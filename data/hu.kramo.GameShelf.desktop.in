@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Game Shelf
+Exec=gameshelf
+Icon=hu.kramo.GameShelf
+Terminal=false
+Type=Application
+Categories=Game;
+StartupNotify=true

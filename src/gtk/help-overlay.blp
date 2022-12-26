@@ -1,0 +1,34 @@
+using Gtk 4.0;
+
+ShortcutsWindow help_overlay {
+  modal: true;
+
+  ShortcutsSection {
+    section-name: "shortcuts";
+    max-height: 10;
+
+    ShortcutsGroup {
+      title: C_("shortcut window", "General");
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Quit");
+        action-name: "app.quit";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Search");
+        action-name: "win.toggle_search";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Shortcuts");
+        action-name: "win.show-help-overlay";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Undo");
+        action-name: "win.undo_remove";
+      }
+    }
+  }
+}

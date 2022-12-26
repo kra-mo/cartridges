@@ -1,0 +1,109 @@
+using Gtk 4.0;
+using Adw 1;
+
+template game : Box {
+  orientation: vertical;
+  halign: center;
+  valign: start;
+
+  Button cover_button {
+    Picture cover {
+      width-request: 200;
+      height-request: 300;
+      hexpand: true;
+      vexpand: true;
+
+      styles [
+        "card",
+      ]
+    }
+
+    styles [
+      "card",
+      "flat",
+    ]
+  }
+
+  Adw.Clamp {
+    maximum-size: 200;
+
+    Box {
+      Label title {
+        label: _("Title");
+        ellipsize: end;
+        hexpand: true;
+        halign: start;
+        margin-start: 12;
+      }
+
+      MenuButton menu_button {
+        icon-name: "view-more-symbolic";
+        margin-top: 6;
+        margin-bottom: 6;
+        margin-end: 6;
+        margin-start: 6;
+        menu-model: game_options;
+
+        styles [
+          "flat",
+        ]
+      }
+    }
+  }
+
+  styles [
+    "card",
+  ]
+}
+
+menu game_options {
+  section {
+    item {
+      label: _("Play");
+      action: "app.launch_game";
+    }
+  }
+
+  section {
+    item {
+      label: _("Edit");
+      action: "app.edit_details";
+    }
+
+    item {
+      label: _("Hide");
+      action: "app.hide_game";
+    }
+
+    item {
+      label: _("Remove");
+      action: "app.remove_game";
+    }
+  }
+}
+
+menu hidden_game_options {
+  section {
+    item {
+      label: _("Play");
+      action: "app.launch_game";
+    }
+  }
+
+  section {
+    item {
+      label: _("Edit");
+      action: "app.edit_details";
+    }
+
+    item {
+      label: _("Unhide");
+      action: "app.hide_game";
+    }
+
+    item {
+      label: _("Remove");
+      action: "app.remove_game";
+    }
+  }
+}

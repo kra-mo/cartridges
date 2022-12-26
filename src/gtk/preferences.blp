@@ -1,0 +1,35 @@
+using Gtk 4.0;
+using Adw 1;
+
+template PreferencesWindow : Adw.PreferencesWindow {
+  search-enabled: false;
+  default-height: 400;
+
+  Adw.PreferencesPage {
+    Adw.PreferencesGroup {
+      title: _("General");
+
+      Adw.ActionRow {
+        title: _("Exit after launching a game");
+
+        Switch exit_after_launch_switch {
+          valign: center;
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: "Steam";
+
+      Adw.ActionRow {
+        title: _("Steam install location");
+        subtitle: _("Directory to use when importing games");
+
+        Button steam_file_chooser_button {
+          icon-name: "folder-symbolic";
+          valign: center;
+        }
+      }
+    }
+  }
+}

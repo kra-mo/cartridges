@@ -1,0 +1,407 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.StatusPage notice_no_results {
+  icon-name: "system-search-symbolic";
+  title: _("No Games Found");
+  description: _("Try a different search.");
+  vexpand: true;
+  valign: center;
+}
+
+Adw.StatusPage notice_empty {
+  icon-name: "applications-games-symbolic";
+  title: _("No Games Found");
+  description: _("Use the + button to add games.");
+  vexpand: true;
+  valign: center;
+}
+
+Adw.StatusPage hidden_notice_empty {
+  icon-name: "view-conceal-symbolic";
+  title: _("No Hidden Games");
+  description: _("Games you hide will appear here.");
+  vexpand: true;
+  valign: center;
+}
+
+template GameShelfWindow : Adw.ApplicationWindow {
+  title: _("Game Shelf");
+  default-width: 1110;
+  default-height: 820;
+
+  Adw.ToastOverlay toast_overlay {
+    Stack stack {
+      visible-child: library_view;
+      transition-type: over_left;
+
+      Overlay overview {
+        [overlay]
+        Box overview_box {
+          orientation: vertical;
+
+          Adw.HeaderBar {
+            [start]
+            Button back_button {
+              action-name: "win.go_back";
+              icon-name: "go-previous-symbolic";
+            }
+
+            [title]
+            Adw.WindowTitle overview_header_bar_title {
+              title: _("Game Details");
+            }
+
+            styles [
+              "flat",
+            ]
+          }
+
+          Adw.Bin {
+            hexpand: true;
+            vexpand: true;
+
+            Box {
+              halign: center;
+              valign: center;
+              margin-start: 24;
+              margin-end: 24;
+              margin-top: 24;
+              margin-bottom: 24;
+
+              Picture overview_cover {
+                halign: end;
+                valign: start;
+                width-request: 200;
+                height-request: 300;
+
+                styles [
+                  "card",
+                ]
+              }
+
+              Box {
+                orientation: vertical;
+                margin-start: 48;
+                vexpand: true;
+                valign: center;
+
+                Label overview_title {
+                  label: _("Game Title");
+                  hexpand: true;
+                  halign: start;
+                  wrap: true;
+                  wrap-mode: word_char;
+                  natural-wrap-mode: word;
+
+                  styles [
+                    "title-1",
+                  ]
+                }
+                Label overview_added {
+                  margin-top: 12;
+                  hexpand: true;
+                  halign: start;
+                  wrap: true;
+                  wrap-mode: word_char;
+                  natural-wrap-mode: word;
+
+                  styles [
+                    "dim-label",
+                  ]
+                }
+                Label overview_last_played {
+                  margin-top: 6;
+                  hexpand: true;
+                  halign: start;
+                  wrap: true;
+                  wrap-mode: word_char;
+                  natural-wrap-mode: word;
+
+                  styles [
+                    "dim-label",
+                  ]
+                }
+                Box {
+                  hexpand: true;
+                  vexpand: true;
+                  valign: center;
+
+                  Button overview_launch {
+                    action-name: "app.launch_game";
+                    label: _("Play");
+                    halign: start;
+                    margin-top: 24;
+
+                    styles [
+                      "suggested-action",
+                      "pill",
+                    ]
+                  }
+
+                  MenuButton overview_menu_button {
+                    icon-name: "view-more-symbolic";
+                    hexpand: true;
+                    vexpand: true;
+                    halign: start;
+                    valign: center;
+                    margin-top: 24;
+                    margin-start: 6;
+
+                    styles [
+                      "circular",
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        styles [
+          "background",
+        ]
+
+        Picture overview_blurred_cover {
+          opacity: 0.2;
+          can-shrink: true;
+          keep-aspect-ratio: false;
+          hexpand: true;
+          vexpand: true;
+        }
+      }
+
+      Box library_view {
+        orientation: vertical;
+
+        Adw.HeaderBar header_bar {
+          [start]
+          MenuButton {
+            icon-name: "list-add-symbolic";
+            menu-model: add_games;
+          }
+
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            menu-model: primary_menu;
+          }
+
+          [end]
+          ToggleButton search_button {
+            icon-name: "system-search-symbolic";
+            action-name: "win.toggle_search";
+          }
+        }
+
+        SearchBar search_bar {
+          Adw.Clamp {
+            maximum-size: 500;
+            tightening-threshold: 500;
+
+            SearchEntry search_entry {
+              hexpand: true;
+            }
+          }
+        }
+
+        Adw.Bin library_bin {
+          ScrolledWindow scrolledwindow {
+            hexpand: true;
+            vexpand: true;
+
+            FlowBox library {
+              homogeneous: true;
+              halign: center;
+              valign: start;
+              column-spacing: 12;
+              row-spacing: 12;
+              margin-top: 16;
+              margin-bottom: 16;
+              margin-start: 16;
+              margin-end: 16;
+              selection-mode: none;
+            }
+          }
+        }
+      }
+
+      Box hidden_library_view {
+        orientation: vertical;
+
+        Adw.HeaderBar hidden_header_bar {
+          [start]
+          Button hidden_back_button {
+            action-name: "win.go_back";
+            icon-name: "go-previous-symbolic";
+          }
+
+          [title]
+          Adw.WindowTitle {
+            title: _("Hidden Games");
+          }
+
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            menu-model: primary_menu;
+          }
+
+          [end]
+          ToggleButton hidden_search_button {
+            icon-name: "system-search-symbolic";
+            action-name: "win.toggle_search";
+          }
+        }
+
+        SearchBar hidden_search_bar {
+          Adw.Clamp {
+            maximum-size: 500;
+            tightening-threshold: 500;
+
+            SearchEntry hidden_search_entry {
+              hexpand: true;
+            }
+          }
+        }
+
+        Adw.Bin hidden_library_bin {
+          ScrolledWindow hidden_scrolledwindow {
+            hexpand: true;
+            vexpand: true;
+
+            FlowBox hidden_library {
+              homogeneous: true;
+              halign: center;
+              valign: start;
+              column-spacing: 12;
+              row-spacing: 12;
+              margin-top: 16;
+              margin-bottom: 16;
+              margin-start: 16;
+              margin-end: 16;
+              selection-mode: none;
+            }
+          }
+        }
+
+        styles [
+          "background",
+        ]
+      }
+    }
+  }
+}
+
+menu primary_menu {
+  section {
+    submenu {
+      label: _("Sort");
+
+      item {
+        label: _("A-Z");
+        action: "win.sort_by";
+        target: "a-z";
+      }
+
+      item {
+        label: _("Z-A");
+        action: "win.sort_by";
+        target: "z-a";
+      }
+
+      item {
+        label: _("Newest");
+        action: "win.sort_by";
+        target: "newest";
+      }
+
+      item {
+        label: _("Oldest");
+        action: "win.sort_by";
+        target: "oldest";
+      }
+
+      item {
+        label: _("Last Played");
+        action: "win.sort_by";
+        target: "last_played";
+      }
+    }
+
+    item {
+      label: _("Show Hidden");
+      action: "win.show_hidden";
+      hidden-when: "action-disabled";
+    }
+  }
+
+  section {
+    item {
+      label: _("Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("About Game Shelf");
+      action: "app.about";
+    }
+  }
+}
+
+menu add_games {
+  section {
+    item {
+      label: _("Add Game");
+      action: "app.add_game";
+    }
+
+    item {
+      label: _("Import From Steam");
+      action: "app.steam_import";
+    }
+  }
+}
+
+menu game_options {
+  section {
+    item {
+      label: _("Edit");
+      action: "app.edit_details";
+    }
+
+    item {
+      label: _("Hide");
+      action: "app.hide_game";
+    }
+
+    item {
+      label: _("Remove");
+      action: "app.remove_game";
+    }
+  }
+}
+
+menu hidden_game_options {
+  section {
+    item {
+      label: _("Edit");
+      action: "app.edit_details";
+    }
+
+    item {
+      label: _("Unhide");
+      action: "app.hide_game";
+    }
+
+    item {
+      label: _("Remove");
+      action: "app.remove_game";
+    }
+  }
+}

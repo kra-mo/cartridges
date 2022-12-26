@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gameshelf">
+	<schema id="hu.kramo.GameShelf" path="/hu/kramo/GameShelf/">
+	  <key name="exit-after-launch" type="b">
+	    <default>false</default>
+	  </key>
+	  <key name="steam-location" type="s">
+      <default>"~/.steam/"</default>
+    </key>
+	  <key name="sort-mode" type="s">
+      <choices>
+        <choice value="a-z"/>
+        <choice value="z-a"/>
+        <choice value="newest"/>
+        <choice value="oldest"/>
+        <choice value="last_played"/>
+      </choices>
+      <default>"a-z"</default>
+    </key>
+	</schema>
+</schemalist>

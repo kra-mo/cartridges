@@ -1,0 +1,14 @@
+data/hu.kramo.GameShelf.desktop.in
+data/hu.kramo.GameShelf.metainfo.xml.in
+
+src/main.py
+src/window.py
+src/window.blp
+src/game.py
+src/preferences.py
+
+src/gtk/game.blp
+src/gtk/preferences.blp
+
+src/utils/create_details_window.py
+src/utils/create_dialog.py
