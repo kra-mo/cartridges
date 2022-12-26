@@ -39,7 +39,7 @@ Click the down arrow next to the hammer at the top of your GNOME Builder window,
 ## Contributing
 
 ### Code
-Fork the repository, make your cahnges, then create a pull request. 
+Fork the repository, make your changes, then create a pull request. 
 
 ### Translations
 Currently, translations can be added manually with the following steps:
