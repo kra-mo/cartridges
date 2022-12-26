@@ -8,6 +8,15 @@
   <img src="data/screenshot.webp">
 </div>
 
+
+## The Project
+Game Shelf is a simple game launcher written in Python using GTK4 + Libadwaita.
+### Features
+- Manually adding and editing games
+- Importing games from Steam
+- Hiding games
+- Searching and sorting by title, date added and last played
+
 ## Building
 
 ### GNOME Builder
