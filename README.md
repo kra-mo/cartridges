@@ -1,9 +1,11 @@
 
 <div align="center">
-  <img src="data/icons/hicolor/scalable/apps/hu.kramo.GameShelf.svg" width="128" height="128"/>
+  <img src="data/icons/hicolor/scalable/apps/hu.kramo.GameShelf.svg" width="128" height="128">
 
   # Game Shelf
   A GTK4 + Libadwaita game launcher
+
+  <img src="data/screenshot.webp">
 </div>
 
 ## Building
