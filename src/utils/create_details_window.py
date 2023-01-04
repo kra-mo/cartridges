@@ -19,7 +19,7 @@
 
 def create_details_window(parent_widget, game_id = None):
     import os, json, time
-    from gi.repository import Adw, Gtk, GLib, GdkPixbuf
+    from gi.repository import Adw, Gtk, Gio, GLib, GdkPixbuf
     from .create_dialog import create_dialog
     from .save_games import save_games
     from .save_cover import save_cover
@@ -42,11 +42,13 @@ def create_details_window(parent_widget, game_id = None):
         executable = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new((games[game_id]["executable"]), -1))
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
-    file_filter = Gtk.FileFilter.new()
-    file_filter.set_name(_("Images"))
-    file_filter.add_pixbuf_formats()
+    image_filter = Gtk.FileFilter.new()
+    image_filter.set_name(_("Images"))
+    image_filter.add_pixbuf_formats()
+    file_filters = Gio.ListStore.new(Gtk.FileFilter)
+    file_filters.append(image_filter)
     filechooser = Gtk.FileDialog.new()
-    filechooser.set_current_filter(file_filter)
+    filechooser.set_filters(file_filters)
 
     cover.add_css_class("card")
     cover.set_size_request(200, 300)
@@ -103,11 +105,10 @@ def create_details_window(parent_widget, game_id = None):
     window.set_transient_for(parent_widget)
 
     def choose_cover(widget):
-        filechooser.open(window, None, None, set_cover, None)
+        filechooser.open(window, None, set_cover, None)
 
     def set_cover(source, result, _):
         nonlocal pixbuf
-
         try:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filechooser.open_finish(result).get_path(), 200, 300, False)
             cover.set_pixbuf(pixbuf)

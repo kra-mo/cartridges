@@ -40,7 +40,7 @@ def steam_parser(parent_widget, action):
                 return
 
         def choose_folder(widget):
-            filechooser.select_folder(parent_widget, None, None, set_steam_dir, None)
+            filechooser.select_folder(parent_widget, None, set_steam_dir, None)
 
         def response(widget, response):
             if response == "choose_folder":
