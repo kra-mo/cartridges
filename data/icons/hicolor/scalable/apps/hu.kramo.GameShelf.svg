@@ -1,22 +1,34 @@
-<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="20" y="8" width="88" height="112" rx="9" fill="#C64600"/>
-<rect x="20" y="8" width="88" height="95" rx="9" fill="#FF7800"/>
-<rect x="26" y="14" width="76" height="50" rx="4" fill="black"/>
-<rect x="38" y="20" width="52" height="38" rx="4" fill="url(#paint0_linear_5_31)"/>
-<rect x="54" y="107" width="9" height="9" rx="4.5" fill="#241F31"/>
-<rect x="70" y="109" width="5" height="5" rx="2.5" fill="#241F31"/>
-<rect x="40" y="73" width="7" height="21" rx="3.5" fill="black"/>
-<rect x="54" y="80" width="7" height="21" rx="3.5" transform="rotate(90 54 80)" fill="black"/>
-<rect x="40" y="72" width="7" height="21" rx="3.5" fill="#241F31"/>
-<rect x="54" y="79" width="7" height="21" rx="3.5" transform="rotate(90 54 79)" fill="#241F31"/>
-<rect x="80" y="80" width="11" height="11" rx="5.5" transform="rotate(90 80 80)" fill="black"/>
-<rect x="94" y="73" width="11" height="11" rx="5.5" transform="rotate(90 94 73)" fill="black"/>
-<rect x="80" y="79" width="11" height="11" rx="5.5" transform="rotate(90 80 79)" fill="#241F31"/>
-<rect x="94" y="72" width="11" height="11" rx="5.5" transform="rotate(90 94 72)" fill="#241F31"/>
-<defs>
-<linearGradient id="paint0_linear_5_31" x1="38" y1="20" x2="38" y2="58" gradientUnits="userSpaceOnUse">
-<stop stop-color="#597E53"/>
-<stop offset="1" stop-color="#97AE79"/>
-</linearGradient>
-</defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="none">
+    <rect width="88" height="112" x="20" y="8" fill="url(#a)" rx="9"/>
+    <rect width="88" height="95" x="20" y="8" fill="url(#b)" rx="9"/>
+    <rect width="74" height="46" x="27" y="15" fill="#000" rx="5"/>
+    <rect width="50" height="34" x="39" y="21" fill="url(#c)" rx="4"/>
+    <rect width="9" height="9" x="55" y="107" fill="#241F31" rx="4.5"/>
+    <rect width="5" height="5" x="57" y="109" fill="#000" rx="2.5"/>
+    <rect width="5" height="5" x="71" y="109" fill="#241F31" rx="2.5"/>
+    <rect width="7" height="21" x="40" y="72" fill="#000" rx="3.5"/>
+    <rect width="7" height="21" x="54" y="79" fill="#000" rx="3.5" transform="rotate(90 54 79)"/>
+    <rect width="7" height="21" x="40" y="71" fill="#241F31" rx="3.5"/>
+    <rect width="7" height="21" x="54" y="78" fill="#241F31" rx="3.5" transform="rotate(90 54 78)"/>
+    <rect width="11" height="11" x="80" y="80" fill="#000" rx="5.5" transform="rotate(90 80 80)"/>
+    <rect width="11" height="11" x="94" y="73" fill="#000" rx="5.5" transform="rotate(90 94 73)"/>
+    <rect width="11" height="11" x="80" y="79" fill="#241F31" rx="5.5" transform="rotate(90 80 79)"/>
+    <rect width="11" height="11" x="94" y="72" fill="#241F31" rx="5.5" transform="rotate(90 94 72)"/>
+    <defs>
+        <linearGradient id="a" x1="20" x2="108" y1="120" y2="120" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FF7800"/>
+            <stop offset=".12" stop-color="#FFA348"/>
+            <stop offset=".88" stop-color="#FFA348"/>
+            <stop offset="1" stop-color="#FF7800"/>
+        </linearGradient>
+        <linearGradient id="b" x1="64" x2="64" y1="8" y2="103" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFA348"/>
+            <stop offset=".9" stop-color="#F6D32D"/>
+            <stop offset="1" stop-color="#F9F06B"/>
+        </linearGradient>
+        <linearGradient id="c" x1="39" x2="39" y1="21" y2="55" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#53784D"/>
+            <stop offset="1" stop-color="#B2D18B"/>
+        </linearGradient>
+    </defs>
 </svg>
