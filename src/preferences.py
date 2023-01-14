@@ -33,7 +33,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         schema = parent_widget.schema
         schema.bind("exit-after-launch", self.exit_after_launch_switch, "active", Gio.SettingsBindFlags.DEFAULT)
 
-        filechooser = Gtk.FileDialog.new()
+        filechooser = Gtk.FileDialog()
 
         def set_steam_dir(source, result, user_data):
             try:

@@ -127,7 +127,7 @@ class GameShelfWindow(Adw.ApplicationWindow):
                     self.hidden_library.append(entry)
 
                 entry.cover_button.connect("clicked", self.show_overview, game_id)
-                entry.menu_button.connect("state-flags-changed", self.set_active_game, game_id)
+                entry.menu_button.get_popover().connect("notify::visible", self.set_active_game, game_id)
 
         if self.visible_widgets == {}:
             self.library_bin.set_child(self.notice_empty)
@@ -185,9 +185,8 @@ class GameShelfWindow(Adw.ApplicationWindow):
             self.hidden_library_bin.set_child(self.hidden_scrolledwindow)
         return filtered
 
-    def set_active_game(self, widget, flags, game):
-        if "GTK_STATE_FLAG_FOCUS_WITHIN" in flags.value_names:
-            self.active_game_id = game
+    def set_active_game(self, widget, _, game):
+        self.active_game_id = game
 
     def get_time(self, timestamp):
         date = datetime.datetime.fromtimestamp(timestamp)

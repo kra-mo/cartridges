@@ -24,7 +24,12 @@ def create_details_window(parent_widget, game_id = None):
     from .save_games import save_games
     from .save_cover import save_cover
 
-    window = Adw.Window.new()
+    window = Adw.Window(
+        modal = True,
+        default_width = 450,
+        default_height = 650,
+        transient_for = parent_widget
+    )
 
     games = parent_widget.games
     pixbuf = None
@@ -32,8 +37,8 @@ def create_details_window(parent_widget, game_id = None):
     if game_id == None:
         window.set_title(_("Add New Game"))
         cover = Gtk.Picture.new_for_pixbuf(parent_widget.placeholder_pixbuf)
-        name = Gtk.Entry.new()
-        executable = Gtk.Entry.new()
+        name = Gtk.Entry()
+        executable = Gtk.Entry()
         apply_button = Gtk.Button.new_with_label(_("Confirm"))
     else:
         window.set_title(_("Edit Game Details"))
@@ -42,45 +47,50 @@ def create_details_window(parent_widget, game_id = None):
         executable = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new((games[game_id]["executable"]), -1))
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
-    image_filter = Gtk.FileFilter.new()
-    image_filter.set_name(_("Images"))
+    image_filter = Gtk.FileFilter(
+        name= _("Images")
+    )
     image_filter.add_pixbuf_formats()
     file_filters = Gio.ListStore.new(Gtk.FileFilter)
     file_filters.append(image_filter)
-    filechooser = Gtk.FileDialog.new()
+    filechooser = Gtk.FileDialog()
     filechooser.set_filters(file_filters)
 
     cover.add_css_class("card")
     cover.set_size_request(200, 300)
 
-    cover_button = Gtk.Button.new_from_icon_name("document-edit-symbolic")
-    cover_button.set_halign(Gtk.Align.END)
-    cover_button.set_valign(Gtk.Align.END)
-    cover_button.set_margin_bottom(6)
-    cover_button.set_margin_end(6)
-    cover_button.add_css_class("circular")
-    cover_button.add_css_class("osd")
+    cover_button = Gtk.Button(
+        icon_name = "document-edit-symbolic",
+        halign = Gtk.Align.END,
+        valign = Gtk.Align.END,
+        margin_bottom = 6,
+        margin_end = 6,
+        css_classes = ["circular", "osd"],
+    )
 
-    cover_overlay = Gtk.Overlay.new()
-    cover_overlay.set_child(cover)
+    cover_overlay = Gtk.Overlay(
+        child = cover,
+        halign = Gtk.Align.CENTER,
+        valign = Gtk.Align.CENTER,
+    )
     cover_overlay.add_overlay(cover_button)
-    cover_overlay.set_halign(Gtk.Align.CENTER)
-    cover_overlay.set_valign(Gtk.Align.CENTER)
 
-    cover_group = Adw.PreferencesGroup.new()
+    cover_group = Adw.PreferencesGroup()
     cover_group.add(cover_overlay)
 
-    title_group = Adw.PreferencesGroup.new()
-    title_group.set_title(_("Title"))
-    title_group.set_description(_("The title of the game"))
+    title_group = Adw.PreferencesGroup(
+        title = _("Title"),
+        description = _("The title of the game"),
+    )
     title_group.add(name)
 
-    exec_group = Adw.PreferencesGroup.new()
-    exec_group.set_title(_("Executable"))
-    exec_group.set_description(_("File to open or command to run when launching the game"))
+    exec_group = Adw.PreferencesGroup(
+        title = _("Executable"),
+        description = _("File to open or command to run when launching the game"),
+    )
     exec_group.add(executable)
 
-    general_page = Adw.PreferencesPage.new()
+    general_page = Adw.PreferencesPage()
     general_page.add(cover_group)
     general_page.add(title_group)
     general_page.add(exec_group)
@@ -89,20 +99,17 @@ def create_details_window(parent_widget, game_id = None):
 
     apply_button.add_css_class("suggested-action")
 
-    header_bar = Adw.HeaderBar.new()
-    header_bar.set_show_start_title_buttons(False)
-    header_bar.set_show_end_title_buttons(False)
+    header_bar = Adw.HeaderBar(
+        show_start_title_buttons = False,
+        show_end_title_buttons = False,
+    )
     header_bar.pack_start(cancel_button)
     header_bar.pack_end(apply_button)
 
     main_box = Gtk.Box.new(Gtk.Orientation.VERTICAL, 0)
     main_box.append(header_bar)
     main_box.append(general_page)
-
-    window.set_modal(True)
-    window.set_default_size(500, 650)
     window.set_content(main_box)
-    window.set_transient_for(parent_widget)
 
     def choose_cover(widget):
         filechooser.open(window, None, set_cover, None)
@@ -186,7 +193,7 @@ def create_details_window(parent_widget, game_id = None):
     name.connect("activate", focus_executable)
     executable.connect("activate", apply_preferences)
 
-    shortcut_controller = Gtk.ShortcutController.new()
+    shortcut_controller = Gtk.ShortcutController()
     shortcut_controller.add_shortcut(Gtk.Shortcut.new(Gtk.ShortcutTrigger.parse_string('Escape'), Gtk.CallbackAction.new(close_window)))
 
     window.add_controller(shortcut_controller)
