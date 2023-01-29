@@ -11,7 +11,8 @@
         "--socket=wayland",
         "--talk-name=org.freedesktop.Flatpak",
         "--filesystem=xdg-run/gvfsd",
-        "--filesystem=~/.steam/steam/"
+        "--filesystem=~/.steam/steam/",
+        "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/heroic/"
     ],
     "cleanup" : [
         "/include",

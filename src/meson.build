@@ -44,6 +44,7 @@ gameshelf_sources = [
   'preferences.py',
   'game.py',
   'utils/steam_parser.py',
+  'utils/heroic_parser.py',
   'utils/run_command.py',
   'utils/get_games.py',
   'utils/get_cover.py',

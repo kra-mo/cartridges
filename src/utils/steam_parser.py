@@ -58,23 +58,23 @@ def steam_parser(parent_widget, action):
         steam_not_found()
         return {}
 
-    steam_dir = os.path.join(schema.get_string("steam-location"))
+    steam_dir = schema.get_string("steam-location")
 
     appmanifests = []
     datatypes = ["appid", "name"]
     steam_games = {}
     current_time = int(time.time())
 
-    for file in os.listdir(os.path.join(steam_dir, "steamapps")):
-        path = os.path.join(steam_dir, "steamapps", file)
-        if os.path.isfile(path) and "appmanifest" in file:
+    for open_file in os.listdir(os.path.join(steam_dir, "steamapps")):
+        path = os.path.join(steam_dir, "steamapps", open_file)
+        if os.path.isfile(path) and "appmanifest" in open_file:
             appmanifests.append(path)
 
     for appmanifest in appmanifests:
         values = {}
-        file = open(appmanifest, "r")
-        data = file.read()
-        file.close()
+        open_file = open(appmanifest, "r")
+        data = open_file.read()
+        open_file.close()
         for datatype in datatypes:
             value = re.findall("\"" + datatype + "\"\t\t\"(.*)\"\n", data)
             values [datatype] = value[0]
@@ -99,5 +99,5 @@ def steam_parser(parent_widget, action):
     elif len(steam_games) == 1:
         create_dialog(parent_widget, _("Steam Games Imported"), _("Successfully imported 1 game."))
     elif len(steam_games) > 1:
-        create_dialog(parent_widget, _("Steam Games Imported"), _("Successfully imported ") + str(len(steam_games)) + _(" games."))
+        create_dialog(parent_widget, _("Steam Games Imported"), _("Successfully imported") + " " + str(len(steam_games)) + " " + _("games."))
     return steam_games

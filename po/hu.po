@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-26 14:29+0100\n"
-"PO-Revision-Date: 2022-12-26 14:33+0100\n"
+"POT-Creation-Date: 2023-01-29 14:12+0100\n"
+"PO-Revision-Date: 2023-01-29 14:19+0100\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -18,243 +18,286 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: game.blp:32 ../utils/create_details_window.py:72
-msgid "Title"
-msgstr "Cím"
-
-#: game.blp:62 game.blp:88 ../window.blp:132
-msgid "Play"
-msgstr "Játék"
-
-#: game.blp:69 game.blp:95 ../window.blp:374 ../window.blp:393
-msgid "Edit"
-msgstr "Szerkeszt"
-
-#: game.blp:74 ../window.blp:379
-msgid "Hide"
-msgstr "Elrejt"
-
-#: game.blp:79 game.blp:105 ../window.blp:384 ../window.blp:403
-msgid "Remove"
-msgstr "Eltávolít"
-
-#: game.blp:100 ../window.blp:398
-msgid "Unhide"
-msgstr "Mutat"
-
-#: preferences.blp:10
-msgid "General"
-msgstr "Általános"
-
-#: preferences.blp:13
-msgid "Exit after launching a game"
-msgstr "Kilépés játék indítása után"
-
-#: preferences.blp:25
-msgid "Steam install location"
-msgstr "Steam telepítés helye"
-
-#: preferences.blp:26
-msgid "Directory to use when importing games"
-msgstr "Az importáláskor használatos mappa"
-
-#: ../window.blp:6 ../window.blp:14 ../utils/steam_parser.py:98
-msgid "No Games Found"
-msgstr "Nem Találhatóak Játékok"
-
-#: ../window.blp:7
-msgid "Try a different search."
-msgstr "Próbálkozz más kereséssel."
-
-#: ../window.blp:15
-msgid "Use the + button to add games."
-msgstr "Használd a + gombot a játékok hozzáadásához."
-
-#: ../window.blp:22
-msgid "No Hidden Games"
-msgstr "Nincsenek Rejtett Játékok"
-
-#: ../window.blp:23
-msgid "Games you hide will appear here."
-msgstr "A rejtett játékaid itt lesznek megtalálhatók."
-
-#: ../window.blp:29
-msgid "Game Shelf"
-msgstr "Játékpolc"
-
-#: ../window.blp:52
-msgid "Game Details"
-msgstr "Játék Részletei"
-
-#: ../window.blp:90
-msgid "Game Title"
-msgstr "Cím"
-
-#: ../window.blp:241
-msgid "Hidden Games"
-msgstr "Rejtett Játékok"
-
-#: ../window.blp:299
-msgid "Sort"
-msgstr "Rendezés"
-
-#: ../window.blp:302
-msgid "A-Z"
-msgstr "A-Z"
-
-#: ../window.blp:308
-msgid "Z-A"
-msgstr "Z-A"
-
-#: ../window.blp:314
-msgid "Newest"
-msgstr "Legújabb"
-
-#: ../window.blp:320
-msgid "Oldest"
-msgstr "Legrégebbi"
-
-#: ../window.blp:326
-msgid "Last Played"
-msgstr "Legutóbb játszott"
-
-#: ../window.blp:333
-msgid "Show Hidden"
-msgstr "Rejtett Játékok"
-
-#: ../window.blp:341
-msgid "Preferences"
-msgstr "Beállítások"
-
-#: ../window.blp:346
-msgid "Keyboard Shortcuts"
-msgstr "Billentyűparancsok"
-
-#: ../window.blp:351
-msgid "About Game Shelf"
-msgstr "A Játékpolcról"
-
-#: ../window.blp:360
-msgid "Add Game"
-msgstr "Játék Hozzáadása"
-
-#: ../window.blp:365
-msgid "Import From Steam"
-msgstr "Importálás Steam-ből"
-
 #. Create toast for undoing the remove action
-#: ../main.py:126
-msgid " removed"
-msgstr " eltávolítva"
+#: src/main.py:133
+msgid "removed"
+msgstr "eltávolítva"
 
-#: ../main.py:127
+#: src/main.py:134
 msgid "Undo"
 msgstr "Visszavonás"
 
-#: ../window.py:196
+#: src/window.py:195
 msgid "Today"
 msgstr "Ma"
 
-#: ../window.py:198
+#: src/window.py:197
 msgid "Yesterday"
 msgstr "Tegnap"
 
-#: ../window.py:222
+#: src/window.py:221
 msgid "Added: "
 msgstr "Hozzáadva: "
 
-#: ../window.py:223
+#: src/window.py:222
 msgid "Last played: "
 msgstr "Legutóbb játszva: "
 
-#: ../window.py:223
+#: src/window.py:222
 msgid "Last played: Never"
 msgstr "Legutóbb játszva: Soha"
 
-#: ../utils/create_details_window.py:33
+#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:98
+#: src/utils/heroic_parser.py:153
+msgid "No Games Found"
+msgstr "Nem Találhatóak Játékok"
+
+#: src/window.blp:7
+msgid "Try a different search."
+msgstr "Próbálkozz más kereséssel."
+
+#: src/window.blp:15
+msgid "Use the + button to add games."
+msgstr "Használd a + gombot a játékok hozzáadásához."
+
+#: src/window.blp:22
+msgid "No Hidden Games"
+msgstr "Nincsenek Rejtett Játékok"
+
+#: src/window.blp:23
+msgid "Games you hide will appear here."
+msgstr "A rejtett játékaid itt lesznek megtalálhatók."
+
+#: src/window.blp:29
+msgid "Game Shelf"
+msgstr "Játékpolc"
+
+#: src/window.blp:52
+msgid "Game Details"
+msgstr "Játék Részletei"
+
+#: src/window.blp:90
+msgid "Game Title"
+msgstr "Cím"
+
+#: src/window.blp:132 src/gtk/game.blp:62 src/gtk/game.blp:88
+msgid "Play"
+msgstr "Játék"
+
+#: src/window.blp:241
+msgid "Hidden Games"
+msgstr "Rejtett Játékok"
+
+#: src/window.blp:299
+msgid "Sort"
+msgstr "Rendezés"
+
+#: src/window.blp:302
+msgid "A-Z"
+msgstr "A-Z"
+
+#: src/window.blp:308
+msgid "Z-A"
+msgstr "Z-A"
+
+#: src/window.blp:314
+msgid "Newest"
+msgstr "Legújabb"
+
+#: src/window.blp:320
+msgid "Oldest"
+msgstr "Legrégebbi"
+
+#: src/window.blp:326
+msgid "Last Played"
+msgstr "Legutóbb játszott"
+
+#: src/window.blp:333
+msgid "Show Hidden"
+msgstr "Rejtett Játékok"
+
+#: src/window.blp:341
+msgid "Preferences"
+msgstr "Beállítások"
+
+#: src/window.blp:346
+msgid "Keyboard Shortcuts"
+msgstr "Billentyűparancsok"
+
+#: src/window.blp:351
+msgid "About Game Shelf"
+msgstr "A Játékpolcról"
+
+#: src/window.blp:360
+msgid "Add Game"
+msgstr "Játék Hozzáadása"
+
+#: src/window.blp:365
+msgid "Import From Steam"
+msgstr "Importálás Steam-ből"
+
+#: src/window.blp:370
+msgid "Import From Heroic"
+msgstr "Importálás Heroic-ból"
+
+#: src/window.blp:379 src/window.blp:398 src/gtk/game.blp:69
+#: src/gtk/game.blp:95
+msgid "Edit"
+msgstr "Szerkeszt"
+
+#: src/window.blp:384 src/gtk/game.blp:74
+msgid "Hide"
+msgstr "Elrejt"
+
+#: src/window.blp:389 src/window.blp:408 src/gtk/game.blp:79
+#: src/gtk/game.blp:105
+msgid "Remove"
+msgstr "Eltávolít"
+
+#: src/window.blp:403 src/gtk/game.blp:100
+msgid "Unhide"
+msgstr "Mutat"
+
+#: src/gtk/game.blp:32 src/utils/create_details_window.py:82
+msgid "Title"
+msgstr "Cím"
+
+#: src/gtk/preferences.blp:10
+msgid "General"
+msgstr "Általános"
+
+#: src/gtk/preferences.blp:13
+msgid "Exit After Launching Games"
+msgstr "Kilépés Játékok Indítása Után"
+
+#: src/gtk/preferences.blp:25
+msgid "Steam Install Location"
+msgstr "Steam Telepítés Helye"
+
+#: src/gtk/preferences.blp:26 src/gtk/preferences.blp:40
+msgid "Directory to use when importing games"
+msgstr "Az importáláskor használatos mappa"
+
+#: src/gtk/preferences.blp:39
+msgid "Heroic Install Location"
+msgstr "Heroic Telepítés Helye"
+
+#: src/gtk/preferences.blp:49
+msgid "Import Epic Games"
+msgstr "Epic Games Játékok Importálása"
+
+#: src/gtk/preferences.blp:57
+msgid "Import GOG Games"
+msgstr "GOG Játékok Importálása"
+
+#: src/gtk/preferences.blp:65
+msgid "Import Sideloaded Games"
+msgstr "Manuálisan Hozzáadott Játékok Importálása"
+
+#: src/utils/create_details_window.py:38
 msgid "Add New Game"
 msgstr "Új Játék Hozzáadása"
 
-#: ../utils/create_details_window.py:37
+#: src/utils/create_details_window.py:42
 msgid "Confirm"
 msgstr "Megerősít"
 
-#: ../utils/create_details_window.py:39
+#: src/utils/create_details_window.py:44
 msgid "Edit Game Details"
 msgstr "Játék Részleteinek Szerkesztése"
 
-#: ../utils/create_details_window.py:43
+#: src/utils/create_details_window.py:48
 msgid "Apply"
 msgstr "Alkalmaz"
 
-#: ../utils/create_details_window.py:46
+#: src/utils/create_details_window.py:51
 msgid "Images"
 msgstr "Képek"
 
-#: ../utils/create_details_window.py:73
+#: src/utils/create_details_window.py:83
 msgid "The title of the game"
 msgstr "A játék címe"
 
-#: ../utils/create_details_window.py:77
+#: src/utils/create_details_window.py:88
 msgid "Executable"
 msgstr "Program"
 
-#: ../utils/create_details_window.py:78
+#: src/utils/create_details_window.py:89
 msgid "File to open or command to run when launching the game"
 msgstr "Fájl megnyitása vagy parancs futtatása a játék indításakor"
 
-#: ../utils/create_details_window.py:86
+#: src/utils/create_details_window.py:98
 msgid "Cancel"
 msgstr "Mégse"
 
-#: ../utils/create_details_window.py:133 ../utils/create_details_window.py:137
+#: src/utils/create_details_window.py:141
+#: src/utils/create_details_window.py:145
 msgid "Couldn't Add Game"
 msgstr "Nem Lehet Hozzáadni a Játékot"
 
-#: ../utils/create_details_window.py:133 ../utils/create_details_window.py:158
+#: src/utils/create_details_window.py:141
+#: src/utils/create_details_window.py:166
 msgid "Game title cannot be empty."
 msgstr "A cím nem lehet üres."
 
-#: ../utils/create_details_window.py:137 ../utils/create_details_window.py:162
+#: src/utils/create_details_window.py:145
+#: src/utils/create_details_window.py:170
 msgid "Executable cannot be empty."
 msgstr "A program nem lehet üres."
 
-#: ../utils/create_details_window.py:158 ../utils/create_details_window.py:162
+#: src/utils/create_details_window.py:166
+#: src/utils/create_details_window.py:170
 msgid "Couldn't Apply Preferences"
 msgstr "Nem Lehet Menteni a Beállításokat"
 
-#: ../utils/create_dialog.py:24
+#: src/utils/create_dialog.py:24
 msgid "Dismiss"
 msgstr "Rendben"
 
-#: ../utils/steam_parser.py:49
+#: src/utils/steam_parser.py:49 src/utils/heroic_parser.py:49
 msgid "Couldn't Import Games"
 msgstr "Nem Lehet Importálni a Játékot"
 
-#: ../utils/steam_parser.py:49
+#: src/utils/steam_parser.py:49
 msgid "Steam directory cannot be found."
 msgstr "A Steam mappa nem található."
 
-#: ../utils/steam_parser.py:49
+#: src/utils/steam_parser.py:49
 msgid "Set Steam Location"
 msgstr "Steam Mappa Kiválasztása"
 
-#: ../utils/steam_parser.py:98
+#: src/utils/steam_parser.py:98
 msgid "No new games found in Steam library."
 msgstr "Nem találhatók új játékok a Steam könyvtárban."
 
-#: ../utils/steam_parser.py:100 ../utils/steam_parser.py:102
+#: src/utils/steam_parser.py:100 src/utils/steam_parser.py:102
 msgid "Steam Games Imported"
 msgstr "Steam Játékok Importálva"
 
-#: ../utils/steam_parser.py:100
+#: src/utils/steam_parser.py:100 src/utils/heroic_parser.py:155
 msgid "Successfully imported 1 game."
 msgstr "1 játék sikeresen importálva."
 
-#: ../utils/steam_parser.py:102
-msgid "Successfully imported "
-msgstr "Sikeresen importálva "
+#: src/utils/steam_parser.py:102 src/utils/heroic_parser.py:157
+msgid "Successfully imported"
+msgstr "Sikeresen importálva"
 
-#: ../utils/steam_parser.py:102
-msgid " games."
-msgstr " játék."
+#: src/utils/steam_parser.py:102 src/utils/heroic_parser.py:157
+msgid "games."
+msgstr "játék."
+
+#: src/utils/heroic_parser.py:49
+msgid "Heroic directory cannot be found."
+msgstr "A Heroic mappa nem található."
+
+#: src/utils/heroic_parser.py:49
+msgid "Set Heroic Location"
+msgstr "Heroic Mappa Kiválasztása"
+
+#: src/utils/heroic_parser.py:153
+msgid "No new games found in Heroic library."
+msgstr "Nem találhatók új játékok a Heroic könyvtárban."
+
+#: src/utils/heroic_parser.py:155 src/utils/heroic_parser.py:157
+msgid "Heroic Games Imported"
+msgstr "Heroic Játékok Importálva"

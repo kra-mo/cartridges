@@ -30,6 +30,7 @@ from .toggle_hidden import toggle_hidden
 from .save_games import save_games
 from .run_command import run_command
 from .steam_parser import steam_parser
+from .heroic_parser import heroic_parser
 from .create_details_window import create_details_window
 
 class GameShelfApplication(Adw.Application):
@@ -39,6 +40,7 @@ class GameShelfApplication(Adw.Application):
         self.create_action("about", self.on_about_action)
         self.create_action("preferences", self.on_preferences_action)
         self.create_action("steam_import", self.on_steam_import_action)
+        self.create_action("heroic_import", self.on_heroic_import_action)
         self.create_action("launch_game", self.on_launch_game_action)
         self.create_action("hide_game", self.on_hide_game_action)
         self.create_action("edit_details", self.on_edit_details_action)
@@ -71,7 +73,7 @@ class GameShelfApplication(Adw.Application):
                                 application_name="Game Shelf",
                                 application_icon="hu.kramo.GameShelf",
                                 developer_name="kramo",
-                                version="0.1.0",
+                                version="0.1.1",
                                 developers=["kramo"],
                                 copyright="© 2022 kramo",
                                 license_type=Gtk.License.GPL_3_0)
@@ -82,6 +84,11 @@ class GameShelfApplication(Adw.Application):
 
     def on_steam_import_action(self, widget, callback=None):
         games = steam_parser(self.props.active_window, self.on_steam_import_action)
+        save_games(games)
+        self.props.active_window.update_games(games.keys())
+
+    def on_heroic_import_action(self, widget, callback=None):
+        games = heroic_parser(self.props.active_window, self.on_heroic_import_action)
         save_games(games)
         self.props.active_window.update_games(games.keys())
 
@@ -123,7 +130,7 @@ class GameShelfApplication(Adw.Application):
             self.props.active_window.on_go_back_action(None, None)
 
         # Create toast for undoing the remove action
-        toast = Adw.Toast.new(self.props.active_window.games[game_id]["name"] + (_(" removed")))
+        toast = Adw.Toast.new(self.props.active_window.games[game_id]["name"] + " " + (_("removed")))
         toast.set_button_label(_("Undo"))
         toast.connect("button-clicked", self.props.active_window.on_undo_remove_action, game_id)
         toast.set_priority(Adw.ToastPriority.HIGH)

@@ -13,7 +13,7 @@
 Game Shelf is a simple game launcher written in Python using GTK4 + Libadwaita.
 ### Features
 - Manually adding and editing games
-- Importing games from Steam
+- Importing games from Steam and Heroic
 - Hiding games
 - Searching and sorting by title, date added and last played
 

@@ -3,14 +3,14 @@ using Adw 1;
 
 template PreferencesWindow : Adw.PreferencesWindow {
   search-enabled: false;
-  default-height: 400;
+  default-height: 500;
 
   Adw.PreferencesPage {
     Adw.PreferencesGroup {
       title: _("General");
 
       Adw.ActionRow {
-        title: _("Exit after launching a game");
+        title: _("Exit After Launching Games");
 
         Switch exit_after_launch_switch {
           valign: center;
@@ -22,11 +22,49 @@ template PreferencesWindow : Adw.PreferencesWindow {
       title: "Steam";
 
       Adw.ActionRow {
-        title: _("Steam install location");
+        title: _("Steam Install Location");
         subtitle: _("Directory to use when importing games");
 
         Button steam_file_chooser_button {
           icon-name: "folder-symbolic";
+          valign: center;
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: "Heroic";
+
+      Adw.ActionRow {
+        title: _("Heroic Install Location");
+        subtitle: _("Directory to use when importing games");
+
+        Button heroic_file_chooser_button {
+          icon-name: "folder-symbolic";
+          valign: center;
+        }
+      }
+
+      Adw.ActionRow {
+        title: _("Import Epic Games");
+
+        Switch import_epic_games_switch {
+          valign: center;
+        }
+      }
+
+      Adw.ActionRow {
+        title: _("Import GOG Games");
+
+        Switch import_gog_games_switch {
+          valign: center;
+        }
+      }
+
+      Adw.ActionRow {
+        title: _("Import Sideloaded Games");
+
+        Switch import_sideload_games_switch {
           valign: center;
         }
       }

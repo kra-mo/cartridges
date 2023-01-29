@@ -4,8 +4,20 @@
 	  <key name="exit-after-launch" type="b">
 	    <default>false</default>
 	  </key>
+	  <key name="heroic-import-epic" type="b">
+	    <default>true</default>
+	  </key>
+	  <key name="heroic-import-gog" type="b">
+	    <default>true</default>
+	  </key>
+	  <key name="heroic-import-sideload" type="b">
+	    <default>true</default>
+	  </key>
 	  <key name="steam-location" type="s">
       <default>"~/.steam/"</default>
+    </key>
+	  <key name="heroic-location" type="s">
+      <default>"~/.var/app/com.heroicgameslauncher.hgl/config/heroic/"</default>
     </key>
 	  <key name="sort-mode" type="s">
       <choices>
