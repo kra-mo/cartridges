@@ -56,7 +56,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 pass
 
         def choose_folder(widget, function):
-            filechooser.select_folder(parent_widget, None, None, function, None)
+            filechooser.select_folder(parent_widget, None, function, None)
 
         self.steam_file_chooser_button.connect("clicked", choose_folder, set_steam_dir)
         self.heroic_file_chooser_button.connect("clicked", choose_folder, set_heroic_dir)
