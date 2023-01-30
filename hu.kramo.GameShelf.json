@@ -32,8 +32,8 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "file:///home/kramo/Projects"
+                    "type" : "dir",
+                    "path" : "."
                 }
             ]
         }
