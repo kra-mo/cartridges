@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 def heroic_parser(parent_widget, action):
-    import os, json, time
+    import os, json, time, hashlib
 
     from gi.repository import Gtk, GLib
 
@@ -46,7 +46,8 @@ def heroic_parser(parent_widget, action):
             if response == "choose_folder":
                 choose_folder(widget)
 
-        create_dialog(parent_widget, _("Couldn't Import Games"), _("Heroic directory cannot be found."), "choose_folder", _("Set Heroic Location")).connect("response", response)
+        create_dialog(parent_widget, _("Couldn't Import Games"), _("Heroic directory cannot be found."),
+                      "choose_folder", _("Set Heroic Location")).connect("response", response)
 
     if os.path.exists(os.path.join(heroic_dir, "config.json")) == True:
         pass
@@ -58,21 +59,28 @@ def heroic_parser(parent_widget, action):
     current_time = int(time.time())
 
     # Import Epic games
-    if schema.get_boolean("heroic-import-epic") == False:
+    if not schema.get_boolean("heroic-import-epic"):
         pass
-    elif os.path.exists(os.path.join(heroic_dir, "lib-cache", "installInfo.json")) == True:
+    elif os.path.exists(os.path.join(heroic_dir, "lib-cache", "installInfo.json")) and os.path.exists(
+            os.path.join(heroic_dir, "lib-cache", "library.json")):
         open_file = open(os.path.join(heroic_dir, "lib-cache", "installInfo.json"), "r")
         data = open_file.read()
         open_file.close()
         installInfo = json.loads(data)
+
+        open_file = open(os.path.join(heroic_dir, "lib-cache", "library.json"), "r")
+        data = open_file.read()
+        library = json.loads(data)
+        open_file.close()
         for item in installInfo:
-            if installInfo[item]["install"] != None:
+            if installInfo[item].get("install") is not None:
                 values = {}
                 app_name = installInfo[item]["game"]["app_name"]
 
                 values["game_id"] = "heroic_epic_" + app_name
 
-                if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[values["game_id"]].keys():
+                if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[
+                    values["game_id"]].keys():
                     continue
 
                 values["name"] = installInfo[item]["game"]["title"]
@@ -81,15 +89,22 @@ def heroic_parser(parent_widget, action):
                 values["source"] = "heroic_epic"
                 values["added"] = current_time
                 values["last_played"] = 0
-                if os.path.isfile(os.path.join(heroic_dir, "icons", app_name + ".jpg")) == True:
-                    values["pixbuf_options"] = save_cover(values, parent_widget, os.path.join(os.path.join(heroic_dir, "icons", app_name + ".jpg")))
 
+                for game in library["library"]:
+                    if game["app_name"] == app_name:
+                        image_path = os.path.join(heroic_dir, "images-cache",
+                                                  hashlib.sha256((game[
+                                                                      "art_square"] + "?h=400&resize=1&w=300").encode()).hexdigest())
+                        if os.path.exists(image_path):
+                            values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
+
+                        break
                 heroic_games[values["game_id"]] = values
 
     # Import GOG games
-    if schema.get_boolean("heroic-import-gog") == False:
+    if not schema.get_boolean("heroic-import-gog"):
         pass
-    elif os.path.exists(os.path.join(heroic_dir, "gog_store", "installed.json")) == True:
+    elif os.path.exists(os.path.join(heroic_dir, "gog_store", "installed.json")):
         open_file = open(os.path.join(heroic_dir, "gog_store", "installed.json"), "r")
         data = open_file.read()
         open_file.close()
@@ -100,8 +115,9 @@ def heroic_parser(parent_widget, action):
 
             values["game_id"] = "heroic_gog_" + app_name
 
-            if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[values["game_id"]].keys():
-                    continue
+            if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[
+                values["game_id"]].keys():
+                continue
 
             # Get game title from library.json as it's not present in installed.json
             open_file = open(os.path.join(heroic_dir, "gog_store", "library.json"), "r")
@@ -111,6 +127,10 @@ def heroic_parser(parent_widget, action):
             for game in library["games"]:
                 if game["app_name"] == app_name:
                     values["name"] = game["title"]
+                    image_path = os.path.join(heroic_dir, "images-cache",
+                                              hashlib.sha256(game["art_square"].encode()).hexdigest())
+                    if os.path.exists(image_path):
+                        values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
                     break
 
             values["executable"] = "xdg-open heroic://launch/" + app_name
@@ -118,8 +138,6 @@ def heroic_parser(parent_widget, action):
             values["source"] = "heroic_gog"
             values["added"] = current_time
             values["last_played"] = 0
-            if os.path.isfile(os.path.join(heroic_dir, "icons", app_name + ".jpg")) == True:
-                    values["pixbuf_options"] = save_cover(values, parent_widget, os.path.join(os.path.join(heroic_dir, "icons", app_name + ".jpg")))
             heroic_games[values["game_id"]] = values
 
     # Import sideloaded games
@@ -136,7 +154,8 @@ def heroic_parser(parent_widget, action):
 
             values["game_id"] = "heroic_sideload_" + app_name
 
-            if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[values["game_id"]].keys():
+            if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[
+                values["game_id"]].keys():
                 continue
 
             values["name"] = item["title"]
@@ -145,8 +164,10 @@ def heroic_parser(parent_widget, action):
             values["source"] = "heroic_sideload"
             values["added"] = current_time
             values["last_played"] = 0
-            if os.path.isfile(os.path.join(heroic_dir, "icons", app_name + ".jpg")) == True:
-                values["pixbuf_options"] = save_cover(values, parent_widget, os.path.join(os.path.join(heroic_dir, "icons", app_name + ".jpg")))
+            image_path = os.path.join(heroic_dir, "images-cache",
+                                      hashlib.sha256(item["art_square"].encode()).hexdigest())
+            if os.path.exists(image_path):
+                values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
             heroic_games[values["game_id"]] = values
 
     if len(heroic_games) == 0:
@@ -154,5 +175,6 @@ def heroic_parser(parent_widget, action):
     elif len(heroic_games) == 1:
         create_dialog(parent_widget, _("Heroic Games Imported"), _("Successfully imported 1 game."))
     elif len(heroic_games) > 1:
-        create_dialog(parent_widget, _("Heroic Games Imported"), _("Successfully imported") + " " + str(len(heroic_games)) + " " + _("games."))
+        create_dialog(parent_widget, _("Heroic Games Imported"),
+                      _("Successfully imported") + " " + str(len(heroic_games)) + " " + _("games."))
     return heroic_games
