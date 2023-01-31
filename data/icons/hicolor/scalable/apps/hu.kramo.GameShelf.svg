@@ -1,36 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="none">
-    <rect width="88" height="112" x="20" y="8" fill="url(#a)" rx="9" style="fill:url(#a)"/>
-    <rect width="88" height="95" x="20" y="8" fill="url(#b)" rx="9" style="fill:url(#b)"/>
-    <rect width="74" height="46" x="27" y="15" fill="#000" rx="5"/>
-    <rect width="50" height="34" x="39" y="21" fill="url(#c)" rx="4" style="fill:url(#c)"/>
-    <rect width="9" height="9" x="55" y="107" fill="#241f31" rx="4.5"/>
-    <rect width="5" height="5" x="57" y="109" fill="#000" rx="2.5"/>
-    <rect width="5" height="5" x="71" y="109" fill="#241f31" rx="2.5"/>
-    <rect width="7" height="21" x="40" y="72" fill="#000" rx="3.5"/>
-    <rect width="7" height="21" x="79" y="-54" fill="#000" rx="3.5" transform="rotate(90)"/>
-    <rect width="7" height="21" x="40" y="71" fill="#241f31" rx="3.5"/>
-    <rect width="7" height="21" x="78" y="-54" fill="#241f31" rx="3.5" transform="rotate(90)"/>
-    <rect width="11" height="11" x="80" y="-80" fill="#000" rx="5.5" transform="rotate(90)"/>
-    <rect width="11" height="11" x="73" y="-94" fill="#000" rx="5.5" transform="rotate(90)"/>
-    <rect width="11" height="11" x="79" y="-80" fill="#241f31" rx="5.5" transform="rotate(90)"/>
-    <rect width="11" height="11" x="72" y="-94" fill="#241f31" rx="5.5" transform="rotate(90)"/>
+    <path fill="url(#a)" d="M111 29H17a8 8 0 0 0-8 8v70a8 8 0 0 0 8 8h94a8 8 0 0 0 8-8V37a8 8 0 0 0-8-8Z"/>
+    <path fill="#C061CB" d="M111 29H17c-4.418 0-8 3.681-8 8.222v57.556c0 4.54 3.582 8.222 8 8.222h94c4.418 0 8-3.681 8-8.222V37.222c0-4.54-3.582-8.222-8-8.222Z"/>
+    <path fill="#000" d="M84 42H44a4 4 0 0 0-4 4v40a4 4 0 0 0 4 4h40a4 4 0 0 0 4-4V46a4 4 0 0 0-4-4Z"/>
+    <path fill="url(#b)" d="M81 50H47a2 2 0 0 0-2 2v28a2 2 0 0 0 2 2h34a2 2 0 0 0 2-2V52a2 2 0 0 0-2-2Z"/>
+    <path fill="#000" d="M102 61v-1a5 5 0 0 0-10 0v1a5 5 0 0 0 10 0ZM114 55v-1a5 5 0 0 0-10 0v1a5 5 0 0 0 10 0Z"/>
+    <path fill="#3D3846" d="M97 64c2.761 0 5-2.015 5-4.5S99.761 55 97 55s-5 2.015-5 4.5 2.239 4.5 5 4.5ZM109 58c2.761 0 5-2.015 5-4.5s-2.239-4.5-5-4.5-5 2.015-5 4.5 2.239 4.5 5 4.5Z"/>
+    <path fill="#000" d="M29 56.5a3.5 3.5 0 1 0-7 0v13a3.5 3.5 0 1 0 7 0v-13Z"/>
+    <path fill="#000" d="M33 58H18a3 3 0 0 0-3 3v2a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-2a3 3 0 0 0-3-3Z"/>
+    <path fill="#3D3846" d="M29 54.5a3.5 3.5 0 1 0-7 0v13a3.5 3.5 0 1 0 7 0v-13Z"/>
+    <path fill="#3D3846" d="M33 58H18a3 3 0 1 0 0 6h15a3 3 0 1 0 0-6Z"/>
+    <path fill="#000" d="M71 109a2 2 0 1 1 4 0 2 2 0 0 1-4 0Z"/>
+    <path fill="#9141AC" d="M71.063 108.5a2 2 0 0 0 3.874 0 1.999 1.999 0 0 1-2.817 2.294 1.996 1.996 0 0 1-1.057-2.294Z"/>
+    <path fill="#000" d="M66 107H56a2 2 0 1 0 0 4h10a2 2 0 1 0 0-4Z"/>
+    <path fill="#9141AC" d="M54.063 108.5A2 2 0 0 0 56 111h10a2.005 2.005 0 0 0 1.582-.775 1.996 1.996 0 0 0 .355-1.725A1.999 1.999 0 0 1 66 110H56a1.998 1.998 0 0 1-1.937-1.5Z"/>
+    <path fill="#613583" d="M110 74H96a1 1 0 1 0 0 2h14a1 1 0 0 0 0-2ZM110 79H96a1 1 0 1 0 0 2h14a1 1 0 0 0 0-2ZM110 84H96a1 1 0 1 0 0 2h14a1 1 0 0 0 0-2Z"/>
+    <path fill="#000" d="M21.5 79h-3a2.5 2.5 0 0 0 0 5h3a2.5 2.5 0 0 0 0-5ZM32.5 79h-3a2.5 2.5 0 0 0 0 5h3a2.5 2.5 0 0 0 0-5Z"/>
+    <path fill="#3D3846" d="M22 79h-4a2 2 0 1 0 0 4h4a2 2 0 1 0 0-4ZM33 79h-4a2 2 0 1 0 0 4h4a2 2 0 1 0 0-4Z"/>
     <defs>
-        <linearGradient id="a" x1="20" x2="108" y1="120" y2="120" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FF7800"/>
-            <stop offset=".06" stop-color="#FFA348"/>
-            <stop offset=".21" stop-color="#FFA348" style="stop-color:#ff7800;stop-opacity:1"/>
-            <stop offset=".8" stop-color="#FFA348" style="stop-color:#ff7800;stop-opacity:1"/>
-            <stop offset=".94" stop-color="#FFA348"/>
-            <stop offset="1" stop-color="#FF7800"/>
+        <linearGradient id="a" x1="9" x2="119" y1="115" y2="115" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#613583"/>
+            <stop offset=".05" stop-color="#9141AC"/>
+            <stop offset=".22" stop-color="#613583"/>
+            <stop offset=".78" stop-color="#613583"/>
+            <stop offset=".95" stop-color="#9141AC"/>
+            <stop offset="1" stop-color="#613583"/>
         </linearGradient>
-        <linearGradient id="b" x1="64" x2="64" y1="8" y2="103" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#FFA348" style="stop-color:#f6d32d;stop-opacity:1"/>
-            <stop offset=".9" stop-color="#F6D32D"/>
-            <stop offset="1" stop-color="#F9F06B"/>
-        </linearGradient>
-        <linearGradient id="c" x1="39" x2="39" y1="21" y2="55" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#53784D"/>
-            <stop offset="1" stop-color="#B2D18B"/>
+        <linearGradient id="b" x1="45" x2="45" y1="50" y2="82" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#BDD0D5"/>
+            <stop offset="1" stop-color="#305749"/>
         </linearGradient>
     </defs>
 </svg>
