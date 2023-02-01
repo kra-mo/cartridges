@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=Cartridges
+GenericName=Game Launcher
+Comment=Launch your games
 Exec=cartridges
 Icon=hu.kramo.Cartridges
 Terminal=false
 Type=Application
-Categories=Game;
+Categories=GNOME;GTK;Game;
 StartupNotify=true
