@@ -1,5 +1,5 @@
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-moduledir = join_paths(pkgdatadir, 'gameshelf')
+moduledir = join_paths(pkgdatadir, 'cartridges')
 gnome = import('gnome')
 
 blueprints = custom_target('blueprints',
@@ -13,8 +13,8 @@ blueprints = custom_target('blueprints',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
 )
 
-gnome.compile_resources('gameshelf',
-  'gameshelf.gresource.xml',
+gnome.compile_resources('cartridges',
+  'cartridges.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -30,14 +30,14 @@ conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
 conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
-  input: 'gameshelf.in',
-  output: 'gameshelf',
+  input: 'cartridges.in',
+  output: 'cartridges',
   configuration: conf,
   install: true,
   install_dir: get_option('bindir')
 )
 
-gameshelf_sources = [
+cartridges_sources = [
   '__init__.py',
   'main.py',
   'window.py',
@@ -55,4 +55,4 @@ gameshelf_sources = [
   'utils/create_details_window.py'
 ]
 
-install_data(gameshelf_sources, install_dir: moduledir)
+install_data(cartridges_sources, install_dir: moduledir)

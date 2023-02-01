@@ -69,7 +69,7 @@ msgid "Games you hide will appear here."
 msgstr "A rejtett játékaid itt lesznek megtalálhatók."
 
 #: src/window.blp:29
-msgid "Game Shelf"
+msgid "Cartridges"
 msgstr "Játékpolc"
 
 #: src/window.blp:52
@@ -125,7 +125,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Billentyűparancsok"
 
 #: src/window.blp:351
-msgid "About Game Shelf"
+msgid "About Cartridges"
 msgstr "A Játékpolcról"
 
 #: src/window.blp:360

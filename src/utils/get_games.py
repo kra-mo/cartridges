@@ -20,7 +20,7 @@
 def get_games():
     import os, json
 
-    games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "games")
+    games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
     games = {}
 
     if os.path.exists(games_dir) == False:

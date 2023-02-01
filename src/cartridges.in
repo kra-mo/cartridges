@@ -1,6 +1,6 @@
 #!@PYTHON@
 
-# gameshelf.in
+# cartridges.in
 #
 # Copyright 2022 kramo
 #
@@ -31,16 +31,16 @@ localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-locale.bindtextdomain('gameshelf', localedir)
-locale.textdomain('gameshelf')
-gettext.install('gameshelf', localedir)
+locale.bindtextdomain('cartridges', localedir)
+locale.textdomain('cartridges')
+gettext.install('cartridges', localedir)
 
 if __name__ == '__main__':
     import gi
 
     from gi.repository import Gio
-    resource = Gio.Resource.load(os.path.join(pkgdatadir, 'gameshelf.gresource'))
+    resource = Gio.Resource.load(os.path.join(pkgdatadir, 'cartridges.gresource'))
     resource._register()
 
-    from gameshelf import main
+    from cartridges import main
     sys.exit(main.main(VERSION))

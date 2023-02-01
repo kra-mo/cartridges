@@ -19,7 +19,7 @@
 
 from gi.repository import Adw, Gtk, Gio, GLib
 
-@Gtk.Template(resource_path='/hu/kramo/GameShelf/gtk/preferences.ui')
+@Gtk.Template(resource_path='/hu/kramo/Cartridges/gtk/preferences.ui')
 class PreferencesWindow(Adw.PreferencesWindow):
     __gtype_name__ = 'PreferencesWindow'
 

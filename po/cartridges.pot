@@ -68,7 +68,7 @@ msgid "Games you hide will appear here."
 msgstr ""
 
 #: src/window.blp:29
-msgid "Game Shelf"
+msgid "Cartridges"
 msgstr ""
 
 #: src/window.blp:52
@@ -124,7 +124,7 @@ msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: src/window.blp:351
-msgid "About Game Shelf"
+msgid "About Cartridges"
 msgstr ""
 
 #: src/window.blp:360

@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-        input: 'hu.kramo.GameShelf.desktop.in',
-       output: 'hu.kramo.GameShelf.desktop',
+        input: 'hu.kramo.Cartridges.desktop.in',
+       output: 'hu.kramo.Cartridges.desktop',
          type: 'desktop',
        po_dir: '../po',
       install: true,
@@ -13,8 +13,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-        input: 'hu.kramo.GameShelf.metainfo.xml.in',
-       output: 'hu.kramo.GameShelf.metainfo.xml',
+        input: 'hu.kramo.Cartridges.metainfo.xml.in',
+       output: 'hu.kramo.Cartridges.metainfo.xml',
        po_dir: '../po',
       install: true,
   install_dir: join_paths(get_option('datadir'), 'metainfo')
@@ -25,7 +25,7 @@ if appstream_util.found()
   test('Validate appstream file', appstream_util, args: ['validate', appstream_file])
 endif
 
-install_data('hu.kramo.GameShelf.gschema.xml',
+install_data('hu.kramo.Cartridges.gschema.xml',
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
 

@@ -24,7 +24,7 @@ gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Gio, GLib, Adw
 
-from .window import GameShelfWindow
+from .window import CartridgesWindow
 from .preferences import PreferencesWindow
 from .toggle_hidden import toggle_hidden
 from .save_games import save_games
@@ -33,9 +33,9 @@ from .steam_parser import steam_parser
 from .heroic_parser import heroic_parser
 from .create_details_window import create_details_window
 
-class GameShelfApplication(Adw.Application):
+class CartridgesApplication(Adw.Application):
     def __init__(self):
-        super().__init__(application_id="hu.kramo.GameShelf", flags=Gio.ApplicationFlags.FLAGS_NONE)
+        super().__init__(application_id="hu.kramo.Cartridges", flags=Gio.ApplicationFlags.FLAGS_NONE)
         self.create_action("quit", self.on_quit_action, ["<primary>q"])
         self.create_action("about", self.on_about_action)
         self.create_action("preferences", self.on_preferences_action)
@@ -52,7 +52,7 @@ class GameShelfApplication(Adw.Application):
         # Create the main window
         win = self.props.active_window
         if not win:
-            win = GameShelfWindow(application=self)
+            win = CartridgesWindow(application=self)
 
         win.present()
 
@@ -70,8 +70,8 @@ class GameShelfApplication(Adw.Application):
 
     def on_about_action(self, widget, callback=None):
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name="Game Shelf",
-                                application_icon="hu.kramo.GameShelf",
+                                application_name="Cartridges",
+                                application_icon="hu.kramo.Cartridges",
                                 developer_name="kramo",
                                 version="0.1.1",
                                 developers=["kramo"],
@@ -119,7 +119,7 @@ class GameShelfApplication(Adw.Application):
 
         # Add "removed=True" to the game properties so it can be deleted on next init
         game_id = self.props.active_window.active_game_id
-        open_file = open(os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "games", game_id + ".json")), "r")
+        open_file = open(os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game_id + ".json")), "r")
         data = json.loads(open_file.read())
         open_file.close()
         data["removed"] = True
@@ -153,6 +153,6 @@ class GameShelfApplication(Adw.Application):
                 self.set_accels_for_action(f"win.{name}", shortcuts)
 
 def main(version):
-    app = GameShelfApplication()
+    app = CartridgesApplication()
     return app.run(sys.argv)
 

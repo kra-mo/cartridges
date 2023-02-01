@@ -26,9 +26,9 @@ from .get_cover import get_cover
 from .get_games import get_games
 from .save_games import save_games
 
-@Gtk.Template(resource_path="/hu/kramo/GameShelf/window.ui")
-class GameShelfWindow(Adw.ApplicationWindow):
-    __gtype_name__ = "GameShelfWindow"
+@Gtk.Template(resource_path="/hu/kramo/Cartridges/window.ui")
+class CartridgesWindow(Adw.ApplicationWindow):
+    __gtype_name__ = "CartridgesWindow"
 
     toast_overlay = Gtk.Template.Child()
     stack = Gtk.Template.Child()
@@ -77,14 +77,14 @@ class GameShelfWindow(Adw.ApplicationWindow):
         self.overview.set_measure_overlay(self.overview_box, True)
         self.overview.set_clip_overlay(self.overview_box, False)
 
-        self.schema = Gio.Settings.new("hu.kramo.GameShelf")
-        self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale("/hu/kramo/GameShelf/assets/library_placeholder.svg", 200, 300, False)
+        self.schema = Gio.Settings.new("hu.kramo.Cartridges")
+        self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale("/hu/kramo/Cartridges/assets/library_placeholder.svg", 200, 300, False)
         games = get_games()
         for game in games:
             if "removed" in games[game].keys():
-                os.remove(os.path.join(os.environ.get("XDG_DATA_HOME"), "games", game + ".json"))
+                os.remove(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game + ".json"))
                 try:
-                    os.remove(os.path.join(os.environ.get("XDG_DATA_HOME"), "covers", game + ".dat"))
+                    os.remove(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers", game + ".dat"))
                 except FileNotFoundError:
                     pass
 
@@ -374,7 +374,7 @@ class GameShelfWindow(Adw.ApplicationWindow):
                 game_id = list(self.toasts)[-1]
             except IndexError:
                 return
-        open_file = open(os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "games", game_id + ".json")), "r")
+        open_file = open(os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game_id + ".json")), "r")
         data = json.loads(open_file.read())
         open_file.close()
         data.pop("removed")

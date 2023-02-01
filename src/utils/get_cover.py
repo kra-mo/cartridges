@@ -21,7 +21,7 @@ def get_cover(game, parent_widget):
     from gi.repository import GdkPixbuf
     import os
 
-    cover_path = os.path.join(os.environ.get("XDG_DATA_HOME"), "covers", game["game_id"] + ".dat")
+    cover_path = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers", game["game_id"] + ".dat")
 
     if os.path.isfile(cover_path) == False:
         return parent_widget.placeholder_pixbuf

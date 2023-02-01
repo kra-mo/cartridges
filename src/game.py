@@ -19,7 +19,7 @@
 
 from gi.repository import Gtk
 
-@Gtk.Template(resource_path='/hu/kramo/GameShelf/gtk/game.ui')
+@Gtk.Template(resource_path='/hu/kramo/Cartridges/gtk/game.ui')
 class game(Gtk.Box):
     __gtype_name__ = 'game'
 

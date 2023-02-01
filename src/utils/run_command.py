@@ -24,5 +24,5 @@ def run_command(parent_widget, executable):
 
     subprocess.Popen(["flatpak-spawn --host " + executable], shell=True, start_new_session=True)
 
-    if Gio.Settings.new("hu.kramo.GameShelf").get_boolean("exit-after-launch") == True:
+    if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch") == True:
         sys.exit()

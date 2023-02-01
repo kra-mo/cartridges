@@ -1,4 +1,4 @@
-application_id = 'hu.kramo.GameShelf'
+application_id = 'hu.kramo.Cartridges'
 
 scalable_dir = join_paths('hicolor', 'scalable', 'apps')
 install_data(

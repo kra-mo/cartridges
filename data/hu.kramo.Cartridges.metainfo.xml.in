@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>hu.kramo.Cartridges.desktop</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0-or-later</project_license>
+  <name>Cartridges</name>
+  <summary>Launch all your games</summary>
+	<description>
+	  <p>Cartridges is a simple game launcher. It has support for importing your games from Steam and Heroic with organizational features such as hiding and sorting by date added or last played.</p>
+	</description>
+  <launchable type="desktop-id">hu.kramo.Cartridges.desktop</launchable>
+  <developer_name>kramo</developer_name>
+</component>

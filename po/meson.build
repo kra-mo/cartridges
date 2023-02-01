@@ -1,1 +1,1 @@
-i18n.gettext('gameshelf', preset: 'glib')
+i18n.gettext('cartridges', preset: 'glib')

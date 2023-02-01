@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="gameshelf">
-	<schema id="hu.kramo.GameShelf" path="/hu/kramo/GameShelf/">
+<schemalist gettext-domain="cartridges">
+	<schema id="hu.kramo.Cartridges" path="/hu/kramo/Cartridges/">
 	  <key name="exit-after-launch" type="b">
 	    <default>false</default>
 	  </key>

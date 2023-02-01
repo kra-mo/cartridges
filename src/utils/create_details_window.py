@@ -131,7 +131,6 @@ def create_details_window(parent_widget, game_id = None):
 
         values = {}
 
-        games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "games")
         final_name = name.get_buffer().get_text()
         final_executable = executable.get_buffer().get_text()
 

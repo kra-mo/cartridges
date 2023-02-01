@@ -1,9 +1,9 @@
 {
-    "app-id" : "hu.kramo.GameShelf",
+    "app-id" : "hu.kramo.Cartridges",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
-    "command" : "gameshelf",
+    "command" : "cartridges",
     "finish-args" : [
         "--share=ipc",
         "--socket=fallback-x11",
@@ -27,7 +27,7 @@
     ],
     "modules" : [
         {
-            "name" : "gameshelf",
+            "name" : "cartridges",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
