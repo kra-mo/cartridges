@@ -73,7 +73,7 @@ class CartridgesApplication(Adw.Application):
                                 application_name="Cartridges",
                                 application_icon="hu.kramo.Cartridges",
                                 developer_name="kramo",
-                                version="0.1.1",
+                                version="0.1.2",
                                 developers=["kramo"],
                                 copyright="© 2022 kramo",
                                 license_type=Gtk.License.GPL_3_0)
