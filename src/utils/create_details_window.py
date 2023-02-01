@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 def create_details_window(parent_widget, game_id = None):
-    import os, json, time
+    import time
     from gi.repository import Adw, Gtk, Gio, GLib, GdkPixbuf
     from .create_dialog import create_dialog
     from .save_games import save_games

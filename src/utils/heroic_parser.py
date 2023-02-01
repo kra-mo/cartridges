@@ -49,7 +49,7 @@ def heroic_parser(parent_widget, action):
         create_dialog(parent_widget, _("Couldn't Import Games"), _("Heroic directory cannot be found."),
                       "choose_folder", _("Set Heroic Location")).connect("response", response)
 
-    if os.path.exists(os.path.join(heroic_dir, "config.json")) == True:
+    if os.path.exists(os.path.join(heroic_dir, "config.json")):
         pass
     else:
         heroic_not_found()
@@ -141,9 +141,9 @@ def heroic_parser(parent_widget, action):
             heroic_games[values["game_id"]] = values
 
     # Import sideloaded games
-    if schema.get_boolean("heroic-import-sideload") == False:
+    if not schema.get_boolean("heroic-import-sideload"):
         pass
-    elif os.path.exists(os.path.join(heroic_dir, "sideload_apps", "library.json")) == True:
+    elif os.path.exists(os.path.join(heroic_dir, "sideload_apps", "library.json")):
         open_file = open(os.path.join(heroic_dir, "sideload_apps", "library.json"), "r")
         data = open_file.read()
         open_file.close()

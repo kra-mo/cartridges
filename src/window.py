@@ -118,7 +118,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
                 entry = game(current_game["name"], get_cover(current_game, self), game_id)
 
-                if self.games[game_id]["hidden"] == False:
+                if not self.games[game_id]["hidden"]:
                     self.visible_widgets[game_id] = entry
                     self.library.append(entry)
                 else:
@@ -144,7 +144,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def search_changed(self, widget, hidden):
         # Refresh search filter on keystroke in search box
-        if hidden == False:
+        if not hidden:
             self.library.invalidate_filter()
         else:
             self.hidden_library.invalidate_filter()
@@ -203,7 +203,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def show_overview(self, widget, game_id):
         game = self.games[game_id]
 
-        if game["hidden"] == False:
+        if not game["hidden"]:
             self.overview_menu_button.set_menu_model(self.game_options)
         else:
             self.overview_menu_button.set_menu_model(self.hidden_game_options)
@@ -341,7 +341,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         search_bar.set_search_mode(not search_mode)
         search_button.set_active(not search_button.get_active())
 
-        if search_mode == False:
+        if not search_mode:
             self.set_focus(search_entry)
         else:
             search_entry.set_text("")

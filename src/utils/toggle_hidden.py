@@ -21,7 +21,7 @@ def toggle_hidden(game):
     import os, json
     games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
 
-    if os.path.exists(games_dir) == False:
+    if not os.path.exists(games_dir):
         return
 
     file = open(os.path.join(games_dir, game + ".json"), "r")

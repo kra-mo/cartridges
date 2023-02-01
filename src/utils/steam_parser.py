@@ -48,11 +48,11 @@ def steam_parser(parent_widget, action):
 
         create_dialog(parent_widget, _("Couldn't Import Games"), _("Steam directory cannot be found."), "choose_folder", _("Set Steam Location")).connect("response", response)
 
-    if os.path.exists(os.path.join(steam_dir, "steamapps")) == True:
+    if os.path.exists(os.path.join(steam_dir, "steamapps")):
         pass
-    elif os.path.exists(os.path.join(steam_dir, "steam", "steamapps")) == True:
+    elif os.path.exists(os.path.join(steam_dir, "steam", "steamapps")):
         schema.set_string("steam-location", os.path.join(steam_dir, "steam"))
-    elif os.path.exists(os.path.join(steam_dir, "Steam", "steamapps")) == True:
+    elif os.path.exists(os.path.join(steam_dir, "Steam", "steamapps")):
         schema.set_string("steam-location", os.path.join(steam_dir, "Steam"))
     else:
         steam_not_found()
@@ -90,7 +90,7 @@ def steam_parser(parent_widget, action):
         values["added"] = current_time
         values["last_played"] = 0
 
-        if os.path.isfile(os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg")) == True:
+        if os.path.isfile(os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg")):
             values["pixbuf_options"] = save_cover(values, parent_widget, os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg"))
         steam_games[values["game_id"]] = values
 
