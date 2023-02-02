@@ -1,0 +1,20 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+name: CI
+jobs:
+  flatpak:
+    name: "Flatpak"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-40
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v2
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v4
+      with:
+        repository-name: gnome-nightly
+        repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
+        bundle: hu.kramo.Cartridges.flatpak
+        manifest-path: hu.kramo.Cartridges.json
