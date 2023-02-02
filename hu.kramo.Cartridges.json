@@ -26,7 +26,18 @@
         "*.a"
     ],
     "modules" : [
-    	"python3-PyYAML.json",
+        "python3-PyYAML.json",
+        {
+            "name": "blueprint-compiler",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                "type": "git",
+                "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
+                "tag": "v0.6.0"
+                }
+            ]
+        },
         {
             "name" : "cartridges",
             "builddir" : true,
