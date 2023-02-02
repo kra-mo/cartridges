@@ -27,5 +27,5 @@ def save_games(games):
 
     for game in games:
         open_file = open(os.path.join(games_dir, game + ".json"), "w")
-        open_file.write(json.dumps(games[game], indent=4))
+        open_file.write(json.dumps(games[game], indent=4, sort_keys=True))
         open_file.close()
