@@ -24,9 +24,14 @@ Cartridges is a simple game launcher written in Python using GTK4 + Libadwaita.
 1. Download [GNOME Builder](https://flathub.org/apps/details/org.gnome.Builder).
 2. Click "Clone Repository" with `https://github.com/kra-mo/game-shelf.git` as the URL.
 3. Click on the build button (hammer) at the top.
-4. Install `org.gnome.Platform` from the [gnome-nightly repository](https://wiki.gnome.org/Apps/Nightly) if needed.
 
 ## Installation
+
+### Latest Build From GitHub Actions
+1. Install `org.gnome.Platform` from the [gnome-nightly repository](https://wiki.gnome.org/Apps/Nightly) if needed.
+2. Download the artifact from the latest workflow run.
+3. Decompress the archive.
+4. Install it via GNOME Software or `flatpak install hu.kramo.Cartridges.flatpak`.
 
 ### From Releases
 1. Install `org.gnome.Platform` from the [gnome-nightly repository](https://wiki.gnome.org/Apps/Nightly) if needed.
@@ -45,6 +50,6 @@ Fork the repository, make your changes, then create a pull request.
 Currently, translations can be added manually with the following steps:
 1. Clone the repository.
 2. If it isn't already there, add your language to `/po/LINGUAS`.
-3. Create a new translation from the `/po/cartridges.pot` file with a program such as [Poedit](https://poedit.net/).
+3. Create a new translation from the `/po/cartridges.pot` file with a translation editor such as [Poedit](https://poedit.net/).
 4. Save the file as `[YOUR LANGUAGE CODE].po` to `/po/`.
 5. Create a pull request with your translations.
