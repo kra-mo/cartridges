@@ -99,6 +99,7 @@ def heroic_parser(parent_widget, action):
                             values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
 
                         break
+
                 heroic_games[values["game_id"]] = values
 
     # Import GOG games
@@ -138,6 +139,7 @@ def heroic_parser(parent_widget, action):
             values["source"] = "heroic_gog"
             values["added"] = current_time
             values["last_played"] = 0
+
             heroic_games[values["game_id"]] = values
 
     # Import sideloaded games
@@ -168,6 +170,7 @@ def heroic_parser(parent_widget, action):
                                       hashlib.sha256(item["art_square"].encode()).hexdigest())
             if os.path.exists(image_path):
                 values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
+
             heroic_games[values["game_id"]] = values
 
     if len(heroic_games) == 0:

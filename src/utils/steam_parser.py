@@ -77,7 +77,7 @@ def steam_parser(parent_widget, action):
         open_file.close()
         for datatype in datatypes:
             value = re.findall("\"" + datatype + "\"\t\t\"(.*)\"\n", data)
-            values [datatype] = value[0]
+            values[datatype] = value[0]
 
         values["game_id"] = "steam_" + values["appid"]
 
@@ -92,6 +92,7 @@ def steam_parser(parent_widget, action):
 
         if os.path.isfile(os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg")):
             values["pixbuf_options"] = save_cover(values, parent_widget, os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg"))
+
         steam_games[values["game_id"]] = values
 
     if len(steam_games) == 0:

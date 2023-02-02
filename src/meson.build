@@ -45,6 +45,7 @@ cartridges_sources = [
   'game.py',
   'utils/steam_parser.py',
   'utils/heroic_parser.py',
+  'utils/bottles_parser.py',
   'utils/run_command.py',
   'utils/get_games.py',
   'utils/get_cover.py',

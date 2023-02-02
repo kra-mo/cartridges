@@ -19,6 +19,9 @@
 	  <key name="heroic-location" type="s">
       <default>"~/.var/app/com.heroicgameslauncher.hgl/config/heroic/"</default>
     </key>
+	  <key name="bottles-location" type="s">
+      <default>"~/.var/app/com.usebottles.bottles/data/bottles/"</default>
+    </key>
 	  <key name="sort-mode" type="s">
       <choices>
         <choice value="a-z"/>

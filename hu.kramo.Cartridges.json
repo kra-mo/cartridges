@@ -11,7 +11,8 @@
         "--socket=wayland",
         "--talk-name=org.freedesktop.Flatpak",
         "--filesystem=~/.steam/steam/",
-        "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/heroic/"
+        "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/heroic/",
+        "--filesystem=~/.var/app/com.usebottles.bottles/data/bottles/"
     ],
     "cleanup" : [
         "/include",
@@ -25,6 +26,7 @@
         "*.a"
     ],
     "modules" : [
+    	"python3-PyYAML.json",
         {
             "name" : "cartridges",
             "builddir" : true,

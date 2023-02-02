@@ -31,6 +31,7 @@ from .save_games import save_games
 from .run_command import run_command
 from .steam_parser import steam_parser
 from .heroic_parser import heroic_parser
+from .bottles_parser import bottles_parser
 from .create_details_window import create_details_window
 
 class CartridgesApplication(Adw.Application):
@@ -41,6 +42,7 @@ class CartridgesApplication(Adw.Application):
         self.create_action("preferences", self.on_preferences_action)
         self.create_action("steam_import", self.on_steam_import_action)
         self.create_action("heroic_import", self.on_heroic_import_action)
+        self.create_action("bottles_import", self.on_bottles_import_action)
         self.create_action("launch_game", self.on_launch_game_action)
         self.create_action("hide_game", self.on_hide_game_action)
         self.create_action("edit_details", self.on_edit_details_action)
@@ -50,26 +52,26 @@ class CartridgesApplication(Adw.Application):
     def do_activate(self):
 
         # Create the main window
-        win = self.props.active_window
-        if not win:
-            win = CartridgesWindow(application=self)
+        self.win = self.props.active_window
+        if not self.win:
+            self.win = CartridgesWindow(application=self)
 
-        win.present()
+        self.win.present()
 
         # Create actions for the main window
-        self.create_action("show_hidden", win.on_show_hidden_action, None, win)
-        self.create_action("go_back", win.on_go_back_action, ["<alt>Left"], win)
-        self.create_action("go_to_parent", win.on_go_to_parent_action, ["<alt>Up"], win)
-        self.create_action("toggle_search", win.on_toggle_search_action, ["<primary>f"], win)
-        self.create_action("escape", win.on_escape_action, ["Escape"], win)
-        self.create_action("undo_remove", win.on_undo_remove_action, ["<primary>z"], win)
-        win.sort = Gio.SimpleAction.new_stateful("sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z"))
-        win.add_action(win.sort)
-        win.sort.connect("activate", win.on_sort_action)
-        win.on_sort_action(win.sort, win.schema.get_value("sort-mode"))
+        self.create_action("show_hidden", self.win.on_show_hidden_action, None, self.win)
+        self.create_action("go_back", self.win.on_go_back_action, ["<alt>Left"], self.win)
+        self.create_action("go_to_parent", self.win.on_go_to_parent_action, ["<alt>Up"], self.win)
+        self.create_action("toggle_search", self.win.on_toggle_search_action, ["<primary>f"], self.win)
+        self.create_action("escape", self.win.on_escape_action, ["Escape"], self.win)
+        self.create_action("undo_remove", self.win.on_undo_remove_action, ["<primary>z"], self.win)
+        self.win.sort = Gio.SimpleAction.new_stateful("sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z"))
+        self.win.add_action(self.win.sort)
+        self.win.sort.connect("activate", self.win.on_sort_action)
+        self.win.on_sort_action(self.win.sort, self.win.schema.get_value("sort-mode"))
 
     def on_about_action(self, widget, callback=None):
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
+        about = Adw.AboutWindow(transient_for=self.win,
                                 application_name="Cartridges",
                                 application_icon="hu.kramo.Cartridges",
                                 developer_name="kramo",
@@ -83,62 +85,67 @@ class CartridgesApplication(Adw.Application):
         about.present()
 
     def on_preferences_action(self, widget, callback=None):
-        PreferencesWindow(self.props.active_window).present()
+        PreferencesWindow(self.win).present()
 
     def on_steam_import_action(self, widget, callback=None):
-        games = steam_parser(self.props.active_window, self.on_steam_import_action)
+        games = steam_parser(self.win, self.on_steam_import_action)
         save_games(games)
-        self.props.active_window.update_games(games.keys())
+        self.win.update_games(games.keys())
 
     def on_heroic_import_action(self, widget, callback=None):
-        games = heroic_parser(self.props.active_window, self.on_heroic_import_action)
+        games = heroic_parser(self.win, self.on_heroic_import_action)
         save_games(games)
-        self.props.active_window.update_games(games.keys())
+        self.win.update_games(games.keys())
+
+    def on_bottles_import_action(self, widget, callback=None):
+        games = bottles_parser(self.win, self.on_bottles_import_action)
+        save_games(games)
+        self.win.update_games(games.keys())
 
     def on_launch_game_action(self, widget, callback=None):
 
         # Launch the game and update the last played value
-        self.props.active_window.games[self.props.active_window.active_game_id]["last_played"] = int(time.time())
-        save_games({self.props.active_window.active_game_id : self.props.active_window.games[self.props.active_window.active_game_id]})
-        self.props.active_window.update_games([self.props.active_window.active_game_id])
-        run_command(self.props.active_window, self.props.active_window.games[self.props.active_window.active_game_id]["executable"])
+        self.win.games[self.win.active_game_id]["last_played"] = int(time.time())
+        save_games({self.win.active_game_id : self.win.games[self.win.active_game_id]})
+        self.win.update_games([self.win.active_game_id])
+        run_command(self.win, self.win.games[self.win.active_game_id]["executable"])
 
-        if self.props.active_window.stack.get_visible_child() == self.props.active_window.overview:
-            self.props.active_window.show_overview(None, self.props.active_window.active_game_id)
+        if self.win.stack.get_visible_child() == self.win.overview:
+            self.win.show_overview(None, self.win.active_game_id)
 
     def on_hide_game_action(self, widget, callback=None):
-        if self.props.active_window.stack.get_visible_child() == self.props.active_window.overview:
-            self.props.active_window.on_go_back_action(None, None)
-        toggle_hidden(self.props.active_window.active_game_id)
-        self.props.active_window.update_games([self.props.active_window.active_game_id])
+        if self.win.stack.get_visible_child() == self.win.overview:
+            self.win.on_go_back_action(None, None)
+        toggle_hidden(self.win.active_game_id)
+        self.win.update_games([self.win.active_game_id])
 
     def on_edit_details_action(self, widget, callback=None):
-        create_details_window(self.props.active_window, self.props.active_window.active_game_id)
+        create_details_window(self.win, self.win.active_game_id)
 
     def on_add_game_action(self, widget, callback=None):
-        create_details_window(self.props.active_window)
+        create_details_window(self.win)
 
     def on_remove_game_action(self, widget, callback=None):
 
         # Add "removed=True" to the game properties so it can be deleted on next init
-        game_id = self.props.active_window.active_game_id
+        game_id = self.win.active_game_id
         open_file = open(os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game_id + ".json")), "r")
         data = json.loads(open_file.read())
         open_file.close()
         data["removed"] = True
         save_games({game_id : data})
 
-        self.props.active_window.update_games([game_id])
-        if self.props.active_window.stack.get_visible_child() == self.props.active_window.overview:
-            self.props.active_window.on_go_back_action(None, None)
+        self.win.update_games([game_id])
+        if self.win.stack.get_visible_child() == self.win.overview:
+            self.win.on_go_back_action(None, None)
 
         # Create toast for undoing the remove action
-        toast = Adw.Toast.new(self.props.active_window.games[game_id]["name"] + " " + (_("removed")))
+        toast = Adw.Toast.new(self.win.games[game_id]["name"] + " " + (_("removed")))
         toast.set_button_label(_("Undo"))
-        toast.connect("button-clicked", self.props.active_window.on_undo_remove_action, game_id)
+        toast.connect("button-clicked", self.win.on_undo_remove_action, game_id)
         toast.set_priority(Adw.ToastPriority.HIGH)
-        self.props.active_window.toasts[game_id] = toast
-        self.props.active_window.toast_overlay.add_toast(toast)
+        self.win.toasts[game_id] = toast
+        self.win.toast_overlay.add_toast(toast)
 
     def on_quit_action(self, widget, callback=None):
         self.quit()
