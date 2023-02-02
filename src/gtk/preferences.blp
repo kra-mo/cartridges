@@ -69,5 +69,19 @@ template PreferencesWindow : Adw.PreferencesWindow {
         }
       }
     }
+
+    Adw.PreferencesGroup {
+      title: "Bottles";
+
+      Adw.ActionRow {
+        title: _("Bottles Install Location");
+        subtitle: _("Directory to use when importing games");
+
+        Button bottles_file_chooser_button {
+          icon-name: "folder-symbolic";
+          valign: center;
+        }
+      }
+    }
   }
 }

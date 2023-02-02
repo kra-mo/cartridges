@@ -30,6 +30,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     steam_file_chooser_button = Gtk.Template.Child()
     heroic_file_chooser_button = Gtk.Template.Child()
+    bottles_file_chooser_button = Gtk.Template.Child()
 
     def __init__(self, parent_widget, **kwargs):
         super().__init__(**kwargs)
@@ -55,8 +56,15 @@ class PreferencesWindow(Adw.PreferencesWindow):
             except GLib.GError:
                 pass
 
+        def set_bottles_dir(source, result, user_data):
+            try:
+                schema.set_string("bottles-location", filechooser.select_folder_finish(result).get_path())
+            except GLib.GError:
+                pass
+
         def choose_folder(widget, function):
             filechooser.select_folder(parent_widget, None, function, None)
 
         self.steam_file_chooser_button.connect("clicked", choose_folder, set_steam_dir)
         self.heroic_file_chooser_button.connect("clicked", choose_folder, set_heroic_dir)
+        self.bottles_file_chooser_button.connect("clicked", choose_folder, set_bottles_dir)
