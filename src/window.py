@@ -97,6 +97,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.search_entry.connect("search-changed", self.search_changed, False)
         self.hidden_search_entry.connect("search-changed", self.search_changed, True)
 
+        back_mouse_button = Gtk.GestureClick(button=8)
+        back_mouse_button.connect("pressed", self.on_go_back_action)
+        self.add_controller(back_mouse_button)
+
     def update_games(self, games):
         # Update the displayed games and the self.games instance variable to reference later
         self.games = get_games()
@@ -274,7 +278,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             return self.a_z_sort(child1, child2)
 
-    def on_go_back_action(self, widget, _):
+    def on_go_back_action(self, widget, _, x=None, y=None):
         if self.stack.get_visible_child() == self.hidden_library_view:
             self.on_show_library_action(None, None)
         elif self.stack.get_visible_child() == self.overview:
