@@ -74,9 +74,12 @@ class CartridgesApplication(Adw.Application):
                                 application_icon="hu.kramo.Cartridges",
                                 developer_name="kramo",
                                 version="0.1.2",
-                                developers=["kramo"],
+                                developers=["kramo <contact@kramo.hu>", "Paweł Lidwin https://github.com/imLinguin"],
+                                designers=["kramo <contact@kramo.hu>"],
                                 copyright="© 2022 kramo",
-                                license_type=Gtk.License.GPL_3_0)
+                                license_type=Gtk.License.GPL_3_0,
+                                issue_url="https://github.com/kra-mo/cartridges/issues/new",
+                                website="https://github.com/kra-mo/cartridges")
         about.present()
 
     def on_preferences_action(self, widget, callback=None):
