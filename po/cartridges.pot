@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-29 14:12+0100\n"
+"POT-Creation-Date: 2023-02-02 20:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,36 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. Create toast for undoing the remove action
-#: src/main.py:133
+#: src/main.py:143
 msgid "removed"
 msgstr ""
 
-#: src/main.py:134
+#: src/main.py:144
 msgid "Undo"
 msgstr ""
 
-#: src/window.py:195
+#: src/window.py:199
 msgid "Today"
 msgstr ""
 
-#: src/window.py:197
+#: src/window.py:201
 msgid "Yesterday"
 msgstr ""
 
-#: src/window.py:221
+#: src/window.py:225
 msgid "Added: "
 msgstr ""
 
-#: src/window.py:222
+#: src/window.py:226
 msgid "Last played: "
 msgstr ""
 
-#: src/window.py:222
+#: src/window.py:226
 msgid "Last played: Never"
 msgstr ""
 
-#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:98
-#: src/utils/heroic_parser.py:153
+#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:99
+#: src/utils/heroic_parser.py:177
 msgid "No Games Found"
 msgstr ""
 
@@ -131,29 +131,37 @@ msgstr ""
 msgid "Add Game"
 msgstr ""
 
-#: src/window.blp:365
-msgid "Import From Steam"
+#: src/window.blp:366
+msgid "Import from"
 msgstr ""
 
-#: src/window.blp:370
-msgid "Import From Heroic"
+#: src/window.blp:368
+msgid "Steam"
 msgstr ""
 
-#: src/window.blp:379 src/window.blp:398 src/gtk/game.blp:69
+#: src/window.blp:373
+msgid "Heroic"
+msgstr ""
+
+#: src/window.blp:378
+msgid "Bottles"
+msgstr ""
+
+#: src/window.blp:388 src/window.blp:407 src/gtk/game.blp:69
 #: src/gtk/game.blp:95
 msgid "Edit"
 msgstr ""
 
-#: src/window.blp:384 src/gtk/game.blp:74
+#: src/window.blp:393 src/gtk/game.blp:74
 msgid "Hide"
 msgstr ""
 
-#: src/window.blp:389 src/window.blp:408 src/gtk/game.blp:79
+#: src/window.blp:398 src/window.blp:417 src/gtk/game.blp:79
 #: src/gtk/game.blp:105
 msgid "Remove"
 msgstr ""
 
-#: src/window.blp:403 src/gtk/game.blp:100
+#: src/window.blp:412 src/gtk/game.blp:100
 msgid "Unhide"
 msgstr ""
 
@@ -174,6 +182,7 @@ msgid "Steam Install Location"
 msgstr ""
 
 #: src/gtk/preferences.blp:26 src/gtk/preferences.blp:40
+#: src/gtk/preferences.blp:78
 msgid "Directory to use when importing games"
 msgstr ""
 
@@ -191,6 +200,10 @@ msgstr ""
 
 #: src/gtk/preferences.blp:65
 msgid "Import Sideloaded Games"
+msgstr ""
+
+#: src/gtk/preferences.blp:77
+msgid "Bottles Install Location"
 msgstr ""
 
 #: src/utils/create_details_window.py:38
@@ -229,23 +242,23 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/utils/create_details_window.py:141
-#: src/utils/create_details_window.py:145
+#: src/utils/create_details_window.py:140
+#: src/utils/create_details_window.py:144
 msgid "Couldn't Add Game"
 msgstr ""
 
-#: src/utils/create_details_window.py:141
-#: src/utils/create_details_window.py:166
+#: src/utils/create_details_window.py:140
+#: src/utils/create_details_window.py:165
 msgid "Game title cannot be empty."
 msgstr ""
 
-#: src/utils/create_details_window.py:145
-#: src/utils/create_details_window.py:170
+#: src/utils/create_details_window.py:144
+#: src/utils/create_details_window.py:169
 msgid "Executable cannot be empty."
 msgstr ""
 
-#: src/utils/create_details_window.py:166
-#: src/utils/create_details_window.py:170
+#: src/utils/create_details_window.py:165
+#: src/utils/create_details_window.py:169
 msgid "Couldn't Apply Preferences"
 msgstr ""
 
@@ -265,23 +278,23 @@ msgstr ""
 msgid "Set Steam Location"
 msgstr ""
 
-#: src/utils/steam_parser.py:98
+#: src/utils/steam_parser.py:99
 msgid "No new games found in Steam library."
 msgstr ""
 
-#: src/utils/steam_parser.py:100 src/utils/steam_parser.py:102
+#: src/utils/steam_parser.py:101 src/utils/steam_parser.py:103
 msgid "Steam Games Imported"
 msgstr ""
 
-#: src/utils/steam_parser.py:100 src/utils/heroic_parser.py:155
+#: src/utils/steam_parser.py:101 src/utils/heroic_parser.py:179
 msgid "Successfully imported 1 game."
 msgstr ""
 
-#: src/utils/steam_parser.py:102 src/utils/heroic_parser.py:157
+#: src/utils/steam_parser.py:103 src/utils/heroic_parser.py:182
 msgid "Successfully imported"
 msgstr ""
 
-#: src/utils/steam_parser.py:102 src/utils/heroic_parser.py:157
+#: src/utils/steam_parser.py:103 src/utils/heroic_parser.py:182
 msgid "games."
 msgstr ""
 
@@ -289,14 +302,14 @@ msgstr ""
 msgid "Heroic directory cannot be found."
 msgstr ""
 
-#: src/utils/heroic_parser.py:49
+#: src/utils/heroic_parser.py:50
 msgid "Set Heroic Location"
 msgstr ""
 
-#: src/utils/heroic_parser.py:153
+#: src/utils/heroic_parser.py:177
 msgid "No new games found in Heroic library."
 msgstr ""
 
-#: src/utils/heroic_parser.py:155 src/utils/heroic_parser.py:157
+#: src/utils/heroic_parser.py:179 src/utils/heroic_parser.py:181
 msgid "Heroic Games Imported"
 msgstr ""
