@@ -18,3 +18,4 @@ jobs:
         repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
         bundle: hu.kramo.Cartridges.flatpak
         manifest-path: hu.kramo.Cartridges.json
+        cache-key: flatpak-builder-${{ github.sha }}
