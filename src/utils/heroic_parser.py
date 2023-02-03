@@ -61,46 +61,36 @@ def heroic_parser(parent_widget, action):
     # Import Epic games
     if not schema.get_boolean("heroic-import-epic"):
         pass
-    elif os.path.exists(os.path.join(heroic_dir, "lib-cache", "installInfo.json")) and os.path.exists(
-            os.path.join(heroic_dir, "lib-cache", "library.json")):
-        open_file = open(os.path.join(heroic_dir, "lib-cache", "installInfo.json"), "r")
-        data = open_file.read()
-        open_file.close()
-        installInfo = json.loads(data)
-
+    elif os.path.exists(os.path.join(heroic_dir, "lib-cache", "library.json")):
         open_file = open(os.path.join(heroic_dir, "lib-cache", "library.json"), "r")
         data = open_file.read()
         library = json.loads(data)
         open_file.close()
-        for item in installInfo:
-            if installInfo[item].get("install") is not None:
-                values = {}
-                app_name = installInfo[item]["game"]["app_name"]
 
-                values["game_id"] = "heroic_epic_" + app_name
+        for game in library["library"]:
+            if game["is_installed"] == False:
+                continue
 
-                if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[
-                    values["game_id"]].keys():
-                    continue
+            values = {}
 
-                values["name"] = installInfo[item]["game"]["title"]
-                values["executable"] = "xdg-open heroic://launch/" + app_name
-                values["hidden"] = False
-                values["source"] = "heroic_epic"
-                values["added"] = current_time
-                values["last_played"] = 0
+            app_name = game["app_name"]
+            values["game_id"] = "heroic_epic_" + app_name
 
-                for game in library["library"]:
-                    if game["app_name"] == app_name:
-                        image_path = os.path.join(heroic_dir, "images-cache",
-                                                  hashlib.sha256((game[
-                                                                      "art_square"] + "?h=400&resize=1&w=300").encode()).hexdigest())
-                        if os.path.exists(image_path):
-                            values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
+            if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[values["game_id"]].keys():
+                continue
 
-                        break
+            values["name"] = game["title"]
+            values["executable"] = "xdg-open heroic://launch/" + app_name
+            values["hidden"] = False
+            values["source"] = "heroic_epic"
+            values["added"] = current_time
+            values["last_played"] = 0
 
-                heroic_games[values["game_id"]] = values
+            image_path = os.path.join(heroic_dir, "images-cache", hashlib.sha256((game["art_square"] + "?h=400&resize=1&w=300").encode()).hexdigest())
+            if os.path.exists(image_path):
+                values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
+
+            heroic_games[values["game_id"]] = values
 
     # Import GOG games
     if not schema.get_boolean("heroic-import-gog"):
