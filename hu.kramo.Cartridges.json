@@ -11,6 +11,9 @@
         "--socket=wayland",
         "--talk-name=org.freedesktop.Flatpak",
         "--filesystem=~/.steam/steam/",
+        "--filesystem=xdg-config/heroic/",
+        "--filesystem=xdg-data/bottles/",
+        "--filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam/",
         "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/heroic/",
         "--filesystem=~/.var/app/com.usebottles.bottles/data/bottles/"
     ],

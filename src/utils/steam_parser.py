@@ -26,27 +26,33 @@ def steam_parser(parent_widget, action):
     from .save_cover import save_cover
 
     schema = parent_widget.schema
-    steam_dir = os.path.expanduser(os.path.join(schema.get_string("steam-location")))
+    steam_dir = os.path.expanduser(schema.get_string("steam-location"))
 
     def steam_not_found():
-        filechooser = Gtk.FileDialog.new()
+        if os.path.exists(os.path.expanduser("~/.var/app/com.valvesoftware.Steam/data/Steam/")):
+            schema.set_string("steam-location", "~/.var/app/com.valvesoftware.Steam/data/Steam/")
+            action(None, None)
+        elif os.path.exists(os.path.expanduser("~/.steam/steam/")):
+            schema.set_string("steam-location", "~/.steam/steam/")
+            action(None, None)
+        else:
+            filechooser = Gtk.FileDialog.new()
 
-        def set_steam_dir(source, result, _):
-            try:
-                schema.set_string("steam-location", filechooser.select_folder_finish(result).get_path())
-                steam_dir = steam_dir = os.path.join(schema.get_string("steam-location"))
-                action(None, None)
-            except GLib.GError:
-                return
+            def set_steam_dir(source, result, _):
+                try:
+                    schema.set_string("steam-location", filechooser.select_folder_finish(result).get_path())
+                    action(None, None)
+                except GLib.GError:
+                    return
 
-        def choose_folder(widget):
-            filechooser.select_folder(parent_widget, None, set_steam_dir, None)
+            def choose_folder(widget):
+                filechooser.select_folder(parent_widget, None, set_steam_dir, None)
 
-        def response(widget, response):
-            if response == "choose_folder":
-                choose_folder(widget)
+            def response(widget, response):
+                if response == "choose_folder":
+                    choose_folder(widget)
 
-        create_dialog(parent_widget, _("Couldn't Import Games"), _("Steam directory cannot be found."), "choose_folder", _("Set Steam Location")).connect("response", response)
+            create_dialog(parent_widget, _("Couldn't Import Games"), _("Steam directory cannot be found."), "choose_folder", _("Set Steam Location")).connect("response", response)
 
     if os.path.exists(os.path.join(steam_dir, "steamapps")):
         pass
@@ -58,7 +64,7 @@ def steam_parser(parent_widget, action):
         steam_not_found()
         return {}
 
-    steam_dir = schema.get_string("steam-location")
+    steam_dir = os.path.expanduser(schema.get_string("steam-location"))
 
     appmanifests = []
     datatypes = ["appid", "name"]

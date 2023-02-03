@@ -26,33 +26,41 @@ def bottles_parser(parent_widget, action):
     from .save_cover import save_cover
 
     schema = parent_widget.schema
-    bottles_dir = os.path.expanduser(os.path.join(schema.get_string("bottles-location")))
+    bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
 
     def bottles_not_found():
-        filechooser = Gtk.FileDialog.new()
+        if os.path.exists(os.path.expanduser("~/.var/app/com.usebottles.bottles/data/bottles/")):
+            schema.set_string("bottles-location", "~/.var/app/com.usebottles.bottles/data/bottles/")
+            action(None, None)
+        elif os.path.exists(os.path.join(os.environ.get("XDG_DATA_HOME"), "bottles")):
+            schema.set_string("bottles-location", os.path.join(os.environ.get("XDG_DATA_HOME"), "bottles"))
+            action(None, None)
+        else:
+            filechooser = Gtk.FileDialog.new()
 
-        def set_bottles_dir(source, result, _):
-            try:
-                schema.set_string("bottles-location", filechooser.select_folder_finish(result).get_path())
-                bottles_dir = bottles_dir = os.path.join(schema.get_string("bottles-location"))
-                action(None, None)
-            except GLib.GError:
-                return
+            def set_bottles_dir(source, result, _):
+                try:
+                    schema.set_string("bottles-location", filechooser.select_folder_finish(result).get_path())
+                    action(None, None)
+                except GLib.GError:
+                    return
 
-        def choose_folder(widget):
-            filechooser.select_folder(parent_widget, None, set_bottles_dir, None)
+            def choose_folder(widget):
+                filechooser.select_folder(parent_widget, None, set_bottles_dir, None)
 
-        def response(widget, response):
-            if response == "choose_folder":
-                choose_folder(widget)
+            def response(widget, response):
+                if response == "choose_folder":
+                    choose_folder(widget)
 
-        create_dialog(parent_widget, _("Couldn't Import Games"), _("Bottles directory cannot be found."), "choose_folder", _("Set Bottles Location")).connect("response", response)
+            create_dialog(parent_widget, _("Couldn't Import Games"), _("Bottles directory cannot be found."), "choose_folder", _("Set Bottles Location")).connect("response", response)
 
     if os.path.isfile(os.path.join(bottles_dir, "library.yml")):
         pass
     else:
         bottles_not_found()
         return {}
+
+    bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
 
     datatypes = ["path", "id", "name", "thumbnail"]
     bottles_games = {}

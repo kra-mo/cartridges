@@ -26,34 +26,41 @@ def heroic_parser(parent_widget, action):
     from .save_cover import save_cover
 
     schema = parent_widget.schema
-    heroic_dir = os.path.expanduser(os.path.join(schema.get_string("heroic-location")))
+    heroic_dir = os.path.expanduser(schema.get_string("heroic-location"))
 
     def heroic_not_found():
-        filechooser = Gtk.FileDialog.new()
+        if os.path.exists(os.path.expanduser("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")):
+            schema.set_string("heroic-location", "~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
+            action(None, None)
+        elif os.path.exists(os.path.join(os.environ.get("XDG_CONFIG_HOME"), "heroic")):
+            schema.set_string("heroic-location", os.path.join(os.environ.get("XDG_CONFIG_HOME"), "heroic"))
+            action(None, None)
+        else:
+            filechooser = Gtk.FileDialog.new()
 
-        def set_heroic_dir(source, result, _):
-            try:
-                schema.set_string("heroic-location", filechooser.select_folder_finish(result).get_path())
-                heroic_dir = heroic_dir = os.path.join(schema.get_string("heroic-location"))
-                action(None, None)
-            except GLib.GError:
-                return
+            def set_heroic_dir(source, result, _):
+                try:
+                    schema.set_string("heroic-location", filechooser.select_folder_finish(result).get_path())
+                    action(None, None)
+                except GLib.GError:
+                    return
 
-        def choose_folder(widget):
-            filechooser.select_folder(parent_widget, None, set_heroic_dir, None)
+            def choose_folder(widget):
+                filechooser.select_folder(parent_widget, None, set_heroic_dir, None)
 
-        def response(widget, response):
-            if response == "choose_folder":
-                choose_folder(widget)
+            def response(widget, response):
+                if response == "choose_folder":
+                    choose_folder(widget)
 
-        create_dialog(parent_widget, _("Couldn't Import Games"), _("Heroic directory cannot be found."),
-                      "choose_folder", _("Set Heroic Location")).connect("response", response)
+            create_dialog(parent_widget, _("Couldn't Import Games"), _("Heroic directory cannot be found."), "choose_folder", _("Set Heroic Location")).connect("response", response)
 
     if os.path.exists(os.path.join(heroic_dir, "config.json")):
         pass
     else:
         heroic_not_found()
         return {}
+
+    heroic_dir = os.path.expanduser(schema.get_string("heroic-location"))
 
     heroic_games = {}
     current_time = int(time.time())
