@@ -56,6 +56,12 @@ class CartridgesApplication(Adw.Application):
         if not self.win:
             self.win = CartridgesWindow(application=self)
 
+        # Save window geometry
+        state_settings = Gio.Settings(schema_id="hu.kramo.Cartridge.State")
+        state_settings.bind("width", self.win, "default-width", Gio.SettingsBindFlags.DEFAULT)
+        state_settings.bind("height", self.win, "default-height", Gio.SettingsBindFlags.DEFAULT)
+        state_settings.bind("is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT)
+
         self.win.present()
 
         # Create actions for the main window
@@ -68,7 +74,7 @@ class CartridgesApplication(Adw.Application):
         self.win.sort = Gio.SimpleAction.new_stateful("sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z"))
         self.win.add_action(self.win.sort)
         self.win.sort.connect("activate", self.win.on_sort_action)
-        self.win.on_sort_action(self.win.sort, self.win.schema.get_value("sort-mode"))
+        self.win.on_sort_action(self.win.sort, state_settings.get_value("sort-mode"))
 
     def on_about_action(self, widget, callback=None):
         about = Adw.AboutWindow(transient_for=self.win,

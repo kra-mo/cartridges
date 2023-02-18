@@ -22,7 +22,18 @@
 	  <key name="bottles-location" type="s">
       <default>"~/.var/app/com.usebottles.bottles/data/bottles/"</default>
     </key>
-	  <key name="sort-mode" type="s">
+	</schema>
+  <schema id="hu.kramo.Cartridge.State" path="/hu/kramo/Cartridges/State/">
+    <key name="width" type="i">
+      <default>1110</default>
+    </key>
+    <key name="height" type="i">
+      <default>820</default>
+    </key>
+    <key name="is-maximized" type="b">
+      <default>false</default>
+    </key>
+    <key name="sort-mode" type="s">
       <choices>
         <choice value="a-z"/>
         <choice value="z-a"/>
@@ -32,5 +43,5 @@
       </choices>
       <default>"a-z"</default>
     </key>
-	</schema>
+  </schema>
 </schemalist>

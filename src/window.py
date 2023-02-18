@@ -325,7 +325,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         elif state == "last_played":
             sort_func = self.last_played_sort
 
-        self.schema.set_string("sort-mode", state)
+        Gio.Settings(schema_id="hu.kramo.Cartridge.State").set_string("sort-mode", state)
         self.library.set_sort_func(sort_func)
         self.hidden_library.set_sort_func(sort_func)
 
