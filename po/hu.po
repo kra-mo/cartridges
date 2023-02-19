@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: github.com/kra-mo/cartridges/issues/new/\n"
-"POT-Creation-Date: 2023-02-19 10:50+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-19 16:21+0530\n"
 "PO-Revision-Date: 2023-02-19 10:56+0100\n"
 "Last-Translator: kramo\n"
 "Language-Team: \n"
@@ -18,9 +18,33 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: src/main.py:81 src/window.blp:29
+#: data/hu.kramo.Cartridges.desktop.in:3
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6 src/main.py:81 src/window.blp:29
 msgid "Cartridges"
 msgstr "Kazetták"
+
+#: data/hu.kramo.Cartridges.desktop.in:4
+msgid "Game Launcher"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.desktop.in:5
+msgid "Launch your games"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:7
+msgid "Launch all your games"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:9
+msgid ""
+"Cartridges is a simple game launcher. It has support for importing your "
+"games from Steam, Heroic and Bottles with organizational features such as "
+"hiding and sorting by date added or last played."
+msgstr ""
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:12
+msgid "kramo"
+msgstr ""
 
 #. Translators: Replace this with your name for it to show up in the about window.
 #: src/main.py:92
@@ -56,8 +80,8 @@ msgstr "Legutóbb játszva: "
 msgid "Last played: Never"
 msgstr "Legutóbb játszva: Soha"
 
-#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:105
-#: src/utils/heroic_parser.py:174
+#: src/window.blp:6 src/window.blp:14 src/utils/bottles_parser.py:98
+#: src/utils/heroic_parser.py:174 src/utils/steam_parser.py:105
 msgid "No Games Found"
 msgstr "Nem Találhatóak Játékok"
 
@@ -175,6 +199,34 @@ msgstr "Mutat"
 msgid "Title"
 msgstr "Cím"
 
+#: src/gtk/help-overlay.blp:11
+#, fuzzy
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Általános"
+
+#: src/gtk/help-overlay.blp:14
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:19
+msgctxt "shortcut window"
+msgid "Search"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:24
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr "Billentyűparancsok"
+
+#: src/gtk/help-overlay.blp:29
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "Visszavonás"
+
 #: src/gtk/preferences.blp:10
 msgid "General"
 msgstr "Általános"
@@ -211,6 +263,46 @@ msgstr "Manuálisan Hozzáadott Játékok Importálása"
 #: src/gtk/preferences.blp:77
 msgid "Bottles Install Location"
 msgstr "Bottles Telepítés Helye"
+
+#: src/utils/bottles_parser.py:55 src/utils/heroic_parser.py:55
+#: src/utils/steam_parser.py:55
+msgid "Couldn't Import Games"
+msgstr "Nem Lehet Importálni a Játékot"
+
+#: src/utils/bottles_parser.py:55
+#, fuzzy
+msgid "The Bottles directory cannot be found."
+msgstr "A Steam mappa nem található."
+
+#: src/utils/bottles_parser.py:55
+#, fuzzy
+msgid "Set Bottles Location"
+msgstr "Steam Mappa Kiválasztása"
+
+#: src/utils/bottles_parser.py:98
+#, fuzzy
+msgid "No new games were found in the Bottles library."
+msgstr "Nem találhatók új játékok a Steam könyvtárban."
+
+#: src/utils/bottles_parser.py:100 src/utils/bottles_parser.py:102
+#, fuzzy
+msgid "Bottles Games Imported"
+msgstr "Steam Játékok Importálva"
+
+#: src/utils/bottles_parser.py:100 src/utils/heroic_parser.py:176
+#: src/utils/steam_parser.py:107
+msgid "Successfully imported 1 game."
+msgstr "1 játék sikeresen importálva."
+
+#: src/utils/bottles_parser.py:102 src/utils/heroic_parser.py:179
+#: src/utils/steam_parser.py:109
+msgid "Successfully imported"
+msgstr "Sikeresen importálva"
+
+#: src/utils/bottles_parser.py:102 src/utils/heroic_parser.py:179
+#: src/utils/steam_parser.py:109
+msgid "games."
+msgstr "játék."
 
 #: src/utils/create_details_window.py:38
 msgid "Add New Game"
@@ -272,40 +364,9 @@ msgstr "Nem Lehet Menteni a Beállításokat"
 msgid "Dismiss"
 msgstr "Rendben"
 
-#: src/utils/steam_parser.py:55 src/utils/heroic_parser.py:55
-msgid "Couldn't Import Games"
-msgstr "Nem Lehet Importálni a Játékot"
-
-#: src/utils/steam_parser.py:55
-msgid "Steam directory cannot be found."
-msgstr "A Steam mappa nem található."
-
-#: src/utils/steam_parser.py:55
-msgid "Set Steam Location"
-msgstr "Steam Mappa Kiválasztása"
-
-#: src/utils/steam_parser.py:105
-msgid "No new games found in Steam library."
-msgstr "Nem találhatók új játékok a Steam könyvtárban."
-
-#: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
-msgid "Steam Games Imported"
-msgstr "Steam Játékok Importálva"
-
-#: src/utils/steam_parser.py:107 src/utils/heroic_parser.py:176
-msgid "Successfully imported 1 game."
-msgstr "1 játék sikeresen importálva."
-
-#: src/utils/steam_parser.py:109 src/utils/heroic_parser.py:179
-msgid "Successfully imported"
-msgstr "Sikeresen importálva"
-
-#: src/utils/steam_parser.py:109 src/utils/heroic_parser.py:179
-msgid "games."
-msgstr "játék."
-
 #: src/utils/heroic_parser.py:55
-msgid "Heroic directory cannot be found."
+#, fuzzy
+msgid "The Heroic directory cannot be found."
 msgstr "A Heroic mappa nem található."
 
 #: src/utils/heroic_parser.py:55
@@ -313,12 +374,31 @@ msgid "Set Heroic Location"
 msgstr "Heroic Mappa Kiválasztása"
 
 #: src/utils/heroic_parser.py:174
-msgid "No new games found in Heroic library."
+#, fuzzy
+msgid "No new games were found in the Heroic library."
 msgstr "Nem találhatók új játékok a Heroic könyvtárban."
 
 #: src/utils/heroic_parser.py:176 src/utils/heroic_parser.py:178
 msgid "Heroic Games Imported"
 msgstr "Heroic Játékok Importálva"
+
+#: src/utils/steam_parser.py:55
+#, fuzzy
+msgid "The Steam directory cannot be found."
+msgstr "A Steam mappa nem található."
+
+#: src/utils/steam_parser.py:55
+msgid "Set Steam Location"
+msgstr "Steam Mappa Kiválasztása"
+
+#: src/utils/steam_parser.py:105
+#, fuzzy
+msgid "No new games were found in the Steam library."
+msgstr "Nem találhatók új játékok a Steam könyvtárban."
+
+#: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
+msgid "Steam Games Imported"
+msgstr "Steam Játékok Importálva"
 
 #~ msgid "Import From Heroic"
 #~ msgstr "Importálás Heroic-ból"

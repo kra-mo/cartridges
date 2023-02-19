@@ -52,7 +52,7 @@ def heroic_parser(parent_widget, action):
                 if response == "choose_folder":
                     choose_folder(widget)
 
-            create_dialog(parent_widget, _("Couldn't Import Games"), _("Heroic directory cannot be found."), "choose_folder", _("Set Heroic Location")).connect("response", response)
+            create_dialog(parent_widget, _("Couldn't Import Games"), _("The Heroic directory cannot be found."), "choose_folder", _("Set Heroic Location")).connect("response", response)
 
     if os.path.exists(os.path.join(heroic_dir, "config.json")):
         pass
@@ -171,7 +171,7 @@ def heroic_parser(parent_widget, action):
             heroic_games[values["game_id"]] = values
 
     if len(heroic_games) == 0:
-        create_dialog(parent_widget, _("No Games Found"), _("No new games found in Heroic library."))
+        create_dialog(parent_widget, _("No Games Found"), _("No new games were found in the Heroic library."))
     elif len(heroic_games) == 1:
         create_dialog(parent_widget, _("Heroic Games Imported"), _("Successfully imported 1 game."))
     elif len(heroic_games) > 1:
