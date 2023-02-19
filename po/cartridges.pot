@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR kramo
+# This file is distributed under the same license as the cartridges package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-02 20:41+0100\n"
+"Project-Id-Version: cartridges\n"
+"Report-Msgid-Bugs-To: github.com/kra-mo/cartridges/issues/new/\n"
+"POT-Creation-Date: 2023-02-19 10:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,21 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: src/main.py:81 src/window.blp:29
+msgid "Cartridges"
+msgstr ""
+
+#. Translators: Replace this with your name for it to show up in the about window.
+#: src/main.py:92
+msgid "translator_credits"
+msgstr ""
+
 #. Create toast for undoing the remove action
-#: src/main.py:143
+#: src/main.py:151
 msgid "removed"
 msgstr ""
 
-#: src/main.py:144
+#: src/main.py:152
 msgid "Undo"
 msgstr ""
 
@@ -46,8 +55,8 @@ msgstr ""
 msgid "Last played: Never"
 msgstr ""
 
-#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:99
-#: src/utils/heroic_parser.py:177
+#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:105
+#: src/utils/heroic_parser.py:174
 msgid "No Games Found"
 msgstr ""
 
@@ -67,101 +76,97 @@ msgstr ""
 msgid "Games you hide will appear here."
 msgstr ""
 
-#: src/window.blp:29
-msgid "Cartridges"
-msgstr ""
-
-#: src/window.blp:52
+#: src/window.blp:50
 msgid "Game Details"
 msgstr ""
 
-#: src/window.blp:90
+#: src/window.blp:88
 msgid "Game Title"
 msgstr ""
 
-#: src/window.blp:132 src/gtk/game.blp:62 src/gtk/game.blp:88
+#: src/window.blp:130 src/gtk/game.blp:62 src/gtk/game.blp:88
 msgid "Play"
 msgstr ""
 
-#: src/window.blp:241
+#: src/window.blp:239
 msgid "Hidden Games"
 msgstr ""
 
-#: src/window.blp:299
+#: src/window.blp:297
 msgid "Sort"
 msgstr ""
 
-#: src/window.blp:302
+#: src/window.blp:300
 msgid "A-Z"
 msgstr ""
 
-#: src/window.blp:308
+#: src/window.blp:306
 msgid "Z-A"
 msgstr ""
 
-#: src/window.blp:314
+#: src/window.blp:312
 msgid "Newest"
 msgstr ""
 
-#: src/window.blp:320
+#: src/window.blp:318
 msgid "Oldest"
 msgstr ""
 
-#: src/window.blp:326
+#: src/window.blp:324
 msgid "Last Played"
 msgstr ""
 
-#: src/window.blp:333
+#: src/window.blp:331
 msgid "Show Hidden"
 msgstr ""
 
-#: src/window.blp:341
+#: src/window.blp:339
 msgid "Preferences"
 msgstr ""
 
-#: src/window.blp:346
+#: src/window.blp:344
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: src/window.blp:351
+#: src/window.blp:349
 msgid "About Cartridges"
 msgstr ""
 
-#: src/window.blp:360
+#: src/window.blp:358
 msgid "Add Game"
 msgstr ""
 
-#: src/window.blp:366
+#: src/window.blp:364
 msgid "Import from"
 msgstr ""
 
-#: src/window.blp:368
+#: src/window.blp:366
 msgid "Steam"
 msgstr ""
 
-#: src/window.blp:373
+#: src/window.blp:371
 msgid "Heroic"
 msgstr ""
 
-#: src/window.blp:378
+#: src/window.blp:376
 msgid "Bottles"
 msgstr ""
 
-#: src/window.blp:388 src/window.blp:407 src/gtk/game.blp:69
+#: src/window.blp:386 src/window.blp:405 src/gtk/game.blp:69
 #: src/gtk/game.blp:95
 msgid "Edit"
 msgstr ""
 
-#: src/window.blp:393 src/gtk/game.blp:74
+#: src/window.blp:391 src/gtk/game.blp:74
 msgid "Hide"
 msgstr ""
 
-#: src/window.blp:398 src/window.blp:417 src/gtk/game.blp:79
+#: src/window.blp:396 src/window.blp:415 src/gtk/game.blp:79
 #: src/gtk/game.blp:105
 msgid "Remove"
 msgstr ""
 
-#: src/window.blp:412 src/gtk/game.blp:100
+#: src/window.blp:410 src/gtk/game.blp:100
 msgid "Unhide"
 msgstr ""
 
@@ -266,50 +271,50 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
-#: src/utils/steam_parser.py:49 src/utils/heroic_parser.py:49
+#: src/utils/steam_parser.py:55 src/utils/heroic_parser.py:55
 msgid "Couldn't Import Games"
 msgstr ""
 
-#: src/utils/steam_parser.py:49
+#: src/utils/steam_parser.py:55
 msgid "Steam directory cannot be found."
 msgstr ""
 
-#: src/utils/steam_parser.py:49
+#: src/utils/steam_parser.py:55
 msgid "Set Steam Location"
 msgstr ""
 
-#: src/utils/steam_parser.py:99
+#: src/utils/steam_parser.py:105
 msgid "No new games found in Steam library."
 msgstr ""
 
-#: src/utils/steam_parser.py:101 src/utils/steam_parser.py:103
+#: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
 msgid "Steam Games Imported"
 msgstr ""
 
-#: src/utils/steam_parser.py:101 src/utils/heroic_parser.py:179
+#: src/utils/steam_parser.py:107 src/utils/heroic_parser.py:176
 msgid "Successfully imported 1 game."
 msgstr ""
 
-#: src/utils/steam_parser.py:103 src/utils/heroic_parser.py:182
+#: src/utils/steam_parser.py:109 src/utils/heroic_parser.py:179
 msgid "Successfully imported"
 msgstr ""
 
-#: src/utils/steam_parser.py:103 src/utils/heroic_parser.py:182
+#: src/utils/steam_parser.py:109 src/utils/heroic_parser.py:179
 msgid "games."
 msgstr ""
 
-#: src/utils/heroic_parser.py:49
+#: src/utils/heroic_parser.py:55
 msgid "Heroic directory cannot be found."
 msgstr ""
 
-#: src/utils/heroic_parser.py:50
+#: src/utils/heroic_parser.py:55
 msgid "Set Heroic Location"
 msgstr ""
 
-#: src/utils/heroic_parser.py:177
+#: src/utils/heroic_parser.py:174
 msgid "No new games found in Heroic library."
 msgstr ""
 
-#: src/utils/heroic_parser.py:179 src/utils/heroic_parser.py:181
+#: src/utils/heroic_parser.py:176 src/utils/heroic_parser.py:178
 msgid "Heroic Games Imported"
 msgstr ""

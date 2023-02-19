@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-02 20:41+0100\n"
-"PO-Revision-Date: 2023-02-06 19:05+0100\n"
+"Report-Msgid-Bugs-To: github.com/kra-mo/cartridges/issues/new/\n"
+"POT-Creation-Date: 2023-02-19 10:50+0100\n"
+"PO-Revision-Date: 2023-02-19 10:56+0100\n"
 "Last-Translator: kramo\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -18,12 +18,21 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.2.2\n"
 
+#: src/main.py:81 src/window.blp:29
+msgid "Cartridges"
+msgstr "Kazetták"
+
+#. Translators: Replace this with your name for it to show up in the about window.
+#: src/main.py:92
+msgid "translator_credits"
+msgstr "kramo https://kramo.hu"
+
 #. Create toast for undoing the remove action
-#: src/main.py:143
+#: src/main.py:151
 msgid "removed"
 msgstr "eltávolítva"
 
-#: src/main.py:144
+#: src/main.py:152
 msgid "Undo"
 msgstr "Visszavonás"
 
@@ -47,8 +56,8 @@ msgstr "Legutóbb játszva: "
 msgid "Last played: Never"
 msgstr "Legutóbb játszva: Soha"
 
-#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:99
-#: src/utils/heroic_parser.py:177
+#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:105
+#: src/utils/heroic_parser.py:174
 msgid "No Games Found"
 msgstr "Nem Találhatóak Játékok"
 
@@ -68,101 +77,97 @@ msgstr "Nincsenek Rejtett Játékok"
 msgid "Games you hide will appear here."
 msgstr "A rejtett játékaid itt lesznek megtalálhatók."
 
-#: src/window.blp:29
-msgid "Cartridges"
-msgstr "Játékpolc"
-
-#: src/window.blp:52
+#: src/window.blp:50
 msgid "Game Details"
 msgstr "Játék Részletei"
 
-#: src/window.blp:90
+#: src/window.blp:88
 msgid "Game Title"
 msgstr "Cím"
 
-#: src/window.blp:132 src/gtk/game.blp:62 src/gtk/game.blp:88
+#: src/window.blp:130 src/gtk/game.blp:62 src/gtk/game.blp:88
 msgid "Play"
 msgstr "Játék"
 
-#: src/window.blp:241
+#: src/window.blp:239
 msgid "Hidden Games"
 msgstr "Rejtett Játékok"
 
-#: src/window.blp:299
+#: src/window.blp:297
 msgid "Sort"
 msgstr "Rendezés"
 
-#: src/window.blp:302
+#: src/window.blp:300
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/window.blp:308
+#: src/window.blp:306
 msgid "Z-A"
 msgstr "Z-A"
 
-#: src/window.blp:314
+#: src/window.blp:312
 msgid "Newest"
 msgstr "Legújabb"
 
-#: src/window.blp:320
+#: src/window.blp:318
 msgid "Oldest"
 msgstr "Legrégebbi"
 
-#: src/window.blp:326
+#: src/window.blp:324
 msgid "Last Played"
 msgstr "Legutóbb játszott"
 
-#: src/window.blp:333
+#: src/window.blp:331
 msgid "Show Hidden"
 msgstr "Rejtett Játékok"
 
-#: src/window.blp:341
+#: src/window.blp:339
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: src/window.blp:346
+#: src/window.blp:344
 msgid "Keyboard Shortcuts"
 msgstr "Billentyűparancsok"
 
-#: src/window.blp:351
+#: src/window.blp:349
 msgid "About Cartridges"
-msgstr "A Játékpolcról"
+msgstr "A Kazettákról"
 
-#: src/window.blp:360
+#: src/window.blp:358
 msgid "Add Game"
 msgstr "Játék Hozzáadása"
 
-#: src/window.blp:366
+#: src/window.blp:364
 msgid "Import from"
 msgstr "Importálás innen"
 
-#: src/window.blp:368
+#: src/window.blp:366
 msgid "Steam"
 msgstr "Steam"
 
-#: src/window.blp:373
+#: src/window.blp:371
 msgid "Heroic"
 msgstr "Heroic"
 
-#: src/window.blp:378
+#: src/window.blp:376
 msgid "Bottles"
 msgstr "Bottles"
 
-#: src/window.blp:388 src/window.blp:407 src/gtk/game.blp:69
+#: src/window.blp:386 src/window.blp:405 src/gtk/game.blp:69
 #: src/gtk/game.blp:95
 msgid "Edit"
 msgstr "Szerkeszt"
 
-#: src/window.blp:393 src/gtk/game.blp:74
+#: src/window.blp:391 src/gtk/game.blp:74
 msgid "Hide"
 msgstr "Elrejt"
 
-#: src/window.blp:398 src/window.blp:417 src/gtk/game.blp:79
+#: src/window.blp:396 src/window.blp:415 src/gtk/game.blp:79
 #: src/gtk/game.blp:105
 msgid "Remove"
 msgstr "Eltávolít"
 
-#: src/window.blp:412 src/gtk/game.blp:100
+#: src/window.blp:410 src/gtk/game.blp:100
 msgid "Unhide"
 msgstr "Mutat"
 
@@ -267,51 +272,51 @@ msgstr "Nem Lehet Menteni a Beállításokat"
 msgid "Dismiss"
 msgstr "Rendben"
 
-#: src/utils/steam_parser.py:49 src/utils/heroic_parser.py:49
+#: src/utils/steam_parser.py:55 src/utils/heroic_parser.py:55
 msgid "Couldn't Import Games"
 msgstr "Nem Lehet Importálni a Játékot"
 
-#: src/utils/steam_parser.py:49
+#: src/utils/steam_parser.py:55
 msgid "Steam directory cannot be found."
 msgstr "A Steam mappa nem található."
 
-#: src/utils/steam_parser.py:49
+#: src/utils/steam_parser.py:55
 msgid "Set Steam Location"
 msgstr "Steam Mappa Kiválasztása"
 
-#: src/utils/steam_parser.py:99
+#: src/utils/steam_parser.py:105
 msgid "No new games found in Steam library."
 msgstr "Nem találhatók új játékok a Steam könyvtárban."
 
-#: src/utils/steam_parser.py:101 src/utils/steam_parser.py:103
+#: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
 msgid "Steam Games Imported"
 msgstr "Steam Játékok Importálva"
 
-#: src/utils/steam_parser.py:101 src/utils/heroic_parser.py:179
+#: src/utils/steam_parser.py:107 src/utils/heroic_parser.py:176
 msgid "Successfully imported 1 game."
 msgstr "1 játék sikeresen importálva."
 
-#: src/utils/steam_parser.py:103 src/utils/heroic_parser.py:182
+#: src/utils/steam_parser.py:109 src/utils/heroic_parser.py:179
 msgid "Successfully imported"
 msgstr "Sikeresen importálva"
 
-#: src/utils/steam_parser.py:103 src/utils/heroic_parser.py:182
+#: src/utils/steam_parser.py:109 src/utils/heroic_parser.py:179
 msgid "games."
 msgstr "játék."
 
-#: src/utils/heroic_parser.py:49
+#: src/utils/heroic_parser.py:55
 msgid "Heroic directory cannot be found."
 msgstr "A Heroic mappa nem található."
 
-#: src/utils/heroic_parser.py:50
+#: src/utils/heroic_parser.py:55
 msgid "Set Heroic Location"
 msgstr "Heroic Mappa Kiválasztása"
 
-#: src/utils/heroic_parser.py:177
+#: src/utils/heroic_parser.py:174
 msgid "No new games found in Heroic library."
 msgstr "Nem találhatók új játékok a Heroic könyvtárban."
 
-#: src/utils/heroic_parser.py:179 src/utils/heroic_parser.py:181
+#: src/utils/heroic_parser.py:176 src/utils/heroic_parser.py:178
 msgid "Heroic Games Imported"
 msgstr "Heroic Játékok Importálva"
 

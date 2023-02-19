@@ -78,7 +78,7 @@ class CartridgesApplication(Adw.Application):
 
     def on_about_action(self, widget, callback=None):
         about = Adw.AboutWindow(transient_for=self.win,
-                                application_name="Cartridges",
+                                application_name=_("Cartridges"),
                                 application_icon="hu.kramo.Cartridges",
                                 developer_name="kramo",
                                 version="0.1.2",
@@ -87,7 +87,9 @@ class CartridgesApplication(Adw.Application):
                                 copyright="© 2022 kramo",
                                 license_type=Gtk.License.GPL_3_0,
                                 issue_url="https://github.com/kra-mo/cartridges/issues/new",
-                                website="https://github.com/kra-mo/cartridges")
+                                website="https://github.com/kra-mo/cartridges",
+                                # Translators: Replace this with your name for it to show up in the about window.
+                                translator_credits=_("translator_credits"))
         about.present()
 
     def on_preferences_action(self, widget, callback=None):
