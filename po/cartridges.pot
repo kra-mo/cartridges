@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2023 Cartridges Contributors
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
-# kramo <EMAIL@ADDRESS>, 2023.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 16:21+0530\n"
+"POT-Creation-Date: 2023-02-19 12:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,10 +39,6 @@ msgid ""
 "Cartridges is a simple game launcher. It has support for importing your "
 "games from Steam, Heroic and Bottles with organizational features such as "
 "hiding and sorting by date added or last played."
-msgstr ""
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:12
-msgid "kramo"
 msgstr ""
 
 #. Translators: Replace this with your name for it to show up in the about window.

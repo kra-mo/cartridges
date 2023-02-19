@@ -9,5 +9,5 @@
 	  <p>Cartridges is a simple game launcher. It has support for importing your games from Steam, Heroic and Bottles with organizational features such as hiding and sorting by date added or last played.</p>
 	</description>
   <launchable type="desktop-id">hu.kramo.Cartridges.desktop</launchable>
-  <developer_name>kramo</developer_name>
+  <developer_name translatable="no">kramo</developer_name>
 </component>

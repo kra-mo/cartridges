@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 16:21+0530\n"
+"POT-Creation-Date: 2023-02-19 12:51+0100\n"
 "PO-Revision-Date: 2023-02-19 12:17+0100\n"
 "Last-Translator: kramo\n"
 "Language-Team: \n"
@@ -43,10 +43,6 @@ msgid ""
 msgstr ""
 "A Kazetták egy egyszerű játékindító. Támogatja a Steam-ből, Heroic-ból és "
 "Bottles-ből való importálást, valamint a játékok elrejtését és rendezését."
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:12
-msgid "kramo"
-msgstr "kramo"
 
 #. Translators: Replace this with your name for it to show up in the about window.
 #: src/main.py:92
@@ -390,6 +386,9 @@ msgstr "Nem találhatók új játékok a Steam könyvtárban."
 #: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
 msgid "Steam Games Imported"
 msgstr "Steam Játékok Importálva"
+
+#~ msgid "kramo"
+#~ msgstr "kramo"
 
 #~ msgid "Import From Heroic"
 #~ msgstr "Importálás Heroic-ból"

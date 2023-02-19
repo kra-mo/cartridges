@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 16:21+0530\n"
+"POT-Creation-Date: 2023-02-19 12:51+0100\n"
 "PO-Revision-Date: 2023-02-19 16:29+0530\n"
 "Last-Translator: K.B.Dharun Krishna <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: data/hu.kramo.Cartridges.desktop.in:3 data/hu.kramo.Cartridges.metainfo.xml.in:6
-#: src/main.py:81 src/window.blp:29
+#: data/hu.kramo.Cartridges.desktop.in:3
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6 src/main.py:81 src/window.blp:29
 msgid "Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள்"
 
@@ -37,17 +37,14 @@ msgstr "உங்கள் எல்லா விளையாட்டுகள�
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
-"Cartridges is a simple game launcher. It has support for importing your games from "
-"Steam, Heroic and Bottles with organizational features such as hiding and sorting by "
-"date added or last played."
+"Cartridges is a simple game launcher. It has support for importing your "
+"games from Steam, Heroic and Bottles with organizational features such as "
+"hiding and sorting by date added or last played."
 msgstr ""
-"கார்ட்ரிட்ஜ்கள் ஒரு எளிய விளையாட்டு துவக்கி. இது உங்கள் விளையாட்டுகளை ஸ்டீம், ஹீரோயிக் மற்றும் பாட்டில்களில் "
-"இருந்து இறக்குமதி செய்வதற்கான ஆதரவைக் கொண்டுள்ளது, அதாவது மறைத்தல் மற்றும் சேர்த்த அல்லது கடைசியாக "
-"விளையாடிய தேதியின்படி வரிசைப்படுத்துதல் போன்ற நிறுவன அம்சங்களுடன்."
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:12
-msgid "kramo"
-msgstr "கிராமோ"
+"கார்ட்ரிட்ஜ்கள் ஒரு எளிய விளையாட்டு துவக்கி. இது உங்கள் விளையாட்டுகளை ஸ்டீம், ஹீரோயிக் "
+"மற்றும் பாட்டில்களில் இருந்து இறக்குமதி செய்வதற்கான ஆதரவைக் கொண்டுள்ளது, அதாவது மறைத்தல் "
+"மற்றும் சேர்த்த அல்லது கடைசியாக விளையாடிய தேதியின்படி வரிசைப்படுத்துதல் போன்ற நிறுவன "
+"அம்சங்களுடன்."
 
 #. Translators: Replace this with your name for it to show up in the about window.
 #: src/main.py:92
@@ -180,7 +177,8 @@ msgstr "Heroic (ஹீரோயிக்)"
 msgid "Bottles"
 msgstr "Bottles (பாட்டில்கள்)"
 
-#: src/window.blp:386 src/window.blp:405 src/gtk/game.blp:69 src/gtk/game.blp:95
+#: src/window.blp:386 src/window.blp:405 src/gtk/game.blp:69
+#: src/gtk/game.blp:95
 msgid "Edit"
 msgstr "தொகு"
 
@@ -188,7 +186,8 @@ msgstr "தொகு"
 msgid "Hide"
 msgstr "மறை"
 
-#: src/window.blp:396 src/window.blp:415 src/gtk/game.blp:79 src/gtk/game.blp:105
+#: src/window.blp:396 src/window.blp:415 src/gtk/game.blp:79
+#: src/gtk/game.blp:105
 msgid "Remove"
 msgstr "அகற்று"
 
@@ -237,7 +236,8 @@ msgstr "விளையாட்டுகளை தொடங்கிய பி�
 msgid "Steam Install Location"
 msgstr "Steam (ஸ்டீம்) நிறுவல் இடம்"
 
-#: src/gtk/preferences.blp:26 src/gtk/preferences.blp:40 src/gtk/preferences.blp:78
+#: src/gtk/preferences.blp:26 src/gtk/preferences.blp:40
+#: src/gtk/preferences.blp:78
 msgid "Directory to use when importing games"
 msgstr "விளையாட்டுகளை இறக்குமதி செய்யும் போது பயன்படுத்த வேண்டிய அடைவு"
 
@@ -333,19 +333,23 @@ msgstr "விளையாட்டைத் தொடங்கும் போ�
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: src/utils/create_details_window.py:140 src/utils/create_details_window.py:144
+#: src/utils/create_details_window.py:140
+#: src/utils/create_details_window.py:144
 msgid "Couldn't Add Game"
 msgstr "விளையாட்டைச் சேர்க்க முடியவில்லை"
 
-#: src/utils/create_details_window.py:140 src/utils/create_details_window.py:165
+#: src/utils/create_details_window.py:140
+#: src/utils/create_details_window.py:165
 msgid "Game title cannot be empty."
 msgstr "விளையாட்டு தலைப்பு காலியாக இருக்கக்கூடாது."
 
-#: src/utils/create_details_window.py:144 src/utils/create_details_window.py:169
+#: src/utils/create_details_window.py:144
+#: src/utils/create_details_window.py:169
 msgid "Executable cannot be empty."
 msgstr "இயங்கக்கூடியது காலியாக இருக்க முடியாது."
 
-#: src/utils/create_details_window.py:165 src/utils/create_details_window.py:169
+#: src/utils/create_details_window.py:165
+#: src/utils/create_details_window.py:169
 msgid "Couldn't Apply Preferences"
 msgstr "விருப்பத்தேர்வுகளைப் பயன்படுத்த முடியவில்லை"
 
@@ -384,3 +388,6 @@ msgstr "Steam (ஸ்டீம்) நூலகத்தில் புதி�
 #: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
 msgid "Steam Games Imported"
 msgstr "Steam (ஸ்டீம்) விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
+
+#~ msgid "kramo"
+#~ msgstr "கிராமோ"
