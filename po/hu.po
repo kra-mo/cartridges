@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-19 16:21+0530\n"
-"PO-Revision-Date: 2023-02-19 10:56+0100\n"
+"PO-Revision-Date: 2023-02-19 12:17+0100\n"
 "Last-Translator: kramo\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -25,15 +25,15 @@ msgstr "Kazetták"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr ""
+msgstr "Játék Indító"
 
 #: data/hu.kramo.Cartridges.desktop.in:5
 msgid "Launch your games"
-msgstr ""
+msgstr "Indítsa el a játékait"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
-msgstr ""
+msgstr "Indítsa el az összes játékát"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -41,10 +41,12 @@ msgid ""
 "games from Steam, Heroic and Bottles with organizational features such as "
 "hiding and sorting by date added or last played."
 msgstr ""
+"A Kazetták egy egyszerű játékindító. Támogatja a Steam-ből, Heroic-ból és "
+"Bottles-ből való importálást, valamint a játékok elrejtését és rendezését."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:12
 msgid "kramo"
-msgstr ""
+msgstr "kramo"
 
 #. Translators: Replace this with your name for it to show up in the about window.
 #: src/main.py:92
@@ -200,7 +202,6 @@ msgid "Title"
 msgstr "Cím"
 
 #: src/gtk/help-overlay.blp:11
-#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Általános"
@@ -208,21 +209,19 @@ msgstr "Általános"
 #: src/gtk/help-overlay.blp:14
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Kilépés"
 
 #: src/gtk/help-overlay.blp:19
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Keresés"
 
 #: src/gtk/help-overlay.blp:24
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Shortcuts"
 msgstr "Billentyűparancsok"
 
 #: src/gtk/help-overlay.blp:29
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Visszavonás"
@@ -270,24 +269,20 @@ msgid "Couldn't Import Games"
 msgstr "Nem Lehet Importálni a Játékot"
 
 #: src/utils/bottles_parser.py:55
-#, fuzzy
 msgid "The Bottles directory cannot be found."
-msgstr "A Steam mappa nem található."
+msgstr "A Bottles mappa nem található."
 
 #: src/utils/bottles_parser.py:55
-#, fuzzy
 msgid "Set Bottles Location"
-msgstr "Steam Mappa Kiválasztása"
+msgstr "Bottles Mappa Kiválasztása"
 
 #: src/utils/bottles_parser.py:98
-#, fuzzy
 msgid "No new games were found in the Bottles library."
-msgstr "Nem találhatók új játékok a Steam könyvtárban."
+msgstr "Nem találhatók új játékok a Bottles könyvtárban."
 
 #: src/utils/bottles_parser.py:100 src/utils/bottles_parser.py:102
-#, fuzzy
 msgid "Bottles Games Imported"
-msgstr "Steam Játékok Importálva"
+msgstr "Bottles Játékok Importálva"
 
 #: src/utils/bottles_parser.py:100 src/utils/heroic_parser.py:176
 #: src/utils/steam_parser.py:107
@@ -365,7 +360,6 @@ msgid "Dismiss"
 msgstr "Rendben"
 
 #: src/utils/heroic_parser.py:55
-#, fuzzy
 msgid "The Heroic directory cannot be found."
 msgstr "A Heroic mappa nem található."
 
@@ -374,7 +368,6 @@ msgid "Set Heroic Location"
 msgstr "Heroic Mappa Kiválasztása"
 
 #: src/utils/heroic_parser.py:174
-#, fuzzy
 msgid "No new games were found in the Heroic library."
 msgstr "Nem találhatók új játékok a Heroic könyvtárban."
 
@@ -383,7 +376,6 @@ msgid "Heroic Games Imported"
 msgstr "Heroic Játékok Importálva"
 
 #: src/utils/steam_parser.py:55
-#, fuzzy
 msgid "The Steam directory cannot be found."
 msgstr "A Steam mappa nem található."
 
@@ -392,7 +384,6 @@ msgid "Set Steam Location"
 msgstr "Steam Mappa Kiválasztása"
 
 #: src/utils/steam_parser.py:105
-#, fuzzy
 msgid "No new games were found in the Steam library."
 msgstr "Nem találhatók új játékok a Steam könyvtárban."
 
