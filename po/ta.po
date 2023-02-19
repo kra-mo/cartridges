@@ -1,0 +1,316 @@
+# Cartridges - Tamil Translation.
+# Copyright (C) 2023 Cartridges Contributors
+# This file is distributed under the same license as Cartridges.
+# K.B.Dharun Krishna <kbdharunkrishna@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-02 20:41+0100\n"
+"PO-Revision-Date: 2023-02-19 12:58+0530\n"
+"Last-Translator: K.B.Dharun Krishna <kbdharunkrishna@gmail.com>\n"
+"Language-Team: Tamil\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. Create toast for undoing the remove action
+#: src/main.py:143
+msgid "removed"
+msgstr "அகற்றப்பட்டது"
+
+#: src/main.py:144
+msgid "Undo"
+msgstr "செயல்தவிர்"
+
+#: src/window.py:199
+msgid "Today"
+msgstr "இன்று"
+
+#: src/window.py:201
+msgid "Yesterday"
+msgstr "நேற்று"
+
+#: src/window.py:225
+msgid "Added: "
+msgstr "சேர்க்கப்பட்டது: "
+
+#: src/window.py:226
+msgid "Last played: "
+msgstr "கடைசியாக விளையாடியது: "
+
+#: src/window.py:226
+msgid "Last played: Never"
+msgstr "கடைசியாக விளையாடியது: ஒருபோதும் இல்லை"
+
+#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:99
+#: src/utils/heroic_parser.py:177
+msgid "No Games Found"
+msgstr "விளையாட்டுகள் எதுவும் இல்லை"
+
+#: src/window.blp:7
+msgid "Try a different search."
+msgstr "வேறு தேடலை முயற்சிக்கவும்."
+
+#: src/window.blp:15
+msgid "Use the + button to add games."
+msgstr "விளையாட்டுகளைச் சேர்க்க + பொத்தானைப் பயன்படுத்தவும்."
+
+#: src/window.blp:22
+msgid "No Hidden Games"
+msgstr "மறைக்கப்பட்ட விளையாட்டுகள் இல்லை"
+
+#: src/window.blp:23
+msgid "Games you hide will appear here."
+msgstr "நீங்கள் மறைக்கும் விளையாட்டுகள் இங்கே தோன்றும்."
+
+#: src/window.blp:29
+msgid "Cartridges"
+msgstr "கார்ட்ரிட்ஜ்கள்"
+
+#: src/window.blp:52
+msgid "Game Details"
+msgstr "விளையாட்டு விவரங்கள்"
+
+#: src/window.blp:90
+msgid "Game Title"
+msgstr "விளையாட்டு தலைப்பு"
+
+#: src/window.blp:132 src/gtk/game.blp:62 src/gtk/game.blp:88
+msgid "Play"
+msgstr "விளையாடு"
+
+#: src/window.blp:241
+msgid "Hidden Games"
+msgstr "மறைக்கப்பட்ட விளையாட்டுகள்"
+
+#: src/window.blp:299
+msgid "Sort"
+msgstr "வகைபடுத்து"
+
+#: src/window.blp:302
+msgid "A-Z"
+msgstr "A-Z"
+
+#: src/window.blp:308
+msgid "Z-A"
+msgstr "Z-A"
+
+#: src/window.blp:314
+msgid "Newest"
+msgstr "புதியது"
+
+#: src/window.blp:320
+msgid "Oldest"
+msgstr "பழமையானது"
+
+#: src/window.blp:326
+msgid "Last Played"
+msgstr "கடைசியாக விளையாடியது"
+
+#: src/window.blp:333
+msgid "Show Hidden"
+msgstr "மறைக்கப்பட்டதைக் காட்டு"
+
+#: src/window.blp:341
+msgid "Preferences"
+msgstr "விருப்பங்கள்"
+
+#: src/window.blp:346
+msgid "Keyboard Shortcuts"
+msgstr "விசைப்பலகை குறுக்குவழிகள்"
+
+#: src/window.blp:351
+msgid "About Cartridges"
+msgstr "கார்ட்ரிட்ஜ்கள் பற்றி"
+
+#: src/window.blp:360
+msgid "Add Game"
+msgstr "விளையாட்டைச் சேர்க்கவும்"
+
+#: src/window.blp:366
+msgid "Import from"
+msgstr "இலிருந்து இறக்குமதி செய்"
+
+#: src/window.blp:368
+msgid "Steam"
+msgstr "Steam (ஸ்டீம்)"
+
+#: src/window.blp:373
+msgid "Heroic"
+msgstr "Heroic (வீரம்)"
+
+#: src/window.blp:378
+msgid "Bottles"
+msgstr "Bottles (பாட்டில்கள்)"
+
+#: src/window.blp:388 src/window.blp:407 src/gtk/game.blp:69
+#: src/gtk/game.blp:95
+msgid "Edit"
+msgstr "தொகு"
+
+#: src/window.blp:393 src/gtk/game.blp:74
+msgid "Hide"
+msgstr "மறை"
+
+#: src/window.blp:398 src/window.blp:417 src/gtk/game.blp:79
+#: src/gtk/game.blp:105
+msgid "Remove"
+msgstr "அகற்று"
+
+#: src/window.blp:412 src/gtk/game.blp:100
+msgid "Unhide"
+msgstr "மறை காட்டு"
+
+#: src/gtk/game.blp:32 src/utils/create_details_window.py:82
+msgid "Title"
+msgstr "தலைப்பு"
+
+#: src/gtk/preferences.blp:10
+msgid "General"
+msgstr "பொது"
+
+#: src/gtk/preferences.blp:13
+msgid "Exit After Launching Games"
+msgstr "விளையாட்டுகளை தொடங்கிய பிறகு வெளியேறவும்"
+
+#: src/gtk/preferences.blp:25
+msgid "Steam Install Location"
+msgstr "Steam (ஸ்டீம்) நிறுவல் இடம்"
+
+#: src/gtk/preferences.blp:26 src/gtk/preferences.blp:40
+#: src/gtk/preferences.blp:78
+msgid "Directory to use when importing games"
+msgstr "விளையாட்டுகளை இறக்குமதி செய்யும் போது பயன்படுத்த வேண்டிய அடைவு"
+
+#: src/gtk/preferences.blp:39
+msgid "Heroic Install Location"
+msgstr "Heroic நிறுவல் இடம்"
+
+#: src/gtk/preferences.blp:49
+msgid "Import Epic Games"
+msgstr "Epic விளையாட்டுகளை இறக்குமதி செய்"
+
+#: src/gtk/preferences.blp:57
+msgid "Import GOG Games"
+msgstr "GOG விளையாட்டுகளை இறக்குமதி செய்யவும்"
+
+#: src/gtk/preferences.blp:65
+msgid "Import Sideloaded Games"
+msgstr "பக்க ஏற்றப்பட்ட விளையாட்டுகளை இறக்குமதி செய்யவும்"
+
+#: src/gtk/preferences.blp:77
+msgid "Bottles Install Location"
+msgstr "Bottles (பாட்டில்கள்) நிறுவும் இடம்"
+
+#: src/utils/create_details_window.py:38
+msgid "Add New Game"
+msgstr "புதிய விளையாட்டைச் சேர்க்கவும்"
+
+#: src/utils/create_details_window.py:42
+msgid "Confirm"
+msgstr "உறுதிப்படுத்தவும்"
+
+#: src/utils/create_details_window.py:44
+msgid "Edit Game Details"
+msgstr "விளையாட்டு விவரங்களைத் திருத்து"
+
+#: src/utils/create_details_window.py:48
+msgid "Apply"
+msgstr "விண்ணப்பி"
+
+#: src/utils/create_details_window.py:51
+msgid "Images"
+msgstr "படங்கள்"
+
+#: src/utils/create_details_window.py:83
+msgid "The title of the game"
+msgstr "விளையாட்டின் தலைப்பு"
+
+#: src/utils/create_details_window.py:88
+msgid "Executable"
+msgstr "செயல்படுத்தக்கூடியது"
+
+#: src/utils/create_details_window.py:89
+msgid "File to open or command to run when launching the game"
+msgstr "விளையாட்டைத் தொடங்கும் போது திறக்க கோப்பு அல்லது இயக்க கட்டளை"
+
+#: src/utils/create_details_window.py:98
+msgid "Cancel"
+msgstr "ரத்துசெய்"
+
+#: src/utils/create_details_window.py:140
+#: src/utils/create_details_window.py:144
+msgid "Couldn't Add Game"
+msgstr "விளையாட்டைச் சேர்க்க முடியவில்லை"
+
+#: src/utils/create_details_window.py:140
+#: src/utils/create_details_window.py:165
+msgid "Game title cannot be empty."
+msgstr "விளையாட்டு தலைப்பு காலியாக இருக்கக்கூடாது."
+
+#: src/utils/create_details_window.py:144
+#: src/utils/create_details_window.py:169
+msgid "Executable cannot be empty."
+msgstr "இயங்கக்கூடியது காலியாக இருக்க முடியாது."
+
+#: src/utils/create_details_window.py:165
+#: src/utils/create_details_window.py:169
+msgid "Couldn't Apply Preferences"
+msgstr "விருப்பத்தேர்வுகளைப் பயன்படுத்த முடியவில்லை"
+
+#: src/utils/create_dialog.py:24
+msgid "Dismiss"
+msgstr "நிராகரி"
+
+#: src/utils/steam_parser.py:49 src/utils/heroic_parser.py:49
+msgid "Couldn't Import Games"
+msgstr "கேம்களை இறக்குமதி செய்ய முடியவில்லை"
+
+#: src/utils/steam_parser.py:49
+msgid "Steam directory cannot be found."
+msgstr "Steam (ஸ்டீம்) கோப்பகத்தைக் கண்டறிய முடியவில்லை."
+
+#: src/utils/steam_parser.py:49
+msgid "Set Steam Location"
+msgstr "Steam (ஸ்டீம்) இடத்தை அமைக்கவும்"
+
+#: src/utils/steam_parser.py:99
+msgid "No new games found in Steam library."
+msgstr "Steam (ஸ்டீம்) நூலகத்தில் புதிய விளையாட்டுகள் எதுவும் இல்லை."
+
+#: src/utils/steam_parser.py:101 src/utils/steam_parser.py:103
+msgid "Steam Games Imported"
+msgstr "Steam (ஸ்டீம்) விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
+
+#: src/utils/steam_parser.py:101 src/utils/heroic_parser.py:179
+msgid "Successfully imported 1 game."
+msgstr "1 விளையாட்டு வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது."
+
+#: src/utils/steam_parser.py:103 src/utils/heroic_parser.py:182
+msgid "Successfully imported"
+msgstr "வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது"
+
+#: src/utils/steam_parser.py:103 src/utils/heroic_parser.py:182
+msgid "games."
+msgstr "விளையாட்டுகள்."
+
+#: src/utils/heroic_parser.py:49
+msgid "Heroic directory cannot be found."
+msgstr "Heroic அடைவு காணப்படவில்லை."
+
+#: src/utils/heroic_parser.py:50
+msgid "Set Heroic Location"
+msgstr "Heroic இருப்பிடத்தை அமைக்கவும்"
+
+#: src/utils/heroic_parser.py:177
+msgid "No new games found in Heroic library."
+msgstr "Heroic நூலகத்தில் புதிய விளையாட்டுகள் எதுவும் இல்லை."
+
+#: src/utils/heroic_parser.py:179 src/utils/heroic_parser.py:181
+msgid "Heroic Games Imported"
+msgstr "Heroic விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
