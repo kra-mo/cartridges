@@ -39,14 +39,14 @@ class CartridgesApplication(Adw.Application):
         super().__init__(application_id="hu.kramo.Cartridges", flags=Gio.ApplicationFlags.FLAGS_NONE)
         self.create_action("quit", self.on_quit_action, ["<primary>q"])
         self.create_action("about", self.on_about_action)
-        self.create_action("preferences", self.on_preferences_action)
+        self.create_action("preferences", self.on_preferences_action, ["<primary>comma"])
         self.create_action("steam_import", self.on_steam_import_action)
         self.create_action("heroic_import", self.on_heroic_import_action)
         self.create_action("bottles_import", self.on_bottles_import_action)
         self.create_action("launch_game", self.on_launch_game_action)
         self.create_action("hide_game", self.on_hide_game_action)
         self.create_action("edit_details", self.on_edit_details_action)
-        self.create_action("add_game", self.on_add_game_action)
+        self.create_action("add_game", self.on_add_game_action, ["<primary>n"])
         self.create_action("remove_game", self.on_remove_game_action)
 
     def do_activate(self):
@@ -65,12 +65,13 @@ class CartridgesApplication(Adw.Application):
         self.win.present()
 
         # Create actions for the main window
-        self.create_action("show_hidden", self.win.on_show_hidden_action, None, self.win)
+        self.create_action("show_hidden", self.win.on_show_hidden_action, ["<primary>h"], self.win)
         self.create_action("go_back", self.win.on_go_back_action, ["<alt>Left"], self.win)
         self.create_action("go_to_parent", self.win.on_go_to_parent_action, ["<alt>Up"], self.win)
         self.create_action("toggle_search", self.win.on_toggle_search_action, ["<primary>f"], self.win)
         self.create_action("escape", self.win.on_escape_action, ["Escape"], self.win)
         self.create_action("undo_remove", self.win.on_undo_remove_action, ["<primary>z"], self.win)
+        self.create_action("open_menu", self.win.on_open_menu_action, ["F10"], self.win)
         self.win.sort = Gio.SimpleAction.new_stateful("sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z"))
         self.win.add_action(self.win.sort)
         self.win.sort.connect("activate", self.win.on_sort_action)

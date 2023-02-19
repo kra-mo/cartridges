@@ -31,6 +31,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     __gtype_name__ = "CartridgesWindow"
 
     toast_overlay = Gtk.Template.Child()
+    primary_menu_button = Gtk.Template.Child()
     stack = Gtk.Template.Child()
     overview = Gtk.Template.Child()
     library_view = Gtk.Template.Child()
@@ -386,3 +387,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.update_games({game_id : self.games[game_id]})
         self.toasts[game_id].dismiss()
         self.toasts.pop(game_id)
+
+    def on_open_menu_action(self, widget, _):
+        if self.stack.get_visible_child() != self.overview:
+            self.primary_menu_button.set_active(True)
+        else:
+            self.overview_menu_button.set_active(True)

@@ -21,6 +21,11 @@ ShortcutsWindow help_overlay {
       }
 
       ShortcutsShortcut {
+        title: C_("shortcut window", "Show preferences");
+        action-name: "app.preferences";
+      }
+
+      ShortcutsShortcut {
         title: C_("shortcut window", "Shortcuts");
         action-name: "win.show-help-overlay";
       }
@@ -28,6 +33,25 @@ ShortcutsWindow help_overlay {
       ShortcutsShortcut {
         title: C_("shortcut window", "Undo");
         action-name: "win.undo_remove";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Open menu");
+        action-name: "win.open_menu";
+      }
+    }
+
+    ShortcutsGroup {
+      title: C_("shortcut window", "Games");
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Add new game");
+        action-name: "app.add_game";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Show hidden games");
+        action-name: "win.show_hidden";
       }
     }
   }
