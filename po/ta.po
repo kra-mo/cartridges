@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 12:51+0100\n"
+"POT-Creation-Date: 2023-02-19 20:09+0100\n"
 "PO-Revision-Date: 2023-02-19 16:29+0530\n"
 "Last-Translator: K.B.Dharun Krishna <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil\n"
@@ -19,7 +19,8 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
-#: data/hu.kramo.Cartridges.metainfo.xml.in:6 src/main.py:81 src/window.blp:29
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6 src/main.py:82
+#: data/gtk/window.blp:29
 msgid "Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள்"
 
@@ -47,217 +48,246 @@ msgstr ""
 "அம்சங்களுடன்."
 
 #. Translators: Replace this with your name for it to show up in the about window.
-#: src/main.py:92
+#: src/main.py:93
 msgid "translator_credits"
 msgstr "K.B.Dharun Krishna <kbdharunkrishna@gmail.com>"
 
 #. Create toast for undoing the remove action
-#: src/main.py:151
+#: src/main.py:152
 msgid "removed"
 msgstr "அகற்றப்பட்டது"
 
-#: src/main.py:152
+#: src/main.py:153
 msgid "Undo"
 msgstr "செயல்தவிர்"
 
-#: src/window.py:199
+#: src/window.py:200
 msgid "Today"
 msgstr "இன்று"
 
-#: src/window.py:201
+#: src/window.py:202
 msgid "Yesterday"
 msgstr "நேற்று"
 
-#: src/window.py:225
+#: src/window.py:226
 msgid "Added: "
 msgstr "சேர்க்கப்பட்டது: "
 
-#: src/window.py:226
+#: src/window.py:227
 msgid "Last played: "
 msgstr "கடைசியாக விளையாடியது: "
 
-#: src/window.py:226
+#: src/window.py:227
 msgid "Last played: Never"
 msgstr "கடைசியாக விளையாடியது: ஒருபோதும் இல்லை"
 
-#: src/window.blp:6 src/window.blp:14 src/utils/bottles_parser.py:98
+#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:98
 #: src/utils/heroic_parser.py:174 src/utils/steam_parser.py:105
 msgid "No Games Found"
 msgstr "விளையாட்டுகள் எதுவும் இல்லை"
 
-#: src/window.blp:7
+#: data/gtk/window.blp:7
 msgid "Try a different search."
 msgstr "வேறு தேடலை முயற்சிக்கவும்."
 
-#: src/window.blp:15
+#: data/gtk/window.blp:15
 msgid "Use the + button to add games."
 msgstr "விளையாட்டுகளைச் சேர்க்க + பொத்தானைப் பயன்படுத்தவும்."
 
-#: src/window.blp:22
+#: data/gtk/window.blp:22
 msgid "No Hidden Games"
 msgstr "மறைக்கப்பட்ட விளையாட்டுகள் இல்லை"
 
-#: src/window.blp:23
+#: data/gtk/window.blp:23
 msgid "Games you hide will appear here."
 msgstr "நீங்கள் மறைக்கும் விளையாட்டுகள் இங்கே தோன்றும்."
 
-#: src/window.blp:50
+#: data/gtk/window.blp:50
 msgid "Game Details"
 msgstr "விளையாட்டு விவரங்கள்"
 
-#: src/window.blp:88
+#: data/gtk/window.blp:88
 msgid "Game Title"
 msgstr "விளையாட்டு தலைப்பு"
 
-#: src/window.blp:130 src/gtk/game.blp:62 src/gtk/game.blp:88
+#: data/gtk/window.blp:130 data/gtk/game.blp:62 data/gtk/game.blp:88
 msgid "Play"
 msgstr "விளையாடு"
 
-#: src/window.blp:239
+#: data/gtk/window.blp:239
 msgid "Hidden Games"
 msgstr "மறைக்கப்பட்ட விளையாட்டுகள்"
 
-#: src/window.blp:297
+#: data/gtk/window.blp:297
 msgid "Sort"
 msgstr "வகைபடுத்து"
 
-#: src/window.blp:300
+#: data/gtk/window.blp:300
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/window.blp:306
+#: data/gtk/window.blp:306
 msgid "Z-A"
 msgstr "Z-A"
 
-#: src/window.blp:312
+#: data/gtk/window.blp:312
 msgid "Newest"
 msgstr "புதியது"
 
-#: src/window.blp:318
+#: data/gtk/window.blp:318
 msgid "Oldest"
 msgstr "பழமையானது"
 
-#: src/window.blp:324
+#: data/gtk/window.blp:324
 msgid "Last Played"
 msgstr "கடைசியாக விளையாடியது"
 
-#: src/window.blp:331
+#: data/gtk/window.blp:331
 msgid "Show Hidden"
 msgstr "மறைக்கப்பட்டதைக் காட்டு"
 
-#: src/window.blp:339
+#: data/gtk/window.blp:339
 msgid "Preferences"
 msgstr "விருப்பங்கள்"
 
-#: src/window.blp:344
+#: data/gtk/window.blp:344
 msgid "Keyboard Shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
 
-#: src/window.blp:349
+#: data/gtk/window.blp:349
 msgid "About Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள் பற்றி"
 
-#: src/window.blp:358
+#: data/gtk/window.blp:358
 msgid "Add Game"
 msgstr "விளையாட்டைச் சேர்க்கவும்"
 
-#: src/window.blp:364
+#: data/gtk/window.blp:364
 msgid "Import from"
 msgstr "இலிருந்து இறக்குமதி செய்"
 
-#: src/window.blp:366
+#: data/gtk/window.blp:366
 msgid "Steam"
 msgstr "Steam (ஸ்டீம்)"
 
-#: src/window.blp:371
+#: data/gtk/window.blp:371
 msgid "Heroic"
 msgstr "Heroic (ஹீரோயிக்)"
 
-#: src/window.blp:376
+#: data/gtk/window.blp:376
 msgid "Bottles"
 msgstr "Bottles (பாட்டில்கள்)"
 
-#: src/window.blp:386 src/window.blp:405 src/gtk/game.blp:69
-#: src/gtk/game.blp:95
+#: data/gtk/window.blp:386 data/gtk/window.blp:405 data/gtk/game.blp:69
+#: data/gtk/game.blp:95
 msgid "Edit"
 msgstr "தொகு"
 
-#: src/window.blp:391 src/gtk/game.blp:74
+#: data/gtk/window.blp:391 data/gtk/game.blp:74
 msgid "Hide"
 msgstr "மறை"
 
-#: src/window.blp:396 src/window.blp:415 src/gtk/game.blp:79
-#: src/gtk/game.blp:105
+#: data/gtk/window.blp:396 data/gtk/window.blp:415 data/gtk/game.blp:79
+#: data/gtk/game.blp:105
 msgid "Remove"
 msgstr "அகற்று"
 
-#: src/window.blp:410 src/gtk/game.blp:100
+#: data/gtk/window.blp:410 data/gtk/game.blp:100
 msgid "Unhide"
 msgstr "மறை காட்டு"
 
-#: src/gtk/game.blp:32 src/utils/create_details_window.py:82
+#: data/gtk/game.blp:32 src/utils/create_details_window.py:82
 msgid "Title"
 msgstr "தலைப்பு"
 
-#: src/gtk/help-overlay.blp:11
+#: data/gtk/help-overlay.blp:11
 msgctxt "shortcut window"
 msgid "General"
 msgstr "பொது"
 
-#: src/gtk/help-overlay.blp:14
+#: data/gtk/help-overlay.blp:14
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "வெளியேறு"
 
-#: src/gtk/help-overlay.blp:19
+#: data/gtk/help-overlay.blp:19
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "தேடு"
 
-#: src/gtk/help-overlay.blp:24
+#: data/gtk/help-overlay.blp:24
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Show preferences"
+msgstr "விருப்பங்கள்"
+
+#: data/gtk/help-overlay.blp:29
 msgctxt "shortcut window"
 msgid "Shortcuts"
 msgstr "குறுக்குவழிகள்"
 
-#: src/gtk/help-overlay.blp:29
+#: data/gtk/help-overlay.blp:34
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "செயல்தவிர்"
 
-#: src/gtk/preferences.blp:10
+#: data/gtk/help-overlay.blp:39
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:45
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Games"
+msgstr "விளையாட்டுகள்."
+
+#: data/gtk/help-overlay.blp:48
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Add new game"
+msgstr "புதிய விளையாட்டைச் சேர்க்கவும்"
+
+#: data/gtk/help-overlay.blp:53
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Show hidden games"
+msgstr "மறைக்கப்பட்ட விளையாட்டுகள் இல்லை"
+
+#: data/gtk/preferences.blp:10
 msgid "General"
 msgstr "பொது"
 
-#: src/gtk/preferences.blp:13
+#: data/gtk/preferences.blp:13
 msgid "Exit After Launching Games"
 msgstr "விளையாட்டுகளை தொடங்கிய பிறகு வெளியேறவும்"
 
-#: src/gtk/preferences.blp:25
+#: data/gtk/preferences.blp:25
 msgid "Steam Install Location"
 msgstr "Steam (ஸ்டீம்) நிறுவல் இடம்"
 
-#: src/gtk/preferences.blp:26 src/gtk/preferences.blp:40
-#: src/gtk/preferences.blp:78
+#: data/gtk/preferences.blp:26 data/gtk/preferences.blp:40
+#: data/gtk/preferences.blp:78
 msgid "Directory to use when importing games"
 msgstr "விளையாட்டுகளை இறக்குமதி செய்யும் போது பயன்படுத்த வேண்டிய அடைவு"
 
-#: src/gtk/preferences.blp:39
+#: data/gtk/preferences.blp:39
 msgid "Heroic Install Location"
 msgstr "Heroic (ஹீரோயிக்) நிறுவல் இடம்"
 
-#: src/gtk/preferences.blp:49
+#: data/gtk/preferences.blp:49
 msgid "Import Epic Games"
 msgstr "Epic விளையாட்டுகளை இறக்குமதி செய்"
 
-#: src/gtk/preferences.blp:57
+#: data/gtk/preferences.blp:57
 msgid "Import GOG Games"
 msgstr "GOG விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: src/gtk/preferences.blp:65
+#: data/gtk/preferences.blp:65
 msgid "Import Sideloaded Games"
 msgstr "பக்க ஏற்றப்பட்ட விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: src/gtk/preferences.blp:77
+#: data/gtk/preferences.blp:77
 msgid "Bottles Install Location"
 msgstr "Bottles (பாட்டில்கள்) நிறுவும் இடம்"
 
