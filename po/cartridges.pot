@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2023 Cartridges Contributors
 # This file is distributed under the same license as the cartridges package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# kramo <EMAIL@ADDRESS>, 2023.
 #
 #, fuzzy
 msgid ""
