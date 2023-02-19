@@ -26,7 +26,7 @@ from .get_cover import get_cover
 from .get_games import get_games
 from .save_games import save_games
 
-@Gtk.Template(resource_path="/hu/kramo/Cartridges/window.ui")
+@Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/window.ui")
 class CartridgesWindow(Adw.ApplicationWindow):
     __gtype_name__ = "CartridgesWindow"
 
@@ -79,7 +79,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.overview.set_clip_overlay(self.overview_box, False)
 
         self.schema = Gio.Settings.new("hu.kramo.Cartridges")
-        self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale("/hu/kramo/Cartridges/assets/library_placeholder.svg", 200, 300, False)
+        self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale("/hu/kramo/Cartridges/library_placeholder.svg", 200, 300, False)
         games = get_games()
         for game in games:
             if "removed" in games[game].keys():

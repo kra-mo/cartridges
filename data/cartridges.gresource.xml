@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/hu/kramo/Cartridges">
-    <file preprocess="xml-stripblanks">window.ui</file>
+    <file preprocess="xml-stripblanks">gtk/window.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
     <file preprocess="xml-stripblanks">gtk/game.ui</file>
     <file preprocess="xml-stripblanks">gtk/preferences.ui</file>
-    <file>assets/library_placeholder.svg</file>
+    <file>library_placeholder.svg</file>
   </gresource>
 </gresources>

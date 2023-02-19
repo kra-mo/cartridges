@@ -1,3 +1,22 @@
+blueprints = custom_target('blueprints',
+  input: files(
+    'gtk/help-overlay.blp',
+    'gtk/window.blp',
+    'gtk/game.blp',
+    'gtk/preferences.blp'
+  ),
+  output: '.',
+  command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
+)
+
+gnome.compile_resources('cartridges',
+  'cartridges.gresource.xml',
+  gresource_bundle: true,
+  install: true,
+  install_dir: pkgdatadir,
+  dependencies: blueprints,
+)
+
 desktop_file = i18n.merge_file(
         input: 'hu.kramo.Cartridges.desktop.in',
        output: 'hu.kramo.Cartridges.desktop',
