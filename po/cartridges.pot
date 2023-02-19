@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR kramo
+# Copyright (C) 2023 Cartridges Contributors
 # This file is distributed under the same license as the cartridges package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# kramo <EMAIL@ADDRESS>, 2023.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
-"Report-Msgid-Bugs-To: github.com/kra-mo/cartridges/issues/new/\n"
-"POT-Creation-Date: 2023-02-19 10:50+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-19 16:21+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.py:81 src/window.blp:29
+#: data/hu.kramo.Cartridges.desktop.in:3
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6 src/main.py:81 src/window.blp:29
 msgid "Cartridges"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.desktop.in:4
+msgid "Game Launcher"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.desktop.in:5
+msgid "Launch your games"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:7
+msgid "Launch all your games"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:9
+msgid ""
+"Cartridges is a simple game launcher. It has support for importing your "
+"games from Steam, Heroic and Bottles with organizational features such as "
+"hiding and sorting by date added or last played."
+msgstr ""
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:12
+msgid "kramo"
 msgstr ""
 
 #. Translators: Replace this with your name for it to show up in the about window.
@@ -55,8 +79,8 @@ msgstr ""
 msgid "Last played: Never"
 msgstr ""
 
-#: src/window.blp:6 src/window.blp:14 src/utils/steam_parser.py:105
-#: src/utils/heroic_parser.py:174
+#: src/window.blp:6 src/window.blp:14 src/utils/bottles_parser.py:98
+#: src/utils/heroic_parser.py:174 src/utils/steam_parser.py:105
 msgid "No Games Found"
 msgstr ""
 
@@ -174,6 +198,31 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: src/gtk/help-overlay.blp:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:14
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:19
+msgctxt "shortcut window"
+msgid "Search"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:24
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:29
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr ""
+
 #: src/gtk/preferences.blp:10
 msgid "General"
 msgstr ""
@@ -209,6 +258,42 @@ msgstr ""
 
 #: src/gtk/preferences.blp:77
 msgid "Bottles Install Location"
+msgstr ""
+
+#: src/utils/bottles_parser.py:55 src/utils/heroic_parser.py:55
+#: src/utils/steam_parser.py:55
+msgid "Couldn't Import Games"
+msgstr ""
+
+#: src/utils/bottles_parser.py:55
+msgid "The Bottles directory cannot be found."
+msgstr ""
+
+#: src/utils/bottles_parser.py:55
+msgid "Set Bottles Location"
+msgstr ""
+
+#: src/utils/bottles_parser.py:98
+msgid "No new games were found in the Bottles library."
+msgstr ""
+
+#: src/utils/bottles_parser.py:100 src/utils/bottles_parser.py:102
+msgid "Bottles Games Imported"
+msgstr ""
+
+#: src/utils/bottles_parser.py:100 src/utils/heroic_parser.py:176
+#: src/utils/steam_parser.py:107
+msgid "Successfully imported 1 game."
+msgstr ""
+
+#: src/utils/bottles_parser.py:102 src/utils/heroic_parser.py:179
+#: src/utils/steam_parser.py:109
+msgid "Successfully imported"
+msgstr ""
+
+#: src/utils/bottles_parser.py:102 src/utils/heroic_parser.py:179
+#: src/utils/steam_parser.py:109
+msgid "games."
 msgstr ""
 
 #: src/utils/create_details_window.py:38
@@ -271,40 +356,8 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
-#: src/utils/steam_parser.py:55 src/utils/heroic_parser.py:55
-msgid "Couldn't Import Games"
-msgstr ""
-
-#: src/utils/steam_parser.py:55
-msgid "Steam directory cannot be found."
-msgstr ""
-
-#: src/utils/steam_parser.py:55
-msgid "Set Steam Location"
-msgstr ""
-
-#: src/utils/steam_parser.py:105
-msgid "No new games found in Steam library."
-msgstr ""
-
-#: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
-msgid "Steam Games Imported"
-msgstr ""
-
-#: src/utils/steam_parser.py:107 src/utils/heroic_parser.py:176
-msgid "Successfully imported 1 game."
-msgstr ""
-
-#: src/utils/steam_parser.py:109 src/utils/heroic_parser.py:179
-msgid "Successfully imported"
-msgstr ""
-
-#: src/utils/steam_parser.py:109 src/utils/heroic_parser.py:179
-msgid "games."
-msgstr ""
-
 #: src/utils/heroic_parser.py:55
-msgid "Heroic directory cannot be found."
+msgid "The Heroic directory cannot be found."
 msgstr ""
 
 #: src/utils/heroic_parser.py:55
@@ -312,9 +365,25 @@ msgid "Set Heroic Location"
 msgstr ""
 
 #: src/utils/heroic_parser.py:174
-msgid "No new games found in Heroic library."
+msgid "No new games were found in the Heroic library."
 msgstr ""
 
 #: src/utils/heroic_parser.py:176 src/utils/heroic_parser.py:178
 msgid "Heroic Games Imported"
+msgstr ""
+
+#: src/utils/steam_parser.py:55
+msgid "The Steam directory cannot be found."
+msgstr ""
+
+#: src/utils/steam_parser.py:55
+msgid "Set Steam Location"
+msgstr ""
+
+#: src/utils/steam_parser.py:105
+msgid "No new games were found in the Steam library."
+msgstr ""
+
+#: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
+msgid "Steam Games Imported"
 msgstr ""

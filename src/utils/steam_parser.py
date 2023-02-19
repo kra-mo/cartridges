@@ -52,7 +52,7 @@ def steam_parser(parent_widget, action):
                 if response == "choose_folder":
                     choose_folder(widget)
 
-            create_dialog(parent_widget, _("Couldn't Import Games"), _("Steam directory cannot be found."), "choose_folder", _("Set Steam Location")).connect("response", response)
+            create_dialog(parent_widget, _("Couldn't Import Games"), _("The Steam directory cannot be found."), "choose_folder", _("Set Steam Location")).connect("response", response)
 
     if os.path.exists(os.path.join(steam_dir, "steamapps")):
         pass
@@ -102,7 +102,7 @@ def steam_parser(parent_widget, action):
         steam_games[values["game_id"]] = values
 
     if len(steam_games) == 0:
-        create_dialog(parent_widget, _("No Games Found"), _("No new games found in Steam library."))
+        create_dialog(parent_widget, _("No Games Found"), _("No new games were found in the Steam library."))
     elif len(steam_games) == 1:
         create_dialog(parent_widget, _("Steam Games Imported"), _("Successfully imported 1 game."))
     elif len(steam_games) > 1:

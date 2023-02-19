@@ -52,7 +52,7 @@ def bottles_parser(parent_widget, action):
                 if response == "choose_folder":
                     choose_folder(widget)
 
-            create_dialog(parent_widget, _("Couldn't Import Games"), _("Bottles directory cannot be found."), "choose_folder", _("Set Bottles Location")).connect("response", response)
+            create_dialog(parent_widget, _("Couldn't Import Games"), _("The Bottles directory cannot be found."), "choose_folder", _("Set Bottles Location")).connect("response", response)
 
     if os.path.isfile(os.path.join(bottles_dir, "library.yml")):
         pass
@@ -95,9 +95,9 @@ def bottles_parser(parent_widget, action):
         bottles_games[values["game_id"]] = values
 
     if len(bottles_games) == 0:
-        create_dialog(parent_widget, _("No Games Found"), _("No new games found in Bottles library."))
+        create_dialog(parent_widget, _("No Games Found"), _("No new games were found in the Bottles library."))
     elif len(bottles_games) == 1:
-        create_dialog(parent_widget, _("bottles Games Imported"), _("Successfully imported 1 game."))
+        create_dialog(parent_widget, _("Bottles Games Imported"), _("Successfully imported 1 game."))
     elif len(bottles_games) > 1:
-        create_dialog(parent_widget, _("bottles Games Imported"), _("Successfully imported") + " " + str(len(bottles_games)) + " " + _("games."))
+        create_dialog(parent_widget, _("Bottles Games Imported"), _("Successfully imported") + " " + str(len(bottles_games)) + " " + _("games."))
     return bottles_games
