@@ -5,6 +5,8 @@
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
     <file preprocess="xml-stripblanks">gtk/game.ui</file>
     <file preprocess="xml-stripblanks">gtk/preferences.ui</file>
+    <file alias="style.css">gtk/style.css</file>
+    <file alias="style-dark.css">gtk/style-dark.css</file>
     <file>library_placeholder.svg</file>
   </gresource>
 </gresources>
