@@ -42,6 +42,23 @@ template game : Box {
             margin-bottom: 6;
           }
         }
+        [overlay]
+        Revealer menu_revealer {
+          transition-type: crossfade;
+          MenuButton menu_button {
+            icon-name: "view-more-symbolic";
+            margin-top: 6;
+            margin-bottom: 6;
+            margin-end: 6;
+            margin-start: 6;
+            menu-model: game_options;
+            halign: end;
+
+            styles [
+              "flat",
+            ]
+          }
+        }
         Revealer title_revealer {
           transition-type: crossfade;
           reveal-child: true;
@@ -51,21 +68,9 @@ template game : Box {
             hexpand: true;
             halign: start;
             margin-start: 12;
+            margin-end: 12;
           }
         }
-      }
-
-      MenuButton menu_button {
-        icon-name: "view-more-symbolic";
-        margin-top: 6;
-        margin-bottom: 6;
-        margin-end: 6;
-        margin-start: 6;
-        menu-model: game_options;
-
-        styles [
-          "flat",
-        ]
       }
     }
   }

@@ -32,6 +32,7 @@ class game(Gtk.Box):
     hidden_game_options = Gtk.Template.Child()
     button_revealer = Gtk.Template.Child()
     title_revealer = Gtk.Template.Child()
+    menu_revealer = Gtk.Template.Child()
 
     def __init__(self, parent_widget, title, pixbuf, game_id, **kwargs):
         super().__init__(**kwargs)
@@ -46,14 +47,24 @@ class game(Gtk.Box):
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
         self.overlay.add_controller(self.event_contoller_motion)
+        self.overlay.set_measure_overlay(self.button_revealer, True)
+        self.overlay.set_measure_overlay(self.menu_revealer, True)
 
         self.button_play.connect("clicked", self.launch_game)
-        self.event_contoller_motion.connect("enter", self.toggle_show_play)
-        self.event_contoller_motion.connect("leave", self.toggle_show_play)
+        self.event_contoller_motion.connect("enter", self.show_play)
+        self.event_contoller_motion.connect("leave", self.hide_play)
+        self.menu_button.get_popover().connect("notify::visible", self.hide_play)
 
-    def toggle_show_play(self, widget, *args):
-        self.button_revealer.set_reveal_child(not self.button_revealer.get_reveal_child())
-        self.title_revealer.set_reveal_child(not self.title_revealer.get_reveal_child())
+    def show_play(self, widget, *args):
+        self.button_revealer.set_reveal_child(True)
+        self.title_revealer.set_reveal_child(False)
+        self.menu_revealer.set_reveal_child(True)
+
+    def hide_play(self, widget, *args):
+        if not self.menu_button.get_active():
+            self.button_revealer.set_reveal_child(False)
+            self.title_revealer.set_reveal_child(True)
+            self.menu_revealer.set_reveal_child(False)
 
     def launch_game(self, widget):
         self.parent_widget.set_active_game(None, None, self.game_id)
