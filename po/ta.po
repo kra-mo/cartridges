@@ -1,13 +1,13 @@
-# Cartridges - Tamil Translation.
-# Copyright (C) 2023 Cartridges Contributors
-# This file is distributed under the same license as Cartridges.
+# Cartridges - Tamil Translation
+# Copyright (C) 2022 kramo
+# This file is distributed under the same license as the cartridges package.
 # K.B.Dharun Krishna <kbdharunkrishna@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 20:09+0100\n"
+"POT-Creation-Date: 2023-03-12 00:09+0100\n"
 "PO-Revision-Date: 2023-02-19 16:29+0530\n"
 "Last-Translator: K.B.Dharun Krishna <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil\n"
@@ -19,8 +19,8 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
-#: data/hu.kramo.Cartridges.metainfo.xml.in:6 src/main.py:82
-#: data/gtk/window.blp:29
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
+#: src/main.py:82
 msgid "Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள்"
 
@@ -46,40 +46,6 @@ msgstr ""
 "மற்றும் பாட்டில்களில் இருந்து இறக்குமதி செய்வதற்கான ஆதரவைக் கொண்டுள்ளது, அதாவது மறைத்தல் "
 "மற்றும் சேர்த்த அல்லது கடைசியாக விளையாடிய தேதியின்படி வரிசைப்படுத்துதல் போன்ற நிறுவன "
 "அம்சங்களுடன்."
-
-#. Translators: Replace this with your name for it to show up in the about window.
-#: src/main.py:93
-msgid "translator_credits"
-msgstr "K.B.Dharun Krishna <kbdharunkrishna@gmail.com>"
-
-#. Create toast for undoing the remove action
-#: src/main.py:152
-msgid "removed"
-msgstr "அகற்றப்பட்டது"
-
-#: src/main.py:153
-msgid "Undo"
-msgstr "செயல்தவிர்"
-
-#: src/window.py:200
-msgid "Today"
-msgstr "இன்று"
-
-#: src/window.py:202
-msgid "Yesterday"
-msgstr "நேற்று"
-
-#: src/window.py:226
-msgid "Added: "
-msgstr "சேர்க்கப்பட்டது: "
-
-#: src/window.py:227
-msgid "Last played: "
-msgstr "கடைசியாக விளையாடியது: "
-
-#: src/window.py:227
-msgid "Last played: Never"
-msgstr "கடைசியாக விளையாடியது: ஒருபோதும் இல்லை"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:98
 #: src/utils/heroic_parser.py:174 src/utils/steam_parser.py:105
@@ -110,7 +76,7 @@ msgstr "விளையாட்டு விவரங்கள்"
 msgid "Game Title"
 msgstr "விளையாட்டு தலைப்பு"
 
-#: data/gtk/window.blp:130 data/gtk/game.blp:62 data/gtk/game.blp:88
+#: data/gtk/window.blp:130 data/gtk/game.blp:39
 msgid "Play"
 msgstr "விளையாடு"
 
@@ -178,25 +144,25 @@ msgstr "Heroic (ஹீரோயிக்)"
 msgid "Bottles"
 msgstr "Bottles (பாட்டில்கள்)"
 
-#: data/gtk/window.blp:386 data/gtk/window.blp:405 data/gtk/game.blp:69
-#: data/gtk/game.blp:95
+#: data/gtk/window.blp:386 data/gtk/window.blp:405 data/gtk/game.blp:85
+#: data/gtk/game.blp:104
 msgid "Edit"
 msgstr "தொகு"
 
-#: data/gtk/window.blp:391 data/gtk/game.blp:74
+#: data/gtk/window.blp:391 data/gtk/game.blp:90
 msgid "Hide"
 msgstr "மறை"
 
-#: data/gtk/window.blp:396 data/gtk/window.blp:415 data/gtk/game.blp:79
-#: data/gtk/game.blp:105
+#: data/gtk/window.blp:396 data/gtk/window.blp:415 data/gtk/game.blp:95
+#: data/gtk/game.blp:114
 msgid "Remove"
 msgstr "அகற்று"
 
-#: data/gtk/window.blp:410 data/gtk/game.blp:100
+#: data/gtk/window.blp:410 data/gtk/game.blp:109
 msgid "Unhide"
 msgstr "மறை காட்டு"
 
-#: data/gtk/game.blp:32 src/utils/create_details_window.py:82
+#: data/gtk/game.blp:65 src/utils/create_details_window.py:82
 msgid "Title"
 msgstr "தலைப்பு"
 
@@ -290,6 +256,40 @@ msgstr "பக்க ஏற்றப்பட்ட விளையாட்ட�
 #: data/gtk/preferences.blp:77
 msgid "Bottles Install Location"
 msgstr "Bottles (பாட்டில்கள்) நிறுவும் இடம்"
+
+#. Translators: Replace this with your name for it to show up in the about window.
+#: src/main.py:93
+msgid "translator_credits"
+msgstr "K.B.Dharun Krishna <kbdharunkrishna@gmail.com>"
+
+#. Create toast for undoing the remove action
+#: src/main.py:152
+msgid "removed"
+msgstr "அகற்றப்பட்டது"
+
+#: src/main.py:153
+msgid "Undo"
+msgstr "செயல்தவிர்"
+
+#: src/window.py:201
+msgid "Today"
+msgstr "இன்று"
+
+#: src/window.py:203
+msgid "Yesterday"
+msgstr "நேற்று"
+
+#: src/window.py:227
+msgid "Added: "
+msgstr "சேர்க்கப்பட்டது: "
+
+#: src/window.py:228
+msgid "Last played: "
+msgstr "கடைசியாக விளையாடியது: "
+
+#: src/window.py:228
+msgid "Last played: Never"
+msgstr "கடைசியாக விளையாடியது: ஒருபோதும் இல்லை"
 
 #: src/utils/bottles_parser.py:55 src/utils/heroic_parser.py:55
 #: src/utils/steam_parser.py:55

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 20:09+0100\n"
+"POT-Creation-Date: 2023-03-12 00:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
-#: data/hu.kramo.Cartridges.metainfo.xml.in:6 src/main.py:82
-#: data/gtk/window.blp:29
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
+#: src/main.py:82
 msgid "Cartridges"
 msgstr ""
 
@@ -40,40 +40,6 @@ msgid ""
 "Cartridges is a simple game launcher. It has support for importing your "
 "games from Steam, Heroic and Bottles with organizational features such as "
 "hiding and sorting by date added or last played."
-msgstr ""
-
-#. Translators: Replace this with your name for it to show up in the about window.
-#: src/main.py:93
-msgid "translator_credits"
-msgstr ""
-
-#. Create toast for undoing the remove action
-#: src/main.py:152
-msgid "removed"
-msgstr ""
-
-#: src/main.py:153
-msgid "Undo"
-msgstr ""
-
-#: src/window.py:200
-msgid "Today"
-msgstr ""
-
-#: src/window.py:202
-msgid "Yesterday"
-msgstr ""
-
-#: src/window.py:226
-msgid "Added: "
-msgstr ""
-
-#: src/window.py:227
-msgid "Last played: "
-msgstr ""
-
-#: src/window.py:227
-msgid "Last played: Never"
 msgstr ""
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:98
@@ -105,7 +71,7 @@ msgstr ""
 msgid "Game Title"
 msgstr ""
 
-#: data/gtk/window.blp:130 data/gtk/game.blp:62 data/gtk/game.blp:88
+#: data/gtk/window.blp:130 data/gtk/game.blp:39
 msgid "Play"
 msgstr ""
 
@@ -173,25 +139,25 @@ msgstr ""
 msgid "Bottles"
 msgstr ""
 
-#: data/gtk/window.blp:386 data/gtk/window.blp:405 data/gtk/game.blp:69
-#: data/gtk/game.blp:95
+#: data/gtk/window.blp:386 data/gtk/window.blp:405 data/gtk/game.blp:85
+#: data/gtk/game.blp:104
 msgid "Edit"
 msgstr ""
 
-#: data/gtk/window.blp:391 data/gtk/game.blp:74
+#: data/gtk/window.blp:391 data/gtk/game.blp:90
 msgid "Hide"
 msgstr ""
 
-#: data/gtk/window.blp:396 data/gtk/window.blp:415 data/gtk/game.blp:79
-#: data/gtk/game.blp:105
+#: data/gtk/window.blp:396 data/gtk/window.blp:415 data/gtk/game.blp:95
+#: data/gtk/game.blp:114
 msgid "Remove"
 msgstr ""
 
-#: data/gtk/window.blp:410 data/gtk/game.blp:100
+#: data/gtk/window.blp:410 data/gtk/game.blp:109
 msgid "Unhide"
 msgstr ""
 
-#: data/gtk/game.blp:32 src/utils/create_details_window.py:82
+#: data/gtk/game.blp:65 src/utils/create_details_window.py:82
 msgid "Title"
 msgstr ""
 
@@ -280,6 +246,40 @@ msgstr ""
 
 #: data/gtk/preferences.blp:77
 msgid "Bottles Install Location"
+msgstr ""
+
+#. Translators: Replace this with your name for it to show up in the about window.
+#: src/main.py:93
+msgid "translator_credits"
+msgstr ""
+
+#. Create toast for undoing the remove action
+#: src/main.py:152
+msgid "removed"
+msgstr ""
+
+#: src/main.py:153
+msgid "Undo"
+msgstr ""
+
+#: src/window.py:201
+msgid "Today"
+msgstr ""
+
+#: src/window.py:203
+msgid "Yesterday"
+msgstr ""
+
+#: src/window.py:227
+msgid "Added: "
+msgstr ""
+
+#: src/window.py:228
+msgid "Last played: "
+msgstr ""
+
+#: src/window.py:228
+msgid "Last played: Never"
 msgstr ""
 
 #: src/utils/bottles_parser.py:55 src/utils/heroic_parser.py:55
