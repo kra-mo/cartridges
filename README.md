@@ -4,6 +4,11 @@
 
   # Cartridges
   A GTK4 + Libadwaita game launcher
+  
+  <a href="https://github.com/kra-mo/cartridges/graphs/contributors"><img src="https://img.shields.io/github/contributors/kra-mo/cartridges?style=for-the-badge"></a>
+  <a href="https://github.com/kra-mo/cartridges/stargazers"><img src="https://img.shields.io/github/stars/kra-mo/cartridges?style=for-the-badge"></a>
+  <a href="https://hosted.weblate.org/projects/cartridges/"><img src="https://img.shields.io/weblate/progress/cartridges?style=for-the-badge"></a>
+  <a href="https://github.com/kra-mo/cartridges/actions"><img src="https://img.shields.io/github/actions/workflow/status/kra-mo/cartridges/flatpak-builder.yml?style=for-the-badge"></a>
 
   <img src="data/screenshot.webp">
 </div>
@@ -47,7 +52,10 @@ Click the down arrow next to the hammer at the top of your GNOME Builder window,
 Fork the repository, make your changes, then create a pull request. 
 
 ### Translations
-Currently, translations can be added manually with the following steps:
+#### Weblate
+The project can be translated on [Weblate](https://hosted.weblate.org/projects/cartridges/).
+
+#### Manually
 1. Clone the repository.
 2. If it isn't already there, add your language to `/po/LINGUAS`.
 3. Create a new translation from the `/po/cartridges.pot` file with a translation editor such as [Poedit](https://poedit.net/).
