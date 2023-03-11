@@ -121,7 +121,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 if "removed" in current_game.keys():
                     continue
 
-                entry = game(current_game["name"], get_cover(current_game, self), game_id)
+                entry = game(self, current_game["name"], get_cover(current_game, self), game_id)
 
                 if not self.games[game_id]["hidden"]:
                     self.visible_widgets[game_id] = entry

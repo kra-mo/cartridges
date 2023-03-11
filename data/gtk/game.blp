@@ -28,12 +28,31 @@ template game : Box {
     maximum-size: 200;
 
     Box {
-      Label title {
-        label: _("Title");
-        ellipsize: end;
-        hexpand: true;
-        halign: start;
-        margin-start: 12;
+      Overlay overlay {
+        [overlay]
+        Revealer button_revealer {
+          reveal-child: false;
+          transition-type: crossfade;
+          Button button_play {
+            halign: start;
+            label: _("Play");
+            margin-start: 6;
+            margin-end: 6;
+            margin-top: 6;
+            margin-bottom: 6;
+          }
+        }
+        Revealer title_revealer {
+          transition-type: crossfade;
+          reveal-child: true;
+          Label title {
+            label: _("Title");
+            ellipsize: end;
+            hexpand: true;
+            halign: start;
+            margin-start: 12;
+          }
+        }
       }
 
       MenuButton menu_button {
@@ -59,13 +78,6 @@ template game : Box {
 menu game_options {
   section {
     item {
-      label: _("Play");
-      action: "app.launch_game";
-    }
-  }
-
-  section {
-    item {
       label: _("Edit");
       action: "app.edit_details";
     }
@@ -83,13 +95,6 @@ menu game_options {
 }
 
 menu hidden_game_options {
-  section {
-    item {
-      label: _("Play");
-      action: "app.launch_game";
-    }
-  }
-
   section {
     item {
       label: _("Edit");

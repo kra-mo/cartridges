@@ -23,18 +23,38 @@ from gi.repository import Gtk
 class game(Gtk.Box):
     __gtype_name__ = 'game'
 
+    overlay = Gtk.Template.Child()
     title = Gtk.Template.Child()
+    button_play = Gtk.Template.Child()
     cover = Gtk.Template.Child()
     cover_button = Gtk.Template.Child()
     menu_button = Gtk.Template.Child()
     hidden_game_options = Gtk.Template.Child()
+    button_revealer = Gtk.Template.Child()
+    title_revealer = Gtk.Template.Child()
 
-    def __init__(self, title, pixbuf, game_id, **kwargs):
+    def __init__(self, parent_widget, title, pixbuf, game_id, **kwargs):
         super().__init__(**kwargs)
 
+        self.parent_widget = parent_widget
         self.name = title
         self.pixbuf = pixbuf
         self.game_id = game_id
 
         self.title.set_label(title)
         self.cover.set_pixbuf(pixbuf)
+
+        self.event_contoller_motion = Gtk.EventControllerMotion.new()
+        self.overlay.add_controller(self.event_contoller_motion)
+
+        self.button_play.connect("clicked", self.launch_game)
+        self.event_contoller_motion.connect("enter", self.toggle_show_play)
+        self.event_contoller_motion.connect("leave", self.toggle_show_play)
+
+    def toggle_show_play(self, widget, *args):
+        self.button_revealer.set_reveal_child(not self.button_revealer.get_reveal_child())
+        self.title_revealer.set_reveal_child(not self.title_revealer.get_reveal_child())
+
+    def launch_game(self, widget):
+        self.parent_widget.set_active_game(None, None, self.game_id)
+        self.parent_widget.get_application().on_launch_game_action(None)
