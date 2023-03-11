@@ -133,6 +133,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
                 entry.cover_button.connect("clicked", self.show_overview, game_id)
                 entry.menu_button.get_popover().connect("notify::visible", self.set_active_game, game_id)
+                entry.get_parent().set_focusable(False)
 
         if self.visible_widgets == {}:
             self.library_bin.set_child(self.notice_empty)
