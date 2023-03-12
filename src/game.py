@@ -45,7 +45,7 @@ class game(Gtk.Box):
         self.cover.set_pixbuf(pixbuf)
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
-        self.overlay.add_controller(self.event_contoller_motion)
+        self.add_controller(self.event_contoller_motion)
         self.overlay.set_measure_overlay(self.play_revealer, True)
 
         self.button_play.connect("clicked", self.launch_game)
