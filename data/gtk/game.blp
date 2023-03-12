@@ -59,13 +59,16 @@ template game : Box {
           }
         }
         Revealer title_revealer {
-          transition-type: crossfade;
+          transition-type: slide_down;
           reveal-child: true;
+          valign: start;
           Label title {
             label: _("Title");
             ellipsize: end;
             hexpand: true;
             halign: start;
+            margin-top: 14;
+            margin-bottom: 14;
             margin-start: 12;
             margin-end: 12;
           }
