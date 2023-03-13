@@ -31,7 +31,7 @@ def save_cover(game, parent_widget, file_path, pixbuf = None, game_id = None):
     cover_path = os.path.join(covers_dir, game_id + ".dat")
 
     if pixbuf == None:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(file_path, 600, 900, False)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(file_path, 400, 600, False)
 
     open_file = open((cover_path), "wb")
     open_file.write(bytes(pixbuf.get_pixels()))
