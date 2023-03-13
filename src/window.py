@@ -74,6 +74,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.hidden_filtered = {}
         self.previous_page = self.library_view
         self.toasts = {}
+        self.busy_games = []
 
         self.overview.set_measure_overlay(self.overview_box, True)
         self.overview.set_clip_overlay(self.overview_box, False)
@@ -107,6 +108,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.games = get_games()
 
         for game_id in games:
+            if game_id in self.busy_games:
+                continue
+
             if game_id in self.visible_widgets:
                 self.library.remove(self.visible_widgets[game_id])
                 self.filtered.pop(self.visible_widgets[game_id])

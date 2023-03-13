@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 def save_cover(game, parent_widget, file_path, pixbuf = None, game_id = None):
-    from gi.repository import GdkPixbuf
+    from gi.repository import GdkPixbuf, Gio
     import os
 
     covers_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers")
@@ -28,9 +28,13 @@ def save_cover(game, parent_widget, file_path, pixbuf = None, game_id = None):
     if game_id == None:
         game_id = game["game_id"]
 
-    cover_path = os.path.join(covers_dir, game_id + ".png")
-
     if pixbuf == None:
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(file_path, 400, 600, False)
 
-    pixbuf.savev(cover_path, "png")
+    def cover_callback(*args):
+        parent_widget.busy_games.remove(game_id)
+        parent_widget.update_games([game_id])
+
+    file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".png"))
+    parent_widget.busy_games.append(game_id)
+    pixbuf.save_to_streamv_async(file.replace(None, False, Gio.FileCreateFlags.NONE), "png", None, None, None, cover_callback)
