@@ -67,15 +67,18 @@ template CartridgesWindow : Adw.ApplicationWindow {
               margin-top: 24;
               margin-bottom: 24;
 
-              Picture overview_cover {
-                halign: end;
-                valign: start;
-                width-request: 200;
-                height-request: 300;
+              Adw.Clamp {
+                maximum-size: 200;
+                Picture overview_cover {
+                  halign: end;
+                  valign: start;
+                  width-request: 200;
+                  height-request: 300;
 
-                styles [
-                  "card",
-                ]
+                  styles [
+                    "card",
+                  ]
+                }
               }
 
               Box {

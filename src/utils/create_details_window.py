@@ -75,8 +75,13 @@ def create_details_window(parent_widget, game_id = None):
     )
     cover_overlay.add_overlay(cover_button)
 
+    cover_clamp = Adw.Clamp(
+        maximum_size = 200,
+        child = cover_overlay,
+    )
+
     cover_group = Adw.PreferencesGroup()
-    cover_group.add(cover_overlay)
+    cover_group.add(cover_clamp)
 
     title_group = Adw.PreferencesGroup(
         title = _("Title"),

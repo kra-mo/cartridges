@@ -6,28 +6,27 @@ template game : Box {
   halign: center;
   valign: start;
 
-  Button cover_button {
-    Picture cover {
-      width-request: 200;
-      height-request: 300;
-      hexpand: true;
-      vexpand: true;
-
-      styles [
-        "card",
-      ]
-    }
-
-    styles [
-      "card",
-      "flat",
-    ]
-  }
-
   Adw.Clamp {
     maximum-size: 200;
-
     Box {
+      orientation: vertical;
+      Button cover_button {
+        Picture cover {
+          width-request: 200;
+          height-request: 300;
+          hexpand: true;
+          vexpand: true;
+
+          styles [
+            "card",
+          ]
+        }
+
+        styles [
+          "card",
+          "flat",
+        ]
+      }
       Overlay overlay {
         [overlay]
         Revealer play_revealer {
