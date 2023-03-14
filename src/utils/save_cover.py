@@ -17,10 +17,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-def save_cover(game, parent_widget, file_path, pixbuf = None, game_id = None):
-    from gi.repository import Gio, GdkPixbuf
-    import os
+import os
 
+from gi.repository import GdkPixbuf, Gio
+
+
+def save_cover(game, parent_widget, file_path, pixbuf = None, game_id = None):
     covers_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers")
     if os.path.exists(covers_dir) == False:
         os.makedirs(covers_dir)

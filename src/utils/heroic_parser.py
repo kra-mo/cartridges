@@ -17,14 +17,18 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import hashlib
+import json
+import os
+import time
+
+from gi.repository import GLib, Gtk
+
+from .create_dialog import create_dialog
+from .save_cover import save_cover
+
+
 def heroic_parser(parent_widget, action):
-    import os, json, time, hashlib
-
-    from gi.repository import Gtk, GLib
-
-    from .create_dialog import create_dialog
-    from .save_cover import save_cover
-
     schema = parent_widget.schema
     heroic_dir = os.path.expanduser(schema.get_string("heroic-location"))
 

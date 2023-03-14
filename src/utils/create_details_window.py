@@ -17,14 +17,19 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-def create_details_window(parent_widget, game_id = None):
-    import time, os, json
-    from gi.repository import Adw, Gtk, Gio, GLib, GdkPixbuf
-    from .create_dialog import create_dialog
-    from .save_games import save_games
-    from .save_cover import save_cover
-    from .get_cover import get_cover
+import json
+import os
+import time
 
+from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
+
+from .create_dialog import create_dialog
+from .get_cover import get_cover
+from .save_cover import save_cover
+from .save_games import save_games
+
+
+def create_details_window(parent_widget, game_id = None):
     window = Adw.Window(
         modal = True,
         default_width = 450,
@@ -149,6 +154,8 @@ def create_details_window(parent_widget, game_id = None):
             if final_executable == "":
                 create_dialog(window, _("Couldn't Add Game"), _("Executable cannot be empty."))
                 return
+
+            # Increment the number after the game id (eg. imported_1, imported_2)
 
             numbers = [0]
 

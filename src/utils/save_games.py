@@ -17,11 +17,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-def save_games(games):
-    import os, json
+import json
+import os
 
+
+def save_games(games):
     games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
-    existing = []
 
     if os.path.exists(games_dir) == False:
         os.makedirs(games_dir)

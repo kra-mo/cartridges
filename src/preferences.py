@@ -17,7 +17,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, Gio, GLib
+from gi.repository import Adw, Gio, GLib, Gtk
+
 
 @Gtk.Template(resource_path='/hu/kramo/Cartridges/gtk/preferences.ui')
 class PreferencesWindow(Adw.PreferencesWindow):

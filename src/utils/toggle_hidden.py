@@ -17,8 +17,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import json
+import os
+
+
 def toggle_hidden(game):
-    import os, json
     games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
 
     if not os.path.exists(games_dir):

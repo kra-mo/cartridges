@@ -17,23 +17,27 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import gi, sys, os, time, json
+import sys
+import time
+
+import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Gtk, Gio, GLib, Adw
+from gi.repository import Adw, Gio, GLib, Gtk
 
-from .window import CartridgesWindow
-from .preferences import PreferencesWindow
-from .toggle_hidden import toggle_hidden
-from .save_games import save_games
-from .get_games import get_games
-from .run_command import run_command
-from .steam_parser import steam_parser
-from .heroic_parser import heroic_parser
 from .bottles_parser import bottles_parser
 from .create_details_window import create_details_window
+from .get_games import get_games
+from .heroic_parser import heroic_parser
+from .preferences import PreferencesWindow
+from .run_command import run_command
+from .save_games import save_games
+from .steam_parser import steam_parser
+from .toggle_hidden import toggle_hidden
+from .window import CartridgesWindow
+
 
 class CartridgesApplication(Adw.Application):
     def __init__(self):

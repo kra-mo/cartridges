@@ -17,9 +17,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-def get_games(game_ids=None):
-    import os, json
+import json
+import os
 
+
+def get_games(game_ids=None):
     games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
     games = {}
 

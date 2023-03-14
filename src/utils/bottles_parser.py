@@ -17,14 +17,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
+import time
+
+import yaml
+from gi.repository import GLib, Gtk
+
+from .create_dialog import create_dialog
+from .save_cover import save_cover
+
+
 def bottles_parser(parent_widget, action):
-    import os, yaml, time
-
-    from gi.repository import Gtk, GLib
-
-    from .create_dialog import create_dialog
-    from .save_cover import save_cover
-
     schema = parent_widget.schema
     bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
 
@@ -62,7 +65,6 @@ def bottles_parser(parent_widget, action):
 
     bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
 
-    datatypes = ["path", "id", "name", "thumbnail"]
     bottles_games = {}
     current_time = int(time.time())
 

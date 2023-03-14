@@ -17,14 +17,16 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gio, GLib, Adw, GdkPixbuf, Gtk
+import datetime
+import os
 
-import os, json, time, datetime
+from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
 
 from .game import game
 from .get_cover import get_cover
 from .get_games import get_games
 from .save_games import save_games
+
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/window.ui")
 class CartridgesWindow(Adw.ApplicationWindow):

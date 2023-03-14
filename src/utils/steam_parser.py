@@ -17,14 +17,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
+import re
+import time
+
+from gi.repository import GLib, Gtk
+
+from .create_dialog import create_dialog
+from .save_cover import save_cover
+
+
 def steam_parser(parent_widget, action):
-    import os, re, time
-
-    from gi.repository import Gtk, GLib
-
-    from .create_dialog import create_dialog
-    from .save_cover import save_cover
-
     schema = parent_widget.schema
     steam_dir = os.path.expanduser(schema.get_string("steam-location"))
 
