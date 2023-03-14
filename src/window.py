@@ -226,8 +226,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.overview_blurred_cover.set_pixbuf(pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR))
         self.overview_title.set_label(game.name)
         self.overview_header_bar_title.set_title(game.name)
-        self.overview_added.set_label(_("Added: ") + self.get_time(game.added))
-        self.overview_last_played.set_label(_("Last played: ") + self.get_time(game.last_played) if game.last_played != 0 else _("Last played: Never"))
+        self.overview_added.set_label(_("Added:") + " " + self.get_time(game.added))
+        self.overview_last_played.set_label(_("Last played:") + " " + self.get_time(game.last_played) if game.last_played != 0 else _("Last played: Never"))
 
     def a_z_sort(self, child1, child2):
         name1 = child1.get_first_child().name.lower()
