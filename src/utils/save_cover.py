@@ -30,21 +30,16 @@ def save_cover(game, parent_widget, file_path, pixbuf=None, game_id=None):
     if game_id == None:
         game_id = game["game_id"]
 
-    cover_path = os.path.join(covers_dir, game_id + ".dat")
-
     if pixbuf == None:
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(file_path, 600, 900, False)
 
     def cover_callback(*args):
         pass
 
-    file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".png"))
+    file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".jpg"))
     parent_widget.pixbufs[game_id] = pixbuf
     pixbuf.save_to_streamv_async(
         file.replace(None, False, Gio.FileCreateFlags.NONE),
-        "png",
-        None,
-        None,
-        None,
-        cover_callback,
+        "jpeg",
+        callback=cover_callback,
     )
