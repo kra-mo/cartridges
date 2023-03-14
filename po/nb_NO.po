@@ -1,19 +1,17 @@
-# Cartridges - Hungarian Translation
-# Copyright (C) 2022 kramo
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
-# kramo, 2023.
-#
 # kramo <login@kramo.hu>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-14 18:50+0100\n"
 "PO-Revision-Date: 2023-03-14 17:59+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
-"Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
-"cartridges/hu/>\n"
-"Language: hu\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
+"cartridges/cartridges/nb_NO/>\n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,19 +22,19 @@ msgstr ""
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
 #: src/main.py:83
 msgid "Cartridges"
-msgstr "Kazetták"
+msgstr "Cartridges"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr "Játék Indító"
+msgstr "Spillutvalgstarter"
 
 #: data/hu.kramo.Cartridges.desktop.in:5
 msgid "Launch your games"
-msgstr "Indítsa el a játékait"
+msgstr "Start spillene dine"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
-msgstr "Indítsa el az összes játékát"
+msgstr "Start alle spillene dine"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -44,93 +42,96 @@ msgid ""
 "games from Steam, Heroic and Bottles with organizational features such as "
 "hiding and sorting by date added or last played."
 msgstr ""
-"A Kazetták egy egyszerű játékindító. Támogatja a Steam-ből, Heroic-ból és "
-"Bottles-ből való importálást, valamint a játékok elrejtését és rendezését."
+"Cartridges er en enkel spillutvalgsoppstarter. Den har støtte for "
+"importering av spillene dine fra Steam, Heroic, og Bottles, med "
+"organiseringsfunksjoner som skjuling og sortering etter tillagt dato eller "
+"sist spilt."
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:97
 #: src/utils/heroic_parser.py:172 src/utils/steam_parser.py:105
 msgid "No Games Found"
-msgstr "Nem Találhatóak Játékok"
+msgstr "Fant ingen spill"
 
 #: data/gtk/window.blp:7
 msgid "Try a different search."
-msgstr "Próbálkozz más kereséssel."
+msgstr "Prøv et forskjellig søk."
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
-msgstr "Használd a + gombot a játékok hozzáadásához."
+msgstr "Bruk «+»-knappen for å legge til spill."
 
 #: data/gtk/window.blp:22
 msgid "No Hidden Games"
-msgstr "Nincsenek Rejtett Játékok"
+msgstr "Ingen skjulte spill"
 
 #: data/gtk/window.blp:23
 msgid "Games you hide will appear here."
-msgstr "A rejtett játékaid itt lesznek megtalálhatók."
+msgstr "Spill du skjuler vil vises her."
 
 #: data/gtk/window.blp:50
 msgid "Game Details"
-msgstr "Játék Részletei"
+msgstr "Spilldetaljer"
 
 #: data/gtk/window.blp:91
 msgid "Game Title"
-msgstr "Cím"
+msgstr "Spillnavn"
 
 #: data/gtk/window.blp:133 data/gtk/game.blp:38
 msgid "Play"
-msgstr "Játék"
+msgstr "Spill"
 
 #: data/gtk/window.blp:242
 msgid "Hidden Games"
-msgstr "Rejtett Játékok"
+msgstr "Skjulte spill"
 
 #: data/gtk/window.blp:300
+#, fuzzy
 msgid "Sort"
-msgstr "Rendezés"
+msgstr "Sorter"
 
 #: data/gtk/window.blp:303
 msgid "A-Z"
-msgstr "A-Z"
+msgstr "A-Å"
 
 #: data/gtk/window.blp:309
 msgid "Z-A"
-msgstr "Z-A"
+msgstr "Å-A"
 
 #: data/gtk/window.blp:315
 msgid "Newest"
-msgstr "Legújabb"
+msgstr "Nyeste"
 
 #: data/gtk/window.blp:321
 msgid "Oldest"
-msgstr "Legrégebbi"
+msgstr "Eldste"
 
 #: data/gtk/window.blp:327
 msgid "Last Played"
-msgstr "Legutóbb játszott"
+msgstr "Sist spilt"
 
 #: data/gtk/window.blp:334
 msgid "Show Hidden"
-msgstr "Rejtett Játékok"
+msgstr "Vis skjulte"
 
 #: data/gtk/window.blp:342
 msgid "Preferences"
-msgstr "Beállítások"
+msgstr "Innstillinger"
 
 #: data/gtk/window.blp:347
 msgid "Keyboard Shortcuts"
-msgstr "Billentyűparancsok"
+msgstr "Tastatursnarveier"
 
 #: data/gtk/window.blp:352
 msgid "About Cartridges"
-msgstr "A Kazettákról"
+msgstr "Om"
 
 #: data/gtk/window.blp:361
 msgid "Add Game"
-msgstr "Játék Hozzáadása"
+msgstr "Legg til spill"
 
 #: data/gtk/window.blp:367
 msgid "Import from"
-msgstr "Importálás innen"
+msgstr "Importer fra"
 
 #: data/gtk/window.blp:369
 msgid "Steam"
@@ -147,276 +148,270 @@ msgstr "Bottles"
 #: data/gtk/window.blp:389 data/gtk/window.blp:408 data/gtk/game.blp:87
 #: data/gtk/game.blp:106
 msgid "Edit"
-msgstr "Szerkeszt"
+msgstr "Rediger"
 
 #: data/gtk/window.blp:394 data/gtk/game.blp:92
 msgid "Hide"
-msgstr "Elrejt"
+msgstr "Skjul"
 
 #: data/gtk/window.blp:399 data/gtk/window.blp:418 data/gtk/game.blp:97
 #: data/gtk/game.blp:116
 msgid "Remove"
-msgstr "Eltávolít"
+msgstr "Fjern"
 
 #: data/gtk/window.blp:413 data/gtk/game.blp:111
 msgid "Unhide"
-msgstr "Mutat"
+msgstr "Opphev fjerning"
 
 #: data/gtk/game.blp:65 src/utils/create_details_window.py:88
 msgid "Title"
-msgstr "Cím"
+msgstr "Navn"
 
 #: data/gtk/help-overlay.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Általános"
+msgstr "Generelt"
 
 #: data/gtk/help-overlay.blp:14
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Kilépés"
+msgstr "Avslutt"
 
 #: data/gtk/help-overlay.blp:19
 msgctxt "shortcut window"
 msgid "Search"
-msgstr "Keresés"
+msgstr "Søk"
 
 #: data/gtk/help-overlay.blp:24
 msgctxt "shortcut window"
 msgid "Show preferences"
-msgstr "Beállítások mutatása"
+msgstr "Vis innstillinger"
 
 #: data/gtk/help-overlay.blp:29
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr "Billentyűparancsok"
+msgstr "Snarveier"
 
 #: data/gtk/help-overlay.blp:34
 msgctxt "shortcut window"
 msgid "Undo"
-msgstr "Visszavonás"
+msgstr "Angre"
 
 #: data/gtk/help-overlay.blp:39
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr "Menü megnyitása"
+msgstr "Åpne meny"
 
 #: data/gtk/help-overlay.blp:45
 msgctxt "shortcut window"
 msgid "Games"
-msgstr "Játékok"
+msgstr "Spill"
 
 #: data/gtk/help-overlay.blp:48
 msgctxt "shortcut window"
 msgid "Add new game"
-msgstr "Új játék hozzáadása"
+msgstr "Legg til nytt spill"
 
 #: data/gtk/help-overlay.blp:53
 msgctxt "shortcut window"
 msgid "Show hidden games"
-msgstr "Rejtett játékok megjelenítése"
+msgstr "Vis skjulte spill"
 
 #: data/gtk/preferences.blp:10
 msgid "General"
-msgstr "Általános"
+msgstr "Generelt"
 
 #: data/gtk/preferences.blp:13
 msgid "Exit After Launching Games"
-msgstr "Kilépés Játékok Indítása Után"
+msgstr "Avslutt etter oppstart av spill"
 
 #: data/gtk/preferences.blp:25
 msgid "Steam Install Location"
-msgstr "Steam Telepítés Helye"
+msgstr ""
 
 #: data/gtk/preferences.blp:26 data/gtk/preferences.blp:40
 #: data/gtk/preferences.blp:78
 msgid "Directory to use when importing games"
-msgstr "Az importáláskor használatos mappa"
+msgstr ""
 
 #: data/gtk/preferences.blp:39
 msgid "Heroic Install Location"
-msgstr "Heroic Telepítés Helye"
+msgstr ""
 
 #: data/gtk/preferences.blp:49
 msgid "Import Epic Games"
-msgstr "Epic Games Játékok Importálása"
+msgstr ""
 
 #: data/gtk/preferences.blp:57
 msgid "Import GOG Games"
-msgstr "GOG Játékok Importálása"
+msgstr ""
 
 #: data/gtk/preferences.blp:65
 msgid "Import Sideloaded Games"
-msgstr "Manuálisan Hozzáadott Játékok Importálása"
+msgstr ""
 
 #: data/gtk/preferences.blp:77
 msgid "Bottles Install Location"
-msgstr "Bottles Telepítés Helye"
+msgstr ""
 
 #. Translators: Replace this with your name for it to show up in the about window.
 #: src/main.py:94
 msgid "translator_credits"
-msgstr "kramo https://kramo.hu"
+msgstr ""
 
 #. Create toast for undoing the remove action
 #: src/main.py:158
 msgid "removed"
-msgstr "eltávolítva"
+msgstr "fjernet"
 
 #: src/main.py:159
 msgid "Undo"
-msgstr "Visszavonás"
+msgstr "Angre"
 
 #: src/window.py:203
 msgid "Today"
-msgstr "Ma"
+msgstr "I dag"
 
 #: src/window.py:205
 msgid "Yesterday"
-msgstr "Tegnap"
+msgstr "I går"
 
 #: src/window.py:229
 msgid "Added:"
-msgstr "Hozzáadva:"
+msgstr "Tillagt:"
 
 #: src/window.py:230
 msgid "Last played:"
-msgstr "Legutóbb játszva:"
+msgstr "Sist spilt:"
 
 #: src/window.py:230
 msgid "Last played: Never"
-msgstr "Legutóbb játszva: Soha"
+msgstr "Sist spilt: Aldri"
 
 #: src/utils/bottles_parser.py:55 src/utils/heroic_parser.py:55
 #: src/utils/steam_parser.py:55
 msgid "Couldn't Import Games"
-msgstr "Nem Lehet Importálni a Játékot"
+msgstr "Kunne ikke importere spill"
 
 #: src/utils/bottles_parser.py:55
 msgid "The Bottles directory cannot be found."
-msgstr "A Bottles mappa nem található."
+msgstr ""
 
 #: src/utils/bottles_parser.py:55
 msgid "Set Bottles Location"
-msgstr "Bottles Mappa Kiválasztása"
+msgstr ""
 
 #: src/utils/bottles_parser.py:97
 msgid "No new games were found in the Bottles library."
-msgstr "Nem találhatók új játékok a Bottles könyvtárban."
+msgstr ""
 
 #: src/utils/bottles_parser.py:99 src/utils/bottles_parser.py:101
 msgid "Bottles Games Imported"
-msgstr "Bottles Játékok Importálva"
+msgstr ""
 
 #: src/utils/bottles_parser.py:99 src/utils/heroic_parser.py:174
 #: src/utils/steam_parser.py:107
 msgid "Successfully imported 1 game."
-msgstr "1 játék sikeresen importálva."
+msgstr ""
 
 #: src/utils/bottles_parser.py:101 src/utils/heroic_parser.py:177
 #: src/utils/steam_parser.py:109
 msgid "Successfully imported"
-msgstr "Sikeresen importálva"
+msgstr ""
 
 #: src/utils/bottles_parser.py:101 src/utils/heroic_parser.py:177
 #: src/utils/steam_parser.py:109
 msgid "games."
-msgstr "játék."
+msgstr "spill."
 
 #: src/utils/create_details_window.py:39
 msgid "Add New Game"
-msgstr "Új Játék Hozzáadása"
+msgstr "Legg til nytt spill"
 
 #: src/utils/create_details_window.py:43
 msgid "Confirm"
-msgstr "Megerősít"
+msgstr "Bekreft"
 
 #: src/utils/create_details_window.py:45
 msgid "Edit Game Details"
-msgstr "Játék Részleteinek Szerkesztése"
+msgstr "Rediger spilldetaljer"
 
 #: src/utils/create_details_window.py:49
 msgid "Apply"
-msgstr "Alkalmaz"
+msgstr "Bruk"
 
 #: src/utils/create_details_window.py:52
 msgid "Images"
-msgstr "Képek"
+msgstr "Bilder"
 
 #: src/utils/create_details_window.py:89
 msgid "The title of the game"
-msgstr "A játék címe"
+msgstr "Navnet på spillet"
 
 #: src/utils/create_details_window.py:94
 msgid "Executable"
-msgstr "Program"
+msgstr "Kjørbar"
 
 #: src/utils/create_details_window.py:95
 msgid "File to open or command to run when launching the game"
-msgstr "Fájl megnyitása vagy parancs futtatása a játék indításakor"
+msgstr ""
 
 #: src/utils/create_details_window.py:104
 msgid "Cancel"
-msgstr "Mégse"
+msgstr "Avbryt"
 
 #: src/utils/create_details_window.py:146
 #: src/utils/create_details_window.py:150
 msgid "Couldn't Add Game"
-msgstr "Nem Lehet Hozzáadni a Játékot"
+msgstr "Kunne ikke legge til spill"
 
 #: src/utils/create_details_window.py:146
 #: src/utils/create_details_window.py:169
 msgid "Game title cannot be empty."
-msgstr "A cím nem lehet üres."
+msgstr ""
 
 #: src/utils/create_details_window.py:150
 #: src/utils/create_details_window.py:173
 msgid "Executable cannot be empty."
-msgstr "A program nem lehet üres."
+msgstr ""
 
 #: src/utils/create_details_window.py:169
 #: src/utils/create_details_window.py:173
 msgid "Couldn't Apply Preferences"
-msgstr "Nem Lehet Menteni a Beállításokat"
+msgstr ""
 
 #: src/utils/create_dialog.py:24
 msgid "Dismiss"
-msgstr "Rendben"
+msgstr ""
 
 #: src/utils/heroic_parser.py:55
 msgid "The Heroic directory cannot be found."
-msgstr "A Heroic mappa nem található."
+msgstr ""
 
 #: src/utils/heroic_parser.py:55
 msgid "Set Heroic Location"
-msgstr "Heroic Mappa Kiválasztása"
+msgstr ""
 
 #: src/utils/heroic_parser.py:172
 msgid "No new games were found in the Heroic library."
-msgstr "Nem találhatók új játékok a Heroic könyvtárban."
+msgstr ""
 
 #: src/utils/heroic_parser.py:174 src/utils/heroic_parser.py:176
 msgid "Heroic Games Imported"
-msgstr "Heroic Játékok Importálva"
+msgstr "Heroic-spill importert"
 
 #: src/utils/steam_parser.py:55
 msgid "The Steam directory cannot be found."
-msgstr "A Steam mappa nem található."
+msgstr ""
 
 #: src/utils/steam_parser.py:55
 msgid "Set Steam Location"
-msgstr "Steam Mappa Kiválasztása"
+msgstr ""
 
 #: src/utils/steam_parser.py:105
 msgid "No new games were found in the Steam library."
-msgstr "Nem találhatók új játékok a Steam könyvtárban."
+msgstr ""
 
 #: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
 msgid "Steam Games Imported"
-msgstr "Steam Játékok Importálva"
-
-#~ msgid "kramo"
-#~ msgstr "kramo"
-
-#~ msgid "Import From Heroic"
-#~ msgstr "Importálás Heroic-ból"
+msgstr ""
