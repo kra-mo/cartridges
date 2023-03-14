@@ -1,0 +1,418 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the cartridges package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cartridges\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-12 00:09+0100\n"
+"PO-Revision-Date: 2023-03-12 10:28+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
+"cartridges/cartridges/nb_NO/>\n"
+"Language: nb_NO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.16.2-dev\n"
+
+#: data/hu.kramo.Cartridges.desktop.in:3
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
+#: src/main.py:82
+msgid "Cartridges"
+msgstr "Cartridges"
+
+#: data/hu.kramo.Cartridges.desktop.in:4
+msgid "Game Launcher"
+msgstr "Spillutvalgstarter"
+
+#: data/hu.kramo.Cartridges.desktop.in:5
+msgid "Launch your games"
+msgstr "Start spillene dine"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:7
+msgid "Launch all your games"
+msgstr "Start alle spillene dine"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:9
+msgid ""
+"Cartridges is a simple game launcher. It has support for importing your "
+"games from Steam, Heroic and Bottles with organizational features such as "
+"hiding and sorting by date added or last played."
+msgstr ""
+"Cartridges er en enkel spillutvalgsoppstarter. Den har støtte for "
+"importering av spillene dine fra Steam, Heroic, og Bottles, med "
+"organiseringsfunksjoner som skjuling og sortering etter tillagt dato eller "
+"sist spilt."
+
+#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:98
+#: src/utils/heroic_parser.py:174 src/utils/steam_parser.py:105
+msgid "No Games Found"
+msgstr "Fant ingen spill"
+
+#: data/gtk/window.blp:7
+msgid "Try a different search."
+msgstr "Prøv et forskjellig søk."
+
+#: data/gtk/window.blp:15
+msgid "Use the + button to add games."
+msgstr "Bruk «+»-knappen for å legge til spill."
+
+#: data/gtk/window.blp:22
+msgid "No Hidden Games"
+msgstr "Ingen skjulte spill"
+
+#: data/gtk/window.blp:23
+msgid "Games you hide will appear here."
+msgstr "Spill du skjuler vil vises her"
+
+#: data/gtk/window.blp:50
+msgid "Game Details"
+msgstr "Spilldetaljer"
+
+#: data/gtk/window.blp:88
+msgid "Game Title"
+msgstr "Spillnavn"
+
+#: data/gtk/window.blp:130 data/gtk/game.blp:39
+msgid "Play"
+msgstr "Spill"
+
+#: data/gtk/window.blp:239
+msgid "Hidden Games"
+msgstr "Skjulte spill"
+
+#: data/gtk/window.blp:297
+#, fuzzy
+msgid "Sort"
+msgstr "Sorter"
+
+#: data/gtk/window.blp:300
+msgid "A-Z"
+msgstr "A-Å"
+
+#: data/gtk/window.blp:306
+msgid "Z-A"
+msgstr "Å-A"
+
+#: data/gtk/window.blp:312
+msgid "Newest"
+msgstr "Nyeste"
+
+#: data/gtk/window.blp:318
+msgid "Oldest"
+msgstr "Eldste"
+
+#: data/gtk/window.blp:324
+msgid "Last Played"
+msgstr "Sist spilt"
+
+#: data/gtk/window.blp:331
+msgid "Show Hidden"
+msgstr "Vis skjulte"
+
+#: data/gtk/window.blp:339
+msgid "Preferences"
+msgstr "Innstillinger"
+
+#: data/gtk/window.blp:344
+msgid "Keyboard Shortcuts"
+msgstr "Tastatursnarveier"
+
+#: data/gtk/window.blp:349
+msgid "About Cartridges"
+msgstr "Om"
+
+#: data/gtk/window.blp:358
+msgid "Add Game"
+msgstr "Legg til spill"
+
+#: data/gtk/window.blp:364
+msgid "Import from"
+msgstr "Importer fra"
+
+#: data/gtk/window.blp:366
+msgid "Steam"
+msgstr "Steam"
+
+#: data/gtk/window.blp:371
+msgid "Heroic"
+msgstr "Heroic"
+
+#: data/gtk/window.blp:376
+msgid "Bottles"
+msgstr "Bottles"
+
+#: data/gtk/window.blp:386 data/gtk/window.blp:405 data/gtk/game.blp:85
+#: data/gtk/game.blp:104
+msgid "Edit"
+msgstr "Rediger"
+
+#: data/gtk/window.blp:391 data/gtk/game.blp:90
+msgid "Hide"
+msgstr "Skjul"
+
+#: data/gtk/window.blp:396 data/gtk/window.blp:415 data/gtk/game.blp:95
+#: data/gtk/game.blp:114
+msgid "Remove"
+msgstr "Fjern"
+
+#: data/gtk/window.blp:410 data/gtk/game.blp:109
+msgid "Unhide"
+msgstr "Opphev fjerning"
+
+#: data/gtk/game.blp:65 src/utils/create_details_window.py:82
+msgid "Title"
+msgstr "Navn"
+
+#: data/gtk/help-overlay.blp:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Generelt"
+
+#: data/gtk/help-overlay.blp:14
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Avslutt"
+
+#: data/gtk/help-overlay.blp:19
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Søk"
+
+#: data/gtk/help-overlay.blp:24
+msgctxt "shortcut window"
+msgid "Show preferences"
+msgstr "Vis innstillinger"
+
+#: data/gtk/help-overlay.blp:29
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr "Snarveier"
+
+#: data/gtk/help-overlay.blp:34
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "Angre"
+
+#: data/gtk/help-overlay.blp:39
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr "Åpne meny"
+
+#: data/gtk/help-overlay.blp:45
+msgctxt "shortcut window"
+msgid "Games"
+msgstr "Spill"
+
+#: data/gtk/help-overlay.blp:48
+msgctxt "shortcut window"
+msgid "Add new game"
+msgstr "Legg til nytt spill"
+
+#: data/gtk/help-overlay.blp:53
+msgctxt "shortcut window"
+msgid "Show hidden games"
+msgstr "Vis skjulte spill"
+
+#: data/gtk/preferences.blp:10
+msgid "General"
+msgstr "Generelt"
+
+#: data/gtk/preferences.blp:13
+msgid "Exit After Launching Games"
+msgstr "Avslutt etter oppstart av spill"
+
+#: data/gtk/preferences.blp:25
+msgid "Steam Install Location"
+msgstr ""
+
+#: data/gtk/preferences.blp:26 data/gtk/preferences.blp:40
+#: data/gtk/preferences.blp:78
+msgid "Directory to use when importing games"
+msgstr ""
+
+#: data/gtk/preferences.blp:39
+msgid "Heroic Install Location"
+msgstr ""
+
+#: data/gtk/preferences.blp:49
+msgid "Import Epic Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:57
+msgid "Import GOG Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:65
+msgid "Import Sideloaded Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:77
+msgid "Bottles Install Location"
+msgstr ""
+
+#. Translators: Replace this with your name for it to show up in the about window.
+#: src/main.py:93
+msgid "translator_credits"
+msgstr ""
+
+#. Create toast for undoing the remove action
+#: src/main.py:152
+msgid "removed"
+msgstr "fjernet"
+
+#: src/main.py:153
+msgid "Undo"
+msgstr "Angre"
+
+#: src/window.py:201
+msgid "Today"
+msgstr "I dag"
+
+#: src/window.py:203
+msgid "Yesterday"
+msgstr "I går"
+
+#: src/window.py:227
+msgid "Added: "
+msgstr "Tillagt: "
+
+#: src/window.py:228
+msgid "Last played: "
+msgstr "Sist spilt: "
+
+#: src/window.py:228
+msgid "Last played: Never"
+msgstr "Sist spilt: Aldri"
+
+#: src/utils/bottles_parser.py:55 src/utils/heroic_parser.py:55
+#: src/utils/steam_parser.py:55
+msgid "Couldn't Import Games"
+msgstr "Kunne ikke importere spill"
+
+#: src/utils/bottles_parser.py:55
+msgid "The Bottles directory cannot be found."
+msgstr ""
+
+#: src/utils/bottles_parser.py:55
+msgid "Set Bottles Location"
+msgstr ""
+
+#: src/utils/bottles_parser.py:98
+msgid "No new games were found in the Bottles library."
+msgstr ""
+
+#: src/utils/bottles_parser.py:100 src/utils/bottles_parser.py:102
+msgid "Bottles Games Imported"
+msgstr ""
+
+#: src/utils/bottles_parser.py:100 src/utils/heroic_parser.py:176
+#: src/utils/steam_parser.py:107
+msgid "Successfully imported 1 game."
+msgstr ""
+
+#: src/utils/bottles_parser.py:102 src/utils/heroic_parser.py:179
+#: src/utils/steam_parser.py:109
+msgid "Successfully imported"
+msgstr ""
+
+#: src/utils/bottles_parser.py:102 src/utils/heroic_parser.py:179
+#: src/utils/steam_parser.py:109
+msgid "games."
+msgstr "spill."
+
+#: src/utils/create_details_window.py:38
+msgid "Add New Game"
+msgstr "Legg til nytt spill"
+
+#: src/utils/create_details_window.py:42
+msgid "Confirm"
+msgstr "Bekreft"
+
+#: src/utils/create_details_window.py:44
+msgid "Edit Game Details"
+msgstr "Rediger spilldetaljer"
+
+#: src/utils/create_details_window.py:48
+msgid "Apply"
+msgstr "Bruk"
+
+#: src/utils/create_details_window.py:51
+msgid "Images"
+msgstr "Bilder"
+
+#: src/utils/create_details_window.py:83
+msgid "The title of the game"
+msgstr "Navnet på spillet"
+
+#: src/utils/create_details_window.py:88
+msgid "Executable"
+msgstr "Kjørbar"
+
+#: src/utils/create_details_window.py:89
+msgid "File to open or command to run when launching the game"
+msgstr ""
+
+#: src/utils/create_details_window.py:98
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/utils/create_details_window.py:140
+#: src/utils/create_details_window.py:144
+msgid "Couldn't Add Game"
+msgstr "Kunne ikke legge til spill"
+
+#: src/utils/create_details_window.py:140
+#: src/utils/create_details_window.py:165
+msgid "Game title cannot be empty."
+msgstr ""
+
+#: src/utils/create_details_window.py:144
+#: src/utils/create_details_window.py:169
+msgid "Executable cannot be empty."
+msgstr ""
+
+#: src/utils/create_details_window.py:165
+#: src/utils/create_details_window.py:169
+msgid "Couldn't Apply Preferences"
+msgstr ""
+
+#: src/utils/create_dialog.py:24
+msgid "Dismiss"
+msgstr ""
+
+#: src/utils/heroic_parser.py:55
+msgid "The Heroic directory cannot be found."
+msgstr ""
+
+#: src/utils/heroic_parser.py:55
+msgid "Set Heroic Location"
+msgstr ""
+
+#: src/utils/heroic_parser.py:174
+msgid "No new games were found in the Heroic library."
+msgstr ""
+
+#: src/utils/heroic_parser.py:176 src/utils/heroic_parser.py:178
+msgid "Heroic Games Imported"
+msgstr "Heroic-spill importert"
+
+#: src/utils/steam_parser.py:55
+msgid "The Steam directory cannot be found."
+msgstr ""
+
+#: src/utils/steam_parser.py:55
+msgid "Set Steam Location"
+msgstr ""
+
+#: src/utils/steam_parser.py:105
+msgid "No new games were found in the Steam library."
+msgstr ""
+
+#: src/utils/steam_parser.py:107 src/utils/steam_parser.py:109
+msgid "Steam Games Imported"
+msgstr ""
