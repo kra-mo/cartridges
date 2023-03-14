@@ -19,6 +19,8 @@
 
 from gi.repository import Gtk
 
+from .get_cover import get_cover
+
 @Gtk.Template(resource_path='/hu/kramo/Cartridges/gtk/game.ui')
 class game(Gtk.Box):
     __gtype_name__ = 'game'
@@ -33,7 +35,7 @@ class game(Gtk.Box):
     play_revealer = Gtk.Template.Child()
     title_revealer = Gtk.Template.Child()
 
-    def __init__(self, parent_widget, data, pixbuf, **kwargs):
+    def __init__(self, parent_widget, data, **kwargs):
         super().__init__(**kwargs)
 
         self.parent_widget = parent_widget
@@ -49,10 +51,10 @@ class game(Gtk.Box):
         else:
             self.removed = False
 
-        self.pixbuf = pixbuf
+        self.pixbuf = get_cover(self.game_id, self.parent_widget)
 
-        self.title.set_label(self.name)
         self.cover.set_pixbuf(self.pixbuf)
+        self.title.set_label(self.name)
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
         self.add_controller(self.event_contoller_motion)

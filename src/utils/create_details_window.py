@@ -23,6 +23,7 @@ def create_details_window(parent_widget, game_id = None):
     from .create_dialog import create_dialog
     from .save_games import save_games
     from .save_cover import save_cover
+    from .get_cover import get_cover
 
     window = Adw.Window(
         modal = True,
@@ -31,7 +32,7 @@ def create_details_window(parent_widget, game_id = None):
         transient_for = parent_widget
     )
 
-    games = parent_widget.games_temp
+    games = parent_widget.games
     pixbuf = None
 
     if game_id == None:
@@ -42,7 +43,7 @@ def create_details_window(parent_widget, game_id = None):
         apply_button = Gtk.Button.new_with_label(_("Confirm"))
     else:
         window.set_title(_("Edit Game Details"))
-        cover = Gtk.Picture.new_for_pixbuf((parent_widget.visible_widgets | parent_widget.hidden_widgets)[game_id].pixbuf)
+        cover = Gtk.Picture.new_for_pixbuf(get_cover(game_id, parent_widget))
         name = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new(games[game_id].name, -1))
         executable = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new((games[game_id].executable), -1))
         apply_button = Gtk.Button.new_with_label(_("Apply"))
@@ -173,7 +174,7 @@ def create_details_window(parent_widget, game_id = None):
                 return
 
         if pixbuf != None:
-            values["pixbuf_options"] = save_cover(None, parent_widget, None, pixbuf, game_id)
+            save_cover(None, parent_widget, None, pixbuf, game_id)
 
         values["name"] = final_name
         values["executable"] = final_executable

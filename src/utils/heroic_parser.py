@@ -83,7 +83,7 @@ def heroic_parser(parent_widget, action):
             app_name = game["app_name"]
             values["game_id"] = "heroic_epic_" + app_name
 
-            if values["game_id"] in parent_widget.games_temp and not parent_widget.games_temp[values["game_id"]].removed:
+            if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
                 continue
 
             values["name"] = game["title"]
@@ -95,7 +95,7 @@ def heroic_parser(parent_widget, action):
 
             image_path = os.path.join(heroic_dir, "images-cache", hashlib.sha256((game["art_square"] + "?h=400&resize=1&w=300").encode()).hexdigest())
             if os.path.exists(image_path):
-                values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
+                save_cover(values, parent_widget, image_path)
 
             heroic_games[values["game_id"]] = values
 
@@ -113,7 +113,7 @@ def heroic_parser(parent_widget, action):
 
             values["game_id"] = "heroic_gog_" + app_name
 
-            if values["game_id"] in parent_widget.games_temp and not parent_widget.games_temp[values["game_id"]].removed:
+            if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
                 continue
 
             # Get game title from library.json as it's not present in installed.json
@@ -127,7 +127,7 @@ def heroic_parser(parent_widget, action):
                     image_path = os.path.join(heroic_dir, "images-cache",
                                               hashlib.sha256(game["art_square"].encode()).hexdigest())
                     if os.path.exists(image_path):
-                        values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
+                        save_cover(values, parent_widget, image_path)
                     break
 
             values["executable"] = "xdg-open heroic://launch/" + app_name
@@ -152,7 +152,7 @@ def heroic_parser(parent_widget, action):
 
             values["game_id"] = "heroic_sideload_" + app_name
 
-            if values["game_id"] in parent_widget.games_temp and not parent_widget.games_temp[values["game_id"]].removed:
+            if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
                 continue
 
             values["name"] = item["title"]
@@ -164,7 +164,7 @@ def heroic_parser(parent_widget, action):
             image_path = os.path.join(heroic_dir, "images-cache",
                                       hashlib.sha256(item["art_square"].encode()).hexdigest())
             if os.path.exists(image_path):
-                values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
+                save_cover(values, parent_widget, image_path)
 
             heroic_games[values["game_id"]] = values
 

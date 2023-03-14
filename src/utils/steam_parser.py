@@ -87,7 +87,7 @@ def steam_parser(parent_widget, action):
 
         values["game_id"] = "steam_" + values["appid"]
 
-        if values["game_id"] in parent_widget.games_temp and not parent_widget.games_temp[values["game_id"]].removed:
+        if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
             continue
 
         values["executable"] = "xdg-open steam://rungameid/" + values["appid"]
@@ -97,7 +97,7 @@ def steam_parser(parent_widget, action):
         values["last_played"] = 0
 
         if os.path.isfile(os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg")):
-            values["pixbuf_options"] = save_cover(values, parent_widget, os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg"))
+            save_cover(values, parent_widget, os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg"))
 
         steam_games[values["game_id"]] = values
 

@@ -17,17 +17,15 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-def get_cover(game_id, pixbuf_options, parent_widget):
+def get_cover(game_id, parent_widget):
     from gi.repository import GdkPixbuf
-    import os, zlib
+    import os
 
-    cover_path = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers", game_id + ".dat")
+    if game_id in parent_widget.pixbufs.keys():
+        return parent_widget.pixbufs[game_id]
+    cover_path = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers", game_id + ".png")
 
     if os.path.isfile(cover_path) == False:
         return parent_widget.placeholder_pixbuf
 
-    open_file = open(cover_path, "rb")
-    data = zlib.decompress(open_file.read())
-    open_file.close()
-
-    return GdkPixbuf.Pixbuf.new_from_data(data, *pixbuf_options)
+    return GdkPixbuf.Pixbuf.new_from_file(cover_path)

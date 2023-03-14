@@ -68,14 +68,14 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.games_temp = {}
+        self.games = {}
         self.visible_widgets = {}
         self.hidden_widgets = {}
         self.filtered = {}
         self.hidden_filtered = {}
         self.previous_page = self.library_view
         self.toasts = {}
-        self.busy_games = []
+        self.pixbufs = {}
 
         self.overview.set_measure_overlay(self.overview_box, True)
         self.overview.set_clip_overlay(self.overview_box, False)
@@ -119,16 +119,13 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
             current_game = current_games[game_id]
 
-            entry = game(self, current_game, get_cover(current_game["game_id"], current_game["pixbuf_options"] if "pixbuf_options" in current_game.keys() else None, self))
-            self.games_temp[current_game["game_id"]] = entry
+            entry = game(self, current_game)
+            self.games[current_game["game_id"]] = entry
 
             if entry.removed:
                 continue
 
-            if game_id in self.busy_games:
-                continue
-
-            if not self.games_temp[game_id].hidden:
+            if not self.games[game_id].hidden:
                 self.visible_widgets[game_id] = entry
                 self.library.append(entry)
             else:
@@ -212,7 +209,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             return GLib.DateTime.new_from_unix_utc(timestamp).format("%x")
 
     def show_overview(self, widget, game_id):
-        game = self.games_temp[game_id]
+        game = self.games[game_id]
 
         if not game.hidden:
             self.overview_menu_button.set_menu_model(self.game_options)
@@ -224,7 +221,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             self.stack.set_visible_child(self.overview)
 
         self.active_game_id = game_id
-        pixbuf = (self.visible_widgets | self.hidden_widgets)[self.active_game_id].pixbuf
+        pixbuf = get_cover(self.active_game_id, self)
         self.overview_cover.set_pixbuf(pixbuf)
         self.overview_blurred_cover.set_pixbuf(pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR))
         self.overview_title.set_label(game.name)
@@ -256,8 +253,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
             return self.a_z_sort(child1, child2)
 
     def newest_sort(self, child1, child2):
-        time1 = self.games_temp[child1.get_first_child().game_id].added
-        time2 = self.games_temp[child2.get_first_child().game_id].added
+        time1 = self.games[child1.get_first_child().game_id].added
+        time2 = self.games[child2.get_first_child().game_id].added
         if time1 > time2:
             return -1
         elif time1 < time2:
@@ -266,8 +263,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
             return self.a_z_sort(child1, child2)
 
     def oldest_sort(self, child1, child2):
-        time1 = self.games_temp[child1.get_first_child().game_id].added
-        time2 = self.games_temp[child2.get_first_child().game_id].added
+        time1 = self.games[child1.get_first_child().game_id].added
+        time2 = self.games[child2.get_first_child().game_id].added
         if time1 > time2:
             return 1
         elif time1 < time2:
@@ -276,8 +273,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
             return self.a_z_sort(child1, child2)
 
     def last_played_sort(self, child1, child2):
-        time1 = self.games_temp[child1.get_first_child().game_id].last_played
-        time2 = self.games_temp[child2.get_first_child().game_id].last_played
+        time1 = self.games[child1.get_first_child().game_id].last_played
+        time2 = self.games[child2.get_first_child().game_id].last_played
         if time1 > time2:
             return -1
         elif time1 < time2:

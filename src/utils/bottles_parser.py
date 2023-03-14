@@ -78,7 +78,7 @@ def bottles_parser(parent_widget, action):
 
         values["game_id"] = "bottles_" + game["id"]
 
-        if values["game_id"] in parent_widget.games_temp and not parent_widget.games_temp[values["game_id"]].removed:
+        if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
             continue
 
         values["name"] = game["name"]
@@ -89,7 +89,7 @@ def bottles_parser(parent_widget, action):
         values["last_played"] = 0
 
         if game["thumbnail"]:
-            values["pixbuf_options"] = save_cover(values, parent_widget, os.path.join(bottles_dir, "bottles", game["bottle"]["path"], "grids", game["thumbnail"].split(":")[1]))
+            save_cover(values, parent_widget, os.path.join(bottles_dir, "bottles", game["bottle"]["path"], "grids", game["thumbnail"].split(":")[1]))
 
         bottles_games[values["game_id"]] = values
 
