@@ -385,9 +385,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 game_id = list(self.toasts)[-1]
             except IndexError:
                 return
-        open_file = open(os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game_id + ".json")), "r")
-        data = json.loads(open_file.read())
-        open_file.close()
+        data = get_games([game_id])[game_id]
         data.pop("removed")
         save_games({game_id : data})
         self.update_games([game_id])

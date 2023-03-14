@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-def get_games():
+def get_games(game_ids=None):
     import os, json
 
     games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
@@ -26,7 +26,14 @@ def get_games():
     if os.path.exists(games_dir) == False:
         return {}
 
-    for game in os.listdir(games_dir):
+    if not game_ids:
+        game_files = os.listdir(games_dir)
+    else:
+        game_files = []
+        for game_id in game_ids:
+            game_files.append(game_id + ".json")
+
+    for game in game_files:
         open_file = open(os.path.join(games_dir, game), "r")
         data = json.loads(open_file.read())
         open_file.close()

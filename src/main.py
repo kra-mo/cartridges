@@ -28,6 +28,7 @@ from .window import CartridgesWindow
 from .preferences import PreferencesWindow
 from .toggle_hidden import toggle_hidden
 from .save_games import save_games
+from .get_games import get_games
 from .run_command import run_command
 from .steam_parser import steam_parser
 from .heroic_parser import heroic_parser
@@ -116,9 +117,8 @@ class CartridgesApplication(Adw.Application):
         # Launch the game and update the last played value
 
         game_id = self.win.active_game_id
-        open_file = open(os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game_id + ".json")), "r")
-        data = json.loads(open_file.read())
-        open_file.close()
+
+        data = get_games([game_id])[game_id]
         data["last_played"] = int(time.time())
         save_games({game_id : data})
 
@@ -145,9 +145,8 @@ class CartridgesApplication(Adw.Application):
 
         # Add "removed=True" to the game properties so it can be deleted on next init
         game_id = self.win.active_game_id
-        open_file = open(os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game_id + ".json")), "r")
-        data = json.loads(open_file.read())
-        open_file.close()
+
+        data = get_games([game_id])[game_id]
         data["removed"] = True
         save_games({game_id : data})
 
