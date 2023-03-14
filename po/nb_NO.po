@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# kramo <login@kramo.hu>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-14 18:50+0100\n"
-"PO-Revision-Date: 2023-03-12 10:28+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"PO-Revision-Date: 2023-03-14 17:59+0000\n"
+"Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -67,7 +66,7 @@ msgstr "Ingen skjulte spill"
 
 #: data/gtk/window.blp:23
 msgid "Games you hide will appear here."
-msgstr "Spill du skjuler vil vises her"
+msgstr "Spill du skjuler vil vises her."
 
 #: data/gtk/window.blp:50
 msgid "Game Details"
@@ -278,16 +277,12 @@ msgid "Yesterday"
 msgstr "I går"
 
 #: src/window.py:229
-#, fuzzy
-#| msgid "Added: "
 msgid "Added:"
-msgstr "Tillagt: "
+msgstr "Tillagt:"
 
 #: src/window.py:230
-#, fuzzy
-#| msgid "Last played: "
 msgid "Last played:"
-msgstr "Sist spilt: "
+msgstr "Sist spilt:"
 
 #: src/window.py:230
 msgid "Last played: Never"

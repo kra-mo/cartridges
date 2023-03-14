@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
 # "J. Lavoie" <j.lavoie@net-c.ca>, 2023.
+# kramo <login@kramo.hu>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-14 18:50+0100\n"
-"PO-Revision-Date: 2023-03-14 13:32+0000\n"
-"Last-Translator: \"J. Lavoie\" <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2023-03-14 17:59+0000\n"
+"Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
 "Language: fr\n"
@@ -276,16 +277,12 @@ msgid "Yesterday"
 msgstr "Hier"
 
 #: src/window.py:229
-#, fuzzy
-#| msgid "Added: "
 msgid "Added:"
-msgstr "Ajouté : "
+msgstr "Ajouté :"
 
 #: src/window.py:230
-#, fuzzy
-#| msgid "Last played: "
 msgid "Last played:"
-msgstr "Dernière session : "
+msgstr "Dernière session :"
 
 #: src/window.py:230
 msgid "Last played: Never"
