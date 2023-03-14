@@ -22,9 +22,9 @@ from gi.repository import Gtk
 from .get_cover import get_cover
 
 
-@Gtk.Template(resource_path='/hu/kramo/Cartridges/gtk/game.ui')
+@Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")
 class game(Gtk.Box):
-    __gtype_name__ = 'game'
+    __gtype_name__ = "game"
 
     overlay = Gtk.Template.Child()
     title = Gtk.Template.Child()

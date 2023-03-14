@@ -32,8 +32,12 @@ def steam_parser(parent_widget, action):
     steam_dir = os.path.expanduser(schema.get_string("steam-location"))
 
     def steam_not_found():
-        if os.path.exists(os.path.expanduser("~/.var/app/com.valvesoftware.Steam/data/Steam/")):
-            schema.set_string("steam-location", "~/.var/app/com.valvesoftware.Steam/data/Steam/")
+        if os.path.exists(
+            os.path.expanduser("~/.var/app/com.valvesoftware.Steam/data/Steam/")
+        ):
+            schema.set_string(
+                "steam-location", "~/.var/app/com.valvesoftware.Steam/data/Steam/"
+            )
             action(None, None)
         elif os.path.exists(os.path.expanduser("~/.steam/steam/")):
             schema.set_string("steam-location", "~/.steam/steam/")
@@ -43,7 +47,10 @@ def steam_parser(parent_widget, action):
 
             def set_steam_dir(source, result, _):
                 try:
-                    schema.set_string("steam-location", filechooser.select_folder_finish(result).get_path())
+                    schema.set_string(
+                        "steam-location",
+                        filechooser.select_folder_finish(result).get_path(),
+                    )
                     action(None, None)
                 except GLib.GError:
                     return
@@ -55,7 +62,13 @@ def steam_parser(parent_widget, action):
                 if response == "choose_folder":
                     choose_folder(widget)
 
-            create_dialog(parent_widget, _("Couldn't Import Games"), _("The Steam directory cannot be found."), "choose_folder", _("Set Steam Location")).connect("response", response)
+            create_dialog(
+                parent_widget,
+                _("Couldn't Import Games"),
+                _("The Steam directory cannot be found."),
+                "choose_folder",
+                _("Set Steam Location"),
+            ).connect("response", response)
 
     if os.path.exists(os.path.join(steam_dir, "steamapps")):
         pass
@@ -85,12 +98,15 @@ def steam_parser(parent_widget, action):
         data = open_file.read()
         open_file.close()
         for datatype in datatypes:
-            value = re.findall("\"" + datatype + "\"\t\t\"(.*)\"\n", data)
+            value = re.findall('"' + datatype + '"\t\t"(.*)"\n', data)
             values[datatype] = value[0]
 
         values["game_id"] = "steam_" + values["appid"]
 
-        if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
+        if (
+            values["game_id"] in parent_widget.games
+            and not parent_widget.games[values["game_id"]].removed
+        ):
             continue
 
         values["executable"] = "xdg-open steam://rungameid/" + values["appid"]
@@ -99,15 +115,45 @@ def steam_parser(parent_widget, action):
         values["added"] = current_time
         values["last_played"] = 0
 
-        if os.path.isfile(os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg")):
-            save_cover(values, parent_widget, os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg"))
+        if os.path.isfile(
+            os.path.join(
+                steam_dir,
+                "appcache",
+                "librarycache",
+                values["appid"] + "_library_600x900.jpg",
+            )
+        ):
+            save_cover(
+                values,
+                parent_widget,
+                os.path.join(
+                    steam_dir,
+                    "appcache",
+                    "librarycache",
+                    values["appid"] + "_library_600x900.jpg",
+                ),
+            )
 
         steam_games[values["game_id"]] = values
 
     if len(steam_games) == 0:
-        create_dialog(parent_widget, _("No Games Found"), _("No new games were found in the Steam library."))
+        create_dialog(
+            parent_widget,
+            _("No Games Found"),
+            _("No new games were found in the Steam library."),
+        )
     elif len(steam_games) == 1:
-        create_dialog(parent_widget, _("Steam Games Imported"), _("Successfully imported 1 game."))
+        create_dialog(
+            parent_widget, _("Steam Games Imported"), _("Successfully imported 1 game.")
+        )
     elif len(steam_games) > 1:
-        create_dialog(parent_widget, _("Steam Games Imported"), _("Successfully imported") + " " + str(len(steam_games)) + " " + _("games."))
+        create_dialog(
+            parent_widget,
+            _("Steam Games Imported"),
+            _("Successfully imported")
+            + " "
+            + str(len(steam_games))
+            + " "
+            + _("games."),
+        )
     return steam_games

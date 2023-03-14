@@ -22,7 +22,7 @@ import os
 from gi.repository import GdkPixbuf, Gio
 
 
-def save_cover(game, parent_widget, file_path, pixbuf = None, game_id = None):
+def save_cover(game, parent_widget, file_path, pixbuf=None, game_id=None):
     covers_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers")
     if os.path.exists(covers_dir) == False:
         os.makedirs(covers_dir)
@@ -40,4 +40,11 @@ def save_cover(game, parent_widget, file_path, pixbuf = None, game_id = None):
 
     file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".png"))
     parent_widget.pixbufs[game_id] = pixbuf
-    pixbuf.save_to_streamv_async(file.replace(None, False, Gio.FileCreateFlags.NONE), "png", None, None, None, cover_callback)
+    pixbuf.save_to_streamv_async(
+        file.replace(None, False, Gio.FileCreateFlags.NONE),
+        "png",
+        None,
+        None,
+        None,
+        cover_callback,
+    )

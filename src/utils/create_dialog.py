@@ -22,7 +22,7 @@ from gi.repository import Adw, Gtk
 
 def create_dialog(parent_widget, heading, body, extra_option=None, extra_label=None):
     dialog = Adw.MessageDialog.new(parent_widget, _(heading), body)
-    dialog.add_response("dismiss",  _("Dismiss"))
+    dialog.add_response("dismiss", _("Dismiss"))
 
     if extra_option:
         dialog.add_response(extra_option, _(extra_label))

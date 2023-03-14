@@ -83,13 +83,29 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.overview.set_clip_overlay(self.overview_box, False)
 
         self.schema = Gio.Settings.new("hu.kramo.Cartridges")
-        self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale("/hu/kramo/Cartridges/library_placeholder.svg", 200, 300, False)
+        self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
+            "/hu/kramo/Cartridges/library_placeholder.svg", 200, 300, False
+        )
         games = get_games()
         for game in games:
             if "removed" in games[game].keys():
-                os.remove(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game + ".json"))
+                os.remove(
+                    os.path.join(
+                        os.environ.get("XDG_DATA_HOME"),
+                        "cartridges",
+                        "games",
+                        game + ".json",
+                    )
+                )
                 try:
-                    os.remove(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers", game + ".dat"))
+                    os.remove(
+                        os.path.join(
+                            os.environ.get("XDG_DATA_HOME"),
+                            "cartridges",
+                            "covers",
+                            game + ".dat",
+                        )
+                    )
                 except FileNotFoundError:
                     pass
 
@@ -136,7 +152,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 self.hidden_library.append(entry)
 
             entry.cover_button.connect("clicked", self.show_overview, game_id)
-            entry.menu_button.get_popover().connect("notify::visible", self.set_active_game, game_id)
+            entry.menu_button.get_popover().connect(
+                "notify::visible", self.set_active_game, game_id
+            )
             entry.get_parent().set_focusable(False)
 
         if self.visible_widgets == {}:
@@ -225,11 +243,17 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.active_game_id = game_id
         pixbuf = get_cover(self.active_game_id, self)
         self.overview_cover.set_pixbuf(pixbuf)
-        self.overview_blurred_cover.set_pixbuf(pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR))
+        self.overview_blurred_cover.set_pixbuf(
+            pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
+        )
         self.overview_title.set_label(game.name)
         self.overview_header_bar_title.set_title(game.name)
         self.overview_added.set_label(_("Added:") + " " + self.get_time(game.added))
-        self.overview_last_played.set_label(_("Last played:") + " " + self.get_time(game.last_played) if game.last_played != 0 else _("Last played: Never"))
+        self.overview_last_played.set_label(
+            _("Last played:") + " " + self.get_time(game.last_played)
+            if game.last_played != 0
+            else _("Last played: Never")
+        )
 
     def a_z_sort(self, child1, child2):
         name1 = child1.get_first_child().name.lower()
@@ -314,7 +338,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def on_sort_action(self, action, state):
         action.set_state(state)
-        state = str(state).strip("\'")
+        state = str(state).strip("'")
 
         if state == "a-z":
             sort_func = self.a_z_sort
@@ -331,7 +355,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         elif state == "last_played":
             sort_func = self.last_played_sort
 
-        Gio.Settings(schema_id="hu.kramo.Cartridge.State").set_string("sort-mode", state)
+        Gio.Settings(schema_id="hu.kramo.Cartridge.State").set_string(
+            "sort-mode", state
+        )
         self.library.set_sort_func(sort_func)
         self.hidden_library.set_sort_func(sort_func)
 
@@ -377,7 +403,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             search_entry.set_text("")
 
     def on_undo_remove_action(self, widget, game_id=None):
-    # Remove the "removed=True" property from the game and dismiss the toast
+        # Remove the "removed=True" property from the game and dismiss the toast
 
         if not game_id:
             try:
@@ -386,7 +412,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 return
         data = get_games([game_id])[game_id]
         data.pop("removed")
-        save_games({game_id : data})
+        save_games({game_id: data})
         self.update_games([game_id])
         self.toasts[game_id].dismiss()
         self.toasts.pop(game_id)

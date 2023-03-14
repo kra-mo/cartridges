@@ -33,18 +33,29 @@ def heroic_parser(parent_widget, action):
     heroic_dir = os.path.expanduser(schema.get_string("heroic-location"))
 
     def heroic_not_found():
-        if os.path.exists(os.path.expanduser("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")):
-            schema.set_string("heroic-location", "~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
+        if os.path.exists(
+            os.path.expanduser("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
+        ):
+            schema.set_string(
+                "heroic-location",
+                "~/.var/app/com.heroicgameslauncher.hgl/config/heroic/",
+            )
             action(None, None)
         elif os.path.exists(os.path.join(os.environ.get("XDG_CONFIG_HOME"), "heroic")):
-            schema.set_string("heroic-location", os.path.join(os.environ.get("XDG_CONFIG_HOME"), "heroic"))
+            schema.set_string(
+                "heroic-location",
+                os.path.join(os.environ.get("XDG_CONFIG_HOME"), "heroic"),
+            )
             action(None, None)
         else:
             filechooser = Gtk.FileDialog.new()
 
             def set_heroic_dir(source, result, _):
                 try:
-                    schema.set_string("heroic-location", filechooser.select_folder_finish(result).get_path())
+                    schema.set_string(
+                        "heroic-location",
+                        filechooser.select_folder_finish(result).get_path(),
+                    )
                     action(None, None)
                 except GLib.GError:
                     return
@@ -56,7 +67,13 @@ def heroic_parser(parent_widget, action):
                 if response == "choose_folder":
                     choose_folder(widget)
 
-            create_dialog(parent_widget, _("Couldn't Import Games"), _("The Heroic directory cannot be found."), "choose_folder", _("Set Heroic Location")).connect("response", response)
+            create_dialog(
+                parent_widget,
+                _("Couldn't Import Games"),
+                _("The Heroic directory cannot be found."),
+                "choose_folder",
+                _("Set Heroic Location"),
+            ).connect("response", response)
 
     if os.path.exists(os.path.join(heroic_dir, "config.json")):
         pass
@@ -87,7 +104,10 @@ def heroic_parser(parent_widget, action):
             app_name = game["app_name"]
             values["game_id"] = "heroic_epic_" + app_name
 
-            if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
+            if (
+                values["game_id"] in parent_widget.games
+                and not parent_widget.games[values["game_id"]].removed
+            ):
                 continue
 
             values["name"] = game["title"]
@@ -97,7 +117,13 @@ def heroic_parser(parent_widget, action):
             values["added"] = current_time
             values["last_played"] = 0
 
-            image_path = os.path.join(heroic_dir, "images-cache", hashlib.sha256((game["art_square"] + "?h=400&resize=1&w=300").encode()).hexdigest())
+            image_path = os.path.join(
+                heroic_dir,
+                "images-cache",
+                hashlib.sha256(
+                    (game["art_square"] + "?h=400&resize=1&w=300").encode()
+                ).hexdigest(),
+            )
             if os.path.exists(image_path):
                 save_cover(values, parent_widget, image_path)
 
@@ -117,7 +143,10 @@ def heroic_parser(parent_widget, action):
 
             values["game_id"] = "heroic_gog_" + app_name
 
-            if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
+            if (
+                values["game_id"] in parent_widget.games
+                and not parent_widget.games[values["game_id"]].removed
+            ):
                 continue
 
             # Get game title from library.json as it's not present in installed.json
@@ -128,8 +157,11 @@ def heroic_parser(parent_widget, action):
             for game in library["games"]:
                 if game["app_name"] == app_name:
                     values["name"] = game["title"]
-                    image_path = os.path.join(heroic_dir, "images-cache",
-                                              hashlib.sha256(game["art_square"].encode()).hexdigest())
+                    image_path = os.path.join(
+                        heroic_dir,
+                        "images-cache",
+                        hashlib.sha256(game["art_square"].encode()).hexdigest(),
+                    )
                     if os.path.exists(image_path):
                         save_cover(values, parent_widget, image_path)
                     break
@@ -156,7 +188,10 @@ def heroic_parser(parent_widget, action):
 
             values["game_id"] = "heroic_sideload_" + app_name
 
-            if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
+            if (
+                values["game_id"] in parent_widget.games
+                and not parent_widget.games[values["game_id"]].removed
+            ):
                 continue
 
             values["name"] = item["title"]
@@ -165,18 +200,36 @@ def heroic_parser(parent_widget, action):
             values["source"] = "heroic_sideload"
             values["added"] = current_time
             values["last_played"] = 0
-            image_path = os.path.join(heroic_dir, "images-cache",
-                                      hashlib.sha256(item["art_square"].encode()).hexdigest())
+            image_path = os.path.join(
+                heroic_dir,
+                "images-cache",
+                hashlib.sha256(item["art_square"].encode()).hexdigest(),
+            )
             if os.path.exists(image_path):
                 save_cover(values, parent_widget, image_path)
 
             heroic_games[values["game_id"]] = values
 
     if len(heroic_games) == 0:
-        create_dialog(parent_widget, _("No Games Found"), _("No new games were found in the Heroic library."))
+        create_dialog(
+            parent_widget,
+            _("No Games Found"),
+            _("No new games were found in the Heroic library."),
+        )
     elif len(heroic_games) == 1:
-        create_dialog(parent_widget, _("Heroic Games Imported"), _("Successfully imported 1 game."))
+        create_dialog(
+            parent_widget,
+            _("Heroic Games Imported"),
+            _("Successfully imported 1 game."),
+        )
     elif len(heroic_games) > 1:
-        create_dialog(parent_widget, _("Heroic Games Imported"),
-                      _("Successfully imported") + " " + str(len(heroic_games)) + " " + _("games."))
+        create_dialog(
+            parent_widget,
+            _("Heroic Games Imported"),
+            _("Successfully imported")
+            + " "
+            + str(len(heroic_games))
+            + " "
+            + _("games."),
+        )
     return heroic_games

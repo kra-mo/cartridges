@@ -41,10 +41,14 @@ from .window import CartridgesWindow
 
 class CartridgesApplication(Adw.Application):
     def __init__(self):
-        super().__init__(application_id="hu.kramo.Cartridges", flags=Gio.ApplicationFlags.FLAGS_NONE)
+        super().__init__(
+            application_id="hu.kramo.Cartridges", flags=Gio.ApplicationFlags.FLAGS_NONE
+        )
         self.create_action("quit", self.on_quit_action, ["<primary>q"])
         self.create_action("about", self.on_about_action)
-        self.create_action("preferences", self.on_preferences_action, ["<primary>comma"])
+        self.create_action(
+            "preferences", self.on_preferences_action, ["<primary>comma"]
+        )
         self.create_action("steam_import", self.on_steam_import_action)
         self.create_action("heroic_import", self.on_heroic_import_action)
         self.create_action("bottles_import", self.on_bottles_import_action)
@@ -63,39 +67,62 @@ class CartridgesApplication(Adw.Application):
 
         # Save window geometry
         state_settings = Gio.Settings(schema_id="hu.kramo.Cartridge.State")
-        state_settings.bind("width", self.win, "default-width", Gio.SettingsBindFlags.DEFAULT)
-        state_settings.bind("height", self.win, "default-height", Gio.SettingsBindFlags.DEFAULT)
-        state_settings.bind("is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT)
+        state_settings.bind(
+            "width", self.win, "default-width", Gio.SettingsBindFlags.DEFAULT
+        )
+        state_settings.bind(
+            "height", self.win, "default-height", Gio.SettingsBindFlags.DEFAULT
+        )
+        state_settings.bind(
+            "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
+        )
 
         self.win.present()
 
         # Create actions for the main window
-        self.create_action("show_hidden", self.win.on_show_hidden_action, ["<primary>h"], self.win)
-        self.create_action("go_back", self.win.on_go_back_action, ["<alt>Left"], self.win)
-        self.create_action("go_to_parent", self.win.on_go_to_parent_action, ["<alt>Up"], self.win)
-        self.create_action("toggle_search", self.win.on_toggle_search_action, ["<primary>f"], self.win)
+        self.create_action(
+            "show_hidden", self.win.on_show_hidden_action, ["<primary>h"], self.win
+        )
+        self.create_action(
+            "go_back", self.win.on_go_back_action, ["<alt>Left"], self.win
+        )
+        self.create_action(
+            "go_to_parent", self.win.on_go_to_parent_action, ["<alt>Up"], self.win
+        )
+        self.create_action(
+            "toggle_search", self.win.on_toggle_search_action, ["<primary>f"], self.win
+        )
         self.create_action("escape", self.win.on_escape_action, ["Escape"], self.win)
-        self.create_action("undo_remove", self.win.on_undo_remove_action, ["<primary>z"], self.win)
+        self.create_action(
+            "undo_remove", self.win.on_undo_remove_action, ["<primary>z"], self.win
+        )
         self.create_action("open_menu", self.win.on_open_menu_action, ["F10"], self.win)
-        self.win.sort = Gio.SimpleAction.new_stateful("sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z"))
+        self.win.sort = Gio.SimpleAction.new_stateful(
+            "sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z")
+        )
         self.win.add_action(self.win.sort)
         self.win.sort.connect("activate", self.win.on_sort_action)
         self.win.on_sort_action(self.win.sort, state_settings.get_value("sort-mode"))
 
     def on_about_action(self, widget, callback=None):
-        about = Adw.AboutWindow(transient_for=self.win,
-                                application_name=_("Cartridges"),
-                                application_icon="hu.kramo.Cartridges",
-                                developer_name="kramo",
-                                version="0.1.2",
-                                developers=["kramo https://kramo.hu", "Paweł Lidwin https://github.com/imLinguin"],
-                                designers=["kramo https://kramo.hu"],
-                                copyright="© 2022 kramo",
-                                license_type=Gtk.License.GPL_3_0,
-                                issue_url="https://github.com/kra-mo/cartridges/issues/new",
-                                website="https://github.com/kra-mo/cartridges",
-                                # Translators: Replace this with your name for it to show up in the about window.
-                                translator_credits=_("translator_credits"))
+        about = Adw.AboutWindow(
+            transient_for=self.win,
+            application_name=_("Cartridges"),
+            application_icon="hu.kramo.Cartridges",
+            developer_name="kramo",
+            version="0.1.2",
+            developers=[
+                "kramo https://kramo.hu",
+                "Paweł Lidwin https://github.com/imLinguin",
+            ],
+            designers=["kramo https://kramo.hu"],
+            copyright="© 2022 kramo",
+            license_type=Gtk.License.GPL_3_0,
+            issue_url="https://github.com/kra-mo/cartridges/issues/new",
+            website="https://github.com/kra-mo/cartridges",
+            # Translators: Replace this with your name for it to show up in the about window.
+            translator_credits=_("translator_credits"),
+        )
         about.present()
 
     def on_preferences_action(self, widget, callback=None):
@@ -124,7 +151,7 @@ class CartridgesApplication(Adw.Application):
 
         data = get_games([game_id])[game_id]
         data["last_played"] = int(time.time())
-        save_games({game_id : data})
+        save_games({game_id: data})
 
         run_command(self.win, self.win.games[self.win.active_game_id].executable)
 
@@ -152,7 +179,7 @@ class CartridgesApplication(Adw.Application):
 
         data = get_games([game_id])[game_id]
         data["removed"] = True
-        save_games({game_id : data})
+        save_games({game_id: data})
 
         self.win.update_games([game_id])
         if self.win.stack.get_visible_child() == self.win.overview:
@@ -181,7 +208,7 @@ class CartridgesApplication(Adw.Application):
             if shortcuts:
                 self.set_accels_for_action(f"win.{name}", shortcuts)
 
+
 def main(version):
     app = CartridgesApplication()
     return app.run(sys.argv)
-

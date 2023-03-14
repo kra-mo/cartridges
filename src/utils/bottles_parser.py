@@ -32,18 +32,28 @@ def bottles_parser(parent_widget, action):
     bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
 
     def bottles_not_found():
-        if os.path.exists(os.path.expanduser("~/.var/app/com.usebottles.bottles/data/bottles/")):
-            schema.set_string("bottles-location", "~/.var/app/com.usebottles.bottles/data/bottles/")
+        if os.path.exists(
+            os.path.expanduser("~/.var/app/com.usebottles.bottles/data/bottles/")
+        ):
+            schema.set_string(
+                "bottles-location", "~/.var/app/com.usebottles.bottles/data/bottles/"
+            )
             action(None, None)
         elif os.path.exists(os.path.join(os.environ.get("XDG_DATA_HOME"), "bottles")):
-            schema.set_string("bottles-location", os.path.join(os.environ.get("XDG_DATA_HOME"), "bottles"))
+            schema.set_string(
+                "bottles-location",
+                os.path.join(os.environ.get("XDG_DATA_HOME"), "bottles"),
+            )
             action(None, None)
         else:
             filechooser = Gtk.FileDialog.new()
 
             def set_bottles_dir(source, result, _):
                 try:
-                    schema.set_string("bottles-location", filechooser.select_folder_finish(result).get_path())
+                    schema.set_string(
+                        "bottles-location",
+                        filechooser.select_folder_finish(result).get_path(),
+                    )
                     action(None, None)
                 except GLib.GError:
                     return
@@ -55,7 +65,13 @@ def bottles_parser(parent_widget, action):
                 if response == "choose_folder":
                     choose_folder(widget)
 
-            create_dialog(parent_widget, _("Couldn't Import Games"), _("The Bottles directory cannot be found."), "choose_folder", _("Set Bottles Location")).connect("response", response)
+            create_dialog(
+                parent_widget,
+                _("Couldn't Import Games"),
+                _("The Bottles directory cannot be found."),
+                "choose_folder",
+                _("Set Bottles Location"),
+            ).connect("response", response)
 
     if os.path.isfile(os.path.join(bottles_dir, "library.yml")):
         pass
@@ -80,25 +96,56 @@ def bottles_parser(parent_widget, action):
 
         values["game_id"] = "bottles_" + game["id"]
 
-        if values["game_id"] in parent_widget.games and not parent_widget.games[values["game_id"]].removed:
+        if (
+            values["game_id"] in parent_widget.games
+            and not parent_widget.games[values["game_id"]].removed
+        ):
             continue
 
         values["name"] = game["name"]
-        values["executable"] = "xdg-open bottles:run/" + game["bottle"]["name"] + "/" + game["name"]
+        values["executable"] = (
+            "xdg-open bottles:run/" + game["bottle"]["name"] + "/" + game["name"]
+        )
         values["hidden"] = False
         values["source"] = "bottles"
         values["added"] = current_time
         values["last_played"] = 0
 
         if game["thumbnail"]:
-            save_cover(values, parent_widget, os.path.join(bottles_dir, "bottles", game["bottle"]["path"], "grids", game["thumbnail"].split(":")[1]))
+            save_cover(
+                values,
+                parent_widget,
+                os.path.join(
+                    bottles_dir,
+                    "bottles",
+                    game["bottle"]["path"],
+                    "grids",
+                    game["thumbnail"].split(":")[1],
+                ),
+            )
 
         bottles_games[values["game_id"]] = values
 
     if len(bottles_games) == 0:
-        create_dialog(parent_widget, _("No Games Found"), _("No new games were found in the Bottles library."))
+        create_dialog(
+            parent_widget,
+            _("No Games Found"),
+            _("No new games were found in the Bottles library."),
+        )
     elif len(bottles_games) == 1:
-        create_dialog(parent_widget, _("Bottles Games Imported"), _("Successfully imported 1 game."))
+        create_dialog(
+            parent_widget,
+            _("Bottles Games Imported"),
+            _("Successfully imported 1 game."),
+        )
     elif len(bottles_games) > 1:
-        create_dialog(parent_widget, _("Bottles Games Imported"), _("Successfully imported") + " " + str(len(bottles_games)) + " " + _("games."))
+        create_dialog(
+            parent_widget,
+            _("Bottles Games Imported"),
+            _("Successfully imported")
+            + " "
+            + str(len(bottles_games))
+            + " "
+            + _("games."),
+        )
     return bottles_games
