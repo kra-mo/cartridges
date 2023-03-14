@@ -83,7 +83,7 @@ def heroic_parser(parent_widget, action):
             app_name = game["app_name"]
             values["game_id"] = "heroic_epic_" + app_name
 
-            if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[values["game_id"]].keys():
+            if values["game_id"] in parent_widget.games_temp and not parent_widget.games_temp[values["game_id"]].removed:
                 continue
 
             values["name"] = game["title"]
@@ -113,8 +113,7 @@ def heroic_parser(parent_widget, action):
 
             values["game_id"] = "heroic_gog_" + app_name
 
-            if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[
-                values["game_id"]].keys():
+            if values["game_id"] in parent_widget.games_temp and not parent_widget.games_temp[values["game_id"]].removed:
                 continue
 
             # Get game title from library.json as it's not present in installed.json
@@ -153,8 +152,7 @@ def heroic_parser(parent_widget, action):
 
             values["game_id"] = "heroic_sideload_" + app_name
 
-            if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[
-                values["game_id"]].keys():
+            if values["game_id"] in parent_widget.games_temp and not parent_widget.games_temp[values["game_id"]].removed:
                 continue
 
             values["name"] = item["title"]

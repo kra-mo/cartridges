@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 def create_details_window(parent_widget, game_id = None):
-    import time
+    import time, os, json
     from gi.repository import Adw, Gtk, Gio, GLib, GdkPixbuf
     from .create_dialog import create_dialog
     from .save_games import save_games
@@ -31,7 +31,7 @@ def create_details_window(parent_widget, game_id = None):
         transient_for = parent_widget
     )
 
-    games = parent_widget.games
+    games = parent_widget.games_temp
     pixbuf = None
 
     if game_id == None:
@@ -43,8 +43,8 @@ def create_details_window(parent_widget, game_id = None):
     else:
         window.set_title(_("Edit Game Details"))
         cover = Gtk.Picture.new_for_pixbuf((parent_widget.visible_widgets | parent_widget.hidden_widgets)[game_id].pixbuf)
-        name = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new(games[game_id]["name"], -1))
-        executable = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new((games[game_id]["executable"]), -1))
+        name = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new(games[game_id].name, -1))
+        executable = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new((games[game_id].executable), -1))
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
     image_filter = Gtk.FileFilter(
@@ -157,8 +157,6 @@ def create_details_window(parent_widget, game_id = None):
 
             game_id = "imported_" + str(max(numbers)+1)
 
-            games[game_id] = {}
-
             values["game_id"] = game_id
             values["hidden"] = False
             values["source"] = "imported"
@@ -180,8 +178,17 @@ def create_details_window(parent_widget, game_id = None):
         values["name"] = final_name
         values["executable"] = final_executable
 
-        games[game_id].update(values)
-        save_games(games)
+        path = os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game_id + ".json"))
+
+        if os.path.exists(path):
+            open_file = open(path, "r")
+            data = json.loads(open_file.read())
+            open_file.close()
+            data.update(values)
+            save_games({game_id : data})
+        else:
+            save_games({game_id : values})
+
         parent_widget.update_games([game_id])
         if parent_widget.stack.get_visible_child() == parent_widget.overview:
             parent_widget.show_overview(None, game_id)

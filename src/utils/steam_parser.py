@@ -87,7 +87,7 @@ def steam_parser(parent_widget, action):
 
         values["game_id"] = "steam_" + values["appid"]
 
-        if values["game_id"] in parent_widget.games and "removed" not in parent_widget.games[values["game_id"]].keys():
+        if values["game_id"] in parent_widget.games_temp and not parent_widget.games_temp[values["game_id"]].removed:
             continue
 
         values["executable"] = "xdg-open steam://rungameid/" + values["appid"]

@@ -33,16 +33,26 @@ class game(Gtk.Box):
     play_revealer = Gtk.Template.Child()
     title_revealer = Gtk.Template.Child()
 
-    def __init__(self, parent_widget, title, pixbuf, game_id, **kwargs):
+    def __init__(self, parent_widget, data, pixbuf, **kwargs):
         super().__init__(**kwargs)
 
         self.parent_widget = parent_widget
-        self.name = title
-        self.pixbuf = pixbuf
-        self.game_id = game_id
+        self.added = data["added"]
+        self.executable = data["executable"]
+        self.game_id = data["game_id"]
+        self.hidden = data["hidden"]
+        self.last_played = data["last_played"]
+        self.name = data["name"]
 
-        self.title.set_label(title)
-        self.cover.set_pixbuf(pixbuf)
+        if "removed" in data.keys():
+            self.removed = True
+        else:
+            self.removed = False
+
+        self.pixbuf = pixbuf
+
+        self.title.set_label(self.name)
+        self.cover.set_pixbuf(self.pixbuf)
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
         self.add_controller(self.event_contoller_motion)

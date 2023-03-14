@@ -114,10 +114,17 @@ class CartridgesApplication(Adw.Application):
     def on_launch_game_action(self, widget, callback=None):
 
         # Launch the game and update the last played value
-        self.win.games[self.win.active_game_id]["last_played"] = int(time.time())
-        save_games({self.win.active_game_id : self.win.games[self.win.active_game_id]})
-        self.win.update_games([self.win.active_game_id])
-        run_command(self.win, self.win.games[self.win.active_game_id]["executable"])
+
+        game_id = self.win.active_game_id
+        open_file = open(os.path.join(os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games", game_id + ".json")), "r")
+        data = json.loads(open_file.read())
+        open_file.close()
+        data["last_played"] = int(time.time())
+        save_games({game_id : data})
+
+        run_command(self.win, self.win.games_temp[self.win.active_game_id].executable)
+
+        self.win.update_games([game_id])
 
         if self.win.stack.get_visible_child() == self.win.overview:
             self.win.show_overview(None, self.win.active_game_id)
@@ -149,7 +156,7 @@ class CartridgesApplication(Adw.Application):
             self.win.on_go_back_action(None, None)
 
         # Create toast for undoing the remove action
-        toast = Adw.Toast.new(self.win.games[game_id]["name"] + " " + (_("removed")))
+        toast = Adw.Toast.new(self.win.games_temp[game_id].name + " " + (_("removed")))
         toast.set_button_label(_("Undo"))
         toast.connect("button-clicked", self.win.on_undo_remove_action, game_id)
         toast.set_priority(Adw.ToastPriority.HIGH)
