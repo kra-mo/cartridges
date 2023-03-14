@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-12 00:09+0100\n"
+"POT-Creation-Date: 2023-03-14 18:50+0100\n"
 "PO-Revision-Date: 2023-03-12 10:28+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:82
+#: src/main.py:83
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -48,8 +48,8 @@ msgstr ""
 "organiseringsfunksjoner som skjuling og sortering etter tillagt dato eller "
 "sist spilt."
 
-#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:98
-#: src/utils/heroic_parser.py:174 src/utils/steam_parser.py:105
+#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:97
+#: src/utils/heroic_parser.py:172 src/utils/steam_parser.py:105
 msgid "No Games Found"
 msgstr "Fant ingen spill"
 
@@ -73,98 +73,98 @@ msgstr "Spill du skjuler vil vises her"
 msgid "Game Details"
 msgstr "Spilldetaljer"
 
-#: data/gtk/window.blp:88
+#: data/gtk/window.blp:91
 msgid "Game Title"
 msgstr "Spillnavn"
 
-#: data/gtk/window.blp:130 data/gtk/game.blp:39
+#: data/gtk/window.blp:133 data/gtk/game.blp:38
 msgid "Play"
 msgstr "Spill"
 
-#: data/gtk/window.blp:239
+#: data/gtk/window.blp:242
 msgid "Hidden Games"
 msgstr "Skjulte spill"
 
-#: data/gtk/window.blp:297
+#: data/gtk/window.blp:300
 #, fuzzy
 msgid "Sort"
 msgstr "Sorter"
 
-#: data/gtk/window.blp:300
+#: data/gtk/window.blp:303
 msgid "A-Z"
 msgstr "A-Å"
 
-#: data/gtk/window.blp:306
+#: data/gtk/window.blp:309
 msgid "Z-A"
 msgstr "Å-A"
 
-#: data/gtk/window.blp:312
+#: data/gtk/window.blp:315
 msgid "Newest"
 msgstr "Nyeste"
 
-#: data/gtk/window.blp:318
+#: data/gtk/window.blp:321
 msgid "Oldest"
 msgstr "Eldste"
 
-#: data/gtk/window.blp:324
+#: data/gtk/window.blp:327
 msgid "Last Played"
 msgstr "Sist spilt"
 
-#: data/gtk/window.blp:331
+#: data/gtk/window.blp:334
 msgid "Show Hidden"
 msgstr "Vis skjulte"
 
-#: data/gtk/window.blp:339
+#: data/gtk/window.blp:342
 msgid "Preferences"
 msgstr "Innstillinger"
 
-#: data/gtk/window.blp:344
+#: data/gtk/window.blp:347
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
-#: data/gtk/window.blp:349
+#: data/gtk/window.blp:352
 msgid "About Cartridges"
 msgstr "Om"
 
-#: data/gtk/window.blp:358
+#: data/gtk/window.blp:361
 msgid "Add Game"
 msgstr "Legg til spill"
 
-#: data/gtk/window.blp:364
+#: data/gtk/window.blp:367
 msgid "Import from"
 msgstr "Importer fra"
 
-#: data/gtk/window.blp:366
+#: data/gtk/window.blp:369
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:371
+#: data/gtk/window.blp:374
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:376
+#: data/gtk/window.blp:379
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/window.blp:386 data/gtk/window.blp:405 data/gtk/game.blp:85
-#: data/gtk/game.blp:104
+#: data/gtk/window.blp:389 data/gtk/window.blp:408 data/gtk/game.blp:87
+#: data/gtk/game.blp:106
 msgid "Edit"
 msgstr "Rediger"
 
-#: data/gtk/window.blp:391 data/gtk/game.blp:90
+#: data/gtk/window.blp:394 data/gtk/game.blp:92
 msgid "Hide"
 msgstr "Skjul"
 
-#: data/gtk/window.blp:396 data/gtk/window.blp:415 data/gtk/game.blp:95
-#: data/gtk/game.blp:114
+#: data/gtk/window.blp:399 data/gtk/window.blp:418 data/gtk/game.blp:97
+#: data/gtk/game.blp:116
 msgid "Remove"
 msgstr "Fjern"
 
-#: data/gtk/window.blp:410 data/gtk/game.blp:109
+#: data/gtk/window.blp:413 data/gtk/game.blp:111
 msgid "Unhide"
 msgstr "Opphev fjerning"
 
-#: data/gtk/game.blp:65 src/utils/create_details_window.py:82
+#: data/gtk/game.blp:65 src/utils/create_details_window.py:88
 msgid "Title"
 msgstr "Navn"
 
@@ -256,36 +256,40 @@ msgid "Bottles Install Location"
 msgstr ""
 
 #. Translators: Replace this with your name for it to show up in the about window.
-#: src/main.py:93
+#: src/main.py:94
 msgid "translator_credits"
 msgstr ""
 
 #. Create toast for undoing the remove action
-#: src/main.py:152
+#: src/main.py:158
 msgid "removed"
 msgstr "fjernet"
 
-#: src/main.py:153
+#: src/main.py:159
 msgid "Undo"
 msgstr "Angre"
 
-#: src/window.py:201
+#: src/window.py:203
 msgid "Today"
 msgstr "I dag"
 
-#: src/window.py:203
+#: src/window.py:205
 msgid "Yesterday"
 msgstr "I går"
 
-#: src/window.py:227
-msgid "Added: "
+#: src/window.py:229
+#, fuzzy
+#| msgid "Added: "
+msgid "Added:"
 msgstr "Tillagt: "
 
-#: src/window.py:228
-msgid "Last played: "
+#: src/window.py:230
+#, fuzzy
+#| msgid "Last played: "
+msgid "Last played:"
 msgstr "Sist spilt: "
 
-#: src/window.py:228
+#: src/window.py:230
 msgid "Last played: Never"
 msgstr "Sist spilt: Aldri"
 
@@ -302,82 +306,82 @@ msgstr ""
 msgid "Set Bottles Location"
 msgstr ""
 
-#: src/utils/bottles_parser.py:98
+#: src/utils/bottles_parser.py:97
 msgid "No new games were found in the Bottles library."
 msgstr ""
 
-#: src/utils/bottles_parser.py:100 src/utils/bottles_parser.py:102
+#: src/utils/bottles_parser.py:99 src/utils/bottles_parser.py:101
 msgid "Bottles Games Imported"
 msgstr ""
 
-#: src/utils/bottles_parser.py:100 src/utils/heroic_parser.py:176
+#: src/utils/bottles_parser.py:99 src/utils/heroic_parser.py:174
 #: src/utils/steam_parser.py:107
 msgid "Successfully imported 1 game."
 msgstr ""
 
-#: src/utils/bottles_parser.py:102 src/utils/heroic_parser.py:179
+#: src/utils/bottles_parser.py:101 src/utils/heroic_parser.py:177
 #: src/utils/steam_parser.py:109
 msgid "Successfully imported"
 msgstr ""
 
-#: src/utils/bottles_parser.py:102 src/utils/heroic_parser.py:179
+#: src/utils/bottles_parser.py:101 src/utils/heroic_parser.py:177
 #: src/utils/steam_parser.py:109
 msgid "games."
 msgstr "spill."
 
-#: src/utils/create_details_window.py:38
+#: src/utils/create_details_window.py:39
 msgid "Add New Game"
 msgstr "Legg til nytt spill"
 
-#: src/utils/create_details_window.py:42
+#: src/utils/create_details_window.py:43
 msgid "Confirm"
 msgstr "Bekreft"
 
-#: src/utils/create_details_window.py:44
+#: src/utils/create_details_window.py:45
 msgid "Edit Game Details"
 msgstr "Rediger spilldetaljer"
 
-#: src/utils/create_details_window.py:48
+#: src/utils/create_details_window.py:49
 msgid "Apply"
 msgstr "Bruk"
 
-#: src/utils/create_details_window.py:51
+#: src/utils/create_details_window.py:52
 msgid "Images"
 msgstr "Bilder"
 
-#: src/utils/create_details_window.py:83
+#: src/utils/create_details_window.py:89
 msgid "The title of the game"
 msgstr "Navnet på spillet"
 
-#: src/utils/create_details_window.py:88
+#: src/utils/create_details_window.py:94
 msgid "Executable"
 msgstr "Kjørbar"
 
-#: src/utils/create_details_window.py:89
+#: src/utils/create_details_window.py:95
 msgid "File to open or command to run when launching the game"
 msgstr ""
 
-#: src/utils/create_details_window.py:98
+#: src/utils/create_details_window.py:104
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/utils/create_details_window.py:140
-#: src/utils/create_details_window.py:144
+#: src/utils/create_details_window.py:146
+#: src/utils/create_details_window.py:150
 msgid "Couldn't Add Game"
 msgstr "Kunne ikke legge til spill"
 
-#: src/utils/create_details_window.py:140
-#: src/utils/create_details_window.py:165
+#: src/utils/create_details_window.py:146
+#: src/utils/create_details_window.py:169
 msgid "Game title cannot be empty."
 msgstr ""
 
-#: src/utils/create_details_window.py:144
-#: src/utils/create_details_window.py:169
+#: src/utils/create_details_window.py:150
+#: src/utils/create_details_window.py:173
 msgid "Executable cannot be empty."
 msgstr ""
 
-#: src/utils/create_details_window.py:165
 #: src/utils/create_details_window.py:169
+#: src/utils/create_details_window.py:173
 msgid "Couldn't Apply Preferences"
 msgstr ""
 
@@ -393,11 +397,11 @@ msgstr ""
 msgid "Set Heroic Location"
 msgstr ""
 
-#: src/utils/heroic_parser.py:174
+#: src/utils/heroic_parser.py:172
 msgid "No new games were found in the Heroic library."
 msgstr ""
 
-#: src/utils/heroic_parser.py:176 src/utils/heroic_parser.py:178
+#: src/utils/heroic_parser.py:174 src/utils/heroic_parser.py:176
 msgid "Heroic Games Imported"
 msgstr "Heroic-spill importert"
 
