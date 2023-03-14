@@ -97,7 +97,7 @@ def steam_parser(parent_widget, action):
         values["last_played"] = 0
 
         if os.path.isfile(os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg")):
-            save_cover(values, parent_widget, os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg"))
+            values["pixbuf_options"] = save_cover(values, parent_widget, os.path.join(steam_dir, "appcache", "librarycache", values["appid"] + "_library_600x900.jpg"))
 
         steam_games[values["game_id"]] = values
 

@@ -18,8 +18,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 def save_cover(game, parent_widget, file_path, pixbuf = None, game_id = None):
-    from gi.repository import GdkPixbuf, Gio
-    import os
+    from gi.repository import GdkPixbuf
+    import os, zlib
 
     covers_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers")
     if os.path.exists(covers_dir) == False:
@@ -28,13 +28,12 @@ def save_cover(game, parent_widget, file_path, pixbuf = None, game_id = None):
     if game_id == None:
         game_id = game["game_id"]
 
+    cover_path = os.path.join(covers_dir, game_id + ".dat")
+
     if pixbuf == None:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(file_path, 400, 600, False)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(file_path, 600, 900, False)
 
-    def cover_callback(*args):
-        parent_widget.busy_games.remove(game_id)
-        parent_widget.update_games([game_id])
-
-    file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".png"))
-    parent_widget.busy_games.append(game_id)
-    pixbuf.save_to_streamv_async(file.replace(None, False, Gio.FileCreateFlags.NONE), "png", None, None, None, cover_callback)
+    open_file = open(cover_path, "wb")
+    open_file.write(zlib.compress(bytes(pixbuf.get_pixels()), 1))
+    open_file.close()
+    return [pixbuf.get_colorspace(), pixbuf.get_has_alpha(), pixbuf.get_bits_per_sample(), pixbuf.get_width(), pixbuf.get_height(), pixbuf.get_rowstride()]

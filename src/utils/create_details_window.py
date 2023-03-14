@@ -175,7 +175,7 @@ def create_details_window(parent_widget, game_id = None):
                 return
 
         if pixbuf != None:
-            save_cover(None, parent_widget, None, pixbuf, game_id)
+            values["pixbuf_options"] = save_cover(None, parent_widget, None, pixbuf, game_id)
 
         values["name"] = final_name
         values["executable"] = final_executable

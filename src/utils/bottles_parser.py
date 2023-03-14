@@ -90,7 +90,7 @@ def bottles_parser(parent_widget, action):
         values["last_played"] = 0
 
         if game["thumbnail"]:
-            save_cover(values, parent_widget, os.path.join(bottles_dir, "bottles", game["bottle"]["path"], "grids", game["thumbnail"].split(":")[1]))
+            values["pixbuf_options"] = save_cover(values, parent_widget, os.path.join(bottles_dir, "bottles", game["bottle"]["path"], "grids", game["thumbnail"].split(":")[1]))
 
         bottles_games[values["game_id"]] = values
 

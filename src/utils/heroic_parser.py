@@ -95,7 +95,7 @@ def heroic_parser(parent_widget, action):
 
             image_path = os.path.join(heroic_dir, "images-cache", hashlib.sha256((game["art_square"] + "?h=400&resize=1&w=300").encode()).hexdigest())
             if os.path.exists(image_path):
-                save_cover(values, parent_widget, image_path)
+                values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
 
             heroic_games[values["game_id"]] = values
 
@@ -128,7 +128,7 @@ def heroic_parser(parent_widget, action):
                     image_path = os.path.join(heroic_dir, "images-cache",
                                               hashlib.sha256(game["art_square"].encode()).hexdigest())
                     if os.path.exists(image_path):
-                        save_cover(values, parent_widget, image_path)
+                        values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
                     break
 
             values["executable"] = "xdg-open heroic://launch/" + app_name
@@ -166,7 +166,7 @@ def heroic_parser(parent_widget, action):
             image_path = os.path.join(heroic_dir, "images-cache",
                                       hashlib.sha256(item["art_square"].encode()).hexdigest())
             if os.path.exists(image_path):
-                save_cover(values, parent_widget, image_path)
+                values["pixbuf_options"] = save_cover(values, parent_widget, image_path)
 
             heroic_games[values["game_id"]] = values
 
