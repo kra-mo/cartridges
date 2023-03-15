@@ -4,11 +4,11 @@
 
   # Cartridges
   A GTK4 + Libadwaita game launcher
-  
-  <a href="https://github.com/kra-mo/cartridges/graphs/contributors"><img src="https://img.shields.io/github/contributors/kra-mo/cartridges?style=for-the-badge"></a>
-  <a href="https://github.com/kra-mo/cartridges/stargazers"><img src="https://img.shields.io/github/stars/kra-mo/cartridges?style=for-the-badge"></a>
+
   <a href="https://hosted.weblate.org/projects/cartridges/"><img src="https://img.shields.io/weblate/progress/cartridges?style=for-the-badge"></a>
   <a href="https://github.com/kra-mo/cartridges/actions"><img src="https://img.shields.io/github/actions/workflow/status/kra-mo/cartridges/flatpak-builder.yml?style=for-the-badge"></a>
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html"><img src="https://img.shields.io/github/license/kra-mo/cartridges?style=for-the-badge"></a>
+  <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000?style=for-the-badge"></a>
 
   <img src="data/screenshot.webp">
 </div>
