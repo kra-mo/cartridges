@@ -109,6 +109,7 @@ def steam_parser(parent_widget, action):
     )
 
     queue = []
+    cancellables = []
 
     for appmanifest in appmanifests:
         values = {}
@@ -189,7 +190,11 @@ def steam_parser(parent_widget, action):
             import_dialog.show()
 
         queue.append(values["appid"])
-        open_file.load_contents_async(None, steam_api_callback, values)
+
+        cancellables.append(Gio.Cancellable())
+        open_file.load_contents_async(cancellables[-1], steam_api_callback, values)
+
+        GLib.timeout_add_seconds(10, timeout, cancellables[-1])
 
         if os.path.isfile(
             os.path.join(
@@ -218,3 +223,8 @@ def steam_parser(parent_widget, action):
             _("No Games Found"),
             _("No new games were found in the Steam library."),
         )
+
+
+def timeout(cancellable):
+    cancellable.cancel()
+    return False
