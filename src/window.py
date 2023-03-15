@@ -222,12 +222,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         if (datetime.datetime.today() - date).days == 0:
             return _("Today")
-        elif (datetime.datetime.today() - date).days == 1:
+        if (datetime.datetime.today() - date).days == 1:
             return _("Yesterday")
-        elif (datetime.datetime.today() - date).days < 8:
+        if (datetime.datetime.today() - date).days < 8:
             return GLib.DateTime.new_from_unix_utc(timestamp).format("%A")
-        else:
-            return GLib.DateTime.new_from_unix_utc(timestamp).format("%x")
+        return GLib.DateTime.new_from_unix_utc(timestamp).format("%x")
 
     def show_overview(self, _widget, game_id):
         current_game = self.games[game_id]
@@ -263,53 +262,47 @@ class CartridgesWindow(Adw.ApplicationWindow):
         name2 = child2.get_first_child().name.lower()
         if name1 > name2:
             return 1
-        elif name1 < name2:
+        if name1 < name2:
             return -1
-        else:
-            if child1.get_first_child().game_id > child2.get_first_child().game_id:
-                return 1
-            else:
-                return -1
+        if child1.get_first_child().game_id > child2.get_first_child().game_id:
+            return 1
+        return -1
 
     def z_a_sort(self, child1, child2):
         name1 = child1.get_first_child().name.lower()
         name2 = child2.get_first_child().name.lower()
         if name1 > name2:
             return -1
-        elif name1 < name2:
+        if name1 < name2:
             return 1
-        else:
-            return self.a_z_sort(child1, child2)
+        return self.a_z_sort(child1, child2)
 
     def newest_sort(self, child1, child2):
         time1 = self.games[child1.get_first_child().game_id].added
         time2 = self.games[child2.get_first_child().game_id].added
         if time1 > time2:
             return -1
-        elif time1 < time2:
+        if time1 < time2:
             return 1
-        else:
-            return self.a_z_sort(child1, child2)
+        return self.a_z_sort(child1, child2)
 
     def oldest_sort(self, child1, child2):
         time1 = self.games[child1.get_first_child().game_id].added
         time2 = self.games[child2.get_first_child().game_id].added
         if time1 > time2:
             return 1
-        elif time1 < time2:
+        if time1 < time2:
             return -1
-        else:
-            return self.a_z_sort(child1, child2)
+        return self.a_z_sort(child1, child2)
 
     def last_played_sort(self, child1, child2):
         time1 = self.games[child1.get_first_child().game_id].last_played
         time2 = self.games[child2.get_first_child().game_id].last_played
         if time1 > time2:
             return -1
-        elif time1 < time2:
+        if time1 < time2:
             return 1
-        else:
-            return self.a_z_sort(child1, child2)
+        return self.a_z_sort(child1, child2)
 
     def on_go_back_action(self, _widget, _unused, _x=None, _y=None):
         if self.stack.get_visible_child() == self.hidden_library_view:
@@ -389,7 +382,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         if self.stack.get_visible_child() == self.overview:
             self.on_go_back_action(None, None)
             return
-        elif self.stack.get_visible_child() == self.library_view:
+        if self.stack.get_visible_child() == self.library_view:
             search_bar = self.search_bar
             search_entry = self.search_entry
             search_button = self.search_button

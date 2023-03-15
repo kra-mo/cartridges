@@ -66,11 +66,11 @@ class game(Gtk.Box):
         self.event_contoller_motion.connect("leave", self.hide_play)
         self.menu_button.get_popover().connect("notify::visible", self.hide_play)
 
-    def show_play(self, _widget, *args):
+    def show_play(self, _widget, *_unused):
         self.play_revealer.set_reveal_child(True)
         self.title_revealer.set_reveal_child(False)
 
-    def hide_play(self, _widget, *args):
+    def hide_play(self, _widget, *_unused):
         if not self.menu_button.get_active():
             self.play_revealer.set_reveal_child(False)
             self.title_revealer.set_reveal_child(True)
