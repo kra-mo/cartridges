@@ -140,7 +140,7 @@ def steam_parser(parent_widget, action):
                 basic_data = json.loads(content)[values["appid"]]
 
                 if not basic_data["success"]:
-                    steam_games.pop(values["game_id"])
+                    steam_games[values["game_id"]]["blacklisted"] = True
                 else:
                     data = basic_data["data"]
                     steam_games[values["game_id"]]["developer"] = ", ".join(
@@ -148,7 +148,7 @@ def steam_parser(parent_widget, action):
                     )
 
                     if data["type"] != "game":
-                        steam_games.pop(values["game_id"])
+                        steam_games[values["game_id"]]["blacklisted"] = True
 
             except GLib.GError:
                 pass
@@ -157,25 +157,27 @@ def steam_parser(parent_widget, action):
             if not queue:
                 import_dialog.close()
 
-                if not steam_games:
-                    create_dialog(
-                        parent_widget,
-                        _("No Games Found"),
-                        _("No new games were found in the Steam library."),
-                    )
-                elif len(steam_games) == 1:
+                games_no = len(
+                    {
+                        game_id: final_values
+                        for game_id, final_values in steam_games.items()
+                        if "blacklisted" not in final_values.keys()
+                    }
+                )
+
+                if games_no == 1:
                     create_dialog(
                         parent_widget,
                         _("Steam Games Imported"),
                         _("Successfully imported 1 game."),
                     )
-                elif len(steam_games) > 1:
+                elif games_no > 1:
                     create_dialog(
                         parent_widget,
                         _("Steam Games Imported"),
                         _("Successfully imported")
                         + " "
-                        + str(len(steam_games))
+                        + str(games_no)
                         + " "
                         + _("games."),
                     )

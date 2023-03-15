@@ -48,6 +48,7 @@ class game(Gtk.Box):
         self.name = data["name"]
         self.developer = data["developer"] if "developer" in data.keys() else None
         self.removed = "removed" in data.keys()
+        self.blacklisted = "blacklisted" in data.keys()
 
         self.pixbuf = get_cover(self.game_id, self.parent_widget)
 

@@ -144,6 +144,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
             if entry.removed:
                 continue
+            if entry.blacklisted:
+                continue
 
             if not self.games[game_id].hidden:
                 self.visible_widgets[game_id] = entry
