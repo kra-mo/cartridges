@@ -95,8 +95,8 @@ def steam_parser(parent_widget, action):
             appmanifests.append(path)
 
     import_statuspage = Adw.StatusPage(
-        title="Importing games...",
-        description="Talking to Steam",
+        title=_("Importing games..."),
+        description=_("Talking to Steam"),
     )
 
     import_dialog = Adw.Window(

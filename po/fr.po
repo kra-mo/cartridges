@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-15 13:13+0100\n"
+"POT-Creation-Date: 2023-03-15 21:12+0100\n"
 "PO-Revision-Date: 2023-03-14 17:59+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:111
+#: src/main.py:112
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -49,7 +49,8 @@ msgstr ""
 "dernière lecture."
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:132
-#: src/utils/heroic_parser.py:226 src/utils/steam_parser.py:158
+#: src/utils/heroic_parser.py:226 src/utils/steam_parser.py:162
+#: src/utils/steam_parser.py:218
 msgid "No Games Found"
 msgstr "Aucun jeu trouvé"
 
@@ -255,7 +256,7 @@ msgid "Bottles Install Location"
 msgstr "Emplacement de l'installation Bottles"
 
 #. Translators: Replace this with your name for it to show up in the about window.
-#: src/main.py:125
+#: src/main.py:126
 msgid "translator_credits"
 msgstr ""
 
@@ -289,7 +290,7 @@ msgid "Last played: Never"
 msgstr "Dernière session : Jamais"
 
 #: src/utils/bottles_parser.py:70 src/utils/heroic_parser.py:72
-#: src/utils/steam_parser.py:68
+#: src/utils/steam_parser.py:69
 msgid "Couldn't Import Games"
 msgstr "Impossible d'importer des jeux"
 
@@ -310,17 +311,17 @@ msgid "Bottles Games Imported"
 msgstr "Jeux Bottles importés"
 
 #: src/utils/bottles_parser.py:139 src/utils/heroic_parser.py:233
-#: src/utils/steam_parser.py:163
+#: src/utils/steam_parser.py:169
 msgid "Successfully imported 1 game."
 msgstr "Importation réussie de 1 jeu."
 
 #: src/utils/bottles_parser.py:145 src/utils/heroic_parser.py:239
-#: src/utils/steam_parser.py:169
+#: src/utils/steam_parser.py:175
 msgid "Successfully imported"
 msgstr "Importation réussie"
 
 #: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:243
-#: src/utils/steam_parser.py:173
+#: src/utils/steam_parser.py:179
 msgid "games."
 msgstr "jeux."
 
@@ -408,18 +409,27 @@ msgstr "Aucun nouveau jeu n'a été trouvé dans la bibliothèque Heroic."
 msgid "Heroic Games Imported"
 msgstr "Jeux Heroic importés"
 
-#: src/utils/steam_parser.py:69
+#: src/utils/steam_parser.py:70
 msgid "The Steam directory cannot be found."
 msgstr "Le répertoire Steam est introuvable."
 
-#: src/utils/steam_parser.py:71
+#: src/utils/steam_parser.py:72
 msgid "Set Steam Location"
 msgstr "Définir l'emplacement Steam"
 
-#: src/utils/steam_parser.py:159
+#: src/utils/steam_parser.py:98
+#, fuzzy
+msgid "Importing games..."
+msgstr "Importer Epic Games"
+
+#: src/utils/steam_parser.py:99
+msgid "Talking to Steam"
+msgstr ""
+
+#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:219
 msgid "No new games were found in the Steam library."
 msgstr "Aucun nouveau jeu n'a été trouvé dans la bibliothèque Steam."
 
-#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:168
+#: src/utils/steam_parser.py:168 src/utils/steam_parser.py:174
 msgid "Steam Games Imported"
 msgstr "Jeux Steam importés"
