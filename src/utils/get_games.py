@@ -25,7 +25,7 @@ def get_games(game_ids=None):
     games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
     games = {}
 
-    if os.path.exists(games_dir) == False:
+    if not os.path.exists(games_dir):
         return {}
 
     if not game_ids:
@@ -36,8 +36,8 @@ def get_games(game_ids=None):
             game_files.append(game_id + ".json")
 
     for game in game_files:
-        open_file = open(os.path.join(games_dir, game), "r")
-        data = json.loads(open_file.read())
-        open_file.close()
+        with open(os.path.join(games_dir, game), "r") as open_file:
+            data = json.loads(open_file.read())
+            open_file.close()
         games[data["game_id"]] = data
     return games

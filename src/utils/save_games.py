@@ -24,10 +24,10 @@ import os
 def save_games(games):
     games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
 
-    if os.path.exists(games_dir) == False:
+    if not os.path.exists(games_dir):
         os.makedirs(games_dir)
 
     for game in games:
-        open_file = open(os.path.join(games_dir, game + ".json"), "w")
-        open_file.write(json.dumps(games[game], indent=4, sort_keys=True))
-        open_file.close()
+        with open(os.path.join(games_dir, game + ".json"), "w") as open_file:
+            open_file.write(json.dumps(games[game], indent=4, sort_keys=True))
+            open_file.close()

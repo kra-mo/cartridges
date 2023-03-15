@@ -24,22 +24,22 @@ from gi.repository import GdkPixbuf, Gio
 
 def save_cover(game, parent_widget, file_path, pixbuf=None, game_id=None):
     covers_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers")
-    if os.path.exists(covers_dir) == False:
+    if not os.path.exists(covers_dir):
         os.makedirs(covers_dir)
 
-    if game_id == None:
+    if game_id is None:
         game_id = game["game_id"]
 
-    if pixbuf == None:
+    if pixbuf is None:
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(file_path, 600, 900, False)
 
-    def cover_callback(*args):
+    def cover_callback(*_unused):
         pass
 
-    file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".jpg"))
+    open_file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".jpg"))
     parent_widget.pixbufs[game_id] = pixbuf
     pixbuf.save_to_streamv_async(
-        file.replace(None, False, Gio.FileCreateFlags.NONE),
+        open_file.replace(None, False, Gio.FileCreateFlags.NONE),
         "jpeg",
         callback=cover_callback,
     )

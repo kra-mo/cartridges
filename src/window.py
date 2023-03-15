@@ -78,6 +78,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.previous_page = self.library_view
         self.toasts = {}
         self.pixbufs = {}
+        self.active_game_id = None
 
         self.overview.set_measure_overlay(self.overview_box, True)
         self.overview.set_clip_overlay(self.overview_box, False)
@@ -86,15 +87,15 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
             "/hu/kramo/Cartridges/library_placeholder.svg", 200, 300, False
         )
-        games = get_games()
-        for game in games:
-            if "removed" in games[game].keys():
+        current_games = get_games()
+        for current_game in current_games:
+            if "removed" in current_games[current_game].keys():
                 os.remove(
                     os.path.join(
                         os.environ.get("XDG_DATA_HOME"),
                         "cartridges",
                         "games",
-                        game + ".json",
+                        current_game + ".json",
                     )
                 )
                 try:
@@ -103,7 +104,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                             os.environ.get("XDG_DATA_HOME"),
                             "cartridges",
                             "covers",
-                            game + ".dat",
+                            current_game + ".dat",
                         )
                     )
                 except FileNotFoundError:
@@ -157,12 +158,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
             )
             entry.get_parent().set_focusable(False)
 
-        if self.visible_widgets == {}:
+        if not self.visible_widgets:
             self.library_bin.set_child(self.notice_empty)
         else:
             self.library_bin.set_child(self.scrolledwindow)
 
-        if self.hidden_widgets == {}:
+        if not self.hidden_widgets:
             self.hidden_library_bin.set_child(self.hidden_notice_empty)
         else:
             self.hidden_library_bin.set_child(self.hidden_scrolledwindow)
@@ -170,7 +171,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.library.invalidate_filter()
         self.hidden_library.invalidate_filter()
 
-    def search_changed(self, widget, hidden):
+    def search_changed(self, _widget, hidden):
         # Refresh search filter on keystroke in search box
         if not hidden:
             self.library.invalidate_filter()
@@ -213,8 +214,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
             self.hidden_library_bin.set_child(self.hidden_scrolledwindow)
         return filtered
 
-    def set_active_game(self, widget, _, game):
-        self.active_game_id = game
+    def set_active_game(self, _widget, _unused, game_id):
+        self.active_game_id = game_id
 
     def get_time(self, timestamp):
         date = datetime.datetime.fromtimestamp(timestamp)
@@ -228,10 +229,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             return GLib.DateTime.new_from_unix_utc(timestamp).format("%x")
 
-    def show_overview(self, widget, game_id):
-        game = self.games[game_id]
+    def show_overview(self, _widget, game_id):
+        current_game = self.games[game_id]
 
-        if not game.hidden:
+        if not current_game.hidden:
             self.overview_menu_button.set_menu_model(self.game_options)
         else:
             self.overview_menu_button.set_menu_model(self.hidden_game_options)
@@ -246,12 +247,14 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.overview_blurred_cover.set_pixbuf(
             pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
         )
-        self.overview_title.set_label(game.name)
-        self.overview_header_bar_title.set_title(game.name)
-        self.overview_added.set_label(_("Added:") + " " + self.get_time(game.added))
+        self.overview_title.set_label(current_game.name)
+        self.overview_header_bar_title.set_title(current_game.name)
+        self.overview_added.set_label(
+            _("Added:") + " " + self.get_time(current_game.added)
+        )
         self.overview_last_played.set_label(
-            _("Last played:") + " " + self.get_time(game.last_played)
-            if game.last_played != 0
+            _("Last played:") + " " + self.get_time(current_game.last_played)
+            if current_game.last_played != 0
             else _("Last played: Never")
         )
 
@@ -308,26 +311,26 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             return self.a_z_sort(child1, child2)
 
-    def on_go_back_action(self, widget, _, x=None, y=None):
+    def on_go_back_action(self, _widget, _unused, _x=None, _y=None):
         if self.stack.get_visible_child() == self.hidden_library_view:
             self.on_show_library_action(None, None)
         elif self.stack.get_visible_child() == self.overview:
             self.on_go_to_parent_action(None, None)
 
-    def on_go_to_parent_action(self, widget, _):
+    def on_go_to_parent_action(self, _widget, _unused):
         if self.stack.get_visible_child() == self.overview:
             if self.previous_page == self.library_view:
                 self.on_show_library_action(None, None)
             else:
                 self.on_show_hidden_action(None, None)
 
-    def on_show_library_action(self, widget, _):
+    def on_show_library_action(self, _widget, _unused):
         self.stack.set_transition_type(Gtk.StackTransitionType.UNDER_RIGHT)
         self.stack.set_visible_child(self.library_view)
         self.lookup_action("show_hidden").set_enabled(True)
         self.previous_page = self.library_view
 
-    def on_show_hidden_action(self, widget, _):
+    def on_show_hidden_action(self, _widget, _unused):
         if self.stack.get_visible_child() == self.library_view:
             self.stack.set_transition_type(Gtk.StackTransitionType.OVER_LEFT)
         else:
@@ -352,7 +355,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         elif state == "oldest":
             sort_func = self.oldest_sort
 
-        elif state == "last_played":
+        else:
             sort_func = self.last_played_sort
 
         Gio.Settings(schema_id="hu.kramo.Cartridge.State").set_string(
@@ -361,7 +364,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.library.set_sort_func(sort_func)
         self.hidden_library.set_sort_func(sort_func)
 
-    def on_toggle_search_action(self, widget, _):
+    def on_toggle_search_action(self, _widget, _unused):
         if self.stack.get_visible_child() == self.library_view:
             search_bar = self.search_bar
             search_entry = self.search_entry
@@ -382,7 +385,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             search_entry.set_text("")
 
-    def on_escape_action(self, widget, _):
+    def on_escape_action(self, _widget, _unused):
         if self.stack.get_visible_child() == self.overview:
             self.on_go_back_action(None, None)
             return
@@ -402,7 +405,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             search_button.set_active(False)
             search_entry.set_text("")
 
-    def on_undo_remove_action(self, widget, game_id=None):
+    def on_undo_remove_action(self, _widget, game_id=None):
         # Remove the "removed=True" property from the game and dismiss the toast
 
         if not game_id:
@@ -417,7 +420,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.toasts[game_id].dismiss()
         self.toasts.pop(game_id)
 
-    def on_open_menu_action(self, widget, _):
+    def on_open_menu_action(self, _widget, _unused):
         if self.stack.get_visible_child() != self.overview:
             self.primary_menu_button.set_active(True)
         else:

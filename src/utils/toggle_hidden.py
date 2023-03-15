@@ -27,10 +27,10 @@ def toggle_hidden(game):
     if not os.path.exists(games_dir):
         return
 
-    file = open(os.path.join(games_dir, game + ".json"), "r")
-    data = json.loads(file.read())
-    file.close()
-    file = open(os.path.join(games_dir, game + ".json"), "w")
-    data["hidden"] = not data["hidden"]
-    file.write(json.dumps(data, indent=4))
-    file.close()
+    with open(os.path.join(games_dir, game + ".json"), "r") as open_file:
+        data = json.loads(open_file.read())
+        open_file.close()
+    with open(os.path.join(games_dir, game + ".json"), "w") as open_file:
+        data["hidden"] = not data["hidden"]
+        open_file.write(json.dumps(data, indent=4))
+        open_file.close()

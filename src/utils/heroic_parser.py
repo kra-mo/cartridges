@@ -50,7 +50,7 @@ def heroic_parser(parent_widget, action):
         else:
             filechooser = Gtk.FileDialog.new()
 
-            def set_heroic_dir(source, result, _):
+            def set_heroic_dir(_source, result, _unused):
                 try:
                     schema.set_string(
                         "heroic-location",
@@ -60,7 +60,7 @@ def heroic_parser(parent_widget, action):
                 except GLib.GError:
                     return
 
-            def choose_folder(widget):
+            def choose_folder(_widget):
                 filechooser.select_folder(parent_widget, None, set_heroic_dir, None)
 
             def response(widget, response):
@@ -90,13 +90,15 @@ def heroic_parser(parent_widget, action):
     if not schema.get_boolean("heroic-import-epic"):
         pass
     elif os.path.exists(os.path.join(heroic_dir, "lib-cache", "library.json")):
-        open_file = open(os.path.join(heroic_dir, "lib-cache", "library.json"), "r")
-        data = open_file.read()
+        with open(
+            os.path.join(heroic_dir, "lib-cache", "library.json"), "r"
+        ) as open_file:
+            data = open_file.read()
+            open_file.close()
         library = json.loads(data)
-        open_file.close()
 
         for game in library["library"]:
-            if game["is_installed"] == False:
+            if not game["is_installed"]:
                 continue
 
             values = {}
@@ -133,9 +135,11 @@ def heroic_parser(parent_widget, action):
     if not schema.get_boolean("heroic-import-gog"):
         pass
     elif os.path.exists(os.path.join(heroic_dir, "gog_store", "installed.json")):
-        open_file = open(os.path.join(heroic_dir, "gog_store", "installed.json"), "r")
-        data = open_file.read()
-        open_file.close()
+        with open(
+            os.path.join(heroic_dir, "gog_store", "installed.json"), "r"
+        ) as open_file:
+            data = open_file.read()
+            open_file.close()
         installed = json.loads(data)
         for item in installed["installed"]:
             values = {}
@@ -150,9 +154,11 @@ def heroic_parser(parent_widget, action):
                 continue
 
             # Get game title from library.json as it's not present in installed.json
-            open_file = open(os.path.join(heroic_dir, "gog_store", "library.json"), "r")
-            data = open_file.read()
-            open_file.close()
+            with open(
+                os.path.join(heroic_dir, "gog_store", "library.json"), "r"
+            ) as open_file:
+                data = open_file.read()
+                open_file.close()
             library = json.loads(data)
             for game in library["games"]:
                 if game["app_name"] == app_name:
@@ -178,9 +184,11 @@ def heroic_parser(parent_widget, action):
     if not schema.get_boolean("heroic-import-sideload"):
         pass
     elif os.path.exists(os.path.join(heroic_dir, "sideload_apps", "library.json")):
-        open_file = open(os.path.join(heroic_dir, "sideload_apps", "library.json"), "r")
-        data = open_file.read()
-        open_file.close()
+        with open(
+            os.path.join(heroic_dir, "sideload_apps", "library.json"), "r"
+        ) as open_file:
+            data = open_file.read()
+            open_file.close()
         library = json.loads(data)
         for item in library["games"]:
             values = {}

@@ -45,7 +45,7 @@ def steam_parser(parent_widget, action):
         else:
             filechooser = Gtk.FileDialog.new()
 
-            def set_steam_dir(source, result, _):
+            def set_steam_dir(_source, result, _unused):
                 try:
                     schema.set_string(
                         "steam-location",
@@ -55,7 +55,7 @@ def steam_parser(parent_widget, action):
                 except GLib.GError:
                     return
 
-            def choose_folder(widget):
+            def choose_folder(_widget):
                 filechooser.select_folder(parent_widget, None, set_steam_dir, None)
 
             def response(widget, response):
@@ -94,9 +94,9 @@ def steam_parser(parent_widget, action):
 
     for appmanifest in appmanifests:
         values = {}
-        open_file = open(appmanifest, "r")
-        data = open_file.read()
-        open_file.close()
+        with open(appmanifest, "r") as open_file:
+            data = open_file.read()
+            open_file.close()
         for datatype in datatypes:
             value = re.findall('"' + datatype + '"\t\t"(.*)"\n', data)
             values[datatype] = value[0]

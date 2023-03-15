@@ -48,7 +48,7 @@ def bottles_parser(parent_widget, action):
         else:
             filechooser = Gtk.FileDialog.new()
 
-            def set_bottles_dir(source, result, _):
+            def set_bottles_dir(_source, result, _unused):
                 try:
                     schema.set_string(
                         "bottles-location",
@@ -58,7 +58,7 @@ def bottles_parser(parent_widget, action):
                 except GLib.GError:
                     return
 
-            def choose_folder(widget):
+            def choose_folder(_widget):
                 filechooser.select_folder(parent_widget, None, set_bottles_dir, None)
 
             def response(widget, response):
@@ -84,9 +84,9 @@ def bottles_parser(parent_widget, action):
     bottles_games = {}
     current_time = int(time.time())
 
-    open_file = open(os.path.join(bottles_dir, "library.yml"), "r")
-    data = open_file.read()
-    open_file.close()
+    with open(os.path.join(bottles_dir, "library.yml"), "r") as open_file:
+        data = open_file.read()
+        open_file.close()
 
     library = yaml.load(data, Loader=yaml.Loader)
 

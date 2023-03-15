@@ -21,10 +21,6 @@ import sys
 import time
 
 import gi
-
-gi.require_version("Gtk", "4.0")
-gi.require_version("Adw", "1")
-
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from .bottles_parser import bottles_parser
@@ -37,6 +33,9 @@ from .save_games import save_games
 from .steam_parser import steam_parser
 from .toggle_hidden import toggle_hidden
 from .window import CartridgesWindow
+
+gi.require_version("Gtk", "4.0")
+gi.require_version("Adw", "1")
 
 
 class CartridgesApplication(Adw.Application):
@@ -57,6 +56,8 @@ class CartridgesApplication(Adw.Application):
         self.create_action("edit_details", self.on_edit_details_action)
         self.create_action("add_game", self.on_add_game_action, ["<primary>n"])
         self.create_action("remove_game", self.on_remove_game_action)
+
+        self.win = None
 
     def do_activate(self):
 
@@ -104,7 +105,7 @@ class CartridgesApplication(Adw.Application):
         self.win.sort.connect("activate", self.win.on_sort_action)
         self.win.on_sort_action(self.win.sort, state_settings.get_value("sort-mode"))
 
-    def on_about_action(self, widget, callback=None):
+    def on_about_action(self, _widget, _callback=None):
         about = Adw.AboutWindow(
             transient_for=self.win,
             application_name=_("Cartridges"),
@@ -125,25 +126,25 @@ class CartridgesApplication(Adw.Application):
         )
         about.present()
 
-    def on_preferences_action(self, widget, callback=None):
+    def on_preferences_action(self, _widget, _callback=None):
         PreferencesWindow(self.win).present()
 
-    def on_steam_import_action(self, widget, callback=None):
+    def on_steam_import_action(self, _widget, _callback=None):
         games = steam_parser(self.win, self.on_steam_import_action)
         save_games(games)
         self.win.update_games(games.keys())
 
-    def on_heroic_import_action(self, widget, callback=None):
+    def on_heroic_import_action(self, _widget, _callback=None):
         games = heroic_parser(self.win, self.on_heroic_import_action)
         save_games(games)
         self.win.update_games(games.keys())
 
-    def on_bottles_import_action(self, widget, callback=None):
+    def on_bottles_import_action(self, _widget, _callback=None):
         games = bottles_parser(self.win, self.on_bottles_import_action)
         save_games(games)
         self.win.update_games(games.keys())
 
-    def on_launch_game_action(self, widget, callback=None):
+    def on_launch_game_action(self, _widget, _callback=None):
 
         # Launch the game and update the last played value
 
@@ -153,26 +154,26 @@ class CartridgesApplication(Adw.Application):
         data["last_played"] = int(time.time())
         save_games({game_id: data})
 
-        run_command(self.win, self.win.games[self.win.active_game_id].executable)
+        run_command(self.win.games[self.win.active_game_id].executable)
 
         self.win.update_games([game_id])
 
         if self.win.stack.get_visible_child() == self.win.overview:
             self.win.show_overview(None, self.win.active_game_id)
 
-    def on_hide_game_action(self, widget, callback=None):
+    def on_hide_game_action(self, _widget, _callback=None):
         if self.win.stack.get_visible_child() == self.win.overview:
             self.win.on_go_back_action(None, None)
         toggle_hidden(self.win.active_game_id)
         self.win.update_games([self.win.active_game_id])
 
-    def on_edit_details_action(self, widget, callback=None):
+    def on_edit_details_action(self, _widget, _callback=None):
         create_details_window(self.win, self.win.active_game_id)
 
-    def on_add_game_action(self, widget, callback=None):
+    def on_add_game_action(self, _widget, _callback=None):
         create_details_window(self.win)
 
-    def on_remove_game_action(self, widget, callback=None):
+    def on_remove_game_action(self, _widget, _callback=None):
 
         # Add "removed=True" to the game properties so it can be deleted on next init
         game_id = self.win.active_game_id
@@ -193,7 +194,7 @@ class CartridgesApplication(Adw.Application):
         self.win.toasts[game_id] = toast
         self.win.toast_overlay.add_toast(toast)
 
-    def on_quit_action(self, widget, callback=None):
+    def on_quit_action(self, _widget, _callback=None):
         self.quit()
 
     def create_action(self, name, callback, shortcuts=None, win=None):

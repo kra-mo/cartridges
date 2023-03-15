@@ -37,7 +37,7 @@ def create_details_window(parent_widget, game_id=None):
     games = parent_widget.games
     pixbuf = None
 
-    if game_id == None:
+    if game_id is None:
         window.set_title(_("Add New Game"))
         cover = Gtk.Picture.new_for_pixbuf(parent_widget.placeholder_pixbuf)
         name = Gtk.Entry()
@@ -119,10 +119,10 @@ def create_details_window(parent_widget, game_id=None):
     main_box.append(general_page)
     window.set_content(main_box)
 
-    def choose_cover(widget):
+    def choose_cover(_widget):
         filechooser.open(window, None, set_cover, None)
 
-    def set_cover(source, result, _):
+    def set_cover(_source, result, _unused):
         nonlocal pixbuf
         try:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
@@ -132,10 +132,10 @@ def create_details_window(parent_widget, game_id=None):
         except GLib.GError:
             return
 
-    def close_window(widget, callback=None):
+    def close_window(_widget, _callback=None):
         window.close()
 
-    def apply_preferences(widget, callback=None):
+    def apply_preferences(_widget, _callback=None):
         nonlocal pixbuf
         nonlocal game_id
 
@@ -144,7 +144,7 @@ def create_details_window(parent_widget, game_id=None):
         final_name = name.get_buffer().get_text()
         final_executable = executable.get_buffer().get_text()
 
-        if game_id == None:
+        if game_id is None:
 
             if final_name == "":
                 create_dialog(
@@ -191,7 +191,7 @@ def create_details_window(parent_widget, game_id=None):
                 )
                 return
 
-        if pixbuf != None:
+        if pixbuf is not None:
             save_cover(None, parent_widget, None, pixbuf, game_id)
 
         values["name"] = final_name
@@ -207,9 +207,9 @@ def create_details_window(parent_widget, game_id=None):
         )
 
         if os.path.exists(path):
-            open_file = open(path, "r")
-            data = json.loads(open_file.read())
-            open_file.close()
+            with open(path, "r") as open_file:
+                data = json.loads(open_file.read())
+                open_file.close()
             data.update(values)
             save_games({game_id: data})
         else:
@@ -221,7 +221,7 @@ def create_details_window(parent_widget, game_id=None):
         window.close()
         parent_widget.show_overview(None, game_id)
 
-    def focus_executable(widget):
+    def focus_executable(_widget):
         window.set_focus(executable)
 
     cover_button.connect("clicked", choose_cover)

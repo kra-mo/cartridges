@@ -23,7 +23,7 @@ import sys
 from gi.repository import Gio
 
 
-def run_command(parent_widget, executable):
+def run_command(executable):
     subprocess.Popen(
         ["flatpak-spawn --host " + executable], shell=True, start_new_session=True
     )

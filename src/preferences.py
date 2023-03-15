@@ -65,7 +65,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         filechooser = Gtk.FileDialog()
 
-        def set_steam_dir(source, result, user_data):
+        def set_steam_dir(_source, result, _unused):
             try:
                 schema.set_string(
                     "steam-location",
@@ -74,7 +74,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             except GLib.GError:
                 pass
 
-        def set_heroic_dir(source, result, user_data):
+        def set_heroic_dir(_source, result, _unused):
             try:
                 schema.set_string(
                     "heroic-location",
@@ -83,7 +83,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             except GLib.GError:
                 pass
 
-        def set_bottles_dir(source, result, user_data):
+        def set_bottles_dir(_source, result, _unused):
             try:
                 schema.set_string(
                     "bottles-location",
@@ -92,7 +92,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             except GLib.GError:
                 pass
 
-        def choose_folder(widget, function):
+        def choose_folder(_widget, function):
             filechooser.select_folder(parent_widget, None, function, None)
 
         self.steam_file_chooser_button.connect("clicked", choose_folder, set_steam_dir)
