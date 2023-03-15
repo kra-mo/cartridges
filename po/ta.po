@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-15 02:27+0100\n"
+"POT-Creation-Date: 2023-03-15 13:13+0100\n"
 "PO-Revision-Date: 2023-03-14 17:59+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
@@ -49,7 +49,7 @@ msgstr ""
 "அம்சங்களுடன்."
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:132
-#: src/utils/heroic_parser.py:224 src/utils/steam_parser.py:142
+#: src/utils/heroic_parser.py:226 src/utils/steam_parser.py:158
 msgid "No Games Found"
 msgstr "விளையாட்டுகள் எதுவும் இல்லை"
 
@@ -77,93 +77,93 @@ msgstr "விளையாட்டு விவரங்கள்"
 msgid "Game Title"
 msgstr "விளையாட்டு தலைப்பு"
 
-#: data/gtk/window.blp:133 data/gtk/game.blp:38
+#: data/gtk/window.blp:147 data/gtk/game.blp:38
 msgid "Play"
 msgstr "விளையாடு"
 
-#: data/gtk/window.blp:242
+#: data/gtk/window.blp:256
 msgid "Hidden Games"
 msgstr "மறைக்கப்பட்ட விளையாட்டுகள்"
 
-#: data/gtk/window.blp:300
+#: data/gtk/window.blp:314
 msgid "Sort"
 msgstr "வகைபடுத்து"
 
-#: data/gtk/window.blp:303
+#: data/gtk/window.blp:317
 msgid "A-Z"
 msgstr "A-Z"
 
-#: data/gtk/window.blp:309
+#: data/gtk/window.blp:323
 msgid "Z-A"
 msgstr "Z-A"
 
-#: data/gtk/window.blp:315
+#: data/gtk/window.blp:329
 msgid "Newest"
 msgstr "புதியது"
 
-#: data/gtk/window.blp:321
+#: data/gtk/window.blp:335
 msgid "Oldest"
 msgstr "பழமையானது"
 
-#: data/gtk/window.blp:327
+#: data/gtk/window.blp:341
 msgid "Last Played"
 msgstr "கடைசியாக விளையாடியது"
 
-#: data/gtk/window.blp:334
+#: data/gtk/window.blp:348
 msgid "Show Hidden"
 msgstr "மறைக்கப்பட்டதைக் காட்டு"
 
-#: data/gtk/window.blp:342
+#: data/gtk/window.blp:356
 msgid "Preferences"
 msgstr "விருப்பங்கள்"
 
-#: data/gtk/window.blp:347
+#: data/gtk/window.blp:361
 msgid "Keyboard Shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
 
-#: data/gtk/window.blp:352
+#: data/gtk/window.blp:366
 msgid "About Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள் பற்றி"
 
-#: data/gtk/window.blp:361
+#: data/gtk/window.blp:375
 msgid "Add Game"
 msgstr "விளையாட்டைச் சேர்க்கவும்"
 
-#: data/gtk/window.blp:367
+#: data/gtk/window.blp:381
 msgid "Import from"
 msgstr "இலிருந்து இறக்குமதி செய்"
 
-#: data/gtk/window.blp:369
+#: data/gtk/window.blp:383
 msgid "Steam"
 msgstr "Steam (ஸ்டீம்)"
 
-#: data/gtk/window.blp:374
+#: data/gtk/window.blp:388
 msgid "Heroic"
 msgstr "Heroic (ஹீரோயிக்)"
 
-#: data/gtk/window.blp:379
+#: data/gtk/window.blp:393
 msgid "Bottles"
 msgstr "Bottles (பாட்டில்கள்)"
 
-#: data/gtk/window.blp:389 data/gtk/window.blp:408 data/gtk/game.blp:87
+#: data/gtk/window.blp:403 data/gtk/window.blp:422 data/gtk/game.blp:87
 #: data/gtk/game.blp:106
 msgid "Edit"
 msgstr "தொகு"
 
-#: data/gtk/window.blp:394 data/gtk/game.blp:92
+#: data/gtk/window.blp:408 data/gtk/game.blp:92
 msgid "Hide"
 msgstr "மறை"
 
-#: data/gtk/window.blp:399 data/gtk/window.blp:418 data/gtk/game.blp:97
+#: data/gtk/window.blp:413 data/gtk/window.blp:432 data/gtk/game.blp:97
 #: data/gtk/game.blp:116
 msgid "Remove"
 msgstr "அகற்று"
 
-#: data/gtk/window.blp:413 data/gtk/game.blp:111
+#: data/gtk/window.blp:427 data/gtk/game.blp:111
 msgid "Unhide"
 msgstr "மறை காட்டு"
 
-#: data/gtk/game.blp:65 src/utils/create_details_window.py:90
+#: data/gtk/game.blp:65 src/utils/create_details_window.py:94
 msgid "Title"
 msgstr "தலைப்பு"
 
@@ -271,28 +271,28 @@ msgstr "அகற்றப்பட்டது"
 msgid "Undo"
 msgstr "செயல்தவிர்"
 
-#: src/window.py:224
+#: src/window.py:225
 msgid "Today"
 msgstr "இன்று"
 
-#: src/window.py:226
+#: src/window.py:227
 msgid "Yesterday"
 msgstr "நேற்று"
 
-#: src/window.py:252
+#: src/window.py:259
 msgid "Added:"
 msgstr "சேர்க்கப்பட்டது:"
 
-#: src/window.py:255
+#: src/window.py:262
 msgid "Last played:"
 msgstr "கடைசியாக விளையாடியது:"
 
-#: src/window.py:257
+#: src/window.py:264
 msgid "Last played: Never"
 msgstr "கடைசியாக விளையாடியது: ஒருபோதும் இல்லை"
 
 #: src/utils/bottles_parser.py:70 src/utils/heroic_parser.py:72
-#: src/utils/steam_parser.py:67
+#: src/utils/steam_parser.py:68
 msgid "Couldn't Import Games"
 msgstr "கேம்களை இறக்குமதி செய்ய முடியவில்லை"
 
@@ -312,18 +312,18 @@ msgstr "பாட்டில்கள் நூலகத்தில் பு�
 msgid "Bottles Games Imported"
 msgstr "பாட்டில் விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
 
-#: src/utils/bottles_parser.py:139 src/utils/heroic_parser.py:231
-#: src/utils/steam_parser.py:147
+#: src/utils/bottles_parser.py:139 src/utils/heroic_parser.py:233
+#: src/utils/steam_parser.py:163
 msgid "Successfully imported 1 game."
 msgstr "1 விளையாட்டு வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது."
 
-#: src/utils/bottles_parser.py:145 src/utils/heroic_parser.py:237
-#: src/utils/steam_parser.py:153
+#: src/utils/bottles_parser.py:145 src/utils/heroic_parser.py:239
+#: src/utils/steam_parser.py:169
 msgid "Successfully imported"
 msgstr "வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது"
 
-#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:241
-#: src/utils/steam_parser.py:157
+#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:243
+#: src/utils/steam_parser.py:173
 msgid "games."
 msgstr "விளையாட்டுகள்."
 
@@ -331,55 +331,63 @@ msgstr "விளையாட்டுகள்."
 msgid "Add New Game"
 msgstr "புதிய விளையாட்டைச் சேர்க்கவும்"
 
-#: src/utils/create_details_window.py:45
+#: src/utils/create_details_window.py:46
 msgid "Confirm"
 msgstr "உறுதிப்படுத்தவும்"
 
-#: src/utils/create_details_window.py:47
+#: src/utils/create_details_window.py:48
 msgid "Edit Game Details"
 msgstr "விளையாட்டு விவரங்களைத் திருத்து"
 
-#: src/utils/create_details_window.py:53
+#: src/utils/create_details_window.py:57
 msgid "Apply"
 msgstr "விண்ணப்பி"
 
-#: src/utils/create_details_window.py:55
+#: src/utils/create_details_window.py:59
 msgid "Images"
 msgstr "படங்கள்"
 
-#: src/utils/create_details_window.py:91
+#: src/utils/create_details_window.py:95
 msgid "The title of the game"
 msgstr "விளையாட்டின் தலைப்பு"
 
-#: src/utils/create_details_window.py:96
+#: src/utils/create_details_window.py:100
+msgid "Developer"
+msgstr ""
+
+#: src/utils/create_details_window.py:101
+msgid "The developer or publisher (optional)"
+msgstr ""
+
+#: src/utils/create_details_window.py:106
 msgid "Executable"
 msgstr "செயல்படுத்தக்கூடியது"
 
-#: src/utils/create_details_window.py:97
+#: src/utils/create_details_window.py:107
 msgid "File to open or command to run when launching the game"
 msgstr "விளையாட்டைத் தொடங்கும் போது திறக்க கோப்பு அல்லது இயக்க கட்டளை"
 
-#: src/utils/create_details_window.py:106
+#: src/utils/create_details_window.py:117
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: src/utils/create_details_window.py:151
-#: src/utils/create_details_window.py:157
+#: src/utils/create_details_window.py:163
+#: src/utils/create_details_window.py:169
 msgid "Couldn't Add Game"
 msgstr "விளையாட்டைச் சேர்க்க முடியவில்லை"
 
-#: src/utils/create_details_window.py:151
-#: src/utils/create_details_window.py:182
+#: src/utils/create_details_window.py:163
+#: src/utils/create_details_window.py:194
 msgid "Game title cannot be empty."
 msgstr "விளையாட்டு தலைப்பு காலியாக இருக்கக்கூடாது."
 
-#: src/utils/create_details_window.py:157
-#: src/utils/create_details_window.py:190
+#: src/utils/create_details_window.py:169
+#: src/utils/create_details_window.py:202
 msgid "Executable cannot be empty."
 msgstr "இயங்கக்கூடியது காலியாக இருக்க முடியாது."
 
-#: src/utils/create_details_window.py:181
-#: src/utils/create_details_window.py:189
+#: src/utils/create_details_window.py:193
+#: src/utils/create_details_window.py:201
 msgid "Couldn't Apply Preferences"
 msgstr "விருப்பத்தேர்வுகளைப் பயன்படுத்த முடியவில்லை"
 
@@ -395,27 +403,27 @@ msgstr "Heroic (ஹீரோயிக்) கோப்பகத்தைக் �
 msgid "Set Heroic Location"
 msgstr "Heroic (ஹீரோயிக்) இருப்பிடத்தை அமைக்கவும்"
 
-#: src/utils/heroic_parser.py:225
+#: src/utils/heroic_parser.py:227
 msgid "No new games were found in the Heroic library."
 msgstr "Heroic (ஹீரோயிக்) நூலகத்தில் புதிய விளையாட்டுகள் எதுவும் இல்லை."
 
-#: src/utils/heroic_parser.py:230 src/utils/heroic_parser.py:236
+#: src/utils/heroic_parser.py:232 src/utils/heroic_parser.py:238
 msgid "Heroic Games Imported"
 msgstr "Heroic (ஹீரோயிக்) விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
 
-#: src/utils/steam_parser.py:68
+#: src/utils/steam_parser.py:69
 msgid "The Steam directory cannot be found."
 msgstr "Steam (ஸ்டீம்) கோப்பகத்தைக் கண்டறிய முடியவில்லை."
 
-#: src/utils/steam_parser.py:70
+#: src/utils/steam_parser.py:71
 msgid "Set Steam Location"
 msgstr "Steam (ஸ்டீம் இடத்தை அமைக்கவும்"
 
-#: src/utils/steam_parser.py:143
+#: src/utils/steam_parser.py:159
 msgid "No new games were found in the Steam library."
 msgstr "Steam (ஸ்டீம்) நூலகத்தில் புதிய விளையாட்டுகள் எதுவும் இல்லை."
 
-#: src/utils/steam_parser.py:147 src/utils/steam_parser.py:152
+#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:168
 msgid "Steam Games Imported"
 msgstr "Steam (ஸ்டீம்) விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
 

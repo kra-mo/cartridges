@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-15 02:27+0100\n"
+"POT-Creation-Date: 2023-03-15 13:13+0100\n"
 "PO-Revision-Date: 2023-03-14 17:59+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
@@ -49,7 +49,7 @@ msgstr ""
 "dernière lecture."
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:132
-#: src/utils/heroic_parser.py:224 src/utils/steam_parser.py:142
+#: src/utils/heroic_parser.py:226 src/utils/steam_parser.py:158
 msgid "No Games Found"
 msgstr "Aucun jeu trouvé"
 
@@ -77,93 +77,93 @@ msgstr "Détails du jeu"
 msgid "Game Title"
 msgstr "Titre du jeu"
 
-#: data/gtk/window.blp:133 data/gtk/game.blp:38
+#: data/gtk/window.blp:147 data/gtk/game.blp:38
 msgid "Play"
 msgstr "Jouer"
 
-#: data/gtk/window.blp:242
+#: data/gtk/window.blp:256
 msgid "Hidden Games"
 msgstr "Jeux masqués"
 
-#: data/gtk/window.blp:300
+#: data/gtk/window.blp:314
 msgid "Sort"
 msgstr "Trier"
 
-#: data/gtk/window.blp:303
+#: data/gtk/window.blp:317
 msgid "A-Z"
 msgstr "A-Z"
 
-#: data/gtk/window.blp:309
+#: data/gtk/window.blp:323
 msgid "Z-A"
 msgstr "Z-A"
 
-#: data/gtk/window.blp:315
+#: data/gtk/window.blp:329
 msgid "Newest"
 msgstr "Le plus récent"
 
-#: data/gtk/window.blp:321
+#: data/gtk/window.blp:335
 msgid "Oldest"
 msgstr "Le plus ancien"
 
-#: data/gtk/window.blp:327
+#: data/gtk/window.blp:341
 msgid "Last Played"
 msgstr "Dernière session"
 
-#: data/gtk/window.blp:334
+#: data/gtk/window.blp:348
 msgid "Show Hidden"
 msgstr "Afficher les masqués"
 
-#: data/gtk/window.blp:342
+#: data/gtk/window.blp:356
 msgid "Preferences"
 msgstr "Préférences"
 
-#: data/gtk/window.blp:347
+#: data/gtk/window.blp:361
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: data/gtk/window.blp:352
+#: data/gtk/window.blp:366
 msgid "About Cartridges"
 msgstr "À propos de Cartridges"
 
-#: data/gtk/window.blp:361
+#: data/gtk/window.blp:375
 msgid "Add Game"
 msgstr "Ajouter un jeu"
 
-#: data/gtk/window.blp:367
+#: data/gtk/window.blp:381
 msgid "Import from"
 msgstr "Importer depuis"
 
-#: data/gtk/window.blp:369
+#: data/gtk/window.blp:383
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:374
+#: data/gtk/window.blp:388
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:379
+#: data/gtk/window.blp:393
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/window.blp:389 data/gtk/window.blp:408 data/gtk/game.blp:87
+#: data/gtk/window.blp:403 data/gtk/window.blp:422 data/gtk/game.blp:87
 #: data/gtk/game.blp:106
 msgid "Edit"
 msgstr "Modifier"
 
-#: data/gtk/window.blp:394 data/gtk/game.blp:92
+#: data/gtk/window.blp:408 data/gtk/game.blp:92
 msgid "Hide"
 msgstr "Masquer"
 
-#: data/gtk/window.blp:399 data/gtk/window.blp:418 data/gtk/game.blp:97
+#: data/gtk/window.blp:413 data/gtk/window.blp:432 data/gtk/game.blp:97
 #: data/gtk/game.blp:116
 msgid "Remove"
 msgstr "Retirer"
 
-#: data/gtk/window.blp:413 data/gtk/game.blp:111
+#: data/gtk/window.blp:427 data/gtk/game.blp:111
 msgid "Unhide"
 msgstr "Afficher"
 
-#: data/gtk/game.blp:65 src/utils/create_details_window.py:90
+#: data/gtk/game.blp:65 src/utils/create_details_window.py:94
 msgid "Title"
 msgstr "Titre"
 
@@ -268,28 +268,28 @@ msgstr "retiré"
 msgid "Undo"
 msgstr "Annuler"
 
-#: src/window.py:224
+#: src/window.py:225
 msgid "Today"
 msgstr "Aujourd'hui"
 
-#: src/window.py:226
+#: src/window.py:227
 msgid "Yesterday"
 msgstr "Hier"
 
-#: src/window.py:252
+#: src/window.py:259
 msgid "Added:"
 msgstr "Ajouté :"
 
-#: src/window.py:255
+#: src/window.py:262
 msgid "Last played:"
 msgstr "Dernière session :"
 
-#: src/window.py:257
+#: src/window.py:264
 msgid "Last played: Never"
 msgstr "Dernière session : Jamais"
 
 #: src/utils/bottles_parser.py:70 src/utils/heroic_parser.py:72
-#: src/utils/steam_parser.py:67
+#: src/utils/steam_parser.py:68
 msgid "Couldn't Import Games"
 msgstr "Impossible d'importer des jeux"
 
@@ -309,18 +309,18 @@ msgstr "Aucun nouveau jeu n'a été trouvé dans la bibliothèque Bottles."
 msgid "Bottles Games Imported"
 msgstr "Jeux Bottles importés"
 
-#: src/utils/bottles_parser.py:139 src/utils/heroic_parser.py:231
-#: src/utils/steam_parser.py:147
+#: src/utils/bottles_parser.py:139 src/utils/heroic_parser.py:233
+#: src/utils/steam_parser.py:163
 msgid "Successfully imported 1 game."
 msgstr "Importation réussie de 1 jeu."
 
-#: src/utils/bottles_parser.py:145 src/utils/heroic_parser.py:237
-#: src/utils/steam_parser.py:153
+#: src/utils/bottles_parser.py:145 src/utils/heroic_parser.py:239
+#: src/utils/steam_parser.py:169
 msgid "Successfully imported"
 msgstr "Importation réussie"
 
-#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:241
-#: src/utils/steam_parser.py:157
+#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:243
+#: src/utils/steam_parser.py:173
 msgid "games."
 msgstr "jeux."
 
@@ -328,55 +328,63 @@ msgstr "jeux."
 msgid "Add New Game"
 msgstr "Ajouter un nouveau jeu"
 
-#: src/utils/create_details_window.py:45
+#: src/utils/create_details_window.py:46
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: src/utils/create_details_window.py:47
+#: src/utils/create_details_window.py:48
 msgid "Edit Game Details"
 msgstr "Modifier les détails du jeu"
 
-#: src/utils/create_details_window.py:53
+#: src/utils/create_details_window.py:57
 msgid "Apply"
 msgstr "Appliquer"
 
-#: src/utils/create_details_window.py:55
+#: src/utils/create_details_window.py:59
 msgid "Images"
 msgstr "Images"
 
-#: src/utils/create_details_window.py:91
+#: src/utils/create_details_window.py:95
 msgid "The title of the game"
 msgstr "Le titre du jeu"
 
-#: src/utils/create_details_window.py:96
+#: src/utils/create_details_window.py:100
+msgid "Developer"
+msgstr ""
+
+#: src/utils/create_details_window.py:101
+msgid "The developer or publisher (optional)"
+msgstr ""
+
+#: src/utils/create_details_window.py:106
 msgid "Executable"
 msgstr "Exécutable"
 
-#: src/utils/create_details_window.py:97
+#: src/utils/create_details_window.py:107
 msgid "File to open or command to run when launching the game"
 msgstr "Fichier à ouvrir ou commande à exécuter au lancement du jeu"
 
-#: src/utils/create_details_window.py:106
+#: src/utils/create_details_window.py:117
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/utils/create_details_window.py:151
-#: src/utils/create_details_window.py:157
+#: src/utils/create_details_window.py:163
+#: src/utils/create_details_window.py:169
 msgid "Couldn't Add Game"
 msgstr "Impossible d'ajouter un jeu"
 
-#: src/utils/create_details_window.py:151
-#: src/utils/create_details_window.py:182
+#: src/utils/create_details_window.py:163
+#: src/utils/create_details_window.py:194
 msgid "Game title cannot be empty."
 msgstr "Le titre du jeu ne peut pas être vide."
 
-#: src/utils/create_details_window.py:157
-#: src/utils/create_details_window.py:190
+#: src/utils/create_details_window.py:169
+#: src/utils/create_details_window.py:202
 msgid "Executable cannot be empty."
 msgstr "L'exécutable ne peut pas être vide."
 
-#: src/utils/create_details_window.py:181
-#: src/utils/create_details_window.py:189
+#: src/utils/create_details_window.py:193
+#: src/utils/create_details_window.py:201
 msgid "Couldn't Apply Preferences"
 msgstr "Impossible d'appliquer les préférences"
 
@@ -392,26 +400,26 @@ msgstr "Le répertoire Heroic est introuvable."
 msgid "Set Heroic Location"
 msgstr "Définir l'emplacement Heroic"
 
-#: src/utils/heroic_parser.py:225
+#: src/utils/heroic_parser.py:227
 msgid "No new games were found in the Heroic library."
 msgstr "Aucun nouveau jeu n'a été trouvé dans la bibliothèque Heroic."
 
-#: src/utils/heroic_parser.py:230 src/utils/heroic_parser.py:236
+#: src/utils/heroic_parser.py:232 src/utils/heroic_parser.py:238
 msgid "Heroic Games Imported"
 msgstr "Jeux Heroic importés"
 
-#: src/utils/steam_parser.py:68
+#: src/utils/steam_parser.py:69
 msgid "The Steam directory cannot be found."
 msgstr "Le répertoire Steam est introuvable."
 
-#: src/utils/steam_parser.py:70
+#: src/utils/steam_parser.py:71
 msgid "Set Steam Location"
 msgstr "Définir l'emplacement Steam"
 
-#: src/utils/steam_parser.py:143
+#: src/utils/steam_parser.py:159
 msgid "No new games were found in the Steam library."
 msgstr "Aucun nouveau jeu n'a été trouvé dans la bibliothèque Steam."
 
-#: src/utils/steam_parser.py:147 src/utils/steam_parser.py:152
+#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:168
 msgid "Steam Games Imported"
 msgstr "Jeux Steam importés"
