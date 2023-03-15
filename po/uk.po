@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-15 21:12+0100\n"
+"POT-Creation-Date: 2023-03-15 21:17+0100\n"
 "PO-Revision-Date: 2023-03-14 17:59+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
@@ -418,7 +418,7 @@ msgstr "Встановіть розташування Steam"
 
 #: src/utils/steam_parser.py:98
 #, fuzzy
-msgid "Importing games..."
+msgid "Importing Games..."
 msgstr "Імпорт Epic Games"
 
 #: src/utils/steam_parser.py:99
