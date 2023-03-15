@@ -22,6 +22,7 @@ import re
 import time
 
 from gi.repository import GLib, Gtk
+from steam.utils.appcache import parse_appinfo
 
 from .create_dialog import create_dialog
 from .save_cover import save_cover
@@ -92,6 +93,17 @@ def steam_parser(parent_widget, action):
         if os.path.isfile(path) and "appmanifest" in open_file:
             appmanifests.append(path)
 
+    with open("/home/kramo/.steam/steam/appcache/appinfo.vdf", "rb") as open_file:
+        _header, apps = parse_appinfo(open_file)
+
+        developers = {
+            app["appid"]: app["data"]["appinfo"]["common"]["associations"]["0"]["name"]
+            for app in apps
+            if "common" in app["data"]["appinfo"]
+            and "associations" in app["data"]["appinfo"]["common"]
+            and "0" in app["data"]["appinfo"]["common"]["associations"]
+        }
+
     for appmanifest in appmanifests:
         values = {}
         with open(appmanifest, "r") as open_file:
@@ -114,6 +126,10 @@ def steam_parser(parent_widget, action):
         values["source"] = "steam"
         values["added"] = current_time
         values["last_played"] = 0
+        try:
+            values["developer"] = developers[int(values["appid"])]
+        except KeyError:
+            pass
 
         if os.path.isfile(
             os.path.join(

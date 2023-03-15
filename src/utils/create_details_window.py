@@ -31,7 +31,7 @@ from .save_games import save_games
 
 def create_details_window(parent_widget, game_id=None):
     window = Adw.Window(
-        modal=True, default_width=450, default_height=650, transient_for=parent_widget
+        modal=True, default_width=450, default_height=750, transient_for=parent_widget
     )
 
     games = parent_widget.games
@@ -41,11 +41,15 @@ def create_details_window(parent_widget, game_id=None):
         window.set_title(_("Add New Game"))
         cover = Gtk.Picture.new_for_pixbuf(parent_widget.placeholder_pixbuf)
         name = Gtk.Entry()
+        developer = Gtk.Entry()
         executable = Gtk.Entry()
         apply_button = Gtk.Button.new_with_label(_("Confirm"))
     else:
         window.set_title(_("Edit Game Details"))
         cover = Gtk.Picture.new_for_pixbuf(get_cover(game_id, parent_widget))
+        developer = Gtk.Entry.new_with_buffer(
+            Gtk.EntryBuffer.new(games[game_id].developer, -1)
+        )
         name = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new(games[game_id].name, -1))
         executable = Gtk.Entry.new_with_buffer(
             Gtk.EntryBuffer.new((games[game_id].executable), -1)
@@ -92,6 +96,12 @@ def create_details_window(parent_widget, game_id=None):
     )
     title_group.add(name)
 
+    developer_group = Adw.PreferencesGroup(
+        title=_("Developer"),
+        description=_("The developer or publisher (optional)"),
+    )
+    developer_group.add(developer)
+
     exec_group = Adw.PreferencesGroup(
         title=_("Executable"),
         description=_("File to open or command to run when launching the game"),
@@ -101,6 +111,7 @@ def create_details_window(parent_widget, game_id=None):
     general_page = Adw.PreferencesPage()
     general_page.add(cover_group)
     general_page.add(title_group)
+    general_page.add(developer_group)
     general_page.add(exec_group)
 
     cancel_button = Gtk.Button.new_with_label(_("Cancel"))
@@ -142,6 +153,7 @@ def create_details_window(parent_widget, game_id=None):
         values = {}
 
         final_name = name.get_buffer().get_text()
+        final_developer = developer.get_buffer().get_text()
         final_executable = executable.get_buffer().get_text()
 
         if game_id is None:
@@ -195,6 +207,7 @@ def create_details_window(parent_widget, game_id=None):
             save_cover(None, parent_widget, None, pixbuf, game_id)
 
         values["name"] = final_name
+        values["developer"] = final_developer if final_developer else None
         values["executable"] = final_executable
 
         path = os.path.join(

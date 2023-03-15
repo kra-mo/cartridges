@@ -54,6 +54,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     overview_launch = Gtk.Template.Child()
     overview_blurred_cover = Gtk.Template.Child()
     overview_menu_button = Gtk.Template.Child()
+    overview_developer = Gtk.Template.Child()
     overview_added = Gtk.Template.Child()
     overview_last_played = Gtk.Template.Child()
 
@@ -230,6 +231,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def show_overview(self, _widget, game_id):
         current_game = self.games[game_id]
+
+        if current_game.developer:
+            self.overview_developer.set_label(current_game.developer)
+            self.overview_developer.set_visible(True)
+        else:
+            self.overview_developer.set_visible(False)
 
         if not current_game.hidden:
             self.overview_menu_button.set_menu_model(self.game_options)

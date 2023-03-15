@@ -46,11 +46,8 @@ class game(Gtk.Box):
         self.hidden = data["hidden"]
         self.last_played = data["last_played"]
         self.name = data["name"]
-
-        if "removed" in data.keys():
-            self.removed = True
-        else:
-            self.removed = False
+        self.developer = data["developer"] if "developer" in data.keys() else None
+        self.removed = "removed" in data.keys()
 
         self.pixbuf = get_cover(self.game_id, self.parent_widget)
 

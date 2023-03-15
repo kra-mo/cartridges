@@ -113,6 +113,7 @@ def heroic_parser(parent_widget, action):
                 continue
 
             values["name"] = game["title"]
+            values["developer"] = game["developer"]
             values["executable"] = "xdg-open heroic://launch/" + app_name
             values["hidden"] = False
             values["source"] = "heroic_epic"
@@ -153,7 +154,7 @@ def heroic_parser(parent_widget, action):
             ):
                 continue
 
-            # Get game title from library.json as it's not present in installed.json
+            # Get game title and developer from library.json as they are not present in installed.json
             with open(
                 os.path.join(heroic_dir, "gog_store", "library.json"), "r"
             ) as open_file:
@@ -162,6 +163,7 @@ def heroic_parser(parent_widget, action):
             library = json.loads(data)
             for game in library["games"]:
                 if game["app_name"] == app_name:
+                    values["developer"] = game["developer"]
                     values["name"] = game["title"]
                     image_path = os.path.join(
                         heroic_dir,
