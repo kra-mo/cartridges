@@ -21,6 +21,10 @@ import sys
 import time
 
 import gi
+
+gi.require_version("Gtk", "4.0")
+gi.require_version("Adw", "1")
+
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from .bottles_parser import bottles_parser
@@ -33,9 +37,6 @@ from .save_games import save_games
 from .steam_parser import steam_parser
 from .toggle_hidden import toggle_hidden
 from .window import CartridgesWindow
-
-gi.require_version("Gtk", "4.0")
-gi.require_version("Adw", "1")
 
 
 class CartridgesApplication(Adw.Application):
@@ -130,9 +131,8 @@ class CartridgesApplication(Adw.Application):
         PreferencesWindow(self.win).present()
 
     def on_steam_import_action(self, _widget, _callback=None):
-        games = steam_parser(self.win, self.on_steam_import_action)
-        save_games(games)
-        self.win.update_games(games.keys())
+        # Handle the updating of games inside of the module because the function is async.
+        steam_parser(self.win, self.on_steam_import_action)
 
     def on_heroic_import_action(self, _widget, _callback=None):
         games = heroic_parser(self.win, self.on_heroic_import_action)

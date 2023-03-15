@@ -17,15 +17,16 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import json
 import os
 import re
 import time
 
-from gi.repository import GLib, Gtk
-from steam.utils.appcache import parse_appinfo
+from gi.repository import Gio, GLib, Gtk, Adw
 
 from .create_dialog import create_dialog
 from .save_cover import save_cover
+from .save_games import save_games
 
 
 def steam_parser(parent_widget, action):
@@ -93,17 +94,21 @@ def steam_parser(parent_widget, action):
         if os.path.isfile(path) and "appmanifest" in open_file:
             appmanifests.append(path)
 
-    with open("/home/kramo/.steam/steam/appcache/appinfo.vdf", "rb") as open_file:
-        _header, apps = parse_appinfo(open_file)
+    import_statuspage = Adw.StatusPage(
+        title="Importing games...",
+        description="Talking to Steam",
+    )
 
-        developers = {
-            app["appid"]: app["data"]["appinfo"]["common"]["associations"]["0"]["name"]
-            for app in apps
-            if "common" in app["data"]["appinfo"]
-            and app["data"]["appinfo"]["common"]["type"] == "Game"
-            and "associations" in app["data"]["appinfo"]["common"]
-            and "0" in app["data"]["appinfo"]["common"]["associations"]
-        }
+    import_dialog = Adw.Window(
+        content=import_statuspage,
+        modal=True,
+        default_width=350,
+        default_height=200,
+        transient_for=parent_widget,
+        deletable=False,
+    )
+
+    queue = []
 
     for appmanifest in appmanifests:
         values = {}
@@ -122,17 +127,69 @@ def steam_parser(parent_widget, action):
         ):
             continue
 
-        # If the developer is empty, it means that the app is not an actual game
-        try:
-            values["developer"] = developers[int(values["appid"])]
-        except KeyError:
-            continue
-
         values["executable"] = "xdg-open steam://rungameid/" + values["appid"]
         values["hidden"] = False
         values["source"] = "steam"
         values["added"] = current_time
         values["last_played"] = 0
+
+        def steam_api_callback(current_file, result, values):
+            try:
+                _success, content, _etag = current_file.load_contents_finish(result)
+                basic_data = json.loads(content)[values["appid"]]
+
+                if not basic_data["success"]:
+                    steam_games.pop(values["game_id"])
+                else:
+                    data = basic_data["data"]
+                    steam_games[values["game_id"]]["developer"] = ", ".join(
+                        data["developers"]
+                    )
+
+                    if data["type"] != "game":
+                        steam_games.pop(values["game_id"])
+
+            except GLib.GError:
+                pass
+
+            queue.remove(values["appid"])
+            if not queue:
+                import_dialog.close()
+
+                if not steam_games:
+                    create_dialog(
+                        parent_widget,
+                        _("No Games Found"),
+                        _("No new games were found in the Steam library."),
+                    )
+                elif len(steam_games) == 1:
+                    create_dialog(
+                        parent_widget,
+                        _("Steam Games Imported"),
+                        _("Successfully imported 1 game."),
+                    )
+                elif len(steam_games) > 1:
+                    create_dialog(
+                        parent_widget,
+                        _("Steam Games Imported"),
+                        _("Successfully imported")
+                        + " "
+                        + str(len(steam_games))
+                        + " "
+                        + _("games."),
+                    )
+                save_games(steam_games)
+                parent_widget.update_games(steam_games.keys())
+
+        open_file = Gio.File.new_for_uri(
+            "https://store.steampowered.com/api/appdetails?appids=" + values["appid"]
+        )
+
+        if not import_dialog.is_visible():
+            import_dialog.show()
+
+        queue.append(values["appid"])
+        open_file.load_contents_async(None, steam_api_callback, values)
 
         if os.path.isfile(
             os.path.join(
@@ -155,24 +212,9 @@ def steam_parser(parent_widget, action):
 
         steam_games[values["game_id"]] = values
 
-    if len(steam_games) == 0:
+    if not steam_games:
         create_dialog(
             parent_widget,
             _("No Games Found"),
             _("No new games were found in the Steam library."),
         )
-    elif len(steam_games) == 1:
-        create_dialog(
-            parent_widget, _("Steam Games Imported"), _("Successfully imported 1 game.")
-        )
-    elif len(steam_games) > 1:
-        create_dialog(
-            parent_widget,
-            _("Steam Games Imported"),
-            _("Successfully imported")
-            + " "
-            + str(len(steam_games))
-            + " "
-            + _("games."),
-        )
-    return steam_games

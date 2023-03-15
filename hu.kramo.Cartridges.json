@@ -10,6 +10,8 @@
         "--device=dri",
         "--socket=wayland",
         "--talk-name=org.freedesktop.Flatpak",
+        "--talk-name=org.gtk.vfs.*",
+        "--filesystem=xdg-run/gvfsd",
         "--filesystem=~/.steam/steam/:ro",
         "--filesystem=xdg-config/heroic/:ro",
         "--filesystem=xdg-data/bottles/:ro",
