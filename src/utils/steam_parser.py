@@ -100,6 +100,7 @@ def steam_parser(parent_widget, action):
             app["appid"]: app["data"]["appinfo"]["common"]["associations"]["0"]["name"]
             for app in apps
             if "common" in app["data"]["appinfo"]
+            and app["data"]["appinfo"]["common"]["type"] == "Game"
             and "associations" in app["data"]["appinfo"]["common"]
             and "0" in app["data"]["appinfo"]["common"]["associations"]
         }
@@ -121,15 +122,17 @@ def steam_parser(parent_widget, action):
         ):
             continue
 
+        # If the developer is empty, it means that the app is not an actual game
+        try:
+            values["developer"] = developers[int(values["appid"])]
+        except KeyError:
+            continue
+
         values["executable"] = "xdg-open steam://rungameid/" + values["appid"]
         values["hidden"] = False
         values["source"] = "steam"
         values["added"] = current_time
         values["last_played"] = 0
-        try:
-            values["developer"] = developers[int(values["appid"])]
-        except KeyError:
-            pass
 
         if os.path.isfile(
             os.path.join(
