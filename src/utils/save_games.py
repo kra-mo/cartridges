@@ -22,7 +22,12 @@ import os
 
 
 def save_games(games):
-    games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
+    games_dir = os.path.join(
+        os.getenv("XDG_DATA_HOME")
+        or os.path.expanduser(os.path.join("~", ".local", "share")),
+        "cartridges",
+        "games",
+    )
 
     if not os.path.exists(games_dir):
         os.makedirs(games_dir)

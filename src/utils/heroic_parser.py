@@ -41,10 +41,20 @@ def heroic_parser(parent_widget, action):
                 "~/.var/app/com.heroicgameslauncher.hgl/config/heroic/",
             )
             action(None, None)
-        elif os.path.exists(os.path.join(os.environ.get("XDG_CONFIG_HOME"), "heroic")):
+        elif os.path.exists(
+            os.path.join(
+                os.getenv("XDG_CONFIG_HOME")
+                or os.path.expanduser(os.path.join("~", ".config")),
+                "heroic",
+            )
+        ):
             schema.set_string(
                 "heroic-location",
-                os.path.join(os.environ.get("XDG_CONFIG_HOME"), "heroic"),
+                os.path.join(
+                    os.getenv("XDG_CONFIG_HOME")
+                    or os.path.expanduser(os.path.join("~", ".config")),
+                    "heroic",
+                ),
             )
             action(None, None)
         else:

@@ -27,7 +27,11 @@ def get_cover(game_id, parent_widget):
         return parent_widget.pixbufs[game_id]
 
     cover_path = os.path.join(
-        os.environ.get("XDG_DATA_HOME"), "cartridges", "covers", game_id + ".tiff"
+        os.getenv("XDG_DATA_HOME")
+        or os.path.expanduser(os.path.join("~", ".local", "share")),
+        "cartridges",
+        "covers",
+        game_id + ".tiff",
     )
 
     if not os.path.isfile(cover_path):

@@ -23,7 +23,12 @@ from gi.repository import GdkPixbuf, Gio
 
 
 def save_cover(game, parent_widget, file_path, pixbuf=None, game_id=None):
-    covers_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "covers")
+    covers_dir = os.path.join(
+        os.getenv("XDG_DATA_HOME")
+        or os.path.expanduser(os.path.join("~", ".local", "share")),
+        "cartridges",
+        "covers",
+    )
     if not os.path.exists(covers_dir):
         os.makedirs(covers_dir)
 

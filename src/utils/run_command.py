@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
 import subprocess
 import sys
 
@@ -25,7 +26,11 @@ from gi.repository import Gio
 
 def run_command(executable):
     with subprocess.Popen(
-        ["flatpak-spawn --host " + executable], shell=True, start_new_session=True
+        ["flatpak-spawn --host " + executable]
+        if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
+        else [executable],
+        shell=True,
+        start_new_session=True,
     ):
         if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
             sys.exit()

@@ -93,7 +93,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
             if "removed" in current_games[current_game].keys():
                 os.remove(
                     os.path.join(
-                        os.environ.get("XDG_DATA_HOME"),
+                        os.getenv("XDG_DATA_HOME")
+                        or os.path.expanduser(os.path.join("~", ".local", "share")),
                         "cartridges",
                         "games",
                         current_game + ".json",
@@ -102,7 +103,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 try:
                     os.remove(
                         os.path.join(
-                            os.environ.get("XDG_DATA_HOME"),
+                            os.getenv("XDG_DATA_HOME")
+                            or os.path.expanduser(os.path.join("~", ".local", "share")),
                             "cartridges",
                             "covers",
                             current_game + ".dat",

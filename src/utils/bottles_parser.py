@@ -39,10 +39,20 @@ def bottles_parser(parent_widget, action):
                 "bottles-location", "~/.var/app/com.usebottles.bottles/data/bottles/"
             )
             action(None, None)
-        elif os.path.exists(os.path.join(os.environ.get("XDG_DATA_HOME"), "bottles")):
+        elif os.path.exists(
+            os.path.join(
+                os.getenv("XDG_DATA_HOME")
+                or os.path.expanduser(os.path.join("~", ".local", "share")),
+                "bottles",
+            )
+        ):
             schema.set_string(
                 "bottles-location",
-                os.path.join(os.environ.get("XDG_DATA_HOME"), "bottles"),
+                os.path.join(
+                    os.getenv("XDG_DATA_HOME")
+                    or os.path.expanduser(os.path.join("~", ".local", "share")),
+                    "bottles",
+                ),
             )
             action(None, None)
         else:

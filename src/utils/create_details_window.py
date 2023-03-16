@@ -212,7 +212,8 @@ def create_details_window(parent_widget, game_id=None):
 
         path = os.path.join(
             os.path.join(
-                os.environ.get("XDG_DATA_HOME"),
+                os.getenv("XDG_DATA_HOME")
+                or os.path.expanduser(os.path.join("~", ".local", "share")),
                 "cartridges",
                 "games",
                 game_id + ".json",

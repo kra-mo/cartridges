@@ -22,7 +22,12 @@ import os
 
 
 def get_games(game_ids=None):
-    games_dir = os.path.join(os.environ.get("XDG_DATA_HOME"), "cartridges", "games")
+    games_dir = os.path.join(
+        os.getenv("XDG_DATA_HOME")
+        or os.path.expanduser(os.path.join("~", ".local", "share")),
+        "cartridges",
+        "games",
+    )
     games = {}
 
     if not os.path.exists(games_dir):
