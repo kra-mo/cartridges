@@ -36,10 +36,12 @@ def save_cover(game, parent_widget, file_path, pixbuf=None, game_id=None):
     def cover_callback(*_unused):
         pass
 
-    open_file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".jpg"))
+    open_file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".tiff"))
     parent_widget.pixbufs[game_id] = pixbuf
     pixbuf.save_to_streamv_async(
         open_file.replace(None, False, Gio.FileCreateFlags.NONE),
-        "jpeg",
+        "tiff",
+        ["compression"],
+        ["7"],
         callback=cover_callback,
     )
