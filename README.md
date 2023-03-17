@@ -13,13 +13,13 @@
 [![Code style][code-style-image]][code-style-url]
   
 [github-actions-url]: https://github.com/kra-mo/cartridges
-[github-actions-image]: https://img.shields.io/github/actions/workflow/status/kra-mo/cartridges/flatpak-builder.yml?branch=main&label=Build
+[github-actions-image]: https://img.shields.io/github/actions/workflow/status/kra-mo/cartridges/flatpak-builder.yml?branch=main&label=build
 [prs-merged-url]: https://github.com/kra-mo/cartridges/pulls?q=is:pr+is:merged
-[prs-merged-image]: https://img.shields.io/github/issues-pr-closed-raw/kra-mo/cartridges.svg?label=Merged+PRs&color=green
+[prs-merged-image]: https://img.shields.io/github/issues-pr-closed-raw/kra-mo/cartridges.svg?label=merged+PRs&color=green
 [contributors-url]: https://github.com/kra-mo/cartridges/graphs/contributors
-[contributors-image]: https://img.shields.io/github/contributors-anon/kra-mo/cartridges.svg?label=Contributors
+[contributors-image]: https://img.shields.io/github/contributors-anon/kra-mo/cartridges.svg
 [license-url]: https://github.com/kra-mo/cartridges/blob/main/LICENSE
-[license-image]: https://img.shields.io/github/license/kra-mo/cartridges?label=License
+[license-image]: https://img.shields.io/github/license/kra-mo/cartridges
 [code-style-url]: https://github.com/psf/black
 [code-style-image]: https://img.shields.io/badge/code%20style-black-000000?style=flat
 [weblate-url]: https://hosted.weblate.org/projects/cartridges/cartridges
