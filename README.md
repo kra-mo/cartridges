@@ -2,13 +2,28 @@
 <div align="center">
   <img src="data/icons/hicolor/scalable/apps/hu.kramo.Cartridges.svg" width="128" height="128">
 
-  # Cartridges
-  A GTK4 + Libadwaita game launcher
-
-  <a href="https://github.com/kra-mo/cartridges/actions"><img src="https://img.shields.io/github/actions/workflow/status/kra-mo/cartridges/flatpak-builder.yml?style=for-the-badge"></a>
-  <a href="https://hosted.weblate.org/projects/cartridges/"><img src="https://img.shields.io/weblate/progress/cartridges?style=for-the-badge"></a>
-  <a href="https://www.gnu.org/licenses/gpl-3.0.html"><img src="https://img.shields.io/github/license/kra-mo/cartridges?style=for-the-badge"></a>
-  <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000?style=for-the-badge"></a>
+ # Cartridges
+ A GTK4 + Libadwaita game launcher
+  
+[![Build status][github-actions-image]][github-actions-url]
+[![Translation Status][weblate-image]][weblate-url]
+[![Merged PRs][prs-merged-image]][prs-merged-url]
+[![GitHub contributors][contributors-image]][contributors-url]
+[![License][license-image]][license-url]
+[![Code style][code-style-image]][code-style-url]
+  
+[github-actions-url]: https://github.com/kra-mo/cartridges
+[github-actions-image]: https://img.shields.io/github/actions/workflow/status/kra-mo/cartridges/flatpak-builder.yml?branch=main&label=Build
+[prs-merged-url]: https://github.com/kra-mo/cartridges/pulls?q=is:pr+is:merged
+[prs-merged-image]: https://img.shields.io/github/issues-pr-closed-raw/kra-mo/cartridges.svg?label=Merged+PRs&color=green
+[contributors-url]: https://github.com/kra-mo/cartridges/graphs/contributors
+[contributors-image]: https://img.shields.io/github/contributors-anon/kra-mo/cartridges.svg?label=Contributors
+[license-url]: https://github.com/kra-mo/cartridges/blob/main/LICENSE
+[license-image]: https://img.shields.io/github/license/kra-mo/cartridges?label=License
+[code-style-url]: https://github.com/psf/black
+[code-style-image]: https://img.shields.io/badge/code%20style-black-000000?style=flat
+[weblate-url]: https://hosted.weblate.org/projects/cartridges/cartridges
+[weblate-image]: https://hosted.weblate.org/widgets/cartridges/-/cartridges/svg-badge.svg
 
   <img src="data/screenshot.webp">
 </div>
