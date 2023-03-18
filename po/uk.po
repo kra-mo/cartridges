@@ -2,21 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
 # kramo <login@kramo.hu>, 2023.
+# Dan <denqwerta@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-15 21:17+0100\n"
-"PO-Revision-Date: 2023-03-14 17:59+0000\n"
-"Last-Translator: kramo <login@kramo.hu>\n"
+"PO-Revision-Date: 2023-03-16 18:47+0000\n"
+"Last-Translator: Dan <denqwerta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.16.2-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
@@ -350,11 +351,11 @@ msgstr "Назва гри"
 
 #: src/utils/create_details_window.py:100
 msgid "Developer"
-msgstr ""
+msgstr "Розробник"
 
 #: src/utils/create_details_window.py:101
 msgid "The developer or publisher (optional)"
-msgstr ""
+msgstr "Розробник або видавець (необов'язково)"
 
 #: src/utils/create_details_window.py:106
 msgid "Executable"
@@ -417,13 +418,12 @@ msgid "Set Steam Location"
 msgstr "Встановіть розташування Steam"
 
 #: src/utils/steam_parser.py:98
-#, fuzzy
 msgid "Importing Games..."
-msgstr "Імпорт Epic Games"
+msgstr "Імпорт ігор..."
 
 #: src/utils/steam_parser.py:99
 msgid "Talking to Steam"
-msgstr ""
+msgstr "Спілкування зі Steam"
 
 #: src/utils/steam_parser.py:163 src/utils/steam_parser.py:219
 msgid "No new games were found in the Steam library."
