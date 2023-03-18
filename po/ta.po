@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the cartridges package.
 # K.B.Dharun Krishna <kbdharunkrishna@gmail.com>, 2023.
 # kramo <login@kramo.hu>, 2023.
+# "K.B.Dharun Krishna" <kbdharunkrishna@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-15 21:17+0100\n"
-"PO-Revision-Date: 2023-03-14 17:59+0000\n"
-"Last-Translator: kramo <login@kramo.hu>\n"
+"PO-Revision-Date: 2023-03-18 23:40+0000\n"
+"Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
 "Language: ta\n"
@@ -184,10 +185,9 @@ msgid "Search"
 msgstr "தேடு"
 
 #: data/gtk/help-overlay.blp:24
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show preferences"
-msgstr "விருப்பங்கள்"
+msgstr "விருப்பங்களைக் காட்டு"
 
 #: data/gtk/help-overlay.blp:29
 msgctxt "shortcut window"
@@ -202,7 +202,7 @@ msgstr "செயல்தவிர்"
 #: data/gtk/help-overlay.blp:39
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "பட்டியலை திறக்கவும்"
 
 #: data/gtk/help-overlay.blp:45
 msgctxt "shortcut window"
@@ -210,16 +210,14 @@ msgid "Games"
 msgstr "விளையாட்டுகள்"
 
 #: data/gtk/help-overlay.blp:48
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Add new game"
 msgstr "புதிய விளையாட்டைச் சேர்க்கவும்"
 
 #: data/gtk/help-overlay.blp:53
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show hidden games"
-msgstr "மறைக்கப்பட்ட விளையாட்டுகள் இல்லை"
+msgstr "மறைக்கப்பட்ட விளையாட்டுகளைக் காட்டு"
 
 #: data/gtk/preferences.blp:10
 msgid "General"
@@ -354,11 +352,11 @@ msgstr "விளையாட்டின் தலைப்பு"
 
 #: src/utils/create_details_window.py:100
 msgid "Developer"
-msgstr ""
+msgstr "டெவலப்பர்"
 
 #: src/utils/create_details_window.py:101
 msgid "The developer or publisher (optional)"
-msgstr ""
+msgstr "டெவலப்பர் அல்லது வெளியீட்டாளர் (விரும்பினால்)"
 
 #: src/utils/create_details_window.py:106
 msgid "Executable"
@@ -421,13 +419,12 @@ msgid "Set Steam Location"
 msgstr "Steam (ஸ்டீம் இடத்தை அமைக்கவும்"
 
 #: src/utils/steam_parser.py:98
-#, fuzzy
 msgid "Importing Games..."
-msgstr "Epic விளையாட்டுகளை இறக்குமதி செய்"
+msgstr "விளையாட்டுகளை இறக்குமதி செய்கிறது..."
 
 #: src/utils/steam_parser.py:99
 msgid "Talking to Steam"
-msgstr ""
+msgstr "ஸ்டிமுடன் (Steam) பேசுகிறேன்"
 
 #: src/utils/steam_parser.py:163 src/utils/steam_parser.py:219
 msgid "No new games were found in the Steam library."
