@@ -228,24 +228,24 @@ msgstr "Avslutt etter oppstart av spill"
 
 #: data/gtk/preferences.blp:25
 msgid "Steam Install Location"
-msgstr ""
+msgstr "Installasjonssted for Steam"
 
 #: data/gtk/preferences.blp:26 data/gtk/preferences.blp:40
 #: data/gtk/preferences.blp:78
 msgid "Directory to use when importing games"
-msgstr ""
+msgstr "Mappe å bruke ved import av spill"
 
 #: data/gtk/preferences.blp:39
 msgid "Heroic Install Location"
-msgstr ""
+msgstr "Installasjonssted for Heroic"
 
 #: data/gtk/preferences.blp:49
 msgid "Import Epic Games"
-msgstr ""
+msgstr "Importer Epic-spill"
 
 #: data/gtk/preferences.blp:57
 msgid "Import GOG Games"
-msgstr ""
+msgstr "Importer GOG-spill"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Sideloaded Games"
@@ -253,12 +253,12 @@ msgstr ""
 
 #: data/gtk/preferences.blp:77
 msgid "Bottles Install Location"
-msgstr ""
+msgstr "Installasjonssted for Bottles"
 
 #. Translators: Replace this with your name for it to show up in the about window.
 #: src/main.py:126
 msgid "translator_credits"
-msgstr ""
+msgstr "Allan Nordhøy, <epost@anotheragency.no>"
 
 #. Create toast for undoing the remove action
 #: src/main.py:190
@@ -296,24 +296,24 @@ msgstr "Kunne ikke importere spill"
 
 #: src/utils/bottles_parser.py:71
 msgid "The Bottles directory cannot be found."
-msgstr ""
+msgstr "Finner ikke Bottles-mappen."
 
 #: src/utils/bottles_parser.py:73
 msgid "Set Bottles Location"
-msgstr ""
+msgstr "Sett mappe for Bottles"
 
 #: src/utils/bottles_parser.py:133
 msgid "No new games were found in the Bottles library."
-msgstr ""
+msgstr "Fant ingen nye spill i Bottles-biblioteket."
 
 #: src/utils/bottles_parser.py:138 src/utils/bottles_parser.py:144
 msgid "Bottles Games Imported"
-msgstr ""
+msgstr "Bottles-spill importert"
 
 #: src/utils/bottles_parser.py:139 src/utils/heroic_parser.py:233
 #: src/utils/steam_parser.py:169
 msgid "Successfully imported 1 game."
-msgstr ""
+msgstr "Importerte ett spill."
 
 #: src/utils/bottles_parser.py:145 src/utils/heroic_parser.py:239
 #: src/utils/steam_parser.py:175
@@ -351,11 +351,11 @@ msgstr "Navnet på spillet"
 
 #: src/utils/create_details_window.py:100
 msgid "Developer"
-msgstr ""
+msgstr "Utvikler"
 
 #: src/utils/create_details_window.py:101
 msgid "The developer or publisher (optional)"
-msgstr ""
+msgstr "Utvikler eller utgiver (valgfritt)"
 
 #: src/utils/create_details_window.py:106
 msgid "Executable"
@@ -363,7 +363,7 @@ msgstr "Kjørbar"
 
 #: src/utils/create_details_window.py:107
 msgid "File to open or command to run when launching the game"
-msgstr ""
+msgstr "Fil å åpne eller kommando å kjøre ved oppstart av spillet"
 
 #: src/utils/create_details_window.py:117
 msgid "Cancel"
@@ -377,7 +377,7 @@ msgstr "Kunne ikke legge til spill"
 #: src/utils/create_details_window.py:163
 #: src/utils/create_details_window.py:194
 msgid "Game title cannot be empty."
-msgstr ""
+msgstr "Spillnavnet kan ikke være tomt."
 
 #: src/utils/create_details_window.py:169
 #: src/utils/create_details_window.py:202
@@ -387,23 +387,23 @@ msgstr ""
 #: src/utils/create_details_window.py:193
 #: src/utils/create_details_window.py:201
 msgid "Couldn't Apply Preferences"
-msgstr ""
+msgstr "Kunne ikke ta i bruk endringer"
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
-msgstr ""
+msgstr "Forkast"
 
 #: src/utils/heroic_parser.py:73
 msgid "The Heroic directory cannot be found."
-msgstr ""
+msgstr "Finner ikke Heroic-spillmappen."
 
 #: src/utils/heroic_parser.py:75
 msgid "Set Heroic Location"
-msgstr ""
+msgstr "Velg hvor Heroic er å finne"
 
 #: src/utils/heroic_parser.py:227
 msgid "No new games were found in the Heroic library."
-msgstr ""
+msgstr "Fant ingen nye spill i Heroic-biblioteket."
 
 #: src/utils/heroic_parser.py:232 src/utils/heroic_parser.py:238
 msgid "Heroic Games Imported"
@@ -411,11 +411,11 @@ msgstr "Heroic-spill importert"
 
 #: src/utils/steam_parser.py:70
 msgid "The Steam directory cannot be found."
-msgstr ""
+msgstr "Kunne ikke finne Steam-mappen."
 
 #: src/utils/steam_parser.py:72
 msgid "Set Steam Location"
-msgstr ""
+msgstr "Velg hvor Steam er å finne"
 
 #: src/utils/steam_parser.py:98
 #, fuzzy
@@ -428,8 +428,8 @@ msgstr ""
 
 #: src/utils/steam_parser.py:163 src/utils/steam_parser.py:219
 msgid "No new games were found in the Steam library."
-msgstr ""
+msgstr "Fant ingen nye spill i Steam-biblioteket."
 
 #: src/utils/steam_parser.py:168 src/utils/steam_parser.py:174
 msgid "Steam Games Imported"
-msgstr ""
+msgstr "Steam-spill importert"
