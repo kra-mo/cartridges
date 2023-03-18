@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-15 21:17+0100\n"
-"PO-Revision-Date: 2023-03-14 17:59+0000\n"
+"PO-Revision-Date: 2023-03-15 22:46+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/nb_NO/>\n"
@@ -86,7 +86,6 @@ msgid "Hidden Games"
 msgstr "Skjulte spill"
 
 #: data/gtk/window.blp:314
-#, fuzzy
 msgid "Sort"
 msgstr "Sorter"
 
@@ -249,7 +248,7 @@ msgstr "Importer GOG-spill"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Sideloaded Games"
-msgstr ""
+msgstr "Importer sideinnlastede spill"
 
 #: data/gtk/preferences.blp:77
 msgid "Bottles Install Location"
@@ -318,7 +317,7 @@ msgstr "Importerte ett spill."
 #: src/utils/bottles_parser.py:145 src/utils/heroic_parser.py:239
 #: src/utils/steam_parser.py:175
 msgid "Successfully imported"
-msgstr ""
+msgstr "Importert"
 
 #: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:243
 #: src/utils/steam_parser.py:179
@@ -382,7 +381,7 @@ msgstr "Spillnavnet kan ikke være tomt."
 #: src/utils/create_details_window.py:169
 #: src/utils/create_details_window.py:202
 msgid "Executable cannot be empty."
-msgstr ""
+msgstr "Kjørbar fil må angis."
 
 #: src/utils/create_details_window.py:193
 #: src/utils/create_details_window.py:201
