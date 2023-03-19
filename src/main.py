@@ -126,7 +126,7 @@ class CartridgesApplication(Adw.Application):
             license_type=Gtk.License.GPL_3_0,
             issue_url="https://github.com/kra-mo/cartridges/issues/new",
             website="https://github.com/kra-mo/cartridges",
-            # Translators: Replace this with your name for it to show up in the about window
+            # Translators: Replace this with your name for it to show up in the about window.
             translator_credits=_("translator_credits"),
         )
         about.present()
@@ -135,7 +135,7 @@ class CartridgesApplication(Adw.Application):
         PreferencesWindow(self.win).present()
 
     def on_steam_import_action(self, _widget, _callback=None):
-        # Handle the updating of games inside of the module because the function is async
+        # Handle the updating of games inside of the module because the function is async.
         steam_parser(self.win, self.on_steam_import_action)
 
     def on_heroic_import_action(self, _widget, _callback=None):
@@ -190,8 +190,8 @@ class CartridgesApplication(Adw.Application):
         if self.win.stack.get_visible_child() == self.win.overview:
             self.win.on_go_back_action(None, None)
 
-        # The variable is the title of the game
-        toast = Adw.Toast.new(_(f"{self.win.games[game_id].name} removed"))
+        # Create toast for undoing the remove action
+        toast = Adw.Toast.new(self.win.games[game_id].name + " " + (_("removed")))
         toast.set_button_label(_("Undo"))
         toast.connect("button-clicked", self.win.on_undo_remove_action, game_id)
         toast.set_priority(Adw.ToastPriority.HIGH)

@@ -167,8 +167,11 @@ def get_games_async(parent_widget, appmanifests, steam_dir, import_dialog):
                 create_dialog(
                     parent_widget,
                     _("Steam Games Imported"),
-                    # The variable is the number of games
-                    _(f"Successfully imported {str(games_no)} games."),
+                    _("Successfully imported")
+                    + " "
+                    + str(games_no)
+                    + " "
+                    + _("games."),
                 )
 
     for appmanifest in appmanifests:
@@ -245,7 +248,7 @@ def steam_parser(parent_widget, action):
     steam_dir = os.path.expanduser(schema.get_string("steam-location"))
 
     import_statuspage = Adw.StatusPage(
-        title=_("Importing Games…"),
+        title=_("Importing Games..."),
         description=_("Talking to Steam"),
     )
 

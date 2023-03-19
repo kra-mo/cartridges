@@ -108,26 +108,12 @@ def create_details_window(parent_widget, game_id=None):
         css_classes=["flat", "circular"],
     )
 
-    file_name = _("file.txt")
-    # As in software
-    exe_name = _("program")
+    exec_info_text = 'To launch the executable "program", use the command:\n\n<tt>"/path/to/program"</tt>\n\nTo open the file "file.txt" with the default application, use:\n\n<tt>xdg-open "/path/to/file.txt"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!'
 
-    if os.name == "nt":
-        exe_name += ".exe"
-        exe_path = _(f"C:\\path\\to\\{exe_name}")
-        file_path = _(f"C:\\path\\to\\{file_name}")
-        command = "start"
-    else:
-        exe_path = _(f"/path/to/{exe_name}")
-        file_path = _(f"/path/to/{file_name}")
-        command = "xdg-open"
-
-    exec_info_text = _(
-        f'To launch the executable "{exe_name}", use the command:\n\n<tt>"{exe_path}"</tt>\n\nTo open the file "{file_name}" with the default application, use:\n\n<tt>{command} "{file_path}"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!'
-    )
+    exec_info_text_win = 'To launch the executable "program.exe", use the command:\n\n<tt>"C:\\path\\to\\program.exe"</tt>\n\nTo open the file "file.txt" with the default application, use:\n\n<tt>start "C:\\path\\to\\file.txt"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!'
 
     exec_info_label = Gtk.Label(
-        label=exec_info_text,
+        label=exec_info_text_win if os.name == "nt" else exec_info_text,
         use_markup=True,
         wrap=True,
         max_width_chars=30,
