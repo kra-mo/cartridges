@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-15 21:17+0100\n"
-"PO-Revision-Date: 2023-03-14 17:59+0000\n"
+"PO-Revision-Date: 2023-03-18 23:40+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -282,11 +282,11 @@ msgstr "Hozzáadva:"
 
 #: src/window.py:262
 msgid "Last played:"
-msgstr "Legutóbb játszva:"
+msgstr "Legutóbbi játékmenet:"
 
 #: src/window.py:264
 msgid "Last played: Never"
-msgstr "Legutóbb játszva: Soha"
+msgstr "Legutóbbi játékmenet: Soha"
 
 #: src/utils/bottles_parser.py:70 src/utils/heroic_parser.py:72
 #: src/utils/steam_parser.py:69
@@ -350,11 +350,11 @@ msgstr "A játék címe"
 
 #: src/utils/create_details_window.py:100
 msgid "Developer"
-msgstr ""
+msgstr "Fejlesztő"
 
 #: src/utils/create_details_window.py:101
 msgid "The developer or publisher (optional)"
-msgstr ""
+msgstr "A fejlesztő vagy kiadó (nem kötelező)"
 
 #: src/utils/create_details_window.py:106
 msgid "Executable"
@@ -417,13 +417,12 @@ msgid "Set Steam Location"
 msgstr "Steam Mappa Kiválasztása"
 
 #: src/utils/steam_parser.py:98
-#, fuzzy
 msgid "Importing Games..."
-msgstr "Epic Games Játékok Importálása"
+msgstr "Játékok Importálása..."
 
 #: src/utils/steam_parser.py:99
 msgid "Talking to Steam"
-msgstr ""
+msgstr "Beszélgetés a Steammel"
 
 #: src/utils/steam_parser.py:163 src/utils/steam_parser.py:219
 msgid "No new games were found in the Steam library."
