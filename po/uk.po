@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 12:55+0100\n"
+"POT-Creation-Date: 2023-03-19 13:11+0100\n"
 "PO-Revision-Date: 2023-03-16 18:47+0000\n"
 "Last-Translator: Dan <denqwerta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
@@ -259,13 +259,12 @@ msgstr "Місце встановлення Bottles"
 msgid "translator_credits"
 msgstr "kefir2105"
 
-#. The variable is the title of the game
-#: src/main.py:194
-#, python-brace-format
-msgid "{self.win.games[game_id].name} removed"
-msgstr ""
-
 #: src/main.py:195
+#, fuzzy, python-brace-format
+msgid "{title} removed"
+msgstr "видалено"
+
+#: src/main.py:196
 msgid "Undo"
 msgstr "Відмінити"
 
@@ -278,22 +277,23 @@ msgid "Yesterday"
 msgstr "Вчора"
 
 #. The variable is the date when the game was added
-#: src/window.py:264
-msgid "Added: {self.get_time(current_game.added)}"
-msgstr ""
+#: src/window.py:265
+#, fuzzy, python-brace-format
+msgid "Added: {date}"
+msgstr "Додано:"
 
-#: src/window.py:269
+#: src/window.py:270
 msgid "Never"
 msgstr ""
 
 #. The variable is the date when the game was last played
-#: src/window.py:273
+#: src/window.py:274
 #, fuzzy, python-brace-format
 msgid "Last played: {last_played_date}"
 msgstr "Остання гра: Ніколи"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:229
+#: src/utils/steam_parser.py:230
 msgid "Couldn't Import Games"
 msgstr "Не вдається імпортувати ігри"
 
@@ -309,7 +309,7 @@ msgstr "Встановити розташування Bottles"
 msgid "No new games were found in the Bottles library."
 msgstr "У бібліотеці Bottles нових ігор не знайдено."
 
-#: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:154
+#: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:155
 msgid "Bottles Games Imported"
 msgstr "Ігри Bottles імпортовано"
 
@@ -319,9 +319,10 @@ msgid "Successfully imported 1 game."
 msgstr "Успішно імпортовано 1 гру."
 
 #. The variable is the number of games
-#: src/utils/bottles_parser.py:156
-#, fuzzy
-msgid "Successfully imported {str(len(bottles_games))} games."
+#: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
+#: src/utils/steam_parser.py:172
+#, fuzzy, python-brace-format
+msgid "Successfully imported {games_no} games."
 msgstr "Успішно імпортовано 1 гру."
 
 #: src/utils/create_details_window.py:41
@@ -447,52 +448,42 @@ msgstr "Встановіть розташування Heroic"
 msgid "No new games were found in the Heroic library."
 msgstr "У бібліотеці Heroic нових ігор не знайдено."
 
-#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:253
+#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:254
 msgid "Heroic Games Imported"
 msgstr "Ігри Heroic імпортовано"
-
-#. The variable is the number of games
-#: src/utils/heroic_parser.py:255
-#, fuzzy
-msgid "Successfully imported {str(len(heroic_games))} games."
-msgstr "Успішно імпортовано 1 гру."
 
 #: src/utils/steam_parser.py:158
 msgid "No new games were found in the Steam library."
 msgstr "У бібліотеці Steam не знайдено жодної нової гри."
 
-#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:169
+#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:170
 msgid "Steam Games Imported"
 msgstr "Ігри Steam імпортовано"
 
-#. The variable is the number of games
-#: src/utils/steam_parser.py:171
-#, fuzzy
-msgid "Successfully imported {str(games_no)} games."
-msgstr "Успішно імпортовано 1 гру."
-
-#: src/utils/steam_parser.py:230
+#: src/utils/steam_parser.py:231
 msgid "The Steam directory cannot be found."
 msgstr "Каталог Steam знайти неможливо."
 
-#: src/utils/steam_parser.py:232
+#: src/utils/steam_parser.py:233
 msgid "Set Steam Location"
 msgstr "Встановіть розташування Steam"
 
-#: src/utils/steam_parser.py:248
+#: src/utils/steam_parser.py:249
 #, fuzzy
 msgid "Importing Games…"
-msgstr "Імпорт ігор..."
+msgstr "Імпорт ігор…"
 
-#: src/utils/steam_parser.py:249
+#: src/utils/steam_parser.py:250
 msgid "Talking to Steam"
 msgstr "Спілкування зі Steam"
 
-#~ msgid "removed"
-#~ msgstr "видалено"
+#, fuzzy
+#~ msgid "Successfully imported {str(len(bottles_games))} games."
+#~ msgstr "Успішно імпортовано 1 гру."
 
-#~ msgid "Added:"
-#~ msgstr "Додано:"
+#, fuzzy
+#~ msgid "Successfully imported {str(len(heroic_games))} games."
+#~ msgstr "Успішно імпортовано 1 гру."
 
 #~ msgid "Last played:"
 #~ msgstr "Остання гра:"
