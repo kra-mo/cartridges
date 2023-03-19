@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 12:55+0100\n"
+"POT-Creation-Date: 2023-03-19 13:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -253,13 +253,12 @@ msgstr ""
 msgid "translator_credits"
 msgstr ""
 
-#. The variable is the title of the game
-#: src/main.py:194
+#: src/main.py:195
 #, python-brace-format
-msgid "{self.win.games[game_id].name} removed"
+msgid "{title} removed"
 msgstr ""
 
-#: src/main.py:195
+#: src/main.py:196
 msgid "Undo"
 msgstr ""
 
@@ -272,22 +271,23 @@ msgid "Yesterday"
 msgstr ""
 
 #. The variable is the date when the game was added
-#: src/window.py:264
-msgid "Added: {self.get_time(current_game.added)}"
+#: src/window.py:265
+#, python-brace-format
+msgid "Added: {date}"
 msgstr ""
 
-#: src/window.py:269
+#: src/window.py:270
 msgid "Never"
 msgstr ""
 
 #. The variable is the date when the game was last played
-#: src/window.py:273
+#: src/window.py:274
 #, python-brace-format
 msgid "Last played: {last_played_date}"
 msgstr ""
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:229
+#: src/utils/steam_parser.py:230
 msgid "Couldn't Import Games"
 msgstr ""
 
@@ -303,7 +303,7 @@ msgstr ""
 msgid "No new games were found in the Bottles library."
 msgstr ""
 
-#: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:154
+#: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:155
 msgid "Bottles Games Imported"
 msgstr ""
 
@@ -313,8 +313,10 @@ msgid "Successfully imported 1 game."
 msgstr ""
 
 #. The variable is the number of games
-#: src/utils/bottles_parser.py:156
-msgid "Successfully imported {str(len(bottles_games))} games."
+#: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
+#: src/utils/steam_parser.py:172
+#, python-brace-format
+msgid "Successfully imported {games_no} games."
 msgstr ""
 
 #: src/utils/create_details_window.py:41
@@ -440,40 +442,30 @@ msgstr ""
 msgid "No new games were found in the Heroic library."
 msgstr ""
 
-#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:253
+#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:254
 msgid "Heroic Games Imported"
-msgstr ""
-
-#. The variable is the number of games
-#: src/utils/heroic_parser.py:255
-msgid "Successfully imported {str(len(heroic_games))} games."
 msgstr ""
 
 #: src/utils/steam_parser.py:158
 msgid "No new games were found in the Steam library."
 msgstr ""
 
-#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:169
+#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:170
 msgid "Steam Games Imported"
 msgstr ""
 
-#. The variable is the number of games
-#: src/utils/steam_parser.py:171
-msgid "Successfully imported {str(games_no)} games."
-msgstr ""
-
-#: src/utils/steam_parser.py:230
+#: src/utils/steam_parser.py:231
 msgid "The Steam directory cannot be found."
 msgstr ""
 
-#: src/utils/steam_parser.py:232
+#: src/utils/steam_parser.py:233
 msgid "Set Steam Location"
 msgstr ""
 
-#: src/utils/steam_parser.py:248
+#: src/utils/steam_parser.py:249
 msgid "Importing Games…"
 msgstr ""
 
-#: src/utils/steam_parser.py:249
+#: src/utils/steam_parser.py:250
 msgid "Talking to Steam"
 msgstr ""

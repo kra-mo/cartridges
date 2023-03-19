@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 12:55+0100\n"
+"POT-Creation-Date: 2023-03-19 13:11+0100\n"
 "PO-Revision-Date: 2023-03-19 12:05+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
@@ -258,13 +258,12 @@ msgstr "Bottles Telepítés Helye"
 msgid "translator_credits"
 msgstr "kramo https://kramo.hu"
 
-#. The variable is the title of the game
-#: src/main.py:194
-#, python-brace-format
-msgid "{self.win.games[game_id].name} removed"
-msgstr "{self.win.games[game_id].name} eltávolítva"
-
 #: src/main.py:195
+#, fuzzy, python-brace-format
+msgid "{title} removed"
+msgstr "eltávolítva"
+
+#: src/main.py:196
 msgid "Undo"
 msgstr "Visszavonás"
 
@@ -277,22 +276,23 @@ msgid "Yesterday"
 msgstr "Tegnap"
 
 #. The variable is the date when the game was added
-#: src/window.py:264
-msgid "Added: {self.get_time(current_game.added)}"
-msgstr "Hozzáadva: {self.get_time(current_game.added)}"
+#: src/window.py:265
+#, fuzzy, python-brace-format
+msgid "Added: {date}"
+msgstr "Hozzáadva:"
 
-#: src/window.py:269
+#: src/window.py:270
 msgid "Never"
 msgstr "Soha"
 
 #. The variable is the date when the game was last played
-#: src/window.py:273
+#: src/window.py:274
 #, python-brace-format
 msgid "Last played: {last_played_date}"
 msgstr "Legutóbbi játékmenet: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:229
+#: src/utils/steam_parser.py:230
 msgid "Couldn't Import Games"
 msgstr "Nem Lehet Importálni a Játékot"
 
@@ -308,7 +308,7 @@ msgstr "Bottles Mappa Kiválasztása"
 msgid "No new games were found in the Bottles library."
 msgstr "Nem találhatók új játékok a Bottles könyvtárban."
 
-#: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:154
+#: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:155
 msgid "Bottles Games Imported"
 msgstr "Bottles Játékok Importálva"
 
@@ -318,9 +318,11 @@ msgid "Successfully imported 1 game."
 msgstr "1 játék sikeresen importálva."
 
 #. The variable is the number of games
-#: src/utils/bottles_parser.py:156
-msgid "Successfully imported {str(len(bottles_games))} games."
-msgstr "{str(len(bottles_games))} játék sikeresen importálva."
+#: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
+#: src/utils/steam_parser.py:172
+#, fuzzy, python-brace-format
+msgid "Successfully imported {games_no} games."
+msgstr "{str(games_no)} játék sikeresen importálva."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -455,49 +457,46 @@ msgstr "Heroic Mappa Kiválasztása"
 msgid "No new games were found in the Heroic library."
 msgstr "Nem találhatók új játékok a Heroic könyvtárban."
 
-#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:253
+#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:254
 msgid "Heroic Games Imported"
 msgstr "Heroic Játékok Importálva"
-
-#. The variable is the number of games
-#: src/utils/heroic_parser.py:255
-msgid "Successfully imported {str(len(heroic_games))} games."
-msgstr "{str(len(heroic_games))} játék sikeresen importálva."
 
 #: src/utils/steam_parser.py:158
 msgid "No new games were found in the Steam library."
 msgstr "Nem találhatók új játékok a Steam könyvtárban."
 
-#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:169
+#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:170
 msgid "Steam Games Imported"
 msgstr "Steam Játékok Importálva"
 
-#. The variable is the number of games
-#: src/utils/steam_parser.py:171
-msgid "Successfully imported {str(games_no)} games."
-msgstr "{str(games_no)} játék sikeresen importálva."
-
-#: src/utils/steam_parser.py:230
+#: src/utils/steam_parser.py:231
 msgid "The Steam directory cannot be found."
 msgstr "A Steam mappa nem található."
 
-#: src/utils/steam_parser.py:232
+#: src/utils/steam_parser.py:233
 msgid "Set Steam Location"
 msgstr "Steam Mappa Kiválasztása"
 
-#: src/utils/steam_parser.py:248
+#: src/utils/steam_parser.py:249
 msgid "Importing Games…"
 msgstr "Játékok Importálása…"
 
-#: src/utils/steam_parser.py:249
+#: src/utils/steam_parser.py:250
 msgid "Talking to Steam"
 msgstr "Beszélgetés a Steammel"
 
-#~ msgid "removed"
-#~ msgstr "eltávolítva"
+#, python-brace-format
+#~ msgid "{self.win.games[game_id].name} removed"
+#~ msgstr "{self.win.games[game_id].name} eltávolítva"
 
-#~ msgid "Added:"
-#~ msgstr "Hozzáadva:"
+#~ msgid "Added: {self.get_time(current_game.added)}"
+#~ msgstr "Hozzáadva: {self.get_time(current_game.added)}"
+
+#~ msgid "Successfully imported {str(len(bottles_games))} games."
+#~ msgstr "{str(len(bottles_games))} játék sikeresen importálva."
+
+#~ msgid "Successfully imported {str(len(heroic_games))} games."
+#~ msgstr "{str(len(heroic_games))} játék sikeresen importálva."
 
 #~ msgid "Last played:"
 #~ msgstr "Legutóbbi játékmenet:"

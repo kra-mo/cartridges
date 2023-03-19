@@ -259,9 +259,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
         self.overview_title.set_label(current_game.name)
         self.overview_header_bar_title.set_title(current_game.name)
+        date = self.get_time(current_game.added)
         self.overview_added.set_label(
             # The variable is the date when the game was added
-            _(f"Added: {self.get_time(current_game.added)}")
+            _(f"Added: {date}")
         )
         last_played_date = (
             self.get_time(current_game.last_played)

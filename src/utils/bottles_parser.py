@@ -149,10 +149,11 @@ def bottles_parser(parent_widget, action):
             _("Successfully imported 1 game."),
         )
     elif len(bottles_games) > 1:
+        games_no = str(len(bottles_games))
         create_dialog(
             parent_widget,
             _("Bottles Games Imported"),
             # The variable is the number of games
-            _(f"Successfully imported {str(len(bottles_games))} games."),
+            _(f"Successfully imported {games_no} games."),
         )
     return bottles_games
