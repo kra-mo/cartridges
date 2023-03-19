@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-19 12:55+0100\n"
-"PO-Revision-Date: 2023-03-18 23:40+0000\n"
+"PO-Revision-Date: 2023-03-19 12:05+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -262,7 +262,7 @@ msgstr "kramo https://kramo.hu"
 #: src/main.py:194
 #, python-brace-format
 msgid "{self.win.games[game_id].name} removed"
-msgstr ""
+msgstr "{self.win.games[game_id].name} eltávolítva"
 
 #: src/main.py:195
 msgid "Undo"
@@ -279,17 +279,17 @@ msgstr "Tegnap"
 #. The variable is the date when the game was added
 #: src/window.py:264
 msgid "Added: {self.get_time(current_game.added)}"
-msgstr ""
+msgstr "Hozzáadva: {self.get_time(current_game.added)}"
 
 #: src/window.py:269
 msgid "Never"
-msgstr ""
+msgstr "Soha"
 
 #. The variable is the date when the game was last played
 #: src/window.py:273
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Last played: {last_played_date}"
-msgstr "Legutóbbi játékmenet: Soha"
+msgstr "Legutóbbi játékmenet: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:229
@@ -319,9 +319,8 @@ msgstr "1 játék sikeresen importálva."
 
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:156
-#, fuzzy
 msgid "Successfully imported {str(len(bottles_games))} games."
-msgstr "1 játék sikeresen importálva."
+msgstr "{str(len(bottles_games))} játék sikeresen importálva."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -357,32 +356,32 @@ msgstr "A fejlesztő vagy kiadó (nem kötelező)"
 
 #: src/utils/create_details_window.py:111
 msgid "file.txt"
-msgstr ""
+msgstr "fájl.txt"
 
 #. As in software
 #: src/utils/create_details_window.py:113
 msgid "program"
-msgstr ""
+msgstr "program"
 
 #: src/utils/create_details_window.py:117
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
-msgstr ""
+msgstr "C:\\útvonal\\a\\programhoz\\{exe_name}"
 
 #: src/utils/create_details_window.py:118
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
-msgstr ""
+msgstr "C:\\útvonal\\a\\fájlhoz\\{file_name}"
 
 #: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "/path/to/{exe_name}"
-msgstr ""
+msgstr "/útvonal/a/programhoz/{exe_name}"
 
 #: src/utils/create_details_window.py:122
 #, python-brace-format
 msgid "/path/to/{file_name}"
-msgstr ""
+msgstr "/útvonal/a/fájlhoz/{file_name}"
 
 #: src/utils/create_details_window.py:126
 #, python-brace-format
@@ -397,6 +396,16 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
+"Az \"{exe_name}\", program elindításához ezt a parancsot használd:\n"
+"\n"
+"<tt>\"{exe_path}\"</tt>\n"
+"\n"
+"A \"{file_name}\" fájl megnyitásához az alapértelmezett programmal ezt a "
+"parancsot használd:\n"
+"\n"
+"<tt>{command} \"{file_path}\"</tt>\n"
+"\n"
+"Ha az elérési útvonalban szóközök vannak, rakd az útvonalat idézőjelek közé!"
 
 #: src/utils/create_details_window.py:149
 msgid "Executable"
@@ -452,9 +461,8 @@ msgstr "Heroic Játékok Importálva"
 
 #. The variable is the number of games
 #: src/utils/heroic_parser.py:255
-#, fuzzy
 msgid "Successfully imported {str(len(heroic_games))} games."
-msgstr "1 játék sikeresen importálva."
+msgstr "{str(len(heroic_games))} játék sikeresen importálva."
 
 #: src/utils/steam_parser.py:158
 msgid "No new games were found in the Steam library."
@@ -466,9 +474,8 @@ msgstr "Steam Játékok Importálva"
 
 #. The variable is the number of games
 #: src/utils/steam_parser.py:171
-#, fuzzy
 msgid "Successfully imported {str(games_no)} games."
-msgstr "1 játék sikeresen importálva."
+msgstr "{str(games_no)} játék sikeresen importálva."
 
 #: src/utils/steam_parser.py:230
 msgid "The Steam directory cannot be found."
@@ -479,9 +486,8 @@ msgid "Set Steam Location"
 msgstr "Steam Mappa Kiválasztása"
 
 #: src/utils/steam_parser.py:248
-#, fuzzy
 msgid "Importing Games…"
-msgstr "Játékok Importálása..."
+msgstr "Játékok Importálása…"
 
 #: src/utils/steam_parser.py:249
 msgid "Talking to Steam"
