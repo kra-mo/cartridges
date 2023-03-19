@@ -118,7 +118,7 @@ def get_games_async(parent_widget, appmanifests, steam_dir, import_dialog):
     steam_games = {}
     queue = 0
 
-    # Wrap the function with another one as Gio.Task.run_in_thread does not allow for passing args
+    # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
     def create_func(datatypes, current_time, parent_widget, appmanifest, steam_dir):
         def wrapper(task, *_unused):
             get_game(

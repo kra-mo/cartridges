@@ -21,7 +21,7 @@ import json
 import os
 import time
 
-from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
+from gi.repository import Adw, GdkPixbuf, Gio, GLib, GObject, Gtk
 
 from .create_dialog import create_dialog
 from .get_cover import get_cover
@@ -31,7 +31,7 @@ from .save_games import save_games
 
 def create_details_window(parent_widget, game_id=None):
     window = Adw.Window(
-        modal=True, default_width=450, default_height=750, transient_for=parent_widget
+        modal=True, default_width=500, default_height=750, transient_for=parent_widget
     )
 
     games = parent_widget.games
@@ -102,10 +102,41 @@ def create_details_window(parent_widget, game_id=None):
     )
     developer_group.add(developer)
 
+    exec_info_button = Gtk.ToggleButton(
+        icon_name="dialog-information-symbolic",
+        valign=Gtk.Align.CENTER,
+        css_classes=["flat", "circular"],
+    )
+
+    exec_info_text = 'To launch the executable "program", use the command:\n\n<tt>"/path/to/program"</tt>\n\nTo open the file "file.txt" with the default application, use:\n\n<tt>xdg-open "/path/to/file.txt"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!'
+
+    exec_info_text_win = 'To launch the executable "program.exe", use the command:\n\n<tt>"C:\\path\\to\\program.exe"</tt>\n\nTo open the file "file.txt" with the default application, use:\n\n<tt>start "C:\\path\\to\\file.txt"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!'
+
+    exec_info_label = Gtk.Label(
+        label=exec_info_text_win if os.name == "nt" else exec_info_text,
+        use_markup=True,
+        wrap=True,
+        max_width_chars=30,
+        margin_top=6,
+        margin_bottom=12,
+        margin_start=6,
+        margin_end=6,
+    )
+
+    exec_info_popover = Gtk.Popover(
+        position=Gtk.PositionType.TOP, child=exec_info_label
+    )
+
+    exec_info_popover.bind_property(
+        "visible", exec_info_button, "active", GObject.BindingFlags.BIDIRECTIONAL
+    )
+
     exec_group = Adw.PreferencesGroup(
         title=_("Executable"),
         description=_("File to open or command to run when launching the game"),
+        header_suffix=exec_info_button,
     )
+    exec_info_popover.set_parent(exec_group.get_header_suffix())
     exec_group.add(executable)
 
     general_page = Adw.PreferencesPage()
