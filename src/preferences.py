@@ -17,12 +17,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
+
 from gi.repository import Adw, Gio, GLib, Gtk
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/preferences.ui")
 class PreferencesWindow(Adw.PreferencesWindow):
     __gtype_name__ = "PreferencesWindow"
+
+    page = Gtk.Template.Child()
+    bottles_group = Gtk.Template.Child()
 
     exit_after_launch_switch = Gtk.Template.Child()
     import_epic_games_switch = Gtk.Template.Child()
@@ -102,3 +107,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.bottles_file_chooser_button.connect(
             "clicked", choose_folder, set_bottles_dir
         )
+
+        if os.name == "nt":
+            self.page.remove(self.bottles_group)

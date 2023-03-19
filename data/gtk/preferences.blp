@@ -5,7 +5,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
   search-enabled: false;
   default-height: 500;
 
-  Adw.PreferencesPage {
+  Adw.PreferencesPage page {
     Adw.PreferencesGroup {
       title: _("General");
 
@@ -18,7 +18,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       }
     }
 
-    Adw.PreferencesGroup {
+    Adw.PreferencesGroup steam_group {
       title: "Steam";
 
       Adw.ActionRow {
@@ -32,7 +32,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       }
     }
 
-    Adw.PreferencesGroup {
+    Adw.PreferencesGroup heroic_group {
       title: "Heroic";
 
       Adw.ActionRow {
@@ -70,7 +70,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       }
     }
 
-    Adw.PreferencesGroup {
+    Adw.PreferencesGroup bottles_group {
       title: "Bottles";
 
       Adw.ActionRow {

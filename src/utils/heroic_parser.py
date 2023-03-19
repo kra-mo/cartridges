@@ -57,6 +57,11 @@ def heroic_parser(parent_widget, action):
                 ),
             )
             action(None, None)
+        elif os.path.exists(os.path.join(os.getenv("appdata"), "heroic")):
+            schema.set_string(
+                "heroic-location", os.path.join(os.getenv("appdata"), "heroic")
+            )
+            action(None, None)
         else:
             filechooser = Gtk.FileDialog.new()
 

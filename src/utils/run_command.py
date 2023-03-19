@@ -25,12 +25,13 @@ from gi.repository import Gio
 
 
 def run_command(executable):
-    with subprocess.Popen(
+    subprocess.Popen(
         ["flatpak-spawn --host " + executable]
         if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
         else [executable],
         shell=True,
         start_new_session=True,
-    ):
-        if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
-            sys.exit()
+        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
+    )
+    if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
+        sys.exit()
