@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 12:40+0100\n"
+"POT-Creation-Date: 2023-03-19 12:43+0100\n"
 "PO-Revision-Date: 2023-03-14 17:59+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -478,7 +478,7 @@ msgstr ""
 
 #: src/utils/steam_parser.py:248
 #, fuzzy
-msgid "Importing Games..."
+msgid "Importing Games…"
 msgstr "Kunne ikke importere spill"
 
 #: src/utils/steam_parser.py:249

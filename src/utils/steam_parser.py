@@ -245,7 +245,7 @@ def steam_parser(parent_widget, action):
     steam_dir = os.path.expanduser(schema.get_string("steam-location"))
 
     import_statuspage = Adw.StatusPage(
-        title=_("Importing Games..."),
+        title=_("Importing Games…"),
         description=_("Talking to Steam"),
     )
 

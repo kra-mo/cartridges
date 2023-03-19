@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 12:40+0100\n"
+"POT-Creation-Date: 2023-03-19 12:43+0100\n"
 "PO-Revision-Date: 2023-03-14 17:59+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
@@ -480,7 +480,7 @@ msgstr "Steam Mappa Kiválasztása"
 
 #: src/utils/steam_parser.py:248
 #, fuzzy
-msgid "Importing Games..."
+msgid "Importing Games…"
 msgstr "Epic Games Játékok Importálása"
 
 #: src/utils/steam_parser.py:249
