@@ -1,0 +1,31 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+name: "Build for Windows"
+jobs:
+  windows:
+    name: "Build"
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: mingw-w64-ucrt-x86_64-gtk4 mingw-w64-ucrt-x86_64-libadwaita mingw-w64-ucrt-x86_64-python-gobject mingw-w64-ucrt-x86_64-python-yaml mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-ca-certificates mingw-w64-ucrt-x86_64-meson git
+      - name: Compile
+        shell: msys2 {0}
+        run: |
+          meson _build
+          ninja -C _build install
+          pacman --noconfirm -Rs mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-meson git
+      - name: "Inno Setup"
+        run: iscc ".\.windows\Cartridges.iss"
+      - name: "Upload Artifact"
+        uses: actions/upload-artifact@v3
+        with:
+          name: "Installer"
+          path: ".windows/Output/Cartridges Setup.exe"
