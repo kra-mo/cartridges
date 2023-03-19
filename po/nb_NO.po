@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-15 21:17+0100\n"
+"POT-Creation-Date: 2023-03-19 12:40+0100\n"
 "PO-Revision-Date: 2023-03-14 17:59+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:112
+#: src/main.py:116
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -47,9 +47,8 @@ msgstr ""
 "organiseringsfunksjoner som skjuling og sortering etter tillagt dato eller "
 "sist spilt."
 
-#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:132
-#: src/utils/heroic_parser.py:226 src/utils/steam_parser.py:162
-#: src/utils/steam_parser.py:218
+#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:142
+#: src/utils/heroic_parser.py:241 src/utils/steam_parser.py:157
 msgid "No Games Found"
 msgstr "Fant ingen spill"
 
@@ -146,21 +145,21 @@ msgstr "Heroic"
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/window.blp:403 data/gtk/window.blp:422 data/gtk/game.blp:87
+#: data/gtk/window.blp:404 data/gtk/window.blp:423 data/gtk/game.blp:87
 #: data/gtk/game.blp:106
 msgid "Edit"
 msgstr "Rediger"
 
-#: data/gtk/window.blp:408 data/gtk/game.blp:92
+#: data/gtk/window.blp:409 data/gtk/game.blp:92
 msgid "Hide"
 msgstr "Skjul"
 
-#: data/gtk/window.blp:413 data/gtk/window.blp:432 data/gtk/game.blp:97
+#: data/gtk/window.blp:414 data/gtk/window.blp:433 data/gtk/game.blp:97
 #: data/gtk/game.blp:116
 msgid "Remove"
 msgstr "Fjern"
 
-#: data/gtk/window.blp:427 data/gtk/game.blp:111
+#: data/gtk/window.blp:428 data/gtk/game.blp:111
 msgid "Unhide"
 msgstr "Opphev fjerning"
 
@@ -255,75 +254,74 @@ msgstr ""
 msgid "Bottles Install Location"
 msgstr ""
 
-#. Translators: Replace this with your name for it to show up in the about window.
-#: src/main.py:126
+#. Translators: Replace this with your name for it to show up in the about window
+#: src/main.py:130
 msgid "translator_credits"
 msgstr ""
 
-#. Create toast for undoing the remove action
-#: src/main.py:190
-msgid "removed"
-msgstr "fjernet"
+#. The variable is the title of the game
+#: src/main.py:194
+#, python-brace-format
+msgid "{self.win.games[game_id].name} removed"
+msgstr ""
 
-#: src/main.py:191
+#: src/main.py:195
 msgid "Undo"
 msgstr "Angre"
 
-#: src/window.py:225
+#: src/window.py:229
 msgid "Today"
 msgstr "I dag"
 
-#: src/window.py:227
+#: src/window.py:231
 msgid "Yesterday"
 msgstr "I går"
 
-#: src/window.py:259
-msgid "Added:"
-msgstr "Tillagt:"
-
-#: src/window.py:262
-msgid "Last played:"
-msgstr "Sist spilt:"
-
+#. The variable is the date when the game was added
 #: src/window.py:264
-msgid "Last played: Never"
+msgid "Added: {self.get_time(current_game.added)}"
+msgstr ""
+
+#: src/window.py:269
+msgid "Never"
+msgstr ""
+
+#. The variable is the date when the game was last played
+#: src/window.py:273
+#, fuzzy, python-brace-format
+msgid "Last played: {last_played_date}"
 msgstr "Sist spilt: Aldri"
 
-#: src/utils/bottles_parser.py:70 src/utils/heroic_parser.py:72
-#: src/utils/steam_parser.py:69
+#: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
+#: src/utils/steam_parser.py:229
 msgid "Couldn't Import Games"
 msgstr "Kunne ikke importere spill"
 
-#: src/utils/bottles_parser.py:71
+#: src/utils/bottles_parser.py:81
 msgid "The Bottles directory cannot be found."
 msgstr ""
 
-#: src/utils/bottles_parser.py:73
+#: src/utils/bottles_parser.py:83
 msgid "Set Bottles Location"
 msgstr ""
 
-#: src/utils/bottles_parser.py:133
+#: src/utils/bottles_parser.py:143
 msgid "No new games were found in the Bottles library."
 msgstr ""
 
-#: src/utils/bottles_parser.py:138 src/utils/bottles_parser.py:144
+#: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:154
 msgid "Bottles Games Imported"
 msgstr ""
 
-#: src/utils/bottles_parser.py:139 src/utils/heroic_parser.py:233
-#: src/utils/steam_parser.py:169
+#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:248
+#: src/utils/steam_parser.py:164
 msgid "Successfully imported 1 game."
 msgstr ""
 
-#: src/utils/bottles_parser.py:145 src/utils/heroic_parser.py:239
-#: src/utils/steam_parser.py:175
-msgid "Successfully imported"
+#. The variable is the number of games
+#: src/utils/bottles_parser.py:156
+msgid "Successfully imported {str(len(bottles_games))} games."
 msgstr ""
-
-#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:243
-#: src/utils/steam_parser.py:179
-msgid "games."
-msgstr "spill."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -357,35 +355,78 @@ msgstr ""
 msgid "The developer or publisher (optional)"
 msgstr ""
 
-#: src/utils/create_details_window.py:106
-msgid "Executable"
-msgstr "Kjørbar"
+#: src/utils/create_details_window.py:111
+msgid "file.txt"
+msgstr ""
 
-#: src/utils/create_details_window.py:107
-msgid "File to open or command to run when launching the game"
+#. As in software
+#: src/utils/create_details_window.py:113
+msgid "program"
 msgstr ""
 
 #: src/utils/create_details_window.py:117
+#, python-brace-format
+msgid "C:\\path\\to\\{exe_name}"
+msgstr ""
+
+#: src/utils/create_details_window.py:118
+#, python-brace-format
+msgid "C:\\path\\to\\{file_name}"
+msgstr ""
+
+#: src/utils/create_details_window.py:121
+#, python-brace-format
+msgid "/path/to/{exe_name}"
+msgstr ""
+
+#: src/utils/create_details_window.py:122
+#, python-brace-format
+msgid "/path/to/{file_name}"
+msgstr ""
+
+#: src/utils/create_details_window.py:126
+#, python-brace-format
+msgid ""
+"To launch the executable \"{exe_name}\", use the command:\n"
+"\n"
+"<tt>\"{exe_path}\"</tt>\n"
+"\n"
+"To open the file \"{file_name}\" with the default application, use:\n"
+"\n"
+"<tt>{command} \"{file_path}\"</tt>\n"
+"\n"
+"If the path contains spaces, make sure to wrap it in double quotes!"
+msgstr ""
+
+#: src/utils/create_details_window.py:149
+msgid "Executable"
+msgstr "Kjørbar"
+
+#: src/utils/create_details_window.py:150
+msgid "File to open or command to run when launching the game"
+msgstr ""
+
+#: src/utils/create_details_window.py:162
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/utils/create_details_window.py:163
-#: src/utils/create_details_window.py:169
+#: src/utils/create_details_window.py:208
+#: src/utils/create_details_window.py:214
 msgid "Couldn't Add Game"
 msgstr "Kunne ikke legge til spill"
 
-#: src/utils/create_details_window.py:163
-#: src/utils/create_details_window.py:194
+#: src/utils/create_details_window.py:208
+#: src/utils/create_details_window.py:239
 msgid "Game title cannot be empty."
 msgstr ""
 
-#: src/utils/create_details_window.py:169
-#: src/utils/create_details_window.py:202
+#: src/utils/create_details_window.py:214
+#: src/utils/create_details_window.py:247
 msgid "Executable cannot be empty."
 msgstr ""
 
-#: src/utils/create_details_window.py:193
-#: src/utils/create_details_window.py:201
+#: src/utils/create_details_window.py:238
+#: src/utils/create_details_window.py:246
 msgid "Couldn't Apply Preferences"
 msgstr ""
 
@@ -393,43 +434,65 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
-#: src/utils/heroic_parser.py:73
+#: src/utils/heroic_parser.py:88
 msgid "The Heroic directory cannot be found."
 msgstr ""
 
-#: src/utils/heroic_parser.py:75
+#: src/utils/heroic_parser.py:90
 msgid "Set Heroic Location"
 msgstr ""
 
-#: src/utils/heroic_parser.py:227
+#: src/utils/heroic_parser.py:242
 msgid "No new games were found in the Heroic library."
 msgstr ""
 
-#: src/utils/heroic_parser.py:232 src/utils/heroic_parser.py:238
+#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:253
 msgid "Heroic Games Imported"
 msgstr "Heroic-spill importert"
 
-#: src/utils/steam_parser.py:70
+#. The variable is the number of games
+#: src/utils/heroic_parser.py:255
+msgid "Successfully imported {str(len(heroic_games))} games."
+msgstr ""
+
+#: src/utils/steam_parser.py:158
+msgid "No new games were found in the Steam library."
+msgstr ""
+
+#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:169
+msgid "Steam Games Imported"
+msgstr ""
+
+#. The variable is the number of games
+#: src/utils/steam_parser.py:171
+msgid "Successfully imported {str(games_no)} games."
+msgstr ""
+
+#: src/utils/steam_parser.py:230
 msgid "The Steam directory cannot be found."
 msgstr ""
 
-#: src/utils/steam_parser.py:72
+#: src/utils/steam_parser.py:232
 msgid "Set Steam Location"
 msgstr ""
 
-#: src/utils/steam_parser.py:98
+#: src/utils/steam_parser.py:248
 #, fuzzy
 msgid "Importing Games..."
 msgstr "Kunne ikke importere spill"
 
-#: src/utils/steam_parser.py:99
+#: src/utils/steam_parser.py:249
 msgid "Talking to Steam"
 msgstr ""
 
-#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:219
-msgid "No new games were found in the Steam library."
-msgstr ""
+#~ msgid "removed"
+#~ msgstr "fjernet"
 
-#: src/utils/steam_parser.py:168 src/utils/steam_parser.py:174
-msgid "Steam Games Imported"
-msgstr ""
+#~ msgid "Added:"
+#~ msgstr "Tillagt:"
+
+#~ msgid "Last played:"
+#~ msgstr "Sist spilt:"
+
+#~ msgid "games."
+#~ msgstr "spill."

@@ -260,12 +260,17 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.overview_title.set_label(current_game.name)
         self.overview_header_bar_title.set_title(current_game.name)
         self.overview_added.set_label(
-            _("Added:") + " " + self.get_time(current_game.added)
+            # The variable is the date when the game was added
+            _(f"Added: {self.get_time(current_game.added)}")
+        )
+        last_played_date = (
+            self.get_time(current_game.last_played)
+            if current_game.last_played != 0
+            else _("Never")
         )
         self.overview_last_played.set_label(
-            _("Last played:") + " " + self.get_time(current_game.last_played)
-            if current_game.last_played != 0
-            else _("Last played: Never")
+            # The variable is the date when the game was last played
+            _(f"Last played: {last_played_date}")
         )
 
     def a_z_sort(self, child1, child2):

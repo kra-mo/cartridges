@@ -167,11 +167,8 @@ def get_games_async(parent_widget, appmanifests, steam_dir, import_dialog):
                 create_dialog(
                     parent_widget,
                     _("Steam Games Imported"),
-                    _("Successfully imported")
-                    + " "
-                    + str(games_no)
-                    + " "
-                    + _("games."),
+                    # The variable is the number of games
+                    _(f"Successfully imported {str(games_no)} games."),
                 )
 
     for appmanifest in appmanifests:
