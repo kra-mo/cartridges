@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-19 13:11+0100\n"
-"PO-Revision-Date: 2023-03-19 12:05+0000\n"
+"PO-Revision-Date: 2023-03-19 12:28+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -259,9 +259,9 @@ msgid "translator_credits"
 msgstr "kramo https://kramo.hu"
 
 #: src/main.py:195
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{title} removed"
-msgstr "eltávolítva"
+msgstr "{title} eltávolítva"
 
 #: src/main.py:196
 msgid "Undo"
@@ -277,9 +277,9 @@ msgstr "Tegnap"
 
 #. The variable is the date when the game was added
 #: src/window.py:265
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Added: {date}"
-msgstr "Hozzáadva:"
+msgstr "Hozzáadva: {date}"
 
 #: src/window.py:270
 msgid "Never"
@@ -320,9 +320,9 @@ msgstr "1 játék sikeresen importálva."
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
 #: src/utils/steam_parser.py:172
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
-msgstr "{str(games_no)} játék sikeresen importálva."
+msgstr "{games_no} játék sikeresen importálva."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"

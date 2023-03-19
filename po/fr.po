@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-19 13:11+0100\n"
-"PO-Revision-Date: 2023-03-18 23:40+0000\n"
-"Last-Translator: \"J. Lavoie\" <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2023-03-19 12:28+0000\n"
+"Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
 "Language: fr\n"
@@ -260,9 +260,9 @@ msgid "translator_credits"
 msgstr ""
 
 #: src/main.py:195
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{title} removed"
-msgstr "retiré"
+msgstr "{title} retiré"
 
 #: src/main.py:196
 msgid "Undo"
@@ -278,19 +278,19 @@ msgstr "Hier"
 
 #. The variable is the date when the game was added
 #: src/window.py:265
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Added: {date}"
-msgstr "Ajouté :"
+msgstr "Ajouté : {date}"
 
 #: src/window.py:270
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #. The variable is the date when the game was last played
 #: src/window.py:274
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Last played: {last_played_date}"
-msgstr "Dernière session : Jamais"
+msgstr "Dernière session : {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:230
@@ -321,9 +321,9 @@ msgstr "Importation réussie de 1 jeu."
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
 #: src/utils/steam_parser.py:172
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
-msgstr "Importation réussie de 1 jeu."
+msgstr "Importation réussie de {games_no} jeux."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
