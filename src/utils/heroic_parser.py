@@ -251,10 +251,7 @@ def heroic_parser(parent_widget, action):
         create_dialog(
             parent_widget,
             _("Heroic Games Imported"),
-            _("Successfully imported")
-            + " "
-            + str(len(heroic_games))
-            + " "
-            + _("games."),
+            # The variable is the number of games
+            _(f"Successfully imported {str(len(heroic_games))} games."),
         )
     return heroic_games

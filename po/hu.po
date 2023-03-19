@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-15 21:17+0100\n"
+"POT-Creation-Date: 2023-03-19 12:55+0100\n"
 "PO-Revision-Date: 2023-03-18 23:40+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:112
+#: src/main.py:116
 msgid "Cartridges"
 msgstr "Kazetták"
 
@@ -47,9 +47,8 @@ msgstr ""
 "A Kazetták egy egyszerű játékindító. Támogatja a Steam-ből, Heroic-ból és "
 "Bottles-ből való importálást, valamint a játékok elrejtését és rendezését."
 
-#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:132
-#: src/utils/heroic_parser.py:226 src/utils/steam_parser.py:162
-#: src/utils/steam_parser.py:218
+#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:142
+#: src/utils/heroic_parser.py:241 src/utils/steam_parser.py:157
 msgid "No Games Found"
 msgstr "Nem Találhatóak Játékok"
 
@@ -145,21 +144,21 @@ msgstr "Heroic"
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/window.blp:403 data/gtk/window.blp:422 data/gtk/game.blp:87
+#: data/gtk/window.blp:404 data/gtk/window.blp:423 data/gtk/game.blp:87
 #: data/gtk/game.blp:106
 msgid "Edit"
 msgstr "Szerkeszt"
 
-#: data/gtk/window.blp:408 data/gtk/game.blp:92
+#: data/gtk/window.blp:409 data/gtk/game.blp:92
 msgid "Hide"
 msgstr "Elrejt"
 
-#: data/gtk/window.blp:413 data/gtk/window.blp:432 data/gtk/game.blp:97
+#: data/gtk/window.blp:414 data/gtk/window.blp:433 data/gtk/game.blp:97
 #: data/gtk/game.blp:116
 msgid "Remove"
 msgstr "Eltávolít"
 
-#: data/gtk/window.blp:427 data/gtk/game.blp:111
+#: data/gtk/window.blp:428 data/gtk/game.blp:111
 msgid "Unhide"
 msgstr "Mutat"
 
@@ -254,75 +253,75 @@ msgstr "Manuálisan Hozzáadott Játékok Importálása"
 msgid "Bottles Install Location"
 msgstr "Bottles Telepítés Helye"
 
-#. Translators: Replace this with your name for it to show up in the about window.
-#: src/main.py:126
+#. Translators: Replace this with your name for it to show up in the about window
+#: src/main.py:130
 msgid "translator_credits"
 msgstr "kramo https://kramo.hu"
 
-#. Create toast for undoing the remove action
-#: src/main.py:190
-msgid "removed"
-msgstr "eltávolítva"
+#. The variable is the title of the game
+#: src/main.py:194
+#, python-brace-format
+msgid "{self.win.games[game_id].name} removed"
+msgstr ""
 
-#: src/main.py:191
+#: src/main.py:195
 msgid "Undo"
 msgstr "Visszavonás"
 
-#: src/window.py:225
+#: src/window.py:229
 msgid "Today"
 msgstr "Ma"
 
-#: src/window.py:227
+#: src/window.py:231
 msgid "Yesterday"
 msgstr "Tegnap"
 
-#: src/window.py:259
-msgid "Added:"
-msgstr "Hozzáadva:"
-
-#: src/window.py:262
-msgid "Last played:"
-msgstr "Legutóbbi játékmenet:"
-
+#. The variable is the date when the game was added
 #: src/window.py:264
-msgid "Last played: Never"
+msgid "Added: {self.get_time(current_game.added)}"
+msgstr ""
+
+#: src/window.py:269
+msgid "Never"
+msgstr ""
+
+#. The variable is the date when the game was last played
+#: src/window.py:273
+#, fuzzy, python-brace-format
+msgid "Last played: {last_played_date}"
 msgstr "Legutóbbi játékmenet: Soha"
 
-#: src/utils/bottles_parser.py:70 src/utils/heroic_parser.py:72
-#: src/utils/steam_parser.py:69
+#: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
+#: src/utils/steam_parser.py:229
 msgid "Couldn't Import Games"
 msgstr "Nem Lehet Importálni a Játékot"
 
-#: src/utils/bottles_parser.py:71
+#: src/utils/bottles_parser.py:81
 msgid "The Bottles directory cannot be found."
 msgstr "A Bottles mappa nem található."
 
-#: src/utils/bottles_parser.py:73
+#: src/utils/bottles_parser.py:83
 msgid "Set Bottles Location"
 msgstr "Bottles Mappa Kiválasztása"
 
-#: src/utils/bottles_parser.py:133
+#: src/utils/bottles_parser.py:143
 msgid "No new games were found in the Bottles library."
 msgstr "Nem találhatók új játékok a Bottles könyvtárban."
 
-#: src/utils/bottles_parser.py:138 src/utils/bottles_parser.py:144
+#: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:154
 msgid "Bottles Games Imported"
 msgstr "Bottles Játékok Importálva"
 
-#: src/utils/bottles_parser.py:139 src/utils/heroic_parser.py:233
-#: src/utils/steam_parser.py:169
+#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:248
+#: src/utils/steam_parser.py:164
 msgid "Successfully imported 1 game."
 msgstr "1 játék sikeresen importálva."
 
-#: src/utils/bottles_parser.py:145 src/utils/heroic_parser.py:239
-#: src/utils/steam_parser.py:175
-msgid "Successfully imported"
-msgstr "Sikeresen importálva"
-
-#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:243
-#: src/utils/steam_parser.py:179
-msgid "games."
-msgstr "játék."
+#. The variable is the number of games
+#: src/utils/bottles_parser.py:156
+#, fuzzy
+msgid "Successfully imported {str(len(bottles_games))} games."
+msgstr "1 játék sikeresen importálva."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -356,35 +355,78 @@ msgstr "Fejlesztő"
 msgid "The developer or publisher (optional)"
 msgstr "A fejlesztő vagy kiadó (nem kötelező)"
 
-#: src/utils/create_details_window.py:106
+#: src/utils/create_details_window.py:111
+msgid "file.txt"
+msgstr ""
+
+#. As in software
+#: src/utils/create_details_window.py:113
+msgid "program"
+msgstr ""
+
+#: src/utils/create_details_window.py:117
+#, python-brace-format
+msgid "C:\\path\\to\\{exe_name}"
+msgstr ""
+
+#: src/utils/create_details_window.py:118
+#, python-brace-format
+msgid "C:\\path\\to\\{file_name}"
+msgstr ""
+
+#: src/utils/create_details_window.py:121
+#, python-brace-format
+msgid "/path/to/{exe_name}"
+msgstr ""
+
+#: src/utils/create_details_window.py:122
+#, python-brace-format
+msgid "/path/to/{file_name}"
+msgstr ""
+
+#: src/utils/create_details_window.py:126
+#, python-brace-format
+msgid ""
+"To launch the executable \"{exe_name}\", use the command:\n"
+"\n"
+"<tt>\"{exe_path}\"</tt>\n"
+"\n"
+"To open the file \"{file_name}\" with the default application, use:\n"
+"\n"
+"<tt>{command} \"{file_path}\"</tt>\n"
+"\n"
+"If the path contains spaces, make sure to wrap it in double quotes!"
+msgstr ""
+
+#: src/utils/create_details_window.py:149
 msgid "Executable"
 msgstr "Program"
 
-#: src/utils/create_details_window.py:107
+#: src/utils/create_details_window.py:150
 msgid "File to open or command to run when launching the game"
 msgstr "Fájl megnyitása vagy parancs futtatása a játék indításakor"
 
-#: src/utils/create_details_window.py:117
+#: src/utils/create_details_window.py:162
 msgid "Cancel"
 msgstr "Mégse"
 
-#: src/utils/create_details_window.py:163
-#: src/utils/create_details_window.py:169
+#: src/utils/create_details_window.py:208
+#: src/utils/create_details_window.py:214
 msgid "Couldn't Add Game"
 msgstr "Nem Lehet Hozzáadni a Játékot"
 
-#: src/utils/create_details_window.py:163
-#: src/utils/create_details_window.py:194
+#: src/utils/create_details_window.py:208
+#: src/utils/create_details_window.py:239
 msgid "Game title cannot be empty."
 msgstr "A cím nem lehet üres."
 
-#: src/utils/create_details_window.py:169
-#: src/utils/create_details_window.py:202
+#: src/utils/create_details_window.py:214
+#: src/utils/create_details_window.py:247
 msgid "Executable cannot be empty."
 msgstr "A program nem lehet üres."
 
-#: src/utils/create_details_window.py:193
-#: src/utils/create_details_window.py:201
+#: src/utils/create_details_window.py:238
+#: src/utils/create_details_window.py:246
 msgid "Couldn't Apply Preferences"
 msgstr "Nem Lehet Menteni a Beállításokat"
 
@@ -392,45 +434,73 @@ msgstr "Nem Lehet Menteni a Beállításokat"
 msgid "Dismiss"
 msgstr "Rendben"
 
-#: src/utils/heroic_parser.py:73
+#: src/utils/heroic_parser.py:88
 msgid "The Heroic directory cannot be found."
 msgstr "A Heroic mappa nem található."
 
-#: src/utils/heroic_parser.py:75
+#: src/utils/heroic_parser.py:90
 msgid "Set Heroic Location"
 msgstr "Heroic Mappa Kiválasztása"
 
-#: src/utils/heroic_parser.py:227
+#: src/utils/heroic_parser.py:242
 msgid "No new games were found in the Heroic library."
 msgstr "Nem találhatók új játékok a Heroic könyvtárban."
 
-#: src/utils/heroic_parser.py:232 src/utils/heroic_parser.py:238
+#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:253
 msgid "Heroic Games Imported"
 msgstr "Heroic Játékok Importálva"
 
-#: src/utils/steam_parser.py:70
-msgid "The Steam directory cannot be found."
-msgstr "A Steam mappa nem található."
+#. The variable is the number of games
+#: src/utils/heroic_parser.py:255
+#, fuzzy
+msgid "Successfully imported {str(len(heroic_games))} games."
+msgstr "1 játék sikeresen importálva."
 
-#: src/utils/steam_parser.py:72
-msgid "Set Steam Location"
-msgstr "Steam Mappa Kiválasztása"
-
-#: src/utils/steam_parser.py:98
-msgid "Importing Games..."
-msgstr "Játékok Importálása..."
-
-#: src/utils/steam_parser.py:99
-msgid "Talking to Steam"
-msgstr "Beszélgetés a Steammel"
-
-#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:219
+#: src/utils/steam_parser.py:158
 msgid "No new games were found in the Steam library."
 msgstr "Nem találhatók új játékok a Steam könyvtárban."
 
-#: src/utils/steam_parser.py:168 src/utils/steam_parser.py:174
+#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:169
 msgid "Steam Games Imported"
 msgstr "Steam Játékok Importálva"
+
+#. The variable is the number of games
+#: src/utils/steam_parser.py:171
+#, fuzzy
+msgid "Successfully imported {str(games_no)} games."
+msgstr "1 játék sikeresen importálva."
+
+#: src/utils/steam_parser.py:230
+msgid "The Steam directory cannot be found."
+msgstr "A Steam mappa nem található."
+
+#: src/utils/steam_parser.py:232
+msgid "Set Steam Location"
+msgstr "Steam Mappa Kiválasztása"
+
+#: src/utils/steam_parser.py:248
+#, fuzzy
+msgid "Importing Games…"
+msgstr "Játékok Importálása..."
+
+#: src/utils/steam_parser.py:249
+msgid "Talking to Steam"
+msgstr "Beszélgetés a Steammel"
+
+#~ msgid "removed"
+#~ msgstr "eltávolítva"
+
+#~ msgid "Added:"
+#~ msgstr "Hozzáadva:"
+
+#~ msgid "Last played:"
+#~ msgstr "Legutóbbi játékmenet:"
+
+#~ msgid "Successfully imported"
+#~ msgstr "Sikeresen importálva"
+
+#~ msgid "games."
+#~ msgstr "játék."
 
 #~ msgid "kramo"
 #~ msgstr "kramo"
