@@ -28,6 +28,8 @@ def run_command(executable):
     subprocess.Popen(
         ["flatpak-spawn --host " + executable]
         if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
+        else executable.split()
+        if os.name == "nt"
         else [executable],
         shell=True,
         start_new_session=True,

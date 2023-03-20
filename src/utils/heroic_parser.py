@@ -129,7 +129,11 @@ def heroic_parser(parent_widget, action):
 
             values["name"] = game["title"]
             values["developer"] = game["developer"]
-            values["executable"] = "xdg-open heroic://launch/" + app_name
+            values["executable"] = (
+                "start heroic://launch/" + app_name
+                if os.name == "nt"
+                else "xdg-open heroic://launch/" + app_name
+            )
             values["hidden"] = False
             values["source"] = "heroic_epic"
             values["added"] = current_time
@@ -189,7 +193,11 @@ def heroic_parser(parent_widget, action):
                         save_cover(values, parent_widget, image_path)
                     break
 
-            values["executable"] = "xdg-open heroic://launch/" + app_name
+            values["executable"] = (
+                "start heroic://launch/" + app_name
+                if os.name == "nt"
+                else "xdg-open heroic://launch/" + app_name
+            )
             values["hidden"] = False
             values["source"] = "heroic_gog"
             values["added"] = current_time
@@ -220,7 +228,11 @@ def heroic_parser(parent_widget, action):
                 continue
 
             values["name"] = item["title"]
-            values["executable"] = "xdg-open heroic://launch/" + app_name
+            values["executable"] = (
+                "start heroic://launch/" + app_name
+                if os.name == "nt"
+                else "xdg-open heroic://launch/" + app_name
+            )
             values["hidden"] = False
             values["source"] = "heroic_sideload"
             values["added"] = current_time
