@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-19 13:11+0100\n"
-"PO-Revision-Date: 2023-03-15 22:46+0000\n"
+"PO-Revision-Date: 2023-03-21 11:05+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/nb_NO/>\n"
@@ -259,9 +259,9 @@ msgid "translator_credits"
 msgstr "Allan Nordhøy, <epost@anotheragency.no>"
 
 #: src/main.py:195
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{title} removed"
-msgstr "fjernet"
+msgstr "{title} fjernet"
 
 #: src/main.py:196
 msgid "Undo"
@@ -277,9 +277,9 @@ msgstr "I går"
 
 #. The variable is the date when the game was added
 #: src/window.py:265
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Added: {date}"
-msgstr "Tillagt:"
+msgstr "Tillagt: {date}"
 
 #: src/window.py:270
 msgid "Never"
@@ -287,9 +287,9 @@ msgstr ""
 
 #. The variable is the date when the game was last played
 #: src/window.py:274
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Last played: {last_played_date}"
-msgstr "Sist spilt: Aldri"
+msgstr "Sist spilt: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:230
@@ -320,9 +320,9 @@ msgstr "Importerte ett spill."
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
 #: src/utils/steam_parser.py:172
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
-msgstr "Importerte ett spill."
+msgstr "Importerte {games_no} spill."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -468,9 +468,8 @@ msgid "Set Steam Location"
 msgstr "Velg hvor Steam er å finne"
 
 #: src/utils/steam_parser.py:249
-#, fuzzy
 msgid "Importing Games…"
-msgstr "Kunne ikke importere spill"
+msgstr ""
 
 #: src/utils/steam_parser.py:250
 msgid "Talking to Steam"
