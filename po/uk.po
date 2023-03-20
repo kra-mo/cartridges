@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-19 13:11+0100\n"
 "PO-Revision-Date: 2023-03-21 11:05+0000\n"
-"Last-Translator: Dan <denqwerta@gmail.com>\n"
+"Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/uk/>\n"
 "Language: uk\n"
@@ -260,9 +260,9 @@ msgid "translator_credits"
 msgstr "kefir2105"
 
 #: src/main.py:195
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{title} removed"
-msgstr "видалено"
+msgstr "{title} видалено"
 
 #: src/main.py:196
 msgid "Undo"
@@ -278,9 +278,9 @@ msgstr "Вчора"
 
 #. The variable is the date when the game was added
 #: src/window.py:265
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Added: {date}"
-msgstr "Додано:"
+msgstr "Додано: {date}"
 
 #: src/window.py:270
 msgid "Never"
@@ -288,9 +288,9 @@ msgstr "Ніколи."
 
 #. The variable is the date when the game was last played
 #: src/window.py:274
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Last played: {last_played_date}"
-msgstr "Остання гра: Ніколи"
+msgstr "Остання гра: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:230
@@ -321,9 +321,9 @@ msgstr "Успішно імпортовано 1 гру."
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
 #: src/utils/steam_parser.py:172
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
-msgstr "Успішно імпортовано 1 гру."
+msgstr "Успішно імпортовано {games_no} ігри."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
