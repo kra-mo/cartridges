@@ -19,7 +19,7 @@ jobs:
       - name: Compile
         shell: msys2 {0}
         run: |
-          meson _build
+          meson setup _build
           ninja -C _build install
           pacman --noconfirm -Rs mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-meson git
       - name: "Inno Setup"
