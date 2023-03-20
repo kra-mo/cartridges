@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-19 13:11+0100\n"
-"PO-Revision-Date: 2023-03-19 12:28+0000\n"
+"PO-Revision-Date: 2023-03-21 11:05+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
@@ -359,7 +359,7 @@ msgstr "Le développeur ou l'éditeur (facultatif)"
 
 #: src/utils/create_details_window.py:111
 msgid "file.txt"
-msgstr ""
+msgstr "ficher.txt"
 
 #. As in software
 #: src/utils/create_details_window.py:113
