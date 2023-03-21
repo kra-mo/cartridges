@@ -19,7 +19,7 @@
 [license-image]: https://img.shields.io/github/license/kra-mo/cartridges
 [code-style-url]: https://github.com/psf/black
 [code-style-image]: https://img.shields.io/badge/code%20style-black-000000?style=flat
-[weblate-url]: https://hosted.weblate.org/projects/cartridges/cartridges
+[weblate-url]: https://hosted.weblate.org/engage/cartridges/
 [weblate-image]: https://hosted.weblate.org/widgets/cartridges/-/cartridges/svg-badge.svg
 
   <img src="data/screenshot.webp">
@@ -73,7 +73,7 @@ Fork the repository, make your changes, then create a pull request.
 
 ## Translations
 ### Weblate
-The project can be translated on [Weblate](https://hosted.weblate.org/projects/cartridges/).
+The project can be translated on [Weblate](https://hosted.weblate.org/engage/cartridges/).
 
 ### Manually
 1. Clone the repository.
