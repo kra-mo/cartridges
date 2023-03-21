@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-21 14:15+0100\n"
+"POT-Creation-Date: 2023-03-21 15:48+0100\n"
 "PO-Revision-Date: 2023-03-18 23:40+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
@@ -248,28 +248,40 @@ msgstr "விளையாட்டுகளை தொடங்கிய பி�
 msgid "Steam Install Location"
 msgstr "Steam (ஸ்டீம்) நிறுவல் இடம்"
 
-#: data/gtk/preferences.blp:26 data/gtk/preferences.blp:40
-#: data/gtk/preferences.blp:78
+#: data/gtk/preferences.blp:26 data/gtk/preferences.blp:64
+#: data/gtk/preferences.blp:102
 msgid "Directory to use when importing games"
 msgstr "விளையாட்டுகளை இறக்குமதி செய்யும் போது பயன்படுத்த வேண்டிய அடைவு"
 
-#: data/gtk/preferences.blp:39
+#: data/gtk/preferences.blp:34
+msgid "Extra Steam Libraries"
+msgstr ""
+
+#: data/gtk/preferences.blp:35
+msgid "Select other directories where you have Steam games installed"
+msgstr ""
+
+#: data/gtk/preferences.blp:42
+msgid "Clear"
+msgstr ""
+
+#: data/gtk/preferences.blp:63
 msgid "Heroic Install Location"
 msgstr "Heroic (ஹீரோயிக்) நிறுவல் இடம்"
 
-#: data/gtk/preferences.blp:49
+#: data/gtk/preferences.blp:73
 msgid "Import Epic Games"
 msgstr "Epic விளையாட்டுகளை இறக்குமதி செய்"
 
-#: data/gtk/preferences.blp:57
+#: data/gtk/preferences.blp:81
 msgid "Import GOG Games"
 msgstr "GOG விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: data/gtk/preferences.blp:65
+#: data/gtk/preferences.blp:89
 msgid "Import Sideloaded Games"
 msgstr "பக்க ஏற்றப்பட்ட விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: data/gtk/preferences.blp:77
+#: data/gtk/preferences.blp:101
 msgid "Bottles Install Location"
 msgstr "Bottles (பாட்டில்கள்) நிறுவும் இடம்"
 
