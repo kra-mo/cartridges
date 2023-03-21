@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-19 13:11+0100\n"
-"PO-Revision-Date: 2023-03-16 18:47+0000\n"
+"PO-Revision-Date: 2023-03-21 13:12+0000\n"
 "Last-Translator: Dan <denqwerta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/uk/>\n"
@@ -260,9 +260,9 @@ msgid "translator_credits"
 msgstr "kefir2105"
 
 #: src/main.py:195
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{title} removed"
-msgstr "видалено"
+msgstr "{title} видалено"
 
 #: src/main.py:196
 msgid "Undo"
@@ -278,19 +278,19 @@ msgstr "Вчора"
 
 #. The variable is the date when the game was added
 #: src/window.py:265
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Added: {date}"
-msgstr "Додано:"
+msgstr "Додано: {date}"
 
 #: src/window.py:270
 msgid "Never"
-msgstr ""
+msgstr "Ніколи"
 
 #. The variable is the date when the game was last played
 #: src/window.py:274
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Last played: {last_played_date}"
-msgstr "Остання гра: Ніколи"
+msgstr "Останній раз грали: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:230
@@ -321,9 +321,9 @@ msgstr "Успішно імпортовано 1 гру."
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
 #: src/utils/steam_parser.py:172
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
-msgstr "Успішно імпортовано 1 гру."
+msgstr "Успішно імпортовано {games_no} ігри."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -359,32 +359,32 @@ msgstr "Розробник або видавець (необов'язково)"
 
 #: src/utils/create_details_window.py:111
 msgid "file.txt"
-msgstr ""
+msgstr "file.txt"
 
 #. As in software
 #: src/utils/create_details_window.py:113
 msgid "program"
-msgstr ""
+msgstr "програма"
 
 #: src/utils/create_details_window.py:117
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
-msgstr ""
+msgstr "C:\\path\\to\\{exe_name}"
 
 #: src/utils/create_details_window.py:118
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
-msgstr ""
+msgstr "C:\\path\\to\\{file_name}"
 
 #: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "/path/to/{exe_name}"
-msgstr ""
+msgstr "/path/to/{exe_name}"
 
 #: src/utils/create_details_window.py:122
 #, python-brace-format
 msgid "/path/to/{file_name}"
-msgstr ""
+msgstr "/path/to/{file_name}"
 
 #: src/utils/create_details_window.py:126
 #, python-brace-format
@@ -399,6 +399,16 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
+"Щоб запустити виконуваний файл \"{exe_name}\", скористайтеся командою:\n"
+"\n"
+"<tt>\"{exe_path}\"</tt>\n"
+"\n"
+"Щоб відкрити файл \"{file_name}\" за допомогою застосунку за замовчуванням, "
+"скористайтеся:\n"
+"\n"
+"<tt>{command} \"{file_path}\"</tt>\n"
+"\n"
+"Якщо шлях містить пробіли, обов'язково візьміть його в подвійні лапки!"
 
 #: src/utils/create_details_window.py:149
 msgid "Executable"
@@ -469,7 +479,6 @@ msgid "Set Steam Location"
 msgstr "Встановіть розташування Steam"
 
 #: src/utils/steam_parser.py:249
-#, fuzzy
 msgid "Importing Games…"
 msgstr "Імпорт ігор…"
 
