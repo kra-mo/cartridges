@@ -7,14 +7,11 @@
   
 [![Build status][github-actions-image]][github-actions-url]
 [![Translation Status][weblate-image]][weblate-url]
-[![Merged PRs][prs-merged-image]][prs-merged-url]
 [![License][license-image]][license-url]
 [![Code style][code-style-image]][code-style-url]
   
 [github-actions-url]: https://github.com/kra-mo/cartridges
-[github-actions-image]: https://img.shields.io/github/actions/workflow/status/kra-mo/cartridges/flatpak-builder.yml?branch=main&label=build
-[prs-merged-url]: https://github.com/kra-mo/cartridges/pulls?q=is:pr+is:merged
-[prs-merged-image]: https://img.shields.io/github/issues-pr-closed-raw/kra-mo/cartridges.svg?label=merged+PRs&color=green
+[github-actions-image]: https://github.com/kra-mo/cartridges/actions/workflows/flatpak-builder.yml/badge.svg
 [license-url]: https://github.com/kra-mo/cartridges/blob/main/LICENSE
 [license-image]: https://img.shields.io/github/license/kra-mo/cartridges
 [code-style-url]: https://github.com/psf/black
