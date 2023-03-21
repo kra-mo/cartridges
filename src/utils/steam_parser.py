@@ -267,9 +267,17 @@ def steam_parser(parent_widget, action):
 
     appmanifests = []
 
-    for open_file in os.listdir(os.path.join(steam_dir, "steamapps")):
-        path = os.path.join(steam_dir, "steamapps", open_file)
-        if os.path.isfile(path) and "appmanifest" in open_file:
-            appmanifests.append(path)
+    steam_dirs = schema.get_strv("steam-extra-dirs")
+    steam_dirs.append(steam_dir)
 
-    get_games_async(parent_widget, appmanifests, steam_dir, import_dialog)
+    for directory in steam_dirs:
+        if not os.path.exists(os.path.join(directory, "steamapps")):
+            steam_dirs.remove(directory)
+
+    for directory in steam_dirs:
+        for open_file in os.listdir(os.path.join(directory, "steamapps")):
+            path = os.path.join(directory, "steamapps", open_file)
+            if os.path.isfile(path) and "appmanifest" in open_file:
+                appmanifests.append(path)
+
+    get_games_async(parent_widget, appmanifests, directory, import_dialog)

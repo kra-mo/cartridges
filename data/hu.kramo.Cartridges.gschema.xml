@@ -16,6 +16,9 @@
 	  <key name="steam-location" type="s">
       <default>"~/.steam/"</default>
     </key>
+    <key name="steam-extra-dirs" type="as">
+      <default>[]</default>
+    </key>
 	  <key name="heroic-location" type="s">
       <default>"~/.var/app/com.heroicgameslauncher.hgl/config/heroic/"</default>
     </key>

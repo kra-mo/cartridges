@@ -35,6 +35,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
     import_sideload_games_switch = Gtk.Template.Child()
 
     steam_file_chooser_button = Gtk.Template.Child()
+    steam_extra_file_chooser_button = Gtk.Template.Child()
+    steam_clear_button = Gtk.Template.Child()
+    steam_clear_button_revealer = Gtk.Template.Child()
     heroic_file_chooser_button = Gtk.Template.Child()
     bottles_file_chooser_button = Gtk.Template.Child()
 
@@ -70,6 +73,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         filechooser = Gtk.FileDialog()
 
+        def update_revealer():
+            if schema.get_strv("steam-extra-dirs"):
+                self.steam_clear_button_revealer.set_reveal_child(True)
+            else:
+                self.steam_clear_button_revealer.set_reveal_child(False)
+
         def set_steam_dir(_source, result, _unused):
             try:
                 schema.set_string(
@@ -78,6 +87,19 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 )
             except GLib.GError:
                 pass
+
+        def add_steam_dir(_source, result, _unused):
+            try:
+                value = schema.get_strv("steam-extra-dirs")
+                value.append(filechooser.select_folder_finish(result).get_path())
+                schema.set_strv("steam-extra-dirs", value)
+            except GLib.GError:
+                pass
+            update_revealer()
+
+        def clear_steam_dirs(*_unused):
+            schema.set_strv("steam-extra-dirs", [])
+            update_revealer()
 
         def set_heroic_dir(_source, result, _unused):
             try:
@@ -100,7 +122,13 @@ class PreferencesWindow(Adw.PreferencesWindow):
         def choose_folder(_widget, function):
             filechooser.select_folder(parent_widget, None, function, None)
 
+        update_revealer()
+
         self.steam_file_chooser_button.connect("clicked", choose_folder, set_steam_dir)
+        self.steam_extra_file_chooser_button.connect(
+            "clicked", choose_folder, add_steam_dir
+        )
+        self.steam_clear_button.connect("clicked", clear_steam_dirs)
         self.heroic_file_chooser_button.connect(
             "clicked", choose_folder, set_heroic_dir
         )
