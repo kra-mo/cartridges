@@ -57,9 +57,8 @@ msgid "Try a different search."
 msgstr "Próbálkozz más kereséssel."
 
 #: data/gtk/window.blp:14
-#, fuzzy
 msgid "No Games"
-msgstr "Játékok"
+msgstr "Nincsenek Játékok"
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
@@ -75,7 +74,7 @@ msgstr "A rejtett játékaid itt lesznek megtalálhatók."
 
 #: data/gtk/window.blp:44 data/gtk/window.blp:254
 msgid "Back"
-msgstr ""
+msgstr "Vissza"
 
 #: data/gtk/window.blp:51
 msgid "Game Details"
@@ -95,10 +94,9 @@ msgstr "Játék Hozzáadása"
 
 #: data/gtk/window.blp:203 data/gtk/window.blp:266
 msgid "Main Menu"
-msgstr ""
+msgstr "Főmenü"
 
 #: data/gtk/window.blp:210 data/gtk/window.blp:273
-#, fuzzy
 msgid "Search"
 msgstr "Keresés"
 
@@ -253,15 +251,15 @@ msgstr "Az importáláskor használatos mappa"
 
 #: data/gtk/preferences.blp:34
 msgid "Extra Steam Libraries"
-msgstr ""
+msgstr "Extra Steam Könyvtárak"
 
 #: data/gtk/preferences.blp:35
 msgid "Select other directories where you have Steam games installed"
-msgstr ""
+msgstr "Válasszon ki egyéb mappákat, ahol vannak még Steam játékai"
 
 #: data/gtk/preferences.blp:42
 msgid "Clear"
-msgstr ""
+msgstr "Törlés"
 
 #: data/gtk/preferences.blp:63
 msgid "Heroic Install Location"
