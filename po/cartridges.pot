@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 13:11+0100\n"
+"POT-Creation-Date: 2023-03-21 14:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,13 +42,17 @@ msgid ""
 "hiding and sorting by date added or last played."
 msgstr ""
 
-#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:142
-#: src/utils/heroic_parser.py:241 src/utils/steam_parser.py:157
+#: data/gtk/window.blp:6 src/utils/bottles_parser.py:142
+#: src/utils/heroic_parser.py:253 src/utils/steam_parser.py:161
 msgid "No Games Found"
 msgstr ""
 
 #: data/gtk/window.blp:7
 msgid "Try a different search."
+msgstr ""
+
+#: data/gtk/window.blp:14
+msgid "No Games"
 msgstr ""
 
 #: data/gtk/window.blp:15
@@ -63,97 +67,109 @@ msgstr ""
 msgid "Games you hide will appear here."
 msgstr ""
 
-#: data/gtk/window.blp:50
+#: data/gtk/window.blp:44 data/gtk/window.blp:254
+msgid "Back"
+msgstr ""
+
+#: data/gtk/window.blp:51
 msgid "Game Details"
 msgstr ""
 
-#: data/gtk/window.blp:91
+#: data/gtk/window.blp:92
 msgid "Game Title"
 msgstr ""
 
-#: data/gtk/window.blp:147 data/gtk/game.blp:38
+#: data/gtk/window.blp:148 data/gtk/game.blp:38
 msgid "Play"
 msgstr ""
 
-#: data/gtk/window.blp:256
-msgid "Hidden Games"
-msgstr ""
-
-#: data/gtk/window.blp:314
-msgid "Sort"
-msgstr ""
-
-#: data/gtk/window.blp:317
-msgid "A-Z"
-msgstr ""
-
-#: data/gtk/window.blp:323
-msgid "Z-A"
-msgstr ""
-
-#: data/gtk/window.blp:329
-msgid "Newest"
-msgstr ""
-
-#: data/gtk/window.blp:335
-msgid "Oldest"
-msgstr ""
-
-#: data/gtk/window.blp:341
-msgid "Last Played"
-msgstr ""
-
-#: data/gtk/window.blp:348
-msgid "Show Hidden"
-msgstr ""
-
-#: data/gtk/window.blp:356
-msgid "Preferences"
-msgstr ""
-
-#: data/gtk/window.blp:361
-msgid "Keyboard Shortcuts"
-msgstr ""
-
-#: data/gtk/window.blp:366
-msgid "About Cartridges"
-msgstr ""
-
-#: data/gtk/window.blp:375
+#: data/gtk/window.blp:196 data/gtk/window.blp:382
 msgid "Add Game"
 msgstr ""
 
-#: data/gtk/window.blp:381
-msgid "Import from"
+#: data/gtk/window.blp:203 data/gtk/window.blp:266
+msgid "Main Menu"
 msgstr ""
 
-#: data/gtk/window.blp:383
-msgid "Steam"
+#: data/gtk/window.blp:210 data/gtk/window.blp:273
+msgid "Search"
+msgstr ""
+
+#: data/gtk/window.blp:261
+msgid "Hidden Games"
+msgstr ""
+
+#: data/gtk/window.blp:321
+msgid "Sort"
+msgstr ""
+
+#: data/gtk/window.blp:324
+msgid "A-Z"
+msgstr ""
+
+#: data/gtk/window.blp:330
+msgid "Z-A"
+msgstr ""
+
+#: data/gtk/window.blp:336
+msgid "Newest"
+msgstr ""
+
+#: data/gtk/window.blp:342
+msgid "Oldest"
+msgstr ""
+
+#: data/gtk/window.blp:348
+msgid "Last Played"
+msgstr ""
+
+#: data/gtk/window.blp:355
+msgid "Show Hidden"
+msgstr ""
+
+#: data/gtk/window.blp:363
+msgid "Preferences"
+msgstr ""
+
+#: data/gtk/window.blp:368
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: data/gtk/window.blp:373
+msgid "About Cartridges"
 msgstr ""
 
 #: data/gtk/window.blp:388
+msgid "Import from"
+msgstr ""
+
+#: data/gtk/window.blp:390
+msgid "Steam"
+msgstr ""
+
+#: data/gtk/window.blp:395
 msgid "Heroic"
 msgstr ""
 
-#: data/gtk/window.blp:393
+#: data/gtk/window.blp:400
 msgid "Bottles"
 msgstr ""
 
-#: data/gtk/window.blp:404 data/gtk/window.blp:423 data/gtk/game.blp:87
+#: data/gtk/window.blp:411 data/gtk/window.blp:430 data/gtk/game.blp:87
 #: data/gtk/game.blp:106
 msgid "Edit"
 msgstr ""
 
-#: data/gtk/window.blp:409 data/gtk/game.blp:92
+#: data/gtk/window.blp:416 data/gtk/game.blp:92
 msgid "Hide"
 msgstr ""
 
-#: data/gtk/window.blp:414 data/gtk/window.blp:433 data/gtk/game.blp:97
+#: data/gtk/window.blp:421 data/gtk/window.blp:440 data/gtk/game.blp:97
 #: data/gtk/game.blp:116
 msgid "Remove"
 msgstr ""
 
-#: data/gtk/window.blp:428 data/gtk/game.blp:111
+#: data/gtk/window.blp:435 data/gtk/game.blp:111
 msgid "Unhide"
 msgstr ""
 
@@ -287,7 +303,7 @@ msgid "Last played: {last_played_date}"
 msgstr ""
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:230
+#: src/utils/steam_parser.py:234
 msgid "Couldn't Import Games"
 msgstr ""
 
@@ -307,14 +323,14 @@ msgstr ""
 msgid "Bottles Games Imported"
 msgstr ""
 
-#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:248
-#: src/utils/steam_parser.py:164
+#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:260
+#: src/utils/steam_parser.py:168
 msgid "Successfully imported 1 game."
 msgstr ""
 
 #. The variable is the number of games
-#: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
-#: src/utils/steam_parser.py:172
+#: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:268
+#: src/utils/steam_parser.py:176
 #, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr ""
@@ -438,34 +454,34 @@ msgstr ""
 msgid "Set Heroic Location"
 msgstr ""
 
-#: src/utils/heroic_parser.py:242
+#: src/utils/heroic_parser.py:254
 msgid "No new games were found in the Heroic library."
 msgstr ""
 
-#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:254
+#: src/utils/heroic_parser.py:259 src/utils/heroic_parser.py:266
 msgid "Heroic Games Imported"
 msgstr ""
 
-#: src/utils/steam_parser.py:158
+#: src/utils/steam_parser.py:162
 msgid "No new games were found in the Steam library."
 msgstr ""
 
-#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:170
+#: src/utils/steam_parser.py:167 src/utils/steam_parser.py:174
 msgid "Steam Games Imported"
 msgstr ""
 
-#: src/utils/steam_parser.py:231
+#: src/utils/steam_parser.py:235
 msgid "The Steam directory cannot be found."
 msgstr ""
 
-#: src/utils/steam_parser.py:233
+#: src/utils/steam_parser.py:237
 msgid "Set Steam Location"
 msgstr ""
 
-#: src/utils/steam_parser.py:249
+#: src/utils/steam_parser.py:253
 msgid "Importing Games…"
 msgstr ""
 
-#: src/utils/steam_parser.py:250
+#: src/utils/steam_parser.py:254
 msgid "Talking to Steam"
 msgstr ""

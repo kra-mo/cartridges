@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 13:11+0100\n"
+"POT-Creation-Date: 2023-03-21 14:15+0100\n"
 "PO-Revision-Date: 2023-03-21 11:05+0000\n"
 "Last-Translator: kramo <login@kramo.hu>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -47,14 +47,19 @@ msgstr ""
 "organiseringsfunksjoner som skjuling og sortering etter tillagt dato eller "
 "sist spilt."
 
-#: data/gtk/window.blp:6 data/gtk/window.blp:14 src/utils/bottles_parser.py:142
-#: src/utils/heroic_parser.py:241 src/utils/steam_parser.py:157
+#: data/gtk/window.blp:6 src/utils/bottles_parser.py:142
+#: src/utils/heroic_parser.py:253 src/utils/steam_parser.py:161
 msgid "No Games Found"
 msgstr "Fant ingen spill"
 
 #: data/gtk/window.blp:7
 msgid "Try a different search."
 msgstr "Prøv et forskjellig søk."
+
+#: data/gtk/window.blp:14
+#, fuzzy
+msgid "No Games"
+msgstr "Spill"
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
@@ -68,97 +73,110 @@ msgstr "Ingen skjulte spill"
 msgid "Games you hide will appear here."
 msgstr "Spill du skjuler vil vises her."
 
-#: data/gtk/window.blp:50
+#: data/gtk/window.blp:44 data/gtk/window.blp:254
+msgid "Back"
+msgstr ""
+
+#: data/gtk/window.blp:51
 msgid "Game Details"
 msgstr "Spilldetaljer"
 
-#: data/gtk/window.blp:91
+#: data/gtk/window.blp:92
 msgid "Game Title"
 msgstr "Spillnavn"
 
-#: data/gtk/window.blp:147 data/gtk/game.blp:38
+#: data/gtk/window.blp:148 data/gtk/game.blp:38
 msgid "Play"
 msgstr "Spill"
 
-#: data/gtk/window.blp:256
-msgid "Hidden Games"
-msgstr "Skjulte spill"
-
-#: data/gtk/window.blp:314
-msgid "Sort"
-msgstr "Sorter"
-
-#: data/gtk/window.blp:317
-msgid "A-Z"
-msgstr "A-Å"
-
-#: data/gtk/window.blp:323
-msgid "Z-A"
-msgstr "Å-A"
-
-#: data/gtk/window.blp:329
-msgid "Newest"
-msgstr "Nyeste"
-
-#: data/gtk/window.blp:335
-msgid "Oldest"
-msgstr "Eldste"
-
-#: data/gtk/window.blp:341
-msgid "Last Played"
-msgstr "Sist spilt"
-
-#: data/gtk/window.blp:348
-msgid "Show Hidden"
-msgstr "Vis skjulte"
-
-#: data/gtk/window.blp:356
-msgid "Preferences"
-msgstr "Innstillinger"
-
-#: data/gtk/window.blp:361
-msgid "Keyboard Shortcuts"
-msgstr "Tastatursnarveier"
-
-#: data/gtk/window.blp:366
-msgid "About Cartridges"
-msgstr "Om"
-
-#: data/gtk/window.blp:375
+#: data/gtk/window.blp:196 data/gtk/window.blp:382
 msgid "Add Game"
 msgstr "Legg til spill"
 
-#: data/gtk/window.blp:381
+#: data/gtk/window.blp:203 data/gtk/window.blp:266
+msgid "Main Menu"
+msgstr ""
+
+#: data/gtk/window.blp:210 data/gtk/window.blp:273
+#, fuzzy
+msgid "Search"
+msgstr "Søk"
+
+#: data/gtk/window.blp:261
+msgid "Hidden Games"
+msgstr "Skjulte spill"
+
+#: data/gtk/window.blp:321
+msgid "Sort"
+msgstr "Sorter"
+
+#: data/gtk/window.blp:324
+msgid "A-Z"
+msgstr "A-Å"
+
+#: data/gtk/window.blp:330
+msgid "Z-A"
+msgstr "Å-A"
+
+#: data/gtk/window.blp:336
+msgid "Newest"
+msgstr "Nyeste"
+
+#: data/gtk/window.blp:342
+msgid "Oldest"
+msgstr "Eldste"
+
+#: data/gtk/window.blp:348
+msgid "Last Played"
+msgstr "Sist spilt"
+
+#: data/gtk/window.blp:355
+msgid "Show Hidden"
+msgstr "Vis skjulte"
+
+#: data/gtk/window.blp:363
+msgid "Preferences"
+msgstr "Innstillinger"
+
+#: data/gtk/window.blp:368
+msgid "Keyboard Shortcuts"
+msgstr "Tastatursnarveier"
+
+#: data/gtk/window.blp:373
+msgid "About Cartridges"
+msgstr "Om"
+
+#: data/gtk/window.blp:388
 msgid "Import from"
 msgstr "Importer fra"
 
-#: data/gtk/window.blp:383
+#: data/gtk/window.blp:390
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:388
+#: data/gtk/window.blp:395
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:393
+#: data/gtk/window.blp:400
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/window.blp:404 data/gtk/window.blp:423 data/gtk/game.blp:87
+#: data/gtk/window.blp:411 data/gtk/window.blp:430 data/gtk/game.blp:87
 #: data/gtk/game.blp:106
 msgid "Edit"
 msgstr "Rediger"
 
-#: data/gtk/window.blp:409 data/gtk/game.blp:92
+#: data/gtk/window.blp:416 data/gtk/game.blp:92
 msgid "Hide"
 msgstr "Skjul"
 
-#: data/gtk/window.blp:414 data/gtk/window.blp:433 data/gtk/game.blp:97
+#: data/gtk/window.blp:421 data/gtk/window.blp:440 data/gtk/game.blp:97
 #: data/gtk/game.blp:116
 msgid "Remove"
 msgstr "Fjern"
 
-#: data/gtk/window.blp:428 data/gtk/game.blp:111
+#: data/gtk/window.blp:435 data/gtk/game.blp:111
 msgid "Unhide"
 msgstr "Opphev fjerning"
 
@@ -292,7 +310,7 @@ msgid "Last played: {last_played_date}"
 msgstr "Sist spilt: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:230
+#: src/utils/steam_parser.py:234
 msgid "Couldn't Import Games"
 msgstr "Kunne ikke importere spill"
 
@@ -312,14 +330,14 @@ msgstr "Fant ingen nye spill i Bottles-biblioteket."
 msgid "Bottles Games Imported"
 msgstr "Bottles-spill importert"
 
-#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:248
-#: src/utils/steam_parser.py:164
+#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:260
+#: src/utils/steam_parser.py:168
 msgid "Successfully imported 1 game."
 msgstr "Importerte ett spill."
 
 #. The variable is the number of games
-#: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:256
-#: src/utils/steam_parser.py:172
+#: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:268
+#: src/utils/steam_parser.py:176
 #, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "Importerte {games_no} spill."
@@ -443,35 +461,35 @@ msgstr "Finner ikke Heroic-spillmappen."
 msgid "Set Heroic Location"
 msgstr "Velg hvor Heroic er å finne"
 
-#: src/utils/heroic_parser.py:242
+#: src/utils/heroic_parser.py:254
 msgid "No new games were found in the Heroic library."
 msgstr "Fant ingen nye spill i Heroic-biblioteket."
 
-#: src/utils/heroic_parser.py:247 src/utils/heroic_parser.py:254
+#: src/utils/heroic_parser.py:259 src/utils/heroic_parser.py:266
 msgid "Heroic Games Imported"
 msgstr "Heroic-spill importert"
 
-#: src/utils/steam_parser.py:158
+#: src/utils/steam_parser.py:162
 msgid "No new games were found in the Steam library."
 msgstr "Fant ingen nye spill i Steam-biblioteket."
 
-#: src/utils/steam_parser.py:163 src/utils/steam_parser.py:170
+#: src/utils/steam_parser.py:167 src/utils/steam_parser.py:174
 msgid "Steam Games Imported"
 msgstr "Steam-spill importert"
 
-#: src/utils/steam_parser.py:231
+#: src/utils/steam_parser.py:235
 msgid "The Steam directory cannot be found."
 msgstr "Kunne ikke finne Steam-mappen."
 
-#: src/utils/steam_parser.py:233
+#: src/utils/steam_parser.py:237
 msgid "Set Steam Location"
 msgstr "Velg hvor Steam er å finne"
 
-#: src/utils/steam_parser.py:249
+#: src/utils/steam_parser.py:253
 msgid "Importing Games…"
 msgstr ""
 
-#: src/utils/steam_parser.py:250
+#: src/utils/steam_parser.py:254
 msgid "Talking to Steam"
 msgstr ""
 
