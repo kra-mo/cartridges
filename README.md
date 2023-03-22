@@ -6,6 +6,7 @@
  A GTK4 + Libadwaita game launcher
   
 [![Build status][github-actions-image]][github-actions-url]
+[![Discord Chatroom][discord-image]][discord-url]
 [![Translation Status][weblate-image]][weblate-url]
 [![License][license-image]][license-url]
 [![Code style][code-style-image]][code-style-url]
@@ -18,6 +19,8 @@
 [code-style-image]: https://img.shields.io/badge/code%20style-black-000000?style=flat
 [weblate-url]: https://hosted.weblate.org/engage/cartridges/
 [weblate-image]: https://hosted.weblate.org/widgets/cartridges/-/cartridges/svg-badge.svg
+[discord-url]: https://discord.gg/4KSFh3AmQR
+[discord-image]: https://img.shields.io/discord/1088155799299313754
 
   <img src="data/screenshot.webp">
 </div>
