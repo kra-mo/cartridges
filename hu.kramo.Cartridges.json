@@ -1,7 +1,7 @@
 {
     "app-id" : "hu.kramo.Cartridges",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "master",
+    "runtime-version" : "44",
     "sdk" : "org.gnome.Sdk",
     "command" : "cartridges",
     "finish-args" : [
@@ -33,13 +33,13 @@
     "modules" : [
         "python3-modules.json",
         {
-            "name": "blueprint-compiler",
-            "buildsystem": "meson",
-            "sources": [
+            "name" : "blueprint-compiler",
+            "buildsystem" : "meson",
+            "sources" : [
                 {
-                "type": "git",
-                "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
-                "tag": "v0.6.0"
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/jwestman/blueprint-compiler",
+                    "tag" : "v0.6.0"
                 }
             ]
         },
@@ -54,5 +54,8 @@
                 }
             ]
         }
-    ]
+    ],
+    "build-options" : {
+        "env" : {        }
+    }
 }
