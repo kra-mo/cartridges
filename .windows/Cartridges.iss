@@ -40,9 +40,9 @@ Source: "D:\a\_temp\msys64\ucrt64\etc\ssl\*"; DestDir: "{app}\etc\ssl"; Flags: r
 
 Source: "D:\a\_temp\msys64\ucrt64\lib\gdk-pixbuf-2.0\*"; DestDir: "{app}\lib\gdk-pixbuf-2.0"; Flags: recursesubdirs ignoreversion   
 Source: "D:\a\_temp\msys64\ucrt64\lib\girepository-1.0\*"; DestDir: "{app}\lib\girepository-1.0"; Flags: recursesubdirs ignoreversion 
-Source: "D:\a\_temp\msys64\ucrt64\lib\python3.10\*"; DestDir: "{app}\lib\python3.10"; Flags: recursesubdirs ignoreversion
+Source: "D:\a\_temp\msys64\ucrt64\lib\python3.10\*"; DestDir: "{app}\lib\python3.10"; Excludes: "__pycache__"; Flags: recursesubdirs ignoreversion
 
-Source: "D:\a\_temp\msys64\ucrt64\share\cartridges\*"; DestDir: "{app}\share\cartridges"; Flags: recursesubdirs ignoreversion
+Source: "D:\a\_temp\msys64\ucrt64\share\cartridges\*"; DestDir: "{app}\share\cartridges"; Excludes: "__pycache__"; Flags: recursesubdirs ignoreversion
 Source: "D:\a\_temp\msys64\ucrt64\share\icons\*"; DestDir: "{app}\share\icons"; Flags: recursesubdirs ignoreversion
 Source: "D:\a\_temp\msys64\ucrt64\share\glib-2.0\*"; DestDir: "{app}\share\glib-2.0"; Flags: recursesubdirs ignoreversion
 Source: "D:\a\_temp\msys64\ucrt64\share\gtk-4.0\*"; DestDir: "{app}\share\gtk-4.0"; Flags: recursesubdirs ignoreversion
