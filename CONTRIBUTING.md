@@ -17,10 +17,14 @@ The project can be translated on [Weblate](https://hosted.weblate.org/engage/car
 # Building
 
 ## GNOME Builder
-
-1. Download [GNOME Builder](https://flathub.org/apps/details/org.gnome.Builder).
+1. Install [GNOME Builder](https://flathub.org/apps/details/org.gnome.Builder).
 2. Click "Clone Repository" with `https://github.com/kra-mo/cartridges.git` as the URL.
 3. Click on the build button (hammer) at the top.
+
+## For Windows
+1. Install [MSYS2](https://www.msys2.org/).
+2. From the MSYS2 shell, install the required dependencies listed [here](https://github.com/kra-mo/cartridges/blob/main/.github/workflows/windows.yml).
+3. Build it via Meson
 
 ## Meson
 ```bash

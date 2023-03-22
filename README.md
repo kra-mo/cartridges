@@ -23,10 +23,11 @@
 </div>
 
 # The Project
-Cartridges is a simple game launcher written in Python using GTK4 + Libadwaita.
+Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita.
 ## Features
 - Manually adding and editing games
 - Importing games from Steam, Heroic and Bottles
+- Support for multiple Steam install locations
 - Hiding games
 - Searching and sorting by title, date added and last played
 
@@ -35,9 +36,8 @@ Cartridges is a simple game launcher written in Python using GTK4 + Libadwaita.
 ## Linux
 
 ### From Releases
-1. Install `org.gnome.Platform` from the [gnome-nightly repository](https://wiki.gnome.org/Apps/Nightly) if needed.
-2. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
-3. Install it via GNOME Software or `flatpak install hu.kramo.Cartridges.flatpak`.
+1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
+2. Install the downloaded file via GNOME Software or `flatpak install hu.kramo.Cartridges.flatpak`.
 
 ## Windows
 
@@ -46,6 +46,9 @@ Cartridges is a simple game launcher written in Python using GTK4 + Libadwaita.
 2. Run the downloaded installer.
 
 Note: Windows might present you with a warning when trying to install the app. This is expected, just ignore the warning.
+
+## Building manually
+See [Building](https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md#building).
 
 # Contributing
 
