@@ -4,11 +4,11 @@
 
  # Cartridges
  A GTK4 + Libadwaita game launcher
-  
+
 [![Build status][github-actions-image]][github-actions-url]
-[![Discord Chatroom][discord-image]][discord-url]
 [![Translation Status][weblate-image]][weblate-url]
 [![License][license-image]][license-url]
+[![Discord Chatroom][discord-image]][discord-url]
 [![Code style][code-style-image]][code-style-url]
   
 [github-actions-url]: https://github.com/kra-mo/cartridges
@@ -20,7 +20,7 @@
 [weblate-url]: https://hosted.weblate.org/engage/cartridges/
 [weblate-image]: https://hosted.weblate.org/widgets/cartridges/-/cartridges/svg-badge.svg
 [discord-url]: https://discord.gg/4KSFh3AmQR
-[discord-image]: https://img.shields.io/discord/1088155799299313754
+[discord-image]: https://img.shields.io/discord/1088155799299313754?color=%235865F2&label=discord&logo=discord&logoColor=%23FFFFFF
 
   <img src="data/screenshot.webp">
 </div>
@@ -33,6 +33,8 @@ Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita
 - Support for multiple Steam install locations
 - Hiding games
 - Searching and sorting by title, date added and last played
+
+For updates and questions, join our [Discord server]([discord-url])!
 
 # Installation
 
