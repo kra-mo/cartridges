@@ -1,6 +1,6 @@
 # main.py
 #
-# Copyright 2022 kramo
+# Copyright 2022-2023 kramo
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -122,7 +122,7 @@ class CartridgesApplication(Adw.Application):
                 "Paweł Lidwin https://github.com/imLinguin",
             ],
             designers=["kramo https://kramo.hu"],
-            copyright="© 2022 kramo",
+            copyright="© 2022-2023 kramo",
             license_type=Gtk.License.GPL_3_0,
             issue_url="https://github.com/kra-mo/cartridges/issues/new",
             website="https://github.com/kra-mo/cartridges",
