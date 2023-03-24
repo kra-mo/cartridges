@@ -129,9 +129,9 @@ def heroic_parser(parent_widget, action):
                 values["name"] = game["title"]
                 values["developer"] = game["developer"]
                 values["executable"] = (
-                    f"start heroic://launch/{app_name}"
+                    ["start", f"heroic://launch/{app_name}"]
                     if os.name == "nt"
-                    else f"xdg-open heroic://launch/{app_name}"
+                    else ["xdg-open", f"heroic://launch/{app_name}"]
                 )
                 values["hidden"] = False
                 values["source"] = "heroic_epic"
@@ -195,9 +195,9 @@ def heroic_parser(parent_widget, action):
                     break
 
             values["executable"] = (
-                f"start heroic://launch/{app_name}"
+                ["start", f"heroic://launch/{app_name}"]
                 if os.name == "nt"
-                else f"xdg-open heroic://launch/{app_name}"
+                else ["xdg-open", f"heroic://launch/{app_name}"]
             )
             values["hidden"] = False
             values["source"] = "heroic_gog"
@@ -230,9 +230,9 @@ def heroic_parser(parent_widget, action):
 
             values["name"] = item["title"]
             values["executable"] = (
-                f"start heroic://launch/{app_name}"
+                ["start", f"heroic://launch/{app_name}"]
                 if os.name == "nt"
-                else f"xdg-open heroic://launch/{app_name}"
+                else ["xdg-open", f"heroic://launch/{app_name}"]
             )
             values["hidden"] = False
             values["source"] = "heroic_sideload"

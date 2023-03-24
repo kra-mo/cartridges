@@ -19,6 +19,7 @@
 
 import json
 import os
+import shlex
 import time
 
 from gi.repository import Adw, GdkPixbuf, Gio, GLib, GObject, Gtk
@@ -52,7 +53,7 @@ def create_details_window(parent_widget, game_id=None):
         )
         name = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new(games[game_id].name, -1))
         executable = Gtk.Entry.new_with_buffer(
-            Gtk.EntryBuffer.new((games[game_id].executable), -1)
+            Gtk.EntryBuffer.new(shlex.join(games[game_id].executable), -1)
         )
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
@@ -201,6 +202,21 @@ def create_details_window(parent_widget, game_id=None):
         final_developer = developer.get_buffer().get_text()
         final_executable = executable.get_buffer().get_text()
 
+        try:
+            # Attempt to parse using shell parsing rules (doesn't verify executable existence).
+            final_executable_split = shlex.split(
+                final_executable, comments=False, posix=True
+            )
+        except Exception as e:
+            create_dialog(
+                window,
+                _("Couldn't Add Game")
+                if game_id is None
+                else _("Couldn't Apply Preferences"),
+                f'{_("Executable")}: {e}.',  # e = Shell parsing error message. Not translatable.
+            )
+            return
+
         if game_id is None:
             if final_name == "":
                 create_dialog(
@@ -252,7 +268,7 @@ def create_details_window(parent_widget, game_id=None):
 
         values["name"] = final_name
         values["developer"] = final_developer or None
-        values["executable"] = final_executable
+        values["executable"] = final_executable_split
 
         path = os.path.join(
             os.path.join(

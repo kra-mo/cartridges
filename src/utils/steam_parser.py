@@ -64,9 +64,9 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
         return
 
     values["executable"] = (
-        f'start steam://rungameid/{values["appid"]}'
+        ["start", f'steam://rungameid/{values["appid"]}']
         if os.name == "nt"
-        else f'xdg-open steam://rungameid/{values["appid"]}'
+        else ["xdg-open", f'steam://rungameid/{values["appid"]}']
     )
     values["hidden"] = False
     values["source"] = "steam"

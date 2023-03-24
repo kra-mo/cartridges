@@ -112,9 +112,10 @@ def bottles_parser(parent_widget, action):
             continue
 
         values["name"] = game["name"]
-        values["executable"] = "xdg-open " + shlex.quote(
+        values["executable"] = [
+            "xdg-open",
             f'bottles:run/{game["bottle"]["name"]}/{game["name"]}'
-        )
+        ]
         values["hidden"] = False
         values["source"] = "bottles"
         values["added"] = current_time
