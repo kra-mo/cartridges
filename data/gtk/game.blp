@@ -11,15 +11,12 @@ template game : Box {
     Box {
       orientation: vertical;
       Button cover_button {
+        overflow: hidden;
         Picture cover {
           width-request: 200;
           height-request: 300;
           hexpand: true;
           vexpand: true;
-
-          styles [
-            "card",
-          ]
         }
 
         styles [
