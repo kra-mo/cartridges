@@ -23,7 +23,7 @@ from .get_cover import get_cover
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")
-class game(Gtk.Box):
+class game(Gtk.Box):  # pylint: disable=invalid-name
     __gtype_name__ = "game"
 
     overlay = Gtk.Template.Child()

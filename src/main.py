@@ -26,6 +26,7 @@ import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
+# pylint: disable=wrong-import-position
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from .bottles_parser import bottles_parser
@@ -64,9 +65,10 @@ class CartridgesApplication(Adw.Application):
 
         self.win = None
 
-    def do_activate(self):
+    def do_activate(self):  # pylint: disable=arguments-differ
+
         # Create the main window
-        self.win = self.props.active_window
+        self.win = self.props.active_window  # pylint: disable=no-member
         if not self.win:
             self.win = CartridgesWindow(application=self)
 
@@ -212,6 +214,6 @@ class CartridgesApplication(Adw.Application):
                 self.set_accels_for_action(f"win.{name}", shortcuts)
 
 
-def main(version):
+def main(version):  # pylint: disable=unused-argument
     app = CartridgesApplication()
     return app.run(sys.argv)
