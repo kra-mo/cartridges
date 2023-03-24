@@ -95,7 +95,6 @@ def bottles_parser(parent_widget, action):
 
     with open(os.path.join(bottles_dir, "library.yml"), "r") as open_file:
         data = open_file.read()
-        open_file.close()
 
     library = yaml.load(data, Loader=yaml.Loader)
 

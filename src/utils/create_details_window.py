@@ -283,7 +283,6 @@ def create_details_window(parent_widget, game_id=None):
         if os.path.exists(path):
             with open(path, "r") as open_file:
                 data = json.loads(open_file.read())
-                open_file.close()
             data.update(values)
             save_games({game_id: data})
         else:

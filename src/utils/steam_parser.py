@@ -49,7 +49,6 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
 
     with open(appmanifest, "r") as open_file:
         data = open_file.read()
-        open_file.close()
     for datatype in datatypes:
         value = re.findall(f'"{datatype}"\t\t"(.*)"\n', data)
         values[datatype] = value[0]
