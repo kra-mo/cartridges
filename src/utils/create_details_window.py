@@ -206,13 +206,13 @@ def create_details_window(parent_widget, game_id=None):
             final_executable_split = shlex.split(
                 final_executable, comments=False, posix=True
             )
-        except Exception as e:
+        except ValueError as exception:
             create_dialog(
                 window,
                 _("Couldn't Add Game")
                 if game_id is None
                 else _("Couldn't Apply Preferences"),
-                f'{_("Executable")}: {e}.',  # e = Shell parsing error message. Not translatable.
+                f'{_("Executable")}: {exception}.',
             )
             return
 
