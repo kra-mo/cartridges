@@ -119,6 +119,7 @@ class CartridgesApplication(Adw.Application):
             developers=[
                 "kramo https://kramo.hu",
                 "Paweł Lidwin https://github.com/imLinguin",
+                "Bananaman https://github.com/Bananaman",
             ],
             designers=["kramo https://kramo.hu"],
             copyright="© 2022-2023 kramo",
