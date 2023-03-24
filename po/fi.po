@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-21 15:48+0100\n"
-"PO-Revision-Date: 2023-03-24 20:07+0000\n"
-"Last-Translator: LINUX-SAUNA <linuxsauna@protonmail.com>\n"
+"PO-Revision-Date: 2023-03-24 20:17+0000\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fi/>\n"
 "Language: fi\n"
@@ -280,58 +280,58 @@ msgstr "Tuo Sideload-pelejä"
 
 #: data/gtk/preferences.blp:101
 msgid "Bottles Install Location"
-msgstr ""
+msgstr "Bottles asennuspaikka"
 
 #. Translators: Replace this with your name for it to show up in the about window
 #: src/main.py:130
 msgid "translator_credits"
-msgstr ""
+msgstr "Linux Sauna"
 
 #: src/main.py:195
 #, python-brace-format
 msgid "{title} removed"
-msgstr ""
+msgstr "{title} poistettu"
 
 #: src/main.py:196
 msgid "Undo"
-msgstr ""
+msgstr "Kumoa"
 
 #: src/window.py:229
 msgid "Today"
-msgstr ""
+msgstr "Tänään"
 
 #: src/window.py:231
 msgid "Yesterday"
-msgstr ""
+msgstr "Eilen"
 
 #. The variable is the date when the game was added
 #: src/window.py:265
 #, python-brace-format
 msgid "Added: {date}"
-msgstr ""
+msgstr "Lisätty: {date}"
 
 #: src/window.py:270
 msgid "Never"
-msgstr ""
+msgstr "Ei koskaan"
 
 #. The variable is the date when the game was last played
 #: src/window.py:274
 #, python-brace-format
 msgid "Last played: {last_played_date}"
-msgstr ""
+msgstr "Pelattu: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:234
 msgid "Couldn't Import Games"
-msgstr ""
+msgstr "Pelejä ei voitu tuoda"
 
 #: src/utils/bottles_parser.py:81
 msgid "The Bottles directory cannot be found."
-msgstr ""
+msgstr "Hakemistoa Bottles ei löydy."
 
 #: src/utils/bottles_parser.py:83
 msgid "Set Bottles Location"
-msgstr ""
+msgstr "Bottles aseta sijainti"
 
 #: src/utils/bottles_parser.py:143
 msgid "No new games were found in the Bottles library."
