@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-21 15:48+0100\n"
-"PO-Revision-Date: 2023-03-24 20:55+0000\n"
-"Last-Translator: Kopimi <tatuus@tutanota.com>\n"
+"PO-Revision-Date: 2023-03-24 21:14+0000\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fi/>\n"
 "Language: fi\n"
@@ -28,15 +28,15 @@ msgstr "Cartridges"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr "Pelikäynnistin"
+msgstr "Pelin käynnistin"
 
 #: data/hu.kramo.Cartridges.desktop.in:5
 msgid "Launch your games"
-msgstr "Käynnistä ja aja pelisi"
+msgstr "Käynnistä pelit"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
-msgstr "Käynnistä ja aja kaikki pelisi"
+msgstr "Käynnistä kaikki pelisi"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -244,7 +244,7 @@ msgstr "Poistuminen pelin käynnistämisen jälkeen"
 
 #: data/gtk/preferences.blp:25
 msgid "Steam Install Location"
-msgstr "Steam-asennuspaikka"
+msgstr "Steam asennuspaikka"
 
 #: data/gtk/preferences.blp:26 data/gtk/preferences.blp:64
 #: data/gtk/preferences.blp:102
@@ -398,22 +398,22 @@ msgstr "ohjelma"
 #: src/utils/create_details_window.py:117
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
-msgstr "C:\\path\\to\\{exe_name}"
+msgstr "C:\\polku\\kansioon\\{exe_name}"
 
 #: src/utils/create_details_window.py:118
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
-msgstr "C:\\path\\to\\{file_name}"
+msgstr "C:\\polku\\kansioon\\{file_name}"
 
 #: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "/path/to/{exe_name}"
-msgstr "/path/to/{exe_name}"
+msgstr "/polku/kansioon/{exe_name}"
 
 #: src/utils/create_details_window.py:122
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "/path/to/{file_name}"
-msgstr "/path/to/{file_name}"
+msgstr "/polku/kansioon/{file_name}"
 
 #: src/utils/create_details_window.py:126
 #, python-brace-format
@@ -484,7 +484,7 @@ msgstr "Heroic-hakemistoa ei löytynyt."
 
 #: src/utils/heroic_parser.py:90
 msgid "Set Heroic Location"
-msgstr "Aseta Heroic:in sijainti"
+msgstr "Heroic aseta sijainti"
 
 #: src/utils/heroic_parser.py:254
 msgid "No new games were found in the Heroic library."
@@ -516,4 +516,4 @@ msgstr "Pelien tuominen…"
 
 #: src/utils/steam_parser.py:254
 msgid "Talking to Steam"
-msgstr "Steam ja puhe"
+msgstr "Yhdistetään Steam kirjastoon"
