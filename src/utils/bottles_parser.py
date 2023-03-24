@@ -95,7 +95,6 @@ def bottles_parser(parent_widget, action):
 
     with open(os.path.join(bottles_dir, "library.yml"), "r") as open_file:
         data = open_file.read()
-        open_file.close()
 
     library = yaml.load(data, Loader=yaml.Loader)
 
@@ -112,9 +111,10 @@ def bottles_parser(parent_widget, action):
             continue
 
         values["name"] = game["name"]
-        values["executable"] = "xdg-open " + shlex.quote(
+        values["executable"] = [
+            "xdg-open",
             f'bottles:run/{game["bottle"]["name"]}/{game["name"]}'
-        )
+        ]
         values["hidden"] = False
         values["source"] = "bottles"
         values["added"] = current_time

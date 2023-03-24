@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+import shlex
 import subprocess
 import sys
 
@@ -25,13 +26,14 @@ from gi.repository import Gio
 
 
 def run_command(executable):
+    # The host environment vars are automatically passed through by Popen.
     subprocess.Popen(
-        [f"flatpak-spawn --host {executable}"]
+        ["flatpak-spawn", "--host", *executable]  # Flatpak
         if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
-        else executable.split()
+        else executable  # Windows
         if os.name == "nt"
-        else [executable],
-        shell=True,
+        else executable,  # Linux/Others
+        shell=False,  # If true, the extra arguments would incorrectly be given to the shell instead.
         start_new_session=True,
         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
     )

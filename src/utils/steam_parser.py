@@ -49,7 +49,6 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
 
     with open(appmanifest, "r") as open_file:
         data = open_file.read()
-        open_file.close()
     for datatype in datatypes:
         value = re.findall(f'"{datatype}"\t\t"(.*)"\n', data)
         values[datatype] = value[0]
@@ -64,9 +63,9 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
         return
 
     values["executable"] = (
-        f'start steam://rungameid/{values["appid"]}'
+        ["start", f'steam://rungameid/{values["appid"]}']
         if os.name == "nt"
-        else f'xdg-open steam://rungameid/{values["appid"]}'
+        else ["xdg-open", f'steam://rungameid/{values["appid"]}']
     )
     values["hidden"] = False
     values["source"] = "steam"

@@ -107,7 +107,6 @@ def heroic_parser(parent_widget, action):
             os.path.join(heroic_dir, "lib-cache", "library.json"), "r"
         ) as open_file:
             data = open_file.read()
-            open_file.close()
         library = json.loads(data)
 
         try:
@@ -129,9 +128,9 @@ def heroic_parser(parent_widget, action):
                 values["name"] = game["title"]
                 values["developer"] = game["developer"]
                 values["executable"] = (
-                    f"start heroic://launch/{app_name}"
+                    ["start", f"heroic://launch/{app_name}"]
                     if os.name == "nt"
-                    else f"xdg-open heroic://launch/{app_name}"
+                    else ["xdg-open", f"heroic://launch/{app_name}"]
                 )
                 values["hidden"] = False
                 values["source"] = "heroic_epic"
@@ -160,7 +159,6 @@ def heroic_parser(parent_widget, action):
             os.path.join(heroic_dir, "gog_store", "installed.json"), "r"
         ) as open_file:
             data = open_file.read()
-            open_file.close()
         installed = json.loads(data)
         for item in installed["installed"]:
             values = {}
@@ -179,7 +177,6 @@ def heroic_parser(parent_widget, action):
                 os.path.join(heroic_dir, "gog_store", "library.json"), "r"
             ) as open_file:
                 data = open_file.read()
-                open_file.close()
             library = json.loads(data)
             for game in library["games"]:
                 if game["app_name"] == app_name:
@@ -195,9 +192,9 @@ def heroic_parser(parent_widget, action):
                     break
 
             values["executable"] = (
-                f"start heroic://launch/{app_name}"
+                ["start", f"heroic://launch/{app_name}"]
                 if os.name == "nt"
-                else f"xdg-open heroic://launch/{app_name}"
+                else ["xdg-open", f"heroic://launch/{app_name}"]
             )
             values["hidden"] = False
             values["source"] = "heroic_gog"
@@ -214,7 +211,6 @@ def heroic_parser(parent_widget, action):
             os.path.join(heroic_dir, "sideload_apps", "library.json"), "r"
         ) as open_file:
             data = open_file.read()
-            open_file.close()
         library = json.loads(data)
         for item in library["games"]:
             values = {}
@@ -230,9 +226,9 @@ def heroic_parser(parent_widget, action):
 
             values["name"] = item["title"]
             values["executable"] = (
-                f"start heroic://launch/{app_name}"
+                ["start", f"heroic://launch/{app_name}"]
                 if os.name == "nt"
-                else f"xdg-open heroic://launch/{app_name}"
+                else ["xdg-open", f"heroic://launch/{app_name}"]
             )
             values["hidden"] = False
             values["source"] = "heroic_sideload"
