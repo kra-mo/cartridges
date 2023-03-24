@@ -84,9 +84,7 @@ def bottles_parser(parent_widget, action):
                 _("Set Bottles Location"),
             ).connect("response", response)
 
-    if os.path.isfile(os.path.join(bottles_dir, "library.yml")):
-        pass
-    else:
+    if not os.path.isfile(os.path.join(bottles_dir, "library.yml")):
         bottles_not_found()
         return {}
 
@@ -137,7 +135,7 @@ def bottles_parser(parent_widget, action):
 
         bottles_games[values["game_id"]] = values
 
-    if len(bottles_games) == 0:
+    if not bottles_games:
         create_dialog(
             parent_widget,
             _("No Games Found"),

@@ -31,10 +31,9 @@ def get_cover(game_id, parent_widget):
         or os.path.expanduser(os.path.join("~", ".local", "share")),
         "cartridges",
         "covers",
-        game_id + ".tiff",
+        f"{game_id}.tiff",
     )
 
-    if not os.path.isfile(cover_path):
-        return parent_widget.placeholder_pixbuf
-
-    return GdkPixbuf.Pixbuf.new_from_file(cover_path)
+    if os.path.isfile(cover_path):
+        return GdkPixbuf.Pixbuf.new_from_file(cover_path)
+    return parent_widget.placeholder_pixbuf

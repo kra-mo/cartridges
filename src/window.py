@@ -97,7 +97,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                         or os.path.expanduser(os.path.join("~", ".local", "share")),
                         "cartridges",
                         "games",
-                        current_game + ".json",
+                        f"{current_game}.json",
                     )
                 )
                 try:
@@ -107,7 +107,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                             or os.path.expanduser(os.path.join("~", ".local", "share")),
                             "cartridges",
                             "covers",
-                            current_game + ".dat",
+                            f"{current_game}.dat",
                         )
                     )
                 except FileNotFoundError:
@@ -290,36 +290,28 @@ class CartridgesWindow(Adw.ApplicationWindow):
         name2 = child2.get_first_child().name.lower()
         if name1 > name2:
             return -1
-        if name1 < name2:
-            return 1
-        return self.a_z_sort(child1, child2)
+        return 1 if name1 < name2 else self.a_z_sort(child1, child2)
 
     def newest_sort(self, child1, child2):
         time1 = self.games[child1.get_first_child().game_id].added
         time2 = self.games[child2.get_first_child().game_id].added
         if time1 > time2:
             return -1
-        if time1 < time2:
-            return 1
-        return self.a_z_sort(child1, child2)
+        return 1 if time1 < time2 else self.a_z_sort(child1, child2)
 
     def oldest_sort(self, child1, child2):
         time1 = self.games[child1.get_first_child().game_id].added
         time2 = self.games[child2.get_first_child().game_id].added
         if time1 > time2:
             return 1
-        if time1 < time2:
-            return -1
-        return self.a_z_sort(child1, child2)
+        return -1 if time1 < time2 else self.a_z_sort(child1, child2)
 
     def last_played_sort(self, child1, child2):
         time1 = self.games[child1.get_first_child().game_id].last_played
         time2 = self.games[child2.get_first_child().game_id].last_played
         if time1 > time2:
             return -1
-        if time1 < time2:
-            return 1
-        return self.a_z_sort(child1, child2)
+        return 1 if time1 < time2 else self.a_z_sort(child1, child2)
 
     def on_go_back_action(self, _widget, _unused, _x=None, _y=None):
         if self.stack.get_visible_child() == self.hidden_library_view:

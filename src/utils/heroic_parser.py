@@ -90,9 +90,7 @@ def heroic_parser(parent_widget, action):
                 _("Set Heroic Location"),
             ).connect("response", response)
 
-    if os.path.exists(os.path.join(heroic_dir, "config.json")):
-        pass
-    else:
+    if not os.path.exists(os.path.join(heroic_dir, "config.json")):
         heroic_not_found()
         return {}
 
@@ -120,7 +118,7 @@ def heroic_parser(parent_widget, action):
                 values = {}
 
                 app_name = game["app_name"]
-                values["game_id"] = "heroic_epic_" + app_name
+                values["game_id"] = f"heroic_epic_{app_name}"
 
                 if (
                     values["game_id"] in parent_widget.games
@@ -131,9 +129,9 @@ def heroic_parser(parent_widget, action):
                 values["name"] = game["title"]
                 values["developer"] = game["developer"]
                 values["executable"] = (
-                    "start heroic://launch/" + app_name
+                    f"start heroic://launch/{app_name}"
                     if os.name == "nt"
-                    else "xdg-open heroic://launch/" + app_name
+                    else f"xdg-open heroic://launch/{app_name}"
                 )
                 values["hidden"] = False
                 values["source"] = "heroic_epic"
@@ -168,7 +166,7 @@ def heroic_parser(parent_widget, action):
             values = {}
             app_name = item["appName"]
 
-            values["game_id"] = "heroic_gog_" + app_name
+            values["game_id"] = f"heroic_gog_{app_name}"
 
             if (
                 values["game_id"] in parent_widget.games
@@ -197,9 +195,9 @@ def heroic_parser(parent_widget, action):
                     break
 
             values["executable"] = (
-                "start heroic://launch/" + app_name
+                f"start heroic://launch/{app_name}"
                 if os.name == "nt"
-                else "xdg-open heroic://launch/" + app_name
+                else f"xdg-open heroic://launch/{app_name}"
             )
             values["hidden"] = False
             values["source"] = "heroic_gog"
@@ -222,7 +220,7 @@ def heroic_parser(parent_widget, action):
             values = {}
             app_name = item["app_name"]
 
-            values["game_id"] = "heroic_sideload_" + app_name
+            values["game_id"] = f"heroic_sideload_{app_name}"
 
             if (
                 values["game_id"] in parent_widget.games
@@ -232,9 +230,9 @@ def heroic_parser(parent_widget, action):
 
             values["name"] = item["title"]
             values["executable"] = (
-                "start heroic://launch/" + app_name
+                f"start heroic://launch/{app_name}"
                 if os.name == "nt"
-                else "xdg-open heroic://launch/" + app_name
+                else f"xdg-open heroic://launch/{app_name}"
             )
             values["hidden"] = False
             values["source"] = "heroic_sideload"
@@ -250,7 +248,7 @@ def heroic_parser(parent_widget, action):
 
             heroic_games[values["game_id"]] = values
 
-    if len(heroic_games) == 0:
+    if not heroic_games:
         create_dialog(
             parent_widget,
             _("No Games Found"),

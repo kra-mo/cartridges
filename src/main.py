@@ -65,7 +65,6 @@ class CartridgesApplication(Adw.Application):
         self.win = None
 
     def do_activate(self):
-
         # Create the main window
         self.win = self.props.active_window
         if not self.win:
@@ -149,7 +148,6 @@ class CartridgesApplication(Adw.Application):
         self.win.update_games(games.keys())
 
     def on_launch_game_action(self, _widget, _callback=None):
-
         # Launch the game and update the last played value
 
         game_id = self.win.active_game_id
@@ -178,7 +176,6 @@ class CartridgesApplication(Adw.Application):
         create_details_window(self.win)
 
     def on_remove_game_action(self, _widget, _callback=None):
-
         # Add "removed=True" to the game properties so it can be deleted on next init
         game_id = self.win.active_game_id
 

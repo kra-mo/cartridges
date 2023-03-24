@@ -202,7 +202,6 @@ def create_details_window(parent_widget, game_id=None):
         final_executable = executable.get_buffer().get_text()
 
         if game_id is None:
-
             if final_name == "":
                 create_dialog(
                     window, _("Couldn't Add Game"), _("Game title cannot be empty.")
@@ -223,7 +222,7 @@ def create_details_window(parent_widget, game_id=None):
                 if "imported_" in game:
                     numbers.append(int(game.replace("imported_", "")))
 
-            game_id = "imported_" + str(max(numbers) + 1)
+            game_id = f"imported_{str(max(numbers) + 1)}"
 
             values["game_id"] = game_id
             values["hidden"] = False
@@ -252,7 +251,7 @@ def create_details_window(parent_widget, game_id=None):
             save_cover(None, parent_widget, None, pixbuf, game_id)
 
         values["name"] = final_name
-        values["developer"] = final_developer if final_developer else None
+        values["developer"] = final_developer or None
         values["executable"] = final_executable
 
         path = os.path.join(
@@ -261,7 +260,7 @@ def create_details_window(parent_widget, game_id=None):
                 or os.path.expanduser(os.path.join("~", ".local", "share")),
                 "cartridges",
                 "games",
-                game_id + ".json",
+                f"{game_id}.json",
             )
         )
 

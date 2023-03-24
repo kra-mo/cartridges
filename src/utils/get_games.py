@@ -33,12 +33,10 @@ def get_games(game_ids=None):
     if not os.path.exists(games_dir):
         return {}
 
-    if not game_ids:
-        game_files = os.listdir(games_dir)
+    if game_ids:
+        game_files = [f"{game_id}.json" for game_id in game_ids]
     else:
-        game_files = []
-        for game_id in game_ids:
-            game_files.append(game_id + ".json")
+        game_files = os.listdir(games_dir)
 
     for game in game_files:
         with open(os.path.join(games_dir, game), "r") as open_file:
