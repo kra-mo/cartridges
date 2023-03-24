@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
 # LINUX-SAUNA <linuxsauna@protonmail.com>, 2023.
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-21 15:48+0100\n"
 "PO-Revision-Date: 2023-03-24 19:27+0000\n"
-"Last-Translator: LINUX-SAUNA <linuxsauna@protonmail.com>\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fi/>\n"
 "Language: fi\n"
@@ -42,10 +43,10 @@ msgid ""
 "games from Steam, Heroic and Bottles with organizational features such as "
 "hiding and sorting by date added or last played."
 msgstr ""
-"Cartridges on yksinkertainen pelikäynnistin. Se tukee pelien tuontia "
-"Steamista, Heroicista ja Bottlesista ja tarjoaa organisointiominaisuuksia, "
-"kuten piilottamisen ja lajittelun lisäyspäivämäärän tai viimeisimmän pelatun "
-"pelin mukaan."
+"Cartridges on helppo pelikäynnistin. Se tukee pelien tuontia Steamista, "
+"Heroicista ja Bottlesista ja tarjoaa ominaisuuden järjestelyyn, kuten "
+"piilottamisen ja lajittelun lisäyspäivämäärän tai viimeisimmän pelatun pelin "
+"mukaan."
 
 #: data/gtk/window.blp:6 src/utils/bottles_parser.py:142
 #: src/utils/heroic_parser.py:253 src/utils/steam_parser.py:161
@@ -54,63 +55,63 @@ msgstr "Pelejä ei löydetty"
 
 #: data/gtk/window.blp:7
 msgid "Try a different search."
-msgstr ""
+msgstr "Kokeile eri hakua."
 
 #: data/gtk/window.blp:14
 msgid "No Games"
-msgstr ""
+msgstr "Ei pelejä"
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
-msgstr ""
+msgstr "Käytä + painiketta pelien lisäämiseen."
 
 #: data/gtk/window.blp:22
 msgid "No Hidden Games"
-msgstr ""
+msgstr "Ei piilotettuja pelejä"
 
 #: data/gtk/window.blp:23
 msgid "Games you hide will appear here."
-msgstr ""
+msgstr "Piilotetut pelit näkyvät täällä."
 
 #: data/gtk/window.blp:44 data/gtk/window.blp:254
 msgid "Back"
-msgstr ""
+msgstr "Takaisin"
 
 #: data/gtk/window.blp:51
 msgid "Game Details"
-msgstr ""
+msgstr "Pelin tiedot"
 
 #: data/gtk/window.blp:92
 msgid "Game Title"
-msgstr ""
+msgstr "Pelin nimi"
 
 #: data/gtk/window.blp:148 data/gtk/game.blp:38
 msgid "Play"
-msgstr ""
+msgstr "Pelaa"
 
 #: data/gtk/window.blp:196 data/gtk/window.blp:382
 msgid "Add Game"
-msgstr ""
+msgstr "Lisää peli"
 
 #: data/gtk/window.blp:203 data/gtk/window.blp:266
 msgid "Main Menu"
-msgstr ""
+msgstr "Päävalikko"
 
 #: data/gtk/window.blp:210 data/gtk/window.blp:273
 msgid "Search"
-msgstr ""
+msgstr "Etsi"
 
 #: data/gtk/window.blp:261
 msgid "Hidden Games"
-msgstr ""
+msgstr "Piilotetut pelit"
 
 #: data/gtk/window.blp:321
 msgid "Sort"
-msgstr ""
+msgstr "Lajittele"
 
 #: data/gtk/window.blp:324
 msgid "A-Z"
-msgstr ""
+msgstr "A-Z"
 
 #: data/gtk/window.blp:330
 msgid "Z-A"
