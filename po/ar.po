@@ -1,37 +1,41 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
-# Philip Goto <philip.goto@gmail.com>, 2023.
+# Ali Aljishi <ahj696@hotmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-21 15:48+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: nl\n"
+"PO-Revision-Date: 2023-03-24 16:49+0000\n"
+"Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
+"cartridges/ar/>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
 #: src/main.py:116
 msgid "Cartridges"
-msgstr "Cartridges"
+msgstr "عبوات"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr "Game-launcher"
+msgstr "مشغِّل ألعاب"
 
 #: data/hu.kramo.Cartridges.desktop.in:5
 msgid "Launch your games"
-msgstr "Start uw games op"
+msgstr "شغِّل ألعابك"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
-msgstr "Start al uw games op"
+msgstr "شغِّل كلَّ ألعابك"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -39,376 +43,375 @@ msgid ""
 "games from Steam, Heroic and Bottles with organizational features such as "
 "hiding and sorting by date added or last played."
 msgstr ""
-"Cartridges is een eenvoudige game-launcher. Het biedt ondersteuning voor het "
-"importeren van al uw games van Steam, Heroic en Bottles. Daarnaast heeft het "
-"organisatorische functies zoals verbergen en sorteren op toegevoegd of "
-"laatst gespeeld."
+"«عبوَّات» هو مشغِّل ألعاب يسير، فيه دعم لاستيراد الألعاب من ستيم، وهِرُوِك، "
+"وبوتلز، وفيه مزايا لترتيب هذه الألعاب مثل إخفاء بعضها أو ترتيبها حسب تاريخ "
+"إضافتها أو آخر تاريخ لُعبت فيه."
 
 #: data/gtk/window.blp:6 src/utils/bottles_parser.py:142
 #: src/utils/heroic_parser.py:253 src/utils/steam_parser.py:161
 msgid "No Games Found"
-msgstr "Geen games gevonden"
+msgstr "لم يُعثر على ألعاب"
 
 #: data/gtk/window.blp:7
 msgid "Try a different search."
-msgstr "Probeer een andere zoekopdracht"
+msgstr "جرِّب بحثًا آخر."
 
 #: data/gtk/window.blp:14
 msgid "No Games"
-msgstr "Geen games"
+msgstr "لا توجد ألعاب"
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
-msgstr "Gebruik de plusknop om games toe te voegen"
+msgstr "استخدم زرَّ + لتضيف ألعابًا."
 
 #: data/gtk/window.blp:22
 msgid "No Hidden Games"
-msgstr "Geen verborgen games"
+msgstr "لا توجد ألعاب مخفية"
 
 #: data/gtk/window.blp:23
 msgid "Games you hide will appear here."
-msgstr "Games die u verbergt zullen hier verschijnen"
+msgstr "هنا يظهر ما أخفيت من ألعاب."
 
 #: data/gtk/window.blp:44 data/gtk/window.blp:254
 msgid "Back"
-msgstr "Terug"
+msgstr "عد"
 
 #: data/gtk/window.blp:51
 msgid "Game Details"
-msgstr "Game-details"
+msgstr "تفاصيل اللعبة"
 
 #: data/gtk/window.blp:92
 msgid "Game Title"
-msgstr "Game-titel"
+msgstr "عنوان اللعبة"
 
 #: data/gtk/window.blp:148 data/gtk/game.blp:38
 msgid "Play"
-msgstr "Spelen"
+msgstr "العب"
 
 #: data/gtk/window.blp:196 data/gtk/window.blp:382
 msgid "Add Game"
-msgstr "Game toevoegen"
+msgstr "أضف لعبةً"
 
 #: data/gtk/window.blp:203 data/gtk/window.blp:266
 msgid "Main Menu"
-msgstr "Hoofdmenu"
+msgstr "القائمة الرئيسة"
 
 #: data/gtk/window.blp:210 data/gtk/window.blp:273
 msgid "Search"
-msgstr "Zoeken"
+msgstr "ابحث"
 
 #: data/gtk/window.blp:261
 msgid "Hidden Games"
-msgstr "Verborgen games"
+msgstr "الألعاب المخفية"
 
 #: data/gtk/window.blp:321
 msgid "Sort"
-msgstr "Sorteren"
+msgstr "رتِّب"
 
 #: data/gtk/window.blp:324
 msgid "A-Z"
-msgstr "A-Z"
+msgstr "أ-ي"
 
 #: data/gtk/window.blp:330
 msgid "Z-A"
-msgstr "Z-A"
+msgstr "ي-أ"
 
 #: data/gtk/window.blp:336
 msgid "Newest"
-msgstr "Nieuwste"
+msgstr "الأجدد"
 
 #: data/gtk/window.blp:342
 msgid "Oldest"
-msgstr "Oudste"
+msgstr "الأقدم"
 
 #: data/gtk/window.blp:348
 msgid "Last Played"
-msgstr "Laatst gespeeld"
+msgstr "لُعبت آخر مرَّة"
 
 #: data/gtk/window.blp:355
 msgid "Show Hidden"
-msgstr "Verborgen games tonen"
+msgstr "أظهر ما أخفي"
 
 #: data/gtk/window.blp:363
 msgid "Preferences"
-msgstr "Voorkeuren"
+msgstr "التفضيلات"
 
 #: data/gtk/window.blp:368
 msgid "Keyboard Shortcuts"
-msgstr "Sneltoetsen"
+msgstr "اختصارات لوحة المفاتيح"
 
 #: data/gtk/window.blp:373
 msgid "About Cartridges"
-msgstr "Over Cartridges"
+msgstr "عن «عبوَّات»"
 
 #: data/gtk/window.blp:388
 msgid "Import from"
-msgstr "Importeren uit"
+msgstr "استورد من"
 
 #: data/gtk/window.blp:390
 msgid "Steam"
-msgstr "Steam"
+msgstr "ستيم"
 
 #: data/gtk/window.blp:395
 msgid "Heroic"
-msgstr "Heroic"
+msgstr "هِرُوِك"
 
 #: data/gtk/window.blp:400
 msgid "Bottles"
-msgstr "Bottles"
+msgstr "بوتلز"
 
 #: data/gtk/window.blp:411 data/gtk/window.blp:430 data/gtk/game.blp:87
 #: data/gtk/game.blp:106
 msgid "Edit"
-msgstr "Bewerken"
+msgstr "حرِّر"
 
 #: data/gtk/window.blp:416 data/gtk/game.blp:92
 msgid "Hide"
-msgstr "Verbergen"
+msgstr "أخفِ"
 
 #: data/gtk/window.blp:421 data/gtk/window.blp:440 data/gtk/game.blp:97
 #: data/gtk/game.blp:116
 msgid "Remove"
-msgstr "Verwijderen"
+msgstr "أزل"
 
 #: data/gtk/window.blp:435 data/gtk/game.blp:111
 msgid "Unhide"
-msgstr "Niet meer verbergen"
+msgstr "اكشف"
 
 #: data/gtk/game.blp:65 src/utils/create_details_window.py:94
 msgid "Title"
-msgstr "Titel"
+msgstr "العنوان"
 
 #: data/gtk/help-overlay.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Algemeen"
+msgstr "عام"
 
 #: data/gtk/help-overlay.blp:14
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Sluiten"
+msgstr "أنهِ"
 
 #: data/gtk/help-overlay.blp:19
 msgctxt "shortcut window"
 msgid "Search"
-msgstr "Zoeken"
+msgstr "ابحث"
 
 #: data/gtk/help-overlay.blp:24
 msgctxt "shortcut window"
 msgid "Show preferences"
-msgstr "Voorkeuren tonen"
+msgstr "أظهر التفضيلات"
 
 #: data/gtk/help-overlay.blp:29
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr "Sneltoetsen"
+msgstr "الاختصارات"
 
 #: data/gtk/help-overlay.blp:34
 msgctxt "shortcut window"
 msgid "Undo"
-msgstr "Ongedaan maken"
+msgstr "تراجع"
 
 #: data/gtk/help-overlay.blp:39
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr "Menu openen"
+msgstr "افتح القائمة"
 
 #: data/gtk/help-overlay.blp:45
 msgctxt "shortcut window"
 msgid "Games"
-msgstr "Games"
+msgstr "الألعاب"
 
 #: data/gtk/help-overlay.blp:48
 msgctxt "shortcut window"
 msgid "Add new game"
-msgstr "Nieuwe game toevoegen"
+msgstr "أضف لعبةً جديدةً"
 
 #: data/gtk/help-overlay.blp:53
 msgctxt "shortcut window"
 msgid "Show hidden games"
-msgstr "Verborgen games tonen"
+msgstr "أظهر الألعاب المخفية"
 
 #: data/gtk/preferences.blp:10
 msgid "General"
-msgstr "Algemeen"
+msgstr "عام"
 
 #: data/gtk/preferences.blp:13
 msgid "Exit After Launching Games"
-msgstr "Sluiten na starten van game"
+msgstr "اخرج بعد بدء الألعاب"
 
 #: data/gtk/preferences.blp:25
 msgid "Steam Install Location"
-msgstr "Installatielocatie van Steam"
+msgstr "موضع تثبيت ستيم"
 
 #: data/gtk/preferences.blp:26 data/gtk/preferences.blp:64
 #: data/gtk/preferences.blp:102
 msgid "Directory to use when importing games"
-msgstr "Map om te gebruiken bij het importeren van games"
+msgstr "المجلَّد المستخدم عند استيراد الألعاب"
 
 #: data/gtk/preferences.blp:34
 msgid "Extra Steam Libraries"
-msgstr "Extra Steam-bibliotheken"
+msgstr "مكتبات ستيم الإضافية"
 
 #: data/gtk/preferences.blp:35
 msgid "Select other directories where you have Steam games installed"
-msgstr "Andere mappen waar u Steam-games heeft geïnstalleerd"
+msgstr "حدِّد المجلَّدات الأخرى التي ثُبِّتت فيها ألعاب ستيم"
 
 #: data/gtk/preferences.blp:42
 msgid "Clear"
-msgstr "Wissen"
+msgstr "أمحُ"
 
 #: data/gtk/preferences.blp:63
 msgid "Heroic Install Location"
-msgstr "Installatielocatie van Heroic"
+msgstr "موضع تثبيت هِرُوِك"
 
 #: data/gtk/preferences.blp:73
 msgid "Import Epic Games"
-msgstr "Epic-games importeren"
+msgstr "استورد ألعاب أَبِك"
 
 #: data/gtk/preferences.blp:81
 msgid "Import GOG Games"
-msgstr "GOG-games importeren"
+msgstr "استورد ألعاب جي‌أو‌جي"
 
 #: data/gtk/preferences.blp:89
 msgid "Import Sideloaded Games"
-msgstr "Gesideloade games importeren"
+msgstr "استورد ألعابًا مثبَّتةً بغير متجر"
 
 #: data/gtk/preferences.blp:101
 msgid "Bottles Install Location"
-msgstr "Installatielocatie van Bottles"
+msgstr "موضع تثبيت بوتلز"
 
 #. Translators: Replace this with your name for it to show up in the about window
 #: src/main.py:130
 msgid "translator_credits"
-msgstr "Philip Goto <philip.goto@gmail.com>"
+msgstr "Ali Aljishi <ahj696@hotmail.com>"
 
 #: src/main.py:195
 #, python-brace-format
 msgid "{title} removed"
-msgstr "{title} verwijderd"
+msgstr "أزيلت {title}"
 
 #: src/main.py:196
 msgid "Undo"
-msgstr "Ongedaan maken"
+msgstr "تراجع"
 
 #: src/window.py:229
 msgid "Today"
-msgstr "Vandaag"
+msgstr "اليوم"
 
 #: src/window.py:231
 msgid "Yesterday"
-msgstr "Gisteren"
+msgstr "أمس"
 
 #. The variable is the date when the game was added
 #: src/window.py:265
 #, python-brace-format
 msgid "Added: {date}"
-msgstr "Toegevoegd op {date}"
+msgstr "أضيفت في: {date}"
 
 #: src/window.py:270
 msgid "Never"
-msgstr "Nooit"
+msgstr "أبدًا"
 
 #. The variable is the date when the game was last played
 #: src/window.py:274
 #, python-brace-format
 msgid "Last played: {last_played_date}"
-msgstr "Laatst gespeeld op {last_played_date}"
+msgstr "لُعبت آخر مرَّة في: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:234
 msgid "Couldn't Import Games"
-msgstr "Kon games niet importeren"
+msgstr "تعذَّر استيراد الألعاب"
 
 #: src/utils/bottles_parser.py:81
 msgid "The Bottles directory cannot be found."
-msgstr "De Bottles-map kan niet worden gevonden"
+msgstr "تعذَّر العثور على مجلَّد بوتلز."
 
 #: src/utils/bottles_parser.py:83
 msgid "Set Bottles Location"
-msgstr "Bottles-locatie instellen"
+msgstr "عيِّن موضع بوتلز"
 
 #: src/utils/bottles_parser.py:143
 msgid "No new games were found in the Bottles library."
-msgstr "Geen nieuwe games gevonden in de Bottles-bibliotheek"
+msgstr "لم يُعثر على ألعاب جديدة في مكتبة بوتلز."
 
 #: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:155
 msgid "Bottles Games Imported"
-msgstr "Bottles-games geïmporteerd"
+msgstr "اُستوردت ألعاب بوتلز"
 
 #: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:260
 #: src/utils/steam_parser.py:168
 msgid "Successfully imported 1 game."
-msgstr "1 game succesvol geïmporteerd"
+msgstr "اُستوردت لعبة بنجاح."
 
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:268
 #: src/utils/steam_parser.py:176
 #, python-brace-format
 msgid "Successfully imported {games_no} games."
-msgstr "{games_no} games succesvol geïmporteerd"
+msgstr "اُستوردت {games_no} لعبة بنجاح."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
-msgstr "Nieuwe game toevoegen"
+msgstr "أضف لعبةً جديدةً"
 
 #: src/utils/create_details_window.py:46
 msgid "Confirm"
-msgstr "Bevestigen"
+msgstr "أكِّد"
 
 #: src/utils/create_details_window.py:48
 msgid "Edit Game Details"
-msgstr "Game-details bewerken"
+msgstr "حرِّر تفاصيل اللعبة"
 
 #: src/utils/create_details_window.py:57
 msgid "Apply"
-msgstr "Toepassen"
+msgstr "طبِّق"
 
 #: src/utils/create_details_window.py:59
 msgid "Images"
-msgstr "Afbeeldingen"
+msgstr "الصور"
 
 #: src/utils/create_details_window.py:95
 msgid "The title of the game"
-msgstr "De titel van de game"
+msgstr "عنوان اللعبة"
 
 #: src/utils/create_details_window.py:100
 msgid "Developer"
-msgstr "Ontwikkelaar"
+msgstr "المطوِّر"
 
 #: src/utils/create_details_window.py:101
 msgid "The developer or publisher (optional)"
-msgstr "De ontwikkelaar of uitgever (optioneel)"
+msgstr "المطوِّر أو الناشر (اختياري)"
 
 #: src/utils/create_details_window.py:111
 msgid "file.txt"
-msgstr "bestand.txt"
+msgstr "ملف.txt"
 
 #. As in software
 #: src/utils/create_details_window.py:113
 msgid "program"
-msgstr "programma"
+msgstr "برنامج"
 
 #: src/utils/create_details_window.py:117
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
-msgstr "C:\\pad\\naar\\{exe_name}"
+msgstr "C:\\path\\to\\{exe_name}"
 
 #: src/utils/create_details_window.py:118
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
-msgstr "C:\\pad\\naar\\{file_name}"
+msgstr "C:\\path\\to\\{file_name}"
 
 #: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "/path/to/{exe_name}"
-msgstr "/pad/naar/{exe_name}"
+msgstr "/path/to/{exe_name}"
 
 #: src/utils/create_details_window.py:122
 #, python-brace-format
 msgid "/path/to/{file_name}"
-msgstr "/pad/naar/{file_name}"
+msgstr "/path/to/{file_name}"
 
 #: src/utils/create_details_window.py:126
 #, python-brace-format
@@ -423,91 +426,88 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Om het programma ‘{exe_name}’ te starten, gebruik de volgende opdracht:\n"
+"إن أردت تشغيل ملفِّ التنفيذ «{exe_name}» فعليك استخدام الأمر:\n"
 "\n"
 "<tt>\"{exe_path}\"</tt>\n"
 "\n"
-"Om het bestand ‘{file_name}’ met de standaard-app te openen, gebruik de "
-"volgende opdracht:\n"
+"إن أردت فتح الملفِّ «{file_name}» باستخدام التطبيق المبدئيِّ فعليك استخدام:\n"
 "\n"
 "<tt>{command} \"{file_path}\"</tt>\n"
 "\n"
-"Indien het pad spaties bevat, zorg er dan voor dat er dubbele "
-"aanhalingstekens omheen staan!"
+"ولا تنسَ إحاطة المسافات في المسار بعلامتي تنصيص مزدوجتين!"
 
 #: src/utils/create_details_window.py:149
 msgid "Executable"
-msgstr "Programmabestand"
+msgstr "ملفُّ تنفيذ"
 
 #: src/utils/create_details_window.py:150
 msgid "File to open or command to run when launching the game"
-msgstr ""
-"Te openen bestand of uit te voeren opdracht bij het starten van de game"
+msgstr "الملفُّ المفتوح أو الأمر المشغَّل عند بدء اللعبة"
 
 #: src/utils/create_details_window.py:162
 msgid "Cancel"
-msgstr "Annuleren"
+msgstr "ألغِ"
 
 #: src/utils/create_details_window.py:208
 #: src/utils/create_details_window.py:214
 msgid "Couldn't Add Game"
-msgstr "Kon game niet toevoegen"
+msgstr "تعذَّرت إضافة اللعبة"
 
 #: src/utils/create_details_window.py:208
 #: src/utils/create_details_window.py:239
 msgid "Game title cannot be empty."
-msgstr "Game-titel mag niet leeg zijn"
+msgstr "لا يجوز كون عنوان اللعبة فارغًا."
 
 #: src/utils/create_details_window.py:214
 #: src/utils/create_details_window.py:247
 msgid "Executable cannot be empty."
-msgstr "Programmabestand mag niet leeg zijn"
+msgstr "لا يجوز كون ملفِّ التنفيذ فارغًا."
 
 #: src/utils/create_details_window.py:238
 #: src/utils/create_details_window.py:246
 msgid "Couldn't Apply Preferences"
-msgstr "Kon voorkeuren niet toepassen"
+msgstr "تعذَّر تطبيق التفضيلات"
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
-msgstr "Sluiten"
+msgstr "تجاهل"
 
 #: src/utils/heroic_parser.py:88
 msgid "The Heroic directory cannot be found."
-msgstr "De Heroic-map kan niet worden gevonden"
+msgstr "تعذَّر العثور على مجلَّد هِرُوِك."
 
 #: src/utils/heroic_parser.py:90
 msgid "Set Heroic Location"
-msgstr "Heroic-locatie instellen"
+msgstr "عيِّن موضع هِرُوِك"
 
 #: src/utils/heroic_parser.py:254
 msgid "No new games were found in the Heroic library."
-msgstr "Geen nieuwe games gevonden in de Heroic-bibliotheek"
+msgstr "لم يُعثر على ألعاب جديدة في مكتبة هِرُوِك."
 
 #: src/utils/heroic_parser.py:259 src/utils/heroic_parser.py:266
 msgid "Heroic Games Imported"
-msgstr "Heroic-games geïmporteerd"
+msgstr "اُستوردت ألعاب هِرُوِك"
 
 #: src/utils/steam_parser.py:162
 msgid "No new games were found in the Steam library."
-msgstr "Geen nieuwe games gevonden in de Steam-bibliotheek"
+msgstr "لم يُعثر على ألعاب جديدة في مكتبة ستيم."
 
 #: src/utils/steam_parser.py:167 src/utils/steam_parser.py:174
 msgid "Steam Games Imported"
-msgstr "Steam-games geïmporteerd"
+msgstr "اُستوردت ألعاب ستيم"
 
 #: src/utils/steam_parser.py:235
 msgid "The Steam directory cannot be found."
-msgstr "Steam-map kan niet worden gevonden"
+msgstr "تعذَّر العثور على مجلَّد ستيم."
 
 #: src/utils/steam_parser.py:237
 msgid "Set Steam Location"
-msgstr "Steam-locatie instellen"
+msgstr "عيِّن موضع ستيم"
 
 #: src/utils/steam_parser.py:253
 msgid "Importing Games…"
-msgstr "Games importeren…"
+msgstr "تُستورد الألعاب…"
 
 #: src/utils/steam_parser.py:254
 msgid "Talking to Steam"
-msgstr "Steam-bibliotheek aan het ophalen"
+msgstr "يُتواصل مع ستيم"
