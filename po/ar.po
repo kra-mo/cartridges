@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-21 15:48+0100\n"
+"POT-Creation-Date: 2023-03-25 00:50+0100\n"
 "PO-Revision-Date: 2023-03-24 16:49+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:116
+#: src/main.py:115
 msgid "Cartridges"
 msgstr "عبوات"
 
@@ -43,12 +43,12 @@ msgid ""
 "games from Steam, Heroic and Bottles with organizational features such as "
 "hiding and sorting by date added or last played."
 msgstr ""
-"«عبوَّات» هو مشغِّل ألعاب يسير، فيه دعم لاستيراد الألعاب من ستيم، وهِرُوِك، "
-"وبوتلز، وفيه مزايا لترتيب هذه الألعاب مثل إخفاء بعضها أو ترتيبها حسب تاريخ "
-"إضافتها أو آخر تاريخ لُعبت فيه."
+"«عبوَّات» هو مشغِّل ألعاب يسير، فيه دعم لاستيراد الألعاب من ستيم، وهِرُوِك، وبوتلز، "
+"وفيه مزايا لترتيب هذه الألعاب مثل إخفاء بعضها أو ترتيبها حسب تاريخ إضافتها "
+"أو آخر تاريخ لُعبت فيه."
 
-#: data/gtk/window.blp:6 src/utils/bottles_parser.py:142
-#: src/utils/heroic_parser.py:253 src/utils/steam_parser.py:161
+#: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
+#: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:163
 msgid "No Games Found"
 msgstr "لم يُعثر على ألعاب"
 
@@ -84,7 +84,7 @@ msgstr "تفاصيل اللعبة"
 msgid "Game Title"
 msgstr "عنوان اللعبة"
 
-#: data/gtk/window.blp:148 data/gtk/game.blp:38
+#: data/gtk/window.blp:148 data/gtk/game.blp:35
 msgid "Play"
 msgstr "العب"
 
@@ -160,27 +160,25 @@ msgstr "هِرُوِك"
 msgid "Bottles"
 msgstr "بوتلز"
 
-#: data/gtk/window.blp:411 data/gtk/window.blp:430 data/gtk/game.blp:87
-#: data/gtk/game.blp:106
+#: data/gtk/game.blp:61 src/utils/create_details_window.py:94
+msgid "Title"
+msgstr "العنوان"
+
+#: data/gtk/game.blp:83 data/gtk/game.blp:102
 msgid "Edit"
 msgstr "حرِّر"
 
-#: data/gtk/window.blp:416 data/gtk/game.blp:92
+#: data/gtk/game.blp:88
 msgid "Hide"
 msgstr "أخفِ"
 
-#: data/gtk/window.blp:421 data/gtk/window.blp:440 data/gtk/game.blp:97
-#: data/gtk/game.blp:116
+#: data/gtk/game.blp:93 data/gtk/game.blp:112
 msgid "Remove"
 msgstr "أزل"
 
-#: data/gtk/window.blp:435 data/gtk/game.blp:111
+#: data/gtk/game.blp:107
 msgid "Unhide"
 msgstr "اكشف"
-
-#: data/gtk/game.blp:65 src/utils/create_details_window.py:94
-msgid "Title"
-msgstr "العنوان"
 
 #: data/gtk/help-overlay.blp:11
 msgctxt "shortcut window"
@@ -286,41 +284,41 @@ msgstr "موضع تثبيت بوتلز"
 msgid "translator_credits"
 msgstr "Ali Aljishi <ahj696@hotmail.com>"
 
-#: src/main.py:195
+#: src/main.py:193
 #, python-brace-format
 msgid "{title} removed"
 msgstr "أزيلت {title}"
 
-#: src/main.py:196
+#: src/main.py:194
 msgid "Undo"
 msgstr "تراجع"
 
-#: src/window.py:229
+#: src/window.py:225
 msgid "Today"
 msgstr "اليوم"
 
-#: src/window.py:231
+#: src/window.py:227
 msgid "Yesterday"
 msgstr "أمس"
 
 #. The variable is the date when the game was added
-#: src/window.py:265
+#: src/window.py:261
 #, python-brace-format
 msgid "Added: {date}"
 msgstr "أضيفت في: {date}"
 
-#: src/window.py:270
+#: src/window.py:266
 msgid "Never"
 msgstr "أبدًا"
 
 #. The variable is the date when the game was last played
-#: src/window.py:274
+#: src/window.py:270
 #, python-brace-format
 msgid "Last played: {last_played_date}"
 msgstr "لُعبت آخر مرَّة في: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:234
+#: src/utils/steam_parser.py:238
 msgid "Couldn't Import Games"
 msgstr "تعذَّر استيراد الألعاب"
 
@@ -332,22 +330,22 @@ msgstr "تعذَّر العثور على مجلَّد بوتلز."
 msgid "Set Bottles Location"
 msgstr "عيِّن موضع بوتلز"
 
-#: src/utils/bottles_parser.py:143
+#: src/utils/bottles_parser.py:141
 msgid "No new games were found in the Bottles library."
 msgstr "لم يُعثر على ألعاب جديدة في مكتبة بوتلز."
 
-#: src/utils/bottles_parser.py:148 src/utils/bottles_parser.py:155
+#: src/utils/bottles_parser.py:146 src/utils/bottles_parser.py:153
 msgid "Bottles Games Imported"
 msgstr "اُستوردت ألعاب بوتلز"
 
-#: src/utils/bottles_parser.py:149 src/utils/heroic_parser.py:260
-#: src/utils/steam_parser.py:168
+#: src/utils/bottles_parser.py:147 src/utils/heroic_parser.py:257
+#: src/utils/steam_parser.py:170
 msgid "Successfully imported 1 game."
 msgstr "اُستوردت لعبة بنجاح."
 
 #. The variable is the number of games
-#: src/utils/bottles_parser.py:157 src/utils/heroic_parser.py:268
-#: src/utils/steam_parser.py:176
+#: src/utils/bottles_parser.py:155 src/utils/heroic_parser.py:265
+#: src/utils/steam_parser.py:178
 #, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "اُستوردت {games_no} لعبة بنجاح."
@@ -448,25 +446,27 @@ msgstr "الملفُّ المفتوح أو الأمر المشغَّل عند ب
 msgid "Cancel"
 msgstr "ألغِ"
 
-#: src/utils/create_details_window.py:208
-#: src/utils/create_details_window.py:214
+#: src/utils/create_details_window.py:212
+#: src/utils/create_details_window.py:222
+#: src/utils/create_details_window.py:228
 msgid "Couldn't Add Game"
 msgstr "تعذَّرت إضافة اللعبة"
 
-#: src/utils/create_details_window.py:208
-#: src/utils/create_details_window.py:239
+#: src/utils/create_details_window.py:214
+#: src/utils/create_details_window.py:252
+#: src/utils/create_details_window.py:260
+msgid "Couldn't Apply Preferences"
+msgstr "تعذَّر تطبيق التفضيلات"
+
+#: src/utils/create_details_window.py:222
+#: src/utils/create_details_window.py:253
 msgid "Game title cannot be empty."
 msgstr "لا يجوز كون عنوان اللعبة فارغًا."
 
-#: src/utils/create_details_window.py:214
-#: src/utils/create_details_window.py:247
+#: src/utils/create_details_window.py:228
+#: src/utils/create_details_window.py:261
 msgid "Executable cannot be empty."
 msgstr "لا يجوز كون ملفِّ التنفيذ فارغًا."
-
-#: src/utils/create_details_window.py:238
-#: src/utils/create_details_window.py:246
-msgid "Couldn't Apply Preferences"
-msgstr "تعذَّر تطبيق التفضيلات"
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
@@ -480,34 +480,34 @@ msgstr "تعذَّر العثور على مجلَّد هِرُوِك."
 msgid "Set Heroic Location"
 msgstr "عيِّن موضع هِرُوِك"
 
-#: src/utils/heroic_parser.py:254
+#: src/utils/heroic_parser.py:251
 msgid "No new games were found in the Heroic library."
 msgstr "لم يُعثر على ألعاب جديدة في مكتبة هِرُوِك."
 
-#: src/utils/heroic_parser.py:259 src/utils/heroic_parser.py:266
+#: src/utils/heroic_parser.py:256 src/utils/heroic_parser.py:263
 msgid "Heroic Games Imported"
 msgstr "اُستوردت ألعاب هِرُوِك"
 
-#: src/utils/steam_parser.py:162
+#: src/utils/steam_parser.py:164
 msgid "No new games were found in the Steam library."
 msgstr "لم يُعثر على ألعاب جديدة في مكتبة ستيم."
 
-#: src/utils/steam_parser.py:167 src/utils/steam_parser.py:174
+#: src/utils/steam_parser.py:169 src/utils/steam_parser.py:176
 msgid "Steam Games Imported"
 msgstr "اُستوردت ألعاب ستيم"
 
-#: src/utils/steam_parser.py:235
+#: src/utils/steam_parser.py:239
 msgid "The Steam directory cannot be found."
 msgstr "تعذَّر العثور على مجلَّد ستيم."
 
-#: src/utils/steam_parser.py:237
+#: src/utils/steam_parser.py:241
 msgid "Set Steam Location"
 msgstr "عيِّن موضع ستيم"
 
-#: src/utils/steam_parser.py:253
+#: src/utils/steam_parser.py:258
 msgid "Importing Games…"
 msgstr "تُستورد الألعاب…"
 
-#: src/utils/steam_parser.py:254
+#: src/utils/steam_parser.py:259
 msgid "Talking to Steam"
 msgstr "يُتواصل مع ستيم"
