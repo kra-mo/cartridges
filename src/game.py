@@ -17,11 +17,14 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import json
 import os
 import subprocess
 import sys
 
 from gi.repository import GdkPixbuf, Gio, Gtk
+
+from .save_games import save_games
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")
@@ -79,6 +82,24 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         )
         if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
             sys.exit()
+
+    def toggle_hidden(self):
+        games_dir = os.path.join(
+            os.getenv("XDG_DATA_HOME")
+            or os.path.expanduser(os.path.join("~", ".local", "share")),
+            "cartridges",
+            "games",
+        )
+
+        if not os.path.exists(games_dir):
+            return
+
+        with open(os.path.join(games_dir, f"{self.game_id}.json"), "r") as open_file:
+            data = json.loads(open_file.read())
+
+        data["hidden"] = not data["hidden"]
+
+        save_games({self.game_id: data})
 
     def get_cover(self):
 

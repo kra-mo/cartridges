@@ -36,7 +36,6 @@ from .heroic_parser import heroic_parser
 from .preferences import PreferencesWindow
 from .save_games import save_games
 from .steam_parser import steam_parser
-from .toggle_hidden import toggle_hidden
 from .window import CartridgesWindow
 
 
@@ -167,7 +166,7 @@ class CartridgesApplication(Adw.Application):
     def on_hide_game_action(self, _widget, _callback=None):
         if self.win.stack.get_visible_child() == self.win.overview:
             self.win.on_go_back_action(None, None)
-        toggle_hidden(self.win.active_game_id)
+        self.win.games[self.win.active_game_id].toggle_hidden()
         self.win.update_games([self.win.active_game_id])
 
     def on_edit_details_action(self, _widget, _callback=None):
