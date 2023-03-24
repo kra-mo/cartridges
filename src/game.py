@@ -37,9 +37,10 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
     cover = Gtk.Template.Child()
     cover_button = Gtk.Template.Child()
     menu_button = Gtk.Template.Child()
-    hidden_game_options = Gtk.Template.Child()
     play_revealer = Gtk.Template.Child()
     title_revealer = Gtk.Template.Child()
+    game_options = Gtk.Template.Child()
+    hidden_game_options = Gtk.Template.Child()
 
     def __init__(self, parent_widget, data, **kwargs):
         super().__init__(**kwargs)
@@ -67,6 +68,11 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.button_play.connect("clicked", self.launch_game)
         self.event_contoller_motion.connect("enter", self.show_play)
         self.event_contoller_motion.connect("leave", self.hide_play)
+
+        if self.hidden:
+            self.menu_button.set_menu_model(self.hidden_game_options)
+        else:
+            self.menu_button.set_menu_model(self.game_options)
         self.menu_button.get_popover().connect("notify::visible", self.hide_play)
 
     def launch(self):

@@ -41,7 +41,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     library_bin = Gtk.Template.Child()
     notice_empty = Gtk.Template.Child()
     notice_no_results = Gtk.Template.Child()
-    game_options = Gtk.Template.Child()
     search_bar = Gtk.Template.Child()
     search_entry = Gtk.Template.Child()
     search_button = Gtk.Template.Child()
@@ -62,7 +61,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     hidden_scrolledwindow = Gtk.Template.Child()
     hidden_library_bin = Gtk.Template.Child()
     hidden_notice_empty = Gtk.Template.Child()
-    hidden_game_options = Gtk.Template.Child()
     hidden_search_bar = Gtk.Template.Child()
     hidden_search_entry = Gtk.Template.Child()
     hidden_search_button = Gtk.Template.Child()
@@ -153,7 +151,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 self.library.append(entry)
             else:
                 self.hidden_widgets[game_id] = entry
-                entry.menu_button.set_menu_model(entry.hidden_game_options)
                 self.hidden_library.append(entry)
 
             entry.cover_button.connect("clicked", self.show_overview, game_id)
@@ -241,10 +238,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             self.overview_developer.set_visible(False)
 
-        if not current_game.hidden:
-            self.overview_menu_button.set_menu_model(self.game_options)
-        else:
-            self.overview_menu_button.set_menu_model(self.hidden_game_options)
+        self.overview_menu_button.set_menu_model(
+            current_game.menu_button.get_menu_model()
+        )
 
         if self.stack.get_visible_child() != self.overview:
             self.stack.set_transition_type(Gtk.StackTransitionType.OVER_LEFT)
