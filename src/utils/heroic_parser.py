@@ -112,44 +112,47 @@ def heroic_parser(parent_widget, action):
             open_file.close()
         library = json.loads(data)
 
-        for game in library["library"]:
-            if not game["is_installed"]:
-                continue
+        try:
+            for game in library["library"]:
+                if not game["is_installed"]:
+                    continue
 
-            values = {}
+                values = {}
 
-            app_name = game["app_name"]
-            values["game_id"] = "heroic_epic_" + app_name
+                app_name = game["app_name"]
+                values["game_id"] = "heroic_epic_" + app_name
 
-            if (
-                values["game_id"] in parent_widget.games
-                and not parent_widget.games[values["game_id"]].removed
-            ):
-                continue
+                if (
+                    values["game_id"] in parent_widget.games
+                    and not parent_widget.games[values["game_id"]].removed
+                ):
+                    continue
 
-            values["name"] = game["title"]
-            values["developer"] = game["developer"]
-            values["executable"] = (
-                "start heroic://launch/" + app_name
-                if os.name == "nt"
-                else "xdg-open heroic://launch/" + app_name
-            )
-            values["hidden"] = False
-            values["source"] = "heroic_epic"
-            values["added"] = current_time
-            values["last_played"] = 0
+                values["name"] = game["title"]
+                values["developer"] = game["developer"]
+                values["executable"] = (
+                    "start heroic://launch/" + app_name
+                    if os.name == "nt"
+                    else "xdg-open heroic://launch/" + app_name
+                )
+                values["hidden"] = False
+                values["source"] = "heroic_epic"
+                values["added"] = current_time
+                values["last_played"] = 0
 
-            image_path = os.path.join(
-                heroic_dir,
-                "images-cache",
-                hashlib.sha256(
-                    (game["art_square"] + "?h=400&resize=1&w=300").encode()
-                ).hexdigest(),
-            )
-            if os.path.exists(image_path):
-                save_cover(values, parent_widget, image_path)
+                image_path = os.path.join(
+                    heroic_dir,
+                    "images-cache",
+                    hashlib.sha256(
+                        (game["art_square"] + "?h=400&resize=1&w=300").encode()
+                    ).hexdigest(),
+                )
+                if os.path.exists(image_path):
+                    save_cover(values, parent_widget, image_path)
 
-            heroic_games[values["game_id"]] = values
+                heroic_games[values["game_id"]] = values
+        except KeyError:
+            pass
 
     # Import GOG games
     if not schema.get_boolean("heroic-import-gog"):
