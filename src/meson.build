@@ -27,7 +27,6 @@ cartridges_sources = [
   'utils/bottles_parser.py',
   'utils/run_command.py',
   'utils/get_games.py',
-  'utils/get_cover.py',
   'utils/save_games.py',
   'utils/save_cover.py',
   'utils/toggle_hidden.py',

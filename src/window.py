@@ -23,7 +23,6 @@ import os
 from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
 
 from .game import game
-from .get_cover import get_cover
 from .get_games import get_games
 from .save_games import save_games
 
@@ -252,7 +251,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
             self.stack.set_visible_child(self.overview)
 
         self.active_game_id = game_id
-        pixbuf = get_cover(self.active_game_id, self)
+
+        pixbuf = current_game.pixbuf
         self.overview_cover.set_pixbuf(pixbuf)
         self.overview_blurred_cover.set_pixbuf(
             pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)

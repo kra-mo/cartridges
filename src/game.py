@@ -17,9 +17,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gtk
+import os
 
-from .get_cover import get_cover
+from gi.repository import GdkPixbuf, Gtk
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")
@@ -50,7 +50,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.removed = "removed" in data.keys()
         self.blacklisted = "blacklisted" in data.keys()
 
-        self.pixbuf = get_cover(self.game_id, self.parent_widget)
+        self.pixbuf = self.get_cover()
 
         self.cover.set_pixbuf(self.pixbuf)
         self.title.set_label(self.name)
@@ -63,6 +63,27 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.event_contoller_motion.connect("enter", self.show_play)
         self.event_contoller_motion.connect("leave", self.hide_play)
         self.menu_button.get_popover().connect("notify::visible", self.hide_play)
+
+    def get_cover(self):
+
+        # If the cover is already in memory, return
+        if self.game_id in self.parent_widget.pixbufs.keys():
+            return self.parent_widget.pixbufs[self.game_id]
+
+        # Create a new pixbuf
+        cover_path = os.path.join(
+            os.getenv("XDG_DATA_HOME")
+            or os.path.expanduser(os.path.join("~", ".local", "share")),
+            "cartridges",
+            "covers",
+            f"{self.game_id}.tiff",
+        )
+
+        if os.path.isfile(cover_path):
+            return GdkPixbuf.Pixbuf.new_from_file(cover_path)
+
+        # Return the placeholder pixbuf
+        return self.parent_widget.placeholder_pixbuf
 
     def show_play(self, _widget, *_unused):
         self.play_revealer.set_reveal_child(True)

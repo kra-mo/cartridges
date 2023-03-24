@@ -25,7 +25,6 @@ import time
 from gi.repository import Adw, GdkPixbuf, Gio, GLib, GObject, Gtk
 
 from .create_dialog import create_dialog
-from .get_cover import get_cover
 from .save_cover import save_cover
 from .save_games import save_games
 
@@ -47,7 +46,7 @@ def create_details_window(parent_widget, game_id=None):
         apply_button = Gtk.Button.new_with_label(_("Confirm"))
     else:
         window.set_title(_("Edit Game Details"))
-        cover = Gtk.Picture.new_for_pixbuf(get_cover(game_id, parent_widget))
+        cover = Gtk.Picture.new_for_pixbuf(parent_widget.games[game_id].pixbuf)
         developer = Gtk.Entry.new_with_buffer(
             Gtk.EntryBuffer.new(games[game_id].developer, -1)
         )
