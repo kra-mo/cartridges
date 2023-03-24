@@ -20,6 +20,8 @@
 import json
 import os
 
+from .save_games import save_games
+
 
 def toggle_hidden(game):
     games_dir = os.path.join(
@@ -38,6 +40,4 @@ def toggle_hidden(game):
 
     data["hidden"] = not data["hidden"]
 
-    with open(os.path.join(games_dir, f"{game}.json"), "w") as open_file:
-        open_file.write(json.dumps(data, indent=4))
-        open_file.close()
+    save_games({data["game_id"]: data})
