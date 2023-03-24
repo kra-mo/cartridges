@@ -26,7 +26,7 @@ from gi.repository import Gio
 
 def run_command(executable):
     subprocess.Popen(
-        ["flatpak-spawn --host " + executable]
+        [f"flatpak-spawn --host {executable}"]
         if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
         else executable.split()
         if os.name == "nt"

@@ -33,6 +33,6 @@ def save_games(games):
         os.makedirs(games_dir)
 
     for game in games:
-        with open(os.path.join(games_dir, game + ".json"), "w") as open_file:
+        with open(os.path.join(games_dir, f"{game}.json"), "w") as open_file:
             open_file.write(json.dumps(games[game], indent=4, sort_keys=True))
             open_file.close()
