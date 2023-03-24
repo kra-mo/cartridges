@@ -20,8 +20,6 @@
 import json
 import os
 
-from .game_data_to_json import game_data_to_json
-
 
 def save_games(games):
     games_dir = os.path.join(
@@ -36,5 +34,5 @@ def save_games(games):
 
     for game in games:
         with open(os.path.join(games_dir, f"{game}.json"), "w") as open_file:
-            open_file.write(game_data_to_json(games[game]))
+            open_file.write(json.dumps(games[game], indent=4, sort_keys=True))
             open_file.close()
