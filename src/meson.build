@@ -30,6 +30,7 @@ cartridges_sources = [
   'utils/get_cover.py',
   'utils/save_games.py',
   'utils/save_cover.py',
+  'utils/game_data_to_json.py',
   'utils/toggle_hidden.py',
   'utils/create_dialog.py',
   'utils/create_details_window.py'

@@ -1,4 +1,4 @@
-# save_games.py
+# game_data_to_json.py
 #
 # Copyright 2022-2023 kramo
 #
@@ -20,21 +20,6 @@
 import json
 import os
 
-from .game_data_to_json import game_data_to_json
 
-
-def save_games(games):
-    games_dir = os.path.join(
-        os.getenv("XDG_DATA_HOME")
-        or os.path.expanduser(os.path.join("~", ".local", "share")),
-        "cartridges",
-        "games",
-    )
-
-    if not os.path.exists(games_dir):
-        os.makedirs(games_dir)
-
-    for game in games:
-        with open(os.path.join(games_dir, f"{game}.json"), "w") as open_file:
-            open_file.write(game_data_to_json(games[game]))
-            open_file.close()
+def game_data_to_json(data):
+    return json.dumps(data, indent=4, sort_keys=True)
