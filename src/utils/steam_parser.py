@@ -115,7 +115,7 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
     return
 
 
-def get_games_async(parent_widget, appmanifests, steam_dir, import_dialog):
+def get_games_async(parent_widget, appmanifests, steam_dir, import_dialog, progressbar):
     datatypes = ["appid", "name"]
     current_time = int(time.time())
 
@@ -133,9 +133,12 @@ def get_games_async(parent_widget, appmanifests, steam_dir, import_dialog):
 
     def update_games(_task, result, parent_widget):
         nonlocal queue
+        nonlocal total_queue
         nonlocal import_dialog
+        nonlocal progressbar
 
         queue -= 1
+        progressbar.set_fraction(1 - (queue / total_queue))
 
         try:
             final_values = result.propagate_value()[1]
@@ -176,8 +179,10 @@ def get_games_async(parent_widget, appmanifests, steam_dir, import_dialog):
                     _(f"Successfully imported {games_no} games."),
                 )
 
+    total_queue = 0
     for appmanifest in appmanifests:
         queue += 1
+        total_queue += 1
 
         cancellable = Gio.Cancellable.new()
         GLib.timeout_add_seconds(5, cancellable.cancel)
@@ -249,16 +254,18 @@ def steam_parser(parent_widget, action):
 
     steam_dir = os.path.expanduser(schema.get_string("steam-location"))
 
+    progressbar = Gtk.ProgressBar(margin_start=12, margin_end=12)
     import_statuspage = Adw.StatusPage(
         title=_("Importing Games…"),
         description=_("Talking to Steam"),
+        child=progressbar,
     )
 
     import_dialog = Adw.Window(
         content=import_statuspage,
         modal=True,
         default_width=350,
-        default_height=200,
+        default_height=-1,
         transient_for=parent_widget,
         deletable=False,
     )
@@ -280,4 +287,4 @@ def steam_parser(parent_widget, action):
             if os.path.isfile(path) and "appmanifest" in open_file:
                 appmanifests.append(path)
 
-    get_games_async(parent_widget, appmanifests, directory, import_dialog)
+    get_games_async(parent_widget, appmanifests, directory, import_dialog, progressbar)

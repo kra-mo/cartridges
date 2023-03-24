@@ -29,8 +29,6 @@ def save_cover(game, parent_widget, file_path, pixbuf=None, game_id=None):
         "cartridges",
         "covers",
     )
-    if not os.path.exists(covers_dir):
-        os.makedirs(covers_dir)
 
     if game_id is None:
         game_id = game["game_id"]
@@ -40,6 +38,9 @@ def save_cover(game, parent_widget, file_path, pixbuf=None, game_id=None):
 
     def cover_callback(*_unused):
         pass
+
+    if not os.path.exists(covers_dir):
+        os.makedirs(covers_dir)
 
     open_file = Gio.File.new_for_path(os.path.join(covers_dir, game_id + ".tiff"))
     parent_widget.pixbufs[game_id] = pixbuf
