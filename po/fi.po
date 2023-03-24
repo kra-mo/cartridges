@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the cartridges package.
 # LINUX-SAUNA <linuxsauna@protonmail.com>, 2023.
 # Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023.
+# Kopimi <tatuus@tutanota.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-21 15:48+0100\n"
 "PO-Revision-Date: 2023-03-24 20:55+0000\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Last-Translator: Kopimi <tatuus@tutanota.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fi/>\n"
 "Language: fi\n"
@@ -475,15 +476,15 @@ msgstr "Asetuksia ei voitu ottaa käyttöön"
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
-msgstr ""
+msgstr "Hylkää"
 
 #: src/utils/heroic_parser.py:88
 msgid "The Heroic directory cannot be found."
-msgstr ""
+msgstr "Heroic-hakemistoa ei löytynyt."
 
 #: src/utils/heroic_parser.py:90
 msgid "Set Heroic Location"
-msgstr ""
+msgstr "Aseta Heroic:in sijainti"
 
 #: src/utils/heroic_parser.py:254
 msgid "No new games were found in the Heroic library."
@@ -491,7 +492,7 @@ msgstr "Heroic-kirjastosta ei löytynyt uusia pelejä."
 
 #: src/utils/heroic_parser.py:259 src/utils/heroic_parser.py:266
 msgid "Heroic Games Imported"
-msgstr ""
+msgstr "Heroic-pelit tuotu"
 
 #: src/utils/steam_parser.py:162
 msgid "No new games were found in the Steam library."
