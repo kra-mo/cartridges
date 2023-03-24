@@ -33,7 +33,6 @@ def run_command(executable):
         else executable  # Windows
         if os.name == "nt"
         else executable,  # Linux/Others
-        shell=False,  # If true, the extra arguments would incorrectly be given to the shell instead.
         start_new_session=True,
         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
     )

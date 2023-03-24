@@ -18,7 +18,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
-import shlex
 import time
 
 import yaml
@@ -113,7 +112,7 @@ def bottles_parser(parent_widget, action):
         values["name"] = game["name"]
         values["executable"] = [
             "xdg-open",
-            f'bottles:run/{game["bottle"]["name"]}/{game["name"]}'
+            f'bottles:run/{game["bottle"]["name"]}/{game["name"]}',
         ]
         values["hidden"] = False
         values["source"] = "bottles"

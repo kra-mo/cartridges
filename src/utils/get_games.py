@@ -41,6 +41,6 @@ def get_games(game_ids=None):
     for game in game_files:
         with open(os.path.join(games_dir, game), "r") as open_file:
             data = json.loads(open_file.read())
-            games[data["game_id"]] = data
+        games[data["game_id"]] = data
 
     return games
