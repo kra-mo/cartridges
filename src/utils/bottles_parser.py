@@ -103,7 +103,7 @@ def bottles_parser(parent_widget, action):
         game = library[game]
         values = {}
 
-        values["game_id"] = "bottles_" + game["id"]
+        values["game_id"] = f'bottles_{game["id"]}'
 
         if (
             values["game_id"] in parent_widget.games
@@ -113,7 +113,7 @@ def bottles_parser(parent_widget, action):
 
         values["name"] = game["name"]
         values["executable"] = "xdg-open " + shlex.quote(
-            "bottles:run/" + game["bottle"]["name"] + "/" + game["name"]
+            f'bottles:run/{game["bottle"]["name"]}/{game["name"]}'
         )
         values["hidden"] = False
         values["source"] = "bottles"

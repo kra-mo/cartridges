@@ -142,7 +142,7 @@ def heroic_parser(parent_widget, action):
                     heroic_dir,
                     "images-cache",
                     hashlib.sha256(
-                        (game["art_square"] + "?h=400&resize=1&w=300").encode()
+                        (f'{game["art_square"]} ?h=400&resize=1&w=300').encode()
                     ).hexdigest(),
                 )
                 if os.path.exists(image_path):

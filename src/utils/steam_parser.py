@@ -51,10 +51,10 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
         data = open_file.read()
         open_file.close()
     for datatype in datatypes:
-        value = re.findall('"' + datatype + '"\t\t"(.*)"\n', data)
+        value = re.findall(f'"{datatype}"\t\t"(.*)"\n', data)
         values[datatype] = value[0]
 
-    values["game_id"] = "steam_" + values["appid"]
+    values["game_id"] = f'steam_{values["appid"]}'
 
     if (
         values["game_id"] in parent_widget.games
@@ -64,16 +64,16 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
         return
 
     values["executable"] = (
-        "start steam://rungameid/" + values["appid"]
+        f'start steam://rungameid/{values["appid"]}'
         if os.name == "nt"
-        else "xdg-open steam://rungameid/" + values["appid"]
+        else f'xdg-open steam://rungameid/{values["appid"]}'
     )
     values["hidden"] = False
     values["source"] = "steam"
     values["added"] = current_time
     values["last_played"] = 0
 
-    url = "https://store.steampowered.com/api/appdetails?appids=" + values["appid"]
+    url = f'https://store.steampowered.com/api/appdetails?appids={values["appid"]}'
 
     # On Linux the request is made through gvfs so the app can run without network permissions
     if os.name == "nt":
@@ -97,7 +97,7 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
             steam_dir,
             "appcache",
             "librarycache",
-            values["appid"] + "_library_600x900.jpg",
+            f'{values["appid"]}_library_600x900.jpg',
         )
     ):
         save_cover(
@@ -107,7 +107,7 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
                 steam_dir,
                 "appcache",
                 "librarycache",
-                values["appid"] + "_library_600x900.jpg",
+                f'{values["appid"]}_library_600x900.jpg',
             ),
         )
 
