@@ -34,7 +34,6 @@ from .create_details_window import create_details_window
 from .get_games import get_games
 from .heroic_parser import heroic_parser
 from .preferences import PreferencesWindow
-from .run_command import run_command
 from .save_games import save_games
 from .steam_parser import steam_parser
 from .toggle_hidden import toggle_hidden
@@ -158,7 +157,7 @@ class CartridgesApplication(Adw.Application):
         data["last_played"] = int(time.time())
         save_games({game_id: data})
 
-        run_command(self.win.games[self.win.active_game_id].executable)
+        self.win.games[game_id].launch()
 
         self.win.update_games([game_id])
 

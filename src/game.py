@@ -18,8 +18,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+import subprocess
+import sys
 
-from gi.repository import GdkPixbuf, Gtk
+from gi.repository import GdkPixbuf, Gio, Gtk
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")
@@ -63,6 +65,20 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.event_contoller_motion.connect("enter", self.show_play)
         self.event_contoller_motion.connect("leave", self.hide_play)
         self.menu_button.get_popover().connect("notify::visible", self.hide_play)
+
+    def launch(self):
+        # The host environment vars are automatically passed through by Popen.
+        subprocess.Popen(
+            ["flatpak-spawn", "--host", *self.executable]  # Flatpak
+            if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
+            else self.executable  # Windows
+            if os.name == "nt"
+            else self.executable,  # Linux/Others
+            start_new_session=True,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
+        )
+        if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
+            sys.exit()
 
     def get_cover(self):
 
