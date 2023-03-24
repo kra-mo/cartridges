@@ -114,7 +114,13 @@ def bottles_parser(parent_widget, action):
 
         values["name"] = game["name"]
         values["executable"] = (
-            "xdg-open bottles:run/" + game["bottle"]["name"] + "/" + game["name"]
+            "xdg-open "
+            + '"'
+            + "bottles:run/"
+            + game["bottle"]["name"]
+            + "/"
+            + game["name"]
+            + '"'
         )
         values["hidden"] = False
         values["source"] = "bottles"
