@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-21 15:48+0100\n"
-"PO-Revision-Date: 2023-03-24 19:27+0000\n"
+"PO-Revision-Date: 2023-03-24 19:30+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fi/>\n"
@@ -115,19 +115,19 @@ msgstr "A-Z"
 
 #: data/gtk/window.blp:330
 msgid "Z-A"
-msgstr ""
+msgstr "Z-A"
 
 #: data/gtk/window.blp:336
 msgid "Newest"
-msgstr ""
+msgstr "Uusin"
 
 #: data/gtk/window.blp:342
 msgid "Oldest"
-msgstr ""
+msgstr "Vanhin"
 
 #: data/gtk/window.blp:348
 msgid "Last Played"
-msgstr ""
+msgstr "Viimeksi pelattu"
 
 #: data/gtk/window.blp:355
 msgid "Show Hidden"
@@ -135,11 +135,11 @@ msgstr ""
 
 #: data/gtk/window.blp:363
 msgid "Preferences"
-msgstr ""
+msgstr "Asetukset"
 
 #: data/gtk/window.blp:368
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Pikanäppäimet"
 
 #: data/gtk/window.blp:373
 msgid "About Cartridges"
