@@ -202,7 +202,6 @@ def create_details_window(parent_widget, game_id=None):
         final_executable = executable.get_buffer().get_text()
 
         if game_id is None:
-
             if final_name == "":
                 create_dialog(
                     window, _("Couldn't Add Game"), _("Game title cannot be empty.")

@@ -37,4 +37,3 @@ def get_cover(game_id, parent_widget):
     if os.path.isfile(cover_path):
         return GdkPixbuf.Pixbuf.new_from_file(cover_path)
     return parent_widget.placeholder_pixbuf
-
