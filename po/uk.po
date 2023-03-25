@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 00:50+0100\n"
+"POT-Creation-Date: 2023-03-25 11:25+0100\n"
 "PO-Revision-Date: 2023-03-21 13:12+0000\n"
 "Last-Translator: Dan <denqwerta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.16.2-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
@@ -48,8 +48,30 @@ msgstr ""
 "Steam, Heroic та Bottles із такими організаційними функціями, як "
 "приховування та сортування за датою додавання чи останньої гри."
 
+#: data/hu.kramo.Cartridges.metainfo.xml.in:22
+msgid "Library"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:26
+#: src/utils/create_details_window.py:48
+msgid "Edit Game Details"
+msgstr "Редагувати інформацію про гру"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:51
+msgid "Game Details"
+msgstr "Подробиці гри"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
+#: src/utils/steam_parser.py:170
+msgid "Preferences"
+msgstr "Параметри"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:41
+msgid "First stable release"
+msgstr ""
+
 #: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
-#: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:163
+#: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:167
 msgid "No Games Found"
 msgstr "Ігор не знайдено"
 
@@ -77,10 +99,6 @@ msgstr "Ігри, які ви сховали, з'являться тут."
 #: data/gtk/window.blp:44 data/gtk/window.blp:254
 msgid "Back"
 msgstr ""
-
-#: data/gtk/window.blp:51
-msgid "Game Details"
-msgstr "Подробиці гри"
 
 #: data/gtk/window.blp:92
 msgid "Game Title"
@@ -134,10 +152,6 @@ msgstr "Остання гра"
 #: data/gtk/window.blp:355
 msgid "Show Hidden"
 msgstr "Показати приховане"
-
-#: data/gtk/window.blp:363
-msgid "Preferences"
-msgstr "Параметри"
 
 #: data/gtk/window.blp:368
 msgid "Keyboard Shortcuts"
@@ -296,32 +310,32 @@ msgstr "{title} видалено"
 msgid "Undo"
 msgstr "Відмінити"
 
-#: src/window.py:225
+#: src/window.py:235
 msgid "Today"
 msgstr "Сьогодні"
 
-#: src/window.py:227
+#: src/window.py:237
 msgid "Yesterday"
 msgstr "Вчора"
 
 #. The variable is the date when the game was added
-#: src/window.py:261
+#: src/window.py:271
 #, python-brace-format
 msgid "Added: {date}"
 msgstr "Додано: {date}"
 
-#: src/window.py:266
+#: src/window.py:276
 msgid "Never"
 msgstr "Ніколи"
 
 #. The variable is the date when the game was last played
-#: src/window.py:270
+#: src/window.py:280
 #, python-brace-format
 msgid "Last played: {last_played_date}"
 msgstr "Останній раз грали: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:238
+#: src/utils/steam_parser.py:245
 msgid "Couldn't Import Games"
 msgstr "Не вдається імпортувати ігри"
 
@@ -342,13 +356,13 @@ msgid "Bottles Games Imported"
 msgstr "Ігри Bottles імпортовано"
 
 #: src/utils/bottles_parser.py:147 src/utils/heroic_parser.py:257
-#: src/utils/steam_parser.py:170
+#: src/utils/steam_parser.py:177
 msgid "Successfully imported 1 game."
 msgstr "Успішно імпортовано 1 гру."
 
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:155 src/utils/heroic_parser.py:265
-#: src/utils/steam_parser.py:178
+#: src/utils/steam_parser.py:185
 #, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "Успішно імпортовано {games_no} ігри."
@@ -360,10 +374,6 @@ msgstr "Додати нову гру"
 #: src/utils/create_details_window.py:46
 msgid "Confirm"
 msgstr "Підтвердити"
-
-#: src/utils/create_details_window.py:48
-msgid "Edit Game Details"
-msgstr "Редагувати інформацію про гру"
 
 #: src/utils/create_details_window.py:57
 msgid "Apply"
@@ -492,27 +502,27 @@ msgstr "У бібліотеці Heroic нових ігор не знайдено
 msgid "Heroic Games Imported"
 msgstr "Ігри Heroic імпортовано"
 
-#: src/utils/steam_parser.py:164
+#: src/utils/steam_parser.py:168
 msgid "No new games were found in the Steam library."
 msgstr "У бібліотеці Steam не знайдено жодної нової гри."
 
-#: src/utils/steam_parser.py:169 src/utils/steam_parser.py:176
+#: src/utils/steam_parser.py:176 src/utils/steam_parser.py:183
 msgid "Steam Games Imported"
 msgstr "Ігри Steam імпортовано"
 
-#: src/utils/steam_parser.py:239
+#: src/utils/steam_parser.py:246
 msgid "The Steam directory cannot be found."
 msgstr "Каталог Steam знайти неможливо."
 
-#: src/utils/steam_parser.py:241
+#: src/utils/steam_parser.py:248
 msgid "Set Steam Location"
 msgstr "Встановіть розташування Steam"
 
-#: src/utils/steam_parser.py:258
+#: src/utils/steam_parser.py:265
 msgid "Importing Games…"
 msgstr "Імпорт ігор…"
 
-#: src/utils/steam_parser.py:259
+#: src/utils/steam_parser.py:266
 msgid "Talking to Steam"
 msgstr "Спілкування зі Steam"
 
