@@ -30,7 +30,7 @@ from .save_cover import save_cover
 from .save_games import save_games
 
 
-def upadte_values_from_data(content, values):
+def update_values_from_data(content, values):
     basic_data = json.loads(content)[values["appid"]]
     if not basic_data["success"]:
         values["blacklisted"] = True
@@ -89,7 +89,7 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
             content = None
 
     if content:
-        values = upadte_values_from_data(content, values)
+        values = update_values_from_data(content, values)
 
     if os.path.isfile(
         os.path.join(
