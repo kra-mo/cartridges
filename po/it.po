@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
 # Alessandro Iepure <alessandro.iepure@gmail.com>, 2023.
+# albanobattistella <albano_battistella@hotmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-25 16:13+0100\n"
-"PO-Revision-Date: 2023-03-24 16:12+0000\n"
-"Last-Translator: Alessandro Iepure <alessandro.iepure@gmail.com>\n"
+"PO-Revision-Date: 2023-03-25 17:57+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/it/>\n"
 "Language: it\n"
@@ -48,7 +49,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
-msgstr ""
+msgstr "Libreria"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
 #: src/utils/create_details_window.py:48
@@ -66,7 +67,7 @@ msgstr "Preferenze"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:41
 msgid "First stable release"
-msgstr ""
+msgstr "Prima versione stabile"
 
 #: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
 #: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:167

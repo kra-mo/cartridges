@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-25 16:13+0100\n"
-"PO-Revision-Date: 2023-03-25 13:56+0000\n"
+"PO-Revision-Date: 2023-03-25 17:57+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -45,7 +45,7 @@ msgid ""
 "hiding and sorting by date added or last played."
 msgstr ""
 "A Kazetták egy egyszerű játékindító. Támogatja a Steam-ből, Heroic-ból és "
-"Bottles-ből való importálást, valamint a játékok elrejtését és rendezését."
+"Palackok-ból való importálást, valamint a játékok elrejtését és rendezését."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
@@ -172,7 +172,7 @@ msgstr "Heroic"
 
 #: data/gtk/window.blp:400 data/gtk/preferences.blp:98
 msgid "Bottles"
-msgstr "Bottles"
+msgstr "Palackok"
 
 #: data/gtk/game.blp:61 src/utils/create_details_window.py:94
 msgid "Title"
@@ -291,7 +291,7 @@ msgstr "Manuálisan Hozzáadott Játékok Importálása"
 
 #: data/gtk/preferences.blp:101
 msgid "Bottles Install Location"
-msgstr "Bottles Telepítés Helye"
+msgstr "Palackok Telepítés Helye"
 
 #. Translators: Replace this with your name for it to show up in the about window
 #: src/main.py:130
@@ -338,19 +338,19 @@ msgstr "Nem Lehet Importálni a Játékot"
 
 #: src/utils/bottles_parser.py:81
 msgid "The Bottles directory cannot be found."
-msgstr "A Bottles mappa nem található."
+msgstr "A Palackok mappa nem található."
 
 #: src/utils/bottles_parser.py:83
 msgid "Set Bottles Location"
-msgstr "Bottles Mappa Kiválasztása"
+msgstr "Palackok Mappa Kiválasztása"
 
 #: src/utils/bottles_parser.py:141
 msgid "No new games were found in the Bottles library."
-msgstr "Nem találhatók új játékok a Bottles könyvtárban."
+msgstr "Nem találhatók új játékok a Palackok könyvtárban."
 
 #: src/utils/bottles_parser.py:146 src/utils/bottles_parser.py:153
 msgid "Bottles Games Imported"
-msgstr "Bottles Játékok Importálva"
+msgstr "Palackok Játékok Importálva"
 
 #: src/utils/bottles_parser.py:147 src/utils/heroic_parser.py:257
 #: src/utils/steam_parser.py:177

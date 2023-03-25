@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-25 16:13+0100\n"
-"PO-Revision-Date: 2023-03-24 16:49+0000\n"
+"PO-Revision-Date: 2023-03-25 17:57+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
-msgstr ""
+msgstr "المكتبة"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
 #: src/utils/create_details_window.py:48
@@ -67,7 +67,7 @@ msgstr "التفضيلات"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:41
 msgid "First stable release"
-msgstr ""
+msgstr "أوَّل إصدار مستقرٍّ"
 
 #: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
 #: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:167
