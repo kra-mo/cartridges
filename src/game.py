@@ -19,6 +19,7 @@
 
 import json
 import os
+import shlex  # pylint: disable=unused-import
 import subprocess
 import sys
 
@@ -76,12 +77,21 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.menu_button.get_popover().connect("notify::visible", self.hide_play)
 
     def launch(self):
-        # The host environment vars are automatically passed through by Popen.
-        subprocess.Popen(
+        # Generate launch arguments, either list (no shell) or a string (for shell).
+        args = (
             ["flatpak-spawn", "--host", *self.executable]  # Flatpak
             if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
-            else self.executable,  # Others
-            shell=os.name == "nt",  # Set shell to True on Windows
+            else shlex.join(
+                self.executable
+            )  # Windows (We need shell to support its "open" built-in).
+            if os.name == "nt"
+            else self.executable  # Linux/Others
+        )
+
+        # The host environment vars are automatically passed through by Popen.
+        subprocess.Popen(
+            args,
+            shell=isinstance(args, str),
             start_new_session=True,
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
         )
