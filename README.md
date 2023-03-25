@@ -5,11 +5,12 @@
  # Cartridges
  A GTK4 + Libadwaita game launcher
 
+[![Flathub][flathub-image]][flathub-url]
 [![Build status][github-actions-image]][github-actions-url]
 [![Translation Status][weblate-image]][weblate-url]
 [![License][license-image]][license-url]
-[![Discord Chatroom][discord-image]][discord-url]
 [![Code style][code-style-image]][code-style-url]
+[![Discord Chatroom][discord-image]][discord-url]
   
 [github-actions-url]: https://github.com/kra-mo/cartridges
 [github-actions-image]: https://github.com/kra-mo/cartridges/actions/workflows/flatpak-builder.yml/badge.svg
@@ -21,6 +22,8 @@
 [weblate-image]: https://hosted.weblate.org/widgets/cartridges/-/cartridges/svg-badge.svg
 [discord-url]: https://discord.gg/4KSFh3AmQR
 [discord-image]: https://img.shields.io/discord/1088155799299313754?color=%235865F2&label=discord&logo=discord&logoColor=%23FFFFFF
+[flathub-url]: https://flathub.org/apps/details/hu.kramo.Cartridges
+[flathub-image]: https://img.shields.io/flathub/v/hu.kramo.Cartridges
 
   <img src="data/screenshots/1.png">
 </div>
@@ -39,6 +42,10 @@ For updates and questions, join our [Discord server]([discord-url])!
 # Installation
 
 ## Linux
+
+### Flathub (Recommended)
+
+<a href=https://flathub.org/apps/details/hu.kramo.Cartridges><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
 ### From Releases
 1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
