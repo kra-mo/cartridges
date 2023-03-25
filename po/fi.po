@@ -1,24 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
-# kramo <contact@kramo.hu>, 2023.
-# Dan <denqwerta@gmail.com>, 2023.
+# LINUX-SAUNA <linuxsauna@protonmail.com>, 2023.
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023.
+# Kopimi <tatuus@tutanota.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-25 00:50+0100\n"
-"PO-Revision-Date: 2023-03-21 13:12+0000\n"
-"Last-Translator: Dan <denqwerta@gmail.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
-"cartridges/uk/>\n"
-"Language: uk\n"
+"PO-Revision-Date: 2023-03-24 21:14+0000\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
+"cartridges/fi/>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
@@ -28,15 +28,15 @@ msgstr "Cartridges"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr "Ігровий лаунчер"
+msgstr "Pelin käynnistin"
 
 #: data/hu.kramo.Cartridges.desktop.in:5
 msgid "Launch your games"
-msgstr "Запустіть свої ігри"
+msgstr "Käynnistä pelit"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
-msgstr "Запустіть усі свої ігри"
+msgstr "Käynnistä kaikki pelisi"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -44,112 +44,111 @@ msgid ""
 "games from Steam, Heroic and Bottles with organizational features such as "
 "hiding and sorting by date added or last played."
 msgstr ""
-"Cartridges — це простий ігровий лаунчер. Він підтримує імпорт ваших ігор із "
-"Steam, Heroic та Bottles із такими організаційними функціями, як "
-"приховування та сортування за датою додавання чи останньої гри."
+"Cartridges on helppo pelikäynnistin. Se tukee pelien tuontia Steamista, "
+"Heroicista ja Bottlesista ja tarjoaa ominaisuuden järjestelyyn, kuten "
+"piilottamisen ja lajittelun lisäyspäivämäärän tai viimeisimmän pelatun pelin "
+"mukaan."
 
 #: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
 #: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:163
 msgid "No Games Found"
-msgstr "Ігор не знайдено"
+msgstr "Pelejä ei löydetty"
 
 #: data/gtk/window.blp:7
 msgid "Try a different search."
-msgstr "Спробуйте інший пошук."
+msgstr "Kokeile eri hakua."
 
 #: data/gtk/window.blp:14
-#, fuzzy
 msgid "No Games"
-msgstr "Ігри"
+msgstr "Ei pelejä"
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
-msgstr "Використовуйте кнопку +, щоб додати гру."
+msgstr "Käytä + painiketta pelien lisäämiseen."
 
 #: data/gtk/window.blp:22
 msgid "No Hidden Games"
-msgstr "Ніяких прихованих ігор"
+msgstr "Ei piilotettuja pelejä"
 
 #: data/gtk/window.blp:23
 msgid "Games you hide will appear here."
-msgstr "Ігри, які ви сховали, з'являться тут."
+msgstr "Piilotetut pelit näkyvät täällä."
 
 #: data/gtk/window.blp:44 data/gtk/window.blp:254
 msgid "Back"
-msgstr ""
+msgstr "Takaisin"
 
 #: data/gtk/window.blp:51
 msgid "Game Details"
-msgstr "Подробиці гри"
+msgstr "Pelin tiedot"
 
 #: data/gtk/window.blp:92
 msgid "Game Title"
-msgstr "Назва гри"
+msgstr "Pelin nimi"
 
 #: data/gtk/window.blp:148 data/gtk/game.blp:35
 msgid "Play"
-msgstr "Грати"
+msgstr "Pelaa"
 
 #: data/gtk/window.blp:196 data/gtk/window.blp:382
 msgid "Add Game"
-msgstr "Додати гру"
+msgstr "Lisää peli"
 
 #: data/gtk/window.blp:203 data/gtk/window.blp:266
 msgid "Main Menu"
-msgstr ""
+msgstr "Päävalikko"
 
 #: data/gtk/window.blp:210 data/gtk/window.blp:273
-#, fuzzy
 msgid "Search"
-msgstr "Пошук"
+msgstr "Etsi"
 
 #: data/gtk/window.blp:261
 msgid "Hidden Games"
-msgstr "Приховані ігри"
+msgstr "Piilotetut pelit"
 
 #: data/gtk/window.blp:321
 msgid "Sort"
-msgstr "Сортувати"
+msgstr "Lajittele"
 
 #: data/gtk/window.blp:324
 msgid "A-Z"
-msgstr "А-Я"
+msgstr "A-Z"
 
 #: data/gtk/window.blp:330
 msgid "Z-A"
-msgstr "Я-А"
+msgstr "Z-A"
 
 #: data/gtk/window.blp:336
 msgid "Newest"
-msgstr "Найновіші"
+msgstr "Uusin"
 
 #: data/gtk/window.blp:342
 msgid "Oldest"
-msgstr "Найстаріші"
+msgstr "Vanhin"
 
 #: data/gtk/window.blp:348
 msgid "Last Played"
-msgstr "Остання гра"
+msgstr "Viimeksi pelattu"
 
 #: data/gtk/window.blp:355
 msgid "Show Hidden"
-msgstr "Показати приховане"
+msgstr "Näytä piilotetut"
 
 #: data/gtk/window.blp:363
 msgid "Preferences"
-msgstr "Параметри"
+msgstr "Asetukset"
 
 #: data/gtk/window.blp:368
 msgid "Keyboard Shortcuts"
-msgstr "Комбінації клавіш"
+msgstr "Pikanäppäimet"
 
 #: data/gtk/window.blp:373
 msgid "About Cartridges"
-msgstr "Про Cartridges"
+msgstr "Tietoja Cartridges"
 
 #: data/gtk/window.blp:388
 msgid "Import from"
-msgstr "Імпорт з"
+msgstr "Tuo kohteesta"
 
 #: data/gtk/window.blp:390
 msgid "Steam"
@@ -165,225 +164,225 @@ msgstr "Bottles"
 
 #: data/gtk/game.blp:61 src/utils/create_details_window.py:94
 msgid "Title"
-msgstr "Назва"
+msgstr "Nimi"
 
 #: data/gtk/game.blp:83 data/gtk/game.blp:102
 msgid "Edit"
-msgstr "Редагувати"
+msgstr "Muokkaa"
 
 #: data/gtk/game.blp:88
 msgid "Hide"
-msgstr "Приховати"
+msgstr "Piilota"
 
 #: data/gtk/game.blp:93 data/gtk/game.blp:112
 msgid "Remove"
-msgstr "Видалити"
+msgstr "Poista"
 
 #: data/gtk/game.blp:107
 msgid "Unhide"
-msgstr "Показати"
+msgstr "Näytä"
 
 #: data/gtk/help-overlay.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Загальний"
+msgstr "Yleistä"
 
 #: data/gtk/help-overlay.blp:14
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Вийти"
+msgstr "Lopeta"
 
 #: data/gtk/help-overlay.blp:19
 msgctxt "shortcut window"
 msgid "Search"
-msgstr "Пошук"
+msgstr "Etsi"
 
 #: data/gtk/help-overlay.blp:24
 msgctxt "shortcut window"
 msgid "Show preferences"
-msgstr "Показати параметри"
+msgstr "Näytä asetukset"
 
 #: data/gtk/help-overlay.blp:29
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr "Ярлики"
+msgstr "Pikanäppäimet"
 
 #: data/gtk/help-overlay.blp:34
 msgctxt "shortcut window"
 msgid "Undo"
-msgstr "Відмінити"
+msgstr "Kumoa"
 
 #: data/gtk/help-overlay.blp:39
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr "Відкрити меню"
+msgstr "Avaa valikko"
 
 #: data/gtk/help-overlay.blp:45
 msgctxt "shortcut window"
 msgid "Games"
-msgstr "Ігри"
+msgstr "Pelit"
 
 #: data/gtk/help-overlay.blp:48
 msgctxt "shortcut window"
 msgid "Add new game"
-msgstr "Додати нову гру"
+msgstr "Lisää uusi peli"
 
 #: data/gtk/help-overlay.blp:53
 msgctxt "shortcut window"
 msgid "Show hidden games"
-msgstr "Показати приховані ігри"
+msgstr "Näytä piilotetut pelit"
 
 #: data/gtk/preferences.blp:10
 msgid "General"
-msgstr "Загальний"
+msgstr "Yleistä"
 
 #: data/gtk/preferences.blp:13
 msgid "Exit After Launching Games"
-msgstr "Вихід після запуску ігор"
+msgstr "Poistuminen pelin käynnistämisen jälkeen"
 
 #: data/gtk/preferences.blp:25
 msgid "Steam Install Location"
-msgstr "Місце встановлення Steam"
+msgstr "Steam asennuspaikka"
 
 #: data/gtk/preferences.blp:26 data/gtk/preferences.blp:64
 #: data/gtk/preferences.blp:102
 msgid "Directory to use when importing games"
-msgstr "Каталог для імпорту ігор"
+msgstr "Hakemisto, jota käytetään pelejä tuotaessa"
 
 #: data/gtk/preferences.blp:34
 msgid "Extra Steam Libraries"
-msgstr ""
+msgstr "Steam lisäkirjastot"
 
 #: data/gtk/preferences.blp:35
 msgid "Select other directories where you have Steam games installed"
-msgstr ""
+msgstr "Valitse muut hakemistot, joihin Steam-pelit on asennettu"
 
 #: data/gtk/preferences.blp:42
 msgid "Clear"
-msgstr ""
+msgstr "Tyhjennä"
 
 #: data/gtk/preferences.blp:63
 msgid "Heroic Install Location"
-msgstr "Місце встановлення Heroic"
+msgstr "Heroic asennuspaikka"
 
 #: data/gtk/preferences.blp:73
 msgid "Import Epic Games"
-msgstr "Імпорт Epic Games"
+msgstr "Tuo Epic-pelejä"
 
 #: data/gtk/preferences.blp:81
 msgid "Import GOG Games"
-msgstr "Імпорт ігор GOG"
+msgstr "Tuo GOG-pelejä"
 
 #: data/gtk/preferences.blp:89
 msgid "Import Sideloaded Games"
-msgstr "Імпорт сторонніх ігор"
+msgstr "Tuo Sideload-pelejä"
 
 #: data/gtk/preferences.blp:101
 msgid "Bottles Install Location"
-msgstr "Місце встановлення Bottles"
+msgstr "Bottles asennuspaikka"
 
 #. Translators: Replace this with your name for it to show up in the about window
 #: src/main.py:130
 msgid "translator_credits"
-msgstr "kefir2105"
+msgstr "Linux Sauna"
 
 #: src/main.py:193
 #, python-brace-format
 msgid "{title} removed"
-msgstr "{title} видалено"
+msgstr "{title} poistettu"
 
 #: src/main.py:194
 msgid "Undo"
-msgstr "Відмінити"
+msgstr "Kumoa"
 
 #: src/window.py:225
 msgid "Today"
-msgstr "Сьогодні"
+msgstr "Tänään"
 
 #: src/window.py:227
 msgid "Yesterday"
-msgstr "Вчора"
+msgstr "Eilen"
 
 #. The variable is the date when the game was added
 #: src/window.py:261
 #, python-brace-format
 msgid "Added: {date}"
-msgstr "Додано: {date}"
+msgstr "Lisätty: {date}"
 
 #: src/window.py:266
 msgid "Never"
-msgstr "Ніколи"
+msgstr "Ei koskaan"
 
 #. The variable is the date when the game was last played
 #: src/window.py:270
 #, python-brace-format
 msgid "Last played: {last_played_date}"
-msgstr "Останній раз грали: {last_played_date}"
+msgstr "Pelattu: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:238
 msgid "Couldn't Import Games"
-msgstr "Не вдається імпортувати ігри"
+msgstr "Pelejä ei voitu tuoda"
 
 #: src/utils/bottles_parser.py:81
 msgid "The Bottles directory cannot be found."
-msgstr "Каталог Bottles не знайдено."
+msgstr "Hakemistoa Bottles ei löydy."
 
 #: src/utils/bottles_parser.py:83
 msgid "Set Bottles Location"
-msgstr "Встановити розташування Bottles"
+msgstr "Bottles aseta sijainti"
 
 #: src/utils/bottles_parser.py:141
 msgid "No new games were found in the Bottles library."
-msgstr "У бібліотеці Bottles нових ігор не знайдено."
+msgstr "Bottles-kirjastosta ei löytynyt uusia pelejä."
 
 #: src/utils/bottles_parser.py:146 src/utils/bottles_parser.py:153
 msgid "Bottles Games Imported"
-msgstr "Ігри Bottles імпортовано"
+msgstr "Bottles pelit on tuotu"
 
 #: src/utils/bottles_parser.py:147 src/utils/heroic_parser.py:257
 #: src/utils/steam_parser.py:170
 msgid "Successfully imported 1 game."
-msgstr "Успішно імпортовано 1 гру."
+msgstr "Onnistuneesti tuotu 1 peli."
 
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:155 src/utils/heroic_parser.py:265
 #: src/utils/steam_parser.py:178
 #, python-brace-format
 msgid "Successfully imported {games_no} games."
-msgstr "Успішно імпортовано {games_no} ігри."
+msgstr "Onnistuneesti tuotu {games_no} peliä."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
-msgstr "Додати нову гру"
+msgstr "Lisää uusi peli"
 
 #: src/utils/create_details_window.py:46
 msgid "Confirm"
-msgstr "Підтвердити"
+msgstr "Vahvista"
 
 #: src/utils/create_details_window.py:48
 msgid "Edit Game Details"
-msgstr "Редагувати інформацію про гру"
+msgstr "Muokkaa pelin tietoja"
 
 #: src/utils/create_details_window.py:57
 msgid "Apply"
-msgstr "Застосувати"
+msgstr "Käytä"
 
 #: src/utils/create_details_window.py:59
 msgid "Images"
-msgstr "Зображення"
+msgstr "Kuvat"
 
 #: src/utils/create_details_window.py:95
 msgid "The title of the game"
-msgstr "Назва гри"
+msgstr "Pelin nimi"
 
 #: src/utils/create_details_window.py:100
 msgid "Developer"
-msgstr "Розробник"
+msgstr "Kehittäjä"
 
 #: src/utils/create_details_window.py:101
 msgid "The developer or publisher (optional)"
-msgstr "Розробник або видавець (необов'язково)"
+msgstr "Kehittäjä tai julkaisija (valinnainen)"
 
 #: src/utils/create_details_window.py:111
 msgid "file.txt"
@@ -392,27 +391,27 @@ msgstr "file.txt"
 #. As in software
 #: src/utils/create_details_window.py:113
 msgid "program"
-msgstr "програма"
+msgstr "ohjelma"
 
 #: src/utils/create_details_window.py:117
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
-msgstr "C:\\path\\to\\{exe_name}"
+msgstr "C:\\polku\\kansioon\\{exe_name}"
 
 #: src/utils/create_details_window.py:118
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
-msgstr "C:\\path\\to\\{file_name}"
+msgstr "C:\\polku\\kansioon\\{file_name}"
 
 #: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "/path/to/{exe_name}"
-msgstr "/path/to/{exe_name}"
+msgstr "/polku/kansioon/{exe_name}"
 
 #: src/utils/create_details_window.py:122
 #, python-brace-format
 msgid "/path/to/{file_name}"
-msgstr "/path/to/{file_name}"
+msgstr "/polku/kansioon/{file_name}"
 
 #: src/utils/create_details_window.py:126
 #, python-brace-format
@@ -427,108 +426,94 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Щоб запустити виконуваний файл \"{exe_name}\", скористайтеся командою:\n"
+"Käynnistääksesi suoritettavan ohjelman \"{exe_name}\", käytä komentoa:\n"
 "\n"
 "<tt>\"{exe_path}\"</tt>\n"
 "\n"
-"Щоб відкрити файл \"{file_name}\" за допомогою застосунку за замовчуванням, "
-"скористайтеся:\n"
+"Tiedoston \"{file_name}\" avaaminen sovelluksessa oletuksena, käytä "
+"komentoa:\n"
 "\n"
 "<tt>{command} \"{file_path}\"</tt>\n"
 "\n"
-"Якщо шлях містить пробіли, обов'язково візьміть його в подвійні лапки!"
+"Jos polku sisältää välilyöntejä, varmista, että se on suljettu "
+"kaksinkertaisiin lainausmerkkeihin!"
 
 #: src/utils/create_details_window.py:149
 msgid "Executable"
-msgstr "Виконуваний"
+msgstr "Suoritettava"
 
 #: src/utils/create_details_window.py:150
 msgid "File to open or command to run when launching the game"
-msgstr "Файл для відкриття або команда для запуску під час запуску гри"
+msgstr ""
+"Tiedosto, joka avataan tai komento, joka ajetaan pelin käynnistämisen "
+"yhteydessä"
 
 #: src/utils/create_details_window.py:162
 msgid "Cancel"
-msgstr "Скасувати"
+msgstr "Peruuta"
 
 #: src/utils/create_details_window.py:212
 #: src/utils/create_details_window.py:222
 #: src/utils/create_details_window.py:228
 msgid "Couldn't Add Game"
-msgstr "Не вдалося додати гру"
+msgstr "Peliä ei voitu lisätä"
 
 #: src/utils/create_details_window.py:214
 #: src/utils/create_details_window.py:252
 #: src/utils/create_details_window.py:260
 msgid "Couldn't Apply Preferences"
-msgstr "Не вдалося застосувати параметри"
+msgstr "Asetuksia ei voitu ottaa käyttöön"
 
 #: src/utils/create_details_window.py:222
 #: src/utils/create_details_window.py:253
 msgid "Game title cannot be empty."
-msgstr "Назва гри не може бути порожньою."
+msgstr "Pelin nimi ei voi olla tyhjä."
 
 #: src/utils/create_details_window.py:228
 #: src/utils/create_details_window.py:261
 msgid "Executable cannot be empty."
-msgstr "Виконуваний файл не може бути порожнім."
+msgstr "Suoritettava ei voi olla tyhjä."
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
-msgstr "Відхилити"
+msgstr "Hylkää"
 
 #: src/utils/heroic_parser.py:88
 msgid "The Heroic directory cannot be found."
-msgstr "Не вдається знайти каталог Heroic."
+msgstr "Heroic-hakemistoa ei löytynyt."
 
 #: src/utils/heroic_parser.py:90
 msgid "Set Heroic Location"
-msgstr "Встановіть розташування Heroic"
+msgstr "Heroic aseta sijainti"
 
 #: src/utils/heroic_parser.py:251
 msgid "No new games were found in the Heroic library."
-msgstr "У бібліотеці Heroic нових ігор не знайдено."
+msgstr "Heroic-kirjastosta ei löytynyt uusia pelejä."
 
 #: src/utils/heroic_parser.py:256 src/utils/heroic_parser.py:263
 msgid "Heroic Games Imported"
-msgstr "Ігри Heroic імпортовано"
+msgstr "Heroic-pelit tuotu"
 
 #: src/utils/steam_parser.py:164
 msgid "No new games were found in the Steam library."
-msgstr "У бібліотеці Steam не знайдено жодної нової гри."
+msgstr "Steam-kirjastosta ei löytynyt uusia pelejä."
 
 #: src/utils/steam_parser.py:169 src/utils/steam_parser.py:176
 msgid "Steam Games Imported"
-msgstr "Ігри Steam імпортовано"
+msgstr "Steam-pelit tuotu"
 
 #: src/utils/steam_parser.py:239
 msgid "The Steam directory cannot be found."
-msgstr "Каталог Steam знайти неможливо."
+msgstr "Steam-hakemistoa ei löydy."
 
 #: src/utils/steam_parser.py:241
 msgid "Set Steam Location"
-msgstr "Встановіть розташування Steam"
+msgstr "Steam aseta sijainti"
 
 #: src/utils/steam_parser.py:258
 msgid "Importing Games…"
-msgstr "Імпорт ігор…"
+msgstr "Pelien tuominen…"
 
 #: src/utils/steam_parser.py:259
 msgid "Talking to Steam"
-msgstr "Спілкування зі Steam"
-
-#, fuzzy
-#~ msgid "Successfully imported {str(len(bottles_games))} games."
-#~ msgstr "Успішно імпортовано 1 гру."
-
-#, fuzzy
-#~ msgid "Successfully imported {str(len(heroic_games))} games."
-#~ msgstr "Успішно імпортовано 1 гру."
-
-#~ msgid "Last played:"
-#~ msgstr "Остання гра:"
-
-#~ msgid "Successfully imported"
-#~ msgstr "Успішно імпортовано"
-
-#~ msgid "games."
-#~ msgstr "ігри."
+msgstr "Yhdistetään Steam kirjastoon"

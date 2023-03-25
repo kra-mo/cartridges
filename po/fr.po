@@ -58,9 +58,8 @@ msgid "Try a different search."
 msgstr "Essayez une autre recherche."
 
 #: data/gtk/window.blp:14
-#, fuzzy
 msgid "No Games"
-msgstr "Jeux"
+msgstr "Aucun jeu"
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
@@ -76,7 +75,7 @@ msgstr "Les jeux que vous masquez apparaîtront ici."
 
 #: data/gtk/window.blp:44 data/gtk/window.blp:254
 msgid "Back"
-msgstr ""
+msgstr "Retour"
 
 #: data/gtk/window.blp:51
 msgid "Game Details"
@@ -96,12 +95,11 @@ msgstr "Ajouter un jeu"
 
 #: data/gtk/window.blp:203 data/gtk/window.blp:266
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu principal"
 
 #: data/gtk/window.blp:210 data/gtk/window.blp:273
-#, fuzzy
 msgid "Search"
-msgstr "Recherche"
+msgstr "Rechercher"
 
 #: data/gtk/window.blp:261
 msgid "Hidden Games"
@@ -252,15 +250,16 @@ msgstr "Répertoire à utiliser lors de l'importation de jeux"
 
 #: data/gtk/preferences.blp:34
 msgid "Extra Steam Libraries"
-msgstr ""
+msgstr "Bibliothèque Steam supplémentaires"
 
 #: data/gtk/preferences.blp:35
 msgid "Select other directories where you have Steam games installed"
 msgstr ""
+"Sélectionnez d’autres répertoires où vous avez des jeux Steam installés"
 
 #: data/gtk/preferences.blp:42
 msgid "Clear"
-msgstr ""
+msgstr "Vider"
 
 #: data/gtk/preferences.blp:63
 msgid "Heroic Install Location"
@@ -285,7 +284,7 @@ msgstr "Emplacement de l'installation Bottles"
 #. Translators: Replace this with your name for it to show up in the about window
 #: src/main.py:130
 msgid "translator_credits"
-msgstr ""
+msgstr "Irénée Thirion"
 
 #: src/main.py:193
 #, python-brace-format
@@ -499,9 +498,8 @@ msgid "Set Steam Location"
 msgstr "Définir l'emplacement Steam"
 
 #: src/utils/steam_parser.py:258
-#, fuzzy
 msgid "Importing Games…"
-msgstr "Importation de jeux…"
+msgstr "Importation des jeux…"
 
 #: src/utils/steam_parser.py:259
 #, fuzzy
