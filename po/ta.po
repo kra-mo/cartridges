@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-25 11:25+0100\n"
-"PO-Revision-Date: 2023-03-18 23:40+0000\n"
+"PO-Revision-Date: 2023-03-25 14:46+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
@@ -51,7 +51,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
-msgstr ""
+msgstr "நூலகம்"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
 #: src/utils/create_details_window.py:48
@@ -69,7 +69,7 @@ msgstr "விருப்பங்கள்"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:41
 msgid "First stable release"
-msgstr ""
+msgstr "முதல் நிலையான வெளியீடு"
 
 #: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
 #: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:167
@@ -81,9 +81,8 @@ msgid "Try a different search."
 msgstr "வேறு தேடலை முயற்சிக்கவும்."
 
 #: data/gtk/window.blp:14
-#, fuzzy
 msgid "No Games"
-msgstr "விளையாட்டுகள்"
+msgstr "விளையாட்டுகள் இல்லை"
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
@@ -99,7 +98,7 @@ msgstr "நீங்கள் மறைக்கும் விளையாட�
 
 #: data/gtk/window.blp:44 data/gtk/window.blp:254
 msgid "Back"
-msgstr ""
+msgstr "மீண்டும்"
 
 #: data/gtk/window.blp:92
 msgid "Game Title"
@@ -115,10 +114,9 @@ msgstr "விளையாட்டைச் சேர்க்கவும்"
 
 #: data/gtk/window.blp:203 data/gtk/window.blp:266
 msgid "Main Menu"
-msgstr ""
+msgstr "முதன்மை பட்டியல்"
 
 #: data/gtk/window.blp:210 data/gtk/window.blp:273
-#, fuzzy
 msgid "Search"
 msgstr "தேடு"
 
@@ -267,15 +265,15 @@ msgstr "விளையாட்டுகளை இறக்குமதி ச�
 
 #: data/gtk/preferences.blp:34
 msgid "Extra Steam Libraries"
-msgstr ""
+msgstr "கூடுதல் ஸ்டீம் (Steam) நூலகங்கள்"
 
 #: data/gtk/preferences.blp:35
 msgid "Select other directories where you have Steam games installed"
-msgstr ""
+msgstr "ஸ்டீம் (Steam) கேம்களை நிறுவிய பிற கோப்பகங்களைத் தேர்ந்தெடுக்கவும்"
 
 #: data/gtk/preferences.blp:42
 msgid "Clear"
-msgstr ""
+msgstr "தெளிவு"
 
 #: data/gtk/preferences.blp:63
 msgid "Heroic Install Location"
@@ -303,9 +301,9 @@ msgid "translator_credits"
 msgstr "K.B.Dharun Krishna <kbdharunkrishna@gmail.com>"
 
 #: src/main.py:193
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{title} removed"
-msgstr "அகற்றப்பட்டது"
+msgstr "{title} அகற்றப்பட்டது"
 
 #: src/main.py:194
 msgid "Undo"
@@ -321,19 +319,19 @@ msgstr "நேற்று"
 
 #. The variable is the date when the game was added
 #: src/window.py:271
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Added: {date}"
-msgstr "சேர்க்கப்பட்டது:"
+msgstr "சேர்க்கப்பட்டது: {date}"
 
 #: src/window.py:276
 msgid "Never"
-msgstr ""
+msgstr "ஒருபோதும் இல்லை"
 
 #. The variable is the date when the game was last played
 #: src/window.py:280
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Last played: {last_played_date}"
-msgstr "கடைசியாக விளையாடியது: ஒருபோதும் இல்லை"
+msgstr "கடைசியாக விளையாடியது: {last_played_date}"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:245
@@ -364,9 +362,9 @@ msgstr "1 விளையாட்டு வெற்றிகரமாக இ�
 #. The variable is the number of games
 #: src/utils/bottles_parser.py:155 src/utils/heroic_parser.py:265
 #: src/utils/steam_parser.py:185
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
-msgstr "1 விளையாட்டு வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது."
+msgstr "{games_no} விளையாட்டுகள் வெற்றிகரமாக இறக்குமதி செய்யப்பட்டன."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -398,32 +396,32 @@ msgstr "டெவலப்பர் அல்லது வெளியீட்�
 
 #: src/utils/create_details_window.py:111
 msgid "file.txt"
-msgstr ""
+msgstr "கோப்பு.txt"
 
 #. As in software
 #: src/utils/create_details_window.py:113
 msgid "program"
-msgstr ""
+msgstr "பயன்பாடு"
 
 #: src/utils/create_details_window.py:117
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
-msgstr ""
+msgstr "C:\\பாதை\\டு \\{exe_name}"
 
 #: src/utils/create_details_window.py:118
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
-msgstr ""
+msgstr "C:\\பாதை\\டு \\{file_name}"
 
 #: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "/path/to/{exe_name}"
-msgstr ""
+msgstr "/பாதை/டு/ {exe_name}"
 
 #: src/utils/create_details_window.py:122
 #, python-brace-format
 msgid "/path/to/{file_name}"
-msgstr ""
+msgstr "/பாதை/டு /{file_name}"
 
 #: src/utils/create_details_window.py:126
 #, python-brace-format
@@ -438,6 +436,16 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
+"இயங்கக்கூடிய \"{exe_name}\" ஐத் தொடங்க, கட்டளையைப் பயன்படுத்தவும்:\n"
+"\n"
+"<tt>\"{exe_path}\"</tt>\n"
+"\n"
+"இயல்புநிலை பயன்பாட்டுடன் \"{file_name}\" கோப்பைத் திறக்க, பயன்படுத்தவும்:\n"
+"\n"
+"<tt>{command} \"{file_path}\"</tt>\n"
+"\n"
+"பாதையில் இடைவெளிகள் இருந்தால், அதை இரட்டை மேற்கோள்களில் போர்த்துவதை "
+"உறுதிசெய்யவும்!"
 
 #: src/utils/create_details_window.py:149
 msgid "Executable"
@@ -510,7 +518,6 @@ msgid "Set Steam Location"
 msgstr "Steam (ஸ்டீம் இடத்தை அமைக்கவும்"
 
 #: src/utils/steam_parser.py:265
-#, fuzzy
 msgid "Importing Games…"
 msgstr "விளையாட்டுகளை இறக்குமதி செய்கிறது…"
 
