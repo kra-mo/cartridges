@@ -16,4 +16,22 @@
   <url type="contribute">https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md</url>
   <developer_name translatable="no">kramo</developer_name>
   <launchable type="desktop-id">hu.kramo.Cartridges.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/1.png</image>
+      <caption>Library</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/2.png</image>
+      <caption>Edit Game Details</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/3.png</image>
+      <caption>Game Details</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/4.png</image>
+      <caption>Preferences</caption>
+    </screenshot>
+  </screenshots>
 </component>
