@@ -81,6 +81,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
             ["flatpak-spawn", "--host", *self.executable]  # Flatpak
             if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
             else self.executable,  # Others
+            shell=os.name == "nt",  # Set shell to True on Windows
             start_new_session=True,
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
         )
