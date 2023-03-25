@@ -48,6 +48,6 @@ def save_cover(game, parent_widget, file_path, pixbuf=None, game_id=None):
         open_file.replace(None, False, Gio.FileCreateFlags.NONE),
         "tiff",
         ["compression"],
-        ["7"],
+        ["8"] if parent_widget.schema.get_boolean("high-quality-images") else ["7"],
         callback=cover_callback,
     )

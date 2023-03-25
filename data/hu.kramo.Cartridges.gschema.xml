@@ -25,6 +25,9 @@
 	  <key name="bottles-location" type="s">
       <default>"~/.var/app/com.usebottles.bottles/data/bottles/"</default>
     </key>
+    <key name="high-quality-images" type="b">
+      <default>false</default>
+    </key>
 	</schema>
   <schema id="hu.kramo.Cartridge.State" path="/hu/kramo/Cartridges/State/">
     <key name="width" type="i">

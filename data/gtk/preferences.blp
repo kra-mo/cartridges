@@ -6,13 +6,21 @@ template PreferencesWindow : Adw.PreferencesWindow {
   default-height: 500;
 
   Adw.PreferencesPage page {
-    Adw.PreferencesGroup {
+    Adw.PreferencesGroup general_group {
       title: _("General");
 
       Adw.ActionRow {
         title: _("Exit After Launching Games");
 
         Switch exit_after_launch_switch {
+          valign: center;
+        }
+      }
+      Adw.ActionRow {
+        title: _("High Quality Images");
+        subtitle: _("Save game covers losslessly at the cost of storage");
+
+        Switch high_quality_images_switch {
           valign: center;
         }
       }
@@ -72,7 +80,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       Adw.ActionRow {
         title: _("Import Epic Games");
 
-        Switch import_epic_games_switch {
+        Switch heroic_epic_switch {
           valign: center;
         }
       }
@@ -80,7 +88,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       Adw.ActionRow {
         title: _("Import GOG Games");
 
-        Switch import_gog_games_switch {
+        Switch heroic_gog_switch {
           valign: center;
         }
       }
@@ -88,7 +96,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       Adw.ActionRow {
         title: _("Import Sideloaded Games");
 
-        Switch import_sideload_games_switch {
+        Switch heroic_sideloaded_switch {
           valign: center;
         }
       }
