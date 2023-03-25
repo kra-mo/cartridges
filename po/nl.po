@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 16:13+0100\n"
+"POT-Creation-Date: 2023-03-25 19:53+0100\n"
 "PO-Revision-Date: 2023-03-25 13:56+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
@@ -162,15 +162,15 @@ msgstr "Over Cartridges"
 msgid "Import from"
 msgstr "Importeren uit"
 
-#: data/gtk/window.blp:390 data/gtk/preferences.blp:22
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:30
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:395 data/gtk/preferences.blp:60
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:68
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:400 data/gtk/preferences.blp:98
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:106
 msgid "Bottles"
 msgstr "Bottles"
 
@@ -252,44 +252,52 @@ msgstr "Algemeen"
 msgid "Exit After Launching Games"
 msgstr "Sluiten na starten van game"
 
-#: data/gtk/preferences.blp:25
+#: data/gtk/preferences.blp:20
+msgid "High Quality Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:21
+msgid "Save game covers losslessly at the cost of storage"
+msgstr ""
+
+#: data/gtk/preferences.blp:33
 msgid "Steam Install Location"
 msgstr "Installatielocatie van Steam"
 
-#: data/gtk/preferences.blp:26 data/gtk/preferences.blp:64
-#: data/gtk/preferences.blp:102
+#: data/gtk/preferences.blp:34 data/gtk/preferences.blp:72
+#: data/gtk/preferences.blp:110
 msgid "Directory to use when importing games"
 msgstr "Map om te gebruiken bij het importeren van games"
 
-#: data/gtk/preferences.blp:34
+#: data/gtk/preferences.blp:42
 msgid "Extra Steam Libraries"
 msgstr "Extra Steam-bibliotheken"
 
-#: data/gtk/preferences.blp:35
+#: data/gtk/preferences.blp:43
 msgid "Select other directories where you have Steam games installed"
 msgstr "Andere mappen waar u Steam-games heeft geïnstalleerd"
 
-#: data/gtk/preferences.blp:42
+#: data/gtk/preferences.blp:50
 msgid "Clear"
 msgstr "Wissen"
 
-#: data/gtk/preferences.blp:63
+#: data/gtk/preferences.blp:71
 msgid "Heroic Install Location"
 msgstr "Installatielocatie van Heroic"
 
-#: data/gtk/preferences.blp:73
+#: data/gtk/preferences.blp:81
 msgid "Import Epic Games"
 msgstr "Epic-games importeren"
 
-#: data/gtk/preferences.blp:81
+#: data/gtk/preferences.blp:89
 msgid "Import GOG Games"
 msgstr "GOG-games importeren"
 
-#: data/gtk/preferences.blp:89
+#: data/gtk/preferences.blp:97
 msgid "Import Sideloaded Games"
 msgstr "Gesideloade games importeren"
 
-#: data/gtk/preferences.blp:101
+#: data/gtk/preferences.blp:109
 msgid "Bottles Install Location"
 msgstr "Installatielocatie van Bottles"
 

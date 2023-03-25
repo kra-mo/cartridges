@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 16:13+0100\n"
+"POT-Creation-Date: 2023-03-25 19:53+0100\n"
 "PO-Revision-Date: 2023-03-25 17:57+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/cartridges/"
@@ -162,15 +162,15 @@ msgstr "Informazioni su Cartucce"
 msgid "Import from"
 msgstr "Importa da"
 
-#: data/gtk/window.blp:390 data/gtk/preferences.blp:22
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:30
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:395 data/gtk/preferences.blp:60
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:68
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:400 data/gtk/preferences.blp:98
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:106
 msgid "Bottles"
 msgstr "Bottles"
 
@@ -252,44 +252,52 @@ msgstr "Generale"
 msgid "Exit After Launching Games"
 msgstr "Esci dopo l'avvio dei giochi"
 
-#: data/gtk/preferences.blp:25
+#: data/gtk/preferences.blp:20
+msgid "High Quality Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:21
+msgid "Save game covers losslessly at the cost of storage"
+msgstr ""
+
+#: data/gtk/preferences.blp:33
 msgid "Steam Install Location"
 msgstr "Percorso Installazione Steam"
 
-#: data/gtk/preferences.blp:26 data/gtk/preferences.blp:64
-#: data/gtk/preferences.blp:102
+#: data/gtk/preferences.blp:34 data/gtk/preferences.blp:72
+#: data/gtk/preferences.blp:110
 msgid "Directory to use when importing games"
 msgstr "Cartella da usare per importare i giochi"
 
-#: data/gtk/preferences.blp:34
+#: data/gtk/preferences.blp:42
 msgid "Extra Steam Libraries"
 msgstr "Librerie Steam Extra"
 
-#: data/gtk/preferences.blp:35
+#: data/gtk/preferences.blp:43
 msgid "Select other directories where you have Steam games installed"
 msgstr "Seleziona le altre directory in cui sono installati i giochi di Steam"
 
-#: data/gtk/preferences.blp:42
+#: data/gtk/preferences.blp:50
 msgid "Clear"
 msgstr "Cancella"
 
-#: data/gtk/preferences.blp:63
+#: data/gtk/preferences.blp:71
 msgid "Heroic Install Location"
 msgstr "Percorso Installazione Heroic"
 
-#: data/gtk/preferences.blp:73
+#: data/gtk/preferences.blp:81
 msgid "Import Epic Games"
 msgstr "Importa giochi da Epic Games"
 
-#: data/gtk/preferences.blp:81
+#: data/gtk/preferences.blp:89
 msgid "Import GOG Games"
 msgstr "Importa giochi da GOG"
 
-#: data/gtk/preferences.blp:89
+#: data/gtk/preferences.blp:97
 msgid "Import Sideloaded Games"
 msgstr "Importa giochi da aggiunti manualmente"
 
-#: data/gtk/preferences.blp:101
+#: data/gtk/preferences.blp:109
 msgid "Bottles Install Location"
 msgstr "Percorso Installazione Bottles"
 

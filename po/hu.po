@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 16:13+0100\n"
+"POT-Creation-Date: 2023-03-25 19:53+0100\n"
 "PO-Revision-Date: 2023-03-25 17:57+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
@@ -162,15 +162,15 @@ msgstr "A Kazettákról"
 msgid "Import from"
 msgstr "Importálás innen"
 
-#: data/gtk/window.blp:390 data/gtk/preferences.blp:22
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:30
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:395 data/gtk/preferences.blp:60
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:68
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:400 data/gtk/preferences.blp:98
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:106
 msgid "Bottles"
 msgstr "Palackok"
 
@@ -252,44 +252,52 @@ msgstr "Általános"
 msgid "Exit After Launching Games"
 msgstr "Kilépés Játékok Indítása Után"
 
-#: data/gtk/preferences.blp:25
+#: data/gtk/preferences.blp:20
+msgid "High Quality Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:21
+msgid "Save game covers losslessly at the cost of storage"
+msgstr ""
+
+#: data/gtk/preferences.blp:33
 msgid "Steam Install Location"
 msgstr "Steam Telepítés Helye"
 
-#: data/gtk/preferences.blp:26 data/gtk/preferences.blp:64
-#: data/gtk/preferences.blp:102
+#: data/gtk/preferences.blp:34 data/gtk/preferences.blp:72
+#: data/gtk/preferences.blp:110
 msgid "Directory to use when importing games"
 msgstr "Az importáláskor használatos mappa"
 
-#: data/gtk/preferences.blp:34
+#: data/gtk/preferences.blp:42
 msgid "Extra Steam Libraries"
 msgstr "Extra Steam Könyvtárak"
 
-#: data/gtk/preferences.blp:35
+#: data/gtk/preferences.blp:43
 msgid "Select other directories where you have Steam games installed"
 msgstr "Válasszon ki egyéb mappákat, ahol vannak még Steam játékai"
 
-#: data/gtk/preferences.blp:42
+#: data/gtk/preferences.blp:50
 msgid "Clear"
 msgstr "Törlés"
 
-#: data/gtk/preferences.blp:63
+#: data/gtk/preferences.blp:71
 msgid "Heroic Install Location"
 msgstr "Heroic Telepítés Helye"
 
-#: data/gtk/preferences.blp:73
+#: data/gtk/preferences.blp:81
 msgid "Import Epic Games"
 msgstr "Epic Games Játékok Importálása"
 
-#: data/gtk/preferences.blp:81
+#: data/gtk/preferences.blp:89
 msgid "Import GOG Games"
 msgstr "GOG Játékok Importálása"
 
-#: data/gtk/preferences.blp:89
+#: data/gtk/preferences.blp:97
 msgid "Import Sideloaded Games"
 msgstr "Manuálisan Hozzáadott Játékok Importálása"
 
-#: data/gtk/preferences.blp:101
+#: data/gtk/preferences.blp:109
 msgid "Bottles Install Location"
 msgstr "Palackok Telepítés Helye"
 
