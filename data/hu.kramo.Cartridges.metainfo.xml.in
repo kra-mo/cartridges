@@ -35,4 +35,11 @@
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />
+  <releases>
+    <release version="1.0" date="2023-03-25">
+      <description>
+        <p>First stable release</p>
+      </description>
+    </release>
+  </releases>
 </component>
