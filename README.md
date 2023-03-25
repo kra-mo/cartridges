@@ -22,7 +22,7 @@
 [discord-url]: https://discord.gg/4KSFh3AmQR
 [discord-image]: https://img.shields.io/discord/1088155799299313754?color=%235865F2&label=discord&logo=discord&logoColor=%23FFFFFF
 
-  <img src="data/screenshot.webp">
+  <img src="data/screenshots/1.png">
 </div>
 
 # The Project
