@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 11:25+0100\n"
+"POT-Creation-Date: 2023-03-25 16:13+0100\n"
 "PO-Revision-Date: 2023-03-25 14:46+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
@@ -164,15 +164,15 @@ msgstr "கார்ட்ரிட்ஜ்கள் பற்றி"
 msgid "Import from"
 msgstr "இலிருந்து இறக்குமதி செய்"
 
-#: data/gtk/window.blp:390
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:22
 msgid "Steam"
 msgstr "Steam (ஸ்டீம்)"
 
-#: data/gtk/window.blp:395
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:60
 msgid "Heroic"
 msgstr "Heroic (ஹீரோயிக்)"
 
-#: data/gtk/window.blp:400
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:98
 msgid "Bottles"
 msgstr "Bottles (பாட்டில்கள்)"
 
@@ -444,8 +444,7 @@ msgstr ""
 "\n"
 "<tt>{command} \"{file_path}\"</tt>\n"
 "\n"
-"பாதையில் இடைவெளிகள் இருந்தால், அதை இரட்டை மேற்கோள்களில் போர்த்துவதை "
-"உறுதிசெய்யவும்!"
+"பாதையில் இடைவெளிகள் இருந்தால், அதை இரட்டை மேற்கோள்களில் போர்த்துவதை உறுதிசெய்யவும்!"
 
 #: src/utils/create_details_window.py:149
 msgid "Executable"

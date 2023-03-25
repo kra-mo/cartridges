@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 11:25+0100\n"
+"POT-Creation-Date: 2023-03-25 16:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,15 +157,15 @@ msgstr ""
 msgid "Import from"
 msgstr ""
 
-#: data/gtk/window.blp:390
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:22
 msgid "Steam"
 msgstr ""
 
-#: data/gtk/window.blp:395
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:60
 msgid "Heroic"
 msgstr ""
 
-#: data/gtk/window.blp:400
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:98
 msgid "Bottles"
 msgstr ""
 

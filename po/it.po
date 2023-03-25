@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 11:25+0100\n"
+"POT-Creation-Date: 2023-03-25 16:13+0100\n"
 "PO-Revision-Date: 2023-03-24 16:12+0000\n"
 "Last-Translator: Alessandro Iepure <alessandro.iepure@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/cartridges/"
@@ -161,15 +161,15 @@ msgstr "Informazioni su Cartucce"
 msgid "Import from"
 msgstr "Importa da"
 
-#: data/gtk/window.blp:390
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:22
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:395
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:60
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:400
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:98
 msgid "Bottles"
 msgstr "Bottles"
 

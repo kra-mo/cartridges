@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 11:25+0100\n"
+"POT-Creation-Date: 2023-03-25 16:13+0100\n"
 "PO-Revision-Date: 2023-03-21 11:05+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -164,15 +164,15 @@ msgstr "Om"
 msgid "Import from"
 msgstr "Importer fra"
 
-#: data/gtk/window.blp:390
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:22
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:395
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:60
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:400
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:98
 msgid "Bottles"
 msgstr "Bottles"
 
