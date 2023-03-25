@@ -157,12 +157,19 @@ def get_games_async(parent_widget, appmanifests, steam_dir, import_dialog, progr
                 }
             )
 
+            def response(_widget, response):
+                if response == "open_preferences":
+                    parent_widget.get_application().on_preferences_action(None)
+
             if games_no == 0:
                 create_dialog(
                     parent_widget,
                     _("No Games Found"),
                     _("No new games were found in the Steam library."),
-                )
+                    "open_preferences",
+                    _("Preferences"),
+                ).connect("response", response)
+
             elif games_no == 1:
                 create_dialog(
                     parent_widget,

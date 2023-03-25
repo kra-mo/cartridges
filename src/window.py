@@ -184,7 +184,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
         text = self.search_entry.get_text().lower()
         if text == "":
             filtered = True
-        elif text in child.get_first_child().name.lower():
+        elif (
+            text in child.get_first_child().name.lower()
+            or text in child.get_first_child().developer.lower()
+            if child.get_first_child().developer
+            else None
+        ):
             filtered = True
         else:
             filtered = False
@@ -202,7 +207,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
         text = self.hidden_search_entry.get_text().lower()
         if text == "":
             filtered = True
-        elif text in child.get_first_child().name.lower():
+        elif (
+            text in child.get_first_child().name.lower()
+            or text in child.get_first_child().developer.lower()
+            if child.get_first_child().developer
+            else None
+        ):
             filtered = True
         else:
             filtered = False
