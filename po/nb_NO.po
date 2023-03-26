@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
 # kramo <contact@kramo.hu>, 2023.
+# Allan Nordhøy <epost@anotheragency.no>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-25 19:53+0100\n"
-"PO-Revision-Date: 2023-03-21 11:05+0000\n"
-"Last-Translator: kramo <contact@kramo.hu>\n"
+"PO-Revision-Date: 2023-03-26 09:03+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
@@ -49,7 +50,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
-msgstr ""
+msgstr "Bibliotek"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
 #: src/utils/create_details_window.py:48
@@ -67,7 +68,7 @@ msgstr "Innstillinger"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:41
 msgid "First stable release"
-msgstr ""
+msgstr "Første ordentlige utgave"
 
 #: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
 #: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:167
@@ -97,7 +98,7 @@ msgstr "Spill du skjuler vil vises her."
 
 #: data/gtk/window.blp:44 data/gtk/window.blp:254
 msgid "Back"
-msgstr ""
+msgstr "Tilbake"
 
 #: data/gtk/window.blp:92
 msgid "Game Title"
@@ -113,7 +114,7 @@ msgstr "Legg til spill"
 
 #: data/gtk/window.blp:203 data/gtk/window.blp:266
 msgid "Main Menu"
-msgstr ""
+msgstr "Hovedmeny"
 
 #: data/gtk/window.blp:210 data/gtk/window.blp:273
 #, fuzzy
@@ -256,11 +257,11 @@ msgstr "Avslutt etter oppstart av spill"
 
 #: data/gtk/preferences.blp:20
 msgid "High Quality Images"
-msgstr ""
+msgstr "Høykvalitetsbilder"
 
 #: data/gtk/preferences.blp:21
 msgid "Save game covers losslessly at the cost of storage"
-msgstr ""
+msgstr "Lagre spillomslag tapsfritt på bekostning av lagringsplass"
 
 #: data/gtk/preferences.blp:33
 msgid "Steam Install Location"
@@ -273,15 +274,16 @@ msgstr "Mappe å bruke ved import av spill"
 
 #: data/gtk/preferences.blp:42
 msgid "Extra Steam Libraries"
-msgstr ""
+msgstr "Ekstra Steam-bibliotek"
 
 #: data/gtk/preferences.blp:43
+#, fuzzy
 msgid "Select other directories where you have Steam games installed"
-msgstr ""
+msgstr "Velg andre mapper der du har Steam-spill installert"
 
 #: data/gtk/preferences.blp:50
 msgid "Clear"
-msgstr ""
+msgstr "Tøm"
 
 #: data/gtk/preferences.blp:71
 msgid "Heroic Install Location"
@@ -333,7 +335,7 @@ msgstr "Tillagt: {date}"
 
 #: src/window.py:276
 msgid "Never"
-msgstr ""
+msgstr "Aldri"
 
 #. The variable is the date when the game was last played
 #: src/window.py:280
@@ -404,35 +406,35 @@ msgstr "Utvikler eller utgiver (valgfritt)"
 
 #: src/utils/create_details_window.py:111
 msgid "file.txt"
-msgstr ""
+msgstr "fil.txt"
 
 #. As in software
 #: src/utils/create_details_window.py:113
 msgid "program"
-msgstr ""
+msgstr "program"
 
 #: src/utils/create_details_window.py:117
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
-msgstr ""
+msgstr "C:\\sti\\til\\{exe_name}"
 
 #: src/utils/create_details_window.py:118
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
-msgstr ""
+msgstr "C:\\sti\\til\\{file_name}"
 
 #: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "/path/to/{exe_name}"
-msgstr ""
+msgstr "/sti/til/{exe_name}"
 
 #: src/utils/create_details_window.py:122
 #, python-brace-format
 msgid "/path/to/{file_name}"
-msgstr ""
+msgstr "/sti/til/{file_name}"
 
 #: src/utils/create_details_window.py:126
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid ""
 "To launch the executable \"{exe_name}\", use the command:\n"
 "\n"
@@ -444,6 +446,16 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
+"Start den kjørbare «{exe_name}»-filen med denne kommandoen:\n"
+"\n"
+"<tt>«{exe_path}»</tt>\n"
+"\n"
+"For å åpne filen «{file_name}» med forvalgt program bruker du:\n"
+"\n"
+"<tt>{command} «{file_path}»</tt>\n"
+"\n"
+"Hvis stien inneholder mellomrom må du pakke den inn i doble engelske "
+"sitattegn."
 
 #: src/utils/create_details_window.py:149
 msgid "Executable"
@@ -517,11 +529,12 @@ msgstr "Velg hvor Steam er å finne"
 
 #: src/utils/steam_parser.py:265
 msgid "Importing Games…"
-msgstr ""
+msgstr "Importerer spill …"
 
 #: src/utils/steam_parser.py:266
+#, fuzzy
 msgid "Talking to Steam"
-msgstr ""
+msgstr "Snakker med Steam"
 
 #, fuzzy
 #~ msgid "Successfully imported {str(len(bottles_games))} games."
