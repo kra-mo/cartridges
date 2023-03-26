@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-26 11:04+0200\n"
-"PO-Revision-Date: 2023-03-21 11:05+0000\n"
+"POT-Creation-Date: 2023-03-26 11:51+0200\n"
+"PO-Revision-Date: 2023-03-26 09:45+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
@@ -415,36 +415,41 @@ msgstr "Développeur"
 msgid "The developer or publisher (optional)"
 msgstr "Le développeur ou l'éditeur (facultatif)"
 
-#: src/utils/create_details_window.py:111
+#. Translate this string as you would translate "file"
+#: src/utils/create_details_window.py:112
 msgid "file.txt"
 msgstr "ficher.txt"
 
 #. As in software
-#: src/utils/create_details_window.py:113
+#: src/utils/create_details_window.py:114
 msgid "program"
 msgstr ""
 
-#: src/utils/create_details_window.py:117
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:119
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
 msgstr ""
 
-#: src/utils/create_details_window.py:118
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
 msgstr ""
 
-#: src/utils/create_details_window.py:121
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:125
 #, python-brace-format
 msgid "/path/to/{exe_name}"
 msgstr ""
 
-#: src/utils/create_details_window.py:122
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:127
 #, python-brace-format
 msgid "/path/to/{file_name}"
 msgstr ""
 
-#: src/utils/create_details_window.py:126
+#: src/utils/create_details_window.py:131
 #, python-brace-format
 msgid ""
 "To launch the executable \"{exe_name}\", use the command:\n"
@@ -458,37 +463,37 @@ msgid ""
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
 
-#: src/utils/create_details_window.py:149
+#: src/utils/create_details_window.py:154
 msgid "Executable"
 msgstr "Exécutable"
 
-#: src/utils/create_details_window.py:150
+#: src/utils/create_details_window.py:155
 msgid "File to open or command to run when launching the game"
 msgstr "Fichier à ouvrir ou commande à exécuter au lancement du jeu"
 
-#: src/utils/create_details_window.py:162
+#: src/utils/create_details_window.py:167
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/utils/create_details_window.py:212
-#: src/utils/create_details_window.py:222
-#: src/utils/create_details_window.py:228
+#: src/utils/create_details_window.py:217
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:233
 msgid "Couldn't Add Game"
 msgstr "Impossible d'ajouter un jeu"
 
-#: src/utils/create_details_window.py:214
-#: src/utils/create_details_window.py:252
-#: src/utils/create_details_window.py:260
+#: src/utils/create_details_window.py:219
+#: src/utils/create_details_window.py:257
+#: src/utils/create_details_window.py:265
 msgid "Couldn't Apply Preferences"
 msgstr "Impossible d'appliquer les préférences"
 
-#: src/utils/create_details_window.py:222
-#: src/utils/create_details_window.py:253
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:258
 msgid "Game title cannot be empty."
 msgstr "Le titre du jeu ne peut pas être vide."
 
-#: src/utils/create_details_window.py:228
-#: src/utils/create_details_window.py:261
+#: src/utils/create_details_window.py:233
+#: src/utils/create_details_window.py:266
 msgid "Executable cannot be empty."
 msgstr "L'exécutable ne peut pas être vide."
 
@@ -533,7 +538,6 @@ msgid "Importing Games…"
 msgstr "Importation des jeux…"
 
 #: src/utils/steam_parser.py:266
-#, fuzzy
 msgid "Talking to Steam"
 msgstr "Parler à Steam"
 
