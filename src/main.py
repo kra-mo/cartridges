@@ -122,7 +122,7 @@ class CartridgesApplication(Adw.Application):
                 "Bananaman https://github.com/Bananaman",
             ],
             designers=["kramo https://kramo.hu"],
-            copyright="© 2022-2023 kramo and contributors",
+            copyright="© 2022-2023 kramo",
             license_type=Gtk.License.GPL_3_0,
             issue_url="https://github.com/kra-mo/cartridges/issues/new",
             website="https://github.com/kra-mo/cartridges",
