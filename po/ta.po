@@ -6,10 +6,10 @@
 # "K.B.Dharun Krishna" <kbdharunkrishna@gmail.com>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-26 11:51+0200\n"
-"PO-Revision-Date: 2023-03-26 23:14+0530\n"
+"PO-Revision-Date: 2023-03-26 23:30+0530\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/cartridges/ta/>\n"
 "Language: ta\n"
@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: data/hu.kramo.Cartridges.desktop.in:3 data/hu.kramo.Cartridges.metainfo.xml.in:6
-#: data/gtk/window.blp:29 src/main.py:115
+#: data/hu.kramo.Cartridges.desktop.in:3 data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
+#: src/main.py:115
 msgid "Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள்"
 
@@ -38,13 +38,12 @@ msgstr "உங்கள் எல்லா விளையாட்டுகள�
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
-"Cartridges is a simple game launcher. It has support for importing your games from "
-"Steam, Heroic and Bottles with organizational features such as hiding and sorting by "
-"date added or last played."
+"Cartridges is a simple game launcher. It has support for importing your games from Steam, Heroic and Bottles "
+"with organizational features such as hiding and sorting by date added or last played."
 msgstr ""
-"கார்ட்ரிட்ஜ்கள் ஒரு எளிய விளையாட்டு துவக்கி. இது உங்கள் விளையாட்டுகளை ஸ்டீம், ஹீரோயிக் மற்றும் பாட்டில்களில் "
-"இருந்து இறக்குமதி செய்வதற்கான ஆதரவைக் கொண்டுள்ளது, அதாவது மறைத்தல் மற்றும் சேர்த்த அல்லது கடைசியாக "
-"விளையாடிய தேதியின்படி வரிசைப்படுத்துதல் போன்ற நிறுவன அம்சங்களுடன்."
+"கார்ட்ரிட்ஜ்கள் ஒரு எளிய விளையாட்டு துவக்கி. இது உங்கள் விளையாட்டுகளை ஸ்டீம், ஹீரோயிக் மற்றும் பாட்டில்களில் இருந்து இறக்குமதி "
+"செய்வதற்கான ஆதரவைக் கொண்டுள்ளது, அதாவது மறைத்தல் மற்றும் சேர்த்த அல்லது கடைசியாக விளையாடிய தேதியின்படி வரிசைப்படுத்துதல் "
+"போன்ற நிறுவன அம்சங்களுடன்."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
@@ -58,8 +57,7 @@ msgstr "விளையாட்டு விவரங்களைத் தி�
 msgid "Game Details"
 msgstr "விளையாட்டு விவரங்கள்"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/steam_parser.py:170
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363 src/utils/steam_parser.py:170
 msgid "Preferences"
 msgstr "விருப்பங்கள்"
 
@@ -134,7 +132,7 @@ msgstr "Z-A"
 
 #: data/gtk/window.blp:336
 msgid "Newest"
-msgstr "புதியது"
+msgstr "புதியத"
 
 #: data/gtk/window.blp:342
 msgid "Oldest"
@@ -348,8 +346,7 @@ msgstr "கடைசியாக விளையாடியது: {last_played
 msgid "Details"
 msgstr "விவரங்கள்"
 
-#: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:245
+#: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87 src/utils/steam_parser.py:245
 msgid "Couldn't Import Games"
 msgstr "கேம்களை இறக்குமதி செய்ய முடியவில்லை"
 
@@ -369,14 +366,12 @@ msgstr "பாட்டில்கள் நூலகத்தில் பு�
 msgid "Bottles Games Imported"
 msgstr "பாட்டில் விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
 
-#: src/utils/bottles_parser.py:147 src/utils/heroic_parser.py:257
-#: src/utils/steam_parser.py:177
+#: src/utils/bottles_parser.py:147 src/utils/heroic_parser.py:257 src/utils/steam_parser.py:177
 msgid "Successfully imported 1 game."
 msgstr "1 விளையாட்டு வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது."
 
 #. The variable is the number of games
-#: src/utils/bottles_parser.py:155 src/utils/heroic_parser.py:265
-#: src/utils/steam_parser.py:185
+#: src/utils/bottles_parser.py:155 src/utils/heroic_parser.py:265 src/utils/steam_parser.py:185
 #, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "{games_no} விளையாட்டுகள் வெற்றிகரமாக இறக்குமதி செய்யப்பட்டன."
