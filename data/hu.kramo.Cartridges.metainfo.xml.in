@@ -36,8 +36,17 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.1" date="2023-03-26">
+      <description translatable="no">
+        <ul>
+          <li>Added option to launch games by clicking the cover image</li>
+          <li>Added option to save cover art losslessly</li>
+          <li>Translations since 1.0</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0" date="2023-03-25">
-      <description>
+      <description translatable="no">
         <p>First stable release</p>
       </description>
     </release>
