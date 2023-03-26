@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-25 19:53+0100\n"
-"PO-Revision-Date: 2023-03-25 13:56+0000\n"
+"PO-Revision-Date: 2023-03-26 02:08+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/nl/>\n"
@@ -254,11 +254,11 @@ msgstr "Sluiten na starten van game"
 
 #: data/gtk/preferences.blp:20
 msgid "High Quality Images"
-msgstr ""
+msgstr "Afbeeldingen van hoge kwaliteit"
 
 #: data/gtk/preferences.blp:21
 msgid "Save game covers losslessly at the cost of storage"
-msgstr ""
+msgstr "Game-covers zonder kwaliteitsverlies opslaan ten koste van opslagruimte"
 
 #: data/gtk/preferences.blp:33
 msgid "Steam Install Location"

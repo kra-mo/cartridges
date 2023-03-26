@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-25 19:53+0100\n"
-"PO-Revision-Date: 2023-03-25 17:57+0000\n"
+"PO-Revision-Date: 2023-03-26 02:08+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -254,11 +254,11 @@ msgstr "Kilépés Játékok Indítása Után"
 
 #: data/gtk/preferences.blp:20
 msgid "High Quality Images"
-msgstr ""
+msgstr "Jó Minőségű Képek"
 
 #: data/gtk/preferences.blp:21
 msgid "Save game covers losslessly at the cost of storage"
-msgstr ""
+msgstr "Játékborítók veszteségmentes tárolása a tárhely költségére"
 
 #: data/gtk/preferences.blp:33
 msgid "Steam Install Location"
