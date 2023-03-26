@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-26 11:04+0200\n"
-"PO-Revision-Date: 2023-03-26 09:03+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"POT-Creation-Date: 2023-03-26 11:51+0200\n"
+"PO-Revision-Date: 2023-03-26 09:45+0000\n"
+"Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -80,9 +80,8 @@ msgid "Try a different search."
 msgstr "Prøv et forskjellig søk."
 
 #: data/gtk/window.blp:14
-#, fuzzy
 msgid "No Games"
-msgstr "Spill"
+msgstr "Ingen spill"
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
@@ -417,36 +416,41 @@ msgstr "Utvikler"
 msgid "The developer or publisher (optional)"
 msgstr "Utvikler eller utgiver (valgfritt)"
 
-#: src/utils/create_details_window.py:111
+#. Translate this string as you would translate "file"
+#: src/utils/create_details_window.py:112
 msgid "file.txt"
 msgstr "fil.txt"
 
 #. As in software
-#: src/utils/create_details_window.py:113
+#: src/utils/create_details_window.py:114
 msgid "program"
 msgstr "program"
 
-#: src/utils/create_details_window.py:117
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:119
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
 msgstr "C:\\sti\\til\\{exe_name}"
 
-#: src/utils/create_details_window.py:118
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
 msgstr "C:\\sti\\til\\{file_name}"
 
-#: src/utils/create_details_window.py:121
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:125
 #, python-brace-format
 msgid "/path/to/{exe_name}"
 msgstr "/sti/til/{exe_name}"
 
-#: src/utils/create_details_window.py:122
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:127
 #, python-brace-format
 msgid "/path/to/{file_name}"
 msgstr "/sti/til/{file_name}"
 
-#: src/utils/create_details_window.py:126
+#: src/utils/create_details_window.py:131
 #, fuzzy, python-brace-format
 msgid ""
 "To launch the executable \"{exe_name}\", use the command:\n"
@@ -470,37 +474,37 @@ msgstr ""
 "Hvis stien inneholder mellomrom må du pakke den inn i doble engelske "
 "sitattegn."
 
-#: src/utils/create_details_window.py:149
+#: src/utils/create_details_window.py:154
 msgid "Executable"
 msgstr "Kjørbar"
 
-#: src/utils/create_details_window.py:150
+#: src/utils/create_details_window.py:155
 msgid "File to open or command to run when launching the game"
 msgstr "Fil å åpne eller kommando å kjøre ved oppstart av spillet"
 
-#: src/utils/create_details_window.py:162
+#: src/utils/create_details_window.py:167
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/utils/create_details_window.py:212
-#: src/utils/create_details_window.py:222
-#: src/utils/create_details_window.py:228
+#: src/utils/create_details_window.py:217
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:233
 msgid "Couldn't Add Game"
 msgstr "Kunne ikke legge til spill"
 
-#: src/utils/create_details_window.py:214
-#: src/utils/create_details_window.py:252
-#: src/utils/create_details_window.py:260
+#: src/utils/create_details_window.py:219
+#: src/utils/create_details_window.py:257
+#: src/utils/create_details_window.py:265
 msgid "Couldn't Apply Preferences"
 msgstr "Kunne ikke ta i bruk endringer"
 
-#: src/utils/create_details_window.py:222
-#: src/utils/create_details_window.py:253
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:258
 msgid "Game title cannot be empty."
 msgstr "Spillnavnet kan ikke være tomt."
 
-#: src/utils/create_details_window.py:228
-#: src/utils/create_details_window.py:261
+#: src/utils/create_details_window.py:233
+#: src/utils/create_details_window.py:266
 msgid "Executable cannot be empty."
 msgstr "Kjørbar fil må angis."
 
