@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 19:53+0100\n"
+"POT-Creation-Date: 2023-03-26 11:04+0200\n"
 "PO-Revision-Date: 2023-03-21 13:12+0000\n"
 "Last-Translator: Dan <denqwerta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.16.2-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
@@ -104,7 +104,7 @@ msgstr ""
 msgid "Game Title"
 msgstr "Назва гри"
 
-#: data/gtk/window.blp:148 data/gtk/game.blp:35
+#: data/gtk/window.blp:148 src/game.py:175
 msgid "Play"
 msgstr "Грати"
 
@@ -165,35 +165,35 @@ msgstr "Про Cartridges"
 msgid "Import from"
 msgstr "Імпорт з"
 
-#: data/gtk/window.blp:390 data/gtk/preferences.blp:30
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:40
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:395 data/gtk/preferences.blp:68
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:78
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:400 data/gtk/preferences.blp:106
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:116
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/game.blp:61 src/utils/create_details_window.py:94
+#: data/gtk/game.blp:60 src/utils/create_details_window.py:94
 msgid "Title"
 msgstr "Назва"
 
-#: data/gtk/game.blp:83 data/gtk/game.blp:102
+#: data/gtk/game.blp:82 data/gtk/game.blp:101
 msgid "Edit"
 msgstr "Редагувати"
 
-#: data/gtk/game.blp:88
+#: data/gtk/game.blp:87
 msgid "Hide"
 msgstr "Приховати"
 
-#: data/gtk/game.blp:93 data/gtk/game.blp:112
+#: data/gtk/game.blp:92 data/gtk/game.blp:111
 msgid "Remove"
 msgstr "Видалити"
 
-#: data/gtk/game.blp:107
+#: data/gtk/game.blp:106
 msgid "Unhide"
 msgstr "Показати"
 
@@ -255,52 +255,60 @@ msgstr "Загальний"
 msgid "Exit After Launching Games"
 msgstr "Вихід після запуску ігор"
 
-#: data/gtk/preferences.blp:20
+#: data/gtk/preferences.blp:21
+msgid "Cover Image Launches Game"
+msgstr ""
+
+#: data/gtk/preferences.blp:22
+msgid "Swaps the behavior of the cover image and the play button"
+msgstr ""
+
+#: data/gtk/preferences.blp:30
 msgid "High Quality Images"
 msgstr ""
 
-#: data/gtk/preferences.blp:21
+#: data/gtk/preferences.blp:31
 msgid "Save game covers losslessly at the cost of storage"
 msgstr ""
 
-#: data/gtk/preferences.blp:33
+#: data/gtk/preferences.blp:43
 msgid "Steam Install Location"
 msgstr "Місце встановлення Steam"
 
-#: data/gtk/preferences.blp:34 data/gtk/preferences.blp:72
-#: data/gtk/preferences.blp:110
+#: data/gtk/preferences.blp:44 data/gtk/preferences.blp:82
+#: data/gtk/preferences.blp:120
 msgid "Directory to use when importing games"
 msgstr "Каталог для імпорту ігор"
 
-#: data/gtk/preferences.blp:42
+#: data/gtk/preferences.blp:52
 msgid "Extra Steam Libraries"
 msgstr ""
 
-#: data/gtk/preferences.blp:43
+#: data/gtk/preferences.blp:53
 msgid "Select other directories where you have Steam games installed"
 msgstr ""
 
-#: data/gtk/preferences.blp:50
+#: data/gtk/preferences.blp:60
 msgid "Clear"
 msgstr ""
 
-#: data/gtk/preferences.blp:71
+#: data/gtk/preferences.blp:81
 msgid "Heroic Install Location"
 msgstr "Місце встановлення Heroic"
 
-#: data/gtk/preferences.blp:81
+#: data/gtk/preferences.blp:91
 msgid "Import Epic Games"
 msgstr "Імпорт Epic Games"
 
-#: data/gtk/preferences.blp:89
+#: data/gtk/preferences.blp:99
 msgid "Import GOG Games"
 msgstr "Імпорт ігор GOG"
 
-#: data/gtk/preferences.blp:97
+#: data/gtk/preferences.blp:107
 msgid "Import Sideloaded Games"
 msgstr "Імпорт сторонніх ігор"
 
-#: data/gtk/preferences.blp:109
+#: data/gtk/preferences.blp:119
 msgid "Bottles Install Location"
 msgstr "Місце встановлення Bottles"
 
@@ -318,29 +326,34 @@ msgstr "{title} видалено"
 msgid "Undo"
 msgstr "Відмінити"
 
-#: src/window.py:235
+#: src/window.py:234
 msgid "Today"
 msgstr "Сьогодні"
 
-#: src/window.py:237
+#: src/window.py:236
 msgid "Yesterday"
 msgstr "Вчора"
 
 #. The variable is the date when the game was added
-#: src/window.py:271
+#: src/window.py:270
 #, python-brace-format
 msgid "Added: {date}"
 msgstr "Додано: {date}"
 
-#: src/window.py:276
+#: src/window.py:275
 msgid "Never"
 msgstr "Ніколи"
 
 #. The variable is the date when the game was last played
-#: src/window.py:280
+#: src/window.py:279
 #, python-brace-format
 msgid "Last played: {last_played_date}"
 msgstr "Останній раз грали: {last_played_date}"
+
+#: src/game.py:173
+#, fuzzy
+msgid "Details"
+msgstr "Подробиці гри"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:245

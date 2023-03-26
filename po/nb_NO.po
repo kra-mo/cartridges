@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 19:53+0100\n"
+"POT-Creation-Date: 2023-03-26 11:04+0200\n"
 "PO-Revision-Date: 2023-03-26 09:03+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -104,7 +104,7 @@ msgstr "Tilbake"
 msgid "Game Title"
 msgstr "Spillnavn"
 
-#: data/gtk/window.blp:148 data/gtk/game.blp:35
+#: data/gtk/window.blp:148 src/game.py:175
 msgid "Play"
 msgstr "Spill"
 
@@ -165,35 +165,35 @@ msgstr "Om"
 msgid "Import from"
 msgstr "Importer fra"
 
-#: data/gtk/window.blp:390 data/gtk/preferences.blp:30
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:40
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/window.blp:395 data/gtk/preferences.blp:68
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:78
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/window.blp:400 data/gtk/preferences.blp:106
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:116
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/game.blp:61 src/utils/create_details_window.py:94
+#: data/gtk/game.blp:60 src/utils/create_details_window.py:94
 msgid "Title"
 msgstr "Navn"
 
-#: data/gtk/game.blp:83 data/gtk/game.blp:102
+#: data/gtk/game.blp:82 data/gtk/game.blp:101
 msgid "Edit"
 msgstr "Rediger"
 
-#: data/gtk/game.blp:88
+#: data/gtk/game.blp:87
 msgid "Hide"
 msgstr "Skjul"
 
-#: data/gtk/game.blp:93 data/gtk/game.blp:112
+#: data/gtk/game.blp:92 data/gtk/game.blp:111
 msgid "Remove"
 msgstr "Fjern"
 
-#: data/gtk/game.blp:107
+#: data/gtk/game.blp:106
 msgid "Unhide"
 msgstr "Opphev fjerning"
 
@@ -255,53 +255,61 @@ msgstr "Generelt"
 msgid "Exit After Launching Games"
 msgstr "Avslutt etter oppstart av spill"
 
-#: data/gtk/preferences.blp:20
+#: data/gtk/preferences.blp:21
+msgid "Cover Image Launches Game"
+msgstr ""
+
+#: data/gtk/preferences.blp:22
+msgid "Swaps the behavior of the cover image and the play button"
+msgstr ""
+
+#: data/gtk/preferences.blp:30
 msgid "High Quality Images"
 msgstr "Høykvalitetsbilder"
 
-#: data/gtk/preferences.blp:21
+#: data/gtk/preferences.blp:31
 msgid "Save game covers losslessly at the cost of storage"
 msgstr "Lagre spillomslag tapsfritt på bekostning av lagringsplass"
 
-#: data/gtk/preferences.blp:33
+#: data/gtk/preferences.blp:43
 msgid "Steam Install Location"
 msgstr "Installasjonssted for Steam"
 
-#: data/gtk/preferences.blp:34 data/gtk/preferences.blp:72
-#: data/gtk/preferences.blp:110
+#: data/gtk/preferences.blp:44 data/gtk/preferences.blp:82
+#: data/gtk/preferences.blp:120
 msgid "Directory to use when importing games"
 msgstr "Mappe å bruke ved import av spill"
 
-#: data/gtk/preferences.blp:42
+#: data/gtk/preferences.blp:52
 msgid "Extra Steam Libraries"
 msgstr "Ekstra Steam-bibliotek"
 
-#: data/gtk/preferences.blp:43
+#: data/gtk/preferences.blp:53
 #, fuzzy
 msgid "Select other directories where you have Steam games installed"
 msgstr "Velg andre mapper der du har Steam-spill installert"
 
-#: data/gtk/preferences.blp:50
+#: data/gtk/preferences.blp:60
 msgid "Clear"
 msgstr "Tøm"
 
-#: data/gtk/preferences.blp:71
+#: data/gtk/preferences.blp:81
 msgid "Heroic Install Location"
 msgstr "Installasjonssted for Heroic"
 
-#: data/gtk/preferences.blp:81
+#: data/gtk/preferences.blp:91
 msgid "Import Epic Games"
 msgstr "Importer Epic-spill"
 
-#: data/gtk/preferences.blp:89
+#: data/gtk/preferences.blp:99
 msgid "Import GOG Games"
 msgstr "Importer GOG-spill"
 
-#: data/gtk/preferences.blp:97
+#: data/gtk/preferences.blp:107
 msgid "Import Sideloaded Games"
 msgstr "Importer sideinnlastede spill"
 
-#: data/gtk/preferences.blp:109
+#: data/gtk/preferences.blp:119
 msgid "Bottles Install Location"
 msgstr "Installasjonssted for Bottles"
 
@@ -319,29 +327,34 @@ msgstr "{title} fjernet"
 msgid "Undo"
 msgstr "Angre"
 
-#: src/window.py:235
+#: src/window.py:234
 msgid "Today"
 msgstr "I dag"
 
-#: src/window.py:237
+#: src/window.py:236
 msgid "Yesterday"
 msgstr "I går"
 
 #. The variable is the date when the game was added
-#: src/window.py:271
+#: src/window.py:270
 #, python-brace-format
 msgid "Added: {date}"
 msgstr "Tillagt: {date}"
 
-#: src/window.py:276
+#: src/window.py:275
 msgid "Never"
 msgstr "Aldri"
 
 #. The variable is the date when the game was last played
-#: src/window.py:280
+#: src/window.py:279
 #, python-brace-format
 msgid "Last played: {last_played_date}"
 msgstr "Sist spilt: {last_played_date}"
+
+#: src/game.py:173
+#, fuzzy
+msgid "Details"
+msgstr "Spilldetaljer"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:245

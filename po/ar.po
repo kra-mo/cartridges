@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 19:53+0100\n"
+"POT-Creation-Date: 2023-03-26 11:04+0200\n"
 "PO-Revision-Date: 2023-03-25 17:57+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
@@ -102,7 +102,7 @@ msgstr "عد"
 msgid "Game Title"
 msgstr "عنوان اللعبة"
 
-#: data/gtk/window.blp:148 data/gtk/game.blp:35
+#: data/gtk/window.blp:148 src/game.py:175
 msgid "Play"
 msgstr "العب"
 
@@ -162,35 +162,35 @@ msgstr "عن «عبوَّات»"
 msgid "Import from"
 msgstr "استورد من"
 
-#: data/gtk/window.blp:390 data/gtk/preferences.blp:30
+#: data/gtk/window.blp:390 data/gtk/preferences.blp:40
 msgid "Steam"
 msgstr "ستيم"
 
-#: data/gtk/window.blp:395 data/gtk/preferences.blp:68
+#: data/gtk/window.blp:395 data/gtk/preferences.blp:78
 msgid "Heroic"
 msgstr "هِرُوِك"
 
-#: data/gtk/window.blp:400 data/gtk/preferences.blp:106
+#: data/gtk/window.blp:400 data/gtk/preferences.blp:116
 msgid "Bottles"
 msgstr "بوتلز"
 
-#: data/gtk/game.blp:61 src/utils/create_details_window.py:94
+#: data/gtk/game.blp:60 src/utils/create_details_window.py:94
 msgid "Title"
 msgstr "العنوان"
 
-#: data/gtk/game.blp:83 data/gtk/game.blp:102
+#: data/gtk/game.blp:82 data/gtk/game.blp:101
 msgid "Edit"
 msgstr "حرِّر"
 
-#: data/gtk/game.blp:88
+#: data/gtk/game.blp:87
 msgid "Hide"
 msgstr "أخفِ"
 
-#: data/gtk/game.blp:93 data/gtk/game.blp:112
+#: data/gtk/game.blp:92 data/gtk/game.blp:111
 msgid "Remove"
 msgstr "أزل"
 
-#: data/gtk/game.blp:107
+#: data/gtk/game.blp:106
 msgid "Unhide"
 msgstr "اكشف"
 
@@ -252,52 +252,60 @@ msgstr "عام"
 msgid "Exit After Launching Games"
 msgstr "اخرج بعد بدء الألعاب"
 
-#: data/gtk/preferences.blp:20
+#: data/gtk/preferences.blp:21
+msgid "Cover Image Launches Game"
+msgstr ""
+
+#: data/gtk/preferences.blp:22
+msgid "Swaps the behavior of the cover image and the play button"
+msgstr ""
+
+#: data/gtk/preferences.blp:30
 msgid "High Quality Images"
 msgstr ""
 
-#: data/gtk/preferences.blp:21
+#: data/gtk/preferences.blp:31
 msgid "Save game covers losslessly at the cost of storage"
 msgstr ""
 
-#: data/gtk/preferences.blp:33
+#: data/gtk/preferences.blp:43
 msgid "Steam Install Location"
 msgstr "موضع تثبيت ستيم"
 
-#: data/gtk/preferences.blp:34 data/gtk/preferences.blp:72
-#: data/gtk/preferences.blp:110
+#: data/gtk/preferences.blp:44 data/gtk/preferences.blp:82
+#: data/gtk/preferences.blp:120
 msgid "Directory to use when importing games"
 msgstr "المجلَّد المستخدم عند استيراد الألعاب"
 
-#: data/gtk/preferences.blp:42
+#: data/gtk/preferences.blp:52
 msgid "Extra Steam Libraries"
 msgstr "مكتبات ستيم الإضافية"
 
-#: data/gtk/preferences.blp:43
+#: data/gtk/preferences.blp:53
 msgid "Select other directories where you have Steam games installed"
 msgstr "حدِّد المجلَّدات الأخرى التي ثُبِّتت فيها ألعاب ستيم"
 
-#: data/gtk/preferences.blp:50
+#: data/gtk/preferences.blp:60
 msgid "Clear"
 msgstr "أمحُ"
 
-#: data/gtk/preferences.blp:71
+#: data/gtk/preferences.blp:81
 msgid "Heroic Install Location"
 msgstr "موضع تثبيت هِرُوِك"
 
-#: data/gtk/preferences.blp:81
+#: data/gtk/preferences.blp:91
 msgid "Import Epic Games"
 msgstr "استورد ألعاب أَبِك"
 
-#: data/gtk/preferences.blp:89
+#: data/gtk/preferences.blp:99
 msgid "Import GOG Games"
 msgstr "استورد ألعاب جي‌أو‌جي"
 
-#: data/gtk/preferences.blp:97
+#: data/gtk/preferences.blp:107
 msgid "Import Sideloaded Games"
 msgstr "استورد ألعابًا مثبَّتةً بغير متجر"
 
-#: data/gtk/preferences.blp:109
+#: data/gtk/preferences.blp:119
 msgid "Bottles Install Location"
 msgstr "موضع تثبيت بوتلز"
 
@@ -315,29 +323,34 @@ msgstr "أزيلت {title}"
 msgid "Undo"
 msgstr "تراجع"
 
-#: src/window.py:235
+#: src/window.py:234
 msgid "Today"
 msgstr "اليوم"
 
-#: src/window.py:237
+#: src/window.py:236
 msgid "Yesterday"
 msgstr "أمس"
 
 #. The variable is the date when the game was added
-#: src/window.py:271
+#: src/window.py:270
 #, python-brace-format
 msgid "Added: {date}"
 msgstr "أضيفت في: {date}"
 
-#: src/window.py:276
+#: src/window.py:275
 msgid "Never"
 msgstr "أبدًا"
 
 #. The variable is the date when the game was last played
-#: src/window.py:280
+#: src/window.py:279
 #, python-brace-format
 msgid "Last played: {last_played_date}"
 msgstr "لُعبت آخر مرَّة في: {last_played_date}"
+
+#: src/game.py:173
+#, fuzzy
+msgid "Details"
+msgstr "تفاصيل اللعبة"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:245
