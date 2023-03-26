@@ -9,20 +9,18 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-26 11:51+0200\n"
-"PO-Revision-Date: 2023-03-25 14:46+0000\n"
+"PO-Revision-Date: 2023-03-26 23:14+0530\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
-"Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
-"cartridges/ta/>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/cartridges/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Poedit 3.2.2\n"
 
-#: data/hu.kramo.Cartridges.desktop.in:3
-#: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:115
+#: data/hu.kramo.Cartridges.desktop.in:3 data/hu.kramo.Cartridges.metainfo.xml.in:6
+#: data/gtk/window.blp:29 src/main.py:115
 msgid "Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள்"
 
@@ -40,21 +38,19 @@ msgstr "உங்கள் எல்லா விளையாட்டுகள�
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
-"Cartridges is a simple game launcher. It has support for importing your "
-"games from Steam, Heroic and Bottles with organizational features such as "
-"hiding and sorting by date added or last played."
+"Cartridges is a simple game launcher. It has support for importing your games from "
+"Steam, Heroic and Bottles with organizational features such as hiding and sorting by "
+"date added or last played."
 msgstr ""
-"கார்ட்ரிட்ஜ்கள் ஒரு எளிய விளையாட்டு துவக்கி. இது உங்கள் விளையாட்டுகளை ஸ்டீம், ஹீரோயிக் "
-"மற்றும் பாட்டில்களில் இருந்து இறக்குமதி செய்வதற்கான ஆதரவைக் கொண்டுள்ளது, அதாவது மறைத்தல் "
-"மற்றும் சேர்த்த அல்லது கடைசியாக விளையாடிய தேதியின்படி வரிசைப்படுத்துதல் போன்ற நிறுவன "
-"அம்சங்களுடன்."
+"கார்ட்ரிட்ஜ்கள் ஒரு எளிய விளையாட்டு துவக்கி. இது உங்கள் விளையாட்டுகளை ஸ்டீம், ஹீரோயிக் மற்றும் பாட்டில்களில் "
+"இருந்து இறக்குமதி செய்வதற்கான ஆதரவைக் கொண்டுள்ளது, அதாவது மறைத்தல் மற்றும் சேர்த்த அல்லது கடைசியாக "
+"விளையாடிய தேதியின்படி வரிசைப்படுத்துதல் போன்ற நிறுவன அம்சங்களுடன்."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
 msgstr "நூலகம்"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:26
-#: src/utils/create_details_window.py:48
+#: data/hu.kramo.Cartridges.metainfo.xml.in:26 src/utils/create_details_window.py:48
 msgid "Edit Game Details"
 msgstr "விளையாட்டு விவரங்களைத் திருத்து"
 
@@ -71,8 +67,8 @@ msgstr "விருப்பங்கள்"
 msgid "First stable release"
 msgstr "முதல் நிலையான வெளியீடு"
 
-#: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
-#: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:167
+#: data/gtk/window.blp:6 src/utils/bottles_parser.py:140 src/utils/heroic_parser.py:250
+#: src/utils/steam_parser.py:167
 msgid "No Games Found"
 msgstr "விளையாட்டுகள் எதுவும் இல்லை"
 
@@ -256,26 +252,25 @@ msgstr "விளையாட்டுகளை தொடங்கிய பி�
 
 #: data/gtk/preferences.blp:21
 msgid "Cover Image Launches Game"
-msgstr ""
+msgstr "அட்டைப் படம் விளையாட்டை தொடங்குகிறது"
 
 #: data/gtk/preferences.blp:22
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr ""
+msgstr "அட்டைப் படத்தின் நடத்தை மற்றும் பிளே பட்டனை மாற்றுகிறது"
 
 #: data/gtk/preferences.blp:30
 msgid "High Quality Images"
-msgstr ""
+msgstr "உயர்தர படங்கள்"
 
 #: data/gtk/preferences.blp:31
 msgid "Save game covers losslessly at the cost of storage"
-msgstr ""
+msgstr "சேமிப்பக செலவில் விளையாட்டுகளை இழப்பின்றி சேமிக்கவும்"
 
 #: data/gtk/preferences.blp:43
 msgid "Steam Install Location"
 msgstr "Steam (ஸ்டீம்) நிறுவல் இடம்"
 
-#: data/gtk/preferences.blp:44 data/gtk/preferences.blp:82
-#: data/gtk/preferences.blp:120
+#: data/gtk/preferences.blp:44 data/gtk/preferences.blp:82 data/gtk/preferences.blp:120
 msgid "Directory to use when importing games"
 msgstr "விளையாட்டுகளை இறக்குமதி செய்யும் போது பயன்படுத்த வேண்டிய அடைவு"
 
@@ -350,9 +345,8 @@ msgid "Last played: {last_played_date}"
 msgstr "கடைசியாக விளையாடியது: {last_played_date}"
 
 #: src/game.py:173
-#, fuzzy
 msgid "Details"
-msgstr "விளையாட்டு விவரங்கள்"
+msgstr "விவரங்கள்"
 
 #: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
 #: src/utils/steam_parser.py:245
@@ -484,25 +478,21 @@ msgstr "விளையாட்டைத் தொடங்கும் போ�
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: src/utils/create_details_window.py:217
-#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:217 src/utils/create_details_window.py:227
 #: src/utils/create_details_window.py:233
 msgid "Couldn't Add Game"
 msgstr "விளையாட்டைச் சேர்க்க முடியவில்லை"
 
-#: src/utils/create_details_window.py:219
-#: src/utils/create_details_window.py:257
+#: src/utils/create_details_window.py:219 src/utils/create_details_window.py:257
 #: src/utils/create_details_window.py:265
 msgid "Couldn't Apply Preferences"
 msgstr "விருப்பத்தேர்வுகளைப் பயன்படுத்த முடியவில்லை"
 
-#: src/utils/create_details_window.py:227
-#: src/utils/create_details_window.py:258
+#: src/utils/create_details_window.py:227 src/utils/create_details_window.py:258
 msgid "Game title cannot be empty."
 msgstr "விளையாட்டு தலைப்பு காலியாக இருக்கக்கூடாது."
 
-#: src/utils/create_details_window.py:233
-#: src/utils/create_details_window.py:266
+#: src/utils/create_details_window.py:233 src/utils/create_details_window.py:266
 msgid "Executable cannot be empty."
 msgstr "இயங்கக்கூடியது காலியாக இருக்க முடியாது."
 

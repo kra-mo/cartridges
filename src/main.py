@@ -38,6 +38,9 @@ from .save_games import save_games
 from .steam_parser import steam_parser
 from .window import CartridgesWindow
 
+release_notes = """
+<p>First stable release</p>
+"""
 
 class CartridgesApplication(Adw.Application):
     def __init__(self):
@@ -122,12 +125,14 @@ class CartridgesApplication(Adw.Application):
                 "Bananaman https://github.com/Bananaman",
             ],
             designers=["kramo https://kramo.hu"],
-            copyright="© 2022-2023 kramo",
+            copyright="© 2022-2023 kramo and contributors",
             license_type=Gtk.License.GPL_3_0,
             issue_url="https://github.com/kra-mo/cartridges/issues/new",
             website="https://github.com/kra-mo/cartridges",
             # Translators: Replace this with your name for it to show up in the about window
             translator_credits=_("translator_credits"),
+            release_notes_version=("1.1"),
+            release_notes=_(release_notes)
         )
         about.present()
 
