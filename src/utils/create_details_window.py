@@ -108,17 +108,22 @@ def create_details_window(parent_widget, game_id=None):
         css_classes=["flat", "circular"],
     )
 
+    # Translate this string as you would translate "file"
     file_name = _("file.txt")
     # As in software
     exe_name = _("program")
 
     if os.name == "nt":
         exe_name += ".exe"
+        # Translate this string as you would translate "path to {exe_name}"
         exe_path = _(f"C:\\path\\to\\{exe_name}")
+        # Translate this string as you would translate "path to {file_name}"
         file_path = _(f"C:\\path\\to\\{file_name}")
         command = "start"
     else:
+        # Translate this string as you would translate "path to {exe_name}"
         exe_path = _(f"/path/to/{exe_name}")
+        # Translate this string as you would translate "path to {file_name}"
         file_path = _(f"/path/to/{file_name}")
         command = "xdg-open"
 
