@@ -29,6 +29,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     page = Gtk.Template.Child()
 
     exit_after_launch_switch = Gtk.Template.Child()
+    cover_launches_game_switch = Gtk.Template.Child()
+    high_quality_images_switch = Gtk.Template.Child()
 
     steam_file_chooser_button = Gtk.Template.Child()
     steam_extra_file_chooser_button = Gtk.Template.Child()
@@ -43,8 +45,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
     bottles_group = Gtk.Template.Child()
     bottles_file_chooser_button = Gtk.Template.Child()
 
-    high_quality_images_switch = Gtk.Template.Child()
-
     def __init__(self, parent_widget, **kwargs):
         super().__init__(**kwargs)
 
@@ -53,6 +53,18 @@ class PreferencesWindow(Adw.PreferencesWindow):
         schema.bind(
             "exit-after-launch",
             self.exit_after_launch_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+        schema.bind(
+            "cover-launches-game",
+            self.cover_launches_game_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+        schema.bind(
+            "high-quality-images",
+            self.high_quality_images_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )
@@ -71,12 +83,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
         schema.bind(
             "heroic-import-sideload",
             self.heroic_sideloaded_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        schema.bind(
-            "high-quality-images",
-            self.high_quality_images_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )

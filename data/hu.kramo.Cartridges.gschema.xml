@@ -4,6 +4,21 @@
 	  <key name="exit-after-launch" type="b">
 	    <default>false</default>
 	  </key>
+    <key name="cover-launches-game" type="b">
+      <default>false</default>
+    </key>
+    <key name="high-quality-images" type="b">
+      <default>false</default>
+    </key>
+    <key name="steam-location" type="s">
+      <default>"~/.steam/"</default>
+    </key>
+    <key name="steam-extra-dirs" type="as">
+      <default>[]</default>
+    </key>
+    <key name="heroic-location" type="s">
+      <default>"~/.var/app/com.heroicgameslauncher.hgl/config/heroic/"</default>
+    </key>
 	  <key name="heroic-import-epic" type="b">
 	    <default>true</default>
 	  </key>
@@ -13,20 +28,8 @@
 	  <key name="heroic-import-sideload" type="b">
 	    <default>true</default>
 	  </key>
-	  <key name="steam-location" type="s">
-      <default>"~/.steam/"</default>
-    </key>
-    <key name="steam-extra-dirs" type="as">
-      <default>[]</default>
-    </key>
-	  <key name="heroic-location" type="s">
-      <default>"~/.var/app/com.heroicgameslauncher.hgl/config/heroic/"</default>
-    </key>
 	  <key name="bottles-location" type="s">
       <default>"~/.var/app/com.usebottles.bottles/data/bottles/"</default>
-    </key>
-    <key name="high-quality-images" type="b">
-      <default>false</default>
     </key>
 	</schema>
   <schema id="hu.kramo.Cartridge.State" path="/hu/kramo/Cartridges/State/">

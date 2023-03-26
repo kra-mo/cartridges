@@ -66,9 +66,15 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.add_controller(self.event_contoller_motion)
         self.overlay.set_measure_overlay(self.play_revealer, True)
 
-        self.button_play.connect("clicked", self.launch_game)
+        self.set_play_label()
+
+        self.cover_button.connect("clicked", self.cover_button_clicked)
+        self.button_play.connect("clicked", self.button_play_clicked)
+
         self.event_contoller_motion.connect("enter", self.show_play)
         self.event_contoller_motion.connect("leave", self.hide_play)
+
+        self.parent_widget.schema.connect("changed", self.schema_changed)
 
         if self.hidden:
             self.menu_button.set_menu_model(self.hidden_game_options)
@@ -146,6 +152,28 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
             self.play_revealer.set_reveal_child(False)
             self.title_revealer.set_reveal_child(True)
 
-    def launch_game(self, _widget):
+    def launch_game(self, _widget, *_unused):
         self.parent_widget.set_active_game(None, None, self.game_id)
         self.parent_widget.get_application().on_launch_game_action(None)
+
+    def cover_button_clicked(self, _widget):
+        if self.parent_widget.schema.get_boolean("cover-launches-game"):
+            self.launch_game(None)
+        else:
+            self.parent_widget.show_overview(None, self.game_id)
+
+    def button_play_clicked(self, _widget):
+        if self.parent_widget.schema.get_boolean("cover-launches-game"):
+            self.parent_widget.show_overview(None, self.game_id)
+        else:
+            self.launch_game(None)
+
+    def set_play_label(self):
+        if self.parent_widget.schema.get_boolean("cover-launches-game"):
+            self.button_play.set_label(_("Details"))
+        else:
+            self.button_play.set_label(_("Play"))
+
+    def schema_changed(self, _settings, key):
+        if key == "cover-launches-game":
+            self.set_play_label()

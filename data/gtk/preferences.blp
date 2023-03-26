@@ -3,7 +3,7 @@ using Adw 1;
 
 template PreferencesWindow : Adw.PreferencesWindow {
   search-enabled: false;
-  default-height: 500;
+  default-height: 550;
 
   Adw.PreferencesPage page {
     Adw.PreferencesGroup general_group {
@@ -16,6 +16,16 @@ template PreferencesWindow : Adw.PreferencesWindow {
           valign: center;
         }
       }
+
+      Adw.ActionRow {
+        title: _("Cover Image Launches Game");
+        subtitle: _("Swaps the behavior of the cover image and the play button");
+
+        Switch cover_launches_game_switch {
+          valign: center;
+        }
+      }
+
       Adw.ActionRow {
         title: _("High Quality Images");
         subtitle: _("Save game covers losslessly at the cost of storage");

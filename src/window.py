@@ -153,7 +153,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 self.hidden_widgets[game_id] = entry
                 self.hidden_library.append(entry)
 
-            entry.cover_button.connect("clicked", self.show_overview, game_id)
             entry.menu_button.get_popover().connect(
                 "notify::visible", self.set_active_game, game_id
             )
