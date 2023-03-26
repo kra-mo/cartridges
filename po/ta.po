@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-26 11:04+0200\n"
+"POT-Creation-Date: 2023-03-26 11:51+0200\n"
 "PO-Revision-Date: 2023-03-25 14:46+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
@@ -415,36 +415,41 @@ msgstr "டெவலப்பர்"
 msgid "The developer or publisher (optional)"
 msgstr "டெவலப்பர் அல்லது வெளியீட்டாளர் (விரும்பினால்)"
 
-#: src/utils/create_details_window.py:111
+#. Translate this string as you would translate "file"
+#: src/utils/create_details_window.py:112
 msgid "file.txt"
 msgstr "கோப்பு.txt"
 
 #. As in software
-#: src/utils/create_details_window.py:113
+#: src/utils/create_details_window.py:114
 msgid "program"
 msgstr "பயன்பாடு"
 
-#: src/utils/create_details_window.py:117
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:119
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
 msgstr "C:\\பாதை\\டு \\{exe_name}"
 
-#: src/utils/create_details_window.py:118
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
 msgstr "C:\\பாதை\\டு \\{file_name}"
 
-#: src/utils/create_details_window.py:121
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:125
 #, python-brace-format
 msgid "/path/to/{exe_name}"
 msgstr "/பாதை/டு/ {exe_name}"
 
-#: src/utils/create_details_window.py:122
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:127
 #, python-brace-format
 msgid "/path/to/{file_name}"
 msgstr "/பாதை/டு /{file_name}"
 
-#: src/utils/create_details_window.py:126
+#: src/utils/create_details_window.py:131
 #, python-brace-format
 msgid ""
 "To launch the executable \"{exe_name}\", use the command:\n"
@@ -467,37 +472,37 @@ msgstr ""
 "\n"
 "பாதையில் இடைவெளிகள் இருந்தால், அதை இரட்டை மேற்கோள்களில் போர்த்துவதை உறுதிசெய்யவும்!"
 
-#: src/utils/create_details_window.py:149
+#: src/utils/create_details_window.py:154
 msgid "Executable"
 msgstr "செயல்படுத்தக்கூடியது"
 
-#: src/utils/create_details_window.py:150
+#: src/utils/create_details_window.py:155
 msgid "File to open or command to run when launching the game"
 msgstr "விளையாட்டைத் தொடங்கும் போது திறக்க கோப்பு அல்லது இயக்க கட்டளை"
 
-#: src/utils/create_details_window.py:162
+#: src/utils/create_details_window.py:167
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: src/utils/create_details_window.py:212
-#: src/utils/create_details_window.py:222
-#: src/utils/create_details_window.py:228
+#: src/utils/create_details_window.py:217
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:233
 msgid "Couldn't Add Game"
 msgstr "விளையாட்டைச் சேர்க்க முடியவில்லை"
 
-#: src/utils/create_details_window.py:214
-#: src/utils/create_details_window.py:252
-#: src/utils/create_details_window.py:260
+#: src/utils/create_details_window.py:219
+#: src/utils/create_details_window.py:257
+#: src/utils/create_details_window.py:265
 msgid "Couldn't Apply Preferences"
 msgstr "விருப்பத்தேர்வுகளைப் பயன்படுத்த முடியவில்லை"
 
-#: src/utils/create_details_window.py:222
-#: src/utils/create_details_window.py:253
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:258
 msgid "Game title cannot be empty."
 msgstr "விளையாட்டு தலைப்பு காலியாக இருக்கக்கூடாது."
 
-#: src/utils/create_details_window.py:228
-#: src/utils/create_details_window.py:261
+#: src/utils/create_details_window.py:233
+#: src/utils/create_details_window.py:266
 msgid "Executable cannot be empty."
 msgstr "இயங்கக்கூடியது காலியாக இருக்க முடியாது."
 

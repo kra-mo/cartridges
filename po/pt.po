@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-26 11:04+0200\n"
+"POT-Creation-Date: 2023-03-26 11:51+0200\n"
 "PO-Revision-Date: 2023-03-26 09:03+0000\n"
 "Last-Translator: Pedro Sader Azevedo <pedro.saderazevedo@protonmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/cartridges/"
@@ -413,36 +413,41 @@ msgstr ""
 msgid "The developer or publisher (optional)"
 msgstr ""
 
-#: src/utils/create_details_window.py:111
+#. Translate this string as you would translate "file"
+#: src/utils/create_details_window.py:112
 msgid "file.txt"
 msgstr ""
 
 #. As in software
-#: src/utils/create_details_window.py:113
+#: src/utils/create_details_window.py:114
 msgid "program"
 msgstr ""
 
-#: src/utils/create_details_window.py:117
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:119
 #, python-brace-format
 msgid "C:\\path\\to\\{exe_name}"
 msgstr ""
 
-#: src/utils/create_details_window.py:118
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:121
 #, python-brace-format
 msgid "C:\\path\\to\\{file_name}"
 msgstr ""
 
-#: src/utils/create_details_window.py:121
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:125
 #, python-brace-format
 msgid "/path/to/{exe_name}"
 msgstr ""
 
-#: src/utils/create_details_window.py:122
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:127
 #, python-brace-format
 msgid "/path/to/{file_name}"
 msgstr ""
 
-#: src/utils/create_details_window.py:126
+#: src/utils/create_details_window.py:131
 #, python-brace-format
 msgid ""
 "To launch the executable \"{exe_name}\", use the command:\n"
@@ -456,37 +461,37 @@ msgid ""
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
 
-#: src/utils/create_details_window.py:149
+#: src/utils/create_details_window.py:154
 msgid "Executable"
 msgstr ""
 
-#: src/utils/create_details_window.py:150
+#: src/utils/create_details_window.py:155
 msgid "File to open or command to run when launching the game"
 msgstr ""
 
-#: src/utils/create_details_window.py:162
+#: src/utils/create_details_window.py:167
 msgid "Cancel"
 msgstr ""
 
-#: src/utils/create_details_window.py:212
-#: src/utils/create_details_window.py:222
-#: src/utils/create_details_window.py:228
+#: src/utils/create_details_window.py:217
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:233
 msgid "Couldn't Add Game"
 msgstr ""
 
-#: src/utils/create_details_window.py:214
-#: src/utils/create_details_window.py:252
-#: src/utils/create_details_window.py:260
+#: src/utils/create_details_window.py:219
+#: src/utils/create_details_window.py:257
+#: src/utils/create_details_window.py:265
 msgid "Couldn't Apply Preferences"
 msgstr ""
 
-#: src/utils/create_details_window.py:222
-#: src/utils/create_details_window.py:253
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:258
 msgid "Game title cannot be empty."
 msgstr ""
 
-#: src/utils/create_details_window.py:228
-#: src/utils/create_details_window.py:261
+#: src/utils/create_details_window.py:233
+#: src/utils/create_details_window.py:266
 msgid "Executable cannot be empty."
 msgstr ""
 
