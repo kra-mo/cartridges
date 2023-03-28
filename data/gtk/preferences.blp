@@ -9,8 +9,8 @@ template PreferencesWindow : Adw.PreferencesWindow {
     title: _("General");
     icon-name: "user-home-symbolic";
 
-    Adw.PreferencesGroup general_group {
-      title: _("General");
+    Adw.PreferencesGroup behavior_group {
+      title: _("Behavior");
 
       Adw.ActionRow {
         title: _("Exit After Launching Games");
@@ -21,23 +21,23 @@ template PreferencesWindow : Adw.PreferencesWindow {
       }
 
       Adw.ActionRow {
-        title: _("High Quality Images");
-        subtitle: _("Save game covers losslessly at the cost of storage");
+        title: _("Cover Image Launches Game");
+        subtitle: _("Swaps the behavior of the cover image and the play button");
 
-        Switch high_quality_images_switch {
+        Switch cover_launches_game_switch {
           valign: center;
         }
       }
     }
 
-    Adw.PreferencesGroup a11y_group {
-      title: _("Accessibility");
+    Adw.PreferencesGroup images_group {
+      title: _("Images");
 
       Adw.ActionRow {
-        title: _("Cover Image Launches Game");
-        subtitle: _("Swaps the behavior of the cover image and the play button");
+        title: _("High Quality Images");
+        subtitle: _("Save game covers losslessly at the cost of storage");
 
-        Switch cover_launches_game_switch {
+        Switch high_quality_images_switch {
           valign: center;
         }
       }
