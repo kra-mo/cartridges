@@ -384,23 +384,9 @@ menu add_games {
     }
   }
   section {
-    submenu {
-      label: _("Import from");
-      item {
-        label: _("Steam");
-        action: "app.steam_import";
-      }
-
-      item {
-        label: _("Heroic");
-        action: "app.heroic_import";
-      }
-
-      item {
-        label: _("Bottles");
-        action: "app.bottles_import";
-        hidden-when: "action-disabled";
-      }
+    item {
+      label: _("Import");
+      action: "app.import";
     }
   }
 }

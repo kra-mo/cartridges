@@ -21,24 +21,19 @@ import os
 import time
 
 import yaml
-from gi.repository import GLib, Gtk
-
-from .create_dialog import create_dialog
-from .save_cover import save_cover
 
 
-def bottles_parser(parent_widget, action):
+def bottles_parser(parent_widget):
     schema = parent_widget.schema
     bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
 
-    def bottles_not_found():
+    if not os.path.isfile(os.path.join(bottles_dir, "library.yml")):
         if os.path.exists(
             os.path.expanduser("~/.var/app/com.usebottles.bottles/data/bottles/")
         ):
             schema.set_string(
                 "bottles-location", "~/.var/app/com.usebottles.bottles/data/bottles/"
             )
-            action(None, None)
         elif os.path.exists(
             os.path.join(
                 os.getenv("XDG_DATA_HOME")
@@ -54,48 +49,20 @@ def bottles_parser(parent_widget, action):
                     "bottles",
                 ),
             )
-            action(None, None)
         else:
-            filechooser = Gtk.FileDialog.new()
-
-            def set_bottles_dir(_source, result, _unused):
-                try:
-                    schema.set_string(
-                        "bottles-location",
-                        filechooser.select_folder_finish(result).get_path(),
-                    )
-                    action(None, None)
-                except GLib.GError:
-                    return
-
-            def choose_folder(_widget):
-                filechooser.select_folder(parent_widget, None, set_bottles_dir, None)
-
-            def response(widget, response):
-                if response == "choose_folder":
-                    choose_folder(widget)
-
-            create_dialog(
-                parent_widget,
-                _("Couldn't Import Games"),
-                _("The Bottles directory cannot be found."),
-                "choose_folder",
-                _("Set Bottles Location"),
-            ).connect("response", response)
-
-    if not os.path.isfile(os.path.join(bottles_dir, "library.yml")):
-        bottles_not_found()
-        return {}
+            return
 
     bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
-
-    bottles_games = {}
     current_time = int(time.time())
 
     with open(os.path.join(bottles_dir, "library.yml"), "r") as open_file:
         data = open_file.read()
 
     library = yaml.load(data, Loader=yaml.Loader)
+
+    importer = parent_widget.importer
+    importer.total_queue += len(library)
+    importer.queue += len(library)
 
     for game in library:
         game = library[game]
@@ -107,6 +74,7 @@ def bottles_parser(parent_widget, action):
             values["game_id"] in parent_widget.games
             and not parent_widget.games[values["game_id"]].removed
         ):
+            importer.save_game()
             continue
 
         values["name"] = game["name"]
@@ -120,9 +88,8 @@ def bottles_parser(parent_widget, action):
         values["last_played"] = 0
 
         if game["thumbnail"]:
-            save_cover(
-                values,
-                parent_widget,
+            importer.save_cover(
+                values["game_id"],
                 os.path.join(
                     bottles_dir,
                     "bottles",
@@ -131,27 +98,4 @@ def bottles_parser(parent_widget, action):
                     game["thumbnail"].split(":")[1],
                 ),
             )
-
-        bottles_games[values["game_id"]] = values
-
-    if not bottles_games:
-        create_dialog(
-            parent_widget,
-            _("No Games Found"),
-            _("No new games were found in the Bottles library."),
-        )
-    elif len(bottles_games) == 1:
-        create_dialog(
-            parent_widget,
-            _("Bottles Games Imported"),
-            _("Successfully imported 1 game."),
-        )
-    elif len(bottles_games) > 1:
-        games_no = str(len(bottles_games))
-        create_dialog(
-            parent_widget,
-            _("Bottles Games Imported"),
-            # The variable is the number of games
-            _(f"Successfully imported {games_no} games."),
-        )
-    return bottles_games
+        importer.save_game(values)

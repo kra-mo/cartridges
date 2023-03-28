@@ -1,4 +1,4 @@
-# save_games.py
+# save_game.py
 #
 # Copyright 2022-2023 kramo
 #
@@ -21,7 +21,7 @@ import json
 import os
 
 
-def save_games(games):
+def save_game(game):
     games_dir = os.path.join(
         os.getenv("XDG_DATA_HOME")
         or os.path.expanduser(os.path.join("~", ".local", "share")),
@@ -32,6 +32,5 @@ def save_games(games):
     if not os.path.exists(games_dir):
         os.makedirs(games_dir)
 
-    for game in games:
-        with open(os.path.join(games_dir, f"{game}.json"), "w") as open_file:
-            open_file.write(json.dumps(games[game], indent=4, sort_keys=True))
+    with open(os.path.join(games_dir, f'{game["game_id"]}.json'), "w") as open_file:
+        open_file.write(json.dumps(game, indent=4, sort_keys=True))

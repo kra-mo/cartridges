@@ -33,8 +33,9 @@ from .bottles_parser import bottles_parser
 from .create_details_window import create_details_window
 from .get_games import get_games
 from .heroic_parser import heroic_parser
+from .importer import Importer
 from .preferences import PreferencesWindow
-from .save_games import save_games
+from .save_game import save_game
 from .steam_parser import steam_parser
 from .window import CartridgesWindow
 
@@ -49,17 +50,12 @@ class CartridgesApplication(Adw.Application):
         self.create_action(
             "preferences", self.on_preferences_action, ["<primary>comma"]
         )
-        self.create_action("steam_import", self.on_steam_import_action)
-        self.create_action("heroic_import", self.on_heroic_import_action)
-        self.create_action("bottles_import", self.on_bottles_import_action)
         self.create_action("launch_game", self.on_launch_game_action)
         self.create_action("hide_game", self.on_hide_game_action)
         self.create_action("edit_details", self.on_edit_details_action)
         self.create_action("add_game", self.on_add_game_action, ["<primary>n"])
+        self.create_action("import", self.on_import_action, ["<primary>i"])
         self.create_action("remove_game", self.on_remove_game_action)
-
-        if os.name == "nt":
-            self.lookup_action("bottles_import").set_enabled(False)
 
         self.win = None
 
@@ -134,20 +130,6 @@ class CartridgesApplication(Adw.Application):
     def on_preferences_action(self, _widget, _callback=None):
         PreferencesWindow(self.win).present()
 
-    def on_steam_import_action(self, _widget, _callback=None):
-        # Handle the updating of games inside of the module because the function is async
-        steam_parser(self.win, self.on_steam_import_action)
-
-    def on_heroic_import_action(self, _widget, _callback=None):
-        games = heroic_parser(self.win, self.on_heroic_import_action)
-        save_games(games)
-        self.win.update_games(games.keys())
-
-    def on_bottles_import_action(self, _widget, _callback=None):
-        games = bottles_parser(self.win, self.on_bottles_import_action)
-        save_games(games)
-        self.win.update_games(games.keys())
-
     def on_launch_game_action(self, _widget, _callback=None):
         # Launch the game and update the last played value
 
@@ -155,7 +137,7 @@ class CartridgesApplication(Adw.Application):
 
         data = get_games([game_id])[game_id]
         data["last_played"] = int(time.time())
-        save_games({game_id: data})
+        save_game(data)
 
         self.win.games[game_id].launch()
 
@@ -176,13 +158,33 @@ class CartridgesApplication(Adw.Application):
     def on_add_game_action(self, _widget, _callback=None):
         create_details_window(self.win)
 
+    def on_import_action(self, _widget, _callback=None):
+        self.win.importer = Importer(self.win)
+
+        self.win.importer.blocker = True
+
+        if self.win.schema.get_boolean("steam"):
+            steam_parser(self.win)
+
+        if self.win.schema.get_boolean("heroic"):
+            heroic_parser(self.win)
+
+        if self.win.schema.get_boolean("bottles"):
+            bottles_parser(self.win)
+
+        self.win.importer.blocker = False
+
+        if self.win.importer.import_dialog.is_visible and self.win.importer.queue == 0:
+            self.win.importer.queue = 1
+            self.win.importer.save_game()
+
     def on_remove_game_action(self, _widget, _callback=None):
         # Add "removed=True" to the game properties so it can be deleted on next init
         game_id = self.win.active_game_id
 
         data = get_games([game_id])[game_id]
         data["removed"] = True
-        save_games({game_id: data})
+        save_game(data)
 
         self.win.update_games([game_id])
         if self.win.stack.get_visible_child() == self.win.overview:

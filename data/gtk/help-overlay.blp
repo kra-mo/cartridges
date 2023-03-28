@@ -8,49 +8,54 @@ ShortcutsWindow help_overlay {
     max-height: 10;
 
     ShortcutsGroup {
-      title: C_("shortcut window", "General");
+      title: C_("shortcuts window", "General");
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Quit");
+        title: C_("shortcuts window", "Quit");
         action-name: "app.quit";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Search");
+        title: C_("shortcuts window", "Search");
         action-name: "win.toggle_search";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Show preferences");
+        title: C_("shortcuts window", "Show preferences");
         action-name: "app.preferences";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Shortcuts");
+        title: C_("shortcuts window", "Shortcuts");
         action-name: "win.show-help-overlay";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Undo");
+        title: C_("shortcuts window", "Undo");
         action-name: "win.undo_remove";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Open menu");
+        title: C_("shortcuts window", "Open menu");
         action-name: "win.open_menu";
       }
     }
 
     ShortcutsGroup {
-      title: C_("shortcut window", "Games");
+      title: C_("shortcuts window", "Games");
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Add new game");
+        title: C_("shortcuts window", "Add new game");
         action-name: "app.add_game";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Show hidden games");
+        title: C_("shortcuts window", "Import games");
+        action-name: "app.import";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcuts window", "Show hidden games");
         action-name: "win.show_hidden";
       }
     }

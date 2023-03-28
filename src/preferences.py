@@ -32,17 +32,20 @@ class PreferencesWindow(Adw.PreferencesWindow):
     cover_launches_game_switch = Gtk.Template.Child()
     high_quality_images_switch = Gtk.Template.Child()
 
+    steam_switch = Gtk.Template.Child()
     steam_file_chooser_button = Gtk.Template.Child()
     steam_extra_file_chooser_button = Gtk.Template.Child()
     steam_clear_button_revealer = Gtk.Template.Child()
     steam_clear_button = Gtk.Template.Child()
 
+    heroic_switch = Gtk.Template.Child()
     heroic_file_chooser_button = Gtk.Template.Child()
     heroic_epic_switch = Gtk.Template.Child()
     heroic_gog_switch = Gtk.Template.Child()
     heroic_sideloaded_switch = Gtk.Template.Child()
 
     bottles_group = Gtk.Template.Child()
+    bottles_switch = Gtk.Template.Child()
     bottles_file_chooser_button = Gtk.Template.Child()
 
     def __init__(self, parent_widget, **kwargs):
@@ -69,6 +72,18 @@ class PreferencesWindow(Adw.PreferencesWindow):
             Gio.SettingsBindFlags.DEFAULT,
         )
         schema.bind(
+            "steam",
+            self.steam_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+        schema.bind(
+            "heroic",
+            self.heroic_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+        schema.bind(
             "heroic-import-epic",
             self.heroic_epic_switch,
             "active",
@@ -83,6 +98,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
         schema.bind(
             "heroic-import-sideload",
             self.heroic_sideloaded_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+        schema.bind(
+            "bottles",
+            self.bottles_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )

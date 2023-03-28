@@ -3,7 +3,7 @@ using Adw 1;
 
 template PreferencesWindow : Adw.PreferencesWindow {
   search-enabled: false;
-  default-height: 550;
+  default-height: 500;
 
   Adw.PreferencesPage page {
     Adw.PreferencesGroup general_group {
@@ -38,6 +38,14 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
     Adw.PreferencesGroup steam_group {
       title: _("Steam");
+
+      Adw.ActionRow {
+        title: _("Import From Steam");
+
+        Switch steam_switch {
+            valign: center;
+        }
+      }
 
       Adw.ActionRow {
         title: _("Steam Install Location");
@@ -78,6 +86,14 @@ template PreferencesWindow : Adw.PreferencesWindow {
       title: _("Heroic");
 
       Adw.ActionRow {
+        title: _("Import From Heroic");
+
+        Switch heroic_switch {
+            valign: center;
+        }
+      }
+
+      Adw.ActionRow {
         title: _("Heroic Install Location");
         subtitle: _("Directory to use when importing games");
 
@@ -114,6 +130,14 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
     Adw.PreferencesGroup bottles_group {
       title: _("Bottles");
+
+      Adw.ActionRow {
+        title: _("Import From Bottles");
+
+        Switch bottles_switch {
+            valign: center;
+        }
+      }
 
       Adw.ActionRow {
         title: _("Bottles Install Location");

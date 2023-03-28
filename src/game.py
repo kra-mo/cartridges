@@ -25,7 +25,7 @@ import sys
 
 from gi.repository import GdkPixbuf, Gio, Gtk
 
-from .save_games import save_games
+from .save_game import save_game
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")
@@ -120,7 +120,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
 
         data["hidden"] = not data["hidden"]
 
-        save_games({self.game_id: data})
+        save_game(data)
 
     def get_cover(self):
 

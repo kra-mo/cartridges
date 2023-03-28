@@ -24,7 +24,7 @@ from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
 
 from .game import game
 from .get_games import get_games
-from .save_games import save_games
+from .save_game import save_game
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/window.ui")
@@ -422,7 +422,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 return
         data = get_games([game_id])[game_id]
         data.pop("removed")
-        save_games({game_id: data})
+        save_game(data)
         self.update_games([game_id])
         self.toasts[game_id].dismiss()
         self.toasts.pop(game_id)

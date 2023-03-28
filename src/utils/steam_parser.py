@@ -23,11 +23,7 @@ import re
 import time
 import urllib.request
 
-from gi.repository import Adw, Gio, GLib, Gtk
-
-from .create_dialog import create_dialog
-from .save_cover import save_cover
-from .save_games import save_games
+from gi.repository import Gio, GLib
 
 
 def update_values_from_data(content, values):
@@ -44,7 +40,9 @@ def update_values_from_data(content, values):
     return values
 
 
-def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_dir):
+def get_game(
+    task, datatypes, current_time, parent_widget, appmanifest, steam_dir, importer
+):
     values = {}
 
     with open(appmanifest, "r") as open_file:
@@ -99,9 +97,8 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
             f'{values["appid"]}_library_600x900.jpg',
         )
     ):
-        save_cover(
-            values,
-            parent_widget,
+        importer.save_cover(
+            values["game_id"],
             os.path.join(
                 steam_dir,
                 "appcache",
@@ -114,93 +111,45 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
     return
 
 
-def get_games_async(parent_widget, appmanifests, steam_dir, import_dialog, progressbar):
+def get_games_async(parent_widget, appmanifests, steam_dir, importer):
     datatypes = ["appid", "name"]
     current_time = int(time.time())
-
-    steam_games = {}
-    queue = 0
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
     def create_func(datatypes, current_time, parent_widget, appmanifest, steam_dir):
         def wrapper(task, *_unused):
             get_game(
-                task, datatypes, current_time, parent_widget, appmanifest, steam_dir
+                task,
+                datatypes,
+                current_time,
+                parent_widget,
+                appmanifest,
+                steam_dir,
+                importer,
             )
 
         return wrapper
 
-    def update_games(_task, result, parent_widget):
-        nonlocal queue
-        nonlocal total_queue
-        nonlocal import_dialog
-        nonlocal progressbar
-
-        queue -= 1
-        progressbar.set_fraction(1 - (queue / total_queue))
-
+    def update_games(_task, result):
         try:
             final_values = result.propagate_value()[1]
-            steam_games[final_values["game_id"]] = final_values
-        except (TypeError, GLib.GError):
-            pass
+            # No need for an if statement as final_value would be None for games we don't want to save
+            importer.save_game(final_values)
+        except GLib.GError:  # Handle the exception for the timeout
+            importer.save_game()
 
-        if queue == 0:
-            save_games(steam_games)
-            parent_widget.update_games(steam_games)
-            import_dialog.close()
-            games_no = len(
-                {
-                    game_id: final_values
-                    for game_id, final_values in steam_games.items()
-                    if "blacklisted" not in final_values.keys()
-                }
-            )
-
-            def response(_widget, response):
-                if response == "open_preferences":
-                    parent_widget.get_application().on_preferences_action(None)
-
-            if games_no == 0:
-                create_dialog(
-                    parent_widget,
-                    _("No Games Found"),
-                    _("No new games were found in the Steam library."),
-                    "open_preferences",
-                    _("Preferences"),
-                ).connect("response", response)
-
-            elif games_no == 1:
-                create_dialog(
-                    parent_widget,
-                    _("Steam Games Imported"),
-                    _("Successfully imported 1 game."),
-                )
-            elif games_no > 1:
-                games_no = str(games_no)
-                create_dialog(
-                    parent_widget,
-                    _("Steam Games Imported"),
-                    # The variable is the number of games
-                    _(f"Successfully imported {games_no} games."),
-                )
-
-    total_queue = 0
     for appmanifest in appmanifests:
-        queue += 1
-        total_queue += 1
-
         cancellable = Gio.Cancellable.new()
         GLib.timeout_add_seconds(5, cancellable.cancel)
 
-        task = Gio.Task.new(None, cancellable, update_games, parent_widget)
+        task = Gio.Task.new(None, cancellable, update_games)
         task.set_return_on_cancel(True)
         task.run_in_thread(
             create_func(datatypes, current_time, parent_widget, appmanifest, steam_dir)
         )
 
 
-def steam_parser(parent_widget, action):
+def steam_parser(parent_widget):
     schema = parent_widget.schema
     steam_dir = os.path.expanduser(schema.get_string("steam-location"))
 
@@ -211,42 +160,14 @@ def steam_parser(parent_widget, action):
             schema.set_string(
                 "steam-location", "~/.var/app/com.valvesoftware.Steam/data/Steam/"
             )
-            action(None, None)
         elif os.path.exists(os.path.expanduser("~/.steam/steam/")):
             schema.set_string("steam-location", "~/.steam/steam/")
-            action(None, None)
         elif os.path.exists(os.path.join(os.getenv("programfiles(x86)"), "Steam")):
             schema.set_string(
                 "steam-location", os.path.join(os.getenv("programfiles(x86)"), "Steam")
             )
-            action(None, None)
         else:
-            filechooser = Gtk.FileDialog.new()
-
-            def set_steam_dir(_source, result, _unused):
-                try:
-                    schema.set_string(
-                        "steam-location",
-                        filechooser.select_folder_finish(result).get_path(),
-                    )
-                    action(None, None)
-                except GLib.GError:
-                    return
-
-            def choose_folder(_widget):
-                filechooser.select_folder(parent_widget, None, set_steam_dir, None)
-
-            def response(widget, response):
-                if response == "choose_folder":
-                    choose_folder(widget)
-
-            create_dialog(
-                parent_widget,
-                _("Couldn't Import Games"),
-                _("The Steam directory cannot be found."),
-                "choose_folder",
-                _("Set Steam Location"),
-            ).connect("response", response)
+            return
 
     if os.path.exists(os.path.join(steam_dir, "steamapps")):
         pass
@@ -256,28 +177,9 @@ def steam_parser(parent_widget, action):
         schema.set_string("steam-location", os.path.join(steam_dir, "Steam"))
     else:
         steam_not_found()
-        return {}
+        return
 
     steam_dir = os.path.expanduser(schema.get_string("steam-location"))
-
-    progressbar = Gtk.ProgressBar(margin_start=12, margin_end=12)
-    import_statuspage = Adw.StatusPage(
-        title=_("Importing Games…"),
-        description=_("Talking to Steam"),
-        child=progressbar,
-    )
-
-    import_dialog = Adw.Window(
-        content=import_statuspage,
-        modal=True,
-        default_width=350,
-        default_height=-1,
-        transient_for=parent_widget,
-        deletable=False,
-    )
-
-    import_dialog.present()
-
     appmanifests = []
 
     steam_dirs = schema.get_strv("steam-extra-dirs")
@@ -293,4 +195,8 @@ def steam_parser(parent_widget, action):
             if os.path.isfile(path) and "appmanifest" in open_file:
                 appmanifests.append(path)
 
-    get_games_async(parent_widget, appmanifests, directory, import_dialog, progressbar)
+    importer = parent_widget.importer
+    importer.total_queue += len(appmanifests)
+    importer.queue += len(appmanifests)
+
+    get_games_async(parent_widget, appmanifests, directory, importer)

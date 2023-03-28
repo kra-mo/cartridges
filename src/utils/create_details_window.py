@@ -26,7 +26,7 @@ from gi.repository import Adw, GdkPixbuf, Gio, GLib, GObject, Gtk
 
 from .create_dialog import create_dialog
 from .save_cover import save_cover
-from .save_games import save_games
+from .save_game import save_game
 
 
 def create_details_window(parent_widget, game_id=None):
@@ -268,7 +268,7 @@ def create_details_window(parent_widget, game_id=None):
                 return
 
         if pixbuf is not None:
-            save_cover(None, parent_widget, None, pixbuf, game_id)
+            save_cover(parent_widget, game_id, None, pixbuf)
 
         values["name"] = final_name
         values["developer"] = final_developer or None
@@ -288,9 +288,9 @@ def create_details_window(parent_widget, game_id=None):
             with open(path, "r") as open_file:
                 data = json.loads(open_file.read())
             data.update(values)
-            save_games({game_id: data})
+            save_game(data)
         else:
-            save_games({game_id: values})
+            save_game(values)
 
         parent_widget.update_games([game_id])
         if parent_widget.stack.get_visible_child() == parent_widget.overview:
