@@ -1,3 +1,22 @@
+# importer.py
+#
+# Copyright 2022-2023 kramo
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 from gi.repository import Adw, Gtk
 
 from .create_dialog import create_dialog
@@ -46,7 +65,9 @@ class Importer:
 
             def response(_widget, response):
                 if response == "open_preferences":
-                    self.parent_widget.get_application().on_preferences_action(None)
+                    self.parent_widget.get_application().on_preferences_action(
+                        None, page_name="import"
+                    )
 
             if self.imported_no == 0:
                 create_dialog(

@@ -26,7 +26,8 @@ from gi.repository import Adw, Gio, GLib, Gtk
 class PreferencesWindow(Adw.PreferencesWindow):
     __gtype_name__ = "PreferencesWindow"
 
-    page = Gtk.Template.Child()
+    general_page = Gtk.Template.Child()
+    import_page = Gtk.Template.Child()
 
     exit_after_launch_switch = Gtk.Template.Child()
     cover_launches_game_switch = Gtk.Template.Child()
@@ -174,4 +175,4 @@ class PreferencesWindow(Adw.PreferencesWindow):
         )
 
         if os.name == "nt":
-            self.page.remove(self.bottles_group)
+            self.import_page.remove(self.bottles_group)

@@ -127,8 +127,11 @@ class CartridgesApplication(Adw.Application):
         )
         about.present()
 
-    def on_preferences_action(self, _widget, _callback=None):
-        PreferencesWindow(self.win).present()
+    def on_preferences_action(self, _widget, _callback=None, page_name=None):
+        win = PreferencesWindow(self.win)
+        if page_name:
+            win.set_visible_page_name(page_name)
+        win.present()
 
     def on_launch_game_action(self, _widget, _callback=None):
         # Launch the game and update the last played value

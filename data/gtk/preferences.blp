@@ -2,10 +2,13 @@ using Gtk 4.0;
 using Adw 1;
 
 template PreferencesWindow : Adw.PreferencesWindow {
-  search-enabled: false;
   default-height: 500;
 
-  Adw.PreferencesPage page {
+  Adw.PreferencesPage general_page {
+    name: "general";
+    title: _("General");
+    icon-name: "user-home-symbolic";
+
     Adw.PreferencesGroup general_group {
       title: _("General");
 
@@ -13,15 +16,6 @@ template PreferencesWindow : Adw.PreferencesWindow {
         title: _("Exit After Launching Games");
 
         Switch exit_after_launch_switch {
-          valign: center;
-        }
-      }
-
-      Adw.ActionRow {
-        title: _("Cover Image Launches Game");
-        subtitle: _("Swaps the behavior of the cover image and the play button");
-
-        Switch cover_launches_game_switch {
           valign: center;
         }
       }
@@ -35,6 +29,24 @@ template PreferencesWindow : Adw.PreferencesWindow {
         }
       }
     }
+
+    Adw.PreferencesGroup a11y_group {
+      title: _("Accessibility");
+
+      Adw.ActionRow {
+        title: _("Cover Image Launches Game");
+        subtitle: _("Swaps the behavior of the cover image and the play button");
+
+        Switch cover_launches_game_switch {
+          valign: center;
+        }
+      }
+    }
+  }
+  Adw.PreferencesPage import_page {
+    name: "import";
+    title: _("Import");
+    icon-name: "document-save-symbolic";
 
     Adw.PreferencesGroup steam_group {
       title: _("Steam");
