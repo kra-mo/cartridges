@@ -24,6 +24,58 @@ from gi.repository import Adw, Gio, GLib, Gtk
 from .create_dialog import create_dialog
 
 
+class ImportPreferences:
+    def __init__(
+        self,
+        source_id,
+        name,
+        key,
+        paths,
+        expander_row,
+        file_chooser_button,
+        window,
+        config=False,
+    ):
+        def set_dir(_source, result, _unused):
+            try:
+                path = window.file_chooser.select_folder_finish(result).get_path()
+
+                def response(widget, response):
+                    if response == "choose_folder":
+                        window.choose_folder(widget, set_dir)
+
+                if not any(
+                    os.path.exists(os.path.join(path, current_path))
+                    for current_path in paths
+                ):
+                    create_dialog(
+                        window.parent_widget,
+                        _("Installation Not Found"),
+                        # The variable is the name of the game launcher
+                        _(f"Select the {name} configuration directory.") if config
+                        # The variable is the name of the game launcher
+                        else _(f"Select the {name} data directory."),
+                        "choose_folder",
+                        _("Set Location"),
+                    ).connect("response", response)
+                else:
+                    window.schema.set_string(
+                        key,
+                        path,
+                    )
+            except GLib.GError:
+                pass
+
+        window.schema.bind(
+            source_id,
+            expander_row,
+            "enable-expansion",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+
+        file_chooser_button.connect("clicked", window.choose_folder, set_dir)
+
+
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/preferences.ui")
 class PreferencesWindow(Adw.PreferencesWindow):
     __gtype_name__ = "PreferencesWindow"
@@ -54,177 +106,111 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def __init__(self, parent_widget, **kwargs):
         super().__init__(**kwargs)
+        self.schema = parent_widget.schema
+        self.parent_widget = parent_widget
+        self.file_chooser = Gtk.FileDialog()
 
         self.set_transient_for(parent_widget)
-        schema = parent_widget.schema
-        schema.bind(
+        self.schema.bind(
             "exit-after-launch",
             self.exit_after_launch_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )
-        schema.bind(
+        self.schema.bind(
             "cover-launches-game",
             self.cover_launches_game_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )
-        schema.bind(
+        self.schema.bind(
             "high-quality-images",
             self.high_quality_images_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )
-        schema.bind(
-            "steam",
-            self.steam_expander_row,
-            "enable-expansion",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        schema.bind(
-            "heroic",
-            self.heroic_expander_row,
-            "enable-expansion",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        schema.bind(
+        self.schema.bind(
             "heroic-import-epic",
             self.heroic_epic_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )
-        schema.bind(
+        self.schema.bind(
             "heroic-import-gog",
             self.heroic_gog_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )
-        schema.bind(
+        self.schema.bind(
             "heroic-import-sideload",
             self.heroic_sideloaded_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )
-        schema.bind(
-            "bottles",
-            self.bottles_expander_row,
-            "enable-expansion",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-
-        filechooser = Gtk.FileDialog()
 
         def update_revealer():
-            if schema.get_strv("steam-extra-dirs"):
+            if self.schema.get_strv("steam-extra-dirs"):
                 self.steam_clear_button_revealer.set_reveal_child(True)
             else:
                 self.steam_clear_button_revealer.set_reveal_child(False)
 
-        def set_steam_dir(_source, result, _unused):
-            try:
-                path = filechooser.select_folder_finish(result).get_path()
-
-                def response(widget, response):
-                    if response == "choose_folder":
-                        choose_folder(widget, set_steam_dir)
-
-                if (
-                    not os.path.exists(os.path.join(path, "steamapps"))
-                    and not os.path.exists(os.path.join(path, "steam", "steamapps"))
-                    and not os.path.exists(os.path.join(path, "Steam", "steamapps"))
-                ):
-                    create_dialog(
-                        parent_widget,
-                        _("Installation Not Found"),
-                        _("Select a valid Steam data directory."),
-                        "choose_folder",
-                        _("Set Steam Location"),
-                    ).connect("response", response)
-                else:
-                    schema.set_string(
-                        "steam-location",
-                        path,
-                    )
-            except GLib.GError:
-                pass
-
         def add_steam_dir(_source, result, _unused):
             try:
-                value = schema.get_strv("steam-extra-dirs")
-                value.append(filechooser.select_folder_finish(result).get_path())
-                schema.set_strv("steam-extra-dirs", value)
+                value = self.schema.get_strv("steam-extra-dirs")
+                value.append(self.file_chooser.select_folder_finish(result).get_path())
+                self.schema.set_strv("steam-extra-dirs", value)
             except GLib.GError:
                 pass
             update_revealer()
 
         def clear_steam_dirs(*_unused):
-            schema.set_strv("steam-extra-dirs", [])
+            self.schema.set_strv("steam-extra-dirs", [])
             update_revealer()
-
-        def set_heroic_dir(_source, result, _unused):
-            try:
-                path = filechooser.select_folder_finish(result).get_path()
-
-                def response(widget, response):
-                    if response == "choose_folder":
-                        choose_folder(widget, set_heroic_dir)
-
-                if not os.path.exists(os.path.join(path, "config.json")):
-                    create_dialog(
-                        parent_widget,
-                        _("Installation Not Found"),
-                        _("Select a valid Heroic configuration directory."),
-                        "choose_folder",
-                        _("Set Heroic Location"),
-                    ).connect("response", response)
-                else:
-                    schema.set_string(
-                        "heroic-location",
-                        path,
-                    )
-            except GLib.GError:
-                pass
-
-        def set_bottles_dir(_source, result, _unused):
-            try:
-                path = filechooser.select_folder_finish(result).get_path()
-
-                def response(widget, response):
-                    if response == "choose_folder":
-                        choose_folder(widget, set_bottles_dir)
-
-                if not os.path.exists(os.path.join(path, "library.yml")):
-                    create_dialog(
-                        parent_widget,
-                        _("Installation Not Found"),
-                        _("Select a valid Bottles data directory."),
-                        "choose_folder",
-                        _("Set Bottles Location"),
-                    ).connect("response", response)
-                else:
-                    schema.set_string(
-                        "bottles-location",
-                        path,
-                    )
-            except GLib.GError:
-                pass
-
-        def choose_folder(_widget, function):
-            filechooser.select_folder(parent_widget, None, function, None)
 
         update_revealer()
 
-        self.steam_file_chooser_button.connect("clicked", choose_folder, set_steam_dir)
         self.steam_extra_file_chooser_button.connect(
-            "clicked", choose_folder, add_steam_dir
+            "clicked", self.choose_folder, add_steam_dir
         )
         self.steam_clear_button.connect("clicked", clear_steam_dirs)
-        self.heroic_file_chooser_button.connect(
-            "clicked", choose_folder, set_heroic_dir
+
+        ImportPreferences(
+            "steam",
+            "Steam",
+            "steam-location",
+            [
+                "steamapps",
+                os.path.join("steam", "steamapps"),
+                os.path.join("Steam", "steamapps"),
+            ],
+            self.steam_expander_row,
+            self.steam_file_chooser_button,
+            self,
         )
-        self.bottles_file_chooser_button.connect(
-            "clicked", choose_folder, set_bottles_dir
+
+        ImportPreferences(
+            "heroic",
+            "Heroic",
+            "heroic-location",
+            ["config.json"],
+            self.heroic_expander_row,
+            self.heroic_file_chooser_button,
+            self,
+            True,
+        )
+
+        ImportPreferences(
+            "bottles",
+            "Bottles",
+            "bottles-location",
+            ["library.yml"],
+            self.bottles_expander_row,
+            self.bottles_file_chooser_button,
+            self,
         )
 
         if os.name == "nt":
             self.sources_group.remove(self.bottles_expander_row)
+
+    def choose_folder(self, _widget, function):
+        self.file_chooser.select_folder(self.parent_widget, None, function, None)
