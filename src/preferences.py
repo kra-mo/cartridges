@@ -21,6 +21,8 @@ import os
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
+from .create_dialog import create_dialog
+
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/preferences.ui")
 class PreferencesWindow(Adw.PreferencesWindow):
@@ -120,10 +122,29 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         def set_steam_dir(_source, result, _unused):
             try:
-                schema.set_string(
-                    "steam-location",
-                    filechooser.select_folder_finish(result).get_path(),
-                )
+                path = filechooser.select_folder_finish(result).get_path()
+
+                def response(widget, response):
+                    if response == "choose_folder":
+                        choose_folder(widget, set_steam_dir)
+
+                if (
+                    not os.path.exists(os.path.join(path, "steamapps"))
+                    and not os.path.exists(os.path.join(path, "steam", "steamapps"))
+                    and not os.path.exists(os.path.join(path, "Steam", "steamapps"))
+                ):
+                    create_dialog(
+                        parent_widget,
+                        _("Installation Not Found"),
+                        _("Select a valid Steam data directory."),
+                        "choose_folder",
+                        _("Set Steam Location"),
+                    ).connect("response", response)
+                else:
+                    schema.set_string(
+                        "steam-location",
+                        path,
+                    )
             except GLib.GError:
                 pass
 
@@ -142,19 +163,49 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         def set_heroic_dir(_source, result, _unused):
             try:
-                schema.set_string(
-                    "heroic-location",
-                    filechooser.select_folder_finish(result).get_path(),
-                )
+                path = filechooser.select_folder_finish(result).get_path()
+
+                def response(widget, response):
+                    if response == "choose_folder":
+                        choose_folder(widget, set_heroic_dir)
+
+                if not os.path.exists(os.path.join(path, "config.json")):
+                    create_dialog(
+                        parent_widget,
+                        _("Installation Not Found"),
+                        _("Select a valid Heroic configuration directory."),
+                        "choose_folder",
+                        _("Set Heroic Location"),
+                    ).connect("response", response)
+                else:
+                    schema.set_string(
+                        "heroic-location",
+                        path,
+                    )
             except GLib.GError:
                 pass
 
         def set_bottles_dir(_source, result, _unused):
             try:
-                schema.set_string(
-                    "bottles-location",
-                    filechooser.select_folder_finish(result).get_path(),
-                )
+                path = filechooser.select_folder_finish(result).get_path()
+
+                def response(widget, response):
+                    if response == "choose_folder":
+                        choose_folder(widget, set_bottles_dir)
+
+                if not os.path.exists(os.path.join(path, "library.yml")):
+                    create_dialog(
+                        parent_widget,
+                        _("Installation Not Found"),
+                        _("Select a valid Bottles data directory."),
+                        "choose_folder",
+                        _("Set Bottles Location"),
+                    ).connect("response", response)
+                else:
+                    schema.set_string(
+                        "bottles-location",
+                        path,
+                    )
             except GLib.GError:
                 pass
 

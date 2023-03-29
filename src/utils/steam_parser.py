@@ -166,8 +166,6 @@ def steam_parser(parent_widget):
             schema.set_string(
                 "steam-location", os.path.join(os.getenv("programfiles(x86)"), "Steam")
             )
-        else:
-            return
 
     if os.path.exists(os.path.join(steam_dir, "steamapps")):
         pass
@@ -177,6 +175,7 @@ def steam_parser(parent_widget):
         schema.set_string("steam-location", os.path.join(steam_dir, "Steam"))
     else:
         steam_not_found()
+        steam_parser(parent_widget)
         return
 
     steam_dir = os.path.expanduser(schema.get_string("steam-location"))
