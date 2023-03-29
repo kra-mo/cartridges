@@ -29,7 +29,7 @@ class Importer:
         self.parent_widget = parent_widget
         self.total_queue = 0
         self.queue = 0
-        self.imported_no = 0
+        self.games_no = 0
         self.blocker = False
 
         self.progressbar = Gtk.ProgressBar(margin_start=12, margin_end=12)
@@ -54,7 +54,7 @@ class Importer:
 
     def save_game(self, values=None):
         if values:
-            self.imported_no += 1
+            self.games_no += 1
             save_game(values)
             self.parent_widget.update_games([values["game_id"]])
 
@@ -70,7 +70,7 @@ class Importer:
                         None, page_name="import"
                     )
 
-            if self.imported_no == 0:
+            if self.games_no == 0:
                 create_dialog(
                     self.parent_widget,
                     _("No Games Found"),
@@ -79,14 +79,14 @@ class Importer:
                     _("Preferences"),
                 ).connect("response", response)
 
-            elif self.imported_no == 1:
+            elif self.games_no == 1:
                 create_dialog(
                     self.parent_widget,
                     _("Game Imported"),
                     _("Successfully imported 1 game."),
                 )
-            elif self.imported_no > 1:
-                imported_no = self.imported_no
+            elif self.games_no > 1:
+                imported_no = self.games_no
                 create_dialog(
                     self.parent_widget,
                     _("Games Imported"),

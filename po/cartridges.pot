@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:08+0200\n"
+"POT-Creation-Date: 2023-03-29 08:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,7 +104,7 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: data/gtk/window.blp:210 data/gtk/window.blp:273
+#: data/gtk/window.blp:210 data/gtk/window.blp:273 data/gtk/help-overlay.blp:19
 msgid "Search"
 msgstr ""
 
@@ -172,63 +172,44 @@ msgstr ""
 msgid "Unhide"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:11
-msgctxt "shortcuts window"
+#: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:14
-msgctxt "shortcuts window"
 msgid "Quit"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:19
-msgctxt "shortcuts window"
-msgid "Search"
-msgstr ""
-
 #: data/gtk/help-overlay.blp:24
-msgctxt "shortcuts window"
 msgid "Show preferences"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:29
-msgctxt "shortcuts window"
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:34
-msgctxt "shortcuts window"
+#: data/gtk/help-overlay.blp:34 src/main.py:199
 msgid "Undo"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:39
-msgctxt "shortcuts window"
 msgid "Open menu"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:45
-msgctxt "shortcuts window"
 msgid "Games"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:48
-msgctxt "shortcuts window"
 msgid "Add new game"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:53
-msgctxt "shortcuts window"
 msgid "Import games"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:58
-msgctxt "shortcuts window"
 msgid "Show hidden games"
-msgstr ""
-
-#: data/gtk/preferences.blp:9
-msgid "General"
 msgstr ""
 
 #: data/gtk/preferences.blp:13
@@ -324,10 +305,6 @@ msgstr ""
 #: src/main.py:198
 #, python-brace-format
 msgid "{title} removed"
-msgstr ""
-
-#: src/main.py:199
-msgid "Undo"
 msgstr ""
 
 #: src/window.py:234
