@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:32+0200\n"
+"POT-Creation-Date: 2023-03-29 19:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -333,6 +333,26 @@ msgstr ""
 
 #: src/game.py:173
 msgid "Details"
+msgstr ""
+
+#: src/preferences.py:53
+msgid "Installation Not Found"
+msgstr ""
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:55
+#, python-brace-format
+msgid "Select the {name} configuration directory."
+msgstr ""
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:57
+#, python-brace-format
+msgid "Select the {name} data directory."
+msgstr ""
+
+#: src/preferences.py:59
+msgid "Set Location"
 msgstr ""
 
 #: src/utils/importer.py:37
