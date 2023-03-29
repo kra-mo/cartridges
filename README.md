@@ -37,7 +37,7 @@ Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita
 - Hiding games
 - Searching and sorting by title, date added and last played
 
-For updates and questions, join our [Discord server]([discord-url])!
+For updates and questions, join our [Discord server][discord-url]!
 
 # Installation
 
