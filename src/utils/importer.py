@@ -86,10 +86,10 @@ class Importer:
                     _("Successfully imported 1 game."),
                 )
             elif self.games_no > 1:
-                imported_no = self.games_no
+                games_no = self.games_no
                 create_dialog(
                     self.parent_widget,
                     _("Games Imported"),
                     # The variable is the number of games
-                    _(f"Successfully imported {imported_no} games."),
+                    _(f"Successfully imported {games_no} games."),
                 )

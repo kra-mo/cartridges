@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:15+0200\n"
+"POT-Creation-Date: 2023-03-29 08:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -358,7 +358,7 @@ msgstr ""
 #. The variable is the number of games
 #: src/utils/importer.py:94
 #, python-brace-format
-msgid "Successfully imported {imported_no} games."
+msgid "Successfully imported {games_no} games."
 msgstr ""
 
 #: src/utils/create_details_window.py:41
