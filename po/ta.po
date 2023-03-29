@@ -374,8 +374,6 @@ msgstr "Steam (ஸ்டீம்) விளையாட்டுகள் இ�
 
 #. The variable is the number of games
 #: src/utils/importer.py:94
-#, fuzzy, python-brace-format
-#| msgid "Successfully imported {games_no} games."
 msgid "Successfully imported {games_no} games."
 msgstr "{games_no} விளையாட்டுகள் வெற்றிகரமாக இறக்குமதி செய்யப்பட்டன."
 

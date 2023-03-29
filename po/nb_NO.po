@@ -376,8 +376,6 @@ msgstr "Steam-spill importert"
 
 #. The variable is the number of games
 #: src/utils/importer.py:94
-#, fuzzy, python-brace-format
-#| msgid "Successfully imported {games_no} games."
 msgid "Successfully imported {games_no} games."
 msgstr "Importerte {games_no} spill."
 

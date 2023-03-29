@@ -375,8 +375,6 @@ msgstr "Steam-pelit tuotu"
 
 #. The variable is the number of games
 #: src/utils/importer.py:94
-#, fuzzy, python-brace-format
-#| msgid "Successfully imported {games_no} games."
 msgid "Successfully imported {games_no} games."
 msgstr "Onnistuneesti tuotu {games_no} peliä."
 
