@@ -48,116 +48,99 @@ template PreferencesWindow : Adw.PreferencesWindow {
     title: _("Import");
     icon-name: "document-save-symbolic";
 
-    Adw.PreferencesGroup steam_group {
-      title: _("Steam");
+    Adw.PreferencesGroup sources_group {
+      title: _("Sources");
 
-      Adw.ActionRow {
-        title: _("Import From Steam");
+      Adw.ExpanderRow steam_expander_row {
+        title: _("Steam");
+        show-enable-switch: true;
 
-        Switch steam_switch {
+        Adw.ActionRow {
+          title: _("Steam Install Location");
+          subtitle: _("Directory to use when importing games");
+
+          Button steam_file_chooser_button {
+            icon-name: "folder-symbolic";
             valign: center;
+          }
+        }
+        Adw.ActionRow {
+          title: _("Extra Steam Libraries");
+          subtitle: _("Select other directories where you have Steam games installed");
+
+
+          Revealer steam_clear_button_revealer {
+            reveal-child: false;
+            transition-type: slide_left;
+            Button steam_clear_button {
+              label: _("Clear");
+              valign: center;
+              halign: end;
+
+              styles [
+                "destructive-action",
+              ]
+            }
+          }
+
+          Button steam_extra_file_chooser_button {
+            icon-name: "folder-new-symbolic";
+            valign: center;
+          }
         }
       }
 
-      Adw.ActionRow {
-        title: _("Steam Install Location");
-        subtitle: _("Directory to use when importing games");
+      Adw.ExpanderRow heroic_expander_row {
+        title: _("Heroic");
+        show-enable-switch: true;
 
-        Button steam_file_chooser_button {
-          icon-name: "folder-symbolic";
-          valign: center;
-        }
-      }
-      Adw.ActionRow {
-        title: _("Extra Steam Libraries");
-        subtitle: _("Select other directories where you have Steam games installed");
+        Adw.ActionRow {
+          title: _("Heroic Install Location");
+          subtitle: _("Directory to use when importing games");
 
-
-        Revealer steam_clear_button_revealer {
-          reveal-child: false;
-          transition-type: slide_left;
-          Button steam_clear_button {
-            label: _("Clear");
+          Button heroic_file_chooser_button {
+            icon-name: "folder-symbolic";
             valign: center;
-            halign: end;
-
-            styles [
-              "destructive-action",
-            ]
           }
         }
 
-        Button steam_extra_file_chooser_button {
-          icon-name: "folder-new-symbolic";
-          valign: center;
-        }
-      }
-    }
+        Adw.ActionRow {
+          title: _("Import Epic Games");
 
-    Adw.PreferencesGroup heroic_group {
-      title: _("Heroic");
-
-      Adw.ActionRow {
-        title: _("Import From Heroic");
-
-        Switch heroic_switch {
+          Switch heroic_epic_switch {
             valign: center;
+          }
         }
-      }
 
-      Adw.ActionRow {
-        title: _("Heroic Install Location");
-        subtitle: _("Directory to use when importing games");
+        Adw.ActionRow {
+          title: _("Import GOG Games");
 
-        Button heroic_file_chooser_button {
-          icon-name: "folder-symbolic";
-          valign: center;
-        }
-      }
-
-      Adw.ActionRow {
-        title: _("Import Epic Games");
-
-        Switch heroic_epic_switch {
-          valign: center;
-        }
-      }
-
-      Adw.ActionRow {
-        title: _("Import GOG Games");
-
-        Switch heroic_gog_switch {
-          valign: center;
-        }
-      }
-
-      Adw.ActionRow {
-        title: _("Import Sideloaded Games");
-
-        Switch heroic_sideloaded_switch {
-          valign: center;
-        }
-      }
-    }
-
-    Adw.PreferencesGroup bottles_group {
-      title: _("Bottles");
-
-      Adw.ActionRow {
-        title: _("Import From Bottles");
-
-        Switch bottles_switch {
+          Switch heroic_gog_switch {
             valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Import Sideloaded Games");
+
+          Switch heroic_sideloaded_switch {
+            valign: center;
+          }
         }
       }
 
-      Adw.ActionRow {
-        title: _("Bottles Install Location");
-        subtitle: _("Directory to use when importing games");
+      Adw.ExpanderRow bottles_expander_row {
+        title: _("Bottles");
+        show-enable-switch: true;
 
-        Button bottles_file_chooser_button {
-          icon-name: "folder-symbolic";
-          valign: center;
+        Adw.ActionRow {
+          title: _("Bottles Install Location");
+          subtitle: _("Directory to use when importing games");
+
+          Button bottles_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
         }
       }
     }

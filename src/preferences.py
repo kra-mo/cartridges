@@ -29,24 +29,25 @@ class PreferencesWindow(Adw.PreferencesWindow):
     general_page = Gtk.Template.Child()
     import_page = Gtk.Template.Child()
 
+    sources_group = Gtk.Template.Child()
+
     exit_after_launch_switch = Gtk.Template.Child()
     cover_launches_game_switch = Gtk.Template.Child()
     high_quality_images_switch = Gtk.Template.Child()
 
-    steam_switch = Gtk.Template.Child()
+    steam_expander_row = Gtk.Template.Child()
     steam_file_chooser_button = Gtk.Template.Child()
     steam_extra_file_chooser_button = Gtk.Template.Child()
     steam_clear_button_revealer = Gtk.Template.Child()
     steam_clear_button = Gtk.Template.Child()
 
-    heroic_switch = Gtk.Template.Child()
+    heroic_expander_row = Gtk.Template.Child()
     heroic_file_chooser_button = Gtk.Template.Child()
     heroic_epic_switch = Gtk.Template.Child()
     heroic_gog_switch = Gtk.Template.Child()
     heroic_sideloaded_switch = Gtk.Template.Child()
 
-    bottles_group = Gtk.Template.Child()
-    bottles_switch = Gtk.Template.Child()
+    bottles_expander_row = Gtk.Template.Child()
     bottles_file_chooser_button = Gtk.Template.Child()
 
     def __init__(self, parent_widget, **kwargs):
@@ -74,14 +75,14 @@ class PreferencesWindow(Adw.PreferencesWindow):
         )
         schema.bind(
             "steam",
-            self.steam_switch,
-            "active",
+            self.steam_expander_row,
+            "enable-expansion",
             Gio.SettingsBindFlags.DEFAULT,
         )
         schema.bind(
             "heroic",
-            self.heroic_switch,
-            "active",
+            self.heroic_expander_row,
+            "enable-expansion",
             Gio.SettingsBindFlags.DEFAULT,
         )
         schema.bind(
@@ -104,8 +105,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
         )
         schema.bind(
             "bottles",
-            self.bottles_switch,
-            "active",
+            self.bottles_expander_row,
+            "enable-expansion",
             Gio.SettingsBindFlags.DEFAULT,
         )
 
@@ -175,4 +176,4 @@ class PreferencesWindow(Adw.PreferencesWindow):
         )
 
         if os.name == "nt":
-            self.import_page.remove(self.bottles_group)
+            self.sources_group.remove(self.bottles_expander_row)
