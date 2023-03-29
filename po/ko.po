@@ -1,0 +1,480 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR kramo
+# This file is distributed under the same license as the Cartridges package.
+# MJKim <kmj10727@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: Cartridges\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-29 08:17+0200\n"
+"PO-Revision-Date: 2023-03-28 22:23+0000\n"
+"Last-Translator: MJKim <kmj10727@gmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/cartridges/"
+"cartridges/ko/>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.17-dev\n"
+
+#: data/hu.kramo.Cartridges.desktop.in:3
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
+#: src/main.py:111
+msgid "Cartridges"
+msgstr "카트리지"
+
+#: data/hu.kramo.Cartridges.desktop.in:4
+msgid "Game Launcher"
+msgstr "게임 런처"
+
+#: data/hu.kramo.Cartridges.desktop.in:5
+msgid "Launch your games"
+msgstr "게임을 실행합니다"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:7
+msgid "Launch all your games"
+msgstr "모든 게임을 실행합니다"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:9
+msgid ""
+"Cartridges is a simple game launcher. It has support for importing your "
+"games from Steam, Heroic and Bottles with organizational features such as "
+"hiding and sorting by date added or last played."
+msgstr ""
+"카트리지는 간단한 게임 런처입니다. 추가한 날짜 또는 마지막으로 플레이한 날짜"
+"별로 게임을 숨기거나 정렬하는 등의 정리 기능을 통해 Steam, Heroic 및 Bottles"
+"에서 게임을 가져올 수 있습니다."
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:22
+msgid "Library"
+msgstr "라이브러리"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:26
+#: src/utils/create_details_window.py:48
+msgid "Edit Game Details"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:51
+msgid "Game Details"
+msgstr ""
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
+#: src/utils/importer.py:79
+msgid "Preferences"
+msgstr ""
+
+#: data/gtk/window.blp:6 src/utils/importer.py:76
+msgid "No Games Found"
+msgstr ""
+
+#: data/gtk/window.blp:7
+msgid "Try a different search."
+msgstr ""
+
+#: data/gtk/window.blp:14
+msgid "No Games"
+msgstr "게임이 없습니다"
+
+#: data/gtk/window.blp:15
+msgid "Use the + button to add games."
+msgstr ""
+
+#: data/gtk/window.blp:22
+msgid "No Hidden Games"
+msgstr ""
+
+#: data/gtk/window.blp:23
+msgid "Games you hide will appear here."
+msgstr ""
+
+#: data/gtk/window.blp:44 data/gtk/window.blp:254
+msgid "Back"
+msgstr "뒤로"
+
+#: data/gtk/window.blp:92
+msgid "Game Title"
+msgstr ""
+
+#: data/gtk/window.blp:148 src/game.py:175
+msgid "Play"
+msgstr ""
+
+#: data/gtk/window.blp:196 data/gtk/window.blp:382
+msgid "Add Game"
+msgstr ""
+
+#: data/gtk/window.blp:203 data/gtk/window.blp:266
+msgid "Main Menu"
+msgstr ""
+
+#: data/gtk/window.blp:210 data/gtk/window.blp:273 data/gtk/help-overlay.blp:19
+msgid "Search"
+msgstr ""
+
+#: data/gtk/window.blp:261
+msgid "Hidden Games"
+msgstr ""
+
+#: data/gtk/window.blp:321
+msgid "Sort"
+msgstr "정렬"
+
+#: data/gtk/window.blp:324
+msgid "A-Z"
+msgstr ""
+
+#: data/gtk/window.blp:330
+msgid "Z-A"
+msgstr ""
+
+#: data/gtk/window.blp:336
+msgid "Newest"
+msgstr ""
+
+#: data/gtk/window.blp:342
+msgid "Oldest"
+msgstr ""
+
+#: data/gtk/window.blp:348
+msgid "Last Played"
+msgstr ""
+
+#: data/gtk/window.blp:355
+msgid "Show Hidden"
+msgstr ""
+
+#: data/gtk/window.blp:368
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: data/gtk/window.blp:373
+msgid "About Cartridges"
+msgstr "카트리지 정보"
+
+#: data/gtk/window.blp:388 data/gtk/preferences.blp:48
+msgid "Import"
+msgstr ""
+
+#: data/gtk/game.blp:60 src/utils/create_details_window.py:94
+msgid "Title"
+msgstr ""
+
+#: data/gtk/game.blp:82 data/gtk/game.blp:101
+msgid "Edit"
+msgstr ""
+
+#: data/gtk/game.blp:87
+msgid "Hide"
+msgstr ""
+
+#: data/gtk/game.blp:92 data/gtk/game.blp:111
+msgid "Remove"
+msgstr ""
+
+#: data/gtk/game.blp:106
+msgid "Unhide"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
+msgid "General"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:14
+msgid "Quit"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:24
+msgid "Show preferences"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:29
+msgid "Shortcuts"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:34 src/main.py:199
+msgid "Undo"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:39
+msgid "Open menu"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:45
+#, fuzzy
+#| msgid "No Games"
+msgid "Games"
+msgstr "게임이 없습니다"
+
+#: data/gtk/help-overlay.blp:48
+msgid "Add new game"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:53
+#, fuzzy
+#| msgid "No Games"
+msgid "Import games"
+msgstr "게임이 없습니다"
+
+#: data/gtk/help-overlay.blp:58
+msgid "Show hidden games"
+msgstr ""
+
+#: data/gtk/preferences.blp:13
+msgid "Behavior"
+msgstr ""
+
+#: data/gtk/preferences.blp:16
+msgid "Exit After Launching Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:24
+msgid "Cover Image Launches Game"
+msgstr ""
+
+#: data/gtk/preferences.blp:25
+msgid "Swaps the behavior of the cover image and the play button"
+msgstr ""
+
+#: data/gtk/preferences.blp:34 src/utils/create_details_window.py:59
+msgid "Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:37
+msgid "High Quality Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:38
+msgid "Save game covers losslessly at the cost of storage"
+msgstr ""
+
+#: data/gtk/preferences.blp:52
+msgid "Sources"
+msgstr ""
+
+#: data/gtk/preferences.blp:55
+msgid "Steam"
+msgstr ""
+
+#: data/gtk/preferences.blp:59
+msgid "Steam Install Location"
+msgstr ""
+
+#: data/gtk/preferences.blp:60 data/gtk/preferences.blp:99
+#: data/gtk/preferences.blp:138
+msgid "Directory to use when importing games"
+msgstr ""
+
+#: data/gtk/preferences.blp:68
+msgid "Extra Steam Libraries"
+msgstr ""
+
+#: data/gtk/preferences.blp:69
+msgid "Select other directories where you have Steam games installed"
+msgstr ""
+
+#: data/gtk/preferences.blp:76
+msgid "Clear"
+msgstr ""
+
+#: data/gtk/preferences.blp:94
+msgid "Heroic"
+msgstr ""
+
+#: data/gtk/preferences.blp:98
+msgid "Heroic Install Location"
+msgstr ""
+
+#: data/gtk/preferences.blp:108
+msgid "Import Epic Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:116
+msgid "Import GOG Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:124
+msgid "Import Sideloaded Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:133
+msgid "Bottles"
+msgstr ""
+
+#: data/gtk/preferences.blp:137
+msgid "Bottles Install Location"
+msgstr ""
+
+#. Translators: Replace this with your name for it to show up in the about window
+#: src/main.py:126
+msgid "translator_credits"
+msgstr ""
+
+#: src/main.py:198
+#, python-brace-format
+msgid "{title} removed"
+msgstr ""
+
+#: src/window.py:234
+msgid "Today"
+msgstr ""
+
+#: src/window.py:236
+msgid "Yesterday"
+msgstr ""
+
+#. The variable is the date when the game was added
+#: src/window.py:270
+#, python-brace-format
+msgid "Added: {date}"
+msgstr ""
+
+#: src/window.py:275
+msgid "Never"
+msgstr ""
+
+#. The variable is the date when the game was last played
+#: src/window.py:279
+#, python-brace-format
+msgid "Last played: {last_played_date}"
+msgstr ""
+
+#: src/game.py:173
+msgid "Details"
+msgstr ""
+
+#: src/utils/importer.py:37
+msgid "Importing Games…"
+msgstr ""
+
+#: src/utils/importer.py:77
+msgid "No new games were found on your device."
+msgstr ""
+
+#: src/utils/importer.py:85
+msgid "Game Imported"
+msgstr ""
+
+#: src/utils/importer.py:86
+msgid "Successfully imported 1 game."
+msgstr ""
+
+#: src/utils/importer.py:92
+msgid "Games Imported"
+msgstr ""
+
+#. The variable is the number of games
+#: src/utils/importer.py:94
+#, python-brace-format
+msgid "Successfully imported {games_no} games."
+msgstr ""
+
+#: src/utils/create_details_window.py:41
+msgid "Add New Game"
+msgstr ""
+
+#: src/utils/create_details_window.py:46
+msgid "Confirm"
+msgstr ""
+
+#: src/utils/create_details_window.py:57
+msgid "Apply"
+msgstr ""
+
+#: src/utils/create_details_window.py:95
+msgid "The title of the game"
+msgstr ""
+
+#: src/utils/create_details_window.py:100
+msgid "Developer"
+msgstr ""
+
+#: src/utils/create_details_window.py:101
+msgid "The developer or publisher (optional)"
+msgstr ""
+
+#. Translate this string as you would translate "file"
+#: src/utils/create_details_window.py:112
+msgid "file.txt"
+msgstr ""
+
+#. As in software
+#: src/utils/create_details_window.py:114
+msgid "program"
+msgstr ""
+
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:119
+#, python-brace-format
+msgid "C:\\path\\to\\{exe_name}"
+msgstr ""
+
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:121
+#, python-brace-format
+msgid "C:\\path\\to\\{file_name}"
+msgstr ""
+
+#. Translate this string as you would translate "path to {exe_name}"
+#: src/utils/create_details_window.py:125
+#, python-brace-format
+msgid "/path/to/{exe_name}"
+msgstr ""
+
+#. Translate this string as you would translate "path to {file_name}"
+#: src/utils/create_details_window.py:127
+#, python-brace-format
+msgid "/path/to/{file_name}"
+msgstr ""
+
+#: src/utils/create_details_window.py:131
+#, python-brace-format
+msgid ""
+"To launch the executable \"{exe_name}\", use the command:\n"
+"\n"
+"<tt>\"{exe_path}\"</tt>\n"
+"\n"
+"To open the file \"{file_name}\" with the default application, use:\n"
+"\n"
+"<tt>{command} \"{file_path}\"</tt>\n"
+"\n"
+"If the path contains spaces, make sure to wrap it in double quotes!"
+msgstr ""
+
+#: src/utils/create_details_window.py:154
+msgid "Executable"
+msgstr ""
+
+#: src/utils/create_details_window.py:155
+msgid "File to open or command to run when launching the game"
+msgstr ""
+
+#: src/utils/create_details_window.py:167
+msgid "Cancel"
+msgstr ""
+
+#: src/utils/create_details_window.py:217
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:233
+msgid "Couldn't Add Game"
+msgstr ""
+
+#: src/utils/create_details_window.py:219
+#: src/utils/create_details_window.py:257
+#: src/utils/create_details_window.py:265
+msgid "Couldn't Apply Preferences"
+msgstr ""
+
+#: src/utils/create_details_window.py:227
+#: src/utils/create_details_window.py:258
+msgid "Game title cannot be empty."
+msgstr ""
+
+#: src/utils/create_details_window.py:233
+#: src/utils/create_details_window.py:266
+msgid "Executable cannot be empty."
+msgstr ""
+
+#: src/utils/create_dialog.py:25
+msgid "Dismiss"
+msgstr ""
