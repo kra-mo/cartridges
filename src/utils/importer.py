@@ -37,6 +37,7 @@ class Importer:
             title=_("Importing Games…"),
             child=self.progressbar,
         )
+
         self.import_dialog = Adw.Window(
             content=import_statuspage,
             modal=True,
@@ -85,9 +86,10 @@ class Importer:
                     _("Successfully imported 1 game."),
                 )
             elif self.imported_no > 1:
+                imported_no = self.imported_no
                 create_dialog(
                     self.parent_widget,
                     _("Games Imported"),
                     # The variable is the number of games
-                    _(f"Successfully imported {self.imported_no} games."),
+                    _(f"Successfully imported {imported_no} games."),
                 )

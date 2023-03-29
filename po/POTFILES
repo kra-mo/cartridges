@@ -12,6 +12,7 @@ src/window.py
 src/game.py
 src/preferences.py
 
+src/utils/importer.py
 src/utils/bottles_parser.py
 src/utils/create_details_window.py
 src/utils/create_dialog.py

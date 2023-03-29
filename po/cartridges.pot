@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-26 11:51+0200\n"
+"POT-Creation-Date: 2023-03-29 08:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:115
+#: src/main.py:111
 msgid "Cartridges"
 msgstr ""
 
@@ -56,16 +56,11 @@ msgid "Game Details"
 msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/steam_parser.py:170
+#: src/utils/importer.py:79
 msgid "Preferences"
 msgstr ""
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:41
-msgid "First stable release"
-msgstr ""
-
-#: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
-#: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:167
+#: data/gtk/window.blp:6 src/utils/importer.py:76
 msgid "No Games Found"
 msgstr ""
 
@@ -153,20 +148,8 @@ msgstr ""
 msgid "About Cartridges"
 msgstr ""
 
-#: data/gtk/window.blp:388
-msgid "Import from"
-msgstr ""
-
-#: data/gtk/window.blp:390 data/gtk/preferences.blp:40
-msgid "Steam"
-msgstr ""
-
-#: data/gtk/window.blp:395 data/gtk/preferences.blp:78
-msgid "Heroic"
-msgstr ""
-
-#: data/gtk/window.blp:400 data/gtk/preferences.blp:116
-msgid "Bottles"
+#: data/gtk/window.blp:388 data/gtk/preferences.blp:48
+msgid "Import"
 msgstr ""
 
 #: data/gtk/game.blp:60 src/utils/create_details_window.py:94
@@ -190,131 +173,160 @@ msgid "Unhide"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:11
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
 msgid "General"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:14
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
 msgid "Quit"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:19
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
 msgid "Search"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:24
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
 msgid "Show preferences"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:29
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
 msgid "Shortcuts"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:34
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
 msgid "Undo"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:39
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
 msgid "Open menu"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:45
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
 msgid "Games"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:48
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
 msgid "Add new game"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:53
-msgctxt "shortcut window"
+msgctxt "shortcuts window"
+msgid "Import games"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:58
+msgctxt "shortcuts window"
 msgid "Show hidden games"
 msgstr ""
 
-#: data/gtk/preferences.blp:10
+#: data/gtk/preferences.blp:9
 msgid "General"
 msgstr ""
 
 #: data/gtk/preferences.blp:13
+msgid "Behavior"
+msgstr ""
+
+#: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:21
+#: data/gtk/preferences.blp:24
 msgid "Cover Image Launches Game"
 msgstr ""
 
-#: data/gtk/preferences.blp:22
+#: data/gtk/preferences.blp:25
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr ""
 
-#: data/gtk/preferences.blp:30
+#: data/gtk/preferences.blp:34 src/utils/create_details_window.py:59
+msgid "Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:37
 msgid "High Quality Images"
 msgstr ""
 
-#: data/gtk/preferences.blp:31
+#: data/gtk/preferences.blp:38
 msgid "Save game covers losslessly at the cost of storage"
 msgstr ""
 
-#: data/gtk/preferences.blp:43
+#: data/gtk/preferences.blp:52
+msgid "Sources"
+msgstr ""
+
+#: data/gtk/preferences.blp:55
+msgid "Steam"
+msgstr ""
+
+#: data/gtk/preferences.blp:59
 msgid "Steam Install Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:44 data/gtk/preferences.blp:82
-#: data/gtk/preferences.blp:120
+#: data/gtk/preferences.blp:60 data/gtk/preferences.blp:99
+#: data/gtk/preferences.blp:138
 msgid "Directory to use when importing games"
 msgstr ""
 
-#: data/gtk/preferences.blp:52
+#: data/gtk/preferences.blp:68
 msgid "Extra Steam Libraries"
 msgstr ""
 
-#: data/gtk/preferences.blp:53
+#: data/gtk/preferences.blp:69
 msgid "Select other directories where you have Steam games installed"
 msgstr ""
 
-#: data/gtk/preferences.blp:60
+#: data/gtk/preferences.blp:76
 msgid "Clear"
 msgstr ""
 
-#: data/gtk/preferences.blp:81
+#: data/gtk/preferences.blp:94
+msgid "Heroic"
+msgstr ""
+
+#: data/gtk/preferences.blp:98
 msgid "Heroic Install Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:91
+#: data/gtk/preferences.blp:108
 msgid "Import Epic Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:99
+#: data/gtk/preferences.blp:116
 msgid "Import GOG Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:107
+#: data/gtk/preferences.blp:124
 msgid "Import Sideloaded Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:119
+#: data/gtk/preferences.blp:133
+msgid "Bottles"
+msgstr ""
+
+#: data/gtk/preferences.blp:137
 msgid "Bottles Install Location"
 msgstr ""
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:130
+#: src/main.py:126
 msgid "translator_credits"
 msgstr ""
 
-#: src/main.py:193
+#: src/main.py:198
 #, python-brace-format
 msgid "{title} removed"
 msgstr ""
 
-#: src/main.py:194
+#: src/main.py:199
 msgid "Undo"
 msgstr ""
 
@@ -346,37 +358,30 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:245
-msgid "Couldn't Import Games"
+#: src/utils/importer.py:37
+msgid "Importing Games…"
 msgstr ""
 
-#: src/utils/bottles_parser.py:81
-msgid "The Bottles directory cannot be found."
+#: src/utils/importer.py:77
+msgid "No new games were found on your device."
 msgstr ""
 
-#: src/utils/bottles_parser.py:83
-msgid "Set Bottles Location"
+#: src/utils/importer.py:85
+msgid "Game Imported"
 msgstr ""
 
-#: src/utils/bottles_parser.py:141
-msgid "No new games were found in the Bottles library."
-msgstr ""
-
-#: src/utils/bottles_parser.py:146 src/utils/bottles_parser.py:153
-msgid "Bottles Games Imported"
-msgstr ""
-
-#: src/utils/bottles_parser.py:147 src/utils/heroic_parser.py:257
-#: src/utils/steam_parser.py:177
+#: src/utils/importer.py:86
 msgid "Successfully imported 1 game."
 msgstr ""
 
+#: src/utils/importer.py:92
+msgid "Games Imported"
+msgstr ""
+
 #. The variable is the number of games
-#: src/utils/bottles_parser.py:155 src/utils/heroic_parser.py:265
-#: src/utils/steam_parser.py:185
+#: src/utils/importer.py:94
 #, python-brace-format
-msgid "Successfully imported {games_no} games."
+msgid "Successfully imported {imported_no} games."
 msgstr ""
 
 #: src/utils/create_details_window.py:41
@@ -389,10 +394,6 @@ msgstr ""
 
 #: src/utils/create_details_window.py:57
 msgid "Apply"
-msgstr ""
-
-#: src/utils/create_details_window.py:59
-msgid "Images"
 msgstr ""
 
 #: src/utils/create_details_window.py:95
@@ -491,44 +492,4 @@ msgstr ""
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
-msgstr ""
-
-#: src/utils/heroic_parser.py:88
-msgid "The Heroic directory cannot be found."
-msgstr ""
-
-#: src/utils/heroic_parser.py:90
-msgid "Set Heroic Location"
-msgstr ""
-
-#: src/utils/heroic_parser.py:251
-msgid "No new games were found in the Heroic library."
-msgstr ""
-
-#: src/utils/heroic_parser.py:256 src/utils/heroic_parser.py:263
-msgid "Heroic Games Imported"
-msgstr ""
-
-#: src/utils/steam_parser.py:168
-msgid "No new games were found in the Steam library."
-msgstr ""
-
-#: src/utils/steam_parser.py:176 src/utils/steam_parser.py:183
-msgid "Steam Games Imported"
-msgstr ""
-
-#: src/utils/steam_parser.py:246
-msgid "The Steam directory cannot be found."
-msgstr ""
-
-#: src/utils/steam_parser.py:248
-msgid "Set Steam Location"
-msgstr ""
-
-#: src/utils/steam_parser.py:265
-msgid "Importing Games…"
-msgstr ""
-
-#: src/utils/steam_parser.py:266
-msgid "Talking to Steam"
 msgstr ""
