@@ -34,7 +34,7 @@ def save_cover(parent_widget, game_id, cover_path, pixbuf=None):
         os.makedirs(covers_dir)
 
     if pixbuf is None:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(cover_path, 600, 900, False)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(cover_path, 400, 600, False)
 
     def cover_callback(*_unused):
         pass

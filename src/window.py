@@ -83,7 +83,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.schema = Gio.Settings.new("hu.kramo.Cartridges")
         self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
-            "/hu/kramo/Cartridges/library_placeholder.svg", 200, 300, False
+            "/hu/kramo/Cartridges/library_placeholder.svg", 400, 600, False
         )
         current_games = get_games()
         for current_game in current_games:
@@ -104,7 +104,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                             or os.path.expanduser(os.path.join("~", ".local", "share")),
                             "cartridges",
                             "covers",
-                            f"{current_game}.dat",
+                            f"{current_game}.tiff",
                         )
                     )
                 except FileNotFoundError:

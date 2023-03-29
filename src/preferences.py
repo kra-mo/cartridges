@@ -27,13 +27,13 @@ from .create_dialog import create_dialog
 class ImportPreferences:
     def __init__(
         self,
+        window,
         source_id,
         name,
-        key,
+        install_key,
         paths,
         expander_row,
         file_chooser_button,
-        window,
         config=False,
     ):
         def set_dir(_source, result, _unused):
@@ -60,7 +60,7 @@ class ImportPreferences:
                     ).connect("response", response)
                 else:
                     window.schema.set_string(
-                        key,
+                        install_key,
                         path,
                     )
             except GLib.GError:
@@ -109,8 +109,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.schema = parent_widget.schema
         self.parent_widget = parent_widget
         self.file_chooser = Gtk.FileDialog()
-
         self.set_transient_for(parent_widget)
+
+        # General
         self.schema.bind(
             "exit-after-launch",
             self.exit_after_launch_switch,
@@ -129,23 +130,20 @@ class PreferencesWindow(Adw.PreferencesWindow):
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )
-        self.schema.bind(
-            "heroic-import-epic",
-            self.heroic_epic_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        self.schema.bind(
-            "heroic-import-gog",
-            self.heroic_gog_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        self.schema.bind(
-            "heroic-import-sideload",
-            self.heroic_sideloaded_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
+
+        # Steam
+        ImportPreferences(
+            self,
+            "steam",
+            "Steam",
+            "steam-location",
+            [
+                "steamapps",
+                os.path.join("steam", "steamapps"),
+                os.path.join("Steam", "steamapps"),
+            ],
+            self.steam_expander_row,
+            self.steam_file_chooser_button,
         )
 
         def update_revealer():
@@ -174,39 +172,46 @@ class PreferencesWindow(Adw.PreferencesWindow):
         )
         self.steam_clear_button.connect("clicked", clear_steam_dirs)
 
+        # Heroic
         ImportPreferences(
-            "steam",
-            "Steam",
-            "steam-location",
-            [
-                "steamapps",
-                os.path.join("steam", "steamapps"),
-                os.path.join("Steam", "steamapps"),
-            ],
-            self.steam_expander_row,
-            self.steam_file_chooser_button,
             self,
-        )
-
-        ImportPreferences(
             "heroic",
             "Heroic",
             "heroic-location",
             ["config.json"],
             self.heroic_expander_row,
             self.heroic_file_chooser_button,
-            self,
             True,
         )
 
+        self.schema.bind(
+            "heroic-import-epic",
+            self.heroic_epic_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+        self.schema.bind(
+            "heroic-import-gog",
+            self.heroic_gog_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+        self.schema.bind(
+            "heroic-import-sideload",
+            self.heroic_sideloaded_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+
+        # Bottles
         ImportPreferences(
+            self,
             "bottles",
             "Bottles",
             "bottles-location",
             ["library.yml"],
             self.bottles_expander_row,
             self.bottles_file_chooser_button,
-            self,
         )
 
         if os.name == "nt":
