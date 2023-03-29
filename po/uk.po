@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-26 11:51+0200\n"
-"PO-Revision-Date: 2023-03-21 13:12+0000\n"
+"POT-Creation-Date: 2023-03-29 08:17+0200\n"
+"PO-Revision-Date: 2023-03-26 17:51+0000\n"
 "Last-Translator: Dan <denqwerta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/uk/>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:115
+#: src/main.py:111
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -50,7 +50,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
-msgstr ""
+msgstr "Бібліотека"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
 #: src/utils/create_details_window.py:48
@@ -62,16 +62,11 @@ msgid "Game Details"
 msgstr "Подробиці гри"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/steam_parser.py:170
+#: src/utils/importer.py:79
 msgid "Preferences"
 msgstr "Параметри"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:41
-msgid "First stable release"
-msgstr ""
-
-#: data/gtk/window.blp:6 src/utils/bottles_parser.py:140
-#: src/utils/heroic_parser.py:250 src/utils/steam_parser.py:167
+#: data/gtk/window.blp:6 src/utils/importer.py:76
 msgid "No Games Found"
 msgstr "Ігор не знайдено"
 
@@ -80,9 +75,8 @@ msgid "Try a different search."
 msgstr "Спробуйте інший пошук."
 
 #: data/gtk/window.blp:14
-#, fuzzy
 msgid "No Games"
-msgstr "Ігри"
+msgstr "Ніяких ігор"
 
 #: data/gtk/window.blp:15
 msgid "Use the + button to add games."
@@ -98,7 +92,7 @@ msgstr "Ігри, які ви сховали, з'являться тут."
 
 #: data/gtk/window.blp:44 data/gtk/window.blp:254
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #: data/gtk/window.blp:92
 msgid "Game Title"
@@ -114,10 +108,9 @@ msgstr "Додати гру"
 
 #: data/gtk/window.blp:203 data/gtk/window.blp:266
 msgid "Main Menu"
-msgstr ""
+msgstr "Головне меню"
 
-#: data/gtk/window.blp:210 data/gtk/window.blp:273
-#, fuzzy
+#: data/gtk/window.blp:210 data/gtk/window.blp:273 data/gtk/help-overlay.blp:19
 msgid "Search"
 msgstr "Пошук"
 
@@ -161,21 +154,11 @@ msgstr "Комбінації клавіш"
 msgid "About Cartridges"
 msgstr "Про Cartridges"
 
-#: data/gtk/window.blp:388
-msgid "Import from"
+#: data/gtk/window.blp:388 data/gtk/preferences.blp:48
+#, fuzzy
+#| msgid "Import from"
+msgid "Import"
 msgstr "Імпорт з"
-
-#: data/gtk/window.blp:390 data/gtk/preferences.blp:40
-msgid "Steam"
-msgstr "Steam"
-
-#: data/gtk/window.blp:395 data/gtk/preferences.blp:78
-msgid "Heroic"
-msgstr "Heroic"
-
-#: data/gtk/window.blp:400 data/gtk/preferences.blp:116
-msgid "Bottles"
-msgstr "Bottles"
 
 #: data/gtk/game.blp:60 src/utils/create_details_window.py:94
 msgid "Title"
@@ -197,134 +180,163 @@ msgstr "Видалити"
 msgid "Unhide"
 msgstr "Показати"
 
-#: data/gtk/help-overlay.blp:11
-msgctxt "shortcut window"
+#: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
 msgstr "Загальний"
 
 #: data/gtk/help-overlay.blp:14
-msgctxt "shortcut window"
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Quit"
 msgid "Quit"
 msgstr "Вийти"
 
-#: data/gtk/help-overlay.blp:19
-msgctxt "shortcut window"
-msgid "Search"
-msgstr "Пошук"
-
 #: data/gtk/help-overlay.blp:24
-msgctxt "shortcut window"
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Show preferences"
 msgid "Show preferences"
 msgstr "Показати параметри"
 
 #: data/gtk/help-overlay.blp:29
-msgctxt "shortcut window"
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Shortcuts"
 msgid "Shortcuts"
 msgstr "Ярлики"
 
-#: data/gtk/help-overlay.blp:34
-msgctxt "shortcut window"
+#: data/gtk/help-overlay.blp:34 src/main.py:199
 msgid "Undo"
 msgstr "Відмінити"
 
 #: data/gtk/help-overlay.blp:39
-msgctxt "shortcut window"
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Open menu"
 msgid "Open menu"
 msgstr "Відкрити меню"
 
 #: data/gtk/help-overlay.blp:45
-msgctxt "shortcut window"
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Games"
 msgid "Games"
 msgstr "Ігри"
 
 #: data/gtk/help-overlay.blp:48
-msgctxt "shortcut window"
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Add new game"
 msgid "Add new game"
 msgstr "Додати нову гру"
 
 #: data/gtk/help-overlay.blp:53
-msgctxt "shortcut window"
+#, fuzzy
+#| msgid "Import GOG Games"
+msgid "Import games"
+msgstr "Імпорт ігор GOG"
+
+#: data/gtk/help-overlay.blp:58
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Show hidden games"
 msgid "Show hidden games"
 msgstr "Показати приховані ігри"
 
-#: data/gtk/preferences.blp:10
-msgid "General"
-msgstr "Загальний"
-
 #: data/gtk/preferences.blp:13
+msgid "Behavior"
+msgstr ""
+
+#: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
 msgstr "Вихід після запуску ігор"
 
-#: data/gtk/preferences.blp:21
+#: data/gtk/preferences.blp:24
 msgid "Cover Image Launches Game"
-msgstr ""
+msgstr "Обкладинка запускає гру"
 
-#: data/gtk/preferences.blp:22
+#: data/gtk/preferences.blp:25
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr ""
+msgstr "Міняє місцями поведінку зображення обкладинки та кнопки відтворення"
 
-#: data/gtk/preferences.blp:30
+#: data/gtk/preferences.blp:34 src/utils/create_details_window.py:59
+msgid "Images"
+msgstr "Зображення"
+
+#: data/gtk/preferences.blp:37
 msgid "High Quality Images"
-msgstr ""
+msgstr "Зображення високої якості"
 
-#: data/gtk/preferences.blp:31
+#: data/gtk/preferences.blp:38
 msgid "Save game covers losslessly at the cost of storage"
+msgstr "Збережена гра покривається без втрат за вартістю зберігання"
+
+#: data/gtk/preferences.blp:52
+msgid "Sources"
 msgstr ""
 
-#: data/gtk/preferences.blp:43
+#: data/gtk/preferences.blp:55
+msgid "Steam"
+msgstr "Steam"
+
+#: data/gtk/preferences.blp:59
 msgid "Steam Install Location"
 msgstr "Місце встановлення Steam"
 
-#: data/gtk/preferences.blp:44 data/gtk/preferences.blp:82
-#: data/gtk/preferences.blp:120
+#: data/gtk/preferences.blp:60 data/gtk/preferences.blp:99
+#: data/gtk/preferences.blp:138
 msgid "Directory to use when importing games"
 msgstr "Каталог для імпорту ігор"
 
-#: data/gtk/preferences.blp:52
+#: data/gtk/preferences.blp:68
 msgid "Extra Steam Libraries"
-msgstr ""
+msgstr "Додаткові бібліотеки Steam"
 
-#: data/gtk/preferences.blp:53
+#: data/gtk/preferences.blp:69
 msgid "Select other directories where you have Steam games installed"
-msgstr ""
+msgstr "Виберіть інші директорії, до яких інстальовано ігри Steam"
 
-#: data/gtk/preferences.blp:60
+#: data/gtk/preferences.blp:76
 msgid "Clear"
-msgstr ""
+msgstr "Очистити"
 
-#: data/gtk/preferences.blp:81
+#: data/gtk/preferences.blp:94
+msgid "Heroic"
+msgstr "Heroic"
+
+#: data/gtk/preferences.blp:98
 msgid "Heroic Install Location"
 msgstr "Місце встановлення Heroic"
 
-#: data/gtk/preferences.blp:91
+#: data/gtk/preferences.blp:108
 msgid "Import Epic Games"
 msgstr "Імпорт Epic Games"
 
-#: data/gtk/preferences.blp:99
+#: data/gtk/preferences.blp:116
 msgid "Import GOG Games"
 msgstr "Імпорт ігор GOG"
 
-#: data/gtk/preferences.blp:107
+#: data/gtk/preferences.blp:124
 msgid "Import Sideloaded Games"
 msgstr "Імпорт сторонніх ігор"
 
-#: data/gtk/preferences.blp:119
+#: data/gtk/preferences.blp:133
+msgid "Bottles"
+msgstr "Bottles"
+
+#: data/gtk/preferences.blp:137
 msgid "Bottles Install Location"
 msgstr "Місце встановлення Bottles"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:130
+#: src/main.py:126
 msgid "translator_credits"
 msgstr "kefir2105"
 
-#: src/main.py:193
+#: src/main.py:198
 #, python-brace-format
 msgid "{title} removed"
 msgstr "{title} видалено"
-
-#: src/main.py:194
-msgid "Undo"
-msgstr "Відмінити"
 
 #: src/window.py:234
 msgid "Today"
@@ -351,40 +363,39 @@ msgid "Last played: {last_played_date}"
 msgstr "Останній раз грали: {last_played_date}"
 
 #: src/game.py:173
-#, fuzzy
 msgid "Details"
-msgstr "Подробиці гри"
+msgstr "Деталі"
 
-#: src/utils/bottles_parser.py:80 src/utils/heroic_parser.py:87
-#: src/utils/steam_parser.py:245
-msgid "Couldn't Import Games"
-msgstr "Не вдається імпортувати ігри"
+#: src/utils/importer.py:37
+msgid "Importing Games…"
+msgstr "Імпорт ігор…"
 
-#: src/utils/bottles_parser.py:81
-msgid "The Bottles directory cannot be found."
-msgstr "Каталог Bottles не знайдено."
+#: src/utils/importer.py:77
+#, fuzzy
+#| msgid "No new games were found in the Heroic library."
+msgid "No new games were found on your device."
+msgstr "У бібліотеці Heroic нових ігор не знайдено."
 
-#: src/utils/bottles_parser.py:83
-msgid "Set Bottles Location"
-msgstr "Встановити розташування Bottles"
+#: src/utils/importer.py:85
+#, fuzzy
+#| msgid "Steam Games Imported"
+msgid "Game Imported"
+msgstr "Ігри Steam імпортовано"
 
-#: src/utils/bottles_parser.py:141
-msgid "No new games were found in the Bottles library."
-msgstr "У бібліотеці Bottles нових ігор не знайдено."
-
-#: src/utils/bottles_parser.py:146 src/utils/bottles_parser.py:153
-msgid "Bottles Games Imported"
-msgstr "Ігри Bottles імпортовано"
-
-#: src/utils/bottles_parser.py:147 src/utils/heroic_parser.py:257
-#: src/utils/steam_parser.py:177
+#: src/utils/importer.py:86
 msgid "Successfully imported 1 game."
 msgstr "Успішно імпортовано 1 гру."
 
+#: src/utils/importer.py:92
+#, fuzzy
+#| msgid "Steam Games Imported"
+msgid "Games Imported"
+msgstr "Ігри Steam імпортовано"
+
 #. The variable is the number of games
-#: src/utils/bottles_parser.py:155 src/utils/heroic_parser.py:265
-#: src/utils/steam_parser.py:185
-#, python-brace-format
+#: src/utils/importer.py:94
+#, fuzzy, python-brace-format
+#| msgid "Successfully imported {games_no} games."
 msgid "Successfully imported {games_no} games."
 msgstr "Успішно імпортовано {games_no} ігри."
 
@@ -399,10 +410,6 @@ msgstr "Підтвердити"
 #: src/utils/create_details_window.py:57
 msgid "Apply"
 msgstr "Застосувати"
-
-#: src/utils/create_details_window.py:59
-msgid "Images"
-msgstr "Зображення"
 
 #: src/utils/create_details_window.py:95
 msgid "The title of the game"
@@ -512,45 +519,74 @@ msgstr "Виконуваний файл не може бути порожнім.
 msgid "Dismiss"
 msgstr "Відхилити"
 
-#: src/utils/heroic_parser.py:88
-msgid "The Heroic directory cannot be found."
-msgstr "Не вдається знайти каталог Heroic."
+#, fuzzy
+#~| msgid "General"
+#~ msgctxt "shortcuts window"
+#~ msgid "General"
+#~ msgstr "Загальний"
 
-#: src/utils/heroic_parser.py:90
-msgid "Set Heroic Location"
-msgstr "Встановіть розташування Heroic"
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "shortcuts window"
+#~ msgid "Search"
+#~ msgstr "Пошук"
 
-#: src/utils/heroic_parser.py:251
-msgid "No new games were found in the Heroic library."
-msgstr "У бібліотеці Heroic нових ігор не знайдено."
+#, fuzzy
+#~| msgid "Undo"
+#~ msgctxt "shortcuts window"
+#~ msgid "Undo"
+#~ msgstr "Відмінити"
 
-#: src/utils/heroic_parser.py:256 src/utils/heroic_parser.py:263
-msgid "Heroic Games Imported"
-msgstr "Ігри Heroic імпортовано"
+#~ msgid "First stable release"
+#~ msgstr "Перший стабільний випуск"
 
-#: src/utils/steam_parser.py:168
-msgid "No new games were found in the Steam library."
-msgstr "У бібліотеці Steam не знайдено жодної нової гри."
+#~ msgctxt "shortcut window"
+#~ msgid "General"
+#~ msgstr "Загальний"
 
-#: src/utils/steam_parser.py:176 src/utils/steam_parser.py:183
-msgid "Steam Games Imported"
-msgstr "Ігри Steam імпортовано"
+#~ msgctxt "shortcut window"
+#~ msgid "Search"
+#~ msgstr "Пошук"
 
-#: src/utils/steam_parser.py:246
-msgid "The Steam directory cannot be found."
-msgstr "Каталог Steam знайти неможливо."
+#~ msgctxt "shortcut window"
+#~ msgid "Undo"
+#~ msgstr "Відмінити"
 
-#: src/utils/steam_parser.py:248
-msgid "Set Steam Location"
-msgstr "Встановіть розташування Steam"
+#~ msgid "Couldn't Import Games"
+#~ msgstr "Не вдається імпортувати ігри"
 
-#: src/utils/steam_parser.py:265
-msgid "Importing Games…"
-msgstr "Імпорт ігор…"
+#~ msgid "The Bottles directory cannot be found."
+#~ msgstr "Каталог Bottles не знайдено."
 
-#: src/utils/steam_parser.py:266
-msgid "Talking to Steam"
-msgstr "Спілкування зі Steam"
+#~ msgid "Set Bottles Location"
+#~ msgstr "Встановити розташування Bottles"
+
+#~ msgid "No new games were found in the Bottles library."
+#~ msgstr "У бібліотеці Bottles нових ігор не знайдено."
+
+#~ msgid "Bottles Games Imported"
+#~ msgstr "Ігри Bottles імпортовано"
+
+#~ msgid "The Heroic directory cannot be found."
+#~ msgstr "Не вдається знайти каталог Heroic."
+
+#~ msgid "Set Heroic Location"
+#~ msgstr "Встановіть розташування Heroic"
+
+#~ msgid "Heroic Games Imported"
+#~ msgstr "Ігри Heroic імпортовано"
+
+#~ msgid "No new games were found in the Steam library."
+#~ msgstr "У бібліотеці Steam не знайдено жодної нової гри."
+
+#~ msgid "The Steam directory cannot be found."
+#~ msgstr "Каталог Steam знайти неможливо."
+
+#~ msgid "Set Steam Location"
+#~ msgstr "Встановіть розташування Steam"
+
+#~ msgid "Talking to Steam"
+#~ msgstr "Спілкування зі Steam"
 
 #, fuzzy
 #~ msgid "Successfully imported {str(len(bottles_games))} games."
