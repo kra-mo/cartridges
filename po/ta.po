@@ -186,23 +186,14 @@ msgid "General"
 msgstr "பொது"
 
 #: data/gtk/help-overlay.blp:14
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Quit"
 msgid "Quit"
 msgstr "வெளியேறு"
 
 #: data/gtk/help-overlay.blp:24
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show preferences"
 msgid "Show preferences"
 msgstr "விருப்பங்களைக் காட்டு"
 
 #: data/gtk/help-overlay.blp:29
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Shortcuts"
 msgid "Shortcuts"
 msgstr "குறுக்குவழிகள்"
 
@@ -211,23 +202,14 @@ msgid "Undo"
 msgstr "செயல்தவிர்"
 
 #: data/gtk/help-overlay.blp:39
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Open menu"
 msgid "Open menu"
 msgstr "பட்டியலை திறக்கவும்"
 
 #: data/gtk/help-overlay.blp:45
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Games"
 msgid "Games"
 msgstr "விளையாட்டுகள்"
 
 #: data/gtk/help-overlay.blp:48
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Add new game"
 msgid "Add new game"
 msgstr "புதிய விளையாட்டைச் சேர்க்கவும்"
 
@@ -238,9 +220,6 @@ msgid "Import games"
 msgstr "GOG விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
 #: data/gtk/help-overlay.blp:58
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show hidden games"
 msgid "Show hidden games"
 msgstr "மறைக்கப்பட்ட விளையாட்டுகளைக் காட்டு"
 

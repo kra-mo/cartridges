@@ -184,23 +184,14 @@ msgid "General"
 msgstr "Algemeen"
 
 #: data/gtk/help-overlay.blp:14
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Quit"
 msgid "Quit"
 msgstr "Sluiten"
 
 #: data/gtk/help-overlay.blp:24
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show preferences"
 msgid "Show preferences"
 msgstr "Voorkeuren tonen"
 
 #: data/gtk/help-overlay.blp:29
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Shortcuts"
 msgid "Shortcuts"
 msgstr "Sneltoetsen"
 
@@ -209,23 +200,14 @@ msgid "Undo"
 msgstr "Ongedaan maken"
 
 #: data/gtk/help-overlay.blp:39
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Open menu"
 msgid "Open menu"
 msgstr "Menu openen"
 
 #: data/gtk/help-overlay.blp:45
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Games"
 msgid "Games"
 msgstr "Games"
 
 #: data/gtk/help-overlay.blp:48
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Add new game"
 msgid "Add new game"
 msgstr "Nieuwe game toevoegen"
 
@@ -236,9 +218,6 @@ msgid "Import games"
 msgstr "GOG-games importeren"
 
 #: data/gtk/help-overlay.blp:58
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show hidden games"
 msgid "Show hidden games"
 msgstr "Verborgen games tonen"
 

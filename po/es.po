@@ -185,23 +185,14 @@ msgid "General"
 msgstr "General"
 
 #: data/gtk/help-overlay.blp:14
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Quit"
 msgid "Quit"
 msgstr "Salir"
 
 #: data/gtk/help-overlay.blp:24
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show preferences"
 msgid "Show preferences"
 msgstr "Mostrar preferencias"
 
 #: data/gtk/help-overlay.blp:29
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Shortcuts"
 msgid "Shortcuts"
 msgstr "Atajos"
 
@@ -210,23 +201,14 @@ msgid "Undo"
 msgstr "Deshacer"
 
 #: data/gtk/help-overlay.blp:39
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Open menu"
 msgid "Open menu"
 msgstr "Abrir menú"
 
 #: data/gtk/help-overlay.blp:45
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Games"
 msgid "Games"
 msgstr "Juegos"
 
 #: data/gtk/help-overlay.blp:48
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Add new game"
 msgid "Add new game"
 msgstr "Añadir juego nuevo"
 
@@ -237,9 +219,6 @@ msgid "Import games"
 msgstr "Importar juegos de GOG"
 
 #: data/gtk/help-overlay.blp:58
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show hidden games"
 msgid "Show hidden games"
 msgstr "Mostrar juegos ocultos"
 
