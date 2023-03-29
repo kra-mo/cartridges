@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:28+0200\n"
+"POT-Creation-Date: 2023-03-29 19:27+0200\n"
 "PO-Revision-Date: 2023-03-26 17:51+0000\n"
 "Last-Translator: Pedro Sader Azevedo <pedro.saderazevedo@protonmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/cartridges/"
@@ -343,6 +343,28 @@ msgstr "Última vez jogado: {last_played_date}"
 msgid "Details"
 msgstr "Detalhes"
 
+#: src/preferences.py:53
+msgid "Installation Not Found"
+msgstr ""
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:55
+#, python-brace-format
+msgid "Select the {name} configuration directory."
+msgstr ""
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:57
+#, python-brace-format
+msgid "Select the {name} data directory."
+msgstr ""
+
+#: src/preferences.py:59
+#, fuzzy
+#| msgid "Set Steam Location"
+msgid "Set Location"
+msgstr "Definir local da Steam"
+
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "Importando jogos…"
@@ -371,6 +393,7 @@ msgstr "Jogos da Steam importados"
 
 #. The variable is the number of games
 #: src/utils/importer.py:94
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "{games_no} jogos importados com sucesso."
 
@@ -555,9 +578,6 @@ msgstr "Dispensar"
 
 #~ msgid "The Steam directory cannot be found."
 #~ msgstr "O diretório da Steam não foi encontrado."
-
-#~ msgid "Set Steam Location"
-#~ msgstr "Definir local da Steam"
 
 #~ msgid "Talking to Steam"
 #~ msgstr "Falando com a Steam"
