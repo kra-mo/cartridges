@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:28+0200\n"
-"PO-Revision-Date: 2023-03-26 09:45+0000\n"
+"POT-Creation-Date: 2023-03-30 16:23+0200\n"
+"PO-Revision-Date: 2023-03-29 21:02+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/nl/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:111
+#: src/main.py:110
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -61,11 +61,11 @@ msgid "Game Details"
 msgstr "Game-details"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/importer.py:79
+#: src/utils/importer.py:81
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: data/gtk/window.blp:6 src/utils/importer.py:76
+#: data/gtk/window.blp:6 src/utils/importer.py:78
 msgid "No Games Found"
 msgstr "Geen games gevonden"
 
@@ -153,11 +153,9 @@ msgstr "Sneltoetsen"
 msgid "About Cartridges"
 msgstr "Over Cartridges"
 
-#: data/gtk/window.blp:388 data/gtk/preferences.blp:48
-#, fuzzy
-#| msgid "Import from"
+#: data/gtk/window.blp:388 data/gtk/preferences.blp:66
 msgid "Import"
-msgstr "Importeren uit"
+msgstr "Importeren"
 
 #: data/gtk/game.blp:60 src/utils/create_details_window.py:94
 msgid "Title"
@@ -171,7 +169,7 @@ msgstr "Bewerken"
 msgid "Hide"
 msgstr "Verbergen"
 
-#: data/gtk/game.blp:92 data/gtk/game.blp:111
+#: data/gtk/game.blp:92 data/gtk/game.blp:111 data/gtk/preferences.blp:53
 msgid "Remove"
 msgstr "Verwijderen"
 
@@ -195,7 +193,7 @@ msgstr "Voorkeuren tonen"
 msgid "Shortcuts"
 msgstr "Sneltoetsen"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:199
+#: data/gtk/help-overlay.blp:34 src/main.py:198 src/preferences.py:118
 msgid "Undo"
 msgstr "Ongedaan maken"
 
@@ -212,10 +210,8 @@ msgid "Add new game"
 msgstr "Nieuwe game toevoegen"
 
 #: data/gtk/help-overlay.blp:53
-#, fuzzy
-#| msgid "Import GOG Games"
 msgid "Import games"
-msgstr "GOG-games importeren"
+msgstr "Games importeren"
 
 #: data/gtk/help-overlay.blp:58
 msgid "Show hidden games"
@@ -223,7 +219,7 @@ msgstr "Verborgen games tonen"
 
 #: data/gtk/preferences.blp:13
 msgid "Behavior"
-msgstr ""
+msgstr "Gedrag"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
@@ -250,69 +246,78 @@ msgid "Save game covers losslessly at the cost of storage"
 msgstr ""
 "Game-covers zonder kwaliteitsverlies opslaan ten koste van opslagruimte"
 
-#: data/gtk/preferences.blp:52
-msgid "Sources"
+#: data/gtk/preferences.blp:47
+msgid "Danger Zone"
 msgstr ""
 
-#: data/gtk/preferences.blp:55
+#: data/gtk/preferences.blp:50
+msgid "Remove All Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:70
+msgid "Sources"
+msgstr "Bronnen"
+
+#: data/gtk/preferences.blp:73
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:59
+#: data/gtk/preferences.blp:77
 msgid "Steam Install Location"
 msgstr "Installatielocatie van Steam"
 
-#: data/gtk/preferences.blp:60 data/gtk/preferences.blp:99
-#: data/gtk/preferences.blp:138
+#: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
+#: data/gtk/preferences.blp:156
 msgid "Directory to use when importing games"
 msgstr "Map om te gebruiken bij het importeren van games"
 
-#: data/gtk/preferences.blp:68
+#: data/gtk/preferences.blp:86
 msgid "Extra Steam Libraries"
 msgstr "Extra Steam-bibliotheken"
 
-#: data/gtk/preferences.blp:69
+#: data/gtk/preferences.blp:87
 msgid "Select other directories where you have Steam games installed"
 msgstr "Andere mappen waar u Steam-games heeft geïnstalleerd"
 
-#: data/gtk/preferences.blp:76
+#: data/gtk/preferences.blp:94
 msgid "Clear"
 msgstr "Wissen"
 
-#: data/gtk/preferences.blp:94
+#: data/gtk/preferences.blp:112
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:98
+#: data/gtk/preferences.blp:116
 msgid "Heroic Install Location"
 msgstr "Installatielocatie van Heroic"
 
-#: data/gtk/preferences.blp:108
+#: data/gtk/preferences.blp:126
 msgid "Import Epic Games"
 msgstr "Epic-games importeren"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:134
 msgid "Import GOG Games"
 msgstr "GOG-games importeren"
 
-#: data/gtk/preferences.blp:124
+#: data/gtk/preferences.blp:142
 msgid "Import Sideloaded Games"
 msgstr "Gesideloade games importeren"
 
-#: data/gtk/preferences.blp:133
+#: data/gtk/preferences.blp:151
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:137
+#: data/gtk/preferences.blp:155
 msgid "Bottles Install Location"
 msgstr "Installatielocatie van Bottles"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:126
+#: src/main.py:125
 msgid "translator_credits"
 msgstr "Philip Goto <philip.goto@gmail.com>"
 
-#: src/main.py:198
+#. The variable is the title of the game
+#: src/main.py:197
 #, python-brace-format
 msgid "{title} removed"
 msgstr "{title} verwijderd"
@@ -345,34 +350,57 @@ msgstr "Laatst gespeeld op {last_played_date}"
 msgid "Details"
 msgstr "Details"
 
+#: src/preferences.py:55
+msgid "Installation Not Found"
+msgstr "Installatie niet gevonden"
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:57
+#, python-brace-format
+msgid "Select the {name} configuration directory."
+msgstr "Selecteer de configuratiemap van {name}"
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:59
+#, python-brace-format
+msgid "Select the {name} data directory."
+msgstr "Selecteer de gegevensmap van {name}"
+
+#: src/preferences.py:61
+msgid "Set Location"
+msgstr "Locatie instellen"
+
+#: src/preferences.py:117
+#, fuzzy
+#| msgid "{title} removed"
+msgid "All games removed"
+msgstr "{title} verwijderd"
+
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "Games importeren…"
 
-#: src/utils/importer.py:77
+#: src/utils/importer.py:79
 #, fuzzy
-#| msgid "No new games were found in the Heroic library."
-msgid "No new games were found on your device."
-msgstr "Geen nieuwe games gevonden in de Heroic-bibliotheek"
+#| msgid "No new games were found on your device."
+msgid "No new games were found on your system."
+msgstr "Geen nieuwe games gevonden op uw apparaat"
 
-#: src/utils/importer.py:85
-#, fuzzy
-#| msgid "Steam Games Imported"
+#: src/utils/importer.py:87
 msgid "Game Imported"
-msgstr "Steam-games geïmporteerd"
+msgstr "Game geïmporteerd"
 
-#: src/utils/importer.py:86
+#: src/utils/importer.py:88
 msgid "Successfully imported 1 game."
 msgstr "1 game succesvol geïmporteerd"
 
-#: src/utils/importer.py:92
-#, fuzzy
-#| msgid "Steam Games Imported"
+#: src/utils/importer.py:94
 msgid "Games Imported"
-msgstr "Steam-games geïmporteerd"
+msgstr "Games geïmporteerd"
 
 #. The variable is the number of games
-#: src/utils/importer.py:94
+#: src/utils/importer.py:96
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "{games_no} games succesvol geïmporteerd"
 
@@ -560,9 +588,6 @@ msgstr "Sluiten"
 
 #~ msgid "The Steam directory cannot be found."
 #~ msgstr "Steam-map kan niet worden gevonden"
-
-#~ msgid "Set Steam Location"
-#~ msgstr "Steam-locatie instellen"
 
 #~ msgid "Talking to Steam"
 #~ msgstr "Steam-bibliotheek aan het ophalen"
