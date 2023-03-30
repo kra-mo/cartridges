@@ -57,6 +57,8 @@ class Importer:
             self.games_no += 1
             save_game(values)
             self.parent_widget.update_games([values["game_id"]])
+            if "blacklisted" in values.keys():
+                self.games_no -= 1
 
         self.queue -= 1
         self.progressbar.set_fraction(1 - (self.queue / self.total_queue))
