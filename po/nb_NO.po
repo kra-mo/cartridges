@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:28+0200\n"
-"PO-Revision-Date: 2023-03-26 09:45+0000\n"
-"Last-Translator: kramo <contact@kramo.hu>\n"
+"POT-Creation-Date: 2023-03-30 16:23+0200\n"
+"PO-Revision-Date: 2023-03-30 11:43+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:111
+#: src/main.py:110
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -62,11 +62,11 @@ msgid "Game Details"
 msgstr "Spilldetaljer"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/importer.py:79
+#: src/utils/importer.py:81
 msgid "Preferences"
 msgstr "Innstillinger"
 
-#: data/gtk/window.blp:6 src/utils/importer.py:76
+#: data/gtk/window.blp:6 src/utils/importer.py:78
 msgid "No Games Found"
 msgstr "Fant ingen spill"
 
@@ -155,7 +155,7 @@ msgstr "Tastatursnarveier"
 msgid "About Cartridges"
 msgstr "Om"
 
-#: data/gtk/window.blp:388 data/gtk/preferences.blp:48
+#: data/gtk/window.blp:388 data/gtk/preferences.blp:66
 #, fuzzy
 #| msgid "Import from"
 msgid "Import"
@@ -173,7 +173,7 @@ msgstr "Rediger"
 msgid "Hide"
 msgstr "Skjul"
 
-#: data/gtk/game.blp:92 data/gtk/game.blp:111
+#: data/gtk/game.blp:92 data/gtk/game.blp:111 data/gtk/preferences.blp:53
 msgid "Remove"
 msgstr "Fjern"
 
@@ -197,7 +197,7 @@ msgstr "Vis innstillinger"
 msgid "Shortcuts"
 msgstr "Snarveier"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:199
+#: data/gtk/help-overlay.blp:34 src/main.py:198 src/preferences.py:118
 msgid "Undo"
 msgstr "Angre"
 
@@ -224,8 +224,9 @@ msgid "Show hidden games"
 msgstr "Vis skjulte spill"
 
 #: data/gtk/preferences.blp:13
+#, fuzzy
 msgid "Behavior"
-msgstr ""
+msgstr "Adferd"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
@@ -233,11 +234,11 @@ msgstr "Avslutt etter oppstart av spill"
 
 #: data/gtk/preferences.blp:24
 msgid "Cover Image Launches Game"
-msgstr ""
+msgstr "Omslagsbilde starter spill"
 
 #: data/gtk/preferences.blp:25
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr ""
+msgstr "Bytter adferd for omslagsbilde og spill-knapp"
 
 #: data/gtk/preferences.blp:34 src/utils/create_details_window.py:59
 msgid "Images"
@@ -251,70 +252,79 @@ msgstr "Høykvalitetsbilder"
 msgid "Save game covers losslessly at the cost of storage"
 msgstr "Lagre spillomslag tapsfritt på bekostning av lagringsplass"
 
-#: data/gtk/preferences.blp:52
-msgid "Sources"
+#: data/gtk/preferences.blp:47
+msgid "Danger Zone"
 msgstr ""
 
-#: data/gtk/preferences.blp:55
+#: data/gtk/preferences.blp:50
+msgid "Remove All Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:70
+msgid "Sources"
+msgstr "Kilder"
+
+#: data/gtk/preferences.blp:73
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:59
+#: data/gtk/preferences.blp:77
 msgid "Steam Install Location"
 msgstr "Installasjonssted for Steam"
 
-#: data/gtk/preferences.blp:60 data/gtk/preferences.blp:99
-#: data/gtk/preferences.blp:138
+#: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
+#: data/gtk/preferences.blp:156
 msgid "Directory to use when importing games"
 msgstr "Mappe å bruke ved import av spill"
 
-#: data/gtk/preferences.blp:68
+#: data/gtk/preferences.blp:86
 msgid "Extra Steam Libraries"
 msgstr "Ekstra Steam-bibliotek"
 
-#: data/gtk/preferences.blp:69
+#: data/gtk/preferences.blp:87
 #, fuzzy
 msgid "Select other directories where you have Steam games installed"
 msgstr "Velg andre mapper der du har Steam-spill installert"
 
-#: data/gtk/preferences.blp:76
+#: data/gtk/preferences.blp:94
 msgid "Clear"
 msgstr "Tøm"
 
-#: data/gtk/preferences.blp:94
+#: data/gtk/preferences.blp:112
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:98
+#: data/gtk/preferences.blp:116
 msgid "Heroic Install Location"
 msgstr "Installasjonssted for Heroic"
 
-#: data/gtk/preferences.blp:108
+#: data/gtk/preferences.blp:126
 msgid "Import Epic Games"
 msgstr "Importer Epic-spill"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:134
 msgid "Import GOG Games"
 msgstr "Importer GOG-spill"
 
-#: data/gtk/preferences.blp:124
+#: data/gtk/preferences.blp:142
 msgid "Import Sideloaded Games"
 msgstr "Importer sideinnlastede spill"
 
-#: data/gtk/preferences.blp:133
+#: data/gtk/preferences.blp:151
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:137
+#: data/gtk/preferences.blp:155
 msgid "Bottles Install Location"
 msgstr "Installasjonssted for Bottles"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:126
+#: src/main.py:125
 msgid "translator_credits"
 msgstr "Allan Nordhøy, <epost@anotheragency.no>"
 
-#: src/main.py:198
+#. The variable is the title of the game
+#: src/main.py:197
 #, python-brace-format
 msgid "{title} removed"
 msgstr "{title} fjernet"
@@ -348,34 +358,63 @@ msgstr "Sist spilt: {last_played_date}"
 msgid "Details"
 msgstr "Spilldetaljer"
 
+#: src/preferences.py:55
+msgid "Installation Not Found"
+msgstr "Fant ikke installasjonen"
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:57
+#, fuzzy, python-brace-format
+msgid "Select the {name} configuration directory."
+msgstr "Velg {name}-oppsettsmappen."
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:59
+#, fuzzy, python-brace-format
+msgid "Select the {name} data directory."
+msgstr "Velg {name}-datamappen."
+
+#: src/preferences.py:61
+#, fuzzy
+#| msgid "Set Steam Location"
+msgid "Set Location"
+msgstr "Velg hvor Steam er å finne"
+
+#: src/preferences.py:117
+#, fuzzy
+#| msgid "{title} removed"
+msgid "All games removed"
+msgstr "{title} fjernet"
+
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "Importerer spill …"
 
-#: src/utils/importer.py:77
+#: src/utils/importer.py:79
 #, fuzzy
 #| msgid "No new games were found in the Heroic library."
-msgid "No new games were found on your device."
+msgid "No new games were found on your system."
 msgstr "Fant ingen nye spill i Heroic-biblioteket."
 
-#: src/utils/importer.py:85
+#: src/utils/importer.py:87
 #, fuzzy
 #| msgid "Steam Games Imported"
 msgid "Game Imported"
 msgstr "Steam-spill importert"
 
-#: src/utils/importer.py:86
+#: src/utils/importer.py:88
 msgid "Successfully imported 1 game."
 msgstr "Importerte ett spill."
 
-#: src/utils/importer.py:92
+#: src/utils/importer.py:94
 #, fuzzy
 #| msgid "Steam Games Imported"
 msgid "Games Imported"
 msgstr "Steam-spill importert"
 
 #. The variable is the number of games
-#: src/utils/importer.py:94
+#: src/utils/importer.py:96
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "Importerte {games_no} spill."
 
@@ -560,9 +599,6 @@ msgstr "Forkast"
 
 #~ msgid "The Steam directory cannot be found."
 #~ msgstr "Kunne ikke finne Steam-mappen."
-
-#~ msgid "Set Steam Location"
-#~ msgstr "Velg hvor Steam er å finne"
 
 #, fuzzy
 #~ msgid "Talking to Steam"

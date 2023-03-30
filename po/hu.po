@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:28+0200\n"
-"PO-Revision-Date: 2023-03-29 06:20+0000\n"
+"POT-Creation-Date: 2023-03-30 16:23+0200\n"
+"PO-Revision-Date: 2023-03-30 16:17+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:111
+#: src/main.py:110
 msgid "Cartridges"
 msgstr "Kazetták"
 
@@ -61,11 +61,11 @@ msgid "Game Details"
 msgstr "Játék Tulajdonságai"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/importer.py:79
+#: src/utils/importer.py:81
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: data/gtk/window.blp:6 src/utils/importer.py:76
+#: data/gtk/window.blp:6 src/utils/importer.py:78
 msgid "No Games Found"
 msgstr "Nem találhatóak játékok"
 
@@ -153,7 +153,7 @@ msgstr "Gyorsbillentyűk"
 msgid "About Cartridges"
 msgstr "A Kazetták névjegye"
 
-#: data/gtk/window.blp:388 data/gtk/preferences.blp:48
+#: data/gtk/window.blp:388 data/gtk/preferences.blp:66
 msgid "Import"
 msgstr "Importálás"
 
@@ -169,7 +169,7 @@ msgstr "Szerkesztés"
 msgid "Hide"
 msgstr "Elrejtés"
 
-#: data/gtk/game.blp:92 data/gtk/game.blp:111
+#: data/gtk/game.blp:92 data/gtk/game.blp:111 data/gtk/preferences.blp:53
 msgid "Remove"
 msgstr "Eltávolítás"
 
@@ -193,7 +193,7 @@ msgstr "Beállítások megjelenítése"
 msgid "Shortcuts"
 msgstr "Gyorsbillentyűk"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:199
+#: data/gtk/help-overlay.blp:34 src/main.py:198 src/preferences.py:118
 msgid "Undo"
 msgstr "Visszavonás"
 
@@ -245,69 +245,78 @@ msgstr "Jó minőségű képek"
 msgid "Save game covers losslessly at the cost of storage"
 msgstr "Játékborítók veszteségmentes tárolása a tárhely költségére"
 
-#: data/gtk/preferences.blp:52
+#: data/gtk/preferences.blp:47
+msgid "Danger Zone"
+msgstr "Veszélyzóna"
+
+#: data/gtk/preferences.blp:50
+msgid "Remove All Games"
+msgstr "Az összes játék eltávolítása"
+
+#: data/gtk/preferences.blp:70
 msgid "Sources"
 msgstr "Források"
 
-#: data/gtk/preferences.blp:55
+#: data/gtk/preferences.blp:73
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:59
+#: data/gtk/preferences.blp:77
 msgid "Steam Install Location"
 msgstr "Steam telepítés helye"
 
-#: data/gtk/preferences.blp:60 data/gtk/preferences.blp:99
-#: data/gtk/preferences.blp:138
+#: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
+#: data/gtk/preferences.blp:156
 msgid "Directory to use when importing games"
 msgstr "Az importáláshoz használt mappa"
 
-#: data/gtk/preferences.blp:68
+#: data/gtk/preferences.blp:86
 msgid "Extra Steam Libraries"
 msgstr "További Steam könyvtárak"
 
-#: data/gtk/preferences.blp:69
+#: data/gtk/preferences.blp:87
 msgid "Select other directories where you have Steam games installed"
 msgstr "Válasszon ki egyéb mappákat, ahol vannak még Steam játékai"
 
-#: data/gtk/preferences.blp:76
+#: data/gtk/preferences.blp:94
 msgid "Clear"
 msgstr "Törlés"
 
-#: data/gtk/preferences.blp:94
+#: data/gtk/preferences.blp:112
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:98
+#: data/gtk/preferences.blp:116
 msgid "Heroic Install Location"
 msgstr "Heroic telepítés helye"
 
-#: data/gtk/preferences.blp:108
+#: data/gtk/preferences.blp:126
 msgid "Import Epic Games"
 msgstr "Epic Games játékok importálása"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:134
 msgid "Import GOG Games"
 msgstr "GOG játékok importálása"
 
-#: data/gtk/preferences.blp:124
+#: data/gtk/preferences.blp:142
 msgid "Import Sideloaded Games"
 msgstr "Manuálisan hozzáadott játékok importálása"
 
-#: data/gtk/preferences.blp:133
+#: data/gtk/preferences.blp:151
 msgid "Bottles"
 msgstr "Palackok"
 
-#: data/gtk/preferences.blp:137
+#: data/gtk/preferences.blp:155
 msgid "Bottles Install Location"
 msgstr "Palackok telepítés helye"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:126
+#: src/main.py:125
 msgid "translator_credits"
 msgstr "kramo https://kramo.hu"
 
-#: src/main.py:198
+#. The variable is the title of the game
+#: src/main.py:197
 #, python-brace-format
 msgid "{title} removed"
 msgstr "{title} eltávolítva"
@@ -340,28 +349,52 @@ msgstr "Legutóbbi játékmenet: {last_played_date}"
 msgid "Details"
 msgstr "Tulajdonságok"
 
+#: src/preferences.py:55
+msgid "Installation Not Found"
+msgstr "Telepítés nem található"
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:57
+#, python-brace-format
+msgid "Select the {name} configuration directory."
+msgstr "Válassza ki {name} konfigurációs mappáját."
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:59
+#, python-brace-format
+msgid "Select the {name} data directory."
+msgstr "Válassza ki {name} adatainak mappáját."
+
+#: src/preferences.py:61
+msgid "Set Location"
+msgstr "Mappa kiválasztása"
+
+#: src/preferences.py:117
+msgid "All games removed"
+msgstr "Az összes játék eltávolítva"
+
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "Játékok importálása folyamatban…"
 
-#: src/utils/importer.py:77
-msgid "No new games were found on your device."
-msgstr "Nem találhatóak új játékok az eszközén."
+#: src/utils/importer.py:79
+msgid "No new games were found on your system."
+msgstr "Nem találhatóak új játékok a rendszerén."
 
-#: src/utils/importer.py:85
+#: src/utils/importer.py:87
 msgid "Game Imported"
 msgstr "Játékok importálva"
 
-#: src/utils/importer.py:86
+#: src/utils/importer.py:88
 msgid "Successfully imported 1 game."
 msgstr "1 játék sikeresen importálva."
 
-#: src/utils/importer.py:92
+#: src/utils/importer.py:94
 msgid "Games Imported"
 msgstr "Játékok importálva"
 
 #. The variable is the number of games
-#: src/utils/importer.py:94
+#: src/utils/importer.py:96
 #, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "{games_no} játék sikeresen importálva."
@@ -542,9 +575,6 @@ msgstr "Rendben"
 
 #~ msgid "The Steam directory cannot be found."
 #~ msgstr "A Steam mappa nem található."
-
-#~ msgid "Set Steam Location"
-#~ msgstr "Steam mappa kiválasztása"
 
 #~ msgid "Talking to Steam"
 #~ msgstr "Adatok lekérése a Steam-ből"
