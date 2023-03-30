@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:28+0200\n"
-"PO-Revision-Date: 2023-03-28 07:06+0000\n"
+"POT-Creation-Date: 2023-03-30 16:23+0200\n"
+"PO-Revision-Date: 2023-03-30 14:24+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ru/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:111
+#: src/main.py:110
 msgid "Cartridges"
 msgstr "Картриджи"
 
@@ -61,11 +61,11 @@ msgid "Game Details"
 msgstr "Подробности об игре"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/importer.py:79
+#: src/utils/importer.py:81
 msgid "Preferences"
 msgstr "Параметры"
 
-#: data/gtk/window.blp:6 src/utils/importer.py:76
+#: data/gtk/window.blp:6 src/utils/importer.py:78
 msgid "No Games Found"
 msgstr "Игры не найдены"
 
@@ -153,11 +153,9 @@ msgstr "Комбинации клавиш"
 msgid "About Cartridges"
 msgstr "О приложении"
 
-#: data/gtk/window.blp:388 data/gtk/preferences.blp:48
-#, fuzzy
-#| msgid "Import from"
+#: data/gtk/window.blp:388 data/gtk/preferences.blp:66
 msgid "Import"
-msgstr "Импортировать из"
+msgstr "Импортировать"
 
 #: data/gtk/game.blp:60 src/utils/create_details_window.py:94
 msgid "Title"
@@ -171,7 +169,7 @@ msgstr "Редактировать"
 msgid "Hide"
 msgstr "Скрыть"
 
-#: data/gtk/game.blp:92 data/gtk/game.blp:111
+#: data/gtk/game.blp:92 data/gtk/game.blp:111 data/gtk/preferences.blp:53
 msgid "Remove"
 msgstr "Удалить"
 
@@ -195,7 +193,7 @@ msgstr "Показать параметры"
 msgid "Shortcuts"
 msgstr "Комбинации клавиш"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:199
+#: data/gtk/help-overlay.blp:34 src/main.py:198 src/preferences.py:118
 msgid "Undo"
 msgstr "Отменить"
 
@@ -212,10 +210,8 @@ msgid "Add new game"
 msgstr "Добавить новую игру"
 
 #: data/gtk/help-overlay.blp:53
-#, fuzzy
-#| msgid "Import GOG Games"
 msgid "Import games"
-msgstr "Импорт игр GOG"
+msgstr "Импорт игр"
 
 #: data/gtk/help-overlay.blp:58
 msgid "Show hidden games"
@@ -223,7 +219,7 @@ msgstr "Показать скрытые игры"
 
 #: data/gtk/preferences.blp:13
 msgid "Behavior"
-msgstr ""
+msgstr "Поведение"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
@@ -249,69 +245,78 @@ msgstr "Изображения высокого качества"
 msgid "Save game covers losslessly at the cost of storage"
 msgstr "Сохранение обложек игр без потерь за счет хранилища"
 
-#: data/gtk/preferences.blp:52
-msgid "Sources"
+#: data/gtk/preferences.blp:47
+msgid "Danger Zone"
 msgstr ""
 
-#: data/gtk/preferences.blp:55
+#: data/gtk/preferences.blp:50
+msgid "Remove All Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:70
+msgid "Sources"
+msgstr "Источники"
+
+#: data/gtk/preferences.blp:73
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:59
+#: data/gtk/preferences.blp:77
 msgid "Steam Install Location"
 msgstr "Место установки Steam"
 
-#: data/gtk/preferences.blp:60 data/gtk/preferences.blp:99
-#: data/gtk/preferences.blp:138
+#: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
+#: data/gtk/preferences.blp:156
 msgid "Directory to use when importing games"
 msgstr "Каталог для импорта игр"
 
-#: data/gtk/preferences.blp:68
+#: data/gtk/preferences.blp:86
 msgid "Extra Steam Libraries"
 msgstr "Дополнительные библиотеки Steam"
 
-#: data/gtk/preferences.blp:69
+#: data/gtk/preferences.blp:87
 msgid "Select other directories where you have Steam games installed"
 msgstr "Выберите другие каталоги, в которых у вас установлены игры из Steam"
 
-#: data/gtk/preferences.blp:76
+#: data/gtk/preferences.blp:94
 msgid "Clear"
 msgstr "Очистить"
 
-#: data/gtk/preferences.blp:94
+#: data/gtk/preferences.blp:112
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:98
+#: data/gtk/preferences.blp:116
 msgid "Heroic Install Location"
 msgstr "Место установки Heroic"
 
-#: data/gtk/preferences.blp:108
+#: data/gtk/preferences.blp:126
 msgid "Import Epic Games"
 msgstr "Импорт игр Epic"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:134
 msgid "Import GOG Games"
 msgstr "Импорт игр GOG"
 
-#: data/gtk/preferences.blp:124
+#: data/gtk/preferences.blp:142
 msgid "Import Sideloaded Games"
 msgstr "Импорт сторонних игр"
 
-#: data/gtk/preferences.blp:133
+#: data/gtk/preferences.blp:151
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:137
+#: data/gtk/preferences.blp:155
 msgid "Bottles Install Location"
 msgstr "Место установки Bottles"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:126
+#: src/main.py:125
 msgid "translator_credits"
 msgstr "Ser82-png"
 
-#: src/main.py:198
+#. The variable is the title of the game
+#: src/main.py:197
 #, python-brace-format
 msgid "{title} removed"
 msgstr "{title} удалена"
@@ -344,34 +349,57 @@ msgstr "Последняя игра: {last_played_date}"
 msgid "Details"
 msgstr "Подробности"
 
+#: src/preferences.py:55
+msgid "Installation Not Found"
+msgstr "Установка не найдена"
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:57
+#, python-brace-format
+msgid "Select the {name} configuration directory."
+msgstr "Выберите каталог конфигурации {name}."
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:59
+#, python-brace-format
+msgid "Select the {name} data directory."
+msgstr "Выберите каталог данных {name}."
+
+#: src/preferences.py:61
+msgid "Set Location"
+msgstr "Установить расположение"
+
+#: src/preferences.py:117
+#, fuzzy
+#| msgid "{title} removed"
+msgid "All games removed"
+msgstr "{title} удалена"
+
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "Импорт игр…"
 
-#: src/utils/importer.py:77
+#: src/utils/importer.py:79
 #, fuzzy
-#| msgid "No new games were found in the Heroic library."
-msgid "No new games were found on your device."
-msgstr "В библиотеке Heroic не было найдено новых игр."
+#| msgid "No new games were found on your device."
+msgid "No new games were found on your system."
+msgstr "На вашем устройстве не найдено новых игр."
 
-#: src/utils/importer.py:85
-#, fuzzy
-#| msgid "Steam Games Imported"
+#: src/utils/importer.py:87
 msgid "Game Imported"
-msgstr "Игры Steam импортированы"
+msgstr "Игра импортирована"
 
-#: src/utils/importer.py:86
+#: src/utils/importer.py:88
 msgid "Successfully imported 1 game."
 msgstr "Успешно импортирована 1 игра."
 
-#: src/utils/importer.py:92
-#, fuzzy
-#| msgid "Steam Games Imported"
+#: src/utils/importer.py:94
 msgid "Games Imported"
-msgstr "Игры Steam импортированы"
+msgstr "Игры импортированы"
 
 #. The variable is the number of games
-#: src/utils/importer.py:94
+#: src/utils/importer.py:96
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "Успешно импортировано {games_no} игр."
 
@@ -557,9 +585,6 @@ msgstr "Отклонить"
 
 #~ msgid "The Steam directory cannot be found."
 #~ msgstr "Не удалось найти каталог Steam."
-
-#~ msgid "Set Steam Location"
-#~ msgstr "Установить расположение Steam"
 
 #~ msgid "Talking to Steam"
 #~ msgstr "Общение со Steam"
