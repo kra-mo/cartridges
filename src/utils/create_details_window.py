@@ -31,7 +31,7 @@ from .save_game import save_game
 
 def create_details_window(parent_widget, game_id=None):
     window = Adw.Window(
-        modal=True, default_width=500, default_height=750, transient_for=parent_widget
+        modal=True, default_width=500, default_height=-1, transient_for=parent_widget
     )
 
     games = parent_widget.games
@@ -158,7 +158,7 @@ def create_details_window(parent_widget, game_id=None):
     exec_info_popover.set_parent(exec_group.get_header_suffix())
     exec_group.add(executable)
 
-    general_page = Adw.PreferencesPage()
+    general_page = Adw.PreferencesPage(vexpand=True)
     general_page.add(cover_group)
     general_page.add(title_group)
     general_page.add(developer_group)
