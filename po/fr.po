@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:28+0200\n"
+"POT-Creation-Date: 2023-03-30 16:23+0200\n"
 "PO-Revision-Date: 2023-03-28 22:23+0000\n"
 "Last-Translator: \"J. Lavoie\" <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:111
+#: src/main.py:110
 msgid "Cartridges"
 msgstr "Cartouches"
 
@@ -63,11 +63,11 @@ msgid "Game Details"
 msgstr "Détails du jeu"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/importer.py:79
+#: src/utils/importer.py:81
 msgid "Preferences"
 msgstr "Préférences"
 
-#: data/gtk/window.blp:6 src/utils/importer.py:76
+#: data/gtk/window.blp:6 src/utils/importer.py:78
 msgid "No Games Found"
 msgstr "Aucun jeu trouvé"
 
@@ -155,7 +155,7 @@ msgstr "Raccourcis clavier"
 msgid "About Cartridges"
 msgstr "À propos de Cartouches"
 
-#: data/gtk/window.blp:388 data/gtk/preferences.blp:48
+#: data/gtk/window.blp:388 data/gtk/preferences.blp:66
 #, fuzzy
 #| msgid "Import from"
 msgid "Import"
@@ -173,7 +173,7 @@ msgstr "Modifier"
 msgid "Hide"
 msgstr "Masquer"
 
-#: data/gtk/game.blp:92 data/gtk/game.blp:111
+#: data/gtk/game.blp:92 data/gtk/game.blp:111 data/gtk/preferences.blp:53
 msgid "Remove"
 msgstr "Retirer"
 
@@ -197,7 +197,7 @@ msgstr "Afficher les préférences"
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:199
+#: data/gtk/help-overlay.blp:34 src/main.py:198 src/preferences.py:118
 msgid "Undo"
 msgstr "Annuler"
 
@@ -253,70 +253,79 @@ msgid "Save game covers losslessly at the cost of storage"
 msgstr ""
 "Sauvegarde les couvertures de jeu sans perte, mais prend plus de stockage"
 
-#: data/gtk/preferences.blp:52
+#: data/gtk/preferences.blp:47
+msgid "Danger Zone"
+msgstr ""
+
+#: data/gtk/preferences.blp:50
+msgid "Remove All Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:70
 msgid "Sources"
 msgstr ""
 
-#: data/gtk/preferences.blp:55
+#: data/gtk/preferences.blp:73
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:59
+#: data/gtk/preferences.blp:77
 msgid "Steam Install Location"
 msgstr "Emplacement de l'installation de Steam"
 
-#: data/gtk/preferences.blp:60 data/gtk/preferences.blp:99
-#: data/gtk/preferences.blp:138
+#: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
+#: data/gtk/preferences.blp:156
 msgid "Directory to use when importing games"
 msgstr "Répertoire à utiliser lors de l'importation de jeux"
 
-#: data/gtk/preferences.blp:68
+#: data/gtk/preferences.blp:86
 msgid "Extra Steam Libraries"
 msgstr "Bibliothèque Steam supplémentaires"
 
-#: data/gtk/preferences.blp:69
+#: data/gtk/preferences.blp:87
 msgid "Select other directories where you have Steam games installed"
 msgstr ""
 "Sélectionnez d’autres répertoires où vous avez des jeux Steam installés"
 
-#: data/gtk/preferences.blp:76
+#: data/gtk/preferences.blp:94
 msgid "Clear"
 msgstr "Vider"
 
-#: data/gtk/preferences.blp:94
+#: data/gtk/preferences.blp:112
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:98
+#: data/gtk/preferences.blp:116
 msgid "Heroic Install Location"
 msgstr "Emplacement de l'installation Heroic"
 
-#: data/gtk/preferences.blp:108
+#: data/gtk/preferences.blp:126
 msgid "Import Epic Games"
 msgstr "Importer Epic Games"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:134
 msgid "Import GOG Games"
 msgstr "Importer des jeux GOG"
 
-#: data/gtk/preferences.blp:124
+#: data/gtk/preferences.blp:142
 msgid "Import Sideloaded Games"
 msgstr "Importer des jeux Sideloaded"
 
-#: data/gtk/preferences.blp:133
+#: data/gtk/preferences.blp:151
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:137
+#: data/gtk/preferences.blp:155
 msgid "Bottles Install Location"
 msgstr "Emplacement de l'installation Bottles"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:126
+#: src/main.py:125
 msgid "translator_credits"
 msgstr "Irénée Thirion"
 
-#: src/main.py:198
+#. The variable is the title of the game
+#: src/main.py:197
 #, python-brace-format
 msgid "{title} removed"
 msgstr "{title} retiré"
@@ -349,34 +358,63 @@ msgstr "Dernière session : {last_played_date}"
 msgid "Details"
 msgstr "Détails"
 
+#: src/preferences.py:55
+msgid "Installation Not Found"
+msgstr ""
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:57
+#, python-brace-format
+msgid "Select the {name} configuration directory."
+msgstr ""
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:59
+#, python-brace-format
+msgid "Select the {name} data directory."
+msgstr ""
+
+#: src/preferences.py:61
+#, fuzzy
+#| msgid "Set Steam Location"
+msgid "Set Location"
+msgstr "Définir l'emplacement Steam"
+
+#: src/preferences.py:117
+#, fuzzy
+#| msgid "{title} removed"
+msgid "All games removed"
+msgstr "{title} retiré"
+
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "Importation des jeux…"
 
-#: src/utils/importer.py:77
+#: src/utils/importer.py:79
 #, fuzzy
 #| msgid "No new games were found in the Heroic library."
-msgid "No new games were found on your device."
+msgid "No new games were found on your system."
 msgstr "Aucun nouveau jeu n'a été trouvé dans la bibliothèque Heroic."
 
-#: src/utils/importer.py:85
+#: src/utils/importer.py:87
 #, fuzzy
 #| msgid "Steam Games Imported"
 msgid "Game Imported"
 msgstr "Jeux Steam importés"
 
-#: src/utils/importer.py:86
+#: src/utils/importer.py:88
 msgid "Successfully imported 1 game."
 msgstr "Importation réussie de 1 jeu."
 
-#: src/utils/importer.py:92
+#: src/utils/importer.py:94
 #, fuzzy
 #| msgid "Steam Games Imported"
 msgid "Games Imported"
 msgstr "Jeux Steam importés"
 
 #. The variable is the number of games
-#: src/utils/importer.py:94
+#: src/utils/importer.py:96
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "Importation réussie de {games_no} jeux."
 
@@ -563,9 +601,6 @@ msgstr "Rejeter"
 
 #~ msgid "The Steam directory cannot be found."
 #~ msgstr "Le répertoire Steam est introuvable."
-
-#~ msgid "Set Steam Location"
-#~ msgstr "Définir l'emplacement Steam"
 
 #~ msgid "Talking to Steam"
 #~ msgstr "Parler à Steam"
