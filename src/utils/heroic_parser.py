@@ -50,7 +50,9 @@ def heroic_parser(parent_widget):
                     "heroic",
                 ),
             )
-        elif os.path.exists(os.path.join(os.getenv("appdata"), "heroic")):
+        elif os.name == "nt" and os.path.exists(
+            os.path.join(os.getenv("appdata"), "heroic")
+        ):
             schema.set_string(
                 "heroic-location", os.path.join(os.getenv("appdata"), "heroic")
             )
