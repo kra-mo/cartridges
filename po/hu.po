@@ -606,3 +606,9 @@ msgstr "Rendben"
 
 #~ msgid "Import From Heroic"
 #~ msgstr "Importálás Heroic-ból"
+
+#~ msgid "No new games were found on your device."
+#~ msgstr "Nem találhatóak új játékok az eszközén."
+
+#~ msgid "Set Steam Location"
+#~ msgstr "Steam mappa kiválasztása"
