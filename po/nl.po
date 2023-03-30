@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-30 16:23+0200\n"
-"PO-Revision-Date: 2023-03-29 21:02+0000\n"
+"PO-Revision-Date: 2023-03-30 16:17+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/nl/>\n"
@@ -248,11 +248,11 @@ msgstr ""
 
 #: data/gtk/preferences.blp:47
 msgid "Danger Zone"
-msgstr ""
+msgstr "Gevarenzone"
 
 #: data/gtk/preferences.blp:50
 msgid "Remove All Games"
-msgstr ""
+msgstr "Alle games verwijderen"
 
 #: data/gtk/preferences.blp:70
 msgid "Sources"
@@ -371,20 +371,16 @@ msgid "Set Location"
 msgstr "Locatie instellen"
 
 #: src/preferences.py:117
-#, fuzzy
-#| msgid "{title} removed"
 msgid "All games removed"
-msgstr "{title} verwijderd"
+msgstr "Alle games verwijderd"
 
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "Games importeren…"
 
 #: src/utils/importer.py:79
-#, fuzzy
-#| msgid "No new games were found on your device."
 msgid "No new games were found on your system."
-msgstr "Geen nieuwe games gevonden op uw apparaat"
+msgstr "Geen nieuwe games gevonden op uw systeem"
 
 #: src/utils/importer.py:87
 msgid "Game Imported"
