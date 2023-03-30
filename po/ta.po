@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 19:27+0200\n"
+"POT-Creation-Date: 2023-03-29 08:28+0200\n"
 "PO-Revision-Date: 2023-03-28 07:06+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
@@ -346,28 +346,6 @@ msgstr "கடைசியாக விளையாடியது: {last_played
 msgid "Details"
 msgstr "விவரங்கள்"
 
-#: src/preferences.py:53
-msgid "Installation Not Found"
-msgstr ""
-
-#. The variable is the name of the game launcher
-#: src/preferences.py:55
-#, python-brace-format
-msgid "Select the {name} configuration directory."
-msgstr ""
-
-#. The variable is the name of the game launcher
-#: src/preferences.py:57
-#, python-brace-format
-msgid "Select the {name} data directory."
-msgstr ""
-
-#: src/preferences.py:59
-#, fuzzy
-#| msgid "Set Steam Location"
-msgid "Set Location"
-msgstr "Steam (ஸ்டீம் இடத்தை அமைக்கவும்"
-
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "விளையாட்டுகளை இறக்குமதி செய்கிறது…"
@@ -396,7 +374,6 @@ msgstr "Steam (ஸ்டீம்) விளையாட்டுகள் இ�
 
 #. The variable is the number of games
 #: src/utils/importer.py:94
-#, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "{games_no} விளையாட்டுகள் வெற்றிகரமாக இறக்குமதி செய்யப்பட்டன."
 
@@ -581,6 +558,9 @@ msgstr "நிராகரி"
 
 #~ msgid "The Steam directory cannot be found."
 #~ msgstr "Steam (ஸ்டீம்) கோப்பகத்தைக் கண்டறிய முடியவில்லை."
+
+#~ msgid "Set Steam Location"
+#~ msgstr "Steam (ஸ்டீம் இடத்தை அமைக்கவும்"
 
 #~ msgid "Talking to Steam"
 #~ msgstr "ஸ்டிமுடன் (Steam) பேசுகிறேன்"
