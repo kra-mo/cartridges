@@ -42,7 +42,25 @@ template PreferencesWindow : Adw.PreferencesWindow {
         }
       }
     }
+
+    Adw.PreferencesGroup danger_zone_group {
+      title: _("Danger Zone");
+
+      Adw.ActionRow {
+        title: _("Remove All Games");
+
+        Button remove_all_games_button {
+          label: _("Remove");
+          valign: center;
+
+          styles [
+            "destructive-action",
+          ]
+        }
+      }
+    }
   }
+
   Adw.PreferencesPage import_page {
     name: "import";
     title: _("Import");

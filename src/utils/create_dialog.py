@@ -17,15 +17,15 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw
 
 
 def create_dialog(parent_widget, heading, body, extra_option=None, extra_label=None):
-    dialog = Adw.MessageDialog.new(parent_widget, _(heading), body)
+    dialog = Adw.MessageDialog.new(parent_widget, heading, body)
     dialog.add_response("dismiss", _("Dismiss"))
 
     if extra_option:
         dialog.add_response(extra_option, _(extra_label))
 
-    Gtk.Window.present(dialog)
+    dialog.present()
     return dialog

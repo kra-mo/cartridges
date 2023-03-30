@@ -76,7 +76,7 @@ class Importer:
                 create_dialog(
                     self.parent_widget,
                     _("No Games Found"),
-                    _("No new games were found on your device."),
+                    _("No new games were found on your system."),
                     "open_preferences",
                     _("Preferences"),
                 ).connect("response", response)

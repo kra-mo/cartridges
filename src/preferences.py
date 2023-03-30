@@ -22,6 +22,8 @@ import os
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from .create_dialog import create_dialog
+from .get_games import get_games
+from .save_game import save_game
 
 
 class ImportPreferences:
@@ -88,6 +90,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     exit_after_launch_switch = Gtk.Template.Child()
     cover_launches_game_switch = Gtk.Template.Child()
     high_quality_images_switch = Gtk.Template.Child()
+    remove_all_games_button = Gtk.Template.Child()
 
     steam_expander_row = Gtk.Template.Child()
     steam_file_chooser_button = Gtk.Template.Child()
@@ -111,6 +114,20 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.file_chooser = Gtk.FileDialog()
         self.set_transient_for(parent_widget)
 
+        self.toast = Adw.Toast.new(_("All games removed"))
+        self.toast.set_button_label(_("Undo"))
+        self.toast.connect("button-clicked", self.undo_remove_all, None)
+        self.toast.set_priority(Adw.ToastPriority.HIGH)
+        shortcut_controller = Gtk.ShortcutController()
+        shortcut_controller.add_shortcut(
+            Gtk.Shortcut.new(
+                Gtk.ShortcutTrigger.parse_string("<primary>z"),
+                Gtk.CallbackAction.new(self.undo_remove_all),
+            )
+        )
+        self.add_controller(shortcut_controller)
+        self.removed_games = []
+
         # General
         self.schema.bind(
             "exit-after-launch",
@@ -130,6 +147,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )
+
+        self.remove_all_games_button.connect("clicked", self.remove_all_games)
 
         # Steam
         ImportPreferences(
@@ -219,3 +238,26 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def choose_folder(self, _widget, function):
         self.file_chooser.select_folder(self.parent_widget, None, function, None)
+
+    def undo_remove_all(self, _widget, _unused):
+        for game_id in self.removed_games:
+            data = get_games([game_id])[game_id]
+            if "removed" in data.keys():
+                data.pop("removed")
+                save_game(data)
+        self.parent_widget.update_games(self.removed_games)
+        self.removed_games = []
+        self.toast.dismiss()
+
+    def remove_all_games(self, _widget):
+        for game in get_games().values():
+            if not "removed" in game.keys():
+                self.removed_games.append(game["game_id"])
+                game["removed"] = True
+                save_game(game)
+
+        self.parent_widget.update_games(self.parent_widget.games)
+        if self.parent_widget.stack.get_visible_child() == self.parent_widget.overview:
+            self.parent_widget.on_go_back_action(None, None)
+
+        self.add_toast(self.toast)
