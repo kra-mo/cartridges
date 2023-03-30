@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 08:28+0200\n"
-"PO-Revision-Date: 2023-03-26 09:45+0000\n"
+"POT-Creation-Date: 2023-03-29 19:27+0200\n"
+"PO-Revision-Date: 2023-03-29 13:46+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/nl/>\n"
@@ -154,10 +154,8 @@ msgid "About Cartridges"
 msgstr "Over Cartridges"
 
 #: data/gtk/window.blp:388 data/gtk/preferences.blp:48
-#, fuzzy
-#| msgid "Import from"
 msgid "Import"
-msgstr "Importeren uit"
+msgstr "Importeren"
 
 #: data/gtk/game.blp:60 src/utils/create_details_window.py:94
 msgid "Title"
@@ -212,10 +210,8 @@ msgid "Add new game"
 msgstr "Nieuwe game toevoegen"
 
 #: data/gtk/help-overlay.blp:53
-#, fuzzy
-#| msgid "Import GOG Games"
 msgid "Import games"
-msgstr "GOG-games importeren"
+msgstr "Games importeren"
 
 #: data/gtk/help-overlay.blp:58
 msgid "Show hidden games"
@@ -223,7 +219,7 @@ msgstr "Verborgen games tonen"
 
 #: data/gtk/preferences.blp:13
 msgid "Behavior"
-msgstr ""
+msgstr "Gedrag"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
@@ -252,7 +248,7 @@ msgstr ""
 
 #: data/gtk/preferences.blp:52
 msgid "Sources"
-msgstr ""
+msgstr "Bronnen"
 
 #: data/gtk/preferences.blp:55
 msgid "Steam"
@@ -345,34 +341,51 @@ msgstr "Laatst gespeeld op {last_played_date}"
 msgid "Details"
 msgstr "Details"
 
+#: src/preferences.py:53
+msgid "Installation Not Found"
+msgstr ""
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:55
+#, python-brace-format
+msgid "Select the {name} configuration directory."
+msgstr ""
+
+#. The variable is the name of the game launcher
+#: src/preferences.py:57
+#, python-brace-format
+msgid "Select the {name} data directory."
+msgstr ""
+
+#: src/preferences.py:59
+#, fuzzy
+#| msgid "Set Steam Location"
+msgid "Set Location"
+msgstr "Steam-locatie instellen"
+
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "Games importeren…"
 
 #: src/utils/importer.py:77
-#, fuzzy
-#| msgid "No new games were found in the Heroic library."
 msgid "No new games were found on your device."
-msgstr "Geen nieuwe games gevonden in de Heroic-bibliotheek"
+msgstr "Geen nieuwe games gevonden op uw apparaat"
 
 #: src/utils/importer.py:85
-#, fuzzy
-#| msgid "Steam Games Imported"
 msgid "Game Imported"
-msgstr "Steam-games geïmporteerd"
+msgstr "Game geïmporteerd"
 
 #: src/utils/importer.py:86
 msgid "Successfully imported 1 game."
 msgstr "1 game succesvol geïmporteerd"
 
 #: src/utils/importer.py:92
-#, fuzzy
-#| msgid "Steam Games Imported"
 msgid "Games Imported"
-msgstr "Steam-games geïmporteerd"
+msgstr "Games geïmporteerd"
 
 #. The variable is the number of games
 #: src/utils/importer.py:94
+#, python-brace-format
 msgid "Successfully imported {games_no} games."
 msgstr "{games_no} games succesvol geïmporteerd"
 
@@ -560,9 +573,6 @@ msgstr "Sluiten"
 
 #~ msgid "The Steam directory cannot be found."
 #~ msgstr "Steam-map kan niet worden gevonden"
-
-#~ msgid "Set Steam Location"
-#~ msgstr "Steam-locatie instellen"
 
 #~ msgid "Talking to Steam"
 #~ msgstr "Steam-bibliotheek aan het ophalen"
