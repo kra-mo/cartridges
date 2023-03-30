@@ -36,6 +36,15 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.2" date="2023-03-30">
+      <description translatable="no">
+        <ul>
+          <li>Refined the user experience for importing games</li>
+          <li>Added option to remove all games</li>
+          <li>Translations since 1.1</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1" date="2023-03-26">
       <description translatable="no">
         <ul>
