@@ -523,19 +523,16 @@ msgid "Dismiss"
 msgstr "Sluiten"
 
 #, fuzzy
-#~| msgid "General"
 #~ msgctxt "shortcuts window"
 #~ msgid "General"
 #~ msgstr "Algemeen"
 
 #, fuzzy
-#~| msgid "Search"
 #~ msgctxt "shortcuts window"
 #~ msgid "Search"
 #~ msgstr "Zoeken"
 
 #, fuzzy
-#~| msgid "Undo"
 #~ msgctxt "shortcuts window"
 #~ msgid "Undo"
 #~ msgstr "Ongedaan maken"
@@ -587,3 +584,11 @@ msgstr "Sluiten"
 
 #~ msgid "Talking to Steam"
 #~ msgstr "Steam-bibliotheek aan het ophalen"
+
+#, fuzzy
+#~| msgid "No new games were found in the Heroic library."
+#~ msgid "No new games were found on your device."
+#~ msgstr "Geen nieuwe games gevonden in de Heroic-bibliotheek"
+
+#~ msgid "Set Steam Location"
+#~ msgstr "Steam-locatie instellen"
