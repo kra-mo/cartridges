@@ -162,7 +162,9 @@ def steam_parser(parent_widget):
             )
         elif os.path.exists(os.path.expanduser("~/.steam/steam/")):
             schema.set_string("steam-location", "~/.steam/steam/")
-        elif os.path.exists(os.path.join(os.getenv("programfiles(x86)"), "Steam")):
+        elif os.name == "nt" and os.path.exists(
+            os.path.join(os.getenv("programfiles(x86)"), "Steam")
+        ):
             schema.set_string(
                 "steam-location", os.path.join(os.getenv("programfiles(x86)"), "Steam")
             )
