@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-30 16:23+0200\n"
-"PO-Revision-Date: 2023-03-30 11:43+0000\n"
+"PO-Revision-Date: 2023-03-30 20:15+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
@@ -247,11 +247,11 @@ msgstr "احفظ غُلُف الألعاب دون فقد على حساب مسا�
 
 #: data/gtk/preferences.blp:47
 msgid "Danger Zone"
-msgstr ""
+msgstr "منطقة خطر"
 
 #: data/gtk/preferences.blp:50
 msgid "Remove All Games"
-msgstr ""
+msgstr "أزل كلَّ الألعاب"
 
 #: data/gtk/preferences.blp:70
 msgid "Sources"
@@ -370,20 +370,16 @@ msgid "Set Location"
 msgstr "عيِّن الموضع"
 
 #: src/preferences.py:117
-#, fuzzy
-#| msgid "{title} removed"
 msgid "All games removed"
-msgstr "أزيلت {title}"
+msgstr "أُزيلت كلُّ الألعاب"
 
 #: src/utils/importer.py:37
 msgid "Importing Games…"
 msgstr "تُستورد الألعاب…"
 
 #: src/utils/importer.py:79
-#, fuzzy
-#| msgid "No new games were found on your device."
 msgid "No new games were found on your system."
-msgstr "لم يُعثر على ألعاب جديدة في جهازك."
+msgstr "لم يُعثر على ألعاب جديدة في نظامك."
 
 #: src/utils/importer.py:87
 msgid "Game Imported"
