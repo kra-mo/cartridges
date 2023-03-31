@@ -251,7 +251,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def remove_all_games(self, _widget):
         for game in get_games().values():
-            if not "removed" in game:
+            if "removed" not in game:
                 self.removed_games.append(game["game_id"])
                 game["removed"] = True
                 save_game(game)
