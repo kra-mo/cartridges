@@ -267,7 +267,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         date = self.get_time(current_game.added)
         self.overview_added.set_label(
             # The variable is the date when the game was added
-            _(f"Added: {date}")
+            _("Added: {}").format(date)
         )
         last_played_date = (
             self.get_time(current_game.last_played)
@@ -276,7 +276,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
         self.overview_last_played.set_label(
             # The variable is the date when the game was last played
-            _(f"Last played: {last_played_date}")
+            _("Last played: {}").format(last_played_date)
         )
 
     def a_z_sort(self, child1, child2):

@@ -115,21 +115,21 @@ def create_details_window(parent_widget, game_id=None):
 
     if os.name == "nt":
         exe_name += ".exe"
-        # Translate this string as you would translate "path to {exe_name}"
-        exe_path = _(f"C:\\path\\to\\{exe_name}")
-        # Translate this string as you would translate "path to {file_name}"
-        file_path = _(f"C:\\path\\to\\{file_name}")
+        # Translate this string as you would translate "path to {}"
+        exe_path = _("C:\\path\\to\\{}").format(exe_name)
+        # Translate this string as you would translate "path to {}"
+        file_path = _("C:\\path\\to\\{}").format(file_name)
         command = "start"
     else:
-        # Translate this string as you would translate "path to {exe_name}"
-        exe_path = _(f"/path/to/{exe_name}")
-        # Translate this string as you would translate "path to {file_name}"
-        file_path = _(f"/path/to/{file_name}")
+        # Translate this string as you would translate "path to {}"
+        exe_path = _("/path/to/{}").format(exe_name)
+        # Translate this string as you would translate "path to {}"
+        file_path = _("/path/to/{}").format(file_name)
         command = "xdg-open"
 
     exec_info_text = _(
-        f'To launch the executable "{exe_name}", use the command:\n\n<tt>"{exe_path}"</tt>\n\nTo open the file "{file_name}" with the default application, use:\n\n<tt>{command} "{file_path}"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!'
-    )
+        'To launch the executable "{}", use the command:\n\n<tt>"{}"</tt>\n\nTo open the file "{}" with the default application, use:\n\n<tt>{} "{}"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!'
+    ).format(exe_name, exe_path, file_name, command, file_path)
 
     exec_info_label = Gtk.Label(
         label=exec_info_text,

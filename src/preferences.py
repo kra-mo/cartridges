@@ -54,9 +54,10 @@ class ImportPreferences:
                         window.parent_widget,
                         _("Installation Not Found"),
                         # The variable is the name of the game launcher
-                        _(f"Select the {name} configuration directory.") if config
+                        _("Select the {} configuration directory.").format(name)
+                        if config
                         # The variable is the name of the game launcher
-                        else _(f"Select the {name} data directory."),
+                        else _("Select the {} data directory.").format(name),
                         "choose_folder",
                         _("Set Location"),
                     ).connect("response", response)

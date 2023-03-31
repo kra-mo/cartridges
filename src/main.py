@@ -198,7 +198,7 @@ class CartridgesApplication(Adw.Application):
 
         title = self.win.games[game_id].name
         # The variable is the title of the game
-        toast = Adw.Toast.new(_(f"{title} removed"))
+        toast = Adw.Toast.new(_("{} removed").format(title))
         toast.set_button_label(_("Undo"))
         toast.connect("button-clicked", self.win.on_undo_remove_action, game_id)
         toast.set_priority(Adw.ToastPriority.HIGH)

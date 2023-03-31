@@ -93,5 +93,5 @@ class Importer:
                     self.parent_widget,
                     _("Games Imported"),
                     # The variable is the number of games
-                    _(f"Successfully imported {games_no} games."),
+                    _("Successfully imported {} games.").format(games_no),
                 )
