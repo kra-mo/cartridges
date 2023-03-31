@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 16:23+0200\n"
-"PO-Revision-Date: 2023-03-28 07:06+0000\n"
-"Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
+"POT-Creation-Date: 2023-03-31 16:40+0200\n"
+"PO-Revision-Date: 2023-03-31 15:04+0000\n"
+"Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
 "Language: ta\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:110
+#: src/main.py:111
 msgid "Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள்"
 
@@ -197,7 +197,7 @@ msgstr "விருப்பங்களைக் காட்டு"
 msgid "Shortcuts"
 msgstr "குறுக்குவழிகள்"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:198 src/preferences.py:118
+#: data/gtk/help-overlay.blp:34 src/main.py:202 src/preferences.py:123
 msgid "Undo"
 msgstr "செயல்தவிர்"
 
@@ -272,7 +272,7 @@ msgid "Steam Install Location"
 msgstr "Steam (ஸ்டீம்) நிறுவல் இடம்"
 
 #: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:156
+#: data/gtk/preferences.blp:141 data/gtk/preferences.blp:180
 msgid "Directory to use when importing games"
 msgstr "விளையாட்டுகளை இறக்குமதி செய்யும் போது பயன்படுத்த வேண்டிய அடைவு"
 
@@ -289,43 +289,64 @@ msgid "Clear"
 msgstr "தெளிவு"
 
 #: data/gtk/preferences.blp:112
+msgid "Lutris"
+msgstr ""
+
+#: data/gtk/preferences.blp:116
+#, fuzzy
+#| msgid "Heroic Install Location"
+msgid "Lutris Install Location"
+msgstr "Heroic (ஹீரோயிக்) நிறுவல் இடம்"
+
+#: data/gtk/preferences.blp:125
+#, fuzzy
+#| msgid "Set Heroic Location"
+msgid "Lutris Cache Location"
+msgstr "Heroic (ஹீரோயிக்) இருப்பிடத்தை அமைக்கவும்"
+
+#: data/gtk/preferences.blp:126
+#, fuzzy
+#| msgid "Directory to use when importing games"
+msgid "Directory to use when importing game covers"
+msgstr "விளையாட்டுகளை இறக்குமதி செய்யும் போது பயன்படுத்த வேண்டிய அடைவு"
+
+#: data/gtk/preferences.blp:136
 msgid "Heroic"
 msgstr "Heroic (ஹீரோயிக்)"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:140
 msgid "Heroic Install Location"
 msgstr "Heroic (ஹீரோயிக்) நிறுவல் இடம்"
 
-#: data/gtk/preferences.blp:126
+#: data/gtk/preferences.blp:150
 msgid "Import Epic Games"
 msgstr "Epic விளையாட்டுகளை இறக்குமதி செய்"
 
-#: data/gtk/preferences.blp:134
+#: data/gtk/preferences.blp:158
 msgid "Import GOG Games"
 msgstr "GOG விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: data/gtk/preferences.blp:142
+#: data/gtk/preferences.blp:166
 msgid "Import Sideloaded Games"
 msgstr "பக்க ஏற்றப்பட்ட விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: data/gtk/preferences.blp:151
+#: data/gtk/preferences.blp:175
 msgid "Bottles"
 msgstr "Bottles (பாட்டில்கள்)"
 
-#: data/gtk/preferences.blp:155
+#: data/gtk/preferences.blp:179
 msgid "Bottles Install Location"
 msgstr "Bottles (பாட்டில்கள்) நிறுவும் இடம்"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:125
+#: src/main.py:126
 msgid "translator_credits"
 msgstr "K.B.Dharun Krishna <kbdharunkrishna@gmail.com>"
 
 #. The variable is the title of the game
-#: src/main.py:197
-#, python-brace-format
-msgid "{title} removed"
-msgstr "{title} அகற்றப்பட்டது"
+#: src/main.py:201
+msgid "{} removed"
+msgstr "{} அகற்றப்பட்டது"
 
 #: src/window.py:234
 msgid "Today"
@@ -337,9 +358,8 @@ msgstr "நேற்று"
 
 #. The variable is the date when the game was added
 #: src/window.py:270
-#, python-brace-format
-msgid "Added: {date}"
-msgstr "சேர்க்கப்பட்டது: {date}"
+msgid "Added: {}"
+msgstr "சேர்க்கப்பட்டது: {}"
 
 #: src/window.py:275
 msgid "Never"
@@ -347,9 +367,10 @@ msgstr "ஒருபோதும் இல்லை"
 
 #. The variable is the date when the game was last played
 #: src/window.py:279
-#, python-brace-format
-msgid "Last played: {last_played_date}"
-msgstr "கடைசியாக விளையாடியது: {last_played_date}"
+#, fuzzy
+#| msgid "Last played:"
+msgid "Last played: {}"
+msgstr "கடைசியாக விளையாடியது:"
 
 #: src/game.py:173
 msgid "Details"
@@ -361,27 +382,33 @@ msgstr ""
 
 #. The variable is the name of the game launcher
 #: src/preferences.py:57
-#, python-brace-format
-msgid "Select the {name} configuration directory."
+msgid "Select the {} configuration directory."
 msgstr ""
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:59
-#, python-brace-format
-msgid "Select the {name} data directory."
+#: src/preferences.py:60
+msgid "Select the {} data directory."
 msgstr ""
 
-#: src/preferences.py:61
+#: src/preferences.py:62 src/preferences.py:224
 #, fuzzy
 #| msgid "Set Steam Location"
 msgid "Set Location"
 msgstr "Steam (ஸ்டீம் இடத்தை அமைக்கவும்"
 
-#: src/preferences.py:117
+#: src/preferences.py:122
 #, fuzzy
 #| msgid "{title} removed"
 msgid "All games removed"
 msgstr "{title} அகற்றப்பட்டது"
+
+#: src/preferences.py:221
+msgid "Cache Not Found"
+msgstr ""
+
+#: src/preferences.py:222
+msgid "Select the Lutris cache directory."
+msgstr ""
 
 #: src/utils/importer.py:37
 msgid "Importing Games…"
@@ -411,9 +438,10 @@ msgstr "Steam (ஸ்டீம்) விளையாட்டுகள் இ�
 
 #. The variable is the number of games
 #: src/utils/importer.py:96
-#, python-brace-format
-msgid "Successfully imported {games_no} games."
-msgstr "{games_no} விளையாட்டுகள் வெற்றிகரமாக இறக்குமதி செய்யப்பட்டன."
+#, fuzzy
+#| msgid "Successfully imported 1 game."
+msgid "Successfully imported {} games."
+msgstr "1 விளையாட்டு வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -449,52 +477,40 @@ msgstr "கோப்பு.txt"
 msgid "program"
 msgstr "பயன்பாடு"
 
-#. Translate this string as you would translate "path to {exe_name}"
+#. Translate this string as you would translate "path to {}"
 #: src/utils/create_details_window.py:119
-#, python-brace-format
-msgid "C:\\path\\to\\{exe_name}"
-msgstr "C:\\பாதை\\டு \\{exe_name}"
-
-#. Translate this string as you would translate "path to {file_name}"
 #: src/utils/create_details_window.py:121
-#, python-brace-format
-msgid "C:\\path\\to\\{file_name}"
-msgstr "C:\\பாதை\\டு \\{file_name}"
+msgid "C:\\path\\to\\{}"
+msgstr "C:\\பாதை\\டு \\{}"
 
-#. Translate this string as you would translate "path to {exe_name}"
+#. Translate this string as you would translate "path to {}"
 #: src/utils/create_details_window.py:125
-#, python-brace-format
-msgid "/path/to/{exe_name}"
-msgstr "/பாதை/டு/ {exe_name}"
-
-#. Translate this string as you would translate "path to {file_name}"
 #: src/utils/create_details_window.py:127
-#, python-brace-format
-msgid "/path/to/{file_name}"
-msgstr "/பாதை/டு /{file_name}"
+msgid "/path/to/{}"
+msgstr "/பாதை/டு/ {}"
 
 #: src/utils/create_details_window.py:131
-#, python-brace-format
 msgid ""
-"To launch the executable \"{exe_name}\", use the command:\n"
+"To launch the executable \"{}\", use the command:\n"
 "\n"
-"<tt>\"{exe_path}\"</tt>\n"
+"<tt>\"{}\"</tt>\n"
 "\n"
-"To open the file \"{file_name}\" with the default application, use:\n"
+"To open the file \"{}\" with the default application, use:\n"
 "\n"
-"<tt>{command} \"{file_path}\"</tt>\n"
+"<tt>{} \"{}\"</tt>\n"
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"இயங்கக்கூடிய \"{exe_name}\" ஐத் தொடங்க, கட்டளையைப் பயன்படுத்தவும்:\n"
+"இயங்கக்கூடிய \"{}\" ஐத் தொடங்க, கட்டளையைப் பயன்படுத்தவும்:\n"
 "\n"
-"<tt>\"{exe_path}\"</tt>\n"
+"<tt>\"{}\"</tt>\n"
 "\n"
-"இயல்புநிலை பயன்பாட்டுடன் \"{file_name}\" கோப்பைத் திறக்க, பயன்படுத்தவும்:\n"
+"இயல்புநிலை பயன்பாட்டுடன் \"{}\" கோப்பைத் திறக்க, பயன்படுத்தவும்:\n"
 "\n"
-"<tt>{command} \"{file_path}\"</tt>\n"
+"<tt>{} \"{}\"</tt>\n"
 "\n"
-"பாதையில் இடைவெளிகள் இருந்தால், அதை இரட்டை மேற்கோள்களில் போர்த்துவதை உறுதிசெய்யவும்!"
+"பாதையில் இடைவெளிகள் இருந்தால், அதை இரட்டை மேற்கோள்களில் போர்த்துவதை "
+"உறுதிசெய்யவும்!"
 
 #: src/utils/create_details_window.py:154
 msgid "Executable"
@@ -533,6 +549,22 @@ msgstr "இயங்கக்கூடியது காலியாக இர�
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
 msgstr "நிராகரி"
+
+#, python-brace-format
+#~ msgid "Last played: {last_played_date}"
+#~ msgstr "கடைசியாக விளையாடியது: {last_played_date}"
+
+#, python-brace-format
+#~ msgid "Successfully imported {games_no} games."
+#~ msgstr "{games_no} விளையாட்டுகள் வெற்றிகரமாக இறக்குமதி செய்யப்பட்டன."
+
+#, python-brace-format
+#~ msgid "C:\\path\\to\\{file_name}"
+#~ msgstr "C:\\பாதை\\டு \\{file_name}"
+
+#, python-brace-format
+#~ msgid "/path/to/{file_name}"
+#~ msgstr "/பாதை/டு /{file_name}"
 
 #, fuzzy
 #~| msgid "General"
@@ -585,9 +617,6 @@ msgstr "நிராகரி"
 #~ msgid "The Heroic directory cannot be found."
 #~ msgstr "Heroic (ஹீரோயிக்) கோப்பகத்தைக் கண்டுபிடிக்க முடியவில்லை."
 
-#~ msgid "Set Heroic Location"
-#~ msgstr "Heroic (ஹீரோயிக்) இருப்பிடத்தை அமைக்கவும்"
-
 #~ msgid "Heroic Games Imported"
 #~ msgstr "Heroic (ஹீரோயிக்) விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
 
@@ -607,9 +636,6 @@ msgstr "நிராகரி"
 #, fuzzy
 #~ msgid "Successfully imported {str(len(heroic_games))} games."
 #~ msgstr "1 விளையாட்டு வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது."
-
-#~ msgid "Last played:"
-#~ msgstr "கடைசியாக விளையாடியது:"
 
 #~ msgid "Successfully imported"
 #~ msgstr "வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது"
