@@ -421,7 +421,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             except IndexError:
                 return
         data = get_games([game_id])[game_id]
-        data.pop("removed")
+        data.pop("removed", None)
         save_game(data)
         self.update_games([game_id])
         self.toasts[game_id].dismiss()
