@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 16:23+0200\n"
-"PO-Revision-Date: 2023-03-31 13:36+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"POT-Creation-Date: 2023-03-31 16:40+0200\n"
+"PO-Revision-Date: 2023-03-31 15:04+0000\n"
+"Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
 "Language: fr\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:110
+#: src/main.py:111
 msgid "Cartridges"
 msgstr "Cartouches"
 
@@ -195,7 +195,7 @@ msgstr "Afficher les préférences"
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:198 src/preferences.py:118
+#: data/gtk/help-overlay.blp:34 src/main.py:202 src/preferences.py:123
 msgid "Undo"
 msgstr "Annuler"
 
@@ -270,7 +270,7 @@ msgid "Steam Install Location"
 msgstr "Emplacement de l'installation de Steam"
 
 #: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:156
+#: data/gtk/preferences.blp:141 data/gtk/preferences.blp:180
 msgid "Directory to use when importing games"
 msgstr "Répertoire à utiliser lors de l'importation de jeux"
 
@@ -288,43 +288,64 @@ msgid "Clear"
 msgstr "Vider"
 
 #: data/gtk/preferences.blp:112
+msgid "Lutris"
+msgstr ""
+
+#: data/gtk/preferences.blp:116
+#, fuzzy
+#| msgid "Heroic Install Location"
+msgid "Lutris Install Location"
+msgstr "Emplacement de l'installation Heroic"
+
+#: data/gtk/preferences.blp:125
+#, fuzzy
+#| msgid "Set Heroic Location"
+msgid "Lutris Cache Location"
+msgstr "Définir l'emplacement Heroic"
+
+#: data/gtk/preferences.blp:126
+#, fuzzy
+#| msgid "Directory to use when importing games"
+msgid "Directory to use when importing game covers"
+msgstr "Répertoire à utiliser lors de l'importation de jeux"
+
+#: data/gtk/preferences.blp:136
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:140
 msgid "Heroic Install Location"
 msgstr "Emplacement de l'installation Heroic"
 
-#: data/gtk/preferences.blp:126
+#: data/gtk/preferences.blp:150
 msgid "Import Epic Games"
 msgstr "Importer Epic Games"
 
-#: data/gtk/preferences.blp:134
+#: data/gtk/preferences.blp:158
 msgid "Import GOG Games"
 msgstr "Importer des jeux GOG"
 
-#: data/gtk/preferences.blp:142
+#: data/gtk/preferences.blp:166
 msgid "Import Sideloaded Games"
 msgstr "Importer des jeux Sideloaded"
 
-#: data/gtk/preferences.blp:151
+#: data/gtk/preferences.blp:175
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:155
+#: data/gtk/preferences.blp:179
 msgid "Bottles Install Location"
 msgstr "Emplacement de l'installation Bottles"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:125
+#: src/main.py:126
 msgid "translator_credits"
 msgstr "Irénée Thirion"
 
 #. The variable is the title of the game
-#: src/main.py:197
-#, python-brace-format
-msgid "{title} removed"
-msgstr "{title} retiré"
+#: src/main.py:201
+msgid "{} removed"
+msgstr "{} retiré"
 
 #: src/window.py:234
 msgid "Today"
@@ -336,9 +357,8 @@ msgstr "Hier"
 
 #. The variable is the date when the game was added
 #: src/window.py:270
-#, python-brace-format
-msgid "Added: {date}"
-msgstr "Ajouté : {date}"
+msgid "Added: {}"
+msgstr "Ajouté : {}"
 
 #: src/window.py:275
 msgid "Never"
@@ -346,9 +366,8 @@ msgstr "Jamais"
 
 #. The variable is the date when the game was last played
 #: src/window.py:279
-#, python-brace-format
-msgid "Last played: {last_played_date}"
-msgstr "Dernière session : {last_played_date}"
+msgid "Last played: {}"
+msgstr "Dernière session : {}"
 
 #: src/game.py:173
 msgid "Details"
@@ -360,23 +379,31 @@ msgstr "Installation introuvable"
 
 #. The variable is the name of the game launcher
 #: src/preferences.py:57
-#, python-brace-format
-msgid "Select the {name} configuration directory."
-msgstr "Sélectionnez le répertoire de configuration de {name}."
+msgid "Select the {} configuration directory."
+msgstr "Sélectionnez le répertoire de configuration de {}."
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:59
-#, python-brace-format
-msgid "Select the {name} data directory."
-msgstr "Sélectionnez le répertoire de données de {name}."
+#: src/preferences.py:60
+msgid "Select the {} data directory."
+msgstr "Sélectionnez le répertoire de données de {}."
 
-#: src/preferences.py:61
+#: src/preferences.py:62 src/preferences.py:224
 msgid "Set Location"
 msgstr "Définir l’emplacement"
 
-#: src/preferences.py:117
+#: src/preferences.py:122
 msgid "All games removed"
 msgstr "Tous les jeux ont été supprimés"
+
+#: src/preferences.py:221
+msgid "Cache Not Found"
+msgstr ""
+
+#: src/preferences.py:222
+#, fuzzy
+#| msgid "Select the {name} data directory."
+msgid "Select the Lutris cache directory."
+msgstr "Sélectionnez le répertoire de données de {name}."
 
 #: src/utils/importer.py:37
 msgid "Importing Games…"
@@ -400,9 +427,10 @@ msgstr "Jeux importés"
 
 #. The variable is the number of games
 #: src/utils/importer.py:96
-#, python-brace-format
-msgid "Successfully imported {games_no} games."
-msgstr "Importation réussie de {games_no} jeux."
+#, fuzzy
+#| msgid "Successfully imported 1 game."
+msgid "Successfully imported {} games."
+msgstr "Importation réussie de 1 jeu."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -438,51 +466,38 @@ msgstr "ficher.txt"
 msgid "program"
 msgstr "programme"
 
-#. Translate this string as you would translate "path to {exe_name}"
+#. Translate this string as you would translate "path to {}"
 #: src/utils/create_details_window.py:119
-#, python-brace-format
-msgid "C:\\path\\to\\{exe_name}"
-msgstr "C:\\chemin\\vers\\{exe_name}"
-
-#. Translate this string as you would translate "path to {file_name}"
 #: src/utils/create_details_window.py:121
-#, python-brace-format
-msgid "C:\\path\\to\\{file_name}"
-msgstr "C:\\chemin\\vers\\{file_name}"
+msgid "C:\\path\\to\\{}"
+msgstr "C:\\chemin\\vers\\{}"
 
-#. Translate this string as you would translate "path to {exe_name}"
+#. Translate this string as you would translate "path to {}"
 #: src/utils/create_details_window.py:125
-#, python-brace-format
-msgid "/path/to/{exe_name}"
-msgstr "/chemin/vers/{exe_name}"
-
-#. Translate this string as you would translate "path to {file_name}"
 #: src/utils/create_details_window.py:127
-#, python-brace-format
-msgid "/path/to/{file_name}"
-msgstr "/chemin/vers/{file_name}"
+msgid "/path/to/{}"
+msgstr "/chemin/vers/{}"
 
 #: src/utils/create_details_window.py:131
-#, python-brace-format
 msgid ""
-"To launch the executable \"{exe_name}\", use the command:\n"
+"To launch the executable \"{}\", use the command:\n"
 "\n"
-"<tt>\"{exe_path}\"</tt>\n"
+"<tt>\"{}\"</tt>\n"
 "\n"
-"To open the file \"{file_name}\" with the default application, use:\n"
+"To open the file \"{}\" with the default application, use:\n"
 "\n"
-"<tt>{command} \"{file_path}\"</tt>\n"
+"<tt>{} \"{}\"</tt>\n"
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Pour lancer l'exécutable « {exe_name} », utilisez la commande :\n"
+"Pour lancer l'exécutable « {} », utilisez la commande :\n"
 "\n"
-"<tt>\"{exe_path}\"</tt>\n"
+"<tt>\"{}\"</tt>\n"
 "\n"
-"Pour ouvrir le fichier « {file_name} » avec l'application par défaut, "
-"utilisez la commande :\n"
+"Pour ouvrir le fichier « {} » avec l'application par défaut, utilisez la "
+"commande :\n"
 "\n"
-"<tt>{command} \"{file_path}\"</tt>\n"
+"<tt>{} \"{}\"</tt>\n"
 "\n"
 "Si le chemin d'accès contient des espaces, veillez à le mettre entre "
 "guillemets !"
@@ -524,6 +539,22 @@ msgstr "L'exécutable ne peut pas être vide."
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
 msgstr "Rejeter"
+
+#, python-brace-format
+#~ msgid "Last played: {last_played_date}"
+#~ msgstr "Dernière session : {last_played_date}"
+
+#, python-brace-format
+#~ msgid "Successfully imported {games_no} games."
+#~ msgstr "Importation réussie de {games_no} jeux."
+
+#, python-brace-format
+#~ msgid "C:\\path\\to\\{file_name}"
+#~ msgstr "C:\\chemin\\vers\\{file_name}"
+
+#, python-brace-format
+#~ msgid "/path/to/{file_name}"
+#~ msgstr "/chemin/vers/{file_name}"
 
 #, fuzzy
 #~| msgid "General"
@@ -576,9 +607,6 @@ msgstr "Rejeter"
 #~ msgid "The Heroic directory cannot be found."
 #~ msgstr "Le répertoire Heroic est introuvable."
 
-#~ msgid "Set Heroic Location"
-#~ msgstr "Définir l'emplacement Heroic"
-
 #~ msgid "Heroic Games Imported"
 #~ msgstr "Jeux Heroic importés"
 
@@ -598,9 +626,6 @@ msgstr "Rejeter"
 #, fuzzy
 #~ msgid "Successfully imported {str(len(heroic_games))} games."
 #~ msgstr "Importation réussie de 1 jeu."
-
-#~ msgid "Last played:"
-#~ msgstr "Dernière session :"
 
 #~ msgid "Successfully imported"
 #~ msgstr "Importation réussie"

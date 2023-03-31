@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 16:23+0200\n"
-"PO-Revision-Date: 2023-03-30 16:17+0000\n"
+"POT-Creation-Date: 2023-03-31 16:40+0200\n"
+"PO-Revision-Date: 2023-03-31 15:04+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:110
+#: src/main.py:111
 msgid "Cartridges"
 msgstr "Kazetták"
 
@@ -193,7 +193,7 @@ msgstr "Beállítások megjelenítése"
 msgid "Shortcuts"
 msgstr "Gyorsbillentyűk"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:198 src/preferences.py:118
+#: data/gtk/help-overlay.blp:34 src/main.py:202 src/preferences.py:123
 msgid "Undo"
 msgstr "Visszavonás"
 
@@ -266,7 +266,7 @@ msgid "Steam Install Location"
 msgstr "Steam telepítés helye"
 
 #: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:156
+#: data/gtk/preferences.blp:141 data/gtk/preferences.blp:180
 msgid "Directory to use when importing games"
 msgstr "Az importáláshoz használt mappa"
 
@@ -283,43 +283,58 @@ msgid "Clear"
 msgstr "Törlés"
 
 #: data/gtk/preferences.blp:112
+msgid "Lutris"
+msgstr "Lutris"
+
+#: data/gtk/preferences.blp:116
+msgid "Lutris Install Location"
+msgstr "Lutris telepítés helye"
+
+#: data/gtk/preferences.blp:125
+msgid "Lutris Cache Location"
+msgstr "Lutris gyorsítótár helye"
+
+#: data/gtk/preferences.blp:126
+msgid "Directory to use when importing game covers"
+msgstr "A játékborítók importáláshoz használt mappa"
+
+#: data/gtk/preferences.blp:136
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:140
 msgid "Heroic Install Location"
 msgstr "Heroic telepítés helye"
 
-#: data/gtk/preferences.blp:126
+#: data/gtk/preferences.blp:150
 msgid "Import Epic Games"
 msgstr "Epic Games játékok importálása"
 
-#: data/gtk/preferences.blp:134
+#: data/gtk/preferences.blp:158
 msgid "Import GOG Games"
 msgstr "GOG játékok importálása"
 
-#: data/gtk/preferences.blp:142
+#: data/gtk/preferences.blp:166
 msgid "Import Sideloaded Games"
 msgstr "Manuálisan hozzáadott játékok importálása"
 
-#: data/gtk/preferences.blp:151
+#: data/gtk/preferences.blp:175
 msgid "Bottles"
 msgstr "Palackok"
 
-#: data/gtk/preferences.blp:155
+#: data/gtk/preferences.blp:179
 msgid "Bottles Install Location"
 msgstr "Palackok telepítés helye"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:125
+#: src/main.py:126
 msgid "translator_credits"
 msgstr "kramo https://kramo.hu"
 
 #. The variable is the title of the game
-#: src/main.py:197
-#, python-brace-format
-msgid "{title} removed"
-msgstr "{title} eltávolítva"
+#: src/main.py:201
+msgid "{} removed"
+msgstr "{} eltávolítva"
 
 #: src/window.py:234
 msgid "Today"
@@ -331,9 +346,8 @@ msgstr "Tegnap"
 
 #. The variable is the date when the game was added
 #: src/window.py:270
-#, python-brace-format
-msgid "Added: {date}"
-msgstr "Hozzáadva: {date}"
+msgid "Added: {}"
+msgstr "Hozzáadva: {}"
 
 #: src/window.py:275
 msgid "Never"
@@ -341,9 +355,8 @@ msgstr "Soha"
 
 #. The variable is the date when the game was last played
 #: src/window.py:279
-#, python-brace-format
-msgid "Last played: {last_played_date}"
-msgstr "Legutóbbi játékmenet: {last_played_date}"
+msgid "Last played: {}"
+msgstr "Legutóbbi játékmenet: {}"
 
 #: src/game.py:173
 msgid "Details"
@@ -355,23 +368,29 @@ msgstr "Telepítés nem található"
 
 #. The variable is the name of the game launcher
 #: src/preferences.py:57
-#, python-brace-format
-msgid "Select the {name} configuration directory."
-msgstr "Válassza ki {name} konfigurációs mappáját."
+msgid "Select the {} configuration directory."
+msgstr "Válassza ki {} konfigurációs mappáját."
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:59
-#, python-brace-format
-msgid "Select the {name} data directory."
-msgstr "Válassza ki {name} adatainak mappáját."
+#: src/preferences.py:60
+msgid "Select the {} data directory."
+msgstr "Válassza ki {} adatainak mappáját."
 
-#: src/preferences.py:61
+#: src/preferences.py:62 src/preferences.py:224
 msgid "Set Location"
 msgstr "Mappa kiválasztása"
 
-#: src/preferences.py:117
+#: src/preferences.py:122
 msgid "All games removed"
 msgstr "Az összes játék eltávolítva"
+
+#: src/preferences.py:221
+msgid "Cache Not Found"
+msgstr "Gyorsítótár nem található"
+
+#: src/preferences.py:222
+msgid "Select the Lutris cache directory."
+msgstr "Válassza ki Lutris gyorsítótár mappáját."
 
 #: src/utils/importer.py:37
 msgid "Importing Games…"
@@ -395,9 +414,8 @@ msgstr "Játékok importálva"
 
 #. The variable is the number of games
 #: src/utils/importer.py:96
-#, python-brace-format
-msgid "Successfully imported {games_no} games."
-msgstr "{games_no} játék sikeresen importálva."
+msgid "Successfully imported {} games."
+msgstr "{} játék sikeresen importálva."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -433,51 +451,38 @@ msgstr "fájl.txt"
 msgid "program"
 msgstr "program"
 
-#. Translate this string as you would translate "path to {exe_name}"
+#. Translate this string as you would translate "path to {}"
 #: src/utils/create_details_window.py:119
-#, python-brace-format
-msgid "C:\\path\\to\\{exe_name}"
-msgstr "C:\\útvonal\\a\\programhoz\\{exe_name}"
-
-#. Translate this string as you would translate "path to {file_name}"
 #: src/utils/create_details_window.py:121
-#, python-brace-format
-msgid "C:\\path\\to\\{file_name}"
-msgstr "C:\\útvonal\\a\\fájlhoz\\{file_name}"
+msgid "C:\\path\\to\\{}"
+msgstr "C:\\útvonal\\ide\\{}"
 
-#. Translate this string as you would translate "path to {exe_name}"
+#. Translate this string as you would translate "path to {}"
 #: src/utils/create_details_window.py:125
-#, python-brace-format
-msgid "/path/to/{exe_name}"
-msgstr "/útvonal/a/programhoz/{exe_name}"
-
-#. Translate this string as you would translate "path to {file_name}"
 #: src/utils/create_details_window.py:127
-#, python-brace-format
-msgid "/path/to/{file_name}"
-msgstr "/útvonal/a/fájlhoz/{file_name}"
+msgid "/path/to/{}"
+msgstr "/útvonal/ide/{}"
 
 #: src/utils/create_details_window.py:131
-#, python-brace-format
 msgid ""
-"To launch the executable \"{exe_name}\", use the command:\n"
+"To launch the executable \"{}\", use the command:\n"
 "\n"
-"<tt>\"{exe_path}\"</tt>\n"
+"<tt>\"{}\"</tt>\n"
 "\n"
-"To open the file \"{file_name}\" with the default application, use:\n"
+"To open the file \"{}\" with the default application, use:\n"
 "\n"
-"<tt>{command} \"{file_path}\"</tt>\n"
+"<tt>{} \"{}\"</tt>\n"
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Az \"{exe_name}\" program elindításához ezt a parancsot használd:\n"
+"Az \"{}\" program elindításához ezt a parancsot használd:\n"
 "\n"
-"<tt>\"{exe_path}\"</tt>\n"
+"<tt>\"{}\"</tt>\n"
 "\n"
-"A \"{file_name}\" fájl megnyitásához az alapértelmezett programmal ezt a "
-"parancsot használd:\n"
+"A \"{}\" fájl megnyitásához az alapértelmezett programmal ezt a parancsot "
+"használd:\n"
 "\n"
-"<tt>{command} \"{file_path}\"</tt>\n"
+"<tt>{} \"{}\"</tt>\n"
 "\n"
 "Ha az elérési útvonalban szóközök vannak, rakd az útvonalat idézőjelek közé!"
 
@@ -518,6 +523,22 @@ msgstr "A program nem lehet üres."
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
 msgstr "Rendben"
+
+#, python-brace-format
+#~ msgid "Last played: {last_played_date}"
+#~ msgstr "Legutóbbi játékmenet: {last_played_date}"
+
+#, python-brace-format
+#~ msgid "Successfully imported {games_no} games."
+#~ msgstr "{games_no} játék sikeresen importálva."
+
+#, python-brace-format
+#~ msgid "C:\\path\\to\\{file_name}"
+#~ msgstr "C:\\útvonal\\a\\fájlhoz\\{file_name}"
+
+#, python-brace-format
+#~ msgid "/path/to/{file_name}"
+#~ msgstr "/útvonal/a/fájlhoz/{file_name}"
 
 #~ msgctxt "shortcuts window"
 #~ msgid "General"
@@ -564,9 +585,6 @@ msgstr "Rendben"
 #~ msgid "The Heroic directory cannot be found."
 #~ msgstr "A Heroic mappa nem található."
 
-#~ msgid "Set Heroic Location"
-#~ msgstr "Heroic mappa kiválasztása"
-
 #~ msgid "Heroic Games Imported"
 #~ msgstr "Játékok importálva a Heroic-ból"
 
@@ -591,9 +609,6 @@ msgstr "Rendben"
 
 #~ msgid "Successfully imported {str(len(heroic_games))} games."
 #~ msgstr "{str(len(heroic_games))} játék sikeresen importálva."
-
-#~ msgid "Last played:"
-#~ msgstr "Legutóbbi játékmenet:"
 
 #~ msgid "Successfully imported"
 #~ msgstr "Sikeresen importálva"

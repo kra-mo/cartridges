@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 16:23+0200\n"
-"PO-Revision-Date: 2023-03-30 11:43+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"POT-Creation-Date: 2023-03-31 16:40+0200\n"
+"PO-Revision-Date: 2023-03-31 15:04+0000\n"
+"Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:110
+#: src/main.py:111
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -197,7 +197,7 @@ msgstr "Vis innstillinger"
 msgid "Shortcuts"
 msgstr "Snarveier"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:198 src/preferences.py:118
+#: data/gtk/help-overlay.blp:34 src/main.py:202 src/preferences.py:123
 msgid "Undo"
 msgstr "Angre"
 
@@ -273,7 +273,7 @@ msgid "Steam Install Location"
 msgstr "Installasjonssted for Steam"
 
 #: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:156
+#: data/gtk/preferences.blp:141 data/gtk/preferences.blp:180
 msgid "Directory to use when importing games"
 msgstr "Mappe å bruke ved import av spill"
 
@@ -291,43 +291,64 @@ msgid "Clear"
 msgstr "Tøm"
 
 #: data/gtk/preferences.blp:112
+msgid "Lutris"
+msgstr ""
+
+#: data/gtk/preferences.blp:116
+#, fuzzy
+#| msgid "Heroic Install Location"
+msgid "Lutris Install Location"
+msgstr "Installasjonssted for Heroic"
+
+#: data/gtk/preferences.blp:125
+#, fuzzy
+#| msgid "Set Heroic Location"
+msgid "Lutris Cache Location"
+msgstr "Velg hvor Heroic er å finne"
+
+#: data/gtk/preferences.blp:126
+#, fuzzy
+#| msgid "Directory to use when importing games"
+msgid "Directory to use when importing game covers"
+msgstr "Mappe å bruke ved import av spill"
+
+#: data/gtk/preferences.blp:136
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:140
 msgid "Heroic Install Location"
 msgstr "Installasjonssted for Heroic"
 
-#: data/gtk/preferences.blp:126
+#: data/gtk/preferences.blp:150
 msgid "Import Epic Games"
 msgstr "Importer Epic-spill"
 
-#: data/gtk/preferences.blp:134
+#: data/gtk/preferences.blp:158
 msgid "Import GOG Games"
 msgstr "Importer GOG-spill"
 
-#: data/gtk/preferences.blp:142
+#: data/gtk/preferences.blp:166
 msgid "Import Sideloaded Games"
 msgstr "Importer sideinnlastede spill"
 
-#: data/gtk/preferences.blp:151
+#: data/gtk/preferences.blp:175
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:155
+#: data/gtk/preferences.blp:179
 msgid "Bottles Install Location"
 msgstr "Installasjonssted for Bottles"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:125
+#: src/main.py:126
 msgid "translator_credits"
 msgstr "Allan Nordhøy, <epost@anotheragency.no>"
 
 #. The variable is the title of the game
-#: src/main.py:197
-#, python-brace-format
-msgid "{title} removed"
-msgstr "{title} fjernet"
+#: src/main.py:201
+msgid "{} removed"
+msgstr "{} fjernet"
 
 #: src/window.py:234
 msgid "Today"
@@ -339,9 +360,8 @@ msgstr "I går"
 
 #. The variable is the date when the game was added
 #: src/window.py:270
-#, python-brace-format
-msgid "Added: {date}"
-msgstr "Tillagt: {date}"
+msgid "Added: {}"
+msgstr "Tillagt: {}"
 
 #: src/window.py:275
 msgid "Never"
@@ -349,9 +369,8 @@ msgstr "Aldri"
 
 #. The variable is the date when the game was last played
 #: src/window.py:279
-#, python-brace-format
-msgid "Last played: {last_played_date}"
-msgstr "Sist spilt: {last_played_date}"
+msgid "Last played: {}"
+msgstr "Sist spilt: {}"
 
 #: src/game.py:173
 #, fuzzy
@@ -364,27 +383,34 @@ msgstr "Fant ikke installasjonen"
 
 #. The variable is the name of the game launcher
 #: src/preferences.py:57
-#, fuzzy, python-brace-format
-msgid "Select the {name} configuration directory."
-msgstr "Velg {name}-oppsettsmappen."
+msgid "Select the {} configuration directory."
+msgstr "Velg {}-oppsettsmappen."
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:59
-#, fuzzy, python-brace-format
-msgid "Select the {name} data directory."
-msgstr "Velg {name}-datamappen."
+#: src/preferences.py:60
+msgid "Select the {} data directory."
+msgstr "Velg {}-datamappen."
 
-#: src/preferences.py:61
+#: src/preferences.py:62 src/preferences.py:224
 #, fuzzy
 #| msgid "Set Steam Location"
 msgid "Set Location"
 msgstr "Velg hvor Steam er å finne"
 
-#: src/preferences.py:117
+#: src/preferences.py:122
 #, fuzzy
 #| msgid "{title} removed"
 msgid "All games removed"
 msgstr "{title} fjernet"
+
+#: src/preferences.py:221
+msgid "Cache Not Found"
+msgstr ""
+
+#: src/preferences.py:222
+#, fuzzy
+msgid "Select the Lutris cache directory."
+msgstr "Velg {name}-datamappen."
 
 #: src/utils/importer.py:37
 msgid "Importing Games…"
@@ -414,9 +440,10 @@ msgstr "Steam-spill importert"
 
 #. The variable is the number of games
 #: src/utils/importer.py:96
-#, python-brace-format
-msgid "Successfully imported {games_no} games."
-msgstr "Importerte {games_no} spill."
+#, fuzzy
+#| msgid "Successfully imported 1 game."
+msgid "Successfully imported {} games."
+msgstr "Importerte ett spill."
 
 #: src/utils/create_details_window.py:41
 msgid "Add New Game"
@@ -452,50 +479,37 @@ msgstr "fil.txt"
 msgid "program"
 msgstr "program"
 
-#. Translate this string as you would translate "path to {exe_name}"
+#. Translate this string as you would translate "path to {}"
 #: src/utils/create_details_window.py:119
-#, python-brace-format
-msgid "C:\\path\\to\\{exe_name}"
-msgstr "C:\\sti\\til\\{exe_name}"
-
-#. Translate this string as you would translate "path to {file_name}"
 #: src/utils/create_details_window.py:121
-#, python-brace-format
-msgid "C:\\path\\to\\{file_name}"
-msgstr "C:\\sti\\til\\{file_name}"
+msgid "C:\\path\\to\\{}"
+msgstr "C:\\sti\\til\\{}"
 
-#. Translate this string as you would translate "path to {exe_name}"
+#. Translate this string as you would translate "path to {}"
 #: src/utils/create_details_window.py:125
-#, python-brace-format
-msgid "/path/to/{exe_name}"
-msgstr "/sti/til/{exe_name}"
-
-#. Translate this string as you would translate "path to {file_name}"
 #: src/utils/create_details_window.py:127
-#, python-brace-format
-msgid "/path/to/{file_name}"
-msgstr "/sti/til/{file_name}"
+msgid "/path/to/{}"
+msgstr "/sti/til/{}"
 
 #: src/utils/create_details_window.py:131
-#, fuzzy, python-brace-format
 msgid ""
-"To launch the executable \"{exe_name}\", use the command:\n"
+"To launch the executable \"{}\", use the command:\n"
 "\n"
-"<tt>\"{exe_path}\"</tt>\n"
+"<tt>\"{}\"</tt>\n"
 "\n"
-"To open the file \"{file_name}\" with the default application, use:\n"
+"To open the file \"{}\" with the default application, use:\n"
 "\n"
-"<tt>{command} \"{file_path}\"</tt>\n"
+"<tt>{} \"{}\"</tt>\n"
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Start den kjørbare «{exe_name}»-filen med denne kommandoen:\n"
+"Start den kjørbare «{}»-filen med denne kommandoen:\n"
 "\n"
-"<tt>«{exe_path}»</tt>\n"
+"<tt>«{}»</tt>\n"
 "\n"
-"For å åpne filen «{file_name}» med forvalgt program bruker du:\n"
+"For å åpne filen «{}» med forvalgt program bruker du:\n"
 "\n"
-"<tt>{command} «{file_path}»</tt>\n"
+"<tt>{} «{}»</tt>\n"
 "\n"
 "Hvis stien inneholder mellomrom må du pakke den inn i doble engelske "
 "sitattegn."
@@ -537,6 +551,22 @@ msgstr "Kjørbar fil må angis."
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
 msgstr "Forkast"
+
+#, python-brace-format
+#~ msgid "Last played: {last_played_date}"
+#~ msgstr "Sist spilt: {last_played_date}"
+
+#, python-brace-format
+#~ msgid "Successfully imported {games_no} games."
+#~ msgstr "Importerte {games_no} spill."
+
+#, python-brace-format
+#~ msgid "C:\\path\\to\\{file_name}"
+#~ msgstr "C:\\sti\\til\\{file_name}"
+
+#, python-brace-format
+#~ msgid "/path/to/{file_name}"
+#~ msgstr "/sti/til/{file_name}"
 
 #, fuzzy
 #~| msgid "General"
@@ -588,9 +618,6 @@ msgstr "Forkast"
 #~ msgid "The Heroic directory cannot be found."
 #~ msgstr "Finner ikke Heroic-spillmappen."
 
-#~ msgid "Set Heroic Location"
-#~ msgstr "Velg hvor Heroic er å finne"
-
 #~ msgid "Heroic Games Imported"
 #~ msgstr "Heroic-spill importert"
 
@@ -611,9 +638,6 @@ msgstr "Forkast"
 #, fuzzy
 #~ msgid "Successfully imported {str(len(heroic_games))} games."
 #~ msgstr "Importerte ett spill."
-
-#~ msgid "Last played:"
-#~ msgstr "Sist spilt:"
 
 #~ msgid "Successfully imported"
 #~ msgstr "Importert"
