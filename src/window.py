@@ -87,7 +87,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
         current_games = get_games()
         for current_game in current_games:
-            if "removed" in current_games[current_game].keys():
+            if "removed" in current_games[current_game]:
                 os.remove(
                     os.path.join(
                         os.getenv("XDG_DATA_HOME")

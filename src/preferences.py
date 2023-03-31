@@ -242,7 +242,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     def undo_remove_all(self, _widget, _unused):
         for game_id in self.removed_games:
             data = get_games([game_id])[game_id]
-            if "removed" in data.keys():
+            if "removed" in data:
                 data.pop("removed")
                 save_game(data)
         self.parent_widget.update_games(self.removed_games)
@@ -251,7 +251,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def remove_all_games(self, _widget):
         for game in get_games().values():
-            if not "removed" in game.keys():
+            if not "removed" in game:
                 self.removed_games.append(game["game_id"])
                 game["removed"] = True
                 save_game(game)
