@@ -53,9 +53,9 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.hidden = data["hidden"]
         self.last_played = data["last_played"]
         self.name = data["name"]
-        self.developer = data["developer"] if "developer" in data.keys() else None
-        self.removed = "removed" in data.keys()
-        self.blacklisted = "blacklisted" in data.keys()
+        self.developer = data["developer"] if "developer" in data else None
+        self.removed = "removed" in data
+        self.blacklisted = "blacklisted" in data
 
         self.pixbuf = self.get_cover()
 
@@ -125,7 +125,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
     def get_cover(self):
 
         # If the cover is already in memory, return
-        if self.game_id in self.parent_widget.pixbufs.keys():
+        if self.game_id in self.parent_widget.pixbufs:
             return self.parent_widget.pixbufs[self.game_id]
 
         # Create a new pixbuf
