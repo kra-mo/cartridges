@@ -29,8 +29,7 @@ def save_game(game):
         "games",
     )
 
-    if not os.path.exists(games_dir):
-        os.makedirs(games_dir)
+    os.makedirs(games_dir, exist_ok=True)
 
     with open(os.path.join(games_dir, f'{game["game_id"]}.json'), "w") as open_file:
         open_file.write(json.dumps(game, indent=4, sort_keys=True))

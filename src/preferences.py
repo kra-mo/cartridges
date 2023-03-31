@@ -98,6 +98,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
     steam_clear_button_revealer = Gtk.Template.Child()
     steam_clear_button = Gtk.Template.Child()
 
+    lutris_expander_row = Gtk.Template.Child()
+    lutris_file_chooser_button = Gtk.Template.Child()
+    lutris_cache_file_chooser_button = Gtk.Template.Child()
+
     heroic_expander_row = Gtk.Template.Child()
     heroic_file_chooser_button = Gtk.Template.Child()
     heroic_epic_switch = Gtk.Template.Child()
@@ -190,6 +194,45 @@ class PreferencesWindow(Adw.PreferencesWindow):
             "clicked", self.choose_folder, add_steam_dir
         )
         self.steam_clear_button.connect("clicked", clear_steam_dirs)
+
+        # Lutris
+        ImportPreferences(
+            self,
+            "lutris",
+            "Lutris",
+            "lutris-location",
+            ["pga.db"],
+            self.lutris_expander_row,
+            self.lutris_file_chooser_button,
+        )
+
+        def set_cache_dir(_source, result, _unused):
+            try:
+                path = self.file_chooser.select_folder_finish(result).get_path()
+
+                def response(widget, response):
+                    if response == "choose_folder":
+                        self.choose_folder(widget, set_cache_dir)
+
+                if not os.path.exists(os.path.join(path, "coverart")):
+                    create_dialog(
+                        self.parent_widget,
+                        _("Cache Not Found"),
+                        _("Select the Lutris cache directory."),
+                        "choose_folder",
+                        _("Set Location"),
+                    ).connect("response", response)
+                else:
+                    self.schema.set_string(
+                        "lutris-cache-location",
+                        path,
+                    )
+            except GLib.GError:
+                pass
+
+        self.lutris_cache_file_chooser_button.connect(
+            "clicked", self.choose_folder, set_cache_dir
+        )
 
         # Heroic
         ImportPreferences(

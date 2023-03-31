@@ -33,6 +33,7 @@ from .create_details_window import create_details_window
 from .get_games import get_games
 from .heroic_parser import heroic_parser
 from .importer import Importer
+from .lutris_parser import lutris_parser
 from .preferences import PreferencesWindow
 from .save_game import save_game
 from .steam_parser import steam_parser
@@ -167,6 +168,9 @@ class CartridgesApplication(Adw.Application):
 
         if self.win.schema.get_boolean("steam"):
             steam_parser(self.win)
+
+        if self.win.schema.get_boolean("lutris"):
+            lutris_parser(self.win)
 
         if self.win.schema.get_boolean("heroic"):
             heroic_parser(self.win)

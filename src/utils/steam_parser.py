@@ -20,8 +20,8 @@
 import json
 import os
 import re
-import time
 import urllib.request
+from time import time
 
 from gi.repository import Gio, GLib
 
@@ -113,7 +113,7 @@ def get_game(
 
 def get_games_async(parent_widget, appmanifests, steam_dir, importer):
     datatypes = ["appid", "name"]
-    current_time = int(time.time())
+    current_time = int(time())
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
     def create_func(datatypes, current_time, parent_widget, appmanifest, steam_dir):

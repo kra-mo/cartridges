@@ -108,6 +108,30 @@ template PreferencesWindow : Adw.PreferencesWindow {
         }
       }
 
+      Adw.ExpanderRow lutris_expander_row {
+        title: _("Lutris");
+        show-enable-switch: true;
+
+        Adw.ActionRow {
+          title: _("Lutris Install Location");
+          subtitle: _("Directory to use when importing games");
+
+          Button lutris_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+        Adw.ActionRow {
+          title: _("Lutris Cache Location");
+          subtitle: _("Directory to use when importing game covers");
+
+          Button lutris_cache_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+      }
+
       Adw.ExpanderRow heroic_expander_row {
         title: _("Heroic");
         show-enable-switch: true;

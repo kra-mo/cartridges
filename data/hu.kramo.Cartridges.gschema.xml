@@ -19,6 +19,15 @@
     <key name="steam-extra-dirs" type="as">
       <default>[]</default>
     </key>
+    <key name="lutris" type="b">
+      <default>true</default>
+    </key>
+    <key name="lutris-location" type="s">
+      <default>"~/.var/app/net.lutris.Lutris/data/lutris/"</default>
+    </key>
+    <key name="lutris-cache-location" type="s">
+      <default>"~/.var/app/net.lutris.Lutris/cache/lutris"</default>
+    </key>
     <key name="heroic" type="b">
       <default>true</default>
     </key>

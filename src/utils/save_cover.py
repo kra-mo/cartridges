@@ -30,8 +30,7 @@ def save_cover(parent_widget, game_id, cover_path, pixbuf=None):
         "covers",
     )
 
-    if not os.path.exists(covers_dir):
-        os.makedirs(covers_dir)
+    os.makedirs(covers_dir, exist_ok=True)
 
     if pixbuf is None:
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(cover_path, 400, 600, False)

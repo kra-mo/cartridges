@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
-import time
+from time import time
 
 import yaml
 
@@ -53,7 +53,7 @@ def bottles_parser(parent_widget):
             return
 
     bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
-    current_time = int(time.time())
+    current_time = int(time())
 
     with open(os.path.join(bottles_dir, "library.yml"), "r") as open_file:
         data = open_file.read()

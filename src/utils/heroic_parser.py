@@ -20,7 +20,7 @@
 import hashlib
 import json
 import os
-import time
+from time import time
 
 
 def heroic_parser(parent_widget):
@@ -60,7 +60,7 @@ def heroic_parser(parent_widget):
             return
 
     heroic_dir = os.path.expanduser(schema.get_string("heroic-location"))
-    current_time = int(time.time())
+    current_time = int(time())
 
     importer = parent_widget.importer
 
