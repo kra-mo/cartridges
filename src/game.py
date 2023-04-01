@@ -110,8 +110,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         if not games_dir.exists():
             return
 
-        with open((games_dir / f"{self.game_id}.json") / "r") as open_file:
-            data = json.loads(open_file.read())
+        data = json.loads((games_dir / f"{self.game_id}.json").read_text())
 
         data["hidden"] = not data["hidden"]
 

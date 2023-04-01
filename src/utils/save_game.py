@@ -25,5 +25,6 @@ def save_game(parent_widget, game):
 
     games_dir.mkdir(parents=True, exist_ok=True)
 
-    with open((games_dir / f'{game["game_id"]}.json'), "w") as open_file:
-        open_file.write(json.dumps(game, indent=4, sort_keys=True))
+    (games_dir / f'{game["game_id"]}.json').write_text(
+        json.dumps(game, indent=4, sort_keys=True)
+    )

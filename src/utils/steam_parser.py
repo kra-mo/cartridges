@@ -46,8 +46,7 @@ def get_game(
 ):
     values = {}
 
-    with open(appmanifest, "r") as open_file:
-        data = open_file.read()
+    data = appmanifest.read_text()
     for datatype in datatypes:
         value = re.findall(f'"{datatype}"\t\t"(.*)"\n', data)
         values[datatype] = value[0]

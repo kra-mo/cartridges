@@ -58,8 +58,7 @@ def heroic_parser(parent_widget):
     if not schema.get_boolean("heroic-import-epic"):
         pass
     elif (heroic_dir / "lib-cache" / "library.json").exists():
-        with open((heroic_dir / "lib-cache" / "library.json"), "r") as open_file:
-            data = open_file.read()
+        data = (heroic_dir / "lib-cache" / "library.json").read_text()
         library = json.loads(data)
 
         try:
@@ -112,8 +111,7 @@ def heroic_parser(parent_widget):
     if not schema.get_boolean("heroic-import-gog"):
         pass
     elif (heroic_dir / "gog_store" / "installed.json").exists():
-        with open((heroic_dir / "gog_store" / "installed.json"), "r") as open_file:
-            data = open_file.read()
+        data = (heroic_dir / "gog_store" / "installed.json").read_text()
         installed = json.loads(data)
 
         importer.total_queue += len(installed["installed"])
@@ -133,8 +131,7 @@ def heroic_parser(parent_widget):
                 continue
 
             # Get game title and developer from library.json as they are not present in installed.json
-            with open((heroic_dir / "gog_store" / "library.json"), "r") as open_file:
-                data = open_file.read()
+            data = (heroic_dir / "gog_store" / "library.json").read_text()
             library = json.loads(data)
             for game in library["games"]:
                 if game["app_name"] == app_name:
@@ -165,8 +162,7 @@ def heroic_parser(parent_widget):
     if not schema.get_boolean("heroic-import-sideload"):
         pass
     elif (heroic_dir / "sideload_apps" / "library.json").exists():
-        with open((heroic_dir / "sideload_apps" / "library.json"), "r") as open_file:
-            data = open_file.read()
+        data = (heroic_dir / "sideload_apps" / "library.json").read_text()
         library = json.loads(data)
 
         importer.total_queue += len(library["games"])
