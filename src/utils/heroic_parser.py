@@ -20,46 +20,36 @@
 import hashlib
 import json
 import os
+from pathlib import Path
 from time import time
 
 
 def heroic_parser(parent_widget):
     schema = parent_widget.schema
-    heroic_dir = os.path.expanduser(schema.get_string("heroic-location"))
+    heroic_dir = Path(schema.get_string("heroic-location")).expanduser()
 
-    if not os.path.exists(os.path.join(heroic_dir, "config.json")):
-        if os.path.exists(
-            os.path.expanduser("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
+    if not (heroic_dir / "config.json").exists():
+        if (
+            Path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
+            .expanduser()
+            .exists()
         ):
             schema.set_string(
                 "heroic-location",
                 "~/.var/app/com.heroicgameslauncher.hgl/config/heroic/",
             )
-        elif os.path.exists(
-            os.path.join(
-                os.getenv("XDG_CONFIG_HOME")
-                or os.path.expanduser(os.path.join("~", ".config")),
-                "heroic",
-            )
-        ):
+        elif (parent_widget.config_dir / "heroic").exists():
             schema.set_string(
-                "heroic-location",
-                os.path.join(
-                    os.getenv("XDG_CONFIG_HOME")
-                    or os.path.expanduser(os.path.join("~", ".config")),
-                    "heroic",
-                ),
+                "heroic-location", str(parent_widget.config_dir / "heroic")
             )
-        elif os.name == "nt" and os.path.exists(
-            os.path.join(os.getenv("appdata"), "heroic")
-        ):
+        elif os.name == "nt" and (Path(os.getenv("appdata")) / "heroic").exists():
             schema.set_string(
-                "heroic-location", os.path.join(os.getenv("appdata"), "heroic")
+                "heroic-location", str(Path((os.getenv("appdata") / "heroic")))
             )
         else:
             return
 
-    heroic_dir = os.path.expanduser(schema.get_string("heroic-location"))
+    heroic_dir = Path(schema.get_string("heroic-location")).expanduser()
     current_time = int(time())
 
     importer = parent_widget.importer
@@ -67,10 +57,8 @@ def heroic_parser(parent_widget):
     # Import Epic games
     if not schema.get_boolean("heroic-import-epic"):
         pass
-    elif os.path.exists(os.path.join(heroic_dir, "lib-cache", "library.json")):
-        with open(
-            os.path.join(heroic_dir, "lib-cache", "library.json"), "r"
-        ) as open_file:
+    elif (heroic_dir / "lib-cache" / "library.json").exists():
+        with open((heroic_dir / "lib-cache" / "library.json"), "r") as open_file:
             data = open_file.read()
         library = json.loads(data)
 
@@ -106,14 +94,14 @@ def heroic_parser(parent_widget):
                 values["added"] = current_time
                 values["last_played"] = 0
 
-                image_path = os.path.join(
-                    heroic_dir,
-                    "images-cache",
-                    hashlib.sha256(
+                image_path = (
+                    heroic_dir
+                    / "images-cache"
+                    / hashlib.sha256(
                         (f'{game["art_square"]}?h=400&resize=1&w=300').encode()
-                    ).hexdigest(),
+                    ).hexdigest()
                 )
-                if os.path.exists(image_path):
+                if image_path.exists():
                     importer.save_cover(values["game_id"], image_path)
 
                 importer.save_game(values)
@@ -123,10 +111,8 @@ def heroic_parser(parent_widget):
     # Import GOG games
     if not schema.get_boolean("heroic-import-gog"):
         pass
-    elif os.path.exists(os.path.join(heroic_dir, "gog_store", "installed.json")):
-        with open(
-            os.path.join(heroic_dir, "gog_store", "installed.json"), "r"
-        ) as open_file:
+    elif (heroic_dir / "gog_store" / "installed.json").exists():
+        with open((heroic_dir / "gog_store" / "installed.json"), "r") as open_file:
             data = open_file.read()
         installed = json.loads(data)
 
@@ -147,21 +133,19 @@ def heroic_parser(parent_widget):
                 continue
 
             # Get game title and developer from library.json as they are not present in installed.json
-            with open(
-                os.path.join(heroic_dir, "gog_store", "library.json"), "r"
-            ) as open_file:
+            with open((heroic_dir / "gog_store" / "library.json"), "r") as open_file:
                 data = open_file.read()
             library = json.loads(data)
             for game in library["games"]:
                 if game["app_name"] == app_name:
                     values["developer"] = game["developer"]
                     values["name"] = game["title"]
-                    image_path = os.path.join(
-                        heroic_dir,
-                        "images-cache",
-                        hashlib.sha256(game["art_square"].encode()).hexdigest(),
+                    image_path = (
+                        heroic_dir
+                        / "images-cache"
+                        / hashlib.sha256(game["art_square"].encode()).hexdigest()
                     )
-                    if os.path.exists(image_path):
+                    if image_path.exists():
                         importer.save_cover(values["game_id"], image_path)
                     break
 
@@ -180,10 +164,8 @@ def heroic_parser(parent_widget):
     # Import sideloaded games
     if not schema.get_boolean("heroic-import-sideload"):
         pass
-    elif os.path.exists(os.path.join(heroic_dir, "sideload_apps", "library.json")):
-        with open(
-            os.path.join(heroic_dir, "sideload_apps", "library.json"), "r"
-        ) as open_file:
+    elif (heroic_dir / "sideload_apps" / "library.json").exists():
+        with open((heroic_dir / "sideload_apps" / "library.json"), "r") as open_file:
             data = open_file.read()
         library = json.loads(data)
 
@@ -213,12 +195,12 @@ def heroic_parser(parent_widget):
             values["source"] = "heroic_sideload"
             values["added"] = current_time
             values["last_played"] = 0
-            image_path = os.path.join(
-                heroic_dir,
-                "images-cache",
-                hashlib.sha256(item["art_square"].encode()).hexdigest(),
+            image_path = (
+                heroic_dir
+                / "images-cache"
+                / hashlib.sha256(item["art_square"].encode()).hexdigest()
             )
-            if os.path.exists(image_path):
+            if image_path.extsts():
                 importer.save_cover(values["game_id"], image_path)
 
             importer.save_game(values)

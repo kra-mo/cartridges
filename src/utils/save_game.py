@@ -18,18 +18,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
-import os
 
 
-def save_game(game):
-    games_dir = os.path.join(
-        os.getenv("XDG_DATA_HOME")
-        or os.path.expanduser(os.path.join("~", ".local", "share")),
-        "cartridges",
-        "games",
-    )
+def save_game(parent_widget, game):
+    games_dir = parent_widget.data_dir / "cartridges" / "games"
 
-    os.makedirs(games_dir, exist_ok=True)
+    games_dir.mkdir(parents=True, exist_ok=True)
 
-    with open(os.path.join(games_dir, f'{game["game_id"]}.json'), "w") as open_file:
+    with open((games_dir / f'{game["game_id"]}.json'), "w") as open_file:
         open_file.write(json.dumps(game, indent=4, sort_keys=True))

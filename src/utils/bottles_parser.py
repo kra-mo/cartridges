@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os
+from pathlib import Path
 from time import time
 
 import yaml
@@ -25,37 +25,28 @@ import yaml
 
 def bottles_parser(parent_widget):
     schema = parent_widget.schema
-    bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
+    bottles_dir = Path(schema.get_string("bottles-location")).expanduser()
 
-    if not os.path.isfile(os.path.join(bottles_dir, "library.yml")):
-        if os.path.exists(
-            os.path.expanduser("~/.var/app/com.usebottles.bottles/data/bottles/")
+    if not (bottles_dir / "library.yml").is_file():
+        if (
+            Path("~/.var/app/com.usebottles.bottles/data/bottles/")
+            .expanduser()
+            .exists()
         ):
             schema.set_string(
                 "bottles-location", "~/.var/app/com.usebottles.bottles/data/bottles/"
             )
-        elif os.path.exists(
-            os.path.join(
-                os.getenv("XDG_DATA_HOME")
-                or os.path.expanduser(os.path.join("~", ".local", "share")),
-                "bottles",
-            )
-        ):
+        elif (parent_widget.data_dir / "bottles").exists():
             schema.set_string(
-                "bottles-location",
-                os.path.join(
-                    os.getenv("XDG_DATA_HOME")
-                    or os.path.expanduser(os.path.join("~", ".local", "share")),
-                    "bottles",
-                ),
+                "bottles-location", str(parent_widget.data_dir / "bottles")
             )
         else:
             return
 
-    bottles_dir = os.path.expanduser(schema.get_string("bottles-location"))
+    bottles_dir = Path(schema.get_string("bottles-location")).expanduser()
     current_time = int(time())
 
-    with open(os.path.join(bottles_dir, "library.yml"), "r") as open_file:
+    with open((bottles_dir / "library.yml"), "r") as open_file:
         data = open_file.read()
 
     library = yaml.load(data, Loader=yaml.Loader)
@@ -90,12 +81,12 @@ def bottles_parser(parent_widget):
         if game["thumbnail"]:
             importer.save_cover(
                 values["game_id"],
-                os.path.join(
-                    bottles_dir,
-                    "bottles",
-                    game["bottle"]["path"],
-                    "grids",
-                    game["thumbnail"].split(":")[1],
+                (
+                    bottles_dir
+                    / "bottles"
+                    / game["bottle"]["path"]
+                    / "grids"
+                    / game["thumbnail"].split(":")[1]
                 ),
             )
         importer.save_game(values)

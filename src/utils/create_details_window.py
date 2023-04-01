@@ -274,23 +274,15 @@ def create_details_window(parent_widget, game_id=None):
         values["developer"] = final_developer or None
         values["executable"] = final_executable_split
 
-        path = os.path.join(
-            os.path.join(
-                os.getenv("XDG_DATA_HOME")
-                or os.path.expanduser(os.path.join("~", ".local", "share")),
-                "cartridges",
-                "games",
-                f"{game_id}.json",
-            )
-        )
+        path = parent_widget.data_dir / "cartridges" / "games" / f"{game_id}.json"
 
-        if os.path.exists(path):
+        if path.exists():
             with open(path, "r") as open_file:
                 data = json.loads(open_file.read())
             data.update(values)
-            save_game(data)
+            save_game(parent_widget, data)
         else:
-            save_game(values)
+            save_game(parent_widget, values)
 
         parent_widget.update_games([game_id])
         if parent_widget.stack.get_visible_child() == parent_widget.overview:

@@ -19,6 +19,7 @@
 
 import datetime
 import os
+from pathlib import Path
 
 from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
 
@@ -68,6 +69,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.data_dir = (
+            Path(os.getenv("XDG_DATA_HOME")) or Path.home() / ".local" / "share"
+        )
+        self.config_dir = Path(os.getenv("XDG_CONFIG_HOME")) or Path.home() / ".config"
+        self.cache_dir = Path(os.getenv("XDG_CACHE_HOME")) or Path.home() / ".cache"
+
         self.games = {}
         self.visible_widgets = {}
         self.hidden_widgets = {}
@@ -85,35 +92,23 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
             "/hu/kramo/Cartridges/library_placeholder.svg", 400, 600, False
         )
-        current_games = get_games()
+        current_games = get_games(self)
         for current_game in current_games:
             if "removed" in current_games[current_game]:
-                os.remove(
-                    os.path.join(
-                        os.getenv("XDG_DATA_HOME")
-                        or os.path.expanduser(os.path.join("~", ".local", "share")),
-                        "cartridges",
-                        "games",
-                        f"{current_game}.json",
-                    )
-                )
+                (
+                    self.data_dir / "cartridges" / "games" / f"{current_game}.json"
+                ).remove()
                 try:
-                    os.remove(
-                        os.path.join(
-                            os.getenv("XDG_DATA_HOME")
-                            or os.path.expanduser(os.path.join("~", ".local", "share")),
-                            "cartridges",
-                            "covers",
-                            f"{current_game}.tiff",
-                        )
-                    )
+                    (
+                        self.data_dir / "cartridges" / "covers" / f"{current_game}.tiff"
+                    ).remove()
                 except FileNotFoundError:
                     pass
 
         self.library.set_filter_func(self.search_filter)
         self.hidden_library.set_filter_func(self.hidden_search_filter)
 
-        self.update_games(get_games())
+        self.update_games(get_games(self))
 
         # Connect signals
         self.search_entry.connect("search-changed", self.search_changed, False)
@@ -124,7 +119,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.add_controller(back_mouse_button)
 
     def update_games(self, games):
-        current_games = get_games()
+        current_games = get_games(self)
 
         for game_id in games:
             if game_id in self.visible_widgets:
@@ -420,9 +415,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 game_id = list(self.toasts)[-1]
             except IndexError:
                 return
-        data = get_games([game_id])[game_id]
+        data = get_games(self, [game_id])[game_id]
         data.pop("removed", None)
-        save_game(data)
+        save_game(self, data)
         self.update_games([game_id])
         self.toasts[game_id].dismiss()
         self.toasts.pop(game_id)

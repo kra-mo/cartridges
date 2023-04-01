@@ -17,28 +17,24 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os
 
 from gi.repository import GdkPixbuf, Gio
 
 
 def save_cover(parent_widget, game_id, cover_path, pixbuf=None):
-    covers_dir = os.path.join(
-        os.getenv("XDG_DATA_HOME")
-        or os.path.expanduser(os.path.join("~", ".local", "share")),
-        "cartridges",
-        "covers",
-    )
+    covers_dir = parent_widget.data_dir / "cartridges" / "covers"
 
-    os.makedirs(covers_dir, exist_ok=True)
+    covers_dir.mkdir(parents=True, exist_ok=True)
 
     if pixbuf is None:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(cover_path, 400, 600, False)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            str(cover_path), 400, 600, False
+        )
 
     def cover_callback(*_unused):
         pass
 
-    open_file = Gio.File.new_for_path(os.path.join(covers_dir, f"{game_id}.tiff"))
+    open_file = Gio.File.new_for_path(str(covers_dir / f"{game_id}.tiff"))
     parent_widget.pixbufs[game_id] = pixbuf
     pixbuf.save_to_streamv_async(
         open_file.replace(None, False, Gio.FileCreateFlags.NONE),

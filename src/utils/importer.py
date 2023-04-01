@@ -55,7 +55,7 @@ class Importer:
     def save_game(self, values=None):
         if values:
             self.games_no += 1
-            save_game(values)
+            save_game(self.parent_widget, values)
             self.parent_widget.update_games([values["game_id"]])
             if "blacklisted" in values:
                 self.games_no -= 1

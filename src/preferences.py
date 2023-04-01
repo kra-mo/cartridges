@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+from pathlib import Path
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -46,10 +47,7 @@ class ImportPreferences:
                     if response == "choose_folder":
                         window.choose_folder(widget, set_dir)
 
-                if not any(
-                    os.path.exists(os.path.join(path, current_path))
-                    for current_path in paths
-                ):
+                if not any((path / current_path).exists() for current_path in paths):
                     create_dialog(
                         window.parent_widget,
                         _("Installation Not Found"),
@@ -163,8 +161,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
             "steam-location",
             [
                 "steamapps",
-                os.path.join("steam", "steamapps"),
-                os.path.join("Steam", "steamapps"),
+                Path("steam") / "steamapps",
+                Path("Steam") / "steamapps",
             ],
             self.steam_expander_row,
             self.steam_file_chooser_button,
@@ -209,13 +207,13 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         def set_cache_dir(_source, result, _unused):
             try:
-                path = self.file_chooser.select_folder_finish(result).get_path()
+                path = Path(self.file_chooser.select_folder_finish(result).get_path())
 
                 def response(widget, response):
                     if response == "choose_folder":
                         self.choose_folder(widget, set_cache_dir)
 
-                if not os.path.exists(os.path.join(path, "coverart")):
+                if not (path / "coverart").exists():
                     create_dialog(
                         self.parent_widget,
                         _("Cache Not Found"),
@@ -234,6 +232,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.lutris_cache_file_chooser_button.connect(
             "clicked", self.choose_folder, set_cache_dir
         )
+
+        if os.name == "nt":
+            self.sources_group.remove(self.lutris_expander_row)
 
         # Heroic
         ImportPreferences(
@@ -285,20 +286,20 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def undo_remove_all(self, _widget, _unused):
         for game_id in self.removed_games:
-            data = get_games([game_id])[game_id]
+            data = get_games(self.parent_widget, [game_id])[game_id]
             if "removed" in data:
                 data.pop("removed")
-                save_game(data)
+                save_game(self.parent_widget, data)
         self.parent_widget.update_games(self.removed_games)
         self.removed_games = []
         self.toast.dismiss()
 
     def remove_all_games(self, _widget):
-        for game in get_games().values():
+        for game in get_games(self.parent_widget).values():
             if "removed" not in game:
                 self.removed_games.append(game["game_id"])
                 game["removed"] = True
-                save_game(game)
+                save_game(self.parent_widget, game)
 
         self.parent_widget.update_games(self.parent_widget.games)
         if self.parent_widget.stack.get_visible_child() == self.parent_widget.overview:

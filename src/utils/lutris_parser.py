@@ -17,8 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os
-import shutil
+from pathlib import Path
 from sqlite3 import connect
 from time import time
 
@@ -27,73 +26,40 @@ def lutris_parser(parent_widget):
 
     schema = parent_widget.schema
 
-    database_path = os.path.join(
-        os.path.expanduser(schema.get_string("lutris-location")), "pga.db"
-    )
-    if not os.path.isfile(database_path):
-        if os.path.exists(
-            os.path.expanduser("~/.var/app/net.lutris.Lutris/data/lutris/")
-        ):
+    database_path = (Path(schema.get_string("lutris-location")) / "pga.db").expanduser()
+    if not database_path.is_file():
+        if Path("~/.var/app/net.lutris.Lutris/data/lutris/").expanduser().exists():
             schema.set_string(
                 "lutris-location", "~/.var/app/net.lutris.Lutris/data/lutris/"
             )
-        elif os.path.exists(
-            os.path.join(
-                os.getenv("XDG_DATA_HOME")
-                or os.path.expanduser(os.path.join("~", ".local", "share")),
-                "lutris",
-            )
-        ):
-            schema.set_string(
-                "lutris-location",
-                os.path.join(
-                    os.getenv("XDG_DATA_HOME")
-                    or os.path.expanduser(os.path.join("~", ".local", "share")),
-                    "lutris",
-                ),
-            )
+        elif (parent_widget.data_dir / "lutris").exists():
+            schema.set_string("lutris-location", str(parent_widget.data_dir / "lutris"))
         else:
             return
 
-    cache_dir = os.path.expanduser(schema.get_string("lutris-cache-location"))
-    if not os.path.exists(cache_dir):
-        if os.path.exists(
-            os.path.expanduser("~/.var/app/net.lutris.Lutris/cache/lutris/")
-        ):
+    cache_dir = Path(schema.get_string("lutris-cache-location")).expanduser()
+    if not cache_dir.exists():
+        if Path("~/.var/app/net.lutris.Lutris/cache/lutris/").expanduser().exists():
             schema.set_string(
                 "lutris-cache-location", "~/.var/app/net.lutris.Lutris/cache/lutris/"
             )
-        elif os.path.exists(
-            os.path.join(
-                os.getenv("XDG_CACHE_HOME")
-                or os.path.expanduser(os.path.join("~", ".cache")),
-                "lutris",
-            )
-        ):
+        elif (parent_widget.cache_dir / "lutris").exists():
             schema.set_string(
-                "lutris-cache-location",
-                os.path.join(
-                    os.getenv("XDG_CACHE_HOME")
-                    or os.path.expanduser(os.path.join("~", ".cache")),
-                    "lutris",
-                ),
+                "lutris-cache-location", str(parent_widget.cache_dir / "lutris")
             )
         else:
             return
 
-    database_path = os.path.join(
-        os.path.expanduser(schema.get_string("lutris-location")), "pga.db"
-    )
-    cache_dir = os.path.expanduser(schema.get_string("lutris-cache-location"))
+    database_path = Path(schema.get_string("lutris-location")) / "pga.db"
+    database_path.expanduser()
+    cache_dir = Path(schema.get_string("lutris-cache-location")).expanduser()
 
-    db_cache_dir = os.path.join(
-        os.getenv("XDG_CACHE_HOME") or os.path.expanduser(os.path.join("~", ".cache")),
-        "cartridges",
-        "lutris",
-    )
-    os.makedirs(db_cache_dir, exist_ok=True)
+    db_cache_dir = parent_widget.cache_dir / "cartridges" / "lutris"
+    db_cache_dir.mkdir(parents=True, exist_ok=True)
 
-    shutil.copyfile(database_path, os.path.join(db_cache_dir, "pga.db"))
+    database_link_path = db_cache_dir / "pga.db"
+    database_link_path.unlink(True)
+    database_link_path.symlink_to(database_path)
 
     db_request = """
                 SELECT
@@ -108,7 +74,7 @@ def lutris_parser(parent_widget):
                 ;
             """
 
-    connection = connect(os.path.join(db_cache_dir, "pga.db"))
+    connection = connect(database_link_path)
     cursor = connection.execute(db_request)
     rows = cursor.fetchall()
     connection.close()
@@ -141,9 +107,9 @@ def lutris_parser(parent_widget):
         values["name"] = row[1]
         values["source"] = f"lutris_{row[3]}"
 
-        if os.path.isfile(os.path.join(cache_dir, "coverart", f"{row[2]}.jpg")):
+        if (cache_dir / "coverart" / f"{row[2]}.jpg").is_file():
             importer.save_cover(
-                values["game_id"], os.path.join(cache_dir, "coverart", f"{row[2]}.jpg")
+                values["game_id"], (cache_dir / "coverart" / f"{row[2]}.jpg")
             )
 
         importer.save_game(values)

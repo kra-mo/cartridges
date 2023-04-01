@@ -21,6 +21,7 @@ import json
 import os
 import re
 import urllib.request
+from pathlib import Path
 from time import time
 
 from gi.repository import Gio, GLib
@@ -89,21 +90,19 @@ def get_game(
     if content:
         values = update_values_from_data(content, values)
 
-    if os.path.isfile(
-        os.path.join(
-            steam_dir,
-            "appcache",
-            "librarycache",
-            f'{values["appid"]}_library_600x900.jpg',
-        )
-    ):
+    if (
+        steam_dir
+        / "appcache"
+        / "librarycache"
+        / f'{values["appid"]}_library_600x900.jpg'
+    ).is_file():
         importer.save_cover(
             values["game_id"],
-            os.path.join(
-                steam_dir,
-                "appcache",
-                "librarycache",
-                f'{values["appid"]}_library_600x900.jpg',
+            (
+                steam_dir
+                / "appcache"
+                / "librarycache"
+                / f'{values["appid"]}_library_600x900.jpg'
             ),
         )
 
@@ -151,49 +150,48 @@ def get_games_async(parent_widget, appmanifests, steam_dir, importer):
 
 def steam_parser(parent_widget):
     schema = parent_widget.schema
-    steam_dir = os.path.expanduser(schema.get_string("steam-location"))
+    steam_dir = Path(schema.get_string("steam-location")).expanduser()
 
     def steam_not_found():
-        if os.path.exists(
-            os.path.expanduser("~/.var/app/com.valvesoftware.Steam/data/Steam/")
-        ):
+        if Path("~/.var/app/com.valvesoftware.Steam/data/Steam/").expanduser().exists():
             schema.set_string(
                 "steam-location", "~/.var/app/com.valvesoftware.Steam/data/Steam/"
             )
-        elif os.path.exists(os.path.expanduser("~/.steam/steam/")):
+        elif Path("~/.steam/steam/").expanduser().exists():
             schema.set_string("steam-location", "~/.steam/steam/")
-        elif os.name == "nt" and os.path.exists(
-            os.path.join(os.getenv("programfiles(x86)"), "Steam")
+        elif (
+            os.name == "nt"
+            and (Path((os.getenv("programfiles(x86)"))) / "Steam").exists()
         ):
             schema.set_string(
-                "steam-location", os.path.join(os.getenv("programfiles(x86)"), "Steam")
+                "steam-location", str(Path(os.getenv("programfiles(x86)")) / "Steam")
             )
 
-    if os.path.exists(os.path.join(steam_dir, "steamapps")):
+    if (steam_dir / "steamapps").exists():
         pass
-    elif os.path.exists(os.path.join(steam_dir, "steam", "steamapps")):
-        schema.set_string("steam-location", os.path.join(steam_dir, "steam"))
-    elif os.path.exists(os.path.join(steam_dir, "Steam", "steamapps")):
-        schema.set_string("steam-location", os.path.join(steam_dir, "Steam"))
+    elif (steam_dir / "steam" / "steamapps").exists():
+        schema.set_string("steam-location", str(steam_dir / "steam"))
+    elif (steam_dir / "Steam" / "steamapps").exists():
+        schema.set_string("steam-location", str(steam_dir / "Steam"))
     else:
         steam_not_found()
         steam_parser(parent_widget)
         return
 
-    steam_dir = os.path.expanduser(schema.get_string("steam-location"))
+    steam_dir = Path(schema.get_string("steam-location")).expanduser()
     appmanifests = []
 
     steam_dirs = schema.get_strv("steam-extra-dirs")
     steam_dirs.append(steam_dir)
 
     for directory in steam_dirs:
-        if not os.path.exists(os.path.join(directory, "steamapps")):
+        if not (directory / "steamapps").exists():
             steam_dirs.remove(directory)
 
     for directory in steam_dirs:
-        for open_file in os.listdir(os.path.join(directory, "steamapps")):
-            path = os.path.join(directory, "steamapps", open_file)
-            if os.path.isfile(path) and "appmanifest" in open_file:
+        for open_file in (directory / "steamapps").iterdir():
+            path = directory / "steamapps" / open_file
+            if path.is_file() and "appmanifest" in open_file.name:
                 appmanifests.append(path)
 
     importer = parent_widget.importer

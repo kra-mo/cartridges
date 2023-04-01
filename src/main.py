@@ -138,9 +138,9 @@ class CartridgesApplication(Adw.Application):
 
         game_id = self.win.active_game_id
 
-        data = get_games([game_id])[game_id]
+        data = get_games(self.win, [game_id])[game_id]
         data["last_played"] = int(time.time())
-        save_game(data)
+        save_game(self.win, data)
 
         self.win.games[game_id].launch()
 
@@ -188,9 +188,9 @@ class CartridgesApplication(Adw.Application):
         # Add "removed=True" to the game properties so it can be deleted on next init
         game_id = self.win.active_game_id
 
-        data = get_games([game_id])[game_id]
+        data = get_games(self.win, [game_id])[game_id]
         data["removed"] = True
-        save_game(data)
+        save_game(self.win, data)
 
         self.win.update_games([game_id])
         if self.win.stack.get_visible_child() == self.win.overview:
