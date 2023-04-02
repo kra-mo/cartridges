@@ -17,6 +17,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+from pathlib import Path
+
 from gi.repository import Adw, Gtk
 
 from .create_dialog import create_dialog
@@ -66,12 +68,6 @@ class Importer:
         if self.queue == 0 and not self.blocker:
             self.import_dialog.close()
 
-            def response(_widget, response):
-                if response == "open_preferences":
-                    self.parent_widget.get_application().on_preferences_action(
-                        None, page_name="import"
-                    )
-
             if self.games_no == 0:
                 create_dialog(
                     self.parent_widget,
@@ -79,14 +75,14 @@ class Importer:
                     _("No new games were found on your system."),
                     "open_preferences",
                     _("Preferences"),
-                ).connect("response", response)
+                ).connect("response", self.response)
 
             elif self.games_no == 1:
                 create_dialog(
                     self.parent_widget,
                     _("Game Imported"),
                     _("Successfully imported 1 game."),
-                )
+                ).connect("response", self.response)
             elif self.games_no > 1:
                 games_no = self.games_no
                 create_dialog(
@@ -94,4 +90,34 @@ class Importer:
                     _("Games Imported"),
                     # The variable is the number of games
                     _("Successfully imported {} games.").format(games_no),
-                )
+                ).connect("response", self.response)
+
+    def response(self, _widget, response, expander_row=None):
+        if response == "open_preferences":
+            self.parent_widget.get_application().on_preferences_action(
+                None, page_name="import", expander_row=expander_row
+            )
+        elif (
+            self.parent_widget.schema.get_boolean("steam")
+            and self.parent_widget.schema.get_boolean("steam-extra-dirs-hint")
+            and not self.parent_widget.schema.get_strv("steam-extra-dirs")
+        ):
+            steam_library_path = (
+                Path(self.parent_widget.schema.get_string("steam-location"))
+                / "steamapps"
+                / "libraryfolders.vdf"
+            )
+            if (
+                steam_library_path.exists()
+                and steam_library_path.read_text("utf-8").count('"path"') > 1
+            ):
+                self.parent_widget.schema.set_boolean("steam-extra-dirs-hint", False)
+                create_dialog(
+                    self.parent_widget,
+                    _("Extra Steam Libraries"),
+                    _(
+                        "Looks like you have multiple Steam libraries. Would you like to add them in preferences?"
+                    ),
+                    "open_preferences",
+                    _("Preferences"),
+                ).connect("response", self.response, "steam_expander_row")

@@ -127,10 +127,14 @@ class CartridgesApplication(Adw.Application):
         )
         about.present()
 
-    def on_preferences_action(self, _widget, _callback=None, page_name=None):
+    def on_preferences_action(
+        self, _widget, _callback=None, page_name=None, expander_row=None
+    ):
         win = PreferencesWindow(self.win)
         if page_name:
             win.set_visible_page_name(page_name)
+        if expander_row:
+            getattr(win, expander_row).set_expanded(True)
         win.present()
 
     def on_launch_game_action(self, _widget, _callback=None):

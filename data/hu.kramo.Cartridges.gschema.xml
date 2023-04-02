@@ -19,6 +19,9 @@
     <key name="steam-extra-dirs" type="as">
       <default>[]</default>
     </key>
+    <key name="steam-extra-dirs-hint" type="b">
+      <default>true</default>
+    </key>
     <key name="lutris" type="b">
       <default>true</default>
     </key>

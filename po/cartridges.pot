@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-31 16:40+0200\n"
+"POT-Creation-Date: 2023-04-02 17:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,11 +56,11 @@ msgid "Game Details"
 msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/importer.py:81
+#: src/utils/importer.py:77 src/utils/importer.py:122
 msgid "Preferences"
 msgstr ""
 
-#: data/gtk/window.blp:6 src/utils/importer.py:78
+#: data/gtk/window.blp:6 src/utils/importer.py:74
 msgid "No Games Found"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Game Title"
 msgstr ""
 
-#: data/gtk/window.blp:148 src/game.py:175
+#: data/gtk/window.blp:148 src/game.py:168
 msgid "Play"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:34 src/main.py:202 src/preferences.py:123
+#: data/gtk/help-overlay.blp:34 src/main.py:206 src/preferences.py:121
 msgid "Undo"
 msgstr ""
 
@@ -265,7 +265,7 @@ msgstr ""
 msgid "Directory to use when importing games"
 msgstr ""
 
-#: data/gtk/preferences.blp:86
+#: data/gtk/preferences.blp:86 src/utils/importer.py:117
 msgid "Extra Steam Libraries"
 msgstr ""
 
@@ -327,89 +327,95 @@ msgid "translator_credits"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:201
+#: src/main.py:205
 msgid "{} removed"
 msgstr ""
 
-#: src/window.py:234
+#: src/window.py:239
 msgid "Today"
 msgstr ""
 
-#: src/window.py:236
+#: src/window.py:241
 msgid "Yesterday"
 msgstr ""
 
 #. The variable is the date when the game was added
-#: src/window.py:270
+#: src/window.py:275
 msgid "Added: {}"
 msgstr ""
 
-#: src/window.py:275
+#: src/window.py:280
 msgid "Never"
 msgstr ""
 
 #. The variable is the date when the game was last played
-#: src/window.py:279
+#: src/window.py:284
 msgid "Last played: {}"
 msgstr ""
 
-#: src/game.py:173
+#: src/game.py:166
 msgid "Details"
 msgstr ""
 
-#: src/preferences.py:55
+#: src/preferences.py:53
 msgid "Installation Not Found"
 msgstr ""
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:57
+#: src/preferences.py:55
 msgid "Select the {} configuration directory."
 msgstr ""
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:60
+#: src/preferences.py:58
 msgid "Select the {} data directory."
 msgstr ""
 
-#: src/preferences.py:62 src/preferences.py:224
+#: src/preferences.py:60 src/preferences.py:222
 msgid "Set Location"
 msgstr ""
 
-#: src/preferences.py:122
+#: src/preferences.py:120
 msgid "All games removed"
 msgstr ""
 
-#: src/preferences.py:221
+#: src/preferences.py:219
 msgid "Cache Not Found"
 msgstr ""
 
-#: src/preferences.py:222
+#: src/preferences.py:220
 msgid "Select the Lutris cache directory."
 msgstr ""
 
-#: src/utils/importer.py:37
+#: src/utils/importer.py:39
 msgid "Importing Games…"
 msgstr ""
 
-#: src/utils/importer.py:79
+#: src/utils/importer.py:75
 msgid "No new games were found on your system."
 msgstr ""
 
-#: src/utils/importer.py:87
+#: src/utils/importer.py:83
 msgid "Game Imported"
 msgstr ""
 
-#: src/utils/importer.py:88
+#: src/utils/importer.py:84
 msgid "Successfully imported 1 game."
 msgstr ""
 
-#: src/utils/importer.py:94
+#: src/utils/importer.py:90
 msgid "Games Imported"
 msgstr ""
 
 #. The variable is the number of games
-#: src/utils/importer.py:96
+#: src/utils/importer.py:92
 msgid "Successfully imported {} games."
+msgstr ""
+
+#: src/utils/importer.py:119
+msgid ""
+"Looks like you have multiple Steam libraries. Would you like to add them in "
+"preferences?"
 msgstr ""
 
 #: src/utils/create_details_window.py:41
