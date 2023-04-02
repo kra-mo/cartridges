@@ -46,7 +46,7 @@ def bottles_parser(parent_widget):
     bottles_dir = Path(schema.get_string("bottles-location")).expanduser()
     current_time = int(time())
 
-    data = (bottles_dir / "library.yml").read_text()
+    data = (bottles_dir / "library.yml").read_text("utf-8")
 
     library = yaml.load(data, Loader=yaml.Loader)
 

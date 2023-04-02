@@ -277,7 +277,7 @@ def create_details_window(parent_widget, game_id=None):
         path = parent_widget.data_dir / "cartridges" / "games" / f"{game_id}.json"
 
         if path.exists():
-            data = json.loads(path.read_text())
+            data = json.loads(path.read_text("utf-8"))
             data.update(values)
             save_game(parent_widget, data)
         else:

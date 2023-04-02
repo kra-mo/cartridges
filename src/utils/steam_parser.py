@@ -46,7 +46,7 @@ def get_game(
 ):
     values = {}
 
-    data = appmanifest.read_text()
+    data = appmanifest.read_text("utf-8")
     for datatype in datatypes:
         value = re.findall(f'"{datatype}"\t\t"(.*)"\n', data)
         values[datatype] = value[0]

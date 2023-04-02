@@ -33,7 +33,7 @@ def get_games(parent_widget, game_ids=None):
         game_files = games_dir.iterdir()
 
     for game in game_files:
-        data = json.loads(game.read_text())
+        data = json.loads(game.read_text("utf-8"))
         games[data["game_id"]] = data
 
     return games
