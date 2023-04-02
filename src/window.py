@@ -107,11 +107,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
             if "removed" in current_games[current_game]:
                 (
                     self.data_dir / "cartridges" / "games" / f"{current_game}.json"
-                ).remove()
+                ).unlink(missing_ok=True)
                 try:
                     (
                         self.data_dir / "cartridges" / "covers" / f"{current_game}.tiff"
-                    ).remove()
+                    ).unlink(missing_ok=True)
                 except FileNotFoundError:
                     pass
 

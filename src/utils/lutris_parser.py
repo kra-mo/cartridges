@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from pathlib import Path
+from shutil import copyfile
 from sqlite3 import connect
 from time import time
 
@@ -56,9 +57,8 @@ def lutris_parser(parent_widget):
     db_cache_dir = parent_widget.cache_dir / "cartridges" / "lutris"
     db_cache_dir.mkdir(parents=True, exist_ok=True)
 
-    database_link_path = db_cache_dir / "pga.db"
-    database_link_path.unlink(True)
-    database_link_path.symlink_to(database_path)
+    database_tmp_path = db_cache_dir / "pga.db"
+    copyfile(database_path, database_tmp_path)
 
     db_request = """
                 SELECT
@@ -73,10 +73,11 @@ def lutris_parser(parent_widget):
                 ;
             """
 
-    connection = connect(database_link_path)
+    connection = connect(database_tmp_path)
     cursor = connection.execute(db_request)
     rows = cursor.fetchall()
     connection.close()
+    database_tmp_path.unlink(missing_ok=True)
 
     if schema.get_boolean("steam"):
         rows = [row for row in rows if not row[3] == "steam"]

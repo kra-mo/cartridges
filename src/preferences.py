@@ -41,7 +41,7 @@ class ImportPreferences:
     ):
         def set_dir(_source, result, _unused):
             try:
-                path = window.file_chooser.select_folder_finish(result).get_path()
+                path = Path(window.file_chooser.select_folder_finish(result).get_path())
 
                 def response(widget, response):
                     if response == "choose_folder":
@@ -62,7 +62,7 @@ class ImportPreferences:
                 else:
                     window.schema.set_string(
                         install_key,
-                        path,
+                        str(path),
                     )
             except GLib.GError:
                 pass
@@ -224,7 +224,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 else:
                     self.schema.set_string(
                         "lutris-cache-location",
-                        path,
+                        str(path),
                     )
             except GLib.GError:
                 pass
