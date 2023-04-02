@@ -180,7 +180,7 @@ def steam_parser(parent_widget):
     steam_dir = Path(schema.get_string("steam-location")).expanduser()
     appmanifests = []
 
-    steam_dirs = schema.get_strv("steam-extra-dirs")
+    steam_dirs = [Path(directory) for directory in schema.get_strv("steam-extra-dirs")]
     steam_dirs.append(steam_dir)
 
     for directory in steam_dirs:
