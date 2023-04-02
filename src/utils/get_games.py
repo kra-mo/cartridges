@@ -28,12 +28,12 @@ def get_games(parent_widget, game_ids=None):
         return {}
 
     if game_ids:
-        game_files = [f"{game_id}.json" for game_id in game_ids]
+        game_files = [games_dir / f"{game_id}.json" for game_id in game_ids]
     else:
         game_files = games_dir.iterdir()
 
     for game in game_files:
-        data = json.loads((games_dir / game).read_text())
+        data = json.loads(game.read_text())
         games[data["game_id"]] = data
 
     return games

@@ -160,7 +160,7 @@ def steam_parser(parent_widget):
             schema.set_string("steam-location", "~/.steam/steam/")
         elif (
             os.name == "nt"
-            and (Path((os.getenv("programfiles(x86)"))) / "Steam").exists()
+            and (Path(os.getenv("programfiles(x86)")) / "Steam").exists()
         ):
             schema.set_string(
                 "steam-location", str(Path(os.getenv("programfiles(x86)")) / "Steam")
@@ -189,9 +189,8 @@ def steam_parser(parent_widget):
 
     for directory in steam_dirs:
         for open_file in (directory / "steamapps").iterdir():
-            path = directory / "steamapps" / open_file
-            if path.is_file() and "appmanifest" in open_file.name:
-                appmanifests.append(path)
+            if open_file.is_file() and "appmanifest" in open_file.name:
+                appmanifests.append(open_file)
 
     importer = parent_widget.importer
     importer.total_queue += len(appmanifests)

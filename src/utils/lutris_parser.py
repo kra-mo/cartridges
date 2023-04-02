@@ -50,8 +50,7 @@ def lutris_parser(parent_widget):
         else:
             return
 
-    database_path = Path(schema.get_string("lutris-location")) / "pga.db"
-    database_path.expanduser()
+    database_path = (Path(schema.get_string("lutris-location")) / "pga.db").expanduser()
     cache_dir = Path(schema.get_string("lutris-cache-location")).expanduser()
 
     db_cache_dir = parent_widget.cache_dir / "cartridges" / "lutris"

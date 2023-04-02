@@ -70,10 +70,20 @@ class CartridgesWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
 
         self.data_dir = (
-            Path(os.getenv("XDG_DATA_HOME")) or Path.home() / ".local" / "share"
+            Path(os.getenv("XDG_DATA_HOME"))
+            if "XDG_DATA_HOME" in os.environ
+            else Path.home() / ".local" / "share"
         )
-        self.config_dir = Path(os.getenv("XDG_CONFIG_HOME")) or Path.home() / ".config"
-        self.cache_dir = Path(os.getenv("XDG_CACHE_HOME")) or Path.home() / ".cache"
+        self.config_dir = (
+            Path(os.getenv("XDG_CONFIG_HOME"))
+            if "XDG_CONFIG_HOME" in os.environ
+            else Path.home() / ".config"
+        )
+        self.cache_dir = (
+            Path(os.getenv("XDG_CACHE_HOME"))
+            if "XDG_CACHE_HOME" in os.environ
+            else Path.home() / ".cache"
+        )
 
         self.games = {}
         self.visible_widgets = {}

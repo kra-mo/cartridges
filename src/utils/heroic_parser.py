@@ -44,7 +44,7 @@ def heroic_parser(parent_widget):
             )
         elif os.name == "nt" and (Path(os.getenv("appdata")) / "heroic").exists():
             schema.set_string(
-                "heroic-location", str(Path((os.getenv("appdata") / "heroic")))
+                "heroic-location", str(Path(os.getenv("appdata") / "heroic"))
             )
         else:
             return
@@ -196,7 +196,7 @@ def heroic_parser(parent_widget):
                 / "images-cache"
                 / hashlib.sha256(item["art_square"].encode()).hexdigest()
             )
-            if image_path.extsts():
+            if image_path.exists():
                 importer.save_cover(values["game_id"], image_path)
 
             importer.save_game(values)
