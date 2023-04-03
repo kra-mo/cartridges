@@ -157,8 +157,9 @@ class CartridgesApplication(Adw.Application):
         if self.win.stack.get_visible_child() == self.win.overview:
             self.win.show_overview(None, self.win.active_game_id)
 
-    def on_hide_game_action(self, _widget, _callback=None):
-        game_id = self.win.active_game_id
+    def on_hide_game_action(self, _widget, _callback=None, game_id=None):
+        if not game_id:
+            game_id = self.win.active_game_id
 
         if self.win.stack.get_visible_child() == self.win.overview:
             self.win.on_go_back_action(None, None)

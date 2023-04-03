@@ -426,14 +426,14 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 return
 
         if undo == "hide":
-            self.games[game_id].toggle_hidden()
+            self.get_application().on_hide_game_action(None, game_id=game_id)
 
         elif undo == "remove":
             data = get_games(self, [game_id])[game_id]
             data.pop("removed", None)
             save_game(self, data)
+            self.update_games([game_id])
 
-        self.update_games([game_id])
         self.toasts[(game_id, undo)].dismiss()
         self.toasts.pop((game_id, undo))
 
