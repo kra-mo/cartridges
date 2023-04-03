@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-03 10:36+0200\n"
+"POT-Creation-Date: 2023-04-03 18:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:109
+#: src/main.py:110
 msgid "Cartridges"
 msgstr ""
 
@@ -188,8 +188,8 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:34 src/main.py:175 src/main.py:228
-#: src/preferences.py:121
+#: data/gtk/help-overlay.blp:34 src/main.py:178 src/main.py:234
+#: src/preferences.py:124
 msgid "Undo"
 msgstr ""
 
@@ -263,6 +263,7 @@ msgstr ""
 
 #: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
 #: data/gtk/preferences.blp:141 data/gtk/preferences.blp:180
+#: data/gtk/preferences.blp:195
 msgid "Directory to use when importing games"
 msgstr ""
 
@@ -322,28 +323,36 @@ msgstr ""
 msgid "Bottles Install Location"
 msgstr ""
 
+#: data/gtk/preferences.blp:190
+msgid "itch"
+msgstr ""
+
+#: data/gtk/preferences.blp:194
+msgid "itch Install Location"
+msgstr ""
+
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:124
+#: src/main.py:126
 msgid "translator_credits"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:151
+#: src/main.py:153
 msgid "{} launched"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:171
+#: src/main.py:174
 msgid "{} hidden"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:174
+#: src/main.py:177
 msgid "{} unhidden"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:227
+#: src/main.py:233
 msgid "{} removed"
 msgstr ""
 
@@ -387,19 +396,19 @@ msgstr ""
 msgid "Select the {} data directory."
 msgstr ""
 
-#: src/preferences.py:60 src/preferences.py:222
+#: src/preferences.py:60 src/preferences.py:225
 msgid "Set Location"
 msgstr ""
 
-#: src/preferences.py:120
+#: src/preferences.py:123
 msgid "All games removed"
 msgstr ""
 
-#: src/preferences.py:219
+#: src/preferences.py:222
 msgid "Cache Not Found"
 msgstr ""
 
-#: src/preferences.py:220
+#: src/preferences.py:223
 msgid "Select the Lutris cache directory."
 msgstr ""
 
