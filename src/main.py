@@ -148,6 +148,12 @@ class CartridgesApplication(Adw.Application):
 
         self.win.games[game_id].launch()
 
+        title = self.win.games[game_id].name
+        # The variable is the title of the game
+        toast = Adw.Toast.new(_("{} launched").format(title))
+        toast.set_priority(Adw.ToastPriority.HIGH)
+        self.win.toast_overlay.add_toast(toast)
+
         self.win.update_games([game_id])
 
         if self.win.stack.get_visible_child() == self.win.overview:
