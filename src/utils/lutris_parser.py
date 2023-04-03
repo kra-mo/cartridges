@@ -57,6 +57,7 @@ def lutris_parser(parent_widget):
     db_cache_dir = parent_widget.cache_dir / "cartridges" / "lutris"
     db_cache_dir.mkdir(parents=True, exist_ok=True)
 
+    # Copy the file because sqlite3 doesn't like databases in /run/user/
     database_tmp_path = db_cache_dir / "pga.db"
     copyfile(database_path, database_tmp_path)
 

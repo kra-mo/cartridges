@@ -94,9 +94,7 @@ class CartridgesApplication(Adw.Application):
             "toggle_search", self.win.on_toggle_search_action, ["<primary>f"], self.win
         )
         self.create_action("escape", self.win.on_escape_action, ["Escape"], self.win)
-        self.create_action(
-            "undo_remove", self.win.on_undo_remove_action, ["<primary>z"], self.win
-        )
+        self.create_action("undo", self.win.on_undo_action, ["<primary>z"], self.win)
         self.create_action("open_menu", self.win.on_open_menu_action, ["F10"], self.win)
         self.win.sort = Gio.SimpleAction.new_stateful(
             "sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z")
@@ -160,10 +158,28 @@ class CartridgesApplication(Adw.Application):
             self.win.show_overview(None, self.win.active_game_id)
 
     def on_hide_game_action(self, _widget, _callback=None):
+        game_id = self.win.active_game_id
+
         if self.win.stack.get_visible_child() == self.win.overview:
             self.win.on_go_back_action(None, None)
-        self.win.games[self.win.active_game_id].toggle_hidden()
-        self.win.update_games([self.win.active_game_id])
+        self.win.games[game_id].toggle_hidden()
+        self.win.update_games([game_id])
+
+        title = self.win.games[game_id].name
+        if self.win.games[game_id].hidden:
+            # The variable is the title of the game
+            toast = Adw.Toast.new(_("{} hidden").format(title))
+        else:
+            # The variable is the title of the game
+            toast = Adw.Toast.new(_("{} unhidden").format(title))
+        toast.set_button_label(_("Undo"))
+        toast.connect("button-clicked", self.win.on_undo_action, game_id, "hide")
+        toast.set_priority(Adw.ToastPriority.HIGH)
+        if (game_id, "hide") in self.win.toasts.keys():
+            # Dismiss the toast if there already is one
+            self.win.toasts[(game_id, "hide")].dismiss()
+        self.win.toasts[(game_id, "hide")] = toast
+        self.win.toast_overlay.add_toast(toast)
 
     def on_edit_details_action(self, _widget, _callback=None):
         create_details_window(self.win, self.win.active_game_id)
@@ -210,9 +226,9 @@ class CartridgesApplication(Adw.Application):
         # The variable is the title of the game
         toast = Adw.Toast.new(_("{} removed").format(title))
         toast.set_button_label(_("Undo"))
-        toast.connect("button-clicked", self.win.on_undo_remove_action, game_id)
+        toast.connect("button-clicked", self.win.on_undo_action, game_id, "remove")
         toast.set_priority(Adw.ToastPriority.HIGH)
-        self.win.toasts[game_id] = toast
+        self.win.toasts[(game_id, "remove")] = toast
         self.win.toast_overlay.add_toast(toast)
 
     def on_quit_action(self, _widget, _callback=None):

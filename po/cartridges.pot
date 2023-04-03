@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-03 09:37+0200\n"
+"POT-Creation-Date: 2023-04-03 10:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:111
+#: src/main.py:109
 msgid "Cartridges"
 msgstr ""
 
@@ -188,7 +188,8 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:34 src/main.py:212 src/preferences.py:121
+#: data/gtk/help-overlay.blp:34 src/main.py:175 src/main.py:228
+#: src/preferences.py:121
 msgid "Undo"
 msgstr ""
 
@@ -322,17 +323,27 @@ msgid "Bottles Install Location"
 msgstr ""
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:126
+#: src/main.py:124
 msgid "translator_credits"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:153
+#: src/main.py:151
 msgid "{} launched"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:211
+#: src/main.py:171
+msgid "{} hidden"
+msgstr ""
+
+#. The variable is the title of the game
+#: src/main.py:174
+msgid "{} unhidden"
+msgstr ""
+
+#. The variable is the title of the game
+#: src/main.py:227
 msgid "{} removed"
 msgstr ""
 

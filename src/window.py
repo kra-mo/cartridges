@@ -417,20 +417,25 @@ class CartridgesWindow(Adw.ApplicationWindow):
             search_button.set_active(False)
             search_entry.set_text("")
 
-    def on_undo_remove_action(self, _widget, game_id=None):
-        # Remove the "removed=True" property from the game and dismiss the toast
-
-        if not game_id:
+    def on_undo_action(self, _widget, game_id=None, undo=None):
+        if not game_id:  # If the action was activated via Ctrl + Z
             try:
-                game_id = list(self.toasts)[-1]
+                game_id = tuple(self.toasts.keys())[-1][0]
+                undo = tuple(self.toasts.keys())[-1][1]
             except IndexError:
                 return
-        data = get_games(self, [game_id])[game_id]
-        data.pop("removed", None)
-        save_game(self, data)
+
+        if undo == "hide":
+            self.games[game_id].toggle_hidden()
+
+        elif undo == "remove":
+            data = get_games(self, [game_id])[game_id]
+            data.pop("removed", None)
+            save_game(self, data)
+
         self.update_games([game_id])
-        self.toasts[game_id].dismiss()
-        self.toasts.pop(game_id)
+        self.toasts[(game_id, undo)].dismiss()
+        self.toasts.pop((game_id, undo))
 
     def on_open_menu_action(self, _widget, _unused):
         if self.stack.get_visible_child() != self.overview:
