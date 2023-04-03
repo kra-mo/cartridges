@@ -185,6 +185,21 @@ template PreferencesWindow : Adw.PreferencesWindow {
           }
         }
       }
+
+      Adw.ExpanderRow itch_expander_row {
+        title: _("itch");
+        show-enable-switch: true;
+
+        Adw.ActionRow {
+          title: _("itch Install Location");
+          subtitle: _("Directory to use when importing games");
+
+          Button itch_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+      }
     }
   }
 }

@@ -24,7 +24,7 @@ import urllib.request
 from pathlib import Path
 from time import time
 
-from gi.repository import Gio, GLib
+from gi.repository import Gio
 
 
 def update_values_from_data(content, values):
@@ -70,25 +70,6 @@ def get_game(
     values["added"] = current_time
     values["last_played"] = 0
 
-    url = f'https://store.steampowered.com/api/appdetails?appids={values["appid"]}'
-
-    # On Linux the request is made through gvfs so the app can run without network permissions
-    if os.name == "nt":
-        try:
-            with urllib.request.urlopen(url, timeout=10) as open_file:
-                content = open_file.read().decode("utf-8")
-        except urllib.error.URLError:
-            content = None
-    else:
-        open_file = Gio.File.new_for_uri(url)
-        try:
-            content = open_file.load_contents()[1]
-        except GLib.GError:
-            content = None
-
-    if content:
-        values = update_values_from_data(content, values)
-
     if (
         steam_dir
         / "appcache"
@@ -105,8 +86,18 @@ def get_game(
             ),
         )
 
+    try:
+        with urllib.request.urlopen(
+            f'https://store.steampowered.com/api/appdetails?appids={values["appid"]}',
+            timeout=5,
+        ) as open_file:
+            content = open_file.read().decode("utf-8")
+    except urllib.error.URLError:
+        task.return_value(values)
+        return
+
+    values = update_values_from_data(content, values)
     task.return_value(values)
-    return
 
 
 def get_games_async(parent_widget, appmanifests, steam_dir, importer):
@@ -129,19 +120,12 @@ def get_games_async(parent_widget, appmanifests, steam_dir, importer):
         return wrapper
 
     def update_games(_task, result):
-        try:
-            final_values = result.propagate_value()[1]
-            # No need for an if statement as final_value would be None for games we don't want to save
-            importer.save_game(final_values)
-        except GLib.GError:  # Handle the exception for the timeout
-            importer.save_game()
+        final_values = result.propagate_value()[1]
+        # No need for an if statement as final_value would be None for games we don't want to save
+        importer.save_game(final_values)
 
     for appmanifest in appmanifests:
-        cancellable = Gio.Cancellable.new()
-        GLib.timeout_add_seconds(5, cancellable.cancel)
-
-        task = Gio.Task.new(None, cancellable, update_games)
-        task.set_return_on_cancel(True)
+        task = Gio.Task.new(None, None, update_games)
         task.run_in_thread(
             create_func(datatypes, current_time, parent_widget, appmanifest, steam_dir)
         )

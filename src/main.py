@@ -33,6 +33,7 @@ from .create_details_window import create_details_window
 from .get_games import get_games
 from .heroic_parser import heroic_parser
 from .importer import Importer
+from .itch_parser import itch_parser
 from .lutris_parser import lutris_parser
 from .preferences import PreferencesWindow
 from .save_game import save_game
@@ -205,6 +206,9 @@ class CartridgesApplication(Adw.Application):
 
         if self.win.schema.get_boolean("bottles"):
             bottles_parser(self.win)
+
+        if self.win.schema.get_boolean("itch"):
+            itch_parser(self.win)
 
         self.win.importer.blocker = False
 

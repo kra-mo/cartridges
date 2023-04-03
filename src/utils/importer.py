@@ -51,8 +51,8 @@ class Importer:
 
         self.import_dialog.present()
 
-    def save_cover(self, game_id, cover_path):
-        save_cover(self.parent_widget, game_id, cover_path)
+    def save_cover(self, game_id, cover_path=None, pixbuf=None):
+        save_cover(self.parent_widget, game_id, cover_path, pixbuf)
 
     def save_game(self, values=None):
         if values:

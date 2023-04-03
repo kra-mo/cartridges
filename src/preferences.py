@@ -110,6 +110,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
     bottles_expander_row = Gtk.Template.Child()
     bottles_file_chooser_button = Gtk.Template.Child()
 
+    itch_expander_row = Gtk.Template.Child()
+    itch_file_chooser_button = Gtk.Template.Child()
+
     def __init__(self, parent_widget, **kwargs):
         super().__init__(**kwargs)
         self.schema = parent_widget.schema
@@ -280,6 +283,18 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         if os.name == "nt":
             self.sources_group.remove(self.bottles_expander_row)
+
+        # itch
+        ImportPreferences(
+            self,
+            "itch",
+            "itch",
+            "itch-location",
+            [Path("db") / "butler.db"],
+            self.itch_expander_row,
+            self.itch_file_chooser_button,
+            True,
+        )
 
     def choose_folder(self, _widget, function):
         self.file_chooser.select_folder(self.parent_widget, None, function, None)

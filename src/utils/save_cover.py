@@ -21,7 +21,7 @@
 from gi.repository import GdkPixbuf, Gio
 
 
-def save_cover(parent_widget, game_id, cover_path, pixbuf=None):
+def save_cover(parent_widget, game_id, cover_path=None, pixbuf=None):
     covers_dir = parent_widget.data_dir / "cartridges" / "covers"
 
     covers_dir.mkdir(parents=True, exist_ok=True)
