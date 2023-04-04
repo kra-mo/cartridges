@@ -31,8 +31,12 @@ class SGDBSave:
     def update_cover(self, task, game):
         if self.parent_widget.schema.get_boolean("sgdb-prefer") or (
             self.parent_widget.schema.get_boolean("sgdb-import")
-            and self.parent_widget.games[game[0]].pixbuf
-            == self.parent_widget.placeholder_pixbuf
+            and not (
+                self.parent_widget.data_dir
+                / "cartridges"
+                / "covers"
+                / f"{game[0]}.tiff"
+            ).is_file()
         ):
             try:
                 search_result = self.sgdb.search_game(game[1])
