@@ -76,7 +76,7 @@ class Importer:
                 self.queue = len(self.games)
                 self.import_statuspage.set_title(_("Importing Covers…"))
                 self.update_progressbar()
-                SGDBSave(self, self.games)
+                SGDBSave(self.parent_widget, self.games, self)
             else:
                 self.done()
 

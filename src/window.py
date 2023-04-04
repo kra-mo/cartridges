@@ -173,6 +173,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             self.hidden_library_bin.set_child(self.hidden_scrolledwindow)
 
+        if self.stack.get_visible_child() == self.overview:
+            self.show_overview(None, self.active_game_id)
+
         self.library.invalidate_filter()
         self.hidden_library.invalidate_filter()
 

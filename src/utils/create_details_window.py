@@ -27,6 +27,7 @@ from gi.repository import Adw, GdkPixbuf, Gio, GLib, GObject, Gtk
 from .create_dialog import create_dialog
 from .save_cover import save_cover
 from .save_game import save_game
+from .steamgriddb import SGDBSave
 
 
 def create_details_window(parent_widget, game_id=None):
@@ -267,12 +268,17 @@ def create_details_window(parent_widget, game_id=None):
                 )
                 return
 
-        if pixbuf:
-            save_cover(parent_widget, game_id, None, pixbuf)
-
         values["name"] = final_name
         values["developer"] = final_developer or None
         values["executable"] = final_executable_split
+
+        if pixbuf:
+            save_cover(parent_widget, game_id, None, pixbuf)
+        elif (
+            game_id not in parent_widget.games
+            or parent_widget.games[game_id].pixbuf == parent_widget.placeholder_pixbuf
+        ):
+            SGDBSave(parent_widget, {(game_id, values["name"])})
 
         path = parent_widget.data_dir / "cartridges" / "games" / f"{game_id}.json"
 
@@ -284,8 +290,6 @@ def create_details_window(parent_widget, game_id=None):
             save_game(parent_widget, values)
 
         parent_widget.update_games([game_id])
-        if parent_widget.stack.get_visible_child() == parent_widget.overview:
-            parent_widget.show_overview(None, game_id)
         window.close()
         parent_widget.show_overview(None, game_id)
 

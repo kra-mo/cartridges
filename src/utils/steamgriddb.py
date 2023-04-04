@@ -4,13 +4,16 @@ import requests
 from gi.repository import Gio
 from steamgrid import SteamGridDB, http
 
+from .create_dialog import create_dialog
 from .save_cover import save_cover
 
 
 class SGDBSave:
-    def __init__(self, importer, games):
+    def __init__(self, parent_widget, games, importer=None):
+        self.parent_widget = parent_widget
+        self.sgdb = SteamGridDB(self.parent_widget.schema.get_string("sgdb-key"))
         self.importer = importer
-        self.sgdb = SteamGridDB(importer.parent_widget.schema.get_string("sgdb-key"))
+        self.exception = None
 
         # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
         def create_func(game):
@@ -26,10 +29,10 @@ class SGDBSave:
             Gio.Task.new(None, None, self.task_done).run_in_thread(create_func(game))
 
     def update_cover(self, task, game):
-        if self.importer.parent_widget.schema.get_boolean("sgdb-prefer") or (
-            self.importer.parent_widget.schema.get_boolean("sgdb-import")
-            and self.importer.parent_widget.games[game[0]].pixbuf
-            == self.importer.parent_widget.placeholder_pixbuf
+        if self.parent_widget.schema.get_boolean("sgdb-prefer") or (
+            self.parent_widget.schema.get_boolean("sgdb-import")
+            and self.parent_widget.games[game[0]].pixbuf
+            == self.parent_widget.placeholder_pixbuf
         ):
             try:
                 search_result = self.sgdb.search_game(game[1])
@@ -37,7 +40,7 @@ class SGDBSave:
                 task.return_value(game[0])
                 return
             except http.HTTPException as exception:
-                self.importer.sgdb_exception = str(exception)
+                self.exception = str(exception)
                 task.return_value(game[0])
                 return
 
@@ -58,12 +61,28 @@ class SGDBSave:
                 return
 
             Path(tmp_file.get_path()).write_bytes(response.content)
-            save_cover(self.importer.parent_widget, game[0], tmp_file.get_path())
+            save_cover(self.parent_widget, game[0], tmp_file.get_path())
 
         task.return_value(game[0])
 
     def task_done(self, _task, result):
         game_id = result.propagate_value()[1]
-        self.importer.parent_widget.update_games([game_id])
-        self.importer.queue -= 1
-        self.importer.done()
+        self.parent_widget.update_games([game_id])
+        if self.importer:
+            self.importer.queue -= 1
+            self.importer.done()
+            self.importer.sgdb_exception = self.exception
+        elif self.exception:
+            create_dialog(
+                self.parent_widget,
+                _("Couldn't Connect to SteamGridDB"),
+                self.exception,
+                "open_preferences",
+                _("Preferences"),
+            ).connect("response", self.response)
+
+    def response(self, _widget, response):
+        if response == "open_preferences":
+            self.parent_widget.get_application().on_preferences_action(
+                None, page_name="sgdb"
+            )
