@@ -37,6 +37,42 @@ def create_details_window(parent_widget, game_id=None):
 
     games = parent_widget.games
     pixbuf = None
+    cover_deleted = False
+
+    cover_button_edit = Gtk.Button(
+        icon_name="document-edit-symbolic",
+        halign=Gtk.Align.END,
+        valign=Gtk.Align.END,
+        margin_bottom=6,
+        margin_end=6,
+        css_classes=["circular", "osd"],
+    )
+
+    cover_button_delete = Gtk.Button(
+        icon_name="user-trash-symbolic",
+        css_classes=["circular", "osd"],
+        halign=Gtk.Align.END,
+        valign=Gtk.Align.END,
+        margin_bottom=6,
+        margin_end=6,
+    )
+
+    def delete_pixbuf(_widget):
+        nonlocal pixbuf
+        nonlocal cover_deleted
+
+        cover.set_pixbuf(parent_widget.placeholder_pixbuf)
+        cover_button_delete_revealer.set_reveal_child(False)
+        pixbuf = None
+        cover_deleted = True
+
+    cover_button_delete.connect("clicked", delete_pixbuf)
+
+    cover_button_delete_revealer = Gtk.Revealer(
+        child=cover_button_delete,
+        transition_type=Gtk.RevealerTransitionType.CROSSFADE,
+        margin_end=42,
+    )
 
     if not game_id:
         window.set_title(_("Add New Game"))
@@ -57,6 +93,9 @@ def create_details_window(parent_widget, game_id=None):
         )
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
+        if parent_widget.games[game_id].pixbuf != parent_widget.placeholder_pixbuf:
+            cover_button_delete_revealer.set_reveal_child(True)
+
     image_filter = Gtk.FileFilter(name=_("Images"))
     image_filter.add_pixbuf_formats()
     file_filters = Gio.ListStore.new(Gtk.FileFilter)
@@ -67,21 +106,14 @@ def create_details_window(parent_widget, game_id=None):
     cover.add_css_class("card")
     cover.set_size_request(200, 300)
 
-    cover_button = Gtk.Button(
-        icon_name="document-edit-symbolic",
-        halign=Gtk.Align.END,
-        valign=Gtk.Align.END,
-        margin_bottom=6,
-        margin_end=6,
-        css_classes=["circular", "osd"],
-    )
-
     cover_overlay = Gtk.Overlay(
         child=cover,
         halign=Gtk.Align.CENTER,
         valign=Gtk.Align.CENTER,
     )
-    cover_overlay.add_overlay(cover_button)
+
+    cover_overlay.add_overlay(cover_button_edit)
+    cover_overlay.add_overlay(cover_button_delete_revealer)
 
     cover_clamp = Adw.Clamp(
         maximum_size=200,
@@ -190,6 +222,7 @@ def create_details_window(parent_widget, game_id=None):
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
                 filechooser.open_finish(result).get_path(), 200, 300, False
             )
+            cover_button_delete_revealer.set_reveal_child(True)
             cover.set_pixbuf(pixbuf)
         except GLib.GError:
             return
@@ -199,6 +232,7 @@ def create_details_window(parent_widget, game_id=None):
 
     def apply_preferences(_widget, _callback=None):
         nonlocal pixbuf
+        nonlocal cover_deleted
         nonlocal game_id
 
         values = {}
@@ -272,12 +306,18 @@ def create_details_window(parent_widget, game_id=None):
         values["developer"] = final_developer or None
         values["executable"] = final_executable_split
 
+        if cover_deleted:
+            (
+                parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
+            ).unlink(missing_ok=True)
+            if game_id in parent_widget.pixbufs:
+                parent_widget.pixbufs.pop(game_id)
+
         if pixbuf:
             save_cover(parent_widget, game_id, None, pixbuf)
-        elif (
-            game_id not in parent_widget.games
-            or parent_widget.games[game_id].pixbuf == parent_widget.placeholder_pixbuf
-        ):
+        elif not (
+            parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
+        ).is_file():
             SGDBSave(parent_widget, {(game_id, values["name"])})
 
         path = parent_widget.data_dir / "cartridges" / "games" / f"{game_id}.json"
@@ -296,7 +336,7 @@ def create_details_window(parent_widget, game_id=None):
     def focus_executable(_widget):
         window.set_focus(executable)
 
-    cover_button.connect("clicked", choose_cover)
+    cover_button_edit.connect("clicked", choose_cover)
     cancel_button.connect("clicked", close_window)
     apply_button.connect("clicked", apply_preferences)
     name.connect("activate", focus_executable)

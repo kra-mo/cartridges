@@ -108,12 +108,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 (
                     self.data_dir / "cartridges" / "games" / f"{current_game}.json"
                 ).unlink(missing_ok=True)
-                try:
-                    (
-                        self.data_dir / "cartridges" / "covers" / f"{current_game}.tiff"
-                    ).unlink(missing_ok=True)
-                except FileNotFoundError:
-                    pass
+                (
+                    self.data_dir / "cartridges" / "covers" / f"{current_game}.tiff"
+                ).unlink(missing_ok=True)
 
         self.library.set_filter_func(self.search_filter)
         self.hidden_library.set_filter_func(self.hidden_search_filter)
