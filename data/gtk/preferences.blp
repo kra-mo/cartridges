@@ -210,7 +210,6 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
     Adw.PreferencesGroup sgdb_key_group {
       title: _("Authentication");
-      description: _("An API Key is required to use SteamGridDB. You can generate one <a href=\"https://www.steamgriddb.com/profile/preferences/api\">here</a>.");
       
       Adw.EntryRow sgdb_key_entry_row {
         title: _("API Key");
@@ -221,7 +220,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       title: _("Behavior");
 
       Adw.ActionRow {
-        title: _("Download Images Automatically");
+        title: _("Use SteamGridDB");
         subtitle: _("Download images when adding or importing games");
 
         Switch sgdb_download_switch {

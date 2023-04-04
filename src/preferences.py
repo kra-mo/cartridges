@@ -114,6 +114,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     itch_expander_row = Gtk.Template.Child()
     itch_file_chooser_button = Gtk.Template.Child()
 
+    sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
     sgdb_download_switch = Gtk.Template.Child()
     sgdb_prefer_switch = Gtk.Template.Child()
@@ -303,7 +304,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         # SteamGridDB
         self.schema.bind(
-            "sgdb-import",
+            "sgdb",
             self.sgdb_download_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
@@ -321,6 +322,14 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         self.sgdb_key_entry_row.set_text(self.schema.get_string("sgdb-key"))
         self.sgdb_key_entry_row.connect("changed", sgdb_key_changed)
+
+        self.sgdb_key_group.set_description(
+            _(
+                "An API Key is required to use SteamGridDB. You can generate one {}here{}."
+            ).format(
+                '<a href="https://www.steamgriddb.com/profile/preferences/api">', "</a>"
+            )
+        )
 
     def choose_folder(self, _widget, function):
         self.file_chooser.select_folder(self.parent_widget, None, function, None)

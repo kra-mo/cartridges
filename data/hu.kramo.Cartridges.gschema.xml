@@ -61,7 +61,7 @@
     <key name="sgdb-key" type="s">
       <default>""</default>
     </key>
-    <key name="sgdb-import" type="b">
+    <key name="sgdb" type="b">
       <default>false</default>
     </key>
     <key name="sgdb-prefer" type="b">

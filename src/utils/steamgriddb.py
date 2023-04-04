@@ -29,9 +29,9 @@ class SGDBSave:
             Gio.Task.new(None, None, self.task_done).run_in_thread(create_func(game))
 
     def update_cover(self, task, game):
-        if self.parent_widget.schema.get_boolean("sgdb-prefer") or (
-            self.parent_widget.schema.get_boolean("sgdb-import")
-            and not (
+        if self.parent_widget.schema.get_boolean("sgdb") and (
+            self.parent_widget.schema.get_boolean("sgdb-prefer")
+            or not (
                 self.parent_widget.data_dir
                 / "cartridges"
                 / "covers"
