@@ -44,7 +44,7 @@ def heroic_parser(parent_widget):
             )
         elif os.name == "nt" and (Path(os.getenv("appdata")) / "heroic").exists():
             schema.set_string(
-                "heroic-location", str(Path(os.getenv("appdata") / "heroic"))
+                "heroic-location", str(Path(os.getenv("appdata")) / "heroic")
             )
         else:
             return

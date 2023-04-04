@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
 import urllib.request
 from pathlib import Path
 from shutil import copyfile
@@ -120,6 +121,8 @@ def itch_parser(parent_widget):
             schema.set_string("itch-location", "~/.var/app/io.itch.itch/config/itch/")
         elif (parent_widget.config_dir / "itch").exists():
             schema.set_string("itch-location", str(parent_widget.config_dir / "itch"))
+        elif os.name == "nt" and (Path(os.getenv("appdata")) / "itch").exists():
+            schema.set_string("itch-location", str(Path(os.getenv("appdata")) / "itch"))
         else:
             return
 
