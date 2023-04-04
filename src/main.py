@@ -56,6 +56,9 @@ class CartridgesApplication(Adw.Application):
         self.create_action("edit_details", self.on_edit_details_action)
         self.create_action("add_game", self.on_add_game_action, ["<primary>n"])
         self.create_action("import", self.on_import_action, ["<primary>i"])
+        self.create_action(
+            "remove_game_overview", self.on_remove_game_overview_action, ["Delete"]
+        )
         self.create_action("remove_game", self.on_remove_game_action)
 
         self.win = None
@@ -233,6 +236,10 @@ class CartridgesApplication(Adw.Application):
         toast.set_priority(Adw.ToastPriority.HIGH)
         self.win.toasts[(game_id, "remove")] = toast
         self.win.toast_overlay.add_toast(toast)
+
+    def on_remove_game_overview_action(self, _widget, _callback=None):
+        if self.win.stack.get_visible_child() == self.win.overview:
+            self.on_remove_game_action(None)
 
     def on_quit_action(self, _widget, _callback=None):
         self.quit()
