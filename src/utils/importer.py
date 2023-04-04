@@ -24,6 +24,7 @@ from gi.repository import Adw, Gtk
 from .create_dialog import create_dialog
 from .save_cover import save_cover
 from .save_game import save_game
+from .steamgriddb import SGDBSave
 
 
 class Importer:
@@ -33,15 +34,17 @@ class Importer:
         self.queue = 0
         self.games_no = 0
         self.blocker = False
+        self.games = set()
+        self.sgdb_exception = None
 
         self.progressbar = Gtk.ProgressBar(margin_start=12, margin_end=12)
-        import_statuspage = Adw.StatusPage(
+        self.import_statuspage = Adw.StatusPage(
             title=_("Importing Games…"),
             child=self.progressbar,
         )
 
         self.import_dialog = Adw.Window(
-            content=import_statuspage,
+            content=self.import_statuspage,
             modal=True,
             default_width=350,
             default_height=-1,
@@ -51,21 +54,35 @@ class Importer:
 
         self.import_dialog.present()
 
-    def save_cover(self, game_id, cover_path=None, pixbuf=None):
-        save_cover(self.parent_widget, game_id, cover_path, pixbuf)
-
-    def save_game(self, values=None):
+    def save_game(self, values=None, cover_path=None, pixbuf=None):
         if values:
-            self.games_no += 1
             save_game(self.parent_widget, values)
-            self.parent_widget.update_games([values["game_id"]])
+
+            if cover_path or pixbuf:
+                save_cover(self.parent_widget, values["game_id"], cover_path, pixbuf)
+
+            self.games.add((values["game_id"], values["name"]))
+
+            self.games_no += 1
             if "blacklisted" in values:
                 self.games_no -= 1
 
         self.queue -= 1
-        self.progressbar.set_fraction(1 - (self.queue / self.total_queue))
+        self.update_progressbar()
 
         if self.queue == 0 and not self.blocker:
+            if self.games:
+                self.total_queue = len(self.games)
+                self.queue = len(self.games)
+                self.import_statuspage.set_title(_("Importing Covers…"))
+                self.update_progressbar()
+                SGDBSave(self, self.games)
+            else:
+                self.done()
+
+    def done(self):
+        self.update_progressbar()
+        if self.queue == 0:
             self.import_dialog.close()
 
             if self.games_no == 0:
@@ -75,14 +92,14 @@ class Importer:
                     _("No new games were found on your system."),
                     "open_preferences",
                     _("Preferences"),
-                ).connect("response", self.response)
+                ).connect("response", self.response, "import")
 
             elif self.games_no == 1:
                 create_dialog(
                     self.parent_widget,
                     _("Game Imported"),
                     _("Successfully imported 1 game."),
-                ).connect("response", self.response)
+                ).connect("response", self.response, "import")
             elif self.games_no > 1:
                 games_no = self.games_no
                 create_dialog(
@@ -90,13 +107,22 @@ class Importer:
                     _("Games Imported"),
                     # The variable is the number of games
                     _("Successfully imported {} games.").format(games_no),
-                ).connect("response", self.response)
+                ).connect("response", self.response, "import")
 
-    def response(self, _widget, response, expander_row=None):
+    def response(self, _widget, response, page_name=None, expander_row=None):
         if response == "open_preferences":
             self.parent_widget.get_application().on_preferences_action(
-                None, page_name="import", expander_row=expander_row
+                None, page_name=page_name, expander_row=expander_row
             )
+        elif self.sgdb_exception:
+            create_dialog(
+                self.parent_widget,
+                _("Couldn't Connect to SteamGridDB"),
+                self.sgdb_exception,
+                "open_preferences",
+                _("Preferences"),
+            ).connect("response", self.response, "sgdb")
+            self.sgdb_exception = None
         elif (
             self.parent_widget.schema.get_boolean("steam")
             and self.parent_widget.schema.get_boolean("steam-extra-dirs-hint")
@@ -120,4 +146,7 @@ class Importer:
                     ),
                     "open_preferences",
                     _("Preferences"),
-                ).connect("response", self.response, "steam_expander_row")
+                ).connect("response", self.response, "import", "steam_expander_row")
+
+    def update_progressbar(self):
+        self.progressbar.set_fraction(1 - (self.queue / self.total_queue))

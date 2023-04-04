@@ -83,6 +83,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     general_page = Gtk.Template.Child()
     import_page = Gtk.Template.Child()
+    sgdb_page = Gtk.Template.Child()
 
     sources_group = Gtk.Template.Child()
 
@@ -112,6 +113,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     itch_expander_row = Gtk.Template.Child()
     itch_file_chooser_button = Gtk.Template.Child()
+
+    sgdb_key_entry_row = Gtk.Template.Child()
+    sgdb_download_switch = Gtk.Template.Child()
+    sgdb_prefer_switch = Gtk.Template.Child()
 
     def __init__(self, parent_widget, **kwargs):
         super().__init__(**kwargs)
@@ -295,6 +300,27 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self.itch_file_chooser_button,
             True,
         )
+
+        # SteamGridDB
+        self.schema.bind(
+            "sgdb-import",
+            self.sgdb_download_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+
+        self.schema.bind(
+            "sgdb-prefer",
+            self.sgdb_prefer_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+
+        def sgdb_key_changed(_widget):
+            self.schema.set_string("sgdb-key", self.sgdb_key_entry_row.get_text())
+
+        self.sgdb_key_entry_row.set_text(self.schema.get_string("sgdb-key"))
+        self.sgdb_key_entry_row.connect("changed", sgdb_key_changed)
 
     def choose_folder(self, _widget, function):
         self.file_chooser.select_folder(self.parent_widget, None, function, None)

@@ -202,4 +202,38 @@ template PreferencesWindow : Adw.PreferencesWindow {
       }
     }
   }
+
+  Adw.PreferencesPage sgdb_page {
+    name: "sgdb";
+    title: _("SteamGridDB");
+    icon-name: "image-x-generic-symbolic";
+
+    Adw.PreferencesGroup sgdb_key_group {
+      title: _("Authentication");
+      description: _("An API Key is required to use SteamGridDB. You can generate one <a href=\"https://www.steamgriddb.com/profile/preferences/api\">here</a>.");
+      
+      Adw.EntryRow sgdb_key_entry_row {
+        title: _("API Key");
+      }
+    }
+
+    Adw.PreferencesGroup sgdb_behavior_group {
+      title: _("Behavior");
+
+      Adw.ActionRow {
+        title: _("Download Images on Import");
+
+        Switch sgdb_download_switch {
+          valign: center;
+        }
+      }
+      Adw.ActionRow {
+        title: _("Prefer Over Official Images");
+
+        Switch sgdb_prefer_switch {
+          valign: center;
+        }
+      }
+    }
+  }
 }

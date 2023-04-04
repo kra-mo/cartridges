@@ -23,6 +23,7 @@ cartridges_sources = [
   'preferences.py',
   'game.py',
   'utils/importer.py',
+  'utils/steamgriddb.py',
   'utils/steam_parser.py',
   'utils/lutris_parser.py',
   'utils/heroic_parser.py',

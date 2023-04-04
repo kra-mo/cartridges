@@ -37,7 +37,7 @@ def create_details_window(parent_widget, game_id=None):
     games = parent_widget.games
     pixbuf = None
 
-    if game_id is None:
+    if not game_id:
         window.set_title(_("Add New Game"))
         cover = Gtk.Picture.new_for_pixbuf(parent_widget.placeholder_pixbuf)
         name = Gtk.Entry()
@@ -215,13 +215,13 @@ def create_details_window(parent_widget, game_id=None):
             create_dialog(
                 window,
                 _("Couldn't Add Game")
-                if game_id is None
+                if not game_id
                 else _("Couldn't Apply Preferences"),
                 f'{_("Executable")}: {exception}.',
             )
             return
 
-        if game_id is None:
+        if not game_id:
             if final_name == "":
                 create_dialog(
                     window, _("Couldn't Add Game"), _("Game title cannot be empty.")
@@ -267,7 +267,7 @@ def create_details_window(parent_widget, game_id=None):
                 )
                 return
 
-        if pixbuf is not None:
+        if pixbuf:
             save_cover(parent_widget, game_id, None, pixbuf)
 
         values["name"] = final_name

@@ -58,6 +58,15 @@
     <key name="itch-location" type="s">
       <default>"~/.var/app/io.itch.itch/config/itch/"</default>
     </key>
+    <key name="sgdb-key" type="s">
+      <default>""</default>
+    </key>
+    <key name="sgdb-import" type="b">
+      <default>false</default>
+    </key>
+    <key name="sgdb-prefer" type="b">
+      <default>false</default>
+    </key>
 	</schema>
   <schema id="hu.kramo.Cartridge.State" path="/hu/kramo/Cartridges/State/">
     <key name="width" type="i">

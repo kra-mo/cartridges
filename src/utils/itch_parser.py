@@ -35,7 +35,7 @@ def get_game(task, current_time, parent_widget, row, importer):
         values["game_id"] in parent_widget.games
         and not parent_widget.games[values["game_id"]].removed
     ):
-        task.return_value(None)
+        task.return_value((None, None))
         return
 
     values["added"] = current_time
@@ -51,7 +51,7 @@ def get_game(task, current_time, parent_widget, row, importer):
             with urllib.request.urlopen(row[3] or row[2], timeout=5) as open_file:
                 Path(tmp_file.get_path()).write_bytes(open_file.read())
         except urllib.error.URLError:
-            task.return_value(values)
+            task.return_value((values, None))
             return
 
         cover_pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
@@ -77,8 +77,10 @@ def get_game(task, current_time, parent_widget, row, importer):
             GdkPixbuf.InterpType.BILINEAR,
             255,
         )
-        importer.save_cover(values["game_id"], pixbuf=cover_pixbuf)
-    task.return_value(values)
+    else:
+        cover_pixbuf = None
+
+    task.return_value((values, cover_pixbuf))
 
 
 def get_games_async(parent_widget, rows, importer):
@@ -100,7 +102,7 @@ def get_games_async(parent_widget, rows, importer):
     def update_games(_task, result):
         final_values = result.propagate_value()[1]
         # No need for an if statement as final_value would be None for games we don't want to save
-        importer.save_game(final_values)
+        importer.save_game(final_values[0], pixbuf=final_values[1])
 
     for row in rows:
         task = Gio.Task.new(None, None, update_games)

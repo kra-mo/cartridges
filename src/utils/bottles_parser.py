@@ -77,15 +77,15 @@ def bottles_parser(parent_widget):
         values["added"] = current_time
         values["last_played"] = 0
 
-        if game["thumbnail"]:
-            importer.save_cover(
-                values["game_id"],
-                (
-                    bottles_dir
-                    / "bottles"
-                    / game["bottle"]["path"]
-                    / "grids"
-                    / game["thumbnail"].split(":")[1]
-                ),
+        importer.save_game(
+            values,
+            (
+                bottles_dir
+                / "bottles"
+                / game["bottle"]["path"]
+                / "grids"
+                / game["thumbnail"].split(":")[1]
             )
-        importer.save_game(values)
+            if game["thumbnail"]
+            else None,
+        )

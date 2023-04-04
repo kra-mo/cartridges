@@ -57,7 +57,7 @@ def get_game(
         values["game_id"] in parent_widget.games
         and not parent_widget.games[values["game_id"]].removed
     ):
-        task.return_value(None)
+        task.return_value((None, None))
         return
 
     values["executable"] = (
@@ -70,21 +70,12 @@ def get_game(
     values["added"] = current_time
     values["last_played"] = 0
 
-    if (
+    image_path = (
         steam_dir
         / "appcache"
         / "librarycache"
         / f'{values["appid"]}_library_600x900.jpg'
-    ).is_file():
-        importer.save_cover(
-            values["game_id"],
-            (
-                steam_dir
-                / "appcache"
-                / "librarycache"
-                / f'{values["appid"]}_library_600x900.jpg'
-            ),
-        )
+    )
 
     try:
         with urllib.request.urlopen(
@@ -93,11 +84,11 @@ def get_game(
         ) as open_file:
             content = open_file.read().decode("utf-8")
     except urllib.error.URLError:
-        task.return_value(values)
+        task.return_value((values, image_path if image_path.exists() else None))
         return
 
     values = update_values_from_data(content, values)
-    task.return_value(values)
+    task.return_value((values, image_path if image_path.exists() else None))
 
 
 def get_games_async(parent_widget, appmanifests, steam_dir, importer):
@@ -122,7 +113,7 @@ def get_games_async(parent_widget, appmanifests, steam_dir, importer):
     def update_games(_task, result):
         final_values = result.propagate_value()[1]
         # No need for an if statement as final_value would be None for games we don't want to save
-        importer.save_game(final_values)
+        importer.save_game(final_values[0], final_values[1])
 
     for appmanifest in appmanifests:
         task = Gio.Task.new(None, None, update_games)

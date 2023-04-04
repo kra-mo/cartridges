@@ -108,9 +108,5 @@ def lutris_parser(parent_widget):
         values["name"] = row[1]
         values["source"] = f"lutris_{row[3]}"
 
-        if (cache_dir / "coverart" / f"{row[2]}.jpg").is_file():
-            importer.save_cover(
-                values["game_id"], (cache_dir / "coverart" / f"{row[2]}.jpg")
-            )
-
-        importer.save_game(values)
+        image_path = cache_dir / "coverart" / f"{row[2]}.jpg"
+        importer.save_game(values, image_path if image_path.exists() else None)

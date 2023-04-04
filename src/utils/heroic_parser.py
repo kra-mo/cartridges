@@ -100,10 +100,9 @@ def heroic_parser(parent_widget):
                         (f'{game["art_square"]}?h=400&resize=1&w=300').encode()
                     ).hexdigest()
                 )
-                if image_path.exists():
-                    importer.save_cover(values["game_id"], image_path)
 
-                importer.save_game(values)
+                importer.save_game(values, image_path if image_path.exists() else None)
+
         except KeyError:
             pass
 
@@ -142,9 +141,6 @@ def heroic_parser(parent_widget):
                         / "images-cache"
                         / hashlib.sha256(game["art_square"].encode()).hexdigest()
                     )
-                    if image_path.exists():
-                        importer.save_cover(values["game_id"], image_path)
-                    break
 
             values["executable"] = (
                 ["start", f"heroic://launch/{app_name}"]
@@ -156,7 +152,7 @@ def heroic_parser(parent_widget):
             values["added"] = current_time
             values["last_played"] = 0
 
-            importer.save_game(values)
+            importer.save_game(values, image_path if image_path.exists() else None)
 
     # Import sideloaded games
     if not schema.get_boolean("heroic-import-sideload"):
@@ -196,7 +192,5 @@ def heroic_parser(parent_widget):
                 / "images-cache"
                 / hashlib.sha256(item["art_square"].encode()).hexdigest()
             )
-            if image_path.exists():
-                importer.save_cover(values["game_id"], image_path)
 
-            importer.save_game(values)
+            importer.save_game(values, image_path if image_path.exists() else None)
