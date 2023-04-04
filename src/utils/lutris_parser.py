@@ -27,8 +27,8 @@ def lutris_parser(parent_widget):
 
     schema = parent_widget.schema
 
-    database_path = (Path(schema.get_string("lutris-location")) / "pga.db").expanduser()
-    if not database_path.is_file():
+    database_path = (Path(schema.get_string("lutris-location"))).expanduser()
+    if not database_path.exists():
         if Path("~/.var/app/net.lutris.Lutris/data/lutris/").expanduser().exists():
             schema.set_string(
                 "lutris-location", "~/.var/app/net.lutris.Lutris/data/lutris/"
@@ -51,7 +51,7 @@ def lutris_parser(parent_widget):
         else:
             return
 
-    database_path = (Path(schema.get_string("lutris-location")) / "pga.db").expanduser()
+    database_path = (Path(schema.get_string("lutris-location"))).expanduser()
     cache_dir = Path(schema.get_string("lutris-cache-location")).expanduser()
 
     db_cache_dir = parent_widget.cache_dir / "cartridges" / "lutris"
@@ -59,7 +59,9 @@ def lutris_parser(parent_widget):
 
     # Copy the file because sqlite3 doesn't like databases in /run/user/
     database_tmp_path = db_cache_dir / "pga.db"
-    copyfile(database_path, database_tmp_path)
+
+    for db_file in database_path.glob("pga.db*"):
+        copyfile(db_file, (db_cache_dir / db_file.name))
 
     db_request = """
                 SELECT
@@ -78,6 +80,7 @@ def lutris_parser(parent_widget):
     cursor = connection.execute(db_request)
     rows = cursor.fetchall()
     connection.close()
+    # No need to unlink temp files as they disappear when the connection is closed
     database_tmp_path.unlink(missing_ok=True)
 
     if schema.get_boolean("steam"):

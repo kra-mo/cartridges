@@ -27,7 +27,7 @@ from time import time
 from gi.repository import GdkPixbuf, Gio
 
 
-def get_game(task, current_time, parent_widget, row, importer):
+def get_game(task, current_time, parent_widget, row):
     values = {}
 
     values["game_id"] = f"itch_{row[0]}"
@@ -95,7 +95,6 @@ def get_games_async(parent_widget, rows, importer):
                 current_time,
                 parent_widget,
                 row,
-                importer,
             )
 
         return wrapper
@@ -113,10 +112,8 @@ def get_games_async(parent_widget, rows, importer):
 def itch_parser(parent_widget):
     schema = parent_widget.schema
 
-    database_path = (
-        Path(schema.get_string("itch-location")) / "db" / "butler.db"
-    ).expanduser()
-    if not database_path.is_file():
+    database_path = (Path(schema.get_string("itch-location")) / "db").expanduser()
+    if not database_path.exists():
         if Path("~/.var/app/io.itch.itch/config/itch/").expanduser().exists():
             schema.set_string("itch-location", "~/.var/app/io.itch.itch/config/itch/")
         elif (parent_widget.config_dir / "itch").exists():
@@ -126,16 +123,16 @@ def itch_parser(parent_widget):
         else:
             return
 
-    database_path = (
-        Path(schema.get_string("itch-location")) / "db" / "butler.db"
-    ).expanduser()
+    database_path = (Path(schema.get_string("itch-location")) / "db").expanduser()
 
     db_cache_dir = parent_widget.cache_dir / "cartridges" / "itch"
     db_cache_dir.mkdir(parents=True, exist_ok=True)
 
     # Copy the file because sqlite3 doesn't like databases in /run/user/
     database_tmp_path = db_cache_dir / "butler.db"
-    copyfile(database_path, database_tmp_path)
+
+    for db_file in database_path.glob("butler.db*"):
+        copyfile(db_file, (db_cache_dir / db_file.name))
 
     db_request = """
                 SELECT
@@ -157,6 +154,7 @@ def itch_parser(parent_widget):
     cursor = connection.execute(db_request)
     rows = cursor.fetchall()
     connection.close()
+    # No need to unlink temp files as they disappear when the connection is closed
     database_tmp_path.unlink(missing_ok=True)
 
     importer = parent_widget.importer
