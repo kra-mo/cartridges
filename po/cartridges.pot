@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-05 10:13+0200\n"
+"POT-Creation-Date: 2023-04-05 10:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -446,7 +446,7 @@ msgstr ""
 
 #: src/preferences.py:335
 msgid ""
-"An API Key is required to use SteamGridDB. You can generate one {}here{}."
+"An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 
 #: src/utils/importer.py:42

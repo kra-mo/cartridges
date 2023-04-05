@@ -332,7 +332,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         self.sgdb_key_group.set_description(
             _(
-                "An API Key is required to use SteamGridDB. You can generate one {}here{}."
+                "An API key is required to use SteamGridDB. You can generate one {}here{}."
             ).format(
                 '<a href="https://www.steamgriddb.com/profile/preferences/api">', "</a>"
             )
