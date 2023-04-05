@@ -136,9 +136,9 @@ def create_details_window(parent_widget, game_id=None):
     developer_group.add(developer)
 
     exec_info_button = Gtk.ToggleButton(
-        icon_name="dialog-information-symbolic",
+        icon_name="help-about-symbolic",
         valign=Gtk.Align.CENTER,
-        css_classes=["flat", "circular"],
+        css_classes=["flat"],
     )
 
     # Translate this string as you would translate "file"
