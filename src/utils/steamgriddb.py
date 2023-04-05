@@ -38,6 +38,9 @@ class SGDBSave:
                 / f"{game[0]}.tiff"
             ).is_file()
         ):
+            if not self.importer:
+                self.parent_widget.loading = game[0]
+
             try:
                 search_result = self.sgdb.search_game(game[1])
             except requests.exceptions.RequestException:
@@ -70,20 +73,24 @@ class SGDBSave:
         task.return_value(game[0])
 
     def task_done(self, _task, result):
-        game_id = result.propagate_value()[1]
-        self.parent_widget.update_games([game_id])
         if self.importer:
             self.importer.queue -= 1
             self.importer.done()
             self.importer.sgdb_exception = self.exception
-        elif self.exception:
-            create_dialog(
-                self.parent_widget,
-                _("Couldn't Connect to SteamGridDB"),
-                self.exception,
-                "open_preferences",
-                _("Preferences"),
-            ).connect("response", self.response)
+        else:
+            self.parent_widget.loading = None
+
+            if self.exception:
+                create_dialog(
+                    self.parent_widget,
+                    _("Couldn't Connect to SteamGridDB"),
+                    self.exception,
+                    "open_preferences",
+                    _("Preferences"),
+                ).connect("response", self.response)
+
+        game_id = result.propagate_value()[1]
+        self.parent_widget.update_games([game_id])
 
     def response(self, _widget, response):
         if response == "open_preferences":

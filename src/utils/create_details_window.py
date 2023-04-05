@@ -71,7 +71,7 @@ def create_details_window(parent_widget, game_id=None):
     cover_button_delete_revealer = Gtk.Revealer(
         child=cover_button_delete,
         transition_type=Gtk.RevealerTransitionType.CROSSFADE,
-        margin_end=42,
+        margin_end=40,
     )
 
     if not game_id:

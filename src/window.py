@@ -48,6 +48,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     overview_box = Gtk.Template.Child()
     overview_cover = Gtk.Template.Child()
+    overview_spinner = Gtk.Template.Child()
     overview_title = Gtk.Template.Child()
     overview_header_bar_title = Gtk.Template.Child()
     overview_launch = Gtk.Template.Child()
@@ -94,6 +95,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.toasts = {}
         self.pixbufs = {}
         self.active_game_id = None
+        self.loading = None
 
         self.overview.set_measure_overlay(self.overview_box, True)
         self.overview.set_clip_overlay(self.overview_box, False)
@@ -244,6 +246,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
         return GLib.DateTime.new_from_unix_utc(timestamp).format("%x")
 
     def show_overview(self, _widget, game_id):
+        loading = game_id == self.loading
+        self.overview_cover.set_visible(not loading)
+        self.overview_spinner.set_spinning(loading)
+
         current_game = self.games[game_id]
 
         if current_game.developer:

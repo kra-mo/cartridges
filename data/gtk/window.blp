@@ -70,15 +70,23 @@ template CartridgesWindow : Adw.ApplicationWindow {
 
               Adw.Clamp {
                 maximum-size: 200;
-                Picture overview_cover {
-                  halign: end;
-                  valign: start;
-                  width-request: 200;
-                  height-request: 300;
+                Overlay {
+                  [overlay]
+                  Spinner overview_spinner {
+                    margin-start: 72;
+                    margin-end: 72;
+                  }
 
-                  styles [
-                    "card",
-                  ]
+                  Picture overview_cover {
+                    halign: end;
+                    valign: start;
+                    width-request: 200;
+                    height-request: 300;
+
+                    styles [
+                      "card",
+                    ]
+                  }
                 }
               }
 
