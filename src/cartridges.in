@@ -27,6 +27,11 @@ import gettext
 
 VERSION = "@VERSION@"
 if os.name == "nt":
+    from ctypes import windll
+
+    os.environ["LANGUAGE"] = locale.windows_locale[
+        windll.kernel32.GetUserDefaultUILanguage()
+    ]
     pkgdatadir = os.path.join(os.path.dirname(__file__), "..", "share", "cartridges")
     localedir = os.path.join(os.path.dirname(__file__), "..", "share", "locale")
 else:
