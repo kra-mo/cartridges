@@ -83,7 +83,7 @@ def lutris_parser(parent_widget):
     # No need to unlink temp files as they disappear when the connection is closed
     database_tmp_path.unlink(missing_ok=True)
 
-    if schema.get_boolean("steam"):
+    if not schema.get_boolean("lutris-import-steam"):
         rows = [row for row in rows if not row[3] == "steam"]
 
     current_time = int(time())

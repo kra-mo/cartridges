@@ -31,6 +31,9 @@
     <key name="lutris-cache-location" type="s">
       <default>"~/.var/app/net.lutris.Lutris/cache/lutris"</default>
     </key>
+    <key name="lutris-import-steam" type="b">
+      <default>false</default>
+    </key>
     <key name="heroic" type="b">
       <default>true</default>
     </key>

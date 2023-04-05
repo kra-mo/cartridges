@@ -121,12 +121,21 @@ template PreferencesWindow : Adw.PreferencesWindow {
             valign: center;
           }
         }
+
         Adw.ActionRow {
           title: _("Lutris Cache Location");
           subtitle: _("Directory to use when importing game covers");
 
           Button lutris_cache_file_chooser_button {
             icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Import Steam Games");
+
+          Switch lutris_steam_switch {
             valign: center;
           }
         }

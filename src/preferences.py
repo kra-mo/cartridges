@@ -101,6 +101,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     lutris_expander_row = Gtk.Template.Child()
     lutris_file_chooser_button = Gtk.Template.Child()
     lutris_cache_file_chooser_button = Gtk.Template.Child()
+    lutris_steam_switch = Gtk.Template.Child()
 
     heroic_expander_row = Gtk.Template.Child()
     heroic_file_chooser_button = Gtk.Template.Child()
@@ -212,6 +213,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
             ["pga.db"],
             self.lutris_expander_row,
             self.lutris_file_chooser_button,
+        )
+        self.schema.bind(
+            "lutris-import-steam",
+            self.lutris_steam_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
         )
 
         def set_cache_dir(_source, result, _unused):
