@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Cartridges
 GenericName=Game Launcher
-Comment=Launch your games
+Comment=Launch all your games
 Exec=cartridges
 Icon=hu.kramo.Cartridges
 Terminal=false

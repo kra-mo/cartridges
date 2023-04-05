@@ -32,10 +32,11 @@
 Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita.
 ## Features
 - Manually adding and editing games
-- Importing games from Steam, Heroic and Bottles
+- Importing games from Steam, Lutris Heroic, Bottles and itch
 - Support for multiple Steam install locations
 - Hiding games
 - Searching and sorting by title, date added and last played
+- Automatically downloading cover art from [SteamGridDB](https://www.steamgriddb.com/)
 
 For updates and questions, join our [Discord server][discord-url]!
 
