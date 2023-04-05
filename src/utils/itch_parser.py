@@ -40,7 +40,11 @@ def get_game(task, current_time, parent_widget, row):
         return
 
     values["added"] = current_time
-    values["executable"] = ["xdg-open", f"itch://caves/{row[4]}/launch"]
+    values["executable"] = (
+        ["start", f"itch://caves/{row[4]}/launch"]
+        if os.name == "nt"
+        else ["xdg-open", f"itch://caves/{row[4]}/launch"]
+    )
     values["hidden"] = False
     values["last_played"] = 0
     values["name"] = row[1]
