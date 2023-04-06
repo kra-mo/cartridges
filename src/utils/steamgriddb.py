@@ -62,9 +62,8 @@ class SGDBSave:
                 return
 
             try:
-                headers["dimensions"] = "600x900"
                 grid = requests.get(
-                    f'{url}grids/game/{search_result.json()["data"][0]["id"]}',
+                    f'{url}grids/game/{search_result.json()["data"][0]["id"]}?dimensions=600x900',
                     headers=headers,
                     timeout=5,
                 )
