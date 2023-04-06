@@ -50,20 +50,6 @@
             ]
         },
         {
-            "name" : "blueprint-compiler",
-            "buildsystem" : "meson",
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/jwestman/blueprint-compiler",
-                    "tag" : "v0.6.0"
-                }
-            ],
-            "cleanup" : [
-                "*"
-            ]
-        },
-        {
             "name": "python3-python-steamgriddb",
             "buildsystem": "simple",
             "build-commands": [
@@ -100,6 +86,20 @@
                     "url": "https://files.pythonhosted.org/packages/7b/f5/890a0baca17a61c1f92f72b81d3c31523c99bec609e60c292ea55b387ae8/urllib3-1.26.15-py2.py3-none-any.whl",
                     "sha256": "aa751d169e23c7479ce47a0cb0da579e3ede798f994f5816a74e4f4500dcea42"
                 }
+            ]
+        },
+        {
+            "name" : "blueprint-compiler",
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/jwestman/blueprint-compiler",
+                    "tag" : "v0.6.0"
+                }
+            ],
+            "cleanup" : [
+                "*"
             ]
         },
         {
