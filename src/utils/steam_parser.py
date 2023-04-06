@@ -41,15 +41,17 @@ def update_values_from_data(content, values):
     return values
 
 
-def get_game(
-    task, datatypes, current_time, parent_widget, appmanifest, steam_dir, importer
-):
+def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_dir):
     values = {}
 
     data = appmanifest.read_text("utf-8")
     for datatype in datatypes:
         value = re.findall(f'"{datatype}"\t\t"(.*)"\n', data)
-        values[datatype] = value[0]
+        try:
+            values[datatype] = value[0]
+        except IndexError:
+            task.return_value((None, None))
+            return
 
     values["game_id"] = f'steam_{values["appid"]}'
 
@@ -105,7 +107,6 @@ def get_games_async(parent_widget, appmanifests, steam_dir, importer):
                 parent_widget,
                 appmanifest,
                 steam_dir,
-                importer,
             )
 
         return wrapper
