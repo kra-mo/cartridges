@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-31 16:40+0200\n"
-"PO-Revision-Date: 2023-03-31 15:04+0000\n"
+"POT-Creation-Date: 2023-04-05 11:11+0200\n"
+"PO-Revision-Date: 2023-04-05 10:28+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:111
+#: src/main.py:113
 msgid "Cartridges"
 msgstr "Kazetták"
 
@@ -31,28 +31,27 @@ msgid "Game Launcher"
 msgstr "Játék Indító"
 
 #: data/hu.kramo.Cartridges.desktop.in:5
-msgid "Launch your games"
-msgstr "Indítsa el a játékait"
-
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
 msgstr "Indítsa el az összes játékát"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
-"Cartridges is a simple game launcher. It has support for importing your "
-"games from Steam, Heroic and Bottles with organizational features such as "
-"hiding and sorting by date added or last played."
+"Cartridges is a simple game launcher for all of your games. It has support "
+"for importing games from Steam, Lutris, Heroic and more with no login "
+"necessary. You can sort and hide games or download cover art from "
+"SteamGridDB."
 msgstr ""
-"A Kazetták egy egyszerű játékindító. Támogatja a Steam-ből, Heroic-ból és "
-"Palackok-ból való importálást, valamint a játékok elrejtését és rendezését."
+"A Kazetták egy egyszerű játékindító. Importálhat játékokat Steam-ből, Lutris-"
+"ból, Heroic-ból és több más forrásból bejelentkezés nélkül. Rendezheti és "
+"elrejtheti a játékait, valamint letölthet borítóképeket a SteamGridDB-ről."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
 msgstr "Könyvtár"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
-#: src/utils/create_details_window.py:48
+#: src/utils/create_details_window.py:85
 msgid "Edit Game Details"
 msgstr "Játék Szerkesztése"
 
@@ -60,12 +59,12 @@ msgstr "Játék Szerkesztése"
 msgid "Game Details"
 msgstr "Játék Tulajdonságai"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/importer.py:81
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:371
+#: src/utils/importer.py:94 src/utils/importer.py:123 src/utils/importer.py:148
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: data/gtk/window.blp:6 src/utils/importer.py:78
+#: data/gtk/window.blp:6 src/utils/importer.py:91
 msgid "No Games Found"
 msgstr "Nem találhatóak játékok"
 
@@ -89,75 +88,75 @@ msgstr "Nincsenek rejtett játékok"
 msgid "Games you hide will appear here."
 msgstr "A rejtett játékaid itt lesznek megtalálhatóak."
 
-#: data/gtk/window.blp:44 data/gtk/window.blp:254
+#: data/gtk/window.blp:44 data/gtk/window.blp:262
 msgid "Back"
 msgstr "Vissza"
 
-#: data/gtk/window.blp:92
+#: data/gtk/window.blp:100
 msgid "Game Title"
 msgstr "Cím"
 
-#: data/gtk/window.blp:148 src/game.py:175
+#: data/gtk/window.blp:156 src/game.py:168
 msgid "Play"
 msgstr "Játék"
 
-#: data/gtk/window.blp:196 data/gtk/window.blp:382
+#: data/gtk/window.blp:204 data/gtk/window.blp:390
 msgid "Add Game"
 msgstr "Játék hozzáadása"
 
-#: data/gtk/window.blp:203 data/gtk/window.blp:266
+#: data/gtk/window.blp:211 data/gtk/window.blp:274
 msgid "Main Menu"
 msgstr "Főmenü"
 
-#: data/gtk/window.blp:210 data/gtk/window.blp:273 data/gtk/help-overlay.blp:19
+#: data/gtk/window.blp:218 data/gtk/window.blp:281 data/gtk/help-overlay.blp:19
 msgid "Search"
 msgstr "Keresés"
 
-#: data/gtk/window.blp:261
+#: data/gtk/window.blp:269
 msgid "Hidden Games"
 msgstr "Rejtett játékok"
 
-#: data/gtk/window.blp:321
+#: data/gtk/window.blp:329
 msgid "Sort"
 msgstr "Rendezés"
 
-#: data/gtk/window.blp:324
+#: data/gtk/window.blp:332
 msgid "A-Z"
 msgstr "A-Z"
 
-#: data/gtk/window.blp:330
+#: data/gtk/window.blp:338
 msgid "Z-A"
 msgstr "Z-A"
 
-#: data/gtk/window.blp:336
+#: data/gtk/window.blp:344
 msgid "Newest"
 msgstr "Legújabb"
 
-#: data/gtk/window.blp:342
+#: data/gtk/window.blp:350
 msgid "Oldest"
 msgstr "Legrégebbi"
 
-#: data/gtk/window.blp:348
+#: data/gtk/window.blp:356
 msgid "Last Played"
 msgstr "Legutóbb játszott"
 
-#: data/gtk/window.blp:355
+#: data/gtk/window.blp:363
 msgid "Show Hidden"
 msgstr "Rejtett játékok"
 
-#: data/gtk/window.blp:368
+#: data/gtk/window.blp:376
 msgid "Keyboard Shortcuts"
 msgstr "Gyorsbillentyűk"
 
-#: data/gtk/window.blp:373
+#: data/gtk/window.blp:381
 msgid "About Cartridges"
 msgstr "A Kazetták névjegye"
 
-#: data/gtk/window.blp:388 data/gtk/preferences.blp:66
+#: data/gtk/window.blp:396 data/gtk/preferences.blp:66
 msgid "Import"
 msgstr "Importálás"
 
-#: data/gtk/game.blp:60 src/utils/create_details_window.py:94
+#: data/gtk/game.blp:60 src/utils/create_details_window.py:127
 msgid "Title"
 msgstr "Cím"
 
@@ -193,7 +192,8 @@ msgstr "Beállítások megjelenítése"
 msgid "Shortcuts"
 msgstr "Gyorsbillentyűk"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:202 src/preferences.py:123
+#: data/gtk/help-overlay.blp:34 src/main.py:178 src/main.py:234
+#: src/preferences.py:131
 msgid "Undo"
 msgstr "Visszavonás"
 
@@ -217,7 +217,11 @@ msgstr "Játékok importálása"
 msgid "Show hidden games"
 msgstr "Rejtett játékok megjelenítése"
 
-#: data/gtk/preferences.blp:13
+#: data/gtk/help-overlay.blp:63
+msgid "Remove game"
+msgstr "Játék eltávolítása"
+
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:229
 msgid "Behavior"
 msgstr "Működés"
 
@@ -233,7 +237,7 @@ msgstr "A borítókép indítja el a játékot"
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "Felcseréli a \"Játék\" gomb és a borítókép funkcióját"
 
-#: data/gtk/preferences.blp:34 src/utils/create_details_window.py:59
+#: data/gtk/preferences.blp:34 src/utils/create_details_window.py:99
 msgid "Images"
 msgstr "Képek"
 
@@ -266,11 +270,12 @@ msgid "Steam Install Location"
 msgstr "Steam telepítés helye"
 
 #: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:141 data/gtk/preferences.blp:180
+#: data/gtk/preferences.blp:150 data/gtk/preferences.blp:189
+#: data/gtk/preferences.blp:204
 msgid "Directory to use when importing games"
 msgstr "Az importáláshoz használt mappa"
 
-#: data/gtk/preferences.blp:86
+#: data/gtk/preferences.blp:86 src/utils/importer.py:143
 msgid "Extra Steam Libraries"
 msgstr "További Steam könyvtárak"
 
@@ -290,180 +295,254 @@ msgstr "Lutris"
 msgid "Lutris Install Location"
 msgstr "Lutris telepítés helye"
 
-#: data/gtk/preferences.blp:125
+#: data/gtk/preferences.blp:126
 msgid "Lutris Cache Location"
 msgstr "Lutris gyorsítótár helye"
 
-#: data/gtk/preferences.blp:126
+#: data/gtk/preferences.blp:127
 msgid "Directory to use when importing game covers"
 msgstr "A játékborítók importáláshoz használt mappa"
 
 #: data/gtk/preferences.blp:136
+msgid "Import Steam Games"
+msgstr "Steam játékok importálása"
+
+#: data/gtk/preferences.blp:145
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:140
+#: data/gtk/preferences.blp:149
 msgid "Heroic Install Location"
 msgstr "Heroic telepítés helye"
 
-#: data/gtk/preferences.blp:150
+#: data/gtk/preferences.blp:159
 msgid "Import Epic Games"
 msgstr "Epic Games játékok importálása"
 
-#: data/gtk/preferences.blp:158
+#: data/gtk/preferences.blp:167
 msgid "Import GOG Games"
 msgstr "GOG játékok importálása"
 
-#: data/gtk/preferences.blp:166
+#: data/gtk/preferences.blp:175
 msgid "Import Sideloaded Games"
 msgstr "Manuálisan hozzáadott játékok importálása"
 
-#: data/gtk/preferences.blp:175
+#: data/gtk/preferences.blp:184
 msgid "Bottles"
 msgstr "Palackok"
 
-#: data/gtk/preferences.blp:179
+#: data/gtk/preferences.blp:188
 msgid "Bottles Install Location"
 msgstr "Palackok telepítés helye"
 
+#: data/gtk/preferences.blp:199
+msgid "itch"
+msgstr "itch"
+
+#: data/gtk/preferences.blp:203
+msgid "itch Install Location"
+msgstr "itch telepítés helye"
+
+#: data/gtk/preferences.blp:217
+msgid "SteamGridDB"
+msgstr "SteamGridDB"
+
+#: data/gtk/preferences.blp:221
+msgid "Authentication"
+msgstr "Hitelesítés"
+
+#: data/gtk/preferences.blp:224
+msgid "API Key"
+msgstr "API kulcs"
+
+#: data/gtk/preferences.blp:232
+msgid "Use SteamGridDB"
+msgstr "SteamGridDB használata"
+
+#: data/gtk/preferences.blp:233
+msgid "Download images when adding or importing games"
+msgstr "Képek letöltése játékok hozzáadásakor és importálásakor"
+
+#: data/gtk/preferences.blp:240
+msgid "Prefer Over Official Images"
+msgstr "SteamGridDB képek előnyben részesítése"
+
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:126
+#: src/main.py:129
 msgid "translator_credits"
 msgstr "kramo https://kramo.hu"
 
 #. The variable is the title of the game
-#: src/main.py:201
+#: src/main.py:156
+msgid "{} launched"
+msgstr "{} elindítva"
+
+#. The variable is the title of the game
+#: src/main.py:174
+msgid "{} hidden"
+msgstr "{} elrejtve"
+
+#. The variable is the title of the game
+#: src/main.py:177
+msgid "{} unhidden"
+msgstr "{} elrejtése visszavonva"
+
+#. The variable is the title of the game
+#: src/main.py:233
 msgid "{} removed"
 msgstr "{} eltávolítva"
 
-#: src/window.py:234
+#: src/window.py:241
 msgid "Today"
 msgstr "Ma"
 
-#: src/window.py:236
+#: src/window.py:243
 msgid "Yesterday"
 msgstr "Tegnap"
 
 #. The variable is the date when the game was added
-#: src/window.py:270
+#: src/window.py:281
 msgid "Added: {}"
 msgstr "Hozzáadva: {}"
 
-#: src/window.py:275
+#: src/window.py:286
 msgid "Never"
 msgstr "Soha"
 
 #. The variable is the date when the game was last played
-#: src/window.py:279
+#: src/window.py:290
 msgid "Last played: {}"
 msgstr "Legutóbbi játékmenet: {}"
 
-#: src/game.py:173
+#: src/game.py:166
 msgid "Details"
 msgstr "Tulajdonságok"
 
-#: src/preferences.py:55
+#: src/preferences.py:53
 msgid "Installation Not Found"
 msgstr "Telepítés nem található"
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:57
+#: src/preferences.py:55
 msgid "Select the {} configuration directory."
 msgstr "Válassza ki {} konfigurációs mappáját."
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:60
+#: src/preferences.py:58
 msgid "Select the {} data directory."
 msgstr "Válassza ki {} adatainak mappáját."
 
-#: src/preferences.py:62 src/preferences.py:224
+#: src/preferences.py:60 src/preferences.py:238
 msgid "Set Location"
 msgstr "Mappa kiválasztása"
 
-#: src/preferences.py:122
+#: src/preferences.py:130
 msgid "All games removed"
 msgstr "Az összes játék eltávolítva"
 
-#: src/preferences.py:221
+#: src/preferences.py:235
 msgid "Cache Not Found"
 msgstr "Gyorsítótár nem található"
 
-#: src/preferences.py:222
+#: src/preferences.py:236
 msgid "Select the Lutris cache directory."
 msgstr "Válassza ki Lutris gyorsítótár mappáját."
 
-#: src/utils/importer.py:37
+#: src/preferences.py:335
+msgid ""
+"An API key is required to use SteamGridDB. You can generate one {}here{}."
+msgstr ""
+"Egy API kulcs szükséges a SteamGridDB használatához. {}Itt{} generálhat "
+"egyet."
+
+#: src/utils/importer.py:42
 msgid "Importing Games…"
 msgstr "Játékok importálása folyamatban…"
 
-#: src/utils/importer.py:79
+#: src/utils/importer.py:77
+msgid "Importing Covers…"
+msgstr "Borítóképek importálása folyamatban…"
+
+#: src/utils/importer.py:92
 msgid "No new games were found on your system."
 msgstr "Nem találhatóak új játékok a rendszerén."
 
-#: src/utils/importer.py:87
+#: src/utils/importer.py:100
 msgid "Game Imported"
 msgstr "Játékok importálva"
 
-#: src/utils/importer.py:88
+#: src/utils/importer.py:101
 msgid "Successfully imported 1 game."
 msgstr "1 játék sikeresen importálva."
 
-#: src/utils/importer.py:94
+#: src/utils/importer.py:107
 msgid "Games Imported"
 msgstr "Játékok importálva"
 
 #. The variable is the number of games
-#: src/utils/importer.py:96
+#: src/utils/importer.py:109
 msgid "Successfully imported {} games."
 msgstr "{} játék sikeresen importálva."
 
-#: src/utils/create_details_window.py:41
+#: src/utils/importer.py:120
+msgid "Couldn't Connect to SteamGridDB"
+msgstr "Nem lehet csatlakozni a SteamGridDB-hez"
+
+#: src/utils/importer.py:145
+msgid ""
+"Looks like you have multiple Steam libraries. Would you like to add them in "
+"preferences?"
+msgstr ""
+"Úgy tűnik, több Steam könyvtára van. Szeretné őket hozzáadni a "
+"beállításokban?"
+
+#: src/utils/create_details_window.py:78
 msgid "Add New Game"
 msgstr "Új játék hozzáadása"
 
-#: src/utils/create_details_window.py:46
+#: src/utils/create_details_window.py:83
 msgid "Confirm"
 msgstr "Megerősítés"
 
-#: src/utils/create_details_window.py:57
+#: src/utils/create_details_window.py:94
 msgid "Apply"
 msgstr "Alkalmazás"
 
-#: src/utils/create_details_window.py:95
+#: src/utils/create_details_window.py:128
 msgid "The title of the game"
 msgstr "A játék címe"
 
-#: src/utils/create_details_window.py:100
+#: src/utils/create_details_window.py:133
 msgid "Developer"
 msgstr "Fejlesztő"
 
-#: src/utils/create_details_window.py:101
+#: src/utils/create_details_window.py:134
 msgid "The developer or publisher (optional)"
 msgstr "A fejlesztő vagy kiadó (nem kötelező)"
 
 #. Translate this string as you would translate "file"
-#: src/utils/create_details_window.py:112
+#: src/utils/create_details_window.py:145
 msgid "file.txt"
 msgstr "fájl.txt"
 
 #. As in software
-#: src/utils/create_details_window.py:114
+#: src/utils/create_details_window.py:147
 msgid "program"
 msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
-#: src/utils/create_details_window.py:119
-#: src/utils/create_details_window.py:121
+#: src/utils/create_details_window.py:152
+#: src/utils/create_details_window.py:154
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\útvonal\\ide\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/utils/create_details_window.py:125
-#: src/utils/create_details_window.py:127
+#: src/utils/create_details_window.py:158
+#: src/utils/create_details_window.py:160
 msgid "/path/to/{}"
 msgstr "/útvonal/ide/{}"
 
-#: src/utils/create_details_window.py:131
+#: src/utils/create_details_window.py:164
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -486,43 +565,46 @@ msgstr ""
 "\n"
 "Ha az elérési útvonalban szóközök vannak, rakd az útvonalat idézőjelek közé!"
 
-#: src/utils/create_details_window.py:154
+#: src/utils/create_details_window.py:187
 msgid "Executable"
 msgstr "Program"
 
-#: src/utils/create_details_window.py:155
+#: src/utils/create_details_window.py:188
 msgid "File to open or command to run when launching the game"
 msgstr "Fájl megnyitása vagy parancs futtatása a játék indításakor"
 
-#: src/utils/create_details_window.py:167
+#: src/utils/create_details_window.py:200
 msgid "Cancel"
 msgstr "Mégse"
 
-#: src/utils/create_details_window.py:217
-#: src/utils/create_details_window.py:227
-#: src/utils/create_details_window.py:233
+#: src/utils/create_details_window.py:252
+#: src/utils/create_details_window.py:262
+#: src/utils/create_details_window.py:268
 msgid "Couldn't Add Game"
 msgstr "Nem lehet hozzáadni a játékot"
 
-#: src/utils/create_details_window.py:219
-#: src/utils/create_details_window.py:257
-#: src/utils/create_details_window.py:265
+#: src/utils/create_details_window.py:254
+#: src/utils/create_details_window.py:292
+#: src/utils/create_details_window.py:300
 msgid "Couldn't Apply Preferences"
 msgstr "Nem lehet menteni a beállításokat"
 
-#: src/utils/create_details_window.py:227
-#: src/utils/create_details_window.py:258
+#: src/utils/create_details_window.py:262
+#: src/utils/create_details_window.py:293
 msgid "Game title cannot be empty."
 msgstr "A cím nem lehet üres."
 
-#: src/utils/create_details_window.py:233
-#: src/utils/create_details_window.py:266
+#: src/utils/create_details_window.py:268
+#: src/utils/create_details_window.py:301
 msgid "Executable cannot be empty."
 msgstr "A program nem lehet üres."
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
 msgstr "Rendben"
+
+#~ msgid "Launch your games"
+#~ msgstr "Indítsa el a játékait"
 
 #, python-brace-format
 #~ msgid "Last played: {last_played_date}"
