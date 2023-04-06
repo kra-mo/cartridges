@@ -36,10 +36,10 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="1.3.1" date="2023-04-06">
+    <release version="1.3.2" date="2023-04-06">
       <description translatable="no">
         <ul>
-          <li>Fixes a Steam import bug</li>
+          <li>Better SteamGridDB filtering</li>
         </ul>
       </description>
     </release>
