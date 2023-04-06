@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-31 16:40+0200\n"
-"PO-Revision-Date: 2023-03-31 15:04+0000\n"
-"Last-Translator: kramo <contact@kramo.hu>\n"
+"POT-Creation-Date: 2023-04-05 11:11+0200\n"
+"PO-Revision-Date: 2023-04-04 15:35+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/es/>\n"
 "Language: es\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:111
+#: src/main.py:113
 msgid "Cartridges"
 msgstr "Cartuchos"
 
@@ -31,18 +31,21 @@ msgid "Game Launcher"
 msgstr "Lanzador de juegos"
 
 #: data/hu.kramo.Cartridges.desktop.in:5
-msgid "Launch your games"
-msgstr "Lance sus juegos"
-
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
 msgstr "Lance todos sus juegos"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
+#, fuzzy
+#| msgid ""
+#| "Cartridges is a simple game launcher. It has support for importing your "
+#| "games from Steam, Heroic and Bottles with organizational features such as "
+#| "hiding and sorting by date added or last played."
 msgid ""
-"Cartridges is a simple game launcher. It has support for importing your "
-"games from Steam, Heroic and Bottles with organizational features such as "
-"hiding and sorting by date added or last played."
+"Cartridges is a simple game launcher for all of your games. It has support "
+"for importing games from Steam, Lutris, Heroic and more with no login "
+"necessary. You can sort and hide games or download cover art from "
+"SteamGridDB."
 msgstr ""
 "Cartuchos es un lanzador de juegos simple. Tiene soporte para importar sus "
 "juegos de Steam, Heroic y Bottles con características de organización como "
@@ -53,7 +56,7 @@ msgid "Library"
 msgstr "Biblioteca"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
-#: src/utils/create_details_window.py:48
+#: src/utils/create_details_window.py:85
 msgid "Edit Game Details"
 msgstr "Editar detalles del juego"
 
@@ -61,12 +64,12 @@ msgstr "Editar detalles del juego"
 msgid "Game Details"
 msgstr "Detalles del juego"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:363
-#: src/utils/importer.py:81
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:371
+#: src/utils/importer.py:94 src/utils/importer.py:123 src/utils/importer.py:148
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: data/gtk/window.blp:6 src/utils/importer.py:78
+#: data/gtk/window.blp:6 src/utils/importer.py:91
 msgid "No Games Found"
 msgstr "No se han encontrado juegos"
 
@@ -90,75 +93,75 @@ msgstr "No hay juegos ocultos"
 msgid "Games you hide will appear here."
 msgstr "Los juegos que oculte aparecerán aquí."
 
-#: data/gtk/window.blp:44 data/gtk/window.blp:254
+#: data/gtk/window.blp:44 data/gtk/window.blp:262
 msgid "Back"
 msgstr "Volver"
 
-#: data/gtk/window.blp:92
+#: data/gtk/window.blp:100
 msgid "Game Title"
 msgstr "Título del juego"
 
-#: data/gtk/window.blp:148 src/game.py:175
+#: data/gtk/window.blp:156 src/game.py:168
 msgid "Play"
 msgstr "Jugar"
 
-#: data/gtk/window.blp:196 data/gtk/window.blp:382
+#: data/gtk/window.blp:204 data/gtk/window.blp:390
 msgid "Add Game"
 msgstr "Añadir juego"
 
-#: data/gtk/window.blp:203 data/gtk/window.blp:266
+#: data/gtk/window.blp:211 data/gtk/window.blp:274
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: data/gtk/window.blp:210 data/gtk/window.blp:273 data/gtk/help-overlay.blp:19
+#: data/gtk/window.blp:218 data/gtk/window.blp:281 data/gtk/help-overlay.blp:19
 msgid "Search"
 msgstr "Buscar"
 
-#: data/gtk/window.blp:261
+#: data/gtk/window.blp:269
 msgid "Hidden Games"
 msgstr "Juegos ocultos"
 
-#: data/gtk/window.blp:321
+#: data/gtk/window.blp:329
 msgid "Sort"
 msgstr "Ordenar"
 
-#: data/gtk/window.blp:324
+#: data/gtk/window.blp:332
 msgid "A-Z"
 msgstr "A-Z"
 
-#: data/gtk/window.blp:330
+#: data/gtk/window.blp:338
 msgid "Z-A"
 msgstr "Z-A"
 
-#: data/gtk/window.blp:336
+#: data/gtk/window.blp:344
 msgid "Newest"
 msgstr "Más recientes"
 
-#: data/gtk/window.blp:342
+#: data/gtk/window.blp:350
 msgid "Oldest"
 msgstr "Más antiguos"
 
-#: data/gtk/window.blp:348
+#: data/gtk/window.blp:356
 msgid "Last Played"
 msgstr "Último jugado"
 
-#: data/gtk/window.blp:355
+#: data/gtk/window.blp:363
 msgid "Show Hidden"
 msgstr "Mostrar ocultos"
 
-#: data/gtk/window.blp:368
+#: data/gtk/window.blp:376
 msgid "Keyboard Shortcuts"
 msgstr "Atajos del teclado"
 
-#: data/gtk/window.blp:373
+#: data/gtk/window.blp:381
 msgid "About Cartridges"
 msgstr "Acerca de Cartuchos"
 
-#: data/gtk/window.blp:388 data/gtk/preferences.blp:66
+#: data/gtk/window.blp:396 data/gtk/preferences.blp:66
 msgid "Import"
 msgstr "Importar"
 
-#: data/gtk/game.blp:60 src/utils/create_details_window.py:94
+#: data/gtk/game.blp:60 src/utils/create_details_window.py:127
 msgid "Title"
 msgstr "Título"
 
@@ -194,7 +197,8 @@ msgstr "Mostrar preferencias"
 msgid "Shortcuts"
 msgstr "Atajos"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:202 src/preferences.py:123
+#: data/gtk/help-overlay.blp:34 src/main.py:178 src/main.py:234
+#: src/preferences.py:131
 msgid "Undo"
 msgstr "Deshacer"
 
@@ -218,7 +222,13 @@ msgstr "Importar juegos"
 msgid "Show hidden games"
 msgstr "Mostrar juegos ocultos"
 
-#: data/gtk/preferences.blp:13
+#: data/gtk/help-overlay.blp:63
+#, fuzzy
+#| msgid "Remove All Games"
+msgid "Remove game"
+msgstr "Quitar todos los juegos"
+
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:229
 msgid "Behavior"
 msgstr "Conducta"
 
@@ -235,7 +245,7 @@ msgid "Swaps the behavior of the cover image and the play button"
 msgstr ""
 "Cambia el comportamiento de la imagen de portada y del botón de reproducción"
 
-#: data/gtk/preferences.blp:34 src/utils/create_details_window.py:59
+#: data/gtk/preferences.blp:34 src/utils/create_details_window.py:99
 msgid "Images"
 msgstr "Imágenes"
 
@@ -249,11 +259,11 @@ msgstr "Guarda las partidas sin pérdidas a costa del almacenamiento"
 
 #: data/gtk/preferences.blp:47
 msgid "Danger Zone"
-msgstr ""
+msgstr "Zona peligrosa"
 
 #: data/gtk/preferences.blp:50
 msgid "Remove All Games"
-msgstr ""
+msgstr "Quitar todos los juegos"
 
 #: data/gtk/preferences.blp:70
 msgid "Sources"
@@ -268,11 +278,12 @@ msgid "Steam Install Location"
 msgstr "Ubicación de la instalación de Steam"
 
 #: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:141 data/gtk/preferences.blp:180
+#: data/gtk/preferences.blp:150 data/gtk/preferences.blp:189
+#: data/gtk/preferences.blp:204
 msgid "Directory to use when importing games"
 msgstr "Directorio a usar para importar juegos"
 
-#: data/gtk/preferences.blp:86
+#: data/gtk/preferences.blp:86 src/utils/importer.py:143
 msgid "Extra Steam Libraries"
 msgstr "Bibliotecas Steam adicionales"
 
@@ -286,202 +297,268 @@ msgstr "Limpiar"
 
 #: data/gtk/preferences.blp:112
 msgid "Lutris"
-msgstr ""
+msgstr "Lutris"
 
 #: data/gtk/preferences.blp:116
-#, fuzzy
-#| msgid "Heroic Install Location"
 msgid "Lutris Install Location"
-msgstr "Ubicación de la instalación de Heroic"
-
-#: data/gtk/preferences.blp:125
-#, fuzzy
-#| msgid "Set Heroic Location"
-msgid "Lutris Cache Location"
-msgstr "Establecer ubicación de Heroic"
+msgstr "Ubicación de instalación de Lutris"
 
 #: data/gtk/preferences.blp:126
-#, fuzzy
-#| msgid "Directory to use when importing games"
+msgid "Lutris Cache Location"
+msgstr "Ubicación de la caché de Lutris"
+
+#: data/gtk/preferences.blp:127
 msgid "Directory to use when importing game covers"
-msgstr "Directorio a usar para importar juegos"
+msgstr "Directorio para usar al importar las carátulas de los juegos"
 
 #: data/gtk/preferences.blp:136
+#, fuzzy
+#| msgid "Import Sideloaded Games"
+msgid "Import Steam Games"
+msgstr "Importar juegos descargados"
+
+#: data/gtk/preferences.blp:145
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:140
+#: data/gtk/preferences.blp:149
 msgid "Heroic Install Location"
 msgstr "Ubicación de la instalación de Heroic"
 
-#: data/gtk/preferences.blp:150
+#: data/gtk/preferences.blp:159
 msgid "Import Epic Games"
 msgstr "Importar juegos de Epic"
 
-#: data/gtk/preferences.blp:158
+#: data/gtk/preferences.blp:167
 msgid "Import GOG Games"
 msgstr "Importar juegos de GOG"
 
-#: data/gtk/preferences.blp:166
+#: data/gtk/preferences.blp:175
 msgid "Import Sideloaded Games"
 msgstr "Importar juegos descargados"
 
-#: data/gtk/preferences.blp:175
+#: data/gtk/preferences.blp:184
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:179
+#: data/gtk/preferences.blp:188
 msgid "Bottles Install Location"
 msgstr "Ubicación de instalación de Bottles"
 
+#: data/gtk/preferences.blp:199
+msgid "itch"
+msgstr "itch"
+
+#: data/gtk/preferences.blp:203
+msgid "itch Install Location"
+msgstr "Ubicación de la instalación de itch"
+
+#: data/gtk/preferences.blp:217
+#, fuzzy
+#| msgid "Steam"
+msgid "SteamGridDB"
+msgstr "Steam"
+
+#: data/gtk/preferences.blp:221
+#, fuzzy
+#| msgid "Set Location"
+msgid "Authentication"
+msgstr "Escoger la ubicación"
+
+#: data/gtk/preferences.blp:224
+msgid "API Key"
+msgstr ""
+
+#: data/gtk/preferences.blp:232
+msgid "Use SteamGridDB"
+msgstr ""
+
+#: data/gtk/preferences.blp:233
+#, fuzzy
+#| msgid "Directory to use when importing games"
+msgid "Download images when adding or importing games"
+msgstr "Directorio a usar para importar juegos"
+
+#: data/gtk/preferences.blp:240
+msgid "Prefer Over Official Images"
+msgstr ""
+
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:126
+#: src/main.py:129
 msgid "translator_credits"
 msgstr "Óscar Fernández Díaz <oscfdezdz@tuta.io>"
 
 #. The variable is the title of the game
-#: src/main.py:201
+#: src/main.py:156
+msgid "{} launched"
+msgstr "{} comenzó"
+
+#. The variable is the title of the game
+#: src/main.py:174
+msgid "{} hidden"
+msgstr "{} oculto"
+
+#. The variable is the title of the game
+#: src/main.py:177
+msgid "{} unhidden"
+msgstr "{} visible"
+
+#. The variable is the title of the game
+#: src/main.py:233
 msgid "{} removed"
 msgstr "{} eliminado"
 
-#: src/window.py:234
+#: src/window.py:241
 msgid "Today"
 msgstr "Hoy"
 
-#: src/window.py:236
+#: src/window.py:243
 msgid "Yesterday"
 msgstr "Ayer"
 
 #. The variable is the date when the game was added
-#: src/window.py:270
+#: src/window.py:281
 msgid "Added: {}"
 msgstr "Añadido: {}"
 
-#: src/window.py:275
+#: src/window.py:286
 msgid "Never"
 msgstr "Nunca"
 
 #. The variable is the date when the game was last played
-#: src/window.py:279
-#, fuzzy
-#| msgid "Last Played"
+#: src/window.py:290
 msgid "Last played: {}"
-msgstr "Último jugado"
+msgstr "Último jugado: {}"
 
-#: src/game.py:173
+#: src/game.py:166
 msgid "Details"
 msgstr "Detalles"
 
-#: src/preferences.py:55
+#: src/preferences.py:53
 msgid "Installation Not Found"
 msgstr "No se encuentra la instalación"
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:57
+#: src/preferences.py:55
 msgid "Select the {} configuration directory."
 msgstr "Selecciona el directorio de la configuración {}."
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:60
+#: src/preferences.py:58
 msgid "Select the {} data directory."
 msgstr "Selecciona el directorio de los datos {}."
 
-#: src/preferences.py:62 src/preferences.py:224
+#: src/preferences.py:60 src/preferences.py:238
 msgid "Set Location"
 msgstr "Escoger la ubicación"
 
-#: src/preferences.py:122
-#, fuzzy
-#| msgid "{title} removed"
+#: src/preferences.py:130
 msgid "All games removed"
-msgstr "{title} eliminado"
+msgstr "Todos los juegos eliminados"
 
-#: src/preferences.py:221
+#: src/preferences.py:235
 msgid "Cache Not Found"
+msgstr "Caché no encontrada"
+
+#: src/preferences.py:236
+msgid "Select the Lutris cache directory."
+msgstr "Selecciona el directorio de la caché de Lutris."
+
+#: src/preferences.py:335
+msgid ""
+"An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 
-#: src/preferences.py:222
-#, fuzzy
-#| msgid "Select the {name} data directory."
-msgid "Select the Lutris cache directory."
-msgstr "Selecciona el directorio de los datos {name}."
-
-#: src/utils/importer.py:37
+#: src/utils/importer.py:42
 msgid "Importing Games…"
 msgstr "Importando juegos…"
 
-#: src/utils/importer.py:79
+#: src/utils/importer.py:77
 #, fuzzy
-#| msgid "No new games were found on your device."
-msgid "No new games were found on your system."
-msgstr "No se han encontrado juegos nuevos en tu dispositivo."
+#| msgid "Importing Games…"
+msgid "Importing Covers…"
+msgstr "Importando juegos…"
 
-#: src/utils/importer.py:87
+#: src/utils/importer.py:92
+msgid "No new games were found on your system."
+msgstr "No se encontraron nuevos juegos en tú sistema."
+
+#: src/utils/importer.py:100
 msgid "Game Imported"
 msgstr "Juego importado"
 
-#: src/utils/importer.py:88
+#: src/utils/importer.py:101
 msgid "Successfully imported 1 game."
 msgstr "Importado 1 juego con éxito."
 
-#: src/utils/importer.py:94
+#: src/utils/importer.py:107
 msgid "Games Imported"
 msgstr "Juegos importados"
 
 #. The variable is the number of games
-#: src/utils/importer.py:96
-#, fuzzy
-#| msgid "Successfully imported 1 game."
+#: src/utils/importer.py:109
 msgid "Successfully imported {} games."
-msgstr "Importado 1 juego con éxito."
+msgstr "{} juegos importados con éxito."
 
-#: src/utils/create_details_window.py:41
+#: src/utils/importer.py:120
+msgid "Couldn't Connect to SteamGridDB"
+msgstr ""
+
+#: src/utils/importer.py:145
+msgid ""
+"Looks like you have multiple Steam libraries. Would you like to add them in "
+"preferences?"
+msgstr ""
+"Parece que tienes varias bibliotecas de Steam. ¿Quieres agregarlas en la "
+"configuración?"
+
+#: src/utils/create_details_window.py:78
 msgid "Add New Game"
 msgstr "Añadir juego nuevo"
 
-#: src/utils/create_details_window.py:46
+#: src/utils/create_details_window.py:83
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: src/utils/create_details_window.py:57
+#: src/utils/create_details_window.py:94
 msgid "Apply"
 msgstr "Aplicar"
 
-#: src/utils/create_details_window.py:95
+#: src/utils/create_details_window.py:128
 msgid "The title of the game"
 msgstr "El título del juego"
 
-#: src/utils/create_details_window.py:100
+#: src/utils/create_details_window.py:133
 msgid "Developer"
 msgstr "Desarrollador"
 
-#: src/utils/create_details_window.py:101
+#: src/utils/create_details_window.py:134
 msgid "The developer or publisher (optional)"
 msgstr "El desarrollador o editor (opcional)"
 
 #. Translate this string as you would translate "file"
-#: src/utils/create_details_window.py:112
+#: src/utils/create_details_window.py:145
 msgid "file.txt"
 msgstr "archivo.txt"
 
 #. As in software
-#: src/utils/create_details_window.py:114
+#: src/utils/create_details_window.py:147
 msgid "program"
 msgstr "programa"
 
 #. Translate this string as you would translate "path to {}"
-#: src/utils/create_details_window.py:119
-#: src/utils/create_details_window.py:121
+#: src/utils/create_details_window.py:152
+#: src/utils/create_details_window.py:154
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\ruta\\hasta\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/utils/create_details_window.py:125
-#: src/utils/create_details_window.py:127
+#: src/utils/create_details_window.py:158
+#: src/utils/create_details_window.py:160
 msgid "/path/to/{}"
 msgstr "/ruta/hasta/{}"
 
-#: src/utils/create_details_window.py:131
+#: src/utils/create_details_window.py:164
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -503,43 +580,46 @@ msgstr ""
 "\n"
 "Si la ruta contiene espacios, ¡asegúrese de entrecomillarla!"
 
-#: src/utils/create_details_window.py:154
+#: src/utils/create_details_window.py:187
 msgid "Executable"
 msgstr "Ejecutable"
 
-#: src/utils/create_details_window.py:155
+#: src/utils/create_details_window.py:188
 msgid "File to open or command to run when launching the game"
 msgstr "Archivo a abrir o comando a ejecutar al iniciar el juego"
 
-#: src/utils/create_details_window.py:167
+#: src/utils/create_details_window.py:200
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/utils/create_details_window.py:217
-#: src/utils/create_details_window.py:227
-#: src/utils/create_details_window.py:233
+#: src/utils/create_details_window.py:252
+#: src/utils/create_details_window.py:262
+#: src/utils/create_details_window.py:268
 msgid "Couldn't Add Game"
 msgstr "No se puede añadir el juego"
 
-#: src/utils/create_details_window.py:219
-#: src/utils/create_details_window.py:257
-#: src/utils/create_details_window.py:265
+#: src/utils/create_details_window.py:254
+#: src/utils/create_details_window.py:292
+#: src/utils/create_details_window.py:300
 msgid "Couldn't Apply Preferences"
 msgstr "No se pudieron aplicar las preferencias"
 
-#: src/utils/create_details_window.py:227
-#: src/utils/create_details_window.py:258
+#: src/utils/create_details_window.py:262
+#: src/utils/create_details_window.py:293
 msgid "Game title cannot be empty."
 msgstr "El título del juego no puede estar vacío."
 
-#: src/utils/create_details_window.py:233
-#: src/utils/create_details_window.py:266
+#: src/utils/create_details_window.py:268
+#: src/utils/create_details_window.py:301
 msgid "Executable cannot be empty."
 msgstr "El ejecutable no puede estar vacío."
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
 msgstr "Descartar"
+
+#~ msgid "Launch your games"
+#~ msgstr "Lance sus juegos"
 
 #, python-brace-format
 #~ msgid "Last played: {last_played_date}"
