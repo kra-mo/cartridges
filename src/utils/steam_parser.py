@@ -46,7 +46,7 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
 
     data = appmanifest.read_text("utf-8")
     for datatype in datatypes:
-        value = re.findall(f'"{datatype}"\t\t"(.*)"\n', data)
+        value = re.findall(f'"{datatype}"\t\t"(.*)"\n', data, re.IGNORECASE)
         try:
             values[datatype] = value[0]
         except IndexError:
