@@ -50,14 +50,14 @@ class SGDBSave:
                     headers=headers,
                     timeout=5,
                 )
-                search_result.raise_for_status()
-            except requests.exceptions.RequestException:
                 if search_result.status_code != 200:
                     self.exception = str(
                         search_result.json()["errors"][0]
                         if "errors" in tuple(search_result.json())
                         else search_result.status_code
                     )
+                search_result.raise_for_status()
+            except requests.exceptions.RequestException:
                 task.return_value(game[0])
                 return
 
