@@ -113,7 +113,7 @@ class CartridgesApplication(Adw.Application):
             application_name=_("Cartridges"),
             application_icon="hu.kramo.Cartridges",
             developer_name="kramo",
-            version="1.3",
+            version="1.3.1",
             developers=[
                 "kramo https://kramo.hu",
                 "Paweł Lidwin https://github.com/imLinguin",
