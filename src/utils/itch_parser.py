@@ -18,12 +18,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
-import urllib.request
 from pathlib import Path
 from shutil import copyfile
 from sqlite3 import connect
 from time import time
 
+import requests
 from gi.repository import GdkPixbuf, Gio
 
 
@@ -53,9 +53,10 @@ def get_game(task, current_time, parent_widget, row):
     if row[3] or row[2]:
         tmp_file = Gio.File.new_tmp(None)[0]
         try:
-            with urllib.request.urlopen(row[3] or row[2], timeout=5) as open_file:
-                Path(tmp_file.get_path()).write_bytes(open_file.read())
-        except urllib.error.URLError:
+            with requests.get(row[3] or row[2], timeout=5) as cover:
+                cover.raise_for_status()
+                Path(tmp_file.get_path()).write_bytes(cover.content)
+        except requests.exceptions.RequestException:
             task.return_value((values, None))
             return
 

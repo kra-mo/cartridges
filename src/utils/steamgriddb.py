@@ -2,7 +2,6 @@ from pathlib import Path
 
 import requests
 from gi.repository import Gio
-from steamgrid import SteamGridDB, http
 
 from .create_dialog import create_dialog
 from .save_cover import save_cover
@@ -11,7 +10,6 @@ from .save_cover import save_cover
 class SGDBSave:
     def __init__(self, parent_widget, games, importer=None):
         self.parent_widget = parent_widget
-        self.sgdb = SteamGridDB(self.parent_widget.schema.get_string("sgdb-key"))
         self.importer = importer
         self.exception = None
 
@@ -41,29 +39,47 @@ class SGDBSave:
             if not self.importer:
                 self.parent_widget.loading = game[0]
 
+            url = "https://www.steamgriddb.com/api/v2/"
+            headers = {
+                "Authorization": f'Bearer {self.parent_widget.schema.get_string("sgdb-key")}'
+            }
+
             try:
-                search_result = self.sgdb.search_game(game[1])
+                search_result = requests.get(
+                    f"{url}search/autocomplete/{game[1]}",
+                    headers=headers,
+                    timeout=5,
+                )
+                search_result.raise_for_status()
             except requests.exceptions.RequestException:
-                task.return_value(game[0])
-                return
-            except http.HTTPException as exception:
-                self.exception = str(exception)
+                if search_result.status_code != 200:
+                    self.exception = str(
+                        search_result.json()["errors"][0]
+                        if "errors" in tuple(search_result.json())
+                        else search_result.status_code
+                    )
                 task.return_value(game[0])
                 return
 
             try:
-                grid = self.sgdb.get_grids_by_gameid(
-                    [search_result[0].id], is_nsfw=False
-                )[0]
-            except (TypeError, IndexError):
+                headers["dimensions"] = "600x900"
+                grid = requests.get(
+                    f'{url}grids/game/{search_result.json()["data"][0]["id"]}',
+                    headers=headers,
+                    timeout=5,
+                )
+            except (requests.exceptions.RequestException, IndexError):
                 task.return_value(game[0])
                 return
 
             tmp_file = Gio.File.new_tmp(None)[0]
 
             try:
-                response = requests.get(str(grid), timeout=5)
-            except requests.exceptions.RequestException:
+                response = requests.get(
+                    grid.json()["data"][0]["url"],
+                    timeout=5,
+                )
+            except (requests.exceptions.RequestException, IndexError):
                 task.return_value(game[0])
                 return
 

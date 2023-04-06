@@ -17,18 +17,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import json
 import os
 import re
-import urllib.request
 from pathlib import Path
 from time import time
 
+import requests
 from gi.repository import Gio
 
 
 def update_values_from_data(content, values):
-    basic_data = json.loads(content)[values["appid"]]
+    basic_data = content[values["appid"]]
     if not basic_data["success"]:
         values["blacklisted"] = True
     else:
@@ -80,12 +79,13 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
     )
 
     try:
-        with urllib.request.urlopen(
+        with requests.get(
             f'https://store.steampowered.com/api/appdetails?appids={values["appid"]}',
             timeout=5,
         ) as open_file:
-            content = open_file.read().decode("utf-8")
-    except urllib.error.URLError:
+            open_file.raise_for_status()
+            content = open_file.json()
+    except requests.exceptions.RequestException:
         task.return_value((values, image_path if image_path.exists() else None))
         return
 
