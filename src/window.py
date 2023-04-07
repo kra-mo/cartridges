@@ -305,11 +305,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
         if self.stack.get_visible_child() == self.overview:
             style_manager = Adw.StyleManager.get_default()
 
-            if style_manager.get_high_contrast():
-                self.overview_blurred_cover.set_opacity(0)
-                return
-
-            if not style_manager.get_system_supports_color_schemes():
+            if (
+                style_manager.get_high_contrast()
+                or not style_manager.get_system_supports_color_schemes()
+            ):
                 self.overview_blurred_cover.set_opacity(0.2)
                 return
 
