@@ -19,6 +19,7 @@
 
 import datetime
 import os
+import struct
 from pathlib import Path
 
 from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
@@ -96,6 +97,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.pixbufs = {}
         self.active_game_id = None
         self.loading = None
+        self.scaled_pixbuf = None
 
         self.overview.set_measure_overlay(self.overview_box, True)
         self.overview.set_clip_overlay(self.overview_box, False)
@@ -126,6 +128,13 @@ class CartridgesWindow(Adw.ApplicationWindow):
         back_mouse_button = Gtk.GestureClick(button=8)
         back_mouse_button.connect("pressed", self.on_go_back_action)
         self.add_controller(back_mouse_button)
+
+        Adw.StyleManager.get_default().connect(
+            "notify::dark", self.set_overview_opacity
+        )
+        Adw.StyleManager.get_default().connect(
+            "notify::high-contrast", self.set_overview_opacity
+        )
 
     def update_games(self, games):
         current_games = get_games(self)
@@ -270,9 +279,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         pixbuf = current_game.pixbuf
         self.overview_cover.set_pixbuf(pixbuf)
-        self.overview_blurred_cover.set_pixbuf(
-            pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
-        )
+
+        self.scaled_pixbuf = pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
+        self.overview_blurred_cover.set_pixbuf(self.scaled_pixbuf)
+        self.set_overview_opacity()
+
         self.overview_title.set_label(current_game.name)
         self.overview_header_bar_title.set_title(current_game.name)
         date = self.get_time(current_game.added)
@@ -289,6 +300,47 @@ class CartridgesWindow(Adw.ApplicationWindow):
             # The variable is the date when the game was last played
             _("Last played: {}").format(last_played_date)
         )
+
+    def set_overview_opacity(self, _widget=None, _unused=None):
+        if self.stack.get_visible_child() == self.overview:
+            style_manager = Adw.StyleManager.get_default()
+
+            if style_manager.get_high_contrast():
+                self.overview_blurred_cover.set_opacity(0)
+                return
+
+            if not style_manager.get_system_supports_color_schemes():
+                self.overview_blurred_cover.set_opacity(0.2)
+                return
+
+            pixels = self.scaled_pixbuf.get_pixels()
+            channels = self.scaled_pixbuf.get_n_channels()
+            colors = set()
+
+            for index in range(6):
+                colors.add(struct.unpack_from("BBBB", pixels, offset=index * channels))
+
+            dark_theme = style_manager.get_dark()
+
+            luminances = []
+
+            for red, green, blue, alpha in colors:
+                # https://en.wikipedia.org/wiki/Relative_luminance
+                luminance = red * 0.2126 + green * 0.7152 + blue * 0.0722
+
+                if dark_theme:
+                    luminances.append((luminance * alpha) / 255**2)
+                else:
+                    luminances.append(1 - (alpha / 255) * (1 - luminance / 255))
+
+            if dark_theme:
+                self.overview_blurred_cover.set_opacity(
+                    1.3 - (sum(luminances) / len(luminances) + max(luminances)) / 2
+                )
+            else:
+                self.overview_blurred_cover.set_opacity(
+                    0.2 + (sum(luminances) / len(luminances) + min(luminances)) / 2
+                )
 
     def a_z_sort(self, child1, child2):
         name1 = child1.get_first_child().name.lower()

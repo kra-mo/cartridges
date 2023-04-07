@@ -129,10 +129,6 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   wrap: true;
                   wrap-mode: word_char;
                   natural-wrap-mode: word;
-
-                  styles [
-                    "dim-label",
-                  ]
                 }
                 Label overview_last_played {
                   margin-top: 6;
@@ -141,10 +137,6 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   wrap: true;
                   wrap-mode: word_char;
                   natural-wrap-mode: word;
-
-                  styles [
-                    "dim-label",
-                  ]
                 }
                 Box {
                   hexpand: true;
@@ -187,7 +179,6 @@ template CartridgesWindow : Adw.ApplicationWindow {
         ]
 
         Picture overview_blurred_cover {
-          opacity: 0.2;
           can-shrink: true;
           keep-aspect-ratio: false;
           hexpand: true;
