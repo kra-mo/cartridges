@@ -117,7 +117,6 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         save_game(self.parent_widget, data)
 
     def get_cover(self):
-
         # If the cover is already in memory, return
         if self.game_id in self.parent_widget.pixbufs:
             return self.parent_widget.pixbufs[self.game_id]

@@ -35,7 +35,6 @@ def save_cover(parent_widget, game_id, cover_path=None, pixbuf=None):
         pass
 
     open_file = Gio.File.new_for_path(str(covers_dir / f"{game_id}.tiff"))
-    parent_widget.pixbufs[game_id] = pixbuf
     pixbuf.save_to_streamv_async(
         open_file.replace(None, False, Gio.FileCreateFlags.NONE),
         "tiff",
