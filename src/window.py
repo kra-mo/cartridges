@@ -340,7 +340,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 self.overview_blurred_cover.set_opacity(
                     0.2 + (sum(luminances) / len(luminances) + min(luminances)) / 2
                 )
-            print(sum(luminances) / len(luminances))
 
     def a_z_sort(self, child1, child2):
         name1 = child1.get_first_child().name.lower()
