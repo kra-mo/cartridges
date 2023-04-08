@@ -328,11 +328,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 luminance = red * 0.2126 + green * 0.7152 + blue * 0.0722
 
                 if dark_theme:
-                    luminances.append((luminance * (alpha / 255)) / 255)
+                    luminances.append((luminance * alpha) / 255**2)
                 else:
-                    luminances.append(
-                        (luminance + (255 - luminance) * ((255 - alpha) / 255)) / 255
-                    )
+                    luminances.append((alpha * (luminance - 255)) / 255**2 + 1)
 
             if dark_theme:
                 self.overview_blurred_cover.set_opacity(
