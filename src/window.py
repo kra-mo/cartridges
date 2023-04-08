@@ -328,9 +328,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 luminance = red * 0.2126 + green * 0.7152 + blue * 0.0722
 
                 if dark_theme:
-                    luminances.append((luminance * alpha) / 255**2)
+                    luminances.append((luminance * (alpha / 255)) / 255)
                 else:
-                    luminances.append(1 - (alpha / 255) * (1 - luminance / 255))
+                    luminances.append(
+                        (luminance + (255 - luminance) * ((255 - alpha) / 255)) / 255
+                    )
 
             if dark_theme:
                 self.overview_blurred_cover.set_opacity(
@@ -340,6 +342,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 self.overview_blurred_cover.set_opacity(
                     0.2 + (sum(luminances) / len(luminances) + min(luminances)) / 2
                 )
+            print(sum(luminances) / len(luminances))
 
     def a_z_sort(self, child1, child2):
         name1 = child1.get_first_child().name.lower()
