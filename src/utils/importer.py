@@ -149,4 +149,7 @@ class Importer:
                 ).connect("response", self.response, "import", "steam_expander_row")
 
     def update_progressbar(self):
-        self.progressbar.set_fraction(1 - (self.queue / self.total_queue))
+        try:
+            self.progressbar.set_fraction(1 - (self.queue / self.total_queue))
+        except ZeroDivisionError:
+            self.progressbar.set_fraction(1)
