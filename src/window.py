@@ -21,6 +21,7 @@ import datetime
 import os
 import struct
 from pathlib import Path
+from shutil import rmtree
 
 from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
 
@@ -94,6 +95,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.hidden_filtered = {}
         self.previous_page = self.library_view
         self.toasts = {}
+        self.pixbufs = {}
         self.active_game_id = None
         self.loading = None
         self.scaled_pixbuf = None
@@ -105,15 +107,17 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
             "/hu/kramo/Cartridges/library_placeholder.svg", 400, 600, False
         )
-        current_games = get_games(self)
-        for current_game in current_games:
-            if "removed" in current_games[current_game]:
-                (
-                    self.data_dir / "cartridges" / "games" / f"{current_game}.json"
-                ).unlink(missing_ok=True)
-                (
-                    self.data_dir / "cartridges" / "covers" / f"{current_game}.tiff"
-                ).unlink(missing_ok=True)
+        games = get_games(self)
+        for game_id in games:
+            if "removed" in games[game_id]:
+                (self.data_dir / "cartridges" / "games" / f"{game_id}.json").unlink(
+                    missing_ok=True
+                )
+                (self.data_dir / "cartridges" / "covers" / f"{game_id}.tiff").unlink(
+                    missing_ok=True
+                )
+
+        rmtree(self.cache_dir / "cartridges" / "deleted_covers", True)
 
         self.library.set_filter_func(self.search_filter)
         self.hidden_library.set_filter_func(self.hidden_search_filter)

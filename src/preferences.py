@@ -19,6 +19,7 @@
 
 import os
 from pathlib import Path
+from shutil import move
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -342,21 +343,48 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.file_chooser.select_folder(self.parent_widget, None, function, None)
 
     def undo_remove_all(self, _widget, _unused):
+        deleted_covers_dir = (
+            self.parent_widget.cache_dir / "cartridges" / "deleted_covers"
+        )
+
         for game_id in self.removed_games:
             data = get_games(self.parent_widget, [game_id])[game_id]
             if "removed" in data:
                 data.pop("removed")
                 save_game(self.parent_widget, data)
+                if (deleted_covers_dir / f"{game_id}.tiff").is_file():
+                    move(
+                        deleted_covers_dir / f"{game_id}.tiff",
+                        self.parent_widget.data_dir
+                        / "cartridges"
+                        / "covers"
+                        / f"{game_id}.tiff",
+                    )
         self.parent_widget.update_games(self.removed_games)
         self.removed_games = []
         self.toast.dismiss()
 
     def remove_all_games(self, _widget):
+        deleted_covers_dir = (
+            self.parent_widget.cache_dir / "cartridges" / "deleted_covers"
+        )
+        deleted_covers_dir.mkdir(parents=True, exist_ok=True)
+
         for game in get_games(self.parent_widget).values():
             if "removed" not in game:
                 self.removed_games.append(game["game_id"])
                 game["removed"] = True
                 save_game(self.parent_widget, game)
+
+                if game["game_id"] in self.parent_widget.pixbufs:
+                    move(
+                        self.parent_widget.data_dir
+                        / "cartridges"
+                        / "covers"
+                        / f'{game["game_id"]}.tiff',
+                        deleted_covers_dir / f'{game["game_id"]}.tiff',
+                    )
+                    self.parent_widget.pixbufs.pop(game["game_id"])
 
         self.parent_widget.update_games(self.parent_widget.games)
         if self.parent_widget.stack.get_visible_child() == self.parent_widget.overview:

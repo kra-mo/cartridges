@@ -227,7 +227,9 @@ def create_details_window(parent_widget, game_id=None):
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(path, 200, 300, False)
         except GLib.GError:
             animated_pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(path)
-            pixbuf = animated_pixbuf.get_static_image()
+            pixbuf = animated_pixbuf.get_static_image().scale_simple(
+                200, 300, GdkPixbuf.InterpType.BILINEAR
+            )
 
         cover_button_delete_revealer.set_reveal_child(True)
         cover.set_pixbuf(pixbuf)
@@ -315,8 +317,12 @@ def create_details_window(parent_widget, game_id=None):
             (
                 parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
             ).unlink(missing_ok=True)
+            parent_widget.pixbufs.pop(game_id)
 
         if pixbuf:
+            if game_id in parent_widget.pixbufs:
+                parent_widget.pixbufs.pop(game_id)
+
             save_cover(parent_widget, game_id, None, pixbuf)
         elif not (
             parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"

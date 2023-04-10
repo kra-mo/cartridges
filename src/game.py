@@ -117,6 +117,10 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         save_game(self.parent_widget, data)
 
     def get_cover(self):
+        # If the cover is already in memory, return
+        if self.game_id in self.parent_widget.pixbufs:
+            return self.parent_widget.pixbufs[self.game_id]
+
         # Create a new pixbuf
         cover_path = (
             self.parent_widget.data_dir
@@ -126,7 +130,9 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         )
 
         if cover_path.is_file():
-            return GdkPixbuf.Pixbuf.new_from_file(str(cover_path))
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(str(cover_path))
+            self.parent_widget.pixbufs[self.game_id] = pixbuf
+            return pixbuf
 
         # Return the placeholder pixbuf
         return self.parent_widget.placeholder_pixbuf
