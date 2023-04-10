@@ -76,6 +76,7 @@ def create_details_window(parent_widget, game_id=None):
 
     def delete_pixbuf(_widget):
         nonlocal pixbuf
+        nonlocal animation_path
         nonlocal cover_deleted
 
         cover.set_pixbuf(parent_widget.placeholder_pixbuf)
@@ -83,6 +84,7 @@ def create_details_window(parent_widget, game_id=None):
         pixbuf = None
         cover_deleted = True
 
+        animation_path = None
         parent_widget.current_anim_edit = None
 
     cover_button_delete.connect("clicked", delete_pixbuf)
