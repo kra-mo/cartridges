@@ -34,7 +34,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
 
     overlay = Gtk.Template.Child()
     title = Gtk.Template.Child()
-    button_play = Gtk.Template.Child()
+    play_button = Gtk.Template.Child()
     cover = Gtk.Template.Child()
     cover_button = Gtk.Template.Child()
     menu_button = Gtk.Template.Child()
@@ -69,7 +69,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.set_play_label()
 
         self.cover_button.connect("clicked", self.cover_button_clicked)
-        self.button_play.connect("clicked", self.button_play_clicked)
+        self.play_button.connect("clicked", self.play_button_clicked)
 
         self.event_contoller_motion.connect("enter", self.show_play)
         self.event_contoller_motion.connect("leave", self.hide_play)
@@ -154,7 +154,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         else:
             self.parent_widget.show_overview(None, self.game_id)
 
-    def button_play_clicked(self, _widget):
+    def play_button_clicked(self, _widget):
         if self.parent_widget.schema.get_boolean("cover-launches-game"):
             self.parent_widget.show_overview(None, self.game_id)
         else:
@@ -162,9 +162,9 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
 
     def set_play_label(self):
         if self.parent_widget.schema.get_boolean("cover-launches-game"):
-            self.button_play.set_label(_("Details"))
+            self.play_button.set_label(_("Details"))
         else:
-            self.button_play.set_label(_("Play"))
+            self.play_button.set_label(_("Play"))
 
     def schema_changed(self, _settings, key):
         if key == "cover-launches-game":

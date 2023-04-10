@@ -145,14 +145,15 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   vexpand: true;
                   valign: center;
 
-                  Button overview_launch {
-                    name: "overview_launch";
+                  Button overview_play_button {
+                    name: "overview_play_button";
                     action-name: "app.launch_game";
                     label: _("Play");
                     halign: start;
                     margin-top: 24;
 
                     styles [
+                      "opaque",
                       "pill",
                     ]
                   }

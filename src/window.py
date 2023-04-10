@@ -52,7 +52,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     overview_spinner = Gtk.Template.Child()
     overview_title = Gtk.Template.Child()
     overview_header_bar_title = Gtk.Template.Child()
-    overview_launch = Gtk.Template.Child()
+    overview_play_button = Gtk.Template.Child()
     overview_blurred_cover = Gtk.Template.Child()
     overview_developer = Gtk.Template.Child()
     overview_added = Gtk.Template.Child()
