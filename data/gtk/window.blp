@@ -146,13 +146,13 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   valign: center;
 
                   Button overview_launch {
+                    name: "overview_launch";
                     action-name: "app.launch_game";
                     label: _("Play");
                     halign: start;
                     margin-top: 24;
 
                     styles [
-                      "suggested-action",
                       "pill",
                     ]
                   }
