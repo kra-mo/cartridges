@@ -25,7 +25,6 @@ import sys
 
 from gi.repository import GdkPixbuf, Gio, Gtk
 
-from .display_animation import display_animation
 from .save_game import save_game
 
 
@@ -59,12 +58,6 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.blacklisted = "blacklisted" in data
 
         self.pixbuf = self.get_cover()
-        self.animation_path = (
-            self.parent_widget.data_dir
-            / "cartridges"
-            / "animated_covers"
-            / self.game_id
-        )
 
         self.cover.set_pixbuf(self.pixbuf)
         self.title.set_label(self.name)
@@ -88,9 +81,6 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         else:
             self.menu_button.set_menu_model(self.game_options)
         self.menu_button.get_popover().connect("notify::visible", self.hide_play)
-
-        if self.animation_path.is_file():
-            display_animation(self.cover.set_pixbuf, self.animation_path)
 
     def launch(self):
         # Generate launch arguments, either list (no shell) or a string (for shell).
