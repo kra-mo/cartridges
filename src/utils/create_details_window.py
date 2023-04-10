@@ -59,6 +59,21 @@ def create_details_window(parent_widget, game_id=None):
         margin_end=6,
     )
 
+    def update_animation(game_id, animation=None):
+        new_id = (
+            game_id if parent_widget.current_anim_edit != game_id else f"{game_id}_new"
+        )
+        parent_widget.current_anim_edit = new_id
+
+        display_animation(
+            cover.set_pixbuf,
+            animation_path if not animation else None,
+            animation=animation,
+            parent_widget=parent_widget,
+            game_id=new_id,
+            place="edit",
+        )
+
     def delete_pixbuf(_widget):
         nonlocal pixbuf
         nonlocal cover_deleted
@@ -67,6 +82,8 @@ def create_details_window(parent_widget, game_id=None):
         cover_button_delete_revealer.set_reveal_child(False)
         pixbuf = None
         cover_deleted = True
+
+        parent_widget.current_anim_edit = None
 
     cover_button_delete.connect("clicked", delete_pixbuf)
 
@@ -90,7 +107,8 @@ def create_details_window(parent_widget, game_id=None):
             parent_widget.data_dir / "cartridges" / "animated_covers" / game_id
         )
         if animation_path.is_file():
-            display_animation(cover.set_pixbuf, animation_path)
+            update_animation(game_id)
+
         developer = Gtk.Entry.new_with_buffer(
             Gtk.EntryBuffer.new(games[game_id].developer, -1)
         )
@@ -235,13 +253,15 @@ def create_details_window(parent_widget, game_id=None):
         try:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(path, 200, 300, False)
             cover.set_pixbuf(pixbuf)
+            parent_widget.current_anim_edit = None
         except GLib.GError:
             animation_path = path
             animated_pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(path)
             pixbuf = animated_pixbuf.get_static_image().scale_simple(
                 200, 300, GdkPixbuf.InterpType.BILINEAR
             )
-            display_animation(cover.set_pixbuf, animation=animated_pixbuf)
+
+            update_animation(game_id, animated_pixbuf)
 
         cover_button_delete_revealer.set_reveal_child(True)
 
@@ -329,7 +349,11 @@ def create_details_window(parent_widget, game_id=None):
             (
                 parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
             ).unlink(missing_ok=True)
-            parent_widget.pixbufs.pop(game_id)
+            (
+                parent_widget.data_dir / "cartridges" / "animated_covers" / game_id
+            ).unlink(missing_ok=True)
+            if game_id in parent_widget.pixbufs:
+                parent_widget.pixbufs.pop(game_id)
 
         if pixbuf:
             if game_id in parent_widget.pixbufs:
@@ -353,7 +377,11 @@ def create_details_window(parent_widget, game_id=None):
 
         parent_widget.update_games([game_id])
         window.close()
-        parent_widget.show_overview(None, game_id)
+        if parent_widget.stack.get_visible_child() != parent_widget.overview:
+            parent_widget.show_overview(None, game_id)
+
+        if not animation_path:
+            parent_widget.current_anim_overview = None
 
     def focus_executable(_widget):
         window.set_focus(executable)

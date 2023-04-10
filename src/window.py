@@ -100,7 +100,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.active_game_id = None
         self.loading = None
         self.scaled_pixbuf = None
-        self.current_anim = None
+        self.current_anim_overview = None
+        self.current_anim_edit = None
 
         self.overview.set_measure_overlay(self.overview_box, True)
         self.overview.set_clip_overlay(self.overview_box, False)
@@ -288,9 +289,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         pixbuf = current_game.pixbuf
         self.overview_cover.set_pixbuf(pixbuf)
 
-        new_id = game_id if self.current_anim != game_id else f"{game_id}_new"
-
-        self.current_anim = new_id
+        new_id = game_id if self.current_anim_overview != game_id else f"{game_id}_new"
+        self.current_anim_overview = new_id
 
         if current_game.animation_path.is_file():
             display_animation(
@@ -298,6 +298,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 current_game.animation_path,
                 parent_widget=self,
                 game_id=new_id,
+                place="overview",
             )
 
         self.scaled_pixbuf = pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)

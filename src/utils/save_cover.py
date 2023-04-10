@@ -47,6 +47,8 @@ def save_cover(
     (animated_covers_dir / game_id).unlink(missing_ok=True)
 
     if animation_path:
+        if animation_path == animated_covers_dir / game_id:
+            return
         animated_covers_dir.mkdir(parents=True, exist_ok=True)
         with animated_covers_dir / game_id as open_file:
             copyfile(animation_path, open_file)

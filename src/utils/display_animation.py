@@ -2,7 +2,7 @@ from gi.repository import GdkPixbuf, GLib
 
 
 def display_animation(
-    function, path=None, animation=None, parent_widget=None, game_id=None
+    function, path=None, animation=None, parent_widget=None, game_id=None, place=None
 ):
     if not animation:
         animation = GdkPixbuf.PixbufAnimation.new_from_file(str(path))
@@ -12,8 +12,12 @@ def display_animation(
     def update_animation():
         nonlocal anim_iter
 
-        if parent_widget and parent_widget.current_anim != game_id:
-            return
+        if place == "overview":
+            if parent_widget.current_anim_overview != game_id:
+                return
+        elif place == "edit":
+            if parent_widget.current_anim_edit != game_id:
+                return
 
         anim_iter.advance()
         pixbuf = anim_iter.get_pixbuf().scale_simple(
