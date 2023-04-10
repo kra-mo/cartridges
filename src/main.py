@@ -60,6 +60,11 @@ class CartridgesApplication(Adw.Application):
             "remove_game_overview", self.on_remove_game_overview_action, ["Delete"]
         )
         self.create_action("remove_game", self.on_remove_game_action)
+        self.create_action("igdb_search", self.on_igdb_search_action)
+        self.create_action("sgdb_search", self.on_sgdb_search_action)
+        self.create_action("protondb_search", self.on_protondb_search_action)
+        self.create_action("lutris_search", self.on_lutris_search_action)
+        self.create_action("hltb_search", self.on_hltb_search_action)
 
         self.win = None
 
@@ -242,6 +247,26 @@ class CartridgesApplication(Adw.Application):
 
     def on_quit_action(self, _widget, _callback=None):
         self.quit()
+
+    def search(self, uri):
+        Gio.AppInfo.launch_default_for_uri(
+            f"{uri}{self.win.games[self.win.active_game_id].name}"
+        )
+
+    def on_igdb_search_action(self, _widget, _callback=None):
+        self.search("https://www.igdb.com/search?type=1&q=")
+
+    def on_sgdb_search_action(self, _widget, _callback=None):
+        self.search("https://www.steamgriddb.com/search/grids?term=")
+
+    def on_protondb_search_action(self, _widget, _callback=None):
+        self.search("https://www.protondb.com/search?q=")
+
+    def on_lutris_search_action(self, _widget, _callback=None):
+        self.search("https://lutris.net/games?q=")
+
+    def on_hltb_search_action(self, _widget, _callback=None):
+        self.search("https://howlongtobeat.com/?q=")
 
     def create_action(self, name, callback, shortcuts=None, win=None):
         action = Gio.SimpleAction.new(name, None)

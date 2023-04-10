@@ -159,9 +159,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   }
 
                   Box {
-                    hexpand: true;
                     halign: start;
-                    vexpand: true;
                     valign: center;
                     margin-top: 24;
                     margin-start: 12;
@@ -191,9 +189,23 @@ template CartridgesWindow : Adw.ApplicationWindow {
                       "circular",
                     ]
                     }
-
+                    
                     styles [
                       "linked",
+                    ]
+                  }
+
+                  MenuButton {
+                      halign: start;
+                      valign: center;
+                      margin-top: 24;
+                      margin-start: 12;
+                      icon-name: "system-search-symbolic";
+                      menu-model: search;
+                      tooltip-text: _("Search");
+
+                      styles [
+                      "circular",
                     ]
                   }
                 }
@@ -414,6 +426,32 @@ menu add_games {
     item {
       label: _("Import");
       action: "app.import";
+    }
+  }
+}
+
+menu search {
+  section {
+    label: "Search on…";
+    item {
+      label: "IGDB";
+      action: "app.igdb_search";
+    }
+    item {
+      label: "SteamGridDB";
+      action: "app.sgdb_search";
+    }
+    item {
+      label: "ProtonDB";
+      action: "app.protondb_search";
+    }
+    item {
+      label: "Lutris";
+      action: "app.lutris_search";
+    }
+    item {
+      label: "HowLongToBeat";
+      action: "app.hltb_search";
     }
   }
 }
