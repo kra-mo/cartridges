@@ -122,21 +122,23 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   ]
                 }
 
-                Label overview_added {
+                Box {
+                  orientation: horizontal;
                   margin-top: 12;
                   hexpand: true;
                   halign: start;
-                  wrap: true;
-                  wrap-mode: word_char;
-                  natural-wrap-mode: word;
-                }
-                Label overview_last_played {
-                  margin-top: 6;
-                  hexpand: true;
-                  halign: start;
-                  wrap: true;
-                  wrap-mode: word_char;
-                  natural-wrap-mode: word;
+
+                  Label overview_added {
+                    wrap: true;
+                    wrap-mode: word_char;
+                    natural-wrap-mode: word;
+                  }
+                  Label overview_last_played {
+                    margin-start: 12;
+                    wrap: true;
+                    wrap-mode: word_char;
+                    natural-wrap-mode: word;
+                  }
                 }
                 Box {
                   hexpand: true;
@@ -155,17 +157,42 @@ template CartridgesWindow : Adw.ApplicationWindow {
                     ]
                   }
 
-                  MenuButton overview_menu_button {
-                    icon-name: "view-more-symbolic";
+                  Box {
                     hexpand: true;
-                    vexpand: true;
                     halign: start;
+                    vexpand: true;
                     valign: center;
                     margin-top: 24;
-                    margin-start: 6;
+                    margin-start: 12;
+
+                    Button {
+                      icon-name: "document-edit-symbolic";
+                      action-name: "app.edit_game";
+                      tooltip-text: _("Edit");
+
+                      styles [
+                      "circular",
+                    ]
+                    }
+                    Button overview_hide_button {
+                      action-name: "app.hide_game";
+
+                      styles [
+                      "circular",
+                    ]
+                    }
+                    Button {
+                      icon-name: "user-trash-symbolic";
+                      action-name: "app.remove_game";
+                      tooltip-text: _("Remove");
+
+                      styles [
+                      "circular",
+                    ]
+                    }
 
                     styles [
-                      "circular",
+                      "linked",
                     ]
                   }
                 }

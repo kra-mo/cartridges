@@ -53,7 +53,7 @@ class CartridgesApplication(Adw.Application):
         )
         self.create_action("launch_game", self.on_launch_game_action)
         self.create_action("hide_game", self.on_hide_game_action)
-        self.create_action("edit_details", self.on_edit_details_action)
+        self.create_action("edit_game", self.on_edit_game_action)
         self.create_action("add_game", self.on_add_game_action, ["<primary>n"])
         self.create_action("import", self.on_import_action, ["<primary>i"])
         self.create_action(
@@ -64,7 +64,6 @@ class CartridgesApplication(Adw.Application):
         self.win = None
 
     def do_activate(self):  # pylint: disable=arguments-differ
-
         # Create the main window
         self.win = self.props.active_window  # pylint: disable=no-member
         if not self.win:
@@ -184,7 +183,7 @@ class CartridgesApplication(Adw.Application):
         self.win.toasts[(game_id, "hide")] = toast
         self.win.toast_overlay.add_toast(toast)
 
-    def on_edit_details_action(self, _widget, _callback=None):
+    def on_edit_game_action(self, _widget, _callback=None):
         create_details_window(self.win, self.win.active_game_id)
 
     def on_add_game_action(self, _widget, _callback=None):

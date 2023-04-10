@@ -54,10 +54,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
     overview_header_bar_title = Gtk.Template.Child()
     overview_launch = Gtk.Template.Child()
     overview_blurred_cover = Gtk.Template.Child()
-    overview_menu_button = Gtk.Template.Child()
     overview_developer = Gtk.Template.Child()
     overview_added = Gtk.Template.Child()
     overview_last_played = Gtk.Template.Child()
+    overview_hide_button = Gtk.Template.Child()
 
     hidden_library = Gtk.Template.Child()
     hidden_library_view = Gtk.Template.Child()
@@ -267,9 +267,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             self.overview_developer.set_visible(False)
 
-        self.overview_menu_button.set_menu_model(
-            current_game.menu_button.get_menu_model()
-        )
+        if current_game.hidden:
+            self.overview_hide_button.set_icon_name("view-reveal-symbolic")
+            self.overview_hide_button.set_tooltip_text(_("Unhide"))
+        else:
+            self.overview_hide_button.set_icon_name("view-conceal-symbolic")
+            self.overview_hide_button.set_tooltip_text(_("Hide"))
 
         if self.stack.get_visible_child() != self.overview:
             self.stack.set_transition_type(Gtk.StackTransitionType.OVER_LEFT)
@@ -338,7 +341,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 )
             else:
                 self.overview_blurred_cover.set_opacity(
-                    0.2 + (sum(luminances) / len(luminances) + min(luminances)) / 2
+                    0.1 + (sum(luminances) / len(luminances) + min(luminances)) / 2
                 )
 
     def a_z_sort(self, child1, child2):
@@ -497,5 +500,3 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def on_open_menu_action(self, _widget, _unused):
         if self.stack.get_visible_child() != self.overview:
             self.primary_menu_button.set_active(True)
-        else:
-            self.overview_menu_button.set_active(True)
