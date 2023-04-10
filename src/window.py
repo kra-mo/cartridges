@@ -94,7 +94,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.hidden_filtered = {}
         self.previous_page = self.library_view
         self.toasts = {}
-        self.pixbufs = {}
         self.active_game_id = None
         self.loading = None
         self.scaled_pixbuf = None

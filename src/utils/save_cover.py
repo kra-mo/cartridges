@@ -31,14 +31,10 @@ def save_cover(parent_widget, game_id, cover_path=None, pixbuf=None):
             str(cover_path), 400, 600, False
         )
 
-    def cover_callback(*_unused):
-        pass
-
     open_file = Gio.File.new_for_path(str(covers_dir / f"{game_id}.tiff"))
-    pixbuf.save_to_streamv_async(
+    pixbuf.save_to_streamv(
         open_file.replace(None, False, Gio.FileCreateFlags.NONE),
         "tiff",
         ["compression"],
         ["8"] if parent_widget.schema.get_boolean("high-quality-images") else ["7"],
-        callback=cover_callback,
     )
