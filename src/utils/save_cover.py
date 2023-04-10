@@ -18,10 +18,14 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
+from shutil import copyfile
+
 from gi.repository import GdkPixbuf, Gio
 
 
-def save_cover(parent_widget, game_id, cover_path=None, pixbuf=None):
+def save_cover(
+    parent_widget, game_id, cover_path=None, pixbuf=None, animation_path=None
+):
     covers_dir = parent_widget.data_dir / "cartridges" / "covers"
 
     covers_dir.mkdir(parents=True, exist_ok=True)
@@ -38,3 +42,11 @@ def save_cover(parent_widget, game_id, cover_path=None, pixbuf=None):
         ["compression"],
         ["8"] if parent_widget.schema.get_boolean("high-quality-images") else ["7"],
     )
+
+    animated_covers_dir = parent_widget.data_dir / "cartridges" / "animated_covers"
+    (animated_covers_dir / game_id).unlink(missing_ok=True)
+
+    if animation_path:
+        animated_covers_dir.mkdir(parents=True, exist_ok=True)
+        with animated_covers_dir / game_id as open_file:
+            copyfile(animation_path, open_file)

@@ -25,6 +25,7 @@ import time
 from gi.repository import Adw, GdkPixbuf, Gio, GLib, GObject, Gtk
 
 from .create_dialog import create_dialog
+from .display_animation import display_animation
 from .save_cover import save_cover
 from .save_game import save_game
 from .steamgriddb import SGDBSave
@@ -37,6 +38,7 @@ def create_details_window(parent_widget, game_id=None):
 
     games = parent_widget.games
     pixbuf = None
+    animation_path = None
     cover_deleted = False
 
     cover_button_edit = Gtk.Button(
@@ -84,6 +86,11 @@ def create_details_window(parent_widget, game_id=None):
     else:
         window.set_title(_("Edit Game Details"))
         cover = Gtk.Picture.new_for_pixbuf(parent_widget.games[game_id].pixbuf)
+        animation_path = (
+            parent_widget.data_dir / "cartridges" / "animated_covers" / game_id
+        )
+        if animation_path.is_file():
+            display_animation(cover.set_pixbuf, animation_path)
         developer = Gtk.Entry.new_with_buffer(
             Gtk.EntryBuffer.new(games[game_id].developer, -1)
         )
@@ -218,6 +225,8 @@ def create_details_window(parent_widget, game_id=None):
 
     def set_cover(_source, result, _unused):
         nonlocal pixbuf
+        nonlocal animation_path
+
         try:
             path = filechooser.open_finish(result).get_path()
         except GLib.GError:
@@ -225,20 +234,23 @@ def create_details_window(parent_widget, game_id=None):
 
         try:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(path, 200, 300, False)
+            cover.set_pixbuf(pixbuf)
         except GLib.GError:
+            animation_path = path
             animated_pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(path)
             pixbuf = animated_pixbuf.get_static_image().scale_simple(
                 200, 300, GdkPixbuf.InterpType.BILINEAR
             )
+            display_animation(cover.set_pixbuf, animation=animated_pixbuf)
 
         cover_button_delete_revealer.set_reveal_child(True)
-        cover.set_pixbuf(pixbuf)
 
     def close_window(_widget, _callback=None):
         window.close()
 
     def apply_preferences(_widget, _callback=None):
         nonlocal pixbuf
+        nonlocal animation_path
         nonlocal cover_deleted
         nonlocal game_id
 
@@ -323,7 +335,8 @@ def create_details_window(parent_widget, game_id=None):
             if game_id in parent_widget.pixbufs:
                 parent_widget.pixbufs.pop(game_id)
 
-            save_cover(parent_widget, game_id, None, pixbuf)
+            save_cover(parent_widget, game_id, None, pixbuf, animation_path)
+
         elif not (
             parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
         ).is_file():
