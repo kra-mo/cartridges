@@ -23,7 +23,7 @@ import shlex  # pylint: disable=unused-import
 import subprocess
 import sys
 
-from gi.repository import GdkPixbuf, Gio, Gtk
+from gi.repository import Gio, Gtk
 
 from .game_cover import GameCover
 from .save_game import save_game
@@ -119,23 +119,13 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         save_game(self.parent_widget, data)
 
     def get_cover(self):
-        animated_cover_path = (
-            self.parent_widget.data_dir
-            / "cartridges"
-            / "animated_covers"
-            / f"{self.game_id}.gif"
-        )
+        covers_dir = self.parent_widget.data_dir / "cartridges" / "covers"
 
+        animated_cover_path = covers_dir / f"{self.game_id}.gif"
         if animated_cover_path.is_file():
             return animated_cover_path
 
-        cover_path = (
-            self.parent_widget.data_dir
-            / "cartridges"
-            / "covers"
-            / f"{self.game_id}.tiff"
-        )
-
+        cover_path = covers_dir / f"{self.game_id}.tiff"
         if cover_path.is_file():
             return cover_path
 

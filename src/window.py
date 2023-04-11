@@ -119,9 +119,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 (self.data_dir / "cartridges" / "covers" / f"{game_id}.tiff").unlink(
                     missing_ok=True
                 )
-                (
-                    self.data_dir / "cartridges" / "animated_covers" / f"{game_id}.gif"
-                ).unlink(missing_ok=True)
+                (self.data_dir / "cartridges" / "covers" / f"{game_id}.gif").unlink(
+                    missing_ok=True
+                )
 
         rmtree(self.cache_dir / "cartridges" / "deleted_covers", True)
 

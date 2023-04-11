@@ -318,10 +318,7 @@ def create_details_window(parent_widget, game_id=None):
                 parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
             ).unlink(missing_ok=True)
             (
-                parent_widget.data_dir
-                / "cartridges"
-                / "animated_covers"
-                / f"{game_id}.gif"
+                parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.gif"
             ).unlink(missing_ok=True)
 
         elif not (

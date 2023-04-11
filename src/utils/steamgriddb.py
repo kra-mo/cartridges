@@ -29,12 +29,20 @@ class SGDBSave:
     def update_cover(self, task, game):
         if self.parent_widget.schema.get_boolean("sgdb") and (
             self.parent_widget.schema.get_boolean("sgdb-prefer")
-            or not (
-                self.parent_widget.data_dir
-                / "cartridges"
-                / "covers"
-                / f"{game[0]}.tiff"
-            ).is_file()
+            or not any(
+                (
+                    self.parent_widget.data_dir
+                    / "cartridges"
+                    / "covers"
+                    / f"{game[0]}.tiff"
+                ).is_file(),
+                (
+                    self.parent_widget.data_dir
+                    / "cartridges"
+                    / "covers"
+                    / f"{game[0]}.gif"
+                ).is_file(),
+            )
         ):
             if not self.importer:
                 self.parent_widget.loading = game[0]

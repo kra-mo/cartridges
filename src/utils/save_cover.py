@@ -43,17 +43,21 @@ def resize_animation(cover_path):
 
 
 def save_cover(
-    parent_widget, game_id, cover_path=None, pixbuf=None, animation_path=None
+    parent_widget,
+    game_id,
+    cover_path=None,
+    pixbuf=None,
+    animation_path=None,
 ):
     covers_dir = parent_widget.data_dir / "cartridges" / "covers"
-
     covers_dir.mkdir(parents=True, exist_ok=True)
 
     if animation_path:
-        pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(
-            str(animation_path)
-        ).get_static_image()
-    elif not pixbuf:
+        (covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
+        copyfile(animation_path, covers_dir / f"{game_id}.gif")
+        return
+
+    if not pixbuf:
         try:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
                 str(cover_path), *parent_widget.image_size, False
@@ -68,9 +72,3 @@ def save_cover(
         ["compression"],
         ["8"] if parent_widget.schema.get_boolean("high-quality-images") else ["7"],
     )
-
-    if animation_path:
-        animation_dir = parent_widget.data_dir / "cartridges" / "animated_covers"
-        animation_dir.mkdir(parents=True, exist_ok=True)
-
-        copyfile(animation_path, animation_dir / f"{game_id}.gif")
