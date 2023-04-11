@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 21:02+0200\n"
+"POT-Creation-Date: 2023-04-11 23:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:117
+#: src/main.py:119
 msgid "Cartridges"
 msgstr ""
 
@@ -55,120 +55,28 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:402
 #: src/utils/importer.py:94 src/utils/importer.py:123 src/utils/importer.py:148
+#: src/utils/steamgriddb.py:116
 msgid "Preferences"
 msgstr ""
 
-#: data/gtk/window.blp:6 src/utils/importer.py:91
-msgid "No Games Found"
-msgstr ""
-
-#: data/gtk/window.blp:7
-msgid "Try a different search."
-msgstr ""
-
-#: data/gtk/window.blp:14
-msgid "No Games"
-msgstr ""
-
-#: data/gtk/window.blp:15
-msgid "Use the + button to add games."
-msgstr ""
-
-#: data/gtk/window.blp:22
-msgid "No Hidden Games"
-msgstr ""
-
-#: data/gtk/window.blp:23
-msgid "Games you hide will appear here."
-msgstr ""
-
-#: data/gtk/window.blp:44 data/gtk/window.blp:293
-msgid "Back"
-msgstr ""
-
-#: data/gtk/window.blp:100
-msgid "Game Title"
-msgstr ""
-
-#: data/gtk/window.blp:151 src/game.py:154
-msgid "Play"
-msgstr ""
-
-#: data/gtk/window.blp:170 data/gtk/game.blp:82 data/gtk/game.blp:101
-msgid "Edit"
-msgstr ""
-
-#: data/gtk/window.blp:186 data/gtk/game.blp:92 data/gtk/game.blp:111
-#: data/gtk/preferences.blp:56
-msgid "Remove"
-msgstr ""
-
-#: data/gtk/window.blp:205 data/gtk/window.blp:249 data/gtk/window.blp:312
-#: data/gtk/help-overlay.blp:19
-msgid "Search"
-msgstr ""
-
-#: data/gtk/window.blp:235 data/gtk/window.blp:421
-msgid "Add Game"
-msgstr ""
-
-#: data/gtk/window.blp:242 data/gtk/window.blp:305
-msgid "Main Menu"
-msgstr ""
-
-#: data/gtk/window.blp:300
-msgid "Hidden Games"
-msgstr ""
-
-#: data/gtk/window.blp:360
-msgid "Sort"
-msgstr ""
-
-#: data/gtk/window.blp:363
-msgid "A-Z"
-msgstr ""
-
-#: data/gtk/window.blp:369
-msgid "Z-A"
-msgstr ""
-
-#: data/gtk/window.blp:375
-msgid "Newest"
-msgstr ""
-
-#: data/gtk/window.blp:381
-msgid "Oldest"
-msgstr ""
-
-#: data/gtk/window.blp:387
-msgid "Last Played"
-msgstr ""
-
-#: data/gtk/window.blp:394
-msgid "Show Hidden"
-msgstr ""
-
-#: data/gtk/window.blp:407
-msgid "Keyboard Shortcuts"
-msgstr ""
-
-#: data/gtk/window.blp:412
-msgid "About Cartridges"
-msgstr ""
-
-#: data/gtk/window.blp:427 data/gtk/preferences.blp:69
-msgid "Import"
-msgstr ""
-
-#: data/gtk/game.blp:60 src/utils/create_details_window.py:129
+#: data/gtk/game.blp:67 src/utils/create_details_window.py:129
 msgid "Title"
 msgstr ""
 
-#: data/gtk/game.blp:87 src/window.py:283
+#: data/gtk/game.blp:89 data/gtk/game.blp:108 data/gtk/window.blp:170
+msgid "Edit"
+msgstr ""
+
+#: data/gtk/game.blp:94 src/window.py:286
 msgid "Hide"
 msgstr ""
 
-#: data/gtk/game.blp:106 src/window.py:280
+#: data/gtk/game.blp:99 data/gtk/game.blp:118 data/gtk/preferences.blp:56
+#: data/gtk/window.blp:186
+msgid "Remove"
+msgstr ""
+
+#: data/gtk/game.blp:113 src/window.py:283
 msgid "Unhide"
 msgstr ""
 
@@ -180,6 +88,11 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:205 data/gtk/window.blp:249
+#: data/gtk/window.blp:312
+msgid "Search"
+msgstr ""
+
 #: data/gtk/help-overlay.blp:24
 msgid "Show preferences"
 msgstr ""
@@ -188,7 +101,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:34 src/main.py:182 src/main.py:238
+#: data/gtk/help-overlay.blp:34 src/main.py:186 src/main.py:242
 #: src/preferences.py:133
 msgid "Undo"
 msgstr ""
@@ -251,6 +164,10 @@ msgstr ""
 
 #: data/gtk/preferences.blp:53
 msgid "Remove All Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:69 data/gtk/window.blp:427
+msgid "Import"
 msgstr ""
 
 #: data/gtk/preferences.blp:73
@@ -367,54 +284,138 @@ msgstr ""
 msgid "Prefer Animated Images"
 msgstr ""
 
+#: data/gtk/window.blp:6 src/utils/importer.py:91
+msgid "No Games Found"
+msgstr ""
+
+#: data/gtk/window.blp:7
+msgid "Try a different search."
+msgstr ""
+
+#: data/gtk/window.blp:14
+msgid "No Games"
+msgstr ""
+
+#: data/gtk/window.blp:15
+msgid "Use the + button to add games."
+msgstr ""
+
+#: data/gtk/window.blp:22
+msgid "No Hidden Games"
+msgstr ""
+
+#: data/gtk/window.blp:23
+msgid "Games you hide will appear here."
+msgstr ""
+
+#: data/gtk/window.blp:44 data/gtk/window.blp:293
+msgid "Back"
+msgstr ""
+
+#: data/gtk/window.blp:100
+msgid "Game Title"
+msgstr ""
+
+#: data/gtk/window.blp:151 src/game.py:158
+msgid "Play"
+msgstr ""
+
+#: data/gtk/window.blp:235 data/gtk/window.blp:421
+msgid "Add Game"
+msgstr ""
+
+#: data/gtk/window.blp:242 data/gtk/window.blp:305
+msgid "Main Menu"
+msgstr ""
+
+#: data/gtk/window.blp:300
+msgid "Hidden Games"
+msgstr ""
+
+#: data/gtk/window.blp:360
+msgid "Sort"
+msgstr ""
+
+#: data/gtk/window.blp:363
+msgid "A-Z"
+msgstr ""
+
+#: data/gtk/window.blp:369
+msgid "Z-A"
+msgstr ""
+
+#: data/gtk/window.blp:375
+msgid "Newest"
+msgstr ""
+
+#: data/gtk/window.blp:381
+msgid "Oldest"
+msgstr ""
+
+#: data/gtk/window.blp:387
+msgid "Last Played"
+msgstr ""
+
+#: data/gtk/window.blp:394
+msgid "Show Hidden"
+msgstr ""
+
+#: data/gtk/window.blp:407
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: data/gtk/window.blp:412
+msgid "About Cartridges"
+msgstr ""
+
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:133
+#: src/main.py:137
 msgid "translator_credits"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:160
+#: src/main.py:164
 msgid "{} launched"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:178
+#: src/main.py:182
 msgid "{} hidden"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:181
+#: src/main.py:185
 msgid "{} unhidden"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:237
+#: src/main.py:241
 msgid "{} removed"
 msgstr ""
 
-#: src/window.py:258
+#: src/window.py:262
 msgid "Today"
 msgstr ""
 
-#: src/window.py:260
+#: src/window.py:264
 msgid "Yesterday"
 msgstr ""
 
 #. The variable is the date when the game was added
-#: src/window.py:306
+#: src/window.py:310
 msgid "Added: {}"
 msgstr ""
 
-#: src/window.py:311
+#: src/window.py:315
 msgid "Never"
 msgstr ""
 
 #. The variable is the date when the game was last played
-#: src/window.py:315
+#: src/window.py:319
 msgid "Last played: {}"
 msgstr ""
 
-#: src/game.py:152
+#: src/game.py:156
 msgid "Details"
 msgstr ""
 
@@ -451,45 +452,6 @@ msgstr ""
 #: src/preferences.py:344
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
-msgstr ""
-
-#: src/utils/importer.py:42
-msgid "Importing Games…"
-msgstr ""
-
-#: src/utils/importer.py:77
-msgid "Importing Covers…"
-msgstr ""
-
-#: src/utils/importer.py:92
-msgid "No new games were found on your system."
-msgstr ""
-
-#: src/utils/importer.py:100
-msgid "Game Imported"
-msgstr ""
-
-#: src/utils/importer.py:101
-msgid "Successfully imported 1 game."
-msgstr ""
-
-#: src/utils/importer.py:107
-msgid "Games Imported"
-msgstr ""
-
-#. The variable is the number of games
-#: src/utils/importer.py:109
-msgid "Successfully imported {} games."
-msgstr ""
-
-#: src/utils/importer.py:120
-msgid "Couldn't Connect to SteamGridDB"
-msgstr ""
-
-#: src/utils/importer.py:145
-msgid ""
-"Looks like you have multiple Steam libraries. Would you like to add them in "
-"preferences?"
 msgstr ""
 
 #: src/utils/create_details_window.py:81
@@ -587,4 +549,43 @@ msgstr ""
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
+msgstr ""
+
+#: src/utils/importer.py:42
+msgid "Importing Games…"
+msgstr ""
+
+#: src/utils/importer.py:77
+msgid "Importing Covers…"
+msgstr ""
+
+#: src/utils/importer.py:92
+msgid "No new games were found on your system."
+msgstr ""
+
+#: src/utils/importer.py:100
+msgid "Game Imported"
+msgstr ""
+
+#: src/utils/importer.py:101
+msgid "Successfully imported 1 game."
+msgstr ""
+
+#: src/utils/importer.py:107
+msgid "Games Imported"
+msgstr ""
+
+#. The variable is the number of games
+#: src/utils/importer.py:109
+msgid "Successfully imported {} games."
+msgstr ""
+
+#: src/utils/importer.py:120 src/utils/steamgriddb.py:113
+msgid "Couldn't Connect to SteamGridDB"
+msgstr ""
+
+#: src/utils/importer.py:145
+msgid ""
+"Looks like you have multiple Steam libraries. Would you like to add them in "
+"preferences?"
 msgstr ""
