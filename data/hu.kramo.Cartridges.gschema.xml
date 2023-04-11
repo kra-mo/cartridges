@@ -70,6 +70,9 @@
     <key name="sgdb-prefer" type="b">
       <default>false</default>
     </key>
+    <key name="sgdb-animated" type="b">
+      <default>false</default>
+    </key>
 	</schema>
   <schema id="hu.kramo.Cartridge.State" path="/hu/kramo/Cartridges/State/">
     <key name="width" type="i">

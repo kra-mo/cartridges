@@ -4,7 +4,7 @@ import requests
 from gi.repository import Gio
 
 from .create_dialog import create_dialog
-from .save_cover import save_cover
+from .save_cover import save_cover, resize_animation
 
 
 class SGDBSave:
@@ -61,29 +61,45 @@ class SGDBSave:
                 task.return_value(game[0])
                 return
 
+            animated_grid = False
+            response = None
+
             try:
-                grid = requests.get(
-                    f'{url}grids/game/{search_result.json()["data"][0]["id"]}?dimensions=600x900',
-                    headers=headers,
-                    timeout=5,
-                )
+                if self.parent_widget.schema.get_boolean("sgdb-animated"):
+                    try:
+                        grid = requests.get(
+                            f'{url}grids/game/{search_result.json()["data"][0]["id"]}?dimensions=600x900&types=animated',
+                            headers=headers,
+                            timeout=5,
+                        )
+                        response = requests.get(
+                            grid.json()["data"][0]["url"], timeout=5
+                        )
+                        animated_grid = True
+                    except IndexError:
+                        pass
+                if not response:
+                    grid = requests.get(
+                        f'{url}grids/game/{search_result.json()["data"][0]["id"]}?dimensions=600x900',
+                        headers=headers,
+                        timeout=5,
+                    )
+                    response = requests.get(grid.json()["data"][0]["url"], timeout=5)
             except (requests.exceptions.RequestException, IndexError):
                 task.return_value(game[0])
                 return
 
             tmp_file = Gio.File.new_tmp(None)[0]
-
-            try:
-                response = requests.get(
-                    grid.json()["data"][0]["url"],
-                    timeout=5,
-                )
-            except (requests.exceptions.RequestException, IndexError):
-                task.return_value(game[0])
-                return
-
             Path(tmp_file.get_path()).write_bytes(response.content)
-            save_cover(self.parent_widget, game[0], tmp_file.get_path())
+
+            save_cover(
+                self.parent_widget,
+                game[0],
+                tmp_file.get_path(),
+                animation_path=resize_animation(tmp_file.get_path())
+                if animated_grid
+                else None,
+            )
 
         task.return_value(game[0])
 

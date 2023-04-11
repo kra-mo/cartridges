@@ -120,6 +120,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_key_entry_row = Gtk.Template.Child()
     sgdb_download_switch = Gtk.Template.Child()
     sgdb_prefer_switch = Gtk.Template.Child()
+    sgdb_animated_switch = Gtk.Template.Child()
 
     def __init__(self, parent_widget, **kwargs):
         super().__init__(**kwargs)
@@ -321,6 +322,13 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.schema.bind(
             "sgdb-prefer",
             self.sgdb_prefer_switch,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+
+        self.schema.bind(
+            "sgdb-animated",
+            self.sgdb_animated_switch,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         )

@@ -236,10 +236,19 @@ template PreferencesWindow : Adw.PreferencesWindow {
           valign: center;
         }
       }
+
       Adw.ActionRow {
         title: _("Prefer Over Official Images");
 
         Switch sgdb_prefer_switch {
+          valign: center;
+        }
+      }
+
+      Adw.ActionRow {
+        title: _("Prefer Animated Images");
+
+        Switch sgdb_animated_switch {
           valign: center;
         }
       }
