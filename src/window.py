@@ -96,7 +96,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.hidden_filtered = {}
         self.previous_page = self.library_view
         self.toasts = {}
-        self.pixbufs = {}
         self.active_game_id = None
         self.loading = None
         self.scaled_pixbuf = None
@@ -121,6 +120,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.hidden_library.set_filter_func(self.hidden_search_filter)
 
         self.update_games(get_games(self))
+
+        self.overview_game_cover = GameCover(self.overview_cover)
 
         # Connect signals
         self.search_entry.connect("search-changed", self.search_changed, False)
@@ -282,7 +283,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.active_game_id = game_id
 
         pixbuf = current_game.pixbuf
-        GameCover(self.overview_cover, pixbuf)
+        self.overview_game_cover.new_pixbuf(path=current_game.get_cover())
 
         self.scaled_pixbuf = pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
         self.overview_blurred_cover.set_pixbuf(self.scaled_pixbuf)

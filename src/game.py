@@ -58,8 +58,9 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.removed = "removed" in data
         self.blacklisted = "blacklisted" in data
 
-        self.game_cover = GameCover(self.cover, self.get_cover())
+        self.game_cover = GameCover(self.cover, path=self.get_cover())
         self.pixbuf = self.game_cover.get_pixbuf()
+        self.animation = self.game_cover.get_animation()
 
         self.title.set_label(self.name)
 
@@ -118,11 +119,16 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         save_game(self.parent_widget, data)
 
     def get_cover(self):
-        # If the cover is already in memory, return
-        if self.game_id in self.parent_widget.pixbufs:
-            return self.parent_widget.pixbufs[self.game_id]
+        animated_cover_path = (
+            self.parent_widget.data_dir
+            / "cartridges"
+            / "animated_covers"
+            / f"{self.game_id}.gif"
+        )
 
-        # Create a new pixbuf
+        if animated_cover_path.is_file():
+            return animated_cover_path
+
         cover_path = (
             self.parent_widget.data_dir
             / "cartridges"
@@ -131,9 +137,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         )
 
         if cover_path.is_file():
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file(str(cover_path))
-            self.parent_widget.pixbufs[self.game_id] = pixbuf
-            return pixbuf
+            return cover_path
 
         return None
 

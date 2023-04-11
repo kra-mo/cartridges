@@ -18,18 +18,48 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
-from gi.repository import GdkPixbuf, Gio
+from pathlib import Path
+from shutil import copyfile
+
+from gi.repository import GdkPixbuf, Gio, GLib
+from PIL import Image, ImageSequence
 
 
-def save_cover(parent_widget, game_id, cover_path=None, pixbuf=None):
+def resize_animation(cover_path):
+    image = Image.open(cover_path)
+    frames = tuple(
+        frame.copy().resize((200, 300)) for frame in ImageSequence.Iterator(image)
+    )
+
+    tmp_path = Path(Gio.File.new_tmp(None)[0].get_path())
+    frames[0].save(
+        tmp_path,
+        format="gif",
+        save_all=True,
+        append_images=frames[1:],
+    )
+
+    return tmp_path
+
+
+def save_cover(
+    parent_widget, game_id, cover_path=None, pixbuf=None, animation_path=None
+):
     covers_dir = parent_widget.data_dir / "cartridges" / "covers"
 
     covers_dir.mkdir(parents=True, exist_ok=True)
 
-    if not pixbuf:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            str(cover_path), 400, 600, False
-        )
+    if animation_path:
+        pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(
+            str(animation_path)
+        ).get_static_image()
+    elif not pixbuf:
+        try:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                str(cover_path), 400, 600, False
+            )
+        except GLib.GError:
+            return
 
     open_file = Gio.File.new_for_path(str(covers_dir / f"{game_id}.tiff"))
     pixbuf.save_to_streamv(
@@ -38,3 +68,9 @@ def save_cover(parent_widget, game_id, cover_path=None, pixbuf=None):
         ["compression"],
         ["8"] if parent_widget.schema.get_boolean("high-quality-images") else ["7"],
     )
+
+    if animation_path:
+        animation_dir = parent_widget.data_dir / "cartridges" / "animated_covers"
+        animation_dir.mkdir(parents=True, exist_ok=True)
+
+        copyfile(animation_path, animation_dir / f"{game_id}.gif")

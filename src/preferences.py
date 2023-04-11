@@ -376,15 +376,15 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 game["removed"] = True
                 save_game(self.parent_widget, game)
 
-                if game["game_id"] in self.parent_widget.pixbufs:
-                    move(
-                        self.parent_widget.data_dir
-                        / "cartridges"
-                        / "covers"
-                        / f'{game["game_id"]}.tiff',
-                        deleted_covers_dir / f'{game["game_id"]}.tiff',
-                    )
-                    self.parent_widget.pixbufs.pop(game["game_id"])
+                cover_path = (
+                    self.parent_widget.data_dir
+                    / "cartridges"
+                    / "covers"
+                    / f'{game["game_id"]}.tiff'
+                )
+
+                if cover_path.is_file():
+                    move(cover_path, deleted_covers_dir / f'{game["game_id"]}.tiff')
 
         self.parent_widget.update_games(self.parent_widget.games)
         if self.parent_widget.stack.get_visible_child() == self.parent_widget.overview:

@@ -22,7 +22,7 @@ import os
 import shlex
 import time
 
-from gi.repository import Adw, GdkPixbuf, Gio, GLib, GObject, Gtk
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from .game_cover import GameCover
 from .create_dialog import create_dialog
@@ -37,7 +37,6 @@ def create_details_window(parent_widget, game_id=None):
     )
 
     games = parent_widget.games
-    pixbuf = None
     cover_deleted = False
 
     cover_button_edit = Gtk.Button(
@@ -59,13 +58,12 @@ def create_details_window(parent_widget, game_id=None):
     )
 
     def delete_pixbuf(_widget):
-        nonlocal pixbuf
+        nonlocal game_cover
         nonlocal cover_deleted
 
-        GameCover(cover)
+        game_cover.new_pixbuf()
 
         cover_button_delete_revealer.set_reveal_child(False)
-        pixbuf = None
         cover_deleted = True
 
     cover_button_delete.connect("clicked", delete_pixbuf)
@@ -77,17 +75,17 @@ def create_details_window(parent_widget, game_id=None):
     )
 
     cover = Gtk.Picture.new()
+    game_cover = GameCover(cover)
 
     if not game_id:
         window.set_title(_("Add New Game"))
-        GameCover(cover)
         name = Gtk.Entry()
         developer = Gtk.Entry()
         executable = Gtk.Entry()
         apply_button = Gtk.Button.new_with_label(_("Confirm"))
     else:
         window.set_title(_("Edit Game Details"))
-        GameCover(cover, parent_widget.games[game_id].pixbuf)
+        game_cover.new_pixbuf(path=parent_widget.games[game_id].get_cover())
         developer = Gtk.Entry.new_with_buffer(
             Gtk.EntryBuffer.new(games[game_id].developer, -1)
         )
@@ -221,28 +219,22 @@ def create_details_window(parent_widget, game_id=None):
         filechooser.open(window, None, set_cover, None)
 
     def set_cover(_source, result, _unused):
-        nonlocal pixbuf
+        nonlocal game_cover
+        nonlocal cover_deleted
+
         try:
             path = filechooser.open_finish(result).get_path()
         except GLib.GError:
             return
 
-        try:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(path, 200, 300, False)
-        except GLib.GError:
-            animated_pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(path)
-            pixbuf = animated_pixbuf.get_static_image().scale_simple(
-                200, 300, GdkPixbuf.InterpType.BILINEAR
-            )
-
         cover_button_delete_revealer.set_reveal_child(True)
-        GameCover(cover, pixbuf)
+        cover_deleted = True
+        game_cover.new_pixbuf(path=path)
 
     def close_window(_widget, _callback=None):
         window.close()
 
     def apply_preferences(_widget, _callback=None):
-        nonlocal pixbuf
         nonlocal cover_deleted
         nonlocal game_id
 
@@ -321,17 +313,25 @@ def create_details_window(parent_widget, game_id=None):
             (
                 parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
             ).unlink(missing_ok=True)
-            parent_widget.pixbufs.pop(game_id)
+            (
+                parent_widget.data_dir
+                / "cartridges"
+                / "animated_covers"
+                / f"{game_id}.gif"
+            ).unlink(missing_ok=True)
 
-        if pixbuf:
-            if game_id in parent_widget.pixbufs:
-                parent_widget.pixbufs.pop(game_id)
-
-            save_cover(parent_widget, game_id, None, pixbuf)
         elif not (
             parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
         ).is_file():
             SGDBSave(parent_widget, {(game_id, values["name"])})
+
+        save_cover(
+            parent_widget,
+            game_id,
+            None,
+            game_cover.get_pixbuf(),
+            game_cover.get_animation(),
+        )
 
         path = parent_widget.data_dir / "cartridges" / "games" / f"{game_id}.json"
 
