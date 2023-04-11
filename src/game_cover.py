@@ -17,15 +17,14 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import GdkPixbuf, GLib
-
-from .save_cover import resize_animation
+from gi.repository import GdkPixbuf, Gio, GLib
 
 
 class GameCover:
     pixbuf = None
     path = None
     animation = None
+    anim_iter = None
 
     placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
         "/hu/kramo/Cartridges/library_placeholder.svg", 400, 600, False
@@ -34,6 +33,16 @@ class GameCover:
     def __init__(self, picture, pixbuf=None, path=None):
         self.picture = picture
         self.new_pixbuf(pixbuf, path)
+
+    # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
+    def create_func(self, path):
+        self.animation = GdkPixbuf.PixbufAnimation.new_from_file(str(path))
+        self.anim_iter = self.animation.get_iter()
+
+        def wrapper(task, *_unused):
+            self.update_animation((task, self.animation))
+
+        return wrapper
 
     def new_pixbuf(self, pixbuf=None, path=None):
         self.animation = None
@@ -45,10 +54,9 @@ class GameCover:
 
         if path:
             if str(path).rsplit(".", maxsplit=1)[-1] == "gif":
-                self.path = resize_animation(path)
-                self.animation = GdkPixbuf.PixbufAnimation.new_from_file(str(self.path))
-                self.anim_iter = self.animation.get_iter()
-                self.update_animation(self.animation)
+                self.path = path
+                task = Gio.Task.new(None, None, None)
+                task.run_in_thread(self.create_func(self.path))
             else:
                 self.path = path
                 self.pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
@@ -70,8 +78,8 @@ class GameCover:
     def set_pixbuf(self, pixbuf):
         self.picture.set_pixbuf(pixbuf)
 
-    def update_animation(self, animation):
-        if self.animation == animation:
+    def update_animation(self, data):
+        if self.animation == data[1]:
             self.anim_iter.advance()
 
             self.set_pixbuf(self.anim_iter.get_pixbuf())
@@ -80,5 +88,7 @@ class GameCover:
             GLib.timeout_add(
                 20 if delay_time < 20 else delay_time,
                 self.update_animation,
-                animation,
+                data,
             )
+        else:
+            data[0].return_value(False)
