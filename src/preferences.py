@@ -346,6 +346,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
         deleted_covers_dir = (
             self.parent_widget.cache_dir / "cartridges" / "deleted_covers"
         )
+        deleted_animated_covers_dir = (
+            self.parent_widget.cache_dir / "cartridges" / "deleted_animated_covers"
+        )
 
         for game_id in self.removed_games:
             data = get_games(self.parent_widget, [game_id])[game_id]
@@ -360,6 +363,14 @@ class PreferencesWindow(Adw.PreferencesWindow):
                         / "covers"
                         / f"{game_id}.tiff",
                     )
+                if (deleted_animated_covers_dir / f"{game_id}.gif").is_file():
+                    move(
+                        deleted_animated_covers_dir / f"{game_id}.gif",
+                        self.parent_widget.data_dir
+                        / "cartridges"
+                        / "animated_covers"
+                        / f"{game_id}.gif",
+                    )
         self.parent_widget.update_games(self.removed_games)
         self.removed_games = []
         self.toast.dismiss()
@@ -369,6 +380,11 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self.parent_widget.cache_dir / "cartridges" / "deleted_covers"
         )
         deleted_covers_dir.mkdir(parents=True, exist_ok=True)
+
+        deleted_animated_covers_dir = (
+            self.parent_widget.cache_dir / "cartridges" / "deleted_animated_covers"
+        )
+        deleted_animated_covers_dir.mkdir(parents=True, exist_ok=True)
 
         for game in get_games(self.parent_widget).values():
             if "removed" not in game:
@@ -383,8 +399,20 @@ class PreferencesWindow(Adw.PreferencesWindow):
                     / f'{game["game_id"]}.tiff'
                 )
 
+                animated_cover_path = (
+                    self.parent_widget.data_dir
+                    / "cartridges"
+                    / "animated_covers"
+                    / f'{game["game_id"]}.gif'
+                )
+
                 if cover_path.is_file():
                     move(cover_path, deleted_covers_dir / f'{game["game_id"]}.tiff')
+                if animated_cover_path.is_file():
+                    move(
+                        animated_cover_path,
+                        deleted_animated_covers_dir / f'{game["game_id"]}.gif',
+                    )
 
         self.parent_widget.update_games(self.parent_widget.games)
         if self.parent_widget.stack.get_visible_child() == self.parent_widget.overview:
