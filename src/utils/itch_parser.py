@@ -62,22 +62,23 @@ def get_game(task, current_time, parent_widget, row):
 
         game_cover = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
             tmp_file.read(), 2, 2, False
-        ).scale_simple(400, 600, GdkPixbuf.InterpType.BILINEAR)
+        ).scale_simple(*parent_widget.image_size, GdkPixbuf.InterpType.BILINEAR)
 
         itch_pixbuf = GdkPixbuf.Pixbuf.new_from_stream(tmp_file.read())
         itch_pixbuf = itch_pixbuf.scale_simple(
-            400,
-            itch_pixbuf.get_height() * (400 / itch_pixbuf.get_width()),
+            parent_widget.image_size[0],
+            itch_pixbuf.get_height()
+            * (parent_widget.image_size[0] / itch_pixbuf.get_width()),
             GdkPixbuf.InterpType.BILINEAR,
         )
         itch_pixbuf.composite(
             game_cover,
             0,
-            (600 - itch_pixbuf.get_height()) / 2,
+            (parent_widget.image_size[1] - itch_pixbuf.get_height()) / 2,
             itch_pixbuf.get_width(),
             itch_pixbuf.get_height(),
             0,
-            (600 - itch_pixbuf.get_height()) / 2,
+            (parent_widget.image_size[1] - itch_pixbuf.get_height()) / 2,
             1.0,
             1.0,
             GdkPixbuf.InterpType.BILINEAR,

@@ -56,7 +56,7 @@ def save_cover(
     elif not pixbuf:
         try:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-                str(cover_path), 400, 600, False
+                str(cover_path), *parent_widget.image_size, False
             )
         except GLib.GError:
             return

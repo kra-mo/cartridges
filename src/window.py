@@ -23,10 +23,10 @@ import struct
 from pathlib import Path
 from shutil import rmtree
 
-from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
+from gi.repository import Adw, Gdk, GdkPixbuf, Gio, GLib, Gtk
 
-from .game_cover import GameCover
 from .game import game
+from .game_cover import GameCover
 from .get_games import get_games
 from .save_game import save_game
 
@@ -104,6 +104,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.overview.set_clip_overlay(self.overview_box, False)
 
         self.schema = Gio.Settings.new("hu.kramo.Cartridges")
+        scale_factor = max(
+            monitor.get_scale_factor()
+            for monitor in Gdk.Display.get_default().get_monitors()
+        )
+        self.image_size = (200 * scale_factor, 300 * scale_factor)
+
         games = get_games(self)
         for game_id in games:
             if "removed" in games[game_id]:
