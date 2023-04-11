@@ -53,12 +53,12 @@ class GameCover:
             self.pixbuf = pixbuf
 
         if path:
+            self.path = path
+
             if str(path).rsplit(".", maxsplit=1)[-1] == "gif":
-                self.path = path
-                task = Gio.Task.new(None, None, None)
+                task = Gio.Task.new()
                 task.run_in_thread(self.create_func(self.path))
             else:
-                self.path = path
                 self.pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
                     str(path), 200, 300, False
                 )
@@ -76,7 +76,10 @@ class GameCover:
         return self.path if self.animation else None
 
     def set_pixbuf(self, pixbuf):
-        self.picture.set_pixbuf(pixbuf)
+        if self.picture.is_visible():
+            self.picture.set_pixbuf(pixbuf)
+        else:
+            self.animation = None
 
     def update_animation(self, data):
         if self.animation == data[1]:
