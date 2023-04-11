@@ -25,6 +25,7 @@ import sys
 
 from gi.repository import GdkPixbuf, Gio, Gtk
 
+from .game_cover import GameCover
 from .save_game import save_game
 
 
@@ -57,9 +58,9 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.removed = "removed" in data
         self.blacklisted = "blacklisted" in data
 
-        self.pixbuf = self.get_cover()
+        self.game_cover = GameCover(self.cover, self.get_cover())
+        self.pixbuf = self.game_cover.get_pixbuf()
 
-        self.cover.set_pixbuf(self.pixbuf)
         self.title.set_label(self.name)
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
@@ -134,8 +135,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
             self.parent_widget.pixbufs[self.game_id] = pixbuf
             return pixbuf
 
-        # Return the placeholder pixbuf
-        return self.parent_widget.placeholder_pixbuf
+        return None
 
     def show_play(self, _widget, *_unused):
         self.play_revealer.set_reveal_child(True)

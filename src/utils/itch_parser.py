@@ -60,7 +60,7 @@ def get_game(task, current_time, parent_widget, row):
             task.return_value((values, None))
             return
 
-        cover_pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
+        game_cover = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
             tmp_file.read(), 2, 2, False
         ).scale_simple(400, 600, GdkPixbuf.InterpType.BILINEAR)
 
@@ -71,7 +71,7 @@ def get_game(task, current_time, parent_widget, row):
             GdkPixbuf.InterpType.BILINEAR,
         )
         itch_pixbuf.composite(
-            cover_pixbuf,
+            game_cover,
             0,
             (600 - itch_pixbuf.get_height()) / 2,
             itch_pixbuf.get_width(),
@@ -84,9 +84,9 @@ def get_game(task, current_time, parent_widget, row):
             255,
         )
     else:
-        cover_pixbuf = None
+        game_cover = None
 
-    task.return_value((values, cover_pixbuf))
+    task.return_value((values, game_cover))
 
 
 def get_games_async(parent_widget, rows, importer):

@@ -22,6 +22,7 @@ cartridges_sources = [
   'window.py',
   'preferences.py',
   'game.py',
+  'game_cover.py',
   'utils/importer.py',
   'utils/steamgriddb.py',
   'utils/steam_parser.py',

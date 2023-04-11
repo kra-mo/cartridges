@@ -25,6 +25,7 @@ from shutil import rmtree
 
 from gi.repository import Adw, GdkPixbuf, Gio, GLib, Gtk
 
+from .game_cover import GameCover
 from .game import game
 from .get_games import get_games
 from .save_game import save_game
@@ -104,9 +105,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.overview.set_clip_overlay(self.overview_box, False)
 
         self.schema = Gio.Settings.new("hu.kramo.Cartridges")
-        self.placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
-            "/hu/kramo/Cartridges/library_placeholder.svg", 400, 600, False
-        )
         games = get_games(self)
         for game_id in games:
             if "removed" in games[game_id]:
@@ -284,7 +282,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.active_game_id = game_id
 
         pixbuf = current_game.pixbuf
-        self.overview_cover.set_pixbuf(pixbuf)
+        GameCover(self.overview_cover, pixbuf)
 
         self.scaled_pixbuf = pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
         self.overview_blurred_cover.set_pixbuf(self.scaled_pixbuf)

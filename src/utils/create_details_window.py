@@ -24,6 +24,7 @@ import time
 
 from gi.repository import Adw, GdkPixbuf, Gio, GLib, GObject, Gtk
 
+from .game_cover import GameCover
 from .create_dialog import create_dialog
 from .save_cover import save_cover
 from .save_game import save_game
@@ -61,7 +62,8 @@ def create_details_window(parent_widget, game_id=None):
         nonlocal pixbuf
         nonlocal cover_deleted
 
-        cover.set_pixbuf(parent_widget.placeholder_pixbuf)
+        GameCover(cover)
+
         cover_button_delete_revealer.set_reveal_child(False)
         pixbuf = None
         cover_deleted = True
@@ -74,16 +76,18 @@ def create_details_window(parent_widget, game_id=None):
         margin_end=40,
     )
 
+    cover = Gtk.Picture.new()
+
     if not game_id:
         window.set_title(_("Add New Game"))
-        cover = Gtk.Picture.new_for_pixbuf(parent_widget.placeholder_pixbuf)
+        GameCover(cover)
         name = Gtk.Entry()
         developer = Gtk.Entry()
         executable = Gtk.Entry()
         apply_button = Gtk.Button.new_with_label(_("Confirm"))
     else:
         window.set_title(_("Edit Game Details"))
-        cover = Gtk.Picture.new_for_pixbuf(parent_widget.games[game_id].pixbuf)
+        GameCover(cover, parent_widget.games[game_id].pixbuf)
         developer = Gtk.Entry.new_with_buffer(
             Gtk.EntryBuffer.new(games[game_id].developer, -1)
         )
@@ -93,7 +97,7 @@ def create_details_window(parent_widget, game_id=None):
         )
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
-        if parent_widget.games[game_id].pixbuf != parent_widget.placeholder_pixbuf:
+        if parent_widget.games[game_id].pixbuf:
             cover_button_delete_revealer.set_reveal_child(True)
 
     image_filter = Gtk.FileFilter(name=_("Images"))
@@ -232,7 +236,7 @@ def create_details_window(parent_widget, game_id=None):
             )
 
         cover_button_delete_revealer.set_reveal_child(True)
-        cover.set_pixbuf(pixbuf)
+        GameCover(cover, pixbuf)
 
     def close_window(_widget, _callback=None):
         window.close()
