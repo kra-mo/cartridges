@@ -14,6 +14,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
       Adw.ActionRow {
         title: _("Exit After Launching Games");
+        activatable-widget: exit_after_launch_switch;
 
         Switch exit_after_launch_switch {
           valign: center;
@@ -23,6 +24,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       Adw.ActionRow {
         title: _("Cover Image Launches Game");
         subtitle: _("Swaps the behavior of the cover image and the play button");
+        activatable-widget: cover_launches_game_switch;
 
         Switch cover_launches_game_switch {
           valign: center;
@@ -36,6 +38,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       Adw.ActionRow {
         title: _("High Quality Images");
         subtitle: _("Save game covers losslessly at the cost of storage");
+        activatable-widget: high_quality_images_switch;
 
         Switch high_quality_images_switch {
           valign: center;
@@ -86,7 +89,6 @@ template PreferencesWindow : Adw.PreferencesWindow {
           title: _("Extra Steam Libraries");
           subtitle: _("Select other directories where you have Steam games installed");
 
-
           Revealer steam_clear_button_revealer {
             reveal-child: false;
             transition-type: slide_left;
@@ -134,6 +136,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
         Adw.ActionRow {
           title: _("Import Steam Games");
+          activatable-widget: lutris_steam_switch;
 
           Switch lutris_steam_switch {
             valign: center;
@@ -157,6 +160,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
         Adw.ActionRow {
           title: _("Import Epic Games");
+          activatable-widget: heroic_epic_switch;
 
           Switch heroic_epic_switch {
             valign: center;
@@ -165,6 +169,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
         Adw.ActionRow {
           title: _("Import GOG Games");
+          activatable-widget: heroic_gog_switch;
 
           Switch heroic_gog_switch {
             valign: center;
@@ -173,6 +178,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
         Adw.ActionRow {
           title: _("Import Sideloaded Games");
+          activatable-widget: heroic_sideloaded_switch;
 
           Switch heroic_sideloaded_switch {
             valign: center;
@@ -219,7 +225,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
     Adw.PreferencesGroup sgdb_key_group {
       title: _("Authentication");
-      
+
       Adw.EntryRow sgdb_key_entry_row {
         title: _("API Key");
       }
@@ -231,6 +237,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
       Adw.ActionRow {
         title: _("Use SteamGridDB");
         subtitle: _("Download images when adding or importing games");
+        activatable-widget: sgdb_download_switch;
 
         Switch sgdb_download_switch {
           valign: center;
@@ -239,6 +246,7 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
       Adw.ActionRow {
         title: _("Prefer Over Official Images");
+        activatable-widget: sgdb_prefer_switch;
 
         Switch sgdb_prefer_switch {
           valign: center;
