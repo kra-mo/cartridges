@@ -31,7 +31,7 @@ def resize_animation(cover_path):
         frame.copy().resize((200, 300)) for frame in ImageSequence.Iterator(image)
     )
 
-    tmp_path = Path(Gio.File.new_tmp(None)[0].get_path())
+    tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
     frames[0].save(
         tmp_path,
         format="gif",

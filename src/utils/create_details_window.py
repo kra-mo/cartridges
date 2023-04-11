@@ -24,9 +24,9 @@ import time
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-from .game_cover import GameCover
 from .create_dialog import create_dialog
-from .save_cover import save_cover
+from .game_cover import GameCover
+from .save_cover import resize_animation, save_cover
 from .save_game import save_game
 from .steamgriddb import SGDBSave
 
@@ -229,7 +229,11 @@ def create_details_window(parent_widget, game_id=None):
 
         cover_button_delete_revealer.set_reveal_child(True)
         cover_deleted = True
-        game_cover.new_pixbuf(path=path)
+        game_cover.new_pixbuf(
+            path=resize_animation(path)
+            if str(path).rsplit(".", maxsplit=1)[-1] == "gif"
+            else path
+        )
 
     def close_window(_widget, _callback=None):
         window.close()
