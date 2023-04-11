@@ -1,4 +1,4 @@
-# lutris_parser.py
+# lutris_importer.py
 #
 # Copyright 2022-2023 kramo
 #
@@ -23,8 +23,7 @@ from sqlite3 import connect
 from time import time
 
 
-def lutris_parser(parent_widget):
-
+def lutris_importer(parent_widget):
     schema = parent_widget.schema
 
     database_path = (Path(schema.get_string("lutris-location"))).expanduser()

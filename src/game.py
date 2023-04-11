@@ -30,13 +30,14 @@ from .save_game import save_game
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")
-class game(Gtk.Box):  # pylint: disable=invalid-name
-    __gtype_name__ = "game"
+class Game(Gtk.Box):
+    __gtype_name__ = "Game"
 
     overlay = Gtk.Template.Child()
     title = Gtk.Template.Child()
     play_button = Gtk.Template.Child()
     cover = Gtk.Template.Child()
+    spinner = Gtk.Template.Child()
     cover_button = Gtk.Template.Child()
     menu_button = Gtk.Template.Child()
     play_revealer = Gtk.Template.Child()
@@ -58,9 +59,10 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.removed = "removed" in data
         self.blacklisted = "blacklisted" in data
 
-        self.game_cover = GameCover(self.cover, path=self.get_cover_path())
-
+        self.loading = 0
         self.title.set_label(self.name)
+
+        self.game_cover = GameCover(self.cover, path=self.get_cover_path())
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
         self.add_controller(self.event_contoller_motion)
@@ -105,7 +107,9 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
             sys.exit()
 
     def toggle_hidden(self):
-        data = json.loads((self.games_dir / f"{self.game_id}.json").read_text("utf-8"))
+        data = json.loads(
+            (self.parent_widget.games_dir / f"{self.game_id}.json").read_text("utf-8")
+        )
 
         data["hidden"] = not data["hidden"]
 
@@ -139,11 +143,11 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         if self.parent_widget.schema.get_boolean("cover-launches-game"):
             self.launch_game(None)
         else:
-            self.parent_widget.show_overview(None, self.game_id)
+            self.parent_widget.show_details_view(None, self.game_id)
 
     def play_button_clicked(self, _widget):
         if self.parent_widget.schema.get_boolean("cover-launches-game"):
-            self.parent_widget.show_overview(None, self.game_id)
+            self.parent_widget.show_details_view(None, self.game_id)
         else:
             self.launch_game(None)
 
@@ -156,3 +160,10 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
     def schema_changed(self, _settings, key):
         if key == "cover-launches-game":
             self.set_play_label()
+
+    def set_loading(self, state):
+        self.loading += state
+        loading = self.loading > 0
+
+        self.cover.set_opacity(int(not loading))
+        self.spinner.set_spinning(loading)

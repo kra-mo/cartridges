@@ -19,7 +19,7 @@
 
 import os
 from pathlib import Path
-from shutil import move
+from shutil import move, copyfile
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -367,7 +367,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 if not cover_path.is_file():
                     continue
 
-                move(cover_path, self.parent_widget.covers_dir)
+                move(cover_path, self.parent_widget.covers_dir, copyfile)
 
         self.parent_widget.update_games(self.removed_games)
         self.removed_games = []
@@ -386,12 +386,17 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 save_game(self.parent_widget, game)
 
                 cover_path = self.parent_widget.games[game["game_id"]].get_cover_path()
+                if not cover_path:
+                    continue
 
                 if cover_path.is_file():
-                    move(cover_path, deleted_covers_dir)
+                    move(cover_path, deleted_covers_dir, copyfile)
 
         self.parent_widget.update_games(self.parent_widget.games)
-        if self.parent_widget.stack.get_visible_child() == self.parent_widget.overview:
+        if (
+            self.parent_widget.stack.get_visible_child()
+            == self.parent_widget.details_view
+        ):
             self.parent_widget.on_go_back_action(None, None)
 
         self.add_toast(self.toast)

@@ -35,7 +35,7 @@ class SGDBSave:
             )
         ):
             if not self.importer:
-                self.parent_widget.loading = game[0]
+                self.parent_widget.games[game[0]].set_loading(1)
 
             url = "https://www.steamgriddb.com/api/v2/"
             headers = {
@@ -106,8 +106,6 @@ class SGDBSave:
             self.importer.queue -= 1
             self.importer.done()
             self.importer.sgdb_exception = self.exception
-        else:
-            self.parent_widget.loading = None
 
             if self.exception:
                 create_dialog(

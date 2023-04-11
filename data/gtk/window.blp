@@ -33,9 +33,9 @@ template CartridgesWindow : Adw.ApplicationWindow {
       visible-child: library_view;
       transition-type: over_left;
 
-      Overlay overview {
+      Overlay details_view {
         [overlay]
-        Box overview_box {
+        Box details_view_box {
           orientation: vertical;
 
           Adw.HeaderBar {
@@ -47,7 +47,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
             }
 
             [title]
-            Adw.WindowTitle overview_header_bar_title {
+            Adw.WindowTitle details_view_header_bar_title {
               title: _("Game Details");
             }
 
@@ -72,12 +72,12 @@ template CartridgesWindow : Adw.ApplicationWindow {
                 maximum-size: 200;
                 Overlay {
                   [overlay]
-                  Spinner overview_spinner {
+                  Spinner details_view_spinner {
                     margin-start: 72;
                     margin-end: 72;
                   }
 
-                  Picture overview_cover {
+                  Picture details_view_cover {
                     halign: end;
                     valign: start;
                     width-request: 200;
@@ -96,7 +96,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
                 vexpand: true;
                 valign: center;
 
-                Label overview_title {
+                Label details_view_title {
                   label: _("Game Title");
                   hexpand: true;
                   halign: start;
@@ -109,7 +109,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   ]
                 }
 
-                Label overview_developer {
+                Label details_view_developer {
                   margin-top: 3;
                   hexpand: true;
                   halign: start;
@@ -128,12 +128,12 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   hexpand: true;
                   halign: start;
 
-                  Label overview_added {
+                  Label details_view_added {
                     wrap: true;
                     wrap-mode: word_char;
                     natural-wrap-mode: word;
                   }
-                  Label overview_last_played {
+                  Label details_view_last_played {
                     margin-start: 12;
                     wrap: true;
                     wrap-mode: word_char;
@@ -145,8 +145,8 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   vexpand: true;
                   valign: center;
 
-                  Button overview_play_button {
-                    name: "overview_play_button";
+                  Button details_view_play_button {
+                    name: "details_view_play_button";
                     action-name: "app.launch_game";
                     label: _("Play");
                     halign: start;
@@ -173,7 +173,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
                       "circular",
                     ]
                     }
-                    Button overview_hide_button {
+                    Button details_view_hide_button {
                       action-name: "app.hide_game";
 
                       styles [
@@ -218,7 +218,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
           "background",
         ]
 
-        Picture overview_blurred_cover {
+        Picture details_view_blurred_cover {
           can-shrink: true;
           keep-aspect-ratio: false;
           hexpand: true;

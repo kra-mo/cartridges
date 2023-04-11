@@ -1,4 +1,4 @@
-# heroic_parser.py
+# heroic_importer.py
 #
 # Copyright 2022-2023 kramo
 #
@@ -24,7 +24,7 @@ from pathlib import Path
 from time import time
 
 
-def heroic_parser(parent_widget):
+def heroic_importer(parent_widget):
     schema = parent_widget.schema
     heroic_dir = Path(schema.get_string("heroic-location")).expanduser()
 

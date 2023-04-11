@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template game : Box {
+template Game : Box {
   orientation: vertical;
   halign: center;
   valign: start;
@@ -12,11 +12,18 @@ template game : Box {
       orientation: vertical;
       Button cover_button {
         overflow: hidden;
-        Picture cover {
-          width-request: 200;
-          height-request: 300;
-          hexpand: true;
-          vexpand: true;
+        Overlay {
+          [overlay]
+          Spinner spinner {
+            margin-start: 72;
+            margin-end: 72;
+          }
+          Picture cover {
+            width-request: 200;
+            height-request: 300;
+            hexpand: true;
+            vexpand: true;
+          }
         }
 
         styles [

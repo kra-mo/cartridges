@@ -28,16 +28,16 @@ gi.require_version("Adw", "1")
 # pylint: disable=wrong-import-position
 from gi.repository import Adw, Gio, GLib, Gtk
 
-from .bottles_parser import bottles_parser
+from .bottles_importer import bottles_importer
 from .create_details_window import create_details_window
 from .get_games import get_games
-from .heroic_parser import heroic_parser
+from .heroic_importer import heroic_importer
 from .importer import Importer
-from .itch_parser import itch_parser
-from .lutris_parser import lutris_parser
+from .itch_importer import itch_importer
+from .lutris_importer import lutris_importer
 from .preferences import PreferencesWindow
 from .save_game import save_game
-from .steam_parser import steam_parser
+from .steam_importer import steam_importer
 from .window import CartridgesWindow
 
 
@@ -57,7 +57,9 @@ class CartridgesApplication(Adw.Application):
         self.create_action("add_game", self.on_add_game_action, ["<primary>n"])
         self.create_action("import", self.on_import_action, ["<primary>i"])
         self.create_action(
-            "remove_game_overview", self.on_remove_game_overview_action, ["Delete"]
+            "remove_game_details_view",
+            self.on_remove_game_details_view_action,
+            ["Delete"],
         )
         self.create_action("remove_game", self.on_remove_game_action)
         self.create_action("igdb_search", self.on_igdb_search_action)
@@ -121,8 +123,10 @@ class CartridgesApplication(Adw.Application):
             developers=[
                 "kramo https://kramo.hu",
                 "Paweł Lidwin https://github.com/imLinguin",
+                "Domenico https://github.com/Domefemia",
                 "Bananaman https://github.com/Bananaman",
                 "Geoffrey Coulaud https://geoffrey-coulaud.fr",
+                "Rafael Mardojai CM https://mardojai.com",
             ],
             designers=["kramo https://kramo.hu"],
             copyright="© 2022-2023 kramo",
@@ -167,7 +171,7 @@ class CartridgesApplication(Adw.Application):
         if not game_id:
             game_id = self.win.active_game_id
 
-        if self.win.stack.get_visible_child() == self.win.overview:
+        if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action(None, None)
         self.win.games[game_id].toggle_hidden()
         self.win.update_games([game_id])
@@ -200,19 +204,19 @@ class CartridgesApplication(Adw.Application):
         self.win.importer.blocker = True
 
         if self.win.schema.get_boolean("steam"):
-            steam_parser(self.win)
+            steam_importer(self.win)
 
         if self.win.schema.get_boolean("lutris"):
-            lutris_parser(self.win)
+            lutris_importer(self.win)
 
         if self.win.schema.get_boolean("heroic"):
-            heroic_parser(self.win)
+            heroic_importer(self.win)
 
         if self.win.schema.get_boolean("bottles"):
-            bottles_parser(self.win)
+            bottles_importer(self.win)
 
         if self.win.schema.get_boolean("itch"):
-            itch_parser(self.win)
+            itch_importer(self.win)
 
         self.win.importer.blocker = False
 
@@ -229,7 +233,7 @@ class CartridgesApplication(Adw.Application):
         save_game(self.win, data)
 
         self.win.update_games([game_id])
-        if self.win.stack.get_visible_child() == self.win.overview:
+        if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action(None, None)
 
         title = self.win.games[game_id].name
@@ -241,8 +245,8 @@ class CartridgesApplication(Adw.Application):
         self.win.toasts[(game_id, "remove")] = toast
         self.win.toast_overlay.add_toast(toast)
 
-    def on_remove_game_overview_action(self, _widget, _callback=None):
-        if self.win.stack.get_visible_child() == self.win.overview:
+    def on_remove_game_details_view_action(self, _widget, _callback=None):
+        if self.win.stack.get_visible_child() == self.win.details_view:
             self.on_remove_game_action(None)
 
     def on_quit_action(self, _widget, _callback=None):

@@ -2,19 +2,17 @@ data/hu.kramo.Cartridges.desktop.in
 data/hu.kramo.Cartridges.gschema.xml
 data/hu.kramo.Cartridges.metainfo.xml.in
 
-data/gtk/window.blp
 data/gtk/game.blp
 data/gtk/help-overlay.blp
 data/gtk/preferences.blp
+data/gtk/window.blp
 
 src/main.py
 src/window.py
 src/game.py
 src/preferences.py
 
-src/utils/importer.py
-src/utils/bottles_parser.py
 src/utils/create_details_window.py
 src/utils/create_dialog.py
-src/utils/heroic_parser.py
-src/utils/steam_parser.py
+src/utils/importer.py
+src/utils/steamgriddb.py

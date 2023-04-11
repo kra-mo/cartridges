@@ -1,4 +1,4 @@
-# bottles_parser.py
+# bottles_importer.py
 #
 # Copyright 2022-2023 kramo
 #
@@ -23,7 +23,7 @@ from time import time
 import yaml
 
 
-def bottles_parser(parent_widget):
+def bottles_importer(parent_widget):
     schema = parent_widget.schema
     bottles_dir = Path(schema.get_string("bottles-location")).expanduser()
 

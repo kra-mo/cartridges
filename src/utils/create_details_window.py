@@ -317,9 +317,6 @@ def create_details_window(parent_widget, game_id=None):
             (parent_widget.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
             (parent_widget.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
 
-        if not game_cover.get_pixbuf():
-            SGDBSave(parent_widget, {(game_id, values["name"])})
-
         save_cover(
             parent_widget,
             game_id,
@@ -337,9 +334,13 @@ def create_details_window(parent_widget, game_id=None):
         else:
             save_game(parent_widget, values)
 
-        parent_widget.update_games([game_id])
+        if game_cover.get_pixbuf():
+            parent_widget.update_games([game_id])
+        else:
+            SGDBSave(parent_widget, {(game_id, values["name"])})
+
         window.close()
-        parent_widget.show_overview(None, game_id)
+        parent_widget.show_details_view(None, game_id)
 
     def focus_executable(_widget):
         window.set_focus(executable)

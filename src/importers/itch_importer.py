@@ -1,4 +1,4 @@
-# itch_parser.py
+# itch_importer.py
 #
 # Copyright 2022-2023 kramo
 #
@@ -115,7 +115,7 @@ def get_games_async(parent_widget, rows, importer):
         task.run_in_thread(create_func(current_time, parent_widget, row))
 
 
-def itch_parser(parent_widget):
+def itch_importer(parent_widget):
     schema = parent_widget.schema
 
     database_path = (Path(schema.get_string("itch-location")) / "db").expanduser()

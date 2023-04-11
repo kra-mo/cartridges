@@ -1,4 +1,4 @@
-# steam_parser.py
+# steam_importer.py
 #
 # Copyright 2022-2023 kramo
 #
@@ -123,7 +123,7 @@ def get_games_async(parent_widget, appmanifests, steam_dir, importer):
         )
 
 
-def steam_parser(parent_widget):
+def steam_importer(parent_widget):
     schema = parent_widget.schema
     steam_dir = Path(schema.get_string("steam-location")).expanduser()
 
@@ -150,7 +150,7 @@ def steam_parser(parent_widget):
         schema.set_string("steam-location", str(steam_dir / "Steam"))
     else:
         steam_not_found()
-        steam_parser(parent_widget)
+        steam_importer(parent_widget)
         return
 
     steam_dir = Path(schema.get_string("steam-location")).expanduser()
