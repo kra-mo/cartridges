@@ -58,9 +58,7 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
         self.removed = "removed" in data
         self.blacklisted = "blacklisted" in data
 
-        self.game_cover = GameCover(self.cover, path=self.get_cover())
-        self.pixbuf = self.game_cover.get_pixbuf()
-        self.animation = self.game_cover.get_animation()
+        self.game_cover = GameCover(self.cover, path=self.get_cover_path())
 
         self.title.set_label(self.name)
 
@@ -107,25 +105,18 @@ class game(Gtk.Box):  # pylint: disable=invalid-name
             sys.exit()
 
     def toggle_hidden(self):
-        games_dir = self.parent_widget.data_dir / "cartridges" / "games"
-
-        if not games_dir.exists():
-            return
-
-        data = json.loads((games_dir / f"{self.game_id}.json").read_text("utf-8"))
+        data = json.loads((self.games_dir / f"{self.game_id}.json").read_text("utf-8"))
 
         data["hidden"] = not data["hidden"]
 
         save_game(self.parent_widget, data)
 
-    def get_cover(self):
-        covers_dir = self.parent_widget.data_dir / "cartridges" / "covers"
+    def get_cover_path(self):
+        cover_path = self.parent_widget.covers_dir / f"{self.game_id}.gif"
+        if cover_path.is_file():
+            return cover_path
 
-        animated_cover_path = covers_dir / f"{self.game_id}.gif"
-        if animated_cover_path.is_file():
-            return animated_cover_path
-
-        cover_path = covers_dir / f"{self.game_id}.tiff"
+        cover_path = self.parent_widget.covers_dir / f"{self.game_id}.tiff"
         if cover_path.is_file():
             return cover_path
 

@@ -63,9 +63,6 @@ class GameCover:
                     str(path), 200, 300, False
                 )
 
-        if not self.pixbuf:
-            self.pixbuf = self.placeholder_pixbuf
-
         if not self.animation:
             self.set_pixbuf(self.pixbuf)
 
@@ -77,6 +74,8 @@ class GameCover:
 
     def set_pixbuf(self, pixbuf):
         if self.picture.is_visible():
+            if not pixbuf:
+                pixbuf = self.placeholder_pixbuf
             self.picture.set_pixbuf(pixbuf)
         else:
             self.animation = None

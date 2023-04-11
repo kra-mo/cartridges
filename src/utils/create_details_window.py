@@ -85,7 +85,7 @@ def create_details_window(parent_widget, game_id=None):
         apply_button = Gtk.Button.new_with_label(_("Confirm"))
     else:
         window.set_title(_("Edit Game Details"))
-        game_cover.new_pixbuf(path=parent_widget.games[game_id].get_cover())
+        game_cover.new_pixbuf(path=parent_widget.games[game_id].get_cover_path())
         developer = Gtk.Entry.new_with_buffer(
             Gtk.EntryBuffer.new(games[game_id].developer, -1)
         )
@@ -95,7 +95,7 @@ def create_details_window(parent_widget, game_id=None):
         )
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
-        if parent_widget.games[game_id].pixbuf:
+        if parent_widget.games[game_id].get_cover_path():
             cover_button_delete_revealer.set_reveal_child(True)
 
     image_filter = Gtk.FileFilter(name=_("Images"))
@@ -314,16 +314,10 @@ def create_details_window(parent_widget, game_id=None):
         values["executable"] = final_executable_split
 
         if cover_deleted:
-            (
-                parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
-            ).unlink(missing_ok=True)
-            (
-                parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.gif"
-            ).unlink(missing_ok=True)
+            (parent_widget.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
+            (parent_widget.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
 
-        elif not (
-            parent_widget.data_dir / "cartridges" / "covers" / f"{game_id}.tiff"
-        ).is_file():
+        if not game_cover.get_pixbuf():
             SGDBSave(parent_widget, {(game_id, values["name"])})
 
         save_cover(
@@ -334,7 +328,7 @@ def create_details_window(parent_widget, game_id=None):
             game_cover.get_animation(),
         )
 
-        path = parent_widget.data_dir / "cartridges" / "games" / f"{game_id}.json"
+        path = parent_widget.games_dir / f"{game_id}.json"
 
         if path.exists():
             data = json.loads(path.read_text("utf-8"))

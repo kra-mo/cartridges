@@ -49,25 +49,25 @@ def save_cover(
     pixbuf=None,
     animation_path=None,
 ):
-    covers_dir = parent_widget.data_dir / "cartridges" / "covers"
-    covers_dir.mkdir(parents=True, exist_ok=True)
+    parent_widget.covers_dir.mkdir(parents=True, exist_ok=True)
+
+    # Remove previous covers
+    (parent_widget.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
+    (parent_widget.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
 
     if animation_path:
-        (covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
-        copyfile(animation_path, covers_dir / f"{game_id}.gif")
+        copyfile(animation_path, parent_widget.covers_dir / f"{game_id}.gif")
         return
 
     if not pixbuf:
-        try:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-                str(cover_path), *parent_widget.image_size, False
-            )
-        except GLib.GError:
+        if not cover_path:
             return
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            str(cover_path), *parent_widget.image_size, False
+        )
 
-    open_file = Gio.File.new_for_path(str(covers_dir / f"{game_id}.tiff"))
-    pixbuf.save_to_streamv(
-        open_file.replace(None, False, Gio.FileCreateFlags.NONE),
+    pixbuf.savev(
+        str(parent_widget.covers_dir / f"{game_id}.tiff"),
         "tiff",
         ["compression"],
         ["8"] if parent_widget.schema.get_boolean("high-quality-images") else ["7"],

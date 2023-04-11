@@ -21,16 +21,17 @@ import json
 
 
 def get_games(parent_widget, game_ids=None):
-    games_dir = parent_widget.data_dir / "cartridges" / "games"
     games = {}
 
-    if not games_dir.exists():
+    if not parent_widget.games_dir.exists():
         return {}
 
     if game_ids:
-        game_files = [games_dir / f"{game_id}.json" for game_id in game_ids]
+        game_files = [
+            parent_widget.games_dir / f"{game_id}.json" for game_id in game_ids
+        ]
     else:
-        game_files = games_dir.iterdir()
+        game_files = parent_widget.games_dir.iterdir()
 
     for game in game_files:
         data = json.loads(game.read_text("utf-8"))

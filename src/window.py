@@ -89,6 +89,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
             else Path.home() / ".cache"
         )
 
+        self.games_dir = self.data_dir / "cartridges" / "games"
+        self.covers_dir = self.data_dir / "cartridges" / "covers"
+
         self.games = {}
         self.visible_widgets = {}
         self.hidden_widgets = {}
@@ -113,15 +116,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         games = get_games(self)
         for game_id in games:
             if "removed" in games[game_id]:
-                (self.data_dir / "cartridges" / "games" / f"{game_id}.json").unlink(
-                    missing_ok=True
-                )
-                (self.data_dir / "cartridges" / "covers" / f"{game_id}.tiff").unlink(
-                    missing_ok=True
-                )
-                (self.data_dir / "cartridges" / "covers" / f"{game_id}.gif").unlink(
-                    missing_ok=True
-                )
+                (self.games_dir / f"{game_id}.json").unlink(missing_ok=True)
+                (self.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
+                (self.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
 
         rmtree(self.cache_dir / "cartridges" / "deleted_covers", True)
 
@@ -291,8 +288,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.active_game_id = game_id
 
-        pixbuf = current_game.pixbuf
-        self.overview_game_cover.new_pixbuf(path=current_game.get_cover())
+        self.overview_game_cover.new_pixbuf(path=current_game.get_cover_path())
+        pixbuf = (
+            self.overview_game_cover.get_pixbuf()
+            or self.overview_game_cover.placeholder_pixbuf
+        )
 
         self.scaled_pixbuf = pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
         self.overview_blurred_cover.set_pixbuf(self.scaled_pixbuf)
