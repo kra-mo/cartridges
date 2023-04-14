@@ -1,6 +1,10 @@
 @define-color accent_color @purple_1;
 @define-color accent_bg_color @purple_4;
 
+#details_view {
+    background-color: black;
+}
+
 #details_view_play_button {
     color: @dark_5;
     background-color: @light_1;

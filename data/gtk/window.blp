@@ -34,6 +34,8 @@ template CartridgesWindow : Adw.ApplicationWindow {
       transition-type: over_left;
 
       Overlay details_view {
+        name: "details_view";
+
         [overlay]
         Box details_view_box {
           orientation: vertical;
@@ -100,6 +102,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   label: _("Game Title");
                   hexpand: true;
                   halign: start;
+                  max-width-chars: 24;
                   wrap: true;
                   wrap-mode: word_char;
                   natural-wrap-mode: word;
@@ -113,6 +116,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
                   margin-top: 3;
                   hexpand: true;
                   halign: start;
+                  max-width-chars: 36;
                   wrap: true;
                   wrap-mode: word_char;
                   natural-wrap-mode: word;
@@ -214,15 +218,8 @@ template CartridgesWindow : Adw.ApplicationWindow {
           }
         }
 
-        styles [
-          "background",
-        ]
-
         Picture details_view_blurred_cover {
-          can-shrink: true;
           keep-aspect-ratio: false;
-          hexpand: true;
-          vexpand: true;
         }
       }
 

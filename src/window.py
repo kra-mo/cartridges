@@ -327,7 +327,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 style_manager.get_high_contrast()
                 or not style_manager.get_system_supports_color_schemes()
             ):
-                self.details_view_blurred_cover.set_opacity(0.2)
+                self.details_view_blurred_cover.set_opacity(0.3)
                 return
 
             pixels = self.scaled_pixbuf.get_pixels()
@@ -356,7 +356,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 )
             else:
                 self.details_view_blurred_cover.set_opacity(
-                    0.1 + (sum(luminances) / len(luminances) + min(luminances)) / 2
+                    0.2 + (sum(luminances) / len(luminances) + min(luminances)) / 2
                 )
 
     def a_z_sort(self, child1, child2):
