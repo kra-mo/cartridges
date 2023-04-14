@@ -26,39 +26,41 @@ from time import time
 from .check_install import check_install
 
 
-def heroic_importer(win):
-    schema = win.schema
+def heroic_installed(win, path=None):
     location_key = "heroic-location"
-    heroic_dir = Path(schema.get_string(location_key)).expanduser()
+    heroic_dir = (
+        path if path else Path(win.schema.get_string(location_key)).expanduser()
+    )
     check = "config.json"
 
     if not (heroic_dir / check).is_file():
         locations = (
-            Path.home()
-            / ".var"
-            / "app"
-            / "com.heroicgameslauncher.hgl"
-            / "config"
-            / "heroic",
-            win.config_dir / "heroic",
+            (Path(),)
+            if path
+            else (
+                Path.home() / ".var/app/com.heroicgameslauncher.hgl/config/heroic",
+                win.config_dir / "heroic",
+            )
         )
 
-        if os.name == "nt":
+        if os.name == "nt" and not path:
             locations += (Path(os.getenv("appdata")) / "heroic",)
 
-        heroic_dir = check_install(check, locations, (schema, location_key))
-        if not heroic_dir:
-            return
+        heroic_dir = check_install(check, locations, (win.schema, location_key))
 
-    schema = win.schema
-    check = "config.json"
+    return heroic_dir
+
+
+def heroic_importer(win):
+    heroic_dir = heroic_installed(win)
+    if not heroic_dir:
+        return
 
     current_time = int(time())
-
     importer = win.importer
 
     # Import Epic games
-    if not schema.get_boolean("heroic-import-epic"):
+    if not win.schema.get_boolean("heroic-import-epic"):
         pass
     elif (heroic_dir / "store_cache" / "legendary_library.json").exists():
         data = (heroic_dir / "store_cache" / "legendary_library.json").read_text(
@@ -112,7 +114,7 @@ def heroic_importer(win):
             pass
 
     # Import GOG games
-    if not schema.get_boolean("heroic-import-gog"):
+    if not win.schema.get_boolean("heroic-import-gog"):
         pass
     elif (heroic_dir / "gog_store" / "installed.json").exists():
         data = (heroic_dir / "gog_store" / "installed.json").read_text("utf-8")
@@ -160,7 +162,7 @@ def heroic_importer(win):
             importer.save_game(values, image_path if image_path.exists() else None)
 
     # Import sideloaded games
-    if not schema.get_boolean("heroic-import-sideload"):
+    if not win.schema.get_boolean("heroic-import-sideload"):
         pass
     elif (heroic_dir / "sideload_apps" / "library.json").exists():
         data = (heroic_dir / "sideload_apps" / "library.json").read_text("utf-8")

@@ -22,7 +22,7 @@ from pathlib import Path
 
 def check_install(check, locations, setting=None, subdirs=(Path(),)):
     for location in locations:
-        for subdir in subdirs:
+        for subdir in (Path(),) + subdirs:
             if (location / subdir / check).is_file() or (
                 location / subdir / check
             ).exists():

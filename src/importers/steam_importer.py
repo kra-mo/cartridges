@@ -122,31 +122,42 @@ def get_games_async(win, appmanifests, steam_dir, importer):
         )
 
 
-def steam_importer(win):
-    schema = win.schema
+def steam_installed(win, path=None):
     location_key = "steam-location"
-    steam_dir = Path(schema.get_string(location_key)).expanduser()
+    steam_dir = Path(win.schema.get_string(location_key)).expanduser()
     check = "steamapps"
 
     if not (steam_dir / check).is_file():
         subdirs = ("steam", "Steam")
-
         locations = (
-            Path.home() / ".steam",
-            win.data_dir / "Steam",
-            Path.home() / ".var" / "app" / "com.valvesoftware.Steam" / "data" / "Steam",
+            (path,)
+            if path
+            else (
+                steam_dir,
+                Path.home() / ".steam",
+                win.data_dir / "Steam",
+                Path.home() / ".var/app/com.valvesoftware.Steam/data/Steam",
+            )
         )
 
         if os.name == "nt":
             locations += (Path(os.getenv("programfiles(x86)")) / "Steam",)
 
-        steam_dir = check_install(check, locations, (schema, location_key), subdirs)
-        if not steam_dir:
-            return
+        steam_dir = check_install(check, locations, (win.schema, location_key), subdirs)
+
+    return steam_dir
+
+
+def steam_importer(win):
+    steam_dir = steam_installed(win)
+    if not steam_dir:
+        return
 
     appmanifests = []
 
-    steam_dirs = [Path(directory) for directory in schema.get_strv("steam-extra-dirs")]
+    steam_dirs = [
+        Path(directory) for directory in win.schema.get_strv("steam-extra-dirs")
+    ]
     steam_dirs.append(steam_dir)
 
     for directory in steam_dirs:

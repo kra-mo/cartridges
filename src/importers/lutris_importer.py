@@ -25,38 +25,56 @@ from time import time
 from .check_install import check_install
 
 
-def lutris_importer(win):
-    schema = win.schema
+def lutris_installed(win, path=None):
     location_key = "lutris-location"
-    lutris_dir = Path(schema.get_string(location_key)).expanduser()
+    lutris_dir = (
+        path if path else Path(win.schema.get_string(location_key)).expanduser()
+    )
     check = "pga.db"
 
     if not (lutris_dir / check).is_file():
         locations = (
-            Path.home() / ".var" / "app" / "net.lutris.Lutris" / "data" / "lutris",
-            win.data_dir / "lutris",
+            (Path(),)
+            if path
+            else (
+                Path.home() / ".var/app/net.lutris.Lutris/data/lutris",
+                win.data_dir / "lutris",
+            )
         )
 
-        lutris_dir = check_install(check, locations, (schema, location_key))
-        if not lutris_dir:
-            return
+        lutris_dir = check_install(check, locations, (win.schema, location_key))
 
+    return lutris_dir
+
+
+def lutris_cache_exists(win, path=None):
     cache_key = "lutris-cache-location"
-    cache_dir = Path(schema.get_string(cache_key)).expanduser()
+    cache_dir = path if path else Path(win.schema.get_string(cache_key)).expanduser()
     cache_check = "coverart"
 
     if not (cache_dir / cache_check).exists():
         cache_locations = (
-            Path.home() / ".var" / "app" / "net.lutris.Lutris" / "cache" / "lutris",
-            win.cache_dir / "lutris",
+            (Path(),)
+            if path
+            else (
+                Path.home() / ".var" / "app" / "net.lutris.Lutris" / "cache" / "lutris",
+                win.cache_dir / "lutris",
+            )
         )
 
-        cache_dir = check_install(check, cache_locations, (schema, location_key))
-        if not cache_dir:
-            return
+        cache_dir = check_install(cache_check, cache_locations, (win.schema, cache_key))
 
-    database_path = (Path(schema.get_string(location_key))).expanduser()
-    cache_dir = Path(schema.get_string(cache_key)).expanduser()
+    return cache_dir
+
+
+def lutris_importer(win):
+    lutris_dir = lutris_installed(win)
+    if not lutris_dir:
+        return
+
+    cache_dir = lutris_cache_exists(win)
+    if not cache_dir:
+        return
 
     db_cache_dir = win.cache_dir / "cartridges" / "lutris"
     db_cache_dir.mkdir(parents=True, exist_ok=True)
@@ -64,7 +82,7 @@ def lutris_importer(win):
     # Copy the file because sqlite3 doesn't like databases in /run/user/
     database_tmp_path = db_cache_dir / "pga.db"
 
-    for db_file in database_path.glob("pga.db*"):
+    for db_file in lutris_dir.glob("pga.db*"):
         copyfile(db_file, (db_cache_dir / db_file.name))
 
     db_request = """
@@ -87,7 +105,7 @@ def lutris_importer(win):
     # No need to unlink temp files as they disappear when the connection is closed
     database_tmp_path.unlink(missing_ok=True)
 
-    if not schema.get_boolean("lutris-import-steam"):
+    if not win.schema.get_boolean("lutris-import-steam"):
         rows = [row for row in rows if not row[3] == "steam"]
 
     current_time = int(time())

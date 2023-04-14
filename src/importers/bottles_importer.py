@@ -25,26 +25,32 @@ import yaml
 from .check_install import check_install
 
 
-def bottles_importer(win):
-    schema = win.schema
+def bottles_installed(win, path=None):
     location_key = "bottles-location"
-    bottles_dir = Path(schema.get_string(location_key)).expanduser()
+    bottles_dir = (
+        path if path else Path(win.schema.get_string(location_key)).expanduser()
+    )
     check = "library.yml"
 
     if not (bottles_dir / check).is_file():
         locations = (
-            Path.home()
-            / ".var"
-            / "app"
-            / "com.usebottles.bottles"
-            / "data"
-            / "bottles",
-            win.data_dir / "bottles",
+            (Path(),)
+            if path
+            else (
+                Path.home() / ".var/app/com.usebottles.bottles/data/bottles",
+                win.data_dir / "bottles",
+            )
         )
 
-        bottles_dir = check_install(check, locations, (schema, location_key))
-        if not bottles_dir:
-            return
+        bottles_dir = check_install(check, locations, (win.schema, location_key))
+
+    return bottles_dir
+
+
+def bottles_importer(win):
+    bottles_dir = bottles_installed(win)
+    if not bottles_dir:
+        return
 
     current_time = int(time())
 

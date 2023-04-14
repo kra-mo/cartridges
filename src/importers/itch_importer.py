@@ -113,25 +113,35 @@ def get_games_async(win, rows, importer):
         task.run_in_thread(create_func(current_time, win, row))
 
 
-def itch_importer(win):
-    schema = win.schema
+def itch_installed(win, path=None):
     location_key = "itch-location"
-    itch_dir = Path(schema.get_string(location_key)).expanduser()
+    itch_dir = path if path else Path(win.schema.get_string(location_key)).expanduser()
     check = Path("db") / "butler.db"
 
     if not (itch_dir / check).is_file():
         locations = (
-            Path.home() / ".var" / "app" / "io.itch.itch" / "config" / "itch",
-            win.config_dir / "itch",
+            (Path(),)
+            if path
+            else (
+                Path.home() / ".var/app/io.itch.itch/config/itch",
+                win.config_dir / "itch",
+            )
         )
 
-        if os.name == "nt":
+        if os.name == "nt" and not path:
             locations += (Path(os.getenv("appdata")) / "itch",)
 
-        if not check_install(check, locations, (schema, location_key)):
-            return
+        itch_dir = check_install(check, locations, (win.schema, location_key))
 
-    database_path = (Path(schema.get_string(location_key)) / "db").expanduser()
+    return itch_dir
+
+
+def itch_importer(win):
+    itch_dir = itch_installed(win)
+    if not itch_dir:
+        return
+
+    database_path = (itch_dir / "db").expanduser()
 
     db_cache_dir = win.cache_dir / "cartridges" / "itch"
     db_cache_dir.mkdir(parents=True, exist_ok=True)

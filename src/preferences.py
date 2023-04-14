@@ -19,63 +19,61 @@
 
 import os
 from pathlib import Path
-from shutil import move, copyfile
+from shutil import copyfile, move
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
+from .bottles_importer import bottles_installed
 from .create_dialog import create_dialog
 from .get_games import get_games
+from .heroic_importer import heroic_installed
+from .itch_importer import itch_installed
+from .lutris_importer import lutris_cache_exists, lutris_installed
 from .save_game import save_game
+from .steam_importer import steam_installed
 
 
 class ImportPreferences:
     def __init__(
         self,
-        window,
+        win,
         source_id,
         name,
-        install_key,
-        paths,
+        check_func,
         expander_row,
         file_chooser_button,
         config=False,
     ):
         def set_dir(_source, result, _unused):
             try:
-                path = Path(window.file_chooser.select_folder_finish(result).get_path())
-
-                def response(widget, response):
-                    if response == "choose_folder":
-                        window.choose_folder(widget, set_dir)
-
-                if not any((path / current_path).exists() for current_path in paths):
-                    create_dialog(
-                        window.win,
-                        _("Installation Not Found"),
-                        # The variable is the name of the game launcher
-                        _("Select the {} configuration directory.").format(name)
-                        if config
-                        # The variable is the name of the game launcher
-                        else _("Select the {} data directory.").format(name),
-                        "choose_folder",
-                        _("Set Location"),
-                    ).connect("response", response)
-                else:
-                    window.schema.set_string(
-                        install_key,
-                        str(path),
-                    )
+                path = Path(win.file_chooser.select_folder_finish(result).get_path())
             except GLib.GError:
-                pass
+                return
 
-        window.schema.bind(
+            def response(widget, response):
+                if response == "choose_folder":
+                    win.choose_folder(widget, set_dir)
+
+            if not check_func(win, path):
+                create_dialog(
+                    win,
+                    _("Installation Not Found"),
+                    # The variable is the name of the game launcher
+                    _("Select the {} configuration directory.").format(name) if config
+                    # The variable is the name of the game launcher
+                    else _("Select the {} data directory.").format(name),
+                    "choose_folder",
+                    _("Set Location"),
+                ).connect("response", response)
+
+        win.schema.bind(
             source_id,
             expander_row,
             "enable-expansion",
             Gio.SettingsBindFlags.DEFAULT,
         )
 
-        file_chooser_button.connect("clicked", window.choose_folder, set_dir)
+        file_chooser_button.connect("clicked", win.choose_folder, set_dir)
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/preferences.ui")
@@ -170,12 +168,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self,
             "steam",
             "Steam",
-            "steam-location",
-            [
-                "steamapps",
-                Path("steam") / "steamapps",
-                Path("Steam") / "steamapps",
-            ],
+            steam_installed,
             self.steam_expander_row,
             self.steam_file_chooser_button,
         )
@@ -192,7 +185,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 value.append(self.file_chooser.select_folder_finish(result).get_path())
                 self.schema.set_strv("steam-extra-dirs", value)
             except GLib.GError:
-                pass
+                return
             update_revealer()
 
         def clear_steam_dirs(*_unused):
@@ -211,8 +204,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self,
             "lutris",
             "Lutris",
-            "lutris-location",
-            ["pga.db"],
+            lutris_installed,
             self.lutris_expander_row,
             self.lutris_file_chooser_button,
         )
@@ -226,26 +218,21 @@ class PreferencesWindow(Adw.PreferencesWindow):
         def set_cache_dir(_source, result, _unused):
             try:
                 path = Path(self.file_chooser.select_folder_finish(result).get_path())
-
-                def response(widget, response):
-                    if response == "choose_folder":
-                        self.choose_folder(widget, set_cache_dir)
-
-                if not (path / "coverart").exists():
-                    create_dialog(
-                        self.win,
-                        _("Cache Not Found"),
-                        _("Select the Lutris cache directory."),
-                        "choose_folder",
-                        _("Set Location"),
-                    ).connect("response", response)
-                else:
-                    self.schema.set_string(
-                        "lutris-cache-location",
-                        str(path),
-                    )
             except GLib.GError:
-                pass
+                return
+
+            def response(widget, response):
+                if response == "choose_folder":
+                    self.choose_folder(widget, set_cache_dir)
+
+            if not lutris_cache_exists(path).exists():
+                create_dialog(
+                    self.win,
+                    _("Cache Not Found"),
+                    _("Select the Lutris cache directory."),
+                    "choose_folder",
+                    _("Set Location"),
+                ).connect("response", response)
 
         self.lutris_cache_file_chooser_button.connect(
             "clicked", self.choose_folder, set_cache_dir
@@ -259,8 +246,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self,
             "heroic",
             "Heroic",
-            "heroic-location",
-            ["config.json"],
+            heroic_installed,
             self.heroic_expander_row,
             self.heroic_file_chooser_button,
             True,
@@ -290,8 +276,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self,
             "bottles",
             "Bottles",
-            "bottles-location",
-            ["library.yml"],
+            bottles_installed,
             self.bottles_expander_row,
             self.bottles_file_chooser_button,
         )
@@ -304,8 +289,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self,
             "itch",
             "itch",
-            "itch-location",
-            [Path("db") / "butler.db"],
+            itch_installed,
             self.itch_expander_row,
             self.itch_file_chooser_button,
             True,
