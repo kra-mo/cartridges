@@ -107,7 +107,7 @@ class SGDBSave:
             self.importer.done()
             self.importer.sgdb_exception = self.exception
 
-            if self.exception:
+            if self.exception and not self.importer:
                 create_dialog(
                     self.win,
                     _("Couldn't Connect to SteamGridDB"),
