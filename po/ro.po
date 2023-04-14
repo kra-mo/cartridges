@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-05 11:11+0200\n"
+"POT-Creation-Date: 2023-04-11 23:33+0200\n"
 "PO-Revision-Date: 2023-04-04 17:12+0000\n"
 "Last-Translator: Matt C <matei.gurzu@gmail.com>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/cartridges/"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:113
+#: src/main.py:119
 msgid "Cartridges"
 msgstr "Cartușe"
 
@@ -55,7 +55,7 @@ msgid "Library"
 msgstr "Bibliotecă"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
-#: src/utils/create_details_window.py:85
+#: src/utils/create_details_window.py:87
 msgid "Edit Game Details"
 msgstr "Editați detaliile jocului"
 
@@ -63,120 +63,30 @@ msgstr "Editați detaliile jocului"
 msgid "Game Details"
 msgstr "Detalii joc"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:371
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:402
 #: src/utils/importer.py:94 src/utils/importer.py:123 src/utils/importer.py:148
+#: src/utils/steamgriddb.py:116
 msgid "Preferences"
 msgstr "Preferințe"
 
-#: data/gtk/window.blp:6 src/utils/importer.py:91
-msgid "No Games Found"
-msgstr "Nu s-au găsit jocuri"
-
-#: data/gtk/window.blp:7
-msgid "Try a different search."
-msgstr "Încercați o altă căutare."
-
-#: data/gtk/window.blp:14
-msgid "No Games"
-msgstr "Fără jocuri"
-
-#: data/gtk/window.blp:15
-msgid "Use the + button to add games."
-msgstr "Folosiți butonul + pentru a adăuga jocuri."
-
-#: data/gtk/window.blp:22
-msgid "No Hidden Games"
-msgstr "Fără jocuri ascunse"
-
-#: data/gtk/window.blp:23
-msgid "Games you hide will appear here."
-msgstr "Jocurile pe care le ascundeți vor apărea aici."
-
-#: data/gtk/window.blp:44 data/gtk/window.blp:262
-msgid "Back"
-msgstr "Înapoi"
-
-#: data/gtk/window.blp:100
-msgid "Game Title"
-msgstr "Titlul jocului"
-
-#: data/gtk/window.blp:156 src/game.py:168
-msgid "Play"
-msgstr "Joacă"
-
-#: data/gtk/window.blp:204 data/gtk/window.blp:390
-msgid "Add Game"
-msgstr "Adăugați joc"
-
-#: data/gtk/window.blp:211 data/gtk/window.blp:274
-msgid "Main Menu"
-msgstr "Meniu principal"
-
-#: data/gtk/window.blp:218 data/gtk/window.blp:281 data/gtk/help-overlay.blp:19
-msgid "Search"
-msgstr "Căutare"
-
-#: data/gtk/window.blp:269
-msgid "Hidden Games"
-msgstr "Jocuri ascunse"
-
-#: data/gtk/window.blp:329
-msgid "Sort"
-msgstr ""
-
-#: data/gtk/window.blp:332
-msgid "A-Z"
-msgstr ""
-
-#: data/gtk/window.blp:338
-msgid "Z-A"
-msgstr ""
-
-#: data/gtk/window.blp:344
-msgid "Newest"
-msgstr ""
-
-#: data/gtk/window.blp:350
-msgid "Oldest"
-msgstr ""
-
-#: data/gtk/window.blp:356
-msgid "Last Played"
-msgstr ""
-
-#: data/gtk/window.blp:363
-msgid "Show Hidden"
-msgstr ""
-
-#: data/gtk/window.blp:376
-msgid "Keyboard Shortcuts"
-msgstr ""
-
-#: data/gtk/window.blp:381
-msgid "About Cartridges"
-msgstr ""
-
-#: data/gtk/window.blp:396 data/gtk/preferences.blp:66
-msgid "Import"
-msgstr ""
-
-#: data/gtk/game.blp:60 src/utils/create_details_window.py:127
+#: data/gtk/game.blp:67 src/utils/create_details_window.py:129
 msgid "Title"
 msgstr ""
 
-#: data/gtk/game.blp:82 data/gtk/game.blp:101
+#: data/gtk/game.blp:89 data/gtk/game.blp:108 data/gtk/window.blp:170
 msgid "Edit"
 msgstr ""
 
-#: data/gtk/game.blp:87
+#: data/gtk/game.blp:94 src/window.py:286
 msgid "Hide"
 msgstr ""
 
-#: data/gtk/game.blp:92 data/gtk/game.blp:111 data/gtk/preferences.blp:53
+#: data/gtk/game.blp:99 data/gtk/game.blp:118 data/gtk/preferences.blp:56
+#: data/gtk/window.blp:186
 msgid "Remove"
 msgstr ""
 
-#: data/gtk/game.blp:106
+#: data/gtk/game.blp:113 src/window.py:283
 msgid "Unhide"
 msgstr ""
 
@@ -188,6 +98,11 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:205 data/gtk/window.blp:249
+#: data/gtk/window.blp:312
+msgid "Search"
+msgstr "Căutare"
+
 #: data/gtk/help-overlay.blp:24
 msgid "Show preferences"
 msgstr ""
@@ -196,8 +111,8 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:34 src/main.py:178 src/main.py:234
-#: src/preferences.py:131
+#: data/gtk/help-overlay.blp:34 src/main.py:186 src/main.py:242
+#: src/preferences.py:133
 msgid "Undo"
 msgstr ""
 
@@ -225,7 +140,7 @@ msgstr ""
 msgid "Remove game"
 msgstr ""
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:229
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:235
 msgid "Behavior"
 msgstr ""
 
@@ -233,228 +148,417 @@ msgstr ""
 msgid "Exit After Launching Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:24
+#: data/gtk/preferences.blp:25
 msgid "Cover Image Launches Game"
 msgstr ""
 
-#: data/gtk/preferences.blp:25
+#: data/gtk/preferences.blp:26
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr ""
 
-#: data/gtk/preferences.blp:34 src/utils/create_details_window.py:99
+#: data/gtk/preferences.blp:36 src/utils/create_details_window.py:101
 msgid "Images"
 msgstr ""
 
-#: data/gtk/preferences.blp:37
+#: data/gtk/preferences.blp:39
 msgid "High Quality Images"
 msgstr ""
 
-#: data/gtk/preferences.blp:38
+#: data/gtk/preferences.blp:40
 msgid "Save game covers losslessly at the cost of storage"
 msgstr ""
 
-#: data/gtk/preferences.blp:47
+#: data/gtk/preferences.blp:50
 msgid "Danger Zone"
 msgstr ""
 
-#: data/gtk/preferences.blp:50
+#: data/gtk/preferences.blp:53
 msgid "Remove All Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:70
-msgid "Sources"
+#: data/gtk/preferences.blp:69 data/gtk/window.blp:427
+msgid "Import"
 msgstr ""
 
 #: data/gtk/preferences.blp:73
+msgid "Sources"
+msgstr ""
+
+#: data/gtk/preferences.blp:76
 msgid "Steam"
 msgstr ""
 
-#: data/gtk/preferences.blp:77
+#: data/gtk/preferences.blp:80
 msgid "Steam Install Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:150 data/gtk/preferences.blp:189
-#: data/gtk/preferences.blp:204
+#: data/gtk/preferences.blp:81 data/gtk/preferences.blp:119
+#: data/gtk/preferences.blp:153 data/gtk/preferences.blp:195
+#: data/gtk/preferences.blp:210
 msgid "Directory to use when importing games"
 msgstr ""
 
-#: data/gtk/preferences.blp:86 src/utils/importer.py:143
+#: data/gtk/preferences.blp:89 src/utils/importer.py:143
 msgid "Extra Steam Libraries"
 msgstr ""
 
-#: data/gtk/preferences.blp:87
+#: data/gtk/preferences.blp:90
 msgid "Select other directories where you have Steam games installed"
 msgstr ""
 
-#: data/gtk/preferences.blp:94
+#: data/gtk/preferences.blp:96
 msgid "Clear"
 msgstr ""
 
-#: data/gtk/preferences.blp:112
+#: data/gtk/preferences.blp:114
 msgid "Lutris"
 msgstr ""
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:118
 msgid "Lutris Install Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:126
+#: data/gtk/preferences.blp:128
 msgid "Lutris Cache Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:127
+#: data/gtk/preferences.blp:129
 msgid "Directory to use when importing game covers"
 msgstr ""
 
-#: data/gtk/preferences.blp:136
+#: data/gtk/preferences.blp:138
 msgid "Import Steam Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:145
+#: data/gtk/preferences.blp:148
 msgid "Heroic"
 msgstr ""
 
-#: data/gtk/preferences.blp:149
+#: data/gtk/preferences.blp:152
 msgid "Heroic Install Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:159
+#: data/gtk/preferences.blp:162
 msgid "Import Epic Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:167
+#: data/gtk/preferences.blp:171
 msgid "Import GOG Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:175
+#: data/gtk/preferences.blp:180
 msgid "Import Sideloaded Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:184
+#: data/gtk/preferences.blp:190
 msgid "Bottles"
 msgstr ""
 
-#: data/gtk/preferences.blp:188
+#: data/gtk/preferences.blp:194
 msgid "Bottles Install Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:199
+#: data/gtk/preferences.blp:205
 msgid "itch"
 msgstr ""
 
-#: data/gtk/preferences.blp:203
+#: data/gtk/preferences.blp:209
 msgid "itch Install Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:217
+#: data/gtk/preferences.blp:223
 msgid "SteamGridDB"
 msgstr ""
 
-#: data/gtk/preferences.blp:221
+#: data/gtk/preferences.blp:227
 msgid "Authentication"
 msgstr ""
 
-#: data/gtk/preferences.blp:224
+#: data/gtk/preferences.blp:230
 msgid "API Key"
 msgstr ""
 
-#: data/gtk/preferences.blp:232
+#: data/gtk/preferences.blp:238
 msgid "Use SteamGridDB"
 msgstr ""
 
-#: data/gtk/preferences.blp:233
+#: data/gtk/preferences.blp:239
 msgid "Download images when adding or importing games"
 msgstr ""
 
-#: data/gtk/preferences.blp:240
+#: data/gtk/preferences.blp:248
 msgid "Prefer Over Official Images"
 msgstr ""
 
+#: data/gtk/preferences.blp:257
+msgid "Prefer Animated Images"
+msgstr ""
+
+#: data/gtk/window.blp:6 src/utils/importer.py:91
+msgid "No Games Found"
+msgstr "Nu s-au găsit jocuri"
+
+#: data/gtk/window.blp:7
+msgid "Try a different search."
+msgstr "Încercați o altă căutare."
+
+#: data/gtk/window.blp:14
+msgid "No Games"
+msgstr "Fără jocuri"
+
+#: data/gtk/window.blp:15
+msgid "Use the + button to add games."
+msgstr "Folosiți butonul + pentru a adăuga jocuri."
+
+#: data/gtk/window.blp:22
+msgid "No Hidden Games"
+msgstr "Fără jocuri ascunse"
+
+#: data/gtk/window.blp:23
+msgid "Games you hide will appear here."
+msgstr "Jocurile pe care le ascundeți vor apărea aici."
+
+#: data/gtk/window.blp:44 data/gtk/window.blp:293
+msgid "Back"
+msgstr "Înapoi"
+
+#: data/gtk/window.blp:100
+msgid "Game Title"
+msgstr "Titlul jocului"
+
+#: data/gtk/window.blp:151 src/game.py:158
+msgid "Play"
+msgstr "Joacă"
+
+#: data/gtk/window.blp:235 data/gtk/window.blp:421
+msgid "Add Game"
+msgstr "Adăugați joc"
+
+#: data/gtk/window.blp:242 data/gtk/window.blp:305
+msgid "Main Menu"
+msgstr "Meniu principal"
+
+#: data/gtk/window.blp:300
+msgid "Hidden Games"
+msgstr "Jocuri ascunse"
+
+#: data/gtk/window.blp:360
+msgid "Sort"
+msgstr ""
+
+#: data/gtk/window.blp:363
+msgid "A-Z"
+msgstr ""
+
+#: data/gtk/window.blp:369
+msgid "Z-A"
+msgstr ""
+
+#: data/gtk/window.blp:375
+msgid "Newest"
+msgstr ""
+
+#: data/gtk/window.blp:381
+msgid "Oldest"
+msgstr ""
+
+#: data/gtk/window.blp:387
+msgid "Last Played"
+msgstr ""
+
+#: data/gtk/window.blp:394
+msgid "Show Hidden"
+msgstr ""
+
+#: data/gtk/window.blp:407
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: data/gtk/window.blp:412
+msgid "About Cartridges"
+msgstr ""
+
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:129
+#: src/main.py:137
 msgid "translator_credits"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:156
+#: src/main.py:164
 msgid "{} launched"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:174
+#: src/main.py:182
 msgid "{} hidden"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:177
+#: src/main.py:185
 msgid "{} unhidden"
 msgstr ""
 
 #. The variable is the title of the game
-#: src/main.py:233
+#: src/main.py:241
 msgid "{} removed"
 msgstr ""
 
-#: src/window.py:241
+#: src/window.py:262
 msgid "Today"
 msgstr ""
 
-#: src/window.py:243
+#: src/window.py:264
 msgid "Yesterday"
 msgstr ""
 
 #. The variable is the date when the game was added
-#: src/window.py:281
+#: src/window.py:310
 msgid "Added: {}"
 msgstr ""
 
-#: src/window.py:286
+#: src/window.py:315
 msgid "Never"
 msgstr ""
 
 #. The variable is the date when the game was last played
-#: src/window.py:290
+#: src/window.py:319
 msgid "Last played: {}"
 msgstr ""
 
-#: src/game.py:166
+#: src/game.py:156
 msgid "Details"
 msgstr ""
 
-#: src/preferences.py:53
+#: src/preferences.py:54
 msgid "Installation Not Found"
 msgstr ""
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:55
+#: src/preferences.py:56
 msgid "Select the {} configuration directory."
 msgstr ""
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:58
+#: src/preferences.py:59
 msgid "Select the {} data directory."
 msgstr ""
 
-#: src/preferences.py:60 src/preferences.py:238
+#: src/preferences.py:61 src/preferences.py:240
 msgid "Set Location"
 msgstr ""
 
-#: src/preferences.py:130
+#: src/preferences.py:132
 msgid "All games removed"
 msgstr ""
 
-#: src/preferences.py:235
+#: src/preferences.py:237
 msgid "Cache Not Found"
 msgstr ""
 
-#: src/preferences.py:236
+#: src/preferences.py:238
 msgid "Select the Lutris cache directory."
 msgstr ""
 
-#: src/preferences.py:335
+#: src/preferences.py:344
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
+msgstr ""
+
+#: src/utils/create_details_window.py:81
+msgid "Add New Game"
+msgstr ""
+
+#: src/utils/create_details_window.py:85
+msgid "Confirm"
+msgstr ""
+
+#: src/utils/create_details_window.py:96
+msgid "Apply"
+msgstr ""
+
+#: src/utils/create_details_window.py:130
+msgid "The title of the game"
+msgstr ""
+
+#: src/utils/create_details_window.py:135
+msgid "Developer"
+msgstr ""
+
+#: src/utils/create_details_window.py:136
+msgid "The developer or publisher (optional)"
+msgstr ""
+
+#. Translate this string as you would translate "file"
+#: src/utils/create_details_window.py:147
+msgid "file.txt"
+msgstr ""
+
+#. As in software
+#: src/utils/create_details_window.py:149
+msgid "program"
+msgstr ""
+
+#. Translate this string as you would translate "path to {}"
+#: src/utils/create_details_window.py:154
+#: src/utils/create_details_window.py:156
+msgid "C:\\path\\to\\{}"
+msgstr ""
+
+#. Translate this string as you would translate "path to {}"
+#: src/utils/create_details_window.py:160
+#: src/utils/create_details_window.py:162
+msgid "/path/to/{}"
+msgstr ""
+
+#: src/utils/create_details_window.py:166
+msgid ""
+"To launch the executable \"{}\", use the command:\n"
+"\n"
+"<tt>\"{}\"</tt>\n"
+"\n"
+"To open the file \"{}\" with the default application, use:\n"
+"\n"
+"<tt>{} \"{}\"</tt>\n"
+"\n"
+"If the path contains spaces, make sure to wrap it in double quotes!"
+msgstr ""
+
+#: src/utils/create_details_window.py:189
+msgid "Executable"
+msgstr ""
+
+#: src/utils/create_details_window.py:190
+msgid "File to open or command to run when launching the game"
+msgstr ""
+
+#: src/utils/create_details_window.py:202
+msgid "Cancel"
+msgstr ""
+
+#: src/utils/create_details_window.py:259
+#: src/utils/create_details_window.py:269
+#: src/utils/create_details_window.py:275
+msgid "Couldn't Add Game"
+msgstr ""
+
+#: src/utils/create_details_window.py:261
+#: src/utils/create_details_window.py:299
+#: src/utils/create_details_window.py:307
+msgid "Couldn't Apply Preferences"
+msgstr ""
+
+#: src/utils/create_details_window.py:269
+#: src/utils/create_details_window.py:300
+msgid "Game title cannot be empty."
+msgstr ""
+
+#: src/utils/create_details_window.py:275
+#: src/utils/create_details_window.py:308
+msgid "Executable cannot be empty."
+msgstr ""
+
+#: src/utils/create_dialog.py:25
+msgid "Dismiss"
 msgstr ""
 
 #: src/utils/importer.py:42
@@ -486,7 +590,7 @@ msgstr ""
 msgid "Successfully imported {} games."
 msgstr ""
 
-#: src/utils/importer.py:120
+#: src/utils/importer.py:120 src/utils/steamgriddb.py:113
 msgid "Couldn't Connect to SteamGridDB"
 msgstr ""
 
@@ -494,103 +598,6 @@ msgstr ""
 msgid ""
 "Looks like you have multiple Steam libraries. Would you like to add them in "
 "preferences?"
-msgstr ""
-
-#: src/utils/create_details_window.py:78
-msgid "Add New Game"
-msgstr ""
-
-#: src/utils/create_details_window.py:83
-msgid "Confirm"
-msgstr ""
-
-#: src/utils/create_details_window.py:94
-msgid "Apply"
-msgstr ""
-
-#: src/utils/create_details_window.py:128
-msgid "The title of the game"
-msgstr ""
-
-#: src/utils/create_details_window.py:133
-msgid "Developer"
-msgstr ""
-
-#: src/utils/create_details_window.py:134
-msgid "The developer or publisher (optional)"
-msgstr ""
-
-#. Translate this string as you would translate "file"
-#: src/utils/create_details_window.py:145
-msgid "file.txt"
-msgstr ""
-
-#. As in software
-#: src/utils/create_details_window.py:147
-msgid "program"
-msgstr ""
-
-#. Translate this string as you would translate "path to {}"
-#: src/utils/create_details_window.py:152
-#: src/utils/create_details_window.py:154
-msgid "C:\\path\\to\\{}"
-msgstr ""
-
-#. Translate this string as you would translate "path to {}"
-#: src/utils/create_details_window.py:158
-#: src/utils/create_details_window.py:160
-msgid "/path/to/{}"
-msgstr ""
-
-#: src/utils/create_details_window.py:164
-msgid ""
-"To launch the executable \"{}\", use the command:\n"
-"\n"
-"<tt>\"{}\"</tt>\n"
-"\n"
-"To open the file \"{}\" with the default application, use:\n"
-"\n"
-"<tt>{} \"{}\"</tt>\n"
-"\n"
-"If the path contains spaces, make sure to wrap it in double quotes!"
-msgstr ""
-
-#: src/utils/create_details_window.py:187
-msgid "Executable"
-msgstr ""
-
-#: src/utils/create_details_window.py:188
-msgid "File to open or command to run when launching the game"
-msgstr ""
-
-#: src/utils/create_details_window.py:200
-msgid "Cancel"
-msgstr ""
-
-#: src/utils/create_details_window.py:252
-#: src/utils/create_details_window.py:262
-#: src/utils/create_details_window.py:268
-msgid "Couldn't Add Game"
-msgstr ""
-
-#: src/utils/create_details_window.py:254
-#: src/utils/create_details_window.py:292
-#: src/utils/create_details_window.py:300
-msgid "Couldn't Apply Preferences"
-msgstr ""
-
-#: src/utils/create_details_window.py:262
-#: src/utils/create_details_window.py:293
-msgid "Game title cannot be empty."
-msgstr ""
-
-#: src/utils/create_details_window.py:268
-#: src/utils/create_details_window.py:301
-msgid "Executable cannot be empty."
-msgstr ""
-
-#: src/utils/create_dialog.py:25
-msgid "Dismiss"
 msgstr ""
 
 #~ msgid "Launch your games"
