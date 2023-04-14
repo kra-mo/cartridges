@@ -20,9 +20,9 @@
 import json
 
 
-def save_game(parent_widget, game):
-    parent_widget.games_dir.mkdir(parents=True, exist_ok=True)
+def save_game(win, game):
+    win.games_dir.mkdir(parents=True, exist_ok=True)
 
-    (parent_widget.games_dir / f'{game["game_id"]}.json').write_text(
+    (win.games_dir / f'{game["game_id"]}.json').write_text(
         json.dumps(game, indent=4, sort_keys=True), "utf-8"
     )

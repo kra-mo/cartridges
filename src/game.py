@@ -45,10 +45,10 @@ class Game(Gtk.Box):
     game_options = Gtk.Template.Child()
     hidden_game_options = Gtk.Template.Child()
 
-    def __init__(self, parent_widget, data, **kwargs):
+    def __init__(self, win, data, **kwargs):
         super().__init__(**kwargs)
 
-        self.parent_widget = parent_widget
+        self.win = win
         self.added = data["added"]
         self.executable = data["executable"]
         self.game_id = data["game_id"]
@@ -76,7 +76,7 @@ class Game(Gtk.Box):
         self.event_contoller_motion.connect("enter", self.show_play)
         self.event_contoller_motion.connect("leave", self.hide_play)
 
-        self.parent_widget.schema.connect("changed", self.schema_changed)
+        self.win.schema.connect("changed", self.schema_changed)
 
         if self.hidden:
             self.menu_button.set_menu_model(self.hidden_game_options)
@@ -108,19 +108,19 @@ class Game(Gtk.Box):
 
     def toggle_hidden(self):
         data = json.loads(
-            (self.parent_widget.games_dir / f"{self.game_id}.json").read_text("utf-8")
+            (self.win.games_dir / f"{self.game_id}.json").read_text("utf-8")
         )
 
         data["hidden"] = not data["hidden"]
 
-        save_game(self.parent_widget, data)
+        save_game(self.win, data)
 
     def get_cover_path(self):
-        cover_path = self.parent_widget.covers_dir / f"{self.game_id}.gif"
+        cover_path = self.win.covers_dir / f"{self.game_id}.gif"
         if cover_path.is_file():
             return cover_path
 
-        cover_path = self.parent_widget.covers_dir / f"{self.game_id}.tiff"
+        cover_path = self.win.covers_dir / f"{self.game_id}.tiff"
         if cover_path.is_file():
             return cover_path
 
@@ -136,23 +136,23 @@ class Game(Gtk.Box):
             self.title_revealer.set_reveal_child(True)
 
     def launch_game(self, _widget, *_unused):
-        self.parent_widget.set_active_game(None, None, self.game_id)
-        self.parent_widget.get_application().on_launch_game_action(None)
+        self.win.set_active_game(None, None, self.game_id)
+        self.win.get_application().on_launch_game_action(None)
 
     def cover_button_clicked(self, _widget):
-        if self.parent_widget.schema.get_boolean("cover-launches-game"):
+        if self.win.schema.get_boolean("cover-launches-game"):
             self.launch_game(None)
         else:
-            self.parent_widget.show_details_view(None, self.game_id)
+            self.win.show_details_view(None, self.game_id)
 
     def play_button_clicked(self, _widget):
-        if self.parent_widget.schema.get_boolean("cover-launches-game"):
-            self.parent_widget.show_details_view(None, self.game_id)
+        if self.win.schema.get_boolean("cover-launches-game"):
+            self.win.show_details_view(None, self.game_id)
         else:
             self.launch_game(None)
 
     def set_play_label(self):
-        if self.parent_widget.schema.get_boolean("cover-launches-game"):
+        if self.win.schema.get_boolean("cover-launches-game"):
             self.play_button.set_label(_("Details"))
         else:
             self.play_button.set_label(_("Play"))

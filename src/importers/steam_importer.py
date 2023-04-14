@@ -42,7 +42,7 @@ def update_values_from_data(content, values):
     return values
 
 
-def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_dir):
+def get_game(task, datatypes, current_time, win, appmanifest, steam_dir):
     values = {}
 
     data = appmanifest.read_text("utf-8")
@@ -56,10 +56,7 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
 
     values["game_id"] = f'steam_{values["appid"]}'
 
-    if (
-        values["game_id"] in parent_widget.games
-        and not parent_widget.games[values["game_id"]].removed
-    ):
+    if values["game_id"] in win.games and not win.games[values["game_id"]].removed:
         task.return_value((None, None))
         return
 
@@ -95,18 +92,18 @@ def get_game(task, datatypes, current_time, parent_widget, appmanifest, steam_di
     task.return_value((values, image_path if image_path.exists() else None))
 
 
-def get_games_async(parent_widget, appmanifests, steam_dir, importer):
+def get_games_async(win, appmanifests, steam_dir, importer):
     datatypes = ["appid", "name"]
     current_time = int(time())
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
-    def create_func(datatypes, current_time, parent_widget, appmanifest, steam_dir):
+    def create_func(datatypes, current_time, win, appmanifest, steam_dir):
         def wrapper(task, *_unused):
             get_game(
                 task,
                 datatypes,
                 current_time,
-                parent_widget,
+                win,
                 appmanifest,
                 steam_dir,
             )
@@ -121,12 +118,12 @@ def get_games_async(parent_widget, appmanifests, steam_dir, importer):
     for appmanifest in appmanifests:
         task = Gio.Task.new(None, None, update_games)
         task.run_in_thread(
-            create_func(datatypes, current_time, parent_widget, appmanifest, steam_dir)
+            create_func(datatypes, current_time, win, appmanifest, steam_dir)
         )
 
 
-def steam_importer(parent_widget):
-    schema = parent_widget.schema
+def steam_importer(win):
+    schema = win.schema
     location_key = "steam-location"
     steam_dir = Path(schema.get_string(location_key)).expanduser()
     check = "steamapps"
@@ -135,8 +132,8 @@ def steam_importer(parent_widget):
         subdirs = ("steam", "Steam")
 
         locations = (
-            Path.home() / ".steam" / "steam",
-            parent_widget.data_dir / "Steam",
+            Path.home() / ".steam",
+            win.data_dir / "Steam",
             Path.home() / ".var" / "app" / "com.valvesoftware.Steam" / "data" / "Steam",
         )
 
@@ -161,8 +158,8 @@ def steam_importer(parent_widget):
             if open_file.is_file() and "appmanifest" in open_file.name:
                 appmanifests.append(open_file)
 
-    importer = parent_widget.importer
+    importer = win.importer
     importer.total_queue += len(appmanifests)
     importer.queue += len(appmanifests)
 
-    get_games_async(parent_widget, appmanifests, directory, importer)
+    get_games_async(win, appmanifests, directory, importer)

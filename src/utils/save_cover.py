@@ -43,32 +43,32 @@ def resize_animation(cover_path):
 
 
 def save_cover(
-    parent_widget,
+    win,
     game_id,
     cover_path=None,
     pixbuf=None,
     animation_path=None,
 ):
-    parent_widget.covers_dir.mkdir(parents=True, exist_ok=True)
+    win.covers_dir.mkdir(parents=True, exist_ok=True)
 
     # Remove previous covers
-    (parent_widget.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
-    (parent_widget.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
+    (win.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
+    (win.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
 
     if animation_path:
-        copyfile(animation_path, parent_widget.covers_dir / f"{game_id}.gif")
+        copyfile(animation_path, win.covers_dir / f"{game_id}.gif")
         return
 
     if not pixbuf:
         if not cover_path:
             return
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            str(cover_path), *parent_widget.image_size, False
+            str(cover_path), *win.image_size, False
         )
 
     pixbuf.savev(
-        str(parent_widget.covers_dir / f"{game_id}.tiff"),
+        str(win.covers_dir / f"{game_id}.tiff"),
         "tiff",
         ["compression"],
-        ["8"] if parent_widget.schema.get_boolean("high-quality-images") else ["7"],
+        ["8"] if win.schema.get_boolean("high-quality-images") else ["7"],
     )

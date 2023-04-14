@@ -29,15 +29,12 @@ from gi.repository import GdkPixbuf, Gio
 from .check_install import check_install
 
 
-def get_game(task, current_time, parent_widget, row):
+def get_game(task, current_time, win, row):
     values = {}
 
     values["game_id"] = f"itch_{row[0]}"
 
-    if (
-        values["game_id"] in parent_widget.games
-        and not parent_widget.games[values["game_id"]].removed
-    ):
+    if values["game_id"] in win.games and not win.games[values["game_id"]].removed:
         task.return_value((None, None))
         return
 
@@ -64,23 +61,22 @@ def get_game(task, current_time, parent_widget, row):
 
         game_cover = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
             tmp_file.read(), 2, 2, False
-        ).scale_simple(*parent_widget.image_size, GdkPixbuf.InterpType.BILINEAR)
+        ).scale_simple(*win.image_size, GdkPixbuf.InterpType.BILINEAR)
 
         itch_pixbuf = GdkPixbuf.Pixbuf.new_from_stream(tmp_file.read())
         itch_pixbuf = itch_pixbuf.scale_simple(
-            parent_widget.image_size[0],
-            itch_pixbuf.get_height()
-            * (parent_widget.image_size[0] / itch_pixbuf.get_width()),
+            win.image_size[0],
+            itch_pixbuf.get_height() * (win.image_size[0] / itch_pixbuf.get_width()),
             GdkPixbuf.InterpType.BILINEAR,
         )
         itch_pixbuf.composite(
             game_cover,
             0,
-            (parent_widget.image_size[1] - itch_pixbuf.get_height()) / 2,
+            (win.image_size[1] - itch_pixbuf.get_height()) / 2,
             itch_pixbuf.get_width(),
             itch_pixbuf.get_height(),
             0,
-            (parent_widget.image_size[1] - itch_pixbuf.get_height()) / 2,
+            (win.image_size[1] - itch_pixbuf.get_height()) / 2,
             1.0,
             1.0,
             GdkPixbuf.InterpType.BILINEAR,
@@ -92,16 +88,16 @@ def get_game(task, current_time, parent_widget, row):
     task.return_value((values, game_cover))
 
 
-def get_games_async(parent_widget, rows, importer):
+def get_games_async(win, rows, importer):
     current_time = int(time())
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
-    def create_func(current_time, parent_widget, row):
+    def create_func(current_time, win, row):
         def wrapper(task, *_unused):
             get_game(
                 task,
                 current_time,
-                parent_widget,
+                win,
                 row,
             )
 
@@ -114,11 +110,11 @@ def get_games_async(parent_widget, rows, importer):
 
     for row in rows:
         task = Gio.Task.new(None, None, update_games)
-        task.run_in_thread(create_func(current_time, parent_widget, row))
+        task.run_in_thread(create_func(current_time, win, row))
 
 
-def itch_importer(parent_widget):
-    schema = parent_widget.schema
+def itch_importer(win):
+    schema = win.schema
     location_key = "itch-location"
     itch_dir = Path(schema.get_string(location_key)).expanduser()
     check = Path("db") / "butler.db"
@@ -126,7 +122,7 @@ def itch_importer(parent_widget):
     if not (itch_dir / check).is_file():
         locations = (
             Path.home() / ".var" / "app" / "io.itch.itch" / "config" / "itch",
-            parent_widget.config_dir / "itch",
+            win.config_dir / "itch",
         )
 
         if os.name == "nt":
@@ -137,7 +133,7 @@ def itch_importer(parent_widget):
 
     database_path = (Path(schema.get_string(location_key)) / "db").expanduser()
 
-    db_cache_dir = parent_widget.cache_dir / "cartridges" / "itch"
+    db_cache_dir = win.cache_dir / "cartridges" / "itch"
     db_cache_dir.mkdir(parents=True, exist_ok=True)
 
     # Copy the file because sqlite3 doesn't like databases in /run/user/
@@ -169,8 +165,8 @@ def itch_importer(parent_widget):
     # No need to unlink temp files as they disappear when the connection is closed
     database_tmp_path.unlink(missing_ok=True)
 
-    importer = parent_widget.importer
+    importer = win.importer
     importer.total_queue += len(rows)
     importer.queue += len(rows)
 
-    get_games_async(parent_widget, rows, importer)
+    get_games_async(win, rows, importer)

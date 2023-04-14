@@ -25,8 +25,8 @@ from time import time
 from .check_install import check_install
 
 
-def lutris_importer(parent_widget):
-    schema = parent_widget.schema
+def lutris_importer(win):
+    schema = win.schema
     location_key = "lutris-location"
     lutris_dir = Path(schema.get_string(location_key)).expanduser()
     check = "pga.db"
@@ -34,7 +34,7 @@ def lutris_importer(parent_widget):
     if not (lutris_dir / check).is_file():
         locations = (
             Path.home() / ".var" / "app" / "net.lutris.Lutris" / "data" / "lutris",
-            parent_widget.data_dir / "lutris",
+            win.data_dir / "lutris",
         )
 
         lutris_dir = check_install(check, locations, (schema, location_key))
@@ -48,7 +48,7 @@ def lutris_importer(parent_widget):
     if not (cache_dir / cache_check).exists():
         cache_locations = (
             Path.home() / ".var" / "app" / "net.lutris.Lutris" / "cache" / "lutris",
-            parent_widget.cache_dir / "lutris",
+            win.cache_dir / "lutris",
         )
 
         cache_dir = check_install(check, cache_locations, (schema, location_key))
@@ -58,7 +58,7 @@ def lutris_importer(parent_widget):
     database_path = (Path(schema.get_string(location_key))).expanduser()
     cache_dir = Path(schema.get_string(cache_key)).expanduser()
 
-    db_cache_dir = parent_widget.cache_dir / "cartridges" / "lutris"
+    db_cache_dir = win.cache_dir / "cartridges" / "lutris"
     db_cache_dir.mkdir(parents=True, exist_ok=True)
 
     # Copy the file because sqlite3 doesn't like databases in /run/user/
@@ -92,7 +92,7 @@ def lutris_importer(parent_widget):
 
     current_time = int(time())
 
-    importer = parent_widget.importer
+    importer = win.importer
     importer.total_queue += len(rows)
     importer.queue += len(rows)
 
@@ -101,10 +101,7 @@ def lutris_importer(parent_widget):
 
         values["game_id"] = f"lutris_{row[3]}_{row[0]}"
 
-        if (
-            values["game_id"] in parent_widget.games
-            and not parent_widget.games[values["game_id"]].removed
-        ):
+        if values["game_id"] in win.games and not win.games[values["game_id"]].removed:
             importer.save_game()
             continue
 

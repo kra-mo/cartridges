@@ -26,8 +26,8 @@ from time import time
 from .check_install import check_install
 
 
-def heroic_importer(parent_widget):
-    schema = parent_widget.schema
+def heroic_importer(win):
+    schema = win.schema
     location_key = "heroic-location"
     heroic_dir = Path(schema.get_string(location_key)).expanduser()
     check = "config.json"
@@ -40,7 +40,7 @@ def heroic_importer(parent_widget):
             / "com.heroicgameslauncher.hgl"
             / "config"
             / "heroic",
-            parent_widget.config_dir / "heroic",
+            win.config_dir / "heroic",
         )
 
         if os.name == "nt":
@@ -50,12 +50,12 @@ def heroic_importer(parent_widget):
         if not heroic_dir:
             return
 
-    schema = parent_widget.schema
+    schema = win.schema
     check = "config.json"
 
     current_time = int(time())
 
-    importer = parent_widget.importer
+    importer = win.importer
 
     # Import Epic games
     if not schema.get_boolean("heroic-import-epic"):
@@ -80,8 +80,8 @@ def heroic_importer(parent_widget):
                 values["game_id"] = f"heroic_epic_{app_name}"
 
                 if (
-                    values["game_id"] in parent_widget.games
-                    and not parent_widget.games[values["game_id"]].removed
+                    values["game_id"] in win.games
+                    and not win.games[values["game_id"]].removed
                 ):
                     importer.save_game()
                     continue
@@ -128,8 +128,8 @@ def heroic_importer(parent_widget):
             values["game_id"] = f"heroic_gog_{app_name}"
 
             if (
-                values["game_id"] in parent_widget.games
-                and not parent_widget.games[values["game_id"]].removed
+                values["game_id"] in win.games
+                and not win.games[values["game_id"]].removed
             ):
                 importer.save_game()
                 continue
@@ -176,8 +176,8 @@ def heroic_importer(parent_widget):
             values["game_id"] = f"heroic_sideload_{app_name}"
 
             if (
-                values["game_id"] in parent_widget.games
-                and not parent_widget.games[values["game_id"]].removed
+                values["game_id"] in win.games
+                and not win.games[values["game_id"]].removed
             ):
                 importer.save_game()
                 continue

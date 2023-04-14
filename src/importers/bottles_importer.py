@@ -25,8 +25,8 @@ import yaml
 from .check_install import check_install
 
 
-def bottles_importer(parent_widget):
-    schema = parent_widget.schema
+def bottles_importer(win):
+    schema = win.schema
     location_key = "bottles-location"
     bottles_dir = Path(schema.get_string(location_key)).expanduser()
     check = "library.yml"
@@ -39,7 +39,7 @@ def bottles_importer(parent_widget):
             / "com.usebottles.bottles"
             / "data"
             / "bottles",
-            parent_widget.data_dir / "bottles",
+            win.data_dir / "bottles",
         )
 
         bottles_dir = check_install(check, locations, (schema, location_key))
@@ -52,7 +52,7 @@ def bottles_importer(parent_widget):
 
     library = yaml.load(data, Loader=yaml.Loader)
 
-    importer = parent_widget.importer
+    importer = win.importer
     importer.total_queue += len(library)
     importer.queue += len(library)
 
@@ -62,10 +62,7 @@ def bottles_importer(parent_widget):
 
         values["game_id"] = f'bottles_{game["id"]}'
 
-        if (
-            values["game_id"] in parent_widget.games
-            and not parent_widget.games[values["game_id"]].removed
-        ):
+        if values["game_id"] in win.games and not win.games[values["game_id"]].removed:
             importer.save_game()
             continue
 

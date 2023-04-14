@@ -8,8 +8,8 @@ from .save_cover import save_cover, resize_animation
 
 
 class SGDBSave:
-    def __init__(self, parent_widget, games, importer=None):
-        self.parent_widget = parent_widget
+    def __init__(self, win, games, importer=None):
+        self.win = win
         self.importer = importer
         self.exception = None
 
@@ -27,19 +27,19 @@ class SGDBSave:
             Gio.Task.new(None, None, self.task_done).run_in_thread(create_func(game))
 
     def update_cover(self, task, game):
-        if self.parent_widget.schema.get_boolean("sgdb") and (
-            self.parent_widget.schema.get_boolean("sgdb-prefer")
+        if self.win.schema.get_boolean("sgdb") and (
+            self.win.schema.get_boolean("sgdb-prefer")
             or (
-                not (self.parent_widget.covers_dir / f"{game[0]}.gif").is_file()
-                and not (self.parent_widget.covers_dir / f"{game[0]}.tiff").is_file()
+                not (self.win.covers_dir / f"{game[0]}.gif").is_file()
+                and not (self.win.covers_dir / f"{game[0]}.tiff").is_file()
             )
         ):
             if not self.importer:
-                self.parent_widget.games[game[0]].set_loading(1)
+                self.win.games[game[0]].set_loading(1)
 
             url = "https://www.steamgriddb.com/api/v2/"
             headers = {
-                "Authorization": f'Bearer {self.parent_widget.schema.get_string("sgdb-key")}'
+                "Authorization": f'Bearer {self.win.schema.get_string("sgdb-key")}'
             }
 
             try:
@@ -63,7 +63,7 @@ class SGDBSave:
             response = None
 
             try:
-                if self.parent_widget.schema.get_boolean("sgdb-animated"):
+                if self.win.schema.get_boolean("sgdb-animated"):
                     try:
                         grid = requests.get(
                             f'{url}grids/game/{search_result.json()["data"][0]["id"]}?dimensions=600x900&types=animated',
@@ -91,7 +91,7 @@ class SGDBSave:
             Path(tmp_file.get_path()).write_bytes(response.content)
 
             save_cover(
-                self.parent_widget,
+                self.win,
                 game[0],
                 tmp_file.get_path(),
                 animation_path=resize_animation(tmp_file.get_path())
@@ -109,7 +109,7 @@ class SGDBSave:
 
             if self.exception:
                 create_dialog(
-                    self.parent_widget,
+                    self.win,
                     _("Couldn't Connect to SteamGridDB"),
                     self.exception,
                     "open_preferences",
@@ -117,10 +117,8 @@ class SGDBSave:
                 ).connect("response", self.response)
 
         game_id = result.propagate_value()[1]
-        self.parent_widget.update_games([game_id])
+        self.win.update_games([game_id])
 
     def response(self, _widget, response):
         if response == "open_preferences":
-            self.parent_widget.get_application().on_preferences_action(
-                None, page_name="sgdb"
-            )
+            self.win.get_application().on_preferences_action(None, page_name="sgdb")

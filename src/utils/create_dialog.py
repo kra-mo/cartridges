@@ -20,8 +20,8 @@
 from gi.repository import Adw
 
 
-def create_dialog(parent_widget, heading, body, extra_option=None, extra_label=None):
-    dialog = Adw.MessageDialog.new(parent_widget, heading, body)
+def create_dialog(win, heading, body, extra_option=None, extra_label=None):
+    dialog = Adw.MessageDialog.new(win, heading, body)
     dialog.add_response("dismiss", _("Dismiss"))
 
     if extra_option:

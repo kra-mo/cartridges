@@ -28,8 +28,8 @@ from .steamgriddb import SGDBSave
 
 
 class Importer:
-    def __init__(self, parent_widget):
-        self.parent_widget = parent_widget
+    def __init__(self, win):
+        self.win = win
         self.total_queue = 0
         self.queue = 0
         self.games_no = 0
@@ -48,7 +48,7 @@ class Importer:
             modal=True,
             default_width=350,
             default_height=-1,
-            transient_for=parent_widget,
+            transient_for=win,
             deletable=False,
         )
 
@@ -56,10 +56,10 @@ class Importer:
 
     def save_game(self, values=None, cover_path=None, pixbuf=None):
         if values:
-            save_game(self.parent_widget, values)
+            save_game(self.win, values)
 
             if cover_path or pixbuf:
-                save_cover(self.parent_widget, values["game_id"], cover_path, pixbuf)
+                save_cover(self.win, values["game_id"], cover_path, pixbuf)
 
             self.games.add((values["game_id"], values["name"]))
 
@@ -76,7 +76,7 @@ class Importer:
                 self.queue = len(self.games)
                 self.import_statuspage.set_title(_("Importing Covers…"))
                 self.update_progressbar()
-                SGDBSave(self.parent_widget, self.games, self)
+                SGDBSave(self.win, self.games, self)
             else:
                 self.done()
 
@@ -87,7 +87,7 @@ class Importer:
 
             if self.games_no == 0:
                 create_dialog(
-                    self.parent_widget,
+                    self.win,
                     _("No Games Found"),
                     _("No new games were found on your system."),
                     "open_preferences",
@@ -96,14 +96,14 @@ class Importer:
 
             elif self.games_no == 1:
                 create_dialog(
-                    self.parent_widget,
+                    self.win,
                     _("Game Imported"),
                     _("Successfully imported 1 game."),
                 ).connect("response", self.response, "import")
             elif self.games_no > 1:
                 games_no = self.games_no
                 create_dialog(
-                    self.parent_widget,
+                    self.win,
                     _("Games Imported"),
                     # The variable is the number of games
                     _("Successfully imported {} games.").format(games_no),
@@ -111,12 +111,12 @@ class Importer:
 
     def response(self, _widget, response, page_name=None, expander_row=None):
         if response == "open_preferences":
-            self.parent_widget.get_application().on_preferences_action(
+            self.win.get_application().on_preferences_action(
                 None, page_name=page_name, expander_row=expander_row
             )
         elif self.sgdb_exception:
             create_dialog(
-                self.parent_widget,
+                self.win,
                 _("Couldn't Connect to SteamGridDB"),
                 self.sgdb_exception,
                 "open_preferences",
@@ -124,12 +124,12 @@ class Importer:
             ).connect("response", self.response, "sgdb")
             self.sgdb_exception = None
         elif (
-            self.parent_widget.schema.get_boolean("steam")
-            and self.parent_widget.schema.get_boolean("steam-extra-dirs-hint")
-            and not self.parent_widget.schema.get_strv("steam-extra-dirs")
+            self.win.schema.get_boolean("steam")
+            and self.win.schema.get_boolean("steam-extra-dirs-hint")
+            and not self.win.schema.get_strv("steam-extra-dirs")
         ):
             steam_library_path = (
-                Path(self.parent_widget.schema.get_string("steam-location"))
+                Path(self.win.schema.get_string("steam-location"))
                 / "steamapps"
                 / "libraryfolders.vdf"
             )
@@ -137,9 +137,9 @@ class Importer:
                 steam_library_path.exists()
                 and steam_library_path.read_text("utf-8").count('"path"') > 1
             ):
-                self.parent_widget.schema.set_boolean("steam-extra-dirs-hint", False)
+                self.win.schema.set_boolean("steam-extra-dirs-hint", False)
                 create_dialog(
-                    self.parent_widget,
+                    self.win,
                     _("Extra Steam Libraries"),
                     _(
                         "Looks like you have multiple Steam libraries. Would you like to add them in preferences?"

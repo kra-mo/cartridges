@@ -50,7 +50,7 @@ class ImportPreferences:
 
                 if not any((path / current_path).exists() for current_path in paths):
                     create_dialog(
-                        window.parent_widget,
+                        window.win,
                         _("Installation Not Found"),
                         # The variable is the name of the game launcher
                         _("Select the {} configuration directory.").format(name)
@@ -122,12 +122,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
 
-    def __init__(self, parent_widget, **kwargs):
+    def __init__(self, win, **kwargs):
         super().__init__(**kwargs)
-        self.schema = parent_widget.schema
-        self.parent_widget = parent_widget
+        self.schema = win.schema
+        self.win = win
         self.file_chooser = Gtk.FileDialog()
-        self.set_transient_for(parent_widget)
+        self.set_transient_for(win)
 
         self.toast = Adw.Toast.new(_("All games removed"))
         self.toast.set_button_label(_("Undo"))
@@ -233,7 +233,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
                 if not (path / "coverart").exists():
                     create_dialog(
-                        self.parent_widget,
+                        self.win,
                         _("Cache Not Found"),
                         _("Select the Lutris cache directory."),
                         "choose_folder",
@@ -348,18 +348,16 @@ class PreferencesWindow(Adw.PreferencesWindow):
         )
 
     def choose_folder(self, _widget, function):
-        self.file_chooser.select_folder(self.parent_widget, None, function, None)
+        self.file_chooser.select_folder(self.win, None, function, None)
 
     def undo_remove_all(self, _widget, _unused):
-        deleted_covers_dir = (
-            self.parent_widget.cache_dir / "cartridges" / "deleted_covers"
-        )
+        deleted_covers_dir = self.win.cache_dir / "cartridges" / "deleted_covers"
 
         for game_id in self.removed_games:
-            data = get_games(self.parent_widget, [game_id])[game_id]
+            data = get_games(self.win, [game_id])[game_id]
             if "removed" in data:
                 data.pop("removed")
-                save_game(self.parent_widget, data)
+                save_game(self.win, data)
 
                 cover_path = deleted_covers_dir / f"{game_id}.tiff"
                 if not cover_path.is_file():
@@ -367,36 +365,31 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 if not cover_path.is_file():
                     continue
 
-                move(cover_path, self.parent_widget.covers_dir, copyfile)
+                move(cover_path, self.win.covers_dir, copyfile)
 
-        self.parent_widget.update_games(self.removed_games)
+        self.win.update_games(self.removed_games)
         self.removed_games = []
         self.toast.dismiss()
 
     def remove_all_games(self, _widget):
-        deleted_covers_dir = (
-            self.parent_widget.cache_dir / "cartridges" / "deleted_covers"
-        )
+        deleted_covers_dir = self.win.cache_dir / "cartridges" / "deleted_covers"
         deleted_covers_dir.mkdir(parents=True, exist_ok=True)
 
-        for game in get_games(self.parent_widget).values():
+        for game in get_games(self.win).values():
             if "removed" not in game:
                 self.removed_games.append(game["game_id"])
                 game["removed"] = True
-                save_game(self.parent_widget, game)
+                save_game(self.win, game)
 
-                cover_path = self.parent_widget.games[game["game_id"]].get_cover_path()
+                cover_path = self.win.games[game["game_id"]].get_cover_path()
                 if not cover_path:
                     continue
 
                 if cover_path.is_file():
                     move(cover_path, deleted_covers_dir, copyfile)
 
-        self.parent_widget.update_games(self.parent_widget.games)
-        if (
-            self.parent_widget.stack.get_visible_child()
-            == self.parent_widget.details_view
-        ):
-            self.parent_widget.on_go_back_action(None, None)
+        self.win.update_games(self.win.games)
+        if self.win.stack.get_visible_child() == self.win.details_view:
+            self.win.on_go_back_action(None, None)
 
         self.add_toast(self.toast)

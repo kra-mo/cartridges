@@ -31,12 +31,12 @@ from .save_game import save_game
 from .steamgriddb import SGDBSave
 
 
-def create_details_window(parent_widget, game_id=None):
+def create_details_window(win, game_id=None):
     window = Adw.Window(
-        modal=True, default_width=500, default_height=-1, transient_for=parent_widget
+        modal=True, default_width=500, default_height=-1, transient_for=win
     )
 
-    games = parent_widget.games
+    games = win.games
     cover_deleted = False
 
     cover_button_edit = Gtk.Button(
@@ -85,7 +85,7 @@ def create_details_window(parent_widget, game_id=None):
         apply_button = Gtk.Button.new_with_label(_("Confirm"))
     else:
         window.set_title(_("Edit Game Details"))
-        game_cover.new_pixbuf(path=parent_widget.games[game_id].get_cover_path())
+        game_cover.new_pixbuf(path=win.games[game_id].get_cover_path())
         developer = Gtk.Entry.new_with_buffer(
             Gtk.EntryBuffer.new(games[game_id].developer, -1)
         )
@@ -95,7 +95,7 @@ def create_details_window(parent_widget, game_id=None):
         )
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
-        if parent_widget.games[game_id].get_cover_path():
+        if win.games[game_id].get_cover_path():
             cover_button_delete_revealer.set_reveal_child(True)
 
     image_filter = Gtk.FileFilter(name=_("Images"))
@@ -314,33 +314,33 @@ def create_details_window(parent_widget, game_id=None):
         values["executable"] = final_executable_split
 
         if cover_deleted:
-            (parent_widget.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
-            (parent_widget.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
+            (win.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
+            (win.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
 
         save_cover(
-            parent_widget,
+            win,
             game_id,
             None,
             game_cover.get_pixbuf(),
             game_cover.get_animation(),
         )
 
-        path = parent_widget.games_dir / f"{game_id}.json"
+        path = win.games_dir / f"{game_id}.json"
 
         if path.exists():
             data = json.loads(path.read_text("utf-8"))
             data.update(values)
-            save_game(parent_widget, data)
+            save_game(win, data)
         else:
-            save_game(parent_widget, values)
+            save_game(win, values)
 
         if game_cover.get_pixbuf():
-            parent_widget.update_games([game_id])
+            win.update_games([game_id])
         else:
-            SGDBSave(parent_widget, {(game_id, values["name"])})
+            SGDBSave(win, {(game_id, values["name"])})
 
         window.close()
-        parent_widget.show_details_view(None, game_id)
+        win.show_details_view(None, game_id)
 
     def focus_executable(_widget):
         window.set_focus(executable)
