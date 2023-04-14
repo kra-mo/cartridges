@@ -22,36 +22,41 @@ from shutil import copyfile
 from sqlite3 import connect
 from time import time
 
+from .check_install import check_install
+
 
 def lutris_importer(parent_widget):
     schema = parent_widget.schema
+    location_key = "lutris-location"
+    lutris_dir = Path(schema.get_string(location_key)).expanduser()
+    check = "pga.db"
 
-    database_path = (Path(schema.get_string("lutris-location"))).expanduser()
-    if not database_path.exists():
-        if Path("~/.var/app/net.lutris.Lutris/data/lutris/").expanduser().exists():
-            schema.set_string(
-                "lutris-location", "~/.var/app/net.lutris.Lutris/data/lutris/"
-            )
-        elif (parent_widget.data_dir / "lutris").exists():
-            schema.set_string("lutris-location", str(parent_widget.data_dir / "lutris"))
-        else:
+    if not (lutris_dir / check).is_file():
+        locations = (
+            Path.home() / ".var" / "app" / "net.lutris.Lutris" / "data" / "lutris",
+            parent_widget.data_dir / "lutris",
+        )
+
+        lutris_dir = check_install(check, locations, (schema, location_key))
+        if not lutris_dir:
             return
 
-    cache_dir = Path(schema.get_string("lutris-cache-location")).expanduser()
-    if not cache_dir.exists():
-        if Path("~/.var/app/net.lutris.Lutris/cache/lutris/").expanduser().exists():
-            schema.set_string(
-                "lutris-cache-location", "~/.var/app/net.lutris.Lutris/cache/lutris/"
-            )
-        elif (parent_widget.cache_dir / "lutris").exists():
-            schema.set_string(
-                "lutris-cache-location", str(parent_widget.cache_dir / "lutris")
-            )
-        else:
+    cache_key = "lutris-cache-location"
+    cache_dir = Path(schema.get_string(cache_key)).expanduser()
+    cache_check = "coverart"
+
+    if not (cache_dir / cache_check).exists():
+        cache_locations = (
+            Path.home() / ".var" / "app" / "net.lutris.Lutris" / "cache" / "lutris",
+            parent_widget.cache_dir / "lutris",
+        )
+
+        cache_dir = check_install(check, cache_locations, (schema, location_key))
+        if not cache_dir:
             return
 
-    database_path = (Path(schema.get_string("lutris-location"))).expanduser()
-    cache_dir = Path(schema.get_string("lutris-cache-location")).expanduser()
+    database_path = (Path(schema.get_string(location_key))).expanduser()
+    cache_dir = Path(schema.get_string(cache_key)).expanduser()
 
     db_cache_dir = parent_widget.cache_dir / "cartridges" / "lutris"
     db_cache_dir.mkdir(parents=True, exist_ok=True)

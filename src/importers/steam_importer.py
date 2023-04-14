@@ -25,6 +25,8 @@ from time import time
 import requests
 from gi.repository import Gio
 
+from .check_install import check_install
+
 
 def update_values_from_data(content, values):
     basic_data = content[values["appid"]]
@@ -125,35 +127,26 @@ def get_games_async(parent_widget, appmanifests, steam_dir, importer):
 
 def steam_importer(parent_widget):
     schema = parent_widget.schema
-    steam_dir = Path(schema.get_string("steam-location")).expanduser()
+    location_key = "steam-location"
+    steam_dir = Path(schema.get_string(location_key)).expanduser()
+    check = "steamapps"
 
-    def steam_not_found():
-        if Path("~/.var/app/com.valvesoftware.Steam/data/Steam/").expanduser().exists():
-            schema.set_string(
-                "steam-location", "~/.var/app/com.valvesoftware.Steam/data/Steam/"
-            )
-        elif Path("~/.steam/steam/").expanduser().exists():
-            schema.set_string("steam-location", "~/.steam/steam/")
-        elif (
-            os.name == "nt"
-            and (Path(os.getenv("programfiles(x86)")) / "Steam").exists()
-        ):
-            schema.set_string(
-                "steam-location", str(Path(os.getenv("programfiles(x86)")) / "Steam")
-            )
+    if not (steam_dir / check).is_file():
+        subdirs = ("steam", "Steam")
 
-    if (steam_dir / "steamapps").exists():
-        pass
-    elif (steam_dir / "steam" / "steamapps").exists():
-        schema.set_string("steam-location", str(steam_dir / "steam"))
-    elif (steam_dir / "Steam" / "steamapps").exists():
-        schema.set_string("steam-location", str(steam_dir / "Steam"))
-    else:
-        steam_not_found()
-        steam_importer(parent_widget)
-        return
+        locations = (
+            Path.home() / ".steam" / "steam",
+            parent_widget.data_dir / "Steam",
+            Path.home() / ".var" / "app" / "com.valvesoftware.Steam" / "data" / "Steam",
+        )
 
-    steam_dir = Path(schema.get_string("steam-location")).expanduser()
+        if os.name == "nt":
+            locations += (Path(os.getenv("programfiles(x86)")) / "Steam",)
+
+        steam_dir = check_install(check, locations, (schema, location_key), subdirs)
+        if not steam_dir:
+            return
+
     appmanifests = []
 
     steam_dirs = [Path(directory) for directory in schema.get_strv("steam-extra-dirs")]

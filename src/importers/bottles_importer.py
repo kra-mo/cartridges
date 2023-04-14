@@ -22,28 +22,30 @@ from time import time
 
 import yaml
 
+from .check_install import check_install
+
 
 def bottles_importer(parent_widget):
     schema = parent_widget.schema
-    bottles_dir = Path(schema.get_string("bottles-location")).expanduser()
+    location_key = "bottles-location"
+    bottles_dir = Path(schema.get_string(location_key)).expanduser()
+    check = "library.yml"
 
-    if not (bottles_dir / "library.yml").is_file():
-        if (
-            Path("~/.var/app/com.usebottles.bottles/data/bottles/")
-            .expanduser()
-            .exists()
-        ):
-            schema.set_string(
-                "bottles-location", "~/.var/app/com.usebottles.bottles/data/bottles/"
-            )
-        elif (parent_widget.data_dir / "bottles").exists():
-            schema.set_string(
-                "bottles-location", str(parent_widget.data_dir / "bottles")
-            )
-        else:
+    if not (bottles_dir / check).is_file():
+        locations = (
+            Path.home()
+            / ".var"
+            / "app"
+            / "com.usebottles.bottles"
+            / "data"
+            / "bottles",
+            parent_widget.data_dir / "bottles",
+        )
+
+        bottles_dir = check_install(check, locations, (schema, location_key))
+        if not bottles_dir:
             return
 
-    bottles_dir = Path(schema.get_string("bottles-location")).expanduser()
     current_time = int(time())
 
     data = (bottles_dir / "library.yml").read_text("utf-8")

@@ -21,7 +21,7 @@
 from pathlib import Path
 from shutil import copyfile
 
-from gi.repository import GdkPixbuf, Gio, GLib
+from gi.repository import GdkPixbuf, Gio
 from PIL import Image, ImageSequence
 
 

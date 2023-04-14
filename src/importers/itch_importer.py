@@ -26,6 +26,8 @@ from time import time
 import requests
 from gi.repository import GdkPixbuf, Gio
 
+from .check_install import check_install
+
 
 def get_game(task, current_time, parent_widget, row):
     values = {}
@@ -117,19 +119,23 @@ def get_games_async(parent_widget, rows, importer):
 
 def itch_importer(parent_widget):
     schema = parent_widget.schema
+    location_key = "itch-location"
+    itch_dir = Path(schema.get_string(location_key)).expanduser()
+    check = Path("db") / "butler.db"
 
-    database_path = (Path(schema.get_string("itch-location")) / "db").expanduser()
-    if not database_path.exists():
-        if Path("~/.var/app/io.itch.itch/config/itch/").expanduser().exists():
-            schema.set_string("itch-location", "~/.var/app/io.itch.itch/config/itch/")
-        elif (parent_widget.config_dir / "itch").exists():
-            schema.set_string("itch-location", str(parent_widget.config_dir / "itch"))
-        elif os.name == "nt" and (Path(os.getenv("appdata")) / "itch").exists():
-            schema.set_string("itch-location", str(Path(os.getenv("appdata")) / "itch"))
-        else:
+    if not (itch_dir / check).is_file():
+        locations = (
+            Path.home() / ".var" / "app" / "io.itch.itch" / "config" / "itch",
+            parent_widget.config_dir / "itch",
+        )
+
+        if os.name == "nt":
+            locations += (Path(os.getenv("appdata")) / "itch",)
+
+        if not check_install(check, locations, (schema, location_key)):
             return
 
-    database_path = (Path(schema.get_string("itch-location")) / "db").expanduser()
+    database_path = (Path(schema.get_string(location_key)) / "db").expanduser()
 
     db_cache_dir = parent_widget.cache_dir / "cartridges" / "itch"
     db_cache_dir.mkdir(parents=True, exist_ok=True)

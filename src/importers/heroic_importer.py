@@ -23,33 +23,36 @@ import os
 from pathlib import Path
 from time import time
 
+from .check_install import check_install
+
 
 def heroic_importer(parent_widget):
     schema = parent_widget.schema
-    heroic_dir = Path(schema.get_string("heroic-location")).expanduser()
+    location_key = "heroic-location"
+    heroic_dir = Path(schema.get_string(location_key)).expanduser()
+    check = "config.json"
 
-    if not (heroic_dir / "config.json").exists():
-        if (
-            Path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
-            .expanduser()
-            .exists()
-        ):
-            schema.set_string(
-                "heroic-location",
-                "~/.var/app/com.heroicgameslauncher.hgl/config/heroic/",
-            )
-        elif (parent_widget.config_dir / "heroic").exists():
-            schema.set_string(
-                "heroic-location", str(parent_widget.config_dir / "heroic")
-            )
-        elif os.name == "nt" and (Path(os.getenv("appdata")) / "heroic").exists():
-            schema.set_string(
-                "heroic-location", str(Path(os.getenv("appdata")) / "heroic")
-            )
-        else:
+    if not (heroic_dir / check).is_file():
+        locations = (
+            Path.home()
+            / ".var"
+            / "app"
+            / "com.heroicgameslauncher.hgl"
+            / "config"
+            / "heroic",
+            parent_widget.config_dir / "heroic",
+        )
+
+        if os.name == "nt":
+            locations += (Path(os.getenv("appdata")) / "heroic",)
+
+        heroic_dir = check_install(check, locations, (schema, location_key))
+        if not heroic_dir:
             return
 
-    heroic_dir = Path(schema.get_string("heroic-location")).expanduser()
+    schema = parent_widget.schema
+    check = "config.json"
+
     current_time = int(time())
 
     importer = parent_widget.importer
@@ -57,8 +60,10 @@ def heroic_importer(parent_widget):
     # Import Epic games
     if not schema.get_boolean("heroic-import-epic"):
         pass
-    elif (heroic_dir / "lib-cache" / "library.json").exists():
-        data = (heroic_dir / "lib-cache" / "library.json").read_text("utf-8")
+    elif (heroic_dir / "store_cache" / "legendary_library.json").exists():
+        data = (heroic_dir / "store_cache" / "legendary_library.json").read_text(
+            "utf-8"
+        )
         library = json.loads(data)
 
         try:

@@ -34,7 +34,8 @@ cartridges_sources = [
   'utils/save_game.py',
   'utils/save_cover.py',
   'utils/create_dialog.py',
-  'utils/create_details_window.py'
+  'utils/create_details_window.py',
+  'utils/check_install.py'
 ]
 
 install_data(cartridges_sources, install_dir: moduledir)
