@@ -152,20 +152,26 @@ class CartridgesApplication(Adw.Application):
         # Launch the game and update the last played value
 
         game_id = self.win.active_game_id
+        last_played = int(time.time())
 
         data = get_games(self.win, [game_id])[game_id]
-        data["last_played"] = int(time.time())
+        data["last_played"] = last_played
         save_game(self.win, data)
 
         self.win.games[game_id].launch()
+
+        # Update state
+        self.win.games[game_id].last_played = last_played
+        self.win.library.invalidate_sort()
+        self.win.hidden_library.invalidate_sort()
+        if self.win.stack.get_visible_child() == self.win.details_view:
+            self.win.show_details_view(None, game_id)
 
         title = self.win.games[game_id].name
         # The variable is the title of the game
         toast = Adw.Toast.new(_("{} launched").format(title))
         toast.set_priority(Adw.ToastPriority.HIGH)
         self.win.toast_overlay.add_toast(toast)
-
-        self.win.update_games([game_id])
 
     def on_hide_game_action(self, _widget, _callback=None, game_id=None, toast=True):
         if not game_id:
