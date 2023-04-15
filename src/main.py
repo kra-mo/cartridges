@@ -167,7 +167,7 @@ class CartridgesApplication(Adw.Application):
 
         self.win.update_games([game_id])
 
-    def on_hide_game_action(self, _widget, _callback=None, game_id=None):
+    def on_hide_game_action(self, _widget, _callback=None, game_id=None, toast=True):
         if not game_id:
             game_id = self.win.active_game_id
 
@@ -175,6 +175,9 @@ class CartridgesApplication(Adw.Application):
             self.win.on_go_back_action(None, None)
         self.win.games[game_id].toggle_hidden()
         self.win.update_games([game_id])
+
+        if not toast:
+            return
 
         title = self.win.games[game_id].name
         if self.win.games[game_id].hidden:
