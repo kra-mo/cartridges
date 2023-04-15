@@ -334,9 +334,9 @@ def create_details_window(win, game_id=None):
         else:
             save_game(win, values)
 
-        if game_cover.get_pixbuf():
-            win.update_games([game_id])
-        else:
+        win.update_games([game_id])
+
+        if not game_cover.get_pixbuf():
             SGDBSave(win, {(game_id, values["name"])})
 
         window.close()
