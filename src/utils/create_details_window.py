@@ -37,7 +37,7 @@ def create_details_window(win, game_id=None):
     )
 
     games = win.games
-    cover_deleted = False
+    cover_changed = False
 
     cover_button_edit = Gtk.Button(
         icon_name="document-edit-symbolic",
@@ -59,12 +59,12 @@ def create_details_window(win, game_id=None):
 
     def delete_pixbuf(_widget):
         nonlocal game_cover
-        nonlocal cover_deleted
+        nonlocal cover_changed
 
         game_cover.new_pixbuf()
 
         cover_button_delete_revealer.set_reveal_child(False)
-        cover_deleted = True
+        cover_changed = True
 
     cover_button_delete.connect("clicked", delete_pixbuf)
 
@@ -220,7 +220,7 @@ def create_details_window(win, game_id=None):
 
     def set_cover(_source, result, _unused):
         nonlocal game_cover
-        nonlocal cover_deleted
+        nonlocal cover_changed
 
         try:
             path = filechooser.open_finish(result).get_path()
@@ -228,7 +228,7 @@ def create_details_window(win, game_id=None):
             return
 
         cover_button_delete_revealer.set_reveal_child(True)
-        cover_deleted = True
+        cover_changed = True
         game_cover.new_pixbuf(
             path=resize_animation(path)
             if str(path).rsplit(".", maxsplit=1)[-1] == "gif"
@@ -239,7 +239,7 @@ def create_details_window(win, game_id=None):
         window.close()
 
     def apply_preferences(_widget, _callback=None):
-        nonlocal cover_deleted
+        nonlocal cover_changed
         nonlocal game_id
 
         values = {}
@@ -313,17 +313,14 @@ def create_details_window(win, game_id=None):
         values["developer"] = final_developer or None
         values["executable"] = final_executable_split
 
-        if cover_deleted:
-            (win.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
-            (win.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
-
-        save_cover(
-            win,
-            game_id,
-            None,
-            game_cover.get_pixbuf(),
-            game_cover.get_animation(),
-        )
+        if cover_changed:
+            save_cover(
+                win,
+                game_id,
+                None,
+                game_cover.get_pixbuf(),
+                game_cover.get_animation(),
+            )
 
         path = win.games_dir / f"{game_id}.json"
 
