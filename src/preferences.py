@@ -19,7 +19,7 @@
 
 import os
 from pathlib import Path
-from shutil import copyfile, move
+from shutil import move
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -349,7 +349,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 if not cover_path.is_file():
                     continue
 
-                move(cover_path, self.win.covers_dir, copyfile)
+                move(cover_path, self.win.covers_dir / cover_path.name)
 
         self.win.update_games(self.removed_games)
         self.removed_games = []
@@ -370,7 +370,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                     continue
 
                 if cover_path.is_file():
-                    move(cover_path, deleted_covers_dir, copyfile)
+                    move(cover_path, deleted_covers_dir / cover_path.name)
 
         self.win.update_games(self.win.games)
         if self.win.stack.get_visible_child() == self.win.details_view:
