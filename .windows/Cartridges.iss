@@ -34,6 +34,8 @@ Source: "D:\a\_temp\msys64\ucrt64\bin\cartridges"; DestDir: "{app}\bin"; Flags: 
 Source: "D:\a\_temp\msys64\ucrt64\bin\pythonw.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "D:\a\_temp\msys64\ucrt64\bin\python.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "D:\a\_temp\msys64\ucrt64\bin\gdbus.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\a\_temp\msys64\ucrt64\bin\gspawn-win64-helper.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\a\_temp\msys64\ucrt64\bin\gspawn-win64-helper-console.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "D:\a\_temp\msys64\ucrt64\bin\*.dll"; DestDir: "{app}\bin"; Flags: recursesubdirs ignoreversion
 
 Source: "D:\a\_temp\msys64\ucrt64\etc\ssl\*"; DestDir: "{app}\etc\ssl"; Flags: recursesubdirs ignoreversion
