@@ -56,16 +56,14 @@ For updates and questions, join our [Discord server][discord-url]!
 
 ## Windows
 
-### Using Winget
-
-- Install the latest release using `winget install cartridges` command.
-- We the release notes and information about the package using `winget show cartridges` command. 
-
 ### From Releases
 1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
 2. Run the downloaded installer.
 
 Note: Windows might present you with a warning when trying to install the app. This is expected, just ignore the warning.
+
+### Winget
+Install the latest release with the command: `winget install cartridges`. 
 
 ## Building manually
 See [Building](https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md#building).
