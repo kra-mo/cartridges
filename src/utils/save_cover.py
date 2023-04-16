@@ -57,7 +57,8 @@ def save_cover(
 
     if animation_path:
         copyfile(animation_path, win.covers_dir / f"{game_id}.gif")
-        win.game_covers[game_id].new_pixbuf(animation_path)
+        if game_id in win.game_covers:
+            win.game_covers[game_id].new_pixbuf(animation_path)
         return
 
     if not pixbuf:
