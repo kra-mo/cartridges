@@ -62,6 +62,9 @@ For updates and questions, join our [Discord server][discord-url]!
 
 Note: Windows might present you with a warning when trying to install the app. This is expected, just ignore the warning.
 
+### Winget
+Install the latest release with the command: `winget install cartridges`. 
+
 ## Building manually
 See [Building](https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md#building).
 
