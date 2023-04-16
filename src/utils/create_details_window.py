@@ -23,10 +23,11 @@ import shlex
 import time
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
+from PIL import Image
 
 from .create_dialog import create_dialog
 from .game_cover import GameCover
-from .save_cover import resize_animation, save_cover
+from .save_cover import img2tiff, resize_animation, save_cover
 from .save_game import save_game
 from .steamgriddb import SGDBSave
 
@@ -99,7 +100,9 @@ def create_details_window(win, game_id=None):
         apply_button = Gtk.Button.new_with_label(_("Confirm"))
 
     image_filter = Gtk.FileFilter(name=_("Images"))
-    image_filter.add_pixbuf_formats()
+    for extension in Image.registered_extensions():
+        image_filter.add_suffix(extension[1:])
+
     file_filters = Gio.ListStore.new(Gtk.FileFilter)
     file_filters.append(image_filter)
     filechooser = Gtk.FileDialog()
@@ -229,11 +232,14 @@ def create_details_window(win, game_id=None):
 
         cover_button_delete_revealer.set_reveal_child(True)
         cover_changed = True
-        game_cover.new_pixbuf(
-            resize_animation(path)
-            if str(path).rsplit(".", maxsplit=1)[-1] == "gif"
-            else path
-        )
+
+        with Image.open(path) as image:
+            if getattr(image, "is_animated", False):
+                path = resize_animation(path)
+            else:
+                path = img2tiff(win, path)
+
+        game_cover.new_pixbuf(path)
 
     def close_window(_widget, _callback=None):
         window.close()

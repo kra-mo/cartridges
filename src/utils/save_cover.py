@@ -25,16 +25,23 @@ from gi.repository import GdkPixbuf, Gio
 from PIL import Image, ImageSequence
 
 
+def img2tiff(win, cover_path):
+    tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
+    with Image.open(cover_path) as image:
+        image.resize(win.image_size).save(tmp_path)
+
+    return tmp_path
+
+
 def resize_animation(cover_path):
-    image = Image.open(cover_path)
-    frames = tuple(
-        frame.copy().resize((200, 300)) for frame in ImageSequence.Iterator(image)
-    )
+    with Image.open(cover_path) as image:
+        frames = tuple(
+            frame.copy().resize((200, 300)) for frame in ImageSequence.Iterator(image)
+        )
 
     tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
     frames[0].save(
         tmp_path,
-        format="gif",
         save_all=True,
         append_images=frames[1:],
     )

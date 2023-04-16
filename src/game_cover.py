@@ -54,9 +54,7 @@ class GameCover:
                 task = Gio.Task.new()
                 task.run_in_thread(self.create_func(self.path))
             else:
-                self.pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-                    str(path), 200, 300, False
-                )
+                self.pixbuf = GdkPixbuf.Pixbuf.new_from_file(str(path))
 
         if not self.animation:
             self.set_pixbuf(self.pixbuf)
