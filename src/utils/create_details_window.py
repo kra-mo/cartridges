@@ -75,17 +75,10 @@ def create_details_window(win, game_id=None):
     )
 
     cover = Gtk.Picture.new()
-    game_cover = GameCover(cover)
+    game_cover = GameCover({cover})
 
-    if not game_id:
-        window.set_title(_("Add New Game"))
-        name = Gtk.Entry()
-        developer = Gtk.Entry()
-        executable = Gtk.Entry()
-        apply_button = Gtk.Button.new_with_label(_("Confirm"))
-    else:
+    if game_id:
         window.set_title(_("Edit Game Details"))
-        game_cover.new_pixbuf(path=win.games[game_id].get_cover_path())
         developer = Gtk.Entry.new_with_buffer(
             Gtk.EntryBuffer.new(games[game_id].developer, -1)
         )
@@ -95,8 +88,15 @@ def create_details_window(win, game_id=None):
         )
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
-        if win.games[game_id].get_cover_path():
+        game_cover.new_pixbuf(path=win.games[game_id].get_cover_path())
+        if game_cover.get_pixbuf():
             cover_button_delete_revealer.set_reveal_child(True)
+    else:
+        window.set_title(_("Add New Game"))
+        name = Gtk.Entry()
+        developer = Gtk.Entry()
+        executable = Gtk.Entry()
+        apply_button = Gtk.Button.new_with_label(_("Confirm"))
 
     image_filter = Gtk.FileFilter(name=_("Images"))
     image_filter.add_pixbuf_formats()
@@ -241,6 +241,7 @@ def create_details_window(win, game_id=None):
     def apply_preferences(_widget, _callback=None):
         nonlocal cover_changed
         nonlocal game_id
+        nonlocal cover
 
         values = {}
 
@@ -313,6 +314,8 @@ def create_details_window(win, game_id=None):
         values["developer"] = final_developer or None
         values["executable"] = final_executable_split
 
+        win.game_covers[game_id] = game_cover
+
         if cover_changed:
             save_cover(
                 win,
@@ -336,6 +339,8 @@ def create_details_window(win, game_id=None):
         if not game_cover.get_pixbuf():
             SGDBSave(win, {(game_id, values["name"])})
 
+        win.game_covers[game_id].pictures.remove(cover)
+
         window.close()
         win.show_details_view(None, game_id)
 
@@ -346,6 +351,7 @@ def create_details_window(win, game_id=None):
     cancel_button.connect("clicked", close_window)
     apply_button.connect("clicked", apply_preferences)
     name.connect("activate", focus_executable)
+    developer.connect("activate", focus_executable)
     executable.connect("activate", apply_preferences)
 
     shortcut_controller = Gtk.ShortcutController()

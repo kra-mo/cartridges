@@ -30,8 +30,8 @@ class GameCover:
         "/hu/kramo/Cartridges/library_placeholder.svg", 400, 600, False
     )
 
-    def __init__(self, picture, pixbuf=None, path=None):
-        self.picture = picture
+    def __init__(self, pictures, pixbuf=None, path=None):
+        self.pictures = pictures
         self.new_pixbuf(pixbuf, path)
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
@@ -72,13 +72,22 @@ class GameCover:
     def get_animation(self):
         return self.path if self.animation else None
 
+    def add_picture(self, picture):
+        self.pictures.add(picture)
+        if not self.animation:
+            self.set_pixbuf(self.pixbuf)
+
     def set_pixbuf(self, pixbuf):
-        if self.picture.is_visible():
-            if not pixbuf:
-                pixbuf = self.placeholder_pixbuf
-            self.picture.set_pixbuf(pixbuf)
-        else:
+        self.pictures.discard(
+            picture for picture in self.pictures if not picture.is_visible()
+        )
+        if not self.pictures:
             self.animation = None
+        else:
+            for picture in self.pictures:
+                if not pixbuf:
+                    pixbuf = self.placeholder_pixbuf
+                picture.set_pixbuf(pixbuf)
 
     def update_animation(self, data):
         if self.animation == data[1]:

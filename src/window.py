@@ -26,7 +26,6 @@ from shutil import rmtree
 from gi.repository import Adw, Gdk, GdkPixbuf, Gio, GLib, Gtk
 
 from .game import Game
-from .game_cover import GameCover
 from .get_games import get_games
 from .save_game import save_game
 
@@ -93,6 +92,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.covers_dir = self.data_dir / "cartridges" / "covers"
 
         self.games = {}
+        self.game_covers = {}
         self.visible_widgets = {}
         self.hidden_widgets = {}
         self.filtered = {}
@@ -101,9 +101,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.toasts = {}
         self.active_game_id = None
         self.scaled_pixbuf = None
-
-        self.details_view.set_measure_overlay(self.details_view_box, True)
-        self.details_view.set_clip_overlay(self.details_view_box, False)
+        self.details_view_game_cover = None
 
         self.schema = Gio.Settings.new("hu.kramo.Cartridges")
         scale_factor = max(
@@ -121,17 +119,13 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         rmtree(self.cache_dir / "cartridges" / "deleted_covers", True)
 
+        self.details_view.set_measure_overlay(self.details_view_box, True)
+        self.details_view.set_clip_overlay(self.details_view_box, False)
+
         self.library.set_filter_func(self.search_filter)
         self.hidden_library.set_filter_func(self.hidden_search_filter)
 
         self.update_games(get_games(self))
-
-        self.details_view_game_cover = GameCover(self.details_view_cover)
-        self.placeholder_pixbuf_scaled = (
-            self.details_view_game_cover.placeholder_pixbuf.scale_simple(
-                2, 3, GdkPixbuf.InterpType.BILINEAR
-            )
-        )
 
         # Connect signals
         self.search_entry.connect("search-changed", self.search_changed, False)
@@ -291,14 +285,15 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.active_game_id = game_id
 
-        self.details_view_game_cover.new_pixbuf(path=current_game.get_cover_path())
-        pixbuf = self.details_view_game_cover.get_pixbuf()
+        if self.details_view_game_cover:
+            self.details_view_game_cover.pictures.remove(self.details_view_cover)
+        self.details_view_game_cover = self.game_covers[game_id]
+        self.details_view_game_cover.add_picture(self.details_view_cover)
 
         self.scaled_pixbuf = (
-            pixbuf.scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
-            if pixbuf
-            else self.placeholder_pixbuf_scaled
-        )
+            self.details_view_game_cover.get_pixbuf()
+            or self.details_view_game_cover.placeholder_pixbuf
+        ).scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
         self.details_view_blurred_cover.set_pixbuf(self.scaled_pixbuf)
         self.set_details_view_opacity()
 

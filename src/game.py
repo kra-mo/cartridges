@@ -62,7 +62,11 @@ class Game(Gtk.Box):
         self.loading = 0
         self.title.set_label(self.name)
 
-        self.game_cover = GameCover(self.cover, path=self.get_cover_path())
+        if self.game_id in self.win.game_covers:
+            self.win.game_covers[self.game_id].add_picture(self.cover)
+        else:
+            game_cover = GameCover({self.cover}, path=self.get_cover_path())
+            self.win.game_covers[self.game_id] = game_cover
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
         self.add_controller(self.event_contoller_motion)
@@ -123,8 +127,6 @@ class Game(Gtk.Box):
         cover_path = self.win.covers_dir / f"{self.game_id}.tiff"
         if cover_path.is_file():
             return cover_path
-
-        return None
 
     def show_play(self, _widget, *_unused):
         self.play_revealer.set_reveal_child(True)

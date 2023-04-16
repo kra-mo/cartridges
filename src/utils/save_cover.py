@@ -57,6 +57,7 @@ def save_cover(
 
     if animation_path:
         copyfile(animation_path, win.covers_dir / f"{game_id}.gif")
+        win.game_covers[game_id].new_pixbuf(path=animation_path)
         return
 
     if not pixbuf:
@@ -72,3 +73,5 @@ def save_cover(
         ["compression"],
         ["8"] if win.schema.get_boolean("high-quality-images") else ["7"],
     )
+
+    win.game_covers[game_id].new_pixbuf(pixbuf=pixbuf)
