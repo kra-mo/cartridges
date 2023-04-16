@@ -3,6 +3,7 @@
   <img src="data/icons/hicolor/scalable/apps/hu.kramo.Cartridges.svg" width="128" height="128">
 
  # Cartridges
+  
  A GTK4 + Libadwaita game launcher
 
 [![Flathub][flathub-image]][flathub-url]
@@ -29,8 +30,11 @@
 </div>
 
 # The Project
+
 Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita.
+
 ## Features
+
 - Manually adding and editing games
 - Importing games from Steam, Lutris, Heroic, Bottles and itch
 - Support for multiple Steam install locations
@@ -51,21 +55,25 @@ For updates and questions, join our [Discord server][discord-url]!
 <a href=https://flathub.org/apps/details/hu.kramo.Cartridges><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
 ### From Releases
+
 1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
 2. Install the downloaded file via GNOME Software or `flatpak install hu.kramo.Cartridges.flatpak`.
 
 ## Windows
 
 ### From Releases
+
 1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
 2. Run the downloaded installer.
 
 Note: Windows might present you with a warning when trying to install the app. This is expected, just ignore the warning.
 
 ### Winget
+
 Install the latest release with the command: `winget install cartridges`. 
 
 ## Building manually
+
 See [Building](https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md#building).
 
 # Contributing
