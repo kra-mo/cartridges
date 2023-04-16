@@ -74,4 +74,5 @@ def save_cover(
         ["8"] if win.schema.get_boolean("high-quality-images") else ["7"],
     )
 
-    win.game_covers[game_id].new_pixbuf(win.covers_dir / f"{game_id}.tiff")
+    if game_id in win.game_covers:
+        win.game_covers[game_id].new_pixbuf(win.covers_dir / f"{game_id}.tiff")
