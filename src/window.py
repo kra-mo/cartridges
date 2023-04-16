@@ -279,10 +279,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
             self.details_view_hide_button.set_icon_name("view-conceal-symbolic")
             self.details_view_hide_button.set_tooltip_text(_("Hide"))
 
-        if self.stack.get_visible_child() != self.details_view:
-            self.stack.set_transition_type(Gtk.StackTransitionType.OVER_LEFT)
-            self.stack.set_visible_child(self.details_view)
-
         self.active_game_id = game_id
 
         if self.details_view_game_cover:
@@ -295,7 +291,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
             or self.details_view_game_cover.placeholder_pixbuf
         ).scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
         self.details_view_blurred_cover.set_pixbuf(self.scaled_pixbuf)
-        self.set_details_view_opacity()
 
         self.details_view_title.set_label(current_game.name)
         self.details_view_header_bar_title.set_title(current_game.name)
@@ -313,6 +308,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
             # The variable is the date when the game was last played
             _("Last played: {}").format(last_played_date)
         )
+
+        if self.stack.get_visible_child() != self.details_view:
+            self.stack.set_transition_type(Gtk.StackTransitionType.OVER_LEFT)
+            self.stack.set_visible_child(self.details_view)
+
+        self.set_details_view_opacity()
 
     def set_details_view_opacity(self, _widget=None, _unused=None):
         if self.stack.get_visible_child() == self.details_view:

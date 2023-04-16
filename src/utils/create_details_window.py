@@ -88,7 +88,7 @@ def create_details_window(win, game_id=None):
         )
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
-        game_cover.new_pixbuf(path=win.games[game_id].get_cover_path())
+        game_cover.new_pixbuf(win.games[game_id].get_cover_path())
         if game_cover.get_pixbuf():
             cover_button_delete_revealer.set_reveal_child(True)
     else:
@@ -230,7 +230,7 @@ def create_details_window(win, game_id=None):
         cover_button_delete_revealer.set_reveal_child(True)
         cover_changed = True
         game_cover.new_pixbuf(
-            path=resize_animation(path)
+            resize_animation(path)
             if str(path).rsplit(".", maxsplit=1)[-1] == "gif"
             else path
         )

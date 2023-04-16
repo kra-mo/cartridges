@@ -30,9 +30,9 @@ class GameCover:
         "/hu/kramo/Cartridges/library_placeholder.svg", 400, 600, False
     )
 
-    def __init__(self, pictures, pixbuf=None, path=None):
+    def __init__(self, pictures, path=None):
         self.pictures = pictures
-        self.new_pixbuf(pixbuf, path)
+        self.new_pixbuf(path)
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
     def create_func(self, path):
@@ -44,17 +44,12 @@ class GameCover:
 
         return wrapper
 
-    def new_pixbuf(self, pixbuf=None, path=None):
+    def new_pixbuf(self, path=None):
         self.animation = None
         self.pixbuf = None
-        self.path = None
-
-        if pixbuf:
-            self.pixbuf = pixbuf
+        self.path = path
 
         if path:
-            self.path = path
-
             if str(path).rsplit(".", maxsplit=1)[-1] == "gif":
                 task = Gio.Task.new()
                 task.run_in_thread(self.create_func(self.path))

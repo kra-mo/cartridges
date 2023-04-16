@@ -65,7 +65,7 @@ class Game(Gtk.Box):
         if self.game_id in self.win.game_covers:
             self.win.game_covers[self.game_id].add_picture(self.cover)
         else:
-            game_cover = GameCover({self.cover}, path=self.get_cover_path())
+            game_cover = GameCover({self.cover}, self.get_cover_path())
             self.win.game_covers[self.game_id] = game_cover
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
