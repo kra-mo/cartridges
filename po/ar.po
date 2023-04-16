@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-05 11:11+0200\n"
-"PO-Revision-Date: 2023-04-05 11:33+0000\n"
+"POT-Creation-Date: 2023-04-11 23:33+0200\n"
+"PO-Revision-Date: 2023-04-14 12:29+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:29
-#: src/main.py:113
+#: src/main.py:119
 msgid "Cartridges"
 msgstr "خراطيش"
 
@@ -42,16 +42,16 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"«خراطيش» هو مشغِّل ألعاب يسير، فيه دعم لاستيراد الألعاب من ستيم،ولوترس، "
-"وهِرُوِك، وبرامج أخرى، وذلك دون تسجيل دخول. ولك ترتيب وإخفاء الألعاب فيه "
-"كيفما شئت، وكذلك تستطيع منه تنزيل غُلُف الألعاب من SteamGridDB."
+"«خراطيش» هو مشغِّل ألعاب يسير، فيه دعم لاستيراد الألعاب من ستيم،ولوترس، وهِرُوِك، "
+"وبرامج أخرى، وذلك دون تسجيل دخول. ولك ترتيب وإخفاء الألعاب فيه كيفما شئت، "
+"وكذلك تستطيع منه تنزيل غُلُف الألعاب من SteamGridDB."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:22
 msgid "Library"
 msgstr "المكتبة"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
-#: src/utils/create_details_window.py:85
+#: src/utils/create_details_window.py:87
 msgid "Edit Game Details"
 msgstr "حرِّر تفاصيل اللعبة"
 
@@ -59,120 +59,30 @@ msgstr "حرِّر تفاصيل اللعبة"
 msgid "Game Details"
 msgstr "تفاصيل اللعبة"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:371
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:402
 #: src/utils/importer.py:94 src/utils/importer.py:123 src/utils/importer.py:148
+#: src/utils/steamgriddb.py:116
 msgid "Preferences"
 msgstr "التفضيلات"
 
-#: data/gtk/window.blp:6 src/utils/importer.py:91
-msgid "No Games Found"
-msgstr "لم يُعثر على ألعاب"
-
-#: data/gtk/window.blp:7
-msgid "Try a different search."
-msgstr "جرِّب بحثًا آخر."
-
-#: data/gtk/window.blp:14
-msgid "No Games"
-msgstr "لا توجد ألعاب"
-
-#: data/gtk/window.blp:15
-msgid "Use the + button to add games."
-msgstr "استخدم زرَّ + لتضيف ألعابًا."
-
-#: data/gtk/window.blp:22
-msgid "No Hidden Games"
-msgstr "لا توجد ألعاب مخفية"
-
-#: data/gtk/window.blp:23
-msgid "Games you hide will appear here."
-msgstr "هنا يظهر ما أخفيت من ألعاب."
-
-#: data/gtk/window.blp:44 data/gtk/window.blp:262
-msgid "Back"
-msgstr "عد"
-
-#: data/gtk/window.blp:100
-msgid "Game Title"
-msgstr "عنوان اللعبة"
-
-#: data/gtk/window.blp:156 src/game.py:168
-msgid "Play"
-msgstr "العب"
-
-#: data/gtk/window.blp:204 data/gtk/window.blp:390
-msgid "Add Game"
-msgstr "أضف لعبةً"
-
-#: data/gtk/window.blp:211 data/gtk/window.blp:274
-msgid "Main Menu"
-msgstr "القائمة الرئيسة"
-
-#: data/gtk/window.blp:218 data/gtk/window.blp:281 data/gtk/help-overlay.blp:19
-msgid "Search"
-msgstr "ابحث"
-
-#: data/gtk/window.blp:269
-msgid "Hidden Games"
-msgstr "الألعاب المخفية"
-
-#: data/gtk/window.blp:329
-msgid "Sort"
-msgstr "رتِّب"
-
-#: data/gtk/window.blp:332
-msgid "A-Z"
-msgstr "أ-ي"
-
-#: data/gtk/window.blp:338
-msgid "Z-A"
-msgstr "ي-أ"
-
-#: data/gtk/window.blp:344
-msgid "Newest"
-msgstr "الأجدد"
-
-#: data/gtk/window.blp:350
-msgid "Oldest"
-msgstr "الأقدم"
-
-#: data/gtk/window.blp:356
-msgid "Last Played"
-msgstr "لُعبت آخر مرَّة"
-
-#: data/gtk/window.blp:363
-msgid "Show Hidden"
-msgstr "أظهر ما أخفي"
-
-#: data/gtk/window.blp:376
-msgid "Keyboard Shortcuts"
-msgstr "اختصارات لوحة المفاتيح"
-
-#: data/gtk/window.blp:381
-msgid "About Cartridges"
-msgstr "عن «خراطيش»"
-
-#: data/gtk/window.blp:396 data/gtk/preferences.blp:66
-msgid "Import"
-msgstr "استورد"
-
-#: data/gtk/game.blp:60 src/utils/create_details_window.py:127
+#: data/gtk/game.blp:67 src/utils/create_details_window.py:129
 msgid "Title"
 msgstr "العنوان"
 
-#: data/gtk/game.blp:82 data/gtk/game.blp:101
+#: data/gtk/game.blp:89 data/gtk/game.blp:108 data/gtk/window.blp:170
 msgid "Edit"
 msgstr "حرِّر"
 
-#: data/gtk/game.blp:87
+#: data/gtk/game.blp:94 src/window.py:286
 msgid "Hide"
 msgstr "أخفِ"
 
-#: data/gtk/game.blp:92 data/gtk/game.blp:111 data/gtk/preferences.blp:53
+#: data/gtk/game.blp:99 data/gtk/game.blp:118 data/gtk/preferences.blp:56
+#: data/gtk/window.blp:186
 msgid "Remove"
 msgstr "أزل"
 
-#: data/gtk/game.blp:106
+#: data/gtk/game.blp:113 src/window.py:283
 msgid "Unhide"
 msgstr "اكشف"
 
@@ -184,6 +94,11 @@ msgstr "عام"
 msgid "Quit"
 msgstr "أنهِ"
 
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:205 data/gtk/window.blp:249
+#: data/gtk/window.blp:312
+msgid "Search"
+msgstr "ابحث"
+
 #: data/gtk/help-overlay.blp:24
 msgid "Show preferences"
 msgstr "أظهر التفضيلات"
@@ -192,8 +107,8 @@ msgstr "أظهر التفضيلات"
 msgid "Shortcuts"
 msgstr "الاختصارات"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:178 src/main.py:234
-#: src/preferences.py:131
+#: data/gtk/help-overlay.blp:34 src/main.py:186 src/main.py:242
+#: src/preferences.py:133
 msgid "Undo"
 msgstr "تراجع"
 
@@ -221,7 +136,7 @@ msgstr "أظهر الألعاب المخفية"
 msgid "Remove game"
 msgstr "أزل اللعبة"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:229
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:235
 msgid "Behavior"
 msgstr "السلوك"
 
@@ -229,230 +144,428 @@ msgstr "السلوك"
 msgid "Exit After Launching Games"
 msgstr "اخرج بعد بدء الألعاب"
 
-#: data/gtk/preferences.blp:24
+#: data/gtk/preferences.blp:25
 msgid "Cover Image Launches Game"
 msgstr "تبدأ صورة الغلاف اللعبة"
 
-#: data/gtk/preferences.blp:25
+#: data/gtk/preferences.blp:26
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "يبدِّل سلوك صورة الغلاف وزرِّ «العب»"
 
-#: data/gtk/preferences.blp:34 src/utils/create_details_window.py:99
+#: data/gtk/preferences.blp:36 src/utils/create_details_window.py:101
 msgid "Images"
 msgstr "الصور"
 
-#: data/gtk/preferences.blp:37
+#: data/gtk/preferences.blp:39
 msgid "High Quality Images"
 msgstr "صور ذات دقَّة عالية"
 
-#: data/gtk/preferences.blp:38
+#: data/gtk/preferences.blp:40
 msgid "Save game covers losslessly at the cost of storage"
 msgstr "احفظ غُلُف الألعاب دون فقد على حساب مساحة التخزين"
 
-#: data/gtk/preferences.blp:47
+#: data/gtk/preferences.blp:50
 msgid "Danger Zone"
 msgstr "منطقة خطر"
 
-#: data/gtk/preferences.blp:50
+#: data/gtk/preferences.blp:53
 msgid "Remove All Games"
 msgstr "أزل كلَّ الألعاب"
 
-#: data/gtk/preferences.blp:70
+#: data/gtk/preferences.blp:69 data/gtk/window.blp:427
+msgid "Import"
+msgstr "استورد"
+
+#: data/gtk/preferences.blp:73
 msgid "Sources"
 msgstr "المصادر"
 
-#: data/gtk/preferences.blp:73
+#: data/gtk/preferences.blp:76
 msgid "Steam"
 msgstr "ستيم"
 
-#: data/gtk/preferences.blp:77
+#: data/gtk/preferences.blp:80
 msgid "Steam Install Location"
 msgstr "موضع تثبيت ستيم"
 
-#: data/gtk/preferences.blp:78 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:150 data/gtk/preferences.blp:189
-#: data/gtk/preferences.blp:204
+#: data/gtk/preferences.blp:81 data/gtk/preferences.blp:119
+#: data/gtk/preferences.blp:153 data/gtk/preferences.blp:195
+#: data/gtk/preferences.blp:210
 msgid "Directory to use when importing games"
 msgstr "المجلَّد المستخدم عند استيراد الألعاب"
 
-#: data/gtk/preferences.blp:86 src/utils/importer.py:143
+#: data/gtk/preferences.blp:89 src/utils/importer.py:143
 msgid "Extra Steam Libraries"
 msgstr "مكتبات ستيم الإضافية"
 
-#: data/gtk/preferences.blp:87
+#: data/gtk/preferences.blp:90
 msgid "Select other directories where you have Steam games installed"
 msgstr "حدِّد المجلَّدات الأخرى التي ثُبِّتت فيها ألعاب ستيم"
 
-#: data/gtk/preferences.blp:94
+#: data/gtk/preferences.blp:96
 msgid "Clear"
 msgstr "أمحُ"
 
-#: data/gtk/preferences.blp:112
+#: data/gtk/preferences.blp:114
 msgid "Lutris"
 msgstr "لوترس"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:118
 msgid "Lutris Install Location"
 msgstr "موضع تثبيت لوترس"
 
-#: data/gtk/preferences.blp:126
+#: data/gtk/preferences.blp:128
 msgid "Lutris Cache Location"
 msgstr "موضع ذكرة لوترس المؤقَّتة"
 
-#: data/gtk/preferences.blp:127
+#: data/gtk/preferences.blp:129
 msgid "Directory to use when importing game covers"
 msgstr "المجلَّد المستخدم عند استيراد غُلُف الألعاب"
 
-#: data/gtk/preferences.blp:136
+#: data/gtk/preferences.blp:138
 msgid "Import Steam Games"
 msgstr "استورد ألعابًا من ستيم"
 
-#: data/gtk/preferences.blp:145
+#: data/gtk/preferences.blp:148
 msgid "Heroic"
 msgstr "هِرُوِك"
 
-#: data/gtk/preferences.blp:149
+#: data/gtk/preferences.blp:152
 msgid "Heroic Install Location"
 msgstr "موضع تثبيت هِرُوِك"
 
-#: data/gtk/preferences.blp:159
+#: data/gtk/preferences.blp:162
 msgid "Import Epic Games"
 msgstr "استورد ألعاب أَبِك"
 
-#: data/gtk/preferences.blp:167
+#: data/gtk/preferences.blp:171
 msgid "Import GOG Games"
 msgstr "استورد ألعاب جي‌أو‌جي"
 
-#: data/gtk/preferences.blp:175
+#: data/gtk/preferences.blp:180
 msgid "Import Sideloaded Games"
 msgstr "استورد ألعابًا مثبَّتةً بغير متجر"
 
-#: data/gtk/preferences.blp:184
+#: data/gtk/preferences.blp:190
 msgid "Bottles"
 msgstr "قوارير"
 
-#: data/gtk/preferences.blp:188
+#: data/gtk/preferences.blp:194
 msgid "Bottles Install Location"
 msgstr "موضع تثبيت قوارير"
 
-#: data/gtk/preferences.blp:199
+#: data/gtk/preferences.blp:205
 msgid "itch"
 msgstr "إتش"
 
-#: data/gtk/preferences.blp:203
+#: data/gtk/preferences.blp:209
 msgid "itch Install Location"
 msgstr "موضع تثبيت إتش"
 
-#: data/gtk/preferences.blp:217
+#: data/gtk/preferences.blp:223
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:221
+#: data/gtk/preferences.blp:227
 msgid "Authentication"
 msgstr "الاستيثاق"
 
-#: data/gtk/preferences.blp:224
+#: data/gtk/preferences.blp:230
 msgid "API Key"
 msgstr "مفتاح واجهة البرمجة"
 
-#: data/gtk/preferences.blp:232
+#: data/gtk/preferences.blp:238
 msgid "Use SteamGridDB"
 msgstr "استخدم SteamGridDB"
 
-#: data/gtk/preferences.blp:233
+#: data/gtk/preferences.blp:239
 msgid "Download images when adding or importing games"
 msgstr "نزِّل الصور حينما تنزِّل أو تستورد الألعاب"
 
-#: data/gtk/preferences.blp:240
+#: data/gtk/preferences.blp:248
 msgid "Prefer Over Official Images"
 msgstr "فضِّلها على الصور الرسمية"
 
+#: data/gtk/preferences.blp:257
+msgid "Prefer Animated Images"
+msgstr "فضِّل الصور المتحرِّكة"
+
+#: data/gtk/window.blp:6 src/utils/importer.py:91
+msgid "No Games Found"
+msgstr "لم يُعثر على ألعاب"
+
+#: data/gtk/window.blp:7
+msgid "Try a different search."
+msgstr "جرِّب بحثًا آخر."
+
+#: data/gtk/window.blp:14
+msgid "No Games"
+msgstr "لا توجد ألعاب"
+
+#: data/gtk/window.blp:15
+msgid "Use the + button to add games."
+msgstr "استخدم زرَّ + لتضيف ألعابًا."
+
+#: data/gtk/window.blp:22
+msgid "No Hidden Games"
+msgstr "لا توجد ألعاب مخفية"
+
+#: data/gtk/window.blp:23
+msgid "Games you hide will appear here."
+msgstr "هنا يظهر ما أخفيت من ألعاب."
+
+#: data/gtk/window.blp:44 data/gtk/window.blp:293
+msgid "Back"
+msgstr "عد"
+
+#: data/gtk/window.blp:100
+msgid "Game Title"
+msgstr "عنوان اللعبة"
+
+#: data/gtk/window.blp:151 src/game.py:158
+msgid "Play"
+msgstr "العب"
+
+#: data/gtk/window.blp:235 data/gtk/window.blp:421
+msgid "Add Game"
+msgstr "أضف لعبةً"
+
+#: data/gtk/window.blp:242 data/gtk/window.blp:305
+msgid "Main Menu"
+msgstr "القائمة الرئيسة"
+
+#: data/gtk/window.blp:300
+msgid "Hidden Games"
+msgstr "الألعاب المخفية"
+
+#: data/gtk/window.blp:360
+msgid "Sort"
+msgstr "رتِّب"
+
+#: data/gtk/window.blp:363
+msgid "A-Z"
+msgstr "أ-ي"
+
+#: data/gtk/window.blp:369
+msgid "Z-A"
+msgstr "ي-أ"
+
+#: data/gtk/window.blp:375
+msgid "Newest"
+msgstr "الأجدد"
+
+#: data/gtk/window.blp:381
+msgid "Oldest"
+msgstr "الأقدم"
+
+#: data/gtk/window.blp:387
+msgid "Last Played"
+msgstr "لُعبت آخر مرَّة"
+
+#: data/gtk/window.blp:394
+msgid "Show Hidden"
+msgstr "أظهر ما أخفي"
+
+#: data/gtk/window.blp:407
+msgid "Keyboard Shortcuts"
+msgstr "اختصارات لوحة المفاتيح"
+
+#: data/gtk/window.blp:412
+msgid "About Cartridges"
+msgstr "عن «خراطيش»"
+
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:129
+#: src/main.py:137
 msgid "translator_credits"
 msgstr "Ali Aljishi <ahj696@hotmail.com>"
 
 #. The variable is the title of the game
-#: src/main.py:156
+#: src/main.py:164
 msgid "{} launched"
 msgstr "بُدئت {}"
 
 #. The variable is the title of the game
-#: src/main.py:174
+#: src/main.py:182
 msgid "{} hidden"
 msgstr "أٌخفيت {}"
 
 #. The variable is the title of the game
-#: src/main.py:177
+#: src/main.py:185
 msgid "{} unhidden"
 msgstr "أٌظهرت {}"
 
 #. The variable is the title of the game
-#: src/main.py:233
+#: src/main.py:241
 msgid "{} removed"
 msgstr "أزيلت {}"
 
-#: src/window.py:241
+#: src/window.py:262
 msgid "Today"
 msgstr "اليوم"
 
-#: src/window.py:243
+#: src/window.py:264
 msgid "Yesterday"
 msgstr "أمس"
 
 #. The variable is the date when the game was added
-#: src/window.py:281
+#: src/window.py:310
 msgid "Added: {}"
 msgstr "أضيفت في: {}"
 
-#: src/window.py:286
+#: src/window.py:315
 msgid "Never"
 msgstr "أبدًا"
 
 #. The variable is the date when the game was last played
-#: src/window.py:290
+#: src/window.py:319
 msgid "Last played: {}"
 msgstr "لُعبت آخر مرَّة في: {}"
 
-#: src/game.py:166
+#: src/game.py:156
 msgid "Details"
 msgstr "التفاصيل"
 
-#: src/preferences.py:53
+#: src/preferences.py:54
 msgid "Installation Not Found"
 msgstr "لم يُعثر على التثبيت"
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:55
+#: src/preferences.py:56
 msgid "Select the {} configuration directory."
 msgstr "حدِّد مجلَّد ضبط {}."
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:58
+#: src/preferences.py:59
 msgid "Select the {} data directory."
 msgstr "حدِّد مجلَّد بيانات {}."
 
-#: src/preferences.py:60 src/preferences.py:238
+#: src/preferences.py:61 src/preferences.py:240
 msgid "Set Location"
 msgstr "عيِّن الموضع"
 
-#: src/preferences.py:130
+#: src/preferences.py:132
 msgid "All games removed"
 msgstr "أُزيلت كلُّ الألعاب"
 
-#: src/preferences.py:235
+#: src/preferences.py:237
 msgid "Cache Not Found"
 msgstr "لم يُعثر على الذاكرة المؤقَّتة"
 
-#: src/preferences.py:236
+#: src/preferences.py:238
 msgid "Select the Lutris cache directory."
 msgstr "حدِّد مجلَّد ذاكرة لوترس المؤقَّتة."
 
-#: src/preferences.py:335
+#: src/preferences.py:344
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "تحتاج مفتاح واجهة برمجة حال ما أردت استخدام SteamGridDB، {}هنا تولِّده{}."
+
+#: src/utils/create_details_window.py:81
+msgid "Add New Game"
+msgstr "أضف لعبةً جديدةً"
+
+#: src/utils/create_details_window.py:85
+msgid "Confirm"
+msgstr "أكِّد"
+
+#: src/utils/create_details_window.py:96
+msgid "Apply"
+msgstr "طبِّق"
+
+#: src/utils/create_details_window.py:130
+msgid "The title of the game"
+msgstr "عنوان اللعبة"
+
+#: src/utils/create_details_window.py:135
+msgid "Developer"
+msgstr "المطوِّر"
+
+#: src/utils/create_details_window.py:136
+msgid "The developer or publisher (optional)"
+msgstr "المطوِّر أو الناشر (اختياري)"
+
+#. Translate this string as you would translate "file"
+#: src/utils/create_details_window.py:147
+msgid "file.txt"
+msgstr "ملف.txt"
+
+#. As in software
+#: src/utils/create_details_window.py:149
+msgid "program"
+msgstr "البرنامج"
+
+#. Translate this string as you would translate "path to {}"
+#: src/utils/create_details_window.py:154
+#: src/utils/create_details_window.py:156
+msgid "C:\\path\\to\\{}"
+msgstr "C:\\المسار\\إلى\\{}"
+
+#. Translate this string as you would translate "path to {}"
+#: src/utils/create_details_window.py:160
+#: src/utils/create_details_window.py:162
+msgid "/path/to/{}"
+msgstr "/المسار/إلى/{}"
+
+#: src/utils/create_details_window.py:166
+msgid ""
+"To launch the executable \"{}\", use the command:\n"
+"\n"
+"<tt>\"{}\"</tt>\n"
+"\n"
+"To open the file \"{}\" with the default application, use:\n"
+"\n"
+"<tt>{} \"{}\"</tt>\n"
+"\n"
+"If the path contains spaces, make sure to wrap it in double quotes!"
+msgstr ""
+"إن أردت تشغيل ملفِّ التنفيذ «{}» فعليك استخدام الأمر:\n"
+"\n"
+"<tt>«{}»</tt>\n"
+"\n"
+"إن أردت فتح الملفِّ «{}» باستخدام التطبيق المبدئيِّ فعليك استخدام:\n"
+"\n"
+"<tt>{} «{}»</tt>\n"
+"\n"
+"ولا تنسَ إحاطة المسار بعلامتي تنصيص مزدوجتين حالما تضمَّن مسافات!"
+
+#: src/utils/create_details_window.py:189
+msgid "Executable"
+msgstr "ملفُّ التنفيذ"
+
+#: src/utils/create_details_window.py:190
+msgid "File to open or command to run when launching the game"
+msgstr "الملفُّ المفتوح أو الأمر المشغَّل عند بدء اللعبة"
+
+#: src/utils/create_details_window.py:202
+msgid "Cancel"
+msgstr "ألغِ"
+
+#: src/utils/create_details_window.py:259
+#: src/utils/create_details_window.py:269
+#: src/utils/create_details_window.py:275
+msgid "Couldn't Add Game"
+msgstr "تعذَّرت إضافة اللعبة"
+
+#: src/utils/create_details_window.py:261
+#: src/utils/create_details_window.py:299
+#: src/utils/create_details_window.py:307
+msgid "Couldn't Apply Preferences"
+msgstr "تعذَّر تطبيق التفضيلات"
+
+#: src/utils/create_details_window.py:269
+#: src/utils/create_details_window.py:300
+msgid "Game title cannot be empty."
+msgstr "لا يجوز كون عنوان اللعبة فارغًا."
+
+#: src/utils/create_details_window.py:275
+#: src/utils/create_details_window.py:308
+msgid "Executable cannot be empty."
+msgstr "لا يجوز كون ملفِّ التنفيذ فارغًا."
+
+#: src/utils/create_dialog.py:25
+msgid "Dismiss"
+msgstr "تجاهل"
 
 #: src/utils/importer.py:42
 msgid "Importing Games…"
@@ -483,7 +596,7 @@ msgstr "اُستوردت الألعاب"
 msgid "Successfully imported {} games."
 msgstr "اُستوردت {} لعبة بنجاح."
 
-#: src/utils/importer.py:120
+#: src/utils/importer.py:120 src/utils/steamgriddb.py:113
 msgid "Couldn't Connect to SteamGridDB"
 msgstr "تعذَّر الاتصال ب‍ SteamGridDB"
 
@@ -492,112 +605,6 @@ msgid ""
 "Looks like you have multiple Steam libraries. Would you like to add them in "
 "preferences?"
 msgstr "يبدو أن عندك أكثر من مكتبة ستيم. أتريد إضافتهم في التفضيلات؟"
-
-#: src/utils/create_details_window.py:78
-msgid "Add New Game"
-msgstr "أضف لعبةً جديدةً"
-
-#: src/utils/create_details_window.py:83
-msgid "Confirm"
-msgstr "أكِّد"
-
-#: src/utils/create_details_window.py:94
-msgid "Apply"
-msgstr "طبِّق"
-
-#: src/utils/create_details_window.py:128
-msgid "The title of the game"
-msgstr "عنوان اللعبة"
-
-#: src/utils/create_details_window.py:133
-msgid "Developer"
-msgstr "المطوِّر"
-
-#: src/utils/create_details_window.py:134
-msgid "The developer or publisher (optional)"
-msgstr "المطوِّر أو الناشر (اختياري)"
-
-#. Translate this string as you would translate "file"
-#: src/utils/create_details_window.py:145
-msgid "file.txt"
-msgstr "ملف.txt"
-
-#. As in software
-#: src/utils/create_details_window.py:147
-msgid "program"
-msgstr "برنامج"
-
-#. Translate this string as you would translate "path to {}"
-#: src/utils/create_details_window.py:152
-#: src/utils/create_details_window.py:154
-msgid "C:\\path\\to\\{}"
-msgstr "C:\\إلى\\المسار\\{}"
-
-#. Translate this string as you would translate "path to {}"
-#: src/utils/create_details_window.py:158
-#: src/utils/create_details_window.py:160
-msgid "/path/to/{}"
-msgstr "/إلى/المسار/{}"
-
-#: src/utils/create_details_window.py:164
-msgid ""
-"To launch the executable \"{}\", use the command:\n"
-"\n"
-"<tt>\"{}\"</tt>\n"
-"\n"
-"To open the file \"{}\" with the default application, use:\n"
-"\n"
-"<tt>{} \"{}\"</tt>\n"
-"\n"
-"If the path contains spaces, make sure to wrap it in double quotes!"
-msgstr ""
-"إن أردت تشغيل ملفِّ التنفيذ «{}» فعليك استخدام الأمر:\n"
-"\n"
-"<tt>«{}»</tt>\n"
-"\n"
-"إن أردت فتح الملفِّ «{}» باستخدام التطبيق المبدئيِّ فعليك استخدام:\n"
-"\n"
-"<tt>{} «{}»</tt>\n"
-"\n"
-"ولا تنسَ إحاطة المسار بعلامتي تنصيص مزدوجتين حال ما تضمَّن مسافات!"
-
-#: src/utils/create_details_window.py:187
-msgid "Executable"
-msgstr "ملفُّ تنفيذ"
-
-#: src/utils/create_details_window.py:188
-msgid "File to open or command to run when launching the game"
-msgstr "الملفُّ المفتوح أو الأمر المشغَّل عند بدء اللعبة"
-
-#: src/utils/create_details_window.py:200
-msgid "Cancel"
-msgstr "ألغِ"
-
-#: src/utils/create_details_window.py:252
-#: src/utils/create_details_window.py:262
-#: src/utils/create_details_window.py:268
-msgid "Couldn't Add Game"
-msgstr "تعذَّرت إضافة اللعبة"
-
-#: src/utils/create_details_window.py:254
-#: src/utils/create_details_window.py:292
-#: src/utils/create_details_window.py:300
-msgid "Couldn't Apply Preferences"
-msgstr "تعذَّر تطبيق التفضيلات"
-
-#: src/utils/create_details_window.py:262
-#: src/utils/create_details_window.py:293
-msgid "Game title cannot be empty."
-msgstr "لا يجوز كون عنوان اللعبة فارغًا."
-
-#: src/utils/create_details_window.py:268
-#: src/utils/create_details_window.py:301
-msgid "Executable cannot be empty."
-msgstr "لا يجوز كون ملفِّ التنفيذ فارغًا."
-
-#: src/utils/create_dialog.py:25
-msgid "Dismiss"
-msgstr "تجاهل"
 
 #~ msgid "Launch your games"
 #~ msgstr "شغِّل ألعابك"
