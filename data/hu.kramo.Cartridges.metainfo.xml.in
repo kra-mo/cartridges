@@ -36,10 +36,13 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="1.3.2" date="2023-04-06">
+    <release version="1.4" date="2023-04-16">
       <description translatable="no">
         <ul>
-          <li>Better SteamGridDB filtering</li>
+          <li>Support for animated covers</li>
+          <li>Redesigned details view</li>
+          <li>Easily search for games on various databases</li>
+          <li>Translations since 1.3</li>
         </ul>
       </description>
     </release>
