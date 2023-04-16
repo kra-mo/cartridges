@@ -56,6 +56,11 @@ For updates and questions, join our [Discord server][discord-url]!
 
 ## Windows
 
+### Using Winget
+
+- Install the latest release using `winget install cartridges` command.
+- We the release notes and information about the package using `winget show cartridges` command. 
+
 ### From Releases
 1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
 2. Run the downloaded installer.
