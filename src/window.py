@@ -258,7 +258,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
             return _("Yesterday")
         if (datetime.datetime.today() - date).days < 8:
             return GLib.DateTime.new_from_unix_utc(timestamp).format("%A")
-        return GLib.DateTime.new_from_unix_utc(timestamp).format("%x")
+        if (datetime.datetime.today() - date).days < 335:
+            return GLib.DateTime.new_from_unix_utc(timestamp).format("%B")
+        return GLib.DateTime.new_from_unix_utc(timestamp).format("%Y")
 
     def show_details_view(self, _widget, game_id):
         current_game = self.games[game_id]
