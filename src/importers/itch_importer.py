@@ -83,6 +83,7 @@ def get_game(task, current_time, win, row):
             GdkPixbuf.InterpType.BILINEAR,
             255,
         )
+
     else:
         game_cover = None
 
@@ -109,7 +110,7 @@ def get_games_async(win, rows, importer):
         # No need for an if statement as final_value would be None for games we don't want to save
         importer.save_game(
             final_values[0],
-            resize_cover(win, pixbuf=final_values[1]) if final_values[1] else None,
+            resize_cover(win, pixbuf=final_values[1]),
         )
 
     for row in rows:

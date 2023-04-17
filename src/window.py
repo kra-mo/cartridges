@@ -19,7 +19,7 @@
 
 import datetime
 import os
-import struct
+from struct import unpack_from
 from pathlib import Path
 from shutil import rmtree
 
@@ -69,8 +69,21 @@ class CartridgesWindow(Adw.ApplicationWindow):
     hidden_search_entry = Gtk.Template.Child()
     hidden_search_button = Gtk.Template.Child()
 
+    games = {}
+    game_covers = {}
+    visible_widgets = {}
+    hidden_widgets = {}
+    filtered = {}
+    hidden_filtered = {}
+    toasts = {}
+    active_game_id = None
+    scaled_pixbuf = None
+    details_view_game_cover = None
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        self.previous_page = self.library_view
 
         self.data_dir = (
             Path(os.getenv("XDG_DATA_HOME"))
@@ -90,18 +103,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.games_dir = self.data_dir / "cartridges" / "games"
         self.covers_dir = self.data_dir / "cartridges" / "covers"
-
-        self.games = {}
-        self.game_covers = {}
-        self.visible_widgets = {}
-        self.hidden_widgets = {}
-        self.filtered = {}
-        self.hidden_filtered = {}
-        self.previous_page = self.library_view
-        self.toasts = {}
-        self.active_game_id = None
-        self.scaled_pixbuf = None
-        self.details_view_game_cover = None
 
         self.schema = Gio.Settings.new("hu.kramo.Cartridges")
         scale_factor = max(
@@ -333,7 +334,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             colors = set()
 
             for index in range(6):
-                colors.add(struct.unpack_from("BBBB", pixels, offset=index * channels))
+                colors.add(unpack_from("BBBB", pixels, offset=index * channels))
 
             dark_theme = style_manager.get_dark()
 

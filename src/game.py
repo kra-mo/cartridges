@@ -19,11 +19,8 @@
 
 import json
 import os
-import shlex  # pylint: disable=unused-import
-import subprocess
-import sys
 
-from gi.repository import Gio, Gtk
+from gi.repository import Gio, GLib, Gtk
 
 from .game_cover import GameCover
 from .save_game import save_game
@@ -45,10 +42,14 @@ class Game(Gtk.Box):
     game_options = Gtk.Template.Child()
     hidden_game_options = Gtk.Template.Child()
 
+    loading = 0
+
     def __init__(self, win, data, **kwargs):
         super().__init__(**kwargs)
 
         self.win = win
+        self.app = win.get_application()
+
         self.added = data["added"]
         self.executable = data["executable"]
         self.game_id = data["game_id"]
@@ -59,7 +60,6 @@ class Game(Gtk.Box):
         self.removed = "removed" in data
         self.blacklisted = "blacklisted" in data
 
-        self.loading = 0
         self.title.set_label(self.name)
 
         if self.game_id in self.win.game_covers:
@@ -90,25 +90,15 @@ class Game(Gtk.Box):
 
     def launch(self):
         # Generate launch arguments, either list (no shell) or a string (for shell).
-        args = (
-            ["flatpak-spawn", "--host", *self.executable]  # Flatpak
+        argv = (
+            ("flatpak-spawn", "--host", *self.executable)  # Flatpak
             if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
-            else shlex.join(
-                self.executable
-            )  # Windows (We need shell to support its "open" built-in).
-            if os.name == "nt"
-            else self.executable  # Linux/Others
+            else self.executable  # Others
         )
 
-        # The host environment vars are automatically passed through by Popen.
-        subprocess.Popen(
-            args,
-            shell=isinstance(args, str),
-            start_new_session=True,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
-        )
+        GLib.spawn_async(argv, flags=GLib.SpawnFlags.SEARCH_PATH)
         if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
-            sys.exit()
+            self.app.quit()
 
     def toggle_hidden(self):
         data = json.loads(
@@ -139,7 +129,7 @@ class Game(Gtk.Box):
 
     def launch_game(self, _widget, *_unused):
         self.win.set_active_game(None, None, self.game_id)
-        self.win.get_application().on_launch_game_action(None)
+        self.app.on_launch_game_action(None)
 
     def cover_button_clicked(self, _widget):
         if self.win.schema.get_boolean("cover-launches-game"):

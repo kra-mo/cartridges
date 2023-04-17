@@ -26,6 +26,9 @@ from PIL import Image, ImageSequence
 
 
 def resize_cover(win, cover_path=None, pixbuf=None):
+    if not cover_path and not pixbuf:
+        return
+
     if pixbuf:
         cover_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
         pixbuf.savev(str(cover_path), "tiff", ["compression"], ["1"])
@@ -48,7 +51,6 @@ def resize_cover(win, cover_path=None, pixbuf=None):
             # This might not be necessary in the future
             # https://github.com/python-pillow/Pillow/issues/2663
             if image.mode not in ("RGB", "RGBA"):
-                print(image.mode)
                 image = image.convert("RGBA")
 
             tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
