@@ -79,6 +79,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     active_game_id = None
     scaled_pixbuf = None
     details_view_game_cover = None
+    sort_state = "a-z"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -125,6 +126,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.library.set_filter_func(self.search_filter)
         self.hidden_library.set_filter_func(self.hidden_search_filter)
+
+        self.library.set_sort_func(self.sort_func)
+        self.hidden_library.set_sort_func(self.sort_func)
 
         self.update_games(get_games(self))
 
@@ -358,44 +362,24 @@ class CartridgesWindow(Adw.ApplicationWindow):
                     0.2 + (sum(luminances) / len(luminances) + min(luminances)) / 2
                 )
 
-    def a_z_sort(self, child1, child2):
-        name1 = child1.get_first_child().name.lower()
-        name2 = child2.get_first_child().name.lower()
-        if name1 > name2:
-            return 1
-        if name1 < name2:
-            return -1
-        if child1.get_first_child().game_id > child2.get_first_child().game_id:
-            return 1
-        return -1
+    def sort_func(self, child1, child2):
+        games = (child1.get_first_child(), child2.get_first_child())
+        var, order = "name", True
 
-    def z_a_sort(self, child1, child2):
-        name1 = child1.get_first_child().name.lower()
-        name2 = child2.get_first_child().name.lower()
-        if name1 > name2:
-            return -1
-        return 1 if name1 < name2 else self.a_z_sort(child1, child2)
+        if self.sort_state in ("newest", "oldest"):
+            var, order = "added", self.sort_state == "newest"
+        elif self.sort_state == "last_played":
+            var = "last_played"
+        elif self.sort_state == "a-z":
+            order = False
 
-    def newest_sort(self, child1, child2):
-        time1 = self.games[child1.get_first_child().game_id].added
-        time2 = self.games[child2.get_first_child().game_id].added
-        if time1 > time2:
-            return -1
-        return 1 if time1 < time2 else self.a_z_sort(child1, child2)
+        def get_value(index):
+            return str(getattr(games[index], var)).lower()
 
-    def oldest_sort(self, child1, child2):
-        time1 = self.games[child1.get_first_child().game_id].added
-        time2 = self.games[child2.get_first_child().game_id].added
-        if time1 > time2:
-            return 1
-        return -1 if time1 < time2 else self.a_z_sort(child1, child2)
+        if var != "name" and get_value(0) == get_value(1):
+            var, order = "name", True
 
-    def last_played_sort(self, child1, child2):
-        time1 = self.games[child1.get_first_child().game_id].last_played
-        time2 = self.games[child2.get_first_child().game_id].last_played
-        if time1 > time2:
-            return -1
-        return 1 if time1 < time2 else self.a_z_sort(child1, child2)
+        return ((get_value(0) > get_value(1)) ^ order) * 2 - 1
 
     def on_go_back_action(self, _widget, _unused, _x=None, _y=None):
         if self.stack.get_visible_child() == self.hidden_library_view:
@@ -427,28 +411,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def on_sort_action(self, action, state):
         action.set_state(state)
-        state = str(state).strip("'")
-
-        if state == "a-z":
-            sort_func = self.a_z_sort
-
-        elif state == "z-a":
-            sort_func = self.z_a_sort
-
-        elif state == "newest":
-            sort_func = self.newest_sort
-
-        elif state == "oldest":
-            sort_func = self.oldest_sort
-
-        else:
-            sort_func = self.last_played_sort
+        self.sort_state = str(state).strip("'")
+        self.library.invalidate_sort()
 
         Gio.Settings(schema_id="hu.kramo.Cartridge.State").set_string(
-            "sort-mode", state
+            "sort-mode", self.sort_state
         )
-        self.library.set_sort_func(sort_func)
-        self.hidden_library.set_sort_func(sort_func)
 
     def on_toggle_search_action(self, _widget, _unused):
         if self.stack.get_visible_child() == self.library_view:

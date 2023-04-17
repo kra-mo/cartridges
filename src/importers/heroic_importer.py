@@ -63,10 +63,9 @@ def heroic_importer(win):
     if not win.schema.get_boolean("heroic-import-epic"):
         pass
     elif (heroic_dir / "store_cache" / "legendary_library.json").exists():
-        data = (heroic_dir / "store_cache" / "legendary_library.json").read_text(
-            "utf-8"
+        library = json.load(
+            (heroic_dir / "store_cache" / "legendary_library.json").open()
         )
-        library = json.loads(data)
 
         try:
             for game in library["library"]:
@@ -117,8 +116,7 @@ def heroic_importer(win):
     if not win.schema.get_boolean("heroic-import-gog"):
         pass
     elif (heroic_dir / "gog_store" / "installed.json").exists():
-        data = (heroic_dir / "gog_store" / "installed.json").read_text("utf-8")
-        installed = json.loads(data)
+        installed = json.load((heroic_dir / "gog_store" / "installed.json").open())
 
         importer.total_queue += len(installed["installed"])
         importer.queue += len(installed["installed"])
@@ -137,8 +135,7 @@ def heroic_importer(win):
                 continue
 
             # Get game title and developer from library.json as they are not present in installed.json
-            data = (heroic_dir / "gog_store" / "library.json").read_text("utf-8")
-            library = json.loads(data)
+            library = json.load((heroic_dir / "gog_store" / "library.json").open())
             for game in library["games"]:
                 if game["app_name"] == app_name:
                     values["developer"] = game["developer"]
@@ -165,8 +162,7 @@ def heroic_importer(win):
     if not win.schema.get_boolean("heroic-import-sideload"):
         pass
     elif (heroic_dir / "sideload_apps" / "library.json").exists():
-        data = (heroic_dir / "sideload_apps" / "library.json").read_text("utf-8")
-        library = json.loads(data)
+        library = json.load((heroic_dir / "sideload_apps" / "library.json").open())
 
         importer.total_queue += len(library["games"])
         importer.queue += len(library["games"])

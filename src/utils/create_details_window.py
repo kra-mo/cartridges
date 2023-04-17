@@ -326,7 +326,7 @@ def create_details_window(win, game_id=None):
         path = win.games_dir / f"{game_id}.json"
 
         if path.exists():
-            data = json.loads(path.read_text("utf-8"))
+            data = json.load(path.open())
             data.update(values)
             save_game(win, data)
         else:

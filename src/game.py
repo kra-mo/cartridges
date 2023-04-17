@@ -101,9 +101,7 @@ class Game(Gtk.Box):
             self.app.quit()
 
     def toggle_hidden(self):
-        data = json.loads(
-            (self.win.games_dir / f"{self.game_id}.json").read_text("utf-8")
-        )
+        data = json.load((self.win.games_dir / f"{self.game_id}.json").open())
 
         data["hidden"] = not data["hidden"]
 
