@@ -45,12 +45,18 @@ def resize_cover(win, cover_path=None, pixbuf=None):
             )
 
         else:
+            # This might not be necessary in the future
+            # https://github.com/python-pillow/Pillow/issues/2663
+            if image.mode not in ("RGB", "RGBA"):
+                print(image.mode)
+                image = image.convert("RGBA")
+
             tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
             image.resize(win.image_size).save(
                 tmp_path,
                 compression="tiff_adobe_deflate"
                 if win.schema.get_boolean("high-quality-images")
-                else "jpeg",
+                else "webp",
             )
 
     return tmp_path
@@ -68,11 +74,11 @@ def save_cover(win, game_id, cover_path):
 
     copyfile(
         cover_path,
-        animated_path if animated_path.is_file() else static_path,
+        animated_path if cover_path.suffix == ".gif" else static_path,
     )
 
     if game_id in win.game_covers:
         win.game_covers[game_id].new_pixbuf(
-            animated_path if animated_path.is_file() else static_path
+            animated_path if cover_path.suffix == ".gif" else static_path
         )
         return

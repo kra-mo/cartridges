@@ -50,7 +50,7 @@ class GameCover:
         self.path = path
 
         if path:
-            if str(path).rsplit(".", maxsplit=1)[-1] == "gif":
+            if path.suffix == ".gif":
                 task = Gio.Task.new()
                 task.run_in_thread(self.create_func(self.path))
             else:
