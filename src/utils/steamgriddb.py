@@ -4,7 +4,7 @@ import requests
 from gi.repository import Gio
 
 from .create_dialog import create_dialog
-from .save_cover import save_cover, resize_animation
+from .save_cover import save_cover, resize_cover
 
 
 class SGDBSave:
@@ -59,7 +59,6 @@ class SGDBSave:
                 task.return_value(game[0])
                 return
 
-            animated_grid = False
             response = None
 
             try:
@@ -73,7 +72,6 @@ class SGDBSave:
                         response = requests.get(
                             grid.json()["data"][0]["url"], timeout=5
                         )
-                        animated_grid = True
                     except IndexError:
                         pass
                 if not response:
@@ -93,10 +91,7 @@ class SGDBSave:
             save_cover(
                 self.win,
                 game[0],
-                tmp_file.get_path(),
-                animation_path=resize_animation(tmp_file.get_path())
-                if animated_grid
-                else None,
+                resize_cover(self.win, tmp_file.get_path()),
             )
 
         task.return_value(game[0])

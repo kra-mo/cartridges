@@ -22,7 +22,7 @@ from pathlib import Path
 from gi.repository import Adw, Gtk
 
 from .create_dialog import create_dialog
-from .save_cover import save_cover
+from .save_cover import resize_cover, save_cover
 from .save_game import save_game
 from .steamgriddb import SGDBSave
 
@@ -54,12 +54,14 @@ class Importer:
 
         self.import_dialog.present()
 
-    def save_game(self, values=None, cover_path=None, pixbuf=None):
+    def save_game(self, values=None, cover_path=None):
         if values:
             save_game(self.win, values)
 
-            if cover_path or pixbuf:
-                save_cover(self.win, values["game_id"], cover_path, pixbuf)
+            if cover_path:
+                save_cover(
+                    self.win, values["game_id"], resize_cover(self.win, cover_path)
+                )
 
             self.games.add((values["game_id"], values["name"]))
 

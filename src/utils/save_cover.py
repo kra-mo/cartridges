@@ -21,66 +21,58 @@
 from pathlib import Path
 from shutil import copyfile
 
-from gi.repository import GdkPixbuf, Gio
+from gi.repository import Gio
 from PIL import Image, ImageSequence
 
 
-def img2tiff(win, cover_path):
-    tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
+def resize_cover(win, cover_path=None, pixbuf=None):
+    if pixbuf:
+        cover_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
+        pixbuf.savev(str(cover_path), "tiff", ["compression"], ["1"])
+
     with Image.open(cover_path) as image:
-        image.resize(win.image_size).save(tmp_path)
+        if getattr(image, "is_animated", False):
+            frames = tuple(
+                frame.copy().resize((200, 300))
+                for frame in ImageSequence.Iterator(image)
+            )
+
+            tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
+            frames[0].save(
+                tmp_path,
+                save_all=True,
+                append_images=frames[1:],
+            )
+
+        else:
+            tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
+            image.resize(win.image_size).save(
+                tmp_path,
+                compression="tiff_adobe_deflate"
+                if win.schema.get_boolean("high-quality-images")
+                else "jpeg",
+            )
 
     return tmp_path
 
 
-def resize_animation(cover_path):
-    with Image.open(cover_path) as image:
-        frames = tuple(
-            frame.copy().resize((200, 300)) for frame in ImageSequence.Iterator(image)
-        )
-
-    tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
-    frames[0].save(
-        tmp_path,
-        save_all=True,
-        append_images=frames[1:],
-    )
-
-    return tmp_path
-
-
-def save_cover(
-    win,
-    game_id,
-    cover_path=None,
-    pixbuf=None,
-    animation_path=None,
-):
+def save_cover(win, game_id, cover_path):
     win.covers_dir.mkdir(parents=True, exist_ok=True)
 
+    animated_path = win.covers_dir / f"{game_id}.gif"
+    static_path = win.covers_dir / f"{game_id}.tiff"
+
     # Remove previous covers
-    (win.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
-    (win.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
+    (animated_path).unlink(missing_ok=True)
+    (static_path).unlink(missing_ok=True)
 
-    if animation_path:
-        copyfile(animation_path, win.covers_dir / f"{game_id}.gif")
-        if game_id in win.game_covers:
-            win.game_covers[game_id].new_pixbuf(animation_path)
-        return
-
-    if not pixbuf:
-        if not cover_path:
-            return
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            str(cover_path), *win.image_size, False
-        )
-
-    pixbuf.savev(
-        str(win.covers_dir / f"{game_id}.tiff"),
-        "tiff",
-        ["compression"],
-        ["8"] if win.schema.get_boolean("high-quality-images") else ["7"],
+    copyfile(
+        cover_path,
+        animated_path if animated_path.is_file() else static_path,
     )
 
     if game_id in win.game_covers:
-        win.game_covers[game_id].new_pixbuf(win.covers_dir / f"{game_id}.tiff")
+        win.game_covers[game_id].new_pixbuf(
+            animated_path if animated_path.is_file() else static_path
+        )
+        return

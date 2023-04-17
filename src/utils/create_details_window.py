@@ -27,7 +27,7 @@ from PIL import Image
 
 from .create_dialog import create_dialog
 from .game_cover import GameCover
-from .save_cover import img2tiff, resize_animation, save_cover
+from .save_cover import resize_cover, save_cover
 from .save_game import save_game
 from .steamgriddb import SGDBSave
 
@@ -233,13 +233,7 @@ def create_details_window(win, game_id=None):
         cover_button_delete_revealer.set_reveal_child(True)
         cover_changed = True
 
-        with Image.open(path) as image:
-            if getattr(image, "is_animated", False):
-                path = resize_animation(path)
-            else:
-                path = img2tiff(win, path)
-
-        game_cover.new_pixbuf(path)
+        game_cover.new_pixbuf(resize_cover(win, path))
 
     def close_window(_widget, _callback=None):
         window.close()
@@ -326,9 +320,7 @@ def create_details_window(win, game_id=None):
             save_cover(
                 win,
                 game_id,
-                None,
-                game_cover.get_pixbuf(),
-                game_cover.get_animation(),
+                game_cover.path,
             )
 
         path = win.games_dir / f"{game_id}.json"

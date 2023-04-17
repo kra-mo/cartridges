@@ -27,6 +27,7 @@ import requests
 from gi.repository import GdkPixbuf, Gio
 
 from .check_install import check_install
+from .save_cover import resize_cover
 
 
 def get_game(task, current_time, win, row):
@@ -106,7 +107,10 @@ def get_games_async(win, rows, importer):
     def update_games(_task, result):
         final_values = result.propagate_value()[1]
         # No need for an if statement as final_value would be None for games we don't want to save
-        importer.save_game(final_values[0], pixbuf=final_values[1])
+        importer.save_game(
+            final_values[0],
+            resize_cover(win, pixbuf=final_values[1]) if final_values[1] else None,
+        )
 
     for row in rows:
         task = Gio.Task.new(None, None, update_games)
