@@ -340,7 +340,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.toast.dismiss()
 
     def remove_all_games(self, _widget):
-        for game in self.win.games:
+        for game in self.win.games.values():
             if not game.removed:
                 self.removed_games.add(game.game_id)
 

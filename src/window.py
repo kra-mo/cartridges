@@ -115,14 +115,16 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.details_view.set_measure_overlay(self.details_view_box, True)
         self.details_view.set_clip_overlay(self.details_view_box, False)
 
-        self.library.set_filter_func(self.search_filter)
-        self.hidden_library.set_filter_func(self.search_filter)
+        self.library.set_filter_func(self.filter_func)
+        self.hidden_library.set_filter_func(self.filter_func)
 
         self.library.set_sort_func(self.sort_func)
         self.hidden_library.set_sort_func(self.sort_func)
 
         for game in get_games(self).values():
             Game(self, game).update()
+
+        self.set_library_child()
 
         # Connect signals
         self.search_entry.connect("search-changed", self.search_changed, False)
@@ -146,7 +148,27 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             self.library.invalidate_filter()
 
-    def search_filter(self, child):
+    def set_library_child(self):
+        child, hidden_child = self.notice_empty, self.hidden_notice_empty
+
+        for game in self.games.values():
+            if game.removed or game.blacklisted:
+                continue
+            if game.hidden:
+                if game.filtered and hidden_child != self.hidden_scrolledwindow:
+                    hidden_child = self.notice_no_results
+                    continue
+                hidden_child = self.hidden_scrolledwindow
+            else:
+                if game.filtered and child != self.scrolledwindow:
+                    child = self.notice_no_results
+                    continue
+                child = self.scrolledwindow
+
+        self.library_bin.set_child(child)
+        self.hidden_library_bin.set_child(hidden_child)
+
+    def filter_func(self, child):
         hidden = self.stack.get_visible_child() == self.hidden_library_view
         text = (
             (self.hidden_search_entry if hidden else self.search_entry)
@@ -164,19 +186,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         game.filtered = filtered
 
-        (self.hidden_library_bin if hidden else self.library_bin).set_child(
-            (self.hidden_scrolledwindow if hidden else self.scrolledwindow)
-            if any(
-                not game.filtered
-                for game in self.games.values()
-                if not (
-                    game.removed
-                    or game.blacklisted
-                    or (not game.hidden if hidden else game.hidden)
-                )
-            )
-            else self.notice_no_results
-        )
+        self.set_library_child()
 
         return not filtered
 
@@ -223,7 +233,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.details_view_game_cover.add_picture(self.details_view_cover)
 
         self.scaled_pixbuf = (
-            self.details_view_game_cover.get_pixbuf()
+            self.details_view_game_cover.pixbuf
             or self.details_view_game_cover.placeholder_pixbuf
         ).scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
         self.details_view_blurred_cover.set_pixbuf(self.scaled_pixbuf)

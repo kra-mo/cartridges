@@ -17,7 +17,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import json
 import os
 import shlex
 import time
@@ -90,7 +89,7 @@ def create_details_window(win, game_id=None):
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
         game_cover.new_cover(win.games[game_id].get_cover_path())
-        if game_cover.get_pixbuf():
+        if game_cover.pixbuf:
             cover_button_delete_revealer.set_reveal_child(True)
     else:
         window.set_title(_("Add New Game"))
@@ -328,7 +327,7 @@ def create_details_window(win, game_id=None):
         else:
             Game(win, values).save()
 
-        if not game_cover.get_pixbuf():
+        if not game_cover.pixbuf:
             SGDBSave(win, {(game_id, values["name"])})
 
         win.game_covers[game_id].pictures.remove(cover)

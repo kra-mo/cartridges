@@ -111,10 +111,14 @@ class SGDBSave:
                     _("Preferences"),
                 ).connect("response", self.response)
 
-        if not self.importer:
-            game = self.win.games[result.propagate_value()[1]]
-            game.set_loading(-1)
-            game.update()
+        game = self.win.games.get(result.propagate_value()[1])
+        game.set_loading(-1)
+
+        if game:
+            if self.importer:
+                game.save()
+            else:
+                game.update()
 
     def response(self, _widget, response):
         if response == "open_preferences":

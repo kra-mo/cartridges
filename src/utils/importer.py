@@ -56,7 +56,7 @@ class Importer:
 
     def save_game(self, values=None, cover_path=None):
         if values:
-            Game(self.win, values).save()
+            Game(self.win, values)
 
             if cover_path:
                 save_cover(

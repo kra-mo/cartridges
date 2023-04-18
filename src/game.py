@@ -60,6 +60,10 @@ class Game(Gtk.Box):
         self.win = win
         self.app = win.get_application()
 
+        self.update_values(data)
+
+        self.win.games[self.game_id] = self
+
         self.set_play_label()
         self.overlay.set_measure_overlay(self.play_revealer, True)
 
@@ -73,24 +77,11 @@ class Game(Gtk.Box):
 
         self.win.schema.connect("changed", self.schema_changed)
 
-        self.update_values(data)
-
     def update(self):
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.show_details_view(None, self.game_id)
-
-        self.win.games[self.game_id] = self
-
         if self.get_parent():
             self.get_parent().get_parent().remove(self)
             if self.get_parent():
                 self.get_parent().set_child()
-
-        if self.game_id in self.win.game_covers:
-            self.win.game_covers[self.game_id].add_picture(self.cover)
-        else:
-            game_cover = GameCover({self.cover}, self.get_cover_path())
-            self.win.game_covers[self.game_id] = game_cover
 
         self.menu_button.set_menu_model(
             self.hidden_game_options if self.hidden else self.game_options
@@ -103,18 +94,27 @@ class Game(Gtk.Box):
             "notify::visible", self.win.set_active_game, self.game_id
         )
 
-        if not self.removed or self.blacklisted:
+        if self.game_id in self.win.game_covers:
+            self.win.game_covers[self.game_id].add_picture(self.cover)
+        else:
+            game_cover = GameCover({self.cover}, self.get_cover_path())
+            self.win.game_covers[self.game_id] = game_cover
+
+        if self.win.stack.get_visible_child() == self.win.details_view:
+            self.win.show_details_view(None, self.game_id)
+
+        if not self.removed and not self.blacklisted:
             if self.hidden:
                 self.win.hidden_library.append(self)
             else:
                 self.win.library.append(self)
             self.get_parent().set_focusable(False)
 
+        self.win.set_library_child()
+
     def update_values(self, data):
         for key, value in data.items():
             setattr(self, key, value)
-
-        self.save()
 
     def save(self):
         self.win.games_dir.mkdir(parents=True, exist_ok=True)
@@ -139,18 +139,6 @@ class Game(Gtk.Box):
         )
 
         self.update()
-
-        self.win.library_bin.set_child(
-            self.win.scrolledwindow
-            if any(not game.hidden for game in self.win.games.values())
-            else self.win.notice_empty
-        )
-
-        self.win.hidden_library_bin.set_child(
-            self.win.hidden_scrolledwindow
-            if any(game.hidden for game in self.win.games.values())
-            else self.win.hidden_notice_empty
-        )
 
     def launch(self):
         # Generate launch arguments, either list (no shell) or a string (for shell).
