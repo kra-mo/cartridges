@@ -43,6 +43,7 @@ class Game(Gtk.Box):
     hidden_game_options = Gtk.Template.Child()
 
     loading = 0
+    filtered = False
 
     def __init__(self, win, data, **kwargs):
         super().__init__(**kwargs)
@@ -60,33 +61,36 @@ class Game(Gtk.Box):
         self.removed = "removed" in data
         self.blacklisted = "blacklisted" in data
 
-        self.title.set_label(self.name)
-
         if self.game_id in self.win.game_covers:
             self.win.game_covers[self.game_id].add_picture(self.cover)
         else:
             game_cover = GameCover({self.cover}, self.get_cover_path())
             self.win.game_covers[self.game_id] = game_cover
 
-        self.event_contoller_motion = Gtk.EventControllerMotion.new()
-        self.add_controller(self.event_contoller_motion)
-        self.overlay.set_measure_overlay(self.play_revealer, True)
-
-        self.set_play_label()
-
-        self.cover_button.connect("clicked", self.cover_button_clicked)
-        self.play_button.connect("clicked", self.play_button_clicked)
-
-        self.event_contoller_motion.connect("enter", self.show_play)
-        self.event_contoller_motion.connect("leave", self.hide_play)
-
-        self.win.schema.connect("changed", self.schema_changed)
-
         if self.hidden:
             self.menu_button.set_menu_model(self.hidden_game_options)
         else:
             self.menu_button.set_menu_model(self.game_options)
+
+        self.title.set_label(self.name)
+        self.set_play_label()
+
+        self.overlay.set_measure_overlay(self.play_revealer, True)
+
+        self.event_contoller_motion = Gtk.EventControllerMotion.new()
+        self.add_controller(self.event_contoller_motion)
+        self.event_contoller_motion.connect("enter", self.show_play)
+        self.event_contoller_motion.connect("leave", self.hide_play)
+
+        self.cover_button.connect("clicked", self.cover_button_clicked)
+        self.play_button.connect("clicked", self.play_button_clicked)
+
         self.menu_button.get_popover().connect("notify::visible", self.hide_play)
+        self.menu_button.get_popover().connect(
+            "notify::visible", self.win.set_active_game, self.game_id
+        )
+
+        self.win.schema.connect("changed", self.schema_changed)
 
     def launch(self):
         # Generate launch arguments, either list (no shell) or a string (for shell).

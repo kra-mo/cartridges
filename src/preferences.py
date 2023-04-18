@@ -19,7 +19,6 @@
 
 import os
 from pathlib import Path
-from shutil import move
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -139,7 +138,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
         )
         self.add_controller(shortcut_controller)
-        self.removed_games = []
+        self.removed_games = set()
 
         # General
         self.schema.bind(
@@ -335,42 +334,22 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.file_chooser.select_folder(self.win, None, function, None)
 
     def undo_remove_all(self, _widget, _unused):
-        deleted_covers_dir = self.win.cache_dir / "cartridges" / "deleted_covers"
-
         for game_id in self.removed_games:
-            data = get_games(self.win, [game_id])[game_id]
+            data = get_games(self.win, {game_id})[game_id]
             if "removed" in data:
                 data.pop("removed")
                 save_game(self.win, data)
 
-                cover_path = deleted_covers_dir / f"{game_id}.tiff"
-                if not cover_path.is_file():
-                    cover_path = deleted_covers_dir / f"{game_id}.gif"
-                if not cover_path.is_file():
-                    continue
-
-                move(cover_path, self.win.covers_dir / cover_path.name)
-
         self.win.update_games(self.removed_games)
-        self.removed_games = []
+        self.removed_games = set()
         self.toast.dismiss()
 
     def remove_all_games(self, _widget):
-        deleted_covers_dir = self.win.cache_dir / "cartridges" / "deleted_covers"
-        deleted_covers_dir.mkdir(parents=True, exist_ok=True)
-
         for game in get_games(self.win).values():
             if "removed" not in game:
-                self.removed_games.append(game["game_id"])
+                self.removed_games.add(game["game_id"])
                 game["removed"] = True
                 save_game(self.win, game)
-
-                cover_path = self.win.games[game["game_id"]].get_cover_path()
-                if not cover_path:
-                    continue
-
-                if cover_path.is_file():
-                    move(cover_path, deleted_covers_dir / cover_path.name)
 
         self.win.update_games(self.win.games)
         if self.win.stack.get_visible_child() == self.win.details_view:

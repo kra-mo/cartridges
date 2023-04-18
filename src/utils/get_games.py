@@ -23,17 +23,15 @@ import json
 def get_games(win, game_ids=None):
     games = {}
 
-    if not win.games_dir.exists():
-        return {}
-
     game_files = (
-        [win.games_dir / f"{game_id}.json" for game_id in game_ids]
+        {win.games_dir / f"{game_id}.json" for game_id in game_ids}
         if game_ids
         else win.games_dir.iterdir()
     )
 
     for open_file in game_files:
-        data = json.load(open_file.open())
-        games[data["game_id"]] = data
+        if open_file.exists():
+            data = json.load(open_file.open())
+            games[data["game_id"]] = data
 
     return games

@@ -112,7 +112,7 @@ class SGDBSave:
                 ).connect("response", self.response)
 
         game_id = result.propagate_value()[1]
-        self.win.update_games([game_id])
+        self.win.update_games({game_id})
 
     def response(self, _widget, response):
         if response == "open_preferences":

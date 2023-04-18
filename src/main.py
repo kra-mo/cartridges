@@ -154,7 +154,7 @@ class CartridgesApplication(Adw.Application):
         game_id = self.win.active_game_id
         last_played = int(time.time())
 
-        data = get_games(self.win, [game_id])[game_id]
+        data = get_games(self.win, {game_id})[game_id]
         data["last_played"] = last_played
         save_game(self.win, data)
 
@@ -180,7 +180,7 @@ class CartridgesApplication(Adw.Application):
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action(None, None)
         self.win.games[game_id].toggle_hidden()
-        self.win.update_games([game_id])
+        self.win.update_games({game_id})
 
         if not toast:
             return
@@ -237,11 +237,11 @@ class CartridgesApplication(Adw.Application):
         # Add "removed=True" to the game properties so it can be deleted on next init
         game_id = self.win.active_game_id
 
-        data = get_games(self.win, [game_id])[game_id]
+        data = get_games(self.win, {game_id})[game_id]
         data["removed"] = True
         save_game(self.win, data)
 
-        self.win.update_games([game_id])
+        self.win.update_games({game_id})
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action(None, None)
 

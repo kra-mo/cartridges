@@ -21,7 +21,6 @@ import datetime
 import os
 from struct import unpack_from
 from pathlib import Path
-from shutil import rmtree
 
 from gi.repository import Adw, Gdk, GdkPixbuf, Gio, GLib, Gtk
 
@@ -71,10 +70,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     games = {}
     game_covers = {}
-    visible_widgets = {}
-    hidden_widgets = {}
-    filtered = {}
-    hidden_filtered = {}
     toasts = {}
     active_game_id = None
     scaled_pixbuf = None
@@ -119,13 +114,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 (self.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
                 (self.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
 
-        rmtree(self.cache_dir / "cartridges" / "deleted_covers", True)
-
         self.details_view.set_measure_overlay(self.details_view_box, True)
         self.details_view.set_clip_overlay(self.details_view_box, False)
 
         self.library.set_filter_func(self.search_filter)
-        self.hidden_library.set_filter_func(self.hidden_search_filter)
+        self.hidden_library.set_filter_func(self.search_filter)
 
         self.library.set_sort_func(self.sort_func)
         self.hidden_library.set_sort_func(self.sort_func)
@@ -148,126 +141,99 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
 
     def update_games(self, games):
-        current_games = get_games(self)
-
         for game_id in games:
-            if game_id in self.visible_widgets:
-                self.library.remove(self.visible_widgets[game_id])
-                self.filtered.pop(self.visible_widgets[game_id])
-                self.visible_widgets.pop(game_id)
-            elif game_id in self.hidden_widgets:
-                self.hidden_library.remove(self.hidden_widgets[game_id])
-                self.hidden_filtered.pop(self.hidden_widgets[game_id])
-                self.hidden_widgets.pop(game_id)
+            if game_id in self.games and self.games[game_id].get_parent():
+                self.games[game_id].get_parent().get_parent().remove(
+                    self.games[game_id]
+                )
 
-            current_game = current_games[game_id]
+            entry = Game(self, get_games(self, {game_id})[game_id])
+            self.games[game_id] = entry
 
-            entry = Game(self, current_game)
-            self.games[current_game["game_id"]] = entry
-
-            if entry.removed:
-                continue
-            if entry.blacklisted:
+            if entry.removed or entry.blacklisted:
                 continue
 
-            if not self.games[game_id].hidden:
-                self.visible_widgets[game_id] = entry
-                self.library.append(entry)
-            else:
-                self.hidden_widgets[game_id] = entry
+            if entry.hidden:
                 self.hidden_library.append(entry)
+            else:
+                self.library.append(entry)
 
-            entry.menu_button.get_popover().connect(
-                "notify::visible", self.set_active_game, game_id
-            )
             entry.get_parent().set_focusable(False)
 
-        if not self.visible_widgets:
-            self.library_bin.set_child(self.notice_empty)
-        else:
-            self.library_bin.set_child(self.scrolledwindow)
+        self.library_bin.set_child(
+            self.scrolledwindow
+            if any(not game.hidden for game in self.games.values())
+            else self.notice_empty
+        )
 
-        if not self.hidden_widgets:
-            self.hidden_library_bin.set_child(self.hidden_notice_empty)
-        else:
-            self.hidden_library_bin.set_child(self.hidden_scrolledwindow)
+        self.hidden_library_bin.set_child(
+            self.hidden_scrolledwindow
+            if any(game.hidden for game in self.games.values())
+            else self.hidden_notice_empty
+        )
 
         if self.stack.get_visible_child() == self.details_view:
             self.show_details_view(None, self.active_game_id)
 
-        self.library.invalidate_filter()
-        self.hidden_library.invalidate_filter()
-
     def search_changed(self, _widget, hidden):
         # Refresh search filter on keystroke in search box
-        if not hidden:
-            self.library.invalidate_filter()
-        else:
+        if hidden:
             self.hidden_library.invalidate_filter()
+        else:
+            self.library.invalidate_filter()
 
     def search_filter(self, child):
-        # Only show games matching the contents of the search box
-        text = self.search_entry.get_text().lower()
-        if text == "":
-            filtered = True
-        elif (
+        hidden = self.stack.get_visible_child() == self.hidden_library_view
+        text = (
+            (self.hidden_search_entry if hidden else self.search_entry)
+            .get_text()
+            .lower()
+        )
+
+        filtered = text != "" and not (
             text in child.get_first_child().name.lower()
             or text in child.get_first_child().developer.lower()
             if child.get_first_child().developer
             else None
-        ):
-            filtered = True
-        else:
-            filtered = False
+        )
 
-        # Add filtered entry to dict of filtered widgets
-        self.filtered[child.get_first_child()] = filtered
+        child.get_first_child().filtered = filtered
 
-        if True not in self.filtered.values():
-            self.library_bin.set_child(self.notice_no_results)
-        else:
-            self.library_bin.set_child(self.scrolledwindow)
-        return filtered
+        (self.hidden_library_bin if hidden else self.library_bin).set_child(
+            (self.hidden_scrolledwindow if hidden else self.scrolledwindow)
+            if any(
+                not game.filtered
+                for game in self.games.values()
+                if not (
+                    game.removed
+                    or game.blacklisted
+                    or (not game.hidden if hidden else game.hidden)
+                )
+            )
+            else self.notice_no_results
+        )
 
-    def hidden_search_filter(self, child):
-        text = self.hidden_search_entry.get_text().lower()
-        if text == "":
-            filtered = True
-        elif (
-            text in child.get_first_child().name.lower()
-            or text in child.get_first_child().developer.lower()
-            if child.get_first_child().developer
-            else None
-        ):
-            filtered = True
-        else:
-            filtered = False
-
-        self.hidden_filtered[child.get_first_child()] = filtered
-
-        if True not in self.hidden_filtered.values():
-            self.hidden_library_bin.set_child(self.notice_no_results)
-        else:
-            self.hidden_library_bin.set_child(self.hidden_scrolledwindow)
-        return filtered
+        return not filtered
 
     def set_active_game(self, _widget, _unused, game_id):
         self.active_game_id = game_id
 
     def get_time(self, timestamp):
         date = datetime.datetime.fromtimestamp(timestamp)
+        days_no = (datetime.datetime.today() - date).days
 
-        if (datetime.datetime.today() - date).days == 0:
+        if days_no == 0:
             return _("Today")
-        if (datetime.datetime.today() - date).days == 1:
+        if days_no == 1:
             return _("Yesterday")
-        if (datetime.datetime.today() - date).days < 8:
+        if days_no < 8:
             return GLib.DateTime.new_from_unix_utc(timestamp).format("%A")
-        if (datetime.datetime.today() - date).days < 335:
+        if days_no < 335:
             return GLib.DateTime.new_from_unix_utc(timestamp).format("%B")
         return GLib.DateTime.new_from_unix_utc(timestamp).format("%Y")
 
     def show_details_view(self, _widget, game_id):
+        self.active_game_id = game_id
         current_game = self.games[game_id]
 
         self.details_view_cover.set_visible(not current_game.loading)
@@ -285,8 +251,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             self.details_view_hide_button.set_icon_name("view-conceal-symbolic")
             self.details_view_hide_button.set_tooltip_text(_("Hide"))
-
-        self.active_game_id = game_id
 
         if self.details_view_game_cover:
             self.details_view_game_cover.pictures.remove(self.details_view_cover)
@@ -333,12 +297,14 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 self.details_view_blurred_cover.set_opacity(0.3)
                 return
 
-            pixels = self.scaled_pixbuf.get_pixels()
-            channels = self.scaled_pixbuf.get_n_channels()
-            colors = set()
-
-            for index in range(6):
-                colors.add(unpack_from("BBBB", pixels, offset=index * channels))
+            colors = {
+                unpack_from(
+                    "BBBB",
+                    self.scaled_pixbuf.get_pixels(),
+                    offset=index * self.scaled_pixbuf.get_n_channels(),
+                )
+                for index in range(6)
+            }
 
             dark_theme = style_manager.get_dark()
 
@@ -348,19 +314,17 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 # https://en.wikipedia.org/wiki/Relative_luminance
                 luminance = red * 0.2126 + green * 0.7152 + blue * 0.0722
 
-                if dark_theme:
-                    luminances.append((luminance * alpha) / 255**2)
-                else:
-                    luminances.append((alpha * (luminance - 255)) / 255**2 + 1)
+                luminances.append(
+                    (luminance * alpha) / 255**2
+                    if dark_theme
+                    else (alpha * (luminance - 255)) / 255**2 + 1
+                )
 
-            if dark_theme:
-                self.details_view_blurred_cover.set_opacity(
-                    1.3 - (sum(luminances) / len(luminances) + max(luminances)) / 2
-                )
-            else:
-                self.details_view_blurred_cover.set_opacity(
-                    0.2 + (sum(luminances) / len(luminances) + min(luminances)) / 2
-                )
+            self.details_view_blurred_cover.set_opacity(
+                1.3 - (sum(luminances) / len(luminances) + max(luminances)) / 2
+                if dark_theme
+                else 0.2 + (sum(luminances) / len(luminances) + min(luminances)) / 2
+            )
 
     def sort_func(self, child1, child2):
         games = (child1.get_first_child(), child2.get_first_child())
@@ -473,10 +437,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
             )
 
         elif undo == "remove":
-            data = get_games(self, [game_id])[game_id]
+            data = get_games(self, {game_id})[game_id]
             data.pop("removed", None)
             save_game(self, data)
-            self.update_games([game_id])
+            self.update_games({game_id})
 
         self.toasts[(game_id, undo)].dismiss()
         self.toasts.pop((game_id, undo))
