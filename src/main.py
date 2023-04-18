@@ -30,13 +30,11 @@ from gi.repository import Adw, Gio, GLib, Gtk
 
 from .bottles_importer import bottles_importer
 from .create_details_window import create_details_window
-from .get_games import get_games
 from .heroic_importer import heroic_importer
 from .importer import Importer
 from .itch_importer import itch_importer
 from .lutris_importer import lutris_importer
 from .preferences import PreferencesWindow
-from .save_game import save_game
 from .steam_importer import steam_importer
 from .window import CartridgesWindow
 
@@ -150,24 +148,13 @@ class CartridgesApplication(Adw.Application):
 
     def on_launch_game_action(self, _widget, _callback=None):
         # Launch the game and update the last played value
+        game = self.win.games[self.win.active_game_id]
 
-        game_id = self.win.active_game_id
-        last_played = int(time.time())
+        game.last_played = int(time.time())
+        game.save()
+        game.launch()
 
-        data = get_games(self.win, {game_id})[game_id]
-        data["last_played"] = last_played
-        save_game(self.win, data)
-
-        self.win.games[game_id].launch()
-
-        # Update state
-        self.win.games[game_id].last_played = last_played
-        self.win.library.invalidate_sort()
-        self.win.hidden_library.invalidate_sort()
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.show_details_view(None, game_id)
-
-        title = self.win.games[game_id].name
+        title = game.name
         # The variable is the title of the game
         toast = Adw.Toast.new(_("{} launched").format(title))
         toast.set_priority(Adw.ToastPriority.HIGH)
@@ -180,7 +167,6 @@ class CartridgesApplication(Adw.Application):
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action(None, None)
         self.win.games[game_id].toggle_hidden()
-        self.win.update_games({game_id})
 
         if not toast:
             return
@@ -235,23 +221,21 @@ class CartridgesApplication(Adw.Application):
 
     def on_remove_game_action(self, _widget, _callback=None):
         # Add "removed=True" to the game properties so it can be deleted on next init
-        game_id = self.win.active_game_id
+        game = self.win.games[self.win.active_game_id]
 
-        data = get_games(self.win, {game_id})[game_id]
-        data["removed"] = True
-        save_game(self.win, data)
+        game.removed = True
+        game.save()
 
-        self.win.update_games({game_id})
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action(None, None)
 
-        title = self.win.games[game_id].name
+        title = game.name
         # The variable is the title of the game
         toast = Adw.Toast.new(_("{} removed").format(title))
         toast.set_button_label(_("Undo"))
-        toast.connect("button-clicked", self.win.on_undo_action, game_id, "remove")
+        toast.connect("button-clicked", self.win.on_undo_action, game.game_id, "remove")
         toast.set_priority(Adw.ToastPriority.HIGH)
-        self.win.toasts[(game_id, "remove")] = toast
+        self.win.toasts[(game.game_id, "remove")] = toast
         self.win.toast_overlay.add_toast(toast)
 
     def on_remove_game_details_view_action(self, _widget, _callback=None):

@@ -31,7 +31,6 @@ cartridges_sources = [
   'utils/importer.py',
   'utils/steamgriddb.py',
   'utils/get_games.py',
-  'utils/save_game.py',
   'utils/save_cover.py',
   'utils/create_dialog.py',
   'utils/create_details_window.py',

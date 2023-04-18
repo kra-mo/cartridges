@@ -32,7 +32,7 @@ class GameCover:
 
     def __init__(self, pictures, path=None):
         self.pictures = pictures
-        self.new_pixbuf(path)
+        self.new_cover(path)
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
     def create_func(self, path):
@@ -44,7 +44,7 @@ class GameCover:
 
         return wrapper
 
-    def new_pixbuf(self, path=None):
+    def new_cover(self, path=None):
         self.animation = None
         self.pixbuf = None
         self.path = path
@@ -61,9 +61,6 @@ class GameCover:
 
     def get_pixbuf(self):
         return self.animation.get_static_image() if self.animation else self.pixbuf
-
-    def get_animation(self):
-        return self.path if self.animation else None
 
     def add_picture(self, picture):
         self.pictures.add(picture)

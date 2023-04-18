@@ -23,7 +23,6 @@ import os
 from gi.repository import Gio, GLib, Gtk
 
 from .game_cover import GameCover
-from .save_game import save_game
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")
@@ -45,36 +44,23 @@ class Game(Gtk.Box):
     loading = 0
     filtered = False
 
+    added = None
+    executable = None
+    game_id = None
+    hidden = None
+    last_played = None
+    name = None
+    developer = None
+    removed = None
+    blacklisted = None
+
     def __init__(self, win, data, **kwargs):
         super().__init__(**kwargs)
 
         self.win = win
         self.app = win.get_application()
 
-        self.added = data["added"]
-        self.executable = data["executable"]
-        self.game_id = data["game_id"]
-        self.hidden = data["hidden"]
-        self.last_played = data["last_played"]
-        self.name = data["name"]
-        self.developer = data["developer"] if "developer" in data else None
-        self.removed = "removed" in data
-        self.blacklisted = "blacklisted" in data
-
-        if self.game_id in self.win.game_covers:
-            self.win.game_covers[self.game_id].add_picture(self.cover)
-        else:
-            game_cover = GameCover({self.cover}, self.get_cover_path())
-            self.win.game_covers[self.game_id] = game_cover
-
-        if self.hidden:
-            self.menu_button.set_menu_model(self.hidden_game_options)
-        else:
-            self.menu_button.set_menu_model(self.game_options)
-
-        self.title.set_label(self.name)
         self.set_play_label()
-
         self.overlay.set_measure_overlay(self.play_revealer, True)
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
@@ -85,12 +71,86 @@ class Game(Gtk.Box):
         self.cover_button.connect("clicked", self.cover_button_clicked)
         self.play_button.connect("clicked", self.play_button_clicked)
 
+        self.win.schema.connect("changed", self.schema_changed)
+
+        self.update_values(data)
+
+    def update(self):
+        if self.win.stack.get_visible_child() == self.win.details_view:
+            self.win.show_details_view(None, self.game_id)
+
+        self.win.games[self.game_id] = self
+
+        if self.get_parent():
+            self.get_parent().get_parent().remove(self)
+            if self.get_parent():
+                self.get_parent().set_child()
+
+        if self.game_id in self.win.game_covers:
+            self.win.game_covers[self.game_id].add_picture(self.cover)
+        else:
+            game_cover = GameCover({self.cover}, self.get_cover_path())
+            self.win.game_covers[self.game_id] = game_cover
+
+        self.menu_button.set_menu_model(
+            self.hidden_game_options if self.hidden else self.game_options
+        )
+
+        self.title.set_label(self.name)
+
         self.menu_button.get_popover().connect("notify::visible", self.hide_play)
         self.menu_button.get_popover().connect(
             "notify::visible", self.win.set_active_game, self.game_id
         )
 
-        self.win.schema.connect("changed", self.schema_changed)
+        if not self.removed or self.blacklisted:
+            if self.hidden:
+                self.win.hidden_library.append(self)
+            else:
+                self.win.library.append(self)
+            self.get_parent().set_focusable(False)
+
+    def update_values(self, data):
+        for key, value in data.items():
+            setattr(self, key, value)
+
+        self.save()
+
+    def save(self):
+        self.win.games_dir.mkdir(parents=True, exist_ok=True)
+
+        attrs = (
+            "added",
+            "executable",
+            "game_id",
+            "hidden",
+            "last_played",
+            "name",
+            "developer",
+            "removed",
+            "blacklisted",
+        )
+
+        json.dump(
+            {attr: getattr(self, attr) for attr in attrs if attr},
+            (self.win.games_dir / f"{self.game_id}.json").open("w"),
+            indent=4,
+            sort_keys=True,
+        )
+
+        self.update()
+
+        self.win.library_bin.set_child(
+            self.win.scrolledwindow
+            if any(not game.hidden for game in self.win.games.values())
+            else self.win.notice_empty
+        )
+
+        self.win.hidden_library_bin.set_child(
+            self.win.hidden_scrolledwindow
+            if any(game.hidden for game in self.win.games.values())
+            else self.win.hidden_notice_empty
+        )
 
     def launch(self):
         # Generate launch arguments, either list (no shell) or a string (for shell).
@@ -105,11 +165,8 @@ class Game(Gtk.Box):
             self.app.quit()
 
     def toggle_hidden(self):
-        data = json.load((self.win.games_dir / f"{self.game_id}.json").open())
-
-        data["hidden"] = not data["hidden"]
-
-        save_game(self.win, data)
+        self.hidden = not self.hidden
+        self.save()
 
     def get_cover_path(self):
         cover_path = self.win.covers_dir / f"{self.game_id}.gif"
@@ -119,6 +176,8 @@ class Game(Gtk.Box):
         cover_path = self.win.covers_dir / f"{self.game_id}.tiff"
         if cover_path.is_file():
             return cover_path
+
+        return None
 
     def show_play(self, _widget, *_unused):
         self.play_revealer.set_reveal_child(True)

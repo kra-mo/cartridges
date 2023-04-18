@@ -20,16 +20,10 @@
 import json
 
 
-def get_games(win, game_ids=None):
+def get_games(win):
     games = {}
 
-    game_files = (
-        {win.games_dir / f"{game_id}.json" for game_id in game_ids}
-        if game_ids
-        else win.games_dir.iterdir()
-    )
-
-    for open_file in game_files:
+    for open_file in win.games_dir.iterdir():
         if open_file.exists():
             data = json.load(open_file.open())
             games[data["game_id"]] = data

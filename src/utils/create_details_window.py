@@ -26,9 +26,9 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 from PIL import Image
 
 from .create_dialog import create_dialog
+from .game import Game
 from .game_cover import GameCover
 from .save_cover import resize_cover, save_cover
-from .save_game import save_game
 from .steamgriddb import SGDBSave
 
 
@@ -62,7 +62,7 @@ def create_details_window(win, game_id=None):
         nonlocal game_cover
         nonlocal cover_changed
 
-        game_cover.new_pixbuf()
+        game_cover.new_cover()
 
         cover_button_delete_revealer.set_reveal_child(False)
         cover_changed = True
@@ -89,7 +89,7 @@ def create_details_window(win, game_id=None):
         )
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
-        game_cover.new_pixbuf(win.games[game_id].get_cover_path())
+        game_cover.new_cover(win.games[game_id].get_cover_path())
         if game_cover.get_pixbuf():
             cover_button_delete_revealer.set_reveal_child(True)
     else:
@@ -233,7 +233,7 @@ def create_details_window(win, game_id=None):
         cover_button_delete_revealer.set_reveal_child(True)
         cover_changed = True
 
-        game_cover.new_pixbuf(resize_cover(win, path))
+        game_cover.new_cover(resize_cover(win, path))
 
     def close_window(_widget, _callback=None):
         window.close()
@@ -323,16 +323,10 @@ def create_details_window(win, game_id=None):
                 game_cover.path,
             )
 
-        path = win.games_dir / f"{game_id}.json"
-
-        if path.exists():
-            data = json.load(path.open())
-            data.update(values)
-            save_game(win, data)
+        if game_id in win.games:
+            win.games[game_id].update_values(values)
         else:
-            save_game(win, values)
-
-        win.update_games({game_id})
+            Game(win, values).save()
 
         if not game_cover.get_pixbuf():
             SGDBSave(win, {(game_id, values["name"])})

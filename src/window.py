@@ -19,14 +19,13 @@
 
 import datetime
 import os
-from struct import unpack_from
 from pathlib import Path
+from struct import unpack_from
 
 from gi.repository import Adw, Gdk, GdkPixbuf, Gio, GLib, Gtk
 
 from .game import Game
 from .get_games import get_games
-from .save_game import save_game
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/window.ui")
@@ -107,9 +106,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
         self.image_size = (200 * scale_factor, 300 * scale_factor)
 
-        games = get_games(self)
-        for game_id in games:
-            if "removed" in games[game_id]:
+        for game_id, game in get_games(self).items():
+            if game.get("removed"):
                 (self.games_dir / f"{game_id}.json").unlink(missing_ok=True)
                 (self.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
                 (self.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
@@ -123,7 +121,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.library.set_sort_func(self.sort_func)
         self.hidden_library.set_sort_func(self.sort_func)
 
-        self.update_games(get_games(self))
+        for game in get_games(self).values():
+            Game(self, game).update()
 
         # Connect signals
         self.search_entry.connect("search-changed", self.search_changed, False)
@@ -140,41 +139,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
             "notify::high-contrast", self.set_details_view_opacity
         )
 
-    def update_games(self, games):
-        for game_id in games:
-            if game_id in self.games and self.games[game_id].get_parent():
-                self.games[game_id].get_parent().get_parent().remove(
-                    self.games[game_id]
-                )
-
-            entry = Game(self, get_games(self, {game_id})[game_id])
-            self.games[game_id] = entry
-
-            if entry.removed or entry.blacklisted:
-                continue
-
-            if entry.hidden:
-                self.hidden_library.append(entry)
-            else:
-                self.library.append(entry)
-
-            entry.get_parent().set_focusable(False)
-
-        self.library_bin.set_child(
-            self.scrolledwindow
-            if any(not game.hidden for game in self.games.values())
-            else self.notice_empty
-        )
-
-        self.hidden_library_bin.set_child(
-            self.hidden_scrolledwindow
-            if any(game.hidden for game in self.games.values())
-            else self.hidden_notice_empty
-        )
-
-        if self.stack.get_visible_child() == self.details_view:
-            self.show_details_view(None, self.active_game_id)
-
     def search_changed(self, _widget, hidden):
         # Refresh search filter on keystroke in search box
         if hidden:
@@ -190,14 +154,15 @@ class CartridgesWindow(Adw.ApplicationWindow):
             .lower()
         )
 
+        game = child.get_child()
+
         filtered = text != "" and not (
-            text in child.get_first_child().name.lower()
-            or text in child.get_first_child().developer.lower()
-            if child.get_first_child().developer
+            text in game.name.lower() or text in game.developer.lower()
+            if game.developer
             else None
         )
 
-        child.get_first_child().filtered = filtered
+        game.filtered = filtered
 
         (self.hidden_library_bin if hidden else self.library_bin).set_child(
             (self.hidden_scrolledwindow if hidden else self.scrolledwindow)
@@ -327,7 +292,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             )
 
     def sort_func(self, child1, child2):
-        games = (child1.get_first_child(), child2.get_first_child())
+        games = (child1.get_child(), child2.get_child())
         var, order = "name", True
 
         if self.sort_state in ("newest", "oldest"):
@@ -437,10 +402,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
             )
 
         elif undo == "remove":
-            data = get_games(self, {game_id})[game_id]
-            data.pop("removed", None)
-            save_game(self, data)
-            self.update_games({game_id})
+            self.games[game_id].removed = False
+            self.games[game_id].save()
 
         self.toasts[(game_id, undo)].dismiss()
         self.toasts.pop((game_id, undo))

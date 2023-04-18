@@ -27,7 +27,7 @@ from PIL import Image, ImageSequence
 
 def resize_cover(win, cover_path=None, pixbuf=None):
     if not cover_path and not pixbuf:
-        return
+        return None
 
     if pixbuf:
         cover_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
@@ -65,6 +65,9 @@ def resize_cover(win, cover_path=None, pixbuf=None):
 
 
 def save_cover(win, game_id, cover_path):
+    if not cover_path:
+        return
+
     win.covers_dir.mkdir(parents=True, exist_ok=True)
 
     animated_path = win.covers_dir / f"{game_id}.gif"
@@ -80,7 +83,6 @@ def save_cover(win, game_id, cover_path):
     )
 
     if game_id in win.game_covers:
-        win.game_covers[game_id].new_pixbuf(
+        win.game_covers[game_id].new_cover(
             animated_path if cover_path.suffix == ".gif" else static_path
         )
-        return

@@ -22,8 +22,8 @@ from pathlib import Path
 from gi.repository import Adw, Gtk
 
 from .create_dialog import create_dialog
+from .game import Game
 from .save_cover import resize_cover, save_cover
-from .save_game import save_game
 from .steamgriddb import SGDBSave
 
 
@@ -56,7 +56,7 @@ class Importer:
 
     def save_game(self, values=None, cover_path=None):
         if values:
-            save_game(self.win, values)
+            Game(self.win, values).save()
 
             if cover_path:
                 save_cover(
@@ -66,7 +66,7 @@ class Importer:
             self.games.add((values["game_id"], values["name"]))
 
             self.games_no += 1
-            if "blacklisted" in values:
+            if values.get("blacklisted"):
                 self.games_no -= 1
 
         self.queue -= 1

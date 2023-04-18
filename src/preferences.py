@@ -24,11 +24,9 @@ from gi.repository import Adw, Gio, GLib, Gtk
 
 from .bottles_importer import bottles_installed
 from .create_dialog import create_dialog
-from .get_games import get_games
 from .heroic_importer import heroic_installed
 from .itch_importer import itch_installed
 from .lutris_importer import lutris_cache_exists, lutris_installed
-from .save_game import save_game
 from .steam_importer import steam_installed
 
 
@@ -335,23 +333,20 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def undo_remove_all(self, _widget, _unused):
         for game_id in self.removed_games:
-            data = get_games(self.win, {game_id})[game_id]
-            if "removed" in data:
-                data.pop("removed")
-                save_game(self.win, data)
+            self.win.games[game_id].removed = False
+            self.win.games[game_id].save()
 
-        self.win.update_games(self.removed_games)
         self.removed_games = set()
         self.toast.dismiss()
 
     def remove_all_games(self, _widget):
-        for game in get_games(self.win).values():
-            if "removed" not in game:
-                self.removed_games.add(game["game_id"])
-                game["removed"] = True
-                save_game(self.win, game)
+        for game in self.win.games:
+            if not game.removed:
+                self.removed_games.add(game.game_id)
 
-        self.win.update_games(self.win.games)
+                game.removed = True
+                game.save()
+
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action(None, None)
 
