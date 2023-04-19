@@ -1,0 +1,136 @@
+using Gtk 4.0;
+using Adw 1;
+
+template DetailsWindow : Adw.Window {
+    default-width: 500;
+    default-height: -1;
+    modal: true;
+
+    ShortcutController {
+        Shortcut {
+            trigger: "Escape";
+            action: "action(window.close)";
+        }
+    }
+
+    Box {
+        orientation: vertical;
+
+        Adw.HeaderBar HeaderBar {
+            show-start-title-buttons: false;
+            show-end-title-buttons: false;
+
+            [start]
+            Button cancel_button {
+                label: _("Cancel");
+                action-name: "window.close";
+            }
+
+            [end]
+            Button apply_button {
+                styles [
+                    "suggested-action"
+                ]
+            }
+        }
+
+        Adw.PreferencesPage {
+            vexpand: true;
+
+            Adw.PreferencesGroup cover_group {
+                Adw.Clamp cover_clamp {
+                    maximum-size: 200;
+                    Overlay cover_overlay {
+                        halign: center;
+                        valign: center;
+
+                        [overlay]
+                        Button cover_button_edit {
+                            icon-name: "document-edit-symbolic";
+                            halign: end;
+                            valign: end;
+                            margin-bottom: 6;
+                            margin-end: 6;
+
+                            styles [
+                                "circular", "osd"
+                            ]
+                        }
+
+                        [overlay]
+                        Revealer cover_button_delete_revealer {
+                            transition-type: crossfade;
+                            margin-end: 40;
+
+                            Button cover_button_delete {
+                                icon-name: "user-trash-symbolic";
+                                halign: end;
+                                valign: end;
+                                margin-bottom: 6;
+                                margin-end: 6;
+
+                                styles [
+                                    "circular", "osd"
+                                ]
+                            }
+                        }
+
+                        Picture cover {
+                            width-request: 200;
+                            height-request: 300;
+                            
+                            styles [
+                                "card"
+                            ]
+                        }
+                    }
+                }
+            }
+
+            Adw.PreferencesGroup title_group {
+                title: _("Title");
+                description: _("The title of the game");
+
+                Entry name {}
+            }
+
+            Adw.PreferencesGroup developer_group {
+                title: _("Developer");
+                description: _("The developer or publisher (optional)");
+
+                Entry developer {}
+            }
+
+            Adw.PreferencesGroup exec_group {
+                title: _("Executable");
+                description: _("File to open or command to run when launching the game");
+
+                [header-suffix]
+                Gtk.MenuButton exec-info-button {
+                    valign: center;
+                    icon-name: "help-about-symbolic";
+
+                    popover: Popover {
+                        visible: bind exec-info-button.active bidirectional;
+
+                        Label exec_info_label {
+                            use-markup: true;
+                            wrap: true;
+                            max-width-chars: 30;
+                            margin-top: 6;
+                            margin-bottom: 12;
+                            margin-start: 6;
+                            margin-end: 6;
+                        }
+                    };
+
+                    styles [
+                        "flat"
+                    ]
+                }
+
+                Entry executable {}
+            }
+        }
+    }
+}

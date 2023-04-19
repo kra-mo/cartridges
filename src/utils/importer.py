@@ -24,7 +24,7 @@ from gi.repository import Adw, Gtk
 from .create_dialog import create_dialog
 from .game import Game
 from .save_cover import resize_cover, save_cover
-from .steamgriddb import SGDBSave, needs_cover
+from .steamgriddb import SGDBSave
 
 
 class Importer:
@@ -58,7 +58,7 @@ class Importer:
         if values:
             game = Game(self.win, values)
 
-            if not needs_cover(self.win.schema, cover_path):
+            if save_cover:
                 save_cover(self.win, game.game_id, resize_cover(self.win, cover_path))
 
             self.games.add(game)

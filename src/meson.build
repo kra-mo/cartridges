@@ -21,6 +21,7 @@ cartridges_sources = [
   'main.py',
   'window.py',
   'preferences.py',
+  'details_window.py',
   'game.py',
   'game_cover.py',
   'importers/steam_importer.py',
@@ -32,7 +33,6 @@ cartridges_sources = [
   'utils/steamgriddb.py',
   'utils/save_cover.py',
   'utils/create_dialog.py',
-  'utils/create_details_window.py',
   'utils/check_install.py'
 ]
 

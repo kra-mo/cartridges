@@ -3,7 +3,8 @@ blueprints = custom_target('blueprints',
     'gtk/help-overlay.blp',
     'gtk/window.blp',
     'gtk/game.blp',
-    'gtk/preferences.blp'
+    'gtk/preferences.blp',
+    'gtk/details_window.blp'
   ),
   output: '.',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],

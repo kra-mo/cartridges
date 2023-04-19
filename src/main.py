@@ -28,7 +28,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from .bottles_importer import bottles_importer
-from .create_details_window import create_details_window
+from .details_window import DetailsWindow
 from .heroic_importer import heroic_importer
 from .importer import Importer
 from .itch_importer import itch_importer
@@ -143,10 +143,10 @@ class CartridgesApplication(Adw.Application):
         self.win.active_game.toggle_hidden()
 
     def on_edit_game_action(self, *_args):
-        create_details_window(self.win, self.win.active_game)
+        DetailsWindow(self.win, self.win.active_game)
 
     def on_add_game_action(self, *_args):
-        create_details_window(self.win)
+        DetailsWindow(self.win)
 
     def on_import_action(self, *_args):
         self.win.importer = Importer(self.win)

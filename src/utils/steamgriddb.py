@@ -7,12 +7,6 @@ from .create_dialog import create_dialog
 from .save_cover import save_cover, resize_cover
 
 
-def needs_cover(schema, previous):
-    return schema.get_boolean("sgdb") and (
-        (schema.get_boolean("sgdb-prefer")) or not previous
-    )
-
-
 class SGDBSave:
     def __init__(self, win, games, importer=None):
         self.win = win
@@ -34,10 +28,15 @@ class SGDBSave:
 
     def update_cover(self, task, game):
         if (
-            not needs_cover(
-                self.win.schema,
-                (self.win.covers_dir / f"{game.game_id}.gif").is_file()
-                or (self.win.covers_dir / f"{game.game_id}.tiff").is_file(),
+            not (
+                self.win.schema.get_boolean("sgdb")
+                and (
+                    (self.win.schema.get_boolean("sgdb-prefer"))
+                    or not (
+                        (self.win.covers_dir / f"{game.game_id}.gif").is_file()
+                        or (self.win.covers_dir / f"{game.game_id}.tiff").is_file()
+                    )
+                )
             )
             or game.blacklisted
         ):
