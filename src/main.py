@@ -139,15 +139,11 @@ class CartridgesApplication(Adw.Application):
     def on_launch_game_action(self, *_args):
         self.win.active_game.launch()
 
-    def on_hide_game_action(
-        self, _action=None, _parameter=None, game_id=None, toast=True
-    ):
-        (self.win.games[game_id] if game_id else self.win.active_game).toggle_hidden(
-            toast
-        )
+    def on_hide_game_action(self, *_args):
+        self.win.active_game.toggle_hidden()
 
     def on_edit_game_action(self, *_args):
-        create_details_window(self.win, self.win.active_game.game_id)
+        create_details_window(self.win, self.win.active_game)
 
     def on_add_game_action(self, *_args):
         create_details_window(self.win)

@@ -394,23 +394,23 @@ class CartridgesWindow(Adw.ApplicationWindow):
             search_button.set_active(False)
             search_entry.set_text("")
 
-    def on_undo_action(self, _widget, game_id=None, undo=None):
-        if not game_id:  # If the action was activated via Ctrl + Z
+    def on_undo_action(self, _widget, game=None, undo=None):
+        if not game:  # If the action was activated via Ctrl + Z
             try:
-                game_id = tuple(self.toasts.keys())[-1][0]
+                game = tuple(self.toasts.keys())[-1][0]
                 undo = tuple(self.toasts.keys())[-1][1]
             except IndexError:
                 return
 
         if undo == "hide":
-            self.get_application().on_hide_game_action(game_id=game_id, toast=False)
+            game.toggle_hidden(False)
 
         elif undo == "remove":
-            self.games[game_id].removed = False
-            self.games[game_id].save()
+            game.removed = False
+            game.save()
 
-        self.toasts[(game_id, undo)].dismiss()
-        self.toasts.pop((game_id, undo))
+        self.toasts[(game, undo)].dismiss()
+        self.toasts.pop((game, undo))
 
     def on_open_menu_action(self, *_args):
         if self.stack.get_visible_child() != self.details_view:

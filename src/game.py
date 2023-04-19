@@ -48,6 +48,7 @@ class Game(Gtk.Box):
     added = None
     executable = None
     game_id = None
+    source = None
     hidden = None
     last_played = None
     name = None
@@ -128,6 +129,7 @@ class Game(Gtk.Box):
             "added",
             "executable",
             "game_id",
+            "source",
             "hidden",
             "last_played",
             "name",
@@ -151,15 +153,13 @@ class Game(Gtk.Box):
 
         if action:
             toast.set_button_label(_("Undo"))
-            toast.connect(
-                "button-clicked", self.win.on_undo_action, self.game_id, action
-            )
+            toast.connect("button-clicked", self.win.on_undo_action, self, action)
 
-            if (self.game_id, action) in self.win.toasts.keys():
+            if (self, action) in self.win.toasts.keys():
                 # Dismiss the toast if there already is one
-                self.win.toasts[(self.game_id, action)].dismiss()
+                self.win.toasts[(self, action)].dismiss()
 
-            self.win.toasts[(self.game_id, action)] = toast
+            self.win.toasts[(self, action)] = toast
 
         self.win.toast_overlay.add_toast(toast)
 
@@ -180,7 +180,7 @@ class Game(Gtk.Box):
         # The variable is the title of the game
         self.create_toast(_("{} launched"))
 
-    def toggle_hidden(self, toast):
+    def toggle_hidden(self, toast=True):
         self.hidden = not self.hidden
         self.save()
 

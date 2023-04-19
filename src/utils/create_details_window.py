@@ -31,12 +31,11 @@ from .save_cover import resize_cover, save_cover
 from .steamgriddb import SGDBSave
 
 
-def create_details_window(win, game_id=None):
+def create_details_window(win, game=None):
     window = Adw.Window(
         modal=True, default_width=500, default_height=-1, transient_for=win
     )
 
-    games = win.games
     cover_changed = False
 
     cover_button_edit = Gtk.Button(
@@ -77,18 +76,16 @@ def create_details_window(win, game_id=None):
     cover = Gtk.Picture.new()
     game_cover = GameCover({cover})
 
-    if game_id:
+    if game:
         window.set_title(_("Edit Game Details"))
-        developer = Gtk.Entry.new_with_buffer(
-            Gtk.EntryBuffer.new(games[game_id].developer, -1)
-        )
-        name = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new(games[game_id].name, -1))
+        developer = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new(game.developer, -1))
+        name = Gtk.Entry.new_with_buffer(Gtk.EntryBuffer.new(game.name, -1))
         executable = Gtk.Entry.new_with_buffer(
-            Gtk.EntryBuffer.new(shlex.join(games[game_id].executable), -1)
+            Gtk.EntryBuffer.new(shlex.join(game.executable), -1)
         )
         apply_button = Gtk.Button.new_with_label(_("Apply"))
 
-        game_cover.new_cover(win.games[game_id].get_cover_path())
+        game_cover.new_cover(game.get_cover_path())
         if game_cover.pixbuf:
             cover_button_delete_revealer.set_reveal_child(True)
     else:
@@ -239,10 +236,8 @@ def create_details_window(win, game_id=None):
 
     def apply_preferences(*_args):
         nonlocal cover_changed
-        nonlocal game_id
+        nonlocal game
         nonlocal cover
-
-        values = {}
 
         final_name = name.get_buffer().get_text()
         final_developer = developer.get_buffer().get_text()
@@ -256,14 +251,12 @@ def create_details_window(win, game_id=None):
         except ValueError as exception:
             create_dialog(
                 window,
-                _("Couldn't Add Game")
-                if not game_id
-                else _("Couldn't Apply Preferences"),
+                _("Couldn't Add Game") if not game else _("Couldn't Apply Preferences"),
                 f'{_("Executable")}: {exception}.',
             )
             return
 
-        if not game_id:
+        if not game:
             if final_name == "":
                 create_dialog(
                     window, _("Couldn't Add Game"), _("Game title cannot be empty.")
@@ -280,17 +273,20 @@ def create_details_window(win, game_id=None):
 
             numbers = [0]
 
-            for game in games:
-                if "imported_" in game:
-                    numbers.append(int(game.replace("imported_", "")))
+            for current_game in win.games:
+                if "imported_" in current_game:
+                    numbers.append(int(current_game.replace("imported_", "")))
 
-            game_id = f"imported_{str(max(numbers) + 1)}"
-
-            values["game_id"] = game_id
-            values["hidden"] = False
-            values["source"] = "imported"
-            values["added"] = int(time())
-            values["last_played"] = 0
+            game = Game(
+                win,
+                {
+                    "game_id": f"imported_{str(max(numbers) + 1)}",
+                    "hidden": False,
+                    "source": "imported",
+                    "added": int(time()),
+                    "last_played": 0,
+                },
+            )
 
         else:
             if final_name == "":
@@ -309,29 +305,25 @@ def create_details_window(win, game_id=None):
                 )
                 return
 
-        values["name"] = final_name
-        values["developer"] = final_developer or None
-        values["executable"] = final_executable_split
+        game.name = final_name
+        game.developer = final_developer or None
+        game.executable = final_executable_split
 
-        win.game_covers[game_id] = game_cover
+        win.game_covers[game.game_id] = game_cover
 
         if cover_changed:
             save_cover(
                 win,
-                game_id,
+                game.game_id,
                 game_cover.path,
             )
 
-        if game_id in win.games:
-            game = win.games[game_id]
-            game.update_values(values)
-        else:
-            game = Game(win, values).save()
+        game.save()
 
         if not game_cover.pixbuf:
-            SGDBSave(win, {(game_id, values["name"])})
+            SGDBSave(win, {(game.game_id, game.name)})
 
-        win.game_covers[game_id].pictures.remove(cover)
+        game.game_cover.pictures.remove(cover)
 
         window.close()
         win.show_details_view(game)
