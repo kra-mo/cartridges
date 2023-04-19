@@ -33,10 +33,13 @@ class SGDBSave:
             Gio.Task.new(None, None, self.task_done).run_in_thread(create_func(game))
 
     def update_cover(self, task, game):
-        if not needs_cover(
-            self.win.schema,
-            (self.win.covers_dir / f"{game.game_id}.gif").is_file()
-            or (self.win.covers_dir / f"{game.game_id}.tiff").is_file(),
+        if (
+            not needs_cover(
+                self.win.schema,
+                (self.win.covers_dir / f"{game.game_id}.gif").is_file()
+                or (self.win.covers_dir / f"{game.game_id}.tiff").is_file(),
+            )
+            or game.blacklisted
         ):
             task.return_value(game)
             return
