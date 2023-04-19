@@ -39,33 +39,12 @@ from .window import CartridgesWindow
 
 
 class CartridgesApplication(Adw.Application):
+    win = None
+
     def __init__(self):
         super().__init__(
             application_id="hu.kramo.Cartridges", flags=Gio.ApplicationFlags.FLAGS_NONE
         )
-        self.create_action("quit", self.on_quit_action, ["<primary>q"])
-        self.create_action("about", self.on_about_action)
-        self.create_action(
-            "preferences", self.on_preferences_action, ["<primary>comma"]
-        )
-        self.create_action("launch_game", self.on_launch_game_action)
-        self.create_action("hide_game", self.on_hide_game_action)
-        self.create_action("edit_game", self.on_edit_game_action)
-        self.create_action("add_game", self.on_add_game_action, ["<primary>n"])
-        self.create_action("import", self.on_import_action, ["<primary>i"])
-        self.create_action(
-            "remove_game_details_view",
-            self.on_remove_game_details_view_action,
-            ["Delete"],
-        )
-        self.create_action("remove_game", self.on_remove_game_action)
-        self.create_action("igdb_search", self.on_igdb_search_action)
-        self.create_action("sgdb_search", self.on_sgdb_search_action)
-        self.create_action("protondb_search", self.on_protondb_search_action)
-        self.create_action("lutris_search", self.on_lutris_search_action)
-        self.create_action("hltb_search", self.on_hltb_search_action)
-
-        self.win = None
 
     def do_activate(self):  # pylint: disable=arguments-differ
         # Create the main window
@@ -87,28 +66,40 @@ class CartridgesApplication(Adw.Application):
 
         self.win.present()
 
-        # Create actions for the main window
-        self.create_action(
-            "show_hidden", self.win.on_show_hidden_action, ["<primary>h"], self.win
+        # Create actions
+        self.create_actions(
+            {
+                (self, "quit", ("<primary>q",)),
+                (self, "about", None),
+                (self, "preferences", ("<primary>comma",)),
+                (self, "launch_game", None),
+                (self, "hide_game", None),
+                (self, "edit_game", None),
+                (self, "add_game", ("<primary>n",)),
+                (self, "import", ("<primary>i",)),
+                (self, "remove_game_details_view", ("Delete",)),
+                (self, "remove_game", None),
+                (self, "igdb_search", None),
+                (self, "sgdb_search", None),
+                (self, "protondb_search", None),
+                (self, "lutris_search", None),
+                (self, "hltb_search", None),
+                (self.win, "show_hidden", ("<primary>h",)),
+                (self.win, "go_back", ("<alt>Left",)),
+                (self.win, "go_to_parent", ("<alt>Up",)),
+                (self.win, "toggle_search", ("<primary>f",)),
+                (self.win, "escape", ("Escape",)),
+                (self.win, "undo", ("<primary>z",)),
+                (self.win, "open_menu", ("F10",)),
+            }
         )
-        self.create_action(
-            "go_back", self.win.on_go_back_action, ["<alt>Left"], self.win
-        )
-        self.create_action(
-            "go_to_parent", self.win.on_go_to_parent_action, ["<alt>Up"], self.win
-        )
-        self.create_action(
-            "toggle_search", self.win.on_toggle_search_action, ["<primary>f"], self.win
-        )
-        self.create_action("escape", self.win.on_escape_action, ["Escape"], self.win)
-        self.create_action("undo", self.win.on_undo_action, ["<primary>z"], self.win)
-        self.create_action("open_menu", self.win.on_open_menu_action, ["F10"], self.win)
-        self.win.sort = Gio.SimpleAction.new_stateful(
+
+        sort_action = Gio.SimpleAction.new_stateful(
             "sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z")
         )
-        self.win.add_action(self.win.sort)
-        self.win.sort.connect("activate", self.win.on_sort_action)
-        self.win.on_sort_action(self.win.sort, state_settings.get_value("sort-mode"))
+        sort_action.connect("activate", self.win.on_sort_action)
+        self.win.add_action(sort_action)
+        self.win.on_sort_action(sort_action, state_settings.get_value("sort-mode"))
 
     def on_about_action(self, _widget, _callback=None):
         about = Adw.AboutWindow(
@@ -125,7 +116,7 @@ class CartridgesApplication(Adw.Application):
                 "Geoffrey Coulaud https://geoffrey-coulaud.fr",
                 "Rafael Mardojai CM https://mardojai.com",
             ],
-            designers=["kramo https://kramo.hu"],
+            designers=("kramo https://kramo.hu",),
             copyright="© 2022-2023 kramo",
             license_type=Gtk.License.GPL_3_0,
             issue_url="https://github.com/kra-mo/cartridges/issues/new",
@@ -215,17 +206,19 @@ class CartridgesApplication(Adw.Application):
     def on_hltb_search_action(self, _widget, _callback=None):
         self.search("https://howlongtobeat.com/?q=")
 
-    def create_action(self, name, callback, shortcuts=None, win=None):
-        action = Gio.SimpleAction.new(name, None)
-        action.connect("activate", callback)
-        if not win:
-            self.add_action(action)
-            if shortcuts:
-                self.set_accels_for_action(f"app.{name}", shortcuts)
-        else:
-            win.add_action(action)
-            if shortcuts:
-                self.set_accels_for_action(f"win.{name}", shortcuts)
+    def create_actions(self, actions):
+        for action in actions:
+            simple_action = Gio.SimpleAction.new(action[1], None)
+            simple_action.connect(
+                "activate", getattr(action[0], f"on_{action[1]}_action")
+            )
+            if action[2]:
+                self.set_accels_for_action(
+                    f"app.{action[1]}" if action[0] == self else f"win.{action[1]}",
+                    action[2],
+                )
+
+            action[0].add_action(simple_action)
 
 
 def main(version):  # pylint: disable=unused-argument
