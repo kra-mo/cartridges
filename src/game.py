@@ -54,6 +54,7 @@ class Game(Gtk.Box):
     developer = None
     removed = None
     blacklisted = None
+    game_cover = None
 
     def __init__(self, win, data, **kwargs):
         super().__init__(**kwargs)
@@ -94,17 +95,18 @@ class Game(Gtk.Box):
             "notify::visible", self.toggle_play, None
         )
         self.menu_button.get_popover().connect(
-            "notify::visible", self.win.set_active_game, self.game_id
+            "notify::visible", self.win.set_active_game, self
         )
 
         if self.game_id in self.win.game_covers:
-            self.win.game_covers[self.game_id].add_picture(self.cover)
+            self.game_cover = self.win.game_covers[self.game_id]
+            self.game_cover.add_picture(self.cover)
         else:
-            game_cover = GameCover({self.cover}, self.get_cover_path())
-            self.win.game_covers[self.game_id] = game_cover
+            self.game_cover = GameCover({self.cover}, self.get_cover_path())
+            self.win.game_covers[self.game_id] = self.game_cover
 
         if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.show_details_view(None, self.game_id)
+            self.win.show_details_view(self)
 
         if not self.removed and not self.blacklisted:
             if self.hidden:
@@ -230,7 +232,7 @@ class Game(Gtk.Box):
         if self.win.schema.get_boolean("cover-launches-game") ^ button:
             self.launch()
         else:
-            self.win.show_details_view(None, self.game_id)
+            self.win.show_details_view(self)
 
     def set_play_label(self):
         self.play_button.set_label(

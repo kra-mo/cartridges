@@ -39,7 +39,7 @@ class GameCover:
         self.animation = GdkPixbuf.PixbufAnimation.new_from_file(str(path))
         self.anim_iter = self.animation.get_iter()
 
-        def wrapper(task, *_unused):
+        def wrapper(task, *_args):
             self.update_animation((task, self.animation))
 
         return wrapper

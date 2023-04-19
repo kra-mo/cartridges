@@ -64,8 +64,6 @@ class CartridgesApplication(Adw.Application):
             "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
 
-        self.win.present()
-
         # Create actions
         self.create_actions(
             {
@@ -101,7 +99,9 @@ class CartridgesApplication(Adw.Application):
         self.win.add_action(sort_action)
         self.win.on_sort_action(sort_action, state_settings.get_value("sort-mode"))
 
-    def on_about_action(self, _widget, _callback=None):
+        self.win.present()
+
+    def on_about_action(self, *_args):
         about = Adw.AboutWindow(
             transient_for=self.win,
             application_name=_("Cartridges"),
@@ -127,7 +127,7 @@ class CartridgesApplication(Adw.Application):
         about.present()
 
     def on_preferences_action(
-        self, _widget, _callback=None, page_name=None, expander_row=None
+        self, _action=None, _parameter=None, page_name=None, expander_row=None
     ):
         win = PreferencesWindow(self.win)
         if page_name:
@@ -136,21 +136,23 @@ class CartridgesApplication(Adw.Application):
             getattr(win, expander_row).set_expanded(True)
         win.present()
 
-    def on_launch_game_action(self, _widget=None, _callback=None):
-        self.win.games[self.win.active_game_id].launch()
+    def on_launch_game_action(self, *_args):
+        self.win.active_game.launch()
 
     def on_hide_game_action(
-        self, _widget=None, _callback=None, game_id=None, toast=True
+        self, _action=None, _parameter=None, game_id=None, toast=True
     ):
-        self.win.games[game_id or self.win.active_game_id].toggle_hidden(toast)
+        (self.win.games[game_id] if game_id else self.win.active_game).toggle_hidden(
+            toast
+        )
 
-    def on_edit_game_action(self, _widget, _callback=None):
-        create_details_window(self.win, self.win.active_game_id)
+    def on_edit_game_action(self, *_args):
+        create_details_window(self.win, self.win.active_game.game_id)
 
-    def on_add_game_action(self, _widget, _callback=None):
+    def on_add_game_action(self, *_args):
         create_details_window(self.win)
 
-    def on_import_action(self, _widget, _callback=None):
+    def on_import_action(self, *_args):
         self.win.importer = Importer(self.win)
 
         self.win.importer.blocker = True
@@ -176,34 +178,32 @@ class CartridgesApplication(Adw.Application):
             self.win.importer.queue = 1
             self.win.importer.save_game()
 
-    def on_remove_game_action(self, _widget=None, _callback=None):
-        self.win.games[self.win.active_game_id].remove_game()
+    def on_remove_game_action(self, *_args):
+        self.win.active_game.remove_game()
 
-    def on_remove_game_details_view_action(self, _widget, _callback=None):
+    def on_remove_game_details_view_action(self, *_args):
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.on_remove_game_action()
 
-    def on_quit_action(self, _widget, _callback=None):
+    def on_quit_action(self, *_args):
         self.quit()
 
     def search(self, uri):
-        Gio.AppInfo.launch_default_for_uri(
-            f"{uri}{self.win.games[self.win.active_game_id].name}"
-        )
+        Gio.AppInfo.launch_default_for_uri(f"{uri}{self.win.active_game.name}")
 
-    def on_igdb_search_action(self, _widget, _callback=None):
+    def on_igdb_search_action(self, *_args):
         self.search("https://www.igdb.com/search?type=1&q=")
 
-    def on_sgdb_search_action(self, _widget, _callback=None):
+    def on_sgdb_search_action(self, *_args):
         self.search("https://www.steamgriddb.com/search/grids?term=")
 
-    def on_protondb_search_action(self, _widget, _callback=None):
+    def on_protondb_search_action(self, *_args):
         self.search("https://www.protondb.com/search?q=")
 
-    def on_lutris_search_action(self, _widget, _callback=None):
+    def on_lutris_search_action(self, *_args):
         self.search("https://lutris.net/games?q=")
 
-    def on_hltb_search_action(self, _widget, _callback=None):
+    def on_hltb_search_action(self, *_args):
         self.search("https://howlongtobeat.com/?q=")
 
     def create_actions(self, actions):

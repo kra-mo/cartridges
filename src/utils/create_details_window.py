@@ -57,7 +57,7 @@ def create_details_window(win, game_id=None):
         margin_end=6,
     )
 
-    def delete_pixbuf(_widget):
+    def delete_pixbuf(*_args):
         nonlocal game_cover
         nonlocal cover_changed
 
@@ -217,10 +217,10 @@ def create_details_window(win, game_id=None):
     main_box.append(general_page)
     window.set_content(main_box)
 
-    def choose_cover(_widget):
+    def choose_cover(*_args):
         filechooser.open(window, None, set_cover, None)
 
-    def set_cover(_source, result, _unused):
+    def set_cover(_source, result, *_args):
         nonlocal game_cover
         nonlocal cover_changed
 
@@ -234,10 +234,10 @@ def create_details_window(win, game_id=None):
 
         game_cover.new_cover(resize_cover(win, path))
 
-    def close_window(_widget, _callback=None):
+    def close_window(*_args):
         window.close()
 
-    def apply_preferences(_widget, _callback=None):
+    def apply_preferences(*_args):
         nonlocal cover_changed
         nonlocal game_id
         nonlocal cover
@@ -323,9 +323,10 @@ def create_details_window(win, game_id=None):
             )
 
         if game_id in win.games:
-            win.games[game_id].update_values(values)
+            game = win.games[game_id]
+            game.update_values(values)
         else:
-            Game(win, values).save()
+            game = Game(win, values).save()
 
         if not game_cover.pixbuf:
             SGDBSave(win, {(game_id, values["name"])})
@@ -333,9 +334,9 @@ def create_details_window(win, game_id=None):
         win.game_covers[game_id].pictures.remove(cover)
 
         window.close()
-        win.show_details_view(None, game_id)
+        win.show_details_view(game)
 
-    def focus_executable(_widget):
+    def focus_executable(*_args):
         window.set_focus(executable)
 
     cover_button_edit.connect("clicked", choose_cover)

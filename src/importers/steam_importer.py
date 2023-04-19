@@ -98,7 +98,7 @@ def get_games_async(win, appmanifests, steam_dir, importer):
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
     def create_func(datatypes, current_time, win, appmanifest, steam_dir):
-        def wrapper(task, *_unused):
+        def wrapper(task, *_args):
             get_game(
                 task,
                 datatypes,

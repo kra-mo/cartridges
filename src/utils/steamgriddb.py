@@ -15,7 +15,7 @@ class SGDBSave:
 
         # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
         def create_func(game):
-            def wrapper(task, *_unused):
+            def wrapper(task, *_args):
                 self.update_cover(
                     task,
                     game,
@@ -85,7 +85,7 @@ class SGDBSave:
                 task.return_value(game[0])
                 return
 
-            tmp_file = Gio.File.new_tmp(None)[0]
+            tmp_file = Gio.File.new_tmp()[0]
             Path(tmp_file.get_path()).write_bytes(response.content)
 
             save_cover(
@@ -122,4 +122,4 @@ class SGDBSave:
 
     def response(self, _widget, response):
         if response == "open_preferences":
-            self.win.get_application().on_preferences_action(None, page_name="sgdb")
+            self.win.get_application().on_preferences_action(page_name="sgdb")

@@ -51,7 +51,7 @@ def get_game(task, current_time, win, row):
     values["source"] = "itch"
 
     if row[3] or row[2]:
-        tmp_file = Gio.File.new_tmp(None)[0]
+        tmp_file = Gio.File.new_tmp()[0]
         try:
             with requests.get(row[3] or row[2], timeout=5) as cover:
                 cover.raise_for_status()
@@ -95,7 +95,7 @@ def get_games_async(win, rows, importer):
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
     def create_func(current_time, win, row):
-        def wrapper(task, *_unused):
+        def wrapper(task, *_args):
             get_game(
                 task,
                 current_time,

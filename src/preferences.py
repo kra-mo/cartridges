@@ -41,7 +41,7 @@ class ImportPreferences:
         file_chooser_button,
         config=False,
     ):
-        def set_dir(_source, result, _unused):
+        def set_dir(_source, result, *_args):
             try:
                 path = Path(win.file_chooser.select_folder_finish(result).get_path())
             except GLib.GError:
@@ -176,7 +176,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             else:
                 self.steam_clear_button_revealer.set_reveal_child(False)
 
-        def add_steam_dir(_source, result, _unused):
+        def add_steam_dir(_source, result, *_args):
             try:
                 value = self.schema.get_strv("steam-extra-dirs")
                 value.append(self.file_chooser.select_folder_finish(result).get_path())
@@ -185,7 +185,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 return
             update_revealer()
 
-        def clear_steam_dirs(*_unused):
+        def clear_steam_dirs(*_args):
             self.schema.set_strv("steam-extra-dirs", [])
             update_revealer()
 
@@ -212,7 +212,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             Gio.SettingsBindFlags.DEFAULT,
         )
 
-        def set_cache_dir(_source, result, _unused):
+        def set_cache_dir(_source, result, *_args):
             try:
                 path = Path(self.file_chooser.select_folder_finish(result).get_path())
             except GLib.GError:
@@ -314,7 +314,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             Gio.SettingsBindFlags.DEFAULT,
         )
 
-        def sgdb_key_changed(_widget):
+        def sgdb_key_changed(*_args):
             self.schema.set_string("sgdb-key", self.sgdb_key_entry_row.get_text())
 
         self.sgdb_key_entry_row.set_text(self.schema.get_string("sgdb-key"))
@@ -331,7 +331,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     def choose_folder(self, _widget, function):
         self.file_chooser.select_folder(self.win, None, function, None)
 
-    def undo_remove_all(self, _widget, _unused):
+    def undo_remove_all(self, *_args):
         for game_id in self.removed_games:
             self.win.games[game_id].removed = False
             self.win.games[game_id].save()
@@ -339,7 +339,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.removed_games = set()
         self.toast.dismiss()
 
-    def remove_all_games(self, _widget):
+    def remove_all_games(self, *_args):
         for game in self.win.games.values():
             if not game.removed:
                 self.removed_games.add(game.game_id)
