@@ -96,7 +96,7 @@ def lutris_importer(win):
                     AND configPath IS NOT NULL
                     AND installed IS TRUE
                 ;
-            """
+                """
 
     connection = connect(database_tmp_path)
     cursor = connection.execute(db_request)

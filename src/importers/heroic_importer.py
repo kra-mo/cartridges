@@ -17,9 +17,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import hashlib
 import json
 import os
+from hashlib import sha256
 from pathlib import Path
 from time import time
 
@@ -102,7 +102,7 @@ def heroic_importer(win):
                 image_path = (
                     heroic_dir
                     / "images-cache"
-                    / hashlib.sha256(
+                    / sha256(
                         (f'{game["art_square"]}?h=400&resize=1&w=300').encode()
                     ).hexdigest()
                 )
@@ -143,7 +143,7 @@ def heroic_importer(win):
                     image_path = (
                         heroic_dir
                         / "images-cache"
-                        / hashlib.sha256(game["art_square"].encode()).hexdigest()
+                        / sha256(game["art_square"].encode()).hexdigest()
                     )
 
             values["executable"] = (
@@ -193,7 +193,7 @@ def heroic_importer(win):
             image_path = (
                 heroic_dir
                 / "images-cache"
-                / hashlib.sha256(item["art_square"].encode()).hexdigest()
+                / sha256(item["art_square"].encode()).hexdigest()
             )
 
             importer.save_game(values, image_path if image_path.exists() else None)

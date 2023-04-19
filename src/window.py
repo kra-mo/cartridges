@@ -17,15 +17,15 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import datetime
+import json
 import os
+from datetime import datetime
 from pathlib import Path
 from struct import unpack_from
 
 from gi.repository import Adw, Gdk, GdkPixbuf, Gio, GLib, Gtk
 
 from .game import Game
-from .get_games import get_games
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/window.ui")
@@ -107,12 +107,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
         self.image_size = (200 * scale_factor, 300 * scale_factor)
 
-        for game_id, game in get_games(self).items():
-            if game.get("removed"):
-                (self.games_dir / f"{game_id}.json").unlink(missing_ok=True)
-                (self.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
-                (self.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
-
         self.details_view.set_measure_overlay(self.details_view_box, True)
         self.details_view.set_clip_overlay(self.details_view_box, False)
 
@@ -122,8 +116,20 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.library.set_sort_func(self.sort_func)
         self.hidden_library.set_sort_func(self.sort_func)
 
-        for game in get_games(self).values():
-            Game(self, game).update()
+        games = {}
+
+        if self.games_dir.exists():
+            for open_file in self.games_dir.iterdir():
+                data = json.load(open_file.open())
+                games[data["game_id"]] = data
+
+        for game_id, game in games.items():
+            if game.get("removed"):
+                (self.games_dir / f"{game_id}.json").unlink(missing_ok=True)
+                (self.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
+                (self.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
+            else:
+                Game(self, game).update()
 
         self.set_library_child()
 
@@ -193,8 +199,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.active_game = game
 
     def get_time(self, timestamp):
-        date = datetime.datetime.fromtimestamp(timestamp)
-        days_no = (datetime.datetime.today() - date).days
+        date = datetime.fromtimestamp(timestamp)
+        days_no = (datetime.today() - date).days
 
         if days_no == 0:
             return _("Today")

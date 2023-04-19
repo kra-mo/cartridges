@@ -171,7 +171,7 @@ def itch_importer(win):
                 ON
                     caves.game_id = games.id
                 ;
-            """
+                """
 
     connection = connect(database_tmp_path)
     cursor = connection.execute(db_request)
