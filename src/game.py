@@ -19,8 +19,9 @@
 
 import json
 import os
+from time import time
 
-from gi.repository import Gio, GLib, Gtk
+from gi.repository import Adw, Gio, GLib, Gtk
 
 from .game_cover import GameCover
 
@@ -69,11 +70,11 @@ class Game(Gtk.Box):
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
         self.add_controller(self.event_contoller_motion)
-        self.event_contoller_motion.connect("enter", self.show_play)
-        self.event_contoller_motion.connect("leave", self.hide_play)
+        self.event_contoller_motion.connect("enter", self.toggle_play, False)
+        self.event_contoller_motion.connect("leave", self.toggle_play, None, None)
 
-        self.cover_button.connect("clicked", self.cover_button_clicked)
-        self.play_button.connect("clicked", self.play_button_clicked)
+        self.cover_button.connect("clicked", self.main_button_clicked, False)
+        self.play_button.connect("clicked", self.main_button_clicked, True)
 
         self.win.schema.connect("changed", self.schema_changed)
 
@@ -89,7 +90,9 @@ class Game(Gtk.Box):
 
         self.title.set_label(self.name)
 
-        self.menu_button.get_popover().connect("notify::visible", self.hide_play)
+        self.menu_button.get_popover().connect(
+            "notify::visible", self.toggle_play, None
+        )
         self.menu_button.get_popover().connect(
             "notify::visible", self.win.set_active_game, self.game_id
         )
@@ -140,8 +143,28 @@ class Game(Gtk.Box):
 
         self.update()
 
+    def create_toast(self, title, action=None):
+        toast = Adw.Toast.new(title.format(self.name))
+        toast.set_priority(Adw.ToastPriority.HIGH)
+
+        if action:
+            toast.set_button_label(_("Undo"))
+            toast.connect(
+                "button-clicked", self.win.on_undo_action, self.game_id, action
+            )
+
+            if (self.game_id, action) in self.win.toasts.keys():
+                # Dismiss the toast if there already is one
+                self.win.toasts[(self.game_id, action)].dismiss()
+
+            self.win.toasts[(self.game_id, action)] = toast
+
+        self.win.toast_overlay.add_toast(toast)
+
     def launch(self):
-        # Generate launch arguments, either list (no shell) or a string (for shell).
+        self.last_played = int(time())
+        self.save()
+
         argv = (
             ("flatpak-spawn", "--host", *self.executable)  # Flatpak
             if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
@@ -152,9 +175,40 @@ class Game(Gtk.Box):
         if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
             self.app.quit()
 
-    def toggle_hidden(self):
+        # The variable is the title of the game
+        self.create_toast(_("{} launched"))
+
+    def toggle_hidden(self, toast):
         self.hidden = not self.hidden
         self.save()
+
+        if self.win.stack.get_visible_child() == self.win.details_view:
+            self.win.on_go_back_action()
+
+        if toast:
+            self.create_toast(
+                # The variable is the title of the game
+                (_("{} hidden") if self.hidden else _("{} unhidden")).format(self.name),
+                "hide",
+            )
+
+    def remove_game(self):
+        # Add "removed=True" to the game properties so it can be deleted on next init
+        self.removed = True
+        self.save()
+
+        if self.win.stack.get_visible_child() == self.win.details_view:
+            self.win.on_go_back_action()
+
+        # The variable is the title of the game
+        self.create_toast(_("{} removed").format(self.name), "remove")
+
+    def set_loading(self, state):
+        self.loading += state
+        loading = self.loading > 0
+
+        self.cover.set_opacity(int(not loading))
+        self.spinner.set_spinning(loading)
 
     def get_cover_path(self):
         cover_path = self.win.covers_dir / f"{self.game_id}.gif"
@@ -167,44 +221,24 @@ class Game(Gtk.Box):
 
         return None
 
-    def show_play(self, _widget, *_unused):
-        self.play_revealer.set_reveal_child(True)
-        self.title_revealer.set_reveal_child(False)
-
-    def hide_play(self, _widget, *_unused):
+    def toggle_play(self, _widget, _prop1, _prop2, state=True):
         if not self.menu_button.get_active():
-            self.play_revealer.set_reveal_child(False)
-            self.title_revealer.set_reveal_child(True)
+            self.title_revealer.set_reveal_child(state)
+            self.play_revealer.set_reveal_child(not state)
 
-    def launch_game(self, _widget, *_unused):
-        self.win.set_active_game(None, None, self.game_id)
-        self.app.on_launch_game_action(None)
-
-    def cover_button_clicked(self, _widget):
-        if self.win.schema.get_boolean("cover-launches-game"):
-            self.launch_game(None)
+    def main_button_clicked(self, _widget, button):
+        if self.win.schema.get_boolean("cover-launches-game") ^ button:
+            self.launch()
         else:
             self.win.show_details_view(None, self.game_id)
-
-    def play_button_clicked(self, _widget):
-        if self.win.schema.get_boolean("cover-launches-game"):
-            self.win.show_details_view(None, self.game_id)
-        else:
-            self.launch_game(None)
 
     def set_play_label(self):
-        if self.win.schema.get_boolean("cover-launches-game"):
-            self.play_button.set_label(_("Details"))
-        else:
-            self.play_button.set_label(_("Play"))
+        self.play_button.set_label(
+            _("Details")
+            if self.win.schema.get_boolean("cover-launches-game")
+            else _("Play")
+        )
 
     def schema_changed(self, _settings, key):
         if key == "cover-launches-game":
             self.set_play_label()
-
-    def set_loading(self, state):
-        self.loading += state
-        loading = self.loading > 0
-
-        self.cover.set_opacity(int(not loading))
-        self.spinner.set_spinning(loading)

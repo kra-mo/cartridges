@@ -19,7 +19,7 @@
 
 import os
 import shlex
-import time
+from time import time
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 from PIL import Image
@@ -289,7 +289,7 @@ def create_details_window(win, game_id=None):
             values["game_id"] = game_id
             values["hidden"] = False
             values["source"] = "imported"
-            values["added"] = int(time.time())
+            values["added"] = int(time())
             values["last_played"] = 0
 
         else:

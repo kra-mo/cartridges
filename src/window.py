@@ -233,7 +233,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.details_view_game_cover.add_picture(self.details_view_cover)
 
         self.scaled_pixbuf = (
-            self.details_view_game_cover.pixbuf
+            self.details_view_game_cover.get_pixbuf()
             or self.details_view_game_cover.placeholder_pixbuf
         ).scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
         self.details_view_blurred_cover.set_pixbuf(self.scaled_pixbuf)
@@ -320,7 +320,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         return ((get_value(0) > get_value(1)) ^ order) * 2 - 1
 
-    def on_go_back_action(self, _widget, _unused, _x=None, _y=None):
+    def on_go_back_action(self, *_unused):
         if self.stack.get_visible_child() == self.hidden_library_view:
             self.on_show_library_action(None, None)
         elif self.stack.get_visible_child() == self.details_view:
@@ -380,7 +380,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def on_escape_action(self, _widget, _unused):
         if self.stack.get_visible_child() == self.details_view:
-            self.on_go_back_action(None, None)
+            self.on_go_back_action()
             return
         if self.stack.get_visible_child() == self.library_view:
             search_bar = self.search_bar
@@ -407,9 +407,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 return
 
         if undo == "hide":
-            self.get_application().on_hide_game_action(
-                None, game_id=game_id, toast=False
-            )
+            self.get_application().on_hide_game_action(game_id=game_id, toast=False)
 
         elif undo == "remove":
             self.games[game_id].removed = False

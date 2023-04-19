@@ -348,6 +348,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 game.save()
 
         if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action(None, None)
+            self.win.on_go_back_action()
 
         self.add_toast(self.toast)

@@ -18,7 +18,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
-import time
 
 import gi
 
@@ -146,46 +145,13 @@ class CartridgesApplication(Adw.Application):
             getattr(win, expander_row).set_expanded(True)
         win.present()
 
-    def on_launch_game_action(self, _widget, _callback=None):
-        # Launch the game and update the last played value
-        game = self.win.games[self.win.active_game_id]
+    def on_launch_game_action(self, _widget=None, _callback=None):
+        self.win.games[self.win.active_game_id].launch()
 
-        game.last_played = int(time.time())
-        game.save()
-        game.launch()
-
-        title = game.name
-        # The variable is the title of the game
-        toast = Adw.Toast.new(_("{} launched").format(title))
-        toast.set_priority(Adw.ToastPriority.HIGH)
-        self.win.toast_overlay.add_toast(toast)
-
-    def on_hide_game_action(self, _widget, _callback=None, game_id=None, toast=True):
-        if not game_id:
-            game_id = self.win.active_game_id
-
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action(None, None)
-        self.win.games[game_id].toggle_hidden()
-
-        if not toast:
-            return
-
-        title = self.win.games[game_id].name
-        if self.win.games[game_id].hidden:
-            # The variable is the title of the game
-            toast = Adw.Toast.new(_("{} hidden").format(title))
-        else:
-            # The variable is the title of the game
-            toast = Adw.Toast.new(_("{} unhidden").format(title))
-        toast.set_button_label(_("Undo"))
-        toast.connect("button-clicked", self.win.on_undo_action, game_id, "hide")
-        toast.set_priority(Adw.ToastPriority.HIGH)
-        if (game_id, "hide") in self.win.toasts.keys():
-            # Dismiss the toast if there already is one
-            self.win.toasts[(game_id, "hide")].dismiss()
-        self.win.toasts[(game_id, "hide")] = toast
-        self.win.toast_overlay.add_toast(toast)
+    def on_hide_game_action(
+        self, _widget=None, _callback=None, game_id=None, toast=True
+    ):
+        self.win.games[game_id or self.win.active_game_id].toggle_hidden(toast)
 
     def on_edit_game_action(self, _widget, _callback=None):
         create_details_window(self.win, self.win.active_game_id)
@@ -219,28 +185,12 @@ class CartridgesApplication(Adw.Application):
             self.win.importer.queue = 1
             self.win.importer.save_game()
 
-    def on_remove_game_action(self, _widget, _callback=None):
-        # Add "removed=True" to the game properties so it can be deleted on next init
-        game = self.win.games[self.win.active_game_id]
-
-        game.removed = True
-        game.save()
-
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action(None, None)
-
-        title = game.name
-        # The variable is the title of the game
-        toast = Adw.Toast.new(_("{} removed").format(title))
-        toast.set_button_label(_("Undo"))
-        toast.connect("button-clicked", self.win.on_undo_action, game.game_id, "remove")
-        toast.set_priority(Adw.ToastPriority.HIGH)
-        self.win.toasts[(game.game_id, "remove")] = toast
-        self.win.toast_overlay.add_toast(toast)
+    def on_remove_game_action(self, _widget=None, _callback=None):
+        self.win.games[self.win.active_game_id].remove_game()
 
     def on_remove_game_details_view_action(self, _widget, _callback=None):
         if self.win.stack.get_visible_child() == self.win.details_view:
-            self.on_remove_game_action(None)
+            self.on_remove_game_action()
 
     def on_quit_action(self, _widget, _callback=None):
         self.quit()
