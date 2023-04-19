@@ -56,17 +56,15 @@ class Importer:
 
     def save_game(self, values=None, cover_path=None):
         if values:
-            Game(self.win, values)
+            game = Game(self.win, values)
 
             if cover_path:
-                save_cover(
-                    self.win, values["game_id"], resize_cover(self.win, cover_path)
-                )
+                save_cover(self.win, game.game_id, resize_cover(self.win, cover_path))
 
-            self.games.add((values["game_id"], values["name"]))
+            self.games.add(game)
 
             self.games_no += 1
-            if values.get("blacklisted"):
+            if game.blacklisted:
                 self.games_no -= 1
 
         self.queue -= 1

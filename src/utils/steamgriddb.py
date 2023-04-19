@@ -30,12 +30,12 @@ class SGDBSave:
         if self.win.schema.get_boolean("sgdb") and (
             self.win.schema.get_boolean("sgdb-prefer")
             or (
-                not (self.win.covers_dir / f"{game[0]}.gif").is_file()
-                and not (self.win.covers_dir / f"{game[0]}.tiff").is_file()
+                not (self.win.covers_dir / f"{game.game_id}.gif").is_file()
+                and not (self.win.covers_dir / f"{game.game_id}.tiff").is_file()
             )
         ):
             if not self.importer:
-                self.win.games[game[0]].set_loading(1)
+                game.set_loading(1)
 
             url = "https://www.steamgriddb.com/api/v2/"
             headers = {
@@ -44,7 +44,7 @@ class SGDBSave:
 
             try:
                 search_result = requests.get(
-                    f"{url}search/autocomplete/{game[1]}",
+                    f"{url}search/autocomplete/{game.name}",
                     headers=headers,
                     timeout=5,
                 )
@@ -56,7 +56,7 @@ class SGDBSave:
                     )
                 search_result.raise_for_status()
             except requests.exceptions.RequestException:
-                task.return_value(game[0])
+                task.return_value(game)
                 return
 
             response = None
@@ -82,7 +82,7 @@ class SGDBSave:
                     )
                     response = requests.get(grid.json()["data"][0]["url"], timeout=5)
             except (requests.exceptions.RequestException, IndexError):
-                task.return_value(game[0])
+                task.return_value(game)
                 return
 
             tmp_file = Gio.File.new_tmp()[0]
@@ -90,11 +90,11 @@ class SGDBSave:
 
             save_cover(
                 self.win,
-                game[0],
+                game.game_id,
                 resize_cover(self.win, tmp_file.get_path()),
             )
 
-        task.return_value(game[0])
+        task.return_value(game)
 
     def task_done(self, _task, result):
         if self.importer:
@@ -111,14 +111,13 @@ class SGDBSave:
                     _("Preferences"),
                 ).connect("response", self.response)
 
-        game = self.win.games.get(result.propagate_value()[1])
+        game = result.propagate_value()[1]
         game.set_loading(-1)
 
-        if game:
-            if self.importer:
-                game.save()
-            else:
-                game.update()
+        if self.importer:
+            game.save()
+        else:
+            game.update()
 
     def response(self, _widget, response):
         if response == "open_preferences":

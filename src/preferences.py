@@ -332,9 +332,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.file_chooser.select_folder(self.win, None, function, None)
 
     def undo_remove_all(self, *_args):
-        for game_id in self.removed_games:
-            self.win.games[game_id].removed = False
-            self.win.games[game_id].save()
+        for game in self.removed_games:
+            game.removed = False
+            game.save()
 
         self.removed_games = set()
         self.toast.dismiss()
@@ -342,7 +342,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     def remove_all_games(self, *_args):
         for game in self.win.games.values():
             if not game.removed:
-                self.removed_games.add(game.game_id)
+                self.removed_games.add(game)
 
                 game.removed = True
                 game.save()

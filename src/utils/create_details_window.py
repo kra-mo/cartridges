@@ -321,7 +321,7 @@ def create_details_window(win, game=None):
         game.save()
 
         if not game_cover.pixbuf:
-            SGDBSave(win, {(game.game_id, game.name)})
+            SGDBSave(win, {game})
 
         game.game_cover.pictures.remove(cover)
 
