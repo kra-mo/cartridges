@@ -67,7 +67,8 @@ class DetailsWindow(Adw.Window):
         if self.game:
             self.set_title(_("Edit Game Details"))
             self.name.set_text(self.game.name)
-            self.developer.set_text(self.game.developer)
+            if self.game.developer:
+                self.developer.set_text(self.game.developer)
             self.executable.set_text(shlex.join(self.game.executable))
             self.apply_button.set_label(_("Apply"))
 
@@ -218,7 +219,7 @@ class DetailsWindow(Adw.Window):
         self.close()
         self.win.show_details_view(self.game)
 
-    def focus_executable(self):
+    def focus_executable(self, *_args):
         self.set_focus(self.executable)
 
     def set_cover(self, _source, result, *_args):

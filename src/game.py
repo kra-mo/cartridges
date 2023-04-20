@@ -106,7 +106,10 @@ class Game(Gtk.Box):
             self.game_cover = GameCover({self.cover}, self.get_cover_path())
             self.win.game_covers[self.game_id] = self.game_cover
 
-        if self.win.stack.get_visible_child() == self.win.details_view:
+        if (
+            self.win.stack.get_visible_child() == self.win.details_view
+            and self.win.active_game == self
+        ):
             self.win.show_details_view(self)
 
         if not self.removed and not self.blacklisted:
