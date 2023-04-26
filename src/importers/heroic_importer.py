@@ -115,7 +115,9 @@ def heroic_importer(win):
     # Import GOG games
     if not win.schema.get_boolean("heroic-import-gog"):
         pass
-    elif (heroic_dir / "gog_store" / "installed.json").exists():
+    elif (heroic_dir / "gog_store" / "installed.json").exists() and (
+        heroic_dir / "gog_store" / "library.json"
+    ).exists():
         installed = json.load((heroic_dir / "gog_store" / "installed.json").open())
 
         importer.total_queue += len(installed["installed"])
