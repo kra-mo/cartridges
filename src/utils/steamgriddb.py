@@ -27,6 +27,9 @@ class SGDBSave:
             Gio.Task.new(None, None, self.task_done).run_in_thread(create_func(game))
 
     def update_cover(self, task, game):
+        if not self.importer:
+            game.set_loading(1)
+
         if (
             not (
                 self.win.schema.get_boolean("sgdb")
@@ -42,9 +45,6 @@ class SGDBSave:
         ):
             task.return_value(game)
             return
-
-        if not self.importer:
-            game.set_loading(1)
 
         url = "https://www.steamgriddb.com/api/v2/"
         headers = {"Authorization": f'Bearer {self.win.schema.get_string("sgdb-key")}'}

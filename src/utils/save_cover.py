@@ -65,17 +65,17 @@ def resize_cover(win, cover_path=None, pixbuf=None):
 
 
 def save_cover(win, game_id, cover_path):
-    if not cover_path:
-        return
-
     win.covers_dir.mkdir(parents=True, exist_ok=True)
 
     animated_path = win.covers_dir / f"{game_id}.gif"
     static_path = win.covers_dir / f"{game_id}.tiff"
 
     # Remove previous covers
-    (animated_path).unlink(missing_ok=True)
-    (static_path).unlink(missing_ok=True)
+    animated_path.unlink(missing_ok=True)
+    static_path.unlink(missing_ok=True)
+
+    if not cover_path:
+        return
 
     copyfile(
         cover_path,
