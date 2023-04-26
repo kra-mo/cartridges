@@ -53,7 +53,7 @@ class CartridgesApplication(Adw.Application):
             self.win = CartridgesWindow(application=self)
 
         # Save window geometry
-        state_settings = Gio.Settings(schema_id="hu.kramo.Cartridge.State")
+        state_settings = Gio.Settings(schema_id="hu.kramo.Cartridges.State")
         state_settings.bind(
             "width", self.win, "default-width", Gio.SettingsBindFlags.DEFAULT
         )

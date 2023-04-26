@@ -74,7 +74,7 @@
       <default>false</default>
     </key>
 	</schema>
-  <schema id="hu.kramo.Cartridge.State" path="/hu/kramo/Cartridges/State/">
+  <schema id="hu.kramo.Cartridges.State" path="/hu/kramo/Cartridges/State/">
     <key name="width" type="i">
       <default>1110</default>
     </key>

@@ -355,7 +355,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.sort_state = str(state).strip("'")
         self.library.invalidate_sort()
 
-        Gio.Settings(schema_id="hu.kramo.Cartridge.State").set_string(
+        Gio.Settings(schema_id="hu.kramo.Cartridges.State").set_string(
             "sort-mode", self.sort_state
         )
 
