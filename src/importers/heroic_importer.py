@@ -116,7 +116,7 @@ def heroic_importer(win):
     if not win.schema.get_boolean("heroic-import-gog"):
         pass
     elif (heroic_dir / "gog_store" / "installed.json").exists() and (
-        heroic_dir / "gog_store" / "library.json"
+        heroic_dir / "store_cache" / "gog_library.json"
     ).exists():
         installed = json.load((heroic_dir / "gog_store" / "installed.json").open())
 
@@ -136,8 +136,10 @@ def heroic_importer(win):
                 importer.save_game()
                 continue
 
-            # Get game title and developer from library.json as they are not present in installed.json
-            library = json.load((heroic_dir / "store_cache" / "gog_library.json").open())
+            # Get game title and developer from gog_library.json as they are not present in installed.json
+            library = json.load(
+                (heroic_dir / "store_cache" / "gog_library.json").open()
+            )
             for game in library["games"]:
                 if game["app_name"] == app_name:
                     values["developer"] = game["developer"]
