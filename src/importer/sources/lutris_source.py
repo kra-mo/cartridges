@@ -4,6 +4,7 @@ from sqlite3 import connect
 
 from cartridges.game2 import Game
 from cartridges.importer.source import Source, SourceIterator
+from cartridges.importer.location import Location
 
 
 class LutrisSourceIterator(SourceIterator):
@@ -72,44 +73,50 @@ class LutrisSource(Source):
     
     name = "Lutris"
     executable_format = "xdg-open lutris:rungameid/{game_id}"
+    schema_keys = {
+        "location": None,
+        "cache_location": None
+    }
 
-    location = None
-    cache_location = None
+    def __init__(self, win) -> None:
+        super().__init__(win)
+        self.location = Location()
+        self.cache_location = Location()
 
     def __iter__(self):
         return LutrisSourceIterator(source=self)
 
-    # TODO find a way to no duplicate this code
-    # Ideas: 
-    # - Location class (verbose, set in __init__)
-    # - Schema key override decorator ()
-
-    # Lutris location property
-    @cached_property
-    def location(self):
-        ovr = Path(self.win.schema.get_string(self.location_key))
-        if ovr.exists(): return ovr
-        return self.location_default
-
-    # Lutris cache location property
-    @cached_property
-    def cache_location(self):
-        ovr = Path(self.win.schema.get_string(self.cache_location_key))
-        if ovr.exists(): return ovr
-        return self.cache_location_default
+    def __init_locations__(self):
+        super().__init_locations__()
+        self.location.add_override(self.win.schema.get_string(self.schema_keys["location"]))
+        self.cache_location.add_override(self.win.schema.get_string(self.schema_keys["cache_location"]))
 
 
 class LutrisNativeSource(LutrisSource):
+    """Class representing an installation of Lutris using native packaging"""
+
     variant = "native"
-    location_key = "lutris-location"
-    location_default = Path("~/.local/share/lutris/").expanduser()
-    cache_location_key = "lutris-cache-location"
-    cache_location_default = location_default / "covers"
+    schema_keys = {
+        "location": "lutris-location",
+        "cache_location": "lutris-cache-location"
+    }
+
+    def __init_locations__(self):
+        super().__init_locations__()
+        self.location.add("~/.local/share/lutris/")
+        self.cache_location.add("~/.local/share/lutris/covers")
 
 
 class LutrisFlatpakSource(LutrisSource):
+    """Class representing an installation of Lutris using flatpak"""
+
     variant = "flatpak"
-    location_key = "lutris-flatpak-location"
-    location_default = Path("~/.var/app/net.lutris.Lutris/data/lutris").expanduser()
-    cache_location_key = "lutris-flatpak-cache-location"
-    cache_location_default = location_default / "covers"
+    schema_keys = {
+        "location": "lutris-flatpak-location",
+        "cache_location": "lutris-flatpak-cache-location"
+    }
+
+    def __init_locations__(self):
+        super().__init_locations__()
+        self.location.add("~/.var/app/net.lutris.Lutris/data/lutris")
+        self.cache_location.add("~/.var/app/net.lutris.Lutris/data/lutris/covers")
