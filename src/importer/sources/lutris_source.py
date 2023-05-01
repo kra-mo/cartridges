@@ -1,10 +1,9 @@
-from pathlib import Path
 from functools import cached_property
 from sqlite3 import connect
 
 from cartridges.game2 import Game
 from cartridges.importer.source import Source, SourceIterator
-from cartridges.importer.location import Location
+from cartridges.importer.decorators import replaced_by_schema_key, replaced_by_path
 
 
 class LutrisSourceIterator(SourceIterator):
@@ -73,50 +72,48 @@ class LutrisSource(Source):
     
     name = "Lutris"
     executable_format = "xdg-open lutris:rungameid/{game_id}"
-    schema_keys = {
-        "location": None,
-        "cache_location": None
-    }
+
+    location = None
+    cache_location = None
 
     def __init__(self, win) -> None:
         super().__init__(win)
-        self.location = Location()
-        self.cache_location = Location()
 
     def __iter__(self):
         return LutrisSourceIterator(source=self)
-
-    def __init_locations__(self):
-        super().__init_locations__()
-        self.location.add_override(self.win.schema.get_string(self.schema_keys["location"]))
-        self.cache_location.add_override(self.win.schema.get_string(self.schema_keys["cache_location"]))
 
 
 class LutrisNativeSource(LutrisSource):
     """Class representing an installation of Lutris using native packaging"""
 
     variant = "native"
-    schema_keys = {
-        "location": "lutris-location",
-        "cache_location": "lutris-cache-location"
-    }
 
-    def __init_locations__(self):
-        super().__init_locations__()
-        self.location.add("~/.local/share/lutris/")
-        self.cache_location.add("~/.local/share/lutris/covers")
+    @cached_property
+    @replaced_by_schema_key("lutris-location")
+    @replaced_by_path("~/.local/share/lutris/")
+    def location(self):
+        raise FileNotFoundError()
+
+    @cached_property
+    @replaced_by_schema_key("lutris-cache-location")
+    @replaced_by_path("~/.local/share/lutris/covers")
+    def cache_location(self):
+        raise FileNotFoundError()
 
 
 class LutrisFlatpakSource(LutrisSource):
     """Class representing an installation of Lutris using flatpak"""
 
     variant = "flatpak"
-    schema_keys = {
-        "location": "lutris-flatpak-location",
-        "cache_location": "lutris-flatpak-cache-location"
-    }
 
-    def __init_locations__(self):
-        super().__init_locations__()
-        self.location.add("~/.var/app/net.lutris.Lutris/data/lutris")
-        self.cache_location.add("~/.var/app/net.lutris.Lutris/data/lutris/covers")
+    @cached_property
+    @replaced_by_schema_key("lutris-flatpak-location")
+    @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris")
+    def location(self):
+        raise FileNotFoundError()
+
+    @cached_property
+    @replaced_by_schema_key("lutris-flatpak-cache-location")
+    @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/covers")
+    def cache_location(self):
+        raise FileNotFoundError()

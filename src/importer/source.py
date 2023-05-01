@@ -27,7 +27,6 @@ class Source(Iterable):
     """Source of games. Can be a program location on disk with a config file that points to game for example"""
 
     win = None
-    schema_keys: dict
 
     name: str
     variant: str
@@ -36,11 +35,6 @@ class Source(Iterable):
     def __init__(self, win) -> None:
         super().__init__()
         self.win = win
-        self.__init_schema_keys__()
-
-    def __init_schema_keys__(self):
-        """Initialize schema keys needed by the source if necessary"""
-        raise NotImplementedError()
 
     @property
     def full_name(self):
@@ -61,9 +55,4 @@ class Source(Iterable):
 
     def __iter__(self):
         """Get the source's iterator, to use in for loops"""
-        raise NotImplementedError()
-
-    def __init_locations__(self):
-        """Initialize locations needed by the source.
-        Extended and called by **final** children."""
         raise NotImplementedError()
