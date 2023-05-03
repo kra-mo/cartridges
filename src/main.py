@@ -67,28 +67,28 @@ class CartridgesApplication(Adw.Application):
         # Create actions
         self.create_actions(
             {
-                (self, "quit", ("<primary>q",)),
-                (self, "about", None),
-                (self, "preferences", ("<primary>comma",)),
-                (self, "launch_game", None),
-                (self, "hide_game", None),
-                (self, "edit_game", None),
-                (self, "add_game", ("<primary>n",)),
-                (self, "import", ("<primary>i",)),
-                (self, "remove_game_details_view", ("Delete",)),
-                (self, "remove_game", None),
-                (self, "igdb_search", None),
-                (self, "sgdb_search", None),
-                (self, "protondb_search", None),
-                (self, "lutris_search", None),
-                (self, "hltb_search", None),
-                (self.win, "show_hidden", ("<primary>h",)),
-                (self.win, "go_back", ("<alt>Left",)),
-                (self.win, "go_to_parent", ("<alt>Up",)),
-                (self.win, "toggle_search", ("<primary>f",)),
-                (self.win, "escape", ("Escape",)),
-                (self.win, "undo", ("<primary>z",)),
-                (self.win, "open_menu", ("F10",)),
+                ("quit", ("<primary>q",)),
+                ("about",),
+                ("preferences", ("<primary>comma",)),
+                ("launch_game",),
+                ("hide_game",),
+                ("edit_game",),
+                ("add_game", ("<primary>n",)),
+                ("import", ("<primary>i",)),
+                ("remove_game_details_view", ("Delete",)),
+                ("remove_game",),
+                ("igdb_search",),
+                ("sgdb_search",),
+                ("protondb_search",),
+                ("lutris_search",),
+                ("hltb_search",),
+                ("show_hidden", ("<primary>h",), self.win),
+                ("go_back", ("<alt>Left",), self.win),
+                ("go_to_parent", ("<alt>Up",), self.win),
+                ("toggle_search", ("<primary>f",), self.win),
+                ("escape", ("Escape",), self.win),
+                ("undo", ("<primary>z",), self.win),
+                ("open_menu", ("F10",), self.win),
             }
         )
 
@@ -204,17 +204,18 @@ class CartridgesApplication(Adw.Application):
 
     def create_actions(self, actions):
         for action in actions:
-            simple_action = Gio.SimpleAction.new(action[1], None)
-            simple_action.connect(
-                "activate", getattr(action[0], f"on_{action[1]}_action")
-            )
-            if action[2]:
+            simple_action = Gio.SimpleAction.new(action[0], None)
+
+            scope = action[2] if action[2:3] else self
+            simple_action.connect("activate", getattr(scope, f"on_{action[0]}_action"))
+
+            if action[1:2]:
                 self.set_accels_for_action(
-                    f"app.{action[1]}" if action[0] == self else f"win.{action[1]}",
-                    action[2],
+                    f"app.{action[0]}" if scope == self else f"win.{action[0]}",
+                    action[1],
                 )
 
-            action[0].add_action(simple_action)
+            scope.add_action(simple_action)
 
 
 def main(version):  # pylint: disable=unused-argument
