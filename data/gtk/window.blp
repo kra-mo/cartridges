@@ -62,22 +62,27 @@ template CartridgesWindow : Adw.ApplicationWindow {
             hexpand: true;
             vexpand: true;
 
-            Adw.Flap {
+            FlowBox {
               halign: center;
               valign: center;
               margin-start: 24;
               margin-end: 24;
               margin-top: 24;
               margin-bottom: 24;
+              selection-mode: none;
+              homogeneous: true;
+              max-children-per-line: 2;
 
-              flap: Adw.Clamp {
+              Adw.Clamp {
                 maximum-size: 200;
-                margin-end: 48;
                 Overlay {
+                  margin-end: 48;
                   [overlay]
                   Spinner details_view_spinner {
                     margin-start: 72;
                     margin-end: 72;
+                    width-request: 56;
+                    height-request: 56;
                   }
 
                   Picture details_view_cover {
@@ -91,9 +96,9 @@ template CartridgesWindow : Adw.ApplicationWindow {
                     ]
                   }
                 }
-              };
+              }
 
-              content: Box {
+              Box {
                 orientation: vertical;
                 vexpand: true;
                 valign: center;
@@ -213,7 +218,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
                     ]
                   }
                 }
-              };
+              }
             }
           }
         }
