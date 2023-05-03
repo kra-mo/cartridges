@@ -1,9 +1,9 @@
 from functools import cached_property
 from sqlite3 import connect
 
-from cartridges.game2 import Game
-from cartridges.importer.source import Source, SourceIterator
-from cartridges.importer.decorators import replaced_by_schema_key, replaced_by_path
+from src.game2 import Game
+from src.importer.source import Source, SourceIterator
+from src.importer.decorators import replaced_by_schema_key, replaced_by_path
 
 
 class LutrisSourceIterator(SourceIterator):
@@ -56,17 +56,17 @@ class LutrisSourceIterator(SourceIterator):
                 continue
             
             # Build basic game
-            game = Game(
-                name=row[1],
-                hidden=row[4],
-                source=self.source.full_name,
-                game_id=self.source.game_id_format.format(game_id=row[2]),
-                executable=self.source.executable_format.format(game_id=row[2]),
-                developer=None, # TODO get developer metadata on Lutris
-            )
+            values = {
+                "name"      : row[1],
+                "hidden"    : row[4],
+                "source"    : self.source.full_name,
+                "game_id"   : self.source.game_id_format.format(game_id=row[2]),
+                "executable": self.source.executable_format.format(game_id=row[2]),
+                "developer" : None, # TODO get developer metadata on Lutris
+            }
             # TODO Add official image
             # TODO Add SGDB image  
-            return game
+            return values
 
 class LutrisSource(Source):
     

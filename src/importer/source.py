@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from collections.abc import Iterable, Iterator
 from enum import IntEnum, auto
 
@@ -19,18 +20,18 @@ class SourceIterator(Iterator):
     def __iter__(self):
         return self
 
+    @abstractmethod
     def __next__(self):
-        raise NotImplementedError()
+        pass
 
 
 class Source(Iterable):
-    """Source of games. Can be a program location on disk with a config file that points to game for example"""
+    """Source of games. E.g an installed app with a config file that lists game directories"""
 
-    win = None
+    win = None # TODO maybe not depend on that ?
 
     name: str
     variant: str
-    executable_format: str
 
     def __init__(self, win) -> None:
         super().__init__()
@@ -38,7 +39,7 @@ class Source(Iterable):
 
     @property
     def full_name(self):
-        """Get the source's full name"""
+        """The source's full name"""
         s = self.name
         if self.variant is not None:
             s += " (%s)" % self.variant
@@ -46,13 +47,20 @@ class Source(Iterable):
 
     @property
     def game_id_format(self):
-        """Get the string format used to construct game IDs"""
+        """The string format used to construct game IDs"""
         _format = self.name.lower()
         if self.variant is not None: 
             _format += "_" + self.variant.lower()
         _format += "_{game_id}_{game_internal_id}"
         return _format
 
+    @property
+    @abstractmethod
+    def executable_format(self):
+        """The executable format used to construct game executables"""
+        pass
+
+    @abstractmethod
     def __iter__(self):
         """Get the source's iterator, to use in for loops"""
-        raise NotImplementedError()
+        pass
