@@ -62,160 +62,164 @@ template CartridgesWindow : Adw.ApplicationWindow {
             hexpand: true;
             vexpand: true;
 
-            FlowBox {
-              halign: center;
-              valign: center;
-              margin-start: 24;
-              margin-end: 24;
-              margin-top: 24;
-              margin-bottom: 24;
-              selection-mode: none;
-              homogeneous: true;
-              max-children-per-line: 2;
+            ScrolledWindow {
+              hscrollbar-policy: never;
 
-              Adw.Clamp {
-                maximum-size: 200;
-                Overlay {
-                  margin-end: 48;
-                  [overlay]
-                  Spinner details_view_spinner {
-                    margin-start: 72;
-                    margin-end: 72;
-                    width-request: 56;
-                    height-request: 56;
-                  }
-
-                  Picture details_view_cover {
-                    halign: end;
-                    valign: start;
-                    width-request: 200;
-                    height-request: 300;
-
-                    styles [
-                      "card",
-                    ]
-                  }
-                }
-              }
-
-              Box {
-                orientation: vertical;
-                vexpand: true;
+              FlowBox {
+                halign: center;
                 valign: center;
+                margin-start: 24;
+                margin-end: 24;
+                margin-top: 24;
+                margin-bottom: 24;
+                selection-mode: none;
+                homogeneous: true;
+                max-children-per-line: 2;
 
-                Label details_view_title {
-                  label: _("Game Title");
-                  hexpand: true;
-                  halign: start;
-                  max-width-chars: 24;
-                  wrap: true;
-                  wrap-mode: word_char;
-                  natural-wrap-mode: word;
+                Adw.Clamp {
+                  maximum-size: 200;
+                  Overlay {
+                    margin-end: 48;
+                    [overlay]
+                    Spinner details_view_spinner {
+                      margin-start: 72;
+                      margin-end: 72;
+                      width-request: 56;
+                      height-request: 56;
+                    }
 
-                  styles [
-                    "title-1",
-                  ]
-                }
+                    Picture details_view_cover {
+                      halign: end;
+                      valign: start;
+                      width-request: 200;
+                      height-request: 300;
 
-                Label details_view_developer {
-                  margin-top: 3;
-                  hexpand: true;
-                  halign: start;
-                  max-width-chars: 36;
-                  wrap: true;
-                  wrap-mode: word_char;
-                  natural-wrap-mode: word;
-
-                  styles [
-                    "heading"
-                  ]
+                      styles [
+                        "card",
+                      ]
+                    }
+                  }
                 }
 
                 Box {
-                  orientation: horizontal;
-                  margin-top: 12;
-                  hexpand: true;
-                  halign: start;
-
-                  Label details_view_added {
-                    wrap: true;
-                    wrap-mode: word_char;
-                    natural-wrap-mode: word;
-                  }
-                  Label details_view_last_played {
-                    margin-start: 12;
-                    wrap: true;
-                    wrap-mode: word_char;
-                    natural-wrap-mode: word;
-                  }
-                }
-                Box {
-                  hexpand: true;
+                  orientation: vertical;
                   vexpand: true;
                   valign: center;
 
-                  Button details_view_play_button {
-                    name: "details_view_play_button";
-                    action-name: "app.launch_game";
-                    label: _("Play");
+                  Label details_view_title {
+                    label: _("Game Title");
+                    hexpand: true;
                     halign: start;
-                    margin-top: 24;
+                    max-width-chars: 24;
+                    wrap: true;
+                    wrap-mode: word_char;
+                    natural-wrap-mode: word;
 
                     styles [
-                      "opaque",
-                      "pill",
+                      "title-1",
+                    ]
+                  }
+
+                  Label details_view_developer {
+                    margin-top: 3;
+                    hexpand: true;
+                    halign: start;
+                    max-width-chars: 36;
+                    wrap: true;
+                    wrap-mode: word_char;
+                    natural-wrap-mode: word;
+
+                    styles [
+                      "heading"
                     ]
                   }
 
                   Box {
+                    orientation: horizontal;
+                    margin-top: 12;
+                    hexpand: true;
                     halign: start;
-                    valign: center;
-                    margin-top: 24;
-                    margin-start: 12;
 
-                    Button {
-                      icon-name: "document-edit-symbolic";
-                      action-name: "app.edit_game";
-                      tooltip-text: _("Edit");
-
-                      styles [
-                      "circular",
-                    ]
+                    Label details_view_added {
+                      wrap: true;
+                      wrap-mode: word_char;
+                      natural-wrap-mode: word;
                     }
-                    Button details_view_hide_button {
-                      action-name: "app.hide_game";
-
-                      styles [
-                      "circular",
-                    ]
+                    Label details_view_last_played {
+                      margin-start: 12;
+                      wrap: true;
+                      wrap-mode: word_char;
+                      natural-wrap-mode: word;
                     }
-                    Button {
-                      icon-name: "user-trash-symbolic";
-                      action-name: "app.remove_game";
-                      tooltip-text: _("Remove");
-
-                      styles [
-                      "circular",
-                    ]
-                    }
-                    
-                    styles [
-                      "linked",
-                    ]
                   }
+                  Box {
+                    hexpand: true;
+                    vexpand: true;
+                    valign: center;
 
-                  MenuButton {
+                    Button details_view_play_button {
+                      name: "details_view_play_button";
+                      action-name: "app.launch_game";
+                      label: _("Play");
+                      halign: start;
+                      margin-top: 24;
+
+                      styles [
+                        "opaque",
+                        "pill",
+                      ]
+                    }
+
+                    Box {
                       halign: start;
                       valign: center;
                       margin-top: 24;
                       margin-start: 12;
-                      icon-name: "system-search-symbolic";
-                      menu-model: search;
-                      tooltip-text: _("Search");
+
+                      Button {
+                        icon-name: "document-edit-symbolic";
+                        action-name: "app.edit_game";
+                        tooltip-text: _("Edit");
+
+                        styles [
+                        "circular",
+                      ]
+                      }
+                      Button details_view_hide_button {
+                        action-name: "app.hide_game";
+
+                        styles [
+                        "circular",
+                      ]
+                      }
+                      Button {
+                        icon-name: "user-trash-symbolic";
+                        action-name: "app.remove_game";
+                        tooltip-text: _("Remove");
+
+                        styles [
+                        "circular",
+                      ]
+                      }
 
                       styles [
-                      "circular",
-                    ]
+                        "linked",
+                      ]
+                    }
+
+                    MenuButton {
+                        halign: start;
+                        valign: center;
+                        margin-top: 24;
+                        margin-start: 12;
+                        icon-name: "system-search-symbolic";
+                        menu-model: search;
+                        tooltip-text: _("Search");
+
+                        styles [
+                        "circular",
+                      ]
+                    }
                   }
                 }
               }
