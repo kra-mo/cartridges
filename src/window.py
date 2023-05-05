@@ -21,9 +21,8 @@ import json
 import os
 from datetime import datetime
 from pathlib import Path
-from struct import unpack_from
 
-from gi.repository import Adw, Gdk, GdkPixbuf, Gio, GLib, Gtk
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 from .game import Game
 
@@ -71,7 +70,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     game_covers = {}
     toasts = {}
     active_game = None
-    scaled_pixbuf = None
     details_view_game_cover = None
     sort_state = "a-z"
 
@@ -236,11 +234,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.details_view_game_cover = game.game_cover
         self.details_view_game_cover.add_picture(self.details_view_cover)
 
-        self.scaled_pixbuf = (
-            self.details_view_game_cover.get_pixbuf()
-            or self.details_view_game_cover.placeholder_pixbuf
-        ).scale_simple(2, 3, GdkPixbuf.InterpType.BILINEAR)
-        self.details_view_blurred_cover.set_pixbuf(self.scaled_pixbuf)
+        self.details_view_blurred_cover.set_pixbuf(
+            self.details_view_game_cover.get_blurred()
+        )
 
         self.details_view_title.set_label(game.name)
         self.details_view_header_bar_title.set_title(game.name)
@@ -274,33 +270,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 self.details_view_blurred_cover.set_opacity(0.3)
                 return
 
-            colors = {
-                unpack_from(
-                    "BBBB",
-                    self.scaled_pixbuf.get_pixels(),
-                    offset=index * self.scaled_pixbuf.get_n_channels(),
-                )
-                for index in range(6)
-            }
-
             dark_theme = style_manager.get_dark()
 
-            luminances = []
-
-            for red, green, blue, alpha in colors:
-                # https://en.wikipedia.org/wiki/Relative_luminance
-                luminance = red * 0.2126 + green * 0.7152 + blue * 0.0722
-
-                luminances.append(
-                    (luminance * alpha) / 255**2
-                    if dark_theme
-                    else (alpha * (luminance - 255)) / 255**2 + 1
-                )
-
             self.details_view_blurred_cover.set_opacity(
-                1.3 - (sum(luminances) / len(luminances) + max(luminances)) / 2
+                1.2 - self.details_view_game_cover.luminance[0]
                 if dark_theme
-                else 0.2 + (sum(luminances) / len(luminances) + min(luminances)) / 2
+                else 0.2 + self.details_view_game_cover.luminance[1]
             )
 
     def sort_func(self, child1, child2):

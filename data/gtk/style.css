@@ -10,3 +10,8 @@
     background-color: @dark_5;
     opacity: 0.8;
 }
+
+/* This is to hide a weird GdkPixbuf upscaling glitch */
+#details_view_blurred_cover {
+    transform: scale(1.2);
+}

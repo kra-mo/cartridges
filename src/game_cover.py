@@ -18,10 +18,13 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import GdkPixbuf, Gio, GLib
+from PIL import Image, ImageFilter, ImageStat
 
 
 class GameCover:
     pixbuf = None
+    blurred = None
+    luminance = None
     path = None
     animation = None
     anim_iter = None
@@ -47,6 +50,8 @@ class GameCover:
     def new_cover(self, path=None):
         self.animation = None
         self.pixbuf = None
+        self.blurred = None
+        self.luminance = None
         self.path = path
 
         if path:
@@ -61,6 +66,36 @@ class GameCover:
 
     def get_pixbuf(self):
         return self.animation.get_static_image() if self.animation else self.pixbuf
+
+    def get_blurred(self):
+        if not self.blurred:
+            if self.path:
+                with Image.open(self.path) as image:
+                    image = (
+                        image.convert("RGB")
+                        .resize((8, 12))
+                        .filter(ImageFilter.GaussianBlur(3))
+                    )
+
+                    tmp_path = Gio.File.new_tmp(None)[0].get_path()
+                    image.save(tmp_path, "tiff", compression=None)
+
+                    self.blurred = GdkPixbuf.Pixbuf.new_from_file(tmp_path)
+
+                    stat = ImageStat.Stat(image.convert("L"))
+
+                    self.luminance = (
+                        (stat.mean[0] + stat.extrema[0][0]) / 510,
+                        (stat.mean[0] + stat.extrema[0][1]) / 510,
+                    )
+            else:
+                self.blurred = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
+                    "/hu/kramo/Cartridges/library_placeholder.svg", 2, 3, False
+                )
+
+                self.luminance = (0.5, 0.5)
+
+        return self.blurred
 
     def add_picture(self, picture):
         self.pictures.add(picture)
