@@ -73,8 +73,8 @@ class GameCover:
                 with Image.open(self.path) as image:
                     image = (
                         image.convert("RGB")
-                        .resize((10, 15))
-                        .filter(ImageFilter.GaussianBlur(2))
+                        .resize((100, 150))
+                        .filter(ImageFilter.GaussianBlur(20))
                     )
 
                     tmp_path = Gio.File.new_tmp(None)[0].get_path()
