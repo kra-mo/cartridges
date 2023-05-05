@@ -73,8 +73,8 @@ class GameCover:
                 with Image.open(self.path) as image:
                     image = (
                         image.convert("RGB")
-                        .resize((8, 12))
-                        .filter(ImageFilter.GaussianBlur(3))
+                        .resize((10, 15))
+                        .filter(ImageFilter.BoxBlur(3))
                     )
 
                     tmp_path = Gio.File.new_tmp(None)[0].get_path()
@@ -84,6 +84,7 @@ class GameCover:
 
                     stat = ImageStat.Stat(image.convert("L"))
 
+                    # Luminance values for light and dark mode
                     self.luminance = (
                         (stat.mean[0] + stat.extrema[0][0]) / 510,
                         (stat.mean[0] + stat.extrema[0][1]) / 510,
