@@ -69,10 +69,10 @@ class LutrisSourceIterator(SourceIterator):
             # Save official image
             image_path = self.source.cache_location / "coverart" / f"{row[2]}.jpg"
             if image_path.exists():
-                resized = resize_cover(self.win, image_path)
-                save_cover(self.win, values["game_id"], resized)
+                resized = resize_cover(self.source.win, image_path)
+                save_cover(self.source.win, values["game_id"], resized)
 
-            # Save SGDB
+            # TODO Save SGDB
 
             return values
 
