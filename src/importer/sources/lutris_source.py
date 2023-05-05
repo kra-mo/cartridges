@@ -1,21 +1,20 @@
 from functools import cached_property
 from sqlite3 import connect
 
-from src.game2 import Game
+from src.utils.save_cover import resize_cover, save_cover
 from src.importer.source import Source, SourceIterator
 from src.importer.decorators import replaced_by_schema_key, replaced_by_path
 
 
 class LutrisSourceIterator(SourceIterator):
-
-    ignore_steam_games = False
+    ignore_steam_games = False  # TODO get that value
 
     db_connection = None
     db_cursor = None
     db_location = None
     db_request = None
 
-    def __init__(self, ignore_steam_games) -> None:
+    def __init__(self, ignore_steam_games):
         super().__init__()
         self.ignore_steam_games = ignore_steam_games
         self.db_connection = None
@@ -43,10 +42,10 @@ class LutrisSourceIterator(SourceIterator):
             self.db_cursor = self.db_connection.execute(self.db_request)
             self.state = self.States.READY
 
-        # Get next DB value
         while True:
+            # Get next DB value
             try:
-                row = self.db_cursor.__next__() 
+                row = self.db_cursor.__next__()
             except StopIteration as e:
                 self.db_connection.close()
                 raise e
@@ -54,29 +53,41 @@ class LutrisSourceIterator(SourceIterator):
             # Ignore steam games if requested
             if row[3] == "steam" and self.ignore_steam_games:
                 continue
-            
+
             # Build basic game
             values = {
-                "name"      : row[1],
-                "hidden"    : row[4],
-                "source"    : self.source.full_name,
-                "game_id"   : self.source.game_id_format.format(game_id=row[2]),
+                "hidden": row[4],
+                "name": row[1],
+                "source": f"{self.source.id}_{row[3]}",
+                "game_id": self.source.game_id_format.format(
+                    game_id=row[2], game_internal_id=row[0]
+                ),
                 "executable": self.source.executable_format.format(game_id=row[2]),
-                "developer" : None, # TODO get developer metadata on Lutris
+                "developer": None,  # TODO get developer metadata on Lutris
             }
-            # TODO Add official image
-            # TODO Add SGDB image  
+
+            # Save official image
+            image_path = self.source.cache_location / "coverart" / f"{row[2]}.jpg"
+            if image_path.exists():
+                resized = resize_cover(self.win, image_path)
+                save_cover(self.win, values["game_id"], resized)
+
+            # Save SGDB
+
             return values
 
+
 class LutrisSource(Source):
-    
     name = "Lutris"
     executable_format = "xdg-open lutris:rungameid/{game_id}"
-
     location = None
     cache_location = None
 
-    def __init__(self, win) -> None:
+    @property
+    def game_id_format(self):
+        return super().game_id_format + "_{game_internal_id}"
+
+    def __init__(self, win):
         super().__init__(win)
 
     def __iter__(self):

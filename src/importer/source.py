@@ -9,7 +9,7 @@ class SourceIterator(Iterator):
     class States(IntEnum):
         DEFAULT = auto()
         READY = auto()
-    
+
     state = States.DEFAULT
     source = None
 
@@ -28,7 +28,7 @@ class SourceIterator(Iterator):
 class Source(Iterable):
     """Source of games. E.g an installed app with a config file that lists game directories"""
 
-    win = None # TODO maybe not depend on that ?
+    win = None  # TODO maybe not depend on that ?
 
     name: str
     variant: str
@@ -42,17 +42,25 @@ class Source(Iterable):
         """The source's full name"""
         s = self.name
         if self.variant is not None:
-            s += " (%s)" % self.variant
+            s += f" ({self.variant})"
+        return s
+
+    @property
+    def id(self):
+        """The source's identifier"""
+        s = self.name.lower()
+        if self.variant is not None:
+            s += f"_{self.variant.lower()}"
         return s
 
     @property
     def game_id_format(self):
         """The string format used to construct game IDs"""
-        _format = self.name.lower()
-        if self.variant is not None: 
-            _format += "_" + self.variant.lower()
-        _format += "_{game_id}_{game_internal_id}"
-        return _format
+        f = self.name.lower()
+        if self.variant is not None:
+            f += f"_{self.variant.lower()}"
+        f += "_{game_id}"
+        return f
 
     @property
     @abstractmethod
