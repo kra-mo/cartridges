@@ -2,7 +2,7 @@ from threading import Thread, Lock
 from gi.repository import Adw, Gtk, Gio
 
 from .game import Game
-from .steamgriddb import SGDBSave
+from .steamgriddb import SGDBHelper
 
 
 class Importer:
@@ -97,16 +97,16 @@ class Importer:
 
     def __import_from_source(self, *args, **kwargs):
         """Source import thread entry point"""
-        # TODO just get Game objects from the sources
         source, *rest = args
 
         iterator = source.__iter__()
-        for game_values in iterator:
-            game = Game(self.win, game_values)
-
+        for game in iterator:
             self.games_lock.acquire()
             self.games.add(game)
             self.games_lock.release()
+
+            # TODO SGDB image
+            # Who's in charge of image adding ?
 
             self.progress_lock.acquire()
             self.counts[source.id]["total"] = len(iterator)
@@ -114,30 +114,3 @@ class Importer:
                 self.counts[source.id]["done"] += 1
             self.update_progressbar()
             self.progress_lock.release()
-
-    # TODO remove after not needed
-    def save_game(self, values=None, cover_path=None):
-        if values:
-            game = Game(self.win, values)
-
-            if save_cover:
-                save_cover(self.win, game.game_id, resize_cover(self.win, cover_path))
-
-            self.games.add(game)
-
-            self.games_no += 1
-            if game.blacklisted:
-                self.games_no -= 1
-
-        self.queue -= 1
-        self.update_progressbar()
-
-        if self.queue == 0 and not self.blocker:
-            if self.games:
-                self.total_queue = len(self.games)
-                self.queue = len(self.games)
-                self.import_statuspage.set_title(_("Importing Covers…"))
-                self.update_progressbar()
-                SGDBSave(self.win, self.games, self)
-            else:
-                self.done()

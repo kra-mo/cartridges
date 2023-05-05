@@ -8,6 +8,85 @@ from .create_dialog import create_dialog
 from .save_cover import save_cover, resize_cover
 
 
+class SGDBError(Exception):
+    pass
+
+
+class SGDBHelper:
+    base_url = "https://www.steamgriddb.com/api/v2/"
+
+    win = None
+    importer = None
+    exception = None
+
+    def __init__(self, win, importer=None) -> None:
+        self.win = win
+        self.importer = importer
+
+    @property
+    def auth_header(self):
+        key = self.win.schema.get_string("sgdb-key")
+        headers = {"Authorization": f"Bearer {key}"}
+        return headers
+
+    # TODO delegate that to the app
+    def create_exception_dialog(self, exception):
+        dialog = create_dialog(
+            self.win,
+            _("Couldn't Connect to SteamGridDB"),
+            exception,
+            "open_preferences",
+            _("Preferences"),
+        )
+        dialog.connect("response", self.response)
+
+    # TODO same as create_exception_dialog
+    def on_exception_dialog_response(self, _widget, response):
+        if response == "open_preferences":
+            self.win.get_application().on_preferences_action(page_name="sgdb")
+
+    def get_game_id(self, game):
+        """Get grid results for a game. Can raise an exception."""
+
+        # Request
+        res = requests.get(
+            f"{self.base_url}search/autocomplete/{game.name}",
+            headers=self.auth_headers,
+            timeout=5,
+        )
+        if res.status_code == 200:
+            return res.json()["data"][0]["id"]
+
+        # HTTP error
+        res.raise_for_status()
+
+        # SGDB API error
+        res_json = res.json()
+        if "error" in tuple(res_json):
+            raise SGDBError(res_json["errors"])
+        else:
+            raise SGDBError(res.status_code)
+
+    def get_image_uri(self, game, animated=False):
+        """Get the image for a game"""
+        uri = f"{self.base_url}grids/game/{self.get_game_id(game)}?dimensions=600x900"
+        if animated:
+            uri += "&types=animated"
+        grid = requests.get(uri, headers=self.auth_header, timeout=5)
+        image_uri = grid.json()["data"][0]["url"]
+        return image_uri
+
+
+# Current steps to save image for N games
+# Create a task for every game
+# Call update_cover
+# If using sgdb and (prefer or no image) and not blacklisted
+# Search for game
+# Get image from sgdb (animated if preferred and found, or still)
+# Exit task and enter task_done
+# If error, create popup
+
+
 class SGDBSave:
     def __init__(self, games, importer=None):
         self.win = shared.win

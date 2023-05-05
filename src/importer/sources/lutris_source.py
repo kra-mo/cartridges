@@ -1,6 +1,7 @@
 from functools import cached_property
 from sqlite3 import connect
 
+from src.game import Game
 from src.utils.save_cover import resize_cover, save_cover
 from src.importer.source import Source, SourceIterator
 from src.importer.decorators import replaced_by_schema_key, replaced_by_path
@@ -55,6 +56,7 @@ class LutrisSourceIterator(SourceIterator):
                 continue
 
             # Build basic game
+            # TODO decouple game creation from the window object (later)
             values = {
                 "hidden": row[4],
                 "name": row[1],
@@ -65,6 +67,7 @@ class LutrisSourceIterator(SourceIterator):
                 "executable": self.source.executable_format.format(game_id=row[2]),
                 "developer": None,  # TODO get developer metadata on Lutris
             }
+            game = Game(self.source.win, values)
 
             # Save official image
             image_path = self.source.cache_location / "coverart" / f"{row[2]}.jpg"
@@ -73,6 +76,7 @@ class LutrisSourceIterator(SourceIterator):
                 save_cover(self.source.win, values["game_id"], resized)
 
             # TODO Save SGDB
+            SGDBSave(self.win, self.games, self)
 
             return values
 
