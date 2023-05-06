@@ -6,11 +6,6 @@ from enum import IntEnum, auto
 class SourceIterator(Iterator):
     """Data producer for a source of games"""
 
-    class States(IntEnum):
-        DEFAULT = auto()
-        READY = auto()
-
-    state = States.DEFAULT
     source = None
 
     def __init__(self, source) -> None:
@@ -19,6 +14,10 @@ class SourceIterator(Iterator):
 
     def __iter__(self):
         return self
+
+    @abstractmethod
+    def __len__(self):
+        pass
 
     @abstractmethod
     def __next__(self):

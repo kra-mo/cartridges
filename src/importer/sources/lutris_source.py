@@ -1,4 +1,4 @@
-from functools import cached_property
+from functools import cached_property, cache
 from sqlite3 import connect
 
 from src.game import Game
@@ -8,77 +8,82 @@ from src.importer.decorators import replaced_by_schema_key, replaced_by_path
 
 
 class LutrisSourceIterator(SourceIterator):
-    ignore_steam_games = False  # TODO get that value
-
+    import_steam = False
     db_connection = None
     db_cursor = None
     db_location = None
-    db_request = None
+    db_len_request = """
+        SELECT count(*)
+        FROM 'games'
+        WHERE
+            name IS NOT NULL
+            AND slug IS NOT NULL
+            AND configPath IS NOT NULL
+            AND installed
+            AND (runner IS NOT "steam" OR :import_steam)
+        ;
+    """
+    db_games_request = """
+        SELECT id, name, slug, runner, hidden
+        FROM 'games'
+        WHERE
+            name IS NOT NULL
+            AND slug IS NOT NULL
+            AND configPath IS NOT NULL
+            AND installed
+            AND (runner IS NOT "steam" OR :import_steam)
+        ;
+    """
+    db_request_params = None
 
-    def __init__(self, ignore_steam_games):
-        super().__init__()
-        self.ignore_steam_games = ignore_steam_games
-        self.db_connection = None
-        self.db_cursor = None
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.import_steam = self.source.win.schema.get_boolean("lutris-import-steam")
         self.db_location = self.source.location / "pga.db"
-        self.db_request = """
-            SELECT
-                id, name, slug, runner, hidden
-            FROM
-                'games'
-            WHERE
-                name IS NOT NULL
-                AND slug IS NOT NULL
-                AND configPath IS NOT NULL
-                AND installed IS TRUE
-            ;
-        """
+        self.db_connection = connect(self.db_location)
+        self.db_request_params = {"import_steam": self.import_steam}
+        self.__len__()  # Init iterator length
+        self.db_cursor = self.db_connection.execute(
+            self.db_games_request, self.db_request_params
+        )
+
+    @cache
+    def __len__(self):
+        cursor = self.db_connection.execute(self.db_len_request, self.db_request_params)
+        return cursor.fetchone()[0]
 
     def __next__(self):
         """Produce games. Behaviour depends on the state of the iterator."""
+        # TODO decouple game creation from the window object
 
-        # Get database contents iterator
-        if self.state == self.States.DEFAULT:
-            self.db_connection = connect(self.db_location)
-            self.db_cursor = self.db_connection.execute(self.db_request)
-            self.state = self.States.READY
+        row = None
+        try:
+            row = self.db_cursor.__next__()
+        except StopIteration as e:
+            self.db_connection.close()
+            raise e
 
-        while True:
-            # Get next DB value
-            try:
-                row = self.db_cursor.__next__()
-            except StopIteration as e:
-                self.db_connection.close()
-                raise e
+        # Create game
+        row = self.__next_row()
+        values = {
+            "hidden": row[4],
+            "name": row[1],
+            "source": f"{self.source.id}_{row[3]}",
+            "game_id": self.source.game_id_format.format(
+                game_id=row[2], game_internal_id=row[0]
+            ),
+            "executable": self.source.executable_format.format(game_id=row[2]),
+            "developer": None,  # TODO get developer metadata on Lutris
+        }
+        game = Game(self.source.win, values)
 
-            # Ignore steam games if requested
-            if row[3] == "steam" and self.ignore_steam_games:
-                continue
+        # Save official image
+        image_path = self.source.cache_location / "coverart" / f"{row[2]}.jpg"
+        if image_path.exists():
+            resized = resize_cover(self.source.win, image_path)
+            save_cover(self.source.win, values["game_id"], resized)
 
-            # Build basic game
-            # TODO decouple game creation from the window object (later)
-            values = {
-                "hidden": row[4],
-                "name": row[1],
-                "source": f"{self.source.id}_{row[3]}",
-                "game_id": self.source.game_id_format.format(
-                    game_id=row[2], game_internal_id=row[0]
-                ),
-                "executable": self.source.executable_format.format(game_id=row[2]),
-                "developer": None,  # TODO get developer metadata on Lutris
-            }
-            game = Game(self.source.win, values)
-
-            # Save official image
-            image_path = self.source.cache_location / "coverart" / f"{row[2]}.jpg"
-            if image_path.exists():
-                resized = resize_cover(self.source.win, image_path)
-                save_cover(self.source.win, values["game_id"], resized)
-
-            # TODO Save SGDB
-            SGDBSave(self.win, self.games, self)
-
-            return values
+        return game
 
 
 class LutrisSource(Source):
