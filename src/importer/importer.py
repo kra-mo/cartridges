@@ -20,7 +20,7 @@ class Importer:
 
     def __init__(self, win) -> None:
         self.games = set()
-        self.sources = list()
+        self.sources = set()
         self.counts = dict()
         self.games_lock = Lock()
         self.progress_lock = Lock()
@@ -31,9 +31,10 @@ class Importer:
         # Compute overall values
         done = 0
         total = 0
-        for source in self.sources:
-            done += self.counts[source.id]["done"]
-            total += self.counts[source.id]["total"]
+        with self.progress_lock:
+            for source in self.sources:
+                done += self.counts[source.id]["done"]
+                total += self.counts[source.id]["total"]
         # Compute progress
         progress = 1
         if total > 0:
@@ -58,59 +59,55 @@ class Importer:
         self.import_dialog.present()
 
     def close_dialog(self):
-        """Close the import dialog"""
         self.import_dialog.close()
 
     def update_progressbar(self):
-        """Update the progress bar"""
-        progress = self.progress()
-        self.progressbar.set_fraction(progress)
+        self.progressbar.set_fraction(self.progress)
 
     def add_source(self, source):
-        """Add a source to import games from"""
-        self.sources.append(source)
+        self.sources.add(source)
         self.counts[source.id] = {"done": 0, "total": 0}
 
     def import_games(self):
-        """Import games from the specified sources"""
-
         self.create_dialog()
 
-        # Scan all sources
         threads = []
+
+        # Scan all sources
         for source in self.sources:
-            t = Thread(
-                None,
-                self.__import_from_source,
-                args=tuple(
-                    source,
-                ),
-            )
+            t = Thread(target=self.__import_source, args=tuple(source,))  # fmt: skip
             threads.append(t)
             t.start()
-
-        # Wait for all of them to finish
         for t in threads:
             t.join()
 
+        # Add SGDB images
+        # TODO isolate SGDB in a game manager
+        threads.clear()
+        for game in self.games:
+            t = Thread(target=self.__add_sgdb_image, args=tuple(game,))  # fmt: skip
+            threads.append(t)
+            t.start()
+        for t in threads:
+            t.join()
         self.close_dialog()
 
-    def __import_from_source(self, *args, **kwargs):
+    def __import_source(self, *args, **kwargs):
         """Source import thread entry point"""
         source, *rest = args
-
         iterator = source.__iter__()
-        for game in iterator:
-            self.games_lock.acquire()
-            self.games.add(game)
-            self.games_lock.release()
-
-            # TODO SGDB image
-            # Who's in charge of image adding ?
-
-            self.progress_lock.acquire()
+        with self.progress_lock:
             self.counts[source.id]["total"] = len(iterator)
-            if not game.blacklisted:
-                self.counts[source.id]["done"] += 1
+        for game in iterator:
+            with self.games_lock:
+                self.games.add(game)
+            with self.progress_lock:
+                if not game.blacklisted:
+                    self.counts[source.id]["done"] += 1
             self.update_progressbar()
-            self.progress_lock.release()
+        exit(0)
+
+    def __add_sgdb_image(self, *args, **kwargs):
+        """SGDB import thread entry point"""
+        # TODO get id, then save image
+        exit(0)
