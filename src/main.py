@@ -110,10 +110,10 @@ class CartridgesApplication(Adw.Application):
             version="1.4",
             developers=[
                 "kramo https://kramo.hu",
-                "Paweł Lidwin https://github.com/imLinguin",
+                "Arcitec https://github.com/Arcitec",
                 "Domenico https://github.com/Domefemia",
-                "Bananaman https://github.com/Bananaman",
                 "Geoffrey Coulaud https://geoffrey-coulaud.fr",
+                "Paweł Lidwin https://github.com/imLinguin",
                 "Rafael Mardojai CM https://mardojai.com",
             ],
             designers=("kramo https://kramo.hu",),
