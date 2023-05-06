@@ -35,10 +35,12 @@ from .steamgriddb import SGDBSave
 class DetailsWindow(Adw.Window):
     __gtype_name__ = "DetailsWindow"
 
+    cover_overlay = Gtk.Template.Child()
     cover = Gtk.Template.Child()
     cover_button_edit = Gtk.Template.Child()
     cover_button_delete_revealer = Gtk.Template.Child()
     cover_button_delete = Gtk.Template.Child()
+    spinner = Gtk.Template.Child()
 
     name = Gtk.Template.Child()
     developer = Gtk.Template.Child()
@@ -222,6 +224,11 @@ class DetailsWindow(Adw.Window):
     def focus_executable(self, *_args):
         self.set_focus(self.executable)
 
+    def toggle_loading(self):
+        self.apply_button.set_sensitive(not self.apply_button.get_sensitive())
+        self.spinner.set_spinning(not self.spinner.get_spinning())
+        self.cover_overlay.set_opacity(not self.cover_overlay.get_opacity())
+
     def set_cover(self, _source, result, *_args):
         try:
             path = self.file_dialog.open_finish(result).get_path()
@@ -231,7 +238,12 @@ class DetailsWindow(Adw.Window):
         self.cover_button_delete_revealer.set_reveal_child(True)
         self.cover_changed = True
 
-        self.game_cover.new_cover(resize_cover(self.win, path))
+        def resize():
+            self.game_cover.new_cover(resize_cover(self.win, path))
+            self.toggle_loading()
+
+        self.toggle_loading()
+        GLib.Thread.new(None, resize)
 
     def choose_cover(self, *_args):
         self.file_dialog.open(self, None, self.set_cover)

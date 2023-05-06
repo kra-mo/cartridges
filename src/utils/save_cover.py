@@ -36,8 +36,7 @@ def resize_cover(win, cover_path=None, pixbuf=None):
     with Image.open(cover_path) as image:
         if getattr(image, "is_animated", False):
             frames = tuple(
-                frame.copy().resize((200, 300))
-                for frame in ImageSequence.Iterator(image)
+                frame.resize((200, 300)) for frame in ImageSequence.Iterator(image)
             )
 
             tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
