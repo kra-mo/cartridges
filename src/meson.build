@@ -29,8 +29,7 @@ cartridges_sources = [
   'importer/importer.py',
   'utils/steamgriddb.py',
   'utils/save_cover.py',
-  'utils/create_dialog.py',
-  'utils/check_install.py'
+  'utils/create_dialog.py'
 ]
 
 install_data(cartridges_sources, install_dir: moduledir)

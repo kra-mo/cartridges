@@ -84,6 +84,7 @@ class Importer:
 
     def __import_source(self, *args, **kwargs):
         """Source import thread entry point"""
+        # TODO error handling in source iteration
         source, *rest = args
         iterator = source.__iter__()
         with self.progress_lock:
