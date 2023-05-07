@@ -85,6 +85,7 @@ class CartridgesApplication(Adw.Application):
                 ("show_hidden", ("<primary>h",), self.win),
                 ("go_back", ("<alt>Left",), self.win),
                 ("go_to_parent", ("<alt>Up",), self.win),
+                ("go_home", ("<alt>Home",), self.win),
                 ("toggle_search", ("<primary>f",), self.win),
                 ("escape", ("Escape",), self.win),
                 ("undo", ("<primary>z",), self.win),

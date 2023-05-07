@@ -50,7 +50,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     details_view_spinner = Gtk.Template.Child()
     details_view_title = Gtk.Template.Child()
     details_view_header_bar_title = Gtk.Template.Child()
-    details_view_play_button = Gtk.Template.Child()
     details_view_blurred_cover = Gtk.Template.Child()
     details_view_developer = Gtk.Template.Child()
     details_view_added = Gtk.Template.Child()
@@ -114,6 +113,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.library.set_sort_func(self.sort_func)
         self.hidden_library.set_sort_func(self.sort_func)
 
+        self.set_library_child()
+
         games = {}
 
         if self.games_dir.exists():
@@ -123,35 +124,31 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         for game_id, game in games.items():
             if game.get("removed"):
-                (self.games_dir / f"{game_id}.json").unlink(missing_ok=True)
-                (self.covers_dir / f"{game_id}.tiff").unlink(missing_ok=True)
-                (self.covers_dir / f"{game_id}.gif").unlink(missing_ok=True)
+                for path in (
+                    self.games_dir / f"{game_id}.json",
+                    self.covers_dir / f"{game_id}.tiff",
+                    self.covers_dir / f"{game_id}.gif",
+                ):
+                    path.unlink(missing_ok=True)
+
             else:
                 Game(self, game).update()
-
-        self.set_library_child()
 
         # Connect signals
         self.search_entry.connect("search-changed", self.search_changed, False)
         self.hidden_search_entry.connect("search-changed", self.search_changed, True)
 
         back_mouse_button = Gtk.GestureClick(button=8)
-        back_mouse_button.connect("pressed", self.on_go_back_action)
+        (back_mouse_button).connect("pressed", self.on_go_back_action)
         self.add_controller(back_mouse_button)
 
-        Adw.StyleManager.get_default().connect(
-            "notify::dark", self.set_details_view_opacity
-        )
-        Adw.StyleManager.get_default().connect(
-            "notify::high-contrast", self.set_details_view_opacity
-        )
+        style_manager = Adw.StyleManager.get_default()
+        style_manager.connect("notify::dark", self.set_details_view_opacity)
+        style_manager.connect("notify::high-contrast", self.set_details_view_opacity)
 
     def search_changed(self, _widget, hidden):
         # Refresh search filter on keystroke in search box
-        if hidden:
-            self.hidden_library.invalidate_filter()
-        else:
-            self.library.invalidate_filter()
+        (self.hidden_library if hidden else self.library).invalidate_filter()
 
     def set_library_child(self):
         child, hidden_child = self.notice_empty, self.hidden_notice_empty
@@ -175,9 +172,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def filter_func(self, child):
         game = child.get_child()
-        hidden = self.stack.get_visible_child() == self.hidden_library_view
         text = (
-            (self.hidden_search_entry if hidden else self.search_entry)
+            (
+                self.hidden_search_entry
+                if self.stack.get_visible_child() == self.hidden_library_view
+                else self.search_entry
+            )
             .get_text()
             .lower()
         )
@@ -197,8 +197,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.active_game = game
 
     def get_time(self, timestamp):
-        date = datetime.fromtimestamp(timestamp)
-        days_no = (datetime.today() - date).days
+        days_no = (datetime.today() - datetime.fromtimestamp(timestamp)).days
 
         if days_no == 0:
             return _("Today")
@@ -216,21 +215,19 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.details_view_cover.set_visible(not game.loading)
         self.details_view_spinner.set_spinning(game.loading)
 
-        if game.developer:
-            self.details_view_developer.set_label(game.developer)
-            self.details_view_developer.set_visible(True)
-        else:
-            self.details_view_developer.set_visible(False)
+        self.details_view_developer.set_label(game.developer or "")
+        self.details_view_developer.set_visible(bool(game.developer))
 
+        icon, text = "view-conceal-symbolic", _("Hide")
         if game.hidden:
-            self.details_view_hide_button.set_icon_name("view-reveal-symbolic")
-            self.details_view_hide_button.set_tooltip_text(_("Unhide"))
-        else:
-            self.details_view_hide_button.set_icon_name("view-conceal-symbolic")
-            self.details_view_hide_button.set_tooltip_text(_("Hide"))
+            icon, text = "view-reveal-symbolic", _("Unhide")
+
+        self.details_view_hide_button.set_icon_name(icon)
+        self.details_view_hide_button.set_tooltip_text(text)
 
         if self.details_view_game_cover:
             self.details_view_game_cover.pictures.remove(self.details_view_cover)
+
         self.details_view_game_cover = game.game_cover
         self.details_view_game_cover.add_picture(self.details_view_cover)
 
@@ -240,6 +237,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.details_view_title.set_label(game.name)
         self.details_view_header_bar_title.set_title(game.name)
+
         date = self.get_time(game.added)
         self.details_view_added.set_label(
             # The variable is the date when the game was added
@@ -254,32 +252,27 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
 
         if self.stack.get_visible_child() != self.details_view:
-            self.stack.set_transition_type(Gtk.StackTransitionType.OVER_LEFT)
-            self.stack.set_visible_child(self.details_view)
+            self.navigate(self.details_view)
 
         self.set_details_view_opacity()
 
     def set_details_view_opacity(self, *_args):
-        if self.stack.get_visible_child() == self.details_view:
-            style_manager = Adw.StyleManager.get_default()
+        if self.stack.get_visible_child() != self.details_view:
+            return
 
-            if (
-                style_manager.get_high_contrast()
-                or not style_manager.get_system_supports_color_schemes()
-            ):
-                self.details_view_blurred_cover.set_opacity(0.3)
-                return
+        if (
+            style_manager := Adw.StyleManager.get_default()
+        ).get_high_contrast() or not style_manager.get_system_supports_color_schemes():
+            self.details_view_blurred_cover.set_opacity(0.3)
+            return
 
-            dark_theme = style_manager.get_dark()
-
-            self.details_view_blurred_cover.set_opacity(
-                1.2 - self.details_view_game_cover.luminance[0]
-                if dark_theme
-                else 0.2 + self.details_view_game_cover.luminance[1]
-            )
+        self.details_view_blurred_cover.set_opacity(
+            1.2 - self.details_view_game_cover.luminance[0]
+            if style_manager.get_dark()
+            else self.details_view_game_cover.luminance[1]
+        )
 
     def sort_func(self, child1, child2):
-        games = (child1.get_child(), child2.get_child())
         var, order = "name", True
 
         if self.sort_state in ("newest", "oldest"):
@@ -290,40 +283,51 @@ class CartridgesWindow(Adw.ApplicationWindow):
             order = False
 
         def get_value(index):
-            return str(getattr(games[index], var)).lower()
+            return str(
+                getattr((child1.get_child(), child2.get_child())[index], var)
+            ).lower()
 
         if var != "name" and get_value(0) == get_value(1):
             var, order = "name", True
 
         return ((get_value(0) > get_value(1)) ^ order) * 2 - 1
 
+    def navigate(self, next_page):
+        levels = (self.library_view, self.hidden_library_view, self.details_view)
+        self.stack.set_transition_type(
+            Gtk.StackTransitionType.UNDER_RIGHT
+            if levels.index(self.stack.get_visible_child()) - levels.index(next_page)
+            > 0
+            else Gtk.StackTransitionType.OVER_LEFT
+        )
+
+        if next_page == self.library_view or self.hidden_library_view:
+            self.previous_page = next_page
+            self.lookup_action("show_hidden").set_enabled(
+                next_page == self.library_view
+            )
+
+        self.stack.set_visible_child(next_page)
+
     def on_go_back_action(self, *_args):
         if self.stack.get_visible_child() == self.hidden_library_view:
-            self.on_show_library_action()
+            self.navigate(self.library_view)
         elif self.stack.get_visible_child() == self.details_view:
             self.on_go_to_parent_action()
 
     def on_go_to_parent_action(self, *_args):
         if self.stack.get_visible_child() == self.details_view:
-            if self.previous_page == self.library_view:
-                self.on_show_library_action()
-            else:
-                self.on_show_hidden_action()
+            self.navigate(
+                self.hidden_library_view
+                if self.previous_page == self.hidden_library_view
+                else self.library_view
+            )
 
-    def on_show_library_action(self, *_args):
-        self.stack.set_transition_type(Gtk.StackTransitionType.UNDER_RIGHT)
-        self.stack.set_visible_child(self.library_view)
-        self.lookup_action("show_hidden").set_enabled(True)
-        self.previous_page = self.library_view
+    def on_go_home_action(self, *_args):
+        self.navigate(self.library_view)
 
     def on_show_hidden_action(self, *_args):
-        if self.stack.get_visible_child() == self.library_view:
-            self.stack.set_transition_type(Gtk.StackTransitionType.OVER_LEFT)
-        else:
-            self.stack.set_transition_type(Gtk.StackTransitionType.UNDER_RIGHT)
-        self.lookup_action("show_hidden").set_enabled(False)
-        self.stack.set_visible_child(self.hidden_library_view)
-        self.previous_page = self.hidden_library_view
+        self.navigate(self.hidden_library_view)
 
     def on_sort_action(self, action, state):
         action.set_state(state)
@@ -346,34 +350,22 @@ class CartridgesWindow(Adw.ApplicationWindow):
         else:
             return
 
-        search_mode = search_bar.get_search_mode()
-        search_bar.set_search_mode(not search_mode)
+        search_bar.set_search_mode(not (search_mode := search_bar.get_search_mode()))
         search_button.set_active(not search_button.get_active())
 
         if not search_mode:
             self.set_focus(search_entry)
-        else:
-            search_entry.set_text("")
+
+        search_entry.set_text("")
 
     def on_escape_action(self, *_args):
         if self.stack.get_visible_child() == self.details_view:
             self.on_go_back_action()
-            return
-        if self.stack.get_visible_child() == self.library_view:
-            search_bar = self.search_bar
-            search_entry = self.search_entry
-            search_button = self.search_button
-        elif self.stack.get_visible_child() == self.hidden_library_view:
-            search_bar = self.hidden_search_bar
-            search_entry = self.hidden_search_entry
-            search_button = self.hidden_search_button
-        else:
-            return
-
-        if self.get_focus() == search_entry.get_focus_child():
-            search_bar.set_search_mode(False)
-            search_button.set_active(False)
-            search_entry.set_text("")
+        elif (
+            self.get_focus() == self.search_entry.get_focus_child()
+            or self.hidden_search_entry.get_focus_child()
+        ):
+            self.on_toggle_search_action()
 
     def on_undo_action(self, _widget, game=None, undo=None):
         if not game:  # If the action was activated via Ctrl + Z
