@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 23:33+0200\n"
+"POT-Creation-Date: 2023-04-16 14:29+0200\n"
 "PO-Revision-Date: 2023-04-14 12:29+0000\n"
 "Last-Translator: Dan <denqwerta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.17-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
@@ -52,15 +52,15 @@ msgid "Library"
 msgstr "Бібліотека"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
-#: src/utils/create_details_window.py:87
+#: src/utils/create_details_window.py:81
 msgid "Edit Game Details"
 msgstr "Редагувати інформацію про гру"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:51
+#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:53
 msgid "Game Details"
 msgstr "Подробиці гри"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:402
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:399
 #: src/utils/importer.py:94 src/utils/importer.py:123 src/utils/importer.py:148
 #: src/utils/steamgriddb.py:116
 msgid "Preferences"
@@ -70,20 +70,20 @@ msgstr "Параметри"
 msgid "Title"
 msgstr "Назва"
 
-#: data/gtk/game.blp:89 data/gtk/game.blp:108 data/gtk/window.blp:170
+#: data/gtk/game.blp:89 data/gtk/game.blp:108 data/gtk/window.blp:174
 msgid "Edit"
 msgstr "Редагувати"
 
-#: data/gtk/game.blp:94 src/window.py:286
+#: data/gtk/game.blp:94 src/window.py:282
 msgid "Hide"
 msgstr "Приховати"
 
 #: data/gtk/game.blp:99 data/gtk/game.blp:118 data/gtk/preferences.blp:56
-#: data/gtk/window.blp:186
+#: data/gtk/window.blp:190
 msgid "Remove"
 msgstr "Видалити"
 
-#: data/gtk/game.blp:113 src/window.py:283
+#: data/gtk/game.blp:113 src/window.py:279
 msgid "Unhide"
 msgstr "Показати"
 
@@ -95,8 +95,8 @@ msgstr "Загальний"
 msgid "Quit"
 msgstr "Вийти"
 
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:205 data/gtk/window.blp:249
-#: data/gtk/window.blp:312
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:209 data/gtk/window.blp:246
+#: data/gtk/window.blp:309
 msgid "Search"
 msgstr "Пошук"
 
@@ -108,8 +108,8 @@ msgstr "Показати параметри"
 msgid "Shortcuts"
 msgstr "Ярлики"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:186 src/main.py:242
-#: src/preferences.py:133
+#: data/gtk/help-overlay.blp:34 src/main.py:195 src/main.py:251
+#: src/preferences.py:131
 msgid "Undo"
 msgstr "Відмінити"
 
@@ -173,7 +173,7 @@ msgstr "Небезпечна зона"
 msgid "Remove All Games"
 msgstr "Видалити всі ігри"
 
-#: data/gtk/preferences.blp:69 data/gtk/window.blp:427
+#: data/gtk/preferences.blp:69 data/gtk/window.blp:424
 msgid "Import"
 msgstr "Імпорт"
 
@@ -315,63 +315,63 @@ msgstr "Ніяких прихованих ігор"
 msgid "Games you hide will appear here."
 msgstr "Ігри, які ви сховали, з'являться тут."
 
-#: data/gtk/window.blp:44 data/gtk/window.blp:293
+#: data/gtk/window.blp:46 data/gtk/window.blp:290
 msgid "Back"
 msgstr "Назад"
 
-#: data/gtk/window.blp:100
+#: data/gtk/window.blp:102
 msgid "Game Title"
 msgstr "Назва гри"
 
-#: data/gtk/window.blp:151 src/game.py:158
+#: data/gtk/window.blp:155 src/game.py:160
 msgid "Play"
 msgstr "Грати"
 
-#: data/gtk/window.blp:235 data/gtk/window.blp:421
+#: data/gtk/window.blp:232 data/gtk/window.blp:418
 msgid "Add Game"
 msgstr "Додати гру"
 
-#: data/gtk/window.blp:242 data/gtk/window.blp:305
+#: data/gtk/window.blp:239 data/gtk/window.blp:302
 msgid "Main Menu"
 msgstr "Головне меню"
 
-#: data/gtk/window.blp:300
+#: data/gtk/window.blp:297
 msgid "Hidden Games"
 msgstr "Приховані ігри"
 
-#: data/gtk/window.blp:360
+#: data/gtk/window.blp:357
 msgid "Sort"
 msgstr "Сортувати"
 
-#: data/gtk/window.blp:363
+#: data/gtk/window.blp:360
 msgid "A-Z"
 msgstr "А-Я"
 
-#: data/gtk/window.blp:369
+#: data/gtk/window.blp:366
 msgid "Z-A"
 msgstr "Я-А"
 
-#: data/gtk/window.blp:375
+#: data/gtk/window.blp:372
 msgid "Newest"
 msgstr "Найновіші"
 
-#: data/gtk/window.blp:381
+#: data/gtk/window.blp:378
 msgid "Oldest"
 msgstr "Найстаріші"
 
-#: data/gtk/window.blp:387
+#: data/gtk/window.blp:384
 msgid "Last Played"
 msgstr "Остання гра"
 
-#: data/gtk/window.blp:394
+#: data/gtk/window.blp:391
 msgid "Show Hidden"
 msgstr "Показати приховане"
 
-#: data/gtk/window.blp:407
+#: data/gtk/window.blp:404
 msgid "Keyboard Shortcuts"
 msgstr "Комбінації клавіш"
 
-#: data/gtk/window.blp:412
+#: data/gtk/window.blp:409
 msgid "About Cartridges"
 msgstr "Про Cartridges"
 
@@ -381,99 +381,99 @@ msgid "translator_credits"
 msgstr "kefir2105"
 
 #. The variable is the title of the game
-#: src/main.py:164
+#: src/main.py:172
 msgid "{} launched"
 msgstr "{} запущено"
 
 #. The variable is the title of the game
-#: src/main.py:182
+#: src/main.py:191
 msgid "{} hidden"
 msgstr "{} приховано"
 
 #. The variable is the title of the game
-#: src/main.py:185
+#: src/main.py:194
 msgid "{} unhidden"
 msgstr "{} показано"
 
 #. The variable is the title of the game
-#: src/main.py:241
+#: src/main.py:250
 msgid "{} removed"
 msgstr "{} видалено"
 
-#: src/window.py:262
+#: src/window.py:256
 msgid "Today"
 msgstr "Сьогодні"
 
-#: src/window.py:264
+#: src/window.py:258
 msgid "Yesterday"
 msgstr "Вчора"
 
 #. The variable is the date when the game was added
-#: src/window.py:310
+#: src/window.py:302
 msgid "Added: {}"
 msgstr "Додано: {}"
 
-#: src/window.py:315
+#: src/window.py:307
 msgid "Never"
 msgstr "Ніколи"
 
 #. The variable is the date when the game was last played
-#: src/window.py:319
+#: src/window.py:311
 msgid "Last played: {}"
 msgstr "Останній раз грали: {}"
 
-#: src/game.py:156
+#: src/game.py:158
 msgid "Details"
 msgstr "Деталі"
 
-#: src/preferences.py:54
+#: src/preferences.py:60
 msgid "Installation Not Found"
 msgstr "Встановлення не знайдено"
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:56
+#: src/preferences.py:62
 msgid "Select the {} configuration directory."
 msgstr "Виберіть каталог конфігурації {}."
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:59
+#: src/preferences.py:64
 msgid "Select the {} data directory."
 msgstr "Виберіть каталог даних {}."
 
-#: src/preferences.py:61 src/preferences.py:240
+#: src/preferences.py:66 src/preferences.py:234
 msgid "Set Location"
 msgstr "Встановити місцезнаходження"
 
-#: src/preferences.py:132
+#: src/preferences.py:130
 msgid "All games removed"
 msgstr "Всі ігри видалено"
 
-#: src/preferences.py:237
+#: src/preferences.py:231
 msgid "Cache Not Found"
 msgstr "Кеш не знайдено"
 
-#: src/preferences.py:238
+#: src/preferences.py:232
 msgid "Select the Lutris cache directory."
 msgstr "Виберіть каталог кешу Lutris."
 
-#: src/preferences.py:344
+#: src/preferences.py:328
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Для використання SteamGridDB потрібен ключ API. Ви можете згенерувати його {}"
 "тут{}."
 
-#: src/utils/create_details_window.py:81
+#: src/utils/create_details_window.py:89
+msgid "Apply"
+msgstr "Застосувати"
+
+#: src/utils/create_details_window.py:95
 msgid "Add New Game"
 msgstr "Додати нову гру"
 
-#: src/utils/create_details_window.py:85
+#: src/utils/create_details_window.py:99
 msgid "Confirm"
 msgstr "Підтвердити"
-
-#: src/utils/create_details_window.py:96
-msgid "Apply"
-msgstr "Застосувати"
 
 #: src/utils/create_details_window.py:130
 msgid "The title of the game"
@@ -544,25 +544,25 @@ msgstr "Файл для відкриття або команда для запу
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/utils/create_details_window.py:259
-#: src/utils/create_details_window.py:269
-#: src/utils/create_details_window.py:275
+#: src/utils/create_details_window.py:260
+#: src/utils/create_details_window.py:270
+#: src/utils/create_details_window.py:276
 msgid "Couldn't Add Game"
 msgstr "Не вдалося додати гру"
 
-#: src/utils/create_details_window.py:261
-#: src/utils/create_details_window.py:299
-#: src/utils/create_details_window.py:307
+#: src/utils/create_details_window.py:262
+#: src/utils/create_details_window.py:300
+#: src/utils/create_details_window.py:308
 msgid "Couldn't Apply Preferences"
 msgstr "Не вдалося застосувати параметри"
 
-#: src/utils/create_details_window.py:269
-#: src/utils/create_details_window.py:300
+#: src/utils/create_details_window.py:270
+#: src/utils/create_details_window.py:301
 msgid "Game title cannot be empty."
 msgstr "Назва гри не може бути порожньою."
 
-#: src/utils/create_details_window.py:275
-#: src/utils/create_details_window.py:308
+#: src/utils/create_details_window.py:276
+#: src/utils/create_details_window.py:309
 msgid "Executable cannot be empty."
 msgstr "Виконуваний файл не може бути порожнім."
 
