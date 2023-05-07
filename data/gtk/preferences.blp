@@ -136,9 +136,9 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
         Adw.ActionRow {
           title: _("Import Steam Games");
-          activatable-widget: lutris_steam_switch;
+          activatable-widget: lutris_import_steam_switch;
 
-          Switch lutris_steam_switch {
+          Switch lutris_import_steam_switch {
             valign: center;
           }
         }
@@ -160,27 +160,27 @@ template PreferencesWindow : Adw.PreferencesWindow {
 
         Adw.ActionRow {
           title: _("Import Epic Games");
-          activatable-widget: heroic_epic_switch;
+          activatable-widget: heroic_import_epic_switch;
 
-          Switch heroic_epic_switch {
+          Switch heroic_import_epic_switch {
             valign: center;
           }
         }
 
         Adw.ActionRow {
           title: _("Import GOG Games");
-          activatable-widget: heroic_gog_switch;
+          activatable-widget: heroic_import_gog_switch;
 
-          Switch heroic_gog_switch {
+          Switch heroic_import_gog_switch {
             valign: center;
           }
         }
 
         Adw.ActionRow {
           title: _("Import Sideloaded Games");
-          activatable-widget: heroic_sideloaded_switch;
+          activatable-widget: heroic_import_sideload_switch;
 
-          Switch heroic_sideloaded_switch {
+          Switch heroic_import_sideload_switch {
             valign: center;
           }
         }
@@ -237,9 +237,9 @@ template PreferencesWindow : Adw.PreferencesWindow {
       Adw.ActionRow {
         title: _("Use SteamGridDB");
         subtitle: _("Download images when adding or importing games");
-        activatable-widget: sgdb_download_switch;
+        activatable-widget: sgdb_switch;
 
-        Switch sgdb_download_switch {
+        Switch sgdb_switch {
           valign: center;
         }
       }

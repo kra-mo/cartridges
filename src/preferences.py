@@ -97,13 +97,13 @@ class PreferencesWindow(Adw.PreferencesWindow):
     lutris_expander_row = Gtk.Template.Child()
     lutris_file_chooser_button = Gtk.Template.Child()
     lutris_cache_file_chooser_button = Gtk.Template.Child()
-    lutris_steam_switch = Gtk.Template.Child()
+    lutris_import_steam_switch = Gtk.Template.Child()
 
     heroic_expander_row = Gtk.Template.Child()
     heroic_file_chooser_button = Gtk.Template.Child()
-    heroic_epic_switch = Gtk.Template.Child()
-    heroic_gog_switch = Gtk.Template.Child()
-    heroic_sideloaded_switch = Gtk.Template.Child()
+    heroic_import_epic_switch = Gtk.Template.Child()
+    heroic_import_gog_switch = Gtk.Template.Child()
+    heroic_import_sideload_switch = Gtk.Template.Child()
 
     bottles_expander_row = Gtk.Template.Child()
     bottles_file_chooser_button = Gtk.Template.Child()
@@ -113,7 +113,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
-    sgdb_download_switch = Gtk.Template.Child()
+    sgdb_switch = Gtk.Template.Child()
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
 
@@ -139,25 +139,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.removed_games = set()
 
         # General
-        self.schema.bind(
-            "exit-after-launch",
-            self.exit_after_launch_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        self.schema.bind(
-            "cover-launches-game",
-            self.cover_launches_game_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        self.schema.bind(
-            "high-quality-images",
-            self.high_quality_images_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-
         self.remove_all_games_button.connect("clicked", self.remove_all_games)
 
         # Steam
@@ -205,12 +186,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self.lutris_expander_row,
             self.lutris_file_chooser_button,
         )
-        self.schema.bind(
-            "lutris-import-steam",
-            self.lutris_steam_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
 
         def set_cache_dir(_source, result, *_args):
             try:
@@ -249,25 +224,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
             True,
         )
 
-        self.schema.bind(
-            "heroic-import-epic",
-            self.heroic_epic_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        self.schema.bind(
-            "heroic-import-gog",
-            self.heroic_gog_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-        self.schema.bind(
-            "heroic-import-sideload",
-            self.heroic_sideloaded_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-
         # Bottles
         ImportPreferences(
             self,
@@ -292,26 +248,19 @@ class PreferencesWindow(Adw.PreferencesWindow):
             True,
         )
 
-        # SteamGridDB
-        self.schema.bind(
-            "sgdb",
-            self.sgdb_download_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-
-        self.schema.bind(
-            "sgdb-prefer",
-            self.sgdb_prefer_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-
-        self.schema.bind(
-            "sgdb-animated",
-            self.sgdb_animated_switch,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
+        self.bind_switches(
+            (
+                "exit-after-launch",
+                "cover-launches-game",
+                "high-quality-images",
+                "lutris-import-steam",
+                "heroic-import-epic",
+                "heroic-import-gog",
+                "heroic-import-sideload",
+                "sgdb",
+                "sgdb-prefer",
+                "sgdb-animated",
+            )
         )
 
         def sgdb_key_changed(*_args):
@@ -327,6 +276,15 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 '<a href="https://www.steamgriddb.com/profile/preferences/api">', "</a>"
             )
         )
+
+    def bind_switches(self, settings):
+        for setting in settings:
+            self.schema.bind(
+                setting,
+                getattr(self, f'{setting.replace("-", "_")}_switch'),
+                "active",
+                Gio.SettingsBindFlags.DEFAULT,
+            )
 
     def choose_folder(self, _widget, function):
         self.file_chooser.select_folder(self.win, None, function, None)

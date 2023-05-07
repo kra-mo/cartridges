@@ -182,9 +182,6 @@ class CartridgesApplication(Adw.Application):
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.on_remove_game_action()
 
-    def on_quit_action(self, *_args):
-        self.quit()
-
     def search(self, uri):
         Gio.AppInfo.launch_default_for_uri(f"{uri}{self.win.active_game.name}")
 
@@ -202,6 +199,9 @@ class CartridgesApplication(Adw.Application):
 
     def on_hltb_search_action(self, *_args):
         self.search("https://howlongtobeat.com/?q=")
+
+    def on_quit_action(self, *_args):
+        self.quit()
 
     def create_actions(self, actions):
         for action in actions:
