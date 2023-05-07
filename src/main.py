@@ -28,15 +28,11 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from . import shared
-from .bottles_importer import bottles_importer
 from .details_window import DetailsWindow
-from .heroic_importer import heroic_importer
-from .importer import Importer
-from .itch_importer import itch_importer
-from .lutris_importer import lutris_importer
 from .preferences import PreferencesWindow
-from .steam_importer import steam_importer
 from .window import CartridgesWindow
+from .importer import Importer
+from .lutris_source import LutrisNativeSource, LutrisFlatpakSource
 
 
 class CartridgesApplication(Adw.Application):
@@ -151,30 +147,11 @@ class CartridgesApplication(Adw.Application):
         DetailsWindow()
 
     def on_import_action(self, *_args):
-        shared.importer = Importer()
-
-        shared.importer.blocker = True
-
-        if shared.schema.get_boolean("steam"):
-            steam_importer()
-
-        if shared.schema.get_boolean("lutris"):
-            lutris_importer()
-
-        if shared.schema.get_boolean("heroic"):
-            heroic_importer()
-
-        if shared.schema.get_boolean("bottles"):
-            bottles_importer()
-
-        if shared.schema.get_boolean("itch"):
-            itch_importer()
-
-        shared.importer.blocker = False
-
-        if shared.importer.import_dialog.is_visible and shared.importer.queue == 0:
-            shared.importer.queue = 1
-            shared.importer.save_game()
+        importer = Importer(self.win)
+        if self.win.schema.get_boolean("lutris"):
+            importer.add_source(LutrisNativeSource)
+            importer.add_source(LutrisFlatpakSource)
+        importer.import_games()
 
     def on_remove_game_action(self, *_args):
         self.win.active_game.remove_game()

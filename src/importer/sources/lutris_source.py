@@ -1,5 +1,6 @@
 from functools import cached_property, cache
 from sqlite3 import connect
+from time import time
 
 from src.game import Game
 from src.utils.save_cover import resize_cover, save_cover
@@ -66,6 +67,7 @@ class LutrisSourceIterator(SourceIterator):
         # Create game
         row = self.__next_row()
         values = {
+            "added": int(time()),
             "hidden": row[4],
             "name": row[1],
             "source": f"{self.source.id}_{row[3]}",
