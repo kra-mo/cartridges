@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 23:33+0200\n"
+"POT-Creation-Date: 2023-04-16 14:29+0200\n"
 "PO-Revision-Date: 2023-04-06 08:09+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -51,15 +51,15 @@ msgid "Library"
 msgstr "Bibliotek"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:26
-#: src/utils/create_details_window.py:87
+#: src/utils/create_details_window.py:81
 msgid "Edit Game Details"
 msgstr "Rediger spilldetaljer"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:51
+#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:53
 msgid "Game Details"
 msgstr "Spilldetaljer"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:402
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:399
 #: src/utils/importer.py:94 src/utils/importer.py:123 src/utils/importer.py:148
 #: src/utils/steamgriddb.py:116
 msgid "Preferences"
@@ -69,20 +69,20 @@ msgstr "Innstillinger"
 msgid "Title"
 msgstr "Navn"
 
-#: data/gtk/game.blp:89 data/gtk/game.blp:108 data/gtk/window.blp:170
+#: data/gtk/game.blp:89 data/gtk/game.blp:108 data/gtk/window.blp:174
 msgid "Edit"
 msgstr "Rediger"
 
-#: data/gtk/game.blp:94 src/window.py:286
+#: data/gtk/game.blp:94 src/window.py:282
 msgid "Hide"
 msgstr "Skjul"
 
 #: data/gtk/game.blp:99 data/gtk/game.blp:118 data/gtk/preferences.blp:56
-#: data/gtk/window.blp:186
+#: data/gtk/window.blp:190
 msgid "Remove"
 msgstr "Fjern"
 
-#: data/gtk/game.blp:113 src/window.py:283
+#: data/gtk/game.blp:113 src/window.py:279
 msgid "Unhide"
 msgstr "Opphev fjerning"
 
@@ -94,8 +94,8 @@ msgstr "Generelt"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:205 data/gtk/window.blp:249
-#: data/gtk/window.blp:312
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:209 data/gtk/window.blp:246
+#: data/gtk/window.blp:309
 #, fuzzy
 msgid "Search"
 msgstr "Søk"
@@ -108,8 +108,8 @@ msgstr "Vis innstillinger"
 msgid "Shortcuts"
 msgstr "Snarveier"
 
-#: data/gtk/help-overlay.blp:34 src/main.py:186 src/main.py:242
-#: src/preferences.py:133
+#: data/gtk/help-overlay.blp:34 src/main.py:195 src/main.py:251
+#: src/preferences.py:131
 msgid "Undo"
 msgstr "Angre"
 
@@ -176,7 +176,7 @@ msgstr "Faresone"
 msgid "Remove All Games"
 msgstr "Fjern alle spill"
 
-#: data/gtk/preferences.blp:69 data/gtk/window.blp:427
+#: data/gtk/preferences.blp:69 data/gtk/window.blp:424
 msgid "Import"
 msgstr "Importer"
 
@@ -333,63 +333,63 @@ msgstr "Ingen skjulte spill"
 msgid "Games you hide will appear here."
 msgstr "Spill du skjuler vil vises her."
 
-#: data/gtk/window.blp:44 data/gtk/window.blp:293
+#: data/gtk/window.blp:46 data/gtk/window.blp:290
 msgid "Back"
 msgstr "Tilbake"
 
-#: data/gtk/window.blp:100
+#: data/gtk/window.blp:102
 msgid "Game Title"
 msgstr "Spillnavn"
 
-#: data/gtk/window.blp:151 src/game.py:158
+#: data/gtk/window.blp:155 src/game.py:160
 msgid "Play"
 msgstr "Spill"
 
-#: data/gtk/window.blp:235 data/gtk/window.blp:421
+#: data/gtk/window.blp:232 data/gtk/window.blp:418
 msgid "Add Game"
 msgstr "Legg til spill"
 
-#: data/gtk/window.blp:242 data/gtk/window.blp:305
+#: data/gtk/window.blp:239 data/gtk/window.blp:302
 msgid "Main Menu"
 msgstr "Hovedmeny"
 
-#: data/gtk/window.blp:300
+#: data/gtk/window.blp:297
 msgid "Hidden Games"
 msgstr "Skjulte spill"
 
-#: data/gtk/window.blp:360
+#: data/gtk/window.blp:357
 msgid "Sort"
 msgstr "Sorter"
 
-#: data/gtk/window.blp:363
+#: data/gtk/window.blp:360
 msgid "A-Z"
 msgstr "A-Å"
 
-#: data/gtk/window.blp:369
+#: data/gtk/window.blp:366
 msgid "Z-A"
 msgstr "Å-A"
 
-#: data/gtk/window.blp:375
+#: data/gtk/window.blp:372
 msgid "Newest"
 msgstr "Nyeste"
 
-#: data/gtk/window.blp:381
+#: data/gtk/window.blp:378
 msgid "Oldest"
 msgstr "Eldste"
 
-#: data/gtk/window.blp:387
+#: data/gtk/window.blp:384
 msgid "Last Played"
 msgstr "Sist spilt"
 
-#: data/gtk/window.blp:394
+#: data/gtk/window.blp:391
 msgid "Show Hidden"
 msgstr "Vis skjulte"
 
-#: data/gtk/window.blp:407
+#: data/gtk/window.blp:404
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
-#: data/gtk/window.blp:412
+#: data/gtk/window.blp:409
 msgid "About Cartridges"
 msgstr "Om"
 
@@ -399,104 +399,104 @@ msgid "translator_credits"
 msgstr "Allan Nordhøy, <epost@anotheragency.no>"
 
 #. The variable is the title of the game
-#: src/main.py:164
+#: src/main.py:172
 msgid "{} launched"
 msgstr "{} startet"
 
 #. The variable is the title of the game
-#: src/main.py:182
+#: src/main.py:191
 #, fuzzy
 #| msgid "Show Hidden"
 msgid "{} hidden"
 msgstr "{} skjult"
 
 #. The variable is the title of the game
-#: src/main.py:185
+#: src/main.py:194
 msgid "{} unhidden"
 msgstr "{} synlig"
 
 #. The variable is the title of the game
-#: src/main.py:241
+#: src/main.py:250
 msgid "{} removed"
 msgstr "{} fjernet"
 
-#: src/window.py:262
+#: src/window.py:256
 msgid "Today"
 msgstr "I dag"
 
-#: src/window.py:264
+#: src/window.py:258
 msgid "Yesterday"
 msgstr "I går"
 
 #. The variable is the date when the game was added
-#: src/window.py:310
+#: src/window.py:302
 msgid "Added: {}"
 msgstr "Tillagt: {}"
 
-#: src/window.py:315
+#: src/window.py:307
 msgid "Never"
 msgstr "Aldri"
 
 #. The variable is the date when the game was last played
-#: src/window.py:319
+#: src/window.py:311
 msgid "Last played: {}"
 msgstr "Sist spilt: {}"
 
-#: src/game.py:156
+#: src/game.py:158
 msgid "Details"
 msgstr "Detaljer"
 
-#: src/preferences.py:54
+#: src/preferences.py:60
 msgid "Installation Not Found"
 msgstr "Fant ikke installasjonen"
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:56
+#: src/preferences.py:62
 msgid "Select the {} configuration directory."
 msgstr "Velg {}-oppsettsmappen."
 
 #. The variable is the name of the game launcher
-#: src/preferences.py:59
+#: src/preferences.py:64
 msgid "Select the {} data directory."
 msgstr "Velg {}-datamappen."
 
-#: src/preferences.py:61 src/preferences.py:240
+#: src/preferences.py:66 src/preferences.py:234
 #, fuzzy
 #| msgid "Set Steam Location"
 msgid "Set Location"
 msgstr "Velg mappe"
 
-#: src/preferences.py:132
+#: src/preferences.py:130
 msgid "All games removed"
 msgstr "Alle spill fjernet"
 
-#: src/preferences.py:237
+#: src/preferences.py:231
 #, fuzzy
 msgid "Cache Not Found"
 msgstr "Fant ikke hurtiglager"
 
-#: src/preferences.py:238
+#: src/preferences.py:232
 #, fuzzy
 msgid "Select the Lutris cache directory."
 msgstr "Velg {name}-datamappen."
 
-#: src/preferences.py:344
+#: src/preferences.py:328
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "En API-nøkkel kreves for å bruke SteamGridDB. Du kan generere en {}her{}."
 
-#: src/utils/create_details_window.py:81
+#: src/utils/create_details_window.py:89
+msgid "Apply"
+msgstr "Bruk"
+
+#: src/utils/create_details_window.py:95
 msgid "Add New Game"
 msgstr "Legg til nytt spill"
 
-#: src/utils/create_details_window.py:85
+#: src/utils/create_details_window.py:99
 msgid "Confirm"
 msgstr "Bekreft"
-
-#: src/utils/create_details_window.py:96
-msgid "Apply"
-msgstr "Bruk"
 
 #: src/utils/create_details_window.py:130
 msgid "The title of the game"
@@ -567,25 +567,25 @@ msgstr "Fil å åpne eller kommando å kjøre ved oppstart av spillet"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/utils/create_details_window.py:259
-#: src/utils/create_details_window.py:269
-#: src/utils/create_details_window.py:275
+#: src/utils/create_details_window.py:260
+#: src/utils/create_details_window.py:270
+#: src/utils/create_details_window.py:276
 msgid "Couldn't Add Game"
 msgstr "Kunne ikke legge til spill"
 
-#: src/utils/create_details_window.py:261
-#: src/utils/create_details_window.py:299
-#: src/utils/create_details_window.py:307
+#: src/utils/create_details_window.py:262
+#: src/utils/create_details_window.py:300
+#: src/utils/create_details_window.py:308
 msgid "Couldn't Apply Preferences"
 msgstr "Kunne ikke ta i bruk endringer"
 
-#: src/utils/create_details_window.py:269
-#: src/utils/create_details_window.py:300
+#: src/utils/create_details_window.py:270
+#: src/utils/create_details_window.py:301
 msgid "Game title cannot be empty."
 msgstr "Spillnavnet kan ikke være tomt."
 
-#: src/utils/create_details_window.py:275
-#: src/utils/create_details_window.py:308
+#: src/utils/create_details_window.py:276
+#: src/utils/create_details_window.py:309
 msgid "Executable cannot be empty."
 msgstr "Kjørbar fil må angis."
 
