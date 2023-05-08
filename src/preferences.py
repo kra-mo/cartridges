@@ -22,55 +22,13 @@ from pathlib import Path
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
+# pylint: disable=unused-import
 from .bottles_importer import bottles_installed
 from .create_dialog import create_dialog
 from .heroic_importer import heroic_installed
 from .itch_importer import itch_installed
 from .lutris_importer import lutris_cache_exists, lutris_installed
 from .steam_importer import steam_installed
-
-
-class ImportPreferences:
-    def __init__(
-        self,
-        win,
-        source_id,
-        name,
-        check_func,
-        expander_row,
-        file_chooser_button,
-        config=False,
-    ):
-        def set_dir(_source, result, *_args):
-            try:
-                path = Path(win.file_chooser.select_folder_finish(result).get_path())
-            except GLib.GError:
-                return
-
-            def response(widget, response):
-                if response == "choose_folder":
-                    win.choose_folder(widget, set_dir)
-
-            if not check_func(win, path):
-                create_dialog(
-                    win,
-                    _("Installation Not Found"),
-                    # The variable is the name of the game launcher
-                    _("Select the {} configuration directory.").format(name) if config
-                    # The variable is the name of the game launcher
-                    else _("Select the {} data directory.").format(name),
-                    "choose_folder",
-                    _("Set Location"),
-                ).connect("response", response)
-
-        win.schema.bind(
-            source_id,
-            expander_row,
-            "enable-expansion",
-            Gio.SettingsBindFlags.DEFAULT,
-        )
-
-        file_chooser_button.connect("clicked", win.choose_folder, set_dir)
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/preferences.ui")
@@ -117,6 +75,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
 
+    removed_games = set()
+
     def __init__(self, win, **kwargs):
         super().__init__(**kwargs)
         self.schema = win.schema
@@ -128,28 +88,20 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.toast.set_button_label(_("Undo"))
         self.toast.connect("button-clicked", self.undo_remove_all, None)
         self.toast.set_priority(Adw.ToastPriority.HIGH)
-        shortcut_controller = Gtk.ShortcutController()
-        shortcut_controller.add_shortcut(
+
+        (shortcut_controller := Gtk.ShortcutController()).add_shortcut(
             Gtk.Shortcut.new(
                 Gtk.ShortcutTrigger.parse_string("<primary>z"),
                 Gtk.CallbackAction.new(self.undo_remove_all),
             )
         )
         self.add_controller(shortcut_controller)
-        self.removed_games = set()
 
         # General
         self.remove_all_games_button.connect("clicked", self.remove_all_games)
 
         # Steam
-        ImportPreferences(
-            self,
-            "steam",
-            "Steam",
-            steam_installed,
-            self.steam_expander_row,
-            self.steam_file_chooser_button,
-        )
+        self.create_preferences(self, "steam", "Steam")
 
         def update_revealer():
             if self.schema.get_strv("steam-extra-dirs"):
@@ -178,14 +130,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.steam_clear_button.connect("clicked", clear_steam_dirs)
 
         # Lutris
-        ImportPreferences(
-            self,
-            "lutris",
-            "Lutris",
-            lutris_installed,
-            self.lutris_expander_row,
-            self.lutris_file_chooser_button,
-        )
+        self.create_preferences(self, "lutris", "Lutris")
 
         def set_cache_dir(_source, result, *_args):
             try:
@@ -210,44 +155,31 @@ class PreferencesWindow(Adw.PreferencesWindow):
             "clicked", self.choose_folder, set_cache_dir
         )
 
-        if os.name == "nt":
-            self.sources_group.remove(self.lutris_expander_row)
-
         # Heroic
-        ImportPreferences(
-            self,
-            "heroic",
-            "Heroic",
-            heroic_installed,
-            self.heroic_expander_row,
-            self.heroic_file_chooser_button,
-            True,
-        )
+        self.create_preferences(self, "heroic", "Heroic", True)
 
         # Bottles
-        ImportPreferences(
-            self,
-            "bottles",
-            "Bottles",
-            bottles_installed,
-            self.bottles_expander_row,
-            self.bottles_file_chooser_button,
-        )
-
-        if os.name == "nt":
-            self.sources_group.remove(self.bottles_expander_row)
+        self.create_preferences(self, "bottles", "Bottles")
 
         # itch
-        ImportPreferences(
-            self,
-            "itch",
-            "itch",
-            itch_installed,
-            self.itch_expander_row,
-            self.itch_file_chooser_button,
-            True,
+        self.create_preferences(self, "itch", "itch", True)
+
+        # SteamGridDB
+        def sgdb_key_changed(*_args):
+            self.schema.set_string("sgdb-key", self.sgdb_key_entry_row.get_text())
+
+        self.sgdb_key_entry_row.set_text(self.schema.get_string("sgdb-key"))
+        self.sgdb_key_entry_row.connect("changed", sgdb_key_changed)
+
+        self.sgdb_key_group.set_description(
+            _(
+                "An API key is required to use SteamGridDB. You can generate one {}here{}."
+            ).format(
+                '<a href="https://www.steamgriddb.com/profile/preferences/api">', "</a>"
+            )
         )
 
+        # Switches
         self.bind_switches(
             (
                 "exit-after-launch",
@@ -263,19 +195,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
         )
 
-        def sgdb_key_changed(*_args):
-            self.schema.set_string("sgdb-key", self.sgdb_key_entry_row.get_text())
-
-        self.sgdb_key_entry_row.set_text(self.schema.get_string("sgdb-key"))
-        self.sgdb_key_entry_row.connect("changed", sgdb_key_changed)
-
-        self.sgdb_key_group.set_description(
-            _(
-                "An API key is required to use SteamGridDB. You can generate one {}here{}."
-            ).format(
-                '<a href="https://www.steamgriddb.com/profile/preferences/api">', "</a>"
-            )
-        )
+        # Windows
+        if os.name == "nt":
+            self.sources_group.remove(self.lutris_expander_row)
+            self.sources_group.remove(self.bottles_expander_row)
 
     def bind_switches(self, settings):
         for setting in settings:
@@ -309,3 +232,37 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self.win.on_go_back_action()
 
         self.add_toast(self.toast)
+
+    def create_preferences(self, win, source_id, name, config=False):
+        def set_dir(_source, result, *_args):
+            try:
+                path = Path(win.file_chooser.select_folder_finish(result).get_path())
+            except GLib.GError:
+                return
+
+            def response(widget, response):
+                if response == "choose_folder":
+                    win.choose_folder(widget, set_dir)
+
+            if not globals()[f"{source_id}_installed"](win, path):
+                create_dialog(
+                    win,
+                    _("Installation Not Found"),
+                    # The variable is the name of the game launcher
+                    _("Select the {} configuration directory.").format(name) if config
+                    # The variable is the name of the game launcher
+                    else _("Select the {} data directory.").format(name),
+                    "choose_folder",
+                    _("Set Location"),
+                ).connect("response", response)
+
+        win.schema.bind(
+            source_id,
+            getattr(win, f"{source_id}_expander_row"),
+            "enable-expansion",
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+
+        getattr(win, f"{source_id}_file_chooser_button").connect(
+            "clicked", win.choose_folder, set_dir
+        )
