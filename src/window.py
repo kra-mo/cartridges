@@ -267,7 +267,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             return
 
         self.details_view_blurred_cover.set_opacity(
-            1.2 - self.details_view_game_cover.luminance[0]
+            1 - self.details_view_game_cover.luminance[0]
             if style_manager.get_dark()
             else self.details_view_game_cover.luminance[1]
         )
