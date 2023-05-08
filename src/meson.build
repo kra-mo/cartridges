@@ -35,7 +35,8 @@ cartridges_sources = [
   'importers/heroic_importer.py',
   'importers/itch_importer.py',
   'importers/lutris_importer.py',
-  'importers/steam_importer.py'
+  'importers/steam_importer.py',
+  'utils/check_install.py'
 ]
 
 install_data(cartridges_sources, install_dir: moduledir)
