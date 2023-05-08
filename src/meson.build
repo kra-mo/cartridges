@@ -16,6 +16,8 @@ configure_file(
   install_dir: get_option('bindir')
 )
 
+# TODO move to absolute imports = keep real structure, do not flatten
+
 cartridges_sources = [
   '__init__.py',
   'main.py',
@@ -28,9 +30,13 @@ cartridges_sources = [
   'utils/save_cover.py',
   'utils/create_dialog.py',
 
+  # Added
   'importer/sources/lutris_source.py',
   'importer/importer.py',
+  'importer/source.py',
+  'utils/decorators.py',
 
+  # TODO remove before merge
   'importers/bottles_importer.py',
   'importers/heroic_importer.py',
   'importers/itch_importer.py',

@@ -2,10 +2,10 @@ from functools import cached_property, cache
 from sqlite3 import connect
 from time import time
 
-from src.game import Game
-from src.utils.save_cover import resize_cover, save_cover
-from src.importer.source import Source, SourceIterator
-from src.importer.decorators import replaced_by_schema_key, replaced_by_path
+from .game import Game
+from .save_cover import resize_cover, save_cover
+from .source import Source, SourceIterator
+from .decorators import replaced_by_schema_key, replaced_by_path
 
 
 class LutrisSourceIterator(SourceIterator):
