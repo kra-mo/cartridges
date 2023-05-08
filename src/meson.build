@@ -25,11 +25,18 @@ cartridges_sources = [
   'game.py',
   'game_cover.py',
   'shared.py',
-  'importer/sources/lutris_source.py',
-  'importer/importer.py',
   'utils/steamgriddb.py',
   'utils/save_cover.py',
-  'utils/create_dialog.py'
+  'utils/create_dialog.py',
+
+  'importer/sources/lutris_source.py',
+  'importer/importer.py',
+
+  'importers/bottles_importer.py',
+  'importers/heroic_importer.py',
+  'importers/itch_importer.py',
+  'importers/lutris_importer.py',
+  'importers/steam_importer.py'
 ]
 
 install_data(cartridges_sources, install_dir: moduledir)
