@@ -67,6 +67,7 @@ class LutrisSourceIterator(SourceIterator):
         # Create game
         values = {
             "added": int(time()),
+            "last_played": 0,
             "hidden": row[4],
             "name": row[1],
             "source": f"{self.source.id}_{row[3]}",
