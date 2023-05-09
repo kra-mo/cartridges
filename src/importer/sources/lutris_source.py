@@ -2,10 +2,10 @@ from functools import cache
 from sqlite3 import connect
 from time import time
 
+from .decorators import replaced_by_path, replaced_by_schema_key
 from .game import Game
 from .save_cover import resize_cover, save_cover
 from .source import Source, SourceIterator
-from .decorators import replaced_by_schema_key, replaced_by_path
 
 
 class LutrisSourceIterator(SourceIterator):
@@ -128,7 +128,7 @@ class LutrisNativeSource(LutrisSource):
 
     @property
     @replaced_by_schema_key("lutris-cache-location")
-    @replaced_by_path("~/.local/share/lutris/covers")
+    @replaced_by_path("~/.local/share/lutris/covers/")
     def cache_location(self):
         raise FileNotFoundError()
 
@@ -140,12 +140,12 @@ class LutrisFlatpakSource(LutrisSource):
 
     @property
     @replaced_by_schema_key("lutris-flatpak-location")
-    @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris")
+    @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/")
     def location(self):
         raise FileNotFoundError()
 
     @property
     @replaced_by_schema_key("lutris-flatpak-cache-location")
-    @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/covers")
+    @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/covers/")
     def cache_location(self):
         raise FileNotFoundError()

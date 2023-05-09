@@ -1,7 +1,7 @@
-from threading import Thread, Lock
-from gi.repository import Adw, Gtk, Gio
+from threading import Lock, Thread
 
-from .game import Game
+from gi.repository import Adw, Gtk
+
 from .steamgriddb import SGDBHelper
 
 
@@ -18,7 +18,7 @@ class Importer:
     games_lock = None
     games = None
 
-    def __init__(self, win) -> None:
+    def __init__(self, win):
         self.games = set()
         self.sources = set()
         self.counts = dict()
@@ -77,12 +77,12 @@ class Importer:
             print(f"{source.full_name}, installed: {source.is_installed}")
             if not source.is_installed:
                 continue
-            t = Thread(target=self.__import_source__, args=tuple([source]))  # fmt: skip
-            threads.append(t)
-            t.start()
+            thread = Thread(target=self.__import_source__, args=tuple([source]))  # fmt: skip
+            threads.append(thread)
+            thread.start()
 
-        for t in threads:
-            t.join()
+        for thread in threads:
+            thread.join()
 
         # Save games
         for game in self.games:
@@ -95,11 +95,11 @@ class Importer:
 
         self.close_dialog()
 
-    def __import_source__(self, *args, **kwargs):
+    def __import_source__(self, *args, **_kwargs):
         """Source import thread entry point"""
         # TODO error handling in source iteration
         # TODO add SGDB image (move to a game manager)
-        source, *rest = args
+        source, *_rest = args
         iterator = source.__iter__()
         with self.progress_lock:
             self.counts[source.id]["total"] = len(iterator)
