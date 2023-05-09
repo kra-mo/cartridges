@@ -1,4 +1,4 @@
-from functools import cached_property, cache
+from functools import cache
 from sqlite3 import connect
 from time import time
 
@@ -65,7 +65,6 @@ class LutrisSourceIterator(SourceIterator):
             raise e
 
         # Create game
-        row = self.__next_row()
         values = {
             "added": int(time()),
             "hidden": row[4],
@@ -98,8 +97,18 @@ class LutrisSource(Source):
     def game_id_format(self):
         return super().game_id_format + "_{game_internal_id}"
 
-    def __init__(self, win):
-        super().__init__(win)
+    @property
+    def is_installed(self):
+        try:
+            self.location
+            self.cache_location
+        except FileNotFoundError:
+            return False
+        else:
+            return True
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def __iter__(self):
         return LutrisSourceIterator(source=self)
@@ -110,13 +119,13 @@ class LutrisNativeSource(LutrisSource):
 
     variant = "native"
 
-    @cached_property
+    @property
     @replaced_by_schema_key("lutris-location")
     @replaced_by_path("~/.local/share/lutris/")
     def location(self):
         raise FileNotFoundError()
 
-    @cached_property
+    @property
     @replaced_by_schema_key("lutris-cache-location")
     @replaced_by_path("~/.local/share/lutris/covers")
     def cache_location(self):
@@ -128,13 +137,13 @@ class LutrisFlatpakSource(LutrisSource):
 
     variant = "flatpak"
 
-    @cached_property
+    @property
     @replaced_by_schema_key("lutris-flatpak-location")
     @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris")
     def location(self):
         raise FileNotFoundError()
 
-    @cached_property
+    @property
     @replaced_by_schema_key("lutris-flatpak-cache-location")
     @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/covers")
     def cache_location(self):

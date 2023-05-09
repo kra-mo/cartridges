@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="cartridges">
-	<schema id="hu.kramo.Cartridges" path="/hu/kramo/Cartridges/">
-	  <key name="exit-after-launch" type="b">
-	    <default>false</default>
-	  </key>
+  <schema id="hu.kramo.Cartridges" path="/hu/kramo/Cartridges/">
+    <key name="exit-after-launch" type="b">
+      <default>false</default>
+    </key>
     <key name="cover-launches-game" type="b">
       <default>false</default>
     </key>
@@ -25,6 +25,12 @@
     <key name="lutris-cache-location" type="s">
       <default>"~/.var/app/net.lutris.Lutris/cache/lutris"</default>
     </key>
+    <key name="lutris-flatpak-location" type="s">
+      <default>"~/.var/app/net.lutris.Lutris/data/lutris/"</default>
+    </key>
+    <key name="lutris-flatpak-cache-location" type="s">
+      <default>"~/.var/app/net.lutris.Lutris/cache/lutris"</default>
+    </key>
     <key name="lutris-import-steam" type="b">
       <default>false</default>
     </key>
@@ -34,19 +40,19 @@
     <key name="heroic-location" type="s">
       <default>"~/.var/app/com.heroicgameslauncher.hgl/config/heroic/"</default>
     </key>
-	  <key name="heroic-import-epic" type="b">
-	    <default>true</default>
-	  </key>
-	  <key name="heroic-import-gog" type="b">
-	    <default>true</default>
-	  </key>
-	  <key name="heroic-import-sideload" type="b">
-	    <default>true</default>
-	  </key>
+    <key name="heroic-import-epic" type="b">
+      <default>true</default>
+    </key>
+    <key name="heroic-import-gog" type="b">
+      <default>true</default>
+    </key>
+    <key name="heroic-import-sideload" type="b">
+      <default>true</default>
+    </key>
     <key name="bottles" type="b">
       <default>true</default>
     </key>
-	  <key name="bottles-location" type="s">
+    <key name="bottles-location" type="s">
       <default>"~/.var/app/com.usebottles.bottles/data/bottles/"</default>
     </key>
     <key name="itch" type="b">
@@ -67,7 +73,7 @@
     <key name="sgdb-animated" type="b">
       <default>false</default>
     </key>
-	</schema>
+  </schema>
   <schema id="hu.kramo.Cartridges.State" path="/hu/kramo/Cartridges/State/">
     <key name="width" type="i">
       <default>1110</default>
@@ -80,11 +86,11 @@
     </key>
     <key name="sort-mode" type="s">
       <choices>
-        <choice value="a-z"/>
-        <choice value="z-a"/>
-        <choice value="newest"/>
-        <choice value="oldest"/>
-        <choice value="last_played"/>
+        <choice value="a-z" />
+        <choice value="z-a" />
+        <choice value="newest" />
+        <choice value="oldest" />
+        <choice value="last_played" />
       </choices>
       <default>"a-z"</default>
     </key>
