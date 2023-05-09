@@ -19,7 +19,8 @@ from functools import wraps
 
 
 def replaced_by_path(path: PathLike):  # Decorator builder
-    """Replace the method's returned path with the override if the override exists on disk"""
+    """Replace the method's returned path with the override
+    if the override exists on disk"""
 
     def decorator(original_function):  # Built decorator (closure)
         @wraps(original_function)
@@ -36,7 +37,8 @@ def replaced_by_path(path: PathLike):  # Decorator builder
 
 
 def replaced_by_schema_key(key: str):  # Decorator builder
-    """Replace the method's returned path with the path pointed by the key if it exists on disk"""
+    """Replace the method's returned path with the path pointed by the key
+    if it exists on disk"""
 
     def decorator(original_function):  # Built decorator (closure)
         @wraps(original_function)
@@ -47,7 +49,7 @@ def replaced_by_schema_key(key: str):  # Decorator builder
             except Exception:
                 return original_function(*args, **kwargs)
             else:
-                return replaced_by_path(override)(*args, **kwargs)
+                return replaced_by_path(override)(original_function)(*args, **kwargs)
 
         return wrapper
 

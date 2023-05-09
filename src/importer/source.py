@@ -1,9 +1,8 @@
 from abc import abstractmethod
-from collections.abc import Iterable, Iterator
-from enum import IntEnum, auto
+from collections.abc import Iterable, Iterator, Sized
 
 
-class SourceIterator(Iterator):
+class SourceIterator(Iterator, Sized):
     """Data producer for a source of games"""
 
     source = None
@@ -65,6 +64,12 @@ class Source(Iterable):
     @abstractmethod
     def executable_format(self):
         """The executable format used to construct game executables"""
+        pass
+
+    @property
+    @abstractmethod
+    def is_installed(self):
+        """Whether the source is detected as installed"""
         pass
 
     @abstractmethod

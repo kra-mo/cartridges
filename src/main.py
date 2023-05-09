@@ -148,8 +148,8 @@ class CartridgesApplication(Adw.Application):
     def on_import_action(self, *_args):
         importer = Importer(self.win)
         if self.win.schema.get_boolean("lutris"):
-            importer.add_source(LutrisNativeSource)
-            importer.add_source(LutrisFlatpakSource)
+            importer.add_source(LutrisNativeSource(self.win))
+            importer.add_source(LutrisFlatpakSource(self.win))
         importer.import_games()
 
     def on_remove_game_action(self, *_args):

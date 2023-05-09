@@ -74,21 +74,30 @@ class Importer:
         # Scan sources in threads
         threads = []
         for source in self.sources:
-            t = Thread(target=self.__import_source, args=tuple(source,))  # fmt: skip
+            print(f"{source.full_name}, installed: {source.is_installed}")  # ! DEBUG
+            if not source.is_installed:
+                continue
+            t = Thread(target=self.__import_source, args=tuple([source]))  # fmt: skip
             threads.append(t)
             t.start()
+
         for t in threads:
             t.join()
+
+        # Save games
+        for game in self.games:
+            game.save()
 
         self.close_dialog()
 
     def __import_source(self, *args, **kwargs):
         """Source import thread entry point"""
         # TODO error handling in source iteration
+        # TODO add SGDB image (move to a game manager)
         source, *rest = args
         iterator = source.__iter__()
         with self.progress_lock:
-            self.counts[source.id]["total"] = len(iterator)
+            self.counts[source.id]["total"] = iterator.__len__()
         for game in iterator:
             with self.games_lock:
                 self.games.add(game)
@@ -96,5 +105,3 @@ class Importer:
                 if not game.blacklisted:
                     self.counts[source.id]["done"] += 1
             self.update_progressbar()
-        # TODO add SGDB image (move to a game manager)
-        exit(0)
