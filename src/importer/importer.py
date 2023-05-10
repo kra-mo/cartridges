@@ -3,11 +3,11 @@ from pathlib import Path
 from threading import Lock, Thread
 
 import requests
-from requests import HTTPError
 from gi.repository import Adw, Gio, Gtk
 
+from .create_dialog import create_dialog
 from .save_cover import resize_cover, save_cover
-from .steamgriddb import SGDBHelper, SGDBError
+from .steamgriddb import SGDBAuthError, SGDBHelper
 
 
 class Importer:
@@ -23,6 +23,8 @@ class Importer:
     sources = None
 
     # Internal values
+    sgdb_error = None
+    sgdb_error_lock = None
     source_threads = None
     sgdb_threads = None
     progress_lock = None
@@ -40,6 +42,7 @@ class Importer:
         self.games_lock = Lock()
         self.progress_lock = Lock()
         self.sgdb_threads_lock = Lock()
+        self.sgdb_error_lock = Lock()
         self.win = win
 
     @property
@@ -74,8 +77,51 @@ class Importer:
         )
         self.import_dialog.present()
 
-    def close_dialog(self):
-        self.import_dialog.close()
+    def create_sgdb_error_dialog(self):
+        create_dialog(
+            self.win,
+            _("Couldn't Connect to SteamGridDB"),
+            str(self.sgdb_error),
+            "open_preferences",
+            _("Preferences"),
+        ).connect("response", self.on_dialog_response, "sgdb")
+
+    def create_import_done_dialog(self):
+        games_no = len(self.games)
+        if games_no == 0:
+            create_dialog(
+                self.win,
+                _("No Games Found"),
+                _("No new games were found on your system."),
+                "open_preferences",
+                _("Preferences"),
+            ).connect("response", self.on_dialog_response)
+        elif games_no == 1:
+            create_dialog(
+                self.win,
+                _("Game Imported"),
+                _("Successfully imported 1 game."),
+            ).connect("response", self.on_dialog_response)
+        elif games_no > 1:
+            create_dialog(
+                self.win,
+                _("Games Imported"),
+                # The variable is the number of games
+                _("Successfully imported {} games.").format(games_no),
+            ).connect("response", self.on_dialog_response)
+
+    def on_dialog_response(self, _widget, response, *args):
+        if response == "open_preferences":
+            page, expander_row, *_rest = args
+            self.win.get_application().on_preferences_action(
+                page_name=page, expander_row=expander_row
+            )
+        # HACK SGDB manager should be in charge of its error dialog
+        elif self.sgdb_error is not None:
+            self.create_sgdb_error_dialog()
+            self.sgdb_error = None
+        # TODO additional steam libraries tip
+        # (should be handled by the source somehow)
 
     def update_progressbar(self):
         self.progressbar.set_fraction(self.progress)
@@ -131,6 +177,7 @@ class ImporterThread(Thread):
             thread.join()
 
         self.importer.import_dialog.close()
+        self.importer.create_import_done_dialog()
 
 
 class SourceThread(Thread):
@@ -177,12 +224,10 @@ class SourceThread(Thread):
 
             # Start sgdb lookup for game in another thread
             # HACK move to a game manager
-            use_sgdb = self.win.schema.get_boolean("sgdb")
-            if use_sgdb and not game.blacklisted:
-                sgdb_thread = SGDBThread(game, self.win, self.importer)
-                with self.importer.sgdb_threads_lock:
-                    self.importer.sgdb_threads.append(sgdb_thread)
-                sgdb_thread.start()
+            sgdb_thread = SGDBThread(game, self.win, self.importer)
+            with self.importer.sgdb_threads_lock:
+                self.importer.sgdb_threads.append(sgdb_thread)
+            sgdb_thread.start()
 
 
 class SGDBThread(Thread):
@@ -198,8 +243,14 @@ class SGDBThread(Thread):
         self.win = win
         self.importer = importer
 
-    def run(self):
-        """Thread entry point"""
+    def conditionnaly_fetch_cover(self):
+        use_sgdb = self.win.schema.get_boolean("sgdb")
+        if (
+            not use_sgdb
+            or self.game.blacklisted
+            or self.importer.sgdb_error is not None
+        ):
+            return
 
         # Check if we should query SGDB
         prefer_sgdb = self.win.schema.get_boolean("sgdb-prefer")
@@ -216,26 +267,32 @@ class SGDBThread(Thread):
 
         self.game.set_loading(1)
 
-        # Add image from sgdb
+        # SGDB request
         sgdb = SGDBHelper(self.win)
         try:
             sgdb_id = sgdb.get_game_id(self.game)
             uri = sgdb.get_game_image_uri(sgdb_id, animated=prefer_animated)
             response = requests.get(uri, timeout=5)
-        except HTTPError as _error:
-            # TODO handle http errors
-            pass
-        except SGDBError as _error:
-            # TODO handle SGDB API errors
-            pass
-        else:
-            tmp_file = Gio.File.new_tmp()[0]
-            tmp_file_path = tmp_file.get_path()
-            Path(tmp_file_path).write_bytes(response.content)
-            save_cover(
-                self.win, self.game.game_id, resize_cover(self.win, tmp_file_path)
-            )
+        except SGDBAuthError as error:
+            with self.importer.sgdb_error_lock:
+                if self.importer.sgdb_error is None:
+                    self.importer.sgdb_error = error
+            logging.error("SGDB Auth error occured")
+            return
+        except Exception as error:  # pylint: disable=broad-exception-caught
+            logging.warning("Non auth error in SGDB query", exc_info=error)
+            return
+
+        # Image saving
+        tmp_file = Gio.File.new_tmp()[0]
+        tmp_file_path = tmp_file.get_path()
+        Path(tmp_file_path).write_bytes(response.content)
+        save_cover(self.win, self.game.game_id, resize_cover(self.win, tmp_file_path))
 
         self.game.set_loading(0)
+
+    def run(self):
+        """Thread entry point"""
+        self.conditionnaly_fetch_cover()
         with self.importer.progress_lock:
             self.importer.counts[self.game.source.id]["covers"] += 1

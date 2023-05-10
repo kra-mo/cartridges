@@ -12,6 +12,18 @@ class SGDBError(Exception):
     pass
 
 
+class SGDBAuthError(SGDBError):
+    pass
+
+
+class SGDBGameNotFoundError(SGDBError):
+    pass
+
+
+class SGDBBadRequestError(SGDBError):
+    pass
+
+
 class SGDBHelper:
     """Helper class to make queries to SteamGridDB"""
 
@@ -27,51 +39,35 @@ class SGDBHelper:
         headers = {"Authorization": f"Bearer {key}"}
         return headers
 
-    # TODO delegate that to the app
-    def create_exception_dialog(self, exception):
-        dialog = create_dialog(
-            self.win,
-            _("Couldn't Connect to SteamGridDB"),
-            exception,
-            "open_preferences",
-            _("Preferences"),
-        )
-        dialog.connect("response", self.on_exception_dialog_response)
-
-    # TODO same as create_exception_dialog
-    def on_exception_dialog_response(self, _widget, response):
-        if response == "open_preferences":
-            self.win.get_application().on_preferences_action(page_name="sgdb")
-
     def get_game_id(self, game):
         """Get grid results for a game. Can raise an exception."""
-
-        # Request
-        res = requests.get(
-            f"{self.base_url}search/autocomplete/{game.name}",
-            headers=self.auth_headers,
-            timeout=5,
-        )
-        if res.status_code == 200:
-            return res.json()["data"][0]["id"]
-
-        # HTTP error
-        res.raise_for_status()
-
-        # SGDB API error
-        res_json = res.json()
-        if "error" in tuple(res_json):
-            raise SGDBError(res_json["errors"])
-        raise SGDBError(res.status_code)
+        uri = f"{self.base_url}search/autocomplete/{game.name}"
+        res = requests.get(uri, headers=self.auth_headers, timeout=5)
+        match res.status_code:
+            case 200:
+                return res.json()["data"][0]["id"]
+            case 401:
+                raise SGDBAuthError(res.json()["errors"][0])
+            case 404:
+                raise SGDBGameNotFoundError(res.status_code)
+            case _:
+                res.raise_for_status()
 
     def get_image_uri(self, game_id, animated=False):
         """Get the image for a SGDB game id"""
         uri = f"{self.base_url}grids/game/{game_id}?dimensions=600x900"
         if animated:
             uri += "&types=animated"
-        grid = requests.get(uri, headers=self.auth_headers, timeout=5)
-        image_uri = grid.json()["data"][0]["url"]
-        return image_uri
+        res = requests.get(uri, headers=self.auth_headers, timeout=5)
+        match res.status_code:
+            case 200:
+                return res.json()["data"][0]["url"]
+            case 401:
+                raise SGDBAuthError(res.json()["errors"][0])
+            case 404:
+                raise SGDBGameNotFoundError(res.status_code)
+            case _:
+                res.raise_for_status()
 
 
 # Current steps to save image for N games
