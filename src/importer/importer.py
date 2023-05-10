@@ -11,12 +11,18 @@ from .steamgriddb import SGDBHelper, SGDBError
 
 
 class Importer:
-    win = None
+    """A class in charge of scanning sources for games"""
+
+    # Dialog widget
     progressbar = None
     import_statuspage = None
     import_dialog = None
+
+    # Caller-set values
+    win = None
     sources = None
 
+    # Internal values
     source_threads = None
     sgdb_threads = None
     progress_lock = None
@@ -78,23 +84,41 @@ class Importer:
         self.sources.add(source)
         self.counts[source.id] = {"games": 0, "covers": 0, "total": 0}
 
-    def import_games(self):
-        self.create_dialog()
+    def run_in_thread(self):
+        thread = ImporterThread(self, self.win)
+        thread.start()
+
+
+class ImporterThread(Thread):
+    """Thread in charge of the import process"""
+
+    importer = None
+    win = None
+
+    def __init__(self, importer, win, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.importer = importer
+        self.win = win
+
+    def run(self):
+        """Thread entry point"""
+
+        self.importer.create_dialog()
 
         # Scan sources in threads
-        for source in self.sources:
+        for source in self.importer.sources:
             print(f"{source.full_name}, installed: {source.is_installed}")
             if not source.is_installed:
                 continue
-            thread = SourceImportThread(self.win, source, self)
-            self.source_threads.append(thread)
+            thread = SourceThread(source, self.win, self.importer)
+            self.importer.source_threads.append(thread)
             thread.start()
 
-        for thread in self.source_threads:
+        for thread in self.importer.source_threads:
             thread.join()
 
         # Save games
-        for game in self.games:
+        for game in self.importer.games:
             if (
                 game.game_id in self.win.games
                 and not self.win.games[game.game_id].removed
@@ -102,24 +126,24 @@ class Importer:
                 continue
             game.save()
 
-        # Wait for SGDB image import to finish
-        for thread in self.sgdb_threads:
+        # Wait for SGDB query threads to finish
+        for thread in self.importer.sgdb_threads:
             thread.join()
 
-        self.import_dialog.close()
+        self.importer.import_dialog.close()
 
 
-class SourceImportThread(Thread):
+class SourceThread(Thread):
     """Thread in charge of scanning a source for games"""
 
-    win = None
     source = None
+    win = None
     importer = None
 
-    def __init__(self, win, source, importer, *args, **kwargs):
+    def __init__(self, source, win, importer, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.win = win
         self.source = source
+        self.win = win
         self.importer = importer
 
     def run(self):
@@ -153,27 +177,25 @@ class SourceImportThread(Thread):
 
             # Start sgdb lookup for game in another thread
             # HACK move to a game manager
-            # Skip obvious cases
             use_sgdb = self.win.schema.get_boolean("sgdb")
-            if not use_sgdb or game.blacklisted:
-                return
-            sgdb_thread = SGDBLookupThread(self.win, game, self.importer)
-            with self.importer.sgdb_threads_lock:
-                self.importer.sgdb_threads.append(sgdb_thread)
-            sgdb_thread.start()
+            if use_sgdb and not game.blacklisted:
+                sgdb_thread = SGDBThread(game, self.win, self.importer)
+                with self.importer.sgdb_threads_lock:
+                    self.importer.sgdb_threads.append(sgdb_thread)
+                sgdb_thread.start()
 
 
-class SGDBLookupThread(Thread):
+class SGDBThread(Thread):
     """Thread in charge of querying SGDB for a game image"""
 
-    win = None
     game = None
+    win = None
     importer = None
 
-    def __init__(self, win, game, importer, *args, **kwargs):
+    def __init__(self, game, win, importer, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.win = win
         self.game = game
+        self.win = win
         self.importer = importer
 
     def run(self):
