@@ -12,18 +12,16 @@ class SGDBError(Exception):
 
 
 class SGDBHelper:
+    """Helper class to make queries to SteamGridDB"""
+
     base_url = "https://www.steamgriddb.com/api/v2/"
-
     win = None
-    importer = None
-    exception = None
 
-    def __init__(self, win, importer=None) -> None:
+    def __init__(self, win):
         self.win = win
-        self.importer = importer
 
     @property
-    def auth_header(self):
+    def auth_headers(self):
         key = self.win.schema.get_string("sgdb-key")
         headers = {"Authorization": f"Bearer {key}"}
         return headers
@@ -37,7 +35,7 @@ class SGDBHelper:
             "open_preferences",
             _("Preferences"),
         )
-        dialog.connect("response", self.response)
+        dialog.connect("response", self.on_exception_dialog_response)
 
     # TODO same as create_exception_dialog
     def on_exception_dialog_response(self, _widget, response):
@@ -63,15 +61,15 @@ class SGDBHelper:
         res_json = res.json()
         if "error" in tuple(res_json):
             raise SGDBError(res_json["errors"])
-        else:
-            raise SGDBError(res.status_code)
+        raise SGDBError(res.status_code)
 
-    def get_image_uri(self, game, animated=False):
+    def get_game_image_uri(self, game, animated=False):
         """Get the image for a game"""
-        uri = f"{self.base_url}grids/game/{self.get_game_id(game)}?dimensions=600x900"
+        game_id = self.get_game_id(game)
+        uri = f"{self.base_url}grids/game/{game_id}?dimensions=600x900"
         if animated:
             uri += "&types=animated"
-        grid = requests.get(uri, headers=self.auth_header, timeout=5)
+        grid = requests.get(uri, headers=self.auth_headers, timeout=5)
         image_uri = grid.json()["data"][0]["url"]
         return image_uri
 
