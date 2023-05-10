@@ -64,9 +64,8 @@ class SGDBHelper:
             raise SGDBError(res_json["errors"])
         raise SGDBError(res.status_code)
 
-    def get_game_image_uri(self, game, animated=False):
-        """Get the image for a game"""
-        game_id = self.get_game_id(game)
+    def get_image_uri(self, game_id, animated=False):
+        """Get the image for a SGDB game id"""
         uri = f"{self.base_url}grids/game/{game_id}?dimensions=600x900"
         if animated:
             uri += "&types=animated"
