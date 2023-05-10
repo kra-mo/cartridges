@@ -151,7 +151,7 @@ class CartridgesApplication(Adw.Application):
         if self.win.schema.get_boolean("lutris"):
             importer.add_source(LutrisNativeSource(self.win))
             importer.add_source(LutrisFlatpakSource(self.win))
-        importer.import_games()
+        importer.run_in_thread()
 
     def on_remove_game_action(self, *_args):
         self.win.active_game.remove_game()
