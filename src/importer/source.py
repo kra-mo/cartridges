@@ -16,11 +16,13 @@ class SourceIterator(Iterator, Sized):
 
     @abstractmethod
     def __len__(self):
-        pass
+        """Get a rough estimate of the number of games produced by the source"""
 
     @abstractmethod
     def __next__(self):
-        pass
+        """Get the next generated game from the source.
+        Raises StopIteration when exhausted.
+        May raise any other exception signifying an error on this specific game."""
 
 
 class Source(Iterable):
