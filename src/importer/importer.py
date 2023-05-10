@@ -2,7 +2,6 @@ import logging
 from pathlib import Path
 from threading import Lock, Thread
 
-
 import requests
 from gi.repository import Adw, Gio, Gtk
 
