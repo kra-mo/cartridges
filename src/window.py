@@ -113,10 +113,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
                     shared.covers_dir / f"{game_id}.gif",
                 ):
                     path.unlink(missing_ok=True)
-
-            elif game.get("version") > self.spec_version:
-                continue
-
             else:
                 Game(game).update()
 
