@@ -74,6 +74,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
     details_view_game_cover = None
     sort_state = "a-z"
 
+    # The version of the game_id.json spec
+    spec_version = 2.0
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -110,6 +113,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
                     shared.covers_dir / f"{game_id}.gif",
                 ):
                     path.unlink(missing_ok=True)
+
+            elif game.get("version") > self.spec_version:
+                continue
 
             else:
                 Game(game).update()
