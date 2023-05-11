@@ -18,6 +18,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
+import os
+import logging
 
 import gi
 
@@ -151,7 +153,7 @@ class CartridgesApplication(Adw.Application):
         if self.win.schema.get_boolean("lutris"):
             importer.add_source(LutrisNativeSource(self.win))
             importer.add_source(LutrisFlatpakSource(self.win))
-        importer.run_in_thread()
+        importer.run()
 
     def on_remove_game_action(self, *_args):
         self.win.active_game.remove_game()
@@ -198,5 +200,7 @@ class CartridgesApplication(Adw.Application):
 
 
 def main(version):  # pylint: disable=unused-argument
+    log_level = os.environ.get("LOGLEVEL", "ERROR").upper()
+    logging.basicConfig(level="DEBUG")  # TODO remove debug
     app = CartridgesApplication()
     return app.run(sys.argv)
