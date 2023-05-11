@@ -164,7 +164,6 @@ class DetailsWindow(Adw.Window):
                     "hidden": False,
                     "source": "imported",
                     "added": int(time()),
-                    "last_played": 0,
                 },
             )
 
