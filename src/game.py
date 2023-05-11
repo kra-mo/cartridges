@@ -53,7 +53,7 @@ class Game(Gtk.Box):
     game_id = None
     source = None
     hidden = None
-    last_played = None
+    last_played = 0
     name = None
     developer = None
     removed = None

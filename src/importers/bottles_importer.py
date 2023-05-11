@@ -84,7 +84,6 @@ def bottles_importer():
         values["hidden"] = False
         values["source"] = "bottles"
         values["added"] = current_time
-        values["last_played"] = 0
 
         importer.save_game(
             values,

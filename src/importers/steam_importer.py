@@ -72,7 +72,6 @@ def get_game(task, datatypes, current_time, appmanifest, steam_dir):
     values["hidden"] = False
     values["source"] = "steam"
     values["added"] = current_time
-    values["last_played"] = 0
 
     image_path = (
         steam_dir

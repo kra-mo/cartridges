@@ -132,7 +132,6 @@ def lutris_importer():
         values["added"] = current_time
         values["executable"] = ["xdg-open", f"lutris:rungameid/{row[0]}"]
         values["hidden"] = row[4] == 1
-        values["last_played"] = 0
         values["name"] = row[1]
         values["source"] = f"lutris_{row[3]}"
 

@@ -98,7 +98,6 @@ def heroic_importer():
                 values["hidden"] = False
                 values["source"] = "heroic_epic"
                 values["added"] = current_time
-                values["last_played"] = 0
 
                 image_path = (
                     heroic_dir
@@ -159,7 +158,6 @@ def heroic_importer():
             values["hidden"] = False
             values["source"] = "heroic_gog"
             values["added"] = current_time
-            values["last_played"] = 0
 
             importer.save_game(values, image_path if image_path.exists() else None)
 
@@ -194,7 +192,6 @@ def heroic_importer():
             values["hidden"] = False
             values["source"] = "heroic_sideload"
             values["added"] = current_time
-            values["last_played"] = 0
             image_path = (
                 heroic_dir
                 / "images-cache"

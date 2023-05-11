@@ -50,7 +50,6 @@ def get_game(task, current_time, row):
         else ["xdg-open", f"itch://caves/{row[4]}/launch"]
     )
     values["hidden"] = False
-    values["last_played"] = 0
     values["name"] = row[1]
     values["source"] = "itch"
 

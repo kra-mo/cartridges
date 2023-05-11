@@ -230,7 +230,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             _("Added: {}").format(date)
         )
         last_played_date = (
-            self.get_time(game.last_played) if game.last_played != 0 else _("Never")
+            self.get_time(game.last_played) if game.last_played else _("Never")
         )
         self.details_view_last_played.set_label(
             # The variable is the date when the game was last played
