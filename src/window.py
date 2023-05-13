@@ -56,11 +56,13 @@ class CartridgesWindow(Adw.ApplicationWindow):
     details_view_last_played = Gtk.Template.Child()
     details_view_hide_button = Gtk.Template.Child()
 
+    hidden_primary_menu_button = Gtk.Template.Child()
     hidden_library = Gtk.Template.Child()
     hidden_library_view = Gtk.Template.Child()
     hidden_scrolledwindow = Gtk.Template.Child()
     hidden_library_bin = Gtk.Template.Child()
     hidden_notice_empty = Gtk.Template.Child()
+    hidden_notice_no_results = Gtk.Template.Child()
     hidden_search_bar = Gtk.Template.Child()
     hidden_search_entry = Gtk.Template.Child()
     hidden_search_button = Gtk.Template.Child()
@@ -134,6 +136,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
             else:
                 Game(self, game).update()
 
+        # Connect search entries
+        self.search_bar.connect_entry(self.search_entry)
+        self.hidden_search_bar.connect_entry(self.hidden_search_entry)
+
         # Connect signals
         self.search_entry.connect("search-changed", self.search_changed, False)
         self.hidden_search_entry.connect("search-changed", self.search_changed, True)
@@ -158,7 +164,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 continue
             if game.hidden:
                 if game.filtered and hidden_child != self.hidden_scrolledwindow:
-                    hidden_child = self.notice_no_results
+                    hidden_child = self.hidden_notice_no_results
                     continue
                 hidden_child = self.hidden_scrolledwindow
             else:
@@ -301,7 +307,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             else Gtk.StackTransitionType.OVER_LEFT
         )
 
-        if next_page == self.library_view or self.hidden_library_view:
+        if next_page in (self.library_view, self.hidden_library_view):
             self.previous_page = next_page
             self.lookup_action("show_hidden").set_enabled(
                 next_page == self.library_view
@@ -342,16 +348,13 @@ class CartridgesWindow(Adw.ApplicationWindow):
         if self.stack.get_visible_child() == self.library_view:
             search_bar = self.search_bar
             search_entry = self.search_entry
-            search_button = self.search_button
         elif self.stack.get_visible_child() == self.hidden_library_view:
             search_bar = self.hidden_search_bar
             search_entry = self.hidden_search_entry
-            search_button = self.hidden_search_button
         else:
             return
 
         search_bar.set_search_mode(not (search_mode := search_bar.get_search_mode()))
-        search_button.set_active(not search_button.get_active())
 
         if not search_mode:
             self.set_focus(search_entry)
@@ -386,5 +389,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.toasts.pop((game, undo))
 
     def on_open_menu_action(self, *_args):
-        if self.stack.get_visible_child() != self.details_view:
-            self.primary_menu_button.set_active(True)
+        if self.stack.get_visible_child() == self.library_view:
+            self.primary_menu_button.popup()
+        elif self.stack.get_visible_child() == self.hidden_library_view:
+            self.hidden_primary_menu_button.popup()

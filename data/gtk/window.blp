@@ -9,6 +9,14 @@ Adw.StatusPage notice_no_results {
   valign: center;
 }
 
+Adw.StatusPage hidden_notice_no_results {
+  icon-name: "system-search-symbolic";
+  title: _("No Games Found");
+  description: _("Try a different search.");
+  vexpand: true;
+  valign: center;
+}
+
 Adw.StatusPage notice_empty {
   icon-name: "applications-games-symbolic";
   title: _("No Games");
@@ -250,6 +258,8 @@ template CartridgesWindow : Adw.ApplicationWindow {
         }
 
         SearchBar search_bar {
+          search-mode-enabled: bind search_button.active bidirectional;
+          key-capture-widget: library_view;
           Adw.Clamp {
             maximum-size: 500;
             tightening-threshold: 500;
@@ -298,7 +308,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
           }
 
           [end]
-          MenuButton {
+          MenuButton hidden_primary_menu_button {
             tooltip-text: _("Main Menu");
             icon-name: "open-menu-symbolic";
             menu-model: primary_menu;
@@ -313,6 +323,8 @@ template CartridgesWindow : Adw.ApplicationWindow {
         }
 
         SearchBar hidden_search_bar {
+          search-mode-enabled: bind hidden_search_button.active bidirectional;
+          key-capture-widget: hidden_library_view;
           Adw.Clamp {
             maximum-size: 500;
             tightening-threshold: 500;

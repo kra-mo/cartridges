@@ -114,12 +114,12 @@ template DetailsWindow : Adw.Window {
                 description: _("File to open or command to run when launching the game");
 
                 [header-suffix]
-                Gtk.MenuButton exec-info-button {
+                Gtk.MenuButton exec_info_button {
                     valign: center;
                     icon-name: "help-about-symbolic";
 
                     popover: Popover {
-                        visible: bind exec-info-button.active bidirectional;
+                        visible: bind exec_info_button.active bidirectional;
 
                         Label exec_info_label {
                             use-markup: true;
