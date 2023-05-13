@@ -16,6 +16,14 @@
   <url type="contribute">https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md</url>
   <developer_name translatable="no">kramo</developer_name>
   <launchable type="desktop-id">hu.kramo.Cartridges.desktop</launchable>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+  <recommends>
+    <display_length compare="gt">546</display_length>
+  </recommends>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/1.png</image>
