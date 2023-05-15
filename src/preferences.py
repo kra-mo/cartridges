@@ -76,6 +76,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_animated_switch = Gtk.Template.Child()
 
     removed_games = set()
+    import_changed = False
 
     def __init__(self, win, **kwargs):
         super().__init__(**kwargs)
@@ -114,12 +115,14 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 value = self.schema.get_strv("steam-extra-dirs")
                 value.append(self.file_chooser.select_folder_finish(result).get_path())
                 self.schema.set_strv("steam-extra-dirs", value)
+                self.import_changed = True
             except GLib.GError:
                 return
             update_revealer()
 
         def clear_steam_dirs(*_args):
             self.schema.set_strv("steam-extra-dirs", [])
+            self.import_changed = True
             update_revealer()
 
         update_revealer()
@@ -142,7 +145,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 if response == "choose_folder":
                     self.choose_folder(widget, set_cache_dir)
 
-            if not lutris_cache_exists(path).exists():
+            if lutris_cache_exists(self.win, path):
+                self.import_changed = True
+            else:
                 create_dialog(
                     self.win,
                     _("Cache Not Found"),
@@ -195,10 +200,24 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
         )
 
+        # Connect the switches that change the behavior of importing to set_import_changed
+        self.connect_import_switches(
+            (
+                "lutris-import-steam",
+                "heroic-import-epic",
+                "heroic-import-gog",
+                "heroic-import-sideload",
+            )
+        )
+
         # Windows
         if os.name == "nt":
             self.sources_group.remove(self.lutris_expander_row)
             self.sources_group.remove(self.bottles_expander_row)
+
+        # When the user interacts with a widget that changes the behavior of importing,
+        # Cartridges should automatically import upon closing the preferences window
+        self.connect("close-request", self.check_import)
 
     def bind_switches(self, settings):
         for setting in settings:
@@ -207,6 +226,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 getattr(self, f'{setting.replace("-", "_")}_switch'),
                 "active",
                 Gio.SettingsBindFlags.DEFAULT,
+            )
+
+    def connect_import_switches(self, settings):
+        for setting in settings:
+            getattr(self, f'{setting.replace("-", "_")}_switch').connect(
+                "notify::active", self.set_import_changed, True
             )
 
     def choose_folder(self, _widget, function):
@@ -244,7 +269,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 if response == "choose_folder":
                     win.choose_folder(widget, set_dir)
 
-            if not globals()[f"{source_id}_installed"](win, path):
+            if globals()[f"{source_id}_installed"](win, path):
+                self.import_changed = True
+            else:
                 create_dialog(
                     win,
                     _("Installation Not Found"),
@@ -266,3 +293,14 @@ class PreferencesWindow(Adw.PreferencesWindow):
         getattr(win, f"{source_id}_file_chooser_button").connect(
             "clicked", win.choose_folder, set_dir
         )
+
+        getattr(win, f"{source_id}_expander_row").connect(
+            "notify::enable-expansion", self.set_import_changed, True
+        )
+
+    def set_import_changed(self, _widget, _param, value):
+        self.import_changed = value
+
+    def check_import(self, *_args):
+        if self.import_changed:
+            self.win.get_application().on_import_action()
