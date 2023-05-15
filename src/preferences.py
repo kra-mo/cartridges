@@ -76,7 +76,11 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_animated_switch = Gtk.Template.Child()
 
     removed_games = set()
+
+    # Whether to import after closing the window
     import_changed = False
+    # Widgets and their properties to check whether to import after closing the window
+    import_changed_widgets = {}
 
     def __init__(self, win, **kwargs):
         super().__init__(**kwargs)
@@ -300,9 +304,21 @@ class PreferencesWindow(Adw.PreferencesWindow):
         )
 
     def set_import_changed(self, widget, param):
-        if widget.get_property(param.name):
+        if widget not in self.import_changed_widgets:
             self.import_changed = True
+            self.import_changed_widgets[widget] = (
+                param.name,
+                not widget.get_property(param.name),
+            )
 
     def check_import(self, *_args):
         if self.import_changed:
-            self.win.get_application().on_import_action()
+            # This checks whether any of the switches that did actually change their state
+            # would have an effect on the outcome of the import action
+            # and if they would, it initiates it.
+
+            if any(
+                (value := widget.get_property(prop[0])) and value != prop[1]
+                for widget, prop in self.import_changed_widgets.items()
+            ):
+                self.win.get_application().on_import_action()
