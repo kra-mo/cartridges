@@ -312,13 +312,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
 
     def check_import(self, *_args):
-        if self.import_changed:
-            # This checks whether any of the switches that did actually change their state
-            # would have an effect on the outcome of the import action
-            # and if they would, it initiates it.
+        # This checks whether any of the switches that did actually change their state
+        # would have an effect on the outcome of the import action
+        # and if they would, it initiates it.
 
-            if any(
-                (value := widget.get_property(prop[0])) and value != prop[1]
-                for widget, prop in self.import_changed_widgets.items()
-            ):
-                self.win.get_application().on_import_action()
+        if self.import_changed and any(
+            (value := widget.get_property(prop[0])) and value != prop[1]
+            for widget, prop in self.import_changed_widgets.items()
+        ):
+            self.win.get_application().on_import_action()
