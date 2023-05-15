@@ -218,7 +218,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def show_details_view(self, game):
         self.active_game = game
 
-        self.details_view_cover.set_visible(not game.loading)
+        self.details_view_cover.set_opacity(int(not game.loading))
         self.details_view_spinner.set_spinning(game.loading)
 
         self.details_view_developer.set_label(game.developer or "")
