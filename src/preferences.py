@@ -219,20 +219,21 @@ class PreferencesWindow(Adw.PreferencesWindow):
         # Cartridges should automatically import upon closing the preferences window
         self.connect("close-request", self.check_import)
 
+    def get_switch(self, setting):
+        return getattr(self, f'{setting.replace("-", "_")}_switch')
+
     def bind_switches(self, settings):
         for setting in settings:
             self.schema.bind(
                 setting,
-                getattr(self, f'{setting.replace("-", "_")}_switch'),
+                self.get_switch(setting),
                 "active",
                 Gio.SettingsBindFlags.DEFAULT,
             )
 
     def connect_import_switches(self, settings):
         for setting in settings:
-            getattr(self, f'{setting.replace("-", "_")}_switch').connect(
-                "notify::active", self.set_import_changed, True
-            )
+            self.get_switch(setting).connect("notify::active", self.set_import_changed)
 
     def choose_folder(self, _widget, function):
         self.file_chooser.select_folder(self.win, None, function, None)
@@ -295,11 +296,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
         )
 
         getattr(win, f"{source_id}_expander_row").connect(
-            "notify::enable-expansion", self.set_import_changed, True
+            "notify::enable-expansion", self.set_import_changed
         )
 
-    def set_import_changed(self, _widget, _param, value):
-        self.import_changed = value
+    def set_import_changed(self, widget, param):
+        if widget.get_property(param.name):
+            self.import_changed = True
 
     def check_import(self, *_args):
         if self.import_changed:
