@@ -5,7 +5,6 @@ template $Game : Box {
   orientation: vertical;
   halign: center;
   valign: start;
-  overflow: hidden;
 
   Adw.Clamp {
     maximum-size: 200;
@@ -58,6 +57,7 @@ template $Game : Box {
 
         Button cover_button {
           name: "cover_button";
+          overflow: hidden;
 
           Overlay {
             [overlay]
