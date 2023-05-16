@@ -30,7 +30,6 @@ from .game_cover import GameCover
 class Game(Gtk.Box):
     __gtype_name__ = "Game"
 
-    overlay = Gtk.Template.Child()
     title = Gtk.Template.Child()
     play_button = Gtk.Template.Child()
     cover = Gtk.Template.Child()
@@ -38,7 +37,7 @@ class Game(Gtk.Box):
     cover_button = Gtk.Template.Child()
     menu_button = Gtk.Template.Child()
     play_revealer = Gtk.Template.Child()
-    title_revealer = Gtk.Template.Child()
+    menu_revealer = Gtk.Template.Child()
     game_options = Gtk.Template.Child()
     hidden_game_options = Gtk.Template.Child()
 
@@ -67,8 +66,7 @@ class Game(Gtk.Box):
 
         self.win.games[self.game_id] = self
 
-        self.set_play_label()
-        self.overlay.set_measure_overlay(self.play_revealer, True)
+        self.set_play_icon()
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
         self.add_controller(self.event_contoller_motion)
@@ -228,8 +226,8 @@ class Game(Gtk.Box):
 
     def toggle_play(self, _widget, _prop1, _prop2, state=True):
         if not self.menu_button.get_active():
-            self.title_revealer.set_reveal_child(state)
             self.play_revealer.set_reveal_child(not state)
+            GLib.timeout_add(40, self.menu_revealer.set_reveal_child, not state)
 
     def main_button_clicked(self, _widget, button):
         if self.win.schema.get_boolean("cover-launches-game") ^ button:
@@ -237,13 +235,13 @@ class Game(Gtk.Box):
         else:
             self.win.show_details_view(self)
 
-    def set_play_label(self):
-        self.play_button.set_label(
-            _("Details")
+    def set_play_icon(self):
+        self.play_button.set_icon_name(
+            "help-about-symbolic"
             if self.win.schema.get_boolean("cover-launches-game")
-            else _("Play")
+            else "media-playback-start-symbolic"
         )
 
     def schema_changed(self, _settings, key):
         if key == "cover-launches-game":
-            self.set_play_label()
+            self.set_play_icon()

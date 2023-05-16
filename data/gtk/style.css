@@ -10,3 +10,9 @@
     background-color: @dark_5;
     opacity: 0.8;
 }
+
+/* The HIG claims another victim... */
+#cover_button {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}

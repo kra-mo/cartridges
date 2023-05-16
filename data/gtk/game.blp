@@ -9,71 +9,87 @@ template $Game : Box {
 
   Adw.Clamp {
     maximum-size: 200;
+
     Box {
       orientation: vertical;
-      Button cover_button {
-        Overlay {
-          [overlay]
-          Spinner spinner {
-            margin-start: 72;
-            margin-end: 72;
-          }
-          Picture cover {
-            width-request: 200;
-            height-request: 300;
-            hexpand: true;
-            vexpand: true;
-          }
-        }
 
-        styles [
-          "card",
-          "flat",
-        ]
-      }
-      Overlay overlay {
+      Overlay {
         [overlay]
-        Revealer play_revealer {
-          reveal-child: false;
-          transition-type: crossfade;
-          Box {
+        Box {
+          halign: start;
+          valign: end;
+
+          Revealer play_revealer {
+            transition-type: slide_up;
+            valign: end;
+
             Button play_button {
-              halign: start;
+              icon-name: "media-playback-start-symbolic";
               margin-start: 6;
-              margin-end: 6;
-              margin-top: 6;
               margin-bottom: 6;
-            }
-            MenuButton menu_button {
-              icon-name: "view-more-symbolic";
-              margin-top: 6;
-              margin-bottom: 6;
-              margin-end: 6;
-              margin-start: 6;
-              hexpand: true;
-              halign: end;
+              margin-top: 3;
 
               styles [
-                "flat",
+                "circular",
+                "osd",
+              ]
+            }
+          }
+
+          Revealer menu_revealer {
+            transition-type: slide_up;
+            valign: end;
+
+            MenuButton menu_button {
+              icon-name: "view-more-symbolic";
+              margin-start: 6;
+              margin-bottom: 6;
+              margin-top: 3;
+              margin-end: 3;
+              direction: up;
+
+              styles [
+                "circular",
+                "osd",
               ]
             }
           }
         }
-        Revealer title_revealer {
-          transition-type: slide_down;
-          reveal-child: true;
-          valign: start;
-          Label title {
-            label: _("Title");
-            ellipsize: end;
-            hexpand: true;
-            halign: start;
-            margin-top: 14;
-            margin-bottom: 14;
-            margin-start: 12;
-            margin-end: 12;
+
+        Button cover_button {
+          name: "cover_button";
+
+          Overlay {
+            [overlay]
+            Spinner spinner {
+              margin-start: 72;
+              margin-end: 72;
+            }
+
+            Picture cover {
+              width-request: 200;
+              height-request: 300;
+              hexpand: true;
+              vexpand: true;
+            }
           }
+
+          styles [
+            "card",
+            "flat",
+          ]
         }
+      }
+
+      Label title {
+        label: _("Title");
+        ellipsize: end;
+        hexpand: true;
+        halign: start;
+        margin-top: 14;
+        margin-bottom: 14;
+        margin-start: 12;
+        margin-end: 12;
       }
     }
   }
