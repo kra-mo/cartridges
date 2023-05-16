@@ -5,13 +5,13 @@ template Game : Box {
   orientation: vertical;
   halign: center;
   valign: start;
+  overflow: hidden;
 
   Adw.Clamp {
     maximum-size: 200;
     Box {
       orientation: vertical;
       Button cover_button {
-        overflow: hidden;
         Overlay {
           [overlay]
           Spinner spinner {
