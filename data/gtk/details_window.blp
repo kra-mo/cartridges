@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template DetailsWindow : Adw.Window {
+template $DetailsWindow : Adw.Window {
     default-width: 500;
     default-height: -1;
     modal: true;
@@ -119,7 +119,7 @@ template DetailsWindow : Adw.Window {
                     icon-name: "help-about-symbolic";
 
                     popover: Popover {
-                        visible: bind exec_info_button.active bidirectional;
+                        visible: bind-property exec_info_button.active bidirectional;
 
                         Label exec_info_label {
                             use-markup: true;

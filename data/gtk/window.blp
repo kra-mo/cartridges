@@ -44,7 +44,7 @@ Adw.StatusPage hidden_notice_empty {
   valign: center;
 }
 
-template CartridgesWindow : Adw.ApplicationWindow {
+template $CartridgesWindow : Adw.ApplicationWindow {
   title: _("Cartridges");
 
   Adw.ToastOverlay toast_overlay {
@@ -269,7 +269,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
         }
 
         SearchBar search_bar {
-          search-mode-enabled: bind search_button.active bidirectional;
+          search-mode-enabled: bind-property search_button.active bidirectional;
           key-capture-widget: library_view;
           Adw.Clamp {
             maximum-size: 500;
@@ -334,7 +334,7 @@ template CartridgesWindow : Adw.ApplicationWindow {
         }
 
         SearchBar hidden_search_bar {
-          search-mode-enabled: bind hidden_search_button.active bidirectional;
+          search-mode-enabled: bind-property hidden_search_button.active bidirectional;
           key-capture-widget: hidden_library_view;
           Adw.Clamp {
             maximum-size: 500;
