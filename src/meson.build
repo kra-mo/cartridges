@@ -36,6 +36,7 @@ cartridges_sources = [
   'importer/importer.py',
   'importer/source.py',
   'utils/decorators.py',
+  'utils/task.py',
 
   # TODO remove before merge
   'importers/bottles_importer.py',

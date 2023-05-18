@@ -3,6 +3,7 @@ import logging
 from requests import HTTPError
 from gi.repository import Adw, Gio, Gtk
 
+from .task import make_task_thread_func_closure
 from .create_dialog import create_dialog
 from .steamgriddb import SGDBAuthError, SGDBError, SGDBHelper
 
@@ -47,7 +48,7 @@ class Importer:
 
     @property
     def finished(self):
-        return self.n_sgdb_tasks_created == self.n_tasks_done
+        return self.n_tasks_created == self.n_tasks_done
 
     def add_source(self, source):
         self.sources.add(source)
@@ -61,19 +62,30 @@ class Importer:
         # (If SGDB auth is bad, cancel all SGDB tasks)
         self.sgdb_cancellable = Gio.Cancellable()
 
+        """
         # Create a task for each source
-        tasks = set()
-        for source in self.sources:
-            self.n_source_tasks_created += 1
-            logging.debug("Importing games from source %s", source.id)
-
+        def make_closure(source):
             def closure(task, obj, _data, cancellable):
                 self.source_task_thread_func(task, obj, (source,), cancellable)
 
-            task = Gio.Task.new(None, None, self.source_task_callback, (source,))
-            self.n_sgdb_tasks_created += 1
+            return closure
+
+        for source in self.sources:
+            self.n_source_tasks_created += 1
+            logging.debug("Importing games from source %s", source.id)
+            task = Task.new(None, None, self.source_task_callback, (source,))
+            closure = make_closure(source)
             task.run_in_thread(closure)
-            tasks.add(task)
+        """
+
+        for source in self.sources:
+            self.n_source_tasks_created += 1
+            logging.debug("Importing games from source %s", source.id)
+            task = Gio.Task.new(None, None, self.source_task_callback, (source,))
+            closure = make_task_thread_func_closure(
+                self.source_task_thread_func, (source,)
+            )
+            task.run_in_thread(closure)
 
     def create_dialog(self):
         """Create the import dialog"""
@@ -122,30 +134,34 @@ class Importer:
                 )
                 continue
 
+            # TODO register in store instead of dict
+
             # Avoid duplicates
-            gid = game.game_id
-            if gid in self.win.games and not self.win.games[gid].removed:
+            if (
+                game.game_id in self.win.games
+                and not self.win.games[game.game_id].removed
+            ):
                 continue
 
             # Register game
-            self.win.games[gid] = game
+            logging.info("New game registered %s (%s)", game.name, game.game_id)
+            self.win.games[game.game_id] = game
             game.save()
             self.n_games_added += 1
 
             # Start sgdb lookup for game
             # HACK move to its own manager
-
-            def closure(task, obj, _data, cancellable):
-                self.sgdb_task_thread_func(task, obj, (game,), cancellable)
-
             task = Gio.Task.new(
                 None, self.sgdb_cancellable, self.sgdb_task_callback, (game,)
             )
+            closure = make_task_thread_func_closure(self.sgdb_task_thread_func, (game,))
+            self.n_sgdb_tasks_created += 1
             task.run_in_thread(closure)
 
     def source_task_callback(self, _obj, _result, data):
         """Source import callback"""
-        _source, *_rest = data
+        source, *_rest = data
+        logging.debug("Import done for source %s", source.id)
         self.n_source_tasks_done += 1
         self.update_progressbar()
         if self.finished:
@@ -168,7 +184,8 @@ class Importer:
     def sgdb_task_callback(self, _obj, _result, data):
         """SGDB query callback"""
         game, *_rest = data
-        game.set_loading(0)
+        logging.debug("SGDB import done for game %s", game.name)
+        game.set_loading(-1)
         self.n_sgdb_tasks_done += 1
         self.update_progressbar()
         if self.finished:
@@ -176,6 +193,7 @@ class Importer:
 
     def import_callback(self):
         """Callback called when importing has finished"""
+        logging.info("Import done")
         self.import_dialog.close()
         self.create_summary_toast()
         if self.sgdb_error is not None:
