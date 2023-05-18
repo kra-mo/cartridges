@@ -320,4 +320,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
             (value := widget.get_property(prop[0])) and value != prop[1]
             for widget, prop in self.import_changed_widgets.items()
         ):
-            self.win.get_application().on_import_action()
+            # The timeout is a hack to circumvent a GTK bug that I'm too lazy to report:
+            # The window would stay darkened because of the import dialog for some reason
+            GLib.timeout_add(1, self.win.get_application().on_import_action())
