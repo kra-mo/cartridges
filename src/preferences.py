@@ -322,4 +322,4 @@ class PreferencesWindow(Adw.PreferencesWindow):
         ):
             # The timeout is a hack to circumvent a GTK bug that I'm too lazy to report:
             # The window would stay darkened because of the import dialog for some reason
-            GLib.timeout_add(1, self.win.get_application().on_import_action())
+            GLib.timeout_add(1, self.win.get_application().on_import_action)
