@@ -67,7 +67,10 @@ class SGDBHelper:
         res = requests.get(uri, headers=self.auth_headers, timeout=5)
         match res.status_code:
             case 200:
-                return res.json()["data"][0]["url"]
+                data = res.json()["data"]
+                if len(data) == 0:
+                    raise SGDBNoImageFoundError()
+                return data[0]["url"]
             case 401:
                 raise SGDBAuthError(res.json()["errors"][0])
             case 404:
