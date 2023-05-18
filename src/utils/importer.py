@@ -85,29 +85,27 @@ class Importer:
         if self.queue == 0:
             self.import_dialog.close()
 
+            toast = Adw.Toast()
+            toast.set_priority(Adw.ToastPriority.HIGH)
+
             if self.games_no == 0:
-                create_dialog(
-                    self.win,
-                    _("No Games Found"),
-                    _("No new games were found on your system."),
-                    "open_preferences",
-                    _("Preferences"),
-                ).connect("response", self.response, "import")
+                toast.set_title(_("No new games found"))
+                toast.set_button_label(_("Preferences"))
+                toast.connect(
+                    "button-clicked", self.response, "open_preferences", "import"
+                )
 
             elif self.games_no == 1:
-                create_dialog(
-                    self.win,
-                    _("Game Imported"),
-                    _("Successfully imported 1 game."),
-                ).connect("response", self.response, "import")
+                toast.set_title(_("1 game imported"))
+
             elif self.games_no > 1:
                 games_no = self.games_no
-                create_dialog(
-                    self.win,
-                    _("Games Imported"),
+                toast.set_title(
                     # The variable is the number of games
-                    _("Successfully imported {} games.").format(games_no),
-                ).connect("response", self.response, "import")
+                    _("{} games imported").format(games_no)
+                )
+
+            self.win.toast_overlay.add_toast(toast)
 
     def response(self, _widget, response, page_name=None, expander_row=None):
         if response == "open_preferences":
