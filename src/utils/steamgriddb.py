@@ -109,7 +109,7 @@ class SGDBHelper:
         # Download covers
         for uri_kwargs in image_uri_kwargs_sets:
             try:
-                uri = self.get_game_image_uri(sgdb_id, **uri_kwargs)
+                uri = self.get_image_uri(sgdb_id, **uri_kwargs)
                 response = requests.get(uri, timeout=5)
                 tmp_file = Gio.File.new_tmp()[0]
                 tmp_file_path = tmp_file.get_path()
