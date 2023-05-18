@@ -1,6 +1,8 @@
 from pathlib import Path
 
+import logging
 import requests
+from requests import HTTPError
 from gi.repository import Gio
 
 from . import shared
@@ -21,6 +23,10 @@ class SGDBGameNotFoundError(SGDBError):
 
 
 class SGDBBadRequestError(SGDBError):
+    pass
+
+
+class SGDBNoImageFoundError(SGDBError):
     pass
 
 
@@ -68,6 +74,66 @@ class SGDBHelper:
                 raise SGDBGameNotFoundError(res.status_code)
             case _:
                 res.raise_for_status()
+
+    def conditionaly_update_cover(self, game):
+        """Update the game's cover if appropriate"""
+
+        # Obvious skips
+        use_sgdb = self.win.schema.get_boolean("sgdb")
+        if not use_sgdb or game.blacklisted:
+            return
+
+        image_trunk = self.win.covers_dir / game.game_id
+        still = image_trunk.with_suffix(".tiff")
+        uri_kwargs = image_trunk.with_suffix(".gif")
+        prefer_sgdb = self.win.schema.get_boolean("sgdb-prefer")
+
+        # Do nothing if file present and not prefer SGDB
+        if not prefer_sgdb and (still.is_file() or uri_kwargs.is_file()):
+            return
+
+        # Get ID for the game
+        try:
+            sgdb_id = self.get_game_id(game)
+        except (HTTPError, SGDBError) as error:
+            logging.warning(
+                "Error while getting SGDB ID for %s", game.name, exc_info=error
+            )
+            raise error
+
+        # Build different SGDB options to try
+        image_uri_kwargs_sets = [{"animated": False}]
+        if self.win.schema.get_boolean("sgdb-animated"):
+            image_uri_kwargs_sets.insert(0, {"animated": True})
+
+        # Download covers
+        for uri_kwargs in image_uri_kwargs_sets:
+            try:
+                uri = self.get_game_image_uri(sgdb_id, **uri_kwargs)
+                response = requests.get(uri, timeout=5)
+                tmp_file = Gio.File.new_tmp()[0]
+                tmp_file_path = tmp_file.get_path()
+                Path(tmp_file_path).write_bytes(response.content)
+                save_cover(
+                    self.win, game.game_id, resize_cover(self.win, tmp_file_path)
+                )
+            except SGDBAuthError as error:
+                # Let caller handle auth errors
+                raise error
+            except (HTTPError, SGDBError) as error:
+                logging.warning("Error while getting image", exc_info=error)
+                continue
+            else:
+                # Stop as soon as one is finished
+                return
+
+        # No image was added
+        logging.warning(
+            'No matching image found for game "%s" (SGDB ID %d)',
+            game.name,
+            sgdb_id,
+        )
+        raise SGDBNoImageFoundError()
 
 
 # Current steps to save image for N games

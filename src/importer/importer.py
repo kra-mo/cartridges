@@ -1,12 +1,10 @@
 import logging
-from pathlib import Path
 
-import requests
+from requests import HTTPError
 from gi.repository import Adw, Gio, Gtk
 
 from .create_dialog import create_dialog
-from .save_cover import resize_cover, save_cover
-from .steamgriddb import SGDBAuthError, SGDBHelper
+from .steamgriddb import SGDBAuthError, SGDBError, SGDBHelper
 
 
 class Importer:
@@ -25,11 +23,12 @@ class Importer:
     n_sgdb_tasks_created = 0
     n_sgdb_tasks_done = 0
     sgdb_cancellable = None
-    sgdb_error = None
+    errors = None
 
     def __init__(self, win):
         self.win = win
         self.sources = set()
+        self.errors = []
 
     @property
     def n_tasks_created(self):
@@ -123,10 +122,13 @@ class Importer:
                 )
                 continue
 
-            # TODO make sources return games AND avoid duplicates
-            game_id = game.game_id
-            if game.game_id in self.win.games and not self.win.games[game_id].removed:
+            # Avoid duplicates
+            gid = game.game_id
+            if gid in self.win.games and not self.win.games[gid].removed:
                 continue
+
+            # Register game
+            self.win.games[gid] = game
             game.save()
             self.n_games_added += 1
 
@@ -148,49 +150,16 @@ class Importer:
 
     def sgdb_task_thread_func(self, _task, _obj, data, cancellable):
         """SGDB query code"""
-
         game, *_rest = data
-
-        use_sgdb = self.win.schema.get_boolean("sgdb")
-        if not use_sgdb or game.blacklisted:
-            return
-
-        # Check if we should query SGDB
-        prefer_sgdb = self.win.schema.get_boolean("sgdb-prefer")
-        prefer_animated = self.win.schema.get_boolean("sgdb-animated")
-        image_trunk = self.win.covers_dir / game.game_id
-        still = image_trunk.with_suffix(".tiff")
-        animated = image_trunk.with_suffix(".gif")
-
-        # Breaking down the condition
-        is_missing = not still.is_file() and not animated.is_file()
-        is_not_best = not animated.is_file() and prefer_animated
-        if not (is_missing or is_not_best or prefer_sgdb):
-            return
-
         game.set_loading(1)
-
-        # SGDB request
         sgdb = SGDBHelper(self.win)
         try:
-            sgdb_id = sgdb.get_game_id(game)
-            uri = sgdb.get_game_image_uri(sgdb_id, animated=prefer_animated)
-            response = requests.get(uri, timeout=5)
+            sgdb.conditionaly_update_cover(game)
         except SGDBAuthError as error:
-            # On auth error, cancel all present and future SGDB tasks for this import
-            self.sgdb_error = error
-            logging.error("SGDB Auth error occured", exc_info=error)
             cancellable.cancel()
-            return
-        except Exception as error:  # pylint: disable=broad-exception-caught
-            logging.warning("Non auth error in SGDB query", exc_info=error)
-            return
-
-        # Image saving
-        tmp_file = Gio.File.new_tmp()[0]
-        tmp_file_path = tmp_file.get_path()
-        Path(tmp_file_path).write_bytes(response.content)
-        save_cover(self.win, game.game_id, resize_cover(self.win, tmp_file_path))
+            self.errors.append(error)
+        except (HTTPError, SGDBError) as error:
+            self.errors.append(error)
 
     def sgdb_task_callback(self, _obj, _result, data):
         """SGDB query callback"""

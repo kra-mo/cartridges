@@ -60,7 +60,7 @@ class Game(Gtk.Box):
     blacklisted = None
     game_cover = None
 
-    def __init__(self, data, **kwargs):
+    def __init__(self, win, data, allow_side_effects=False, **kwargs):
         super().__init__(**kwargs)
 
         self.win = shared.win
@@ -69,7 +69,8 @@ class Game(Gtk.Box):
 
         self.update_values(data)
 
-        self.win.games[self.game_id] = self
+        if allow_side_effects:
+            self.win.games[self.game_id] = self
 
         self.set_play_icon()
 
@@ -77,7 +78,6 @@ class Game(Gtk.Box):
         self.add_controller(self.event_contoller_motion)
         self.event_contoller_motion.connect("enter", self.toggle_play, False)
         self.event_contoller_motion.connect("leave", self.toggle_play, None, None)
-
         self.cover_button.connect("clicked", self.main_button_clicked, False)
         self.play_button.connect("clicked", self.main_button_clicked, True)
 
