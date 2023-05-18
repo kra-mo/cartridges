@@ -23,12 +23,11 @@ class Importer:
     n_sgdb_tasks_created = 0
     n_sgdb_tasks_done = 0
     sgdb_cancellable = None
-    errors = None
+    sgdb_error = None
 
     def __init__(self, win):
         self.win = win
         self.sources = set()
-        self.errors = []
 
     @property
     def n_tasks_created(self):
@@ -157,9 +156,10 @@ class Importer:
             sgdb.conditionaly_update_cover(game)
         except SGDBAuthError as error:
             cancellable.cancel()
-            self.errors.append(error)
+            self.sgdb_error = error
         except (HTTPError, SGDBError) as error:
-            self.errors.append(error)
+            # TODO handle other SGDB errors
+            pass
 
     def sgdb_task_callback(self, _obj, _result, data):
         """SGDB query callback"""
@@ -173,45 +173,37 @@ class Importer:
     def import_callback(self):
         """Callback called when importing has finished"""
         self.import_dialog.close()
-        self.create_import_done_dialog()
-
-    def create_import_done_dialog(self):
-        if self.n_games_added == 0:
-            create_dialog(
-                self.win,
-                _("No Games Found"),
-                _("No new games were found on your system."),
-                "open_preferences",
-                _("Preferences"),
-            ).connect("response", self.dialog_response_callback)
-        elif self.n_games_added == 1:
-            create_dialog(
-                self.win,
-                _("Game Imported"),
-                _("Successfully imported 1 game."),
-            ).connect("response", self.dialog_response_callback)
-        elif self.n_games_added > 1:
-            create_dialog(
-                self.win,
-                _("Games Imported"),
-                # The variable is the number of games
-                _("Successfully imported {} games.").format(self.n_games_added),
-            ).connect("response", self.dialog_response_callback)
-
-    def dialog_response_callback(self, _widget, response, *args):
-        if response == "open_preferences":
-            page, expander_row, *_rest = args
-            self.win.get_application().on_preferences_action(
-                page_name=page, expander_row=expander_row
-            )
-        # HACK SGDB manager should be in charge of its error dialog
-        elif self.sgdb_error is not None:
+        self.create_summary_toast()
+        if self.sgdb_error is not None:
             self.create_sgdb_error_dialog()
-            self.sgdb_error = None
-        # TODO additional steam libraries tip
-        # (should be handled by the source somehow)
+
+    def create_summary_toast(self):
+        """N games imported toast"""
+
+        toast = Adw.Toast()
+        toast.set_priority(Adw.ToastPriority.HIGH)
+
+        if self.n_games_added == 0:
+            toast.set_title(_("No new games found"))
+            toast.set_button_label(_("Preferences"))
+            toast.connect(
+                "button-clicked",
+                self.dialog_response_callback,
+                "open_preferences",
+                "import",
+            )
+
+        elif self.n_games_added == 1:
+            toast.set_title(_("1 game imported"))
+
+        elif self.n_games_added > 1:
+            # The variable is the number of games
+            toast.set_title(_("{} games imported").format(self.n_games_added))
+
+        self.win.toast_overlay.add_toast(toast)
 
     def create_sgdb_error_dialog(self):
+        """SGDB error dialog"""
         create_dialog(
             self.win,
             _("Couldn't Connect to SteamGridDB"),
@@ -219,3 +211,12 @@ class Importer:
             "open_preferences",
             _("Preferences"),
         ).connect("response", self.dialog_response_callback, "sgdb")
+
+    def dialog_response_callback(self, _widget, response, *args):
+        """Handle after-import dialogs callback"""
+        if response == "open_preferences":
+            page, expander_row, *_rest = args
+            self.win.get_application().on_preferences_action(
+                page_name=page, expander_row=expander_row
+            )
+        # TODO handle steam libraries tip
