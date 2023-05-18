@@ -66,13 +66,14 @@ class Importer:
         for source in self.sources:
             self.n_source_tasks_created += 1
             logging.debug("Importing games from source %s", source.id)
-            task = Gio.Task(None, None, self.source_task_callback, (source,))
-            task.set_task_data((source,))
-            tasks.add(task)
 
-        # Start all tasks
-        for task in tasks:
-            task.run_in_thread(self.source_task_thread_func)
+            def closure(task, obj, _data, cancellable):
+                self.source_task_thread_func(task, obj, (source,), cancellable)
+
+            task = Gio.Task.new(None, None, self.source_task_callback, (source,))
+            self.n_sgdb_tasks_created += 1
+            task.run_in_thread(closure)
+            tasks.add(task)
 
     def create_dialog(self):
         """Create the import dialog"""
@@ -133,11 +134,14 @@ class Importer:
 
             # Start sgdb lookup for game
             # HACK move to its own manager
-            task = Gio.Task(
+
+            def closure(task, obj, _data, cancellable):
+                self.sgdb_task_thread_func(task, obj, (game,), cancellable)
+
+            task = Gio.Task.new(
                 None, self.sgdb_cancellable, self.sgdb_task_callback, (game,)
             )
-            task.set_task_data((game,))
-            task.run_in_thread(self.sgdb_task_thread_func)
+            task.run_in_thread(closure)
 
     def source_task_callback(self, _obj, _result, data):
         """Source import callback"""
