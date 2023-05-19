@@ -1,13 +1,13 @@
+import logging
 from pathlib import Path
 
-import logging
 import requests
-from requests import HTTPError
 from gi.repository import Gio
+from requests import HTTPError
 
 from . import shared
-from .create_dialog import create_dialog
-from .save_cover import save_cover, resize_cover
+from cartridges.utils.create_dialog import create_dialog
+from cartridges.utils.save_cover import resize_cover, save_cover
 
 
 class SGDBError(Exception):

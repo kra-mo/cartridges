@@ -20,6 +20,7 @@
 from pathlib import Path
 
 
+# TODO delegate to the sources
 def check_install(check, locations, setting=None, subdirs=(Path(),)):
     for location in locations:
         for subdir in (Path(),) + subdirs:

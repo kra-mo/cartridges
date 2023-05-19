@@ -24,12 +24,13 @@ from time import time
 from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
 
+# TODO use SGDBHelper
 from . import shared
-from .create_dialog import create_dialog
-from .game import Game
-from .game_cover import GameCover
-from .save_cover import resize_cover, save_cover
-from .steamgriddb import SGDBSave
+from cartridges.game import Game
+from cartridges.game_cover import GameCover
+from cartridges.utils.create_dialog import create_dialog
+from cartridges.utils.save_cover import resize_cover, save_cover
+from cartridges.utils.steamgriddb import SGDBSave
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/details_window.ui")

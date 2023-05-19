@@ -1,11 +1,11 @@
 import logging
 
-from requests import HTTPError
 from gi.repository import Adw, Gio, Gtk
+from requests import HTTPError
 
-from .task import Task
-from .create_dialog import create_dialog
-from .steamgriddb import SGDBAuthError, SGDBError, SGDBHelper
+from cartridges.utils.create_dialog import create_dialog
+from cartridges.utils.steamgriddb import SGDBAuthError, SGDBError, SGDBHelper
+from cartridges.utils.task import Task
 
 
 class Importer:

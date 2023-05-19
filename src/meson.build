@@ -16,35 +16,18 @@ configure_file(
   install_dir: get_option('bindir')
 )
 
-# TODO move to absolute imports = keep real structure, do not flatten
-
-cartridges_sources = [
-  '__init__.py',
-  'main.py',
-  'window.py',
-  'preferences.py',
-  'details_window.py',
-  'game.py',
-  'game_cover.py',
-  'shared.py',
-  'utils/steamgriddb.py',
-  'utils/save_cover.py',
-  'utils/create_dialog.py',
-
-  # Added
-  'importer/sources/lutris_source.py',
-  'importer/importer.py',
-  'importer/source.py',
-  'utils/decorators.py',
-  'utils/task.py',
-
-  # TODO remove before merge
-  'importers/bottles_importer.py',
-  'importers/heroic_importer.py',
-  'importers/itch_importer.py',
-  'importers/lutris_importer.py',
-  'importers/steam_importer.py',
-  'utils/check_install.py'
-]
-
-install_data(cartridges_sources, install_dir: moduledir)
+install_subdir('importer', install_dir: moduledir)
+install_subdir('importers', install_dir: moduledir)
+install_subdir('utils', install_dir: moduledir)
+install_data(
+  [
+    'main.py',
+    'window.py',
+    'preferences.py',
+    'details_window.py',
+    'game.py',
+    'game_cover.py',
+    'shared.py',
+  ],
+  install_dir: moduledir
+)

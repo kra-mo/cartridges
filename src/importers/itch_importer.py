@@ -27,8 +27,8 @@ import requests
 from gi.repository import GdkPixbuf, Gio
 
 from . import shared
-from .check_install import check_install
-from .save_cover import resize_cover
+from cartridges.utils.check_install import check_install
+from cartridges.utils.save_cover import resize_cover
 
 
 def get_game(task, current_time, row):

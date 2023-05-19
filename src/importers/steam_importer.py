@@ -26,7 +26,7 @@ import requests
 from gi.repository import Gio
 
 from . import shared
-from .check_install import check_install
+from cartridges.utils.check_install import check_install
 
 
 def update_values_from_data(content, values):

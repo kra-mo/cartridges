@@ -17,9 +17,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import sys
-import os
 import logging
+import os
+import sys
 
 import gi
 
@@ -30,11 +30,14 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from . import shared
-from .details_window import DetailsWindow
-from .preferences import PreferencesWindow
-from .window import CartridgesWindow
-from .importer import Importer
-from .lutris_source import LutrisNativeSource, LutrisFlatpakSource
+from cartridges.details_window import DetailsWindow
+from cartridges.importer.importer import Importer
+from cartridges.importer.sources.lutris_source import (
+    LutrisFlatpakSource,
+    LutrisNativeSource,
+)
+from cartridges.preferences import PreferencesWindow
+from cartridges.window import CartridgesWindow
 
 
 class CartridgesApplication(Adw.Application):
