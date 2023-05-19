@@ -76,7 +76,7 @@ class LutrisSourceIterator(SourceIterator):
             "executable": self.source.executable_format.format(game_id=row[2]),
             "developer": None,  # TODO get developer metadata on Lutris
         }
-        game = Game(self.source.win, values)
+        game = Game(self.source.win, values, allow_side_effects=False)
 
         # Save official image
         image_path = self.source.cache_location / "coverart" / f"{row[2]}.jpg"

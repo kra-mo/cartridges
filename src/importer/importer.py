@@ -3,7 +3,7 @@ import logging
 from requests import HTTPError
 from gi.repository import Adw, Gio, Gtk
 
-from .task import make_task_thread_func_closure
+from .task import Task
 from .create_dialog import create_dialog
 from .steamgriddb import SGDBAuthError, SGDBError, SGDBHelper
 
@@ -41,7 +41,7 @@ class Importer:
     @property
     def progress(self):
         try:
-            progress = 1 - self.n_tasks_created / self.n_tasks_done
+            progress = self.n_tasks_done / self.n_tasks_created
         except ZeroDivisionError:
             progress = 1
         return progress
@@ -62,30 +62,12 @@ class Importer:
         # (If SGDB auth is bad, cancel all SGDB tasks)
         self.sgdb_cancellable = Gio.Cancellable()
 
-        """
-        # Create a task for each source
-        def make_closure(source):
-            def closure(task, obj, _data, cancellable):
-                self.source_task_thread_func(task, obj, (source,), cancellable)
-
-            return closure
-
         for source in self.sources:
-            self.n_source_tasks_created += 1
             logging.debug("Importing games from source %s", source.id)
             task = Task.new(None, None, self.source_task_callback, (source,))
-            closure = make_closure(source)
-            task.run_in_thread(closure)
-        """
-
-        for source in self.sources:
             self.n_source_tasks_created += 1
-            logging.debug("Importing games from source %s", source.id)
-            task = Gio.Task.new(None, None, self.source_task_callback, (source,))
-            closure = make_task_thread_func_closure(
-                self.source_task_thread_func, (source,)
-            )
-            task.run_in_thread(closure)
+            task.set_task_data((source,))
+            task.run_in_thread(self.source_task_thread_func)
 
     def create_dialog(self):
         """Create the import dialog"""
@@ -105,6 +87,9 @@ class Importer:
         self.import_dialog.present()
 
     def update_progressbar(self):
+        logging.debug(
+            "Progressbar updated (%f)", self.progress
+        )  # TODO why progress not workie?
         self.progressbar.set_fraction(self.progress)
 
     def source_task_thread_func(self, _task, _obj, data, _cancellable):
@@ -151,12 +136,12 @@ class Importer:
 
             # Start sgdb lookup for game
             # HACK move to its own manager
-            task = Gio.Task.new(
+            task = Task.new(
                 None, self.sgdb_cancellable, self.sgdb_task_callback, (game,)
             )
-            closure = make_task_thread_func_closure(self.sgdb_task_thread_func, (game,))
             self.n_sgdb_tasks_created += 1
-            task.run_in_thread(closure)
+            task.set_task_data((game,))
+            task.run_in_thread(self.sgdb_task_thread_func)
 
     def source_task_callback(self, _obj, _result, data):
         """Source import callback"""
@@ -213,6 +198,7 @@ class Importer:
                 self.dialog_response_callback,
                 "open_preferences",
                 "import",
+                None,
             )
 
         elif self.n_games_added == 1:

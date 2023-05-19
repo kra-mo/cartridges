@@ -60,7 +60,7 @@ class Game(Gtk.Box):
     blacklisted = None
     game_cover = None
 
-    def __init__(self, win, data, allow_side_effects=False, **kwargs):
+    def __init__(self, win, data, allow_side_effects=True, **kwargs):
         super().__init__(**kwargs)
 
         self.win = shared.win

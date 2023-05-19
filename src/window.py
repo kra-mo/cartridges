@@ -114,7 +114,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 ):
                     path.unlink(missing_ok=True)
             else:
-                Game(game, allow_side_effects=True).update()
+                Game(game).update()
 
         # Connect search entries
         self.search_bar.connect_entry(self.search_entry)
