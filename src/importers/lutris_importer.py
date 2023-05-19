@@ -23,7 +23,7 @@ from sqlite3 import connect
 from time import time
 
 from . import shared
-from cartridges.utils.check_install import check_install
+from src.utils.check_install import check_install
 
 
 def lutris_installed(path=None):

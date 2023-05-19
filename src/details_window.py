@@ -26,11 +26,11 @@ from PIL import Image
 
 # TODO use SGDBHelper
 from . import shared
-from cartridges.game import Game
-from cartridges.game_cover import GameCover
-from cartridges.utils.create_dialog import create_dialog
-from cartridges.utils.save_cover import resize_cover, save_cover
-from cartridges.utils.steamgriddb import SGDBSave
+from src.game import Game
+from src.game_cover import GameCover
+from src.utils.create_dialog import create_dialog
+from src.utils.save_cover import resize_cover, save_cover
+from src.utils.steamgriddb import SGDBSave
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/details_window.ui")

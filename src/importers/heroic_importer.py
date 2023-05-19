@@ -24,7 +24,7 @@ from pathlib import Path
 from time import time
 
 from . import shared
-from cartridges.utils.check_install import check_install
+from src.utils.check_install import check_install
 
 
 def heroic_installed(path=None):

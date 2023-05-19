@@ -30,14 +30,14 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from . import shared
-from cartridges.details_window import DetailsWindow
-from cartridges.importer.importer import Importer
-from cartridges.importer.sources.lutris_source import (
+from src.details_window import DetailsWindow
+from src.importer.importer import Importer
+from src.importer.sources.lutris_source import (
     LutrisFlatpakSource,
     LutrisNativeSource,
 )
-from cartridges.preferences import PreferencesWindow
-from cartridges.window import CartridgesWindow
+from src.preferences import PreferencesWindow
+from src.window import CartridgesWindow
 
 
 class CartridgesApplication(Adw.Application):

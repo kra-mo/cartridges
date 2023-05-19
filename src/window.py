@@ -23,7 +23,7 @@ from datetime import datetime
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from . import shared
-from cartridges.game import Game
+from src.game import Game
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/window.ui")

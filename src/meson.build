@@ -1,4 +1,4 @@
-moduledir = join_paths(pkgdatadir, 'cartridges')
+moduledir = join_paths(pkgdatadir, 'src')
 
 python = import('python')
 

@@ -6,8 +6,8 @@ from gi.repository import Gio
 from requests import HTTPError
 
 from . import shared
-from cartridges.utils.create_dialog import create_dialog
-from cartridges.utils.save_cover import resize_cover, save_cover
+from src.utils.create_dialog import create_dialog
+from src.utils.save_cover import resize_cover, save_cover
 
 
 class SGDBError(Exception):

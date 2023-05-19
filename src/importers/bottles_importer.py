@@ -23,7 +23,7 @@ from time import time
 import yaml
 
 from . import shared
-from cartridges.utils.check_install import check_install
+from src.utils.check_install import check_install
 
 
 def bottles_installed(path=None):

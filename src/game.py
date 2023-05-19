@@ -27,7 +27,7 @@ from time import time
 from gi.repository import Adw, Gio, Gtk
 
 from . import shared
-from cartridges.game_cover import GameCover
+from src.game_cover import GameCover
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")

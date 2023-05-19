@@ -26,12 +26,12 @@ from gi.repository import Adw, Gio, GLib, Gtk
 # pylint: disable=unused-import
 from . import shared
 # TODO use the new sources
-from cartridges.importers.bottles_importer import bottles_installed
-from cartridges.importers.heroic_importer import heroic_installed
-from cartridges.importers.itch_importer import itch_installed
-from cartridges.importers.lutris_importer import lutris_cache_exists, lutris_installed
-from cartridges.importers.steam_importer import steam_installed
-from cartridges.utils.create_dialog import create_dialog
+from src.importers.bottles_importer import bottles_installed
+from src.importers.heroic_importer import heroic_installed
+from src.importers.itch_importer import itch_installed
+from src.importers.lutris_importer import lutris_cache_exists, lutris_installed
+from src.importers.steam_importer import steam_installed
+from src.utils.create_dialog import create_dialog
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/preferences.ui")
