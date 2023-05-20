@@ -1,5 +1,6 @@
 from abc import abstractmethod
 from collections.abc import Iterable, Iterator, Sized
+from typing import Optional
 
 from src.game import Game
 from src.window import CartridgesWindow
@@ -22,7 +23,7 @@ class SourceIterator(Iterator, Sized):
         """Get a rough estimate of the number of games produced by the source"""
 
     @abstractmethod
-    def __next__(self) -> "Game" | None:
+    def __next__(self) -> Optional[Game]:
         """Get the next generated game from the source.
         Raises StopIteration when exhausted.
         May raise any other exception signifying an error on this specific game.
