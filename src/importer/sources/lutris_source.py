@@ -1,6 +1,8 @@
+from abc import abstractmethod
 from functools import lru_cache
 from sqlite3 import connect
 from time import time
+from pathlib import Path
 
 from src.game import Game
 from src.importer.source import Source, SourceIterator
@@ -54,8 +56,7 @@ class LutrisSourceIterator(SourceIterator):
         return cursor.fetchone()[0]
 
     def __next__(self):
-        """Produce games. Behaviour depends on the state of the iterator."""
-        # TODO decouple game creation from the window object
+        """Produce games"""
 
         row = None
         try:
@@ -79,7 +80,7 @@ class LutrisSourceIterator(SourceIterator):
         game = Game(self.source.win, values, allow_side_effects=False)
 
         # Save official image
-        image_path = self.source.cache_location / "coverart" / f"{row[2]}.jpg"
+        image_path = self.source.location / "covers" / "coverart" / f"{row[2]}.jpg"
         if image_path.exists():
             resized = resize_cover(self.source.win, image_path)
             save_cover(self.source.win, values["game_id"], resized)
@@ -88,10 +89,15 @@ class LutrisSourceIterator(SourceIterator):
 
 
 class LutrisSource(Source):
+    """Generic lutris source"""
+
     name = "Lutris"
     executable_format = "xdg-open lutris:rungameid/{game_id}"
-    location = None
-    cache_location = None
+
+    @property
+    @abstractmethod
+    def location(self) -> Path:
+        pass
 
     @property
     def game_id_format(self):
@@ -102,7 +108,6 @@ class LutrisSource(Source):
         # pylint: disable=pointless-statement
         try:
             self.location
-            self.cache_location
         except FileNotFoundError:
             return False
         return True
@@ -112,8 +117,6 @@ class LutrisSource(Source):
 
 
 class LutrisNativeSource(LutrisSource):
-    """Class representing an installation of Lutris using native packaging"""
-
     variant = "native"
 
     @property
@@ -122,26 +125,12 @@ class LutrisNativeSource(LutrisSource):
     def location(self):
         raise FileNotFoundError()
 
-    @property
-    @replaced_by_schema_key("lutris-cache-location")
-    @replaced_by_path("~/.local/share/lutris/covers/")
-    def cache_location(self):
-        raise FileNotFoundError()
-
 
 class LutrisFlatpakSource(LutrisSource):
-    """Class representing an installation of Lutris using flatpak"""
-
     variant = "flatpak"
 
     @property
     @replaced_by_schema_key("lutris-flatpak-location")
     @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/")
     def location(self):
-        raise FileNotFoundError()
-
-    @property
-    @replaced_by_schema_key("lutris-flatpak-cache-location")
-    @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/covers/")
-    def cache_location(self):
         raise FileNotFoundError()
