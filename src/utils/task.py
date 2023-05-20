@@ -1,5 +1,6 @@
-from gi.repository import Gio
 from functools import wraps
+
+from gi.repository import Gio
 
 
 def create_task_thread_func_closure(func, data):
@@ -17,8 +18,7 @@ def decorate_set_task_data(task):
     def decorator(original_method):
         @wraps(original_method)
         def new_method(task_data):
-            task.__task_data = task_data
-            pass
+            task.task_data = task_data
 
         return new_method
 
@@ -32,9 +32,7 @@ def decorate_run_in_thread(task):
     def decorator(original_method):
         @wraps(original_method)
         def new_method(task_thread_func):
-            closure = create_task_thread_func_closure(
-                task_thread_func, task.__task_data
-            )
+            closure = create_task_thread_func_closure(task_thread_func, task.task_data)
             original_method(closure)
 
         return new_method
@@ -42,6 +40,7 @@ def decorate_run_in_thread(task):
     return decorator
 
 
+# pylint: disable=too-few-public-methods
 class Task:
     """Wrapper around Gio.Task to patch task data not being passed"""
 

@@ -8,6 +8,7 @@ from src.utils.steamgriddb import SGDBAuthError, SGDBError, SGDBHelper
 from src.utils.task import Task
 
 
+# pylint: disable=too-many-instance-attributes
 class Importer:
     """A class in charge of scanning sources for games"""
 
@@ -87,9 +88,6 @@ class Importer:
         self.import_dialog.present()
 
     def update_progressbar(self):
-        logging.debug(
-            "Progressbar updated (%f)", self.progress
-        )  # TODO why progress not workie?
         self.progressbar.set_fraction(self.progress)
 
     def source_task_thread_func(self, _task, _obj, data, _cancellable):
@@ -162,7 +160,7 @@ class Importer:
         except SGDBAuthError as error:
             cancellable.cancel()
             self.sgdb_error = error
-        except (HTTPError, SGDBError) as error:
+        except (HTTPError, SGDBError) as _error:
             # TODO handle other SGDB errors
             pass
 

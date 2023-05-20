@@ -1,4 +1,4 @@
-from functools import cache
+from functools import lru_cache
 from sqlite3 import connect
 from time import time
 
@@ -48,7 +48,7 @@ class LutrisSourceIterator(SourceIterator):
             self.db_games_request, self.db_request_params
         )
 
-    @cache
+    @lru_cache(maxsize=1)
     def __len__(self):
         cursor = self.db_connection.execute(self.db_len_request, self.db_request_params)
         return cursor.fetchone()[0]
@@ -60,9 +60,9 @@ class LutrisSourceIterator(SourceIterator):
         row = None
         try:
             row = self.db_cursor.__next__()
-        except StopIteration as e:
+        except StopIteration as error:
             self.db_connection.close()
-            raise e
+            raise error
 
         # Create game
         values = {
@@ -99,16 +99,13 @@ class LutrisSource(Source):
 
     @property
     def is_installed(self):
+        # pylint: disable=pointless-statement
         try:
             self.location
             self.cache_location
         except FileNotFoundError:
             return False
-        else:
-            return True
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        return True
 
     def __iter__(self):
         return LutrisSourceIterator(source=self)

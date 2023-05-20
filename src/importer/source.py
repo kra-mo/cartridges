@@ -28,7 +28,7 @@ class SourceIterator(Iterator, Sized):
 class Source(Iterable):
     """Source of games. E.g an installed app with a config file that lists game directories"""
 
-    win = None  # TODO maybe not depend on that ?
+    win = None
 
     name: str
     variant: str
