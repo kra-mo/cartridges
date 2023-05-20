@@ -72,6 +72,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
     sgdb_switch = Gtk.Template.Child()
+    sgdb_switch_row = Gtk.Template.Child()
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
 
@@ -187,6 +188,15 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 '<a href="https://www.steamgriddb.com/profile/preferences/api">', "</a>"
             )
         )
+
+        def set_sgdb_sensitive(widget):
+            if not widget.get_text():
+                self.sgdb_switch.set_active(False)
+
+            self.sgdb_switch_row.set_sensitive(widget.get_text())
+
+        self.sgdb_key_entry_row.connect("changed", set_sgdb_sensitive)
+        set_sgdb_sensitive(self.sgdb_key_entry_row)
 
         # Switches
         self.bind_switches(
