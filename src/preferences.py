@@ -48,9 +48,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     steam_expander_row = Gtk.Template.Child()
     steam_file_chooser_button = Gtk.Template.Child()
-    steam_extra_file_chooser_button = Gtk.Template.Child()
-    steam_clear_button_revealer = Gtk.Template.Child()
-    steam_clear_button = Gtk.Template.Child()
 
     lutris_expander_row = Gtk.Template.Child()
     lutris_file_chooser_button = Gtk.Template.Child()
@@ -108,34 +105,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         # Steam
         self.create_preferences(self, "steam", "Steam")
-
-        def update_revealer():
-            if self.schema.get_strv("steam-extra-dirs"):
-                self.steam_clear_button_revealer.set_reveal_child(True)
-            else:
-                self.steam_clear_button_revealer.set_reveal_child(False)
-
-        def add_steam_dir(_source, result, *_args):
-            try:
-                value = self.schema.get_strv("steam-extra-dirs")
-                value.append(self.file_chooser.select_folder_finish(result).get_path())
-                self.schema.set_strv("steam-extra-dirs", value)
-                self.import_changed = True
-            except GLib.GError:
-                return
-            update_revealer()
-
-        def clear_steam_dirs(*_args):
-            self.schema.set_strv("steam-extra-dirs", [])
-            self.import_changed = True
-            update_revealer()
-
-        update_revealer()
-
-        self.steam_extra_file_chooser_button.connect(
-            "clicked", self.choose_folder, add_steam_dir
-        )
-        self.steam_clear_button.connect("clicked", clear_steam_dirs)
 
         # Lutris
         self.create_preferences(self, "lutris", "Lutris")

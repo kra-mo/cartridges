@@ -155,10 +155,13 @@ def steam_importer(win):
 
     appmanifests = []
 
+    if not (lib_file := steam_dir / "steamapps" / "libraryfolders.vdf").is_file():
+        return
+
+    libraryfolders = lib_file.open().read()
     steam_dirs = [
-        Path(directory) for directory in win.schema.get_strv("steam-extra-dirs")
+        Path(path) for path in re.findall('"path"\t\t"(.*)"\n', libraryfolders)
     ]
-    steam_dirs.append(steam_dir)
 
     for directory in steam_dirs:
         if not (directory / "steamapps").exists():
@@ -173,4 +176,4 @@ def steam_importer(win):
     importer.total_queue += len(appmanifests)
     importer.queue += len(appmanifests)
 
-    get_games_async(win, appmanifests, directory, importer)
+    get_games_async(win, appmanifests, steam_dir, importer)

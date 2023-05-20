@@ -17,8 +17,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from pathlib import Path
-
 from gi.repository import Adw, GLib, Gtk
 
 from .create_dialog import create_dialog
@@ -123,30 +121,6 @@ class Importer:
                 _("Preferences"),
             ).connect("response", self.response, "sgdb")
             self.sgdb_exception = None
-        elif (
-            self.win.schema.get_boolean("steam")
-            and self.win.schema.get_boolean("steam-extra-dirs-hint")
-            and not self.win.schema.get_strv("steam-extra-dirs")
-        ):
-            steam_library_path = (
-                Path(self.win.schema.get_string("steam-location"))
-                / "steamapps"
-                / "libraryfolders.vdf"
-            )
-            if (
-                steam_library_path.exists()
-                and steam_library_path.read_text("utf-8").count('"path"') > 1
-            ):
-                self.win.schema.set_boolean("steam-extra-dirs-hint", False)
-                create_dialog(
-                    self.win,
-                    _("Extra Steam Libraries"),
-                    _(
-                        "Looks like you have multiple Steam libraries. Would you like to add them in preferences?"
-                    ),
-                    "open_preferences",
-                    _("Preferences"),
-                ).connect("response", self.response, "import", "steam_expander_row")
 
     def update_progressbar(self):
         try:
