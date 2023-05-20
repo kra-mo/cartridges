@@ -19,10 +19,12 @@
 
 import json
 import os
+import shlex
+import subprocess
 from pathlib import Path
 from time import time
 
-from gi.repository import Adw, Gio, GLib, Gtk
+from gi.repository import Adw, Gio, Gtk
 
 from .game_cover import GameCover
 
@@ -175,15 +177,28 @@ class Game(Gtk.Box):
         self.last_played = int(time())
         self.save()
 
-        argv = (
-            ("flatpak-spawn", "--host", *self.executable)  # Flatpak
+        args = " ".join(
+            [
+                "flatpak-spawn",
+                "--host",
+                "/bin/sh",
+                "-c",
+                shlex.quote(" ".join(self.executable)),
+            ]
             if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
-            else self.executable  # Others
+            else self.executable
         )
 
-        GLib.spawn_async(
-            argv, working_directory=str(Path.home()), flags=GLib.SpawnFlags.SEARCH_PATH
+        print(args)
+
+        subprocess.Popen(
+            args,
+            cwd=Path.home(),
+            shell=True,
+            start_new_session=True,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
         )
+
         if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
             self.app.quit()
 
