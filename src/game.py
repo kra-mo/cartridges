@@ -139,6 +139,13 @@ class Game(Gtk.Box):
             "blacklisted",
         )
 
+        # TODO: remove for 2.0
+        attrs = list(attrs)
+        if not self.removed:
+            attrs.remove("removed")
+        if not self.blacklisted:
+            attrs.remove("blacklisted")
+
         json.dump(
             {attr: getattr(self, attr) for attr in attrs if attr},
             (self.win.games_dir / f"{self.game_id}.json").open("w"),
