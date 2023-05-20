@@ -179,6 +179,7 @@ class Importer:
         logging.info("Import done")
         self.import_dialog.close()
         self.create_summary_toast()
+        # TODO create a summary of errors/warnings/tips popup (eg. SGDB, Steam libraries)
         if self.sgdb_error is not None:
             self.create_sgdb_error_dialog()
 
@@ -196,7 +197,6 @@ class Importer:
                 self.dialog_response_callback,
                 "open_preferences",
                 "import",
-                None,
             )
 
         elif self.n_games_added == 1:
@@ -218,11 +218,12 @@ class Importer:
             _("Preferences"),
         ).connect("response", self.dialog_response_callback, "sgdb")
 
+    def open_preferences(self, page=None, expander_row=None):
+        self.win.get_application().on_preferences_action(
+            page_name=page, expander_row=expander_row
+        )
+
     def dialog_response_callback(self, _widget, response, *args):
         """Handle after-import dialogs callback"""
         if response == "open_preferences":
-            page, expander_row, *_rest = args
-            self.win.get_application().on_preferences_action(
-                page_name=page, expander_row=expander_row
-            )
-        # TODO handle steam libraries tip
+            self.open_preferences(*args)
