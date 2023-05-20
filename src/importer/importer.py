@@ -116,6 +116,8 @@ class Importer:
                     exc_info=exception,
                 )
                 continue
+            if game is None:
+                continue
 
             # TODO register in store instead of dict
 

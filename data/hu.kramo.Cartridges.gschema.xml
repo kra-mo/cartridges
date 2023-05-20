@@ -16,6 +16,12 @@
     <key name="steam-location" type="s">
       <default>"~/.steam/"</default>
     </key>
+    <key name="steam-flatpak-location" type="s">
+      <default>~/.var/app/com.valvesoftware.Steam/data/Steam/</default>
+    </key>
+    <key name="steam-windows-location" type="s">
+      <default>"C:\Program Files (x86)\Steam"</default>
+    </key>
     <key name="lutris" type="b">
       <default>true</default>
     </key>

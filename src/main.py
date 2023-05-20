@@ -36,6 +36,11 @@ from src.importer.sources.lutris_source import (
     LutrisFlatpakSource,
     LutrisNativeSource,
 )
+from src.importer.sources.steam_source import (
+    SteamNativeSource,
+    SteamFlatpakSource,
+    SteamWindowsSource,
+)
 from src.preferences import PreferencesWindow
 from src.window import CartridgesWindow
 
@@ -156,6 +161,10 @@ class CartridgesApplication(Adw.Application):
         if self.win.schema.get_boolean("lutris"):
             importer.add_source(LutrisNativeSource(self.win))
             importer.add_source(LutrisFlatpakSource(self.win))
+        if self.win.schema.get_boolean("steam"):
+            importer.add_source(SteamNativeSource(self.win))
+            importer.add_source(SteamFlatpakSource(self.win))
+            importer.add_source(SteamWindowsSource(self.win))
         importer.run()
 
     def on_remove_game_action(self, *_args):
