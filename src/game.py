@@ -19,6 +19,7 @@
 
 import json
 import os
+from pathlib import Path
 from time import time
 
 from gi.repository import Adw, Gio, GLib, Gtk
@@ -173,7 +174,9 @@ class Game(Gtk.Box):
             else self.executable  # Others
         )
 
-        GLib.spawn_async(argv, flags=GLib.SpawnFlags.SEARCH_PATH)
+        GLib.spawn_async(
+            argv, working_directory=str(Path.home()), flags=GLib.SpawnFlags.SEARCH_PATH
+        )
         if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
             self.app.quit()
 
