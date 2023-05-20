@@ -14,12 +14,12 @@ template $Game : Box {
 
       Overlay {
         [overlay]
-        Box {
-          halign: start;
+        Revealer play_revealer {
+          transition-type: crossfade;
           valign: end;
 
-          Revealer play_revealer {
-            transition-type: slide_up;
+          Box {
+            halign: start;
             valign: end;
 
             Button play_button {
@@ -34,11 +34,6 @@ template $Game : Box {
                 "osd",
               ]
             }
-          }
-
-          Revealer menu_revealer {
-            transition-type: slide_up;
-            valign: end;
 
             MenuButton menu_button {
               icon-name: "view-more-symbolic";

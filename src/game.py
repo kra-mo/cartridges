@@ -37,7 +37,6 @@ class Game(Gtk.Box):
     cover_button = Gtk.Template.Child()
     menu_button = Gtk.Template.Child()
     play_revealer = Gtk.Template.Child()
-    menu_revealer = Gtk.Template.Child()
     game_options = Gtk.Template.Child()
     hidden_game_options = Gtk.Template.Child()
 
@@ -227,7 +226,6 @@ class Game(Gtk.Box):
     def toggle_play(self, _widget, _prop1, _prop2, state=True):
         if not self.menu_button.get_active():
             self.play_revealer.set_reveal_child(not state)
-            GLib.timeout_add(40, self.menu_revealer.set_reveal_child, not state)
 
     def main_button_clicked(self, _widget, button):
         if self.win.schema.get_boolean("cover-launches-game") ^ button:
