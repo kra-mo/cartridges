@@ -19,7 +19,7 @@
 
 from pathlib import Path
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, GLib, Gtk
 
 from .create_dialog import create_dialog
 from .game import Game
@@ -106,6 +106,8 @@ class Importer:
                 )
 
             self.win.toast_overlay.add_toast(toast)
+            # Add timeout to make it the last thing to happen
+            GLib.timeout_add(0, self.response, None, None)
 
     def response(self, _widget, response, page_name=None, expander_row=None):
         if response == "open_preferences":
