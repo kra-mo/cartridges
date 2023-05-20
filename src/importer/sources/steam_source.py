@@ -156,9 +156,11 @@ class SteamFlatpakSource(SteamSource):
 
 class SteamWindowsSource(SteamSource):
     variant = "windows"
+    executable_format = "start steam://rungameid/{game_id}"
 
     @property
     @replaced_by_schema_key("steam-windows-location")
     @replaced_by_env_path("programfiles(x86)", "Steam")
+    @replaced_by_path("C:\\Program Files (x86)\\Steam")
     def location(self):
         raise FileNotFoundError()
