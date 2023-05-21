@@ -25,7 +25,7 @@ from time import time
 import requests
 from gi.repository import Gio
 
-from . import shared
+import src.shared
 from src.utils.check_install import check_install
 
 

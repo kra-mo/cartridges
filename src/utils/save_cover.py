@@ -24,7 +24,7 @@ from shutil import copyfile
 from gi.repository import Gio
 from PIL import Image, ImageSequence
 
-from . import shared
+import src.shared
 
 
 def resize_cover(cover_path=None, pixbuf=None):

@@ -22,7 +22,7 @@ from datetime import datetime
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
-from . import shared
+import src.shared
 from src.game import Game
 
 

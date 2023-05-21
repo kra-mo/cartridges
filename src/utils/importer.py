@@ -19,7 +19,7 @@
 
 from gi.repository import Adw, GLib, Gtk
 
-from . import shared
+import src.shared
 from .create_dialog import create_dialog
 from .game import Game
 from .save_cover import resize_cover, save_cover

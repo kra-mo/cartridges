@@ -26,7 +26,7 @@ from time import time
 
 from gi.repository import Adw, Gio, Gtk
 
-from . import shared
+import src.shared
 from src.game_cover import GameCover
 
 

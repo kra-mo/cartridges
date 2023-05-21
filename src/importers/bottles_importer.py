@@ -22,7 +22,7 @@ from time import time
 
 import yaml
 
-from . import shared
+import src.shared
 from src.utils.check_install import check_install
 
 
