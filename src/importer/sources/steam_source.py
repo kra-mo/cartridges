@@ -1,3 +1,4 @@
+import re
 from abc import abstractmethod
 from pathlib import Path
 from time import time
@@ -34,25 +35,25 @@ class SteamSourceIterator(SourceIterator):
         self.manifests = set()
 
         # Get dirs that contain steam app manifests
-        manifests_dirs = set()
         libraryfolders_path = self.source.location / "steamapps" / "libraryfolders.vdf"
         with open(libraryfolders_path, "r") as file:
-            for line in file.readlines():
-                line = line.strip()
-                prefix = '"path"'
-                if not line.startswith(prefix):
-                    continue
-                library_folder = Path(line[len(prefix) :].strip()[1:-1])
-                manifests_dir = library_folder / "steamapps"
-                if not (manifests_dir).is_dir():
-                    continue
-                manifests_dirs.add(manifests_dir)
+            contents = file.read()
+        steamapps_dirs = [
+            Path(path) / "steamapps"
+            for path in re.findall('"path"\s+"(.*)"\n', contents, re.IGNORECASE)
+        ]
 
         # Get app manifests
-        for manifests_dir in manifests_dirs:
-            for child in manifests_dir.iterdir():
-                if child.is_file() and "appmanifest" in child.name:
-                    self.manifests.add(child)
+        for steamapps_dir in steamapps_dirs:
+            if not steamapps_dir.is_dir():
+                continue
+            self.manifests.update(
+                [
+                    manifest
+                    for manifest in steamapps_dir.glob("appmanifest_*.acf")
+                    if manifest.is_file()
+                ]
+            )
 
         self.manifests_iterator = iter(self.manifests)
 
@@ -71,7 +72,7 @@ class SteamSourceIterator(SourceIterator):
             return None
 
         # Skip non installed games
-        if not int(local_data["StateFlags"]) & self.installed_state_mask:
+        if not int(local_data["stateflags"]) & self.installed_state_mask:
             return None
 
         # Build game from local data
@@ -101,9 +102,9 @@ class SteamSourceIterator(SourceIterator):
         # TODO move to its own manager
         try:
             online_data = steam.get_api_data(appid=appid)
-        except (HTTPError, JSONDecodeError, SteamGameNotFoundError):
+        except (HTTPError, JSONDecodeError):
             pass
-        except SteamNotAGameError:
+        except (SteamNotAGameError, SteamGameNotFoundError):
             game.update_values({"blacklisted": True})
         else:
             game.update_values(online_data)

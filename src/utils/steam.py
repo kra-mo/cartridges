@@ -23,12 +23,16 @@ class SteamInvalidManifestError(SteamError):
 
 
 class SteamManifestData(TypedDict):
+    """Dict returned by SteamHelper.get_manifest_data"""
+
     name: str
     appid: str
-    StateFlags: str
+    stateflags: str
 
 
 class SteamAPIData(TypedDict):
+    """Dict returned by SteamHelper.get_api_data"""
+
     developers: str
 
 
@@ -47,7 +51,7 @@ class SteamHelper:
 
         for key in SteamManifestData.__required_keys__:
             regex = f'"{key}"\s+"(.*)"\n'
-            if (match := re.search(regex, contents)) is None:
+            if (match := re.search(regex, contents, re.IGNORECASE)) is None:
                 raise SteamInvalidManifestError()
             data[key] = match.group(1)
 
@@ -68,9 +72,11 @@ class SteamHelper:
             raise error
 
         if not data["success"]:
+            logging.debug("Appid %s not found", appid)
             raise SteamGameNotFoundError()
 
         if data["data"]["type"] != "game":
+            logging.debug("Appid %s is not a game", appid)
             raise SteamNotAGameError()
 
         # Return API values we're interested in
