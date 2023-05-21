@@ -26,6 +26,7 @@ from time import time
 import requests
 from gi.repository import GdkPixbuf, Gio
 
+from . import shared
 from .check_install import check_install
 from .save_cover import resize_cover
 
@@ -120,7 +121,9 @@ def get_games_async(win, rows, importer):
 
 def itch_installed(win, path=None):
     location_key = "itch-location"
-    itch_dir = path if path else Path(win.schema.get_string(location_key)).expanduser()
+    itch_dir = (
+        path if path else Path(shared.schema.get_string(location_key)).expanduser()
+    )
     check = Path("db") / "butler.db"
 
     if not (itch_dir / check).is_file():
@@ -136,7 +139,7 @@ def itch_installed(win, path=None):
         if os.name == "nt" and not path:
             locations += (Path(os.getenv("appdata")) / "itch",)
 
-        itch_dir = check_install(check, locations, (win.schema, location_key))
+        itch_dir = check_install(check, locations, (shared.schema, location_key))
 
     return itch_dir
 

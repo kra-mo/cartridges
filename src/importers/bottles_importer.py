@@ -22,13 +22,14 @@ from time import time
 
 import yaml
 
+from . import shared
 from .check_install import check_install
 
 
 def bottles_installed(win, path=None):
     location_key = "bottles-location"
     bottles_dir = (
-        path if path else Path(win.schema.get_string(location_key)).expanduser()
+        path if path else Path(shared.schema.get_string(location_key)).expanduser()
     )
     check = "library.yml"
 
@@ -42,7 +43,7 @@ def bottles_installed(win, path=None):
             )
         )
 
-        bottles_dir = check_install(check, locations, (win.schema, location_key))
+        bottles_dir = check_install(check, locations, (shared.schema, location_key))
 
     return bottles_dir
 
