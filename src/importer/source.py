@@ -3,7 +3,6 @@ from collections.abc import Iterable, Iterator, Sized
 from typing import Optional
 
 from src.game import Game
-from src.window import CartridgesWindow
 
 
 class SourceIterator(Iterator, Sized):
@@ -33,13 +32,8 @@ class SourceIterator(Iterator, Sized):
 class Source(Iterable):
     """Source of games. E.g an installed app with a config file that lists game directories"""
 
-    win: "CartridgesWindow" = None
     name: str
     variant: str
-
-    def __init__(self, win) -> None:
-        super().__init__()
-        self.win = win
 
     @property
     def full_name(self) -> str:

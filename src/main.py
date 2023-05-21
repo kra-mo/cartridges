@@ -157,14 +157,14 @@ class CartridgesApplication(Adw.Application):
         DetailsWindow()
 
     def on_import_action(self, *_args):
-        importer = Importer(self.win)
-        if self.win.schema.get_boolean("lutris"):
-            importer.add_source(LutrisNativeSource(self.win))
-            importer.add_source(LutrisFlatpakSource(self.win))
-        if self.win.schema.get_boolean("steam"):
-            importer.add_source(SteamNativeSource(self.win))
-            importer.add_source(SteamFlatpakSource(self.win))
-            importer.add_source(SteamWindowsSource(self.win))
+        importer = Importer()
+        if shared.schema.get_boolean("lutris"):
+            importer.add_source(LutrisNativeSource())
+            importer.add_source(LutrisFlatpakSource())
+        if shared.schema.get_boolean("steam"):
+            importer.add_source(SteamNativeSource())
+            importer.add_source(SteamFlatpakSource())
+            importer.add_source(SteamWindowsSource())
         importer.run()
 
     def on_remove_game_action(self, *_args):

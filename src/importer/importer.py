@@ -3,6 +3,7 @@ import logging
 from gi.repository import Adw, Gio, Gtk
 from requests import HTTPError
 
+import src.shared as shared
 from src.utils.create_dialog import create_dialog
 from src.utils.steamgriddb import SGDBAuthError, SGDBError, SGDBHelper
 from src.utils.task import Task
@@ -16,7 +17,6 @@ class Importer:
     import_statuspage = None
     import_dialog = None
 
-    win = None
     sources = None
 
     n_games_added = 0
@@ -27,8 +27,7 @@ class Importer:
     sgdb_cancellable = None
     sgdb_error = None
 
-    def __init__(self, win):
-        self.win = win
+    def __init__(self):
         self.sources = set()
 
     @property
@@ -82,7 +81,7 @@ class Importer:
             modal=True,
             default_width=350,
             default_height=-1,
-            transient_for=self.win,
+            transient_for=shared.win,
             deletable=False,
         )
         self.import_dialog.present()
@@ -123,14 +122,14 @@ class Importer:
 
             # Avoid duplicates
             if (
-                game.game_id in self.win.games
-                and not self.win.games[game.game_id].removed
+                game.game_id in shared.win.games
+                and not shared.win.games[game.game_id].removed
             ):
                 continue
 
             # Register game
             logging.info("New game registered %s (%s)", game.name, game.game_id)
-            self.win.games[game.game_id] = game
+            shared.win.games[game.game_id] = game
             game.save()
             self.n_games_added += 1
 
@@ -156,7 +155,7 @@ class Importer:
         """SGDB query code"""
         game, *_rest = data
         game.set_loading(1)
-        sgdb = SGDBHelper(self.win)
+        sgdb = SGDBHelper()
         try:
             sgdb.conditionaly_update_cover(game)
         except SGDBAuthError as error:
@@ -208,12 +207,12 @@ class Importer:
             # The variable is the number of games
             toast.set_title(_("{} games imported").format(self.n_games_added))
 
-        self.win.toast_overlay.add_toast(toast)
+        shared.win.toast_overlay.add_toast(toast)
 
     def create_sgdb_error_dialog(self):
         """SGDB error dialog"""
         create_dialog(
-            self.win,
+            shared.win,
             _("Couldn't Connect to SteamGridDB"),
             str(self.sgdb_error),
             "open_preferences",
@@ -221,7 +220,7 @@ class Importer:
         ).connect("response", self.dialog_response_callback, "sgdb")
 
     def open_preferences(self, page=None, expander_row=None):
-        self.win.get_application().on_preferences_action(
+        shared.win.get_application().on_preferences_action(
             page_name=page, expander_row=expander_row
         )
 

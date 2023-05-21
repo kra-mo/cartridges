@@ -84,7 +84,7 @@ class SteamSourceIterator(SourceIterator):
             "game_id": self.source.game_id_format.format(game_id=appid),
             "executable": self.source.executable_format.format(game_id=appid),
         }
-        game = Game(self.source.win, values, allow_side_effects=False)
+        game = Game(values, allow_side_effects=False)
 
         # Add official cover image
         cover_path = (
@@ -94,9 +94,7 @@ class SteamSourceIterator(SourceIterator):
             / f"{appid}_library_600x900.jpg"
         )
         if cover_path.is_file():
-            save_cover(
-                self.source.win, game.game_id, resize_cover(self.source.win, cover_path)
-            )
+            save_cover(game.game_id, resize_cover(cover_path))
 
         # Get online metadata
         # TODO move to its own manager

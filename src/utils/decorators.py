@@ -17,6 +17,8 @@ from pathlib import Path
 from os import PathLike, environ
 from functools import wraps
 
+import src.shared as shared
+
 
 def replaced_by_path(override: PathLike):  # Decorator builder
     """Replace the method's returned path with the override
@@ -42,9 +44,8 @@ def replaced_by_schema_key(key: str):  # Decorator builder
     def decorator(original_function):  # Built decorator (closure)
         @wraps(original_function)
         def wrapper(*args, **kwargs):  # func's override
-            schema = args[0].win.schema
             try:
-                override = schema.get_string(key)
+                override = shared.schema.get_string(key)
             except Exception:  # pylint: disable=broad-exception-caught
                 return original_function(*args, **kwargs)
             return replaced_by_path(override)(original_function)(*args, **kwargs)

@@ -4,6 +4,7 @@ from sqlite3 import connect
 from time import time
 from pathlib import Path
 
+import src.shared as shared
 from src.game import Game
 from src.importer.source import Source, SourceIterator
 from src.utils.decorators import replaced_by_path, replaced_by_schema_key
@@ -41,7 +42,7 @@ class LutrisSourceIterator(SourceIterator):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.import_steam = self.source.win.schema.get_boolean("lutris-import-steam")
+        self.import_steam = shared.schema.get_boolean("lutris-import-steam")
         self.db_location = self.source.location / "pga.db"
         self.db_connection = connect(self.db_location)
         self.db_request_params = {"import_steam": self.import_steam}
@@ -77,13 +78,12 @@ class LutrisSourceIterator(SourceIterator):
             "executable": self.source.executable_format.format(game_id=row[2]),
             "developer": None,  # TODO get developer metadata on Lutris
         }
-        game = Game(self.source.win, values, allow_side_effects=False)
+        game = Game(values, allow_side_effects=False)
 
         # Save official image
         image_path = self.source.location / "covers" / "coverart" / f"{row[2]}.jpg"
         if image_path.exists():
-            resized = resize_cover(self.source.win, image_path)
-            save_cover(self.source.win, values["game_id"], resized)
+            save_cover(values["game_id"], resize_cover(image_path))
 
         return game
 
