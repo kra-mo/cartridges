@@ -23,6 +23,7 @@ from time import time
 from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
 
+from . import shared
 from .create_dialog import create_dialog
 from .game import Game
 from .game_cover import GameCover
@@ -57,13 +58,14 @@ class DetailsWindow(Adw.Window):
         self.cover_button_delete_revealer.set_reveal_child(False)
         self.cover_changed = True
 
-    def __init__(self, win, game=None, **kwargs):
+    def __init__(self, game=None, **kwargs):
         super().__init__(**kwargs)
-        self.set_transient_for(win)
 
-        self.win = win
+        self.win = shared.win
         self.game = game
         self.game_cover = GameCover({self.cover})
+
+        self.set_transient_for(self.win)
 
         if self.game:
             self.set_title(_("Edit Game Details"))
@@ -153,7 +155,6 @@ class DetailsWindow(Adw.Window):
                     numbers.append(int(current_game.replace("imported_", "")))
 
             self.game = Game(
-                self.win,
                 {
                     "game_id": f"imported_{str(max(numbers) + 1)}",
                     "hidden": False,
@@ -191,7 +192,6 @@ class DetailsWindow(Adw.Window):
 
         if self.cover_changed:
             save_cover(
-                self.win,
                 self.game.game_id,
                 self.game_cover.path,
             )
@@ -199,7 +199,7 @@ class DetailsWindow(Adw.Window):
         self.game.save()
 
         if not self.game_cover.get_pixbuf():
-            SGDBSave(self.win, {self.game})
+            SGDBSave({self.game})
 
         self.game_cover.pictures.remove(self.cover)
 
@@ -224,7 +224,7 @@ class DetailsWindow(Adw.Window):
         self.cover_changed = True
 
         def resize():
-            self.game_cover.new_cover(resize_cover(self.win, path))
+            self.game_cover.new_cover(resize_cover(path))
             self.toggle_loading()
 
         self.toggle_loading()

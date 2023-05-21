@@ -31,12 +31,15 @@ from .check_install import check_install
 from .save_cover import resize_cover
 
 
-def get_game(task, current_time, win, row):
+def get_game(task, current_time, row):
     values = {}
 
     values["game_id"] = f"itch_{row[0]}"
 
-    if values["game_id"] in win.games and not win.games[values["game_id"]].removed:
+    if (
+        values["game_id"] in shared.win.games
+        and not shared.win.games[values["game_id"]].removed
+    ):
         task.return_value((None, None))
         return
 
@@ -63,22 +66,22 @@ def get_game(task, current_time, win, row):
 
         game_cover = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
             tmp_file.read(), 2, 2, False
-        ).scale_simple(*win.image_size, GdkPixbuf.InterpType.BILINEAR)
+        ).scale_simple(*shared.image_size, GdkPixbuf.InterpType.BILINEAR)
 
         itch_pixbuf = GdkPixbuf.Pixbuf.new_from_stream(tmp_file.read())
         itch_pixbuf = itch_pixbuf.scale_simple(
-            win.image_size[0],
-            itch_pixbuf.get_height() * (win.image_size[0] / itch_pixbuf.get_width()),
+            shared.image_size[0],
+            itch_pixbuf.get_height() * (shared.image_size[0] / itch_pixbuf.get_width()),
             GdkPixbuf.InterpType.BILINEAR,
         )
         itch_pixbuf.composite(
             game_cover,
             0,
-            (win.image_size[1] - itch_pixbuf.get_height()) / 2,
+            (shared.image_size[1] - itch_pixbuf.get_height()) / 2,
             itch_pixbuf.get_width(),
             itch_pixbuf.get_height(),
             0,
-            (win.image_size[1] - itch_pixbuf.get_height()) / 2,
+            (shared.image_size[1] - itch_pixbuf.get_height()) / 2,
             1.0,
             1.0,
             GdkPixbuf.InterpType.BILINEAR,
@@ -91,16 +94,15 @@ def get_game(task, current_time, win, row):
     task.return_value((values, game_cover))
 
 
-def get_games_async(win, rows, importer):
+def get_games_async(rows, importer):
     current_time = int(time())
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
-    def create_func(current_time, win, row):
+    def create_func(current_time, row):
         def wrapper(task, *_args):
             get_game(
                 task,
                 current_time,
-                win,
                 row,
             )
 
@@ -111,15 +113,15 @@ def get_games_async(win, rows, importer):
         # No need for an if statement as final_value would be None for games we don't want to save
         importer.save_game(
             final_values[0],
-            resize_cover(win, pixbuf=final_values[1]),
+            resize_cover(pixbuf=final_values[1]),
         )
 
     for row in rows:
         task = Gio.Task.new(None, None, update_games)
-        task.run_in_thread(create_func(current_time, win, row))
+        task.run_in_thread(create_func(current_time, row))
 
 
-def itch_installed(win, path=None):
+def itch_installed(path=None):
     location_key = "itch-location"
     itch_dir = (
         path if path else Path(shared.schema.get_string(location_key)).expanduser()
@@ -132,7 +134,7 @@ def itch_installed(win, path=None):
             if path
             else (
                 Path.home() / ".var/app/io.itch.itch/config/itch",
-                win.config_dir / "itch",
+                shared.config_dir / "itch",
             )
         )
 
@@ -144,14 +146,14 @@ def itch_installed(win, path=None):
     return itch_dir
 
 
-def itch_importer(win):
-    itch_dir = itch_installed(win)
+def itch_importer():
+    itch_dir = itch_installed()
     if not itch_dir:
         return
 
     database_path = (itch_dir / "db").expanduser()
 
-    db_cache_dir = win.cache_dir / "cartridges" / "itch"
+    db_cache_dir = shared.cache_dir / "cartridges" / "itch"
     db_cache_dir.mkdir(parents=True, exist_ok=True)
 
     # Copy the file because sqlite3 doesn't like databases in /run/user/
@@ -183,8 +185,8 @@ def itch_importer(win):
     # No need to unlink temp files as they disappear when the connection is closed
     database_tmp_path.unlink(missing_ok=True)
 
-    importer = win.importer
+    importer = shared.importer
     importer.total_queue += len(rows)
     importer.queue += len(rows)
 
-    get_games_async(win, rows, importer)
+    get_games_async(rows, importer)

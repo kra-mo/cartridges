@@ -26,7 +26,7 @@ from . import shared
 from .check_install import check_install
 
 
-def lutris_installed(win, path=None):
+def lutris_installed(path=None):
     location_key = "lutris-location"
     lutris_dir = (
         path if path else Path(shared.schema.get_string(location_key)).expanduser()
@@ -39,7 +39,7 @@ def lutris_installed(win, path=None):
             if path
             else (
                 Path.home() / ".var/app/net.lutris.Lutris/data/lutris",
-                win.data_dir / "lutris",
+                shared.data_dir / "lutris",
             )
         )
 
@@ -48,7 +48,7 @@ def lutris_installed(win, path=None):
     return lutris_dir
 
 
-def lutris_cache_exists(win, path=None):
+def lutris_cache_exists(path=None):
     cache_key = "lutris-cache-location"
     cache_dir = path if path else Path(shared.schema.get_string(cache_key)).expanduser()
     cache_check = "coverart"
@@ -59,7 +59,7 @@ def lutris_cache_exists(win, path=None):
             if path
             else (
                 Path.home() / ".var" / "app" / "net.lutris.Lutris" / "cache" / "lutris",
-                win.cache_dir / "lutris",
+                shared.cache_dir / "lutris",
             )
         )
 
@@ -70,16 +70,16 @@ def lutris_cache_exists(win, path=None):
     return cache_dir
 
 
-def lutris_importer(win):
-    lutris_dir = lutris_installed(win)
+def lutris_importer():
+    lutris_dir = lutris_installed()
     if not lutris_dir:
         return
 
-    cache_dir = lutris_cache_exists(win)
+    cache_dir = lutris_cache_exists()
     if not cache_dir:
         return
 
-    db_cache_dir = win.cache_dir / "cartridges" / "lutris"
+    db_cache_dir = shared.cache_dir / "cartridges" / "lutris"
     db_cache_dir.mkdir(parents=True, exist_ok=True)
 
     # Copy the file because sqlite3 doesn't like databases in /run/user/
@@ -113,7 +113,7 @@ def lutris_importer(win):
 
     current_time = int(time())
 
-    importer = win.importer
+    importer = shared.importer
     importer.total_queue += len(rows)
     importer.queue += len(rows)
 
@@ -122,7 +122,10 @@ def lutris_importer(win):
 
         values["game_id"] = f"lutris_{row[3]}_{row[0]}"
 
-        if values["game_id"] in win.games and not win.games[values["game_id"]].removed:
+        if (
+            values["game_id"] in shared.win.games
+            and not shared.win.games[values["game_id"]].removed
+        ):
             importer.save_game()
             continue
 

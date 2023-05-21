@@ -43,7 +43,7 @@ def update_values_from_data(content, values):
     return values
 
 
-def get_game(task, datatypes, current_time, win, appmanifest, steam_dir):
+def get_game(task, datatypes, current_time, appmanifest, steam_dir):
     values = {}
 
     data = appmanifest.read_text("utf-8")
@@ -57,7 +57,10 @@ def get_game(task, datatypes, current_time, win, appmanifest, steam_dir):
 
     values["game_id"] = f'steam_{values["appid"]}'
 
-    if values["game_id"] in win.games and not win.games[values["game_id"]].removed:
+    if (
+        values["game_id"] in shared.win.games
+        and not shared.win.games[values["game_id"]].removed
+    ):
         task.return_value((None, None))
         return
 
@@ -93,18 +96,17 @@ def get_game(task, datatypes, current_time, win, appmanifest, steam_dir):
     task.return_value((values, image_path if image_path.exists() else None))
 
 
-def get_games_async(win, appmanifests, steam_dir, importer):
+def get_games_async(appmanifests, steam_dir, importer):
     datatypes = ["appid", "name"]
     current_time = int(time())
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
-    def create_func(datatypes, current_time, win, appmanifest, steam_dir):
+    def create_func(datatypes, current_time, appmanifest, steam_dir):
         def wrapper(task, *_args):
             get_game(
                 task,
                 datatypes,
                 current_time,
-                win,
                 appmanifest,
                 steam_dir,
             )
@@ -118,12 +120,10 @@ def get_games_async(win, appmanifests, steam_dir, importer):
 
     for appmanifest in appmanifests:
         task = Gio.Task.new(None, None, update_games)
-        task.run_in_thread(
-            create_func(datatypes, current_time, win, appmanifest, steam_dir)
-        )
+        task.run_in_thread(create_func(datatypes, current_time, appmanifest, steam_dir))
 
 
-def steam_installed(win, path=None):
+def steam_installed(path=None):
     location_key = "steam-location"
     steam_dir = Path(shared.schema.get_string(location_key)).expanduser()
     check = "steamapps"
@@ -136,7 +136,7 @@ def steam_installed(win, path=None):
             else (
                 steam_dir,
                 Path.home() / ".steam",
-                win.data_dir / "Steam",
+                shared.data_dir / "Steam",
                 Path.home() / ".var/app/com.valvesoftware.Steam/data/Steam",
             )
         )
@@ -151,8 +151,8 @@ def steam_installed(win, path=None):
     return steam_dir
 
 
-def steam_importer(win):
-    steam_dir = steam_installed(win)
+def steam_importer():
+    steam_dir = steam_installed()
     if not steam_dir:
         return
 
@@ -175,8 +175,8 @@ def steam_importer(win):
             if open_file.is_file() and "appmanifest" in open_file.name:
                 appmanifests.append(open_file)
 
-    importer = win.importer
+    importer = shared.importer
     importer.total_queue += len(appmanifests)
     importer.queue += len(appmanifests)
 
-    get_games_async(win, appmanifests, steam_dir, importer)
+    get_games_async(appmanifests, steam_dir, importer)

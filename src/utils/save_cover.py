@@ -27,7 +27,7 @@ from PIL import Image, ImageSequence
 from . import shared
 
 
-def resize_cover(win, cover_path=None, pixbuf=None):
+def resize_cover(cover_path=None, pixbuf=None):
     if not cover_path and not pixbuf:
         return None
 
@@ -55,7 +55,7 @@ def resize_cover(win, cover_path=None, pixbuf=None):
                 image = image.convert("RGBA")
 
             tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
-            image.resize(win.image_size).save(
+            image.resize(shared.image_size).save(
                 tmp_path,
                 compression="tiff_adobe_deflate"
                 if shared.schema.get_boolean("high-quality-images")
@@ -65,11 +65,11 @@ def resize_cover(win, cover_path=None, pixbuf=None):
     return tmp_path
 
 
-def save_cover(win, game_id, cover_path):
-    win.covers_dir.mkdir(parents=True, exist_ok=True)
+def save_cover(game_id, cover_path):
+    shared.covers_dir.mkdir(parents=True, exist_ok=True)
 
-    animated_path = win.covers_dir / f"{game_id}.gif"
-    static_path = win.covers_dir / f"{game_id}.tiff"
+    animated_path = shared.covers_dir / f"{game_id}.gif"
+    static_path = shared.covers_dir / f"{game_id}.tiff"
 
     # Remove previous covers
     animated_path.unlink(missing_ok=True)
@@ -83,7 +83,7 @@ def save_cover(win, game_id, cover_path):
         animated_path if cover_path.suffix == ".gif" else static_path,
     )
 
-    if game_id in win.game_covers:
-        win.game_covers[game_id].new_cover(
+    if game_id in shared.win.game_covers:
+        shared.win.game_covers[game_id].new_cover(
             animated_path if cover_path.suffix == ".gif" else static_path
         )

@@ -9,8 +9,8 @@ from .save_cover import save_cover, resize_cover
 
 
 class SGDBSave:
-    def __init__(self, win, games, importer=None):
-        self.win = win
+    def __init__(self, games, importer=None):
+        self.win = shared.win
         self.importer = importer
         self.exception = None
 
@@ -36,8 +36,8 @@ class SGDBSave:
                 and (
                     (shared.schema.get_boolean("sgdb-prefer"))
                     or not (
-                        (self.win.covers_dir / f"{game.game_id}.gif").is_file()
-                        or (self.win.covers_dir / f"{game.game_id}.tiff").is_file()
+                        (shared.covers_dir / f"{game.game_id}.gif").is_file()
+                        or (shared.covers_dir / f"{game.game_id}.tiff").is_file()
                     )
                 )
             )
@@ -94,9 +94,8 @@ class SGDBSave:
         Path(tmp_file.get_path()).write_bytes(response.content)
 
         save_cover(
-            self.win,
             game.game_id,
-            resize_cover(self.win, tmp_file.get_path()),
+            resize_cover(tmp_file.get_path()),
         )
 
         task.return_value(game)

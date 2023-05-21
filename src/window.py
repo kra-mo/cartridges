@@ -18,12 +18,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
-import os
 from datetime import datetime
-from pathlib import Path
 
-from gi.repository import Adw, Gdk, Gio, GLib, Gtk
+from gi.repository import Adw, Gio, GLib, Gtk
 
+from . import shared
 from .game import Game
 
 
@@ -77,34 +76,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        shared.win = self
+
         self.previous_page = self.library_view
-
-        self.data_dir = (
-            Path(os.getenv("XDG_DATA_HOME"))
-            if "XDG_DATA_HOME" in os.environ
-            else Path.home() / ".local" / "share"
-        )
-        self.config_dir = (
-            Path(os.getenv("XDG_CONFIG_HOME"))
-            if "XDG_CONFIG_HOME" in os.environ
-            else Path.home() / ".config"
-        )
-        self.cache_dir = (
-            Path(os.getenv("XDG_CACHE_HOME"))
-            if "XDG_CACHE_HOME" in os.environ
-            else Path.home() / ".cache"
-        )
-
-        self.games_dir = self.data_dir / "cartridges" / "games"
-        self.covers_dir = self.data_dir / "cartridges" / "covers"
-
-        self.schema = Gio.Settings.new("hu.kramo.Cartridges")
-
-        scale_factor = max(
-            monitor.get_scale_factor()
-            for monitor in Gdk.Display.get_default().get_monitors()
-        )
-        self.image_size = (200 * scale_factor, 300 * scale_factor)
 
         self.details_view.set_measure_overlay(self.details_view_box, True)
         self.details_view.set_clip_overlay(self.details_view_box, False)
@@ -119,22 +93,22 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         games = {}
 
-        if self.games_dir.exists():
-            for open_file in self.games_dir.iterdir():
+        if shared.games_dir.exists():
+            for open_file in shared.games_dir.iterdir():
                 data = json.load(open_file.open())
                 games[data["game_id"]] = data
 
         for game_id, game in games.items():
             if game.get("removed"):
                 for path in (
-                    self.games_dir / f"{game_id}.json",
-                    self.covers_dir / f"{game_id}.tiff",
-                    self.covers_dir / f"{game_id}.gif",
+                    shared.games_dir / f"{game_id}.json",
+                    shared.covers_dir / f"{game_id}.tiff",
+                    shared.covers_dir / f"{game_id}.gif",
                 ):
                     path.unlink(missing_ok=True)
 
             else:
-                Game(self, game).update()
+                Game(game).update()
 
         # Connect search entries
         self.search_bar.connect_entry(self.search_entry)

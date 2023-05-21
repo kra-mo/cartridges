@@ -88,11 +88,11 @@ class PreferencesWindow(Adw.PreferencesWindow):
     # Widgets and their properties to check whether to import after closing the window
     import_changed_widgets = {}
 
-    def __init__(self, win, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.win = win
+        self.win = shared.win
         self.file_chooser = Gtk.FileDialog()
-        self.set_transient_for(win)
+        self.set_transient_for(self.win)
 
         self.toast = Adw.Toast.new(_("All games removed"))
         self.toast.set_button_label(_("Undo"))
@@ -276,7 +276,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 if response == "choose_folder":
                     win.choose_folder(widget, set_dir)
 
-            if globals()[f"{source_id}_installed"](win, path):
+            if globals()[f"{source_id}_installed"](path):
                 self.import_changed = True
                 self.set_subtitle(win, source_id)
 

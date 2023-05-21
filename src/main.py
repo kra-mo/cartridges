@@ -130,7 +130,7 @@ class CartridgesApplication(Adw.Application):
     def on_preferences_action(
         self, _action=None, _parameter=None, page_name=None, expander_row=None
     ):
-        win = PreferencesWindow(self.win)
+        win = PreferencesWindow()
         if page_name:
             win.set_visible_page_name(page_name)
         if expander_row:
@@ -144,36 +144,36 @@ class CartridgesApplication(Adw.Application):
         self.win.active_game.toggle_hidden()
 
     def on_edit_game_action(self, *_args):
-        DetailsWindow(self.win, self.win.active_game)
+        DetailsWindow(self.win.active_game)
 
     def on_add_game_action(self, *_args):
-        DetailsWindow(self.win)
+        DetailsWindow()
 
     def on_import_action(self, *_args):
-        self.win.importer = Importer(self.win)
+        shared.importer = Importer()
 
-        self.win.importer.blocker = True
+        shared.importer.blocker = True
 
-        if self.win.schema.get_boolean("steam"):
-            steam_importer(self.win)
+        if shared.schema.get_boolean("steam"):
+            steam_importer()
 
-        if self.win.schema.get_boolean("lutris"):
-            lutris_importer(self.win)
+        if shared.schema.get_boolean("lutris"):
+            lutris_importer()
 
-        if self.win.schema.get_boolean("heroic"):
-            heroic_importer(self.win)
+        if shared.schema.get_boolean("heroic"):
+            heroic_importer()
 
-        if self.win.schema.get_boolean("bottles"):
-            bottles_importer(self.win)
+        if shared.schema.get_boolean("bottles"):
+            bottles_importer()
 
-        if self.win.schema.get_boolean("itch"):
-            itch_importer(self.win)
+        if shared.schema.get_boolean("itch"):
+            itch_importer()
 
-        self.win.importer.blocker = False
+        shared.importer.blocker = False
 
-        if self.win.importer.import_dialog.is_visible and self.win.importer.queue == 0:
-            self.win.importer.queue = 1
-            self.win.importer.save_game()
+        if shared.importer.import_dialog.is_visible and shared.importer.queue == 0:
+            shared.importer.queue = 1
+            shared.importer.save_game()
 
     def on_remove_game_action(self, *_args):
         self.win.active_game.remove_game()

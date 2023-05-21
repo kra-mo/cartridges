@@ -59,11 +59,11 @@ class Game(Gtk.Box):
     blacklisted = None
     game_cover = None
 
-    def __init__(self, win, data, **kwargs):
+    def __init__(self, data, **kwargs):
         super().__init__(**kwargs)
 
-        self.win = win
-        self.app = win.get_application()
+        self.win = shared.win
+        self.app = self.win.get_application()
 
         self.update_values(data)
 
@@ -127,7 +127,7 @@ class Game(Gtk.Box):
             setattr(self, key, value)
 
     def save(self):
-        self.win.games_dir.mkdir(parents=True, exist_ok=True)
+        shared.games_dir.mkdir(parents=True, exist_ok=True)
 
         attrs = (
             "added",
@@ -151,7 +151,7 @@ class Game(Gtk.Box):
 
         json.dump(
             {attr: getattr(self, attr) for attr in attrs if attr},
-            (self.win.games_dir / f"{self.game_id}.json").open("w"),
+            (shared.games_dir / f"{self.game_id}.json").open("w"),
             indent=4,
             sort_keys=True,
         )
@@ -239,11 +239,11 @@ class Game(Gtk.Box):
         self.spinner.set_spinning(loading)
 
     def get_cover_path(self):
-        cover_path = self.win.covers_dir / f"{self.game_id}.gif"
+        cover_path = shared.covers_dir / f"{self.game_id}.gif"
         if cover_path.is_file():
             return cover_path
 
-        cover_path = self.win.covers_dir / f"{self.game_id}.tiff"
+        cover_path = shared.covers_dir / f"{self.game_id}.tiff"
         if cover_path.is_file():
             return cover_path
 

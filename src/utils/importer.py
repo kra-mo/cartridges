@@ -19,6 +19,7 @@
 
 from gi.repository import Adw, GLib, Gtk
 
+from . import shared
 from .create_dialog import create_dialog
 from .game import Game
 from .save_cover import resize_cover, save_cover
@@ -26,8 +27,8 @@ from .steamgriddb import SGDBSave
 
 
 class Importer:
-    def __init__(self, win):
-        self.win = win
+    def __init__(self):
+        self.win = shared.win
         self.total_queue = 0
         self.queue = 0
         self.games_no = 0
@@ -46,7 +47,7 @@ class Importer:
             modal=True,
             default_width=350,
             default_height=-1,
-            transient_for=win,
+            transient_for=self.win,
             deletable=False,
         )
 
@@ -54,10 +55,10 @@ class Importer:
 
     def save_game(self, values=None, cover_path=None):
         if values:
-            game = Game(self.win, values)
+            game = Game(values)
 
             if save_cover:
-                save_cover(self.win, game.game_id, resize_cover(self.win, cover_path))
+                save_cover(game.game_id, resize_cover(cover_path))
 
             self.games.add(game)
 
@@ -74,7 +75,7 @@ class Importer:
                 self.queue = len(self.games)
                 self.import_statuspage.set_title(_("Importing Covers…"))
                 self.update_progressbar()
-                SGDBSave(self.win, self.games, self)
+                SGDBSave(self.games, self)
             else:
                 self.done()
 

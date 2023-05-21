@@ -26,7 +26,7 @@ from . import shared
 from .check_install import check_install
 
 
-def bottles_installed(win, path=None):
+def bottles_installed(path=None):
     location_key = "bottles-location"
     bottles_dir = (
         path if path else Path(shared.schema.get_string(location_key)).expanduser()
@@ -39,7 +39,7 @@ def bottles_installed(win, path=None):
             if path
             else (
                 Path.home() / ".var/app/com.usebottles.bottles/data/bottles",
-                win.data_dir / "bottles",
+                shared.data_dir / "bottles",
             )
         )
 
@@ -48,8 +48,8 @@ def bottles_installed(win, path=None):
     return bottles_dir
 
 
-def bottles_importer(win):
-    bottles_dir = bottles_installed(win)
+def bottles_importer():
+    bottles_dir = bottles_installed()
     if not bottles_dir:
         return
 
@@ -59,7 +59,7 @@ def bottles_importer(win):
 
     library = yaml.load(data, Loader=yaml.Loader)
 
-    importer = win.importer
+    importer = shared.importer
     importer.total_queue += len(library)
     importer.queue += len(library)
 
@@ -69,7 +69,10 @@ def bottles_importer(win):
 
         values["game_id"] = f'bottles_{game["id"]}'
 
-        if values["game_id"] in win.games and not win.games[values["game_id"]].removed:
+        if (
+            values["game_id"] in shared.win.games
+            and not shared.win.games[values["game_id"]].removed
+        ):
             importer.save_game()
             continue
 

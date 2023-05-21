@@ -27,7 +27,7 @@ from . import shared
 from .check_install import check_install
 
 
-def heroic_installed(win, path=None):
+def heroic_installed(path=None):
     location_key = "heroic-location"
     heroic_dir = (
         path if path else Path(shared.schema.get_string(location_key)).expanduser()
@@ -40,7 +40,7 @@ def heroic_installed(win, path=None):
             if path
             else (
                 Path.home() / ".var/app/com.heroicgameslauncher.hgl/config/heroic",
-                win.config_dir / "heroic",
+                shared.config_dir / "heroic",
             )
         )
 
@@ -52,13 +52,13 @@ def heroic_installed(win, path=None):
     return heroic_dir
 
 
-def heroic_importer(win):
-    heroic_dir = heroic_installed(win)
+def heroic_importer():
+    heroic_dir = heroic_installed()
     if not heroic_dir:
         return
 
     current_time = int(time())
-    importer = win.importer
+    importer = shared.importer
 
     # Import Epic games
     if not shared.schema.get_boolean("heroic-import-epic"):
@@ -82,8 +82,8 @@ def heroic_importer(win):
                 values["game_id"] = f"heroic_epic_{app_name}"
 
                 if (
-                    values["game_id"] in win.games
-                    and not win.games[values["game_id"]].removed
+                    values["game_id"] in shared.win.games
+                    and not shared.win.games[values["game_id"]].removed
                 ):
                     importer.save_game()
                     continue
@@ -131,8 +131,8 @@ def heroic_importer(win):
             values["game_id"] = f"heroic_gog_{app_name}"
 
             if (
-                values["game_id"] in win.games
-                and not win.games[values["game_id"]].removed
+                values["game_id"] in shared.win.games
+                and not shared.win.games[values["game_id"]].removed
             ):
                 importer.save_game()
                 continue
@@ -179,8 +179,8 @@ def heroic_importer(win):
             values["game_id"] = f"heroic_sideload_{app_name}"
 
             if (
-                values["game_id"] in win.games
-                and not win.games[values["game_id"]].removed
+                values["game_id"] in shared.win.games
+                and not shared.win.games[values["game_id"]].removed
             ):
                 importer.save_game()
                 continue
