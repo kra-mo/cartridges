@@ -255,7 +255,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def set_subtitle(self, win, source_id):
         getattr(win, f'{source_id.replace("-", "_")}_action_row').set_subtitle(
-            # Remove the path if the dir is picked via the Faltpak portal
+            # Remove the path if the dir is picked via the Flatpak portal
             re.sub(
                 "/run/user/\\d*/doc/......../",
                 "",
