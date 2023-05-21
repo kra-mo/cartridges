@@ -23,7 +23,7 @@ from hashlib import sha256
 from pathlib import Path
 from time import time
 
-import src.shared
+import src.shared as shared
 from src.utils.check_install import check_install
 
 

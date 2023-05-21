@@ -26,7 +26,7 @@ from time import time
 
 from gi.repository import Adw, Gio, Gtk
 
-import src.shared
+import src.shared as shared
 from src.game_cover import GameCover
 
 
@@ -60,7 +60,7 @@ class Game(Gtk.Box):
     blacklisted = None
     game_cover = None
 
-    def __init__(self, win, data, allow_side_effects=True, **kwargs):
+    def __init__(self, data, allow_side_effects=True, **kwargs):
         super().__init__(**kwargs)
 
         self.win = shared.win

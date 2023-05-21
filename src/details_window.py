@@ -25,7 +25,7 @@ from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
 
 # TODO use SGDBHelper
-import src.shared
+import src.shared as shared
 from src.game import Game
 from src.game_cover import GameCover
 from src.utils.create_dialog import create_dialog

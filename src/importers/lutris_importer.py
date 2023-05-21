@@ -22,7 +22,7 @@ from shutil import copyfile
 from sqlite3 import connect
 from time import time
 
-import src.shared
+import src.shared as shared
 from src.utils.check_install import check_install
 
 

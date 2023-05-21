@@ -29,7 +29,7 @@ gi.require_version("Adw", "1")
 # pylint: disable=wrong-import-position
 from gi.repository import Adw, Gio, GLib, Gtk
 
-import src.shared
+import src.shared as shared
 from src.details_window import DetailsWindow
 from src.importer.importer import Importer
 from src.importer.sources.lutris_source import (
