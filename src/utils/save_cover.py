@@ -24,6 +24,8 @@ from shutil import copyfile
 from gi.repository import Gio
 from PIL import Image, ImageSequence
 
+from . import shared
+
 
 def resize_cover(win, cover_path=None, pixbuf=None):
     if not cover_path and not pixbuf:
@@ -56,7 +58,7 @@ def resize_cover(win, cover_path=None, pixbuf=None):
             image.resize(win.image_size).save(
                 tmp_path,
                 compression="tiff_adobe_deflate"
-                if win.schema.get_boolean("high-quality-images")
+                if shared.schema.get_boolean("high-quality-images")
                 else "webp",
             )
 

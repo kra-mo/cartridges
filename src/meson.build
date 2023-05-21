@@ -24,6 +24,7 @@ cartridges_sources = [
   'details_window.py',
   'game.py',
   'game_cover.py',
+  'shared.py',
   'importers/steam_importer.py',
   'importers/lutris_importer.py',
   'importers/heroic_importer.py',

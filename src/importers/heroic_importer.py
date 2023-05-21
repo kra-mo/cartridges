@@ -23,13 +23,14 @@ from hashlib import sha256
 from pathlib import Path
 from time import time
 
+from . import shared
 from .check_install import check_install
 
 
 def heroic_installed(win, path=None):
     location_key = "heroic-location"
     heroic_dir = (
-        path if path else Path(win.schema.get_string(location_key)).expanduser()
+        path if path else Path(shared.schema.get_string(location_key)).expanduser()
     )
     check = "config.json"
 
@@ -46,7 +47,7 @@ def heroic_installed(win, path=None):
         if os.name == "nt" and not path:
             locations += (Path(os.getenv("appdata")) / "heroic",)
 
-        heroic_dir = check_install(check, locations, (win.schema, location_key))
+        heroic_dir = check_install(check, locations, (shared.schema, location_key))
 
     return heroic_dir
 
@@ -60,7 +61,7 @@ def heroic_importer(win):
     importer = win.importer
 
     # Import Epic games
-    if not win.schema.get_boolean("heroic-import-epic"):
+    if not shared.schema.get_boolean("heroic-import-epic"):
         pass
     elif (heroic_dir / "store_cache" / "legendary_library.json").exists():
         library = json.load(
@@ -113,7 +114,7 @@ def heroic_importer(win):
             pass
 
     # Import GOG games
-    if not win.schema.get_boolean("heroic-import-gog"):
+    if not shared.schema.get_boolean("heroic-import-gog"):
         pass
     elif (heroic_dir / "gog_store" / "installed.json").exists() and (
         heroic_dir / "store_cache" / "gog_library.json"
@@ -163,7 +164,7 @@ def heroic_importer(win):
             importer.save_game(values, image_path if image_path.exists() else None)
 
     # Import sideloaded games
-    if not win.schema.get_boolean("heroic-import-sideload"):
+    if not shared.schema.get_boolean("heroic-import-sideload"):
         pass
     elif (heroic_dir / "sideload_apps" / "library.json").exists():
         library = json.load((heroic_dir / "sideload_apps" / "library.json").open())

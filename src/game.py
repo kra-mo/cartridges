@@ -26,6 +26,7 @@ from time import time
 
 from gi.repository import Adw, Gio, Gtk
 
+from . import shared
 from .game_cover import GameCover
 
 
@@ -78,7 +79,7 @@ class Game(Gtk.Box):
         self.cover_button.connect("clicked", self.main_button_clicked, False)
         self.play_button.connect("clicked", self.main_button_clicked, True)
 
-        self.win.schema.connect("changed", self.schema_changed)
+        shared.schema.connect("changed", self.schema_changed)
 
     def update(self):
         if self.get_parent():
@@ -253,7 +254,7 @@ class Game(Gtk.Box):
             self.play_revealer.set_reveal_child(not state)
 
     def main_button_clicked(self, _widget, button):
-        if self.win.schema.get_boolean("cover-launches-game") ^ button:
+        if shared.schema.get_boolean("cover-launches-game") ^ button:
             self.launch()
         else:
             self.win.show_details_view(self)
@@ -261,7 +262,7 @@ class Game(Gtk.Box):
     def set_play_icon(self):
         self.play_button.set_icon_name(
             "help-about-symbolic"
-            if self.win.schema.get_boolean("cover-launches-game")
+            if shared.schema.get_boolean("cover-launches-game")
             else "media-playback-start-symbolic"
         )
 

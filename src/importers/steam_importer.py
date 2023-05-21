@@ -25,6 +25,7 @@ from time import time
 import requests
 from gi.repository import Gio
 
+from . import shared
 from .check_install import check_install
 
 
@@ -124,7 +125,7 @@ def get_games_async(win, appmanifests, steam_dir, importer):
 
 def steam_installed(win, path=None):
     location_key = "steam-location"
-    steam_dir = Path(win.schema.get_string(location_key)).expanduser()
+    steam_dir = Path(shared.schema.get_string(location_key)).expanduser()
     check = "steamapps"
 
     if not (steam_dir / check).is_file():
@@ -143,7 +144,9 @@ def steam_installed(win, path=None):
         if os.name == "nt":
             locations += (Path(os.getenv("programfiles(x86)")) / "Steam",)
 
-        steam_dir = check_install(check, locations, (win.schema, location_key), subdirs)
+        steam_dir = check_install(
+            check, locations, (shared.schema, location_key), subdirs
+        )
 
     return steam_dir
 

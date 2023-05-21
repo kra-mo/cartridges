@@ -24,6 +24,7 @@ from pathlib import Path
 from gi.repository import Adw, Gio, GLib, Gtk
 
 # pylint: disable=unused-import
+from . import shared
 from .bottles_importer import bottles_installed
 from .create_dialog import create_dialog
 from .heroic_importer import heroic_installed
@@ -89,7 +90,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def __init__(self, win, **kwargs):
         super().__init__(**kwargs)
-        self.schema = win.schema
         self.win = win
         self.file_chooser = Gtk.FileDialog()
         self.set_transient_for(win)
@@ -156,9 +156,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         # SteamGridDB
         def sgdb_key_changed(*_args):
-            self.schema.set_string("sgdb-key", self.sgdb_key_entry_row.get_text())
+            shared.schema.set_string("sgdb-key", self.sgdb_key_entry_row.get_text())
 
-        self.sgdb_key_entry_row.set_text(self.schema.get_string("sgdb-key"))
+        self.sgdb_key_entry_row.set_text(shared.schema.get_string("sgdb-key"))
         self.sgdb_key_entry_row.connect("changed", sgdb_key_changed)
 
         self.sgdb_key_group.set_description(
@@ -171,7 +171,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         def set_sgdb_sensitive(widget):
             if not widget.get_text():
-                self.win.schema.set_boolean("sgdb", False)
+                shared.schema.set_boolean("sgdb", False)
 
             self.sgdb_switch_row.set_sensitive(widget.get_text())
 
@@ -218,7 +218,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def bind_switches(self, settings):
         for setting in settings:
-            self.schema.bind(
+            shared.schema.bind(
                 setting,
                 self.get_switch(setting),
                 "active",
@@ -259,7 +259,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
             re.sub(
                 "/run/user/\\d*/doc/......../",
                 "",
-                str(Path(win.schema.get_string(f"{source_id}-location")).expanduser()),
+                str(
+                    Path(shared.schema.get_string(f"{source_id}-location")).expanduser()
+                ),
             )
         )
 
@@ -292,7 +294,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         self.set_subtitle(win, source_id)
 
-        win.schema.bind(
+        shared.schema.bind(
             source_id,
             getattr(win, f"{source_id}_expander_row"),
             "enable-expansion",

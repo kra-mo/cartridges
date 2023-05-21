@@ -3,6 +3,7 @@ from pathlib import Path
 import requests
 from gi.repository import Gio
 
+from . import shared
 from .create_dialog import create_dialog
 from .save_cover import save_cover, resize_cover
 
@@ -31,9 +32,9 @@ class SGDBSave:
 
         if (
             not (
-                self.win.schema.get_boolean("sgdb")
+                shared.schema.get_boolean("sgdb")
                 and (
-                    (self.win.schema.get_boolean("sgdb-prefer"))
+                    (shared.schema.get_boolean("sgdb-prefer"))
                     or not (
                         (self.win.covers_dir / f"{game.game_id}.gif").is_file()
                         or (self.win.covers_dir / f"{game.game_id}.tiff").is_file()
@@ -46,7 +47,7 @@ class SGDBSave:
             return
 
         url = "https://www.steamgriddb.com/api/v2/"
-        headers = {"Authorization": f'Bearer {self.win.schema.get_string("sgdb-key")}'}
+        headers = {"Authorization": f'Bearer {shared.schema.get_string("sgdb-key")}'}
 
         try:
             search_result = requests.get(
@@ -68,7 +69,7 @@ class SGDBSave:
         response = None
 
         try:
-            if self.win.schema.get_boolean("sgdb-animated"):
+            if shared.schema.get_boolean("sgdb-animated"):
                 try:
                     grid = requests.get(
                         f'{url}grids/game/{search_result.json()["data"][0]["id"]}?dimensions=600x900&types=animated',

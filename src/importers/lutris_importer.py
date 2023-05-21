@@ -22,13 +22,14 @@ from shutil import copyfile
 from sqlite3 import connect
 from time import time
 
+from . import shared
 from .check_install import check_install
 
 
 def lutris_installed(win, path=None):
     location_key = "lutris-location"
     lutris_dir = (
-        path if path else Path(win.schema.get_string(location_key)).expanduser()
+        path if path else Path(shared.schema.get_string(location_key)).expanduser()
     )
     check = "pga.db"
 
@@ -42,14 +43,14 @@ def lutris_installed(win, path=None):
             )
         )
 
-        lutris_dir = check_install(check, locations, (win.schema, location_key))
+        lutris_dir = check_install(check, locations, (shared.schema, location_key))
 
     return lutris_dir
 
 
 def lutris_cache_exists(win, path=None):
     cache_key = "lutris-cache-location"
-    cache_dir = path if path else Path(win.schema.get_string(cache_key)).expanduser()
+    cache_dir = path if path else Path(shared.schema.get_string(cache_key)).expanduser()
     cache_check = "coverart"
 
     if not (cache_dir / cache_check).exists():
@@ -62,7 +63,9 @@ def lutris_cache_exists(win, path=None):
             )
         )
 
-        cache_dir = check_install(cache_check, cache_locations, (win.schema, cache_key))
+        cache_dir = check_install(
+            cache_check, cache_locations, (shared.schema, cache_key)
+        )
 
     return cache_dir
 
@@ -105,7 +108,7 @@ def lutris_importer(win):
     # No need to unlink temp files as they disappear when the connection is closed
     database_tmp_path.unlink(missing_ok=True)
 
-    if not win.schema.get_boolean("lutris-import-steam"):
+    if not shared.schema.get_boolean("lutris-import-steam"):
         rows = [row for row in rows if not row[3] == "steam"]
 
     current_time = int(time())

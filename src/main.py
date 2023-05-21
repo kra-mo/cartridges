@@ -27,6 +27,7 @@ gi.require_version("Adw", "1")
 # pylint: disable=wrong-import-position
 from gi.repository import Adw, Gio, GLib, Gtk
 
+from . import shared
 from .bottles_importer import bottles_importer
 from .details_window import DetailsWindow
 from .heroic_importer import heroic_importer
@@ -53,14 +54,13 @@ class CartridgesApplication(Adw.Application):
             self.win = CartridgesWindow(application=self)
 
         # Save window geometry
-        state_settings = Gio.Settings(schema_id="hu.kramo.Cartridges.State")
-        state_settings.bind(
+        shared.state_schema.bind(
             "width", self.win, "default-width", Gio.SettingsBindFlags.DEFAULT
         )
-        state_settings.bind(
+        shared.state_schema.bind(
             "height", self.win, "default-height", Gio.SettingsBindFlags.DEFAULT
         )
-        state_settings.bind(
+        shared.state_schema.bind(
             "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
 
@@ -98,7 +98,7 @@ class CartridgesApplication(Adw.Application):
         )
         sort_action.connect("activate", self.win.on_sort_action)
         self.win.add_action(sort_action)
-        self.win.on_sort_action(sort_action, state_settings.get_value("sort-mode"))
+        self.win.on_sort_action(sort_action, shared.state_schema.get_value("sort-mode"))
 
         self.win.present()
 
