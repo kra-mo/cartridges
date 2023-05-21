@@ -76,9 +76,8 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("Steam");
         show-enable-switch: true;
 
-        Adw.ActionRow {
+        Adw.ActionRow steam_action_row {
           title: _("Steam Install Location");
-          subtitle: _("The data directory for your Steam installation");
 
           Button steam_file_chooser_button {
             icon-name: "folder-symbolic";
@@ -91,9 +90,8 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("Lutris");
         show-enable-switch: true;
 
-        Adw.ActionRow {
+        Adw.ActionRow lutris_action_row {
           title: _("Lutris Install Location");
-          subtitle: _("Directory to use when importing games");
 
           Button lutris_file_chooser_button {
             icon-name: "folder-symbolic";
@@ -101,9 +99,8 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           }
         }
 
-        Adw.ActionRow {
+        Adw.ActionRow lutris_cache_action_row {
           title: _("Lutris Cache Location");
-          subtitle: _("Directory to use when importing game covers");
 
           Button lutris_cache_file_chooser_button {
             icon-name: "folder-symbolic";
@@ -125,9 +122,8 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("Heroic");
         show-enable-switch: true;
 
-        Adw.ActionRow {
+        Adw.ActionRow heroic_action_row {
           title: _("Heroic Install Location");
-          subtitle: _("Directory to use when importing games");
 
           Button heroic_file_chooser_button {
             icon-name: "folder-symbolic";
@@ -167,9 +163,8 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("Bottles");
         show-enable-switch: true;
 
-        Adw.ActionRow {
+        Adw.ActionRow bottles_action_row {
           title: _("Bottles Install Location");
-          subtitle: _("Directory to use when importing games");
 
           Button bottles_file_chooser_button {
             icon-name: "folder-symbolic";
@@ -182,9 +177,8 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("itch");
         show-enable-switch: true;
 
-        Adw.ActionRow {
+        Adw.ActionRow itch_action_row {
           title: _("itch Install Location");
-          subtitle: _("Directory to use when importing games");
 
           Button itch_file_chooser_button {
             icon-name: "folder-symbolic";

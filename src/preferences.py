@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+import re
 from pathlib import Path
 
 from gi.repository import Adw, Gio, GLib, Gtk
@@ -47,23 +48,29 @@ class PreferencesWindow(Adw.PreferencesWindow):
     remove_all_games_button = Gtk.Template.Child()
 
     steam_expander_row = Gtk.Template.Child()
+    steam_action_row = Gtk.Template.Child()
     steam_file_chooser_button = Gtk.Template.Child()
 
     lutris_expander_row = Gtk.Template.Child()
+    lutris_action_row = Gtk.Template.Child()
     lutris_file_chooser_button = Gtk.Template.Child()
+    lutris_cache_action_row = Gtk.Template.Child()
     lutris_cache_file_chooser_button = Gtk.Template.Child()
     lutris_import_steam_switch = Gtk.Template.Child()
 
     heroic_expander_row = Gtk.Template.Child()
+    heroic_action_row = Gtk.Template.Child()
     heroic_file_chooser_button = Gtk.Template.Child()
     heroic_import_epic_switch = Gtk.Template.Child()
     heroic_import_gog_switch = Gtk.Template.Child()
     heroic_import_sideload_switch = Gtk.Template.Child()
 
     bottles_expander_row = Gtk.Template.Child()
+    bottles_action_row = Gtk.Template.Child()
     bottles_file_chooser_button = Gtk.Template.Child()
 
     itch_expander_row = Gtk.Template.Child()
+    itch_action_row = Gtk.Template.Child()
     itch_file_chooser_button = Gtk.Template.Child()
 
     sgdb_key_group = Gtk.Template.Child()
@@ -121,6 +128,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
             if lutris_cache_exists(self.win, path):
                 self.import_changed = True
+                self.set_subtitle(self, "lutris-cache")
+
             else:
                 create_dialog(
                     self.win,
@@ -129,6 +138,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
                     "choose_folder",
                     _("Set Location"),
                 ).connect("response", response)
+
+        self.set_subtitle(self, "lutris-cache")
 
         self.lutris_cache_file_chooser_button.connect(
             "clicked", self.choose_folder, set_cache_dir
@@ -242,6 +253,16 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         self.add_toast(self.toast)
 
+    def set_subtitle(self, win, source_id):
+        getattr(win, f'{source_id.replace("-", "_")}_action_row').set_subtitle(
+            # Remove the path if the dir is picked via the Faltpak portal
+            re.sub(
+                "/run/user/\\d*/doc/......../",
+                "",
+                str(Path(win.schema.get_string(f"{source_id}-location")).expanduser()),
+            )
+        )
+
     def create_preferences(self, win, source_id, name, config=False):
         def set_dir(_source, result, *_args):
             try:
@@ -255,6 +276,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
             if globals()[f"{source_id}_installed"](win, path):
                 self.import_changed = True
+                self.set_subtitle(win, source_id)
+
             else:
                 create_dialog(
                     win,
@@ -266,6 +289,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
                     "choose_folder",
                     _("Set Location"),
                 ).connect("response", response)
+
+        self.set_subtitle(win, source_id)
 
         win.schema.bind(
             source_id,
