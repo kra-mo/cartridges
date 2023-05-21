@@ -160,7 +160,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         def set_sgdb_sensitive(widget):
             if not widget.get_text():
-                self.sgdb_switch.set_active(False)
+                self.win.schema.set_boolean("sgdb", False)
 
             self.sgdb_switch_row.set_sensitive(widget.get_text())
 
