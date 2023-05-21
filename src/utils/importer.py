@@ -105,14 +105,16 @@ class Importer:
 
             self.win.toast_overlay.add_toast(toast)
             # Add timeout to make it the last thing to happen
-            GLib.timeout_add(0, self.response, None, None)
+            GLib.timeout_add(0, self.warning, None, None)
 
     def response(self, _widget, response, page_name=None, expander_row=None):
         if response == "open_preferences":
             self.win.get_application().on_preferences_action(
                 None, page_name=page_name, expander_row=expander_row
             )
-        elif self.sgdb_exception:
+
+    def warning(self, *_args):
+        if self.sgdb_exception:
             create_dialog(
                 self.win,
                 _("Couldn't Connect to SteamGridDB"),
