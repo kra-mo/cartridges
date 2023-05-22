@@ -91,10 +91,10 @@ class GameCover:
                     )
             else:
                 self.blurred = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
-                    "/hu/kramo/Cartridges/library_placeholder.svg", 2, 3, False
+                    "/hu/kramo/Cartridges/library_placeholder.svg", 2, 2, False
                 )
 
-                self.luminance = (0.5, 0.5)
+                self.luminance = (0.1, 0.8)
 
         return self.blurred
 
