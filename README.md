@@ -12,7 +12,7 @@
 [![License][license-image]][license-url]
 [![Code style][code-style-image]][code-style-url]
 [![Discord Chatroom][discord-image]][discord-url]
-  
+
 [github-actions-url]: https://github.com/kra-mo/cartridges
 [github-actions-image]: https://github.com/kra-mo/cartridges/actions/workflows/flatpak-builder.yml/badge.svg
 [license-url]: https://github.com/kra-mo/cartridges/blob/main/LICENSE
@@ -78,6 +78,12 @@ See [Building](https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md#bu
 
 # Contributing
 
-See [CONTRIBUTING](https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md).
+See [CONTRIBUTING.md](https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md).
 
 Thanks to [Weblate](https://weblate.org/) for hosting our translations!
+
+# Code of Conduct
+
+The project follows the [GNOME Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct).
+
+See [CODE_OF_CONDUCT.md](https://github.com/kra-mo/cartridges/blob/main/CODE_OF_CONDUCT.md).
