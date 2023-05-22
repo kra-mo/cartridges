@@ -194,23 +194,30 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                       icon-name: "document-edit-symbolic";
                       action-name: "app.edit_game";
                       tooltip-text: _("Edit");
+
+                      styles ["raised", "circular"]
                     }
 
                     Button details_view_hide_button {
                       action-name: "app.hide_game";
+
+                      styles ["raised", "circular"]
                     }
 
                     Button {
                       icon-name: "user-trash-symbolic";
                       action-name: "app.remove_game";
                       tooltip-text: _("Remove");
+
+                      styles ["raised", "circular"]
                     }
 
                     MenuButton {
                       icon-name: "system-search-symbolic";
                       menu-model: search;
                       tooltip-text: _("Search");
-                      always-show-arrow: true;
+
+                      styles ["raised", "circular"]
                     }
 
                     styles [

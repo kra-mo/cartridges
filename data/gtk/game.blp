@@ -16,35 +16,37 @@ template $Game : Box {
         valign: start;
         halign: start;
 
-        Box {
-          halign: start;
-          valign: end;
+        Button play_button {
+          icon-name: "media-playback-start-symbolic";
+          margin-start: 6;
+          margin-end: 3;
+          margin-top: 6;
+          margin-bottom: 3;
 
-          Button play_button {
-            icon-name: "media-playback-start-symbolic";
-            margin-start: 6;
-            margin-end: 3;
-            margin-top: 6;
-            margin-bottom: 3;
+          styles [
+            "circular",
+            "osd",
+          ]
+        }
+      }
 
-            styles [
-              "circular",
-              "osd",
-            ]
-          }
+      [overlay]
+      Revealer menu_revealer {
+        transition-type: crossfade;
+        valign: start;
+        halign: end;
 
-          MenuButton menu_button {
-            icon-name: "view-more-symbolic";
-            margin-start: 3;
-            margin-end: 3;
-            margin-top: 6;
-            margin-bottom: 3;
+        MenuButton menu_button {
+          icon-name: "view-more-symbolic";
+          margin-start: 3;
+          margin-end: 6;
+          margin-top: 6;
+          margin-bottom: 3;
 
-            styles [
-              "circular",
-              "osd",
-            ]
-          }
+          styles [
+            "circular",
+            "osd",
+          ]
         }
       }
 
