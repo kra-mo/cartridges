@@ -52,12 +52,6 @@ class DetailsWindow(Adw.Window):
 
     cover_changed = False
 
-    def delete_pixbuf(self, *_args):
-        self.game_cover.new_cover()
-
-        self.cover_button_delete_revealer.set_reveal_child(False)
-        self.cover_changed = True
-
     def __init__(self, game=None, **kwargs):
         super().__init__(**kwargs)
 
@@ -126,6 +120,12 @@ class DetailsWindow(Adw.Window):
 
         self.set_focus(self.name)
         self.present()
+
+    def delete_pixbuf(self, *_args):
+        self.game_cover.new_cover()
+
+        self.cover_button_delete_revealer.set_reveal_child(False)
+        self.cover_changed = True
 
     def apply_preferences(self, *_args):
         final_name = self.name.get_text()

@@ -55,6 +55,10 @@ template $Game : Box {
           name: "cover_button";
           overflow: hidden;
 
+          accessibility {
+            labelled-by: title;
+          }
+
           Overlay {
             [overlay]
             Spinner spinner {
