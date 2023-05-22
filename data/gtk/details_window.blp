@@ -128,6 +128,10 @@ template $DetailsWindow : Adw.Window {
                     valign: center;
                     icon-name: "help-about-symbolic";
 
+                    accessibility {
+                        label: _("Info");
+                    }
+
                     popover: Popover {
                         visible: bind-property exec_info_button.active bidirectional;
 
