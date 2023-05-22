@@ -158,13 +158,13 @@ def steam_importer():
 
     appmanifests = []
 
-    if not (lib_file := steam_dir / "steamapps" / "libraryfolders.vdf").is_file():
-        return
-
-    libraryfolders = lib_file.open().read()
-    steam_dirs = [
-        Path(path) for path in re.findall('"path"\t\t"(.*)"\n', libraryfolders)
-    ]
+    if (lib_file := steam_dir / "steamapps" / "libraryfolders.vdf").is_file():
+        libraryfolders = lib_file.open().read()
+        steam_dirs = [
+            Path(path) for path in re.findall('"path"\t\t"(.*)"\n', libraryfolders)
+        ]
+    else:
+        steam_dirs = [steam_dir]
 
     for directory in steam_dirs:
         if not (directory / "steamapps").exists():
