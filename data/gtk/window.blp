@@ -91,6 +91,7 @@ template $CartridgesWindow : Adw.ApplicationWindow {
 
               Adw.Clamp {
                 maximum-size: 200;
+
                 Overlay {
                   [overlay]
                   Spinner details_view_spinner {
@@ -141,7 +142,7 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                   natural-wrap-mode: word;
 
                   styles [
-                    "heading"
+                    "heading",
                   ]
                 }
 
@@ -156,6 +157,7 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                     wrap-mode: word_char;
                     natural-wrap-mode: word;
                   }
+
                   Label details_view_last_played {
                     margin-start: 12;
                     wrap: true;
@@ -163,6 +165,7 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                     natural-wrap-mode: word;
                   }
                 }
+
                 Box {
                   hexpand: true;
                   vexpand: true;
@@ -191,44 +194,27 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                       icon-name: "document-edit-symbolic";
                       action-name: "app.edit_game";
                       tooltip-text: _("Edit");
-
-                      styles [
-                      "circular",
-                    ]
                     }
+
                     Button details_view_hide_button {
                       action-name: "app.hide_game";
-
-                      styles [
-                      "circular",
-                    ]
                     }
+
                     Button {
                       icon-name: "user-trash-symbolic";
                       action-name: "app.remove_game";
                       tooltip-text: _("Remove");
-
-                      styles [
-                      "circular",
-                    ]
                     }
-                    
-                    styles [
-                      "linked",
-                    ]
-                  }
 
-                  MenuButton {
-                      halign: start;
-                      valign: center;
-                      margin-top: 24;
-                      margin-start: 12;
+                    MenuButton {
                       icon-name: "system-search-symbolic";
                       menu-model: search;
                       tooltip-text: _("Search");
+                      always-show-arrow: true;
+                    }
 
-                      styles [
-                      "circular",
+                    styles [
+                      "toolbar",
                     ]
                   }
                 }
@@ -271,6 +257,7 @@ template $CartridgesWindow : Adw.ApplicationWindow {
         SearchBar search_bar {
           search-mode-enabled: bind-property search_button.active bidirectional;
           key-capture-widget: library_view;
+
           Adw.Clamp {
             maximum-size: 500;
             tightening-threshold: 500;
@@ -336,6 +323,7 @@ template $CartridgesWindow : Adw.ApplicationWindow {
         SearchBar hidden_search_bar {
           search-mode-enabled: bind-property hidden_search_button.active bidirectional;
           key-capture-widget: hidden_library_view;
+
           Adw.Clamp {
             maximum-size: 500;
             tightening-threshold: 500;
@@ -442,6 +430,7 @@ menu add_games {
       action: "app.add_game";
     }
   }
+
   section {
     item {
       label: _("Import");
@@ -453,22 +442,27 @@ menu add_games {
 menu search {
   section {
     label: "Search on…";
+
     item {
       label: "IGDB";
       action: "app.igdb_search";
     }
+
     item {
       label: "SteamGridDB";
       action: "app.sgdb_search";
     }
+
     item {
       label: "ProtonDB";
       action: "app.protondb_search";
     }
+
     item {
       label: "Lutris";
       action: "app.lutris_search";
     }
+
     item {
       label: "HowLongToBeat";
       action: "app.hltb_search";

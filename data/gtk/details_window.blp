@@ -127,10 +127,7 @@ template $DetailsWindow : Adw.Window {
                 Gtk.MenuButton exec_info_button {
                     valign: center;
                     icon-name: "help-about-symbolic";
-
-                    accessibility {
-                        label: _("Info");
-                    }
+                    tooltip-text: _("More Info");
 
                     popover: Popover {
                         visible: bind-property exec_info_button.active bidirectional;
