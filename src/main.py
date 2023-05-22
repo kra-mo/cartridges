@@ -67,7 +67,8 @@ class CartridgesApplication(Adw.Application):
         # Create actions
         self.create_actions(
             {
-                ("quit", ("<primary>q", "<primary>w")),
+                ("quit", ("<primary>q",)),
+                ("close_window", ("<primary>w",)),
                 ("about",),
                 ("preferences", ("<primary>comma",)),
                 ("launch_game",),
@@ -199,6 +200,9 @@ class CartridgesApplication(Adw.Application):
 
     def on_hltb_search_action(self, *_args):
         self.search("https://howlongtobeat.com/?q=")
+
+    def on_close_window_action(self, *_args):
+        self.win.close()
 
     def on_quit_action(self, *_args):
         self.quit()
