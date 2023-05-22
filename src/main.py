@@ -67,7 +67,7 @@ class CartridgesApplication(Adw.Application):
         # Create actions
         self.create_actions(
             {
-                ("quit", ("<primary>q",)),
+                ("quit", ("<primary>q", "<primary>w")),
                 ("about",),
                 ("preferences", ("<primary>comma",)),
                 ("launch_game",),
