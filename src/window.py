@@ -50,6 +50,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     details_view_title = Gtk.Template.Child()
     details_view_header_bar_title = Gtk.Template.Child()
     details_view_blurred_cover = Gtk.Template.Child()
+    details_view_play_button = Gtk.Template.Child()
     details_view_developer = Gtk.Template.Child()
     details_view_added = Gtk.Template.Child()
     details_view_last_played = Gtk.Template.Child()
@@ -234,6 +235,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         if self.stack.get_visible_child() != self.details_view:
             self.navigate(self.details_view)
 
+        self.set_focus(self.details_view_play_button)
         self.set_details_view_opacity()
 
     def set_details_view_opacity(self, *_args):
