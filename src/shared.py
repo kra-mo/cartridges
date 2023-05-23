@@ -52,3 +52,4 @@ image_size = (200 * scale_factor, 300 * scale_factor)
 # pylint: disable=invalid-name
 win = None
 importer = None
+spec_version = 1.5  # The version of the game_id.json spec

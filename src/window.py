@@ -100,6 +100,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 games[data["game_id"]] = data
 
         for game_id, game in games.items():
+            if (version := game.get("version")) and version > shared.spec_version:
+                continue
+
             if game.get("removed"):
                 for path in (
                     shared.games_dir / f"{game_id}.json",

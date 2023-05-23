@@ -65,6 +65,7 @@ class Game(Gtk.Box):
 
         self.win = shared.win
         self.app = self.win.get_application()
+        self.version = shared.spec_version
 
         self.update_values(data)
 
@@ -141,6 +142,7 @@ class Game(Gtk.Box):
             "developer",
             "removed",
             "blacklisted",
+            "version",
         )
 
         # TODO: remove for 2.0
@@ -179,19 +181,17 @@ class Game(Gtk.Box):
         self.last_played = int(time())
         self.save()
 
-        args = " ".join(
-            [
-                "flatpak-spawn",
-                "--host",
-                "/bin/sh",
-                "-c",
-                shlex.quote(" ".join(self.executable)),
-            ]
-            if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
-            else self.executable
+        string = (
+            self.executable
+            if isinstance(self.executable, str)
+            else shlex.join(self.executable)
         )
 
-        print(args)
+        args = (
+            "flatpak-spawn --host /bin/sh -c " + shlex.quote(string)  # Flatpak
+            if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
+            else string  # Others
+        )
 
         subprocess.Popen(
             args,

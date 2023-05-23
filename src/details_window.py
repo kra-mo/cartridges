@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+import shlex
 from time import time
 
 from gi.repository import Adw, Gio, GLib, Gtk
@@ -66,7 +67,11 @@ class DetailsWindow(Adw.Window):
             self.name.set_text(self.game.name)
             if self.game.developer:
                 self.developer.set_text(self.game.developer)
-            self.executable.set_text(" ".join(self.game.executable))
+            self.executable.set_text(
+                self.game.executable
+                if isinstance(self.game.executable, str)
+                else shlex.join(self.game.executable)
+            )
             self.apply_button.set_label(_("Apply"))
 
             self.game_cover.new_cover(self.game.get_cover_path())
@@ -131,7 +136,6 @@ class DetailsWindow(Adw.Window):
         final_name = self.name.get_text()
         final_developer = self.developer.get_text()
         final_executable = self.executable.get_text()
-        final_executable_split = final_executable.split()
 
         if not self.game:
             if final_name == "":
@@ -183,7 +187,7 @@ class DetailsWindow(Adw.Window):
 
         self.game.name = final_name
         self.game.developer = final_developer or None
-        self.game.executable = final_executable_split
+        self.game.executable = final_executable
 
         if self.game.game_id in self.win.game_covers.keys():
             self.win.game_covers[self.game.game_id].animation = None
