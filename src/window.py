@@ -234,8 +234,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         if self.stack.get_visible_child() != self.details_view:
             self.navigate(self.details_view)
+            self.set_focus(self.details_view_play_button)
 
-        self.set_focus(self.details_view_play_button)
         self.set_details_view_opacity()
 
     def set_details_view_opacity(self, *_args):
