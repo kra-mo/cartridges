@@ -30,6 +30,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GLib, Gtk
 
 import src.shared as shared
+from src.store.store import Store
 from src.details_window import DetailsWindow
 from src.importer.importer import Importer
 from src.importer.sources.lutris_source import (
@@ -47,6 +48,7 @@ from src.window import CartridgesWindow
 
 class CartridgesApplication(Adw.Application):
     win = None
+    store = None
 
     def __init__(self):
         super().__init__(
@@ -54,6 +56,11 @@ class CartridgesApplication(Adw.Application):
         )
 
     def do_activate(self):  # pylint: disable=arguments-differ
+        # Create the games store
+        if not self.store:
+            # TODO add managers to the store
+            self.store = Store()
+
         # Create the main window
         self.win = self.props.active_window  # pylint: disable=no-member
         if not self.win:

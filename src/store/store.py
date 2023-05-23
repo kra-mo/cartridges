@@ -1,3 +1,4 @@
+import src.shared as shared
 from src.game import Game
 from src.store.manager import Manager
 from src.utils.task import Task
@@ -32,6 +33,7 @@ class Store:
     games: dict[str, Game]
 
     def __init__(self) -> None:
+        shared.store = self
         self.managers = set()
         self.games = {}
         self.pipelines = {}

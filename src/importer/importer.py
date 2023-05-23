@@ -118,23 +118,13 @@ class Importer:
             if game is None:
                 continue
 
-            # TODO register in store instead of dict
-
-            # Avoid duplicates
-            if (
-                game.game_id in shared.win.games
-                and not shared.win.games[game.game_id].removed
-            ):
-                continue
-
             # Register game
-            logging.info("New game registered %s (%s)", game.name, game.game_id)
-            shared.win.games[game.game_id] = game
-            game.save()
+            logging.info("Imported %s (%s)", game.name, game.game_id)
+            shared.store.add_game(game)
             self.n_games_added += 1
 
             # Start sgdb lookup for game
-            # HACK move to its own manager
+            # TODO move to its own manager
             task = Task.new(
                 None, self.sgdb_cancellable, self.sgdb_task_callback, (game,)
             )
