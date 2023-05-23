@@ -4,12 +4,14 @@ from gi.repository import GObject
 
 import src.shared as shared
 from src.game import Game
+from src.store.managers.manager import Manager
 from src.utils.task import Task
-from store.managers.manager import Manager
 
 
 class Pipeline(GObject.Object):
     """Class representing a set of managers for a game"""
+
+    __gtype_name__ = "Pipeline"
 
     game: Game
 
