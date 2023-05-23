@@ -6,13 +6,16 @@
   
  A GTK4 + Libadwaita game launcher
 
+[![GNOME Circle][circle-image]][circle-url]
 [![Flathub][flathub-image]][flathub-url]
 [![Build status][github-actions-image]][github-actions-url]
 [![Translation Status][weblate-image]][weblate-url]
 [![License][license-image]][license-url]
 [![Code style][code-style-image]][code-style-url]
-[![Discord Chatroom][discord-image]][discord-url]
+[![Discord][discord-image]][discord-url]
 
+[circle-url]: https://circle.gnome.org
+[circle-image]: https://circle.gnome.org/assets/button/badge.svg
 [github-actions-url]: https://github.com/kra-mo/cartridges
 [github-actions-image]: https://github.com/kra-mo/cartridges/actions/workflows/flatpak-builder.yml/badge.svg
 [license-url]: https://github.com/kra-mo/cartridges/blob/main/LICENSE
