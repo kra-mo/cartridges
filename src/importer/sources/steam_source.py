@@ -96,18 +96,6 @@ class SteamSourceIterator(SourceIterator):
         if cover_path.is_file():
             save_cover(game.game_id, resize_cover(cover_path))
 
-        # Get online metadata
-        # TODO move to its own manager
-        try:
-            online_data = steam.get_api_data(appid=appid)
-        except (HTTPError, JSONDecodeError):
-            pass
-        except (SteamNotAGameError, SteamGameNotFoundError):
-            game.update_values({"blacklisted": True})
-        else:
-            game.update_values(online_data)
-        return game
-
 
 class SteamSource(Source):
     name = "Steam"

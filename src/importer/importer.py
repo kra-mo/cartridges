@@ -22,33 +22,21 @@ class Importer:
     n_games_added = 0
     n_source_tasks_created = 0
     n_source_tasks_done = 0
-    n_sgdb_tasks_created = 0
-    n_sgdb_tasks_done = 0
-    sgdb_cancellable = None
-    sgdb_error = None
 
     def __init__(self):
         self.sources = set()
 
     @property
-    def n_tasks_created(self):
-        return self.n_source_tasks_created + self.n_sgdb_tasks_created
-
-    @property
-    def n_tasks_done(self):
-        return self.n_source_tasks_done + self.n_sgdb_tasks_done
-
-    @property
     def progress(self):
         try:
-            progress = self.n_tasks_done / self.n_tasks_created
+            progress = self.n_source_tasks_done / self.n_source_tasks_created
         except ZeroDivisionError:
             progress = 1
         return progress
 
     @property
     def finished(self):
-        return self.n_tasks_created == self.n_tasks_done
+        return self.n_source_tasks_created == self.n_source_tasks_done
 
     def add_source(self, source):
         self.sources.add(source)
@@ -123,15 +111,6 @@ class Importer:
             shared.store.add_game(game)
             self.n_games_added += 1
 
-            # Start sgdb lookup for game
-            # TODO move to its own manager
-            task = Task.new(
-                None, self.sgdb_cancellable, self.sgdb_task_callback, (game,)
-            )
-            self.n_sgdb_tasks_created += 1
-            task.set_task_data((game,))
-            task.run_in_thread(self.sgdb_task_thread_func)
-
     def source_task_callback(self, _obj, _result, data):
         """Source import callback"""
         source, *_rest = data
@@ -141,38 +120,14 @@ class Importer:
         if self.finished:
             self.import_callback()
 
-    def sgdb_task_thread_func(self, _task, _obj, data, cancellable):
-        """SGDB query code"""
-        game, *_rest = data
-        game.set_loading(1)
-        sgdb = SGDBHelper()
-        try:
-            sgdb.conditionaly_update_cover(game)
-        except SGDBAuthError as error:
-            cancellable.cancel()
-            self.sgdb_error = error
-        except (HTTPError, SGDBError) as _error:
-            # TODO handle other SGDB errors
-            pass
-
-    def sgdb_task_callback(self, _obj, _result, data):
-        """SGDB query callback"""
-        game, *_rest = data
-        logging.debug("SGDB import done for game %s", game.name)
-        game.set_loading(-1)
-        self.n_sgdb_tasks_done += 1
-        self.update_progressbar()
-        if self.finished:
-            self.import_callback()
-
     def import_callback(self):
         """Callback called when importing has finished"""
         logging.info("Import done")
         self.import_dialog.close()
+        # TODO replace by summary if necessary
         self.create_summary_toast()
         # TODO create a summary of errors/warnings/tips popup (eg. SGDB, Steam libraries)
-        if self.sgdb_error is not None:
-            self.create_sgdb_error_dialog()
+        # Get the error data from shared.store.managers)
 
     def create_summary_toast(self):
         """N games imported toast"""
@@ -198,16 +153,6 @@ class Importer:
             toast.set_title(_("{} games imported").format(self.n_games_added))
 
         shared.win.toast_overlay.add_toast(toast)
-
-    def create_sgdb_error_dialog(self):
-        """SGDB error dialog"""
-        create_dialog(
-            shared.win,
-            _("Couldn't Connect to SteamGridDB"),
-            str(self.sgdb_error),
-            "open_preferences",
-            _("Preferences"),
-        ).connect("response", self.dialog_response_callback, "sgdb")
 
     def open_preferences(self, page=None, expander_row=None):
         shared.win.get_application().on_preferences_action(
