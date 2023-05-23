@@ -1,7 +1,7 @@
 from requests import HTTPError, JSONDecodeError
 
 from src.game import Game
-from src.store.manager import Manager
+from src.store.managers.manager import Manager
 from src.utils.steam import SteamGameNotFoundError, SteamHelper, SteamNotAGameError
 
 

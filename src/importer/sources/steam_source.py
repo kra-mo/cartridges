@@ -4,22 +4,15 @@ from pathlib import Path
 from time import time
 from typing import Iterator
 
-from requests import HTTPError, JSONDecodeError
-
 from src.game import Game
-from src.importer.source import Source, SourceIterator
+from src.importer.sources.source import Source, SourceIterator
 from src.utils.decorators import (
     replaced_by_env_path,
     replaced_by_path,
     replaced_by_schema_key,
 )
 from src.utils.save_cover import resize_cover, save_cover
-from src.utils.steam import (
-    SteamGameNotFoundError,
-    SteamHelper,
-    SteamInvalidManifestError,
-    SteamNotAGameError,
-)
+from src.utils.steam import SteamHelper, SteamInvalidManifestError
 
 
 class SteamSourceIterator(SourceIterator):

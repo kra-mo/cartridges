@@ -39,10 +39,10 @@ from src.importer.sources.steam_source import (
     SteamWindowsSource,
 )
 from src.preferences import PreferencesWindow
-from src.store.display_manager import DisplayManager
-from src.store.file_manager import FileManager
-from src.store.sgdb_manager import SGDBManager
-from src.store.steam_api_manager import SteamAPIManager
+from src.store.managers.display_manager import DisplayManager
+from src.store.managers.file_manager import FileManager
+from src.store.managers.sgdb_manager import SGDBManager
+from src.store.managers.steam_api_manager import SteamAPIManager
 from src.store.store import Store
 from src.window import CartridgesWindow
 

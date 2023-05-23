@@ -4,8 +4,8 @@ from gi.repository import GObject
 
 import src.shared as shared
 from src.game import Game
-from src.store.manager import Manager
 from src.utils.task import Task
+from store.managers.manager import Manager
 
 
 class Pipeline(GObject.Object):

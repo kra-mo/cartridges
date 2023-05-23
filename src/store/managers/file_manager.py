@@ -1,7 +1,7 @@
 from src.game import Game
-from src.store.manager import Manager
-from src.store.sgdb_manager import SGDBManager
-from src.store.steam_api_manager import SteamAPIManager
+from src.store.managers.manager import Manager
+from src.store.managers.sgdb_manager import SGDBManager
+from src.store.managers.steam_api_manager import SteamAPIManager
 
 
 class FileManager(Manager):

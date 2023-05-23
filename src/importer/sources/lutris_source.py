@@ -1,12 +1,12 @@
 from abc import abstractmethod
 from functools import lru_cache
+from pathlib import Path
 from sqlite3 import connect
 from time import time
-from pathlib import Path
 
 import src.shared as shared
 from src.game import Game
-from src.importer.source import Source, SourceIterator
+from src.importer.sources.source import Source, SourceIterator
 from src.utils.decorators import replaced_by_path, replaced_by_schema_key
 from src.utils.save_cover import resize_cover, save_cover
 
