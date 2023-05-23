@@ -369,3 +369,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
             self.primary_menu_button.popup()
         elif self.stack.get_visible_child() == self.hidden_library_view:
             self.hidden_primary_menu_button.popup()
+
+    def on_close_action(self, *_args):
+        self.close()
