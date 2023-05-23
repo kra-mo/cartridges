@@ -9,10 +9,10 @@ data/gtk/window.blp
 
 src/main.py
 src/window.py
+src/details_window.py
 src/game.py
 src/preferences.py
 
-src/utils/create_details_window.py
 src/utils/create_dialog.py
 src/utils/importer.py
 src/utils/steamgriddb.py
