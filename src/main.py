@@ -109,7 +109,7 @@ class CartridgesApplication(Adw.Application):
             application_name=_("Cartridges"),
             application_icon="hu.kramo.Cartridges",
             developer_name="kramo",
-            version="1.4",
+            version="1.5",
             developers=[
                 "kramo https://kramo.hu",
                 "Arcitec https://github.com/Arcitec",
