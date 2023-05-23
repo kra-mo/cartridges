@@ -30,19 +30,20 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GLib, Gtk
 
 import src.shared as shared
-from src.store.store import Store
 from src.details_window import DetailsWindow
 from src.importer.importer import Importer
-from src.importer.sources.lutris_source import (
-    LutrisFlatpakSource,
-    LutrisNativeSource,
-)
+from src.importer.sources.lutris_source import LutrisFlatpakSource, LutrisNativeSource
 from src.importer.sources.steam_source import (
-    SteamNativeSource,
     SteamFlatpakSource,
+    SteamNativeSource,
     SteamWindowsSource,
 )
 from src.preferences import PreferencesWindow
+from src.store.display_manager import DisplayManager
+from src.store.file_manager import FileManager
+from src.store.sgdb_manager import SGDBManager
+from src.store.steam_api_manager import SteamAPIManager
+from src.store.store import Store
 from src.window import CartridgesWindow
 
 
@@ -56,10 +57,13 @@ class CartridgesApplication(Adw.Application):
         )
 
     def do_activate(self):  # pylint: disable=arguments-differ
-        # Create the games store
+        # Create the games store and its managers
         if not self.store:
-            # TODO add managers to the store
             self.store = Store()
+            self.store.add_manager(SteamAPIManager())
+            self.store.add_manager(SGDBManager())
+            self.store.add_manager(FileManager())
+            self.store.add_manager(DisplayManager())
 
         # Create the main window
         self.win = self.props.active_window  # pylint: disable=no-member
