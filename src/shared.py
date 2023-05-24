@@ -53,4 +53,4 @@ image_size = (200 * scale_factor, 300 * scale_factor)
 win = None
 importer = None
 store = None
-spec_version = 1.5  # The version of the game_id.json spec
+spec_version = 2.0  # The version of the game_id.json spec
