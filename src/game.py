@@ -59,7 +59,7 @@ class Game(Gtk.Box):
     removed = None
     blacklisted = None
     game_cover = None
-    version = None
+    version = 0
 
     def __init__(self, data, allow_side_effects=True, **kwargs):
         super().__init__(**kwargs)
