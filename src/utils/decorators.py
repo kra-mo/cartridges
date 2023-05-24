@@ -17,7 +17,7 @@ from pathlib import Path
 from os import PathLike, environ
 from functools import wraps
 
-import src.shared as shared
+from src import shared
 
 
 def replaced_by_path(override: PathLike):  # Decorator builder

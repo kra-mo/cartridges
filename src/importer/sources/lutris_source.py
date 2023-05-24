@@ -4,7 +4,7 @@ from pathlib import Path
 from sqlite3 import connect
 from time import time
 
-import src.shared as shared
+from src import shared
 from src.game import Game
 from src.importer.sources.source import Source, SourceIterator
 from src.utils.decorators import replaced_by_path, replaced_by_schema_key

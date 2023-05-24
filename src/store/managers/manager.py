@@ -20,7 +20,7 @@ class Manager:
     def __init__(self) -> None:
         super().__init__()
         self.cancellable = Gio.Cancellable()
-        self.errors = list()
+        self.errors = []
 
     def cancel_tasks(self):
         """Cancel all tasks for this manager"""

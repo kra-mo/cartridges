@@ -5,7 +5,7 @@ import requests
 from gi.repository import Gio
 from requests import HTTPError
 
-import src.shared as shared
+from src import shared
 from src.utils.create_dialog import create_dialog
 from src.utils.save_cover import resize_cover, save_cover
 

@@ -2,7 +2,7 @@ from typing import Iterable
 
 from gi.repository import GObject
 
-import src.shared as shared
+from src import shared
 from src.game import Game
 from src.store.managers.manager import Manager
 from src.utils.task import Task

@@ -24,7 +24,7 @@ from pathlib import Path
 from gi.repository import Adw, Gio, GLib, Gtk
 
 # pylint: disable=unused-import
-import src.shared as shared
+from src import shared
 
 # TODO use the new sources
 from src.importers.bottles_importer import bottles_installed
@@ -128,7 +128,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 if response == "choose_folder":
                     self.choose_folder(widget, set_cache_dir)
 
-            if lutris_cache_exists(self.win, path):
+            if lutris_cache_exists(path):
                 self.import_changed = True
                 self.set_subtitle(self, "lutris-cache")
 
