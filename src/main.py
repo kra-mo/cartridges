@@ -43,6 +43,7 @@ from src.importer.sources.steam_source import (
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
+from store.managers.format_update_manager import FormatUpdateManager
 from src.store.managers.sgdb_manager import SGDBManager
 from src.store.managers.steam_api_manager import SteamAPIManager
 from src.store.store import Store
@@ -76,9 +77,10 @@ class CartridgesApplication(Adw.Application):
             "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
 
-        # Create the games store with bare minimum managers
+        # Create the games store ready to load games from disk
         if not shared.store:
             shared.store = Store()
+            shared.store.add_manager(FormatUpdateManager())
             shared.store.add_manager(DisplayManager())
 
         # Load games from disk

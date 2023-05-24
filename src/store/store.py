@@ -103,7 +103,7 @@ class Store:
         """
 
         # Ignore games from a newer spec version
-        if (version := game.get("version")) and version > shared.spec_version:
+        if game.version > shared.spec_version:
             return None
 
         # Ignore games that are already there

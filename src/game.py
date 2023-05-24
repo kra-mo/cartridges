@@ -59,13 +59,13 @@ class Game(Gtk.Box):
     removed = None
     blacklisted = None
     game_cover = None
+    version = None
 
     def __init__(self, data, allow_side_effects=True, **kwargs):
         super().__init__(**kwargs)
 
         self.win = shared.win
         self.app = self.win.get_application()
-        self.version = shared.spec_version
 
         self.update_values(data)
 
@@ -144,13 +144,6 @@ class Game(Gtk.Box):
             "blacklisted",
             "version",
         )
-
-        # TODO: remove for 2.0
-        attrs = list(attrs)
-        if not self.removed:
-            attrs.remove("removed")
-        if not self.blacklisted:
-            attrs.remove("blacklisted")
 
         json.dump(
             {attr: getattr(self, attr) for attr in attrs if attr},

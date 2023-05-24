@@ -4,6 +4,7 @@ from pathlib import Path
 from time import time
 from typing import Iterator
 
+from src import shared
 from src.game import Game
 from src.importer.sources.source import Source, SourceIterator
 from src.utils.decorators import (
@@ -71,6 +72,7 @@ class SteamSourceIterator(SourceIterator):
         # Build game from local data
         appid = local_data["appid"]
         values = {
+            "version": shared.spec_version,
             "added": int(time()),
             "name": local_data["name"],
             "source": self.source.id,
