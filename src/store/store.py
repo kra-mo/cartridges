@@ -11,8 +11,6 @@ from src.utils.task import Task
 class Pipeline(GObject.Object):
     """Class representing a set of managers for a game"""
 
-    __gtype_name__ = "Pipeline"
-
     game: Game
 
     waiting: set[Manager]
@@ -57,7 +55,7 @@ class Pipeline(GObject.Object):
             task.set_task_data(data)
             task.run_in_thread(self.manager_task_thread_func)
 
-    @GObject.Signal(name="manager-started")
+    @GObject.Signal(name="manager-started", arg_types=(object,))
     def manager_started(self, manager: Manager) -> None:
         """Signal emitted when a manager is started"""
         pass
@@ -68,7 +66,7 @@ class Pipeline(GObject.Object):
         self.emit("manager-started", manager)
         manager.run(self.game, cancellable)
 
-    @GObject.Signal(name="manager-done")
+    @GObject.Signal(name="manager-done", arg_types=(object,))
     def manager_done(self, manager: Manager) -> None:
         """Signal emitted when a manager is done"""
         pass
