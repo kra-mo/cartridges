@@ -5,6 +5,7 @@ from gi.repository import Adw, Gio, Gtk
 from src import shared
 from src.utils.task import Task
 from src.store.pipeline import Pipeline
+from src.store.managers.manager import Manager
 
 
 # pylint: disable=too-many-instance-attributes
@@ -122,7 +123,7 @@ class Importer:
         if self.finished:
             self.import_callback()
 
-    def manager_done_callback(self, pipeline: Pipeline):
+    def manager_done_callback(self, pipeline: Pipeline, manager: Manager):
         """Callback called when a pipeline for a game has advanced"""
         # TODO (optional) update progress bar more precisely from here
         # TODO get number of games really added here (eg. exlude blacklisted)
