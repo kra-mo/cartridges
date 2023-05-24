@@ -88,7 +88,6 @@ class Store:
     games: dict[str, Game]
 
     def __init__(self) -> None:
-        shared.store = self
         self.managers = set()
         self.games = {}
         self.pipelines = {}
@@ -97,18 +96,35 @@ class Store:
         """Add a manager class that will run when games are added"""
         self.managers.add(manager)
 
-    def add_game(self, game: Game, replace=False) -> Pipeline:
+    def add_game(self, game: Game, replace=False) -> Pipeline | None:
         """Add a game to the app if not already there
 
         :param replace bool: Replace the game if it already exists
-        :return:
         """
+
+        # Ignore games from a newer spec version
+        if (version := game.get("version")) and version > shared.spec_version:
+            return None
+
+        # Ignore games that are already there
         if (
             game.game_id in self.games
             and not self.games[game.game_id].removed
             and not replace
         ):
-            return
+            return None
+
+        # Cleanup removed games
+        if game.get("removed"):
+            for path in (
+                shared.games_dir / f"{game.game_id}.json",
+                shared.covers_dir / f"{game.game_id}.tiff",
+                shared.covers_dir / f"{game.game_id}.gif",
+            ):
+                path.unlink(missing_ok=True)
+            return None
+
+        # Run the pipeline for the game
         pipeline = Pipeline(self.managers)
         self.games[game.game_id] = game
         self.pipelines[game.game_id] = pipeline

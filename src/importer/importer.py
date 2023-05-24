@@ -1,11 +1,8 @@
 import logging
 
 from gi.repository import Adw, Gio, Gtk
-from requests import HTTPError
 
 from src import shared
-from src.utils.create_dialog import create_dialog
-from src.utils.steamgriddb import SGDBAuthError, SGDBError, SGDBHelper
 from src.utils.task import Task
 
 

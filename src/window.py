@@ -17,13 +17,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import json
 from datetime import datetime
 
 from gi.repository import Adw, Gio, GLib, Gtk
-
-from src import shared
-from src.game import Game
 
 
 @Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/window.ui")
@@ -77,8 +73,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        shared.win = self
-
         self.previous_page = self.library_view
 
         self.details_view.set_measure_overlay(self.details_view_box, True)
@@ -91,27 +85,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.hidden_library.set_sort_func(self.sort_func)
 
         self.set_library_child()
-
-        games = {}
-
-        if shared.games_dir.exists():
-            for open_file in shared.games_dir.iterdir():
-                data = json.load(open_file.open())
-                games[data["game_id"]] = data
-
-        for game_id, game in games.items():
-            if (version := game.get("version")) and version > shared.spec_version:
-                continue
-
-            if game.get("removed"):
-                for path in (
-                    shared.games_dir / f"{game_id}.json",
-                    shared.covers_dir / f"{game_id}.tiff",
-                    shared.covers_dir / f"{game_id}.gif",
-                ):
-                    path.unlink(missing_ok=True)
-            else:
-                Game(game).update()
 
         # Connect search entries
         self.search_bar.connect_entry(self.search_entry)

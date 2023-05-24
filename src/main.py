@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import json
 import logging
 import os
 import sys
@@ -31,6 +32,7 @@ from gi.repository import Adw, Gio, GLib, Gtk
 
 from src import shared
 from src.details_window import DetailsWindow
+from src.game import Game
 from src.importer.importer import Importer
 from src.importer.sources.lutris_source import LutrisFlatpakSource, LutrisNativeSource
 from src.importer.sources.steam_source import (
@@ -49,7 +51,6 @@ from src.window import CartridgesWindow
 
 class CartridgesApplication(Adw.Application):
     win = None
-    store = None
 
     def __init__(self):
         super().__init__(
@@ -57,18 +58,12 @@ class CartridgesApplication(Adw.Application):
         )
 
     def do_activate(self):  # pylint: disable=arguments-differ
-        # Create the games store and its managers
-        if not self.store:
-            self.store = Store()
-            self.store.add_manager(SteamAPIManager())
-            self.store.add_manager(SGDBManager())
-            self.store.add_manager(FileManager())
-            self.store.add_manager(DisplayManager())
+        """Called on app creation"""
 
         # Create the main window
         self.win = self.props.active_window  # pylint: disable=no-member
         if not self.win:
-            self.win = CartridgesWindow(application=self)
+            shared.win = self.win = CartridgesWindow(application=self)
 
         # Save window geometry
         shared.state_schema.bind(
@@ -80,6 +75,23 @@ class CartridgesApplication(Adw.Application):
         shared.state_schema.bind(
             "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
+
+        # Create the games store with bare minimum managers
+        if not shared.store:
+            shared.store = Store()
+            shared.store.add_manager(DisplayManager())
+
+        # Load games from disk
+        if shared.games_dir.exists():
+            for game_file in shared.games_dir.iterdir():
+                data = json.load(game_file.open())
+                game = Game(data, allow_side_effects=False)
+                shared.store.add_game(game)
+
+        # Add rest of the managers for game imports
+        shared.store.add_manager(SteamAPIManager())
+        shared.store.add_manager(SGDBManager())
+        shared.store.add_manager(FileManager())
 
         # Create actions
         self.create_actions(
