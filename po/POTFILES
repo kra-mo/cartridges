@@ -2,6 +2,7 @@ data/hu.kramo.Cartridges.desktop.in
 data/hu.kramo.Cartridges.gschema.xml
 data/hu.kramo.Cartridges.metainfo.xml.in
 
+data/gtk/details_window.blp
 data/gtk/game.blp
 data/gtk/help-overlay.blp
 data/gtk/preferences.blp
