@@ -91,6 +91,8 @@ class SteamSourceIterator(SourceIterator):
         if cover_path.is_file():
             save_cover(game.game_id, resize_cover(cover_path))
 
+        return game
+
 
 class SteamSource(Source):
     name = "Steam"

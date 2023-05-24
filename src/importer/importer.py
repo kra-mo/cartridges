@@ -4,6 +4,7 @@ from gi.repository import Adw, Gio, Gtk
 
 from src import shared
 from src.utils.task import Task
+from src.store.pipeline import Pipeline
 
 
 # pylint: disable=too-many-instance-attributes
@@ -83,6 +84,7 @@ class Importer:
         if not source.is_installed:
             logging.info("Source %s skipped, not installed", source.id)
             return
+        logging.info("Scanning source %s", source.id)
 
         # Initialize source iteration
         iterator = iter(source)
@@ -104,18 +106,28 @@ class Importer:
                 continue
 
             # Register game
-            logging.info("Imported %s (%s)", game.name, game.game_id)
-            shared.store.add_game(game)
-            self.n_games_added += 1
+            pipeline: Pipeline = shared.store.add_game(game)
+            if pipeline is not None:
+                logging.info("Imported %s (%s)", game.name, game.game_id)
+                pipeline.connect("manager-done", self.manager_done_callback)
+                self.n_games_added += 1
 
     def source_task_callback(self, _obj, _result, data):
         """Source import callback"""
         source, *_rest = data
         logging.debug("Import done for source %s", source.id)
         self.n_source_tasks_done += 1
+        # TODO remove, should be handled by manager_done_callback
         self.update_progressbar()
         if self.finished:
             self.import_callback()
+
+    def manager_done_callback(self, pipeline: Pipeline):
+        """Callback called when a pipeline for a game has advanced"""
+        # TODO (optional) update progress bar more precisely from here
+        # TODO get number of games really added here (eg. exlude blacklisted)
+        # TODO trigger import_callback only when all pipelines have finished
+        pass
 
     def import_callback(self):
         """Callback called when importing has finished"""
