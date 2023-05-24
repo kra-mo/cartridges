@@ -43,7 +43,7 @@ from src.importer.sources.steam_source import (
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
-from store.managers.format_update_manager import FormatUpdateManager
+from src.store.managers.format_update_manager import FormatUpdateManager
 from src.store.managers.sgdb_manager import SGDBManager
 from src.store.managers.steam_api_manager import SteamAPIManager
 from src.store.store import Store

@@ -17,8 +17,9 @@ class Pipeline(GObject.Object):
     running: set[Manager]
     done: set[Manager]
 
-    def __init__(self, managers: Iterable[Manager]) -> None:
+    def __init__(self, game: Game, managers: Iterable[Manager]) -> None:
         super().__init__()
+        self.game = game
         self.waiting = set(managers)
         self.running = set()
         self.done = set()
@@ -26,7 +27,7 @@ class Pipeline(GObject.Object):
     @property
     def not_done(self) -> set[Manager]:
         """Get the managers that are not done yet"""
-        return self.waiting + self.running
+        return self.waiting | self.running
 
     @property
     def blocked(self) -> set[Manager]:
@@ -64,7 +65,7 @@ class Pipeline(GObject.Object):
         """Thread function for manager tasks"""
         manager, *_rest = data
         self.emit("manager-started", manager)
-        manager.run(self.game, cancellable)
+        manager.run(self.game)
 
     @GObject.Signal(name="manager-done", arg_types=(object,))
     def manager_done(self, manager: Manager) -> None:
@@ -115,7 +116,7 @@ class Store:
             return None
 
         # Cleanup removed games
-        if game.get("removed"):
+        if game.removed:
             for path in (
                 shared.games_dir / f"{game.game_id}.json",
                 shared.covers_dir / f"{game.game_id}.tiff",
@@ -125,7 +126,7 @@ class Store:
             return None
 
         # Run the pipeline for the game
-        pipeline = Pipeline(self.managers)
+        pipeline = Pipeline(game, self.managers)
         self.games[game.game_id] = game
         self.pipelines[game.game_id] = pipeline
         pipeline.advance()

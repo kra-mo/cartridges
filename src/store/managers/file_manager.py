@@ -11,5 +11,4 @@ class FileManager(Manager):
     run_after = set((SteamAPIManager, SGDBManager, FormatUpdateManager))
 
     def run(self, game: Game) -> None:
-        # TODO make game.save (disk) not trigger game.update (UI)
         game.save()

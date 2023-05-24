@@ -152,8 +152,6 @@ class Game(Gtk.Box):
             sort_keys=True,
         )
 
-        self.update()
-
     def create_toast(self, title, action=None):
         toast = Adw.Toast.new(title.format(self.name))
         toast.set_priority(Adw.ToastPriority.HIGH)

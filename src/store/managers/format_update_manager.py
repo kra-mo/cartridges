@@ -16,5 +16,4 @@ class FormatUpdateManager(Manager):
     def run(self, game: Game) -> None:
         if game.version is None:
             self.v1_5_to_v2_0(game)
-        # TODO make game.save (disk) not trigger game.update (UI)
         game.save()

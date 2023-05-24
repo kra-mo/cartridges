@@ -12,7 +12,7 @@ class Manager:
     in that case a new cancellable must be generated for new tasks to run.
     """
 
-    run_after: set[type["Manager"]]
+    run_after: set[type["Manager"]] = set()
 
     cancellable: Gio.Cancellable
     errors: list[Exception]
@@ -42,7 +42,7 @@ class Manager:
         return errors
 
     @abstractmethod
-    def run(self, game: Game) -> None:
+    def run(self, game: Game, cancellable: Gio.Cancellable) -> None:
         """Pass the game through the manager.
         May block its thread.
         May not raise exceptions, as they will be silently ignored."""
