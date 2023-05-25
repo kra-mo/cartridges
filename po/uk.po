@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-23 07:30+0200\n"
-"PO-Revision-Date: 2023-04-14 12:29+0000\n"
+"POT-Creation-Date: 2023-05-25 17:48+0200\n"
+"PO-Revision-Date: 2023-05-24 20:27+0000\n"
 "Last-Translator: Dan <denqwerta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/uk/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:48
@@ -37,7 +37,7 @@ msgstr "Запустіть усі свої ігри"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
 msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
-msgstr ""
+msgstr "ігри;лаунчер;steam;lutris;heroic;bottles;itch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -55,7 +55,7 @@ msgstr ""
 msgid "Library"
 msgstr "Бібліотека"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:65
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:66
 msgid "Edit Game Details"
 msgstr "Редагувати інформацію про гру"
 
@@ -69,15 +69,52 @@ msgstr "Подробиці гри"
 msgid "Preferences"
 msgstr "Параметри"
 
+#: data/gtk/details_window.blp:25
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: data/gtk/details_window.blp:57
+msgid "New Cover"
+msgstr ""
+
+#: data/gtk/details_window.blp:75
+msgid "Delete Cover"
+msgstr ""
+
+#: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
 msgid "Title"
 msgstr "Назва"
+
+#: data/gtk/details_window.blp:102
+msgid "The title of the game"
+msgstr "Назва гри"
+
+#: data/gtk/details_window.blp:112 data/gtk/details_window.blp:117
+msgid "Developer"
+msgstr "Розробник"
+
+#: data/gtk/details_window.blp:113
+msgid "The developer or publisher (optional)"
+msgstr "Розробник або видавець (необов'язково)"
+
+#: data/gtk/details_window.blp:123 data/gtk/details_window.blp:153
+msgid "Executable"
+msgstr "Виконуваний"
+
+#: data/gtk/details_window.blp:124
+msgid "File to open or command to run when launching the game"
+msgstr "Файл для відкриття або команда для запуску під час запуску гри"
+
+#: data/gtk/details_window.blp:130
+msgid "More Info"
+msgstr ""
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
 msgstr "Редагувати"
 
-#: data/gtk/game.blp:107 src/window.py:202
+#: data/gtk/game.blp:107 src/window.py:205
 msgid "Hide"
 msgstr "Приховати"
 
@@ -86,7 +123,7 @@ msgstr "Приховати"
 msgid "Remove"
 msgstr "Видалити"
 
-#: data/gtk/game.blp:126 src/window.py:204
+#: data/gtk/game.blp:126 src/window.py:207
 msgid "Unhide"
 msgstr "Показати"
 
@@ -111,7 +148,7 @@ msgstr "Показати параметри"
 msgid "Shortcuts"
 msgstr "Ярлики"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:167 src/preferences.py:98
+#: data/gtk/help-overlay.blp:34 src/game.py:169 src/preferences.py:98
 msgid "Undo"
 msgstr "Відмінити"
 
@@ -155,7 +192,7 @@ msgstr "Обкладинка запускає гру"
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "Міняє місцями поведінку зображення обкладинки та кнопки відтворення"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:79
+#: data/gtk/preferences.blp:36 src/details_window.py:84
 msgid "Images"
 msgstr "Зображення"
 
@@ -360,61 +397,61 @@ msgstr "Про Cartridges"
 msgid "translator_credits"
 msgstr "kefir2105"
 
-#: src/window.py:184
+#: src/window.py:187
 msgid "Today"
 msgstr "Сьогодні"
 
-#: src/window.py:186
+#: src/window.py:189
 msgid "Yesterday"
 msgstr "Вчора"
 
 #. The variable is the date when the game was added
-#: src/window.py:225
+#: src/window.py:228
 msgid "Added: {}"
 msgstr "Додано: {}"
 
-#: src/window.py:228
+#: src/window.py:231
 msgid "Never"
 msgstr "Ніколи"
 
 #. The variable is the date when the game was last played
-#: src/window.py:232
+#: src/window.py:235
 msgid "Last played: {}"
 msgstr "Останній раз грали: {}"
 
-#: src/details_window.py:70
+#: src/details_window.py:75
 msgid "Apply"
 msgstr "Застосувати"
 
-#: src/details_window.py:76
+#: src/details_window.py:81
 msgid "Add New Game"
 msgstr "Додати нову гру"
 
-#: src/details_window.py:77
+#: src/details_window.py:82
 msgid "Confirm"
 msgstr "Підтвердити"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:89
+#: src/details_window.py:94
 msgid "file.txt"
 msgstr "file.txt"
 
 #. As in software
-#: src/details_window.py:91
+#: src/details_window.py:96
 msgid "program"
 msgstr "програма"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:96 src/details_window.py:98
+#: src/details_window.py:101 src/details_window.py:103
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\path\\to\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:102 src/details_window.py:104
+#: src/details_window.py:107 src/details_window.py:109
 msgid "/path/to/{}"
 msgstr "/path/to/{}"
 
-#: src/details_window.py:108
+#: src/details_window.py:113
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -437,19 +474,19 @@ msgstr ""
 "\n"
 "Якщо шлях містить пробіли, обов'язково візьміть його в подвійні лапки!"
 
-#: src/details_window.py:139 src/details_window.py:145
+#: src/details_window.py:143 src/details_window.py:149
 msgid "Couldn't Add Game"
 msgstr "Не вдалося додати гру"
 
-#: src/details_window.py:139 src/details_window.py:172
+#: src/details_window.py:143 src/details_window.py:176
 msgid "Game title cannot be empty."
 msgstr "Назва гри не може бути порожньою."
 
-#: src/details_window.py:145 src/details_window.py:180
+#: src/details_window.py:149 src/details_window.py:184
 msgid "Executable cannot be empty."
 msgstr "Виконуваний файл не може бути порожнім."
 
-#: src/details_window.py:171 src/details_window.py:179
+#: src/details_window.py:175 src/details_window.py:183
 msgid "Couldn't Apply Preferences"
 msgstr "Не вдалося застосувати параметри"
 
@@ -522,23 +559,17 @@ msgid "Importing Covers…"
 msgstr "Імпорт обкладинок…"
 
 #: src/utils/importer.py:91
-#, fuzzy
-#| msgid "No Games Found"
 msgid "No new games found"
-msgstr "Ігор не знайдено"
+msgstr "Нових ігор не знайдено"
 
 #: src/utils/importer.py:98
-#, fuzzy
-#| msgid "Game Imported"
 msgid "1 game imported"
-msgstr "Ігру імпортовано"
+msgstr "1 гру імпортовано"
 
 #. The variable is the number of games
 #: src/utils/importer.py:104
-#, fuzzy
-#| msgid "Games Imported"
 msgid "{} games imported"
-msgstr "Ігри імпортовано"
+msgstr "{} гри імпортовано"
 
 #: src/utils/importer.py:121 src/utils/steamgriddb.py:112
 msgid "Couldn't Connect to SteamGridDB"
@@ -561,24 +592,6 @@ msgstr "Не вдалося підключитися до SteamGridDB"
 
 #~ msgid "Details"
 #~ msgstr "Деталі"
-
-#~ msgid "The title of the game"
-#~ msgstr "Назва гри"
-
-#~ msgid "Developer"
-#~ msgstr "Розробник"
-
-#~ msgid "The developer or publisher (optional)"
-#~ msgstr "Розробник або видавець (необов'язково)"
-
-#~ msgid "Executable"
-#~ msgstr "Виконуваний"
-
-#~ msgid "File to open or command to run when launching the game"
-#~ msgstr "Файл для відкриття або команда для запуску під час запуску гри"
-
-#~ msgid "Cancel"
-#~ msgstr "Скасувати"
 
 #~ msgid "No new games were found on your system."
 #~ msgstr "У вашій системі не знайдено жодної нової гри."
