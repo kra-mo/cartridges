@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-23 07:30+0200\n"
-"PO-Revision-Date: 2023-04-14 12:29+0000\n"
+"POT-Creation-Date: 2023-05-25 17:48+0200\n"
+"PO-Revision-Date: 2023-05-24 20:27+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:48
@@ -37,7 +37,7 @@ msgstr "உங்கள் எல்லா விளையாட்டுகள�
 
 #: data/hu.kramo.Cartridges.desktop.in:11
 msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
-msgstr ""
+msgstr "விளையாட்டு; துவக்கி; steam;lutris;heroic;பாட்டில்கள்;itch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Library"
 msgstr "நூலகம்"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:65
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:66
 msgid "Edit Game Details"
 msgstr "விளையாட்டு விவரங்களைத் திருத்து"
 
@@ -70,15 +70,52 @@ msgstr "விளையாட்டு விவரங்கள்"
 msgid "Preferences"
 msgstr "விருப்பங்கள்"
 
+#: data/gtk/details_window.blp:25
+msgid "Cancel"
+msgstr "ரத்துசெய்"
+
+#: data/gtk/details_window.blp:57
+msgid "New Cover"
+msgstr ""
+
+#: data/gtk/details_window.blp:75
+msgid "Delete Cover"
+msgstr ""
+
+#: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
 msgid "Title"
 msgstr "தலைப்பு"
+
+#: data/gtk/details_window.blp:102
+msgid "The title of the game"
+msgstr "விளையாட்டின் தலைப்பு"
+
+#: data/gtk/details_window.blp:112 data/gtk/details_window.blp:117
+msgid "Developer"
+msgstr "டெவலப்பர்"
+
+#: data/gtk/details_window.blp:113
+msgid "The developer or publisher (optional)"
+msgstr "டெவலப்பர் அல்லது வெளியீட்டாளர் (விரும்பினால்)"
+
+#: data/gtk/details_window.blp:123 data/gtk/details_window.blp:153
+msgid "Executable"
+msgstr "செயல்படுத்தக்கூடியது"
+
+#: data/gtk/details_window.blp:124
+msgid "File to open or command to run when launching the game"
+msgstr "விளையாட்டைத் தொடங்கும் போது திறக்க கோப்பு அல்லது இயக்க கட்டளை"
+
+#: data/gtk/details_window.blp:130
+msgid "More Info"
+msgstr ""
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
 msgstr "தொகு"
 
-#: data/gtk/game.blp:107 src/window.py:202
+#: data/gtk/game.blp:107 src/window.py:205
 msgid "Hide"
 msgstr "மறை"
 
@@ -87,7 +124,7 @@ msgstr "மறை"
 msgid "Remove"
 msgstr "அகற்று"
 
-#: data/gtk/game.blp:126 src/window.py:204
+#: data/gtk/game.blp:126 src/window.py:207
 msgid "Unhide"
 msgstr "மறை காட்டு"
 
@@ -112,7 +149,7 @@ msgstr "விருப்பங்களைக் காட்டு"
 msgid "Shortcuts"
 msgstr "குறுக்குவழிகள்"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:167 src/preferences.py:98
+#: data/gtk/help-overlay.blp:34 src/game.py:169 src/preferences.py:98
 msgid "Undo"
 msgstr "செயல்தவிர்"
 
@@ -156,7 +193,7 @@ msgstr "அட்டைப் படம் விளையாட்டை தொ
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "அட்டைப் படத்தின் நடத்தை மற்றும் பிளே பட்டனை மாற்றுகிறது"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:79
+#: data/gtk/preferences.blp:36 src/details_window.py:84
 msgid "Images"
 msgstr "படங்கள்"
 
@@ -362,61 +399,61 @@ msgstr "கார்ட்ரிட்ஜ்கள் பற்றி"
 msgid "translator_credits"
 msgstr "K.B.Dharun Krishna <kbdharunkrishna@gmail.com>"
 
-#: src/window.py:184
+#: src/window.py:187
 msgid "Today"
 msgstr "இன்று"
 
-#: src/window.py:186
+#: src/window.py:189
 msgid "Yesterday"
 msgstr "நேற்று"
 
 #. The variable is the date when the game was added
-#: src/window.py:225
+#: src/window.py:228
 msgid "Added: {}"
 msgstr "சேர்க்கப்பட்டது: {}"
 
-#: src/window.py:228
+#: src/window.py:231
 msgid "Never"
 msgstr "ஒருபோதும் இல்லை"
 
 #. The variable is the date when the game was last played
-#: src/window.py:232
+#: src/window.py:235
 msgid "Last played: {}"
 msgstr "கடைசியாக விளையாடியது: {}"
 
-#: src/details_window.py:70
+#: src/details_window.py:75
 msgid "Apply"
 msgstr "விண்ணப்பி"
 
-#: src/details_window.py:76
+#: src/details_window.py:81
 msgid "Add New Game"
 msgstr "புதிய விளையாட்டைச் சேர்க்கவும்"
 
-#: src/details_window.py:77
+#: src/details_window.py:82
 msgid "Confirm"
 msgstr "உறுதிப்படுத்தவும்"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:89
+#: src/details_window.py:94
 msgid "file.txt"
 msgstr "கோப்பு.txt"
 
 #. As in software
-#: src/details_window.py:91
+#: src/details_window.py:96
 msgid "program"
 msgstr "பயன்பாடு"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:96 src/details_window.py:98
+#: src/details_window.py:101 src/details_window.py:103
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\பாதை\\டு \\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:102 src/details_window.py:104
+#: src/details_window.py:107 src/details_window.py:109
 msgid "/path/to/{}"
 msgstr "/பாதை/டு/ {}"
 
-#: src/details_window.py:108
+#: src/details_window.py:113
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -438,19 +475,19 @@ msgstr ""
 "\n"
 "பாதையில் இடைவெளிகள் இருந்தால், அதை இரட்டை மேற்கோள்களில் போர்த்துவதை உறுதிசெய்யவும்!"
 
-#: src/details_window.py:139 src/details_window.py:145
+#: src/details_window.py:143 src/details_window.py:149
 msgid "Couldn't Add Game"
 msgstr "விளையாட்டைச் சேர்க்க முடியவில்லை"
 
-#: src/details_window.py:139 src/details_window.py:172
+#: src/details_window.py:143 src/details_window.py:176
 msgid "Game title cannot be empty."
 msgstr "விளையாட்டு தலைப்பு காலியாக இருக்கக்கூடாது."
 
-#: src/details_window.py:145 src/details_window.py:180
+#: src/details_window.py:149 src/details_window.py:184
 msgid "Executable cannot be empty."
 msgstr "இயங்கக்கூடியது காலியாக இருக்க முடியாது."
 
-#: src/details_window.py:171 src/details_window.py:179
+#: src/details_window.py:175 src/details_window.py:183
 msgid "Couldn't Apply Preferences"
 msgstr "விருப்பத்தேர்வுகளைப் பயன்படுத்த முடியவில்லை"
 
@@ -523,23 +560,17 @@ msgid "Importing Covers…"
 msgstr "அட்டைகளை இறக்குமதி செய்கிறது…"
 
 #: src/utils/importer.py:91
-#, fuzzy
-#| msgid "No Games Found"
 msgid "No new games found"
-msgstr "விளையாட்டுகள் எதுவும் இல்லை"
+msgstr "புதிய விளையாட்டுகள் எதுவும் கண்டறியப்படவில்லை"
 
 #: src/utils/importer.py:98
-#, fuzzy
-#| msgid "Game Imported"
 msgid "1 game imported"
-msgstr "விளையாட்டு இறக்குமதி செய்யப்பட்டது"
+msgstr "1 விளையாட்டு இறக்குமதி செய்யப்பட்டது"
 
 #. The variable is the number of games
 #: src/utils/importer.py:104
-#, fuzzy
-#| msgid "Games Imported"
 msgid "{} games imported"
-msgstr "விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
+msgstr "{} விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
 
 #: src/utils/importer.py:121 src/utils/steamgriddb.py:112
 msgid "Couldn't Connect to SteamGridDB"
@@ -562,24 +593,6 @@ msgstr "ஸ்டீம்கிரிட் டிபி (SteamGridDB) உட�
 
 #~ msgid "Details"
 #~ msgstr "விவரங்கள்"
-
-#~ msgid "The title of the game"
-#~ msgstr "விளையாட்டின் தலைப்பு"
-
-#~ msgid "Developer"
-#~ msgstr "டெவலப்பர்"
-
-#~ msgid "The developer or publisher (optional)"
-#~ msgstr "டெவலப்பர் அல்லது வெளியீட்டாளர் (விரும்பினால்)"
-
-#~ msgid "Executable"
-#~ msgstr "செயல்படுத்தக்கூடியது"
-
-#~ msgid "File to open or command to run when launching the game"
-#~ msgstr "விளையாட்டைத் தொடங்கும் போது திறக்க கோப்பு அல்லது இயக்க கட்டளை"
-
-#~ msgid "Cancel"
-#~ msgstr "ரத்துசெய்"
 
 #~ msgid "No new games were found on your system."
 #~ msgstr "உங்கள் கணினியில் புதிய விளையாட்டுகள் எதுவும் இல்லை."
