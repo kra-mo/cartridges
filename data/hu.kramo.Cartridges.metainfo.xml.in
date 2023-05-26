@@ -47,7 +47,7 @@
     <release version="1.5.1" date="2023-05-26">
       <description translatable="no">
         <ul>
-          <li>Fixes an issue with search<li>
+          <li>Fixes an issue with search</li>
           <li>Translations since 1.5</li>
         </ul>
       </description>
