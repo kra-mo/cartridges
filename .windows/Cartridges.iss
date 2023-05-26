@@ -1,5 +1,5 @@
 #define MyAppName "Cartridges"
-#define MyAppVersion "1.5"
+#define MyAppVersion "1.5.1"
 #define MyAppPublisher "kramo"
 #define MyAppURL "https://github.com/kra-mo/cartridges"
 #define MyAppExeName "pythonw.exe"
