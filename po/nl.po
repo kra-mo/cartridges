@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-23 07:30+0200\n"
+"POT-Creation-Date: 2023-05-25 17:48+0200\n"
 "PO-Revision-Date: 2023-04-14 12:29+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
@@ -54,7 +54,7 @@ msgstr ""
 msgid "Library"
 msgstr "Bibliotheek"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:65
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:66
 msgid "Edit Game Details"
 msgstr "Game-details bewerken"
 
@@ -68,15 +68,53 @@ msgstr "Game-details"
 msgid "Preferences"
 msgstr "Voorkeuren"
 
+#: data/gtk/details_window.blp:25
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: data/gtk/details_window.blp:57
+msgid "New Cover"
+msgstr ""
+
+#: data/gtk/details_window.blp:75
+msgid "Delete Cover"
+msgstr ""
+
+#: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
 msgid "Title"
 msgstr "Titel"
+
+#: data/gtk/details_window.blp:102
+msgid "The title of the game"
+msgstr "De titel van de game"
+
+#: data/gtk/details_window.blp:112 data/gtk/details_window.blp:117
+msgid "Developer"
+msgstr "Ontwikkelaar"
+
+#: data/gtk/details_window.blp:113
+msgid "The developer or publisher (optional)"
+msgstr "De ontwikkelaar of uitgever (optioneel)"
+
+#: data/gtk/details_window.blp:123 data/gtk/details_window.blp:153
+msgid "Executable"
+msgstr "Programmabestand"
+
+#: data/gtk/details_window.blp:124
+msgid "File to open or command to run when launching the game"
+msgstr ""
+"Te openen bestand of uit te voeren opdracht bij het starten van de game"
+
+#: data/gtk/details_window.blp:130
+msgid "More Info"
+msgstr ""
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
 msgstr "Bewerken"
 
-#: data/gtk/game.blp:107 src/window.py:202
+#: data/gtk/game.blp:107 src/window.py:205
 msgid "Hide"
 msgstr "Verbergen"
 
@@ -85,7 +123,7 @@ msgstr "Verbergen"
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: data/gtk/game.blp:126 src/window.py:204
+#: data/gtk/game.blp:126 src/window.py:207
 msgid "Unhide"
 msgstr "Niet meer verbergen"
 
@@ -110,7 +148,7 @@ msgstr "Voorkeuren tonen"
 msgid "Shortcuts"
 msgstr "Sneltoetsen"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:167 src/preferences.py:98
+#: data/gtk/help-overlay.blp:34 src/game.py:169 src/preferences.py:98
 msgid "Undo"
 msgstr "Ongedaan maken"
 
@@ -154,7 +192,7 @@ msgstr "Cover-afbeelding start game"
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "Wisselt het gedrag van de cover-afbeelding en de speelknop om"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:79
+#: data/gtk/preferences.blp:36 src/details_window.py:84
 msgid "Images"
 msgstr "Afbeeldingen"
 
@@ -360,61 +398,61 @@ msgstr "Over Cartridges"
 msgid "translator_credits"
 msgstr "Philip Goto https://flipflop97.github.io/"
 
-#: src/window.py:184
+#: src/window.py:187
 msgid "Today"
 msgstr "Vandaag"
 
-#: src/window.py:186
+#: src/window.py:189
 msgid "Yesterday"
 msgstr "Gisteren"
 
 #. The variable is the date when the game was added
-#: src/window.py:225
+#: src/window.py:228
 msgid "Added: {}"
 msgstr "Toegevoegd op {}"
 
-#: src/window.py:228
+#: src/window.py:231
 msgid "Never"
 msgstr "Nooit"
 
 #. The variable is the date when the game was last played
-#: src/window.py:232
+#: src/window.py:235
 msgid "Last played: {}"
 msgstr "Laatst gespeeld: {}"
 
-#: src/details_window.py:70
+#: src/details_window.py:75
 msgid "Apply"
 msgstr "Toepassen"
 
-#: src/details_window.py:76
+#: src/details_window.py:81
 msgid "Add New Game"
 msgstr "Nieuwe game toevoegen"
 
-#: src/details_window.py:77
+#: src/details_window.py:82
 msgid "Confirm"
 msgstr "Bevestigen"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:89
+#: src/details_window.py:94
 msgid "file.txt"
 msgstr "bestand.txt"
 
 #. As in software
-#: src/details_window.py:91
+#: src/details_window.py:96
 msgid "program"
 msgstr "programma"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:96 src/details_window.py:98
+#: src/details_window.py:101 src/details_window.py:103
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\pad\\naar\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:102 src/details_window.py:104
+#: src/details_window.py:107 src/details_window.py:109
 msgid "/path/to/{}"
 msgstr "/pad/naar/{}"
 
-#: src/details_window.py:108
+#: src/details_window.py:113
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -438,19 +476,19 @@ msgstr ""
 "Indien het pad spaties bevat, zorg er dan voor dat er dubbele "
 "aanhalingstekens omheen staan!"
 
-#: src/details_window.py:139 src/details_window.py:145
+#: src/details_window.py:143 src/details_window.py:149
 msgid "Couldn't Add Game"
 msgstr "Kon game niet toevoegen"
 
-#: src/details_window.py:139 src/details_window.py:172
+#: src/details_window.py:143 src/details_window.py:176
 msgid "Game title cannot be empty."
 msgstr "Game-titel mag niet leeg zijn"
 
-#: src/details_window.py:145 src/details_window.py:180
+#: src/details_window.py:149 src/details_window.py:184
 msgid "Executable cannot be empty."
 msgstr "Programmabestand mag niet leeg zijn"
 
-#: src/details_window.py:171 src/details_window.py:179
+#: src/details_window.py:175 src/details_window.py:183
 msgid "Couldn't Apply Preferences"
 msgstr "Kon voorkeuren niet toepassen"
 
@@ -562,25 +600,6 @@ msgstr "Kan geen verbinding maken met SteamGridDB"
 
 #~ msgid "Details"
 #~ msgstr "Details"
-
-#~ msgid "The title of the game"
-#~ msgstr "De titel van de game"
-
-#~ msgid "Developer"
-#~ msgstr "Ontwikkelaar"
-
-#~ msgid "The developer or publisher (optional)"
-#~ msgstr "De ontwikkelaar of uitgever (optioneel)"
-
-#~ msgid "Executable"
-#~ msgstr "Programmabestand"
-
-#~ msgid "File to open or command to run when launching the game"
-#~ msgstr ""
-#~ "Te openen bestand of uit te voeren opdracht bij het starten van de game"
-
-#~ msgid "Cancel"
-#~ msgstr "Annuleren"
 
 #~ msgid "No new games were found on your system."
 #~ msgstr "Geen nieuwe games gevonden op uw systeem"
