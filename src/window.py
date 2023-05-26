@@ -167,9 +167,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
 
         filtered = text != "" and not (
-            text in game.name.lower() or text in game.developer.lower()
-            if game.developer
-            else None
+            text in game.name.lower()
+            or (text in game.developer.lower() if game.developer else False)
         )
 
         game.filtered = filtered
