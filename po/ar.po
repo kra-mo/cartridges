@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-23 07:30+0200\n"
-"PO-Revision-Date: 2023-04-14 12:29+0000\n"
+"POT-Creation-Date: 2023-05-25 17:48+0200\n"
+"PO-Revision-Date: 2023-05-26 18:10+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:48
@@ -37,7 +37,7 @@ msgstr "شغِّل كلَّ ألعابك"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
 msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
-msgstr ""
+msgstr "لعب;مشغل;ستيم;لوترس;هروك;قوارير;إتش;هيرويك;بوتلز;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -54,7 +54,7 @@ msgstr ""
 msgid "Library"
 msgstr "المكتبة"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:65
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:66
 msgid "Edit Game Details"
 msgstr "حرِّر تفاصيل اللعبة"
 
@@ -68,15 +68,52 @@ msgstr "تفاصيل اللعبة"
 msgid "Preferences"
 msgstr "التفضيلات"
 
+#: data/gtk/details_window.blp:25
+msgid "Cancel"
+msgstr "ألغِ"
+
+#: data/gtk/details_window.blp:57
+msgid "New Cover"
+msgstr "غلاف جديد"
+
+#: data/gtk/details_window.blp:75
+msgid "Delete Cover"
+msgstr "احذف الغلاف"
+
+#: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
 msgid "Title"
 msgstr "العنوان"
+
+#: data/gtk/details_window.blp:102
+msgid "The title of the game"
+msgstr "عنوان اللعبة"
+
+#: data/gtk/details_window.blp:112 data/gtk/details_window.blp:117
+msgid "Developer"
+msgstr "المطوِّر"
+
+#: data/gtk/details_window.blp:113
+msgid "The developer or publisher (optional)"
+msgstr "المطوِّر أو الناشر (اختياري)"
+
+#: data/gtk/details_window.blp:123 data/gtk/details_window.blp:153
+msgid "Executable"
+msgstr "ملفُّ التنفيذ"
+
+#: data/gtk/details_window.blp:124
+msgid "File to open or command to run when launching the game"
+msgstr "الملفُّ المفتوح أو الأمر المشغَّل عند بدء اللعبة"
+
+#: data/gtk/details_window.blp:130
+msgid "More Info"
+msgstr "معلومات أكثر"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
 msgstr "حرِّر"
 
-#: data/gtk/game.blp:107 src/window.py:202
+#: data/gtk/game.blp:107 src/window.py:205
 msgid "Hide"
 msgstr "أخفِ"
 
@@ -85,7 +122,7 @@ msgstr "أخفِ"
 msgid "Remove"
 msgstr "أزل"
 
-#: data/gtk/game.blp:126 src/window.py:204
+#: data/gtk/game.blp:126 src/window.py:207
 msgid "Unhide"
 msgstr "اكشف"
 
@@ -110,7 +147,7 @@ msgstr "أظهر التفضيلات"
 msgid "Shortcuts"
 msgstr "الاختصارات"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:167 src/preferences.py:98
+#: data/gtk/help-overlay.blp:34 src/game.py:169 src/preferences.py:98
 msgid "Undo"
 msgstr "تراجع"
 
@@ -154,7 +191,7 @@ msgstr "تبدأ صورة الغلاف اللعبة"
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "يبدِّل سلوك صورة الغلاف وزرِّ «العب»"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:79
+#: data/gtk/preferences.blp:36 src/details_window.py:84
 msgid "Images"
 msgstr "الصور"
 
@@ -359,61 +396,61 @@ msgstr "عن «خراطيش»"
 msgid "translator_credits"
 msgstr "Ali Aljishi <ahj696@hotmail.com>"
 
-#: src/window.py:184
+#: src/window.py:187
 msgid "Today"
 msgstr "اليوم"
 
-#: src/window.py:186
+#: src/window.py:189
 msgid "Yesterday"
 msgstr "أمس"
 
 #. The variable is the date when the game was added
-#: src/window.py:225
+#: src/window.py:228
 msgid "Added: {}"
 msgstr "أضيفت في: {}"
 
-#: src/window.py:228
+#: src/window.py:231
 msgid "Never"
 msgstr "أبدًا"
 
 #. The variable is the date when the game was last played
-#: src/window.py:232
+#: src/window.py:235
 msgid "Last played: {}"
 msgstr "لُعبت آخر مرَّة في: {}"
 
-#: src/details_window.py:70
+#: src/details_window.py:75
 msgid "Apply"
 msgstr "طبِّق"
 
-#: src/details_window.py:76
+#: src/details_window.py:81
 msgid "Add New Game"
 msgstr "أضف لعبةً جديدةً"
 
-#: src/details_window.py:77
+#: src/details_window.py:82
 msgid "Confirm"
 msgstr "أكِّد"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:89
+#: src/details_window.py:94
 msgid "file.txt"
 msgstr "ملف.txt"
 
 #. As in software
-#: src/details_window.py:91
+#: src/details_window.py:96
 msgid "program"
 msgstr "البرنامج"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:96 src/details_window.py:98
+#: src/details_window.py:101 src/details_window.py:103
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\المسار\\إلى\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:102 src/details_window.py:104
+#: src/details_window.py:107 src/details_window.py:109
 msgid "/path/to/{}"
 msgstr "/المسار/إلى/{}"
 
-#: src/details_window.py:108
+#: src/details_window.py:113
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -435,19 +472,19 @@ msgstr ""
 "\n"
 "ولا تنسَ إحاطة المسار بعلامتي تنصيص مزدوجتين حالما تضمَّن مسافات!"
 
-#: src/details_window.py:139 src/details_window.py:145
+#: src/details_window.py:143 src/details_window.py:149
 msgid "Couldn't Add Game"
 msgstr "تعذَّرت إضافة اللعبة"
 
-#: src/details_window.py:139 src/details_window.py:172
+#: src/details_window.py:143 src/details_window.py:176
 msgid "Game title cannot be empty."
 msgstr "لا يجوز كون عنوان اللعبة فارغًا."
 
-#: src/details_window.py:145 src/details_window.py:180
+#: src/details_window.py:149 src/details_window.py:184
 msgid "Executable cannot be empty."
 msgstr "لا يجوز كون ملفِّ التنفيذ فارغًا."
 
-#: src/details_window.py:171 src/details_window.py:179
+#: src/details_window.py:175 src/details_window.py:183
 msgid "Couldn't Apply Preferences"
 msgstr "تعذَّر تطبيق التفضيلات"
 
@@ -519,23 +556,17 @@ msgid "Importing Covers…"
 msgstr "تُستورد الغُلُف…"
 
 #: src/utils/importer.py:91
-#, fuzzy
-#| msgid "No Games Found"
 msgid "No new games found"
-msgstr "لم يُعثر على ألعاب"
+msgstr "لم يُعثر على ألعاب جديدة"
 
 #: src/utils/importer.py:98
-#, fuzzy
-#| msgid "Game Imported"
 msgid "1 game imported"
-msgstr "اُستوردت اللعبة"
+msgstr "اُستوردت لعبة واحدة"
 
 #. The variable is the number of games
 #: src/utils/importer.py:104
-#, fuzzy
-#| msgid "Games Imported"
 msgid "{} games imported"
-msgstr "اُستوردت الألعاب"
+msgstr "اُستوردت {} لعبة"
 
 #: src/utils/importer.py:121 src/utils/steamgriddb.py:112
 msgid "Couldn't Connect to SteamGridDB"
@@ -558,24 +589,6 @@ msgstr "تعذَّر الاتصال ب‍ SteamGridDB"
 
 #~ msgid "Details"
 #~ msgstr "التفاصيل"
-
-#~ msgid "The title of the game"
-#~ msgstr "عنوان اللعبة"
-
-#~ msgid "Developer"
-#~ msgstr "المطوِّر"
-
-#~ msgid "The developer or publisher (optional)"
-#~ msgstr "المطوِّر أو الناشر (اختياري)"
-
-#~ msgid "Executable"
-#~ msgstr "ملفُّ التنفيذ"
-
-#~ msgid "File to open or command to run when launching the game"
-#~ msgstr "الملفُّ المفتوح أو الأمر المشغَّل عند بدء اللعبة"
-
-#~ msgid "Cancel"
-#~ msgstr "ألغِ"
 
 #~ msgid "No new games were found on your system."
 #~ msgstr "لم يُعثر على ألعاب جديدة في نظامك."
@@ -611,19 +624,16 @@ msgstr "تعذَّر الاتصال ب‍ SteamGridDB"
 #~ msgstr "/path/to/{file_name}"
 
 #, fuzzy
-#~| msgid "General"
 #~ msgctxt "shortcuts window"
 #~ msgid "General"
 #~ msgstr "عام"
 
 #, fuzzy
-#~| msgid "Search"
 #~ msgctxt "shortcuts window"
 #~ msgid "Search"
 #~ msgstr "ابحث"
 
 #, fuzzy
-#~| msgid "Undo"
 #~ msgctxt "shortcuts window"
 #~ msgid "Undo"
 #~ msgstr "تراجع"
@@ -672,3 +682,9 @@ msgstr "تعذَّر الاتصال ب‍ SteamGridDB"
 
 #~ msgid "Talking to Steam"
 #~ msgstr "يُتواصل مع ستيم"
+
+#~ msgid "Game Imported"
+#~ msgstr "اُستوردت اللعبة"
+
+#~ msgid "Games Imported"
+#~ msgstr "اُستوردت الألعاب"
