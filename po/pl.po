@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-25 17:48+0200\n"
+"POT-Creation-Date: 2023-05-23 07:30+0200\n"
 "PO-Revision-Date: 2023-05-07 15:38+0000\n"
 "Last-Translator: Artur Wróblewski <krypalkora1984@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/cartridges/"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Library"
 msgstr "Biblioteka"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:66
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:65
 msgid "Edit Game Details"
 msgstr "Edytuj detale gry"
 
@@ -67,53 +67,15 @@ msgstr "Detale gry"
 msgid "Preferences"
 msgstr "Ustawienia"
 
-#: data/gtk/details_window.blp:25
-msgid "Cancel"
-msgstr "Anuluj"
-
-#: data/gtk/details_window.blp:57
-msgid "New Cover"
-msgstr ""
-
-#: data/gtk/details_window.blp:75
-msgid "Delete Cover"
-msgstr ""
-
-#: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
 msgid "Title"
 msgstr "Tytuł"
-
-#: data/gtk/details_window.blp:102
-msgid "The title of the game"
-msgstr "Tytuł gry"
-
-#: data/gtk/details_window.blp:112 data/gtk/details_window.blp:117
-msgid "Developer"
-msgstr "Deweloper"
-
-#: data/gtk/details_window.blp:113
-msgid "The developer or publisher (optional)"
-msgstr "Twórca lub wydawca (opcjonalnie)"
-
-#: data/gtk/details_window.blp:123 data/gtk/details_window.blp:153
-msgid "Executable"
-msgstr "Wykonywalne"
-
-#: data/gtk/details_window.blp:124
-msgid "File to open or command to run when launching the game"
-msgstr ""
-"Plik do otwarcia lub polecenie do uruchomienia podczas uruchamiania gry"
-
-#: data/gtk/details_window.blp:130
-msgid "More Info"
-msgstr ""
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
 msgstr "Edytuj"
 
-#: data/gtk/game.blp:107 src/window.py:205
+#: data/gtk/game.blp:107 src/window.py:202
 msgid "Hide"
 msgstr "Ukryj"
 
@@ -122,7 +84,7 @@ msgstr "Ukryj"
 msgid "Remove"
 msgstr "Usuń"
 
-#: data/gtk/game.blp:126 src/window.py:207
+#: data/gtk/game.blp:126 src/window.py:204
 msgid "Unhide"
 msgstr "Odkryj"
 
@@ -147,7 +109,7 @@ msgstr "Pokaż preferencje"
 msgid "Shortcuts"
 msgstr "Skróty"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:169 src/preferences.py:98
+#: data/gtk/help-overlay.blp:34 src/game.py:167 src/preferences.py:98
 msgid "Undo"
 msgstr "Cofnij"
 
@@ -191,7 +153,7 @@ msgstr "Obraz okładki startera gier"
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "Zamienia zachowanie obrazu okładki i przycisku odtwarzania"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:84
+#: data/gtk/preferences.blp:36 src/details_window.py:79
 msgid "Images"
 msgstr "Obrazy"
 
@@ -396,61 +358,61 @@ msgstr "O Cartridges"
 msgid "translator_credits"
 msgstr "kredyty tłumacza"
 
-#: src/window.py:187
+#: src/window.py:184
 msgid "Today"
 msgstr "Dzisiaj"
 
-#: src/window.py:189
+#: src/window.py:186
 msgid "Yesterday"
 msgstr "Wczoraj"
 
 #. The variable is the date when the game was added
-#: src/window.py:228
+#: src/window.py:225
 msgid "Added: {}"
 msgstr "Dodano: {}"
 
-#: src/window.py:231
+#: src/window.py:228
 msgid "Never"
 msgstr "Nigdy"
 
 #. The variable is the date when the game was last played
-#: src/window.py:235
+#: src/window.py:232
 msgid "Last played: {}"
 msgstr "Ostatnio grane: {}"
 
-#: src/details_window.py:75
+#: src/details_window.py:70
 msgid "Apply"
 msgstr "Zastosuj"
 
-#: src/details_window.py:81
+#: src/details_window.py:76
 msgid "Add New Game"
 msgstr "Dodaj nową grę"
 
-#: src/details_window.py:82
+#: src/details_window.py:77
 msgid "Confirm"
 msgstr "Potwierdź"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:94
+#: src/details_window.py:89
 msgid "file.txt"
 msgstr "plik.txt"
 
 #. As in software
-#: src/details_window.py:96
+#: src/details_window.py:91
 msgid "program"
 msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:101 src/details_window.py:103
+#: src/details_window.py:96 src/details_window.py:98
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\scieżka\\do\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:107 src/details_window.py:109
+#: src/details_window.py:102 src/details_window.py:104
 msgid "/path/to/{}"
 msgstr "/ścieżka/do/{}"
 
-#: src/details_window.py:113
+#: src/details_window.py:108
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -472,19 +434,19 @@ msgstr ""
 "\n"
 "Jeśli ścieżka zawiera spacje, pamiętaj, aby zawinąć ją w podwójne cudzysłowy!"
 
-#: src/details_window.py:143 src/details_window.py:149
+#: src/details_window.py:139 src/details_window.py:145
 msgid "Couldn't Add Game"
 msgstr "Nie można było dodać gry"
 
-#: src/details_window.py:143 src/details_window.py:176
+#: src/details_window.py:139 src/details_window.py:172
 msgid "Game title cannot be empty."
 msgstr "Tytuł gry nie może być pusty."
 
-#: src/details_window.py:149 src/details_window.py:184
+#: src/details_window.py:145 src/details_window.py:180
 msgid "Executable cannot be empty."
 msgstr "Plik wykonywalny nie może być pusty."
 
-#: src/details_window.py:175 src/details_window.py:183
+#: src/details_window.py:171 src/details_window.py:179
 msgid "Couldn't Apply Preferences"
 msgstr "Nie można zastosować preferencji"
 
@@ -596,6 +558,25 @@ msgstr "Nie można połączyć się z SteamGridDB"
 
 #~ msgid "Details"
 #~ msgstr "Szczegóły"
+
+#~ msgid "The title of the game"
+#~ msgstr "Tytuł gry"
+
+#~ msgid "Developer"
+#~ msgstr "Deweloper"
+
+#~ msgid "The developer or publisher (optional)"
+#~ msgstr "Twórca lub wydawca (opcjonalnie)"
+
+#~ msgid "Executable"
+#~ msgstr "Wykonywalne"
+
+#~ msgid "File to open or command to run when launching the game"
+#~ msgstr ""
+#~ "Plik do otwarcia lub polecenie do uruchomienia podczas uruchamiania gry"
+
+#~ msgid "Cancel"
+#~ msgstr "Anuluj"
 
 #~ msgid "No new games were found on your system."
 #~ msgstr "W systemie nie znaleziono żadnych nowych gier."
