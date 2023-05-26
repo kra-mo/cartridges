@@ -2,14 +2,13 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # micke <mikanybe@gmail.com>, 2023.
-# micke <micke@users.noreply.hosted.weblate.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-25 17:48+0200\n"
-"PO-Revision-Date: 2023-05-24 20:27+0000\n"
-"Last-Translator: micke <micke@users.noreply.hosted.weblate.org>\n"
+"POT-Creation-Date: 2023-05-23 07:30+0200\n"
+"PO-Revision-Date: 2023-05-18 13:36+0000\n"
+"Last-Translator: micke <mikanybe@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/sv/>\n"
 "Language: sv\n"
@@ -36,7 +35,7 @@ msgstr "Starta alla dina spel"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
 msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
-msgstr "gaming;spelstartare;steam;lutris;heroic;bottles;itch;"
+msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -53,7 +52,7 @@ msgstr ""
 msgid "Library"
 msgstr "Bibliotek"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:66
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:65
 msgid "Edit Game Details"
 msgstr "Redigera speldetaljer"
 
@@ -67,52 +66,15 @@ msgstr "Speldetaljer"
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: data/gtk/details_window.blp:25
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: data/gtk/details_window.blp:57
-msgid "New Cover"
-msgstr ""
-
-#: data/gtk/details_window.blp:75
-msgid "Delete Cover"
-msgstr ""
-
-#: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
 msgid "Title"
 msgstr "Titel"
-
-#: data/gtk/details_window.blp:102
-msgid "The title of the game"
-msgstr "Spelets titel"
-
-#: data/gtk/details_window.blp:112 data/gtk/details_window.blp:117
-msgid "Developer"
-msgstr "Utvecklare"
-
-#: data/gtk/details_window.blp:113
-msgid "The developer or publisher (optional)"
-msgstr "Utvecklaren eller utgivaren (valfritt)"
-
-#: data/gtk/details_window.blp:123 data/gtk/details_window.blp:153
-msgid "Executable"
-msgstr "Körbar"
-
-#: data/gtk/details_window.blp:124
-msgid "File to open or command to run when launching the game"
-msgstr "Fil som ska öppnas eller kommando som ska köras när spelet startas"
-
-#: data/gtk/details_window.blp:130
-msgid "More Info"
-msgstr ""
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
 msgstr "Redigera"
 
-#: data/gtk/game.blp:107 src/window.py:205
+#: data/gtk/game.blp:107 src/window.py:202
 msgid "Hide"
 msgstr "Dölj"
 
@@ -121,7 +83,7 @@ msgstr "Dölj"
 msgid "Remove"
 msgstr "Ta bort"
 
-#: data/gtk/game.blp:126 src/window.py:207
+#: data/gtk/game.blp:126 src/window.py:204
 msgid "Unhide"
 msgstr "Visa"
 
@@ -146,7 +108,7 @@ msgstr "Visa inställningar"
 msgid "Shortcuts"
 msgstr "Genvägar"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:169 src/preferences.py:98
+#: data/gtk/help-overlay.blp:34 src/game.py:167 src/preferences.py:98
 msgid "Undo"
 msgstr "Ångra"
 
@@ -190,7 +152,7 @@ msgstr "Omslagsbild startar spel"
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "Byt beteende för omslagsbilden och Spela-knappen"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:84
+#: data/gtk/preferences.blp:36 src/details_window.py:79
 msgid "Images"
 msgstr "Bilder"
 
@@ -396,61 +358,61 @@ msgstr "Om Cartridges"
 msgid "translator_credits"
 msgstr "Micke"
 
-#: src/window.py:187
+#: src/window.py:184
 msgid "Today"
 msgstr "Idag"
 
-#: src/window.py:189
+#: src/window.py:186
 msgid "Yesterday"
 msgstr "Igår"
 
 #. The variable is the date when the game was added
-#: src/window.py:228
+#: src/window.py:225
 msgid "Added: {}"
 msgstr "Tillagt: {}"
 
-#: src/window.py:231
+#: src/window.py:228
 msgid "Never"
 msgstr "Aldrig"
 
 #. The variable is the date when the game was last played
-#: src/window.py:235
+#: src/window.py:232
 msgid "Last played: {}"
 msgstr "Senast spelat: {}"
 
-#: src/details_window.py:75
+#: src/details_window.py:70
 msgid "Apply"
 msgstr "Tillämpa"
 
-#: src/details_window.py:81
+#: src/details_window.py:76
 msgid "Add New Game"
 msgstr "Lägg till nytt spel"
 
-#: src/details_window.py:82
+#: src/details_window.py:77
 msgid "Confirm"
 msgstr "Bekräfta"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:94
+#: src/details_window.py:89
 msgid "file.txt"
 msgstr "fil.txt"
 
 #. As in software
-#: src/details_window.py:96
+#: src/details_window.py:91
 msgid "program"
 msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:101 src/details_window.py:103
+#: src/details_window.py:96 src/details_window.py:98
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\sökväg\\till\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:107 src/details_window.py:109
+#: src/details_window.py:102 src/details_window.py:104
 msgid "/path/to/{}"
 msgstr "/sökväg/till/{}"
 
-#: src/details_window.py:113
+#: src/details_window.py:108
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -473,19 +435,19 @@ msgstr ""
 "Om sökvägen innehåller mellanslag, se till att den omsluts av dubbla "
 "citationstecken!"
 
-#: src/details_window.py:143 src/details_window.py:149
+#: src/details_window.py:139 src/details_window.py:145
 msgid "Couldn't Add Game"
 msgstr "Kunde inte lägga till spelet"
 
-#: src/details_window.py:143 src/details_window.py:176
+#: src/details_window.py:139 src/details_window.py:172
 msgid "Game title cannot be empty."
 msgstr "Spelets titel kan inte vara tom."
 
-#: src/details_window.py:149 src/details_window.py:184
+#: src/details_window.py:145 src/details_window.py:180
 msgid "Executable cannot be empty."
 msgstr "Den körbara filen kan inte vara tom."
 
-#: src/details_window.py:175 src/details_window.py:183
+#: src/details_window.py:171 src/details_window.py:179
 msgid "Couldn't Apply Preferences"
 msgstr "Kunde inte tillämpa inställningar"
 
@@ -557,17 +519,23 @@ msgid "Importing Covers…"
 msgstr "Importerar omslagsbilder…"
 
 #: src/utils/importer.py:91
+#, fuzzy
+#| msgid "No Games Found"
 msgid "No new games found"
-msgstr "Inga nya spel hittades"
+msgstr "Inga spel hittades"
 
 #: src/utils/importer.py:98
+#, fuzzy
+#| msgid "Game Imported"
 msgid "1 game imported"
-msgstr "1 spel Importerat"
+msgstr "Spel Importerat"
 
 #. The variable is the number of games
 #: src/utils/importer.py:104
+#, fuzzy
+#| msgid "Games Imported"
 msgid "{} games imported"
-msgstr "{} spel importerade"
+msgstr "Spel importerade"
 
 #: src/utils/importer.py:121 src/utils/steamgriddb.py:112
 msgid "Couldn't Connect to SteamGridDB"
@@ -590,6 +558,24 @@ msgstr "Kunde inte ansluta till SteamGridDB"
 
 #~ msgid "Details"
 #~ msgstr "Detaljer"
+
+#~ msgid "The title of the game"
+#~ msgstr "Spelets titel"
+
+#~ msgid "Developer"
+#~ msgstr "Utvecklare"
+
+#~ msgid "The developer or publisher (optional)"
+#~ msgstr "Utvecklaren eller utgivaren (valfritt)"
+
+#~ msgid "Executable"
+#~ msgstr "Körbar"
+
+#~ msgid "File to open or command to run when launching the game"
+#~ msgstr "Fil som ska öppnas eller kommando som ska köras när spelet startas"
+
+#~ msgid "Cancel"
+#~ msgstr "Avbryt"
 
 #~ msgid "No new games were found on your system."
 #~ msgstr "Inga nya spel hittades på ditt system."
