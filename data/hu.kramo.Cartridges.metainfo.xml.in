@@ -44,11 +44,10 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="1.5.2" date="2023-05-27">
+    <release version="1.5.3" date="2023-05-27">
       <description translatable="no">
         <ul>
-          <li>Fixes the app icon not displaying on the XFCE panel</li>
-          <li>Fixes a bug with the Steam API</li>
+          <li>Fixes a bug with custom install locations</li>
           <li>Translations since 1.5</li>
         </ul>
       </description>
