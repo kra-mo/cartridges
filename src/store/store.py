@@ -27,7 +27,7 @@ class Store:
         """
 
         # Ignore games from a newer spec version
-        if game.version > shared.spec_version:
+        if game.version > shared.SPEC_VERSION:
             return None
 
         # Ignore games that are already there

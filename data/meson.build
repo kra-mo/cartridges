@@ -11,7 +11,11 @@ blueprints = custom_target('blueprints',
 )
 
 gnome.compile_resources('cartridges',
-  'cartridges.gresource.xml',
+  configure_file(
+    input: 'cartridges.gresource.xml.in',
+    output: 'cartridges.gresource.xml',
+    configuration: conf
+  ),
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -19,8 +23,12 @@ gnome.compile_resources('cartridges',
 )
 
 desktop_file = i18n.merge_file(
-        input: 'hu.kramo.Cartridges.desktop.in',
-       output: 'hu.kramo.Cartridges.desktop',
+        input: configure_file(
+          input: 'hu.kramo.Cartridges.desktop.in',
+          output: app_id + '.desktop.in',
+          configuration: conf
+        ),
+       output: app_id + '.desktop',
          type: 'desktop',
        po_dir: '../po',
       install: true,
@@ -33,8 +41,12 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-        input: 'hu.kramo.Cartridges.metainfo.xml.in',
-       output: 'hu.kramo.Cartridges.metainfo.xml',
+        input: configure_file(
+          input: 'hu.kramo.Cartridges.metainfo.xml.in',
+          output: app_id + '.metainfo.xml.in',
+          configuration: conf
+        ),
+       output: app_id + '.metainfo.xml',
        po_dir: '../po',
       install: true,
   install_dir: join_paths(get_option('datadir'), 'metainfo')
@@ -45,7 +57,12 @@ if appstream_util.found()
   test('Validate appstream file', appstream_util, args: ['validate', appstream_file])
 endif
 
-install_data('hu.kramo.Cartridges.gschema.xml',
+install_data(
+  configure_file(
+    input: 'hu.kramo.Cartridges.gschema.xml.in',
+    output: app_id + '.gschema.xml',
+    configuration: conf
+  ),
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
 

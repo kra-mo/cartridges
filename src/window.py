@@ -19,10 +19,12 @@
 
 from datetime import datetime
 
-from gi.repository import Adw, Gio, GLib, Gtk
+from gi.repository import Adw, GLib, Gtk
+
+from src import shared
 
 
-@Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/window.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "/gtk/window.ui")
 class CartridgesWindow(Adw.ApplicationWindow):
     __gtype_name__ = "CartridgesWindow"
 
@@ -86,6 +88,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.set_library_child()
 
+        self.notice_empty.set_icon_name(shared.APP_ID + "-symbolic")
+
+        if "Devel" in shared.APP_ID:
+            self.add_css_class("devel")
+
         # Connect search entries
         self.search_bar.connect_entry(self.search_entry)
         self.hidden_search_bar.connect_entry(self.hidden_search_entry)
@@ -139,9 +146,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
 
         filtered = text != "" and not (
-            text in game.name.lower() or text in game.developer.lower()
-            if game.developer
-            else None
+            text in game.name.lower()
+            or (text in game.developer.lower() if game.developer else False)
         )
 
         game.filtered = filtered
@@ -291,9 +297,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.sort_state = str(state).strip("'")
         self.library.invalidate_sort()
 
-        Gio.Settings(schema_id="hu.kramo.Cartridges.State").set_string(
-            "sort-mode", self.sort_state
-        )
+        shared.state_schema.set_string("sort-mode", self.sort_state)
 
     def on_toggle_search_action(self, *_args):
         if self.stack.get_visible_child() == self.library_view:

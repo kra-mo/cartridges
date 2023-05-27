@@ -35,7 +35,7 @@ from src.importers.steam_importer import steam_installed
 from src.utils.create_dialog import create_dialog
 
 
-@Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/preferences.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "/gtk/preferences.ui")
 class PreferencesWindow(Adw.PreferencesWindow):
     __gtype_name__ = "PreferencesWindow"
 
@@ -259,7 +259,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         getattr(win, f'{source_id.replace("-", "_")}_action_row').set_subtitle(
             # Remove the path if the dir is picked via the Flatpak portal
             re.sub(
-                "/run/user/\\d*/doc/......../",
+                "/run/user/\\d*/doc/.*/",
                 "",
                 str(
                     Path(shared.schema.get_string(f"{source_id}-location")).expanduser()

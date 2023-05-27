@@ -1,5 +1,5 @@
 {
-    "id" : "hu.kramo.Cartridges",
+    "id" : "hu.kramo.Cartridges.Devel",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "44",
     "sdk" : "org.gnome.Sdk",
@@ -117,10 +117,13 @@
             "name" : "cartridges",
             "builddir" : true,
             "buildsystem" : "meson",
+            "config-opts": [
+                "-Dprofile=development"
+            ],
             "sources" : [
                 {
                     "type" : "dir",
-                    "path" : "."
+                    "path" : ".."
                 }
             ]
         }

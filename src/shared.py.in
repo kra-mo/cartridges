@@ -1,4 +1,4 @@
-# shared.py
+# shared.py.in
 #
 # Copyright 2022-2023 kramo
 #
@@ -22,8 +22,13 @@ from pathlib import Path
 
 from gi.repository import Gdk, Gio
 
-schema = Gio.Settings.new("hu.kramo.Cartridges")
-state_schema = Gio.Settings.new("hu.kramo.Cartridges.State")
+APP_ID = "@APP_ID@"
+VERSION = "@VERSION@"
+PREFIX = "@PREFIX@"
+SPEC_VERSION = 1.5  # The version of the game_id.json spec
+
+schema = Gio.Settings.new(APP_ID)
+state_schema = Gio.Settings.new(APP_ID + ".State")
 
 data_dir = (
     Path(os.getenv("XDG_DATA_HOME"))
@@ -51,5 +56,5 @@ image_size = (200 * scale_factor, 300 * scale_factor)
 
 # pylint: disable=invalid-name
 win = None
+importer = None
 store = None
-spec_version = 2.0  # The version of the game_id.json spec

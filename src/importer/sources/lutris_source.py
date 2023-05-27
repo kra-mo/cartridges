@@ -68,7 +68,7 @@ class LutrisSourceIterator(SourceIterator):
 
         # Create game
         values = {
-            "version": shared.spec_version,
+            "version": shared.SPEC_VERSION,
             "added": int(time()),
             "hidden": row[4],
             "name": row[1],

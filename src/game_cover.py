@@ -20,6 +20,8 @@
 from gi.repository import GdkPixbuf, Gio, GLib
 from PIL import Image, ImageFilter, ImageStat
 
+from src import shared
+
 
 class GameCover:
     pixbuf = None
@@ -30,7 +32,7 @@ class GameCover:
     anim_iter = None
 
     placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
-        "/hu/kramo/Cartridges/library_placeholder.svg", 400, 600, False
+        shared.PREFIX + "/library_placeholder.svg", 400, 600, False
     )
 
     def __init__(self, pictures, path=None):
@@ -91,7 +93,7 @@ class GameCover:
                     )
             else:
                 self.blurred = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
-                    "/hu/kramo/Cartridges/library_placeholder.svg", 2, 2, False
+                    shared.PREFIX + "/library_placeholder.svg", 2, 2, False
                 )
 
                 self.luminance = (0.1, 0.8)

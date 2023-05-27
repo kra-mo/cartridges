@@ -72,7 +72,7 @@ class SteamSourceIterator(SourceIterator):
         # Build game from local data
         appid = local_data["appid"]
         values = {
-            "version": shared.spec_version,
+            "version": shared.SPEC_VERSION,
             "added": int(time()),
             "name": local_data["name"],
             "source": self.source.id,

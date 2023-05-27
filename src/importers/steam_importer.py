@@ -35,9 +35,10 @@ def update_values_from_data(content, values):
         values["blacklisted"] = True
     else:
         data = basic_data["data"]
-        values["developer"] = ", ".join(data["developers"])
+        if data.get("developers"):
+            values["developer"] = ", ".join(data["developers"])
 
-        if data["type"] != "game":
+        if data.get("type") != "game":
             values["blacklisted"] = True
 
     return values
@@ -88,11 +89,11 @@ def get_game(task, datatypes, current_time, appmanifest, steam_dir):
             open_file.raise_for_status()
             content = open_file.json()
     except requests.exceptions.RequestException:
-        task.return_value((values, image_path if image_path.exists() else None))
+        task.return_value((values, image_path if image_path.is_file() else None))
         return
 
     values = update_values_from_data(content, values)
-    task.return_value((values, image_path if image_path.exists() else None))
+    task.return_value((values, image_path if image_path.is_file() else None))
 
 
 def get_games_async(appmanifests, steam_dir, importer):
@@ -124,28 +125,24 @@ def get_games_async(appmanifests, steam_dir, importer):
 
 def steam_installed(path=None):
     location_key = "steam-location"
-    steam_dir = Path(shared.schema.get_string(location_key)).expanduser()
     check = "steamapps"
 
-    if not (steam_dir / check).is_file():
-        subdirs = ("steam", "Steam")
-        locations = (
-            (path,)
-            if path
-            else (
-                steam_dir,
-                Path.home() / ".steam",
-                shared.data_dir / "Steam",
-                Path.home() / ".var/app/com.valvesoftware.Steam/data/Steam",
-            )
+    subdirs = ("steam", "Steam")
+    locations = (
+        (path,)
+        if path
+        else (
+            Path(shared.schema.get_string(location_key)).expanduser(),
+            Path.home() / ".steam",
+            shared.data_dir / "Steam",
+            Path.home() / ".var/app/com.valvesoftware.Steam/data/Steam",
         )
+    )
 
-        if os.name == "nt":
-            locations += (Path(os.getenv("programfiles(x86)")) / "Steam",)
+    if os.name == "nt":
+        locations += (Path(os.getenv("programfiles(x86)")) / "Steam",)
 
-        steam_dir = check_install(
-            check, locations, (shared.schema, location_key), subdirs
-        )
+    steam_dir = check_install(check, locations, (shared.schema, location_key), subdirs)
 
     return steam_dir
 
@@ -166,13 +163,12 @@ def steam_importer():
         steam_dirs = [steam_dir]
 
     for directory in steam_dirs:
-        if not (directory / "steamapps").exists():
-            steam_dirs.remove(directory)
-
-    for directory in steam_dirs:
-        for open_file in (directory / "steamapps").iterdir():
-            if open_file.is_file() and "appmanifest" in open_file.name:
-                appmanifests.append(open_file)
+        try:
+            for open_file in (directory / "steamapps").iterdir():
+                if open_file.is_file() and "appmanifest" in open_file.name:
+                    appmanifests.append(open_file)
+        except FileNotFoundError:
+            continue
 
     importer = shared.importer
     importer.total_queue += len(appmanifests)

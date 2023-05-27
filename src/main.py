@@ -54,11 +54,14 @@ class CartridgesApplication(Adw.Application):
 
     def __init__(self):
         super().__init__(
-            application_id="hu.kramo.Cartridges", flags=Gio.ApplicationFlags.FLAGS_NONE
+            application_id=shared.APP_ID, flags=Gio.ApplicationFlags.FLAGS_NONE
         )
 
     def do_activate(self):  # pylint: disable=arguments-differ
         """Called on app creation"""
+
+        # Set fallback icon-name
+        Gtk.Window.set_default_icon_name(shared.APP_ID)
 
         # Create the main window
         self.win = self.props.active_window  # pylint: disable=no-member
@@ -136,9 +139,9 @@ class CartridgesApplication(Adw.Application):
         about = Adw.AboutWindow(
             transient_for=self.win,
             application_name=_("Cartridges"),
-            application_icon="hu.kramo.Cartridges",
+            application_icon=shared.APP_ID,
             developer_name="kramo",
-            version="1.5",
+            version=shared.VERSION,
             developers=[
                 "kramo https://kramo.hu",
                 "Arcitec https://github.com/Arcitec",

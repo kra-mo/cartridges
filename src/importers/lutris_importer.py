@@ -28,44 +28,38 @@ from src.utils.check_install import check_install
 
 def lutris_installed(path=None):
     location_key = "lutris-location"
-    lutris_dir = (
-        path if path else Path(shared.schema.get_string(location_key)).expanduser()
-    )
     check = "pga.db"
 
-    if not (lutris_dir / check).is_file():
-        locations = (
-            (Path(),)
-            if path
-            else (
-                Path.home() / ".var/app/net.lutris.Lutris/data/lutris",
-                shared.data_dir / "lutris",
-            )
+    locations = (
+        (path,)
+        if path
+        else (
+            Path(shared.schema.get_string(location_key)).expanduser(),
+            Path.home() / ".var/app/net.lutris.Lutris/data/lutris",
+            shared.data_dir / "lutris",
         )
+    )
 
-        lutris_dir = check_install(check, locations, (shared.schema, location_key))
+    lutris_dir = check_install(check, locations, (shared.schema, location_key))
 
     return lutris_dir
 
 
 def lutris_cache_exists(path=None):
     cache_key = "lutris-cache-location"
-    cache_dir = path if path else Path(shared.schema.get_string(cache_key)).expanduser()
     cache_check = "coverart"
 
-    if not (cache_dir / cache_check).exists():
-        cache_locations = (
-            (Path(),)
-            if path
-            else (
-                Path.home() / ".var" / "app" / "net.lutris.Lutris" / "cache" / "lutris",
-                shared.cache_dir / "lutris",
-            )
+    cache_locations = (
+        (path,)
+        if path
+        else (
+            Path(shared.schema.get_string(cache_key)).expanduser(),
+            Path.home() / ".var" / "app" / "net.lutris.Lutris" / "cache" / "lutris",
+            shared.cache_dir / "lutris",
         )
+    )
 
-        cache_dir = check_install(
-            cache_check, cache_locations, (shared.schema, cache_key)
-        )
+    cache_dir = check_install(cache_check, cache_locations, (shared.schema, cache_key))
 
     return cache_dir
 
@@ -136,4 +130,4 @@ def lutris_importer():
         values["source"] = f"lutris_{row[3]}"
 
         image_path = cache_dir / "coverart" / f"{row[2]}.jpg"
-        importer.save_game(values, image_path if image_path.exists() else None)
+        importer.save_game(values, image_path if image_path.is_file() else None)

@@ -1,13 +1,5 @@
 moduledir = join_paths(pkgdatadir, 'src')
 
-python = import('python')
-
-conf = configuration_data()
-conf.set('PYTHON', python.find_installation('python3').path())
-conf.set('VERSION', meson.project_version())
-conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
-conf.set('pkgdatadir', pkgdatadir)
-
 configure_file(
   input: 'cartridges.in',
   output: 'cartridges',
@@ -28,7 +20,11 @@ install_data(
     'details_window.py',
     'game.py',
     'game_cover.py',
-    'shared.py',
+    configure_file(
+      input: 'shared.py.in',
+      output: 'shared.py',
+      configuration: conf
+    )
   ],
   install_dir: moduledir
 )
