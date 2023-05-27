@@ -94,7 +94,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         games = {}
 
-        if shared.games_dir.exists():
+        if shared.games_dir.is_dir():
             for open_file in shared.games_dir.iterdir():
                 data = json.load(open_file.open())
                 games[data["game_id"]] = data

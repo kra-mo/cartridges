@@ -123,25 +123,21 @@ def get_games_async(rows, importer):
 
 def itch_installed(path=None):
     location_key = "itch-location"
-    itch_dir = (
-        path if path else Path(shared.schema.get_string(location_key)).expanduser()
-    )
     check = Path("db") / "butler.db"
 
-    if not (itch_dir / check).is_file():
-        locations = (
-            (Path(),)
-            if path
-            else (
-                Path.home() / ".var/app/io.itch.itch/config/itch",
-                shared.config_dir / "itch",
-            )
+    locations = (
+        (path,)
+        if path
+        else (
+            Path.home() / ".var/app/io.itch.itch/config/itch",
+            shared.config_dir / "itch",
         )
+    )
 
-        if os.name == "nt" and not path:
-            locations += (Path(os.getenv("appdata")) / "itch",)
+    if os.name == "nt" and not path:
+        locations += (Path(os.getenv("appdata")) / "itch",)
 
-        itch_dir = check_install(check, locations, (shared.schema, location_key))
+    itch_dir = check_install(check, locations, (shared.schema, location_key))
 
     return itch_dir
 

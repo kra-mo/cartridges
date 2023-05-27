@@ -126,7 +126,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 if response == "choose_folder":
                     self.choose_folder(widget, set_cache_dir)
 
-            if lutris_cache_exists(self.win, path):
+            if lutris_cache_exists(path):
                 self.import_changed = True
                 self.set_subtitle(self, "lutris-cache")
 
@@ -257,7 +257,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         getattr(win, f'{source_id.replace("-", "_")}_action_row').set_subtitle(
             # Remove the path if the dir is picked via the Flatpak portal
             re.sub(
-                "/run/user/\\d*/doc/......../",
+                "/run/user/\\d*/doc/.*/",
                 "",
                 str(
                     Path(shared.schema.get_string(f"{source_id}-location")).expanduser()

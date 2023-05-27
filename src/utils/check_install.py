@@ -23,10 +23,9 @@ from pathlib import Path
 def check_install(check, locations, setting=None, subdirs=(Path(),)):
     for location in locations:
         for subdir in (Path(),) + subdirs:
-            if (location / subdir / check).is_file() or (
-                location / subdir / check
-            ).exists():
+            if (location / subdir / check).exists():
                 if setting:
                     setting[0].set_string(setting[1], str(location / subdir))
-
                 return location / subdir
+
+    return False

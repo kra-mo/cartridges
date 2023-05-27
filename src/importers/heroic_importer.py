@@ -29,25 +29,21 @@ from .check_install import check_install
 
 def heroic_installed(path=None):
     location_key = "heroic-location"
-    heroic_dir = (
-        path if path else Path(shared.schema.get_string(location_key)).expanduser()
-    )
     check = "config.json"
 
-    if not (heroic_dir / check).is_file():
-        locations = (
-            (Path(),)
-            if path
-            else (
-                Path.home() / ".var/app/com.heroicgameslauncher.hgl/config/heroic",
-                shared.config_dir / "heroic",
-            )
+    locations = (
+        (path,)
+        if path
+        else (
+            Path.home() / ".var/app/com.heroicgameslauncher.hgl/config/heroic",
+            shared.config_dir / "heroic",
         )
+    )
 
-        if os.name == "nt" and not path:
-            locations += (Path(os.getenv("appdata")) / "heroic",)
+    if os.name == "nt" and not path:
+        locations += (Path(os.getenv("appdata")) / "heroic",)
 
-        heroic_dir = check_install(check, locations, (shared.schema, location_key))
+    heroic_dir = check_install(check, locations, (shared.schema, location_key))
 
     return heroic_dir
 
@@ -63,7 +59,7 @@ def heroic_importer():
     # Import Epic games
     if not shared.schema.get_boolean("heroic-import-epic"):
         pass
-    elif (heroic_dir / "store_cache" / "legendary_library.json").exists():
+    elif (heroic_dir / "store_cache" / "legendary_library.json").is_file():
         library = json.load(
             (heroic_dir / "store_cache" / "legendary_library.json").open()
         )
@@ -108,7 +104,7 @@ def heroic_importer():
                     ).hexdigest()
                 )
 
-                importer.save_game(values, image_path if image_path.exists() else None)
+                importer.save_game(values, image_path if image_path.is_file() else None)
 
         except KeyError:
             pass
@@ -116,9 +112,9 @@ def heroic_importer():
     # Import GOG games
     if not shared.schema.get_boolean("heroic-import-gog"):
         pass
-    elif (heroic_dir / "gog_store" / "installed.json").exists() and (
+    elif (heroic_dir / "gog_store" / "installed.json").is_file() and (
         heroic_dir / "store_cache" / "gog_library.json"
-    ).exists():
+    ).is_file():
         installed = json.load((heroic_dir / "gog_store" / "installed.json").open())
 
         importer.total_queue += len(installed["installed"])
@@ -161,12 +157,12 @@ def heroic_importer():
             values["added"] = current_time
             values["last_played"] = 0
 
-            importer.save_game(values, image_path if image_path.exists() else None)
+            importer.save_game(values, image_path if image_path.is_file() else None)
 
     # Import sideloaded games
     if not shared.schema.get_boolean("heroic-import-sideload"):
         pass
-    elif (heroic_dir / "sideload_apps" / "library.json").exists():
+    elif (heroic_dir / "sideload_apps" / "library.json").is_file():
         library = json.load((heroic_dir / "sideload_apps" / "library.json").open())
 
         importer.total_queue += len(library["games"])
@@ -201,4 +197,4 @@ def heroic_importer():
                 / sha256(item["art_square"].encode()).hexdigest()
             )
 
-            importer.save_game(values, image_path if image_path.exists() else None)
+            importer.save_game(values, image_path if image_path.is_file() else None)

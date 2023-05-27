@@ -28,22 +28,18 @@ from .check_install import check_install
 
 def bottles_installed(path=None):
     location_key = "bottles-location"
-    bottles_dir = (
-        path if path else Path(shared.schema.get_string(location_key)).expanduser()
-    )
     check = "library.yml"
 
-    if not (bottles_dir / check).is_file():
-        locations = (
-            (Path(),)
-            if path
-            else (
-                Path.home() / ".var/app/com.usebottles.bottles/data/bottles",
-                shared.data_dir / "bottles",
-            )
+    locations = (
+        (path,)
+        if path
+        else (
+            Path.home() / ".var/app/com.usebottles.bottles/data/bottles",
+            shared.data_dir / "bottles",
         )
+    )
 
-        bottles_dir = check_install(check, locations, (shared.schema, location_key))
+    bottles_dir = check_install(check, locations, (shared.schema, location_key))
 
     return bottles_dir
 
