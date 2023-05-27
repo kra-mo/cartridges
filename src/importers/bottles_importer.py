@@ -57,7 +57,7 @@ def bottles_importer():
 
     data = (bottles_dir / "library.yml").read_text("utf-8")
 
-    library = yaml.load(data, Loader=yaml.Loader)
+    library = yaml.safe_load(data)
 
     importer = shared.importer
     importer.total_queue += len(library)
