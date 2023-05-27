@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="cartridges">
-	<schema id="@APP_ID@" path="@PREFIX@">
+	<schema id="@APP_ID@" path="@PREFIX@/">
 	  <key name="exit-after-launch" type="b">
 	    <default>false</default>
 	  </key>
@@ -68,7 +68,7 @@
       <default>false</default>
     </key>
 	</schema>
-  <schema id="@APP_ID@.State" path="@PREFIX@State/">
+  <schema id="@APP_ID@.State" path="@PREFIX@/State/">
     <key name="width" type="i">
       <default>1110</default>
     </key>

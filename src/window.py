@@ -26,7 +26,7 @@ from . import shared
 from .game import Game
 
 
-@Gtk.Template(resource_path=shared.PREFIX + "gtk/window.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "/gtk/window.ui")
 class CartridgesWindow(Adw.ApplicationWindow):
     __gtype_name__ = "CartridgesWindow"
 

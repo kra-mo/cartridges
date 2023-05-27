@@ -30,7 +30,7 @@ from . import shared
 from .game_cover import GameCover
 
 
-@Gtk.Template(resource_path=shared.PREFIX + "gtk/game.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "/gtk/game.ui")
 class Game(Gtk.Box):
     __gtype_name__ = "Game"
 
@@ -201,7 +201,7 @@ class Game(Gtk.Box):
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
         )
 
-        if shared.state_schema.get_boolean("exit-after-launch"):
+        if shared.schema.get_boolean("exit-after-launch"):
             self.app.quit()
 
         # The variable is the title of the game

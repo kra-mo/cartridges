@@ -13,10 +13,10 @@ pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.proje
 profile = get_option('profile')
 if profile == 'development'
   app_id = 'hu.kramo.Cartridges.Devel'
-  prefix = '/hu/kramo/Cartridges/Devel/'
+  prefix = '/hu/kramo/Cartridges/Devel'
 elif profile ==  'release'
   app_id = 'hu.kramo.Cartridges'
-  prefix = '/hu/kramo/Cartridges/'
+  prefix = '/hu/kramo/Cartridges'
 endif
 
 conf = configuration_data()

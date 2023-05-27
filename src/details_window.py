@@ -32,7 +32,7 @@ from .save_cover import resize_cover, save_cover
 from .steamgriddb import SGDBSave
 
 
-@Gtk.Template(resource_path=shared.PREFIX + "gtk/details_window.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "/gtk/details_window.ui")
 class DetailsWindow(Adw.Window):
     __gtype_name__ = "DetailsWindow"
 
