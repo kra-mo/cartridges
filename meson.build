@@ -24,6 +24,7 @@ conf.set('PYTHON', python.find_installation('python3').full_path())
 conf.set('APP_ID', app_id)
 conf.set('PREFIX', prefix)
 conf.set('VERSION', meson.project_version())
+conf.set('PROFILE', profile)
 conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
 conf.set('pkgdatadir', pkgdatadir)
 

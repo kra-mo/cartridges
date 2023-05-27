@@ -90,7 +90,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.notice_empty.set_icon_name(shared.APP_ID + "-symbolic")
 
-        if "Devel" in shared.APP_ID:
+        if shared.PROFILE == "development":
             self.add_css_class("devel")
 
         # Connect search entries
