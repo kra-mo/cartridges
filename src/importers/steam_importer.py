@@ -126,7 +126,6 @@ def get_games_async(appmanifests, steam_dir, importer):
 
 def steam_installed(path=None):
     location_key = "steam-location"
-    steam_dir = Path(shared.schema.get_string(location_key)).expanduser()
     check = "steamapps"
 
     subdirs = ("steam", "Steam")
@@ -134,7 +133,7 @@ def steam_installed(path=None):
         (path,)
         if path
         else (
-            steam_dir,
+            Path(shared.schema.get_string(location_key)).expanduser(),
             Path.home() / ".steam",
             shared.data_dir / "Steam",
             Path.home() / ".var/app/com.valvesoftware.Steam/data/Steam",
@@ -165,13 +164,12 @@ def steam_importer():
         steam_dirs = [steam_dir]
 
     for directory in steam_dirs:
-        if not (directory / "steamapps").is_dir():
-            steam_dirs.remove(directory)
-
-    for directory in steam_dirs:
-        for open_file in (directory / "steamapps").iterdir():
-            if open_file.is_file() and "appmanifest" in open_file.name:
-                appmanifests.append(open_file)
+        try:
+            for open_file in (directory / "steamapps").iterdir():
+                if open_file.is_file() and "appmanifest" in open_file.name:
+                    appmanifests.append(open_file)
+        except FileNotFoundError:
+            continue
 
     importer = shared.importer
     importer.total_queue += len(appmanifests)

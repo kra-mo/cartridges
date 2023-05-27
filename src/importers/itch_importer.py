@@ -129,6 +129,7 @@ def itch_installed(path=None):
         (path,)
         if path
         else (
+            Path(shared.schema.get_string(location_key)).expanduser(),
             Path.home() / ".var/app/io.itch.itch/config/itch",
             shared.config_dir / "itch",
         )

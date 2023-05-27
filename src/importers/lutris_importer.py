@@ -34,6 +34,7 @@ def lutris_installed(path=None):
         (path,)
         if path
         else (
+            Path(shared.schema.get_string(location_key)).expanduser(),
             Path.home() / ".var/app/net.lutris.Lutris/data/lutris",
             shared.data_dir / "lutris",
         )
@@ -52,6 +53,7 @@ def lutris_cache_exists(path=None):
         (path,)
         if path
         else (
+            Path(shared.schema.get_string(cache_key)).expanduser(),
             Path.home() / ".var" / "app" / "net.lutris.Lutris" / "cache" / "lutris",
             shared.cache_dir / "lutris",
         )

@@ -34,6 +34,7 @@ def bottles_installed(path=None):
         (path,)
         if path
         else (
+            Path(shared.schema.get_string(location_key)).expanduser(),
             Path.home() / ".var/app/com.usebottles.bottles/data/bottles",
             shared.data_dir / "bottles",
         )

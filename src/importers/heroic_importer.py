@@ -35,6 +35,7 @@ def heroic_installed(path=None):
         (path,)
         if path
         else (
+            Path(shared.schema.get_string(location_key)).expanduser(),
             Path.home() / ".var/app/com.heroicgameslauncher.hgl/config/heroic",
             shared.config_dir / "heroic",
         )
