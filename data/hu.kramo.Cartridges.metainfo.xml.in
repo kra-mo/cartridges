@@ -44,10 +44,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="1.5.3" date="2023-05-27">
+    <release version="1.5.4" date="2023-05-27">
       <description translatable="no">
         <ul>
           <li>Fixes a bug with custom install locations</li>
+          <li>Fixes a potential bug with deleted Steam libraries</li>
           <li>Translations since 1.5</li>
         </ul>
       </description>
