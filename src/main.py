@@ -238,7 +238,10 @@ class CartridgesApplication(Adw.Application):
 
 
 def main(version):  # pylint: disable=unused-argument
-    log_level = os.environ.get("LOGLEVEL", "ERROR").upper()
-    logging.basicConfig(level="INFO")  # TODO remove before release, use env
+    # Initiate logger
+    default_log_level = "DEBUG" if shared.PROFILE == "development" else "WARNING"
+    log_level = os.environ.get("LOGLEVEL", default_log_level).upper()
+    logging.basicConfig(level=log_level)
+    # Start app
     app = CartridgesApplication()
     return app.run(sys.argv)
