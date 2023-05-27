@@ -29,6 +29,10 @@ class Pipeline(GObject.Object):
         return self.waiting | self.running
 
     @property
+    def is_done(self) -> bool:
+        return len(self.not_done) == 0
+
+    @property
     def blocked(self) -> set[Manager]:
         """Get the managers that cannot run because their dependencies aren't done"""
         blocked = set()

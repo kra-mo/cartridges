@@ -6,6 +6,7 @@ from src import shared
 from src.utils.task import Task
 from src.store.pipeline import Pipeline
 from src.store.managers.manager import Manager
+from src.importer.sources.source import Source
 
 
 # pylint: disable=too-many-instance-attributes
@@ -16,26 +17,40 @@ class Importer:
     import_statuspage = None
     import_dialog = None
 
-    sources = None
+    sources: set[Source] = None
 
-    n_games_added = 0
-    n_source_tasks_created = 0
-    n_source_tasks_done = 0
+    n_source_tasks_created: int = 0
+    n_source_tasks_done: int = 0
+    n_pipelines_done: int = 0
+    game_pipelines: set[Pipeline] = None
 
     def __init__(self):
+        self.game_pipelines = set()
         self.sources = set()
 
     @property
-    def progress(self):
+    def n_games_added(self):
+        return sum(
+            [
+                1 if not (pipeline.game.blacklisted or pipeline.game.removed) else 0
+                for pipeline in self.game_pipelines
+            ]
+        )
+
+    @property
+    def pipelines_progress(self):
         try:
-            progress = self.n_source_tasks_done / self.n_source_tasks_created
+            progress = self.n_pipelines_done / len(self.game_pipelines)
         except ZeroDivisionError:
             progress = 1
         return progress
 
     @property
     def finished(self):
-        return self.n_source_tasks_created == self.n_source_tasks_done
+        return (
+            self.n_source_tasks_created == self.n_source_tasks_done
+            and len(self.game_pipelines) == self.n_pipelines_done
+        )
 
     def add_source(self, source):
         self.sources.add(source)
@@ -51,7 +66,7 @@ class Importer:
 
         for source in self.sources:
             logging.debug("Importing games from source %s", source.id)
-            task = Task.new(None, None, self.source_task_callback, (source,))
+            task = Task.new(None, None, self.source_callback, (source,))
             self.n_source_tasks_created += 1
             task.set_task_data((source,))
             task.run_in_thread(self.source_task_thread_func)
@@ -72,9 +87,6 @@ class Importer:
             deletable=False,
         )
         self.import_dialog.present()
-
-    def update_progressbar(self):
-        self.progressbar.set_fraction(self.progress)
 
     def source_task_thread_func(self, _task, _obj, data, _cancellable):
         """Source import task code"""
@@ -111,24 +123,24 @@ class Importer:
             if pipeline is not None:
                 logging.info("Imported %s (%s)", game.name, game.game_id)
                 pipeline.connect("manager-done", self.manager_done_callback)
-                self.n_games_added += 1
 
-    def source_task_callback(self, _obj, _result, data):
-        """Source import callback"""
+    def update_progressbar(self):
+        """Update the progressbar to show the percentage of game pipelines done"""
+        self.progressbar.set_fraction(self.pipelines_progress)
+
+    def source_callback(self, _obj, _result, data):
+        """Callback executed when a source is fully scanned"""
         source, *_rest = data
         logging.debug("Import done for source %s", source.id)
         self.n_source_tasks_done += 1
-        # TODO remove, should be handled by manager_done_callback
-        self.update_progressbar()
-        if self.finished:
-            self.import_callback()
 
     def manager_done_callback(self, pipeline: Pipeline, manager: Manager):
         """Callback called when a pipeline for a game has advanced"""
-        # TODO (optional) update progress bar more precisely from here
-        # TODO get number of games really added here (eg. exlude blacklisted)
-        # TODO trigger import_callback only when all pipelines have finished
-        pass
+        if pipeline.is_done:
+            self.n_pipelines_done += 1
+            self.update_progressbar()
+        if self.finished:
+            self.import_callback()
 
     def import_callback(self):
         """Callback called when importing has finished"""
