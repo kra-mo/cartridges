@@ -35,9 +35,10 @@ def update_values_from_data(content, values):
         values["blacklisted"] = True
     else:
         data = basic_data["data"]
-        values["developer"] = ", ".join(data["developers"])
+        if data.get("developers"):
+            values["developer"] = ", ".join(data["developers"])
 
-        if data["type"] != "game":
+        if data.get("type") != "game":
             values["blacklisted"] = True
 
     return values
