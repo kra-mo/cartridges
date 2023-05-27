@@ -1,13 +1,5 @@
 moduledir = join_paths(pkgdatadir, 'cartridges')
 
-python = import('python')
-
-conf = configuration_data()
-conf.set('PYTHON', python.find_installation('python3').path())
-conf.set('VERSION', meson.project_version())
-conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
-conf.set('pkgdatadir', pkgdatadir)
-
 configure_file(
   input: 'cartridges.in',
   output: 'cartridges',
@@ -17,6 +9,11 @@ configure_file(
 )
 
 cartridges_sources = [
+  configure_file(
+    input: 'shared.py.in',
+    output: 'shared.py',
+    configuration: conf
+  ),
   '__init__.py',
   'main.py',
   'window.py',
@@ -24,7 +21,6 @@ cartridges_sources = [
   'details_window.py',
   'game.py',
   'game_cover.py',
-  'shared.py',
   'importers/steam_importer.py',
   'importers/lutris_importer.py',
   'importers/heroic_importer.py',

@@ -20,13 +20,13 @@
 import json
 from datetime import datetime
 
-from gi.repository import Adw, Gio, GLib, Gtk
+from gi.repository import Adw, GLib, Gtk
 
 from . import shared
 from .game import Game
 
 
-@Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/window.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "gtk/window.ui")
 class CartridgesWindow(Adw.ApplicationWindow):
     __gtype_name__ = "CartridgesWindow"
 
@@ -92,6 +92,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.set_library_child()
 
+        self.notice_empty.set_icon_name(shared.APP_ID + "-symbolic")
+
+        if "Devel" in shared.APP_ID:
+            self.add_css_class("devel")
+
         games = {}
 
         if shared.games_dir.is_dir():
@@ -100,7 +105,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 games[data["game_id"]] = data
 
         for game_id, game in games.items():
-            if (version := game.get("version")) and version > shared.spec_version:
+            if (version := game.get("version")) and version > shared.SPEC_VERSION:
                 continue
 
             if game.get("removed"):
@@ -318,9 +323,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.sort_state = str(state).strip("'")
         self.library.invalidate_sort()
 
-        Gio.Settings(schema_id="hu.kramo.Cartridges.State").set_string(
-            "sort-mode", self.sort_state
-        )
+        shared.state_schema.set_string("sort-mode", self.sort_state)
 
     def on_toggle_search_action(self, *_args):
         if self.stack.get_visible_child() == self.library_view:

@@ -53,14 +53,11 @@ For updates and questions, join our [Discord server][discord-url]!
 
 ## Linux
 
-### Flathub (Recommended)
+### Flathub
+
+The app is available on Flathub.
 
 <a href=https://flathub.org/apps/hu.kramo.Cartridges><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
-
-### From Releases
-
-1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
-2. Install the downloaded file via GNOME Software or `flatpak install hu.kramo.Cartridges.flatpak`.
 
 ## Windows
 

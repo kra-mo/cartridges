@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>hu.kramo.Cartridges.desktop</id>
+  <id>@APP_ID@.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
   <name>Cartridges</name>
@@ -15,7 +15,7 @@
   <url type="vcs-browser">https://github.com/kra-mo/cartridges</url>
   <url type="contribute">https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md</url>
   <developer_name translatable="no">kramo</developer_name>
-  <launchable type="desktop-id">hu.kramo.Cartridges.desktop</launchable>
+  <launchable type="desktop-id">@APP_ID@.desktop</launchable>
   <supports>
     <control>pointing</control>
     <control>keyboard</control>

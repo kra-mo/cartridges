@@ -1,5 +1,5 @@
 data/hu.kramo.Cartridges.desktop.in
-data/hu.kramo.Cartridges.gschema.xml
+data/hu.kramo.Cartridges.gschema.xml.in
 data/hu.kramo.Cartridges.metainfo.xml.in
 
 data/gtk/details_window.blp

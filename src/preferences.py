@@ -33,7 +33,7 @@ from .lutris_importer import lutris_cache_exists, lutris_installed
 from .steam_importer import steam_installed
 
 
-@Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/preferences.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "gtk/preferences.ui")
 class PreferencesWindow(Adw.PreferencesWindow):
     __gtype_name__ = "PreferencesWindow"
 

@@ -24,13 +24,13 @@ import subprocess
 from pathlib import Path
 from time import time
 
-from gi.repository import Adw, Gio, Gtk
+from gi.repository import Adw, Gtk
 
 from . import shared
 from .game_cover import GameCover
 
 
-@Gtk.Template(resource_path="/hu/kramo/Cartridges/gtk/game.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "gtk/game.ui")
 class Game(Gtk.Box):
     __gtype_name__ = "Game"
 
@@ -65,7 +65,7 @@ class Game(Gtk.Box):
 
         self.win = shared.win
         self.app = self.win.get_application()
-        self.version = shared.spec_version
+        self.version = shared.SPEC_VERSION
 
         self.update_values(data)
 
@@ -189,7 +189,7 @@ class Game(Gtk.Box):
 
         args = (
             "flatpak-spawn --host /bin/sh -c " + shlex.quote(string)  # Flatpak
-            if os.getenv("FLATPAK_ID") == "hu.kramo.Cartridges"
+            if os.getenv("FLATPAK_ID") == shared.APP_ID
             else string  # Others
         )
 
@@ -201,7 +201,7 @@ class Game(Gtk.Box):
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
         )
 
-        if Gio.Settings.new("hu.kramo.Cartridges").get_boolean("exit-after-launch"):
+        if shared.state_schema.get_boolean("exit-after-launch"):
             self.app.quit()
 
         # The variable is the title of the game
