@@ -48,6 +48,9 @@ class CartridgesApplication(Adw.Application):
         )
 
     def do_activate(self):  # pylint: disable=arguments-differ
+        # Set fallback icon-name
+        Gtk.Window.set_default_icon_name("hu.kramo.Cartridges")
+
         # Create the main window
         self.win = self.props.active_window  # pylint: disable=no-member
         if not self.win:
