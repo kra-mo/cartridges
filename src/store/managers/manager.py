@@ -1,11 +1,10 @@
 from abc import abstractmethod
-
-from gi.repository import GObject
+from typing import Callable
 
 from src.game import Game
 
 
-class Manager(GObject.Object):
+class Manager:
     """Class in charge of handling a post creation action for games.
 
     * May connect to signals on the game to handle them.
@@ -39,19 +38,8 @@ class Manager(GObject.Object):
         * May not raise exceptions, as they will be silently ignored
         """
 
-    def run(self, game: Game) -> None:
+    def run(self, game: Game, callback: Callable[["Manager"]]) -> None:
         """Pass the game through the manager.
         In charge of calling the final_run method."""
-        self.emit("started")
         self.final_run(game)
-        self.emit("done")
-
-    @GObject.Signal(name="started")
-    def started(self) -> None:
-        """Signal emitted when a manager is started"""
-        pass
-
-    @GObject.Signal(name="done")
-    def done(self) -> None:
-        """Signal emitted when a manager is done"""
-        pass
+        callback(self)

@@ -55,25 +55,21 @@ class Pipeline(GObject.Object):
         # Separate blocking / async managers
         managers = self.ready
         blocking = set(filter(lambda manager: manager.blocking, managers))
-        parallel = managers - parallel
+        parallel = managers - blocking
 
         # Schedule parallel managers, then run the blocking ones
         for manager in (*parallel, *blocking):
-            manager.run(self.game)
+            self.emit("manager-started", manager)
+            manager.run(self.game, self._manager_callback)
+
+    def _manager_callback(self, manager: Manager) -> None:
+        """Method called by a manager when it's done"""
+        self.emit("manager-done", manager)
 
     @GObject.Signal(name="manager-started", arg_types=(object,))
     def manager_started(self, manager: Manager) -> None:
         """Signal emitted when a manager is started"""
-        pass
 
     @GObject.Signal(name="manager-done", arg_types=(object,))
     def manager_done(self, manager: Manager) -> None:
         """Signal emitted when a manager is done"""
-        pass
-
-    def on_manager_started(self, manager: Manager) -> None:
-        self.emit("manager-started", manager)
-
-    def on_manager_done(self, manager: Manager) -> None:
-        self.emit("manager-done", manager)
-        self.advance()
