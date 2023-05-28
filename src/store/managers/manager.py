@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Callable
+from typing import Callable, Any
 
 from src.game import Game
 
@@ -15,6 +15,10 @@ class Manager:
     run_after: set[type["Manager"]] = set()
     errors: list[Exception]
     blocking: bool = True
+
+    @property
+    def name(self):
+        return type(self).__name__
 
     def __init__(self) -> None:
         super().__init__()
@@ -38,7 +42,7 @@ class Manager:
         * May not raise exceptions, as they will be silently ignored
         """
 
-    def run(self, game: Game, callback: Callable[["Manager"]]) -> None:
+    def run(self, game: Game, callback: Callable[["Manager"], Any]) -> None:
         """Pass the game through the manager.
         In charge of calling the final_run method."""
         self.final_run(game)

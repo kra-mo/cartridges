@@ -1,10 +1,10 @@
+import logging
 from typing import Iterable
 
 from gi.repository import GObject
 
 from src.game import Game
 from src.store.managers.manager import Manager
-from src.utils.task import Task
 
 
 class Pipeline(GObject.Object):
@@ -59,17 +59,18 @@ class Pipeline(GObject.Object):
 
         # Schedule parallel managers, then run the blocking ones
         for manager in (*parallel, *blocking):
-            self.emit("manager-started", manager)
-            manager.run(self.game, self._manager_callback)
+            self.waiting.remove(manager)
+            self.running.add(manager)
+            manager.run(self.game, self.manager_callback)
 
-    def _manager_callback(self, manager: Manager) -> None:
+    def manager_callback(self, manager: Manager) -> None:
         """Method called by a manager when it's done"""
-        self.emit("manager-done", manager)
+        logging.debug("%s done for %s", manager.name, self.game.game_id)
+        self.running.remove(manager)
+        self.done.add(manager)
+        self.emit("advanced")
+        self.advance()
 
-    @GObject.Signal(name="manager-started", arg_types=(object,))
-    def manager_started(self, manager: Manager) -> None:
-        """Signal emitted when a manager is started"""
-
-    @GObject.Signal(name="manager-done", arg_types=(object,))
-    def manager_done(self, manager: Manager) -> None:
-        """Signal emitted when a manager is done"""
+    @GObject.Signal(name="advanced")
+    def advanced(self) -> None:
+        """Signal emitted when the pipeline has advanced"""

@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Any
 
 from gi.repository import Gio
 
@@ -26,8 +26,8 @@ class AsyncManager(Manager):
         Already scheduled Tasks will no longer be cancellable."""
         self.cancellable = Gio.Cancellable()
 
-    def run(self, game: Game, callback: Callable) -> None:
-        task = Task.new(self, self.cancellable, self._task_callback, (callback,))
+    def run(self, game: Game, callback: Callable[["Manager"], Any]) -> None:
+        task = Task.new(None, self.cancellable, self._task_callback, (callback,))
         task.set_task_data((game,))
         task.run_in_thread(self._task_thread_func)
 
@@ -38,5 +38,5 @@ class AsyncManager(Manager):
 
     def _task_callback(self, _source_object, _result, data):
         """Method run after the async task is done"""
-        _game, callback, *_rest = data
+        callback, *_rest = data
         callback(self)
