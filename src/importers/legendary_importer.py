@@ -1,4 +1,4 @@
-# lutris_importer.py
+# legendary_importer.py
 #
 # Copyright 2022-2023 kramo
 #
