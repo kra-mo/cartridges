@@ -1,14 +1,14 @@
 from requests import HTTPError, JSONDecodeError
 
 from src.game import Game
-from src.store.managers.manager import Manager
+from src.store.managers.async_manager import AsyncManager
 from src.utils.steam import SteamGameNotFoundError, SteamHelper, SteamNotAGameError
 
 
-class SteamAPIManager(Manager):
+class SteamAPIManager(AsyncManager):
     """Manager in charge of completing a game's data from the Steam API"""
 
-    def run(self, game: Game) -> None:
+    def final_run(self, game: Game) -> None:
         # Skip non-steam games
         if not game.source.startswith("steam_"):
             return

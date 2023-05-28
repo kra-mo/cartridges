@@ -9,7 +9,8 @@ class DisplayManager(Manager):
 
     run_after = set((FileManager,))
 
-    def run(self, game: Game) -> None:
+    def final_run(self, game: Game) -> None:
         # TODO decouple a game from its widget
+        # TODO make the display manager async
         shared.win.games[game.game_id] = game
         game.update()
