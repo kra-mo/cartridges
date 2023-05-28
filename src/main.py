@@ -33,6 +33,7 @@ from .details_window import DetailsWindow
 from .heroic_importer import heroic_importer
 from .importer import Importer
 from .itch_importer import itch_importer
+from .legendary_importer import legendary_importer
 from .lutris_importer import lutris_importer
 from .preferences import PreferencesWindow
 from .steam_importer import steam_importer
@@ -172,6 +173,9 @@ class CartridgesApplication(Adw.Application):
 
         if shared.schema.get_boolean("itch"):
             itch_importer()
+
+        if shared.schema.get_boolean("legendary"):
+            legendary_importer()
 
         shared.importer.blocker = False
 

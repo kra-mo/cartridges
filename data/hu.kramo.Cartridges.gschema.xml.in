@@ -55,6 +55,12 @@
     <key name="itch-location" type="s">
       <default>"~/.var/app/io.itch.itch/config/itch/"</default>
     </key>
+    <key name="legendary" type="b">
+      <default>true</default>
+    </key>
+    <key name="legendary-location" type="s">
+      <default>"~/.config/legendary/"</default>
+    </key>
     <key name="sgdb-key" type="s">
       <default>""</default>
     </key>

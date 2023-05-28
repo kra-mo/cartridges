@@ -26,6 +26,7 @@ cartridges_sources = [
   'importers/heroic_importer.py',
   'importers/bottles_importer.py',
   'importers/itch_importer.py',
+  'importers/legendary_importer.py',
   'utils/importer.py',
   'utils/steamgriddb.py',
   'utils/save_cover.py',

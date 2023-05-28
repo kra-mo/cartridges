@@ -29,6 +29,7 @@ from .bottles_importer import bottles_installed
 from .create_dialog import create_dialog
 from .heroic_importer import heroic_installed
 from .itch_importer import itch_installed
+from .legendary_importer import legendary_importer
 from .lutris_importer import lutris_cache_exists, lutris_installed
 from .steam_importer import steam_installed
 
@@ -73,6 +74,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
     itch_expander_row = Gtk.Template.Child()
     itch_action_row = Gtk.Template.Child()
     itch_file_chooser_button = Gtk.Template.Child()
+
+    legendary_expander_row = Gtk.Template.Child()
+    legendary_action_row = Gtk.Template.Child()
+    legendary_file_chooser_button = Gtk.Template.Child()
 
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
@@ -153,6 +158,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         # itch
         self.create_preferences(self, "itch", "itch", True)
+
+        # Legendary
+        self.create_preferences(self, "legendary", "legendary", True)
 
         # SteamGridDB
         def sgdb_key_changed(*_args):
