@@ -84,12 +84,7 @@ class CartridgesApplication(Adw.Application):
             shared.store = Store()
             shared.store.add_manager(DisplayManager())
 
-        # Load games from disk
-        if shared.games_dir.exists():
-            for game_file in shared.games_dir.iterdir():
-                data = json.load(game_file.open())
-                game = Game(data, allow_side_effects=False)
-                shared.store.add_game(game)
+        self.load_games_from_disk()
 
         # Add rest of the managers for game imports
         shared.store.add_manager(SteamAPIManager())
@@ -134,6 +129,13 @@ class CartridgesApplication(Adw.Application):
         self.win.on_sort_action(sort_action, shared.state_schema.get_value("sort-mode"))
 
         self.win.present()
+
+    def load_games_from_disk(self):
+        if shared.games_dir.exists():
+            for game_file in shared.games_dir.iterdir():
+                data = json.load(game_file.open())
+                game = Game(data, allow_side_effects=False)
+                shared.store.add_game(game)
 
     def on_about_action(self, *_args):
         about = Adw.AboutWindow(

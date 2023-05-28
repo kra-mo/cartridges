@@ -123,6 +123,8 @@ class Importer:
             if pipeline is not None:
                 logging.info("Imported %s (%s)", game.name, game.game_id)
                 pipeline.connect("manager-done", self.manager_done_callback)
+                pipeline.connect("manager-started", self.manager_started_callback)
+                self.game_pipelines.add(pipeline)
 
     def update_progressbar(self):
         """Update the progressbar to show the percentage of game pipelines done"""
@@ -134,8 +136,17 @@ class Importer:
         logging.debug("Import done for source %s", source.id)
         self.n_source_tasks_done += 1
 
+    def manager_started_callback(self, pipeline: Pipeline, manager: Manager):
+        """Callback called when a game manager has started"""
+        logging.debug(
+            "Manager %s for %s started", manager.__class__.__name__, pipeline.game.name
+        )
+
     def manager_done_callback(self, pipeline: Pipeline, manager: Manager):
         """Callback called when a pipeline for a game has advanced"""
+        logging.debug(
+            "Manager %s for %s done", manager.__class__.__name__, pipeline.game.name
+        )
         if pipeline.is_done:
             self.n_pipelines_done += 1
             self.update_progressbar()
