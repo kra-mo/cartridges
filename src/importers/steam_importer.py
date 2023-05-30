@@ -38,7 +38,7 @@ def update_values_from_data(content, values):
         if data.get("developers"):
             values["developer"] = ", ".join(data["developers"])
 
-        if data.get("type") != "game":
+        if data.get("type") not in {"game", "demo"}:
             values["blacklisted"] = True
 
     return values
