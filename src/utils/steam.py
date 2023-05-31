@@ -75,7 +75,8 @@ class SteamHelper:
             logging.debug("Appid %s not found", appid)
             raise SteamGameNotFoundError()
 
-        if data["data"]["type"] != "game":
+        game_types = ("game", "demo")
+        if data["data"]["type"] not in game_types:
             logging.debug("Appid %s is not a game", appid)
             raise SteamNotAGameError()
 

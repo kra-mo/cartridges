@@ -1,12 +1,17 @@
-from requests import HTTPError, JSONDecodeError
-
 from src.game import Game
 from src.store.managers.async_manager import AsyncManager
-from src.utils.steam import SteamGameNotFoundError, SteamHelper, SteamNotAGameError
+from src.utils.steam import (
+    HTTPError,
+    SteamGameNotFoundError,
+    SteamHelper,
+    SteamNotAGameError,
+)
 
 
 class SteamAPIManager(AsyncManager):
     """Manager in charge of completing a game's data from the Steam API"""
+
+    retryable_on = set((HTTPError,))
 
     def final_run(self, game: Game) -> None:
         # Skip non-steam games
@@ -18,9 +23,6 @@ class SteamAPIManager(AsyncManager):
         steam = SteamHelper()
         try:
             online_data = steam.get_api_data(appid=appid)
-        except (HTTPError, JSONDecodeError) as error:
-            # On minor error, just report it
-            self.report_error(error)
         except (SteamNotAGameError, SteamGameNotFoundError):
             game.update_values({"blacklisted": True})
         else:

@@ -54,11 +54,7 @@ class Source(Iterable):
     @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
-        format_ = self.name.lower()
-        if self.variant is not None:
-            format_ += f"_{self.variant.lower()}"
-        format_ += "_{game_id}"
-        return format_
+        return self.name.lower() + "_{game_id}"
 
     @property
     @abstractmethod

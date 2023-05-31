@@ -96,7 +96,7 @@ class SGDBHelper:
             sgdb_id = self.get_game_id(game)
         except (HTTPError, SGDBError) as error:
             logging.warning(
-                "%s while getting SGDB ID for %s", error.__class__.__name__, game.name
+                "%s while getting SGDB ID for %s", type(error).__name__, game.name
             )
             raise error
 
@@ -120,7 +120,7 @@ class SGDBHelper:
             except (HTTPError, SGDBError) as error:
                 logging.warning(
                     "%s while getting image for %s kwargs=%s",
-                    error.__class__.__name__,
+                    type(error).__name__,
                     game.name,
                     str(uri_kwargs),
                 )
