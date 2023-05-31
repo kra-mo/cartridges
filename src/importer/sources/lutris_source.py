@@ -16,17 +16,6 @@ class LutrisSourceIterator(SourceIterator):
     db_connection = None
     db_cursor = None
     db_location = None
-    db_len_request = """
-        SELECT count(*)
-        FROM 'games'
-        WHERE
-            name IS NOT NULL
-            AND slug IS NOT NULL
-            AND configPath IS NOT NULL
-            AND installed
-            AND (runner IS NOT "steam" OR :import_steam)
-        ;
-    """
     db_games_request = """
         SELECT id, name, slug, runner, hidden
         FROM 'games'
@@ -46,15 +35,9 @@ class LutrisSourceIterator(SourceIterator):
         self.db_location = self.source.location / "pga.db"
         self.db_connection = connect(self.db_location)
         self.db_request_params = {"import_steam": self.import_steam}
-        self.__len__()  # Init iterator length
         self.db_cursor = self.db_connection.execute(
             self.db_games_request, self.db_request_params
         )
-
-    @lru_cache(maxsize=1)
-    def __len__(self):
-        cursor = self.db_connection.execute(self.db_len_request, self.db_request_params)
-        return cursor.fetchone()[0]
 
     def __next__(self):
         """Produce games"""

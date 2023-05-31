@@ -1,11 +1,11 @@
 from abc import abstractmethod
-from collections.abc import Iterable, Iterator, Sized
+from collections.abc import Iterable, Iterator
 from typing import Optional
 
 from src.game import Game
 
 
-class SourceIterator(Iterator, Sized):
+class SourceIterator(Iterator):
     """Data producer for a source of games"""
 
     source: "Source" = None
@@ -16,10 +16,6 @@ class SourceIterator(Iterator, Sized):
 
     def __iter__(self) -> "SourceIterator":
         return self
-
-    @abstractmethod
-    def __len__(self) -> int:
-        """Get a rough estimate of the number of games produced by the source"""
 
     @abstractmethod
     def __next__(self) -> Optional[Game]:

@@ -51,9 +51,6 @@ class SteamSourceIterator(SourceIterator):
 
         self.manifests_iterator = iter(self.manifests)
 
-    def __len__(self):
-        return len(self.manifests)
-
     def __next__(self):
         """Produce games"""
 
