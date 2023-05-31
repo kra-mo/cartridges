@@ -1,5 +1,7 @@
+import os
 from abc import abstractmethod
 from collections.abc import Iterable, Iterator
+from pathlib import Path
 from typing import Optional
 
 from src.game import Game
@@ -30,6 +32,11 @@ class Source(Iterable):
 
     name: str
     variant: str
+    available_on: set[str]
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.available_on = set()
 
     @property
     def full_name(self) -> str:
@@ -53,15 +60,40 @@ class Source(Iterable):
         return self.name.lower() + "_{game_id}"
 
     @property
+    def is_installed(self):
+        # pylint: disable=pointless-statement
+        try:
+            self.location
+        except FileNotFoundError:
+            return False
+        return os.name in self.available_on
+
+    @property
+    @abstractmethod
+    def location(self) -> Path:
+        """The source's location on disk"""
+
+    @property
     @abstractmethod
     def executable_format(self) -> str:
         """The executable format used to construct game executables"""
 
-    @property
-    @abstractmethod
-    def is_installed(self) -> bool:
-        """Whether the source is detected as installed"""
-
     @abstractmethod
     def __iter__(self) -> SourceIterator:
         """Get the source's iterator, to use in for loops"""
+
+
+class NTSource(Source):
+    """Mixin for sources available on Windows"""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.available_on.add("nt")
+
+
+class PosixSource(Source):
+    """Mixin for sources available on POXIX-compliant systems"""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.available_on.add("posix")

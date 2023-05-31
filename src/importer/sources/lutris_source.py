@@ -1,11 +1,9 @@
-from abc import abstractmethod
-from pathlib import Path
 from sqlite3 import connect
 from time import time
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import Source, SourceIterator
+from src.importer.sources.source import PosixSource, Source, SourceIterator
 from src.utils.decorators import replaced_by_path, replaced_by_schema_key
 from src.utils.save_cover import resize_cover, save_cover
 
@@ -79,28 +77,14 @@ class LutrisSource(Source):
     executable_format = "xdg-open lutris:rungameid/{game_id}"
 
     @property
-    @abstractmethod
-    def location(self) -> Path:
-        pass
-
-    @property
     def game_id_format(self):
         return super().game_id_format + "_{game_internal_id}"
-
-    @property
-    def is_installed(self):
-        # pylint: disable=pointless-statement
-        try:
-            self.location
-        except FileNotFoundError:
-            return False
-        return True
 
     def __iter__(self):
         return LutrisSourceIterator(source=self)
 
 
-class LutrisNativeSource(LutrisSource):
+class LutrisNativeSource(LutrisSource, PosixSource):
     variant = "native"
 
     @property
@@ -110,7 +94,7 @@ class LutrisNativeSource(LutrisSource):
         raise FileNotFoundError()
 
 
-class LutrisFlatpakSource(LutrisSource):
+class LutrisFlatpakSource(LutrisSource, PosixSource):
     variant = "flatpak"
 
     @property

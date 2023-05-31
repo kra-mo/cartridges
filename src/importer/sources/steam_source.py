@@ -1,12 +1,11 @@
 import re
-from abc import abstractmethod
 from pathlib import Path
 from time import time
 from typing import Iterator
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import Source, SourceIterator
+from src.importer.sources.source import NTSource, PosixSource, Source, SourceIterator
 from src.utils.decorators import (
     replaced_by_env_path,
     replaced_by_path,
@@ -94,25 +93,11 @@ class SteamSource(Source):
     name = "Steam"
     executable_format = "xdg-open steam://rungameid/{game_id}"
 
-    @property
-    @abstractmethod
-    def location(self) -> Path:
-        pass
-
-    @property
-    def is_installed(self):
-        # pylint: disable=pointless-statement
-        try:
-            self.location
-        except FileNotFoundError:
-            return False
-        return True
-
     def __iter__(self):
         return SteamSourceIterator(source=self)
 
 
-class SteamNativeSource(SteamSource):
+class SteamNativeSource(SteamSource, PosixSource):
     variant = "native"
 
     @property
@@ -124,7 +109,7 @@ class SteamNativeSource(SteamSource):
         raise FileNotFoundError()
 
 
-class SteamFlatpakSource(SteamSource):
+class SteamFlatpakSource(SteamSource, PosixSource):
     variant = "flatpak"
 
     @property
@@ -134,7 +119,7 @@ class SteamFlatpakSource(SteamSource):
         raise FileNotFoundError()
 
 
-class SteamWindowsSource(SteamSource):
+class SteamWindowsSource(SteamSource, NTSource):
     variant = "windows"
     executable_format = "start steam://rungameid/{game_id}"
 

@@ -1,5 +1,5 @@
 import json
-from abc import abstractmethod
+import logging
 from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
@@ -8,7 +8,7 @@ from typing import Generator, Optional, TypedDict
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import Source, SourceIterator
+from src.importer.sources.source import NTSource, PosixSource, Source, SourceIterator
 from src.utils.decorators import (
     replaced_by_env_path,
     replaced_by_path,
@@ -87,9 +87,9 @@ class HeroicSourceIterator(SourceIterator):
 
     def sub_sources_generator(self):
         """Generator method producing games from all the Heroic sub-sources"""
-        for key, sub_source in self.sub_sources.items():
+        for _key, sub_source in self.sub_sources.items():
             # Skip disabled sub-sources
-            if not shared.schema.get_boolean("heroic-import-" + key):
+            if not shared.schema.get_boolean("heroic-import-" + sub_source["service"]):
                 continue
             # Load games from JSON
             try:
@@ -125,31 +125,18 @@ class HeroicSource(Source):
     executable_format = "xdg-open heroic://launch/{app_name}"
 
     @property
-    @abstractmethod
-    def location(self) -> Path:
-        pass
-
-    @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
         return self.name.lower() + "_{service}_{game_id}"
-
-    @property
-    def is_installed(self):
-        # pylint: disable=pointless-statement
-        try:
-            self.location
-        except FileNotFoundError:
-            return False
-        return True
 
     def __iter__(self):
         return HeroicSourceIterator(source=self)
 
 
-class HeroicNativeSource(HeroicSource):
+class HeroicNativeSource(HeroicSource, PosixSource):
     variant = "native"
 
+    @property
     @replaced_by_schema_key("heroic-location")
     @replaced_by_env_path("XDG_CONFIG_HOME", "heroic/")
     @replaced_by_path("~/.config/heroic/")
@@ -157,19 +144,21 @@ class HeroicNativeSource(HeroicSource):
         raise FileNotFoundError()
 
 
-class HeroicFlatpakSource(HeroicSource):
+class HeroicFlatpakSource(HeroicSource, PosixSource):
     variant = "flatpak"
 
+    @property
     @replaced_by_schema_key("heroic-flatpak-location")
     @replaced_by_path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
     def location(self) -> Path:
         raise FileNotFoundError()
 
 
-class HeroicWindowsSource(HeroicSource):
+class HeroicWindowsSource(HeroicSource, NTSource):
     variant = "windows"
     executable_format = "start heroic://launch/{app_name}"
 
+    @property
     @replaced_by_schema_key("heroic-windows-location")
     @replaced_by_env_path("appdata", "heroic/")
     def location(self) -> Path:
