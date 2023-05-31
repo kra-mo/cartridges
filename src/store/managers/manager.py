@@ -56,22 +56,24 @@ class Manager:
                 self.manager_logic(game)
             except Exception as error:
                 # Handle unretryable errors
-                log_args = (type(error).__name__, self.name, game.game_id)
-                if type(error) in self.retryable_on:
-                    logging.error("Unretryable %s in %s for %s", *log_args)
+                log_args = (type(error).__name__, self.name, game.name, game.game_id)
+                if type(error) not in self.retryable_on:
+                    logging.error("Unretryable %s in %s for %s (%s)", *log_args)
                     self.report_error(error)
                     break
                 # Handle being out of retries
                 elif remaining_tries == 0:
-                    logging.error("Too many retries due to %s in %s for %s", *log_args)
+                    logging.error(
+                        "Too many retries due to %s in %s for %s (%s)", *log_args
+                    )
                     self.report_error(error)
                     break
                 # Retry
                 else:
-                    logging.debug("Retry caused by %s in %s for %s", *log_args)
+                    logging.debug("Retry caused by %s in %s for %s (%s)", *log_args)
                     continue
 
     def process_game(self, game: Game, callback: Callable[["Manager"], Any]) -> None:
         """Pass the game through the manager"""
-        self.execute_resilient_manager_logic(game, tries=0)
+        self.execute_resilient_manager_logic(game)
         callback(self)

@@ -66,11 +66,9 @@ class SteamHelper:
             ) as response:
                 response.raise_for_status()
                 data = response.json()[appid]
-
-        except (HTTPError, JSONDecodeError) as error:
-            logging.warning("Error while querying Steam API for %s", appid)
+        except HTTPError as error:
+            logging.warning("Steam API HTTP error for %s", appid, exc_info=error)
             raise error
-
         if not data["success"]:
             logging.debug("Appid %s not found", appid)
             raise SteamGameNotFoundError()

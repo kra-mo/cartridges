@@ -247,7 +247,7 @@ def main(version):  # pylint: disable=unused-argument
     base_log_level = os.environ.get("LOGLEVEL", profile_base_log_level).upper()
     lib_log_level = os.environ.get("LIBLOGLEVEL", profile_lib_log_level).upper()
     log_levels = {
-        __name__: base_log_level,
+        None: base_log_level,
         "PIL": lib_log_level,
         "urllib3": lib_log_level,
     }

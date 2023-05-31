@@ -1,9 +1,7 @@
-from requests import HTTPError
-
 from src.game import Game
 from src.store.managers.async_manager import AsyncManager
 from src.store.managers.steam_api_manager import SteamAPIManager
-from src.utils.steamgriddb import HTTPError, SGDBAuthError, SGDBError, SGDBHelper
+from src.utils.steamgriddb import HTTPError, SGDBAuthError, SGDBHelper
 
 
 class SGDBManager(AsyncManager):
