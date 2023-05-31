@@ -8,5 +8,5 @@ class FileManager(AsyncManager):
 
     run_after = set((SteamAPIManager,))
 
-    def final_run(self, game: Game) -> None:
+    def manager_logic(self, game: Game) -> None:
         game.save()

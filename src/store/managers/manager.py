@@ -40,40 +40,38 @@ class Manager:
         return errors
 
     @abstractmethod
-    def final_run(self, game: Game) -> None:
+    def manager_logic(self, game: Game) -> None:
         """
         Manager specific logic triggered by the run method
         * Implemented by final child classes
-        * Called by the run method, not used directly
         * May block its thread
-        * May raise retryable exceptions that will be be retried if possible
+        * May raise retryable exceptions that will trigger a retry if possible
         * May raise other exceptions that will be reported
         """
 
-    def run(self, game: Game, callback: Callable[["Manager"], Any]) -> None:
-        """
-        Pass the game through the manager
-        * Public method called by a pipeline
-        * In charge of calling the final_run method and handling its errors
-        """
-
+    def execute_resilient_manager_logic(self, game: Game) -> None:
+        """Execute the manager logic and handle its errors by reporting them or retrying"""
         for remaining_tries in range(self.max_tries, -1, -1):
             try:
-                self.final_run(game, self.max_tries)
+                self.manager_logic(game)
             except Exception as error:
+                # Handle unretryable errors
+                log_args = (type(error).__name__, self.name, game.game_id)
                 if type(error) in self.retryable_on:
-                    # Handle unretryable errors
-                    logging.error("Unretryable error in %s", self.name, exc_info=error)
+                    logging.error("Unretryable %s in %s for %s", *log_args)
                     self.report_error(error)
                     break
+                # Handle being out of retries
                 elif remaining_tries == 0:
-                    # Handle being out of retries
-                    logging.error("Out of retries in %s", self.name, exc_info=error)
+                    logging.error("Too many retries due to %s in %s for %s", *log_args)
                     self.report_error(error)
                     break
+                # Retry
                 else:
-                    # Retry
-                    logging.debug("Retrying %s (%s)", self.name, type(error).__name__)
+                    logging.debug("Retry caused by %s in %s for %s", *log_args)
                     continue
 
+    def process_game(self, game: Game, callback: Callable[["Manager"], Any]) -> None:
+        """Pass the game through the manager"""
+        self.execute_resilient_manager_logic(game, tries=0)
         callback(self)

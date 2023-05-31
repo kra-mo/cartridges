@@ -26,7 +26,8 @@ class AsyncManager(Manager):
         Already scheduled Tasks will no longer be cancellable."""
         self.cancellable = Gio.Cancellable()
 
-    def run(self, game: Game, callback: Callable[["Manager"], Any]) -> None:
+    def process_game(self, game: Game, callback: Callable[["Manager"], Any]) -> None:
+        """Create a task to process the game in a separate thread"""
         task = Task.new(None, self.cancellable, self._task_callback, (callback,))
         task.set_task_data((game,))
         task.run_in_thread(self._task_thread_func)
@@ -34,9 +35,9 @@ class AsyncManager(Manager):
     def _task_thread_func(self, _task, _source_object, data, cancellable):
         """Task thread entry point"""
         game, *_rest = data
-        self.final_run(game)
+        self.execute_resilient_manager_logic(game)
 
     def _task_callback(self, _source_object, _result, data):
-        """Method run after the async task is done"""
+        """Method run after the task is done"""
         callback, *_rest = data
         callback(self)

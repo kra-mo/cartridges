@@ -241,9 +241,20 @@ class CartridgesApplication(Adw.Application):
 
 def main(version):  # pylint: disable=unused-argument
     # Initiate logger
-    default_log_level = "DEBUG" if shared.PROFILE == "development" else "WARNING"
-    log_level = os.environ.get("LOGLEVEL", default_log_level).upper()
-    logging.basicConfig(level=log_level)
+    # (silence debug info from external libraries)
+    profile_base_log_level = "DEBUG" if shared.PROFILE == "development" else "WARNING"
+    profile_lib_log_level = "INFO" if shared.PROFILE == "development" else "WARNING"
+    base_log_level = os.environ.get("LOGLEVEL", profile_base_log_level).upper()
+    lib_log_level = os.environ.get("LIBLOGLEVEL", profile_lib_log_level).upper()
+    log_levels = {
+        __name__: base_log_level,
+        "PIL": lib_log_level,
+        "urllib3": lib_log_level,
+    }
+    logging.basicConfig()
+    for logger, level in log_levels.items():
+        logging.getLogger(logger).setLevel(level)
+
     # Start app
     app = CartridgesApplication()
     return app.run(sys.argv)

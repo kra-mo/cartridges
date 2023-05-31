@@ -13,7 +13,7 @@ class SteamAPIManager(AsyncManager):
 
     retryable_on = set((HTTPError,))
 
-    def final_run(self, game: Game) -> None:
+    def manager_logic(self, game: Game) -> None:
         # Skip non-steam games
         if not game.source.startswith("steam_"):
             return

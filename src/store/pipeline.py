@@ -61,7 +61,7 @@ class Pipeline(GObject.Object):
         for manager in (*parallel, *blocking):
             self.waiting.remove(manager)
             self.running.add(manager)
-            manager.run(self.game, self.manager_callback)
+            manager.process_game(self.game, self.manager_callback)
 
     def manager_callback(self, manager: Manager) -> None:
         """Method called by a manager when it's done"""

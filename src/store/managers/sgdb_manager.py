@@ -12,11 +12,11 @@ class SGDBManager(AsyncManager):
     run_after = set((SteamAPIManager,))
     retryable_on = set((HTTPError,))
 
-    def final_run(self, game: Game) -> None:
+    def manager_logic(self, game: Game) -> None:
         try:
             sgdb = SGDBHelper()
             sgdb.conditionaly_update_cover(game)
-        except SGDBAuthError as error:
+        except SGDBAuthError:
             # If invalid auth, cancel all SGDBManager tasks
             self.cancellable.cancel()
-            self.report_error(error)
+            raise
