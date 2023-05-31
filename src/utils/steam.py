@@ -22,6 +22,10 @@ class SteamInvalidManifestError(SteamError):
     pass
 
 
+class SteamForbiddenError(SteamError):
+    pass
+
+
 class SteamManifestData(TypedDict):
     """Dict returned by SteamHelper.get_manifest_data"""
 
@@ -64,6 +68,8 @@ class SteamHelper:
             with requests.get(
                 f"{self.base_url}/appdetails?appids={appid}", timeout=5
             ) as response:
+                if response.status_code == 403:
+                    raise SteamForbiddenError()
                 response.raise_for_status()
                 data = response.json()[appid]
         except HTTPError as error:

@@ -2,6 +2,7 @@ from src.game import Game
 from src.store.managers.async_manager import AsyncManager
 from src.utils.steam import (
     HTTPError,
+    SteamForbiddenError,
     SteamGameNotFoundError,
     SteamHelper,
     SteamNotAGameError,
@@ -23,7 +24,7 @@ class SteamAPIManager(AsyncManager):
         steam = SteamHelper()
         try:
             online_data = steam.get_api_data(appid=appid)
-        except (SteamNotAGameError, SteamGameNotFoundError):
+        except (SteamNotAGameError, SteamGameNotFoundError, SteamForbiddenError):
             game.update_values({"blacklisted": True})
         else:
             game.update_values(online_data)
