@@ -62,7 +62,6 @@ class HeroicSourceIterator(SourceIterator):
         service = self.sub_sources[runner]["service"]
         values = {
             "version": shared.SPEC_VERSION,
-            "hidden": False,
             "source": self.source.id,
             "added": int(time()),
             "name": entry["title"],

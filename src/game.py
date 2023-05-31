@@ -52,12 +52,12 @@ class Game(Gtk.Box):
     executable = None
     game_id = None
     source = None
-    hidden = None
+    hidden = False
     last_played = 0
     name = None
     developer = None
-    removed = None
-    blacklisted = None
+    removed = False
+    blacklisted = False
     game_cover = None
     version = 0
 
