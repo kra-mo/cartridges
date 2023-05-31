@@ -134,12 +134,23 @@ class Importer:
         source, *_rest = data
         logging.debug("Import done for source %s", source.id)
         self.n_source_tasks_done += 1
+        self.progress_changed_callback()
 
     def pipeline_advanced_callback(self, pipeline: Pipeline):
         """Callback called when a pipeline for a game has advanced"""
         if pipeline.is_done:
             self.n_pipelines_done += 1
-            self.update_progressbar()
+            self.progress_changed_callback()
+
+    def progress_changed_callback(self):
+        """
+        Callback called when the import process has progressed
+
+        Triggered when:
+        * A source finishes
+        * A pipeline finishes
+        """
+        self.update_progressbar()
         if self.finished:
             self.import_callback()
 
