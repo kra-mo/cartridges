@@ -34,6 +34,11 @@ from src import shared
 from src.details_window import DetailsWindow
 from src.game import Game
 from src.importer.importer import Importer
+from src.importer.sources.heroic_source import (
+    HeroicFlatpakSource,
+    HeroicNativeSource,
+    HeroicWindowsSource,
+)
 from src.importer.sources.lutris_source import LutrisFlatpakSource, LutrisNativeSource
 from src.importer.sources.steam_source import (
     SteamFlatpakSource,
@@ -193,6 +198,10 @@ class CartridgesApplication(Adw.Application):
             importer.add_source(SteamNativeSource())
             importer.add_source(SteamFlatpakSource())
             importer.add_source(SteamWindowsSource())
+        if shared.schema.get_boolean("heroic"):
+            importer.add_source(HeroicNativeSource())
+            importer.add_source(HeroicFlatpakSource())
+            importer.add_source(HeroicWindowsSource())
         importer.run()
 
     def on_remove_game_action(self, *_args):
