@@ -1,5 +1,4 @@
 from abc import abstractmethod
-from functools import lru_cache
 from pathlib import Path
 from sqlite3 import connect
 from time import time
@@ -12,6 +11,7 @@ from src.utils.save_cover import resize_cover, save_cover
 
 
 class LutrisSourceIterator(SourceIterator):
+    source: "LutrisSource"
     import_steam = False
     db_connection = None
     db_cursor = None

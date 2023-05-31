@@ -18,7 +18,6 @@ from src.utils.steam import SteamHelper, SteamInvalidManifestError
 
 class SteamSourceIterator(SourceIterator):
     source: "SteamSource"
-
     manifests: set = None
     manifests_iterator: Iterator[Path] = None
     installed_state_mask: int = 4
