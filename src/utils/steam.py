@@ -59,6 +59,7 @@ class SteamHelper:
 
     def get_api_data(self, appid) -> SteamAPIData:
         """Get online data for a game from its appid"""
+        # TODO throttle to not get access denied
 
         try:
             with requests.get(
