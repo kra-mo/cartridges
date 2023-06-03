@@ -8,7 +8,12 @@ from typing import Generator, Optional, TypedDict
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import NTSource, PosixSource, Source, SourceIterator
+from src.importer.sources.source import (
+    LinuxSource,
+    Source,
+    SourceIterator,
+    WindowsSource,
+)
 from src.utils.decorators import (
     replaced_by_env_path,
     replaced_by_path,
@@ -121,7 +126,6 @@ class HeroicSource(Source):
     """Generic heroic games launcher source"""
 
     name = "Heroic"
-    executable_format = "xdg-open heroic://launch/{app_name}"
 
     @property
     def game_id_format(self) -> str:
@@ -132,28 +136,20 @@ class HeroicSource(Source):
         return HeroicSourceIterator(source=self)
 
 
-class HeroicNativeSource(HeroicSource, PosixSource):
-    variant = "native"
+class HeroicNativeSource(HeroicSource, LinuxSource):
+    variant = "linux"
+    executable_format = "xdg-open heroic://launch/{app_name}"
 
     @property
     @replaced_by_schema_key("heroic-location")
+    @replaced_by_path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
     @replaced_by_env_path("XDG_CONFIG_HOME", "heroic/")
     @replaced_by_path("~/.config/heroic/")
     def location(self) -> Path:
         raise FileNotFoundError()
 
 
-class HeroicFlatpakSource(HeroicSource, PosixSource):
-    variant = "flatpak"
-
-    @property
-    @replaced_by_schema_key("heroic-flatpak-location")
-    @replaced_by_path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
-    def location(self) -> Path:
-        raise FileNotFoundError()
-
-
-class HeroicWindowsSource(HeroicSource, NTSource):
+class HeroicWindowsSource(HeroicSource, WindowsSource):
     variant = "windows"
     executable_format = "start heroic://launch/{app_name}"
 

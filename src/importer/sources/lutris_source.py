@@ -3,7 +3,7 @@ from time import time
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import PosixSource, Source, SourceIterator
+from src.importer.sources.source import LinuxSource, Source, SourceIterator
 from src.utils.decorators import replaced_by_path, replaced_by_schema_key
 from src.utils.save_cover import resize_cover, save_cover
 
@@ -74,7 +74,6 @@ class LutrisSource(Source):
     """Generic lutris source"""
 
     name = "Lutris"
-    executable_format = "xdg-open lutris:rungameid/{game_id}"
 
     @property
     def game_id_format(self):
@@ -84,21 +83,13 @@ class LutrisSource(Source):
         return LutrisSourceIterator(source=self)
 
 
-class LutrisNativeSource(LutrisSource, PosixSource):
-    variant = "native"
+class LutrisNativeSource(LutrisSource, LinuxSource):
+    variant = "linux"
+    executable_format = "xdg-open lutris:rungameid/{game_id}"
 
     @property
     @replaced_by_schema_key("lutris-location")
-    @replaced_by_path("~/.local/share/lutris/")
-    def location(self):
-        raise FileNotFoundError()
-
-
-class LutrisFlatpakSource(LutrisSource, PosixSource):
-    variant = "flatpak"
-
-    @property
-    @replaced_by_schema_key("lutris-flatpak-location")
     @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/")
+    @replaced_by_path("~/.local/share/lutris/")
     def location(self):
         raise FileNotFoundError()

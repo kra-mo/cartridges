@@ -16,12 +16,6 @@
     <key name="steam-location" type="s">
       <default>"~/.steam/"</default>
     </key>
-    <key name="steam-flatpak-location" type="s">
-      <default>"~/.var/app/com.valvesoftware.Steam/data/Steam/"</default>
-    </key>
-    <key name="steam-windows-location" type="s">
-      <default>"C:\Program Files (x86)\Steam"</default>
-    </key>
     <key name="lutris" type="b">
       <default>true</default>
     </key>
@@ -29,12 +23,6 @@
       <default>"~/.var/app/net.lutris.Lutris/data/lutris/"</default>
     </key>
     <key name="lutris-cache-location" type="s">
-      <default>"~/.var/app/net.lutris.Lutris/cache/lutris"</default>
-    </key>
-    <key name="lutris-flatpak-location" type="s">
-      <default>"~/.var/app/net.lutris.Lutris/data/lutris/"</default>
-    </key>
-    <key name="lutris-flatpak-cache-location" type="s">
       <default>"~/.var/app/net.lutris.Lutris/cache/lutris"</default>
     </key>
     <key name="lutris-import-steam" type="b">
@@ -45,12 +33,6 @@
     </key>
     <key name="heroic-location" type="s">
       <default>"~/.config/heroic/"</default>
-    </key>
-    <key name="heroic-flatpak-location" type="s">
-      <default>"~/.var/app/com.heroicgameslauncher.hgl/config/heroic/"</default>
-    </key>
-    <key name="heroic-windows-location" type="s">
-      <default>""</default>
     </key>
     <key name="heroic-import-epic" type="b">
       <default>true</default>

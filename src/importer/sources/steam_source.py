@@ -5,7 +5,12 @@ from typing import Iterator
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import NTSource, PosixSource, Source, SourceIterator
+from src.importer.sources.source import (
+    LinuxSource,
+    Source,
+    SourceIterator,
+    WindowsSource,
+)
 from src.utils.decorators import (
     replaced_by_env_path,
     replaced_by_path,
@@ -20,10 +25,12 @@ class SteamSourceIterator(SourceIterator):
     manifests: set = None
     manifests_iterator: Iterator[Path] = None
     installed_state_mask: int = 4
+    appid_cache: set = None
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        self.appid_cache = set()
         self.manifests = set()
 
         # Get dirs that contain steam app manifests
@@ -64,8 +71,13 @@ class SteamSourceIterator(SourceIterator):
         if not int(local_data["stateflags"]) & self.installed_state_mask:
             return None
 
-        # Build game from local data
+        # Skip duplicate appids
         appid = local_data["appid"]
+        if appid in self.appid_cache:
+            return None
+        self.appid_cache.add(appid)
+
+        # Build game from local data
         values = {
             "version": shared.SPEC_VERSION,
             "added": int(time()),
@@ -91,17 +103,18 @@ class SteamSourceIterator(SourceIterator):
 
 class SteamSource(Source):
     name = "Steam"
-    executable_format = "xdg-open steam://rungameid/{game_id}"
 
     def __iter__(self):
         return SteamSourceIterator(source=self)
 
 
-class SteamNativeSource(SteamSource, PosixSource):
-    variant = "native"
+class SteamNativeSource(SteamSource, LinuxSource):
+    variant = "linux"
+    executable_format = "xdg-open steam://rungameid/{game_id}"
 
     @property
     @replaced_by_schema_key("steam-location")
+    @replaced_by_path("~/.var/app/com.valvesoftware.Steam/data/Steam/")
     @replaced_by_env_path("XDG_DATA_HOME", "Steam/")
     @replaced_by_path("~/.steam/")
     @replaced_by_path("~/.local/share/Steam/")
@@ -109,23 +122,12 @@ class SteamNativeSource(SteamSource, PosixSource):
         raise FileNotFoundError()
 
 
-class SteamFlatpakSource(SteamSource, PosixSource):
-    variant = "flatpak"
-
-    @property
-    @replaced_by_schema_key("steam-flatpak-location")
-    @replaced_by_path("~/.var/app/com.valvesoftware.Steam/data/Steam/")
-    def location(self):
-        raise FileNotFoundError()
-
-
-class SteamWindowsSource(SteamSource, NTSource):
+class SteamWindowsSource(SteamSource, WindowsSource):
     variant = "windows"
     executable_format = "start steam://rungameid/{game_id}"
 
     @property
-    @replaced_by_schema_key("steam-windows-location")
+    @replaced_by_schema_key("steam-location")
     @replaced_by_env_path("programfiles(x86)", "Steam")
-    @replaced_by_path("C:\\Program Files (x86)\\Steam")
     def location(self):
         raise FileNotFoundError()

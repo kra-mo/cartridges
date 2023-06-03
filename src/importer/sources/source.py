@@ -1,4 +1,4 @@
-import os
+import sys
 from abc import abstractmethod
 from collections.abc import Iterable, Iterator
 from pathlib import Path
@@ -66,7 +66,7 @@ class Source(Iterable):
             self.location
         except FileNotFoundError:
             return False
-        return os.name in self.available_on
+        return sys.platform in self.available_on
 
     @property
     @abstractmethod
@@ -83,17 +83,17 @@ class Source(Iterable):
         """Get the source's iterator, to use in for loops"""
 
 
-class NTSource(Source):
+class WindowsSource(Source):
     """Mixin for sources available on Windows"""
 
     def __init__(self) -> None:
         super().__init__()
-        self.available_on.add("nt")
+        self.available_on.add("win32")
 
 
-class PosixSource(Source):
-    """Mixin for sources available on POXIX-compliant systems"""
+class LinuxSource(Source):
+    """Mixin for sources available on Linux"""
 
     def __init__(self) -> None:
         super().__init__()
-        self.available_on.add("posix")
+        self.available_on.add("linux")
