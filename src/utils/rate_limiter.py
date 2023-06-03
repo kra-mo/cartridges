@@ -27,7 +27,7 @@ class TokenBucketRateLimiter(AbstractContextManager):
     @n_tokens.setter
     def n_tokens(self, value: int):
         with self.__n_tokens_lock:
-            self.n_tokens = value
+            self.__n_tokens = value
 
     def __init__(
         self,
@@ -35,22 +35,24 @@ class TokenBucketRateLimiter(AbstractContextManager):
         max_tokens: Optional[int] = None,
         initial_tokens: Optional[int] = None,
     ) -> None:
+        """Initialize the limiter"""
+
         # Initialize default values
-        self.queue_lock = Lock()
         if max_tokens is not None:
             self.MAX_TOKENS = max_tokens
         if refill_spacing_seconds is not None:
             self.REFILL_SPACING_SECONDS = refill_spacing_seconds
 
-        # Initialize the bucket
+        # Create locks
+        self.__n_tokens_lock = Lock()
+        self.queue_lock = Lock()
+
+        # Initialize the number of tokens in the bucket
         self.bucket = BoundedSemaphore(self.MAX_TOKENS)
         missing = 0 if initial_tokens is None else self.MAX_TOKENS - initial_tokens
         missing = max(0, min(missing, self.MAX_TOKENS))
         for _ in range(missing):
             self.bucket.acquire()
-
-        # Initialize the counter
-        self.__n_tokens_lock = Lock()
         self.n_tokens = self.MAX_TOKENS - missing
 
         # Spawn daemon thread that refills the bucket
