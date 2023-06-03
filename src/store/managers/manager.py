@@ -63,7 +63,9 @@ class Manager:
                 # Handle unretryable errors
                 log_args = (type(error).__name__, self.name, game.name, game.game_id)
                 if type(error) not in self.retryable_on:
-                    logging.error("Unretryable %s in %s for %s (%s)", *log_args)
+                    logging.error(
+                        "Unretryable %s in %s for %s (%s)", *log_args, exc_info=error
+                    )
                     self.report_error(error)
                     break
                 # Handle being out of retries

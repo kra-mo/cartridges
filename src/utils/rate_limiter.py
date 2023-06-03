@@ -43,9 +43,10 @@ class TokenBucketRateLimiter(AbstractContextManager):
         if refill_spacing_seconds is not None:
             self.REFILL_SPACING_SECONDS = refill_spacing_seconds
 
-        # Create locks
+        # Create synchro data
         self.__n_tokens_lock = Lock()
         self.queue_lock = Lock()
+        self.queue = deque()
 
         # Initialize the number of tokens in the bucket
         self.bucket = BoundedSemaphore(self.MAX_TOKENS)
