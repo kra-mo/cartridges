@@ -1,6 +1,7 @@
 import logging
 from abc import abstractmethod
 from typing import Any, Callable
+from threading import Lock
 
 from src.game import Game
 
@@ -20,6 +21,7 @@ class Manager:
     max_tries: int = 3
 
     errors: list[Exception]
+    errors_lock: Lock = None
 
     @property
     def name(self):
@@ -28,15 +30,18 @@ class Manager:
     def __init__(self) -> None:
         super().__init__()
         self.errors = []
+        self.errors_lock = Lock()
 
     def report_error(self, error: Exception):
         """Report an error that happened in Manager.run"""
-        self.errors.append(error)
+        with self.errors_lock:
+            self.errors.append(error)
 
     def collect_errors(self) -> list[Exception]:
         """Get the errors produced by the manager and remove them from self.errors"""
-        errors = list(self.errors)
-        self.errors.clear()
+        with self.errors_lock:
+            errors = self.errors.copy()
+            self.errors.clear()
         return errors
 
     @abstractmethod
