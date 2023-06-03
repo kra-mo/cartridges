@@ -108,7 +108,7 @@ class SteamSource(Source):
         return SteamSourceIterator(source=self)
 
 
-class SteamNativeSource(SteamSource, LinuxSource):
+class SteamLinuxSource(SteamSource, LinuxSource):
     variant = "linux"
     executable_format = "xdg-open steam://rungameid/{game_id}"
 

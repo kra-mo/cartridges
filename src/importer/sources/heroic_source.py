@@ -136,7 +136,7 @@ class HeroicSource(Source):
         return HeroicSourceIterator(source=self)
 
 
-class HeroicNativeSource(HeroicSource, LinuxSource):
+class HeroicLinuxSource(HeroicSource, LinuxSource):
     variant = "linux"
     executable_format = "xdg-open heroic://launch/{app_name}"
 

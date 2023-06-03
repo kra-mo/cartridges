@@ -34,17 +34,9 @@ from src import shared
 from src.details_window import DetailsWindow
 from src.game import Game
 from src.importer.importer import Importer
-from src.importer.sources.heroic_source import (
-    HeroicFlatpakSource,
-    HeroicNativeSource,
-    HeroicWindowsSource,
-)
-from src.importer.sources.lutris_source import LutrisFlatpakSource, LutrisNativeSource
-from src.importer.sources.steam_source import (
-    SteamFlatpakSource,
-    SteamNativeSource,
-    SteamWindowsSource,
-)
+from src.importer.sources.heroic_source import HeroicLinuxSource, HeroicWindowsSource
+from src.importer.sources.lutris_source import LutrisLinuxSource
+from src.importer.sources.steam_source import SteamLinuxSource, SteamWindowsSource
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
@@ -192,15 +184,12 @@ class CartridgesApplication(Adw.Application):
     def on_import_action(self, *_args):
         importer = Importer()
         if shared.schema.get_boolean("lutris"):
-            importer.add_source(LutrisNativeSource())
-            importer.add_source(LutrisFlatpakSource())
+            importer.add_source(LutrisLinuxSource())
         if shared.schema.get_boolean("steam"):
-            importer.add_source(SteamNativeSource())
-            importer.add_source(SteamFlatpakSource())
+            importer.add_source(SteamLinuxSource())
             importer.add_source(SteamWindowsSource())
         if shared.schema.get_boolean("heroic"):
-            importer.add_source(HeroicNativeSource())
-            importer.add_source(HeroicFlatpakSource())
+            importer.add_source(HeroicLinuxSource())
             importer.add_source(HeroicWindowsSource())
         importer.run()
 

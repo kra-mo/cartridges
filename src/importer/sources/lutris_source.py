@@ -83,7 +83,7 @@ class LutrisSource(Source):
         return LutrisSourceIterator(source=self)
 
 
-class LutrisNativeSource(LutrisSource, LinuxSource):
+class LutrisLinuxSource(LutrisSource, LinuxSource):
     variant = "linux"
     executable_format = "xdg-open lutris:rungameid/{game_id}"
 
