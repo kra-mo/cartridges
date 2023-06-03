@@ -1,9 +1,14 @@
-import re
 import logging
+import re
+from time import time
 from typing import TypedDict
+from math import floor, ceil
 
 import requests
-from requests import HTTPError, JSONDecodeError
+from requests import HTTPError
+
+from src import shared
+from src.utils.rate_limiter import TokenBucketRateLimiter
 
 
 class SteamError(Exception):
@@ -36,10 +41,39 @@ class SteamAPIData(TypedDict):
     developers: str
 
 
+class SteamRateLimiter(TokenBucketRateLimiter):
+    """Rate limiter for the Steam web API"""
+
+    # Steam web API limit
+    # 200 requests per 5 min seems to be the limit
+    # https://stackoverflow.com/questions/76047820/how-am-i-exceeding-steam-apis-rate-limit
+    # https://stackoverflow.com/questions/51795457/avoiding-error-429-too-many-requests-steam-web-api
+    REFILL_SPACING_SECONDS = 1.5
+    MAX_TOKENS = 200
+
+    def __init__(self) -> None:
+        # Load initial tokens from schema
+        # (Remember API limits through restarts of Cartridges)
+        last_tokens = shared.state_schema.get_int("steam-api-tokens")
+        last_time = shared.state_schema.get_int("steam-api-tokens-timestamp")
+        produced = floor((time() - last_time) / self.REFILL_SPACING_SECONDS)
+        inital_tokens = last_tokens + produced
+        super().__init__(initial_tokens=inital_tokens)
+
+    def refill(self):
+        """Refill the bucket and store its number of tokens in the schema"""
+        super().refill()
+        shared.state_schema.set_int("steam-api-tokens-timestamp", ceil(time()))
+        shared.state_schema.set_int("steam-api-tokens", self.n_tokens)
+
+
 class SteamHelper:
     """Helper around the Steam API"""
 
     base_url = "https://store.steampowered.com/api"
+
+    # Shared across instances
+    rate_limiter: SteamRateLimiter = SteamRateLimiter()
 
     def get_manifest_data(self, manifest_path) -> SteamManifestData:
         """Get local data for a game from its manifest"""
@@ -58,22 +92,30 @@ class SteamHelper:
         return SteamManifestData(**data)
 
     def get_api_data(self, appid) -> SteamAPIData:
-        """Get online data for a game from its appid"""
-        # TODO throttle to not get access denied
+        """
+        Get online data for a game from its appid.
 
-        try:
-            with requests.get(
-                f"{self.base_url}/appdetails?appids={appid}", timeout=5
-            ) as response:
-                response.raise_for_status()
-                data = response.json()[appid]
-        except HTTPError as error:
-            logging.warning("Steam API HTTP error for %s", appid, exc_info=error)
-            raise error
+        May block to satisfy the Steam web API limitations.
+        """
+
+        # Get data from the API (way block to satisfy its limits)
+        with self.rate_limiter:
+            try:
+                with requests.get(
+                    f"{self.base_url}/appdetails?appids={appid}", timeout=5
+                ) as response:
+                    response.raise_for_status()
+                    data = response.json()[appid]
+            except HTTPError as error:
+                logging.warning("Steam API HTTP error for %s", appid, exc_info=error)
+                raise error
+
+        # Handle not found
         if not data["success"]:
             logging.debug("Appid %s not found", appid)
             raise SteamGameNotFoundError()
 
+        # Handle appid is not a game
         game_types = ("game", "demo")
         if data["data"]["type"] not in game_types:
             logging.debug("Appid %s is not a game", appid)
