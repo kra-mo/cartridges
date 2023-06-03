@@ -45,7 +45,7 @@ class TokenBucketRateLimiter(AbstractContextManager):
         # Initialize the bucket
         self.bucket = BoundedSemaphore(self.MAX_TOKENS)
         missing = 0 if initial_tokens is None else self.MAX_TOKENS - initial_tokens
-        missing = max(0, min(missing, max_tokens))
+        missing = max(0, min(missing, self.MAX_TOKENS))
         for _ in range(missing):
             self.bucket.acquire()
 
