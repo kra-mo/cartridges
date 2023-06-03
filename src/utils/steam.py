@@ -71,9 +71,13 @@ class SteamHelper:
     """Helper around the Steam API"""
 
     base_url = "https://store.steampowered.com/api"
+    rate_limiter: SteamRateLimiter = None
 
-    # Shared across instances
-    rate_limiter: SteamRateLimiter = SteamRateLimiter()
+    def __init__(self) -> None:
+        # Instanciate the rate limiter on the class to share across instances
+        # Can't be done at class creation time, schema isn't available yet
+        if self.__class__.rate_limiter is None:
+            self.__class__.rate_limiter = SteamRateLimiter()
 
     def get_manifest_data(self, manifest_path) -> SteamManifestData:
         """Get local data for a game from its manifest"""
