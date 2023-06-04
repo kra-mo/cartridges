@@ -58,7 +58,7 @@ class HeroicSourceIterator(SourceIterator):
         """Helper method used to build a Game from a Heroic library entry"""
 
         # Skip games that are not installed
-        if not entry["installed"]:
+        if not entry["is_installed"]:
             return None
 
         # Build game
@@ -96,17 +96,19 @@ class HeroicSourceIterator(SourceIterator):
             if not shared.schema.get_boolean("heroic-import-" + sub_source["service"]):
                 continue
             # Load games from JSON
+            file = self.source.location.joinpath(*sub_source["path"])
             try:
-                file = self.source.location.joinpath(*sub_source["path"])
                 library = json.load(file.open())["library"]
             except (JSONDecodeError, OSError, KeyError):
                 # Invalid library.json file, skip it
+                logging.warning("Couldn't open Heroic file: %s", str(file))
                 continue
             for entry in library:
                 try:
                     game = self.game_from_library_entry(entry)
                 except KeyError:
                     # Skip invalid games
+                    logging.warning("Invalid Heroic game skipped in %s", str(file))
                     continue
                 yield game
 
@@ -154,7 +156,7 @@ class HeroicWindowsSource(HeroicSource, WindowsSource):
     executable_format = "start heroic://launch/{app_name}"
 
     @property
-    @replaced_by_schema_key("heroic-windows-location")
+    @replaced_by_schema_key("heroic-location")
     @replaced_by_env_path("appdata", "heroic/")
     def location(self) -> Path:
         raise FileNotFoundError()
