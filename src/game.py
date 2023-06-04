@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
+import logging
 import os
 import shlex
 import subprocess
@@ -185,6 +186,7 @@ class Game(Gtk.Box):
             else string  # Others
         )
 
+        logging.info("Starting %s: %s", self.name, str(args))
         subprocess.Popen(
             args,
             cwd=Path.home(),
