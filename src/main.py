@@ -34,6 +34,7 @@ from src import shared
 from src.details_window import DetailsWindow
 from src.game import Game
 from src.importer.importer import Importer
+from src.importer.sources.bottles_source import BottlesLinuxSource
 from src.importer.sources.heroic_source import HeroicLinuxSource, HeroicWindowsSource
 from src.importer.sources.lutris_source import LutrisLinuxSource
 from src.importer.sources.steam_source import SteamLinuxSource, SteamWindowsSource
@@ -191,6 +192,8 @@ class CartridgesApplication(Adw.Application):
         if shared.schema.get_boolean("heroic"):
             importer.add_source(HeroicLinuxSource())
             importer.add_source(HeroicWindowsSource())
+        if shared.schema.get_boolean("bottles"):
+            importer.add_source(BottlesLinuxSource())
         importer.run()
 
     def on_remove_game_action(self, *_args):
