@@ -1,7 +1,8 @@
 import logging
 from abc import abstractmethod
-from typing import Any, Callable
 from threading import Lock
+from time import sleep
+from typing import Any, Callable
 
 from src.game import Game
 
@@ -17,7 +18,10 @@ class Manager:
 
     run_after: set[type["Manager"]] = set()
     blocking: bool = True
+
     retryable_on: set[type[Exception]] = set()
+    continue_on: set[type[Exception]] = set()
+    retry_delay: int = 3
     max_tries: int = 3
 
     errors: list[Exception]
@@ -54,31 +58,35 @@ class Manager:
         * May raise other exceptions that will be reported
         """
 
-    def execute_resilient_manager_logic(self, game: Game) -> None:
+    def execute_resilient_manager_logic(self, game: Game, try_index: int = 0) -> None:
         """Execute the manager logic and handle its errors by reporting them or retrying"""
-        for remaining_tries in range(self.max_tries, -1, -1):
-            try:
-                self.manager_logic(game)
-            except Exception as error:
-                # Handle unretryable errors
-                log_args = (type(error).__name__, self.name, game.name, game.game_id)
-                if type(error) not in self.retryable_on:
-                    logging.error(
-                        "Unretryable %s in %s for %s (%s)", *log_args, exc_info=error
-                    )
-                    self.report_error(error)
-                    break
-                # Handle being out of retries
-                elif remaining_tries == 0:
-                    logging.error(
-                        "Too many retries due to %s in %s for %s (%s)", *log_args
-                    )
-                    self.report_error(error)
-                    break
-                # Retry
+        try:
+            self.manager_logic(game)
+        except Exception as error:
+            if error in self.continue_on:
+                # Handle skippable errors (skip silently)
+                return
+            elif error in self.retryable_on:
+                if try_index < self.max_tries:
+                    # Handle retryable errors
+                    logging_format = "Retrying %s in %s for %s"
+                    sleep(self.retry_delay)
+                    self.execute_resilient_manager_logic(game, try_index + 1)
                 else:
-                    logging.debug("Retry caused by %s in %s for %s (%s)", *log_args)
-                    continue
+                    # Handle being out of retries
+                    logging_format = "Out of retries dues to %s in %s for %s"
+                    self.report_error(error)
+            else:
+                # Handle unretryable errors
+                logging_format = "Unretryable %s in %s for %s"
+                self.report_error(error)
+            # Finally log errors
+            logging.error(
+                logging_format,
+                type(error).__name__,
+                self.name,
+                f"{game.name} ({game.game_id})",
+            )
 
     def process_game(self, game: Game, callback: Callable[["Manager"], Any]) -> None:
         """Pass the game through the manager"""

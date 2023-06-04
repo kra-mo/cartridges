@@ -1,3 +1,5 @@
+from urllib3.exceptions import SSLError
+
 from src.game import Game
 from src.store.managers.async_manager import AsyncManager
 from src.utils.steam import (
@@ -11,7 +13,7 @@ from src.utils.steam import (
 class SteamAPIManager(AsyncManager):
     """Manager in charge of completing a game's data from the Steam API"""
 
-    retryable_on = set((HTTPError,))
+    retryable_on = set((HTTPError, SSLError))
 
     def manager_logic(self, game: Game) -> None:
         # Skip non-steam games
