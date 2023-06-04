@@ -1,14 +1,13 @@
+import json
 import logging
 import re
-from time import time
 from typing import TypedDict
-from math import floor, ceil
 
 import requests
 from requests import HTTPError
 
 from src import shared
-from src.utils.rate_limiter import TokenBucketRateLimiter
+from src.utils.rate_limiter import PickHistory, RateLimiter
 
 
 class SteamError(Exception):
@@ -41,30 +40,37 @@ class SteamAPIData(TypedDict):
     developers: str
 
 
-class SteamRateLimiter(TokenBucketRateLimiter):
+class SteamRateLimiter(RateLimiter):
     """Rate limiter for the Steam web API"""
 
     # Steam web API limit
     # 200 requests per 5 min seems to be the limit
     # https://stackoverflow.com/questions/76047820/how-am-i-exceeding-steam-apis-rate-limit
     # https://stackoverflow.com/questions/51795457/avoiding-error-429-too-many-requests-steam-web-api
-    REFILL_SPACING_SECONDS = 5 * 60 / 100
-    MAX_TOKENS = 100
+    REFILL_PERIOD_SECONDS = 5 * 60
+    REFILL_PERIOD_TOKENS = 200
+    BURST_TOKENS = 100
 
     def __init__(self) -> None:
-        # Load initial tokens from schema
+        # Load pick history from schema
         # (Remember API limits through restarts of Cartridges)
-        last_tokens = shared.state_schema.get_int("steam-api-tokens")
-        last_time = shared.state_schema.get_int("steam-api-tokens-timestamp")
-        produced = floor((time() - last_time) / self.REFILL_SPACING_SECONDS)
-        inital_tokens = last_tokens + produced
-        super().__init__(initial_tokens=inital_tokens)
+        timestamps_str = shared.state_schema.get_string("steam-limiter-tokens-history")
+        self.pick_history = PickHistory(self.REFILL_PERIOD_SECONDS)
+        self.pick_history.add(*json.loads(timestamps_str))
+        self.pick_history.remove_old_entries()
+        super().__init__()
 
-    def refill(self):
-        """Refill the bucket and store its number of tokens in the schema"""
-        super().refill()
-        shared.state_schema.set_int("steam-api-tokens-timestamp", ceil(time()))
-        shared.state_schema.set_int("steam-api-tokens", self.n_tokens)
+    @property
+    def refill_spacing(self) -> float:
+        spacing = super().refill_spacing
+        logging.debug("Next Steam API request token in %f seconds", spacing)
+        return spacing
+
+    def acquire(self):
+        """Get a token from the bucket and store the pick history in the schema"""
+        super().acquire()
+        timestamps_str = json.dumps(self.pick_history.copy_timestamps())
+        shared.state_schema.set_string("steam-limiter-tokens-history", timestamps_str)
 
 
 class SteamHelper:

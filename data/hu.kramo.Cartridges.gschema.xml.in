@@ -88,11 +88,8 @@
       </choices>
       <default>"a-z"</default>
     </key>
-    <key name="steam-api-tokens" type="i">
-      <default>200</default>
-    </key>
-    <key name="steam-api-tokens-timestamp" type="i">
-      <default>0</default>
+    <key name="steam-limiter-tokens-history" type="s">
+      <default>"[]"</default>
     </key>
   </schema>
 </schemalist>
