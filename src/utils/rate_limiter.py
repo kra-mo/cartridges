@@ -47,7 +47,7 @@ class PickHistory(Sized):
         with self.timestamps_lock:
             try:
                 entry = self.timestamps[0]
-            except KeyError:
+            except IndexError:
                 entry = time()
         return entry
 
