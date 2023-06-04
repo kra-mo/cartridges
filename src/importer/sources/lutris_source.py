@@ -1,5 +1,6 @@
 from sqlite3 import connect
 from time import time
+from typing import Optional
 
 from src import shared
 from src.game import Game
@@ -27,7 +28,7 @@ class LutrisSourceIterator(SourceIterator):
     """
     db_request_params = None
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.import_steam = shared.schema.get_boolean("lutris-import-steam")
         self.db_location = self.source.location / "pga.db"
@@ -37,9 +38,7 @@ class LutrisSourceIterator(SourceIterator):
             self.db_games_request, self.db_request_params
         )
 
-    def __next__(self):
-        """Produce games"""
-
+    def __next__(self) -> Optional[Game]:
         row = None
         try:
             row = self.db_cursor.__next__()

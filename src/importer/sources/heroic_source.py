@@ -112,8 +112,8 @@ class HeroicSourceIterator(SourceIterator):
                     continue
                 yield game
 
-    def __init__(self, source: "HeroicSource") -> None:
-        self.source = source
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
         self.generator = self.sub_sources_generator()
 
     def __next__(self) -> Optional[Game]:

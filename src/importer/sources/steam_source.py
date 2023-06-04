@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 from time import time
-from typing import Iterator
+from typing import Iterator, Optional
 
 from src import shared
 from src.game import Game
@@ -27,7 +27,7 @@ class SteamSourceIterator(SourceIterator):
     installed_state_mask: int = 4
     appid_cache: set = None
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
         self.appid_cache = set()
@@ -56,9 +56,7 @@ class SteamSourceIterator(SourceIterator):
 
         self.manifests_iterator = iter(self.manifests)
 
-    def __next__(self):
-        """Produce games"""
-
+    def __next__(self) -> Optional[Game]:
         # Get metadata from manifest
         manifest_path = next(self.manifests_iterator)
         steam = SteamHelper()
