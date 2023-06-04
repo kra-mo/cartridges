@@ -48,8 +48,8 @@ class SteamRateLimiter(TokenBucketRateLimiter):
     # 200 requests per 5 min seems to be the limit
     # https://stackoverflow.com/questions/76047820/how-am-i-exceeding-steam-apis-rate-limit
     # https://stackoverflow.com/questions/51795457/avoiding-error-429-too-many-requests-steam-web-api
-    REFILL_SPACING_SECONDS = 1.5
-    MAX_TOKENS = 200
+    REFILL_SPACING_SECONDS = 5 * 60 / 100
+    MAX_TOKENS = 100
 
     def __init__(self) -> None:
         # Load initial tokens from schema
@@ -98,8 +98,9 @@ class SteamHelper:
     def get_api_data(self, appid) -> SteamAPIData:
         """
         Get online data for a game from its appid.
-
         May block to satisfy the Steam web API limitations.
+
+        See https://wiki.teamfortress.com/wiki/User:RJackson/StorefrontAPI#appdetails
         """
 
         # Get data from the API (way block to satisfy its limits)

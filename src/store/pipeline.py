@@ -30,7 +30,7 @@ class Pipeline(GObject.Object):
 
     @property
     def is_done(self) -> bool:
-        return len(self.not_done) == 0
+        return len(self.waiting) == 0 and len(self.running) == 0
 
     @property
     def blocked(self) -> set[Manager]:
@@ -48,6 +48,17 @@ class Pipeline(GObject.Object):
     def ready(self) -> set[Manager]:
         """Get the managers that can be run"""
         return self.waiting - self.blocked
+
+    @property
+    def progress(self) -> float:
+        """Get the pipeline progress. Should only be a rough idea."""
+        n_done = len(self.done)
+        n_total = len(self.waiting) + len(self.running) + n_done
+        try:
+            progress = n_done / n_total
+        except ZeroDivisionError:
+            progress = 1
+        return progress
 
     def advance(self):
         """Spawn tasks for managers that are able to run for a game"""

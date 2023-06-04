@@ -39,8 +39,9 @@ class Importer:
 
     @property
     def pipelines_progress(self):
+        progress = sum([pipeline.progress for pipeline in self.game_pipelines])
         try:
-            progress = self.n_pipelines_done / len(self.game_pipelines)
+            progress = progress / len(self.game_pipelines)
         except ZeroDivisionError:
             progress = 1
         return progress
