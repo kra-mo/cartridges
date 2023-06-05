@@ -38,7 +38,7 @@ class HeroicSubSource(TypedDict):
 
 class HeroicSourceIterator(SourceIterator):
     source: "HeroicSource"
-    generator: Generator = None
+
     sub_sources: dict[str, HeroicSubSource] = {
         "sideload": {
             "service": "sideload",
@@ -89,9 +89,10 @@ class HeroicSourceIterator(SourceIterator):
 
         return Game(values, allow_side_effects=False)
 
-    def sub_sources_generator(self):
+    def generator_builder(self):
         """Generator method producing games from all the Heroic sub-sources"""
-        for _key, sub_source in self.sub_sources.items():
+
+        for sub_source in self.sub_sources.values():
             # Skip disabled sub-sources
             if not shared.schema.get_boolean("heroic-import-" + sub_source["service"]):
                 continue
@@ -111,17 +112,6 @@ class HeroicSourceIterator(SourceIterator):
                     logging.warning("Invalid Heroic game skipped in %s", str(file))
                     continue
                 yield game
-
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        self.generator = self.sub_sources_generator()
-
-    def __next__(self) -> Optional[Game]:
-        try:
-            game = next(self.generator)
-        except StopIteration:
-            raise
-        return game
 
 
 class HeroicSource(Source):

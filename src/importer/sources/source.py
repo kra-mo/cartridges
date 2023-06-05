@@ -2,7 +2,7 @@ import sys
 from abc import abstractmethod
 from collections.abc import Iterable, Iterator
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Generator
 
 from src.game import Game
 
@@ -11,20 +11,28 @@ class SourceIterator(Iterator):
     """Data producer for a source of games"""
 
     source: "Source" = None
+    generator: Generator = None
 
     def __init__(self, source: "Source") -> None:
         super().__init__()
         self.source = source
+        self.generator = self.generator_builder()
 
     def __iter__(self) -> "SourceIterator":
         return self
 
-    @abstractmethod
     def __next__(self) -> Optional[Game]:
-        """Get the next generated game from the source.
-        Raises StopIteration when exhausted.
-        May raise any other exception signifying an error on this specific game.
-        May return None when a game has been skipped without an error."""
+        return next(self.generator)
+
+    @abstractmethod
+    def generator_builder(self) -> Generator[Optional[Game], None, None]:
+        """
+        Method that returns a generator that produces games
+        * Should be implemented as a generator method
+        * May yield `None` when an iteration hasn't produced a game
+        * In charge of handling per-game errors
+        * Returns when exhausted
+        """
 
 
 class Source(Iterable):

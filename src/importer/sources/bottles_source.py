@@ -17,11 +17,6 @@ from src.utils.save_cover import resize_cover, save_cover
 
 class BottlesSourceIterator(SourceIterator):
     source: "BottlesSource"
-    generator: Generator = None
-
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        self.generator = self.generator_builder()
 
     def generator_builder(self) -> Optional[Game]:
         """Generator method producing games"""
@@ -54,13 +49,6 @@ class BottlesSourceIterator(SourceIterator):
 
             # Produce game
             yield game
-
-    def __next__(self) -> Optional[Game]:
-        try:
-            game = next(self.generator)
-        except StopIteration:
-            raise
-        return game
 
 
 class BottlesSource(Source):

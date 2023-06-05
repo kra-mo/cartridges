@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 from time import time
-from typing import Iterator, Optional
+from typing import Iterable, Optional, Generator
 
 from src import shared
 from src.game import Game
@@ -22,81 +22,78 @@ from src.utils.steam import SteamHelper, SteamInvalidManifestError
 
 class SteamSourceIterator(SourceIterator):
     source: "SteamSource"
-    manifests: set = None
-    manifests_iterator: Iterator[Path] = None
-    installed_state_mask: int = 4
-    appid_cache: set = None
 
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-
-        self.appid_cache = set()
-        self.manifests = set()
-
-        # Get dirs that contain steam app manifests
+    def get_manifest_dirs(self) -> Iterable[Path]:
+        """Get dirs that contain steam app manifests"""
         libraryfolders_path = self.source.location / "steamapps" / "libraryfolders.vdf"
         with open(libraryfolders_path, "r") as file:
             contents = file.read()
-        steamapps_dirs = [
+        return [
             Path(path) / "steamapps"
             for path in re.findall('"path"\s+"(.*)"\n', contents, re.IGNORECASE)
         ]
 
-        # Get app manifests
-        for steamapps_dir in steamapps_dirs:
+    def get_manifests(self) -> Iterable[Path]:
+        """Get app manifests"""
+        manifests = set()
+        for steamapps_dir in self.get_manifest_dirs():
             if not steamapps_dir.is_dir():
                 continue
-            self.manifests.update(
+            manifests.update(
                 [
                     manifest
                     for manifest in steamapps_dir.glob("appmanifest_*.acf")
                     if manifest.is_file()
                 ]
             )
+        return manifests
 
-        self.manifests_iterator = iter(self.manifests)
+    def generator_builder(self) -> Optional[Game]:
+        """Generator method producing games"""
+        appid_cache = set()
+        manifests = self.get_manifests()
+        for manifest in manifests:
+            # Get metadata from manifest
+            steam = SteamHelper()
+            try:
+                local_data = steam.get_manifest_data(manifest)
+            except (OSError, SteamInvalidManifestError):
+                continue
 
-    def __next__(self) -> Optional[Game]:
-        # Get metadata from manifest
-        manifest_path = next(self.manifests_iterator)
-        steam = SteamHelper()
-        try:
-            local_data = steam.get_manifest_data(manifest_path)
-        except (OSError, SteamInvalidManifestError):
-            return None
+            # Skip non installed games
+            INSTALLED_MASK: int = 4
+            if not int(local_data["stateflags"]) & INSTALLED_MASK:
+                continue
 
-        # Skip non installed games
-        if not int(local_data["stateflags"]) & self.installed_state_mask:
-            return None
+            # Skip duplicate appids
+            appid = local_data["appid"]
+            if appid in appid_cache:
+                continue
+            appid_cache.add(appid)
 
-        # Skip duplicate appids
-        appid = local_data["appid"]
-        if appid in self.appid_cache:
-            return None
-        self.appid_cache.add(appid)
+            # Build game from local data
+            values = {
+                "version": shared.SPEC_VERSION,
+                "added": int(time()),
+                "name": local_data["name"],
+                "source": self.source.id,
+                "game_id": self.source.game_id_format.format(game_id=appid),
+                "executable": self.source.executable_format.format(game_id=appid),
+            }
+            game = Game(values, allow_side_effects=False)
 
-        # Build game from local data
-        values = {
-            "version": shared.SPEC_VERSION,
-            "added": int(time()),
-            "name": local_data["name"],
-            "source": self.source.id,
-            "game_id": self.source.game_id_format.format(game_id=appid),
-            "executable": self.source.executable_format.format(game_id=appid),
-        }
-        game = Game(values, allow_side_effects=False)
+            # Add official cover image
+            image_path = (
+                self.source.location
+                / "appcache"
+                / "librarycache"
+                / f"{appid}_library_600x900.jpg"
+            )
+            if image_path.is_file():
+                save_cover(game.game_id, resize_cover(image_path))
 
-        # Add official cover image
-        cover_path = (
-            self.source.location
-            / "appcache"
-            / "librarycache"
-            / f"{appid}_library_600x900.jpg"
-        )
-        if cover_path.is_file():
-            save_cover(game.game_id, resize_cover(cover_path))
-
-        return game
+            # Produce game
+            yield game
 
 
 class SteamSource(Source):
