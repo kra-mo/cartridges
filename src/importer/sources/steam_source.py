@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 from time import time
-from typing import Iterable, Optional
+from typing import Iterable, Optional, Generator
 
 from src import shared
 from src.game import Game
@@ -44,7 +44,7 @@ class SteamSourceIterator(SourceIterator):
             )
         return manifests
 
-    def generator_builder(self) -> Optional[Game]:
+    def generator_builder(self) -> Generator[Optional[Game], None, None]:
         """Generator method producing games"""
         appid_cache = set()
         manifests = self.get_manifests()

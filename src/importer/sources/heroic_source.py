@@ -4,7 +4,7 @@ from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
 from time import time
-from typing import Optional, TypedDict
+from typing import Optional, TypedDict, Generator
 
 from src import shared
 from src.game import Game
@@ -85,7 +85,7 @@ class HeroicSourceIterator(SourceIterator):
 
         return Game(values, allow_side_effects=False)
 
-    def generator_builder(self):
+    def generator_builder(self) -> Generator[Optional[Game], None, None]:
         """Generator method producing games from all the Heroic sub-sources"""
 
         for sub_source in self.sub_sources.values():

@@ -1,6 +1,6 @@
 from pathlib import Path
 from time import time
-from typing import Optional
+from typing import Optional, Generator
 
 import yaml
 
@@ -14,7 +14,7 @@ from src.utils.save_cover import resize_cover, save_cover
 class BottlesSourceIterator(SourceIterator):
     source: "BottlesSource"
 
-    def generator_builder(self) -> Optional[Game]:
+    def generator_builder(self) -> Generator[Optional[Game], None, None]:
         """Generator method producing games"""
 
         data = (self.source.location / "library.yml").read_text("utf-8")

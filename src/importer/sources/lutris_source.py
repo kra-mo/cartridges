@@ -1,6 +1,6 @@
 from sqlite3 import connect
 from time import time
-from typing import Optional
+from typing import Optional, Generator
 
 from src import shared
 from src.game import Game
@@ -12,7 +12,7 @@ from src.utils.save_cover import resize_cover, save_cover
 class LutrisSourceIterator(SourceIterator):
     source: "LutrisSource"
 
-    def generator_builder(self) -> Optional[Game]:
+    def generator_builder(self) -> Generator[Optional[Game], None, None]:
         """Generator method producing games"""
 
         # Query the database
