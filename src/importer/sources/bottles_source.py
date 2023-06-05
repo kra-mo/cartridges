@@ -62,7 +62,7 @@ class BottlesLinuxSource(BottlesSource, LinuxSource):
     executable_format = 'xdg-open bottles:run/"{bottle_name}"/"{game_name}"'
 
     @property
-    @Source.replaced_by_schema_key()
+    @BottlesSource.replaced_by_schema_key()
     @replaced_by_path("~/.var/app/com.usebottles.bottles/data/bottles/")
     @replaced_by_env_path("XDG_DATA_HOME", "bottles/")
     @replaced_by_path("~/.local/share/bottles/")

@@ -76,7 +76,7 @@ class LutrisLinuxSource(LutrisSource, LinuxSource):
     executable_format = "xdg-open lutris:rungameid/{game_id}"
 
     @property
-    @Source.replaced_by_schema_key()
+    @LutrisSource.replaced_by_schema_key()
     @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/")
     @replaced_by_path("~/.local/share/lutris/")
     def location(self):

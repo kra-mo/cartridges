@@ -105,7 +105,7 @@ class SteamLinuxSource(SteamSource, LinuxSource):
     executable_format = "xdg-open steam://rungameid/{game_id}"
 
     @property
-    @Source.replaced_by_schema_key()
+    @SteamSource.replaced_by_schema_key()
     @replaced_by_path("~/.var/app/com.valvesoftware.Steam/data/Steam/")
     @replaced_by_env_path("XDG_DATA_HOME", "Steam/")
     @replaced_by_path("~/.steam/")
@@ -119,7 +119,7 @@ class SteamWindowsSource(SteamSource, WindowsSource):
     executable_format = "start steam://rungameid/{game_id}"
 
     @property
-    @Source.replaced_by_schema_key()
+    @SteamSource.replaced_by_schema_key()
     @replaced_by_env_path("programfiles(x86)", "Steam")
     def location(self):
         raise FileNotFoundError()

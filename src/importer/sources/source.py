@@ -49,7 +49,7 @@ class Source(Iterable):
     def __init__(self) -> None:
         super().__init__()
         self.available_on = set()
-        self.update_location_schema_key()
+        
 
     @property
     def full_name(self) -> str:

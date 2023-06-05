@@ -130,7 +130,7 @@ class HeroicLinuxSource(HeroicSource, LinuxSource):
     executable_format = "xdg-open heroic://launch/{app_name}"
 
     @property
-    @Source.replaced_by_schema_key()
+    @HeroicSource.replaced_by_schema_key()
     @replaced_by_path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
     @replaced_by_env_path("XDG_CONFIG_HOME", "heroic/")
     @replaced_by_path("~/.config/heroic/")
@@ -143,7 +143,7 @@ class HeroicWindowsSource(HeroicSource, WindowsSource):
     executable_format = "start heroic://launch/{app_name}"
 
     @property
-    @Source.replaced_by_schema_key()
+    @HeroicSource.replaced_by_schema_key()
     @replaced_by_env_path("appdata", "heroic/")
     def location(self) -> Path:
         raise FileNotFoundError()
