@@ -1,10 +1,13 @@
 import sys
 from abc import abstractmethod
 from collections.abc import Iterable, Iterator
+from functools import wraps
 from pathlib import Path
-from typing import Optional, Generator
+from typing import Generator, Optional
 
+from src import shared
 from src.game import Game
+from src.utils.decorators import replaced_by_path
 
 
 class SourceIterator(Iterator):
@@ -40,11 +43,13 @@ class Source(Iterable):
 
     name: str
     variant: str
+    location_key: str
     available_on: set[str]
 
     def __init__(self) -> None:
         super().__init__()
         self.available_on = set()
+        self.update_location_schema_key()
 
     @property
     def full_name(self) -> str:
@@ -75,6 +80,28 @@ class Source(Iterable):
         except FileNotFoundError:
             return False
         return sys.platform in self.available_on
+
+    def update_location_schema_key(self):
+        """Update the schema value for this source's location if possible"""
+        try:
+            location = self.location
+        except FileNotFoundError:
+            return
+        shared.schema.set_string(self.location_key, location)
+
+    @classmethod
+    def replaced_by_schema_key(cls):  # Decorator builder
+        """Replace the returned path with schema's path if valid"""
+
+        def decorator(original_function):  # Built decorator (closure)
+            @wraps(original_function)
+            def wrapper(*args, **kwargs):  # func's override
+                override = shared.schema.get_string(cls.location_key)
+                return replaced_by_path(override)(original_function)(*args, **kwargs)
+
+            return wrapper
+
+        return decorator
 
     @property
     @abstractmethod

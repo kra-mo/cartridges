@@ -4,7 +4,7 @@ from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
 from time import time
-from typing import Generator, Optional, TypedDict
+from typing import Optional, TypedDict
 
 from src import shared
 from src.game import Game
@@ -14,11 +14,7 @@ from src.importer.sources.source import (
     SourceIterator,
     WindowsSource,
 )
-from src.utils.decorators import (
-    replaced_by_env_path,
-    replaced_by_path,
-    replaced_by_schema_key,
-)
+from src.utils.decorators import replaced_by_env_path, replaced_by_path
 from src.utils.save_cover import resize_cover, save_cover
 
 
@@ -118,6 +114,7 @@ class HeroicSource(Source):
     """Generic heroic games launcher source"""
 
     name = "Heroic"
+    location_key = "heroic-location"
 
     @property
     def game_id_format(self) -> str:
@@ -133,7 +130,7 @@ class HeroicLinuxSource(HeroicSource, LinuxSource):
     executable_format = "xdg-open heroic://launch/{app_name}"
 
     @property
-    @replaced_by_schema_key("heroic-location")
+    @Source.replaced_by_schema_key()
     @replaced_by_path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
     @replaced_by_env_path("XDG_CONFIG_HOME", "heroic/")
     @replaced_by_path("~/.config/heroic/")
@@ -146,7 +143,7 @@ class HeroicWindowsSource(HeroicSource, WindowsSource):
     executable_format = "start heroic://launch/{app_name}"
 
     @property
-    @replaced_by_schema_key("heroic-location")
+    @Source.replaced_by_schema_key()
     @replaced_by_env_path("appdata", "heroic/")
     def location(self) -> Path:
         raise FileNotFoundError()

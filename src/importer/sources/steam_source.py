@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 from time import time
-from typing import Iterable, Optional, Generator
+from typing import Iterable, Optional
 
 from src import shared
 from src.game import Game
@@ -11,11 +11,7 @@ from src.importer.sources.source import (
     SourceIterator,
     WindowsSource,
 )
-from src.utils.decorators import (
-    replaced_by_env_path,
-    replaced_by_path,
-    replaced_by_schema_key,
-)
+from src.utils.decorators import replaced_by_env_path, replaced_by_path
 from src.utils.save_cover import resize_cover, save_cover
 from src.utils.steam import SteamHelper, SteamInvalidManifestError
 
@@ -98,6 +94,7 @@ class SteamSourceIterator(SourceIterator):
 
 class SteamSource(Source):
     name = "Steam"
+    location_key = "steam-location"
 
     def __iter__(self):
         return SteamSourceIterator(source=self)
@@ -108,7 +105,7 @@ class SteamLinuxSource(SteamSource, LinuxSource):
     executable_format = "xdg-open steam://rungameid/{game_id}"
 
     @property
-    @replaced_by_schema_key("steam-location")
+    @Source.replaced_by_schema_key()
     @replaced_by_path("~/.var/app/com.valvesoftware.Steam/data/Steam/")
     @replaced_by_env_path("XDG_DATA_HOME", "Steam/")
     @replaced_by_path("~/.steam/")
@@ -122,7 +119,7 @@ class SteamWindowsSource(SteamSource, WindowsSource):
     executable_format = "start steam://rungameid/{game_id}"
 
     @property
-    @replaced_by_schema_key("steam-location")
+    @Source.replaced_by_schema_key()
     @replaced_by_env_path("programfiles(x86)", "Steam")
     def location(self):
         raise FileNotFoundError()

@@ -1,17 +1,13 @@
 from pathlib import Path
 from time import time
-from typing import Generator, Optional
+from typing import Optional
 
 import yaml
 
 from src import shared
 from src.game import Game
 from src.importer.sources.source import LinuxSource, Source, SourceIterator
-from src.utils.decorators import (
-    replaced_by_env_path,
-    replaced_by_path,
-    replaced_by_schema_key,
-)
+from src.utils.decorators import replaced_by_env_path, replaced_by_path
 from src.utils.save_cover import resize_cover, save_cover
 
 
@@ -55,6 +51,7 @@ class BottlesSource(Source):
     """Generic Bottles source"""
 
     name = "Bottles"
+    location_key = "bottles-location"
 
     def __iter__(self) -> SourceIterator:
         return BottlesSourceIterator(self)
@@ -65,7 +62,7 @@ class BottlesLinuxSource(BottlesSource, LinuxSource):
     executable_format = 'xdg-open bottles:run/"{bottle_name}"/"{game_name}"'
 
     @property
-    @replaced_by_schema_key("bottles-location")
+    @Source.replaced_by_schema_key()
     @replaced_by_path("~/.var/app/com.usebottles.bottles/data/bottles/")
     @replaced_by_env_path("XDG_DATA_HOME", "bottles/")
     @replaced_by_path("~/.local/share/bottles/")

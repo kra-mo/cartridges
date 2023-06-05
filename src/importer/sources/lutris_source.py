@@ -1,11 +1,11 @@
 from sqlite3 import connect
 from time import time
-from typing import Optional, Generator
+from typing import Optional
 
 from src import shared
 from src.game import Game
 from src.importer.sources.source import LinuxSource, Source, SourceIterator
-from src.utils.decorators import replaced_by_path, replaced_by_schema_key
+from src.utils.decorators import replaced_by_path
 from src.utils.save_cover import resize_cover, save_cover
 
 
@@ -61,6 +61,7 @@ class LutrisSource(Source):
     """Generic lutris source"""
 
     name = "Lutris"
+    location_key = "lutris-location"
 
     @property
     def game_id_format(self):
@@ -75,7 +76,7 @@ class LutrisLinuxSource(LutrisSource, LinuxSource):
     executable_format = "xdg-open lutris:rungameid/{game_id}"
 
     @property
-    @replaced_by_schema_key("lutris-location")
+    @Source.replaced_by_schema_key()
     @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/")
     @replaced_by_path("~/.local/share/lutris/")
     def location(self):
