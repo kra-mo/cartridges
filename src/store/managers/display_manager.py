@@ -10,7 +10,7 @@ class DisplayManager(Manager):
 
     run_after = set((SteamAPIManager, SGDBManager))
 
-    def manager_logic(self, game: Game) -> None:
+    def manager_logic(self, game: Game, _additional_data: tuple) -> None:
         # TODO decouple a game from its widget
         shared.win.games[game.game_id] = game
         game.update()

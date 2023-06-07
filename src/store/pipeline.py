@@ -11,14 +11,18 @@ class Pipeline(GObject.Object):
     """Class representing a set of managers for a game"""
 
     game: Game
+    additional_data: tuple
 
     waiting: set[Manager]
     running: set[Manager]
     done: set[Manager]
 
-    def __init__(self, game: Game, managers: Iterable[Manager]) -> None:
+    def __init__(
+        self, game: Game, additional_data: tuple, managers: Iterable[Manager]
+    ) -> None:
         super().__init__()
         self.game = game
+        self.additional_data = additional_data
         self.waiting = set(managers)
         self.running = set()
         self.done = set()
@@ -72,7 +76,7 @@ class Pipeline(GObject.Object):
         for manager in (*parallel, *blocking):
             self.waiting.remove(manager)
             self.running.add(manager)
-            manager.process_game(self.game, self.manager_callback)
+            manager.process_game(self.game, self.additional_data, self.manager_callback)
 
     def manager_callback(self, manager: Manager) -> None:
         """Method called by a manager when it's done"""

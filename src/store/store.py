@@ -20,7 +20,9 @@ class Store:
         """Add a manager class that will run when games are added"""
         self.managers.add(manager)
 
-    def add_game(self, game: Game, replace=False) -> Pipeline | None:
+    def add_game(
+        self, game: Game, additional_data: tuple, replace=False
+    ) -> Pipeline | None:
         """Add a game to the app if not already there
 
         :param replace bool: Replace the game if it already exists
@@ -49,7 +51,7 @@ class Store:
             return None
 
         # Run the pipeline for the game
-        pipeline = Pipeline(game, self.managers)
+        pipeline = Pipeline(game, additional_data, self.managers)
         self.games[game.game_id] = game
         self.pipelines[game.game_id] = pipeline
         pipeline.advance()

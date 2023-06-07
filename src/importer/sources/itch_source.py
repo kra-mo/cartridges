@@ -48,12 +48,9 @@ class ItchSourceIterator(SourceIterator):
                 "game_id": self.source.game_id_format.format(game_id=row[0]),
                 "executable": self.source.executable_format.format(cave_id=row[4]),
             }
-            yield Game(values, allow_side_effects=False)
-
-            # TODO pass image URIs to the pipeline somehow
-            # - Add a reserved field to the Game object
-            # - Reconstruct those from the pipeline (we already have them)
-            # - Pass game and additional data to the pipeline separately (requires deep changes)
+            additional_data = (row[3], row[2])
+            game = Game(values, allow_side_effects=False)
+            yield (game, additional_data)
 
 
 class ItchSource(Source):

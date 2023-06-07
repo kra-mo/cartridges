@@ -133,7 +133,7 @@ class CartridgesApplication(Adw.Application):
             for game_file in shared.games_dir.iterdir():
                 data = json.load(game_file.open())
                 game = Game(data, allow_side_effects=False)
-                shared.store.add_game(game)
+                shared.store.add_game(game, tuple())
 
     def on_about_action(self, *_args):
         about = Adw.AboutWindow(

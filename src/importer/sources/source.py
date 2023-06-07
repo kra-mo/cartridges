@@ -3,11 +3,14 @@ from abc import abstractmethod
 from collections.abc import Iterable, Iterator
 from functools import wraps
 from pathlib import Path
-from typing import Generator, Optional
+from typing import Generator, Any
 
 from src import shared
 from src.game import Game
 from src.utils.decorators import replaced_by_path
+
+# Type of the data returned by iterating on a Source
+SourceIterationResult = None | Game | tuple[Game, tuple[Any]]
 
 
 class SourceIterator(Iterator):
@@ -24,11 +27,11 @@ class SourceIterator(Iterator):
     def __iter__(self) -> "SourceIterator":
         return self
 
-    def __next__(self) -> Optional[Game]:
+    def __next__(self) -> SourceIterationResult:
         return next(self.generator)
 
     @abstractmethod
-    def generator_builder(self) -> Generator[Optional[Game], None, None]:
+    def generator_builder(self) -> Generator[SourceIterationResult, None, None]:
         """
         Method that returns a generator that produces games
         * Should be implemented as a generator method
@@ -49,7 +52,6 @@ class Source(Iterable):
     def __init__(self) -> None:
         super().__init__()
         self.available_on = set()
-        
 
     @property
     def full_name(self) -> str:

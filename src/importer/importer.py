@@ -3,9 +3,9 @@ import logging
 from gi.repository import Adw, Gio, Gtk
 
 from src import shared
+from src.game import Game
 from src.utils.task import Task
 from src.store.pipeline import Pipeline
-from src.store.managers.manager import Manager
 from src.importer.sources.source import Source
 
 
@@ -92,6 +92,7 @@ class Importer:
     def source_task_thread_func(self, _task, _obj, data, _cancellable):
         """Source import task code"""
 
+        source: Source
         source, *_rest = data
 
         # Early exit if not installed
@@ -107,20 +108,35 @@ class Importer:
         while True:
             # Handle exceptions raised when iterating
             try:
-                game = next(iterator)
+                iteration_result = next(iterator)
             except StopIteration:
                 break
             except Exception as exception:  # pylint: disable=broad-exception-caught
                 logging.exception(
-                    msg=f"Exception in source {source.id}",
-                    exc_info=exception,
+                    "Exception in source %s", source.id, exc_info=exception
                 )
                 continue
-            if game is None:
+
+            # Handle the result depending on its type
+            if isinstance(iteration_result, Game):
+                game = iteration_result
+                additional_data = tuple()
+            elif isinstance(iteration_result, tuple):
+                game, additional_data = iteration_result
+            elif iteration_result is None:
+                continue
+            else:
+                # Warn source implementers that an invalid type was produced
+                # Should not happen on production code
+                logging.warn(
+                    "%s produced an invalid iteration return type %s",
+                    source.id,
+                    type(iteration_result),
+                )
                 continue
 
             # Register game
-            pipeline: Pipeline = shared.store.add_game(game)
+            pipeline: Pipeline = shared.store.add_game(game, additional_data)
             if pipeline is not None:
                 logging.info("Imported %s (%s)", game.name, game.game_id)
                 pipeline.connect("advanced", self.pipeline_advanced_callback)

@@ -37,7 +37,7 @@ class Manager:
         self.errors_lock = Lock()
 
     def report_error(self, error: Exception):
-        """Report an error that happened in Manager.run"""
+        """Report an error that happened in Manager.process_game"""
         with self.errors_lock:
             self.errors.append(error)
 
@@ -49,7 +49,7 @@ class Manager:
         return errors
 
     @abstractmethod
-    def manager_logic(self, game: Game) -> None:
+    def manager_logic(self, game: Game, additional_data: tuple) -> None:
         """
         Manager specific logic triggered by the run method
         * Implemented by final child classes
@@ -58,10 +58,12 @@ class Manager:
         * May raise other exceptions that will be reported
         """
 
-    def execute_resilient_manager_logic(self, game: Game, try_index: int = 0) -> None:
+    def execute_resilient_manager_logic(
+        self, game: Game, additional_data: tuple, try_index: int = 0
+    ) -> None:
         """Execute the manager logic and handle its errors by reporting them or retrying"""
         try:
-            self.manager_logic(game)
+            self.manager_logic(game, additional_data)
         except Exception as error:
             if error in self.continue_on:
                 # Handle skippable errors (skip silently)
@@ -71,7 +73,9 @@ class Manager:
                     # Handle retryable errors
                     logging_format = "Retrying %s in %s for %s"
                     sleep(self.retry_delay)
-                    self.execute_resilient_manager_logic(game, try_index + 1)
+                    self.execute_resilient_manager_logic(
+                        game, additional_data, try_index + 1
+                    )
                 else:
                     # Handle being out of retries
                     logging_format = "Out of retries dues to %s in %s for %s"
@@ -88,7 +92,9 @@ class Manager:
                 f"{game.name} ({game.game_id})",
             )
 
-    def process_game(self, game: Game, callback: Callable[["Manager"], Any]) -> None:
+    def process_game(
+        self, game: Game, additional_data: tuple, callback: Callable[["Manager"], Any]
+    ) -> None:
         """Pass the game through the manager"""
-        self.execute_resilient_manager_logic(game)
+        self.execute_resilient_manager_logic(game, additional_data)
         callback(self)
