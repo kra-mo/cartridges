@@ -43,6 +43,8 @@ from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
 from src.store.managers.sgdb_manager import SGDBManager
 from src.store.managers.steam_api_manager import SteamAPIManager
+from src.store.managers.local_cover_manager import LocalCoverManager
+from src.store.managers.itch_cover_manager import ItchCoverManager
 from src.store.store import Store
 from src.window import CartridgesWindow
 
@@ -85,7 +87,9 @@ class CartridgesApplication(Adw.Application):
         self.load_games_from_disk()
 
         # Add rest of the managers for game imports
+        shared.store.add_manager(LocalCoverManager())
         shared.store.add_manager(SteamAPIManager())
+        shared.store.add_manager(ItchCoverManager())
         shared.store.add_manager(SGDBManager())
         shared.store.add_manager(FileManager())
 

@@ -11,14 +11,14 @@ class Pipeline(GObject.Object):
     """Class representing a set of managers for a game"""
 
     game: Game
-    additional_data: tuple
+    additional_data: dict
 
     waiting: set[Manager]
     running: set[Manager]
     done: set[Manager]
 
     def __init__(
-        self, game: Game, additional_data: tuple, managers: Iterable[Manager]
+        self, game: Game, additional_data: dict, managers: Iterable[Manager]
     ) -> None:
         super().__init__()
         self.game = game

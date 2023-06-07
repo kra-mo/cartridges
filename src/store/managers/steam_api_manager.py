@@ -15,11 +15,10 @@ class SteamAPIManager(AsyncManager):
 
     retryable_on = set((HTTPError, SSLError))
 
-    def manager_logic(self, game: Game, _additional_data: tuple) -> None:
+    def manager_logic(self, game: Game, _additional_data: dict) -> None:
         # Skip non-steam games
         if not game.source.startswith("steam_"):
             return
-
         # Get online metadata
         appid = str(game.game_id).split("_")[-1]
         steam = SteamHelper()

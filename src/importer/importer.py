@@ -120,7 +120,7 @@ class Importer:
             # Handle the result depending on its type
             if isinstance(iteration_result, Game):
                 game = iteration_result
-                additional_data = tuple()
+                additional_data = {}
             elif isinstance(iteration_result, tuple):
                 game, additional_data = iteration_result
             elif iteration_result is None:

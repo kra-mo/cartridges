@@ -49,7 +49,7 @@ class Manager:
         return errors
 
     @abstractmethod
-    def manager_logic(self, game: Game, additional_data: tuple) -> None:
+    def manager_logic(self, game: Game, additional_data: dict) -> None:
         """
         Manager specific logic triggered by the run method
         * Implemented by final child classes
@@ -59,7 +59,7 @@ class Manager:
         """
 
     def execute_resilient_manager_logic(
-        self, game: Game, additional_data: tuple, try_index: int = 0
+        self, game: Game, additional_data: dict, try_index: int = 0
     ) -> None:
         """Execute the manager logic and handle its errors by reporting them or retrying"""
         try:
@@ -93,7 +93,7 @@ class Manager:
             )
 
     def process_game(
-        self, game: Game, additional_data: tuple, callback: Callable[["Manager"], Any]
+        self, game: Game, additional_data: dict, callback: Callable[["Manager"], Any]
     ) -> None:
         """Pass the game through the manager"""
         self.execute_resilient_manager_logic(game, additional_data)

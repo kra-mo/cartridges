@@ -21,7 +21,7 @@ class Store:
         self.managers.add(manager)
 
     def add_game(
-        self, game: Game, additional_data: tuple, replace=False
+        self, game: Game, additional_data: dict, replace=False
     ) -> Pipeline | None:
         """Add a game to the app if not already there
 

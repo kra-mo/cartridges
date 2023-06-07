@@ -1,18 +1,21 @@
 from sqlite3 import connect
 from time import time
-from typing import Optional, Generator
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import LinuxSource, Source, SourceIterator
+from src.importer.sources.source import (
+    LinuxSource,
+    Source,
+    SourceIterationResult,
+    SourceIterator,
+)
 from src.utils.decorators import replaced_by_path
-from src.utils.save_cover import resize_cover, save_cover
 
 
 class LutrisSourceIterator(SourceIterator):
     source: "LutrisSource"
 
-    def generator_builder(self) -> Generator[Optional[Game], None, None]:
+    def generator_builder(self) -> SourceIterationResult:
         """Generator method producing games"""
 
         # Query the database
@@ -48,13 +51,12 @@ class LutrisSourceIterator(SourceIterator):
             }
             game = Game(values, allow_side_effects=False)
 
-            # Save official image
+            # Get official image path
             image_path = self.source.location / "covers" / "coverart" / f"{row[2]}.jpg"
-            if image_path.exists():
-                save_cover(values["game_id"], resize_cover(image_path))
+            additional_data = {"local_image_path": image_path}
 
             # Produce game
-            yield game
+            yield (game, additional_data)
 
 
 class LutrisSource(Source):

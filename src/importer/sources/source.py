@@ -3,7 +3,7 @@ from abc import abstractmethod
 from collections.abc import Iterable, Iterator
 from functools import wraps
 from pathlib import Path
-from typing import Generator, Any
+from typing import Generator, Any, TypedDict
 
 from src import shared
 from src.game import Game

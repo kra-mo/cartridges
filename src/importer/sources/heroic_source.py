@@ -4,18 +4,18 @@ from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
 from time import time
-from typing import Optional, TypedDict, Generator
+from typing import Optional, TypedDict
 
 from src import shared
 from src.game import Game
 from src.importer.sources.source import (
     LinuxSource,
     Source,
+    SourceIterationResult,
     SourceIterator,
     WindowsSource,
 )
 from src.utils.decorators import replaced_by_env_path, replaced_by_path
-from src.utils.save_cover import resize_cover, save_cover
 
 
 class HeroicLibraryEntry(TypedDict):
@@ -50,7 +50,9 @@ class HeroicSourceIterator(SourceIterator):
         },
     }
 
-    def game_from_library_entry(self, entry: HeroicLibraryEntry) -> Optional[Game]:
+    def game_from_library_entry(
+        self, entry: HeroicLibraryEntry
+    ) -> SourceIterationResult:
         """Helper method used to build a Game from a Heroic library entry"""
 
         # Skip games that are not installed
@@ -72,20 +74,20 @@ class HeroicSourceIterator(SourceIterator):
             ),
             "executable": self.source.executable_format.format(app_name=app_name),
         }
+        game = Game(values, allow_side_effects=False)
 
-        # Save image from the heroic cache
+        # Get the image path from the heroic cache
         # Filenames are derived from the URL that heroic used to get the file
         uri: str = entry["art_square"]
         if service == "epic":
             uri += "?h=400&resize=1&w=300"
         digest = sha256(uri.encode()).hexdigest()
         image_path = self.source.location / "images-cache" / digest
-        if image_path.is_file():
-            save_cover(values["game_id"], resize_cover(image_path))
+        additional_data = {"local_image_path": image_path}
 
-        return Game(values, allow_side_effects=False)
+        return (game, additional_data)
 
-    def generator_builder(self) -> Generator[Optional[Game], None, None]:
+    def generator_builder(self) -> SourceIterationResult:
         """Generator method producing games from all the Heroic sub-sources"""
 
         for sub_source in self.sub_sources.values():
@@ -102,12 +104,12 @@ class HeroicSourceIterator(SourceIterator):
                 continue
             for entry in library:
                 try:
-                    game = self.game_from_library_entry(entry)
+                    result = self.game_from_library_entry(entry)
                 except KeyError:
                     # Skip invalid games
                     logging.warning("Invalid Heroic game skipped in %s", str(file))
                     continue
-                yield game
+                yield result
 
 
 class HeroicSource(Source):

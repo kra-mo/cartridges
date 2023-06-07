@@ -1,20 +1,23 @@
 from pathlib import Path
 from time import time
-from typing import Optional, Generator
 
 import yaml
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import LinuxSource, Source, SourceIterator
+from src.importer.sources.source import (
+    LinuxSource,
+    Source,
+    SourceIterationResult,
+    SourceIterator,
+)
 from src.utils.decorators import replaced_by_env_path, replaced_by_path
-from src.utils.save_cover import resize_cover, save_cover
 
 
 class BottlesSourceIterator(SourceIterator):
     source: "BottlesSource"
 
-    def generator_builder(self) -> Generator[Optional[Game], None, None]:
+    def generator_builder(self) -> SourceIterationResult:
         """Generator method producing games"""
 
         data = (self.source.location / "library.yml").read_text("utf-8")
@@ -34,17 +37,16 @@ class BottlesSourceIterator(SourceIterator):
             }
             game = Game(values, allow_side_effects=False)
 
-            # Save official cover
+            # Get official cover path
             bottle_path = entry["bottle"]["path"]
             image_name = entry["thumbnail"].split(":")[1]
             image_path = (
                 self.source.location / "bottles" / bottle_path / "grids" / image_name
             )
-            if image_path.is_file():
-                save_cover(values["game_id"], resize_cover(image_path))
+            additional_data = {"local_image_path": image_path}
 
             # Produce game
-            yield game
+            yield (game, additional_data)
 
 
 class BottlesSource(Source):

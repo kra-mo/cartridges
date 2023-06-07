@@ -1,18 +1,18 @@
 import re
 from pathlib import Path
 from time import time
-from typing import Iterable, Optional, Generator
+from typing import Iterable
 
 from src import shared
 from src.game import Game
 from src.importer.sources.source import (
     LinuxSource,
     Source,
+    SourceIterationResult,
     SourceIterator,
     WindowsSource,
 )
 from src.utils.decorators import replaced_by_env_path, replaced_by_path
-from src.utils.save_cover import resize_cover, save_cover
 from src.utils.steam import SteamHelper, SteamInvalidManifestError
 
 
@@ -44,7 +44,7 @@ class SteamSourceIterator(SourceIterator):
             )
         return manifests
 
-    def generator_builder(self) -> Generator[Optional[Game], None, None]:
+    def generator_builder(self) -> SourceIterationResult:
         """Generator method producing games"""
         appid_cache = set()
         manifests = self.get_manifests()
@@ -85,11 +85,10 @@ class SteamSourceIterator(SourceIterator):
                 / "librarycache"
                 / f"{appid}_library_600x900.jpg"
             )
-            if image_path.is_file():
-                save_cover(game.game_id, resize_cover(image_path))
+            additional_data = {"local_image_path": image_path}
 
             # Produce game
-            yield game
+            yield (game, additional_data)
 
 
 class SteamSource(Source):

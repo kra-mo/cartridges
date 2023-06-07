@@ -1,23 +1,23 @@
-from sqlite3 import connect
 from pathlib import Path
+from sqlite3 import connect
 from time import time
-from typing import Optional, Generator
 
 from src import shared
-from src.utils.decorators import replaced_by_env_path, replaced_by_path
 from src.game import Game
 from src.importer.sources.source import (
-    Source,
-    SourceIterator,
     LinuxSource,
+    Source,
+    SourceIterationResult,
+    SourceIterator,
     WindowsSource,
 )
+from src.utils.decorators import replaced_by_env_path, replaced_by_path
 
 
 class ItchSourceIterator(SourceIterator):
     source: "ItchSource"
 
-    def generator_builder(self) -> Generator[Optional[Game], None, None]:
+    def generator_builder(self) -> SourceIterationResult:
         """Generator method producing games"""
 
         # Query the database
@@ -48,7 +48,7 @@ class ItchSourceIterator(SourceIterator):
                 "game_id": self.source.game_id_format.format(game_id=row[0]),
                 "executable": self.source.executable_format.format(cave_id=row[4]),
             }
-            additional_data = (row[3], row[2])
+            additional_data = {"itch_cover_url": row[2], "itch_still_cover_url": row[3]}
             game = Game(values, allow_side_effects=False)
             yield (game, additional_data)
 

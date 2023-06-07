@@ -27,7 +27,7 @@ class AsyncManager(Manager):
         self.cancellable = Gio.Cancellable()
 
     def process_game(
-        self, game: Game, additional_data: tuple, callback: Callable[["Manager"], Any]
+        self, game: Game, additional_data: dict, callback: Callable[["Manager"], Any]
     ) -> None:
         """Create a task to process the game in a separate thread"""
         task = Task.new(None, self.cancellable, self._task_callback, (callback,))
