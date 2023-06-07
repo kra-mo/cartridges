@@ -61,16 +61,14 @@ class Importer:
 
         self.create_dialog()
 
-        # Single SGDB cancellable shared by all its tasks
-        # (If SGDB auth is bad, cancel all SGDB tasks)
-        self.sgdb_cancellable = Gio.Cancellable()
-
         for source in self.sources:
             logging.debug("Importing games from source %s", source.id)
             task = Task.new(None, None, self.source_callback, (source,))
             self.n_source_tasks_created += 1
             task.set_task_data((source,))
             task.run_in_thread(self.source_task_thread_func)
+
+        self.progress_changed_callback()
 
     def create_dialog(self):
         """Create the import dialog"""
@@ -164,6 +162,7 @@ class Importer:
         Callback called when the import process has progressed
 
         Triggered when:
+        * All sources have been started
         * A source finishes
         * A pipeline finishes
         """

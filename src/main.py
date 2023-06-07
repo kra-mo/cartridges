@@ -36,15 +36,16 @@ from src.game import Game
 from src.importer.importer import Importer
 from src.importer.sources.bottles_source import BottlesLinuxSource
 from src.importer.sources.heroic_source import HeroicLinuxSource, HeroicWindowsSource
+from src.importer.sources.itch_source import ItchLinuxSource, ItchWindowsSource
 from src.importer.sources.lutris_source import LutrisLinuxSource
 from src.importer.sources.steam_source import SteamLinuxSource, SteamWindowsSource
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
+from src.store.managers.itch_cover_manager import ItchCoverManager
+from src.store.managers.local_cover_manager import LocalCoverManager
 from src.store.managers.sgdb_manager import SGDBManager
 from src.store.managers.steam_api_manager import SteamAPIManager
-from src.store.managers.local_cover_manager import LocalCoverManager
-from src.store.managers.itch_cover_manager import ItchCoverManager
 from src.store.store import Store
 from src.window import CartridgesWindow
 
@@ -198,6 +199,9 @@ class CartridgesApplication(Adw.Application):
             importer.add_source(HeroicWindowsSource())
         if shared.schema.get_boolean("bottles"):
             importer.add_source(BottlesLinuxSource())
+        if shared.schema.get_boolean("itch"):
+            importer.add_source(ItchLinuxSource())
+            importer.add_source(ItchWindowsSource())
         importer.run()
 
     def on_remove_game_action(self, *_args):

@@ -45,6 +45,7 @@ class ItchSourceIterator(SourceIterator):
                 "version": shared.SPEC_VERSION,
                 "added": int(time()),
                 "source": self.source.id,
+                "name": row[1],
                 "game_id": self.source.game_id_format.format(game_id=row[0]),
                 "executable": self.source.executable_format.format(cave_id=row[4]),
             }
@@ -65,6 +66,7 @@ class ItchLinuxSource(ItchSource, LinuxSource):
     variant = "linux"
     executable_format = "xdg-open itch://caves/{cave_id}/launch"
 
+    @property
     @ItchSource.replaced_by_schema_key()
     @replaced_by_path("~/.var/app/io.itch.itch/config/itch/")
     @replaced_by_env_path("XDG_DATA_HOME", "itch/")
@@ -77,6 +79,7 @@ class ItchWindowsSource(ItchSource, WindowsSource):
     variant = "windows"
     executable_format = "start itch://caves/{cave_id}/launch"
 
+    @property
     @ItchSource.replaced_by_schema_key()
     @replaced_by_env_path("appdata", "itch/")
     def location(self) -> Path:

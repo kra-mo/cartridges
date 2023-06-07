@@ -65,32 +65,34 @@ class Manager:
         try:
             self.manager_logic(game, additional_data)
         except Exception as error:
+            logging_args = (
+                type(error).__name__,
+                self.name,
+                f"{game.name} ({game.game_id})",
+            )
             if error in self.continue_on:
                 # Handle skippable errors (skip silently)
                 return
             elif error in self.retryable_on:
                 if try_index < self.max_tries:
                     # Handle retryable errors
-                    logging_format = "Retrying %s in %s for %s"
+                    logging.error("Retrying %s in %s for %s", *logging_args)
                     sleep(self.retry_delay)
                     self.execute_resilient_manager_logic(
                         game, additional_data, try_index + 1
                     )
                 else:
                     # Handle being out of retries
-                    logging_format = "Out of retries dues to %s in %s for %s"
+                    logging.error(
+                        "Out of retries dues to %s in %s for %s", *logging_args
+                    )
                     self.report_error(error)
             else:
                 # Handle unretryable errors
-                logging_format = "Unretryable %s in %s for %s"
+                logging.error(
+                    "Unretryable %s in %s for %s", *logging_args, exc_info=error
+                )
                 self.report_error(error)
-            # Finally log errors
-            logging.error(
-                logging_format,
-                type(error).__name__,
-                self.name,
-                f"{game.name} ({game.game_id})",
-            )
 
     def process_game(
         self, game: Game, additional_data: dict, callback: Callable[["Manager"], Any]
