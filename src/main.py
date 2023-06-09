@@ -37,6 +37,7 @@ from src.importer.importer import Importer
 from src.importer.sources.bottles_source import BottlesLinuxSource
 from src.importer.sources.heroic_source import HeroicLinuxSource, HeroicWindowsSource
 from src.importer.sources.itch_source import ItchLinuxSource, ItchWindowsSource
+from src.importer.sources.legendary_source import LegendaryLinuxSource
 from src.importer.sources.lutris_source import LutrisLinuxSource
 from src.importer.sources.steam_source import SteamLinuxSource, SteamWindowsSource
 from src.preferences import PreferencesWindow
@@ -202,6 +203,8 @@ class CartridgesApplication(Adw.Application):
         if shared.schema.get_boolean("itch"):
             importer.add_source(ItchLinuxSource())
             importer.add_source(ItchWindowsSource())
+        if shared.schema.get_boolean("legendary"):
+            importer.add_source(LegendaryLinuxSource())
         importer.run()
 
     def on_remove_game_action(self, *_args):

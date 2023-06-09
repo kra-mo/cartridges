@@ -186,6 +186,20 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           }
         }
       }
+
+      Adw.ExpanderRow legendary_expander_row {
+        title: _("Legendary");
+        show-enable-switch: true;
+
+        Adw.ActionRow legendary_action_row {
+          title: _("Legendary Install Location");
+
+          Button legendary_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+      }
     }
   }
 

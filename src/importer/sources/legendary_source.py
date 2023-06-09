@@ -32,7 +32,7 @@ class LegendarySourceIterator(SourceIterator):
             "source": self.source.id,
             "name": entry["title"],
             "game_id": self.source.game_id_format.format(game_id=app_name),
-            "executable": self.source.game_id_format.format(app_name=app_name),
+            "executable": self.source.executable_format.format(app_name=app_name),
         }
         data = {}
 
@@ -55,17 +55,19 @@ class LegendarySourceIterator(SourceIterator):
         # Open library
         file = self.source.location / "installed.json"
         try:
-            library = json.load(file.open())
+            library: dict = json.load(file.open())
         except (JSONDecodeError, OSError):
             logging.warning("Couldn't open Legendary file: %s", str(file))
             return
         # Generate games from library
-        for entry in library:
+        for entry in library.values():
             try:
                 result = self.game_from_library_entry(entry)
-            except KeyError:
+            except KeyError as error:
                 # Skip invalid games
-                logging.warning("Invalid Legendary game skipped in %s", str(file))
+                logging.warning(
+                    "Invalid Legendary game skipped in %s", str(file), exc_info=error
+                )
                 continue
             yield result
 
