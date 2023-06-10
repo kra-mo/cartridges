@@ -44,12 +44,10 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="1.5.4" date="2023-05-27">
+    <release version="1.5.5" date="2023-06-10">
       <description translatable="no">
         <ul>
-          <li>Fixes a bug with custom install locations</li>
-          <li>Fixes a potential bug with deleted Steam libraries</li>
-          <li>Translations since 1.5</li>
+          <li>Fixes an issue with Bottles' custom Bottles directory feature</li>
         </ul>
       </description>
     </release>
