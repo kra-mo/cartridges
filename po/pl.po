@@ -2,13 +2,14 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # Artur Wróblewski <krypalkora1984@gmail.com>, 2023.
+# Kshyso <Kshysio@protonmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-25 17:48+0200\n"
-"PO-Revision-Date: 2023-05-07 15:38+0000\n"
-"Last-Translator: Artur Wróblewski <krypalkora1984@gmail.com>\n"
+"PO-Revision-Date: 2023-06-10 16:48+0000\n"
+"Last-Translator: Kshyso <Kshysio@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/pl/>\n"
 "Language: pl\n"
@@ -73,11 +74,11 @@ msgstr "Anuluj"
 
 #: data/gtk/details_window.blp:57
 msgid "New Cover"
-msgstr ""
+msgstr "Nowa Okładka"
 
 #: data/gtk/details_window.blp:75
 msgid "Delete Cover"
-msgstr ""
+msgstr "Usuń Okładkę"
 
 #: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
