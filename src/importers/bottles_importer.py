@@ -83,15 +83,25 @@ def bottles_importer():
         values["added"] = current_time
         values["last_played"] = 0
 
+        # This will not work if both Cartridges and Bottles are installed via Flatpak
+        # as Cartridges can't access directories picked via Bottles' file picker portal
+        try:
+            bottles_location = Path(
+                yaml.safe_load((bottles_dir / "data.yml").read_text("utf-8"))[
+                    "custom_bottles_path"
+                ]
+            )
+        except (FileNotFoundError, KeyError):
+            bottles_location = bottles_dir / "bottles"
+
+        grid_path = (
+            bottles_location
+            / game["bottle"]["path"]
+            / "grids"
+            / game["thumbnail"].split(":")[1]
+        )
+
         importer.save_game(
             values,
-            (
-                bottles_dir
-                / "bottles"
-                / game["bottle"]["path"]
-                / "grids"
-                / game["thumbnail"].split(":")[1]
-            )
-            if game["thumbnail"]
-            else None,
+            grid_path if game["thumbnail"] and grid_path.is_file() else None,
         )
