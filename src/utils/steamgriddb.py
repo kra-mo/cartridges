@@ -3,7 +3,7 @@ from pathlib import Path
 
 import requests
 from gi.repository import Gio
-from requests import HTTPError
+from requests.exceptions import HTTPError
 
 from src import shared
 from src.utils.create_dialog import create_dialog

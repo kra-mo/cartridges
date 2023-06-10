@@ -4,7 +4,7 @@ import re
 from typing import TypedDict
 
 import requests
-from requests import HTTPError
+from requests.exceptions import HTTPError
 
 from src import shared
 from src.utils.rate_limiter import PickHistory, RateLimiter
@@ -27,7 +27,7 @@ class SteamInvalidManifestError(SteamError):
 
 
 class SteamManifestData(TypedDict):
-    """Dict returned by SteamHelper.get_manifest_data"""
+    """Dict returned by SteamFileHelper.get_manifest_data"""
 
     name: str
     appid: str
@@ -35,7 +35,7 @@ class SteamManifestData(TypedDict):
 
 
 class SteamAPIData(TypedDict):
-    """Dict returned by SteamHelper.get_api_data"""
+    """Dict returned by SteamAPIHelper.get_api_data"""
 
     developers: str
 
@@ -73,33 +73,34 @@ class SteamRateLimiter(RateLimiter):
         shared.state_schema.set_string("steam-limiter-tokens-history", timestamps_str)
 
 
-class SteamHelper:
-    """Helper around the Steam API"""
-
-    base_url = "https://store.steampowered.com/api"
-    rate_limiter: SteamRateLimiter = None
-
-    def __init__(self) -> None:
-        # Instanciate the rate limiter on the class to share across instances
-        # Can't be done at class creation time, schema isn't available yet
-        if self.__class__.rate_limiter is None:
-            self.__class__.rate_limiter = SteamRateLimiter()
+class SteamFileHelper:
+    """Helper for steam file formats"""
 
     def get_manifest_data(self, manifest_path) -> SteamManifestData:
         """Get local data for a game from its manifest"""
 
-        with open(manifest_path) as file:
+        with open(manifest_path, "r", encoding="utf-8") as file:
             contents = file.read()
 
         data = {}
 
-        for key in SteamManifestData.__required_keys__:
-            regex = f'"{key}"\s+"(.*)"\n'
+        for key in SteamManifestData.__required_keys__:  # pylint: disable=no-member
+            regex = f'"{key}"\\s+"(.*)"\n'
             if (match := re.search(regex, contents, re.IGNORECASE)) is None:
                 raise SteamInvalidManifestError()
             data[key] = match.group(1)
 
         return SteamManifestData(**data)
+
+
+class SteamAPIHelper:
+    """Helper around the Steam API"""
+
+    base_url = "https://store.steampowered.com/api"
+    rate_limiter: RateLimiter
+
+    def __init__(self, rate_limiter: RateLimiter) -> None:
+        self.rate_limiter = rate_limiter
 
     def get_api_data(self, appid) -> SteamAPIData:
         """

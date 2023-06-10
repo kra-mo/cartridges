@@ -4,12 +4,11 @@ from time import time
 from src import shared
 from src.game import Game
 from src.importer.sources.source import (
-    LinuxSource,
-    Source,
     SourceIterationResult,
     SourceIterator,
+    URLExecutableSource,
 )
-from src.utils.decorators import replaced_by_path
+from src.utils.decorators import replaced_by_path, replaced_by_schema_key
 
 
 class LutrisSourceIterator(SourceIterator):
@@ -47,7 +46,6 @@ class LutrisSourceIterator(SourceIterator):
                     game_id=row[2], game_internal_id=row[0]
                 ),
                 "executable": self.source.executable_format.format(game_id=row[2]),
-                "developer": None,  # TODO get developer metadata on Lutris
             }
             game = Game(values, allow_side_effects=False)
 
@@ -59,26 +57,20 @@ class LutrisSourceIterator(SourceIterator):
             yield (game, additional_data)
 
 
-class LutrisSource(Source):
+class LutrisSource(URLExecutableSource):
     """Generic lutris source"""
 
     name = "Lutris"
-    location_key = "lutris-location"
+    iterator_class = LutrisSourceIterator
+    url_format = "lutris:rungameid/{game_id}"
+    available_on = set(("linux",))
 
     @property
     def game_id_format(self):
         return super().game_id_format + "_{game_internal_id}"
 
-    def __iter__(self):
-        return LutrisSourceIterator(source=self)
-
-
-class LutrisLinuxSource(LutrisSource, LinuxSource):
-    variant = "linux"
-    executable_format = "xdg-open lutris:rungameid/{game_id}"
-
     @property
-    @LutrisSource.replaced_by_schema_key()
+    @replaced_by_schema_key
     @replaced_by_path("~/.var/app/net.lutris.Lutris/data/lutris/")
     @replaced_by_path("~/.local/share/lutris/")
     def location(self):

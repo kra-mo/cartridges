@@ -34,12 +34,12 @@ from src import shared
 from src.details_window import DetailsWindow
 from src.game import Game
 from src.importer.importer import Importer
-from src.importer.sources.bottles_source import BottlesLinuxSource
-from src.importer.sources.heroic_source import HeroicLinuxSource, HeroicWindowsSource
-from src.importer.sources.itch_source import ItchLinuxSource, ItchWindowsSource
-from src.importer.sources.legendary_source import LegendaryLinuxSource
-from src.importer.sources.lutris_source import LutrisLinuxSource
-from src.importer.sources.steam_source import SteamLinuxSource, SteamWindowsSource
+from src.importer.sources.bottles_source import BottlesSource
+from src.importer.sources.heroic_source import HeroicSource
+from src.importer.sources.itch_source import ItchSource
+from src.importer.sources.legendary_source import LegendarySource
+from src.importer.sources.lutris_source import LutrisSource
+from src.importer.sources.steam_source import SteamSource
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
@@ -190,21 +190,25 @@ class CartridgesApplication(Adw.Application):
 
     def on_import_action(self, *_args):
         importer = Importer()
+
         if shared.schema.get_boolean("lutris"):
-            importer.add_source(LutrisLinuxSource())
+            importer.add_source(LutrisSource())
+
         if shared.schema.get_boolean("steam"):
-            importer.add_source(SteamLinuxSource())
-            importer.add_source(SteamWindowsSource())
+            importer.add_source(SteamSource())
+
         if shared.schema.get_boolean("heroic"):
-            importer.add_source(HeroicLinuxSource())
-            importer.add_source(HeroicWindowsSource())
+            importer.add_source(HeroicSource())
+
         if shared.schema.get_boolean("bottles"):
-            importer.add_source(BottlesLinuxSource())
+            importer.add_source(BottlesSource())
+
         if shared.schema.get_boolean("itch"):
-            importer.add_source(ItchLinuxSource())
-            importer.add_source(ItchWindowsSource())
+            importer.add_source(ItchSource())
+
         if shared.schema.get_boolean("legendary"):
-            importer.add_source(LegendaryLinuxSource())
+            importer.add_source(LegendarySource())
+
         importer.run()
 
     def on_remove_game_action(self, *_args):

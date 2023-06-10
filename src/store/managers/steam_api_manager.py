@@ -1,12 +1,12 @@
-from urllib3.exceptions import SSLError
+from requests.exceptions import HTTPError, SSLError
 
 from src.game import Game
 from src.store.managers.async_manager import AsyncManager
 from src.utils.steam import (
-    HTTPError,
     SteamGameNotFoundError,
-    SteamHelper,
+    SteamAPIHelper,
     SteamNotAGameError,
+    SteamRateLimiter,
 )
 
 
@@ -15,15 +15,22 @@ class SteamAPIManager(AsyncManager):
 
     retryable_on = set((HTTPError, SSLError))
 
-    def manager_logic(self, game: Game, _additional_data: dict) -> None:
+    steam_api_helper: SteamAPIHelper = None
+    steam_rate_limiter: SteamRateLimiter = None
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.steam_rate_limiter = SteamRateLimiter()
+        self.steam_api_helper = SteamAPIHelper(self.steam_rate_limiter)
+
+    def manager_logic(self, game: Game, additional_data: dict) -> None:
         # Skip non-steam games
-        if not game.source.startswith("steam_"):
+        appid = additional_data.get("steam_appid", None)
+        if appid is None:
             return
         # Get online metadata
-        appid = str(game.game_id).split("_")[-1]
-        steam = SteamHelper()
         try:
-            online_data = steam.get_api_data(appid=appid)
+            online_data = self.steam_api_helper.get_api_data(appid=appid)
         except (SteamNotAGameError, SteamGameNotFoundError):
             game.update_values({"blacklisted": True})
         else:

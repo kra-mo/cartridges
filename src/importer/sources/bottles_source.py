@@ -6,12 +6,15 @@ import yaml
 from src import shared
 from src.game import Game
 from src.importer.sources.source import (
-    LinuxSource,
-    Source,
     SourceIterationResult,
     SourceIterator,
+    URLExecutableSource,
 )
-from src.utils.decorators import replaced_by_env_path, replaced_by_path
+from src.utils.decorators import (
+    replaced_by_env_path,
+    replaced_by_path,
+    replaced_by_schema_key,
+)
 
 
 class BottlesSourceIterator(SourceIterator):
@@ -49,22 +52,16 @@ class BottlesSourceIterator(SourceIterator):
             yield (game, additional_data)
 
 
-class BottlesSource(Source):
+class BottlesSource(URLExecutableSource):
     """Generic Bottles source"""
 
     name = "Bottles"
-    location_key = "bottles-location"
-
-    def __iter__(self) -> SourceIterator:
-        return BottlesSourceIterator(self)
-
-
-class BottlesLinuxSource(BottlesSource, LinuxSource):
-    variant = "linux"
-    executable_format = 'xdg-open bottles:run/"{bottle_name}"/"{game_name}"'
+    iterator_class = BottlesSourceIterator
+    url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
+    available_on = set(("linux",))
 
     @property
-    @BottlesSource.replaced_by_schema_key()
+    @replaced_by_schema_key
     @replaced_by_path("~/.var/app/com.usebottles.bottles/data/bottles/")
     @replaced_by_env_path("XDG_DATA_HOME", "bottles/")
     @replaced_by_path("~/.local/share/bottles/")

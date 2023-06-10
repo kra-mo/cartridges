@@ -1,13 +1,11 @@
 import sys
 from abc import abstractmethod
 from collections.abc import Iterable, Iterator
-from functools import wraps
 from pathlib import Path
-from typing import Generator, Any, TypedDict
+from typing import Generator, Any
 
 from src import shared
 from src.game import Game
-from src.utils.decorators import replaced_by_path
 
 # Type of the data returned by iterating on a Source
 SourceIterationResult = None | Game | tuple[Game, tuple[Any]]
@@ -45,13 +43,9 @@ class Source(Iterable):
     """Source of games. E.g an installed app with a config file that lists game directories"""
 
     name: str
-    variant: str
-    location_key: str
-    available_on: set[str]
-
-    def __init__(self) -> None:
-        super().__init__()
-        self.available_on = set()
+    iterator_class: type[SourceIterator]
+    variant: str = None
+    available_on: set[str] = set()
 
     @property
     def full_name(self) -> str:
@@ -83,6 +77,14 @@ class Source(Iterable):
             return False
         return sys.platform in self.available_on
 
+    @property
+    def location_key(self) -> str:
+        """
+        The schema key pointing to the user-set location for the source.
+        May be overriden by inherinting classes.
+        """
+        return f"{self.name.lower()}-location"
+
     def update_location_schema_key(self):
         """Update the schema value for this source's location if possible"""
         try:
@@ -91,19 +93,9 @@ class Source(Iterable):
             return
         shared.schema.set_string(self.location_key, location)
 
-    @classmethod
-    def replaced_by_schema_key(cls):  # Decorator builder
-        """Replace the returned path with schema's path if valid"""
-
-        def decorator(original_function):  # Built decorator (closure)
-            @wraps(original_function)
-            def wrapper(*args, **kwargs):  # func's override
-                override = shared.schema.get_string(cls.location_key)
-                return replaced_by_path(override)(original_function)(*args, **kwargs)
-
-            return wrapper
-
-        return decorator
+    def __iter__(self) -> SourceIterator:
+        """Get an iterator for the source"""
+        return self.iterator_class(self)
 
     @property
     @abstractmethod
@@ -115,22 +107,21 @@ class Source(Iterable):
     def executable_format(self) -> str:
         """The executable format used to construct game executables"""
 
-    @abstractmethod
-    def __iter__(self) -> SourceIterator:
-        """Get the source's iterator, to use in for loops"""
 
+# pylint: disable=abstract-method
+class URLExecutableSource(Source):
+    """Source class that use custom URLs to start games"""
 
-class WindowsSource(Source):
-    """Mixin for sources available on Windows"""
+    url_format: str
 
-    def __init__(self) -> None:
-        super().__init__()
-        self.available_on.add("win32")
-
-
-class LinuxSource(Source):
-    """Mixin for sources available on Linux"""
-
-    def __init__(self) -> None:
-        super().__init__()
-        self.available_on.add("linux")
+    @property
+    def executable_format(self) -> str:
+        match sys.platform:
+            case "win32":
+                return "start " + self.url_format
+            case "linux":
+                return "xdg-open " + self.url_format
+            case other:
+                raise NotImplementedError(
+                    f"No URL handler command available for {other}"
+                )

@@ -9,13 +9,15 @@ from typing import Optional, TypedDict
 from src import shared
 from src.game import Game
 from src.importer.sources.source import (
-    LinuxSource,
-    Source,
+    URLExecutableSource,
     SourceIterationResult,
     SourceIterator,
-    WindowsSource,
 )
-from src.utils.decorators import replaced_by_env_path, replaced_by_path
+from src.utils.decorators import (
+    replaced_by_env_path,
+    replaced_by_path,
+    replaced_by_schema_key,
+)
 
 
 class HeroicLibraryEntry(TypedDict):
@@ -112,40 +114,24 @@ class HeroicSourceIterator(SourceIterator):
                 yield result
 
 
-class HeroicSource(Source):
+class HeroicSource(URLExecutableSource):
     """Generic heroic games launcher source"""
 
     name = "Heroic"
-    location_key = "heroic-location"
+    iterator_class = HeroicSourceIterator
+    url_format = "heroic://launch/{app_name}"
+    available_on = set(("linux", "win32"))
 
     @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
         return self.name.lower() + "_{service}_{game_id}"
 
-    def __iter__(self):
-        return HeroicSourceIterator(source=self)
-
-
-class HeroicLinuxSource(HeroicSource, LinuxSource):
-    variant = "linux"
-    executable_format = "xdg-open heroic://launch/{app_name}"
-
     @property
-    @HeroicSource.replaced_by_schema_key()
+    @replaced_by_schema_key
     @replaced_by_path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
     @replaced_by_env_path("XDG_CONFIG_HOME", "heroic/")
     @replaced_by_path("~/.config/heroic/")
-    def location(self) -> Path:
-        raise FileNotFoundError()
-
-
-class HeroicWindowsSource(HeroicSource, WindowsSource):
-    variant = "windows"
-    executable_format = "start heroic://launch/{app_name}"
-
-    @property
-    @HeroicSource.replaced_by_schema_key()
     @replaced_by_env_path("appdata", "heroic/")
     def location(self) -> Path:
         raise FileNotFoundError()

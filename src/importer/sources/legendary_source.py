@@ -1,19 +1,18 @@
-import logging
-from pathlib import Path
-from typing import Generator
 import json
+import logging
 from json import JSONDecodeError
+from pathlib import Path
 from time import time
+from typing import Generator
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import (
-    LinuxSource,
-    Source,
-    SourceIterationResult,
-    SourceIterator,
+from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
+from src.utils.decorators import (
+    replaced_by_env_path,
+    replaced_by_path,
+    replaced_by_schema_key,
 )
-from src.utils.decorators import replaced_by_env_path, replaced_by_path
 
 
 class LegendarySourceIterator(SourceIterator):
@@ -74,22 +73,14 @@ class LegendarySourceIterator(SourceIterator):
 
 class LegendarySource(Source):
     name = "Legendary"
-    location_key = "legendary-location"
-
-    def __iter__(self) -> SourceIterator:
-        return LegendarySourceIterator(self)
-
-
-# TODO add Legendary windows variant
-
-
-class LegendaryLinuxSource(LegendarySource, LinuxSource):
-    variant = "linux"
     executable_format = "legendary launch {app_name}"
+    iterator_class = LegendarySourceIterator
+    available_on = set(("linux", "win32"))
 
     @property
-    @LegendarySource.replaced_by_schema_key()
+    @replaced_by_schema_key
     @replaced_by_env_path("XDG_CONFIG_HOME", "legendary/")
     @replaced_by_path("~/.config/legendary/")
+    @replaced_by_path("~\\.config\\legendary\\")
     def location(self) -> Path:
         raise FileNotFoundError()

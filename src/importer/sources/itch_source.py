@@ -5,13 +5,15 @@ from time import time
 from src import shared
 from src.game import Game
 from src.importer.sources.source import (
-    LinuxSource,
-    Source,
     SourceIterationResult,
     SourceIterator,
-    WindowsSource,
+    URLExecutableSource,
 )
-from src.utils.decorators import replaced_by_env_path, replaced_by_path
+from src.utils.decorators import (
+    replaced_by_env_path,
+    replaced_by_path,
+    replaced_by_schema_key,
+)
 
 
 class ItchSourceIterator(SourceIterator):
@@ -54,33 +56,17 @@ class ItchSourceIterator(SourceIterator):
             yield (game, additional_data)
 
 
-class ItchSource(Source):
+class ItchSource(URLExecutableSource):
     name = "Itch"
-    location_key = "itch-location"
-
-    def __iter__(self) -> SourceIterator:
-        return ItchSourceIterator(self)
-
-
-class ItchLinuxSource(ItchSource, LinuxSource):
-    variant = "linux"
-    executable_format = "xdg-open itch://caves/{cave_id}/launch"
+    iterator_class = ItchSourceIterator
+    url_format = "itch://caves/{cave_id}/launch"
+    available_on = set(("linux", "win32"))
 
     @property
-    @ItchSource.replaced_by_schema_key()
+    @replaced_by_schema_key
     @replaced_by_path("~/.var/app/io.itch.itch/config/itch/")
     @replaced_by_env_path("XDG_DATA_HOME", "itch/")
     @replaced_by_path("~/.config/itch")
-    def location(self) -> Path:
-        raise FileNotFoundError()
-
-
-class ItchWindowsSource(ItchSource, WindowsSource):
-    variant = "windows"
-    executable_format = "start itch://caves/{cave_id}/launch"
-
-    @property
-    @ItchSource.replaced_by_schema_key()
     @replaced_by_env_path("appdata", "itch/")
     def location(self) -> Path:
         raise FileNotFoundError()

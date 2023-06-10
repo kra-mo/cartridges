@@ -2,13 +2,12 @@ from pathlib import Path
 
 import requests
 from gi.repository import GdkPixbuf, Gio
-from requests import HTTPError
-from urllib3.exceptions import SSLError
+from requests.exceptions import HTTPError, SSLError
 
 from src import shared
 from src.game import Game
-from src.store.managers.manager import Manager
 from src.store.managers.local_cover_manager import LocalCoverManager
+from src.store.managers.manager import Manager
 from src.utils.save_cover import resize_cover, save_cover
 
 
@@ -45,7 +44,7 @@ class ItchCoverManager(Manager):
             GdkPixbuf.InterpType.BILINEAR,
         )
 
-        # Composite 
+        # Composite
         itch_pixbuf.composite(
             game_cover,
             0,

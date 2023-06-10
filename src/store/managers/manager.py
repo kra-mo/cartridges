@@ -64,7 +64,7 @@ class Manager:
         """Execute the manager logic and handle its errors by reporting them or retrying"""
         try:
             self.manager_logic(game, additional_data)
-        except Exception as error:
+        except Exception as error:  # pylint: disable=broad-exception-caught
             logging_args = (
                 type(error).__name__,
                 self.name,
