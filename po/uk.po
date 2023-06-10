@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-25 17:48+0200\n"
-"PO-Revision-Date: 2023-05-26 18:10+0000\n"
-"Last-Translator: Dan <denqwerta@gmail.com>\n"
+"PO-Revision-Date: 2023-06-03 18:51+0000\n"
+"Last-Translator: Вова Смірнов <vovasmirnon5895@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/uk/>\n"
 "Language: uk\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:48
 #: src/main.py:109
 msgid "Cartridges"
-msgstr "Cartridges"
+msgstr "Картриджі"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
@@ -47,7 +47,7 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Cartridges - це простий лаунчер для всіх ваших ігор. Він підтримує імпорт "
+"Картриджі - це простий лаунчер для всіх ваших ігор. Він підтримує імпорт "
 "ігор з Steam, Lutris, Heroic тощо без необхідності входу в систему. Ви "
 "можете сортувати та приховувати ігри або завантажувати обкладинки з "
 "SteamGridDB."
@@ -391,7 +391,7 @@ msgstr "Комбінації клавіш"
 
 #: data/gtk/window.blp:427
 msgid "About Cartridges"
-msgstr "Про Cartridges"
+msgstr "Про Картриджі"
 
 #. Translators: Replace this with your name for it to show up in the about window
 #: src/main.py:127
@@ -418,7 +418,7 @@ msgstr "Ніколи"
 #. The variable is the date when the game was last played
 #: src/window.py:235
 msgid "Last played: {}"
-msgstr "Останній раз грали: {}"
+msgstr "Востаннє грали: {}"
 
 #: src/details_window.py:75
 msgid "Apply"
