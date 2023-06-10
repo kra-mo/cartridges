@@ -17,21 +17,21 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import logging
 import os
 import shlex
 from time import time
 
 from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
-from requests.exceptions import HTTPError, SSLError
 
 from src import shared
 from src.game import Game
 from src.game_cover import GameCover
+from src.store.managers.sgdb_manager import SGDBManager
+from src.store.pipeline import Pipeline
 from src.utils.create_dialog import create_dialog
 from src.utils.save_cover import resize_cover, save_cover
-from src.utils.steamgriddb import SGDBError, SGDBHelper
+from src.utils.steamgriddb import SGDBAuthError
 
 
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/details_window.ui")
@@ -205,23 +205,47 @@ class DetailsWindow(Adw.Window):
         self.game.save()
         self.game.update()
 
-        # Try to get a cover if none is present
-        # TODO inform the user
-        # TODO wrap in a task and mark loading
+        # Get a cover from SGDB if none is present
         if not self.game_cover.get_pixbuf():
-            print("test 1212")
-            sgdb = SGDBHelper()
-            try:
-                sgdb.conditionaly_update_cover(self.game)
-            except SGDBError as error:
-                logging.error("Could not update cover", exc_info=error)
-            except (HTTPError, SSLError, ConnectionError):
-                logging.warning("Could not connect to SteamGridDB")
+            self.game.set_loading(1)
+            sgdb_manager: SGDBManager = shared.store.managers[SGDBManager]
+            sgdb_manager.reset_cancellable()
+            pipeline = Pipeline(self.game, {}, (sgdb_manager,))
+            pipeline.connect("advanced", self.update_cover_callback)
+            pipeline.advance()
 
         self.game_cover.pictures.remove(self.cover)
 
         self.close()
         self.win.show_details_view(self.game)
+
+    def update_cover_callback(self, pipeline: Pipeline):
+        # Check that managers are done
+        if not pipeline.is_done:
+            return
+
+        # Set the game as not loading
+        self.game.set_loading(-1)
+        self.game.update()
+
+        # Handle errors that occured
+        errors = []
+        for manager in pipeline.done:
+            errors.extend(manager.collect_errors())
+        for error in errors:
+            # On auth error, inform the user
+            if isinstance(error, SGDBAuthError):
+                create_dialog(
+                    shared.win,
+                    _("Couldn't Connect to SteamGridDB"),
+                    str(error),
+                    "open_preferences",
+                    _("Preferences"),
+                ).connect("response", self.update_cover_error_response)
+
+    def update_cover_error_response(self, _widget, response):
+        if response == "open_preferences":
+            shared.win.get_application().on_preferences_action(page_name="sgdb")
 
     def focus_executable(self, *_args):
         self.set_focus(self.executable)

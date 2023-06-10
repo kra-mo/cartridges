@@ -7,18 +7,18 @@ from src.store.pipeline import Pipeline
 class Store:
     """Class in charge of handling games being added to the app."""
 
-    managers: set[Manager]
+    managers: dict[type[Manager], Manager]
     pipelines: dict[str, Pipeline]
     games: dict[str, Game]
 
     def __init__(self) -> None:
-        self.managers = set()
+        self.managers = {}
         self.games = {}
         self.pipelines = {}
 
     def add_manager(self, manager: Manager):
-        """Add a manager class that will run when games are added"""
-        self.managers.add(manager)
+        """Add a manager that will run when games are added"""
+        self.managers[type(manager)] = manager
 
     def add_game(
         self, game: Game, additional_data: dict, replace=False
@@ -51,7 +51,7 @@ class Store:
             return None
 
         # Run the pipeline for the game
-        pipeline = Pipeline(game, additional_data, self.managers)
+        pipeline = Pipeline(game, additional_data, self.managers.values())
         self.games[game.game_id] = game
         self.pipelines[game.game_id] = pipeline
         pipeline.advance()
