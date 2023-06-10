@@ -4,13 +4,14 @@
 # Pedro Sader Azevedo <pedro.saderazevedo@protonmail.com>, 2023.
 # kramo <contact@kramo.hu>, 2023.
 # Henrique Machado <henriquecamposrj@gmail.com>, 2023.
+# João Alves <joao.2003.couto@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-25 17:48+0200\n"
-"PO-Revision-Date: 2023-04-18 22:49+0000\n"
-"Last-Translator: Henrique Machado <henriquecamposrj@gmail.com>\n"
+"PO-Revision-Date: 2023-06-04 22:47+0000\n"
+"Last-Translator: João Alves <joao.2003.couto@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/pt/>\n"
 "Language: pt\n"
@@ -24,7 +25,7 @@ msgstr ""
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:48
 #: src/main.py:109
 msgid "Cartridges"
-msgstr "Cartuchos"
+msgstr "Cartridges"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
@@ -37,7 +38,7 @@ msgstr "Inicie todos os seus jogos"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
 msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
-msgstr ""
+msgstr "gaming;iniciador;steam;lutris;heroic;bottles;itch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -46,10 +47,10 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Cartuchos é um iniciador de jogos simples. Ele tem suporte para importação "
-"de jogos da Steam, Lutris, Heroic, e etc. sem precisar fazer login. E pode "
-"organizar e esconder jogos ou baixar imagens das capas dos jogos a partir do "
-"SteamGridDB."
+"Cartridges é um lançador de jogos simples para todos os seus jogos. Tem "
+"suporte para importar jogos do Steam, Lutris, Heroic e muito mais, sem "
+"necessidade de login. Você pode classificar e ocultar jogos ou baixar a capa "
+"do SteamGridDB."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:30
 msgid "Library"
@@ -75,11 +76,11 @@ msgstr "Cancelar"
 
 #: data/gtk/details_window.blp:57
 msgid "New Cover"
-msgstr ""
+msgstr "Nova capa"
 
 #: data/gtk/details_window.blp:75
 msgid "Delete Cover"
-msgstr ""
+msgstr "Apagar capa"
 
 #: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
@@ -108,7 +109,7 @@ msgstr "Arquivo a ser aberto ou comando a ser executado ao iniciar o jogo"
 
 #: data/gtk/details_window.blp:130
 msgid "More Info"
-msgstr ""
+msgstr "Mais informação"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
@@ -174,7 +175,7 @@ msgstr "Exibir jogos ocultados"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Remove game"
-msgstr "Remove o jogo"
+msgstr "Remover jogo"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:206
 msgid "Behavior"
@@ -182,11 +183,11 @@ msgstr "Comportamento"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
-msgstr "Fechar Cartuchos ao iniciar um jogo"
+msgstr "Fechar Cartridges ao iniciar um jogo"
 
 #: data/gtk/preferences.blp:25
 msgid "Cover Image Launches Game"
-msgstr "Clicar na capa para iniciar o jogo"
+msgstr "Clicar na capa inicia o jogo"
 
 #: data/gtk/preferences.blp:26
 msgid "Swaps the behavior of the cover image and the play button"
@@ -206,11 +207,11 @@ msgstr "Salva imagens das capas sem perda, consumindo mais armazenamento"
 
 #: data/gtk/preferences.blp:50
 msgid "Danger Zone"
-msgstr "Atenção"
+msgstr "Zona de perigo"
 
 #: data/gtk/preferences.blp:53
 msgid "Remove All Games"
-msgstr "Remove todos os jogos"
+msgstr "Remover todos os jogos"
 
 #: data/gtk/preferences.blp:69 data/gtk/window.blp:28 data/gtk/window.blp:443
 msgid "Import"
@@ -558,23 +559,17 @@ msgid "Importing Covers…"
 msgstr "Importando capas…"
 
 #: src/utils/importer.py:91
-#, fuzzy
-#| msgid "No Games Found"
 msgid "No new games found"
-msgstr "Nenhum jogo encontrado"
+msgstr "Nenhum jogo novo encontrado"
 
 #: src/utils/importer.py:98
-#, fuzzy
-#| msgid "Game Imported"
 msgid "1 game imported"
-msgstr "Jogo importado"
+msgstr "1 jogo importado"
 
 #. The variable is the number of games
 #: src/utils/importer.py:104
-#, fuzzy
-#| msgid "Games Imported"
 msgid "{} games imported"
-msgstr "Jogos importados"
+msgstr "{} jogos importados"
 
 #: src/utils/importer.py:121 src/utils/steamgriddb.py:112
 msgid "Couldn't Connect to SteamGridDB"
