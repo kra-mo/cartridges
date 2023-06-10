@@ -6,7 +6,7 @@ from typing import TypedDict
 import requests
 from requests.exceptions import HTTPError
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 from src.utils.rate_limiter import PickHistory, RateLimiter
 
 

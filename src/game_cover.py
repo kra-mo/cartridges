@@ -20,7 +20,7 @@
 from gi.repository import GdkPixbuf, Gio, GLib
 from PIL import Image, ImageFilter, ImageStat
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 
 
 class GameCover:

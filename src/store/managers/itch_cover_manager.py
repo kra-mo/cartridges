@@ -4,7 +4,7 @@ import requests
 from gi.repository import GdkPixbuf, Gio
 from requests.exceptions import HTTPError, SSLError
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 from src.game import Game
 from src.store.managers.local_cover_manager import LocalCoverManager
 from src.store.managers.manager import Manager

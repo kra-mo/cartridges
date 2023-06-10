@@ -1,4 +1,4 @@
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 from src.game import Game
 from src.store.managers.sgdb_manager import SGDBManager
 from src.store.managers.steam_api_manager import SteamAPIManager

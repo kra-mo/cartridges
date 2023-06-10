@@ -27,7 +27,7 @@ from time import time
 
 from gi.repository import Adw, Gtk
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 from src.game_cover import GameCover
 
 

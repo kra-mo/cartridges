@@ -24,7 +24,7 @@ from time import time
 from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 from src.game import Game
 from src.game_cover import GameCover
 from src.store.managers.sgdb_manager import SGDBManager

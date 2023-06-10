@@ -3,7 +3,7 @@ from pathlib import Path
 from time import time
 from typing import Iterable
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 from src.game import Game
 from src.importer.sources.source import (
     SourceIterationResult,

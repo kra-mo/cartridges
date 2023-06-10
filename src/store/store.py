@@ -1,4 +1,4 @@
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 from src.game import Game
 from src.store.managers.manager import Manager
 from src.store.pipeline import Pipeline

@@ -21,7 +21,7 @@ from datetime import datetime
 
 from gi.repository import Adw, GLib, Gtk
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 
 
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/window.ui")

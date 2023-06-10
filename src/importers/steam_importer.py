@@ -25,7 +25,7 @@ from time import time
 import requests
 from gi.repository import Gio
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 from src.utils.check_install import check_install
 
 

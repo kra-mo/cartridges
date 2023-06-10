@@ -2,7 +2,7 @@ from pathlib import Path
 from os import PathLike, environ
 from functools import wraps
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 
 
 def replaced_by_path(override: PathLike):  # Decorator builder
