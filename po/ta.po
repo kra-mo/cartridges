@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-25 17:48+0200\n"
-"PO-Revision-Date: 2023-05-24 20:27+0000\n"
+"PO-Revision-Date: 2023-05-29 18:48+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
@@ -76,11 +76,11 @@ msgstr "ரத்துசெய்"
 
 #: data/gtk/details_window.blp:57
 msgid "New Cover"
-msgstr ""
+msgstr "புதிய அட்டை"
 
 #: data/gtk/details_window.blp:75
 msgid "Delete Cover"
-msgstr ""
+msgstr "அட்டையை நீக்கு"
 
 #: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
@@ -109,7 +109,7 @@ msgstr "விளையாட்டைத் தொடங்கும் போ�
 
 #: data/gtk/details_window.blp:130
 msgid "More Info"
-msgstr ""
+msgstr "மேலும் தகவல்"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
