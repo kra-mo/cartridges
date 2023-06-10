@@ -41,11 +41,20 @@ class BottlesSourceIterator(SourceIterator):
             game = Game(values, allow_side_effects=False)
 
             # Get official cover path
+            try:
+                # This will not work if both Cartridges and Bottles are installed via Flatpak
+                # as Cartridges can't access directories picked via Bottles' file picker portal
+                bottles_location = Path(
+                    yaml.safe_load(
+                        (self.source.location / "data.yml").read_text("utf-8")
+                    )["custom_bottles_path"]
+                )
+            except (FileNotFoundError, KeyError):
+                bottles_location = self.source.location / "bottles"
+
             bottle_path = entry["bottle"]["path"]
             image_name = entry["thumbnail"].split(":")[1]
-            image_path = (
-                self.source.location / "bottles" / bottle_path / "grids" / image_name
-            )
+            image_path = bottles_location / bottle_path / "grids" / image_name
             additional_data = {"local_image_path": image_path}
 
             # Produce game
