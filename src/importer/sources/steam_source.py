@@ -11,7 +11,6 @@ from src.importer.sources.source import (
     URLExecutableSource,
 )
 from src.utils.decorators import (
-    replaced_by_env_path,
     replaced_by_path,
     replaced_by_schema_key,
 )
@@ -102,9 +101,8 @@ class SteamSource(URLExecutableSource):
     @property
     @replaced_by_schema_key
     @replaced_by_path("~/.var/app/com.valvesoftware.Steam/data/Steam/")
-    @replaced_by_env_path("XDG_DATA_HOME", "Steam/")
+    @replaced_by_path(shared.data_dir / "Steam")
     @replaced_by_path("~/.steam/")
-    @replaced_by_path("~/.local/share/Steam/")
-    @replaced_by_env_path("programfiles(x86)", "Steam")
+    @replaced_by_path(shared.programfiles32_dir / "Steam")
     def location(self):
         raise FileNotFoundError()

@@ -50,6 +50,9 @@ cache_dir = (
 games_dir = data_dir / "cartridges" / "games"
 covers_dir = data_dir / "cartridges" / "covers"
 
+appdata_dir = Path(os.getenv("appdata") or "C:\\Users\\Default\\AppData\\Roaming")
+programfiles32_dir = Path(os.getenv("programfiles(x86)") or "C:\\Program Files (x86)")
+
 scale_factor = max(
     monitor.get_scale_factor() for monitor in Gdk.Display.get_default().get_monitors()
 )

@@ -8,11 +8,7 @@ from typing import Generator
 from src import shared  # pylint: disable=no-name-in-module
 from src.game import Game
 from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
-from src.utils.decorators import (
-    replaced_by_env_path,
-    replaced_by_path,
-    replaced_by_schema_key,
-)
+from src.utils.decorators import replaced_by_path, replaced_by_schema_key
 
 
 class LegendarySourceIterator(SourceIterator):
@@ -79,8 +75,6 @@ class LegendarySource(Source):
 
     @property
     @replaced_by_schema_key
-    @replaced_by_env_path("XDG_CONFIG_HOME", "legendary/")
-    @replaced_by_path("~/.config/legendary/")
-    @replaced_by_path("~\\.config\\legendary\\")
+    @replaced_by_path(shared.config_dir / "legendary")
     def location(self) -> Path:
         raise FileNotFoundError()

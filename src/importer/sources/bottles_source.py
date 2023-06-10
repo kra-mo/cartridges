@@ -11,7 +11,6 @@ from src.importer.sources.source import (
     URLExecutableSource,
 )
 from src.utils.decorators import (
-    replaced_by_env_path,
     replaced_by_path,
     replaced_by_schema_key,
 )
@@ -72,7 +71,6 @@ class BottlesSource(URLExecutableSource):
     @property
     @replaced_by_schema_key
     @replaced_by_path("~/.var/app/com.usebottles.bottles/data/bottles/")
-    @replaced_by_env_path("XDG_DATA_HOME", "bottles/")
-    @replaced_by_path("~/.local/share/bottles/")
+    @replaced_by_path(shared.data_dir / "bottles")
     def location(self) -> Path:
         raise FileNotFoundError()

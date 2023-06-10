@@ -10,7 +10,6 @@ from src.importer.sources.source import (
     URLExecutableSource,
 )
 from src.utils.decorators import (
-    replaced_by_env_path,
     replaced_by_path,
     replaced_by_schema_key,
 )
@@ -65,8 +64,7 @@ class ItchSource(URLExecutableSource):
     @property
     @replaced_by_schema_key
     @replaced_by_path("~/.var/app/io.itch.itch/config/itch/")
-    @replaced_by_env_path("XDG_DATA_HOME", "itch/")
-    @replaced_by_path("~/.config/itch")
-    @replaced_by_env_path("appdata", "itch/")
+    @replaced_by_path(shared.config_dir / "itch")
+    @replaced_by_path(shared.appdata_dir / "itch")
     def location(self) -> Path:
         raise FileNotFoundError()

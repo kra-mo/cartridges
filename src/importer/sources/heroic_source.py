@@ -14,7 +14,6 @@ from src.importer.sources.source import (
     SourceIterator,
 )
 from src.utils.decorators import (
-    replaced_by_env_path,
     replaced_by_path,
     replaced_by_schema_key,
 )
@@ -130,8 +129,7 @@ class HeroicSource(URLExecutableSource):
     @property
     @replaced_by_schema_key
     @replaced_by_path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
-    @replaced_by_env_path("XDG_CONFIG_HOME", "heroic/")
-    @replaced_by_path("~/.config/heroic/")
-    @replaced_by_env_path("appdata", "heroic/")
+    @replaced_by_path(shared.config_dir / "heroic")
+    @replaced_by_path(shared.appdata_dir / "heroic")
     def location(self) -> Path:
         raise FileNotFoundError()
