@@ -58,41 +58,53 @@ class Manager:
         * May raise other exceptions that will be reported
         """
 
-    def execute_resilient_manager_logic(
-        self, game: Game, additional_data: dict, try_index: int = 0
-    ) -> None:
-        """Execute the manager logic and handle its errors by reporting them or retrying"""
-        try:
-            self.manager_logic(game, additional_data)
-        except Exception as error:  # pylint: disable=broad-exception-caught
-            logging_args = (
+    def execute_resilient_manager_logic(self, game: Game, additional_data: dict):
+        """Handle errors (retry, ignore or raise) that occur the manager logic"""
+
+        # Keep track of the number of tries
+        tries = 1
+
+        def handle_error(error: Exception):
+            nonlocal tries
+
+            log_args = (
                 type(error).__name__,
                 self.name,
                 f"{game.name} ({game.game_id})",
             )
+
+            out_of_retries_format = "Out of retries dues to %s in %s for %s"
+            retrying_format = "Retrying %s in %s for %s"
+            unretryable_format = "Unretryable %s in %s for %s"
+
             if error in self.continue_on:
                 # Handle skippable errors (skip silently)
                 return
+
             if error in self.retryable_on:
-                if try_index < self.max_tries:
-                    # Handle retryable errors
-                    logging.error("Retrying %s in %s for %s", *logging_args)
-                    sleep(self.retry_delay)
-                    self.execute_resilient_manager_logic(
-                        game, additional_data, try_index + 1
-                    )
-                else:
+                if tries > self.max_tries:
                     # Handle being out of retries
-                    logging.error(
-                        "Out of retries dues to %s in %s for %s", *logging_args
-                    )
+                    logging.error(out_of_retries_format, *log_args)
                     self.report_error(error)
+                else:
+                    # Handle retryable errors
+                    logging.error(retrying_format, *log_args)
+                    sleep(self.retry_delay)
+                    tries += 1
+                    try_manager_logic()
+
             else:
                 # Handle unretryable errors
-                logging.error(
-                    "Unretryable %s in %s for %s", *logging_args, exc_info=error
-                )
+                logging.error(unretryable_format, *log_args, exc_info=error)
                 self.report_error(error)
+
+        def try_manager_logic():
+            try:
+                self.manager_logic(game, additional_data)
+            except Exception as error:  # pylint: disable=broad-exception-caught
+                handle_error(error)
+
+        try_manager_logic()
 
     def process_game(
         self, game: Game, additional_data: dict, callback: Callable[["Manager"], Any]
