@@ -26,6 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **System (please complete the following information):**
  - OS: [e.g. Fedora Linux]
  - Installation method [e.g. Flatpak]
+ - Cartridges version [e.g. 1.5.4]
 
 **Additional context**
 Add any other context about the problem here.
