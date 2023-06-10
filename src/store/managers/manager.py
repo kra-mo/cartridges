@@ -2,7 +2,7 @@ import logging
 from abc import abstractmethod
 from threading import Lock
 from time import sleep
-from typing import Any, Callable
+from typing import Any, Callable, Container
 
 from src.game import Game
 
@@ -16,11 +16,11 @@ class Manager:
     * May be retried on some specific error types
     """
 
-    run_after: set[type["Manager"]] = set()
+    run_after: Container[type["Manager"]] = tuple()
     blocking: bool = True
 
-    retryable_on: set[type[Exception]] = set()
-    continue_on: set[type[Exception]] = set()
+    retryable_on: Container[type[Exception]] = tuple()
+    continue_on: Container[type[Exception]] = tuple()
     retry_delay: int = 3
     max_tries: int = 3
 

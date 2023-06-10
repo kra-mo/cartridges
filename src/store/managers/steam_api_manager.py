@@ -13,7 +13,7 @@ from src.utils.steam import (
 class SteamAPIManager(AsyncManager):
     """Manager in charge of completing a game's data from the Steam API"""
 
-    retryable_on = set((HTTPError, SSLError))
+    retryable_on = (HTTPError, SSLError)
 
     steam_api_helper: SteamAPIHelper = None
     steam_rate_limiter: SteamRateLimiter = None

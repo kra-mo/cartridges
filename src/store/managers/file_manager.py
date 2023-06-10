@@ -6,7 +6,7 @@ from src.store.managers.steam_api_manager import SteamAPIManager
 class FileManager(AsyncManager):
     """Manager in charge of saving a game to a file"""
 
-    run_after = set((SteamAPIManager,))
+    run_after = (SteamAPIManager,)
 
     def manager_logic(self, game: Game, _additional_data: dict) -> None:
         game.save()

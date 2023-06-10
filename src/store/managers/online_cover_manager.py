@@ -13,8 +13,8 @@ from src.utils.save_cover import resize_cover, save_cover
 class OnlineCoverManager(Manager):
     """Manager that downloads game covers from URLs"""
 
-    run_after = set((LocalCoverManager,))
-    retryable_on = set((HTTPError, SSLError))
+    run_after = (LocalCoverManager,)
+    retryable_on = (HTTPError, SSLError)
 
     def manager_logic(self, game: Game, additional_data: dict) -> None:
         # Ensure that we have a cover to download

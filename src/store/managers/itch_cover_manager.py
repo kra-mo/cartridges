@@ -17,8 +17,8 @@ from src.utils.save_cover import resize_cover, save_cover
 class ItchCoverManager(Manager):
     """Manager in charge of downloading the game's cover from itch.io"""
 
-    run_after = set((LocalCoverManager,))
-    retryable_on = set((HTTPError, SSLError))
+    run_after = (LocalCoverManager,)
+    retryable_on = (HTTPError, SSLError)
 
     def manager_logic(self, game: Game, additional_data: dict) -> None:
         # Get the first matching cover url

@@ -13,8 +13,8 @@ from src.utils.steamgriddb import SGDBAuthError, SGDBHelper
 class SGDBManager(AsyncManager):
     """Manager in charge of downloading a game's cover from steamgriddb"""
 
-    run_after = set((SteamAPIManager, LocalCoverManager, ItchCoverManager))
-    retryable_on = set((HTTPError, SSLError, ConnectionError, JSONDecodeError))
+    run_after = (SteamAPIManager, LocalCoverManager, ItchCoverManager)
+    retryable_on = (HTTPError, SSLError, ConnectionError, JSONDecodeError)
 
     def manager_logic(self, game: Game, _additional_data: dict) -> None:
         try:

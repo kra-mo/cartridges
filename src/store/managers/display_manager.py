@@ -8,7 +8,7 @@ from src.store.managers.manager import Manager
 class DisplayManager(Manager):
     """Manager in charge of adding a game to the UI"""
 
-    run_after = set((SteamAPIManager, SGDBManager))
+    run_after = (SteamAPIManager, SGDBManager)
 
     def manager_logic(self, game: Game, _additional_data: dict) -> None:
         # TODO decouple a game from its widget

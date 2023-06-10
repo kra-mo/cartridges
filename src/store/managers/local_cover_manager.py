@@ -9,7 +9,7 @@ from src.utils.save_cover import save_cover, resize_cover
 class LocalCoverManager(Manager):
     """Manager in charge of adding the local cover image of the game"""
 
-    run_after = set((SteamAPIManager,))
+    run_after = (SteamAPIManager,)
 
     def manager_logic(self, game: Game, additional_data: dict) -> None:
         # Ensure that the cover path is in the additional data
