@@ -47,15 +47,15 @@ class SteamRateLimiter(RateLimiter):
     # 200 requests per 5 min seems to be the limit
     # https://stackoverflow.com/questions/76047820/how-am-i-exceeding-steam-apis-rate-limit
     # https://stackoverflow.com/questions/51795457/avoiding-error-429-too-many-requests-steam-web-api
-    REFILL_PERIOD_SECONDS = 5 * 60
-    REFILL_PERIOD_TOKENS = 200
-    BURST_TOKENS = 100
+    refill_period_seconds = 5 * 60
+    refill_period_tokens = 200
+    burst_tokens = 100
 
     def __init__(self) -> None:
         # Load pick history from schema
         # (Remember API limits through restarts of Cartridges)
         timestamps_str = shared.state_schema.get_string("steam-limiter-tokens-history")
-        self.pick_history = PickHistory(self.REFILL_PERIOD_SECONDS)
+        self.pick_history = PickHistory(self.refill_period_seconds)
         self.pick_history.add(*json.loads(timestamps_str))
         self.pick_history.remove_old_entries()
         super().__init__()

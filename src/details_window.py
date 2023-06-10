@@ -110,6 +110,7 @@ class DetailsWindow(Adw.Window):
             file_path = _("/path/to/{}").format(file_name)
             command = "xdg-open"
 
+        # pylint: disable=line-too-long
         exec_info_text = _(
             'To launch the executable "{}", use the command:\n\n<tt>"{}"</tt>\n\nTo open the file "{}" with the default application, use:\n\n<tt>{} "{}"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!'
         ).format(exe_name, exe_path, file_name, command, file_path)

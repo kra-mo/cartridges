@@ -1,6 +1,6 @@
 import logging
 
-from gi.repository import Adw, Gio, Gtk
+from gi.repository import Adw, Gtk
 
 from src import shared
 from src.game import Game
@@ -31,15 +31,13 @@ class Importer:
     @property
     def n_games_added(self):
         return sum(
-            [
-                1 if not (pipeline.game.blacklisted or pipeline.game.removed) else 0
-                for pipeline in self.game_pipelines
-            ]
+            1 if not (pipeline.game.blacklisted or pipeline.game.removed) else 0
+            for pipeline in self.game_pipelines
         )
 
     @property
     def pipelines_progress(self):
-        progress = sum([pipeline.progress for pipeline in self.game_pipelines])
+        progress = sum(pipeline.progress for pipeline in self.game_pipelines)
         try:
             progress = progress / len(self.game_pipelines)
         except ZeroDivisionError:
@@ -126,7 +124,7 @@ class Importer:
             else:
                 # Warn source implementers that an invalid type was produced
                 # Should not happen on production code
-                logging.warn(
+                logging.warning(
                     "%s produced an invalid iteration return type %s",
                     source.id,
                     type(iteration_result),

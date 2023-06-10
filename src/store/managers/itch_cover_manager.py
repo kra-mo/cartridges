@@ -11,6 +11,9 @@ from src.store.managers.manager import Manager
 from src.utils.save_cover import resize_cover, save_cover
 
 
+# TODO Remove by generalizing OnlineCoverManager
+
+
 class ItchCoverManager(Manager):
     """Manager in charge of downloading the game's cover from itch.io"""
 

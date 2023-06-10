@@ -31,6 +31,7 @@ from src import shared
 from src.game_cover import GameCover
 
 
+# pylint: disable=too-many-instance-attributes
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/game.ui")
 class Game(Gtk.Box):
     __gtype_name__ = "Game"
@@ -187,6 +188,7 @@ class Game(Gtk.Box):
         )
 
         logging.info("Starting %s: %s", self.name, str(args))
+        # pylint: disable=consider-using-with
         subprocess.Popen(
             args,
             cwd=Path.home(),

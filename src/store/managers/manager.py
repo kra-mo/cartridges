@@ -73,7 +73,7 @@ class Manager:
             if error in self.continue_on:
                 # Handle skippable errors (skip silently)
                 return
-            elif error in self.retryable_on:
+            if error in self.retryable_on:
                 if try_index < self.max_tries:
                     # Handle retryable errors
                     logging.error("Retrying %s in %s for %s", *logging_args)
