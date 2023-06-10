@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-25 17:48+0200\n"
-"PO-Revision-Date: 2023-05-24 20:27+0000\n"
+"PO-Revision-Date: 2023-05-28 10:11+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
@@ -77,11 +77,11 @@ msgstr "Annuler"
 
 #: data/gtk/details_window.blp:57
 msgid "New Cover"
-msgstr ""
+msgstr "Nouvelle couverture"
 
 #: data/gtk/details_window.blp:75
 msgid "Delete Cover"
-msgstr ""
+msgstr "Supprimer la couverture"
 
 #: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
@@ -110,7 +110,7 @@ msgstr "Fichier à ouvrir ou commande à exécuter au lancement du jeu"
 
 #: data/gtk/details_window.blp:130
 msgid "More Info"
-msgstr ""
+msgstr "Plus d’informations"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
