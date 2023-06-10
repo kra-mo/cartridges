@@ -174,6 +174,7 @@ class Game(Gtk.Box):
     def launch(self):
         self.last_played = int(time())
         self.save()
+        self.update()
 
         string = (
             self.executable
@@ -206,6 +207,7 @@ class Game(Gtk.Box):
     def toggle_hidden(self, toast=True):
         self.hidden = not self.hidden
         self.save()
+        self.update()
 
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action()
@@ -221,6 +223,7 @@ class Game(Gtk.Box):
         # Add "removed=True" to the game properties so it can be deleted on next init
         self.removed = True
         self.save()
+        self.update()
 
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action()

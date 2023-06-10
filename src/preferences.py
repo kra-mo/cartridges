@@ -245,6 +245,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         for game in self.removed_games:
             game.removed = False
             game.save()
+            game.update()
 
         self.removed_games = set()
         self.toast.dismiss()
@@ -256,6 +257,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
                 game.removed = True
                 game.save()
+                game.update()
 
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action()

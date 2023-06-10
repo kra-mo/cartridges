@@ -339,6 +339,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         elif undo == "remove":
             game.removed = False
             game.save()
+            game.update()
 
         self.toasts[(game, undo)].dismiss()
         self.toasts.pop((game, undo))
