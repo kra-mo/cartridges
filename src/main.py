@@ -19,7 +19,6 @@
 
 import json
 import logging
-import os
 import sys
 
 import gi
@@ -40,6 +39,7 @@ from src.importer.sources.itch_source import ItchSource
 from src.importer.sources.legendary_source import LegendarySource
 from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.steam_source import SteamSource
+from src.logging.setup import setup_logging
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
@@ -257,20 +257,8 @@ class CartridgesApplication(Adw.Application):
 
 def main(version):  # pylint: disable=unused-argument
     # Initiate logger
-    # (silence debug info from external libraries)
-    profile_base_log_level = "DEBUG" if shared.PROFILE == "development" else "WARNING"
-    profile_lib_log_level = "INFO" if shared.PROFILE == "development" else "WARNING"
-    base_log_level = os.environ.get("LOGLEVEL", profile_base_log_level).upper()
-    lib_log_level = os.environ.get("LIBLOGLEVEL", profile_lib_log_level).upper()
-    log_levels = {
-        None: base_log_level,
-        "PIL": lib_log_level,
-        "urllib3": lib_log_level,
-    }
-    logging.basicConfig()
-    for logger, level in log_levels.items():
-        logging.getLogger(logger).setLevel(level)
-
+    logging.basicConfig(level="DEBUG")
+    setup_logging()
     # Start app
     app = CartridgesApplication()
     return app.run(sys.argv)
