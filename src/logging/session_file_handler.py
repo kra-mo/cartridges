@@ -39,12 +39,10 @@ class SessionFileHandler(StreamHandler):
         suffixes.append(f".{new_number}")
         stem = file.name.split(".", maxsplit=1)[0]
         new_name = stem + "".join(suffixes)
-        print(f"Log file renamed: {file.name} -> {new_name}")
         file = file.rename(file.with_name(new_name))
 
         # Remove older files
         if new_number > self.backup_count:
-            print(f"Log file deleted: {file.name}")
             file.unlink()
             return
 
