@@ -8,17 +8,13 @@ from src import shared
 def setup_logging():
     """Intitate the app's logging"""
 
-    # Prepare the log file
-    log_dir = shared.data_dir / "cartridges" / "logs"
-    log_dir.mkdir(exist_ok=True)
-    log_file_path = log_dir / "cartridges.log"
-    log_file_max_size_bytes = 8 * 10**6  # 8 MB
-
-    # Define log levels
-    profile_app_log_level = "DEBUG" if shared.PROFILE == "development" else "INFO"
-    profile_lib_log_level = "INFO" if shared.PROFILE == "development" else "WARNING"
+    is_dev = shared.PROFILE == "development"
+    profile_app_log_level = "DEBUG" if is_dev else "INFO"
+    profile_lib_log_level = "INFO" if is_dev else "WARNING"
     app_log_level = os.environ.get("LOGLEVEL", profile_app_log_level).upper()
     lib_log_level = os.environ.get("LIBLOGLEVEL", profile_lib_log_level).upper()
+
+    log_filename = shared.data_dir / "cartridges" / "logs" / "cartridges.log.xz"
 
     config = {
         "version": 1,
@@ -33,12 +29,11 @@ def setup_logging():
         },
         "handlers": {
             "file_handler": {
-                "class": "logging.handlers.RotatingFileHandler",
+                "class": "src.logging.session_file_handler.SessionFileHandler",
                 "formatter": "file_formatter",
                 "level": "DEBUG",
-                "filename": log_file_path,
-                "maxBytes": log_file_max_size_bytes,
-                "backupCount": 1,
+                "filename": log_filename,
+                "backup_count": 2,
             },
             "app_console_handler": {
                 "class": "logging.StreamHandler",
