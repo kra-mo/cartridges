@@ -16,9 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-
 import json
-import logging
 import sys
 
 import gi
@@ -255,10 +253,7 @@ class CartridgesApplication(Adw.Application):
             scope.add_action(simple_action)
 
 
-def main(version):  # pylint: disable=unused-argument
-    # Initiate logger
-    logging.basicConfig(level="DEBUG")
+def main(_version):
     setup_logging()
-    # Start app
     app = CartridgesApplication()
     return app.run(sys.argv)
