@@ -1,3 +1,4 @@
+from shutil import rmtree
 from sqlite3 import connect
 from time import time
 
@@ -9,6 +10,7 @@ from src.importer.sources.source import (
     URLExecutableSource,
 )
 from src.utils.decorators import replaced_by_path, replaced_by_schema_key
+from src.utils.sqlite import copy_db
 
 
 class LutrisSourceIterator(SourceIterator):
@@ -30,7 +32,8 @@ class LutrisSourceIterator(SourceIterator):
             ;
         """
         params = {"import_steam": shared.schema.get_boolean("lutris-import-steam")}
-        connection = connect(self.source.location / "pga.db")
+        db_path = copy_db(self.source.location / "pga.db")
+        connection = connect(db_path)
         cursor = connection.execute(request, params)
 
         # Create games from the DB results
@@ -55,6 +58,9 @@ class LutrisSourceIterator(SourceIterator):
 
             # Produce game
             yield (game, additional_data)
+
+        # Cleanup
+        rmtree(str(db_path.parent))
 
 
 class LutrisSource(URLExecutableSource):

@@ -1,4 +1,5 @@
 from pathlib import Path
+from shutil import rmtree
 from sqlite3 import connect
 from time import time
 
@@ -9,10 +10,8 @@ from src.importer.sources.source import (
     SourceIterator,
     URLExecutableSource,
 )
-from src.utils.decorators import (
-    replaced_by_path,
-    replaced_by_schema_key,
-)
+from src.utils.decorators import replaced_by_path, replaced_by_schema_key
+from src.utils.sqlite import copy_db
 
 
 class ItchSourceIterator(SourceIterator):
@@ -37,7 +36,8 @@ class ItchSourceIterator(SourceIterator):
             caves.game_id = games.id
         ;
         """
-        connection = connect(self.source.location / "db" / "butler.db")
+        db_path = copy_db(self.source.location / "db" / "butler.db")
+        connection = connect(db_path)
         cursor = connection.execute(db_request)
 
         # Create games from the db results
@@ -53,6 +53,9 @@ class ItchSourceIterator(SourceIterator):
             additional_data = {"itch_cover_url": row[2], "itch_still_cover_url": row[3]}
             game = Game(values, allow_side_effects=False)
             yield (game, additional_data)
+
+        # Cleanup
+        rmtree(str(db_path.parent))
 
 
 class ItchSource(URLExecutableSource):
