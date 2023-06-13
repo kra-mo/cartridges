@@ -37,7 +37,7 @@ from src.importer.sources.itch_source import ItchSource
 from src.importer.sources.legendary_source import LegendarySource
 from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.steam_source import SteamSource
-from src.logging.setup import setup_logging
+from src.logging.setup import setup_logging, log_system_info
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
@@ -254,6 +254,8 @@ class CartridgesApplication(Adw.Application):
 
 
 def main(_version):
+    """App entry point"""
     setup_logging()
+    log_system_info()
     app = CartridgesApplication()
     return app.run(sys.argv)

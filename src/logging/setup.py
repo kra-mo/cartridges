@@ -1,6 +1,8 @@
 import logging
 import logging.config as logging_dot_config
 import os
+import sys
+import subprocess
 
 from src import shared
 
@@ -65,9 +67,26 @@ def setup_logging():
     }
     logging_dot_config.dictConfig(config)
 
-    # Inform of the logging behaviour
-    logging.info("Logging profile: %s", shared.PROFILE)
-    logging.info("Console logging level for application: %s", app_log_level)
-    logging.info("Console logging level for libraries: %s", lib_log_level)
-    logging.info("Use env vars LOGLEVEL, LIBLOGLEVEL to override")
-    logging.info("All message levels are written to the log file")
+
+def log_system_info():
+    """Log system debug information"""
+
+    logging.debug("Starting %s v%s (%s)", shared.APP_ID, shared.VERSION, shared.PROFILE)
+    logging.debug("System: %s", sys.platform)
+    logging.debug("Python version: %s", sys.version)
+    if os.getenv("FLATPAK_ID"):
+        process = subprocess.run(
+            ("flatpak-spawn", "--host", "flatpak", "--version"),
+            capture_output=True,
+            encoding="utf-8",
+            check=False,
+        )
+        logging.debug("Flatpak version: %s", process.stdout.rstrip())
+    if os.name == "posix":
+        uname = os.uname()
+        logging.debug("Uname info:")
+        logging.debug("\tsysname: %s", uname.sysname)
+        logging.debug("\trelease: %s", uname.release)
+        logging.debug("\tversion: %s", uname.version)
+        logging.debug("\tmachine: %s", uname.machine)
+    logging.debug("-" * 80)
