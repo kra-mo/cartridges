@@ -46,10 +46,21 @@ class SessionFileHandler(StreamHandler):
             file.unlink()
             return
 
+    def file_sort_key(self, file: Path) -> int:
+        """Key function used to sort files"""
+        if not file.name.startswith(self.filename.name):
+            # First all files that aren't logs
+            return -1
+        if file.name == self.filename.name:
+            # Then the latest log file
+            return 0
+        # Then in order the other log files
+        return int(file.suffixes[-1][1:])
+
     def rotate(self) -> None:
         """Rotate the numbered suffix on the log files and remove old ones"""
         files = list(self.filename.parent.iterdir())
-        files.sort(key=lambda file: file.name, reverse=True)
+        files.sort(key=self.file_sort_key, reverse=True)
         for file in files:
             self.rotate_file(file)
 
