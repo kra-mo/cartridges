@@ -37,12 +37,12 @@ from src.importer.sources.itch_source import ItchSource
 from src.importer.sources.legendary_source import LegendarySource
 from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.steam_source import SteamSource
-from src.logging.setup import setup_logging, log_system_info
+from src.logging.setup import log_system_info, setup_logging
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
-from src.store.managers.itch_cover_manager import ItchCoverManager
 from src.store.managers.local_cover_manager import LocalCoverManager
+from src.store.managers.online_cover_manager import OnlineCoverManager
 from src.store.managers.sgdb_manager import SGDBManager
 from src.store.managers.steam_api_manager import SteamAPIManager
 from src.store.store import Store
@@ -89,7 +89,7 @@ class CartridgesApplication(Adw.Application):
         # Add rest of the managers for game imports
         shared.store.add_manager(LocalCoverManager())
         shared.store.add_manager(SteamAPIManager())
-        shared.store.add_manager(ItchCoverManager())
+        shared.store.add_manager(OnlineCoverManager())
         shared.store.add_manager(SGDBManager())
         shared.store.add_manager(FileManager())
 

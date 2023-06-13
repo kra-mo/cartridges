@@ -50,7 +50,7 @@ class ItchSourceIterator(SourceIterator):
                 "game_id": self.source.game_id_format.format(game_id=row[0]),
                 "executable": self.source.executable_format.format(cave_id=row[4]),
             }
-            additional_data = {"itch_cover_url": row[2], "itch_still_cover_url": row[3]}
+            additional_data = {"online_cover_url": row[3] or row[2]}
             game = Game(values, allow_side_effects=False)
             yield (game, additional_data)
 
