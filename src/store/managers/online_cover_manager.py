@@ -92,14 +92,14 @@ class OnlineCoverManager(Manager):
         with Image.open(image_path) as pil_image:
             width, height = pil_image.size
 
-        # Composite the image if its aspect ratio differs too much
-        # (allow the side that is smaller to be stretched by a small percentage)
-        max_diff_proportion = 0.12
-        scale = min(cover_width / width, cover_height / height)
-        width_diff = (cover_width - (width * scale)) / cover_width
-        height_diff = (cover_height - (height * scale)) / cover_height
-        diff = width_diff + height_diff
-        if diff < max_diff_proportion:
+        # Composite if the image is shorter and the stretch amount is too high
+        aspect_ratio = width / height
+        target_aspect_ratio = cover_width / cover_height
+        is_taller = aspect_ratio < target_aspect_ratio
+        resized_height = height / width * cover_width
+        stretch = 1 - (resized_height / cover_height)
+        max_stretch = 0.12
+        if is_taller or stretch <= max_stretch:
             save_cover(game.game_id, resize_cover(image_path))
         else:
             self.save_composited_cover(
