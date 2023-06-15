@@ -45,6 +45,7 @@ class Store:
 
         # Cleanup removed games
         if game.removed:
+            # TODO: come back to this later
             for path in (
                 shared.games_dir / f"{game.game_id}.json",
                 shared.covers_dir / f"{game.game_id}.tiff",
