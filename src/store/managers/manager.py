@@ -110,5 +110,6 @@ class Manager:
         self, game: Game, additional_data: dict, callback: Callable[["Manager"], Any]
     ) -> None:
         """Pass the game through the manager"""
+        # TODO: connect to signals here
         self.execute_resilient_manager_logic(game, additional_data)
         callback(self)

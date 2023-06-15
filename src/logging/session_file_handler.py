@@ -18,7 +18,7 @@ class SessionFileHandler(StreamHandler):
 
     def create_dir(self) -> None:
         """Create the log dir if needed"""
-        self.filename.parent.mkdir(exist_ok=True)
+        self.filename.parent.mkdir(exist_ok=True, parents=True)
 
     def rotate_file(self, file: Path):
         """Rotate a file's number suffix and remove it if it's too old"""

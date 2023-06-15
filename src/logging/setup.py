@@ -1,10 +1,10 @@
 import logging
 import logging.config as logging_dot_config
 import os
-import sys
 import subprocess
+import sys
 
-from src import shared
+from src import shared  # pylint: disable=no-name-in-module
 
 
 def setup_logging():
@@ -16,7 +16,7 @@ def setup_logging():
     app_log_level = os.environ.get("LOGLEVEL", profile_app_log_level).upper()
     lib_log_level = os.environ.get("LIBLOGLEVEL", profile_lib_log_level).upper()
 
-    log_filename = shared.data_dir / "cartridges" / "logs" / "cartridges.log.xz"
+    log_filename = shared.cache_dir / "cartridges" / "logs" / "cartridges.log.xz"
 
     config = {
         "version": 1,
@@ -35,7 +35,7 @@ def setup_logging():
                 "formatter": "file_formatter",
                 "level": "DEBUG",
                 "filename": log_filename,
-                "backup_count": 2,
+                "backup_count": 3,
             },
             "app_console_handler": {
                 "class": "logging.StreamHandler",

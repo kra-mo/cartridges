@@ -40,12 +40,12 @@ class Pipeline(GObject.Object):
     def blocked(self) -> set[Manager]:
         """Get the managers that cannot run because their dependencies aren't done"""
         blocked = set()
-        for manager_a in self.waiting:
-            for manager_b in self.not_done:
-                if manager_a == manager_b:
+        for waiting in self.waiting:
+            for not_done in self.not_done:
+                if waiting == not_done:
                     continue
-                if type(manager_b) in manager_a.run_after:
-                    blocked.add(manager_a)
+                if type(not_done) in waiting.run_after:
+                    blocked.add(waiting)
         return blocked
 
     @property
