@@ -82,6 +82,7 @@ class CartridgesApplication(Adw.Application):
         # Create the games store ready to load games from disk
         if not shared.store:
             shared.store = Store()
+            shared.store.add_manager(FileManager(), False)
             shared.store.add_manager(DisplayManager())
 
         self.load_games_from_disk()
@@ -91,7 +92,8 @@ class CartridgesApplication(Adw.Application):
         shared.store.add_manager(SteamAPIManager())
         shared.store.add_manager(OnlineCoverManager())
         shared.store.add_manager(SGDBManager())
-        shared.store.add_manager(FileManager())
+
+        shared.store.manager_to_pipeline(FileManager)
 
         # Create actions
         self.create_actions(
@@ -137,7 +139,7 @@ class CartridgesApplication(Adw.Application):
             for game_file in shared.games_dir.iterdir():
                 data = json.load(game_file.open())
                 game = Game(data, allow_side_effects=False)
-                shared.store.add_game(game, tuple())
+                shared.store.add_game(game, {"skip_save": True})
 
     def on_about_action(self, *_args):
         about = Adw.AboutWindow(
@@ -148,9 +150,9 @@ class CartridgesApplication(Adw.Application):
             version=shared.VERSION,
             developers=[
                 "kramo https://kramo.hu",
+                "Geoffrey Coulaud https://geoffrey-coulaud.fr",
                 "Arcitec https://github.com/Arcitec",
                 "Domenico https://github.com/Domefemia",
-                "Geoffrey Coulaud https://geoffrey-coulaud.fr",
                 "Paweł Lidwin https://github.com/imLinguin",
                 "Rafael Mardojai CM https://mardojai.com",
             ],

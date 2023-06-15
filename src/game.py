@@ -17,7 +17,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import json
 import logging
 import os
 import shlex
@@ -25,10 +24,9 @@ import subprocess
 from pathlib import Path
 from time import time
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, GObject, Gtk
 
 from src import shared  # pylint: disable=no-name-in-module
-from src.game_cover import GameCover
 
 
 # pylint: disable=too-many-instance-attributes
@@ -86,74 +84,15 @@ class Game(Gtk.Box):
 
         shared.schema.connect("changed", self.schema_changed)
 
-    def update(self):
-        if self.get_parent():
-            self.get_parent().get_parent().remove(self)
-            if self.get_parent():
-                self.get_parent().set_child()
-
-        self.menu_button.set_menu_model(
-            self.hidden_game_options if self.hidden else self.game_options
-        )
-
-        self.title.set_label(self.name)
-
-        self.menu_button.get_popover().connect(
-            "notify::visible", self.toggle_play, None
-        )
-        self.menu_button.get_popover().connect(
-            "notify::visible", self.win.set_active_game, self
-        )
-
-        if self.game_id in self.win.game_covers:
-            self.game_cover = self.win.game_covers[self.game_id]
-            self.game_cover.add_picture(self.cover)
-        else:
-            self.game_cover = GameCover({self.cover}, self.get_cover_path())
-            self.win.game_covers[self.game_id] = self.game_cover
-
-        if (
-            self.win.stack.get_visible_child() == self.win.details_view
-            and self.win.active_game == self
-        ):
-            self.win.show_details_view(self)
-
-        if not self.removed and not self.blacklisted:
-            if self.hidden:
-                self.win.hidden_library.append(self)
-            else:
-                self.win.library.append(self)
-            self.get_parent().set_focusable(False)
-
-        self.win.set_library_child()
-
     def update_values(self, data):
         for key, value in data.items():
             setattr(self, key, value)
 
+    def update(self):
+        self.emit("update-ready", {})
+
     def save(self):
-        shared.games_dir.mkdir(parents=True, exist_ok=True)
-
-        attrs = (
-            "added",
-            "executable",
-            "game_id",
-            "source",
-            "hidden",
-            "last_played",
-            "name",
-            "developer",
-            "removed",
-            "blacklisted",
-            "version",
-        )
-
-        json.dump(
-            {attr: getattr(self, attr) for attr in attrs if attr},
-            (shared.games_dir / f"{self.game_id}.json").open("w"),
-            indent=4,
-            sort_keys=True,
-        )
+        self.emit("save-ready", {})
 
     def create_toast(self, title, action=None):
         toast = Adw.Toast.new(title.format(self.name))
@@ -270,3 +209,11 @@ class Game(Gtk.Box):
     def schema_changed(self, _settings, key):
         if key == "cover-launches-game":
             self.set_play_icon()
+
+    @GObject.Signal(name="update-ready", arg_types=[object])
+    def update_ready(self, _additional_data) -> None:
+        """Signal emitted when the game needs updating"""
+
+    @GObject.Signal(name="save-ready", arg_types=[object])
+    def save_ready(self, _additional_data) -> None:
+        """Signal emitted when the game needs saving"""

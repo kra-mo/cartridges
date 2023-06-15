@@ -16,9 +16,12 @@ class Store:
         self.games = {}
         self.pipelines = {}
 
-    def add_manager(self, manager: Manager):
+    def add_manager(self, manager: Manager, in_pipeline=True):
         """Add a manager that will run when games are added"""
-        self.managers[type(manager)] = manager
+        self.managers[type(manager)] = [manager, in_pipeline]
+
+    def manager_to_pipeline(self, manager_type: type[Manager]):
+        self.managers[manager_type][1] = True
 
     def add_game(
         self, game: Game, additional_data: dict, replace=False
@@ -50,8 +53,17 @@ class Store:
                 path.unlink(missing_ok=True)
             return None
 
+        # Connect signals
+        for manager, _in_pipeline in self.managers.values():
+            for signal in manager.signals:
+                game.connect(signal, manager.execute_resilient_manager_logic)
+
         # Run the pipeline for the game
-        pipeline = Pipeline(game, additional_data, self.managers.values())
+        pipeline = Pipeline(
+            game,
+            additional_data,
+            (manager[0] for manager in self.managers.values() if manager[1]),
+        )
         self.games[game.game_id] = game
         self.pipelines[game.game_id] = pipeline
         pipeline.advance()

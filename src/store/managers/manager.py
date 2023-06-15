@@ -21,6 +21,7 @@ class Manager:
 
     retryable_on: Container[type[Exception]] = tuple()
     continue_on: Container[type[Exception]] = tuple()
+    signals: Container[type[str]] = set()
     retry_delay: int = 3
     max_tries: int = 3
 
@@ -110,6 +111,5 @@ class Manager:
         self, game: Game, additional_data: dict, callback: Callable[["Manager"], Any]
     ) -> None:
         """Pass the game through the manager"""
-        # TODO: connect to signals here
         self.execute_resilient_manager_logic(game, additional_data)
         callback(self)

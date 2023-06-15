@@ -205,6 +205,7 @@ class DetailsWindow(Adw.Window):
         self.game.save()
         self.game.update()
 
+        # TODO: this is fucked up
         # Get a cover from SGDB if none is present
         if not self.game_cover.get_pixbuf():
             self.game.set_loading(1)
