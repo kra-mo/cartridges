@@ -1,6 +1,6 @@
 import logging
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gtk, GLib
 
 from src import shared  # pylint: disable=no-name-in-module
 from src.game import Game
@@ -17,6 +17,7 @@ class Importer:
     progressbar = None
     import_statuspage = None
     import_dialog = None
+    summary_toast = None
 
     sources: set[Source] = None
 
@@ -173,10 +174,7 @@ class Importer:
         """Callback called when importing has finished"""
         logging.info("Import done")
         self.import_dialog.close()
-        # TODO replace by summary if necessary
-        self.create_summary_toast()
-        # TODO create a summary of errors/warnings/tips popup (eg. SGDB, Steam libraries)
-        # Get the error data from shared.store.managers)
+        self.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
 
     def create_error_dialog(self):
@@ -193,15 +191,16 @@ class Importer:
                 shared.win,
                 "Warning",
                 string + errors,
-                "open_preferences",
+                "open_preferences_import",
                 _("Preferences"),
             ).connect("response", self.dialog_response_callback)
+        else:
+            self.timeout_toast()
 
     def create_summary_toast(self):
         """N games imported toast"""
 
-        toast = Adw.Toast()
-        toast.set_priority(Adw.ToastPriority.HIGH)
+        toast = Adw.Toast(timeout=0, priority=Adw.ToastPriority.HIGH)
 
         if self.n_games_added == 0:
             toast.set_title(_("No new games found"))
@@ -221,13 +220,23 @@ class Importer:
             toast.set_title(_("{} games imported").format(self.n_games_added))
 
         shared.win.toast_overlay.add_toast(toast)
+        return toast
 
     def open_preferences(self, page=None, expander_row=None):
-        shared.win.get_application().on_preferences_action(
+        return shared.win.get_application().on_preferences_action(
             page_name=page, expander_row=expander_row
         )
+
+    def timeout_toast(self, *_args):
+        """Manually timeout the toast after the user has dismissed all warnings"""
+        GLib.timeout_add_seconds(5, self.summary_toast.dismiss)
 
     def dialog_response_callback(self, _widget, response, *args):
         """Handle after-import dialogs callback"""
         if response == "open_preferences":
             self.open_preferences(*args)
+
+        elif response == "open_preferences_import":
+            self.open_preferences(*args).connect("close-request", self.timeout_toast)
+        else:
+            self.timeout_toast()

@@ -175,6 +175,8 @@ class CartridgesApplication(Adw.Application):
             getattr(win, expander_row).set_expanded(True)
         win.present()
 
+        return win
+
     def on_launch_game_action(self, *_args):
         self.win.active_game.launch()
 
