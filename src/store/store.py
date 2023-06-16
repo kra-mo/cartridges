@@ -10,20 +10,26 @@ class Store:
     """Class in charge of handling games being added to the app."""
 
     managers: dict[type[Manager], Manager]
+    pipeline_managers: set[Manager]
     pipelines: dict[str, Pipeline]
     games: dict[str, Game]
 
     def __init__(self) -> None:
         self.managers = {}
-        self.games = {}
+        self.pipeline_managers = set()
         self.pipelines = {}
+        self.games = {}
 
     def add_manager(self, manager: Manager, in_pipeline=True):
-        """Add a manager that will run when games are added"""
-        self.managers[type(manager)] = [manager, in_pipeline]
+        """Add a manager to the store"""
+        manager_type = type(manager)
+        self.managers[manager_type] = manager
+        if in_pipeline:
+            self.enable_manager_in_pipelines(manager_type)
 
-    def manager_to_pipeline(self, manager_type: type[Manager]):
-        self.managers[manager_type][1] = True
+    def enable_manager_in_pipelines(self, manager_type: type[Manager]):
+        """Make a manager run in new pipelines"""
+        self.pipeline_managers.add(self.managers[manager_type])
 
     def cleanup_game(self, game: Game) -> None:
         """Remove a game's files"""
@@ -65,16 +71,12 @@ class Store:
             return None
 
         # Connect signals
-        for manager, _in_pipeline in self.managers.values():
+        for manager in self.managers.values():
             for signal in manager.signals:
                 game.connect(signal, manager.execute_resilient_manager_logic)
 
         # Run the pipeline for the game
-        pipeline = Pipeline(
-            game,
-            additional_data,
-            (manager[0] for manager in self.managers.values() if manager[1]),
-        )
+        pipeline = Pipeline(game, additional_data, self.pipeline_managers)
         self.games[game.game_id] = game
         self.pipelines[game.game_id] = pipeline
         pipeline.advance()

@@ -205,35 +205,26 @@ class DetailsWindow(Adw.Window):
         self.game.save()
         self.game.update()
 
-        # TODO: this is fucked up
+        # TODO: this is fucked up (less than before)
         # Get a cover from SGDB if none is present
         if not self.game_cover.get_pixbuf():
             self.game.set_loading(1)
-            sgdb_manager: SGDBManager = shared.store.managers[SGDBManager][0]
+            sgdb_manager: SGDBManager = shared.store.managers[SGDBManager]
             sgdb_manager.reset_cancellable()
-            pipeline = Pipeline(self.game, {}, (sgdb_manager,))
-            pipeline.connect("advanced", self.update_cover_callback)
-            pipeline.advance()
+            sgdb_manager.process_game(self.game, {}, self.update_cover_callback)
 
         self.game_cover.pictures.remove(self.cover)
 
         self.close()
         self.win.show_details_view(self.game)
 
-    def update_cover_callback(self, pipeline: Pipeline):
-        # Check that managers are done
-        if not pipeline.is_done:
-            return
-
+    def update_cover_callback(self, manager: SGDBManager):
         # Set the game as not loading
         self.game.set_loading(-1)
         self.game.update()
 
         # Handle errors that occured
-        errors = []
-        for manager in pipeline.done:
-            errors.extend(manager.collect_errors())
-        for error in errors:
+        for error in manager.collect_errors():
             # On auth error, inform the user
             if isinstance(error, SGDBAuthError):
                 create_dialog(
