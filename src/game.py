@@ -24,7 +24,7 @@ import subprocess
 from pathlib import Path
 from time import time
 
-from gi.repository import Adw, GObject, Gtk
+from gi.repository import Adw, GLib, GObject, Gtk
 
 from src import shared  # pylint: disable=no-name-in-module
 
@@ -154,7 +154,9 @@ class Game(Gtk.Box):
         if toast:
             self.create_toast(
                 # The variable is the title of the game
-                (_("{} hidden") if self.hidden else _("{} unhidden")).format(self.name),
+                (_("{} hidden") if self.hidden else _("{} unhidden")).format(
+                    GLib.markup_escape_text(self.name)
+                ),
                 "hide",
             )
 
@@ -168,7 +170,9 @@ class Game(Gtk.Box):
             self.win.on_go_back_action()
 
         # The variable is the title of the game
-        self.create_toast(_("{} removed").format(self.name), "remove")
+        self.create_toast(
+            _("{} removed").format(GLib.markup_escape_text(self.name)), "remove"
+        )
 
     def set_loading(self, state):
         self.loading += state
