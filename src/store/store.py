@@ -1,3 +1,5 @@
+import logging
+
 from src import shared  # pylint: disable=no-name-in-module
 from src.game import Game
 from src.store.managers.manager import Manager
@@ -23,35 +25,43 @@ class Store:
     def manager_to_pipeline(self, manager_type: type[Manager]):
         self.managers[manager_type][1] = True
 
-    def add_game(
-        self, game: Game, additional_data: dict, replace=False
-    ) -> Pipeline | None:
-        """Add a game to the app if not already there
+    def cleanup_game(self, game: Game) -> None:
+        """Remove a game's files"""
+        for path in (
+            shared.games_dir / f"{game.game_id}.json",
+            shared.covers_dir / f"{game.game_id}.tiff",
+            shared.covers_dir / f"{game.game_id}.gif",
+        ):
+            path.unlink(missing_ok=True)
 
-        :param replace bool: Replace the game if it already exists
-        """
+    def add_game(self, game: Game, additional_data: dict) -> Pipeline | None:
+        """Add a game to the app"""
 
         # Ignore games from a newer spec version
         if game.version > shared.SPEC_VERSION:
             return None
 
-        # Ignore games that are already there
-        if (
-            game.game_id in self.games
-            and not self.games[game.game_id].removed
-            and not replace
-        ):
+        # Scanned game is already removed, just clean it up
+        if game.removed:
+            self.cleanup_game(game)
             return None
 
-        # Cleanup removed games
-        if game.removed:
-            # TODO: come back to this later
-            for path in (
-                shared.games_dir / f"{game.game_id}.json",
-                shared.covers_dir / f"{game.game_id}.tiff",
-                shared.covers_dir / f"{game.game_id}.gif",
-            ):
-                path.unlink(missing_ok=True)
+        # Handle game duplicates
+        stored_game = self.games.get(game.game_id)
+        if not stored_game:
+            # New game, do as normal
+            logging.debug("New store game %s (%s)", game.name, game.game_id)
+        elif stored_game.removed:
+            # Will replace a removed game, cleanup its remains
+            logging.debug(
+                "New store game %s (%s) (replacing a removed one)",
+                game.name,
+                game.game_id,
+            )
+            self.cleanup_game(stored_game)
+        else:
+            # Duplicate game, ignore it
+            logging.debug("Duplicate store game %s (%s)", game.name, game.game_id)
             return None
 
         # Connect signals
