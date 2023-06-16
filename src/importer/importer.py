@@ -4,9 +4,10 @@ from gi.repository import Adw, Gtk
 
 from src import shared  # pylint: disable=no-name-in-module
 from src.game import Game
-from src.utils.task import Task
-from src.store.pipeline import Pipeline
 from src.importer.sources.source import Source
+from src.store.pipeline import Pipeline
+from src.utils.create_dialog import create_dialog
+from src.utils.task import Task
 
 
 # pylint: disable=too-many-instance-attributes
@@ -176,6 +177,25 @@ class Importer:
         self.create_summary_toast()
         # TODO create a summary of errors/warnings/tips popup (eg. SGDB, Steam libraries)
         # Get the error data from shared.store.managers)
+        self.create_error_dialog()
+
+    def create_error_dialog(self):
+        """Dialog containing all errors raised by importers"""
+        string = _("The following errors occured during import:")
+        errors = ""
+
+        for manager in shared.store.managers.values():
+            for error in manager.collect_errors():
+                errors += "\n\n" + str(error)
+
+        if errors:
+            create_dialog(
+                shared.win,
+                "Warning",
+                string + errors,
+                "open_preferences",
+                _("Preferences"),
+            ).connect("response", self.dialog_response_callback)
 
     def create_summary_toast(self):
         """N games imported toast"""
