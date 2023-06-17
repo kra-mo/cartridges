@@ -89,11 +89,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     removed_games = set()
 
-    # Whether to import after closing the window
-    import_changed = False
-    # Widgets and their properties to check whether to import after closing the window
-    import_changed_widgets = {}
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.win = shared.win
@@ -133,7 +128,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
                     self.choose_folder(widget, set_cache_dir)
 
             if lutris_cache_exists(path):
-                self.import_changed = True
                 self.set_subtitle(self, "lutris-cache")
 
             else:
@@ -203,24 +197,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
         )
 
-        # Connect the switches that change the behavior of importing to set_import_changed
-        self.connect_import_switches(
-            (
-                "lutris-import-steam",
-                "heroic-import-epic",
-                "heroic-import-gog",
-                "heroic-import-sideload",
-            )
-        )
-
         # Windows
         if os.name == "nt":
             self.sources_group.remove(self.lutris_expander_row)
             self.sources_group.remove(self.bottles_expander_row)
-
-        # When the user interacts with a widget that changes the behavior of importing,
-        # Cartridges should automatically import upon closing the preferences window
-        self.connect("close-request", self.check_import)
 
     def get_switch(self, setting):
         return getattr(self, f'{setting.replace("-", "_")}_switch')
@@ -233,10 +213,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "active",
                 Gio.SettingsBindFlags.DEFAULT,
             )
-
-    def connect_import_switches(self, settings):
-        for setting in settings:
-            self.get_switch(setting).connect("notify::active", self.set_import_changed)
 
     def choose_folder(self, _widget, function):
         self.file_chooser.select_folder(self.win, None, function, None)
@@ -288,7 +264,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
                     win.choose_folder(widget, set_dir)
 
             if globals()[f"{source_id}_installed"](path):
-                self.import_changed = True
                 self.set_subtitle(win, source_id)
 
             else:
@@ -315,28 +290,3 @@ class PreferencesWindow(Adw.PreferencesWindow):
         getattr(win, f"{source_id}_file_chooser_button").connect(
             "clicked", win.choose_folder, set_dir
         )
-
-        getattr(win, f"{source_id}_expander_row").connect(
-            "notify::enable-expansion", self.set_import_changed
-        )
-
-    def set_import_changed(self, widget, param):
-        if widget not in self.import_changed_widgets:
-            self.import_changed = True
-            self.import_changed_widgets[widget] = (
-                param.name,
-                not widget.get_property(param.name),
-            )
-
-    def check_import(self, *_args):
-        # This checks whether any of the switches that did actually change their state
-        # would have an effect on the outcome of the import action
-        # and if they would, it initiates it.
-
-        if self.import_changed and any(
-            (value := widget.get_property(prop[0])) and value != prop[1]
-            for widget, prop in self.import_changed_widgets.items()
-        ):
-            # The timeout is a hack to circumvent a GTK bug that I'm too lazy to report:
-            # The window would stay darkened because of the import dialog for some reason
-            GLib.timeout_add(1, self.win.get_application().on_import_action)
