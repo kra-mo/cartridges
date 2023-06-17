@@ -17,11 +17,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from datetime import datetime
-
-from gi.repository import Adw, GLib, Gtk
+from gi.repository import Adw, Gtk
 
 from src import shared  # pylint: disable=no-name-in-module
+from src.utils.relative_date import relative_date
 
 
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/window.ui")
@@ -158,19 +157,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def set_active_game(self, _widget, _pspec, game):
         self.active_game = game
 
-    def get_time(self, timestamp):
-        days_no = (datetime.today() - datetime.fromtimestamp(timestamp)).days
-
-        if days_no == 0:
-            return _("Today")
-        if days_no == 1:
-            return _("Yesterday")
-        if days_no < 8:
-            return GLib.DateTime.new_from_unix_utc(timestamp).format("%A")
-        if days_no < 335:
-            return GLib.DateTime.new_from_unix_utc(timestamp).format("%B")
-        return GLib.DateTime.new_from_unix_utc(timestamp).format("%Y")
-
     def show_details_view(self, game):
         self.active_game = game
 
@@ -200,13 +186,13 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.details_view_title.set_label(game.name)
         self.details_view_header_bar_title.set_title(game.name)
 
-        date = self.get_time(game.added)
+        date = relative_date(game.added)
         self.details_view_added.set_label(
             # The variable is the date when the game was added
             _("Added: {}").format(date)
         )
         last_played_date = (
-            self.get_time(game.last_played) if game.last_played else _("Never")
+            relative_date(game.last_played) if game.last_played else _("Never")
         )
         self.details_view_last_played.set_label(
             # The variable is the date when the game was last played
