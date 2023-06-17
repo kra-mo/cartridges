@@ -40,7 +40,9 @@ class Store:
         ):
             path.unlink(missing_ok=True)
 
-    def add_game(self, game: Game, additional_data: dict) -> Pipeline | None:
+    def add_game(
+        self, game: Game, additional_data: dict, run_pipeline=True
+    ) -> Pipeline | None:
         """Add a game to the app"""
 
         # Ignore games from a newer spec version
@@ -76,6 +78,8 @@ class Store:
                 game.connect(signal, manager.execute_resilient_manager_logic)
 
         # Run the pipeline for the game
+        if not run_pipeline:
+            return None
         pipeline = Pipeline(game, additional_data, self.pipeline_managers)
         self.games[game.game_id] = game
         self.pipelines[game.game_id] = pipeline

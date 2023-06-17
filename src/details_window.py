@@ -150,20 +150,23 @@ class DetailsWindow(Adw.Window):
                 return
 
             # Increment the number after the game id (eg. imported_1, imported_2)
-
             numbers = [0]
-
-            for current_game in self.win.games:
-                if "imported_" in current_game:
-                    numbers.append(int(current_game.replace("imported_", "")))
+            game_id: str
+            for game_id in shared.store.games:
+                prefix = "imported_"
+                if not game_id.startswith(prefix):
+                    continue
+                numbers.append(int(game_id.replace(prefix, "", count=1)))
+            game_number = max(numbers) + 1
 
             self.game = Game(
                 {
-                    "game_id": f"imported_{str(max(numbers) + 1)}",
+                    "game_id": f"imported_{game_number}",
                     "hidden": False,
                     "source": "imported",
                     "added": int(time()),
                 },
+                allow_side_effects=False,
             )
 
         else:
@@ -198,6 +201,7 @@ class DetailsWindow(Adw.Window):
                 self.game_cover.path,
             )
 
+        shared.store.add_game(self.game, {}, run_pipeline=False)
         self.game.save()
         self.game.update()
 
