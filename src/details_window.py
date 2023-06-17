@@ -156,7 +156,7 @@ class DetailsWindow(Adw.Window):
                 prefix = "imported_"
                 if not game_id.startswith(prefix):
                     continue
-                numbers.append(int(game_id.replace(prefix, "")))
+                numbers.append(int(game_id.replace(prefix, "", 1)))
             game_number = max(numbers) + 1
 
             self.game = Game(
