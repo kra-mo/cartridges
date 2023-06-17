@@ -69,11 +69,7 @@ class DetailsWindow(Adw.Window):
             self.name.set_text(self.game.name)
             if self.game.developer:
                 self.developer.set_text(self.game.developer)
-            self.executable.set_text(
-                self.game.executable
-                if isinstance(self.game.executable, str)
-                else shlex.join(self.game.executable)
-            )
+            self.executable.set_text(self.game.executable)
             self.apply_button.set_label(_("Apply"))
 
             self.game_cover.new_cover(self.game.get_cover_path())

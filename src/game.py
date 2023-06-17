@@ -86,6 +86,9 @@ class Game(Gtk.Box):
 
     def update_values(self, data):
         for key, value in data.items():
+            # Convert executables to strings
+            if key == "executable" and isinstance(value, list):
+                value = shlex.join(value)
             setattr(self, key, value)
 
     def update(self):
@@ -115,16 +118,10 @@ class Game(Gtk.Box):
         self.save()
         self.update()
 
-        string = (
-            self.executable
-            if isinstance(self.executable, str)
-            else shlex.join(self.executable)
-        )
-
         args = (
-            "flatpak-spawn --host /bin/sh -c " + shlex.quote(string)  # Flatpak
+            "flatpak-spawn --host /bin/sh -c " + shlex.quote(self.executable)  # Flatpak
             if os.getenv("FLATPAK_ID") == shared.APP_ID
-            else string  # Others
+            else self.executable  # Others
         )
 
         logging.info("Starting %s: %s", self.name, str(args))
