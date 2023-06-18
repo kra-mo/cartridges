@@ -134,7 +134,7 @@ class CartridgesApplication(Adw.Application):
         self.win.present()
 
     def load_games_from_disk(self):
-        if shared.games_dir.exists():
+        if shared.games_dir.is_dir():
             for game_file in shared.games_dir.iterdir():
                 data = json.load(game_file.open())
                 game = Game(data, allow_side_effects=False)
