@@ -24,7 +24,7 @@ from src import shared
 
 
 class GameCover:
-    pixbuf = None
+    texture = None
     blurred = None
     luminance = None
     path = None
@@ -54,7 +54,7 @@ class GameCover:
 
     def new_cover(self, path=None):
         self.animation = None
-        self.pixbuf = None
+        self.texture = None
         self.blurred = None
         self.luminance = None
         self.path = path
@@ -64,13 +64,17 @@ class GameCover:
                 task = Gio.Task.new()
                 task.run_in_thread(self.create_func(self.path))
             else:
-                self.pixbuf = GdkPixbuf.Pixbuf.new_from_file(str(path))
+                self.texture = Gdk.Texture.new_from_filename(str(path))
 
         if not self.animation:
-            self.set_pixbuf(self.pixbuf)
+            self.set_texture(self.texture)
 
-    def get_pixbuf(self):
-        return self.animation.get_static_image() if self.animation else self.pixbuf
+    def get_texture(self):
+        return (
+            Gdk.Texture.new_for_pixbuf(self.animation.get_static_image())
+            if self.animation
+            else self.texture
+        )
 
     def get_blurred(self):
         if not self.blurred:
@@ -103,9 +107,9 @@ class GameCover:
     def add_picture(self, picture):
         self.pictures.add(picture)
         if not self.animation:
-            self.set_pixbuf(self.pixbuf)
+            self.set_texture(self.texture)
 
-    def set_pixbuf(self, pixbuf):
+    def set_texture(self, texture):
         self.pictures.discard(
             picture for picture in self.pictures if not picture.is_visible()
         )
@@ -113,16 +117,13 @@ class GameCover:
             self.animation = None
         else:
             for picture in self.pictures:
-                if pixbuf:
-                    picture.set_pixbuf(pixbuf)
-                else:
-                    picture.set_paintable(self.placeholder)
+                picture.set_paintable(texture or self.placeholder)
 
     def update_animation(self, data):
         if self.animation == data[1]:
             self.anim_iter.advance()
 
-            self.set_pixbuf(self.anim_iter.get_pixbuf())
+            self.set_texture(Gdk.Texture.new_for_pixbuf(self.anim_iter.get_pixbuf()))
 
             delay_time = self.anim_iter.get_delay_time()
             GLib.timeout_add(

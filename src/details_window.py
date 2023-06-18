@@ -71,7 +71,7 @@ class DetailsWindow(Adw.Window):
             self.apply_button.set_label(_("Apply"))
 
             self.game_cover.new_cover(self.game.get_cover_path())
-            if self.game_cover.get_pixbuf():
+            if self.game_cover.get_texture():
                 self.cover_button_delete_revealer.set_reveal_child(True)
         else:
             self.set_title(_("Add New Game"))
@@ -205,7 +205,7 @@ class DetailsWindow(Adw.Window):
 
         # TODO: this is fucked up (less than before)
         # Get a cover from SGDB if none is present
-        if not self.game_cover.get_pixbuf():
+        if not self.game_cover.get_texture():
             self.game.set_loading(1)
             sgdb_manager: SGDBManager = shared.store.managers[SGDBManager]
             sgdb_manager.reset_cancellable()
