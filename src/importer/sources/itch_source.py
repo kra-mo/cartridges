@@ -23,7 +23,7 @@ from shutil import rmtree
 from sqlite3 import connect
 from time import time
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.game import Game
 from src.importer.sources.source import (
     SourceIterationResult,

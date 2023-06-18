@@ -23,7 +23,7 @@ import os
 import subprocess
 import sys
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 
 
 def setup_logging():

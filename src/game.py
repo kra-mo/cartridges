@@ -26,7 +26,7 @@ from time import time
 
 from gi.repository import Adw, GLib, GObject, Gtk
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 
 
 # pylint: disable=too-many-instance-attributes

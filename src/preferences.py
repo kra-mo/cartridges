@@ -24,7 +24,7 @@ from pathlib import Path
 from gi.repository import Adw, Gio, GLib, Gtk
 
 # pylint: disable=unused-import
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 
 # TODO use the new sources
 from src.importers.bottles_importer import bottles_installed

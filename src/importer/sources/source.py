@@ -23,7 +23,7 @@ from collections.abc import Iterable, Iterator
 from pathlib import Path
 from typing import Generator, Any
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.game import Game
 
 # Type of the data returned by iterating on a Source

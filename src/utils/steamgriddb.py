@@ -25,7 +25,7 @@ import requests
 from gi.repository import Gio
 from requests.exceptions import HTTPError
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.utils.save_cover import resize_cover, save_cover
 
 

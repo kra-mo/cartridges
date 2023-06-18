@@ -18,7 +18,8 @@ disable=raw-checker-failed,
         missing-class-docstring,
         missing-module-docstring,
         relative-beyond-top-level,
-        import-error
+        import-error,
+        no-name-in-module
 
 
 [TYPECHECK]

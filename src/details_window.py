@@ -18,17 +18,15 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
-import shlex
 from time import time
 
 from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.game import Game
 from src.game_cover import GameCover
 from src.store.managers.sgdb_manager import SGDBManager
-from src.store.pipeline import Pipeline
 from src.utils.create_dialog import create_dialog
 from src.utils.save_cover import resize_cover, save_cover
 from src.utils.steamgriddb import SGDBAuthError

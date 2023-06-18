@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.game import Game
 from src.game_cover import GameCover
 from src.store.managers.manager import Manager

@@ -19,7 +19,7 @@
 
 import json
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.game import Game
 from src.store.managers.async_manager import AsyncManager
 from src.store.managers.steam_api_manager import SteamAPIManager

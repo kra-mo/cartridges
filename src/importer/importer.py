@@ -22,7 +22,7 @@ import logging
 
 from gi.repository import Adw, Gtk, GLib
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.game import Game
 from src.importer.sources.source import Source
 from src.store.pipeline import Pipeline

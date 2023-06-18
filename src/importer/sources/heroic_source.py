@@ -26,7 +26,7 @@ from pathlib import Path
 from time import time
 from typing import Optional, TypedDict
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.game import Game
 from src.importer.sources.source import (
     URLExecutableSource,

@@ -27,7 +27,7 @@ gi.require_version("Adw", "1")
 # pylint: disable=wrong-import-position
 from gi.repository import Adw, Gio, GLib, Gtk
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.details_window import DetailsWindow
 from src.game import Game
 from src.importer.importer import Importer

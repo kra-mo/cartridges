@@ -19,7 +19,7 @@
 
 from gi.repository import Adw, Gtk
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.utils.relative_date import relative_date
 
 

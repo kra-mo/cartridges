@@ -21,7 +21,7 @@ from pathlib import Path
 from os import PathLike
 from functools import wraps
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 
 
 def replaced_by_path(override: PathLike):  # Decorator builder

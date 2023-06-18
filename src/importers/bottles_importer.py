@@ -22,7 +22,7 @@ from time import time
 
 import yaml
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.utils.check_install import check_install
 
 

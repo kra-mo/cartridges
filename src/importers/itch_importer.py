@@ -26,7 +26,7 @@ from time import time
 import requests
 from gi.repository import GdkPixbuf, Gio
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.utils.check_install import check_install
 from src.utils.save_cover import resize_cover
 

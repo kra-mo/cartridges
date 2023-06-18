@@ -24,7 +24,7 @@ from pathlib import Path
 from time import time
 from typing import Generator
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 from src.game import Game
 from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
 from src.utils.decorators import replaced_by_path, replaced_by_schema_key

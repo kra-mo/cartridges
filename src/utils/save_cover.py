@@ -24,7 +24,7 @@ from shutil import copyfile
 from gi.repository import Gio
 from PIL import Image, ImageSequence
 
-from src import shared  # pylint: disable=no-name-in-module
+from src import shared
 
 
 def resize_cover(cover_path=None, pixbuf=None):
