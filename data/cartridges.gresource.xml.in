@@ -9,5 +9,6 @@
     <file alias="style.css">gtk/style.css</file>
     <file alias="style-dark.css">gtk/style-dark.css</file>
     <file>library_placeholder.svg</file>
+    <file>library_placeholder_small.svg</file>
   </gresource>
 </gresources>

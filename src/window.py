@@ -179,7 +179,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.details_view_game_cover = game.game_cover
         self.details_view_game_cover.add_picture(self.details_view_cover)
 
-        self.details_view_blurred_cover.set_pixbuf(
+        self.details_view_blurred_cover.set_paintable(
             self.details_view_game_cover.get_blurred()
         )
 

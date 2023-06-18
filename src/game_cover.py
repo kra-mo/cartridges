@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import GdkPixbuf, Gio, GLib
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib
 from PIL import Image, ImageFilter, ImageStat
 
 from src import shared
@@ -31,8 +31,11 @@ class GameCover:
     animation = None
     anim_iter = None
 
-    placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
-        shared.PREFIX + "/library_placeholder.svg", 400, 600, False
+    placeholder = Gdk.Texture.new_from_resource(
+        shared.PREFIX + "/library_placeholder.svg"
+    )
+    placeholder_small = Gdk.Texture.new_from_resource(
+        shared.PREFIX + "/library_placeholder_small.svg"
     )
 
     def __init__(self, pictures, path=None):
@@ -82,7 +85,7 @@ class GameCover:
                     tmp_path = Gio.File.new_tmp(None)[0].get_path()
                     image.save(tmp_path, "tiff", compression=None)
 
-                    self.blurred = GdkPixbuf.Pixbuf.new_from_file(tmp_path)
+                    self.blurred = Gdk.Texture.new_from_filename(tmp_path)
 
                     stat = ImageStat.Stat(image.convert("L"))
 
@@ -92,11 +95,8 @@ class GameCover:
                         (stat.mean[0] + stat.extrema[0][1]) / 510,
                     )
             else:
-                self.blurred = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
-                    shared.PREFIX + "/library_placeholder.svg", 2, 2, False
-                )
-
-                self.luminance = (0.1, 0.8)
+                self.blurred = self.placeholder_small
+                self.luminance = (0.3, 0.5)
 
         return self.blurred
 
@@ -113,9 +113,10 @@ class GameCover:
             self.animation = None
         else:
             for picture in self.pictures:
-                if not pixbuf:
-                    pixbuf = self.placeholder_pixbuf
-                picture.set_pixbuf(pixbuf)
+                if pixbuf:
+                    picture.set_pixbuf(pixbuf)
+                else:
+                    picture.set_paintable(self.placeholder)
 
     def update_animation(self, data):
         if self.animation == data[1]:
