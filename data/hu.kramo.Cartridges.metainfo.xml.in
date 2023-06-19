@@ -48,6 +48,7 @@
       <description translatable="no">
         <ul>
           <li>Fixes an issue with importing Bottles games without covers</li>
+          <li>Translations since 1.5</li>
         </ul>
       </description>
     </release>
