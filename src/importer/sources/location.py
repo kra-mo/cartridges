@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 from typing import Callable, Mapping, Iterable
 from os import PathLike
@@ -73,7 +74,9 @@ class Location:
             raise UnresolvableLocationError()
 
         # Update the schema with the found candidate
-        shared.schema.set_string(self.schema_key, str(candidate))
+        value = str(candidate)
+        shared.schema.set_string(self.schema_key, value)
+        logging.debug("Resolved value for schema key %s: %s", self.schema_key, value)
 
     def __getitem__(self, key: str):
         """Get the computed path from its key for the location"""

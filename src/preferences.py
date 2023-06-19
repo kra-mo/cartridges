@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os
+import logging
 import re
 from pathlib import Path
 from shutil import rmtree
@@ -267,17 +267,19 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 # Set the schema
                 infix = "-cache" if location == "cache" else ""
                 key = f"{source.id}{infix}-location"
-                shared.schema.set_string(key, str(path))
+                value = str(path)
+                shared.schema.set_string(key, value)
                 # Update the row
                 self.update_source_action_row_paths(source)
+                logging.debug("User-set value for schema key %s: %s", key, value)
 
             # Bad picked location, inform user
             else:
                 if location_name == "cache":
-                    title = "Cache not found"
+                    title = "Cache directory not found"
                     subtitle_format = "Select the {} cache directory."
                 else:
-                    title = "Installation not found"
+                    title = "Installation directory not found"
                     subtitle_format = "Select the {} installation directory."
                 dialog = create_dialog(
                     self,
