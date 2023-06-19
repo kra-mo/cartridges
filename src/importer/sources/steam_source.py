@@ -118,8 +118,8 @@ class SteamSource(URLExecutableSource):
     url_format = "steam://rungameid/{game_id}"
 
     data_location = Location(
+        schema_key="steam-location",
         candidates=(
-            lambda: shared.schema.get_string("steam-location"),
             "~/.var/app/com.valvesoftware.Steam/data/Steam/",
             shared.data_dir / "Steam/",
             "~/.steam/",

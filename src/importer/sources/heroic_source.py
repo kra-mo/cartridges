@@ -138,8 +138,8 @@ class HeroicSource(URLExecutableSource):
     available_on = set(("linux", "win32"))
 
     config_location = Location(
+        schema_key="heroic-location",
         candidates=(
-            lambda: shared.schema.get_string("heroic-location"),
             "~/.var/app/com.heroicgameslauncher.hgl/config/heroic/",
             shared.config_dir / "heroic/",
             "~/.config/heroic/",

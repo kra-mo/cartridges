@@ -93,8 +93,8 @@ class LutrisSource(URLExecutableSource):
     # FIXME possible bug: location picks ~/.var... and cache_lcoation picks ~/.local...
 
     data_location = Location(
+        schema_key="lutris-location",
         candidates=(
-            lambda: shared.schema.get_string("lutris-location"),
             "~/.var/app/net.lutris.Lutris/data/lutris/",
             shared.data_dir / "lutris/",
             "~/.local/share/lutris/",
@@ -105,8 +105,8 @@ class LutrisSource(URLExecutableSource):
     )
 
     cache_location = Location(
+        schema_key="lutris-cache-location",
         candidates=(
-            lambda: shared.schema.get_string("lutris-cache-location"),
             "~/.var/app/net.lutris.Lutris/cache/lutris/",
             shared.cache_dir / "lutris/",
             "~/.cache/lutris",

@@ -84,8 +84,8 @@ class ItchSource(URLExecutableSource):
     available_on = set(("linux", "win32"))
 
     config_location = Location(
+        schema_key="itch-location",
         candidates=(
-            lambda: shared.schema.get_string("itch-location"),
             "~/.var/app/io.itch.itch/config/itch/",
             shared.config_dir / "itch/",
             "~/.config/itch/",

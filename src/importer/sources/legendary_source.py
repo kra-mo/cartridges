@@ -93,8 +93,8 @@ class LegendarySource(Source):
 
     iterator_class = LegendarySourceIterator
     data_location: Location = Location(
+        schema_key="legendary-location",
         candidates=(
-            lambda: shared.schema.get_string("legendary-location"),
             shared.config_dir / "legendary/",
             "~/.config/legendary",
         ),

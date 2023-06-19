@@ -86,8 +86,8 @@ class BottlesSource(URLExecutableSource):
     available_on = set(("linux",))
 
     data_location = Location(
+        schema_key="bottles-location",
         candidates=(
-            lambda: shared.schema.get_string("bottles-location"),
             "~/.var/app/com.usebottles.bottles/data/bottles/",
             shared.data_dir / "bottles/",
         ),
