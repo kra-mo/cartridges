@@ -121,6 +121,18 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 rmtree(shared.data_dir / "cartridges", True)
                 rmtree(shared.config_dir / "cartridges", True)
                 rmtree(shared.cache_dir / "cartridges", True)
+
+                for key in (
+                    (settings_schema_source := Gio.SettingsSchemaSource.get_default())
+                    .lookup(shared.APP_ID, True)
+                    .list_keys()
+                ):
+                    shared.schema.reset(key)
+                for key in settings_schema_source.lookup(
+                    shared.APP_ID + ".State", True
+                ).list_keys():
+                    shared.state_schema.reset(key)
+
                 shared.win.get_application().quit()
 
             reset_button = Gtk.Button.new_with_label("Reset")
