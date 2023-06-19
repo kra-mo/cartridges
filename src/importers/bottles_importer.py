@@ -94,12 +94,13 @@ def bottles_importer():
         except (FileNotFoundError, KeyError):
             bottles_location = bottles_dir / "bottles"
 
-        grid_path = (
-            bottles_location
-            / game["bottle"]["path"]
-            / "grids"
-            / game["thumbnail"].split(":")[1]
-        )
+        if game["thumbnail"]:
+            grid_path = (
+                bottles_location
+                / game["bottle"]["path"]
+                / "grids"
+                / game["thumbnail"].split(":")[1]
+            )
 
         importer.save_game(
             values,
