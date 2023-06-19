@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-25 17:48+0200\n"
-"PO-Revision-Date: 2023-05-24 20:27+0000\n"
+"PO-Revision-Date: 2023-06-02 15:40+0000\n"
 "Last-Translator: micke <micke@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/sv/>\n"
@@ -73,11 +73,11 @@ msgstr "Avbryt"
 
 #: data/gtk/details_window.blp:57
 msgid "New Cover"
-msgstr ""
+msgstr "Nytt omslag"
 
 #: data/gtk/details_window.blp:75
 msgid "Delete Cover"
-msgstr ""
+msgstr "Ta bort omslag"
 
 #: data/gtk/details_window.blp:101 data/gtk/details_window.blp:106
 #: data/gtk/game.blp:80
@@ -106,7 +106,7 @@ msgstr "Fil som ska öppnas eller kommando som ska köras när spelet startas"
 
 #: data/gtk/details_window.blp:130
 msgid "More Info"
-msgstr ""
+msgstr "Mer info"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:196
 msgid "Edit"
