@@ -20,6 +20,7 @@
 import os
 import re
 from pathlib import Path
+from shutil import rmtree
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -87,6 +88,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
 
+    danger_zone_group = Gtk.Template.Child()
+
     removed_games = set()
 
     def __init__(self, **kwargs):
@@ -110,6 +113,32 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         # General
         self.remove_all_games_button.connect("clicked", self.remove_all_games)
+
+        # Debug
+        if shared.PROFILE == "development":
+
+            def reset_app(*_args):
+                rmtree(shared.data_dir / "cartridges", True)
+                rmtree(shared.config_dir / "cartridges", True)
+                rmtree(shared.cache_dir / "cartridges", True)
+                shared.win.get_application().quit()
+
+            reset_button = Gtk.Button.new_with_label("Reset")
+            reset_button.set_valign(Gtk.Align.CENTER)
+            reset_button.add_css_class("destructive-action")
+            reset_button.connect("clicked", reset_app)
+
+            self.danger_zone_group.add(
+                (
+                    reset_action_row := Adw.ActionRow(
+                        title="Reset App",
+                        subtitle="Completely resets and quits Cartridges",
+                    )
+                )
+            )
+
+            reset_action_row.add_suffix(reset_button)
+            self.set_default_size(-1, 560)
 
         # Steam
         self.create_preferences(self, "steam", "Steam")
