@@ -20,10 +20,9 @@
 import sys
 from abc import abstractmethod
 from collections.abc import Iterable, Iterator
-from pathlib import Path
-from typing import Generator, Any
+from typing import Generator, Any, Optional
 
-from src import shared
+from src.importer.sources.location import Location
 from src.game import Game
 
 # Type of the data returned by iterating on a Source
@@ -62,9 +61,12 @@ class Source(Iterable):
     """Source of games. E.g an installed app with a config file that lists game directories"""
 
     name: str
-    iterator_class: type[SourceIterator]
     variant: str = None
     available_on: set[str] = set()
+    data_location: Optional[Location] = None
+    cache_location: Optional[Location] = None
+    config_location: Optional[Location] = None
+    iterator_class: type[SourceIterator]
 
     @property
     def full_name(self) -> str:
@@ -88,43 +90,20 @@ class Source(Iterable):
         return self.name.lower() + "_{game_id}"
 
     @property
-    def is_installed(self):
-        # pylint: disable=pointless-statement
-        try:
-            self.location
-        except FileNotFoundError:
-            return False
+    def is_available(self):
         return sys.platform in self.available_on
-
-    @property
-    def location_key(self) -> str:
-        """
-        The schema key pointing to the user-set location for the source.
-        May be overriden by inherinting classes.
-        """
-        return f"{self.name.lower()}-location"
-
-    def update_location_schema_key(self):
-        """Update the schema value for this source's location if possible"""
-        try:
-            location = self.location
-        except FileNotFoundError:
-            return
-        shared.schema.set_string(self.location_key, location)
-
-    def __iter__(self) -> SourceIterator:
-        """Get an iterator for the source"""
-        return self.iterator_class(self)
-
-    @property
-    @abstractmethod
-    def location(self) -> Path:
-        """The source's location on disk"""
 
     @property
     @abstractmethod
     def executable_format(self) -> str:
         """The executable format used to construct game executables"""
+
+    def __iter__(self) -> SourceIterator:
+        """Get an iterator for the source"""
+        for location in (self.data_location, self.cache_location, self.config_location):
+            if location is not None:
+                location.resolve()
+        return self.iterator_class(self)
 
 
 # pylint: disable=abstract-method

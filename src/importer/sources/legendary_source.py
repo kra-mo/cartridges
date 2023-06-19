@@ -26,8 +26,8 @@ from typing import Generator
 
 from src import shared
 from src.game import Game
+from src.importer.sources.location import Location
 from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
-from src.utils.decorators import replaced_by_path, replaced_by_schema_key
 
 
 class LegendarySourceIterator(SourceIterator):
@@ -51,7 +51,7 @@ class LegendarySourceIterator(SourceIterator):
         data = {}
 
         # Get additional metadata from file (optional)
-        metadata_file = self.source.location / "metadata" / f"{app_name}.json"
+        metadata_file = self.source.data_location["metadata"] / f"{app_name}.json"
         try:
             metadata = json.load(metadata_file.open())
             values["developer"] = metadata["metadata"]["developer"]
@@ -67,7 +67,7 @@ class LegendarySourceIterator(SourceIterator):
 
     def generator_builder(self) -> Generator[SourceIterationResult, None, None]:
         # Open library
-        file = self.source.location / "installed.json"
+        file = self.source.data_location["installed.json"]
         try:
             library: dict = json.load(file.open())
         except (JSONDecodeError, OSError):
@@ -89,11 +89,17 @@ class LegendarySourceIterator(SourceIterator):
 class LegendarySource(Source):
     name = "Legendary"
     executable_format = "legendary launch {app_name}"
-    iterator_class = LegendarySourceIterator
     available_on = set(("linux", "win32"))
 
-    @property
-    @replaced_by_schema_key
-    @replaced_by_path(shared.config_dir / "legendary")
-    def location(self) -> Path:
-        raise FileNotFoundError()
+    iterator_class = LegendarySourceIterator
+    data_location: Location = Location(
+        candidates=(
+            lambda: shared.schema.get_string("legendary-location"),
+            shared.config_dir / "legendary/",
+            "~/.config/legendary",
+        ),
+        paths={
+            "installed.json": (False, "installed.json"),
+            "metadata": (True, "metadata"),
+        },
+    )

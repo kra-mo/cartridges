@@ -35,6 +35,7 @@ from src.utils.decorators import (
     replaced_by_schema_key,
 )
 from src.utils.steam import SteamFileHelper, SteamInvalidManifestError
+from src.importer.sources.location import Location
 
 
 class SteamSourceIterator(SourceIterator):
@@ -42,7 +43,7 @@ class SteamSourceIterator(SourceIterator):
 
     def get_manifest_dirs(self) -> Iterable[Path]:
         """Get dirs that contain steam app manifests"""
-        libraryfolders_path = self.source.location / "steamapps" / "libraryfolders.vdf"
+        libraryfolders_path = self.source.data_location["libraryfolders.vdf"]
         with open(libraryfolders_path, "r", encoding="utf-8") as file:
             contents = file.read()
         return [
@@ -101,9 +102,7 @@ class SteamSourceIterator(SourceIterator):
 
             # Add official cover image
             image_path = (
-                self.source.location
-                / "appcache"
-                / "librarycache"
+                self.source.data_location["librarycache"]
                 / f"{appid}_library_600x900.jpg"
             )
             additional_data = {"local_image_path": image_path, "steam_appid": appid}
@@ -114,15 +113,20 @@ class SteamSourceIterator(SourceIterator):
 
 class SteamSource(URLExecutableSource):
     name = "Steam"
+    available_on = set(("linux", "win32"))
     iterator_class = SteamSourceIterator
     url_format = "steam://rungameid/{game_id}"
-    available_on = set(("linux", "win32"))
 
-    @property
-    @replaced_by_schema_key
-    @replaced_by_path("~/.var/app/com.valvesoftware.Steam/data/Steam/")
-    @replaced_by_path(shared.data_dir / "Steam")
-    @replaced_by_path("~/.steam/")
-    @replaced_by_path(shared.programfiles32_dir / "Steam")
-    def location(self):
-        raise FileNotFoundError()
+    data_location = Location(
+        candidates=(
+            lambda: shared.schema.get_string("steam-location"),
+            "~/.var/app/com.valvesoftware.Steam/data/Steam/",
+            shared.data_dir / "Steam/",
+            "~/.steam/",
+            shared.programfiles32_dir / "Steam",
+        ),
+        paths={
+            "libraryfolders.vdf": (False, "steamapps/libraryfolders.vdf"),
+            "librarycache": (True, "appcache/librarycache"),
+        },
+    )

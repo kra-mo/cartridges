@@ -61,6 +61,22 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           ]
         }
       }
+
+      Adw.ActionRow reset_action_row {
+        title: _("Reset App");
+        subtitle: _("Completely resets and quits Cartridges");
+        visible: false;
+
+        Button reset_button {
+          label: _("Reset");
+          valign: center;
+
+          styles [
+            "destructive-action",
+          ]
+        }
+      }
+
     }
   }
 
@@ -76,10 +92,10 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("Steam");
         show-enable-switch: true;
 
-        Adw.ActionRow steam_action_row {
+        Adw.ActionRow steam_data_action_row {
           title: _("Install Location");
 
-          Button steam_file_chooser_button {
+          Button steam_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
           }
@@ -90,10 +106,10 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("Lutris");
         show-enable-switch: true;
 
-        Adw.ActionRow lutris_action_row {
+        Adw.ActionRow lutris_data_action_row {
           title: _("Install Location");
 
-          Button lutris_file_chooser_button {
+          Button lutris_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
           }
@@ -122,10 +138,10 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("Heroic");
         show-enable-switch: true;
 
-        Adw.ActionRow heroic_action_row {
+        Adw.ActionRow heroic_config_action_row {
           title: _("Install Location");
 
-          Button heroic_file_chooser_button {
+          Button heroic_config_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
           }
@@ -163,10 +179,10 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("Bottles");
         show-enable-switch: true;
 
-        Adw.ActionRow bottles_action_row {
+        Adw.ActionRow bottles_data_action_row {
           title: _("Install Location");
 
-          Button bottles_file_chooser_button {
+          Button bottles_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
           }
@@ -177,10 +193,10 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("itch");
         show-enable-switch: true;
 
-        Adw.ActionRow itch_action_row {
+        Adw.ActionRow itch_config_action_row {
           title: _("Install Location");
 
-          Button itch_file_chooser_button {
+          Button itch_config_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
           }
@@ -191,10 +207,10 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("Legendary");
         show-enable-switch: true;
 
-        Adw.ActionRow legendary_action_row {
+        Adw.ActionRow legendary_config_action_row {
           title: _("Install Location");
 
-          Button legendary_file_chooser_button {
+          Button legendary_config_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
           }

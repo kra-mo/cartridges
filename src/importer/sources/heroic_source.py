@@ -22,20 +22,16 @@ import json
 import logging
 from hashlib import sha256
 from json import JSONDecodeError
-from pathlib import Path
 from time import time
 from typing import Optional, TypedDict
 
 from src import shared
 from src.game import Game
+from src.importer.sources.location import Location
 from src.importer.sources.source import (
     URLExecutableSource,
     SourceIterationResult,
     SourceIterator,
-)
-from src.utils.decorators import (
-    replaced_by_path,
-    replaced_by_schema_key,
 )
 
 
@@ -103,7 +99,7 @@ class HeroicSourceIterator(SourceIterator):
         if service == "epic":
             uri += "?h=400&resize=1&w=300"
         digest = sha256(uri.encode()).hexdigest()
-        image_path = self.source.location / "images-cache" / digest
+        image_path = self.source.config_location.root / "images-cache" / digest
         additional_data = {"local_image_path": image_path}
 
         return (game, additional_data)
@@ -116,7 +112,7 @@ class HeroicSourceIterator(SourceIterator):
             if not shared.schema.get_boolean("heroic-import-" + sub_source["service"]):
                 continue
             # Load games from JSON
-            file = self.source.location.joinpath(*sub_source["path"])
+            file = self.source.config_location.root.joinpath(*sub_source["path"])
             try:
                 library = json.load(file.open())["library"]
             except (JSONDecodeError, OSError, KeyError):
@@ -141,15 +137,20 @@ class HeroicSource(URLExecutableSource):
     url_format = "heroic://launch/{app_name}"
     available_on = set(("linux", "win32"))
 
+    config_location = Location(
+        candidates=(
+            lambda: shared.schema.get_string("heroic-location"),
+            "~/.var/app/com.heroicgameslauncher.hgl/config/heroic/",
+            shared.config_dir / "heroic/",
+            "~/.config/heroic/",
+            shared.appdata_dir / "heroic/",
+        ),
+        paths={
+            "config.json": (False, "config.json"),
+        },
+    )
+
     @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
         return self.name.lower() + "_{service}_{game_id}"
-
-    @property
-    @replaced_by_schema_key
-    @replaced_by_path("~/.var/app/com.heroicgameslauncher.hgl/config/heroic/")
-    @replaced_by_path(shared.config_dir / "heroic")
-    @replaced_by_path(shared.appdata_dir / "heroic")
-    def location(self) -> Path:
-        raise FileNotFoundError()

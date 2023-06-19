@@ -25,14 +25,11 @@ import yaml
 
 from src import shared
 from src.game import Game
+from src.importer.sources.location import Location
 from src.importer.sources.source import (
     SourceIterationResult,
     SourceIterator,
     URLExecutableSource,
-)
-from src.utils.decorators import (
-    replaced_by_path,
-    replaced_by_schema_key,
 )
 
 
@@ -42,7 +39,7 @@ class BottlesSourceIterator(SourceIterator):
     def generator_builder(self) -> SourceIterationResult:
         """Generator method producing games"""
 
-        data = (self.source.location / "library.yml").read_text("utf-8")
+        data = self.source.data_location["library.yml"].read_text("utf-8")
         library: dict = yaml.safe_load(data)
 
         for entry in library.values():
@@ -65,11 +62,11 @@ class BottlesSourceIterator(SourceIterator):
                 # as Cartridges can't access directories picked via Bottles' file picker portal
                 bottles_location = Path(
                     yaml.safe_load(
-                        (self.source.location / "data.yml").read_text("utf-8")
+                        self.source.data_location["data.yml"].read_text("utf-8")
                     )["custom_bottles_path"]
                 )
             except (FileNotFoundError, KeyError):
-                bottles_location = self.source.location / "bottles"
+                bottles_location = self.source.data_location.root / "bottles"
 
             bottle_path = entry["bottle"]["path"]
             image_name = entry["thumbnail"].split(":")[1]
@@ -88,9 +85,14 @@ class BottlesSource(URLExecutableSource):
     url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
     available_on = set(("linux",))
 
-    @property
-    @replaced_by_schema_key
-    @replaced_by_path("~/.var/app/com.usebottles.bottles/data/bottles/")
-    @replaced_by_path(shared.data_dir / "bottles")
-    def location(self) -> Path:
-        raise FileNotFoundError()
+    data_location = Location(
+        candidates=(
+            lambda: shared.schema.get_string("bottles-location"),
+            "~/.var/app/com.usebottles.bottles/data/bottles/",
+            shared.data_dir / "bottles/",
+        ),
+        paths={
+            "library.yml": (False, "library.yml"),
+            "data.yml": (False, "data.yml"),
+        },
+    )

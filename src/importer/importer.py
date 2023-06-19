@@ -114,7 +114,7 @@ class Importer:
         source, *_rest = data
 
         # Early exit if not installed
-        if not source.is_installed:
+        if not source.is_available:
             logging.info("Source %s skipped, not installed", source.id)
             return
         logging.info("Scanning source %s", source.id)

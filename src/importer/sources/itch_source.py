@@ -18,19 +18,18 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from pathlib import Path
 from shutil import rmtree
 from sqlite3 import connect
 from time import time
 
 from src import shared
 from src.game import Game
+from src.importer.sources.location import Location
 from src.importer.sources.source import (
     SourceIterationResult,
     SourceIterator,
     URLExecutableSource,
 )
-from src.utils.decorators import replaced_by_path, replaced_by_schema_key
 from src.utils.sqlite import copy_db
 
 
@@ -56,7 +55,7 @@ class ItchSourceIterator(SourceIterator):
             caves.game_id = games.id
         ;
         """
-        db_path = copy_db(self.source.location / "db" / "butler.db")
+        db_path = copy_db(self.source.config_location["butler.db"])
         connection = connect(db_path)
         cursor = connection.execute(db_request)
 
@@ -84,10 +83,13 @@ class ItchSource(URLExecutableSource):
     url_format = "itch://caves/{cave_id}/launch"
     available_on = set(("linux", "win32"))
 
-    @property
-    @replaced_by_schema_key
-    @replaced_by_path("~/.var/app/io.itch.itch/config/itch/")
-    @replaced_by_path(shared.config_dir / "itch")
-    @replaced_by_path(shared.appdata_dir / "itch")
-    def location(self) -> Path:
-        raise FileNotFoundError()
+    config_location = Location(
+        candidates=(
+            lambda: shared.schema.get_string("itch-location"),
+            "~/.var/app/io.itch.itch/config/itch/",
+            shared.config_dir / "itch/",
+            "~/.config/itch/",
+            shared.appdata_dir / "itch/",
+        ),
+        paths={"butler.db": (False, "db/butler.db")},
+    )
