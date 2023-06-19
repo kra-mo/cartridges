@@ -251,11 +251,11 @@ class DetailsWindow(Adw.Window):
         except GLib.GError:
             return
 
-        self.cover_button_delete_revealer.set_reveal_child(True)
-        self.cover_changed = True
-
         def resize():
-            self.game_cover.new_cover(resize_cover(path))
+            if cover := resize_cover(path):
+                self.game_cover.new_cover(cover)
+                self.cover_button_delete_revealer.set_reveal_child(True)
+                self.cover_changed = True
             self.toggle_loading()
 
         self.toggle_loading()
