@@ -265,7 +265,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             location = getattr(source, f"{location_name}_location")
             if location.check_candidate(path):
                 # Set the schema
-                infix = "-cache" if location == "cache" else ""
+                infix = "-cache" if location_name == "cache" else ""
                 key = f"{source.id}{infix}-location"
                 value = str(path)
                 shared.schema.set_string(key, value)
