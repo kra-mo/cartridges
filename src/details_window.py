@@ -48,6 +48,7 @@ class DetailsWindow(Adw.Window):
     executable = Gtk.Template.Child()
 
     exec_info_label = Gtk.Template.Child()
+    exec_info_popover = Gtk.Template.Child()
 
     apply_button = Gtk.Template.Child()
 
@@ -111,6 +112,11 @@ class DetailsWindow(Adw.Window):
         ).format(exe_name, exe_path, file_name, command, file_path)
 
         self.exec_info_label.set_label(exec_info_text)
+
+        def clear_info_selection(*_args):
+            self.exec_info_label.select_region(0, 0)
+
+        self.exec_info_popover.connect("show", clear_info_selection)
 
         self.cover_button_delete.connect("clicked", self.delete_pixbuf)
         self.cover_button_edit.connect("clicked", self.choose_cover)

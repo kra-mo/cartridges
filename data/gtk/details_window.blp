@@ -129,17 +129,19 @@ template $DetailsWindow : Adw.Window {
                     icon-name: "help-about-symbolic";
                     tooltip-text: _("More Info");
 
-                    popover: Popover {
-                        visible: bind-property exec_info_button.active bidirectional;
+                    popover: Popover exec_info_popover {
 
                         Label exec_info_label {
                             use-markup: true;
                             wrap: true;
-                            max-width-chars: 30;
+                            max-width-chars: 50;
+                            halign: center;
+                            valign: center;
                             margin-top: 6;
-                            margin-bottom: 12;
+                            margin-bottom: 6;
                             margin-start: 6;
                             margin-end: 6;
+                            selectable: true;
                         }
                     };
 
