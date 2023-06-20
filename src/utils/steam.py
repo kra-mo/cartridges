@@ -80,12 +80,6 @@ class SteamRateLimiter(RateLimiter):
         self.pick_history.remove_old_entries()
         super().__init__()
 
-    @property
-    def refill_spacing(self) -> float:
-        spacing = super().refill_spacing
-        logging.debug("Next Steam API request token in %f seconds", spacing)
-        return spacing
-
     def acquire(self):
         """Get a token from the bucket and store the pick history in the schema"""
         super().acquire()
