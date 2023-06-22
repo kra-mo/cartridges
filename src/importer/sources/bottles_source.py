@@ -69,9 +69,12 @@ class BottlesSourceIterator(SourceIterator):
                 bottles_location = self.source.data_location.root / "bottles"
 
             bottle_path = entry["bottle"]["path"]
-            image_name = entry["thumbnail"].split(":")[1]
-            image_path = bottles_location / bottle_path / "grids" / image_name
-            additional_data = {"local_image_path": image_path}
+
+            additional_data = {}
+            if entry["thumbnail"]:
+                image_name = entry["thumbnail"].split(":")[1]
+                image_path = bottles_location / bottle_path / "grids" / image_name
+                additional_data = {"local_image_path": image_path}
 
             # Produce game
             yield (game, additional_data)
