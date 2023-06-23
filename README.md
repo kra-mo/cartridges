@@ -59,6 +59,14 @@ The app is available on Flathub.
 
 <a href=https://flathub.org/apps/hu.kramo.Cartridges><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
+### Distribution repositories
+
+The app is also packaged in systems described by following table from the Repology database:
+
+<a href="https://repology.org/project/cartridges/versions">
+    <img src="https://repology.org/badge/vertical-allrepos/cartridges.svg" alt="Packaging status">
+</a>
+
 ## Windows
 
 ### From Releases
