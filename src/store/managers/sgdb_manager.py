@@ -44,6 +44,6 @@ class SGDBManager(AsyncManager):
             # If invalid auth, cancel all SGDBManager tasks
             self.cancellable.cancel()
             raise FriendlyError(
-                "Couldn't authenticate to SGDB",
+                "Couldn't authenticate to SteamGridDB",
                 "Verify your API key in the preferences",
             ) from error

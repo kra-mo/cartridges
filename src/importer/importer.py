@@ -211,30 +211,50 @@ class Importer(ErrorProducer):
 
     def create_error_dialog(self):
         """Dialog containing all errors raised by importers"""
-        string = _("The following errors occured during import:")
-        errors = ""
 
         # Collect all errors that happened in the importer and the managers
-        collected_errors: list[Exception] = []
-        collected_errors.extend(self.collect_errors())
+        errors: list[Exception] = []
+        errors.extend(self.collect_errors())
         for manager in shared.store.managers.values():
-            collected_errors.extend(manager.collect_errors())
-        for error in collected_errors:
-            # Only display friendly errors
-            if not isinstance(error, FriendlyError):
-                continue
-            errors += "\n\n" + str(error)
+            errors.extend(manager.collect_errors())
 
-        if errors:
-            create_dialog(
-                shared.win,
-                "Warning",
-                string + errors,
-                "open_preferences_import",
-                _("Preferences"),
-            ).connect("response", self.dialog_response_callback)
-        else:
+        # Filter out non friendly errors
+        errors = list(filter(lambda error: isinstance(error, FriendlyError), errors))
+
+        # No error to display
+        if not errors:
             self.timeout_toast()
+            return
+
+        # Create error dialog
+        dialog = Adw.MessageDialog()
+        dialog.set_heading(_("Warning"))
+        dialog.add_response("close", _("Dismiss"))
+        dialog.add_response("open_preferences_import", _("Preferences"))
+        dialog.set_default_response("open_preferences_import")
+        dialog.connect("response", self.dialog_response_callback)
+        dialog.set_transient_for(shared.win)
+
+        if len(errors) == 1:
+            # Display the single error in the dialog body
+            error = errors[0]
+            dialog.set_body(f"{error.title}\n{error.subtitle}")
+        else:
+            # Display the errors in a list
+            list_box = Gtk.ListBox()
+            list_box.set_selection_mode(Gtk.SelectionMode.NONE)
+            list_box.set_css_classes(["boxed-list"])
+            list_box.set_margin_top(16)
+            for error in errors:
+                row = Adw.ActionRow()
+                row.set_title(error.title)
+                row.set_subtitle(error.subtitle)
+                list_box.append(row)
+            dialog.set_body(_("The following errors occured during import"))
+            dialog.set_extra_child(list_box)
+
+        # Dialog is ready, present it
+        dialog.present()
 
     def create_summary_toast(self):
         """N games imported toast"""
@@ -272,9 +292,9 @@ class Importer(ErrorProducer):
 
     def dialog_response_callback(self, _widget, response, *args):
         """Handle after-import dialogs callback"""
+        logging.debug("After-import dialog response: %s (%s)", response, str(args))
         if response == "open_preferences":
             self.open_preferences(*args)
-
         elif response == "open_preferences_import":
             self.open_preferences(*args).connect("close-request", self.timeout_toast)
         else:
