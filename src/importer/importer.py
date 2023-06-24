@@ -20,18 +20,21 @@
 
 import logging
 
-from gi.repository import Adw, Gtk, GLib
+from gi.repository import Adw, GLib, Gtk
 
 from src import shared
+from src.errors.error_producer import ErrorProducer
+from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.importer.sources.source import Source
+from src.store.managers.async_manager import AsyncManager
 from src.store.pipeline import Pipeline
 from src.utils.create_dialog import create_dialog
 from src.utils.task import Task
 
 
 # pylint: disable=too-many-instance-attributes
-class Importer:
+class Importer(ErrorProducer):
     """A class in charge of scanning sources for games"""
 
     progressbar = None
@@ -47,6 +50,7 @@ class Importer:
     game_pipelines: set[Pipeline] = None
 
     def __init__(self):
+        super().__init__()
         self.game_pipelines = set()
         self.sources = set()
 
@@ -80,6 +84,15 @@ class Importer:
         """Use several Gio.Task to import games from added sources"""
 
         self.create_dialog()
+
+        # Collect all errors and reset the cancellables for the managers
+        # - Only one importer exists at any given time
+        # - Every import starts fresh
+        self.collect_errors()
+        for manager in shared.store.managers.values():
+            manager.collect_errors()
+            if isinstance(manager, AsyncManager):
+                manager.reset_cancellable()
 
         for source in self.sources:
             logging.debug("Importing games from source %s", source.id)
@@ -129,10 +142,9 @@ class Importer:
                 iteration_result = next(iterator)
             except StopIteration:
                 break
-            except Exception as exception:  # pylint: disable=broad-exception-caught
-                logging.exception(
-                    "Exception in source %s", source.id, exc_info=exception
-                )
+            except Exception as error:  # pylint: disable=broad-exception-caught
+                logging.exception("%s in %s", type(error).__name__, source.id)
+                self.report_error(error)
                 continue
 
             # Handle the result depending on its type
@@ -202,9 +214,16 @@ class Importer:
         string = _("The following errors occured during import:")
         errors = ""
 
+        # Collect all errors that happened in the importer and the managers
+        collected_errors: list[Exception] = []
+        collected_errors.extend(self.collect_errors())
         for manager in shared.store.managers.values():
-            for error in manager.collect_errors():
-                errors += "\n\n" + str(error)
+            collected_errors.extend(manager.collect_errors())
+        for error in collected_errors:
+            # Only display friendly errors
+            if not isinstance(error, FriendlyError):
+                continue
+            errors += "\n\n" + str(error)
 
         if errors:
             create_dialog(

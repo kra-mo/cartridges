@@ -19,14 +19,15 @@
 
 import logging
 from abc import abstractmethod
-from threading import Lock
 from time import sleep
 from typing import Any, Callable, Container
 
+from src.errors.error_producer import ErrorProducer
+from src.errors.friendly_error import FriendlyError
 from src.game import Game
 
 
-class Manager:
+class Manager(ErrorProducer):
     """Class in charge of handling a post creation action for games.
 
     * May connect to signals on the game to handle them.
@@ -44,29 +45,9 @@ class Manager:
     retry_delay: int = 3
     max_tries: int = 3
 
-    errors: list[Exception]
-    errors_lock: Lock = None
-
     @property
     def name(self):
         return type(self).__name__
-
-    def __init__(self) -> None:
-        super().__init__()
-        self.errors = []
-        self.errors_lock = Lock()
-
-    def report_error(self, error: Exception):
-        """Report an error that happened in Manager.process_game"""
-        with self.errors_lock:
-            self.errors.append(error)
-
-    def collect_errors(self) -> list[Exception]:
-        """Get the errors produced by the manager and remove them from self.errors"""
-        with self.errors_lock:
-            errors = self.errors.copy()
-            self.errors.clear()
-        return errors
 
     @abstractmethod
     def manager_logic(self, game: Game, additional_data: dict) -> None:
@@ -87,6 +68,11 @@ class Manager:
         def handle_error(error: Exception):
             nonlocal tries
 
+            # If FriendlyError, handle its cause instead
+            base_error = error
+            if isinstance(error, FriendlyError):
+                error = error.__cause__
+
             log_args = (
                 type(error).__name__,
                 self.name,
@@ -105,7 +91,7 @@ class Manager:
                 if tries > self.max_tries:
                     # Handle being out of retries
                     logging.error(out_of_retries_format, *log_args)
-                    self.report_error(error)
+                    self.report_error(base_error)
                 else:
                     # Handle retryable errors
                     logging.error(retrying_format, *log_args)
@@ -116,7 +102,7 @@ class Manager:
             else:
                 # Handle unretryable errors
                 logging.error(unretryable_format, *log_args, exc_info=error)
-                self.report_error(error)
+                self.report_error(base_error)
 
         def try_manager_logic():
             try:

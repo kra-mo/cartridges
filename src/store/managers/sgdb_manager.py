@@ -21,10 +21,11 @@ from json import JSONDecodeError
 
 from requests.exceptions import HTTPError, SSLError
 
+from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.store.managers.async_manager import AsyncManager
-from src.store.managers.online_cover_manager import OnlineCoverManager
 from src.store.managers.local_cover_manager import LocalCoverManager
+from src.store.managers.online_cover_manager import OnlineCoverManager
 from src.store.managers.steam_api_manager import SteamAPIManager
 from src.utils.steamgriddb import SGDBAuthError, SGDBHelper
 
@@ -39,7 +40,10 @@ class SGDBManager(AsyncManager):
         try:
             sgdb = SGDBHelper()
             sgdb.conditionaly_update_cover(game)
-        except SGDBAuthError:
+        except SGDBAuthError as error:
             # If invalid auth, cancel all SGDBManager tasks
             self.cancellable.cancel()
-            raise
+            raise FriendlyError(
+                "Couldn't authenticate to SGDB",
+                "Verify your API key in the preferences",
+            ) from error

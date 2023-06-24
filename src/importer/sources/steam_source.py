@@ -30,10 +30,6 @@ from src.importer.sources.source import (
     SourceIterator,
     URLExecutableSource,
 )
-from src.utils.decorators import (
-    replaced_by_path,
-    replaced_by_schema_key,
-)
 from src.utils.steam import SteamFileHelper, SteamInvalidManifestError
 from src.importer.sources.location import Location
 

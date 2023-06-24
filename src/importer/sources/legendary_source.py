@@ -20,7 +20,6 @@
 import json
 import logging
 from json import JSONDecodeError
-from pathlib import Path
 from time import time
 from typing import Generator
 
