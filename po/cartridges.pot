@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 12:01+0200\n"
+"POT-Creation-Date: 2023-06-26 22:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:146
+#: src/main.py:153
 msgid "Cartridges"
 msgstr ""
 
@@ -375,7 +375,7 @@ msgid "About Cartridges"
 msgstr ""
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:164
+#: src/main.py:171
 msgid "translator_credits"
 msgstr ""
 
@@ -487,27 +487,6 @@ msgstr ""
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
-msgstr ""
-
-#: src/importer/sources/source.py:106
-msgid "Data"
-msgstr ""
-
-#: src/importer/sources/source.py:107
-msgid "Cache"
-msgstr ""
-
-#: src/importer/sources/source.py:108
-msgid "Configuration"
-msgstr ""
-
-#. The variables are the type of location (eg. cache) and the source's name (eg. Steam)
-#: src/importer/sources/source.py:119
-msgid "Invalid {} Location for {{}}"
-msgstr ""
-
-#: src/importer/sources/source.py:120
-msgid "Pick a new one or disable the source in preferences"
 msgstr ""
 
 #: src/store/managers/sgdb_manager.py:47
