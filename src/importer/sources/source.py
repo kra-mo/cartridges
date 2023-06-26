@@ -101,7 +101,13 @@ class Source(Iterable):
 
     def __iter__(self) -> SourceIterator:
         """Get an iterator for the source"""
-        for location_name in ("data", "cache", "config"):
+        for location_name in (
+            locations := {
+                "data": _("data"),
+                "cache": _("cache"),
+                "config": _("configuration"),
+            }.keys()
+        ):
             location = getattr(self, f"{location_name}_location", None)
             if location is None:
                 continue
@@ -109,9 +115,9 @@ class Source(Iterable):
                 location.resolve()
             except UnresolvableLocationError as error:
                 raise FriendlyError(
-                    # The variable is the source's name
-                    f"Invalid {location_name} location for {{}}",
-                    "Change it or disable the source in the preferences",
+                    # The variables are the type of location (eg. cache) and the source's name
+                    _("Invalid {} location for {{}}").format(locations[location_name]),
+                    _("Change it or disable the source in the preferences"),
                     (self.name,),
                     (self.name,),
                 ) from error

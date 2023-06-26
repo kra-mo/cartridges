@@ -16,12 +16,12 @@ class FriendlyError(Exception):
     @property
     def title(self) -> str:
         """Get the gettext translated error title"""
-        return _(self.title_format).format(self.title_args)
+        return self.title_format.format(self.title_args)
 
     @property
     def subtitle(self) -> str:
         """Get the gettext translated error subtitle"""
-        return _(self.subtitle_format).format(self.subtitle_args)
+        return self.subtitle_format.format(self.subtitle_args)
 
     def __init__(
         self,
