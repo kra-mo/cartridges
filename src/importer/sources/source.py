@@ -115,9 +115,9 @@ class Source(Iterable):
                 location.resolve()
             except UnresolvableLocationError as error:
                 raise FriendlyError(
-                    # The variables are the type of location (eg. cache) and the source's name
+                    # The variables are the type of location (eg. cache) and the source's name (eg. Steam)
                     _("Invalid {} Location for {{}}").format(locations[location_name]),
-                    _("Change it or disable the source in preferences"),
+                    _("Pick a new one or disable the source in preferences"),
                     (self.name,),
                     (self.name,),
                 ) from error
