@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-
+import json
 import sys
 
 import gi
@@ -27,16 +27,26 @@ gi.require_version("Adw", "1")
 # pylint: disable=wrong-import-position
 from gi.repository import Adw, Gio, GLib, Gtk
 
-from . import shared
-from .bottles_importer import bottles_importer
-from .details_window import DetailsWindow
-from .heroic_importer import heroic_importer
-from .importer import Importer
-from .itch_importer import itch_importer
-from .lutris_importer import lutris_importer
-from .preferences import PreferencesWindow
-from .steam_importer import steam_importer
-from .window import CartridgesWindow
+from src import shared
+from src.details_window import DetailsWindow
+from src.game import Game
+from src.importer.importer import Importer
+from src.importer.sources.bottles_source import BottlesSource
+from src.importer.sources.heroic_source import HeroicSource
+from src.importer.sources.itch_source import ItchSource
+from src.importer.sources.legendary_source import LegendarySource
+from src.importer.sources.lutris_source import LutrisSource
+from src.importer.sources.steam_source import SteamSource
+from src.logging.setup import log_system_info, setup_logging
+from src.preferences import PreferencesWindow
+from src.store.managers.display_manager import DisplayManager
+from src.store.managers.file_manager import FileManager
+from src.store.managers.local_cover_manager import LocalCoverManager
+from src.store.managers.online_cover_manager import OnlineCoverManager
+from src.store.managers.sgdb_manager import SGDBManager
+from src.store.managers.steam_api_manager import SteamAPIManager
+from src.store.store import Store
+from src.window import CartridgesWindow
 
 
 class CartridgesApplication(Adw.Application):
@@ -48,13 +58,15 @@ class CartridgesApplication(Adw.Application):
         )
 
     def do_activate(self):  # pylint: disable=arguments-differ
+        """Called on app creation"""
+
         # Set fallback icon-name
         Gtk.Window.set_default_icon_name(shared.APP_ID)
 
         # Create the main window
         self.win = self.props.active_window  # pylint: disable=no-member
         if not self.win:
-            self.win = CartridgesWindow(application=self)
+            shared.win = self.win = CartridgesWindow(application=self)
 
         # Save window geometry
         shared.state_schema.bind(
@@ -66,6 +78,21 @@ class CartridgesApplication(Adw.Application):
         shared.state_schema.bind(
             "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
+
+        # Create the games store ready to load games from disk
+        if not shared.store:
+            shared.store = Store()
+            shared.store.add_manager(FileManager(), False)
+            shared.store.add_manager(DisplayManager())
+
+        self.load_games_from_disk()
+
+        # Add rest of the managers for game imports
+        shared.store.add_manager(LocalCoverManager())
+        shared.store.add_manager(SteamAPIManager())
+        shared.store.add_manager(OnlineCoverManager())
+        shared.store.add_manager(SGDBManager())
+        shared.store.enable_manager_in_pipelines(FileManager)
 
         # Create actions
         self.create_actions(
@@ -106,6 +133,13 @@ class CartridgesApplication(Adw.Application):
 
         self.win.present()
 
+    def load_games_from_disk(self):
+        if shared.games_dir.is_dir():
+            for game_file in shared.games_dir.iterdir():
+                data = json.load(game_file.open())
+                game = Game(data, allow_side_effects=False)
+                shared.store.add_game(game, {"skip_save": True})
+
     def on_about_action(self, *_args):
         about = Adw.AboutWindow(
             transient_for=self.win,
@@ -115,9 +149,9 @@ class CartridgesApplication(Adw.Application):
             version=shared.VERSION,
             developers=[
                 "kramo https://kramo.hu",
+                "Geoffrey Coulaud https://geoffrey-coulaud.fr",
                 "Arcitec https://github.com/Arcitec",
                 "Domenico https://github.com/Domefemia",
-                "Geoffrey Coulaud https://geoffrey-coulaud.fr",
                 "Paweł Lidwin https://github.com/imLinguin",
                 "Rafael Mardojai CM https://mardojai.com",
             ],
@@ -141,6 +175,8 @@ class CartridgesApplication(Adw.Application):
             getattr(win, expander_row).set_expanded(True)
         win.present()
 
+        return win
+
     def on_launch_game_action(self, *_args):
         self.win.active_game.launch()
 
@@ -154,30 +190,27 @@ class CartridgesApplication(Adw.Application):
         DetailsWindow()
 
     def on_import_action(self, *_args):
-        shared.importer = Importer()
-
-        shared.importer.blocker = True
-
-        if shared.schema.get_boolean("steam"):
-            steam_importer()
+        importer = Importer()
 
         if shared.schema.get_boolean("lutris"):
-            lutris_importer()
+            importer.add_source(LutrisSource())
+
+        if shared.schema.get_boolean("steam"):
+            importer.add_source(SteamSource())
 
         if shared.schema.get_boolean("heroic"):
-            heroic_importer()
+            importer.add_source(HeroicSource())
 
         if shared.schema.get_boolean("bottles"):
-            bottles_importer()
+            importer.add_source(BottlesSource())
 
         if shared.schema.get_boolean("itch"):
-            itch_importer()
+            importer.add_source(ItchSource())
 
-        shared.importer.blocker = False
+        if shared.schema.get_boolean("legendary"):
+            importer.add_source(LegendarySource())
 
-        if shared.importer.import_dialog.is_visible and shared.importer.queue == 0:
-            shared.importer.queue = 1
-            shared.importer.save_game()
+        importer.run()
 
     def on_remove_game_action(self, *_args):
         self.win.active_game.remove_game()
@@ -223,6 +256,9 @@ class CartridgesApplication(Adw.Application):
             scope.add_action(simple_action)
 
 
-def main(version):  # pylint: disable=unused-argument
+def main(_version):
+    """App entry point"""
+    setup_logging()
+    log_system_info()
     app = CartridgesApplication()
     return app.run(sys.argv)

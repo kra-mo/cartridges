@@ -17,19 +17,19 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import json
+import logging
 import os
 import shlex
 import subprocess
 from pathlib import Path
 from time import time
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, GLib, GObject, Gtk
 
-from . import shared
-from .game_cover import GameCover
+from src import shared
 
 
+# pylint: disable=too-many-instance-attributes
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/game.ui")
 class Game(Gtk.Box):
     __gtype_name__ = "Game"
@@ -52,15 +52,16 @@ class Game(Gtk.Box):
     executable = None
     game_id = None
     source = None
-    hidden = None
-    last_played = None
+    hidden = False
+    last_played = 0
     name = None
     developer = None
-    removed = None
-    blacklisted = None
+    removed = False
+    blacklisted = False
     game_cover = None
+    version = 0
 
-    def __init__(self, data, **kwargs):
+    def __init__(self, data, allow_side_effects=True, **kwargs):
         super().__init__(**kwargs)
 
         self.win = shared.win
@@ -69,7 +70,8 @@ class Game(Gtk.Box):
 
         self.update_values(data)
 
-        self.win.games[self.game_id] = self
+        if allow_side_effects:
+            self.win.games[self.game_id] = self
 
         self.set_play_icon()
 
@@ -77,89 +79,23 @@ class Game(Gtk.Box):
         self.add_controller(self.event_contoller_motion)
         self.event_contoller_motion.connect("enter", self.toggle_play, False)
         self.event_contoller_motion.connect("leave", self.toggle_play, None, None)
-
         self.cover_button.connect("clicked", self.main_button_clicked, False)
         self.play_button.connect("clicked", self.main_button_clicked, True)
 
         shared.schema.connect("changed", self.schema_changed)
 
-    def update(self):
-        if self.get_parent():
-            self.get_parent().get_parent().remove(self)
-            if self.get_parent():
-                self.get_parent().set_child()
-
-        self.menu_button.set_menu_model(
-            self.hidden_game_options if self.hidden else self.game_options
-        )
-
-        self.title.set_label(self.name)
-
-        self.menu_button.get_popover().connect(
-            "notify::visible", self.toggle_play, None
-        )
-        self.menu_button.get_popover().connect(
-            "notify::visible", self.win.set_active_game, self
-        )
-
-        if self.game_id in self.win.game_covers:
-            self.game_cover = self.win.game_covers[self.game_id]
-            self.game_cover.add_picture(self.cover)
-        else:
-            self.game_cover = GameCover({self.cover}, self.get_cover_path())
-            self.win.game_covers[self.game_id] = self.game_cover
-
-        if (
-            self.win.stack.get_visible_child() == self.win.details_view
-            and self.win.active_game == self
-        ):
-            self.win.show_details_view(self)
-
-        if not self.removed and not self.blacklisted:
-            if self.hidden:
-                self.win.hidden_library.append(self)
-            else:
-                self.win.library.append(self)
-            self.get_parent().set_focusable(False)
-
-        self.win.set_library_child()
-
     def update_values(self, data):
         for key, value in data.items():
+            # Convert executables to strings
+            if key == "executable" and isinstance(value, list):
+                value = shlex.join(value)
             setattr(self, key, value)
 
+    def update(self):
+        self.emit("update-ready", {})
+
     def save(self):
-        shared.games_dir.mkdir(parents=True, exist_ok=True)
-
-        attrs = (
-            "added",
-            "executable",
-            "game_id",
-            "source",
-            "hidden",
-            "last_played",
-            "name",
-            "developer",
-            "removed",
-            "blacklisted",
-            "version",
-        )
-
-        # TODO: remove for 2.0
-        attrs = list(attrs)
-        if not self.removed:
-            attrs.remove("removed")
-        if not self.blacklisted:
-            attrs.remove("blacklisted")
-
-        json.dump(
-            {attr: getattr(self, attr) for attr in attrs if attr},
-            (shared.games_dir / f"{self.game_id}.json").open("w"),
-            indent=4,
-            sort_keys=True,
-        )
-
-        self.update()
+        self.emit("save-ready", {})
 
     def create_toast(self, title, action=None):
         toast = Adw.Toast.new(title.format(self.name))
@@ -180,19 +116,16 @@ class Game(Gtk.Box):
     def launch(self):
         self.last_played = int(time())
         self.save()
-
-        string = (
-            self.executable
-            if isinstance(self.executable, str)
-            else shlex.join(self.executable)
-        )
+        self.update()
 
         args = (
-            "flatpak-spawn --host /bin/sh -c " + shlex.quote(string)  # Flatpak
+            "flatpak-spawn --host /bin/sh -c " + shlex.quote(self.executable)  # Flatpak
             if os.getenv("FLATPAK_ID") == shared.APP_ID
-            else string  # Others
+            else self.executable  # Others
         )
 
+        logging.info("Starting %s: %s", self.name, str(args))
+        # pylint: disable=consider-using-with
         subprocess.Popen(
             args,
             cwd=Path.home(),
@@ -210,6 +143,7 @@ class Game(Gtk.Box):
     def toggle_hidden(self, toast=True):
         self.hidden = not self.hidden
         self.save()
+        self.update()
 
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action()
@@ -217,7 +151,9 @@ class Game(Gtk.Box):
         if toast:
             self.create_toast(
                 # The variable is the title of the game
-                (_("{} hidden") if self.hidden else _("{} unhidden")).format(self.name),
+                (_("{} hidden") if self.hidden else _("{} unhidden")).format(
+                    GLib.markup_escape_text(self.name)
+                ),
                 "hide",
             )
 
@@ -225,12 +161,15 @@ class Game(Gtk.Box):
         # Add "removed=True" to the game properties so it can be deleted on next init
         self.removed = True
         self.save()
+        self.update()
 
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action()
 
         # The variable is the title of the game
-        self.create_toast(_("{} removed").format(self.name), "remove")
+        self.create_toast(
+            _("{} removed").format(GLib.markup_escape_text(self.name)), "remove"
+        )
 
     def set_loading(self, state):
         self.loading += state
@@ -271,3 +210,11 @@ class Game(Gtk.Box):
     def schema_changed(self, _settings, key):
         if key == "cover-launches-game":
             self.set_play_icon()
+
+    @GObject.Signal(name="update-ready", arg_types=[object])
+    def update_ready(self, _additional_data) -> None:
+        """Signal emitted when the game needs updating"""
+
+    @GObject.Signal(name="save-ready", arg_types=[object])
+    def save_ready(self, _additional_data) -> None:
+        """Signal emitted when the game needs saving"""

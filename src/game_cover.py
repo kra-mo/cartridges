@@ -17,22 +17,25 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import GdkPixbuf, Gio, GLib
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib
 from PIL import Image, ImageFilter, ImageStat
 
-from . import shared
+from src import shared
 
 
 class GameCover:
-    pixbuf = None
+    texture = None
     blurred = None
     luminance = None
     path = None
     animation = None
     anim_iter = None
 
-    placeholder_pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
-        shared.PREFIX + "/library_placeholder.svg", 400, 600, False
+    placeholder = Gdk.Texture.new_from_resource(
+        shared.PREFIX + "/library_placeholder.svg"
+    )
+    placeholder_small = Gdk.Texture.new_from_resource(
+        shared.PREFIX + "/library_placeholder_small.svg"
     )
 
     def __init__(self, pictures, path=None):
@@ -51,7 +54,7 @@ class GameCover:
 
     def new_cover(self, path=None):
         self.animation = None
-        self.pixbuf = None
+        self.texture = None
         self.blurred = None
         self.luminance = None
         self.path = path
@@ -61,13 +64,17 @@ class GameCover:
                 task = Gio.Task.new()
                 task.run_in_thread(self.create_func(self.path))
             else:
-                self.pixbuf = GdkPixbuf.Pixbuf.new_from_file(str(path))
+                self.texture = Gdk.Texture.new_from_filename(str(path))
 
         if not self.animation:
-            self.set_pixbuf(self.pixbuf)
+            self.set_texture(self.texture)
 
-    def get_pixbuf(self):
-        return self.animation.get_static_image() if self.animation else self.pixbuf
+    def get_texture(self):
+        return (
+            Gdk.Texture.new_for_pixbuf(self.animation.get_static_image())
+            if self.animation
+            else self.texture
+        )
 
     def get_blurred(self):
         if not self.blurred:
@@ -82,7 +89,7 @@ class GameCover:
                     tmp_path = Gio.File.new_tmp(None)[0].get_path()
                     image.save(tmp_path, "tiff", compression=None)
 
-                    self.blurred = GdkPixbuf.Pixbuf.new_from_file(tmp_path)
+                    self.blurred = Gdk.Texture.new_from_filename(tmp_path)
 
                     stat = ImageStat.Stat(image.convert("L"))
 
@@ -92,20 +99,17 @@ class GameCover:
                         (stat.mean[0] + stat.extrema[0][1]) / 510,
                     )
             else:
-                self.blurred = GdkPixbuf.Pixbuf.new_from_resource_at_scale(
-                    shared.PREFIX + "/library_placeholder.svg", 2, 2, False
-                )
-
-                self.luminance = (0.1, 0.8)
+                self.blurred = self.placeholder_small
+                self.luminance = (0.3, 0.5)
 
         return self.blurred
 
     def add_picture(self, picture):
         self.pictures.add(picture)
         if not self.animation:
-            self.set_pixbuf(self.pixbuf)
+            self.set_texture(self.texture)
 
-    def set_pixbuf(self, pixbuf):
+    def set_texture(self, texture):
         self.pictures.discard(
             picture for picture in self.pictures if not picture.is_visible()
         )
@@ -113,15 +117,13 @@ class GameCover:
             self.animation = None
         else:
             for picture in self.pictures:
-                if not pixbuf:
-                    pixbuf = self.placeholder_pixbuf
-                picture.set_pixbuf(pixbuf)
+                picture.set_paintable(texture or self.placeholder)
 
     def update_animation(self, data):
         if self.animation == data[1]:
             self.anim_iter.advance()
 
-            self.set_pixbuf(self.anim_iter.get_pixbuf())
+            self.set_texture(Gdk.Texture.new_for_pixbuf(self.anim_iter.get_pixbuf()))
 
             delay_time = self.anim_iter.get_delay_time()
             GLib.timeout_add(

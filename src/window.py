@@ -17,13 +17,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import json
-from datetime import datetime
+from gi.repository import Adw, Gtk
 
-from gi.repository import Adw, GLib, Gtk
-
-from . import shared
-from .game import Game
+from src import shared
+from src.utils.relative_date import relative_date
 
 
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/window.ui")
@@ -77,8 +74,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        shared.win = self
-
         self.previous_page = self.library_view
 
         self.details_view.set_measure_overlay(self.details_view_box, True)
@@ -94,30 +89,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.notice_empty.set_icon_name(shared.APP_ID + "-symbolic")
 
-        if "Devel" in shared.APP_ID:
+        if shared.PROFILE == "development":
             self.add_css_class("devel")
-
-        games = {}
-
-        if shared.games_dir.is_dir():
-            for open_file in shared.games_dir.iterdir():
-                data = json.load(open_file.open())
-                games[data["game_id"]] = data
-
-        for game_id, game in games.items():
-            if (version := game.get("version")) and version > shared.SPEC_VERSION:
-                continue
-
-            if game.get("removed"):
-                for path in (
-                    shared.games_dir / f"{game_id}.json",
-                    shared.covers_dir / f"{game_id}.tiff",
-                    shared.covers_dir / f"{game_id}.gif",
-                ):
-                    path.unlink(missing_ok=True)
-
-            else:
-                Game(game).update()
 
         # Connect search entries
         self.search_bar.connect_entry(self.search_entry)
@@ -184,19 +157,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def set_active_game(self, _widget, _pspec, game):
         self.active_game = game
 
-    def get_time(self, timestamp):
-        days_no = (datetime.today() - datetime.fromtimestamp(timestamp)).days
-
-        if days_no == 0:
-            return _("Today")
-        if days_no == 1:
-            return _("Yesterday")
-        if days_no < 8:
-            return GLib.DateTime.new_from_unix_utc(timestamp).format("%A")
-        if days_no < 335:
-            return GLib.DateTime.new_from_unix_utc(timestamp).format("%B")
-        return GLib.DateTime.new_from_unix_utc(timestamp).format("%Y")
-
     def show_details_view(self, game):
         self.active_game = game
 
@@ -219,20 +179,20 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.details_view_game_cover = game.game_cover
         self.details_view_game_cover.add_picture(self.details_view_cover)
 
-        self.details_view_blurred_cover.set_pixbuf(
+        self.details_view_blurred_cover.set_paintable(
             self.details_view_game_cover.get_blurred()
         )
 
         self.details_view_title.set_label(game.name)
         self.details_view_header_bar_title.set_title(game.name)
 
-        date = self.get_time(game.added)
+        date = relative_date(game.added)
         self.details_view_added.set_label(
             # The variable is the date when the game was added
             _("Added: {}").format(date)
         )
         last_played_date = (
-            self.get_time(game.last_played) if game.last_played != 0 else _("Never")
+            relative_date(game.last_played) if game.last_played else _("Never")
         )
         self.details_view_last_played.set_label(
             # The variable is the date when the game was last played
@@ -365,6 +325,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         elif undo == "remove":
             game.removed = False
             game.save()
+            game.update()
 
         self.toasts[(game, undo)].dismiss()
         self.toasts.pop((game, undo))

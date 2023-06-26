@@ -55,6 +55,6 @@ if __name__ == "__main__":
     resource = Gio.Resource.load(os.path.join(pkgdatadir, "cartridges.gresource"))
     resource._register()
 
-    from cartridges import main
+    from src import main
 
     sys.exit(main.main(VERSION))

@@ -22,9 +22,9 @@ from pathlib import Path
 from shutil import copyfile
 
 from gi.repository import Gio
-from PIL import Image, ImageSequence
+from PIL import Image, ImageSequence, UnidentifiedImageError
 
-from . import shared
+from src import shared
 
 
 def resize_cover(cover_path=None, pixbuf=None):
@@ -35,32 +35,35 @@ def resize_cover(cover_path=None, pixbuf=None):
         cover_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
         pixbuf.savev(str(cover_path), "tiff", ["compression"], ["1"])
 
-    with Image.open(cover_path) as image:
-        if getattr(image, "is_animated", False):
-            frames = tuple(
-                frame.resize((200, 300)) for frame in ImageSequence.Iterator(image)
-            )
+    try:
+        with Image.open(cover_path) as image:
+            if getattr(image, "is_animated", False):
+                frames = tuple(
+                    frame.resize((200, 300)) for frame in ImageSequence.Iterator(image)
+                )
 
-            tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
-            frames[0].save(
-                tmp_path,
-                save_all=True,
-                append_images=frames[1:],
-            )
+                tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
+                frames[0].save(
+                    tmp_path,
+                    save_all=True,
+                    append_images=frames[1:],
+                )
 
-        else:
-            # This might not be necessary in the future
-            # https://github.com/python-pillow/Pillow/issues/2663
-            if image.mode not in ("RGB", "RGBA"):
-                image = image.convert("RGBA")
+            else:
+                # This might not be necessary in the future
+                # https://github.com/python-pillow/Pillow/issues/2663
+                if image.mode not in ("RGB", "RGBA"):
+                    image = image.convert("RGBA")
 
-            tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
-            image.resize(shared.image_size).save(
-                tmp_path,
-                compression="tiff_adobe_deflate"
-                if shared.schema.get_boolean("high-quality-images")
-                else "webp",
-            )
+                tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
+                image.resize(shared.image_size).save(
+                    tmp_path,
+                    compression="tiff_adobe_deflate"
+                    if shared.schema.get_boolean("high-quality-images")
+                    else "webp",
+                )
+    except UnidentifiedImageError:
+        return None
 
     return tmp_path
 

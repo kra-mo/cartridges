@@ -25,6 +25,7 @@ from gi.repository import Gdk, Gio
 APP_ID = "@APP_ID@"
 VERSION = "@VERSION@"
 PREFIX = "@PREFIX@"
+PROFILE = "@PROFILE@"
 SPEC_VERSION = 1.5  # The version of the game_id.json spec
 
 schema = Gio.Settings.new(APP_ID)
@@ -49,6 +50,9 @@ cache_dir = (
 games_dir = data_dir / "cartridges" / "games"
 covers_dir = data_dir / "cartridges" / "covers"
 
+appdata_dir = Path(os.getenv("appdata") or "C:\\Users\\Default\\AppData\\Roaming")
+programfiles32_dir = Path(os.getenv("programfiles(x86)") or "C:\\Program Files (x86)")
+
 scale_factor = max(
     monitor.get_scale_factor() for monitor in Gdk.Display.get_default().get_monitors()
 )
@@ -57,3 +61,4 @@ image_size = (200 * scale_factor, 300 * scale_factor)
 # pylint: disable=invalid-name
 win = None
 importer = None
+store = None

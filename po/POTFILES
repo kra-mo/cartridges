@@ -2,7 +2,7 @@ data/hu.kramo.Cartridges.desktop.in
 data/hu.kramo.Cartridges.gschema.xml.in
 data/hu.kramo.Cartridges.metainfo.xml.in
 
-data/gtk/details_window.blp
+data/gtk/details-window.blp
 data/gtk/game.blp
 data/gtk/help-overlay.blp
 data/gtk/preferences.blp
@@ -15,5 +15,5 @@ src/game.py
 src/preferences.py
 
 src/utils/create_dialog.py
-src/utils/importer.py
-src/utils/steamgriddb.py
+src/importer/sources/source.py
+src/store/managers/sgdb_manager.py

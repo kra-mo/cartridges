@@ -18,21 +18,21 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
-import shlex
 from time import time
 
 from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
 
-from . import shared
-from .create_dialog import create_dialog
-from .game import Game
-from .game_cover import GameCover
-from .save_cover import resize_cover, save_cover
-from .steamgriddb import SGDBSave
+from src import shared
+from src.errors.friendly_error import FriendlyError
+from src.game import Game
+from src.game_cover import GameCover
+from src.store.managers.sgdb_manager import SGDBManager
+from src.utils.create_dialog import create_dialog
+from src.utils.save_cover import resize_cover, save_cover
 
 
-@Gtk.Template(resource_path=shared.PREFIX + "/gtk/details_window.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "/gtk/details-window.ui")
 class DetailsWindow(Adw.Window):
     __gtype_name__ = "DetailsWindow"
 
@@ -48,6 +48,7 @@ class DetailsWindow(Adw.Window):
     executable = Gtk.Template.Child()
 
     exec_info_label = Gtk.Template.Child()
+    exec_info_popover = Gtk.Template.Child()
 
     apply_button = Gtk.Template.Child()
 
@@ -67,15 +68,11 @@ class DetailsWindow(Adw.Window):
             self.name.set_text(self.game.name)
             if self.game.developer:
                 self.developer.set_text(self.game.developer)
-            self.executable.set_text(
-                self.game.executable
-                if isinstance(self.game.executable, str)
-                else shlex.join(self.game.executable)
-            )
+            self.executable.set_text(self.game.executable)
             self.apply_button.set_label(_("Apply"))
 
             self.game_cover.new_cover(self.game.get_cover_path())
-            if self.game_cover.get_pixbuf():
+            if self.game_cover.get_texture():
                 self.cover_button_delete_revealer.set_reveal_child(True)
         else:
             self.set_title(_("Add New Game"))
@@ -109,11 +106,17 @@ class DetailsWindow(Adw.Window):
             file_path = _("/path/to/{}").format(file_name)
             command = "xdg-open"
 
+        # pylint: disable=line-too-long
         exec_info_text = _(
             'To launch the executable "{}", use the command:\n\n<tt>"{}"</tt>\n\nTo open the file "{}" with the default application, use:\n\n<tt>{} "{}"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!'
         ).format(exe_name, exe_path, file_name, command, file_path)
 
         self.exec_info_label.set_label(exec_info_text)
+
+        def clear_info_selection(*_args):
+            self.exec_info_label.select_region(0, 0)
+
+        self.exec_info_popover.connect("show", clear_info_selection)
 
         self.cover_button_delete.connect("clicked", self.delete_pixbuf)
         self.cover_button_edit.connect("clicked", self.choose_cover)
@@ -151,21 +154,23 @@ class DetailsWindow(Adw.Window):
                 return
 
             # Increment the number after the game id (eg. imported_1, imported_2)
-
             numbers = [0]
-
-            for current_game in self.win.games:
-                if "imported_" in current_game:
-                    numbers.append(int(current_game.replace("imported_", "")))
+            game_id: str
+            for game_id in shared.store.games:
+                prefix = "imported_"
+                if not game_id.startswith(prefix):
+                    continue
+                numbers.append(int(game_id.replace(prefix, "", 1)))
+            game_number = max(numbers) + 1
 
             self.game = Game(
                 {
-                    "game_id": f"imported_{str(max(numbers) + 1)}",
+                    "game_id": f"imported_{game_number}",
                     "hidden": False,
                     "source": "imported",
                     "added": int(time()),
-                    "last_played": 0,
                 },
+                allow_side_effects=False,
             )
 
         else:
@@ -200,15 +205,43 @@ class DetailsWindow(Adw.Window):
                 self.game_cover.path,
             )
 
+        shared.store.add_game(self.game, {}, run_pipeline=False)
         self.game.save()
+        self.game.update()
 
-        if not self.game_cover.get_pixbuf():
-            SGDBSave({self.game})
+        # TODO: this is fucked up (less than before)
+        # Get a cover from SGDB if none is present
+        if not self.game_cover.get_texture():
+            self.game.set_loading(1)
+            sgdb_manager: SGDBManager = shared.store.managers[SGDBManager]
+            sgdb_manager.reset_cancellable()
+            sgdb_manager.process_game(self.game, {}, self.update_cover_callback)
 
         self.game_cover.pictures.remove(self.cover)
 
         self.close()
         self.win.show_details_view(self.game)
+
+    def update_cover_callback(self, manager: SGDBManager):
+        # Set the game as not loading
+        self.game.set_loading(-1)
+        self.game.update()
+
+        # Handle errors that occured
+        for error in manager.collect_errors():
+            # On auth error, inform the user
+            if isinstance(error, FriendlyError):
+                create_dialog(
+                    shared.win,
+                    error.title,
+                    error.subtitle,
+                    "open_preferences",
+                    _("Preferences"),
+                ).connect("response", self.update_cover_error_response)
+
+    def update_cover_error_response(self, _widget, response):
+        if response == "open_preferences":
+            shared.win.get_application().on_preferences_action(page_name="sgdb")
 
     def focus_executable(self, *_args):
         self.set_focus(self.executable)
@@ -224,11 +257,11 @@ class DetailsWindow(Adw.Window):
         except GLib.GError:
             return
 
-        self.cover_button_delete_revealer.set_reveal_child(True)
-        self.cover_changed = True
-
         def resize():
-            self.game_cover.new_cover(resize_cover(path))
+            if cover := resize_cover(path):
+                self.game_cover.new_cover(cover)
+                self.cover_button_delete_revealer.set_reveal_child(True)
+                self.cover_changed = True
             self.toggle_loading()
 
         self.toggle_loading()

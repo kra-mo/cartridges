@@ -1,6 +1,7 @@
-# check_install.py
+# sqlite.py
 #
 # Copyright 2022-2023 kramo
+# Copyright 2023 Geoffrey Coulaud
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,16 +18,20 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+from glob import escape
 from pathlib import Path
+from shutil import copyfile
+
+from gi.repository import GLib
 
 
-# TODO delegate to the sources
-def check_install(check, locations, setting=None, subdirs=(Path(),)):
-    for location in locations:
-        for subdir in (Path(),) + subdirs:
-            if (location / subdir / check).exists():
-                if setting:
-                    setting[0].set_string(setting[1], str(location / subdir))
-                return location / subdir
-
-    return False
+def copy_db(original_path: Path) -> Path:
+    """
+    Copy a sqlite database to a cache dir and return its new path.
+    The caller in in charge of deleting the returned path's parent dir.
+    """
+    tmp = Path(GLib.Dir.make_tmp())
+    for file in original_path.parent.glob(f"{escape(original_path.name)}*"):
+        copy = tmp / file.name
+        copyfile(str(file), str(copy))
+    return tmp / original_path.name

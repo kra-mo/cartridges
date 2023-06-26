@@ -1,0 +1,32 @@
+[MAIN]
+
+ignore=importers
+
+
+[MESSAGES CONTROL]
+
+disable=raw-checker-failed,
+        bad-inline-option,
+        locally-disabled,
+        file-ignored,
+        suppressed-message,
+        useless-suppression,
+        deprecated-pragma,
+        use-symbolic-message-instead,
+        too-few-public-methods,
+        missing-function-docstring,
+        missing-class-docstring,
+        missing-module-docstring,
+        relative-beyond-top-level,
+        import-error,
+        no-name-in-module
+
+
+[TYPECHECK]
+
+ignored-classes=Child
+
+
+[VARIABLES]
+
+additional-builtins=_
