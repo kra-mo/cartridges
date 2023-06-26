@@ -94,7 +94,7 @@ class SessionFileHandler(StreamHandler):
         self.rotate()
         shared.log_files = self.get_files()
         self.log_file = lzma.open(
-            self.filename, "xt", format=FORMAT_XZ, preset=PRESET_DEFAULT
+            self.filename, "at", format=FORMAT_XZ, preset=PRESET_DEFAULT
         )
         super().__init__(self.log_file)
 
