@@ -60,7 +60,7 @@ class Manager(ErrorProducer):
         """
 
     def execute_resilient_manager_logic(self, game: Game, additional_data: dict):
-        """Handle errors (retry, ignore or raise) that occur the manager logic"""
+        """Handle errors (retry, ignore or raise) that occur in the manager logic"""
 
         # Keep track of the number of tries
         tries = 1
