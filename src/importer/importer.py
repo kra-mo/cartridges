@@ -218,7 +218,14 @@ class Importer(ErrorProducer):
             errors.extend(manager.collect_errors())
 
         # Filter out non friendly errors
-        errors = list(filter(lambda error: isinstance(error, FriendlyError), errors))
+        errors = set(
+            tuple(
+                (error.title, error.subtitle)
+                for error in (
+                    filter(lambda error: isinstance(error, FriendlyError), errors)
+                )
+            )
+        )
 
         # No error to display
         if not errors:
@@ -235,9 +242,8 @@ class Importer(ErrorProducer):
         dialog.set_transient_for(shared.win)
 
         if len(errors) == 1:
-            # Display the single error in the dialog body
-            error = errors[0]
-            dialog.set_body(f"{error.title}\n{error.subtitle}")
+            dialog.set_heading((error := next(iter(errors)))[0])
+            dialog.set_body(error[1])
         else:
             # Display the errors in a list
             list_box = Gtk.ListBox()
@@ -246,13 +252,12 @@ class Importer(ErrorProducer):
             list_box.set_margin_top(16)
             for error in errors:
                 row = Adw.ActionRow()
-                row.set_title(error.title)
-                row.set_subtitle(error.subtitle)
+                row.set_title(error[0])
+                row.set_subtitle(error[1])
                 list_box.append(row)
-            dialog.set_body(_("The following errors occured during import"))
+            dialog.set_body(_("The following errors occured during import:"))
             dialog.set_extra_child(list_box)
 
-        # Dialog is ready, present it
         dialog.present()
 
     def create_summary_toast(self):
