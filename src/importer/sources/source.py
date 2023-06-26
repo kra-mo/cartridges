@@ -103,9 +103,9 @@ class Source(Iterable):
         """Get an iterator for the source"""
         for location_name in (
             locations := {
-                "data": _("data"),
-                "cache": _("cache"),
-                "config": _("configuration"),
+                "data": _("Data"),
+                "cache": _("Cache"),
+                "config": _("Configuration"),
             }.keys()
         ):
             location = getattr(self, f"{location_name}_location", None)
@@ -116,8 +116,8 @@ class Source(Iterable):
             except UnresolvableLocationError as error:
                 raise FriendlyError(
                     # The variables are the type of location (eg. cache) and the source's name
-                    _("Invalid {} location for {{}}").format(locations[location_name]),
-                    _("Change it or disable the source in the preferences"),
+                    _("Invalid {} Location for {{}}").format(locations[location_name]),
+                    _("Change it or disable the source in preferences"),
                     (self.name,),
                     (self.name,),
                 ) from error
