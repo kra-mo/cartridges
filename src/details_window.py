@@ -24,15 +24,15 @@ from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
 
 from src import shared
+from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.game_cover import GameCover
 from src.store.managers.sgdb_manager import SGDBManager
 from src.utils.create_dialog import create_dialog
 from src.utils.save_cover import resize_cover, save_cover
-from src.utils.steamgriddb import SGDBAuthError
 
 
-@Gtk.Template(resource_path=shared.PREFIX + "/gtk/details_window.ui")
+@Gtk.Template(resource_path=shared.PREFIX + "/gtk/details-window.ui")
 class DetailsWindow(Adw.Window):
     __gtype_name__ = "DetailsWindow"
 
@@ -230,11 +230,11 @@ class DetailsWindow(Adw.Window):
         # Handle errors that occured
         for error in manager.collect_errors():
             # On auth error, inform the user
-            if isinstance(error, SGDBAuthError):
+            if isinstance(error, FriendlyError):
                 create_dialog(
                     shared.win,
-                    _("Couldn't Connect to SteamGridDB"),
-                    str(error),
+                    error.title,
+                    error.subtitle,
                     "open_preferences",
                     _("Preferences"),
                 ).connect("response", self.update_cover_error_response)

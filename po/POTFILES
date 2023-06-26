@@ -15,5 +15,5 @@ src/game.py
 src/preferences.py
 
 src/utils/create_dialog.py
-src/utils/importer.py
-src/utils/steamgriddb.py
+src/importer/sources/source.py
+src/store/managers/sgdb_manager.py
