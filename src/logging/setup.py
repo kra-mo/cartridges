@@ -54,7 +54,7 @@ def setup_logging():
                 "formatter": "file_formatter",
                 "level": "DEBUG",
                 "filename": log_filename,
-                "backup_count": 3,
+                "backup_count": 2,
             },
             "app_console_handler": {
                 "class": "logging.StreamHandler",

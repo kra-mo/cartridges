@@ -24,6 +24,8 @@ from lzma import FORMAT_XZ, PRESET_DEFAULT
 from os import PathLike
 from pathlib import Path
 
+from src import shared
+
 
 class SessionFileHandler(StreamHandler):
     """
@@ -39,15 +41,15 @@ class SessionFileHandler(StreamHandler):
         """Create the log dir if needed"""
         self.filename.parent.mkdir(exist_ok=True, parents=True)
 
-    def rotate_file(self, file: Path):
+    def rotate_file(self, path: Path):
         """Rotate a file's number suffix and remove it if it's too old"""
 
         # Skip non interesting dir entries
-        if not (file.is_file() and file.name.startswith(self.filename.name)):
+        if not (path.is_file() and path.name.startswith(self.filename.name)):
             return
 
         # Compute the new number suffix
-        suffixes = file.suffixes
+        suffixes = path.suffixes
         has_number = len(suffixes) != len(self.filename.suffixes)
         current_number = 0 if not has_number else int(suffixes[-1][1:])
         new_number = current_number + 1
@@ -56,40 +58,43 @@ class SessionFileHandler(StreamHandler):
         if has_number:
             suffixes.pop()
         suffixes.append(f".{new_number}")
-        stem = file.name.split(".", maxsplit=1)[0]
+        stem = path.name.split(".", maxsplit=1)[0]
         new_name = stem + "".join(suffixes)
-        file = file.rename(file.with_name(new_name))
+        path = path.rename(path.with_name(new_name))
 
         # Remove older files
         if new_number > self.backup_count:
-            file.unlink()
+            path.unlink()
             return
 
-    def file_sort_key(self, file: Path) -> int:
+    def file_sort_key(self, path: Path) -> int:
         """Key function used to sort files"""
-        if not file.name.startswith(self.filename.name):
+        if not path.name.startswith(self.filename.name):
             # First all files that aren't logs
             return -1
-        if file.name == self.filename.name:
+        if path.name == self.filename.name:
             # Then the latest log file
             return 0
         # Then in order the other log files
-        return int(file.suffixes[-1][1:])
+        return int(path.suffixes[-1][1:])
+
+    def get_files(self) -> list[Path]:
+        return list(self.filename.parent.iterdir())
 
     def rotate(self) -> None:
         """Rotate the numbered suffix on the log files and remove old ones"""
-        files = list(self.filename.parent.iterdir())
-        files.sort(key=self.file_sort_key, reverse=True)
-        for file in files:
-            self.rotate_file(file)
+        (files := self.get_files()).sort(key=self.file_sort_key, reverse=True)
+        for path in files:
+            self.rotate_file(path)
 
     def __init__(self, filename: PathLike, backup_count: int = 2) -> None:
         self.filename = Path(filename)
         self.backup_count = backup_count
         self.create_dir()
         self.rotate()
+        shared.log_files = self.get_files()
         self.log_file = lzma.open(
-            self.filename, "at", format=FORMAT_XZ, preset=PRESET_DEFAULT
+            self.filename, "xt", format=FORMAT_XZ, preset=PRESET_DEFAULT
         )
         super().__init__(self.log_file)
 

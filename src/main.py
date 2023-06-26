@@ -16,7 +16,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+
 import json
+import lzma
 import sys
 
 import gi
@@ -141,6 +143,11 @@ class CartridgesApplication(Adw.Application):
                 shared.store.add_game(game, {"skip_save": True})
 
     def on_about_action(self, *_args):
+        debug_str = ""
+        for path in shared.log_files:
+            log_file = lzma.open(path, "rt", encoding="utf-8")
+            debug_str += log_file.read()
+
         about = Adw.AboutWindow(
             transient_for=self.win,
             application_name=_("Cartridges"),
@@ -162,6 +169,7 @@ class CartridgesApplication(Adw.Application):
             website="https://github.com/kra-mo/cartridges",
             # Translators: Replace this with your name for it to show up in the about window
             translator_credits=_("translator_credits"),
+            debug_info=debug_str,
         )
         about.present()
 

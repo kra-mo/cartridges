@@ -62,3 +62,4 @@ image_size = (200 * scale_factor, 300 * scale_factor)
 win = None
 importer = None
 store = None
+log_files = None
