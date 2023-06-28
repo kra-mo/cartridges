@@ -6,6 +6,6 @@
 }
 
 #details_view_play_button {
-    color: @dark_5;
-    background-color: @light_1;
+    color: rgba(0, 0, 0, .8);
+    background-color: white;
 }
