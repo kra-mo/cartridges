@@ -20,6 +20,7 @@
 import logging
 import logging.config as logging_dot_config
 import os
+import platform
 import subprocess
 import sys
 
@@ -41,7 +42,7 @@ def setup_logging():
         "version": 1,
         "formatters": {
             "file_formatter": {
-                "format": "%(asctime)s: %(levelname)s: %(message)s",
+                "format": "%(asctime)s - %(levelname)s: %(message)s",
                 "datefmt": "%M:%S",
             },
             "console_formatter": {
@@ -92,9 +93,8 @@ def log_system_info():
     """Log system debug information"""
 
     logging.debug("Starting %s v%s (%s)", shared.APP_ID, shared.VERSION, shared.PROFILE)
-    logging.debug("System: %s", sys.platform)
     logging.debug("Python version: %s", sys.version)
-    if os.getenv("FLATPAK_ID"):
+    if os.getenv("FLATPAK_ID") == shared.APP_ID:
         process = subprocess.run(
             ("flatpak-spawn", "--host", "flatpak", "--version"),
             capture_output=True,
@@ -102,11 +102,8 @@ def log_system_info():
             check=False,
         )
         logging.debug("Flatpak version: %s", process.stdout.rstrip())
+    logging.debug("Platform: %s", platform.platform())
     if os.name == "posix":
-        uname = os.uname()
-        logging.debug("Uname info:")
-        logging.debug("\tsysname: %s", uname.sysname)
-        logging.debug("\trelease: %s", uname.release)
-        logging.debug("\tversion: %s", uname.version)
-        logging.debug("\tmachine: %s", uname.machine)
+        for key, value in platform.uname()._asdict().items():
+            logging.debug("\t%s: %s", key.title(), value)
     logging.debug("─" * 37)
