@@ -143,10 +143,16 @@ class CartridgesApplication(Adw.Application):
                 shared.store.add_game(game, {"skip_save": True})
 
     def on_about_action(self, *_args):
+        # Get the debug info from the log files
         debug_str = ""
         for path in shared.log_files:
-            log_file = lzma.open(path, "rt", encoding="utf-8")
+            log_file = (
+                lzma.open(path, "rt", encoding="utf-8")
+                if path.name.endswith(".xz")
+                else open(path, "r", encoding="utf-8")
+            )
             debug_str += log_file.read()
+            log_file.close()
 
         about = Adw.AboutWindow(
             transient_for=self.win,
