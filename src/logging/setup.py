@@ -108,4 +108,4 @@ def log_system_info():
         logging.debug("\trelease: %s", uname.release)
         logging.debug("\tversion: %s", uname.version)
         logging.debug("\tmachine: %s", uname.machine)
-    logging.debug("-" * 80)
+    logging.debug("─" * 37)
