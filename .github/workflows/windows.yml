@@ -24,9 +24,11 @@ jobs:
           pacman --noconfirm -Rs mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-meson git
           find /ucrt64/share/locale/ -type f ! -name "*cartridges.mo" -delete
       - name: "Inno Setup"
-        run: iscc ".\_build\Cartridges.iss"
+        run: |
+          dir .
+          dir .\_build
       - name: "Upload Artifact"
         uses: actions/upload-artifact@v3
         with:
           name: "Installer"
-          path: "windows/Output/Cartridges Setup.exe"
+          path: "_build/Output/Cartridges Setup.exe"
