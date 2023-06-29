@@ -41,50 +41,58 @@ class SessionFileHandler(StreamHandler):
         """Create the log dir if needed"""
         self.filename.parent.mkdir(exist_ok=True, parents=True)
 
+    def path_is_logfile(self, path: Path) -> bool:
+        return (
+            path.is_file()
+            and path.name.startswith(self.filename.stem)
+            and path.name.endswith("".join(self.filename.suffixes))
+        )
+
+    def path_has_number(self, path: Path) -> bool:
+        return path.name != self.filename.name
+
+    def get_path_number(self, path: Path) -> int:
+        """Get the number extension in the filename as an int"""
+        suffixes = path.suffixes
+        number = 0 if not self.path_has_number(path) else int(suffixes[0][1:])
+        return number
+
+    def set_path_number(self, path: Path, number: int) -> str:
+        """Set or add the number extension in the filename"""
+        suffixes = path.suffixes
+        if self.path_has_number(path):
+            suffixes.pop(0)
+        suffixes.insert(0, f".{number}")
+        stem = path.name.split(".", maxsplit=1)[0]
+        new_name = stem + "".join(suffixes)
+        return new_name
+
+    def file_sort_key(self, path: Path) -> int:
+        """Key function used to sort files"""
+        return self.get_path_number(path) if self.path_has_number(path) else 0
+
+    def get_logfiles(self) -> list[Path]:
+        """Get the log files"""
+        logfiles = list(filter(self.path_is_logfile, self.filename.parent.iterdir()))
+        logfiles.sort(key=self.file_sort_key, reverse=True)
+        return logfiles
+
     def rotate_file(self, path: Path):
         """Rotate a file's number suffix and remove it if it's too old"""
 
-        # Skip non interesting dir entries
-        if not (path.is_file() and path.name.startswith(self.filename.name)):
-            return
-
-        # Compute the new number suffix
-        suffixes = path.suffixes
-        has_number = len(suffixes) != len(self.filename.suffixes)
-        current_number = 0 if not has_number else int(suffixes[-1][1:])
-        new_number = current_number + 1
-
         # Rename with new number suffix
-        if has_number:
-            suffixes.pop()
-        suffixes.append(f".{new_number}")
-        stem = path.name.split(".", maxsplit=1)[0]
-        new_name = stem + "".join(suffixes)
-        path = path.rename(path.with_name(new_name))
+        new_number = self.get_path_number(path) + 1
+        new_path_name = self.set_path_number(path, new_number)
+        path = path.rename(path.with_name(new_path_name))
 
         # Remove older files
         if new_number > self.backup_count:
             path.unlink()
             return
 
-    def file_sort_key(self, path: Path) -> int:
-        """Key function used to sort files"""
-        if not path.name.startswith(self.filename.name):
-            # First all files that aren't logs
-            return -1
-        if path.name == self.filename.name:
-            # Then the latest log file
-            return 0
-        # Then in order the other log files
-        return int(path.suffixes[-1][1:])
-
-    def get_files(self) -> list[Path]:
-        return list(self.filename.parent.iterdir())
-
     def rotate(self) -> None:
         """Rotate the numbered suffix on the log files and remove old ones"""
-        (files := self.get_files()).sort(key=self.file_sort_key, reverse=True)
-        for path in files:
+        for path in self.get_logfiles():
             self.rotate_file(path)
 
     def __init__(self, filename: PathLike, backup_count: int = 2) -> None:
@@ -92,7 +100,7 @@ class SessionFileHandler(StreamHandler):
         self.backup_count = backup_count
         self.create_dir()
         self.rotate()
-        shared.log_files = self.get_files()
+        shared.log_files = self.get_logfiles()
         self.log_file = lzma.open(
             self.filename, "at", format=FORMAT_XZ, preset=PRESET_DEFAULT
         )

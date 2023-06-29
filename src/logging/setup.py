@@ -35,7 +35,7 @@ def setup_logging():
     app_log_level = os.environ.get("LOGLEVEL", profile_app_log_level).upper()
     lib_log_level = os.environ.get("LIBLOGLEVEL", profile_lib_log_level).upper()
 
-    log_filename = shared.cache_dir / "cartridges" / "logs" / "cartridges.log.xz"
+    log_filename = shared.cache_dir / "cartridges" / "logs" / "cartridges.xz"
 
     config = {
         "version": 1,
