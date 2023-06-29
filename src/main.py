@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
+import logging
 import lzma
 import sys
 
@@ -25,9 +26,10 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
+gi.require_version("Manette", "0.2")
 
 # pylint: disable=wrong-import-position
-from gi.repository import Adw, Gio, GLib, Gtk
+from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk, Manette
 
 from src import shared
 from src.details_window import DetailsWindow
@@ -39,6 +41,7 @@ from src.importer.sources.itch_source import ItchSource
 from src.importer.sources.legendary_source import LegendarySource
 from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.steam_source import SteamSource
+from src.keyboard_emulator import KeyboardEmulator
 from src.logging.setup import log_system_info, setup_logging
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
@@ -53,14 +56,80 @@ from src.window import CartridgesWindow
 
 class CartridgesApplication(Adw.Application):
     win = None
+    window_controller = None
+    keyboard_emulator = None
 
     def __init__(self):
         super().__init__(
             application_id=shared.APP_ID, flags=Gio.ApplicationFlags.FLAGS_NONE
         )
 
+    @GObject.Signal(name="emulate-key", arg_types=[int])
+    def emulate_key(self, keyval) -> None:
+        """Signal emitted when the app wants to emulate a keypress"""
+
+    def gamepad_abs_axis(self, _device, event):
+        logging.debug(event.get_absolute())
+
+    def gamepad_hat_axis(self, device, event):
+        device.rumble(1000, 1000, 50)
+        logging.debug(
+            "Gamepad: hat axis: %s, value: %s", *(hat := event.get_hat())[1:3]
+        )
+
+        if hat[2] != 0:
+            self.navigate(hat[1] + hat[2])
+
+    def navigate(self, direction: int):
+        match direction:
+            case 16:
+                self.emit("emulate-key", Gdk.KEY_Up)
+                print("up")
+            case 18:
+                print("down")
+            case 15:
+                print("left")
+            case 17:
+                print("right")
+
+    def print_args(self, *args):
+        print(*args)
+
+    def gamepad_button_pressed(self, _device, event):
+        logging.debug("Gamepad: %s pressed", (button := event.get_button()[1]))
+
+        match button:
+            case 304:
+                print("A button pressed")
+            case 305:
+                print("B button pressed")
+            case 307:
+                print("X button pressed")
+            case 308:
+                print("Y button pressed")
+            case 314:
+                self.win.on_show_hidden_action()
+
+    def gamepad_listen(self, device, *_args):
+        device.connect("button-press-event", self.gamepad_button_pressed)
+        device.connect("hat-axis-event", self.gamepad_hat_axis)
+
+        def log_connected():
+            logging.debug("%s connected", device.get_name())
+            GLib.timeout_add_seconds(60, log_connected)
+
+        log_connected()
+
     def do_activate(self):  # pylint: disable=arguments-differ
         """Called on app creation"""
+
+        # Setup gamepads
+        manette_monitor = Manette.Monitor.new()
+        manette_iter = manette_monitor.iterate()
+
+        while (device := manette_iter.next())[0]:
+            self.gamepad_listen(device[1])
+        self.keyboard_emulator = KeyboardEmulator(self)
 
         # Set fallback icon-name
         Gtk.Window.set_default_icon_name(shared.APP_ID)
@@ -69,6 +138,16 @@ class CartridgesApplication(Adw.Application):
         self.win = self.props.active_window  # pylint: disable=no-member
         if not self.win:
             shared.win = self.win = CartridgesWindow(application=self)
+
+        for index in range(
+            (list_model := self.win.observe_controllers()).get_n_items()
+        ):
+            if isinstance((item := list_model.get_item(index)), Gtk.EventControllerKey):
+                self.window_controller = item
+                break
+
+        self.window_controller.connect("key-pressed", self.print_args)
+        self.window_controller.connect("key-released", self.print_args)
 
         # Save window geometry
         shared.state_schema.bind(

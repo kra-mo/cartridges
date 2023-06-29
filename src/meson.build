@@ -21,6 +21,7 @@ install_data(
     'details_window.py',
     'game.py',
     'game_cover.py',
+    'keyboard_emulator.py',
     configure_file(
       input: 'shared.py.in',
       output: 'shared.py',
