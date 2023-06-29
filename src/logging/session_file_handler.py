@@ -33,6 +33,8 @@ class SessionFileHandler(StreamHandler):
     The files are compressed and older sessions logs are kept up to a small limit.
     """
 
+    NUMBER_SUFFIX_POSITION = 1
+
     backup_count: int
     filename: Path
     log_file: StringIO = None
@@ -42,27 +44,31 @@ class SessionFileHandler(StreamHandler):
         self.filename.parent.mkdir(exist_ok=True, parents=True)
 
     def path_is_logfile(self, path: Path) -> bool:
-        return (
-            path.is_file()
-            and path.name.startswith(self.filename.stem)
-            and path.name.endswith("".join(self.filename.suffixes))
-        )
+        return path.is_file() and path.name.startswith(self.filename.stem)
 
     def path_has_number(self, path: Path) -> bool:
-        return path.name != self.filename.name
+        try:
+            int(path.suffixes[self.NUMBER_SUFFIX_POSITION][1:])
+        except (ValueError, IndexError):
+            return False
+        return True
 
     def get_path_number(self, path: Path) -> int:
         """Get the number extension in the filename as an int"""
         suffixes = path.suffixes
-        number = 0 if not self.path_has_number(path) else int(suffixes[0][1:])
+        number = (
+            0
+            if not self.path_has_number(path)
+            else int(suffixes[self.NUMBER_SUFFIX_POSITION][1:])
+        )
         return number
 
     def set_path_number(self, path: Path, number: int) -> str:
         """Set or add the number extension in the filename"""
         suffixes = path.suffixes
         if self.path_has_number(path):
-            suffixes.pop(0)
-        suffixes.insert(0, f".{number}")
+            suffixes.pop(self.NUMBER_SUFFIX_POSITION)
+        suffixes.insert(self.NUMBER_SUFFIX_POSITION, f".{number}")
         stem = path.name.split(".", maxsplit=1)[0]
         new_name = stem + "".join(suffixes)
         return new_name
@@ -79,6 +85,19 @@ class SessionFileHandler(StreamHandler):
 
     def rotate_file(self, path: Path):
         """Rotate a file's number suffix and remove it if it's too old"""
+
+        # If uncompressed, compress
+        if not path.name.endswith(".xz"):
+            new_path = path.with_suffix(path.suffix + ".xz")
+            with (
+                lzma.open(
+                    new_path, "wt", format=FORMAT_XZ, preset=PRESET_DEFAULT
+                ) as lzma_file,
+                open(path, "r", encoding="utf-8") as original_file,
+            ):
+                lzma_file.write(original_file.read())
+            path.unlink()
+            path = new_path
 
         # Rename with new number suffix
         new_number = self.get_path_number(path) + 1
@@ -101,9 +120,7 @@ class SessionFileHandler(StreamHandler):
         self.create_dir()
         self.rotate()
         shared.log_files = self.get_logfiles()
-        self.log_file = lzma.open(
-            self.filename, "at", format=FORMAT_XZ, preset=PRESET_DEFAULT
-        )
+        self.log_file = open(self.filename, "w", encoding="utf-8")
         super().__init__(self.log_file)
 
     def close(self) -> None:
