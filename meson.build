@@ -21,6 +21,7 @@ endif
 
 conf = configuration_data()
 conf.set('PYTHON', python.find_installation('python3').full_path())
+conf.set('PYTHON_VERSION', python.find_installation('python3').language_version())
 conf.set('APP_ID', app_id)
 conf.set('PREFIX', prefix)
 conf.set('VERSION', meson.project_version())
@@ -31,6 +32,14 @@ conf.set('pkgdatadir', pkgdatadir)
 subdir('data')
 subdir('src')
 subdir('po')
+
+configure_file(
+  input: './windows/Cartridges.iss.in',
+  output: 'Cartridges.iss',
+  configuration: conf,
+  install: true,
+  install_dir: '.'
+)
 
 gnome.post_install(
      glib_compile_schemas: true,
