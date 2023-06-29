@@ -41,7 +41,8 @@ def setup_logging():
         "version": 1,
         "formatters": {
             "file_formatter": {
-                "format": "%(asctime)s | %(name)s | %(levelname)s | %(message)s"
+                "format": "%(asctime)s: %(levelname)s: %(message)s",
+                "datefmt": "%M:%S",
             },
             "console_formatter": {
                 "format": "%(name)s %(levelname)s - %(message)s",
