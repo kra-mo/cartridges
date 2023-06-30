@@ -303,13 +303,13 @@ class CartridgesWindow(Adw.ApplicationWindow):
         search_entry.set_text("")
 
     def on_escape_action(self, *_args):
-        if self.stack.get_visible_child() == self.details_view:
-            self.on_go_back_action()
-        elif (
+        if (
             self.get_focus() == self.search_entry.get_focus_child()
             or self.hidden_search_entry.get_focus_child()
         ):
             self.on_toggle_search_action()
+        else:
+            self.on_go_back_action()
 
     def on_undo_action(self, _widget, game=None, undo=None):
         if not game:  # If the action was activated via Ctrl + Z
