@@ -67,7 +67,15 @@ class Importer(ErrorProducer):
         try:
             progress = progress / len(self.game_pipelines)
         except ZeroDivisionError:
-            progress = 1
+            progress = 0
+        return progress
+
+    @property
+    def sources_progress(self):
+        try:
+            progress = self.n_source_tasks_done / self.n_source_tasks_created
+        except ZeroDivisionError:
+            progress = 0
         return progress
 
     @property
@@ -175,8 +183,11 @@ class Importer(ErrorProducer):
                 self.game_pipelines.add(pipeline)
 
     def update_progressbar(self):
-        """Update the progressbar to show the percentage of game pipelines done"""
-        self.progressbar.set_fraction(self.pipelines_progress)
+        """Update the progressbar to show the overall import progress"""
+        # Reserve 10% for the sources discovery, the rest is the pipelines
+        self.progressbar.set_fraction(
+            (0.1 * self.sources_progress) + (0.9 * self.pipelines_progress)
+        )
 
     def source_callback(self, _obj, _result, data):
         """Callback executed when a source is fully scanned"""
