@@ -17,11 +17,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os
 import re
 from pathlib import Path
 from time import time
-
+import subprocess
 from xdg import IconTheme
 
 from src import shared
@@ -38,10 +37,25 @@ class FlatpakSourceIterator(SourceIterator):
 
         added_time = int(time())
 
-        IconTheme.icondirs.append("/var/lib/flatpak/exports/share/icons")
+        IconTheme.icondirs.append(self.source.data_location["icons"])
+
+        try:
+            process = subprocess.run(
+                ("flatpak-spawn", "--host", "flatpak", "list", "--columns=application"),
+                capture_output=True,
+                encoding="utf-8",
+                check=True,
+            )
+            flatpak_ids = process.stdout.split("\n")
+            flatpak_ids.remove("hu.kramo.Cartridges")
+        except subprocess.CalledProcessError:
+            return
 
         for entry in (self.source.data_location["applications"]).iterdir():
             flatpak_id = entry.stem
+
+            if flatpak_id not in flatpak_ids:
+                continue
 
             with entry.open("r", encoding="utf-8") as open_file:
                 string = open_file.read()
@@ -76,7 +90,7 @@ class FlatpakSourceIterator(SourceIterator):
                 if icon_path := IconTheme.getIconPath(icon_name, 512):
                     additional_data = {"local_image_path": Path(icon_path)}
                 else:
-                    print(":(")
+                    pass
 
             # Produce game
             yield (game, additional_data)
@@ -98,5 +112,6 @@ class FlatpakSource(Source):
         ),
         paths={
             "applications": (True, "share/applications"),
+            "icons": (True, "share/icons"),
         },
     )
