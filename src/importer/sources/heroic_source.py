@@ -68,7 +68,7 @@ class HeroicSourceIterator(SourceIterator):
     }
 
     def game_from_library_entry(
-        self, entry: HeroicLibraryEntry
+        self, entry: HeroicLibraryEntry, added_time: int
     ) -> SourceIterationResult:
         """Helper method used to build a Game from a Heroic library entry"""
 
@@ -81,9 +81,8 @@ class HeroicSourceIterator(SourceIterator):
         runner = entry["runner"]
         service = self.sub_sources[runner]["service"]
         values = {
-            "version": shared.SPEC_VERSION,
             "source": self.source.id,
-            "added": int(time()),
+            "added": added_time,
             "name": entry["title"],
             "developer": entry["developer"],
             "game_id": self.source.game_id_format.format(
@@ -119,9 +118,12 @@ class HeroicSourceIterator(SourceIterator):
                 # Invalid library.json file, skip it
                 logging.warning("Couldn't open Heroic file: %s", str(file))
                 continue
+
+            added_time = int(time())
+
             for entry in library:
                 try:
-                    result = self.game_from_library_entry(entry)
+                    result = self.game_from_library_entry(entry, added_time)
                 except KeyError:
                     # Skip invalid games
                     logging.warning("Invalid Heroic game skipped in %s", str(file))
@@ -130,7 +132,7 @@ class HeroicSourceIterator(SourceIterator):
 
 
 class HeroicSource(URLExecutableSource):
-    """Generic heroic games launcher source"""
+    """Generic Heroic Games Launcher source"""
 
     name = "Heroic"
     iterator_class = HeroicSourceIterator
@@ -141,9 +143,8 @@ class HeroicSource(URLExecutableSource):
         schema_key="heroic-location",
         candidates=(
             "~/.var/app/com.heroicgameslauncher.hgl/config/heroic/",
-            shared.config_dir / "heroic/",
-            "~/.config/heroic/",
-            shared.appdata_dir / "heroic/",
+            shared.config_dir / "heroic",
+            shared.appdata_dir / "heroic",
         ),
         paths={
             "config.json": (False, "config.json"),

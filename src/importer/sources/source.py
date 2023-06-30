@@ -87,7 +87,7 @@ class Source(Iterable):
     @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
-        return self.name.lower() + "_{game_id}"
+        return self.id + "_{game_id}"
 
     @property
     def is_available(self):
