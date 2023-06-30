@@ -94,10 +94,10 @@ class GameCover:
                     stat = ImageStat.Stat(image.convert("L"))
 
                     # Luminance values for light and dark mode
-                    self.luminance = (
-                        (stat.mean[0] + stat.extrema[0][0]) / 510,
-                        (stat.mean[0] + stat.extrema[0][1]) / 510,
-                    )
+                    self.luminance = [
+                        min((stat.mean[0] + stat.extrema[0][0]) / 510, 0.7),
+                        max((stat.mean[0] + stat.extrema[0][1]) / 510, 0.3),
+                    ]
             else:
                 self.blurred = self.placeholder_small
                 self.luminance = (0.3, 0.5)
