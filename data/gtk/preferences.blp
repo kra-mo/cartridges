@@ -216,6 +216,20 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           }
         }
       }
+
+      Adw.ExpanderRow flatpak_expander_row {
+        title: _("Flatpak Games");
+        show-enable-switch: true;
+
+        Adw.ActionRow flatpak_data_action_row {
+          title: _("Install Location");
+
+          Button flatpak_config_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+      }
     }
   }
 

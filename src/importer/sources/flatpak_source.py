@@ -46,12 +46,18 @@ class FlatpakSourceIterator(SourceIterator):
             with entry.open("r", encoding="utf-8") as open_file:
                 string = open_file.read()
 
-            desktop_values = {"Name": None, "Icon": None}
+            desktop_values = {"Name": None, "Icon": None, "Categories": None}
             for key in desktop_values:
                 if regex := re.findall(f"{key}=(.*)\n", string):
                     desktop_values[key] = regex[0]
 
             if not desktop_values["Name"]:
+                continue
+
+            if not desktop_values["Categories"]:
+                continue
+
+            if not "Game" in desktop_values["Categories"].split(";"):
                 continue
 
             values = {
@@ -67,8 +73,10 @@ class FlatpakSourceIterator(SourceIterator):
 
             additional_data = {}
             if icon_name := desktop_values["Icon"]:
-                if icon_path := IconTheme.getIconPath(icon_name):
+                if icon_path := IconTheme.getIconPath(icon_name, 512):
                     additional_data = {"local_image_path": Path(icon_path)}
+                else:
+                    print(":(")
 
             # Produce game
             yield (game, additional_data)

@@ -223,7 +223,7 @@ class CartridgesApplication(Adw.Application):
         if shared.schema.get_boolean("bottles"):
             importer.add_source(BottlesSource())
 
-        if not shared.schema.get_boolean("flatpak"):
+        if shared.schema.get_boolean("flatpak"):
             importer.add_source(FlatpakSource())
 
         if shared.schema.get_boolean("itch"):

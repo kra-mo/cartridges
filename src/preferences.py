@@ -80,6 +80,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
     legendary_config_action_row = Gtk.Template.Child()
     legendary_config_file_chooser_button = Gtk.Template.Child()
 
+    flatpak_expander_row = Gtk.Template.Child()
+    flatpak_data_action_row = Gtk.Template.Child()
+    flatpak_config_file_chooser_button = Gtk.Template.Child()
+
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
     sgdb_switch = Gtk.Template.Child()
