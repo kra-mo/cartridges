@@ -100,6 +100,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.search_entry.connect("search-changed", self.search_changed, False)
         self.hidden_search_entry.connect("search-changed", self.search_changed, True)
 
+        self.search_entry.connect("activate", self.show_details_view_search)
+        self.hidden_search_entry.connect("activate", self.show_details_view_search)
+
         back_mouse_button = Gtk.GestureClick(button=8)
         (back_mouse_button).connect("pressed", self.on_go_back_action)
         self.add_controller(back_mouse_button)
@@ -310,6 +313,22 @@ class CartridgesWindow(Adw.ApplicationWindow):
             self.on_toggle_search_action()
         else:
             self.on_go_back_action()
+
+    def show_details_view_search(self, widget):
+        library = (
+            self.hidden_library if widget == self.hidden_search_entry else self.library
+        )
+        index = 0
+
+        while True:
+            if not (child := library.get_child_at_index(index)):
+                break
+
+            if self.filter_func(child):
+                self.show_details_view(child.get_child())
+                break
+
+            index += 1
 
     def on_undo_action(self, _widget, game=None, undo=None):
         if not game:  # If the action was activated via Ctrl + Z
