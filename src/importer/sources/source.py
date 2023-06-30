@@ -22,9 +22,8 @@ from abc import abstractmethod
 from collections.abc import Iterable, Iterator
 from typing import Any, Generator, Optional
 
-from src.errors.friendly_error import FriendlyError
 from src.game import Game
-from src.importer.sources.location import Location, UnresolvableLocationError
+from src.importer.sources.location import Location
 
 # Type of the data returned by iterating on a Source
 SourceIterationResult = None | Game | tuple[Game, tuple[Any]]
@@ -100,27 +99,15 @@ class Source(Iterable):
         """The executable format used to construct game executables"""
 
     def __iter__(self) -> SourceIterator:
-        """Get an iterator for the source"""
-        for location_name in (
-            locations := {
-                "data": "Data",
-                "cache": "Cache",
-                "config": "Configuration",
-            }.keys()
-        ):
+        """
+        Get an iterator for the source
+        :raises UnresolvableLocationError: Not iterable if any of the locations are unresolvable
+        """
+        for location_name in ("data", "cache", "config"):
             location = getattr(self, f"{location_name}_location", None)
             if location is None:
                 continue
-            try:
-                location.resolve()
-            except UnresolvableLocationError as error:
-                raise FriendlyError(
-                    # The variables are the type of location (eg. cache) and the source's name (eg. Steam)
-                    "Invalid {} Location for {{}}".format(locations[location_name]),
-                    "Pick a new one or disable the source in preferences",
-                    (self.name,),
-                    (self.name,),
-                ) from error
+            location.resolve()
         return self.iterator_class(self)
 
 

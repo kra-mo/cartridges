@@ -26,6 +26,7 @@ from src import shared
 from src.errors.error_producer import ErrorProducer
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
+from src.importer.sources.location import UnresolvableLocationError
 from src.importer.sources.source import Source
 from src.store.managers.async_manager import AsyncManager
 from src.store.pipeline import Pipeline
@@ -125,16 +126,18 @@ class Importer(ErrorProducer):
         source: Source
         source, *_rest = data
 
-        # Early exit if not installed
+        # Early exit if not available or not installed
         if not source.is_available:
-            logging.info("Source %s skipped, not installed", source.id)
+            logging.info("Source %s skipped, not available", source.id)
             return
-        logging.info("Scanning source %s", source.id)
-
-        # Initialize source iteration
-        iterator = iter(source)
+        try:
+            iterator = iter(source)
+        except UnresolvableLocationError:
+            logging.info("Source %s skipped, bad location", source.id)
+            return
 
         # Get games from source
+        logging.info("Scanning source %s", source.id)
         while True:
             # Handle exceptions raised when iterating
             try:
