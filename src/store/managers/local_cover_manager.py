@@ -68,4 +68,4 @@ class LocalCoverManager(Manager):
                 255,
             )
 
-        save_cover(game.game_id, resize_cover(pixbuf=cover))
+            save_cover(game.game_id, resize_cover(pixbuf=cover))

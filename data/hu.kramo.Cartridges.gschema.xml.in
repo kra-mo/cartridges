@@ -68,7 +68,7 @@
       <default>true</default>
     </key>
     <key name="flatpak-location" type="s">
-      <default>"/var/lib/flatpak/exports"</default>
+      <default>"/var/lib/flatpak/exports/"</default>
     </key>
     <key name="flatpak-import-launchers" type="b">
       <default>false</default>
