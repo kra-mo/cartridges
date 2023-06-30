@@ -48,9 +48,13 @@ class LutrisSourceIterator(SourceIterator):
                 AND configPath IS NOT NULL
                 AND installed
                 AND (runner IS NOT "steam" OR :import_steam)
+                AND (runner IS NOT "flatpak" OR :import_flatpak)
             ;
         """
-        params = {"import_steam": shared.schema.get_boolean("lutris-import-steam")}
+        params = {
+            "import_steam": shared.schema.get_boolean("lutris-import-steam"),
+            "import_flatpak": shared.schema.get_boolean("lutris-import-flatpak"),
+        }
         db_path = copy_db(self.source.data_location["pga.db"])
         connection = connect(db_path)
         cursor = connection.execute(request, params)

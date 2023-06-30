@@ -47,7 +47,24 @@ class FlatpakSourceIterator(SourceIterator):
                 check=True,
             )
             flatpak_ids = process.stdout.split("\n")
-            flatpak_ids.remove("hu.kramo.Cartridges")
+
+            to_remove = (
+                {"hu.kramo.Cartridges"}
+                if shared.schema.get_boolean("flatpak-import-launchers")
+                else {
+                    "hu.kramo.Cartridges",
+                    "com.valvesoftware.Steam",
+                    "net.lutris.Lutris",
+                    "com.heroicgameslauncher.hgl",
+                    "com.usebottles.Bottles",
+                    "io.itch.itch",
+                }
+            )
+
+            for item in to_remove:
+                if item in flatpak_ids:
+                    flatpak_ids.remove(item)
+
         except subprocess.CalledProcessError:
             return
 
@@ -88,7 +105,7 @@ class FlatpakSourceIterator(SourceIterator):
             additional_data = {}
             if icon_name := desktop_values["Icon"]:
                 if icon_path := IconTheme.getIconPath(icon_name, 512):
-                    additional_data = {"local_image_path": Path(icon_path)}
+                    additional_data = {"local_icon_path": Path(icon_path)}
                 else:
                     pass
 

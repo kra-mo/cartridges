@@ -60,6 +60,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     lutris_cache_action_row = Gtk.Template.Child()
     lutris_cache_file_chooser_button = Gtk.Template.Child()
     lutris_import_steam_switch = Gtk.Template.Child()
+    lutris_import_flatpak_switch = Gtk.Template.Child()
 
     heroic_expander_row = Gtk.Template.Child()
     heroic_config_action_row = Gtk.Template.Child()
@@ -83,6 +84,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     flatpak_expander_row = Gtk.Template.Child()
     flatpak_data_action_row = Gtk.Template.Child()
     flatpak_config_file_chooser_button = Gtk.Template.Child()
+    flatpak_import_launchers_switch = Gtk.Template.Child()
 
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
@@ -174,9 +176,11 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "cover-launches-game",
                 "high-quality-images",
                 "lutris-import-steam",
+                "lutris-import-flatpak",
                 "heroic-import-epic",
                 "heroic-import-gog",
                 "heroic-import-sideload",
+                "flatpak-import-launchers",
                 "sgdb",
                 "sgdb-prefer",
                 "sgdb-animated",
