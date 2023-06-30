@@ -41,13 +41,13 @@ class BottlesSourceIterator(SourceIterator):
 
         data = self.source.data_location["library.yml"].read_text("utf-8")
         library: dict = yaml.safe_load(data)
+        added_time = int(time())
 
         for entry in library.values():
             # Build game
             values = {
-                "version": shared.SPEC_VERSION,
                 "source": self.source.id,
-                "added": int(time()),
+                "added": added_time,
                 "name": entry["name"],
                 "game_id": self.source.game_id_format.format(game_id=entry["id"]),
                 "executable": self.source.executable_format.format(

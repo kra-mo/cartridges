@@ -26,6 +26,7 @@ from gi.repository import Adw, Gio, GLib, Gtk
 
 from src import shared
 from src.importer.sources.bottles_source import BottlesSource
+from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
 from src.importer.sources.legendary_source import LegendarySource
@@ -59,6 +60,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     lutris_cache_action_row = Gtk.Template.Child()
     lutris_cache_file_chooser_button = Gtk.Template.Child()
     lutris_import_steam_switch = Gtk.Template.Child()
+    lutris_import_flatpak_switch = Gtk.Template.Child()
 
     heroic_expander_row = Gtk.Template.Child()
     heroic_config_action_row = Gtk.Template.Child()
@@ -78,6 +80,11 @@ class PreferencesWindow(Adw.PreferencesWindow):
     legendary_expander_row = Gtk.Template.Child()
     legendary_config_action_row = Gtk.Template.Child()
     legendary_config_file_chooser_button = Gtk.Template.Child()
+
+    flatpak_expander_row = Gtk.Template.Child()
+    flatpak_data_action_row = Gtk.Template.Child()
+    flatpak_config_file_chooser_button = Gtk.Template.Child()
+    flatpak_import_launchers_switch = Gtk.Template.Child()
 
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
@@ -124,6 +131,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         # Sources settings
         for source_class in (
             BottlesSource,
+            FlatpakSource,
             HeroicSource,
             ItchSource,
             LegendarySource,
@@ -168,9 +176,11 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "cover-launches-game",
                 "high-quality-images",
                 "lutris-import-steam",
+                "lutris-import-flatpak",
                 "heroic-import-epic",
                 "heroic-import-gog",
                 "heroic-import-sideload",
+                "flatpak-import-launchers",
                 "sgdb",
                 "sgdb-prefer",
                 "sgdb-animated",

@@ -32,7 +32,9 @@ from src.importer.sources.source import Source, SourceIterationResult, SourceIte
 class LegendarySourceIterator(SourceIterator):
     source: "LegendarySource"
 
-    def game_from_library_entry(self, entry: dict) -> SourceIterationResult:
+    def game_from_library_entry(
+        self, entry: dict, added_time: int
+    ) -> SourceIterationResult:
         # Skip non-games
         if entry["is_dlc"]:
             return None
@@ -40,8 +42,7 @@ class LegendarySourceIterator(SourceIterator):
         # Build game
         app_name = entry["app_name"]
         values = {
-            "version": shared.SPEC_VERSION,
-            "added": int(time()),
+            "added": added_time,
             "source": self.source.id,
             "name": entry["title"],
             "game_id": self.source.game_id_format.format(game_id=app_name),
@@ -72,10 +73,13 @@ class LegendarySourceIterator(SourceIterator):
         except (JSONDecodeError, OSError):
             logging.warning("Couldn't open Legendary file: %s", str(file))
             return
+
+        added_time = int(time())
+
         # Generate games from library
         for entry in library.values():
             try:
-                result = self.game_from_library_entry(entry)
+                result = self.game_from_library_entry(entry, added_time)
             except KeyError as error:
                 # Skip invalid games
                 logging.warning(
@@ -93,10 +97,7 @@ class LegendarySource(Source):
     iterator_class = LegendarySourceIterator
     data_location: Location = Location(
         schema_key="legendary-location",
-        candidates=(
-            shared.config_dir / "legendary/",
-            "~/.config/legendary",
-        ),
+        candidates=(shared.config_dir / "legendary",),
         paths={
             "installed.json": (False, "installed.json"),
             "metadata": (True, "metadata"),

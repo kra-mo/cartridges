@@ -28,6 +28,9 @@
     <key name="lutris-import-steam" type="b">
       <default>false</default>
     </key>
+    <key name="lutris-import-flatpak" type="b">
+      <default>false</default>
+    </key>
     <key name="heroic" type="b">
       <default>true</default>
     </key>
@@ -60,6 +63,15 @@
     </key>
     <key name="legendary-location" type="s">
       <default>"~/.config/legendary/"</default>
+    </key>
+    <key name="flatpak" type="b">
+      <default>true</default>
+    </key>
+    <key name="flatpak-location" type="s">
+      <default>"/var/lib/flatpak/exports"</default>
+    </key>
+    <key name="flatpak-import-launchers" type="b">
+      <default>false</default>
     </key>
     <key name="sgdb-key" type="s">
       <default>""</default>

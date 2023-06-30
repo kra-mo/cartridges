@@ -48,19 +48,24 @@ class LutrisSourceIterator(SourceIterator):
                 AND configPath IS NOT NULL
                 AND installed
                 AND (runner IS NOT "steam" OR :import_steam)
+                AND (runner IS NOT "flatpak" OR :import_flatpak)
             ;
         """
-        params = {"import_steam": shared.schema.get_boolean("lutris-import-steam")}
+        params = {
+            "import_steam": shared.schema.get_boolean("lutris-import-steam"),
+            "import_flatpak": shared.schema.get_boolean("lutris-import-flatpak"),
+        }
         db_path = copy_db(self.source.data_location["pga.db"])
         connection = connect(db_path)
         cursor = connection.execute(request, params)
+
+        added_time = int(time())
 
         # Create games from the DB results
         for row in cursor:
             # Create game
             values = {
-                "version": shared.SPEC_VERSION,
-                "added": int(time()),
+                "added": added_time,
                 "hidden": row[4],
                 "name": row[1],
                 "source": f"{self.source.id}_{row[3]}",
@@ -83,7 +88,7 @@ class LutrisSourceIterator(SourceIterator):
 
 
 class LutrisSource(URLExecutableSource):
-    """Generic lutris source"""
+    """Generic Lutris source"""
 
     name = "Lutris"
     iterator_class = LutrisSourceIterator
@@ -96,8 +101,7 @@ class LutrisSource(URLExecutableSource):
         schema_key="lutris-location",
         candidates=(
             "~/.var/app/net.lutris.Lutris/data/lutris/",
-            shared.data_dir / "lutris/",
-            "~/.local/share/lutris/",
+            shared.data_dir / "lutris",
         ),
         paths={
             "pga.db": (False, "pga.db"),
@@ -108,8 +112,7 @@ class LutrisSource(URLExecutableSource):
         schema_key="lutris-cache-location",
         candidates=(
             "~/.var/app/net.lutris.Lutris/cache/lutris/",
-            shared.cache_dir / "lutris/",
-            "~/.cache/lutris",
+            shared.cache_dir / "lutris",
         ),
         paths={
             "coverart": (True, "coverart"),

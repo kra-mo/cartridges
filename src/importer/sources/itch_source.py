@@ -59,11 +59,12 @@ class ItchSourceIterator(SourceIterator):
         connection = connect(db_path)
         cursor = connection.execute(db_request)
 
+        added_time = int(time())
+
         # Create games from the db results
         for row in cursor:
             values = {
-                "version": shared.SPEC_VERSION,
-                "added": int(time()),
+                "added": added_time,
                 "source": self.source.id,
                 "name": row[1],
                 "game_id": self.source.game_id_format.format(game_id=row[0]),
@@ -87,9 +88,8 @@ class ItchSource(URLExecutableSource):
         schema_key="itch-location",
         candidates=(
             "~/.var/app/io.itch.itch/config/itch/",
-            shared.config_dir / "itch/",
-            "~/.config/itch/",
-            shared.appdata_dir / "itch/",
+            shared.config_dir / "itch",
+            shared.appdata_dir / "itch",
         ),
         paths={"butler.db": (False, "db/butler.db")},
     )

@@ -21,7 +21,7 @@
 from pathlib import Path
 from shutil import copyfile
 
-from gi.repository import Gio
+from gi.repository import Gdk, Gio, GLib
 from PIL import Image, ImageSequence, UnidentifiedImageError
 
 from src import shared
@@ -63,7 +63,13 @@ def resize_cover(cover_path=None, pixbuf=None):
                     else "webp",
                 )
     except UnidentifiedImageError:
-        return None
+        try:
+            Gdk.Texture.new_from_filename(str(cover_path)).save_to_tiff(
+                tmp_path := Gio.File.new_tmp("XXXXXX.tiff")[0].get_path()
+            )
+            return resize_cover(tmp_path)
+        except GLib.GError:
+            return None
 
     return tmp_path
 

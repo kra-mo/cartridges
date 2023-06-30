@@ -66,6 +66,9 @@ class SteamSourceIterator(SourceIterator):
         """Generator method producing games"""
         appid_cache = set()
         manifests = self.get_manifests()
+
+        added_time = int(time())
+
         for manifest in manifests:
             # Get metadata from manifest
             steam = SteamFileHelper()
@@ -87,8 +90,7 @@ class SteamSourceIterator(SourceIterator):
 
             # Build game from local data
             values = {
-                "version": shared.SPEC_VERSION,
-                "added": int(time()),
+                "added": added_time,
                 "name": local_data["name"],
                 "source": self.source.id,
                 "game_id": self.source.game_id_format.format(game_id=appid),
@@ -117,8 +119,8 @@ class SteamSource(URLExecutableSource):
         schema_key="steam-location",
         candidates=(
             "~/.var/app/com.valvesoftware.Steam/data/Steam/",
-            shared.data_dir / "Steam/",
-            "~/.steam/",
+            shared.data_dir / "Steam",
+            "~/.steam",
             shared.programfiles32_dir / "Steam",
         ),
         paths={

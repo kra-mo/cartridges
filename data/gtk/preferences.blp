@@ -132,6 +132,15 @@ template $PreferencesWindow : Adw.PreferencesWindow {
             valign: center;
           }
         }
+
+        Adw.ActionRow {
+          title: _("Import Flatpak Games");
+          activatable-widget: lutris_import_flatpak_switch;
+
+          Switch lutris_import_flatpak_switch {
+            valign: center;
+          }
+        }
       }
 
       Adw.ExpanderRow heroic_expander_row {
@@ -212,6 +221,29 @@ template $PreferencesWindow : Adw.PreferencesWindow {
 
           Button legendary_config_file_chooser_button {
             icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+      }
+
+      Adw.ExpanderRow flatpak_expander_row {
+        title: _("Flatpak");
+        show-enable-switch: true;
+
+        Adw.ActionRow flatpak_data_action_row {
+          title: _("Install Location");
+
+          Button flatpak_config_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow flatpak_import_launchers_row {
+          title: _("Import Game Launchers");
+          activatable-widget: flatpak_import_launchers_switch;
+
+          Switch flatpak_import_launchers_switch {
             valign: center;
           }
         }
