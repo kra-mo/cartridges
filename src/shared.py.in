@@ -20,7 +20,7 @@
 import os
 from pathlib import Path
 
-from gi.repository import Gdk, Gio
+from gi.repository import Gdk, Gio, GLib
 
 APP_ID = "@APP_ID@"
 VERSION = "@VERSION@"
@@ -31,21 +31,11 @@ SPEC_VERSION = 1.5  # The version of the game_id.json spec
 schema = Gio.Settings.new(APP_ID)
 state_schema = Gio.Settings.new(APP_ID + ".State")
 
-data_dir = (
-    Path(os.getenv("XDG_DATA_HOME"))
-    if "XDG_DATA_HOME" in os.environ
-    else Path.home() / ".local" / "share"
-)
-config_dir = (
-    Path(os.getenv("XDG_CONFIG_HOME"))
-    if "XDG_CONFIG_HOME" in os.environ
-    else Path.home() / ".config"
-)
-cache_dir = (
-    Path(os.getenv("XDG_CACHE_HOME"))
-    if "XDG_CACHE_HOME" in os.environ
-    else Path.home() / ".cache"
-)
+home = Path.home()
+data_dir = Path(GLib.get_user_data_dir())
+config_dir = Path(GLib.get_user_config_dir())
+cache_dir = Path(GLib.get_user_config_dir())
+flatpak_dir = home / ".var" / "app"
 
 games_dir = data_dir / "cartridges" / "games"
 covers_dir = data_dir / "cartridges" / "covers"

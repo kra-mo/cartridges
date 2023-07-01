@@ -97,7 +97,10 @@ class LegendarySource(Source):
     iterator_class = LegendarySourceIterator
     config_location: Location = Location(
         schema_key="legendary-location",
-        candidates=(shared.config_dir / "legendary",),
+        candidates=(
+            shared.config_dir / "legendary",
+            shared.home / ".config" / "legendary",
+        ),
         paths={
             "installed.json": (False, "installed.json"),
             "metadata": (True, "metadata"),

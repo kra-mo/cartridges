@@ -87,8 +87,9 @@ class ItchSource(URLExecutableSource):
     config_location = Location(
         schema_key="itch-location",
         candidates=(
-            "~/.var/app/io.itch.itch/config/itch/",
+            shared.flatpak_dir / "io.itch.itch" / "config" / "itch",
             shared.config_dir / "itch",
+            shared.home / ".config" / "itch",
             shared.appdata_dir / "itch",
         ),
         paths={"butler.db": (False, "db/butler.db")},

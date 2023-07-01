@@ -91,9 +91,9 @@ class BottlesSource(URLExecutableSource):
     data_location = Location(
         schema_key="bottles-location",
         candidates=(
-            "~/.var/app/com.usebottles.bottles/data/bottles/",
+            shared.flatpak_dir / "com.usebottles.bottles" / "data" / "bottles",
             shared.data_dir / "bottles/",
-            "~/.local/share/bottles",
+            shared.home / ".local" / "share" / "bottles",
         ),
         paths={
             "library.yml": (False, "library.yml"),

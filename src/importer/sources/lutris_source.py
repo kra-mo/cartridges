@@ -100,9 +100,9 @@ class LutrisSource(URLExecutableSource):
     data_location = Location(
         schema_key="lutris-location",
         candidates=(
-            "~/.var/app/net.lutris.Lutris/data/lutris/",
+            shared.flatpak_dir / "net.lutris.Lutris" / "data" / "lutris",
             shared.data_dir / "lutris",
-            "~/.local/share/lutris",
+            shared.home / ".local" / "share" / "lutris",
         ),
         paths={
             "pga.db": (False, "pga.db"),
@@ -112,9 +112,9 @@ class LutrisSource(URLExecutableSource):
     cache_location = Location(
         schema_key="lutris-cache-location",
         candidates=(
-            "~/.var/app/net.lutris.Lutris/cache/lutris/",
+            shared.flatpak_dir / "net.lutris.Lutris" / "cache" / "lutris",
             shared.cache_dir / "lutris",
-            "~/.cache/lutris",
+            shared.home / ".cache" / "lutris",
         ),
         paths={
             "coverart": (True, "coverart"),
