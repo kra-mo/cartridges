@@ -21,6 +21,6 @@ jobs:
           uses: softprops/action-gh-release@v0.1.15
           with:
             files: "Installer/Cartridges Setup.exe"
-            tag_name: ${{ github.ref_name }}
+            tag_name: ${{ github.ref }}
             draft: true
             generate_release_notes: true
