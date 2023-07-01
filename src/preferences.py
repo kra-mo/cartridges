@@ -79,8 +79,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     itch_config_file_chooser_button = Gtk.Template.Child()
 
     legendary_expander_row = Gtk.Template.Child()
-    legendary_data_action_row = Gtk.Template.Child()
-    legendary_data_file_chooser_button = Gtk.Template.Child()
+    legendary_config_action_row = Gtk.Template.Child()
+    legendary_config_file_chooser_button = Gtk.Template.Child()
 
     flatpak_expander_row = Gtk.Template.Child()
     flatpak_data_action_row = Gtk.Template.Child()

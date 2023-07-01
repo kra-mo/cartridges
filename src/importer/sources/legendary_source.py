@@ -95,7 +95,7 @@ class LegendarySource(Source):
     available_on = set(("linux", "win32"))
 
     iterator_class = LegendarySourceIterator
-    data_location: Location = Location(
+    config_location: Location = Location(
         schema_key="legendary-location",
         candidates=(shared.config_dir / "legendary",),
         paths={
