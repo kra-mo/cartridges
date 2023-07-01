@@ -14,6 +14,9 @@ jobs:
             workflow: windows.yml
             workflow_conclusion: success
 
+        - name: Checkout
+          uses: actions/checkout@v3
+
         - name: Get release notes
           shell: "python"  
           run: |
