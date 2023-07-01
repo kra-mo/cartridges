@@ -143,7 +143,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             source = source_class()
             if not source.is_available:
                 expander_row = getattr(self, f"{source.id}_expander_row")
-                expander_row.remove()
+                expander_row.set_visible(False)
             else:
                 self.init_source_row(source)
 
