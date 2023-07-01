@@ -2,7 +2,6 @@
 
 ignore=importers
 
-
 [MESSAGES CONTROL]
 
 disable=raw-checker-failed,
