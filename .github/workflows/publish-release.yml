@@ -1,6 +1,6 @@
 on:
     push:
-      branches: [main]
+      branches: [test-actions]
 #      tags:
 #        - 'v(\d|\.)*'
 name: "Publish Release"
@@ -19,5 +19,6 @@ jobs:
 
         - name: "Publish Release"
           uses: softprops/action-gh-release@v0.1.15
+          if: startsWith(github.ref, 'refs/tags/')
           with:
             files: "Cartridges Setup.exe"
