@@ -23,7 +23,7 @@ jobs:
         manifest-path: flatpak/hu.kramo.Cartridges.Devel.json
 
   windows:
-    name: Build for Windows
+    name: Windows
     runs-on: windows-latest
     steps:
       - name: Checkout
