@@ -16,7 +16,7 @@ jobs:
       - name: Download workflow artifact
         uses: dawidd6/action-download-artifact@v2.27.0
         with:
-          workflow: windows.yml
+          workflow: ci.yml
           commit: ${{ github.sha }}
 
       - name: Get release notes

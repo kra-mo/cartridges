@@ -16,7 +16,7 @@
 [circle-url]: https://circle.gnome.org
 [circle-image]: https://circle.gnome.org/assets/button/badge.svg
 [github-actions-url]: https://github.com/kra-mo/cartridges
-[github-actions-image]: https://github.com/kra-mo/cartridges/actions/workflows/flatpak-builder.yml/badge.svg
+[github-actions-image]: https://github.com/kra-mo/cartridges/actions/workflows/ci.yml/badge.svg
 [code-style-url]: https://github.com/psf/black
 [code-style-image]: https://img.shields.io/badge/code%20style-black-000000?style=flat
 [weblate-url]: https://hosted.weblate.org/engage/cartridges/
