@@ -26,7 +26,7 @@ jobs:
         - name: "Publish Release"
           uses: softprops/action-gh-release@v0.1.15
           with:
-            files: "Cartridges Setup.exe"
+            files: "Installer/Cartridges Setup.exe"
             tag_name: ${{ env.tag_name }}
             draft: true
             generate_release_notes: true
