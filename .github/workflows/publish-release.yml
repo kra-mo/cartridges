@@ -18,7 +18,7 @@ jobs:
             workflow_conclusion: success
         
         - name: "Get tag"
-          run: "export git_tag=$(git describe --tags --abbrev=0)"
+          run: "export git_tag=$(git describe --no-abbrev)"
 
         - name: "a"
           run: "echo $git_tag"
