@@ -18,6 +18,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
+from pathlib import Path
+from typing import Optional
+from shutil import rmtree, copytree
+
+from gi.repository import GLib
 
 from src import shared
 from src.game import Game
@@ -32,6 +37,11 @@ class Store:
     pipeline_managers: set[Manager]
     pipelines: dict[str, Pipeline]
     games: dict[str, Game]
+
+    games_backup: Optional[dict[str, Game]] = None
+    covers_backup_path: Optional[Path] = None
+    is_backup_protected: bool = False
+    has_backup: bool = False
 
     def __init__(self) -> None:
         self.managers = {}
@@ -104,3 +114,55 @@ class Store:
         self.pipelines[game.game_id] = pipeline
         pipeline.advance()
         return pipeline
+
+    def save_backup(self):
+        """Save an internal backup of games and covers that can be restored"""
+        self.games_backup = self.games.copy()
+        self.covers_backup_path = GLib.dir_make_tmp()
+        copytree(str(shared.covers_dir), self.covers_backup_path)
+
+    def protect_backup(self):
+        """Protect the current backup from being deleted"""
+        self.is_backup_protected = True
+
+    def unprotect_backup(self):
+        """No longer protect the backup from being deleted"""
+        self.is_backup_protected = False
+
+    def restore_backup(self):
+        """Restore the latest backup of games and covers"""
+
+        if not self.has_backup:
+            return  
+
+        # Remove covers
+        rmtree(shared.covers_dir)
+        shared.covers_dir.mkdir()
+
+        # Remove games
+        for game in self.games_backup.values():
+            game.update_values({"removed": True})
+            game.save()
+        shared.win.library.remove_all()
+        shared.win.hidden_library.remove_all()
+
+        # Restore covers
+        copytree(self.covers_backup_path, str(shared.covers_dir))
+
+        # Restore games and covers
+        for game in self.games_backup.values():
+            self.add_game(game, {}, run_pipeline=False)
+            game.save()
+            game.update()
+
+        self.delete_backup()
+
+    def delete_backup(self):
+        """Delete the latest backup of games and covers (if not protected)"""
+        if self.is_backup_protected:
+            return
+        self.games_backup = None
+        if self.covers_backup_path and Path(self.covers_backup_path).is_dir():
+            self.covers_backup_path = None
+            rmtree(self.covers_backup_path, ignore_errors=True)
+        self.has_backup = False

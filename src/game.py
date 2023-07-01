@@ -82,6 +82,7 @@ class Game(Gtk.Box):
         shared.schema.connect("changed", self.schema_changed)
 
     def update_values(self, data):
+        shared.store.delete_backup()
         for key, value in data.items():
             # Convert executables to strings
             if key == "executable" and isinstance(value, list):
