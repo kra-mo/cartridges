@@ -102,6 +102,7 @@ class LutrisSource(URLExecutableSource):
         candidates=(
             "~/.var/app/net.lutris.Lutris/data/lutris/",
             shared.data_dir / "lutris",
+            "~/.local/share/lutris",
         ),
         paths={
             "pga.db": (False, "pga.db"),
@@ -113,6 +114,7 @@ class LutrisSource(URLExecutableSource):
         candidates=(
             "~/.var/app/net.lutris.Lutris/cache/lutris/",
             shared.cache_dir / "lutris",
+            "~/.cache/lutris",
         ),
         paths={
             "coverart": (True, "coverart"),

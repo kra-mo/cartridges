@@ -93,6 +93,7 @@ class BottlesSource(URLExecutableSource):
         candidates=(
             "~/.var/app/com.usebottles.bottles/data/bottles/",
             shared.data_dir / "bottles/",
+            "~/.local/share/bottles",
         ),
         paths={
             "library.yml": (False, "library.yml"),
