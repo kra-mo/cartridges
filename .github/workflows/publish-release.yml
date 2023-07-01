@@ -26,7 +26,7 @@ jobs:
             open_file.close()
             string = re.findall("<release.*>\s*<description.*>\n([\s\S]*?)\s*</description>\s*<\/release>", string)[0]
             string = textwrap.dedent(string)
-            open_file = open("release_notes", "rx", encoding="utf-8")
+            open_file = open("release_notes", "w", encoding="utf-8")
             open_file.write(string)
             open_file.close()
 
