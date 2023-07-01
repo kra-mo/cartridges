@@ -93,15 +93,16 @@ class LutrisSource(URLExecutableSource):
     name = "Lutris"
     iterator_class = LutrisSourceIterator
     url_format = "lutris:rungameid/{game_id}"
-    available_on = set(("linux",))
+    available_on = {"linux"}
 
     # FIXME possible bug: location picks ~/.var... and cache_lcoation picks ~/.local...
 
     data_location = Location(
         schema_key="lutris-location",
         candidates=(
-            "~/.var/app/net.lutris.Lutris/data/lutris/",
+            shared.flatpak_dir / "net.lutris.Lutris" / "data" / "lutris",
             shared.data_dir / "lutris",
+            shared.home / ".local" / "share" / "lutris",
         ),
         paths={
             "pga.db": (False, "pga.db"),
@@ -111,8 +112,9 @@ class LutrisSource(URLExecutableSource):
     cache_location = Location(
         schema_key="lutris-cache-location",
         candidates=(
-            "~/.var/app/net.lutris.Lutris/cache/lutris/",
+            shared.flatpak_dir / "net.lutris.Lutris" / "cache" / "lutris",
             shared.cache_dir / "lutris",
+            shared.home / ".cache" / "lutris",
         ),
         paths={
             "coverart": (True, "coverart"),

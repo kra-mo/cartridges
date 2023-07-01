@@ -111,16 +111,16 @@ class SteamSourceIterator(SourceIterator):
 
 class SteamSource(URLExecutableSource):
     name = "Steam"
-    available_on = set(("linux", "win32"))
+    available_on = {"linux", "win32"}
     iterator_class = SteamSourceIterator
     url_format = "steam://rungameid/{game_id}"
 
     data_location = Location(
         schema_key="steam-location",
         candidates=(
-            "~/.var/app/com.valvesoftware.Steam/data/Steam/",
+            shared.flatpak_dir / "com.valvesoftware.Steam" / "data" / "Steam",
             shared.data_dir / "Steam",
-            "~/.steam",
+            shared.home / ".steam",
             shared.programfiles32_dir / "Steam",
         ),
         paths={

@@ -116,7 +116,7 @@ class FlatpakSource(Source):
     name = "Flatpak"
     iterator_class = FlatpakSourceIterator
     executable_format = "flatpak run {flatpak_id}"
-    available_on = set(("linux",))
+    available_on = {"linux"}
 
     data_location = Location(
         schema_key="flatpak-location",
