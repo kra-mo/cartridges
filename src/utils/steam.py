@@ -57,7 +57,7 @@ class SteamManifestData(TypedDict):
 class SteamAPIData(TypedDict):
     """Dict returned by SteamAPIHelper.get_api_data"""
 
-    developers: str
+    developer: str
 
 
 class SteamRateLimiter(RateLimiter):
@@ -148,5 +148,5 @@ class SteamAPIHelper:
             raise SteamNotAGameError()
 
         # Return API values we're interested in
-        values = SteamAPIData(developers=", ".join(data["data"]["developers"]))
+        values = SteamAPIData(developer=", ".join(data["data"]["developers"]))
         return values
