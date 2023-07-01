@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [test-actions]
+    branches: [main]
   pull_request:
 name: CI
 concurrency:
@@ -51,5 +51,5 @@ jobs:
       - name: "Upload Artifact"
         uses: actions/upload-artifact@v3
         with:
-          name: Installer
+          name: Windows Installer
           path: _build/Output/Cartridges Setup.exe
