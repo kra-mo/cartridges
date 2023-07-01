@@ -96,7 +96,7 @@ class SteamSourceIterator(SourceIterator):
                 "game_id": self.source.game_id_format.format(game_id=appid),
                 "executable": self.source.executable_format.format(game_id=appid),
             }
-            game = Game(values, allow_side_effects=False)
+            game = Game(values)
 
             # Add official cover image
             image_path = (

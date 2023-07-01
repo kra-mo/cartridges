@@ -138,7 +138,7 @@ class CartridgesApplication(Adw.Application):
         if shared.games_dir.is_dir():
             for game_file in shared.games_dir.iterdir():
                 data = json.load(game_file.open())
-                game = Game(data, allow_side_effects=False)
+                game = Game(data)
                 shared.store.add_game(game, {"skip_save": True})
 
     def on_about_action(self, *_args):

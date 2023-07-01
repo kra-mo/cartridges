@@ -90,7 +90,7 @@ class HeroicSourceIterator(SourceIterator):
             ),
             "executable": self.source.executable_format.format(app_name=app_name),
         }
-        game = Game(values, allow_side_effects=False)
+        game = Game(values)
 
         # Get the image path from the heroic cache
         # Filenames are derived from the URL that heroic used to get the file

@@ -61,7 +61,7 @@ class Game(Gtk.Box):
     game_cover = None
     version = 0
 
-    def __init__(self, data, allow_side_effects=True, **kwargs):
+    def __init__(self, data, **kwargs):
         super().__init__(**kwargs)
 
         self.win = shared.win
