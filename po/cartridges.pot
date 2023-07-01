@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-01 11:35+0200\n"
+"POT-Creation-Date: 2023-07-01 11:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -494,19 +494,21 @@ msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 
-#: src/preferences.py:289 src/preferences.py:292
-msgid "Directory not Valid"
+#: src/preferences.py:289 src/preferences.py:293
+msgid "Invalid Directory"
 msgstr ""
 
-#: src/preferences.py:290
+#. The variable is the name of the source
+#: src/preferences.py:291
 msgid "Select the {} cache directory."
 msgstr ""
 
-#: src/preferences.py:293
+#. The variable is the name of the source
+#: src/preferences.py:295
 msgid "Select the {} installation directory."
 msgstr ""
 
-#: src/preferences.py:299
+#: src/preferences.py:301
 msgid "Set Location"
 msgstr ""
 

@@ -286,10 +286,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
             # Bad picked location, inform user
             else:
                 if location_name == "cache":
-                    title = _("Directory not Valid")
+                    title = _("Invalid Directory")
+                    # The variable is the name of the source
                     subtitle_format = _("Select the {} cache directory.")
                 else:
-                    title = _("Directory not Valid")
+                    title = _("Invalid Directory")
+                    # The variable is the name of the source
                     subtitle_format = _("Select the {} installation directory.")
                 dialog = create_dialog(
                     self,
