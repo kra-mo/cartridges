@@ -70,9 +70,6 @@ class Game(Gtk.Box):
 
         self.update_values(data)
 
-        if allow_side_effects:
-            self.win.games[self.game_id] = self
-
         self.set_play_icon()
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()

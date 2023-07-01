@@ -64,7 +64,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     hidden_search_entry = Gtk.Template.Child()
     hidden_search_button = Gtk.Template.Child()
 
-    games = {}
     game_covers = {}
     toasts = {}
     active_game = None
@@ -118,7 +117,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def set_library_child(self):
         child, hidden_child = self.notice_empty, self.hidden_notice_empty
 
-        for game in self.games.values():
+        for game in shared.store.games.values():
             if game.removed or game.blacklisted:
                 continue
             if game.hidden:
