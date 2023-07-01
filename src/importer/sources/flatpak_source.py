@@ -53,6 +53,9 @@ class FlatpakSourceIterator(SourceIterator):
         )
 
         for entry in (self.source.data_location["applications"]).iterdir():
+            if entry.suffix != ".desktop":
+                continue
+
             keyfile = GLib.KeyFile.new()
 
             try:
@@ -118,11 +121,11 @@ class FlatpakSource(Source):
     data_location = Location(
         schema_key="flatpak-location",
         candidates=(
-            "/var/lib/flatpak/exports/",
-            shared.data_dir / "flatpak" / "exports",
+            "/var/lib/flatpak/",
+            shared.data_dir / "flatpak",
         ),
         paths={
-            "applications": (True, "share/applications"),
-            "icons": (True, "share/icons"),
+            "applications": (True, "exports/share/applications"),
+            "icons": (True, "exports/share/icons"),
         },
     )
