@@ -111,7 +111,7 @@ class SteamSourceIterator(SourceIterator):
 
 class SteamSource(URLExecutableSource):
     name = "Steam"
-    available_on = set(("linux", "win32"))
+    available_on = {"linux", "win32"}
     iterator_class = SteamSourceIterator
     url_format = "steam://rungameid/{game_id}"
 

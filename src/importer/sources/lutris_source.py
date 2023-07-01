@@ -93,7 +93,7 @@ class LutrisSource(URLExecutableSource):
     name = "Lutris"
     iterator_class = LutrisSourceIterator
     url_format = "lutris:rungameid/{game_id}"
-    available_on = set(("linux",))
+    available_on = {"linux"}
 
     # FIXME possible bug: location picks ~/.var... and cache_lcoation picks ~/.local...
 

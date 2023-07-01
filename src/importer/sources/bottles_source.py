@@ -86,7 +86,7 @@ class BottlesSource(URLExecutableSource):
     name = "Bottles"
     iterator_class = BottlesSourceIterator
     url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
-    available_on = set(("linux",))
+    available_on = {"linux"}
 
     data_location = Location(
         schema_key="bottles-location",

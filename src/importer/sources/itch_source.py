@@ -82,7 +82,7 @@ class ItchSource(URLExecutableSource):
     name = "Itch"
     iterator_class = ItchSourceIterator
     url_format = "itch://caves/{cave_id}/launch"
-    available_on = set(("linux", "win32"))
+    available_on = {"linux", "win32"}
 
     config_location = Location(
         schema_key="itch-location",

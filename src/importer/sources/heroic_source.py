@@ -137,7 +137,7 @@ class HeroicSource(URLExecutableSource):
     name = "Heroic"
     iterator_class = HeroicSourceIterator
     url_format = "heroic://launch/{app_name}"
-    available_on = set(("linux", "win32"))
+    available_on = {"linux", "win32"}
 
     config_location = Location(
         schema_key="heroic-location",
