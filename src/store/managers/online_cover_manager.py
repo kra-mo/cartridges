@@ -36,7 +36,7 @@ class OnlineCoverManager(Manager):
     """Manager that downloads game covers from URLs"""
 
     run_after = (LocalCoverManager,)
-    retryable_on = (HTTPError, SSLError)
+    retryable_on = (HTTPError, SSLError, ConnectionError)
 
     def save_composited_cover(
         self,
