@@ -114,7 +114,7 @@ class DetailsWindow(Adw.Window):
         self.exec_info_label.set_label(exec_info_text)
 
         def clear_info_selection(*_args):
-            self.exec_info_label.select_region(0, 0)
+            self.exec_info_label.select_region(-1, -1)
 
         self.exec_info_popover.connect("show", clear_info_selection)
 

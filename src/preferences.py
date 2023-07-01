@@ -30,6 +30,7 @@ from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
 from src.importer.sources.legendary_source import LegendarySource
+from src.importer.sources.location import UnresolvableLocationError
 from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.source import Source
 from src.importer.sources.steam_source import SteamSource
@@ -78,8 +79,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     itch_config_file_chooser_button = Gtk.Template.Child()
 
     legendary_expander_row = Gtk.Template.Child()
-    legendary_config_action_row = Gtk.Template.Child()
-    legendary_config_file_chooser_button = Gtk.Template.Child()
+    legendary_data_action_row = Gtk.Template.Child()
+    legendary_data_file_chooser_button = Gtk.Template.Child()
 
     flatpak_expander_row = Gtk.Template.Child()
     flatpak_data_action_row = Gtk.Template.Child()
@@ -99,6 +100,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     remove_all_games_button = Gtk.Template.Child()
 
     removed_games = set()
+    warning_menu_buttons = {}
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -251,14 +253,64 @@ class PreferencesWindow(Adw.PreferencesWindow):
             if not action_row:
                 continue
 
-            # Historically "location" meant data or config, so the key stays shared
             infix = "-cache" if location == "cache" else ""
             key = f"{source.id}{infix}-location"
             path = Path(shared.schema.get_string(key)).expanduser()
 
-            # Remove the path if the dir is picked via the Flatpak portal
+            # Remove the path prefix if picked via Flatpak portal
             subtitle = re.sub("/run/user/\\d*/doc/.*/", "", str(path))
             action_row.set_subtitle(subtitle)
+
+    def resolve_locations(self, source):
+        """Resolve locations and add a warning if location cannot be found"""
+
+        def clear_warning_selection(_widget, label):
+            label.select_region(-1, -1)
+
+        for location_name in ("data", "config", "cache"):
+            action_row = getattr(self, f"{source.id}_{location_name}_action_row", None)
+            if not action_row:
+                continue
+
+            try:
+                getattr(source, f"{location_name}_location", None).resolve()
+
+            except UnresolvableLocationError:
+                popover = Gtk.Popover(
+                    child=(
+                        label := Gtk.Label(
+                            label=(
+                                '<span rise="12pt"><b><big>'
+                                + _("Installation Not Found")
+                                + "</big></b></span>\n"
+                                + _("Select a valid directory.")
+                            ),
+                            use_markup=True,
+                            wrap=True,
+                            max_width_chars=50,
+                            halign=Gtk.Align.CENTER,
+                            valign=Gtk.Align.CENTER,
+                            justify=Gtk.Justification.CENTER,
+                            margin_top=9,
+                            margin_bottom=9,
+                            margin_start=12,
+                            margin_end=12,
+                            selectable=True,
+                        )
+                    )
+                )
+
+                popover.connect("show", clear_warning_selection, label)
+
+                menu_button = Gtk.MenuButton(
+                    icon_name="dialog-warning-symbolic",
+                    valign=Gtk.Align.CENTER,
+                    popover=popover,
+                )
+                menu_button.add_css_class("warning")
+
+                action_row.add_prefix(menu_button)
+                self.warning_menu_buttons[source.id] = menu_button
 
     def init_source_row(self, source: Source):
         """Initialize a preference row for a source class"""
@@ -281,6 +333,14 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 shared.schema.set_string(key, value)
                 # Update the row
                 self.update_source_action_row_paths(source)
+
+                if self.warning_menu_buttons.get(source.id):
+                    action_row = getattr(
+                        self, f"{source.id}_{location_name}_action_row", None
+                    )
+                    action_row.remove(self.warning_menu_buttons[source.id])
+                    self.warning_menu_buttons.pop(source.id)
+
                 logging.debug("User-set value for schema key %s: %s", key, value)
 
             # Bad picked location, inform user
@@ -323,4 +383,5 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 button.connect("clicked", self.choose_folder, set_dir, location)
 
         # Set the source row subtitles
+        self.resolve_locations(source)
         self.update_source_action_row_paths(source)
