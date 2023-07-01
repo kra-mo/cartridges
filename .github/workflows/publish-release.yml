@@ -1,6 +1,5 @@
 on:
     push:
-      branches: [test-actions]
       tags:
         - 'v(\d|\.)*'
 name: "Publish Release"
