@@ -88,16 +88,20 @@ class SessionFileHandler(StreamHandler):
 
         # If uncompressed, compress
         if not path.name.endswith(".xz"):
-            new_path = path.with_suffix(path.suffix + ".xz")
+            compressed_path = path.with_suffix(path.suffix + ".xz")
             with (
                 lzma.open(
-                    new_path, "wt", format=FORMAT_XZ, preset=PRESET_DEFAULT
+                    compressed_path,
+                    "wt",
+                    format=FORMAT_XZ,
+                    preset=PRESET_DEFAULT,
+                    encoding="utf-8",
                 ) as lzma_file,
                 open(path, "r", encoding="utf-8") as original_file,
             ):
                 lzma_file.write(original_file.read())
             path.unlink()
-            path = new_path
+            path = compressed_path
 
         # Rename with new number suffix
         new_number = self.get_path_number(path) + 1
