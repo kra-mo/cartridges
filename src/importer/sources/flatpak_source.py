@@ -18,10 +18,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import re
+import subprocess
 from pathlib import Path
 from time import time
-import subprocess
-from xdg import IconTheme
+
+from gi.repository import Gtk
 
 from src import shared
 from src.game import Game
@@ -37,7 +38,8 @@ class FlatpakSourceIterator(SourceIterator):
 
         added_time = int(time())
 
-        IconTheme.icondirs.append(self.source.data_location["icons"])
+        icon_theme = Gtk.IconTheme.new()
+        icon_theme.add_search_path(str(self.source.data_location["icons"]))
 
         try:
             process = subprocess.run(
@@ -104,7 +106,13 @@ class FlatpakSourceIterator(SourceIterator):
 
             additional_data = {}
             if icon_name := desktop_values["Icon"]:
-                if icon_path := IconTheme.getIconPath(icon_name, 512):
+                if (
+                    icon_path := icon_theme.lookup_icon(
+                        icon_name, None, 512, 1, shared.win.get_direction(), 0
+                    )
+                    .get_file()
+                    .get_path()
+                ):
                     additional_data = {"local_icon_path": Path(icon_path)}
                 else:
                     pass
