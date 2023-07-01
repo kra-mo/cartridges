@@ -1,8 +1,8 @@
 on:
     push:
       branches: [test-actions]
-#      tags:
-#        - 'v(\d|\.)*'
+      tags:
+        - 'v(\d|\.)*'
 name: "Publish Release"
 jobs:
   publish-release:
