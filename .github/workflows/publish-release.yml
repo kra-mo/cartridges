@@ -16,17 +16,11 @@ jobs:
           with:
             workflow: windows.yml
             workflow_conclusion: success
-        
-        - name: "Get tag"
-          run: "export git_tag=$(git describe --no-abbrev)"
-
-        - name: "a"
-          run: "echo $git_tag"
 
         - name: "Publish Release"
           uses: softprops/action-gh-release@v0.1.15
           with:
             files: "Installer/Cartridges Setup.exe"
-            tag_name: ${{ env.tag_name }}
+            tag_name: ${{ github.ref_name }}
             draft: true
             generate_release_notes: true
