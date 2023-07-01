@@ -10,7 +10,6 @@
 [![Flathub][flathub-image]][flathub-url]
 [![Build status][github-actions-image]][github-actions-url]
 [![Translation Status][weblate-image]][weblate-url]
-[![License][license-image]][license-url]
 [![Code style][code-style-image]][code-style-url]
 [![Discord][discord-image]][discord-url]
 
@@ -18,8 +17,6 @@
 [circle-image]: https://circle.gnome.org/assets/button/badge.svg
 [github-actions-url]: https://github.com/kra-mo/cartridges
 [github-actions-image]: https://github.com/kra-mo/cartridges/actions/workflows/flatpak-builder.yml/badge.svg
-[license-url]: https://github.com/kra-mo/cartridges/blob/main/LICENSE
-[license-image]: https://img.shields.io/github/license/kra-mo/cartridges
 [code-style-url]: https://github.com/psf/black
 [code-style-image]: https://img.shields.io/badge/code%20style-black-000000?style=flat
 [weblate-url]: https://hosted.weblate.org/engage/cartridges/
@@ -39,8 +36,14 @@ Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita
 ## Features
 
 - Manually adding and editing games
-- Importing games from Steam, Lutris, Heroic, Bottles and itch
-- Support for multiple Steam install locations
+- Importing games from various sources:
+  - Steam
+  - Lutris
+  - Heroic
+  - Bottles
+  - itch
+  - Legendary
+  - Flatpak
 - Hiding games
 - Searching and sorting by title, date added and last played
 - Automatically downloading cover art from [SteamGridDB](https://www.steamgriddb.com/)
