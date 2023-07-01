@@ -1,8 +1,8 @@
 on:
     push:
       branches: [test-actions]
-      tags:
-        - 'v(\d|\.)*'
+      #tags:
+      #  - 'v(\d|\.)*'
 name: "Publish Release"
 jobs:
   publish-release:
@@ -16,8 +16,14 @@ jobs:
           with:
             workflow: windows.yml
             workflow_conclusion: success
+        
+        - name: "Get tag"
+          run: "export git_tag=$(git describe --tags --abbrev=0)"
 
         - name: "Publish Release"
           uses: softprops/action-gh-release@v0.1.15
           with:
             files: "Cartridges Setup.exe"
+            tag-name: ${{ env.tag_name }}
+            draft: true
+            generate_release_notes: true
