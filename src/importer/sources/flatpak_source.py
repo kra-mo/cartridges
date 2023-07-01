@@ -63,7 +63,7 @@ class FlatpakSourceIterator(SourceIterator):
 
                 if (
                     flatpak_id := keyfile.get_string("Desktop Entry", "X-Flatpak")
-                ) in blacklist:
+                ) in blacklist or flatpak_id != entry.stem:
                     continue
 
                 name = keyfile.get_string("Desktop Entry", "Name")
