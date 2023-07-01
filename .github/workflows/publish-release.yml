@@ -29,10 +29,14 @@ jobs:
             open_file.write(string)
             open_file.close()
 
+        - name: Get tag name
+          id: get_tag_name
+          run: echo ::set-output name=tag_name::${GITHUB_REF#refs/tags/}
+
         - name: Publish release
           uses: softprops/action-gh-release@v0.1.15
           with:
             files: "Installer/Cartridges Setup.exe"
-            tag_name: ${{ github.ref_name }}
+            tag_name: ${{ steps.get_tag_name.outputs.tag_name }}
             draft: true
             body_path: "release_notes"
