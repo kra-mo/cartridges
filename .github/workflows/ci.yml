@@ -17,11 +17,10 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Flatpak Builder
-      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
       with:
         bundle: hu.kramo.Cartridges.Devel.flatpak
         manifest-path: flatpak/hu.kramo.Cartridges.Devel.json
-        cache-key: flatpak-builder-${{ github.sha }}
 
   windows:
     name: Build for Windows
