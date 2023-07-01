@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-01 11:36+0200\n"
+"POT-Creation-Date: 2023-07-01 13:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:110
+#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:112
 msgid "Undo"
 msgstr ""
 
@@ -485,30 +485,38 @@ msgstr ""
 msgid "{} removed"
 msgstr ""
 
-#: src/preferences.py:109
+#: src/preferences.py:111
 msgid "All games removed"
 msgstr ""
 
-#: src/preferences.py:157
+#: src/preferences.py:159
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 
-#: src/preferences.py:289 src/preferences.py:293
+#: src/preferences.py:284
+msgid "Installation Not Found"
+msgstr ""
+
+#: src/preferences.py:286
+msgid "Select a valid directory."
+msgstr ""
+
+#: src/preferences.py:349 src/preferences.py:353
 msgid "Invalid Directory"
 msgstr ""
 
 #. The variable is the name of the source
-#: src/preferences.py:291
+#: src/preferences.py:351
 msgid "Select the {} cache directory."
 msgstr ""
 
 #. The variable is the name of the source
-#: src/preferences.py:295
+#: src/preferences.py:355
 msgid "Select the {} installation directory."
 msgstr ""
 
-#: src/preferences.py:301
+#: src/preferences.py:361
 msgid "Set Location"
 msgstr ""
 
