@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-01 11:15+0200\n"
+"POT-Creation-Date: 2023-07-01 11:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -492,6 +492,22 @@ msgstr ""
 #: src/preferences.py:157
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
+msgstr ""
+
+#: src/preferences.py:289
+msgid "Cache directory not found"
+msgstr ""
+
+#: src/preferences.py:290
+msgid "Select the {} cache directory."
+msgstr ""
+
+#: src/preferences.py:292
+msgid "Installation directory not found"
+msgstr ""
+
+#: src/preferences.py:293
+msgid "Select the {} installation directory."
 msgstr ""
 
 #: src/preferences.py:299
