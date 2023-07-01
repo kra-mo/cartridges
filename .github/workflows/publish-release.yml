@@ -31,7 +31,7 @@ jobs:
 
         - name: Get tag name
           id: get_tag_name
-          run: echo ::set-output name=tag_name::${GITHUB_REF#refs/tags/}
+          run: echo tag_name=${GITHUB_REF#refs/tags/} >> $GITHUB_OUTPUT
 
         - name: Publish release
           uses: softprops/action-gh-release@v0.1.15
