@@ -7,14 +7,14 @@ jobs:
   publish-release:
       runs-on: ubuntu-latest
       steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
         - name: Download workflow artifact
           uses: dawidd6/action-download-artifact@v2.27.0
           with:
             workflow: windows.yml
             workflow_conclusion: success
-
-        - name: Checkout
-          uses: actions/checkout@v3
 
         - name: Get release notes
           shell: "python"  
