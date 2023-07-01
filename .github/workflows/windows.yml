@@ -12,6 +12,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: mingw-w64-ucrt-x86_64-gtk4 mingw-w64-ucrt-x86_64-libadwaita mingw-w64-ucrt-x86_64-python-gobject mingw-w64-ucrt-x86_64-python-yaml mingw-w64-ucrt-x86_64-python-requests mingw-w64-ucrt-x86_64-python-pillow mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-ca-certificates mingw-w64-ucrt-x86_64-meson git
+      - name: Compile
+        shell: msys2 {0}
+        run: |
+          meson setup _build
+          ninja -C _build install
+          pacman --noconfirm -Rs mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-meson git
+          find /ucrt64/share/locale/ -type f ! -name "*cartridges.mo" -delete
+      - name: "Inno Setup"
+        run: iscc ".\_build\Cartridges.iss"
+      - name: "Upload Artifact"
+        uses: actions/upload-artifact@v3
+        with:
+          name: Installer
+          path: _build/Output/Cartridges Setup.exe
 
   publish-release:
       name: Publish Release
@@ -23,10 +43,12 @@ jobs:
           uses: actions/checkout@v3
 
         - name: Download workflow artifact
-          uses: dawidd6/action-download-artifact@v2.27.0
+          uses: actions/download-artifact@v3
           with:
-            workflow: windows.yml
-            workflow_conclusion: success
+            name: Installer
+
+        - name: ls
+          run: ls
 
         - name: Get release notes
           shell: python
