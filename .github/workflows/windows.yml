@@ -5,6 +5,9 @@ on:
       "*"
   pull_request:
 name: Build for Windows
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   windows:
     name: Build
@@ -12,12 +15,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: MSYS2
+
+      - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
         with:
           msystem: UCRT64
           update: true
           install: mingw-w64-ucrt-x86_64-gtk4 mingw-w64-ucrt-x86_64-libadwaita mingw-w64-ucrt-x86_64-python-gobject mingw-w64-ucrt-x86_64-python-yaml mingw-w64-ucrt-x86_64-python-requests mingw-w64-ucrt-x86_64-python-pillow mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-ca-certificates mingw-w64-ucrt-x86_64-meson git
+
       - name: Compile
         shell: msys2 {0}
         run: |
@@ -25,8 +30,10 @@ jobs:
           ninja -C _build install
           pacman --noconfirm -Rs mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-meson git
           find /ucrt64/share/locale/ -type f ! -name "*cartridges.mo" -delete
+
       - name: "Inno Setup"
         run: iscc ".\_build\Cartridges.iss"
+
       - name: "Upload Artifact"
         uses: actions/upload-artifact@v3
         with:
@@ -46,9 +53,6 @@ jobs:
           uses: actions/download-artifact@v3
           with:
             name: Installer
-
-        - name: ls
-          run: ls
 
         - name: Get release notes
           shell: python
@@ -70,7 +74,7 @@ jobs:
         - name: Publish release
           uses: softprops/action-gh-release@v0.1.15
           with:
-            files: Installer/Cartridges Setup.exe
+            files: Cartridges Setup.exe
             fail_on_unmatched_files: true
             tag_name: ${{ steps.get_tag_name.outputs.tag_name }}
             body_path: release_notes
