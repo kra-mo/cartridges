@@ -20,10 +20,13 @@ jobs:
         - name: "Get tag"
           run: "export git_tag=$(git describe --tags --abbrev=0)"
 
+        - name: "ls"
+          run: "ls"
+
         - name: "Publish Release"
           uses: softprops/action-gh-release@v0.1.15
           with:
             files: "Cartridges Setup.exe"
-            tag-name: ${{ env.tag_name }}
+            tag_name: ${{ env.tag_name }}
             draft: true
             generate_release_notes: true
