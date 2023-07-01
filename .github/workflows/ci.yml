@@ -2,12 +2,29 @@ on:
   push:
     branches: [test-actions]
   pull_request:
-name: Build for Windows
+name: CI
 concurrency:
-  group: Release
+  group: release-${{ github.sha }}
 jobs:
+  flatpak:
+    name: "Flatpak"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-44
+      options: --privileged
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Flatpak Builder
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: hu.kramo.Cartridges.Devel.flatpak
+        manifest-path: flatpak/hu.kramo.Cartridges.Devel.json
+        cache-key: flatpak-builder-${{ github.sha }}
+
   windows:
-    name: Build
+    name: Build for Windows
     runs-on: windows-latest
     steps:
       - name: Checkout

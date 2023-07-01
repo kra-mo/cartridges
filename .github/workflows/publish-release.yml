@@ -4,7 +4,7 @@ on:
       "*"
 name: Publish Release
 concurrency:
-  group: Release
+  group: release-${{ github.sha }}
 jobs:
   publish-release:
     name: Publish Release
