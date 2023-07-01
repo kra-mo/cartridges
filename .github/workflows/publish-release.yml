@@ -20,8 +20,8 @@ jobs:
         - name: "Get tag"
           run: "export git_tag=$(git describe --tags --abbrev=0)"
 
-        - name: "ls"
-          run: "ls"
+        - name: "a"
+          run: "echo $git_tag"
 
         - name: "Publish Release"
           uses: softprops/action-gh-release@v0.1.15
