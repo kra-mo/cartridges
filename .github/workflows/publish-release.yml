@@ -1,7 +1,7 @@
 on:
     push:
       tags:
-        - "v\\d.*"
+        - "v.*"
 name: Publish Release
 jobs:
   publish-release:
