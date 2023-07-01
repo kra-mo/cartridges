@@ -61,7 +61,7 @@ class Game(Gtk.Box):
     game_cover = None
     version = 0
 
-    def __init__(self, data, allow_side_effects=True, **kwargs):
+    def __init__(self, data, **kwargs):
         super().__init__(**kwargs)
 
         self.win = shared.win
@@ -69,9 +69,6 @@ class Game(Gtk.Box):
         self.version = shared.SPEC_VERSION
 
         self.update_values(data)
-
-        if allow_side_effects:
-            self.win.games[self.game_id] = self
 
         self.set_play_icon()
 

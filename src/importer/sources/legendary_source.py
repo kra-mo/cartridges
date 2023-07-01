@@ -62,7 +62,7 @@ class LegendarySourceIterator(SourceIterator):
         except (JSONDecodeError, OSError, KeyError):
             pass
 
-        game = Game(values, allow_side_effects=False)
+        game = Game(values)
         return (game, data)
 
     def generator_builder(self) -> Generator[SourceIterationResult, None, None]:

@@ -56,6 +56,7 @@ class CartridgesApplication(Adw.Application):
     win = None
 
     def __init__(self):
+        shared.store = Store()
         super().__init__(
             application_id=shared.APP_ID, flags=Gio.ApplicationFlags.FLAGS_NONE
         )
@@ -82,12 +83,9 @@ class CartridgesApplication(Adw.Application):
             "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
 
-        # Create the games store ready to load games from disk
-        if not shared.store:
-            shared.store = Store()
-            shared.store.add_manager(FileManager(), False)
-            shared.store.add_manager(DisplayManager())
-
+        # Load games from disk
+        shared.store.add_manager(FileManager(), False)
+        shared.store.add_manager(DisplayManager())
         self.load_games_from_disk()
 
         # Add rest of the managers for game imports
@@ -140,7 +138,7 @@ class CartridgesApplication(Adw.Application):
         if shared.games_dir.is_dir():
             for game_file in shared.games_dir.iterdir():
                 data = json.load(game_file.open())
-                game = Game(data, allow_side_effects=False)
+                game = Game(data)
                 shared.store.add_game(game, {"skip_save": True})
 
     def on_about_action(self, *_args):

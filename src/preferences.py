@@ -83,7 +83,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     flatpak_expander_row = Gtk.Template.Child()
     flatpak_data_action_row = Gtk.Template.Child()
-    flatpak_config_file_chooser_button = Gtk.Template.Child()
+    flatpak_data_file_chooser_button = Gtk.Template.Child()
     flatpak_import_launchers_switch = Gtk.Template.Child()
 
     sgdb_key_group = Gtk.Template.Child()
@@ -212,7 +212,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.toast.dismiss()
 
     def remove_all_games(self, *_args):
-        for game in self.win.games.values():
+        for game in shared.store.games.values():
             if not game.removed:
                 self.removed_games.add(game)
 
@@ -225,7 +225,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         self.add_toast(self.toast)
 
-    def reset_app(*_args):
+    def reset_app(self, *_args):
         rmtree(shared.data_dir / "cartridges", True)
         rmtree(shared.config_dir / "cartridges", True)
         rmtree(shared.cache_dir / "cartridges", True)

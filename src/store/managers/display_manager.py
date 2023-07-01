@@ -17,7 +17,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from src import shared
 from src.game import Game
 from src.game_cover import GameCover
 from src.store.managers.manager import Manager
@@ -32,7 +31,6 @@ class DisplayManager(Manager):
     signals = {"update-ready"}
 
     def manager_logic(self, game: Game, _additional_data: dict) -> None:
-        shared.win.games[game.game_id] = game
         if game.get_parent():
             game.get_parent().get_parent().remove(game)
             if game.get_parent():

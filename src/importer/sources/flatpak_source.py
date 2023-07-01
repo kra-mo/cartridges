@@ -100,7 +100,7 @@ class FlatpakSourceIterator(SourceIterator):
                     flatpak_id=flatpak_id
                 ),
             }
-            game = Game(values, allow_side_effects=False)
+            game = Game(values)
 
             additional_data = {}
             if icon_name := desktop_values["Icon"]:

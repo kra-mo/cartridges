@@ -169,8 +169,7 @@ class DetailsWindow(Adw.Window):
                     "hidden": False,
                     "source": "imported",
                     "added": int(time()),
-                },
-                allow_side_effects=False,
+                }
             )
 
         else:

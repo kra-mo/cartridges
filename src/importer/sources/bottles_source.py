@@ -54,7 +54,7 @@ class BottlesSourceIterator(SourceIterator):
                     bottle_name=entry["bottle"]["name"], game_name=entry["name"]
                 ),
             }
-            game = Game(values, allow_side_effects=False)
+            game = Game(values)
 
             # Get official cover path
             try:

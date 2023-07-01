@@ -74,7 +74,7 @@ class LutrisSourceIterator(SourceIterator):
                 ),
                 "executable": self.source.executable_format.format(game_id=row[2]),
             }
-            game = Game(values, allow_side_effects=False)
+            game = Game(values)
 
             # Get official image path
             image_path = self.source.cache_location["coverart"] / f"{row[2]}.jpg"
