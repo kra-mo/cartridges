@@ -7,7 +7,7 @@ concurrency:
   group: release-${{ github.sha }}
 jobs:
   flatpak:
-    name: "Flatpak"
+    name: Flatpak
     runs-on: ubuntu-latest
     container:
       image: bilelmoussaoui/flatpak-github-actions:gnome-44
@@ -48,10 +48,10 @@ jobs:
         shell: msys2 {0}
         run: timeout 2 cartridges
 
-      - name: "Inno Setup"
+      - name: Inno Setup
         run: iscc ".\_build\Cartridges.iss"
 
-      - name: "Upload Artifact"
+      - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Windows Installer
