@@ -21,8 +21,6 @@ import json
 import lzma
 import sys
 
-import non_existent_module
-
 import gi
 
 gi.require_version("Gtk", "4.0")
