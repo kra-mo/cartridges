@@ -46,7 +46,9 @@ jobs:
 
       - name: Test
         shell: msys2 {0}
-        run: timeout 2 cartridges; [ "$?" -eq "124" ] && exit 0
+        run: |
+          set +e  
+          timeout 2 cartridges; [ "$?" -eq "124" ]
 
       - name: Inno Setup
         run: iscc ".\_build\Cartridges.iss"
