@@ -18,7 +18,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import json
 import logging
+from shutil import copytree, rmtree
 
 from gi.repository import Adw, GLib, Gtk
 
@@ -26,8 +28,15 @@ from src import shared
 from src.errors.error_producer import ErrorProducer
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
+from src.importer.sources.bottles_source import BottlesSource
+from src.importer.sources.flatpak_source import FlatpakSource
+from src.importer.sources.heroic_source import HeroicSource
+from src.importer.sources.itch_source import ItchSource
+from src.importer.sources.legendary_source import LegendarySource
 from src.importer.sources.location import UnresolvableLocationError
+from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.source import Source
+from src.importer.sources.steam_source import SteamSource
 from src.store.managers.async_manager import AsyncManager
 from src.store.pipeline import Pipeline
 from src.utils.task import Task
@@ -53,6 +62,20 @@ class Importer(ErrorProducer):
         super().__init__()
         self.game_pipelines = set()
         self.sources = set()
+        if shared.schema.get_boolean("lutris"):
+            self.sources.add(LutrisSource())
+        if shared.schema.get_boolean("steam"):
+            self.sources.add(SteamSource())
+        if shared.schema.get_boolean("heroic"):
+            self.sources.add(HeroicSource())
+        if shared.schema.get_boolean("bottles"):
+            self.sources.add(BottlesSource())
+        if shared.schema.get_boolean("flatpak"):
+            self.sources.add(FlatpakSource())
+        if shared.schema.get_boolean("itch"):
+            self.sources.add(ItchSource())
+        if shared.schema.get_boolean("legendary"):
+            self.sources.add(LegendarySource())
 
     @property
     def n_games_added(self):
@@ -85,12 +108,47 @@ class Importer(ErrorProducer):
             and len(self.game_pipelines) == self.n_pipelines_done
         )
 
-    def add_source(self, source):
-        self.sources.add(source)
+    def load_games_from_disk(self):
+        """Load the games from disk"""
+        if shared.games_dir.is_dir():
+            for game_file in shared.games_dir.iterdir():
+                data = json.load(game_file.open())
+                game = Game(data)
+                shared.store.add_game(game, {"skip_save": True})
+                game.update()
+
+    def delete_backup(self):
+        """Delete a a previously made backup"""
+        rmtree(shared.backup_games_dir, ignore_errors=True)
+        rmtree(shared.backup_covers_dir, ignore_errors=True)
+
+    def create_backup(self):
+        """Make a games and covers backup"""
+        self.delete_backup()
+        copytree(shared.games_dir, shared.backup_games_dir)
+        copytree(shared.covers_dir, shared.backup_covers_dir)
+
+    def restore_backup(self):
+        """Restore a previously made backup"""
+
+        # Remove games from the store and UI
+        for game in shared.store.games.values():
+            game.update_values({"removed": True})
+            game.update()
+
+        # Restore the disk backup
+        rmtree(shared.games_dir, ignore_errors=True)
+        rmtree(shared.covers_dir, ignore_errors=True)
+        shared.backup_games_dir.rename(shared.games_dir)
+        shared.backup_covers_dir.rename(shared.covers_dir)
+
+        # Reload games from disk
+        self.load_games_from_disk()
 
     def run(self):
         """Use several Gio.Task to import games from added sources"""
 
+        self.create_backup()
         self.create_dialog()
 
         # Collect all errors and reset the cancellables for the managers
@@ -288,13 +346,17 @@ class Importer(ErrorProducer):
                 "open_preferences",
                 "import",
             )
-
-        elif self.n_games_added == 1:
-            toast.set_title(_("1 game imported"))
-
-        elif self.n_games_added > 1:
-            # The variable is the number of games
-            toast.set_title(_("{} games imported").format(self.n_games_added))
+        else:
+            toast.set_button_label(_("Undo"))
+            toast.connect(
+                "button-clicked", self.dialog_response_callback, "undo_import"
+            )
+            toast.set_title(
+                _("1 game imported")
+                if self.n_games_added == 1
+                # The variable is the number of games
+                else _("{} games imported").format(self.n_games_added)
+            )
 
         shared.win.toast_overlay.add_toast(toast)
         return toast
@@ -315,5 +377,7 @@ class Importer(ErrorProducer):
             self.open_preferences(*args)
         elif response == "open_preferences_import":
             self.open_preferences(*args).connect("close-request", self.timeout_toast)
+        elif response == "undo_import":
+            self.restore_backup()
         else:
             self.timeout_toast()

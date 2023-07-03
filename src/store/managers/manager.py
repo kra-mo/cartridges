@@ -110,6 +110,7 @@ class Manager(ErrorProducer):
             except Exception as error:  # pylint: disable=broad-exception-caught
                 handle_error(error)
 
+        logging.debug("Running %s for %s (%s)", self.name, game.name, game.game_id)
         try_manager_logic()
 
     def process_game(

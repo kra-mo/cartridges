@@ -17,7 +17,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import json
 import lzma
 import sys
 
@@ -31,15 +30,7 @@ from gi.repository import Adw, Gio, GLib, Gtk
 
 from src import shared
 from src.details_window import DetailsWindow
-from src.game import Game
 from src.importer.importer import Importer
-from src.importer.sources.bottles_source import BottlesSource
-from src.importer.sources.flatpak_source import FlatpakSource
-from src.importer.sources.heroic_source import HeroicSource
-from src.importer.sources.itch_source import ItchSource
-from src.importer.sources.legendary_source import LegendarySource
-from src.importer.sources.lutris_source import LutrisSource
-from src.importer.sources.steam_source import SteamSource
 from src.logging.setup import log_system_info, setup_logging
 from src.preferences import PreferencesWindow
 from src.store.managers.display_manager import DisplayManager
@@ -83,17 +74,16 @@ class CartridgesApplication(Adw.Application):
             "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
 
-        # Load games from disk
-        shared.store.add_manager(FileManager(), False)
+        # Add managers to the store for game imports
         shared.store.add_manager(DisplayManager())
-        self.load_games_from_disk()
-
-        # Add rest of the managers for game imports
+        shared.store.add_manager(FileManager())
         shared.store.add_manager(LocalCoverManager())
         shared.store.add_manager(SteamAPIManager())
         shared.store.add_manager(OnlineCoverManager())
         shared.store.add_manager(SGDBManager())
-        shared.store.enable_manager_in_pipelines(FileManager)
+
+        # Load games from disk
+        Importer().load_games_from_disk()
 
         # Create actions
         self.create_actions(
@@ -133,13 +123,6 @@ class CartridgesApplication(Adw.Application):
         self.win.on_sort_action(sort_action, shared.state_schema.get_value("sort-mode"))
 
         self.win.present()
-
-    def load_games_from_disk(self):
-        if shared.games_dir.is_dir():
-            for game_file in shared.games_dir.iterdir():
-                data = json.load(game_file.open())
-                game = Game(data)
-                shared.store.add_game(game, {"skip_save": True})
 
     def on_about_action(self, *_args):
         # Get the debug info from the log files
@@ -207,30 +190,7 @@ class CartridgesApplication(Adw.Application):
         DetailsWindow()
 
     def on_import_action(self, *_args):
-        importer = Importer()
-
-        if shared.schema.get_boolean("lutris"):
-            importer.add_source(LutrisSource())
-
-        if shared.schema.get_boolean("steam"):
-            importer.add_source(SteamSource())
-
-        if shared.schema.get_boolean("heroic"):
-            importer.add_source(HeroicSource())
-
-        if shared.schema.get_boolean("bottles"):
-            importer.add_source(BottlesSource())
-
-        if shared.schema.get_boolean("flatpak"):
-            importer.add_source(FlatpakSource())
-
-        if shared.schema.get_boolean("itch"):
-            importer.add_source(ItchSource())
-
-        if shared.schema.get_boolean("legendary"):
-            importer.add_source(LegendarySource())
-
-        importer.run()
+        Importer().run()
 
     def on_remove_game_action(self, *_args):
         self.win.active_game.remove_game()

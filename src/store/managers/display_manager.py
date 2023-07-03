@@ -17,6 +17,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import logging
+
+from src import shared
 from src.game import Game
 from src.game_cover import GameCover
 from src.store.managers.manager import Manager
@@ -46,27 +49,28 @@ class DisplayManager(Manager):
             "notify::visible", game.toggle_play, None
         )
         game.menu_button.get_popover().connect(
-            "notify::visible", game.win.set_active_game, game
+            "notify::visible", shared.win.set_active_game, game
         )
 
-        if game.game_id in game.win.game_covers:
-            game.game_cover = game.win.game_covers[game.game_id]
+        if game.game_id in shared.win.game_covers:
+            game.game_cover = shared.win.game_covers[game.game_id]
             game.game_cover.add_picture(game.cover)
         else:
             game.game_cover = GameCover({game.cover}, game.get_cover_path())
-            game.win.game_covers[game.game_id] = game.game_cover
+            shared.win.game_covers[game.game_id] = game.game_cover
 
         if (
-            game.win.stack.get_visible_child() == game.win.details_view
-            and game.win.active_game == game
+            shared.win.stack.get_visible_child() == shared.win.details_view
+            and shared.win.active_game == game
         ):
-            game.win.show_details_view(game)
+            shared.win.show_details_view(game)
 
         if not game.removed and not game.blacklisted:
+            logging.debug("Adding %s (%s) to the UI", game.name, game.game_id)
             if game.hidden:
-                game.win.hidden_library.append(game)
+                shared.win.hidden_library.append(game)
             else:
-                game.win.library.append(game)
+                shared.win.library.append(game)
             game.get_parent().set_focusable(False)
 
-        game.win.set_library_child()
+        shared.win.set_library_child()
