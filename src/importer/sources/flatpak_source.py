@@ -40,10 +40,11 @@ class FlatpakSourceIterator(SourceIterator):
         icon_theme.add_search_path(str(self.source.data_location["icons"]))
 
         blacklist = (
-            {"hu.kramo.Cartridges"}
+            {"hu.kramo.Cartridges", "hu.kramo.Cartridges.Devel"}
             if shared.schema.get_boolean("flatpak-import-launchers")
             else {
                 "hu.kramo.Cartridges",
+                "hu.kramo.Cartridges.Devel",
                 "com.valvesoftware.Steam",
                 "net.lutris.Lutris",
                 "com.heroicgameslauncher.hgl",
