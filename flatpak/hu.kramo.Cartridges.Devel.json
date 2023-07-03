@@ -30,7 +30,8 @@
         "*.la",
         "*.a",
         "*.pyc",
-        "__pycache__"
+        "__pycache__",
+        "Cartridges.iss"
     ],
     "modules" : [
         {
