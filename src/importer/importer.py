@@ -93,11 +93,6 @@ class Importer(ErrorProducer):
 
         self.create_dialog()
 
-        # Backup the store to enable undo
-        shared.store.delete_backup()
-        shared.store.save_backup()
-        shared.store.protect_backup()
-
         # Collect all errors and reset the cancellables for the managers
         # - Only one importer exists at any given time
         # - Every import starts fresh
@@ -223,7 +218,6 @@ class Importer(ErrorProducer):
     def import_callback(self):
         """Callback called when importing has finished"""
         logging.info("Import done")
-        shared.store.unprotect_backup()
         self.import_dialog.close()
         self.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
@@ -294,17 +288,13 @@ class Importer(ErrorProducer):
                 "open_preferences",
                 "import",
             )
-        else:
-            toast.set_title(
-                _("1 game imported")
-                if self.n_games_added == 1
-                # The variable is the number of games
-                else _("{} games imported").format(self.n_games_added)
-            )
-            toast.set_button_label(_("Undo"))
-            toast.connect(
-                "button-clicked", self.dialog_response_callback, "undo_import"
-            )
+
+        elif self.n_games_added == 1:
+            toast.set_title(_("1 game imported"))
+
+        elif self.n_games_added > 1:
+            # The variable is the number of games
+            toast.set_title(_("{} games imported").format(self.n_games_added))
 
         shared.win.toast_overlay.add_toast(toast)
         return toast
@@ -325,7 +315,5 @@ class Importer(ErrorProducer):
             self.open_preferences(*args)
         elif response == "open_preferences_import":
             self.open_preferences(*args).connect("close-request", self.timeout_toast)
-        elif response == "undo_import":
-            shared.store.restore_backup()
         else:
             self.timeout_toast()
