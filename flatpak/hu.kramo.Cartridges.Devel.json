@@ -28,7 +28,9 @@
         "/share/man",
         "/share/pkgconfig",
         "*.la",
-        "*.a"
+        "*.a",
+        "*.pyc",
+        "__pycache__"
     ],
     "modules" : [
         {

@@ -140,10 +140,11 @@ class Game(Gtk.Box):
     def toggle_hidden(self, toast=True):
         self.hidden = not self.hidden
         self.save()
-        self.update()
 
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action()
+
+        self.update()
 
         if toast:
             self.create_toast(
