@@ -29,8 +29,6 @@
         "/share/pkgconfig",
         "*.la",
         "*.a",
-        "*.pyc",
-        "__pycache__",
         "Cartridges.iss"
     ],
     "modules" : [
