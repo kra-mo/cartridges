@@ -263,7 +263,7 @@ class Importer(ErrorProducer):
             list_box = Gtk.ListBox()
             list_box.set_selection_mode(Gtk.SelectionMode.NONE)
             list_box.set_css_classes(["boxed-list"])
-            list_box.set_margin_top(8)
+            list_box.set_margin_top(9)
             for error in errors:
                 row = Adw.ActionRow.new()
                 row.set_title(error[0])
