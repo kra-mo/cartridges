@@ -81,6 +81,7 @@ class DetailsWindow(Adw.Window):
         image_filter = Gtk.FileFilter(name=_("Images"))
         for extension in Image.registered_extensions():
             image_filter.add_suffix(extension[1:])
+            image_filter.add_suffix("svg")  # Gdk.Texture supports .svg but PIL doesn't
 
         file_filters = Gio.ListStore.new(Gtk.FileFilter)
         file_filters.append(image_filter)
