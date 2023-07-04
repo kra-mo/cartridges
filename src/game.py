@@ -141,8 +141,8 @@ class Game(Gtk.Box):
         self.hidden = not self.hidden
         self.save()
 
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action()
+        if self.win.navigation_view.get_visible_page() == self.win.details_page:
+            self.win.navigation_view.pop()
 
         self.update()
 
@@ -161,8 +161,8 @@ class Game(Gtk.Box):
         self.save()
         self.update()
 
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action()
+        if self.win.navigation_view.get_visible_page() == self.win.details_page:
+            self.win.navigation_view.pop()
 
         # The variable is the title of the game
         self.create_toast(
@@ -196,7 +196,7 @@ class Game(Gtk.Box):
         if shared.schema.get_boolean("cover-launches-game") ^ button:
             self.launch()
         else:
-            self.win.show_details_view(self)
+            self.win.show_details_page(self)
 
     def set_play_icon(self):
         self.play_button.set_icon_name(

@@ -114,7 +114,6 @@ class CartridgesApplication(Adw.Application):
                 ("lutris_search",),
                 ("hltb_search",),
                 ("show_hidden", ("<primary>h",), self.win),
-                ("go_back", ("<alt>Left",), self.win),
                 ("go_to_parent", ("<alt>Up",), self.win),
                 ("go_home", ("<alt>Home",), self.win),
                 ("toggle_search", ("<primary>f",), self.win),
@@ -236,7 +235,7 @@ class CartridgesApplication(Adw.Application):
         self.win.active_game.remove_game()
 
     def on_remove_game_details_view_action(self, *_args):
-        if self.win.stack.get_visible_child() == self.win.details_view:
+        if self.win.navigation_view.get_visible_page() == self.win.details_page:
             self.on_remove_game_action()
 
     def search(self, uri):

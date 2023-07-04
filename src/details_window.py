@@ -219,7 +219,7 @@ class DetailsWindow(Adw.Window):
         self.game_cover.pictures.remove(self.cover)
 
         self.close()
-        self.win.show_details_view(self.game)
+        self.win.show_details_page(self.game)
 
     def update_cover_callback(self, manager: SGDBManager):
         # Set the game as not loading

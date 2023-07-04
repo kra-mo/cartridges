@@ -222,8 +222,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 game.save()
                 game.update()
 
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action()
+        if self.win.navigation_view.get_visible_page() == self.win.details_page:
+            self.win.navigation_view.pop()
 
         self.add_toast(self.toast)
 

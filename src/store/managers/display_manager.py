@@ -57,10 +57,10 @@ class DisplayManager(Manager):
             game.win.game_covers[game.game_id] = game.game_cover
 
         if (
-            game.win.stack.get_visible_child() == game.win.details_view
+            game.win.navigation_view.get_visible_page() == game.win.details_page
             and game.win.active_game == game
         ):
-            game.win.show_details_view(game)
+            game.win.show_details_page(game)
 
         if not game.removed and not game.blacklisted:
             if game.hidden:
