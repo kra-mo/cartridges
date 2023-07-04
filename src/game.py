@@ -24,7 +24,7 @@ import subprocess
 from pathlib import Path
 from time import time
 
-from gi.repository import Adw, GLib, GObject, Gtk
+from gi.repository import Adw, GObject, Gtk
 
 from src import shared
 
@@ -97,6 +97,7 @@ class Game(Gtk.Box):
     def create_toast(self, title, action=None):
         toast = Adw.Toast.new(title.format(self.name))
         toast.set_priority(Adw.ToastPriority.HIGH)
+        toast.set_use_markup(False)
 
         if action:
             toast.set_button_label(_("Undo"))
@@ -149,9 +150,7 @@ class Game(Gtk.Box):
         if toast:
             self.create_toast(
                 # The variable is the title of the game
-                (_("{} hidden") if self.hidden else _("{} unhidden")).format(
-                    GLib.markup_escape_text(self.name)
-                ),
+                (_("{} hidden") if self.hidden else _("{} unhidden")).format(self.name),
                 "hide",
             )
 
@@ -165,9 +164,7 @@ class Game(Gtk.Box):
             self.win.navigation_view.pop()
 
         # The variable is the title of the game
-        self.create_toast(
-            _("{} removed").format(GLib.markup_escape_text(self.name)), "remove"
-        )
+        self.create_toast(_("{} removed").format(self.name), "remove")
 
     def set_loading(self, state):
         self.loading += state

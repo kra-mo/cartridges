@@ -127,7 +127,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
         if shared.PROFILE == "development":
             self.reset_action_row.set_visible(True)
             self.reset_button.connect("clicked", self.reset_app)
-            self.set_default_size(-1, 560)
 
         # Sources settings
         for source_class in (
