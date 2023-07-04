@@ -90,7 +90,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
     sgdb_switch = Gtk.Template.Child()
-    sgdb_switch_row = Gtk.Template.Child()
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
 
@@ -162,15 +161,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
         )
 
-        def set_sgdb_sensitive(widget):
-            if not widget.get_text():
-                shared.schema.set_boolean("sgdb", False)
-
-            self.sgdb_switch_row.set_sensitive(widget.get_text())
-
-        self.sgdb_key_entry_row.connect("changed", set_sgdb_sensitive)
-        set_sgdb_sensitive(self.sgdb_key_entry_row)
-
         # Switches
         self.bind_switches(
             (
@@ -188,6 +178,15 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "sgdb-animated",
             )
         )
+
+        def set_sgdb_sensitive(widget):
+            if not widget.get_text():
+                shared.schema.set_boolean("sgdb", False)
+
+            self.sgdb_switch.set_sensitive(widget.get_text())
+
+        self.sgdb_key_entry_row.connect("changed", set_sgdb_sensitive)
+        set_sgdb_sensitive(self.sgdb_key_entry_row)
 
     def get_switch(self, setting):
         return getattr(self, f'{setting.replace("-", "_")}_switch')
