@@ -72,7 +72,7 @@ class LutrisSourceIterator(SourceIterator):
                 "game_id": self.source.game_id_format.format(
                     game_id=row[2], game_internal_id=row[0]
                 ),
-                "executable": self.source.executable_format.format(game_id=row[2]),
+                "executable": self.source.executable_format.format(game_id=row[0]),
             }
             game = Game(values)
 
