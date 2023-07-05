@@ -35,6 +35,7 @@ subdir('po')
 
 if host_machine.system() == 'windows'
   subdir('windows')
+endif
 
 gnome.post_install(
      glib_compile_schemas: true,
