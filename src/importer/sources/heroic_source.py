@@ -84,7 +84,7 @@ class HeroicSourceIterator(SourceIterator):
             "source": self.source.id,
             "added": added_time,
             "name": entry["title"],
-            "developer": entry["developer"],
+            "developer": entry.get("developer", None),
             "game_id": self.source.game_id_format.format(
                 service=service, game_id=app_name
             ),
@@ -106,14 +106,16 @@ class HeroicSourceIterator(SourceIterator):
     def generator_builder(self) -> SourceIterationResult:
         """Generator method producing games from all the Heroic sub-sources"""
 
-        for sub_source in self.sub_sources.values():
+        for sub_source_name, sub_source in self.sub_sources.items():
             # Skip disabled sub-sources
             if not shared.schema.get_boolean("heroic-import-" + sub_source["service"]):
                 continue
             # Load games from JSON
             file = self.source.config_location.root.joinpath(*sub_source["path"])
             try:
-                library = json.load(file.open())["library"]
+                contents = json.load(file.open())
+                key = "library" if sub_source_name == "legendary" else "games"
+                library = contents[key]
             except (JSONDecodeError, OSError, KeyError):
                 # Invalid library.json file, skip it
                 logging.warning("Couldn't open Heroic file: %s", str(file))
@@ -124,9 +126,11 @@ class HeroicSourceIterator(SourceIterator):
             for entry in library:
                 try:
                     result = self.game_from_library_entry(entry, added_time)
-                except KeyError:
+                except KeyError as error:
                     # Skip invalid games
-                    logging.warning("Invalid Heroic game skipped in %s", str(file))
+                    logging.warning(
+                        "Invalid Heroic game skipped in %s", str(file), exc_info=error
+                    )
                     continue
                 yield result
 
