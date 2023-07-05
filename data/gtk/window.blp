@@ -179,173 +179,196 @@ Adw.NavigationPage details_page {
     name: "details_view";
 
     [overlay]
-    Box details_view_box {
-      orientation: vertical;
+    Adw.ToolbarView details_view_toolbar_view {
 
+      [top]
       Adw.HeaderBar {
-        styles [
-          "flat",
-        ]
       }
 
-      Adw.Bin {
+      Adw.BreakpointBin {
         hexpand: true;
         vexpand: true;
+        width-request: 229;
+        height-request: 54;
 
-        Box {
-          halign: center;
-          valign: center;
-          margin-start: 24;
-          margin-end: 24;
-          margin-top: 24;
-          margin-bottom: 24;
-
-          Adw.Clamp {
-            maximum-size: 200;
-
-            Overlay {
-              [overlay]
-              Spinner details_view_spinner {
-                margin-start: 72;
-                margin-end: 72;
-              }
-
-              Picture details_view_cover {
-                halign: end;
-                valign: start;
-                width-request: 200;
-                height-request: 300;
-
-                styles [
-                  "card",
-                ]
-              }
-            }
+        Adw.Breakpoint {
+          condition ("max-width: 564px")
+          setters {
+            details_view_box.orientation: vertical;
+            details_view_box.margin-top: 12;
+            details_view_box.margin-start: 12;
+            details_view_box.margin-end: 12;
+            details_view_details_box.margin-start: 0;
+            details_view_details_box.margin-end: 0;
+            details_view_title.margin-top: 30;
+            details_view_title.halign: center;
+            details_view_developer.halign: center;
+            details_view_date_box.halign: center;
+            details_view_toolbar.halign: center;
+            details_view_toolbar.orientation: vertical;
+            details_view_play_button.halign: center;
+            details_view_toolbar_buttons.margin-start: 0;
           }
+        }
 
-          Box {
-            orientation: vertical;
-            margin-start: 48;
-            vexpand: true;
+        ScrolledWindow {
+          Box details_view_box {
+            halign: center;
             valign: center;
+            margin-start: 24;
+            margin-end: 24;
+            margin-top: 24;
+            margin-bottom: 24;
 
-            Label details_view_title {
-              label: _("Game Title");
-              hexpand: true;
-              halign: start;
-              max-width-chars: 24;
-              wrap: true;
-              wrap-mode: word_char;
-              natural-wrap-mode: word;
+            Adw.Clamp {
+              maximum-size: 200;
 
-              styles [
-                "title-1",
-              ]
-            }
+              Overlay {
+                [overlay]
+                Spinner details_view_spinner {
+                  margin-start: 72;
+                  margin-end: 72;
+                }
 
-            Label details_view_developer {
-              margin-top: 6;
-              hexpand: true;
-              halign: start;
-              max-width-chars: 36;
-              wrap: true;
-              wrap-mode: word_char;
-              natural-wrap-mode: word;
+                Picture details_view_cover {
+                  halign: end;
+                  valign: start;
+                  width-request: 200;
+                  height-request: 300;
 
-              styles [
-                "heading",
-              ]
-            }
-
-            Box {
-              orientation: horizontal;
-              margin-top: 15;
-              hexpand: true;
-              halign: start;
-
-              Label details_view_added {
-                wrap: true;
-                wrap-mode: word_char;
-                natural-wrap-mode: word;
-              }
-
-              Label details_view_last_played {
-                margin-start: 12;
-                wrap: true;
-                wrap-mode: word_char;
-                natural-wrap-mode: word;
+                  styles [
+                    "card",
+                  ]
+                }
               }
             }
 
-            Box {
-              hexpand: true;
+            Box details_view_details_box {
+              orientation: vertical;
+              margin-start: 48;
               vexpand: true;
               valign: center;
 
-              Button details_view_play_button {
-                name: "details_view_play_button";
-                action-name: "app.launch_game";
-                label: _("Play");
+              Label details_view_title {
+                label: _("Game Title");
+                hexpand: true;
                 halign: start;
-                margin-top: 24;
+                max-width-chars: 24;
+                wrap: true;
+                wrap-mode: word_char;
+                natural-wrap-mode: word;
 
                 styles [
-                  "opaque",
-                  "pill",
+                  "title-1",
                 ]
               }
 
-              Box {
+              Label details_view_developer {
+                margin-top: 6;
+                hexpand: true;
                 halign: start;
-                valign: center;
-                margin-top: 24;
-                margin-start: 9;
-
-                Button {
-                  icon-name: "document-edit-symbolic";
-                  action-name: "app.edit_game";
-                  tooltip-text: _("Edit");
-
-                  styles [
-                    "raised",
-                    "circular",
-                  ]
-                }
-
-                Button details_view_hide_button {
-                  action-name: "app.hide_game";
-
-                  styles [
-                    "raised",
-                    "circular",
-                  ]
-                }
-
-                Button {
-                  icon-name: "user-trash-symbolic";
-                  action-name: "app.remove_game";
-                  tooltip-text: _("Remove");
-
-                  styles [
-                    "raised",
-                    "circular",
-                  ]
-                }
-
-                MenuButton {
-                  icon-name: "system-search-symbolic";
-                  menu-model: search;
-                  tooltip-text: _("Search");
-
-                  styles [
-                    "raised",
-                    "circular",
-                  ]
-                }
+                max-width-chars: 36;
+                wrap: true;
+                wrap-mode: word_char;
+                natural-wrap-mode: word;
 
                 styles [
-                  "toolbar",
+                  "heading",
                 ]
+              }
+
+              Box details_view_date_box {
+                orientation: horizontal;
+                margin-top: 15;
+                hexpand: true;
+                halign: start;
+
+                Label details_view_added {
+                  wrap: true;
+                  wrap-mode: word_char;
+                  natural-wrap-mode: word;
+                  justify: center;
+                }
+
+                Label details_view_last_played {
+                  margin-start: 12;
+                  wrap: true;
+                  wrap-mode: word_char;
+                  natural-wrap-mode: word;
+                  justify: center;
+                }
+              }
+
+              Box details_view_toolbar {
+                hexpand: true;
+                vexpand: true;
+                valign: center;
+
+                Button details_view_play_button {
+                  name: "details_view_play_button";
+                  action-name: "app.launch_game";
+                  label: _("Play");
+                  halign: start;
+                  margin-top: 24;
+
+                  styles [
+                    "opaque",
+                    "pill",
+                  ]
+                }
+
+                Box details_view_toolbar_buttons {
+                  halign: start;
+                  valign: center;
+                  margin-top: 24;
+                  margin-start: 9;
+
+                  Button {
+                    icon-name: "document-edit-symbolic";
+                    action-name: "app.edit_game";
+                    tooltip-text: _("Edit");
+
+                    styles [
+                      "raised",
+                      "circular",
+                    ]
+                  }
+
+                  Button details_view_hide_button {
+                    action-name: "app.hide_game";
+
+                    styles [
+                      "raised",
+                      "circular",
+                    ]
+                  }
+
+                  Button {
+                    icon-name: "user-trash-symbolic";
+                    action-name: "app.remove_game";
+                    tooltip-text: _("Remove");
+
+                    styles [
+                      "raised",
+                      "circular",
+                    ]
+                  }
+
+                  MenuButton {
+                    icon-name: "system-search-symbolic";
+                    menu-model: search;
+                    tooltip-text: _("Search");
+
+                    styles [
+                      "raised",
+                      "circular",
+                    ]
+                  }
+
+                  styles [
+                    "toolbar",
+                  ]
+                }
               }
             }
           }

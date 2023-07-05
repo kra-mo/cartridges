@@ -43,7 +43,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     search_button = Gtk.Template.Child()
 
     details_page = Gtk.Template.Child()
-    details_view_box = Gtk.Template.Child()
+    details_view_toolbar_view = Gtk.Template.Child()
     details_view_cover = Gtk.Template.Child()
     details_view_spinner = Gtk.Template.Child()
     details_view_title = Gtk.Template.Child()
@@ -75,8 +75,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.details_view.set_measure_overlay(self.details_view_box, True)
-        self.details_view.set_clip_overlay(self.details_view_box, False)
+        self.details_view.set_measure_overlay(self.details_view_toolbar_view, True)
+        self.details_view.set_clip_overlay(self.details_view_toolbar_view, False)
 
         self.library.set_filter_func(self.filter_func)
         self.hidden_library.set_filter_func(self.filter_func)
