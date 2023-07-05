@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 12:01+0200\n"
-"PO-Revision-Date: 2023-06-26 10:05+0000\n"
+"POT-Creation-Date: 2023-07-05 14:36+0200\n"
+"PO-Revision-Date: 2023-07-05 13:13+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:146
+#: src/main.py:162
 msgid "Cartridges"
 msgstr "Kazetták"
 
@@ -112,7 +112,7 @@ msgstr "Több infó"
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: data/gtk/game.blp:107 src/window.py:169
+#: data/gtk/game.blp:107 src/window.py:171
 msgid "Hide"
 msgstr "Elrejtés"
 
@@ -121,7 +121,7 @@ msgstr "Elrejtés"
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: data/gtk/game.blp:126 src/window.py:171
+#: data/gtk/game.blp:126 src/window.py:173
 msgid "Unhide"
 msgstr "Elrejtés visszavonása"
 
@@ -146,7 +146,7 @@ msgstr "Beállítások megjelenítése"
 msgid "Shortcuts"
 msgstr "Gyorsbillentyűk"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:103
+#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:112
 msgid "Undo"
 msgstr "Visszavonás"
 
@@ -174,7 +174,7 @@ msgstr "Rejtett játékok megjelenítése"
 msgid "Remove game"
 msgstr "Játék eltávolítása"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:236
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:268
 msgid "Behavior"
 msgstr "Működés"
 
@@ -223,8 +223,9 @@ msgid "Steam"
 msgstr "Steam"
 
 #: data/gtk/preferences.blp:96 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:142 data/gtk/preferences.blp:183
-#: data/gtk/preferences.blp:197 data/gtk/preferences.blp:211
+#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:206 data/gtk/preferences.blp:220
+#: data/gtk/preferences.blp:234
 msgid "Install Location"
 msgstr "Telepítés helye"
 
@@ -240,59 +241,71 @@ msgstr "Gyorsítótár helye"
 msgid "Import Steam Games"
 msgstr "Steam játékok importálása"
 
-#: data/gtk/preferences.blp:138
+#: data/gtk/preferences.blp:137
+msgid "Import Flatpak Games"
+msgstr "Flatpak játékok importálása"
+
+#: data/gtk/preferences.blp:147
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:151
+#: data/gtk/preferences.blp:160
 msgid "Import Epic Games"
 msgstr "Epic Games játékok importálása"
 
-#: data/gtk/preferences.blp:160
+#: data/gtk/preferences.blp:169
 msgid "Import GOG Games"
 msgstr "GOG játékok importálása"
 
-#: data/gtk/preferences.blp:169
+#: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
 msgstr "Manuálisan hozzáadott játékok importálása"
 
-#: data/gtk/preferences.blp:179
+#: data/gtk/preferences.blp:188
 msgid "Bottles"
 msgstr "Palackok"
 
-#: data/gtk/preferences.blp:193
+#: data/gtk/preferences.blp:202
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:207
+#: data/gtk/preferences.blp:216
 msgid "Legendary"
 msgstr "Legendary"
 
-#: data/gtk/preferences.blp:224
+#: data/gtk/preferences.blp:230
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: data/gtk/preferences.blp:243
+msgid "Import Game Launchers"
+msgstr "Játékindítók importálása"
+
+#: data/gtk/preferences.blp:256
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:228
+#: data/gtk/preferences.blp:260
 msgid "Authentication"
 msgstr "Hitelesítés"
 
-#: data/gtk/preferences.blp:231
+#: data/gtk/preferences.blp:263
 msgid "API Key"
 msgstr "API kulcs"
 
-#: data/gtk/preferences.blp:239
+#: data/gtk/preferences.blp:271
 msgid "Use SteamGridDB"
 msgstr "SteamGridDB használata"
 
-#: data/gtk/preferences.blp:240
+#: data/gtk/preferences.blp:272
 msgid "Download images when adding or importing games"
 msgstr "Képek letöltése játékok hozzáadásakor és importálásakor"
 
-#: data/gtk/preferences.blp:249
+#: data/gtk/preferences.blp:281
 msgid "Prefer Over Official Images"
 msgstr "SteamGridDB képek előnyben részesítése"
 
-#: data/gtk/preferences.blp:258
+#: data/gtk/preferences.blp:290
 msgid "Prefer Animated Images"
 msgstr "Animált képek előnyben részesítése"
 
@@ -381,21 +394,21 @@ msgid "About Cartridges"
 msgstr "A Kazetták névjegye"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:164
+#: src/main.py:180
 msgid "translator_credits"
 msgstr "kramo https://kramo.hu"
 
 #. The variable is the date when the game was added
-#: src/window.py:192
+#: src/window.py:194
 msgid "Added: {}"
 msgstr "Hozzáadva: {}"
 
-#: src/window.py:195
+#: src/window.py:197
 msgid "Never"
 msgstr "Soha"
 
 #. The variable is the date when the game was last played
-#: src/window.py:199
+#: src/window.py:201
 msgid "Last played: {}"
 msgstr "Legutóbbi játékmenet: {}"
 
@@ -412,26 +425,26 @@ msgid "Confirm"
 msgstr "Megerősítés"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:91
+#: src/details_window.py:92
 msgid "file.txt"
 msgstr "fájl.txt"
 
 #. As in software
-#: src/details_window.py:93
+#: src/details_window.py:94
 msgid "program"
 msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:98 src/details_window.py:100
+#: src/details_window.py:99 src/details_window.py:101
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\útvonal\\ide\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:104 src/details_window.py:106
+#: src/details_window.py:105 src/details_window.py:107
 msgid "/path/to/{}"
 msgstr "/útvonal/ide/{}"
 
-#: src/details_window.py:111
+#: src/details_window.py:112
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -454,15 +467,15 @@ msgstr ""
 "\n"
 "Ha az elérési útvonalban szóközök vannak, rakja az útvonalat idézőjelek közé!"
 
-#: src/details_window.py:146 src/details_window.py:152
+#: src/details_window.py:147 src/details_window.py:153
 msgid "Couldn't Add Game"
 msgstr "Nem lehet hozzáadni a játékot"
 
-#: src/details_window.py:146 src/details_window.py:181
+#: src/details_window.py:147 src/details_window.py:181
 msgid "Game title cannot be empty."
 msgstr "A cím nem lehet üres."
 
-#: src/details_window.py:152 src/details_window.py:189
+#: src/details_window.py:153 src/details_window.py:189
 msgid "Executable cannot be empty."
 msgstr "A program nem lehet üres."
 
@@ -471,62 +484,68 @@ msgid "Couldn't Apply Preferences"
 msgstr "Nem lehet menteni a beállításokat"
 
 #. The variable is the title of the game
-#: src/game.py:141
+#: src/game.py:138
 msgid "{} launched"
 msgstr "{} elindítva"
 
 #. The variable is the title of the game
-#: src/game.py:154
+#: src/game.py:152
 msgid "{} hidden"
 msgstr "{} elrejtve"
 
-#: src/game.py:154
+#: src/game.py:152
 msgid "{} unhidden"
 msgstr "{} elrejtése visszavonva"
 
-#: src/game.py:171
+#: src/game.py:169
 msgid "{} removed"
 msgstr "{} eltávolítva"
 
-#: src/preferences.py:102
+#: src/preferences.py:111
 msgid "All games removed"
 msgstr "Az összes játék eltávolítva"
 
-#: src/preferences.py:149
+#: src/preferences.py:159
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Egy API kulcs szükséges a SteamGridDB használatához. {}Itt{} generálhat "
 "egyet."
 
-#: src/preferences.py:289
+#: src/preferences.py:284
+msgid "Installation Not Found"
+msgstr "A telepítés nem található"
+
+#: src/preferences.py:286
+msgid "Select a valid directory."
+msgstr "Válasszon ki egy érvényes mappát."
+
+#: src/preferences.py:348
+msgid "Invalid Directory"
+msgstr "Érvénytelen mappa"
+
+#. The variable is the name of the source
+#: src/preferences.py:352
+msgid "Select the {} cache directory."
+msgstr "Válassza ki {} gyorsítótár mappáját."
+
+#. The variable is the name of the source
+#: src/preferences.py:355
+msgid "Select the {} configuration directory."
+msgstr "Válassza ki {} konfigurációs mappáját."
+
+#. The variable is the name of the source
+#: src/preferences.py:358
+msgid "Select the {} data directory."
+msgstr "Válassza ki {} adatok mappáját."
+
+#: src/preferences.py:364
 msgid "Set Location"
 msgstr "Mappa kiválasztása"
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
 msgstr "Rendben"
-
-#: src/importer/sources/source.py:106
-msgid "Data"
-msgstr "Adatok"
-
-#: src/importer/sources/source.py:107
-msgid "Cache"
-msgstr "Gyorsítótár"
-
-#: src/importer/sources/source.py:108
-msgid "Configuration"
-msgstr "Konfigurációk"
-
-#. The variables are the type of location (eg. cache) and the source's name (eg. Steam)
-#: src/importer/sources/source.py:119
-msgid "Invalid {} Location for {{}}"
-msgstr "Érvénytelen {} mappa ennek a forrásnak: {{}}"
-
-#: src/importer/sources/source.py:120
-msgid "Pick a new one or disable the source in preferences"
-msgstr "Válasszon egy újat, vagy kapcsolja ki a forrást a beállításokban"
 
 #: src/store/managers/sgdb_manager.py:47
 msgid "Couldn't Authenticate SteamGridDB"
@@ -535,6 +554,26 @@ msgstr "Nem lehet hitelesíteni SteamGridDB-t"
 #: src/store/managers/sgdb_manager.py:48
 msgid "Verify your API key in preferences"
 msgstr "Ellenőrizze az API kulcsát a beállításokban"
+
+#, fuzzy
+#~| msgid "The Steam directory cannot be found."
+#~ msgid "Directory not Valid"
+#~ msgstr "A Steam mappa nem található."
+
+#~ msgid "Data"
+#~ msgstr "Adatok"
+
+#~ msgid "Cache"
+#~ msgstr "Gyorsítótár"
+
+#~ msgid "Configuration"
+#~ msgstr "Konfigurációk"
+
+#~ msgid "Invalid {} Location for {{}}"
+#~ msgstr "Érvénytelen {} mappa ennek a forrásnak: {{}}"
+
+#~ msgid "Pick a new one or disable the source in preferences"
+#~ msgstr "Válasszon egy újat, vagy kapcsolja ki a forrást a beállításokban"
 
 #~ msgid "Steam Install Location"
 #~ msgstr "Steam telepítés helye"
@@ -559,15 +598,6 @@ msgstr "Ellenőrizze az API kulcsát a beállításokban"
 
 #~ msgid "Select the Lutris cache directory."
 #~ msgstr "Válassza ki Lutris gyorsítótár mappáját."
-
-#~ msgid "Installation Not Found"
-#~ msgstr "Telepítés nem található"
-
-#~ msgid "Select the {} configuration directory."
-#~ msgstr "Válassza ki {} konfigurációs mappáját."
-
-#~ msgid "Select the {} data directory."
-#~ msgstr "Válassza ki {} adatainak mappáját."
 
 #~ msgid "Importing Games…"
 #~ msgstr "Játékok importálása folyamatban…"
@@ -687,9 +717,6 @@ msgstr "Ellenőrizze az API kulcsát a beállításokban"
 
 #~ msgid "No new games were found in the Steam library."
 #~ msgstr "Nem találhatóak új játékok a Steam könyvtárban."
-
-#~ msgid "The Steam directory cannot be found."
-#~ msgstr "A Steam mappa nem található."
 
 #~ msgid "Talking to Steam"
 #~ msgstr "Adatok lekérése a Steam-ből"
