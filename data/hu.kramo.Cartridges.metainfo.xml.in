@@ -44,12 +44,18 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="1.5.6" date="2023-06-19">
+    <release version="2.0" date="2023-07-05">
       <description translatable="no">
+        <p>After months of work, Cartridges 2.0 is here:</p>
         <ul>
-          <li>Fixes an issue with importing Bottles games without covers</li>
+          <li>New import source: Legendary</li>
+          <li>New import source: Flatpak</li>
+          <li>Importing games should be much quicker</li>
+          <li>Error handling has been improved</li>
+          <li>Various UX improvements</li>
           <li>Translations since 1.5</li>
         </ul>
+        <p>Thanks to the new import backend, adding new sources is much easier and a lot more are coming soon!</p>
       </description>
     </release>
     <release version="1.5" date="2023-05-23">
