@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 12:01+0200\n"
+"POT-Creation-Date: 2023-07-05 14:36+0200\n"
 "PO-Revision-Date: 2023-05-07 15:38+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:146
+#: src/main.py:162
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: data/gtk/game.blp:107 src/window.py:169
+#: data/gtk/game.blp:107 src/window.py:171
 msgid "Hide"
 msgstr "Piilota"
 
@@ -131,7 +131,7 @@ msgstr "Piilota"
 msgid "Remove"
 msgstr "Poista"
 
-#: data/gtk/game.blp:126 src/window.py:171
+#: data/gtk/game.blp:126 src/window.py:173
 msgid "Unhide"
 msgstr "Näytä"
 
@@ -156,7 +156,7 @@ msgstr "Näytä asetukset"
 msgid "Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:103
+#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:112
 msgid "Undo"
 msgstr "Kumoa"
 
@@ -184,7 +184,7 @@ msgstr "Näytä piilotetut pelit"
 msgid "Remove game"
 msgstr "Poista peli"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:236
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:268
 msgid "Behavior"
 msgstr "Toiminta"
 
@@ -233,8 +233,9 @@ msgid "Steam"
 msgstr "Steam"
 
 #: data/gtk/preferences.blp:96 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:142 data/gtk/preferences.blp:183
-#: data/gtk/preferences.blp:197 data/gtk/preferences.blp:211
+#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:206 data/gtk/preferences.blp:220
+#: data/gtk/preferences.blp:234
 #, fuzzy
 #| msgid "itch Install Location"
 msgid "Install Location"
@@ -254,59 +255,75 @@ msgstr "Lutris-välimuistin sijainti"
 msgid "Import Steam Games"
 msgstr "Tuo Steam-pelejä"
 
-#: data/gtk/preferences.blp:138
+#: data/gtk/preferences.blp:137
+#, fuzzy
+#| msgid "Import Steam Games"
+msgid "Import Flatpak Games"
+msgstr "Tuo Steam-pelejä"
+
+#: data/gtk/preferences.blp:147
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:151
+#: data/gtk/preferences.blp:160
 msgid "Import Epic Games"
 msgstr "Tuo Epic-pelejä"
 
-#: data/gtk/preferences.blp:160
+#: data/gtk/preferences.blp:169
 msgid "Import GOG Games"
 msgstr "Tuo GOG-pelejä"
 
-#: data/gtk/preferences.blp:169
+#: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
 msgstr "Tuo Sideload-pelejä"
 
-#: data/gtk/preferences.blp:179
+#: data/gtk/preferences.blp:188
 msgid "Bottles"
 msgstr "Pullot"
 
-#: data/gtk/preferences.blp:193
+#: data/gtk/preferences.blp:202
 msgid "itch"
 msgstr ""
 
-#: data/gtk/preferences.blp:207
+#: data/gtk/preferences.blp:216
 msgid "Legendary"
 msgstr ""
 
-#: data/gtk/preferences.blp:224
+#: data/gtk/preferences.blp:230
+msgid "Flatpak"
+msgstr ""
+
+#: data/gtk/preferences.blp:243
+#, fuzzy
+#| msgid "Game Launcher"
+msgid "Import Game Launchers"
+msgstr "Pelin käynnistin"
+
+#: data/gtk/preferences.blp:256
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:228
+#: data/gtk/preferences.blp:260
 msgid "Authentication"
 msgstr "Tunnistautuminen"
 
-#: data/gtk/preferences.blp:231
+#: data/gtk/preferences.blp:263
 msgid "API Key"
 msgstr "API-avain"
 
-#: data/gtk/preferences.blp:239
+#: data/gtk/preferences.blp:271
 msgid "Use SteamGridDB"
 msgstr "Käytä SteamGridDB:tä"
 
-#: data/gtk/preferences.blp:240
+#: data/gtk/preferences.blp:272
 msgid "Download images when adding or importing games"
 msgstr "Lataa kuvat pelejä lisätessä tai tuotaessa"
 
-#: data/gtk/preferences.blp:249
+#: data/gtk/preferences.blp:281
 msgid "Prefer Over Official Images"
 msgstr "Suosi virallisten kuvien sijaan"
 
-#: data/gtk/preferences.blp:258
+#: data/gtk/preferences.blp:290
 msgid "Prefer Animated Images"
 msgstr "Suosi animoituja kuvia"
 
@@ -395,21 +412,21 @@ msgid "About Cartridges"
 msgstr "Tietoja - Cartridges"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:164
+#: src/main.py:180
 msgid "translator_credits"
 msgstr "Linux Sauna"
 
 #. The variable is the date when the game was added
-#: src/window.py:192
+#: src/window.py:194
 msgid "Added: {}"
 msgstr "Lisätty: {}"
 
-#: src/window.py:195
+#: src/window.py:197
 msgid "Never"
 msgstr "Ei koskaan"
 
 #. The variable is the date when the game was last played
-#: src/window.py:199
+#: src/window.py:201
 msgid "Last played: {}"
 msgstr "Viimeksi pelattu: {}"
 
@@ -426,26 +443,26 @@ msgid "Confirm"
 msgstr "Vahvista"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:91
+#: src/details_window.py:92
 msgid "file.txt"
 msgstr "file.txt"
 
 #. As in software
-#: src/details_window.py:93
+#: src/details_window.py:94
 msgid "program"
 msgstr "ohjelma"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:98 src/details_window.py:100
+#: src/details_window.py:99 src/details_window.py:101
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\polku\\kansioon\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:104 src/details_window.py:106
+#: src/details_window.py:105 src/details_window.py:107
 msgid "/path/to/{}"
 msgstr "/polku/kansioon/{}"
 
-#: src/details_window.py:111
+#: src/details_window.py:112
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -468,15 +485,15 @@ msgstr ""
 "Jos polku sisältää välilyöntejä, varmista, että se on suljettu "
 "kaksinkertaisiin lainausmerkkeihin!"
 
-#: src/details_window.py:146 src/details_window.py:152
+#: src/details_window.py:147 src/details_window.py:153
 msgid "Couldn't Add Game"
 msgstr "Peliä ei voitu lisätä"
 
-#: src/details_window.py:146 src/details_window.py:181
+#: src/details_window.py:147 src/details_window.py:181
 msgid "Game title cannot be empty."
 msgstr "Pelin nimi ei voi olla tyhjä."
 
-#: src/details_window.py:152 src/details_window.py:189
+#: src/details_window.py:153 src/details_window.py:189
 msgid "Executable cannot be empty."
 msgstr "Suoritettava ei voi olla tyhjä."
 
@@ -485,64 +502,70 @@ msgid "Couldn't Apply Preferences"
 msgstr "Asetuksia ei voitu ottaa käyttöön"
 
 #. The variable is the title of the game
-#: src/game.py:141
+#: src/game.py:138
 msgid "{} launched"
 msgstr "{} käynnistetty"
 
 #. The variable is the title of the game
-#: src/game.py:154
+#: src/game.py:152
 msgid "{} hidden"
 msgstr "{} piilotettu"
 
-#: src/game.py:154
+#: src/game.py:152
 msgid "{} unhidden"
 msgstr "{} palautettu näkyviin"
 
-#: src/game.py:171
+#: src/game.py:169
 msgid "{} removed"
 msgstr "{} poistettu"
 
-#: src/preferences.py:102
+#: src/preferences.py:111
 msgid "All games removed"
 msgstr "Kaikki pelit poistettu"
 
-#: src/preferences.py:149
+#: src/preferences.py:159
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "API-avain on pakollinen, jos haluat käyttää SteamGridDB:tä. Voit luoda "
 "avaimen {}täällä{}."
 
-#: src/preferences.py:289
+#: src/preferences.py:284
+#, fuzzy
+#| msgid "Installation Not Found"
+msgid "Installation Not Found"
+msgstr "Asennusta ei löydy"
+
+#: src/preferences.py:286
+msgid "Select a valid directory."
+msgstr ""
+
+#: src/preferences.py:348
+msgid "Invalid Directory"
+msgstr ""
+
+#. The variable is the name of the source
+#: src/preferences.py:352
+msgid "Select the {} cache directory."
+msgstr ""
+
+#. The variable is the name of the source
+#: src/preferences.py:355
+msgid "Select the {} configuration directory."
+msgstr ""
+
+#. The variable is the name of the source
+#: src/preferences.py:358
+msgid "Select the {} data directory."
+msgstr ""
+
+#: src/preferences.py:364
 msgid "Set Location"
 msgstr "Aseta sijainti"
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
 msgstr "Hylkää"
-
-#: src/importer/sources/source.py:106
-msgid "Data"
-msgstr ""
-
-#: src/importer/sources/source.py:107
-msgid "Cache"
-msgstr ""
-
-#: src/importer/sources/source.py:108
-#, fuzzy
-#| msgid "Confirm"
-msgid "Configuration"
-msgstr "Vahvista"
-
-#. The variables are the type of location (eg. cache) and the source's name (eg. Steam)
-#: src/importer/sources/source.py:119
-msgid "Invalid {} Location for {{}}"
-msgstr ""
-
-#: src/importer/sources/source.py:120
-msgid "Pick a new one or disable the source in preferences"
-msgstr ""
 
 #: src/store/managers/sgdb_manager.py:47
 #, fuzzy
@@ -553,6 +576,16 @@ msgstr "Ei voitu yhdistää SteamGridDB:hen"
 #: src/store/managers/sgdb_manager.py:48
 msgid "Verify your API key in preferences"
 msgstr ""
+
+#, fuzzy
+#~| msgid "The Steam directory cannot be found."
+#~ msgid "Directory not Valid"
+#~ msgstr "Steam-hakemistoa ei löydy."
+
+#, fuzzy
+#~| msgid "Confirm"
+#~ msgid "Configuration"
+#~ msgstr "Vahvista"
 
 #~ msgid "Steam Install Location"
 #~ msgstr "Steam-asennuksen sijainti"
@@ -574,9 +607,6 @@ msgstr ""
 
 #~ msgid "Cache Not Found"
 #~ msgstr "Välimuistia ei löydy"
-
-#~ msgid "Installation Not Found"
-#~ msgstr "Asennusta ei löydy"
 
 #~ msgid "Importing Games…"
 #~ msgstr "Tuodaan pelejä…"
@@ -710,9 +740,6 @@ msgstr ""
 
 #~ msgid "No new games were found in the Steam library."
 #~ msgstr "Steam-kirjastosta ei löytynyt uusia pelejä."
-
-#~ msgid "The Steam directory cannot be found."
-#~ msgstr "Steam-hakemistoa ei löydy."
 
 #~ msgid "Talking to Steam"
 #~ msgstr "Yhdistetään Steam-kirjastoon"
