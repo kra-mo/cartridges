@@ -33,13 +33,8 @@ subdir('data')
 subdir('src')
 subdir('po')
 
-configure_file(
-  input: './windows/Cartridges.iss.in',
-  output: 'Cartridges.iss',
-  configuration: conf,
-  install: true,
-  install_dir: '.'
-)
+if host_machine.system() == 'windows'
+  subdir('windows')
 
 gnome.post_install(
      glib_compile_schemas: true,

@@ -28,8 +28,7 @@
         "/share/man",
         "/share/pkgconfig",
         "*.la",
-        "*.a",
-        "Cartridges.iss"
+        "*.a"
     ],
     "modules" : [
         {
