@@ -133,5 +133,3 @@ class GameCover:
                 self.update_animation,
                 data,
             )
-        else:
-            data[0].return_value(False)
