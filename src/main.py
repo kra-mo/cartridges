@@ -179,6 +179,7 @@ class CartridgesApplication(Adw.Application):
             # Translators: Replace this with your name for it to show up in the about window
             translator_credits=_("translator_credits"),
             debug_info=debug_str,
+            debug_info_filename="cartridges.log",
         )
         about.present()
 
