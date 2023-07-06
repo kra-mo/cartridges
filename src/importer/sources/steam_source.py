@@ -118,9 +118,9 @@ class SteamSource(URLExecutableSource):
     data_location = Location(
         schema_key="steam-location",
         candidates=(
-            shared.flatpak_dir / "com.valvesoftware.Steam" / "data" / "Steam",
+            shared.home / ".steam" / "steam",
             shared.data_dir / "Steam",
-            shared.home / ".steam",
+            shared.flatpak_dir / "com.valvesoftware.Steam" / "data" / "Steam",
             shared.programfiles32_dir / "Steam",
         ),
         paths={
