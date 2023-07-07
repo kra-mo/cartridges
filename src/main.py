@@ -53,6 +53,7 @@ from src.window import CartridgesWindow
 
 
 class CartridgesApplication(Adw.Application):
+    state = shared.AppState.DEFAULT
     win = None
 
     def __init__(self):
@@ -86,7 +87,10 @@ class CartridgesApplication(Adw.Application):
         # Load games from disk
         shared.store.add_manager(FileManager(), False)
         shared.store.add_manager(DisplayManager())
+        self.state = shared.AppState.LOAD_FROM_DISK
         self.load_games_from_disk()
+        self.state = shared.AppState.DEFAULT
+        self.win.create_source_rows()
 
         # Add rest of the managers for game imports
         shared.store.add_manager(LocalCoverManager())
@@ -140,6 +144,9 @@ class CartridgesApplication(Adw.Application):
                 data = json.load(game_file.open())
                 game = Game(data)
                 shared.store.add_game(game, {"skip_save": True})
+
+    def get_source_name(self, source_id):
+        return globals()[f"{source_id.title()}Source"].name
 
     def on_about_action(self, *_args):
         # Get the debug info from the log files

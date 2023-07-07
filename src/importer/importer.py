@@ -91,6 +91,7 @@ class Importer(ErrorProducer):
     def run(self):
         """Use several Gio.Task to import games from added sources"""
 
+        shared.win.get_application().state = shared.AppState.IMPORT
         shared.win.get_application().lookup_action("import").set_enabled(False)
 
         self.create_dialog()
@@ -224,6 +225,8 @@ class Importer(ErrorProducer):
         self.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
         shared.win.get_application().lookup_action("import").set_enabled(True)
+        shared.win.get_application().state = shared.AppState.DEFAULT
+        shared.win.create_source_rows()
 
     def create_error_dialog(self):
         """Dialog containing all errors raised by importers"""

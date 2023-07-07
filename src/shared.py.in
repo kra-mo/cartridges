@@ -18,9 +18,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+from enum import IntEnum, auto
 from pathlib import Path
 
 from gi.repository import Gdk, Gio, GLib
+
+
+class AppState(IntEnum):
+    DEFAULT = auto()
+    LOAD_FROM_DISK = auto()
+    IMPORT = auto()
+
 
 APP_ID = "@APP_ID@"
 VERSION = "@VERSION@"

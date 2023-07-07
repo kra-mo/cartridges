@@ -88,16 +88,44 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                   }
                 }
 
-                ListBox {
-                  Box {
+                ListBox sidebar {
+                  Box all_games_row_box {
+                    margin-top: 12;
+                    margin-bottom: 12;
+                    margin-start: 6;
+                    margin-end: 6;
+                    spacing: 12;
+
                     Image {
-                      icon-name: "view-grid";
-                      margin-start: 3;
-                      margin-end: 9;
+                      icon-name: "view-grid-symbolic";
                     }
                     Label {
                       halign: start;
-                      label: _("All");
+                      label: _("All Games");
+                    }
+                  }
+                  Box added_row_box {
+                    margin-top: 12;
+                    margin-bottom: 12;
+                    margin-start: 6;
+                    margin-end: 6;
+                    spacing: 12;
+
+                    Image {
+                      icon-name: "list-add-symbolic";
+                    }
+                    Label {
+                      halign: start;
+                      label: _("Added");
+                    }
+                  }
+                  ListBoxRow {
+                    selectable: false;
+                    activatable: false;
+                    Label {
+                      label: _("Imported");
+                      styles ["heading"]
+                      halign: start;
                     }
                   }
                   styles ["navigation-sidebar"]

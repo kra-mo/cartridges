@@ -29,6 +29,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     overlay_split_view = Gtk.Template.Child()
     navigation_view = Gtk.Template.Child()
+    sidebar = Gtk.Template.Child()
+    all_games_row_box = Gtk.Template.Child()
+    added_row_box = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     primary_menu_button = Gtk.Template.Child()
     show_sidebar_button = Gtk.Template.Child()
@@ -73,6 +76,57 @@ class CartridgesWindow(Adw.ApplicationWindow):
     active_game = None
     details_view_game_cover = None
     sort_state = "a-z"
+    filter_state = "all"
+    source_rows = {}
+
+    def create_source_rows(self):
+        self.sidebar.get_row_at_index(2).set_visible(False)
+
+        while row := self.sidebar.get_row_at_index(3):
+            self.sidebar.remove(row)
+
+        def get_removed(source_id):
+            for game in shared.store.source_games[source_id].values():
+                if game.removed:
+                    return True
+            return False
+
+        for source_id in shared.store.source_games:
+            if source_id == "imported":
+                continue
+            if get_removed(source_id):
+                continue
+
+            row = Gtk.Label(
+                label=self.get_application().get_source_name(source_id),
+                halign=Gtk.Align.START,
+                margin_top=12,
+                margin_bottom=12,
+                margin_start=6,
+                margin_end=6,
+            )
+
+            self.sidebar.append(row)
+            self.source_rows[row.get_parent()] = source_id
+            self.sidebar.get_row_at_index(2).set_visible(True)
+
+    def row_selected(self, widget, row):
+        if not row:
+            widget.select_row(self.all_games_row_box.get_parent())
+        try:
+            value = self.source_rows[row]
+        except KeyError:
+            match row.get_child():
+                case self.all_games_row_box:
+                    value = "all"
+                case self.added_row_box:
+                    value = "imported"
+
+        self.filter_state = value
+        self.library.invalidate_filter()
+
+        if self.overlay_split_view.get_collapsed():
+            self.overlay_split_view.set_show_sidebar(False)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -90,7 +144,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.notice_empty.set_icon_name(shared.APP_ID + "-symbolic")
 
-        self.overlay_split_view.set_show_sidebar(shared.state_schema.get_boolean("show-sidebar"))
+        self.overlay_split_view.set_show_sidebar(
+            shared.state_schema.get_boolean("show-sidebar")
+        )
+
+        self.sidebar.select_row(self.all_games_row_box.get_parent())
 
         if shared.PROFILE == "development":
             self.add_css_class("devel")
@@ -108,6 +166,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         self.navigation_view.connect("popped", self.set_show_hidden)
         self.navigation_view.connect("pushed", self.set_show_hidden)
+
+        self.sidebar.connect("row-selected", self.row_selected)
 
         style_manager = Adw.StyleManager.get_default()
         style_manager.connect("notify::dark", self.set_details_view_opacity)
@@ -151,9 +211,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
             remove_from_overlay(self.hidden_notice_no_results)
 
     def filter_func(self, child):
-        if shared.state_schema.get_string("filter") != "all":
-            pass
-
         game = child.get_child()
         text = (
             (
@@ -169,6 +226,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
             text in game.name.lower()
             or (text in game.developer.lower() if game.developer else False)
         )
+
+        if not filtered:
+            if self.filter_state == "all":
+                pass
+            elif game.source != self.filter_state:
+                filtered = True
 
         game.filtered = filtered
         self.set_library_child()
