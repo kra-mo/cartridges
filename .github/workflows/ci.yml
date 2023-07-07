@@ -51,10 +51,10 @@ jobs:
           timeout 2 cartridges; [ "$?" -eq "124" ]
 
       - name: Inno Setup
-        run: iscc ".\_build\Cartridges.iss"
+        run: iscc ".\_build\windows\Cartridges.iss"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Windows Installer
-          path: _build/Output/Cartridges Setup.exe
+          path: _build/windows/Output/Cartridges Setup.exe

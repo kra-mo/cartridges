@@ -14,7 +14,7 @@
       <default>true</default>
     </key>
     <key name="steam-location" type="s">
-      <default>"~/.steam/"</default>
+      <default>"~/.steam/steam"</default>
     </key>
     <key name="lutris" type="b">
       <default>true</default>

@@ -120,7 +120,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def set_library_child(self):
         child, hidden_child = self.notice_empty, self.hidden_notice_empty
 
-        for game in shared.store.games.values():
+        for game in shared.store:
             if game.removed or game.blacklisted:
                 continue
             if game.hidden:

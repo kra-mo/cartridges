@@ -34,7 +34,7 @@ state_schema = Gio.Settings.new(APP_ID + ".State")
 home = Path.home()
 data_dir = Path(GLib.get_user_data_dir())
 config_dir = Path(GLib.get_user_config_dir())
-cache_dir = Path(GLib.get_user_config_dir())
+cache_dir = Path(GLib.get_user_cache_dir())
 flatpak_dir = home / ".var" / "app"
 
 games_dir = data_dir / "cartridges" / "games"

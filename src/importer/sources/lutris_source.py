@@ -70,9 +70,9 @@ class LutrisSourceIterator(SourceIterator):
                 "name": row[1],
                 "source": f"{self.source.id}_{row[3]}",
                 "game_id": self.source.game_id_format.format(
-                    game_id=row[2], game_internal_id=row[0]
+                    runner=row[3], game_id=row[0]
                 ),
-                "executable": self.source.executable_format.format(game_id=row[2]),
+                "executable": self.source.executable_format.format(game_id=row[0]),
             }
             game = Game(values)
 
@@ -123,4 +123,4 @@ class LutrisSource(URLExecutableSource):
 
     @property
     def game_id_format(self):
-        return super().game_id_format + "_{game_internal_id}"
+        return self.id + "_{runner}_{game_id}"
