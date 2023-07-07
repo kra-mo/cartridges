@@ -81,17 +81,18 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def create_source_rows(self):
         def get_removed(source_id):
-            if all(
+            removed = tuple(
                 game.removed or game.hidden or game.blacklisted
                 for game in shared.store.source_games[source_id].values()
-            ):
-                return True
-            return False
+            )
+            return (
+                (count,) if (count := sum(removed)) != len(removed) else False
+            )  # Return a tuple because 0 == False and 1 == True
 
         restored = False
 
         selected_id = (
-            self.source_rows[selected_row]
+            self.source_rows[selected_row][0]
             if (selected_row := self.sidebar.get_selected_row()) in self.source_rows
             else None
         )
@@ -101,7 +102,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             restored = True
 
         if added_missing := (
-            not shared.store.source_games.get("imported") or get_removed("imported")
+            not shared.store.source_games.get("imported") or not get_removed("imported")
         ):
             self.sidebar.select_row(self.all_games_row_box.get_parent())
         self.added_row_box.get_parent().set_visible(not added_missing)
@@ -114,20 +115,48 @@ class CartridgesWindow(Adw.ApplicationWindow):
         for source_id in shared.store.source_games:
             if source_id == "imported":
                 continue
-            if get_removed(source_id):
+            if not (removed := get_removed(source_id)):
                 continue
 
-            row = Gtk.Label(
-                label=self.get_application().get_source_name(source_id),
-                halign=Gtk.Align.START,
-                margin_top=12,
-                margin_bottom=12,
-                margin_start=6,
-                margin_end=6,
+            row = Gtk.Box()
+            games_no = len(shared.store.source_games[source_id]) - removed[0]
+
+            row.append(
+                Gtk.Label(
+                    label=self.get_application().get_source_name(source_id),
+                    halign=Gtk.Align.START,
+                    margin_top=12,
+                    margin_bottom=12,
+                    margin_start=6,
+                    margin_end=6,
+                )
             )
 
-            self.sidebar.append(row)
-            self.source_rows[row.get_parent()] = source_id
+            row.append(
+                Gtk.Label(
+                    label=games_no,
+                    hexpand=True,
+                    halign=Gtk.Align.END,
+                    margin_top=12,
+                    margin_bottom=12,
+                    margin_end=12,
+                )
+            )
+
+            # Order rows based on the number of games in them
+            index = 3
+            while source_row := self.sidebar.get_row_at_index(index):
+                if self.source_rows[source_row][1] < games_no:
+                    self.sidebar.insert(row, index)
+                    break
+                index += 1
+            if not row.get_parent():
+                self.sidebar.append(row)
+
+            self.source_rows[row.get_parent()] = (
+                source_id,
+                games_no,
+            )
 
             if source_id == selected_id:
                 self.sidebar.select_row(row.get_parent())
@@ -147,7 +176,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             case self.added_row_box:
                 value = "imported"
             case _default:
-                value = self.source_rows[row]
+                value = self.source_rows[row][0]
 
         self.filter_state = value
         self.library.invalidate_filter()
