@@ -133,7 +133,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             )
 
             row.append(
-                Gtk.Label(
+                games_no_label := Gtk.Label(
                     label=games_no,
                     hexpand=True,
                     halign=Gtk.Align.END,
@@ -142,6 +142,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
                     margin_end=12,
                 )
             )
+
+            games_no_label.add_css_class("dim-label")
 
             # Order rows based on the number of games in them
             index = 3
