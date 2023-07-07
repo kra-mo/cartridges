@@ -203,6 +203,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.file_chooser.select_folder(self.win, None, callback, callback_data)
 
     def undo_remove_all(self, *_args):
+        shared.win.get_application().state = shared.AppState.UNDO_REMOVE_ALL_GAMES
         for game in self.removed_games:
             game.removed = False
             game.save()
@@ -210,8 +211,11 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         self.removed_games = set()
         self.toast.dismiss()
+        shared.win.get_application().state = shared.AppState.DEFAULT
+        shared.win.create_source_rows()
 
     def remove_all_games(self, *_args):
+        shared.win.get_application().state = shared.AppState.REMOVE_ALL_GAMES
         for game in shared.store:
             if not game.removed:
                 self.removed_games.add(game)
@@ -223,6 +227,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
             self.win.navigation_view.pop()
 
         self.add_toast(self.toast)
+        shared.win.get_application().state = shared.AppState.DEFAULT
+        shared.win.create_source_rows()
 
     def reset_app(self, *_args):
         rmtree(shared.data_dir / "cartridges", True)

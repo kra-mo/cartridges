@@ -28,6 +28,8 @@ class AppState(IntEnum):
     DEFAULT = auto()
     LOAD_FROM_DISK = auto()
     IMPORT = auto()
+    REMOVE_ALL_GAMES = auto()
+    UNDO_REMOVE_ALL_GAMES = auto()
 
 
 APP_ID = "@APP_ID@"

@@ -31,7 +31,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
     navigation_view = Gtk.Template.Child()
     sidebar = Gtk.Template.Child()
     all_games_row_box = Gtk.Template.Child()
+    all_games_no_label = Gtk.Template.Child()
     added_row_box = Gtk.Template.Child()
+    added_games_no_label = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     primary_menu_button = Gtk.Template.Child()
     show_sidebar_button = Gtk.Template.Child()
@@ -89,6 +91,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 (count,) if (count := sum(removed)) != len(removed) else False
             )  # Return a tuple because 0 == False and 1 == True
 
+        total_games_no = 0
         restored = False
 
         selected_id = (
@@ -102,9 +105,14 @@ class CartridgesWindow(Adw.ApplicationWindow):
             restored = True
 
         if added_missing := (
-            not shared.store.source_games.get("imported") or not get_removed("imported")
+            not shared.store.source_games.get("imported")
+            or not (removed := get_removed("imported"))
         ):
             self.sidebar.select_row(self.all_games_row_box.get_parent())
+        else:
+            games_no = len(shared.store.source_games["imported"]) - removed[0]
+            self.added_games_no_label.set_label(str(games_no))
+            total_games_no += games_no
         self.added_row_box.get_parent().set_visible(not added_missing)
 
         self.sidebar.get_row_at_index(2).set_visible(False)
@@ -118,15 +126,14 @@ class CartridgesWindow(Adw.ApplicationWindow):
             if not (removed := get_removed(source_id)):
                 continue
 
-            row = Gtk.Box()
+            row = Gtk.Box(margin_top=12, margin_bottom=12)
             games_no = len(shared.store.source_games[source_id]) - removed[0]
+            total_games_no += games_no
 
             row.append(
                 Gtk.Label(
                     label=self.get_application().get_source_name(source_id),
                     halign=Gtk.Align.START,
-                    margin_top=12,
-                    margin_bottom=12,
                     margin_start=6,
                     margin_end=6,
                 )
@@ -137,9 +144,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                     label=games_no,
                     hexpand=True,
                     halign=Gtk.Align.END,
-                    margin_top=12,
-                    margin_bottom=12,
-                    margin_end=12,
+                    margin_end=6,
                 )
             )
 
@@ -166,8 +171,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
             self.sidebar.get_row_at_index(2).set_visible(True)
 
-            if not restored:
-                self.sidebar.select_row(self.all_games_row_box.get_parent())
+        self.all_games_no_label.set_label(str(total_games_no))
+
+        if not restored:
+            self.sidebar.select_row(self.all_games_row_box.get_parent())
 
     def row_selected(self, _widget, row):
         if not row:
