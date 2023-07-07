@@ -93,7 +93,7 @@ class CartridgesApplication(Adw.Application):
         shared.store.add_manager(SteamAPIManager())
         shared.store.add_manager(OnlineCoverManager())
         shared.store.add_manager(SGDBManager())
-        shared.store.enable_manager_in_pipelines(FileManager)
+        shared.store.toggle_manager_in_pipelines(FileManager, True)
 
         # Create actions
         self.create_actions(
