@@ -27,9 +27,11 @@ from src.utils.relative_date import relative_date
 class CartridgesWindow(Adw.ApplicationWindow):
     __gtype_name__ = "CartridgesWindow"
 
+    overlay_split_view = Gtk.Template.Child()
     navigation_view = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     primary_menu_button = Gtk.Template.Child()
+    show_sidebar_button = Gtk.Template.Child()
     details_view = Gtk.Template.Child()
     library_page = Gtk.Template.Child()
     library_view = Gtk.Template.Child()
@@ -87,6 +89,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.set_library_child()
 
         self.notice_empty.set_icon_name(shared.APP_ID + "-symbolic")
+
+        self.overlay_split_view.set_show_sidebar(shared.state_schema.get_boolean("show-sidebar"))
 
         if shared.PROFILE == "development":
             self.add_css_class("devel")
@@ -147,6 +151,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
             remove_from_overlay(self.hidden_notice_no_results)
 
     def filter_func(self, child):
+        if shared.state_schema.get_string("filter") != "all":
+            pass
+
         game = child.get_child()
         text = (
             (
@@ -259,6 +266,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.lookup_action("show_hidden").set_enabled(
             widget.get_visible_page() == self.library_page
         )
+
+    def on_show_sidebar_action(self, *_args):
+        shared.state_schema.set_boolean(
+            "show-sidebar", (value := not self.overlay_split_view.get_show_sidebar())
+        )
+        self.overlay_split_view.set_show_sidebar(value)
 
     def on_go_to_parent_action(self, *_args):
         if self.navigation_view.get_visible_page() == self.details_page:

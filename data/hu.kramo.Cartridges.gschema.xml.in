@@ -106,6 +106,12 @@
       </choices>
       <default>"a-z"</default>
     </key>
+    <key name="show-sidebar" type="b">
+      <default>false</default>
+    </key>
+    <key name="filter" type="s">
+      <default>"all"</default>
+    </key>
     <key name="steam-limiter-tokens-history" type="s">
       <default>"[]"</default>
     </key>

@@ -113,6 +113,7 @@ class CartridgesApplication(Adw.Application):
                 ("protondb_search",),
                 ("lutris_search",),
                 ("hltb_search",),
+                ("show_sidebar", ("F9",), self.win),
                 ("show_hidden", ("<primary>h",), self.win),
                 ("go_to_parent", ("<alt>Up",), self.win),
                 ("go_home", ("<alt>Home",), self.win),
