@@ -214,10 +214,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.toast.dismiss()
 
     def remove_all_games(self, *_args):
-        for game in shared.store.games.values():
+        for game in shared.store:
             if not game.removed:
                 self.removed_games.add(game)
-
                 game.removed = True
                 game.save()
                 game.update()
