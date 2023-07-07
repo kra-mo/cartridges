@@ -80,16 +80,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
     source_rows = {}
 
     def create_source_rows(self):
-        selected_id = (
-            self.source_rows[selected_row]
-            if (selected_row := self.sidebar.get_selected_row()) in self.source_rows
-            else None
-        )
-        self.sidebar.get_row_at_index(2).set_visible(False)
-
-        while row := self.sidebar.get_row_at_index(3):
-            self.sidebar.remove(row)
-
         def get_removed(source_id):
             if all(
                 game.removed or game.hidden or game.blacklisted
@@ -99,6 +89,27 @@ class CartridgesWindow(Adw.ApplicationWindow):
             return False
 
         restored = False
+
+        selected_id = (
+            self.source_rows[selected_row]
+            if (selected_row := self.sidebar.get_selected_row()) in self.source_rows
+            else None
+        )
+
+        if selected_row == self.added_row_box.get_parent():
+            self.sidebar.select_row(self.added_row_box.get_parent())
+            restored = True
+
+        if added_missing := (
+            not shared.store.source_games.get("imported") or get_removed("imported")
+        ):
+            self.sidebar.select_row(self.all_games_row_box.get_parent())
+        self.added_row_box.get_parent().set_visible(not added_missing)
+
+        self.sidebar.get_row_at_index(2).set_visible(False)
+
+        while row := self.sidebar.get_row_at_index(3):
+            self.sidebar.remove(row)
 
         for source_id in shared.store.source_games:
             if source_id == "imported":
