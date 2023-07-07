@@ -80,16 +80,24 @@ class CartridgesWindow(Adw.ApplicationWindow):
     source_rows = {}
 
     def create_source_rows(self):
+        selected_id = (
+            self.source_rows[selected_row]
+            if (selected_row := self.sidebar.get_selected_row()) in self.source_rows
+            else None
+        )
         self.sidebar.get_row_at_index(2).set_visible(False)
 
         while row := self.sidebar.get_row_at_index(3):
             self.sidebar.remove(row)
 
         def get_removed(source_id):
-            for game in shared.store.source_games[source_id].values():
-                if game.removed:
-                    return True
+            if all(
+                game.removed for game in shared.store.source_games[source_id].values()
+            ):
+                return True
             return False
+
+        restored = False
 
         for source_id in shared.store.source_games:
             if source_id == "imported":
@@ -108,19 +116,26 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
             self.sidebar.append(row)
             self.source_rows[row.get_parent()] = source_id
+
+            if source_id == selected_id:
+                self.sidebar.select_row(row.get_parent())
+                restored = True
+
             self.sidebar.get_row_at_index(2).set_visible(True)
 
-    def row_selected(self, widget, row):
+            if not restored:
+                self.sidebar.select_row(self.all_games_row_box.get_parent())
+
+    def row_selected(self, _widget, row):
         if not row:
-            widget.select_row(self.all_games_row_box.get_parent())
-        try:
-            value = self.source_rows[row]
-        except KeyError:
-            match row.get_child():
-                case self.all_games_row_box:
-                    value = "all"
-                case self.added_row_box:
-                    value = "imported"
+            return
+        match row.get_child():
+            case self.all_games_row_box:
+                value = "all"
+            case self.added_row_box:
+                value = "imported"
+            case _default:
+                value = self.source_rows[row]
 
         self.filter_state = value
         self.library.invalidate_filter()
