@@ -92,7 +92,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         def get_removed(source_id):
             if all(
-                game.removed for game in shared.store.source_games[source_id].values()
+                game.removed or game.hidden or game.blacklisted
+                for game in shared.store.source_games[source_id].values()
             ):
                 return True
             return False
