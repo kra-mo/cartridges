@@ -92,7 +92,7 @@ class LegendarySourceIterator(SourceIterator):
 class LegendarySource(Source):
     name = "Legendary"
     executable_format = "legendary launch {app_name}"
-    available_on = {"linux", "win32"}
+    available_on = {"linux"}
 
     iterator_class = LegendarySourceIterator
     config_location: Location = Location(
