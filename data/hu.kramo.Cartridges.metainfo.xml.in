@@ -44,10 +44,10 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.0.2" date="2023-07-08">
+    <release version="2.0.3" date="2023-07-08">
       <description translatable="no">
         <ul>
-          <li>Fixes an issue with internal data storage</li>
+          <li>Fixes an issue with Windows data storage</li>
         </ul>
       </description>
     </release>
