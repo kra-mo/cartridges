@@ -81,7 +81,7 @@ class HeroicSourceIterator(SourceIterator):
         runner = entry["runner"]
         service = self.sub_sources[runner]["service"]
         values = {
-            "source": self.source.id,
+            "source": f"{self.source.id}_{service}",
             "added": added_time,
             "name": entry["title"],
             "developer": entry.get("developer", None),
@@ -159,4 +159,4 @@ class HeroicSource(URLExecutableSource):
     @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
-        return self.name.lower() + "_{service}_{game_id}"
+        return self.id + "_{service}_{game_id}"
