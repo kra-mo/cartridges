@@ -146,7 +146,7 @@ class CartridgesApplication(Adw.Application):
                 shared.store.add_game(game, {"skip_save": True})
 
     def get_source_name(self, source_id):
-        return globals()[f"{source_id.title()}Source"].name
+        return globals()[f'{source_id.split("_")[0].title()}Source'].name
 
     def on_about_action(self, *_args):
         # Get the debug info from the log files
