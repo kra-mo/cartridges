@@ -38,11 +38,12 @@ def migrate_files_v1_to_v2():
         if "XDG_DATA_HOME" in os.environ
         else Path.home() / ".local" / "share"
     )
+    old_cartridges_data_dir = old_data_dir / "cartridges"
 
     # Skip if there is no old dir
-    # Skip if old == new
+    # Skip if old == current
     # Skip if already migrated
-    migrated_file = old_data_dir / ".migrated"
+    migrated_file = old_cartridges_data_dir / ".migrated"
     if (
         not old_data_dir.is_dir()
         or str(old_data_dir) == str(shared.data_dir)
@@ -52,19 +53,21 @@ def migrate_files_v1_to_v2():
 
     logging.info("Migrating data dir %s", str(old_data_dir))
 
+    # Create the current data dir if needed
+    if not shared.data_dir.is_dir():
+        shared.data_dir.mkdir(parents=True)
+
     # Migrate games if they don't exist in the current data dir.
     # If a game is migrated, its covers should be too.
-    old_games_dir = old_data_dir / "games"
-    old_covers_dir = old_data_dir / "covers"
-    current_games_dir = shared.data_dir / "games"
-    current_covers_dir = shared.data_dir / "covers"
+    old_games_dir = old_cartridges_data_dir / "games"
+    old_covers_dir = old_cartridges_data_dir / "covers"
     for game_file in old_games_dir.iterdir():
         # Ignore non game files
         if not game_file.is_file() or game_file.suffix != ".json":
             continue
 
         # Do nothing if already in games dir
-        destination_game_file = current_games_dir / game_file.name
+        destination_game_file = shared.games_dir / game_file.name
         if destination_game_file.exists():
             continue
 
@@ -77,7 +80,7 @@ def migrate_files_v1_to_v2():
             cover_file = old_covers_dir / game_file.with_suffix(suffix).name
             if not cover_file.is_file():
                 continue
-            destination_cover_file = current_covers_dir / cover_file.name
+            destination_cover_file = shared.covers_dir / cover_file.name
             copyfile(cover_file, destination_cover_file)
             logging.info(
                 "Copied %s -> %s", str(cover_file), str(destination_cover_file)
