@@ -17,10 +17,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import json
 import logging
+import os
 from pathlib import Path
 from shutil import copyfile
-import os
 
 from src import shared
 
@@ -57,27 +58,59 @@ def migrate_files_v1_to_v2():
     if not shared.data_dir.is_dir():
         shared.data_dir.mkdir(parents=True)
 
-    # Migrate games if they don't exist in the current data dir.
-    # If a game is migrated, its covers should be too.
     old_games_dir = old_cartridges_data_dir / "games"
     old_covers_dir = old_cartridges_data_dir / "covers"
-    for game_file in old_games_dir.iterdir():
-        # Ignore non game files
-        if not game_file.is_file() or game_file.suffix != ".json":
+
+    old_games = set(old_games_dir.glob("*.json"))
+    old_imported_games = set(
+        filter(lambda path: path.name.startswith("imported_"), old_games)
+    )
+    old_other_games = old_games - old_imported_games
+
+    # Discover current imported games
+    imported_game_number = 0
+    imported_execs = set()
+    for game in shared.games_dir.glob("imported_*.json"):
+        try:
+            game_data = json.load(game.open("r"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        number = int(game_data["game_id"].replace("imported_", ""))
+        imported_game_number = max(number, imported_game_number)
+        imported_execs.add(game_data["executable"])
+
+    # Migrate imported game files
+    for game in old_imported_games:
+        try:
+            game_data = json.load(game.open("r"))
+        except (OSError, json.JSONDecodeError):
             continue
 
+        # Don't migrate if there's a game with the same exec
+        if game_data["executable"] in imported_execs:
+            continue
+
+        # Migrate with updated index
+        imported_game_number += 1
+        game_id = f"imported_{imported_game_number}"
+        game_data["game_id"] = game_id
+        destination_game_file = shared.games_dir / f"{game_id}.json"
+        json.dump(game_data, destination_game_file.open("w"))
+
+    # Migrate all other games
+    for game in old_other_games:
         # Do nothing if already in games dir
-        destination_game_file = shared.games_dir / game_file.name
+        destination_game_file = shared.games_dir / game.name
         if destination_game_file.exists():
             continue
 
         # Else, migrate the game
-        copyfile(game_file, destination_game_file)
-        logging.info("Copied %s -> %s", str(game_file), str(destination_game_file))
+        copyfile(game, destination_game_file)
+        logging.info("Copied %s -> %s", str(game), str(destination_game_file))
 
         # Migrate covers
         for suffix in (".tiff", ".gif"):
-            cover_file = old_covers_dir / game_file.with_suffix(suffix).name
+            cover_file = old_covers_dir / game.with_suffix(suffix).name
             if not cover_file.is_file():
                 continue
             destination_cover_file = shared.covers_dir / cover_file.name
