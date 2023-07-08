@@ -49,6 +49,7 @@ from src.store.managers.online_cover_manager import OnlineCoverManager
 from src.store.managers.sgdb_manager import SGDBManager
 from src.store.managers.steam_api_manager import SteamAPIManager
 from src.store.store import Store
+from src.utils.migrate_files_v1_to_v2 import migrate_files_v1_to_v2
 from src.window import CartridgesWindow
 
 
@@ -281,5 +282,6 @@ def main(_version):
     """App entry point"""
     setup_logging()
     log_system_info()
+    migrate_files_v1_to_v2()
     app = CartridgesApplication()
     return app.run(sys.argv)
