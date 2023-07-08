@@ -25,6 +25,29 @@ from shutil import copyfile
 
 from src import shared
 
+old_data_dir: Path = (
+    Path(os.getenv("XDG_DATA_HOME"))
+    if "XDG_DATA_HOME" in os.environ
+    else Path.home() / ".local" / "share"
+)
+old_cartridges_data_dir = old_data_dir / "cartridges"
+migrated_file = old_cartridges_data_dir / ".migrated"
+old_games_dir = old_cartridges_data_dir / "games"
+old_covers_dir = old_cartridges_data_dir / "covers"
+
+
+def migrate_game_covers(game_file: Path):
+    """Migrate a game covers from a source game file (json) to current dir"""
+
+    # Migrate covers
+    for suffix in (".tiff", ".gif"):
+        cover_file = old_covers_dir / game_file.with_suffix(suffix).name
+        if not cover_file.is_file():
+            continue
+        destination_cover_file = shared.covers_dir / cover_file.name
+        copyfile(cover_file, destination_cover_file)
+        logging.info("Copied %s -> %s", str(cover_file), str(destination_cover_file))
+
 
 def migrate_files_v1_to_v2():
     """
@@ -34,17 +57,9 @@ def migrate_files_v1_to_v2():
     where the windows directories for data, config and cache changed.
     """
 
-    old_data_dir: Path = (
-        Path(os.getenv("XDG_DATA_HOME"))
-        if "XDG_DATA_HOME" in os.environ
-        else Path.home() / ".local" / "share"
-    )
-    old_cartridges_data_dir = old_data_dir / "cartridges"
-
     # Skip if there is no old dir
     # Skip if old == current
     # Skip if already migrated
-    migrated_file = old_cartridges_data_dir / ".migrated"
     if (
         not old_data_dir.is_dir()
         or str(old_data_dir) == str(shared.data_dir)
@@ -58,9 +73,6 @@ def migrate_files_v1_to_v2():
     if not shared.data_dir.is_dir():
         shared.data_dir.mkdir(parents=True)
 
-    old_games_dir = old_cartridges_data_dir / "games"
-    old_covers_dir = old_cartridges_data_dir / "covers"
-
     old_games = set(old_games_dir.glob("*.json"))
     old_imported_games = set(
         filter(lambda path: path.name.startswith("imported_"), old_games)
@@ -70,9 +82,9 @@ def migrate_files_v1_to_v2():
     # Discover current imported games
     imported_game_number = 0
     imported_execs = set()
-    for game in shared.games_dir.glob("imported_*.json"):
+    for game_file in shared.games_dir.glob("imported_*.json"):
         try:
-            game_data = json.load(game.open("r"))
+            game_data = json.load(game_file.open("r"))
         except (OSError, json.JSONDecodeError):
             continue
         number = int(game_data["game_id"].replace("imported_", ""))
@@ -80,9 +92,9 @@ def migrate_files_v1_to_v2():
         imported_execs.add(game_data["executable"])
 
     # Migrate imported game files
-    for game in old_imported_games:
+    for game_file in old_imported_games:
         try:
-            game_data = json.load(game.open("r"))
+            game_data = json.load(game_file.open("r"))
         except (OSError, json.JSONDecodeError):
             continue
 
@@ -96,28 +108,22 @@ def migrate_files_v1_to_v2():
         game_data["game_id"] = game_id
         destination_game_file = shared.games_dir / f"{game_id}.json"
         json.dump(game_data, destination_game_file.open("w"))
+        logging.info(
+            "Copied (updated id) %s -> %s", str(game_file), str(destination_game_file)
+        )
+        migrate_game_covers(game_file)
 
     # Migrate all other games
-    for game in old_other_games:
+    for game_file in old_other_games:
         # Do nothing if already in games dir
-        destination_game_file = shared.games_dir / game.name
+        destination_game_file = shared.games_dir / game_file.name
         if destination_game_file.exists():
             continue
 
         # Else, migrate the game
-        copyfile(game, destination_game_file)
-        logging.info("Copied %s -> %s", str(game), str(destination_game_file))
-
-        # Migrate covers
-        for suffix in (".tiff", ".gif"):
-            cover_file = old_covers_dir / game.with_suffix(suffix).name
-            if not cover_file.is_file():
-                continue
-            destination_cover_file = shared.covers_dir / cover_file.name
-            copyfile(cover_file, destination_cover_file)
-            logging.info(
-                "Copied %s -> %s", str(cover_file), str(destination_cover_file)
-            )
+        copyfile(game_file, destination_game_file)
+        logging.info("Copied %s -> %s", str(game_file), str(destination_game_file))
+        migrate_game_covers(game_file)
 
     # Signal that this dir is migrated
     migrated_file.touch()
