@@ -48,6 +48,7 @@
       <description translatable="no">
         <ul>
           <li>Fixes an issue with adding new games manually</li>
+          <li>Translations since 2.0</li>
         </ul>
       </description>
     </release>
