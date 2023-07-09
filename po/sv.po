@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-05 14:36+0200\n"
-"PO-Revision-Date: 2023-07-01 22:51+0000\n"
+"PO-Revision-Date: 2023-07-08 14:52+0000\n"
 "Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/sv/>\n"
@@ -531,17 +531,13 @@ msgstr "Välj {} cachekatalog."
 
 #. The variable is the name of the source
 #: src/preferences.py:355
-#, fuzzy
-#| msgid "Select the {} installation directory."
 msgid "Select the {} configuration directory."
-msgstr "Välj {} installationskatalog."
+msgstr "Välj {} konfigurationskatalog."
 
 #. The variable is the name of the source
 #: src/preferences.py:358
-#, fuzzy
-#| msgid "Select the {} cache directory."
 msgid "Select the {} data directory."
-msgstr "Välj {} cachekatalog."
+msgstr "Välj {} datakatalog."
 
 #: src/preferences.py:364
 msgid "Set Location"
