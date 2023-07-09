@@ -158,11 +158,12 @@ class DetailsWindow(Adw.Window):
             source_id = "imported"
             numbers = [0]
             game_id: str
-            for game_id in shared.source_games[source_id]:
+            for game_id in shared.store.source_games.get(source_id, set()):
                 prefix = "imported_"
                 if not game_id.startswith(prefix):
                     continue
                 numbers.append(int(game_id.replace(prefix, "", 1)))
+
             game_number = max(numbers) + 1
 
             self.game = Game(
