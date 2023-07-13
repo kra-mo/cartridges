@@ -126,16 +126,26 @@ class CartridgesWindow(Adw.ApplicationWindow):
             if not (removed := get_removed(source_id)):
                 continue
 
-            row = Gtk.Box(margin_top=12, margin_bottom=12)
+            row = Gtk.Box(
+                margin_top=12,
+                margin_bottom=12,
+                margin_start=6,
+                margin_end=6,
+                spacing=12,
+            )
             games_no = len(shared.store.source_games[source_id]) - removed[0]
             total_games_no += games_no
+
+            row.append(
+                Gtk.Image.new_from_icon_name(
+                    f'{source_id.split("_")[0]}-source-symbolic'
+                )
+            )
 
             row.append(
                 Gtk.Label(
                     label=self.get_application().get_source_name(source_id),
                     halign=Gtk.Align.START,
-                    margin_start=6,
-                    margin_end=6,
                 )
             )
 
@@ -144,7 +154,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
                     label=games_no,
                     hexpand=True,
                     halign=Gtk.Align.END,
-                    margin_end=6,
                 )
             )
 

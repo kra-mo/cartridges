@@ -188,6 +188,12 @@ class CartridgesApplication(Adw.Application):
             debug_info=debug_str,
             debug_info_filename="cartridges.log",
         )
+        about.add_legal_section(
+            "Steam Branding",
+            "© 2023 Valve Corporation",
+            Gtk.License.CUSTOM,
+            "Steam and the Steam logo are trademarks and/or registered trademarks of Valve Corporation in the U.S. and/or other countries.",  # pylint: disable=line-too-long
+        )
         about.present()
 
     def on_preferences_action(
