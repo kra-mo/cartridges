@@ -90,7 +90,7 @@ class LutrisSourceIterator(SourceIterator):
 class LutrisSource(URLExecutableSource):
     """Generic Lutris source"""
 
-    name = "Lutris"
+    name = _("Lutris")
     iterator_class = LutrisSourceIterator
     url_format = "lutris:rungameid/{game_id}"
     available_on = {"linux"}

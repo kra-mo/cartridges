@@ -138,7 +138,7 @@ class HeroicSourceIterator(SourceIterator):
 class HeroicSource(URLExecutableSource):
     """Generic Heroic Games Launcher source"""
 
-    name = "Heroic"
+    name = _("Heroic")
     iterator_class = HeroicSourceIterator
     url_format = "heroic://launch/{app_name}"
     available_on = {"linux", "win32"}

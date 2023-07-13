@@ -90,7 +90,7 @@ class LegendarySourceIterator(SourceIterator):
 
 
 class LegendarySource(Source):
-    name = "Legendary"
+    name = _("Legendary")
     executable_format = "legendary launch {app_name}"
     available_on = {"linux"}
 
