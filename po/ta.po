@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-05 14:36+0200\n"
-"PO-Revision-Date: 2023-06-28 20:19+0000\n"
+"PO-Revision-Date: 2023-07-09 07:59+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
@@ -46,10 +46,10 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"உங்கள் எல்லா விளையாட்டுகளுக்கும் கேட்ரிட்ஜ்கள் ஒரு எளிய விளையாட்டு துவக்கி ஆகும். ஸ்டீம் "
-"(Steam), லுட்ரிஸ் (Lutris), வீரம் (Heroic) மற்றும் பலவற்றிலிருந்து விளையாட்டுகளை "
-"இறக்குமதி செய்வதற்கான ஆதரவை இது கொண்டுள்ளது. நீங்கள் விளையாட்டுகளை வரிசைப்படுத்தலாம் "
-"மற்றும் மறைக்கலாம் அல்லது ஸ்டீம்கிரிட் டிபி (SteamGridDB) இலிருந்து அட்டைப்பட கலையைப் "
+"உங்கள் எல்லா விளையாட்டுகளுக்கும் கேட்ரிட்ஜ்கள் ஒரு எளிய விளையாட்டு துவக்கி "
+"ஆகும். Steam, Lutris, Heroic மற்றும் பலவற்றிலிருந்து விளையாட்டுகளை இறக்குமதி "
+"செய்வதற்கான ஆதரவை இது கொண்டுள்ளது. நீங்கள் விளையாட்டுகளை வரிசைப்படுத்தலாம் "
+"மற்றும் மறைக்கலாம் அல்லது SteamGridDB இலிருந்து அட்டைப்பட கலையைப் "
 "பதிவிறக்கலாம்."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:30
@@ -222,7 +222,7 @@ msgstr "மூலங்கள்"
 
 #: data/gtk/preferences.blp:92
 msgid "Steam"
-msgstr "Steam (ஸ்டீம்)"
+msgstr "Steam"
 
 #: data/gtk/preferences.blp:96 data/gtk/preferences.blp:110
 #: data/gtk/preferences.blp:151 data/gtk/preferences.blp:192
@@ -233,7 +233,7 @@ msgstr "நிறுவல் இடம்"
 
 #: data/gtk/preferences.blp:106
 msgid "Lutris"
-msgstr "லூட்ரிஸ்"
+msgstr "Lutris"
 
 #: data/gtk/preferences.blp:119
 msgid "Cache Location"
@@ -241,17 +241,15 @@ msgstr "தற்காலிக சேமிப்பு இடம்"
 
 #: data/gtk/preferences.blp:128
 msgid "Import Steam Games"
-msgstr "ஸ்டீம் (Steam) விளையாட்டுகளை இறக்குமதி செய்யவும்"
+msgstr "Steam விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
 #: data/gtk/preferences.blp:137
-#, fuzzy
-#| msgid "Import Steam Games"
 msgid "Import Flatpak Games"
-msgstr "ஸ்டீம் (Steam) விளையாட்டுகளை இறக்குமதி செய்யவும்"
+msgstr "Flatpak கேம்களை இறக்குமதி செய்யவும்"
 
 #: data/gtk/preferences.blp:147
 msgid "Heroic"
-msgstr "Heroic (ஹீரோயிக்)"
+msgstr "Heroic"
 
 #: data/gtk/preferences.blp:160
 msgid "Import Epic Games"
@@ -267,29 +265,27 @@ msgstr "பக்க ஏற்றப்பட்ட விளையாட்ட�
 
 #: data/gtk/preferences.blp:188
 msgid "Bottles"
-msgstr "Bottles (பாட்டில்கள்)"
+msgstr "பாட்டில்கள்"
 
 #: data/gtk/preferences.blp:202
 msgid "itch"
-msgstr "அரிப்பு (itch)"
+msgstr "itch"
 
 #: data/gtk/preferences.blp:216
 msgid "Legendary"
-msgstr "பழம்பெரும்"
+msgstr "Legendary"
 
 #: data/gtk/preferences.blp:230
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: data/gtk/preferences.blp:243
-#, fuzzy
-#| msgid "Game Launcher"
 msgid "Import Game Launchers"
-msgstr "விளையாட்டு துவக்கி"
+msgstr "விளையாட்டு துவக்கிகளை இறக்குமதி செய்"
 
 #: data/gtk/preferences.blp:256
 msgid "SteamGridDB"
-msgstr "ஸ்டீம்கிரிட் டிபி (SteamGridDB)"
+msgstr "SteamGridDB"
 
 #: data/gtk/preferences.blp:260
 msgid "Authentication"
@@ -301,7 +297,7 @@ msgstr "API விசை"
 
 #: data/gtk/preferences.blp:271
 msgid "Use SteamGridDB"
-msgstr "ஸ்டீம்கிரிட் டிபி (SteamGridDB) ஐப் பயன்படுத்தவும்"
+msgstr "SteamGridDB ஐப் பயன்படுத்தவும்"
 
 #: data/gtk/preferences.blp:272
 msgid "Download images when adding or importing games"
@@ -515,43 +511,33 @@ msgstr "அனைத்து விளையாட்டுகளும் அ�
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
-"ஸ்டீம்கிரிட் டிபி (SteamGridDB) ஐப் பயன்படுத்த API விசை தேவை. நீங்கள் ஒன்றை {}இங்கே{} "
+"SteamGridDB ஐப் பயன்படுத்த API விசை தேவை. நீங்கள் ஒன்றை {}இங்கே{} "
 "உருவாக்கலாம்."
 
 #: src/preferences.py:284
-#, fuzzy
-#| msgid "Installation Not Found"
 msgid "Installation Not Found"
 msgstr "நிறுவல் கிடைக்கவில்லை"
 
 #: src/preferences.py:286
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select a valid directory."
-msgstr "{} தரவு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
+msgstr "சரியான கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
 #: src/preferences.py:348
 msgid "Invalid Directory"
-msgstr ""
+msgstr "தவறான கோப்பகம்"
 
 #. The variable is the name of the source
 #: src/preferences.py:352
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select the {} cache directory."
-msgstr "{} தரவு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
+msgstr "{} கேச் கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
 #. The variable is the name of the source
 #: src/preferences.py:355
-#, fuzzy
-#| msgid "Select the {} configuration directory."
 msgid "Select the {} configuration directory."
-msgstr "{} உள்ளமைவு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
+msgstr "{} கட்டமைப்பு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
 #. The variable is the name of the source
 #: src/preferences.py:358
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select the {} data directory."
 msgstr "{} தரவு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
@@ -565,7 +551,7 @@ msgstr "நிராகரி"
 
 #: src/store/managers/sgdb_manager.py:47
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "ஸ்டீம்கிரிட் டிபி (SteamGridDB) ஐ அங்கீகரிக்க முடியவில்லை"
+msgstr "SteamGridDB ஐ அங்கீகரிக்க முடியவில்லை"
 
 #: src/store/managers/sgdb_manager.py:48
 msgid "Verify your API key in preferences"

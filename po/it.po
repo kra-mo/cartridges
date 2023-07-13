@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-05 14:36+0200\n"
-"PO-Revision-Date: 2023-07-01 15:10+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"PO-Revision-Date: 2023-07-08 14:52+0000\n"
+"Last-Translator: Alessandro Iepure <alessandro.iepure@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/it/>\n"
 "Language: it\n"
@@ -87,7 +87,7 @@ msgstr "Titolo"
 
 #: data/gtk/details-window.blp:102
 msgid "The title of the game"
-msgstr "Titolo del gioco"
+msgstr "Il titolo del gioco"
 
 #: data/gtk/details-window.blp:112 data/gtk/details-window.blp:117
 msgid "Developer"
@@ -273,7 +273,7 @@ msgstr "itch"
 
 #: data/gtk/preferences.blp:216
 msgid "Legendary"
-msgstr "Leggendari"
+msgstr "Leggendario"
 
 #: data/gtk/preferences.blp:230
 msgid "Flatpak"
@@ -281,7 +281,7 @@ msgstr "Flatpak"
 
 #: data/gtk/preferences.blp:243
 msgid "Import Game Launchers"
-msgstr "Importa lanciatori di giochi"
+msgstr "Importa launcher di giochi"
 
 #: data/gtk/preferences.blp:256
 msgid "SteamGridDB"
@@ -528,21 +528,17 @@ msgstr "Directory non valida"
 #. The variable is the name of the source
 #: src/preferences.py:352
 msgid "Select the {} cache directory."
-msgstr "Seleziona la directory della cache {}."
+msgstr "Seleziona la directory della cache per {}."
 
 #. The variable is the name of the source
 #: src/preferences.py:355
-#, fuzzy
-#| msgid "Select the {} installation directory."
 msgid "Select the {} configuration directory."
-msgstr "Selezionare la directory di installazione {}."
+msgstr "Selezionare la directory di configurazione per {}."
 
 #. The variable is the name of the source
 #: src/preferences.py:358
-#, fuzzy
-#| msgid "Select the {} cache directory."
 msgid "Select the {} data directory."
-msgstr "Seleziona la directory della cache {}."
+msgstr "Seleziona la directory dati per {}."
 
 #: src/preferences.py:364
 msgid "Set Location"
@@ -554,7 +550,7 @@ msgstr "Chiudi"
 
 #: src/store/managers/sgdb_manager.py:47
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "Impossibile eseguire l'autenticazione su SteamGridDB"
+msgstr "Impossibile autenticare SteamGridDB"
 
 #: src/store/managers/sgdb_manager.py:48
 msgid "Verify your API key in preferences"

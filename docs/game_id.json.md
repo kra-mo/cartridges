@@ -49,9 +49,9 @@ Stored as a string.
 
 ### source
 
-A unique ID for the source of the game in lowercase, without spaces.
+A unique ID for the source of the game in lowercase, without spaces or underscores.
 
-If a source provides multiple internal sources, these should be separately labeled, but share a common prefix. eg. `heoic_gog`, `heroic_epic`.
+If a source provides multiple internal sources, these should be separately labeled, but share a common prefix. eg. `heoic_gog`, `heroic_epic`. This is the only place you should use an underscore.
 
 Stored as a string.
 

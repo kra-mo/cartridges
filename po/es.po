@@ -9,8 +9,9 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-05 14:36+0200\n"
-"PO-Revision-Date: 2023-07-04 17:29+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2023-07-08 14:52+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
+".org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/es/>\n"
 "Language: es\n"
@@ -46,9 +47,9 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Cartridges es un lanzador simple para todos tus juegos. Admite la "
-"importación de tus juegos de Steam, Lutris, Heroic y más sin necesidad de "
-"una cuenta. Puedes ordenar y ocultar juegos, o descargar carátulas de "
+"Cartuchos es un sencillo lanzador de juegos para todos sus juegos. Tiene "
+"soporte para importar juegos de Steam, Lutris, Heroic y más sin necesidad de "
+"iniciar sesión. Puede ordenar y ocultar juegos o descargar portadas de "
 "SteamGridDB."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:30
@@ -74,11 +75,11 @@ msgstr "Cancelar"
 
 #: data/gtk/details-window.blp:57
 msgid "New Cover"
-msgstr "Nueva caratula"
+msgstr "Portada nueva"
 
 #: data/gtk/details-window.blp:75
 msgid "Delete Cover"
-msgstr "Borrar la caratula"
+msgstr "Borrar portada"
 
 #: data/gtk/details-window.blp:101 data/gtk/details-window.blp:106
 #: data/gtk/game.blp:80
@@ -124,7 +125,7 @@ msgstr "Eliminar"
 
 #: data/gtk/game.blp:126 src/window.py:173
 msgid "Unhide"
-msgstr "Mostrar"
+msgstr "Desocultar"
 
 #: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
@@ -177,7 +178,7 @@ msgstr "Eliminar juego"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:268
 msgid "Behavior"
-msgstr "Conducta"
+msgstr "Comportamiento"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
@@ -206,11 +207,11 @@ msgstr "Guarda las partidas sin pérdidas a costa del almacenamiento"
 
 #: data/gtk/preferences.blp:50
 msgid "Danger Zone"
-msgstr "Zona peligrosa"
+msgstr "Zona de peligro"
 
 #: data/gtk/preferences.blp:53
 msgid "Remove All Games"
-msgstr "Quitar todos los juegos"
+msgstr "Eliminar todos los juegos"
 
 #: data/gtk/preferences.blp:85 data/gtk/window.blp:27 data/gtk/window.blp:442
 msgid "Import"
@@ -229,7 +230,7 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:206 data/gtk/preferences.blp:220
 #: data/gtk/preferences.blp:234
 msgid "Install Location"
-msgstr "Lugar de la instalación"
+msgstr "Ruta de instalación"
 
 #: data/gtk/preferences.blp:106
 msgid "Lutris"
@@ -237,7 +238,7 @@ msgstr "Lutris"
 
 #: data/gtk/preferences.blp:119
 msgid "Cache Location"
-msgstr "Localización de la caché"
+msgstr "Ruta de la caché"
 
 #: data/gtk/preferences.blp:128
 msgid "Import Steam Games"
@@ -245,7 +246,7 @@ msgstr "Importar juegos de Steam"
 
 #: data/gtk/preferences.blp:137
 msgid "Import Flatpak Games"
-msgstr "Importar los juegos Flatpak"
+msgstr "Importar juegos Flatpak"
 
 #: data/gtk/preferences.blp:147
 msgid "Heroic"
@@ -289,15 +290,15 @@ msgstr "SteamGridDB"
 
 #: data/gtk/preferences.blp:260
 msgid "Authentication"
-msgstr "Autentificación"
+msgstr "Autenticación"
 
 #: data/gtk/preferences.blp:263
 msgid "API Key"
-msgstr "Código API"
+msgstr "Clave API"
 
 #: data/gtk/preferences.blp:271
 msgid "Use SteamGridDB"
-msgstr "Utiliza SteamGridDB"
+msgstr "Usar SteamGridDB"
 
 #: data/gtk/preferences.blp:272
 msgid "Download images when adding or importing games"
@@ -532,17 +533,13 @@ msgstr "Seleccione el directorio de la caché {}."
 
 #. The variable is the name of the source
 #: src/preferences.py:355
-#, fuzzy
-#| msgid "Select the {} installation directory."
 msgid "Select the {} configuration directory."
-msgstr "Selecciona el directorio de la instalación {}."
+msgstr "Seleccione el directorio de configuración {}."
 
 #. The variable is the name of the source
 #: src/preferences.py:358
-#, fuzzy
-#| msgid "Select the {} cache directory."
 msgid "Select the {} data directory."
-msgstr "Seleccione el directorio de la caché {}."
+msgstr "Seleccione el directorio de datos {}."
 
 #: src/preferences.py:364
 msgid "Set Location"

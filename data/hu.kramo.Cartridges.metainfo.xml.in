@@ -44,11 +44,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.0.1" date="2023-07-06">
+    <release version="2.0.4" date="2023-07-09">
       <description translatable="no">
         <ul>
-          <li>Fixes the ability to import multiple times at once</li>
-          <li>Fixes an issue with non-Flatpak Steam on Linux</li>
+          <li>Fixes an issue with adding new games manually</li>
+          <li>Translations since 2.0</li>
         </ul>
       </description>
     </release>
