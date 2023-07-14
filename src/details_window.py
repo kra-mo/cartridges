@@ -222,6 +222,11 @@ class DetailsWindow(Adw.Window):
         self.game_cover.pictures.remove(self.cover)
 
         self.close()
+        if self.win.sidebar.get_selected_row().get_child() not in (
+            self.win.all_games_row_box,
+            self.win.added_row_box,
+        ):
+            self.win.sidebar.select_row(self.win.added_row_box.get_parent())
         self.win.show_details_page(self.game)
 
     def update_cover_callback(self, manager: SGDBManager):
