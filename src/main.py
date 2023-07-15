@@ -33,6 +33,7 @@ from src import shared
 from src.details_window import DetailsWindow
 from src.game import Game
 from src.importer.importer import Importer
+from src.importer.sources.retroarch_source import RetroarchSource
 from src.importer.sources.bottles_source import BottlesSource
 from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
@@ -229,6 +230,9 @@ class CartridgesApplication(Adw.Application):
 
         if shared.schema.get_boolean("legendary"):
             importer.add_source(LegendarySource())
+
+        if shared.schema.get_boolean("retroarch"):
+            importer.add_source(RetroarchSource())
 
         importer.run()
 

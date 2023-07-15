@@ -226,6 +226,20 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         }
       }
 
+      Adw.ExpanderRow retroarch_expander_row {
+        title: _("Retroarch");
+        show-enable-switch: true;
+
+        Adw.ActionRow retroarch_config_action_row {
+          title: _("Install Location");
+
+          Button retroarch_config_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+      }
+
       Adw.ExpanderRow flatpak_expander_row {
         title: _("Flatpak");
         show-enable-switch: true;

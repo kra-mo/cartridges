@@ -30,6 +30,7 @@ from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
 from src.importer.sources.legendary_source import LegendarySource
+from src.importer.sources.retroarch_source import RetroarchSource
 from src.importer.sources.location import UnresolvableLocationError
 from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.source import Source
@@ -81,6 +82,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
     legendary_expander_row = Gtk.Template.Child()
     legendary_config_action_row = Gtk.Template.Child()
     legendary_config_file_chooser_button = Gtk.Template.Child()
+
+    retroarch_expander_row = Gtk.Template.Child()
+    retroarch_config_file_chooser_button = Gtk.Template.Child()
 
     flatpak_expander_row = Gtk.Template.Child()
     flatpak_data_action_row = Gtk.Template.Child()
@@ -138,6 +142,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             ItchSource,
             LegendarySource,
             LutrisSource,
+            RetroarchSource,
             SteamSource,
         ):
             source = source_class()
@@ -385,3 +390,4 @@ class PreferencesWindow(Adw.PreferencesWindow):
         # Set the source row subtitles
         self.resolve_locations(source)
         self.update_source_action_row_paths(source)
+
