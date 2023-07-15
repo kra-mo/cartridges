@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the Cartridges package.
 # Artur Wróblewski <krypalkora1984@gmail.com>, 2023.
 # Kshyso <Kshysio@protonmail.com>, 2023.
+# Eryk Michalak <gnu.ewm@protonmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-05 14:36+0200\n"
-"PO-Revision-Date: 2023-06-10 16:48+0000\n"
-"Last-Translator: Kshyso <Kshysio@protonmail.com>\n"
+"PO-Revision-Date: 2023-07-14 15:51+0000\n"
+"Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/pl/>\n"
 "Language: pl\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
@@ -37,7 +38,7 @@ msgstr "Uruchom wszystkie swoje gry"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
 msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
-msgstr ""
+msgstr "gry;gaming;launcher;steam;lutris;heroic;bottles;itch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -107,7 +108,7 @@ msgstr ""
 
 #: data/gtk/details-window.blp:130
 msgid "More Info"
-msgstr ""
+msgstr "Więcej informacji"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:195
 msgid "Edit"
@@ -227,30 +228,24 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:151 data/gtk/preferences.blp:192
 #: data/gtk/preferences.blp:206 data/gtk/preferences.blp:220
 #: data/gtk/preferences.blp:234
-#, fuzzy
-#| msgid "itch Install Location"
 msgid "Install Location"
-msgstr "Położenie instalacji itch"
+msgstr "Lokalizacja instalacji"
 
 #: data/gtk/preferences.blp:106
 msgid "Lutris"
 msgstr "Lutris"
 
 #: data/gtk/preferences.blp:119
-#, fuzzy
-#| msgid "Lutris Cache Location"
 msgid "Cache Location"
-msgstr "Lokalizacja Lutris Cache"
+msgstr "Lokalizacja pamięci podręcznej"
 
 #: data/gtk/preferences.blp:128
 msgid "Import Steam Games"
 msgstr "Importuj gry Steam"
 
 #: data/gtk/preferences.blp:137
-#, fuzzy
-#| msgid "Import Steam Games"
 msgid "Import Flatpak Games"
-msgstr "Importuj gry Steam"
+msgstr "Importuj gry Flatpak"
 
 #: data/gtk/preferences.blp:147
 msgid "Heroic"
@@ -278,17 +273,15 @@ msgstr "itch"
 
 #: data/gtk/preferences.blp:216
 msgid "Legendary"
-msgstr ""
+msgstr "Legendarne"
 
 #: data/gtk/preferences.blp:230
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: data/gtk/preferences.blp:243
-#, fuzzy
-#| msgid "Game Launcher"
 msgid "Import Game Launchers"
-msgstr "Launcher Gier"
+msgstr "Importuj programy uruchamiające gry"
 
 #: data/gtk/preferences.blp:256
 msgid "SteamGridDB"
@@ -521,41 +514,31 @@ msgstr ""
 "{} tutaj{}."
 
 #: src/preferences.py:284
-#, fuzzy
-#| msgid "Installation Not Found"
 msgid "Installation Not Found"
 msgstr "Nie znaleziono instalacji"
 
 #: src/preferences.py:286
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select a valid directory."
-msgstr "Wybierz {} katalog danych."
+msgstr "Wybierz prawidłowy katalog."
 
 #: src/preferences.py:348
 msgid "Invalid Directory"
-msgstr ""
+msgstr "Nieprawidłowy katalog"
 
 #. The variable is the name of the source
 #: src/preferences.py:352
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select the {} cache directory."
-msgstr "Wybierz {} katalog danych."
+msgstr "Wybierz katalog pamięci podręcznej {}."
 
 #. The variable is the name of the source
 #: src/preferences.py:355
-#, fuzzy
-#| msgid "Select the {} configuration directory."
 msgid "Select the {} configuration directory."
-msgstr "Wybierz {} katalog konfiguracyjny."
+msgstr "Wybierz katalog konfiguracyjny {}."
 
 #. The variable is the name of the source
 #: src/preferences.py:358
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select the {} data directory."
-msgstr "Wybierz {} katalog danych."
+msgstr "Wybierz katalog z danymi {}."
 
 #: src/preferences.py:364
 msgid "Set Location"
@@ -566,14 +549,12 @@ msgid "Dismiss"
 msgstr "Odrzucić"
 
 #: src/store/managers/sgdb_manager.py:47
-#, fuzzy
-#| msgid "Couldn't Connect to SteamGridDB"
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "Nie można połączyć się z SteamGridDB"
+msgstr "Nie można uwierzytelnić SteamGridDB"
 
 #: src/store/managers/sgdb_manager.py:48
 msgid "Verify your API key in preferences"
-msgstr ""
+msgstr "Zweryfikuj swój klucz API w preferencjach"
 
 #, fuzzy
 #~| msgid "Cache Not Found"
