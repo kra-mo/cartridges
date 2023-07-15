@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the Cartridges package.
 # Henrique Machado <henriquecamposrj@gmail.com>, 2023.
 # Vinícius Gama Santos <vinny.stalck@protonmail.com>, 2023.
+# Vítor Fernandes Almado <vfalmado@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-05 14:36+0200\n"
-"PO-Revision-Date: 2023-06-02 15:40+0000\n"
-"Last-Translator: Vinícius Gama Santos <vinny.stalck@protonmail.com>\n"
+"PO-Revision-Date: 2023-07-11 15:52+0000\n"
+"Last-Translator: Vítor Fernandes Almado <vfalmado@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
@@ -277,11 +278,11 @@ msgstr "itch"
 
 #: data/gtk/preferences.blp:216
 msgid "Legendary"
-msgstr ""
+msgstr "Lendário"
 
 #: data/gtk/preferences.blp:230
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: data/gtk/preferences.blp:243
 #, fuzzy
@@ -533,7 +534,7 @@ msgstr "Selecione o diretório de dados do(a) {}."
 
 #: src/preferences.py:348
 msgid "Invalid Directory"
-msgstr ""
+msgstr "Diretório inválido"
 
 #. The variable is the name of the source
 #: src/preferences.py:352
@@ -572,7 +573,7 @@ msgstr "Não foi possível conectar-se ao SteamGridDB"
 
 #: src/store/managers/sgdb_manager.py:48
 msgid "Verify your API key in preferences"
-msgstr ""
+msgstr "Verifique sua chave API nas preferências"
 
 #, fuzzy
 #~| msgid "Cache Not Found"
