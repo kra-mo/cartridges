@@ -58,9 +58,9 @@ class RetroarchSourceIterator(SourceIterator):
                 ):
                     if core_path != "DETECT":
                         break
-                    else:
-                        logging.warning("Cannot find core for: %s", str(item["path"]))
-                        continue
+                else:
+                    logging.warning("Cannot find core for: %s", str(item["path"]))
+                    continue
 
                 # Build game
                 game_title = item["label"].split("(", 1)[0]
