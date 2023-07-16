@@ -81,7 +81,7 @@ class RetroarchSourceIterator(SourceIterator):
                 additional_data = {}
 
                 # Get boxart
-                boxart_image_name = item["label"] + ".png"
+                boxart_image_name = game_title + ".png"
                 boxart_image_name = boxart_image_name.replace("&", "_")
                 boxart_folder_name = playlist_file.name.split(".", 1)[0]
                 image_path = (
