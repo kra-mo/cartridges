@@ -17,9 +17,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import hashlib
 import json
 import logging
-import os
 from json import JSONDecodeError
 from pathlib import Path
 from time import time
@@ -63,14 +63,13 @@ class RetroarchSourceIterator(SourceIterator):
                     continue
 
                 # Build game
-                game_title = item["label"]
+                game_id = hashlib.md5(item["path"].encode("utf-8")).hexdigest()
+
                 values = {
                     "source": self.source.id,
                     "added": int(time()),
-                    "name": game_title,
-                    "game_id": self.source.game_id_format.format(
-                        game_id=item["crc32"][:8]
-                    ),
+                    "name": item["label"],
+                    "game_id": self.source.game_id_format.format(game_id=game_id),
                     "executable": self.source.executable_format.format(
                         rom_path=item["path"],
                         core_path=core_path,
@@ -81,7 +80,7 @@ class RetroarchSourceIterator(SourceIterator):
                 additional_data = {}
 
                 # Get boxart
-                boxart_image_name = game_title + ".png"
+                boxart_image_name = item["label"] + ".png"
                 boxart_image_name = boxart_image_name.replace("&", "_")
                 boxart_folder_name = playlist_file.name.split(".", 1)[0]
                 image_path = (
@@ -98,7 +97,7 @@ class RetroarchSourceIterator(SourceIterator):
 class RetroarchSource(Source):
     args = ' -L "{core_path}" "{rom_path}"'
 
-    name = "Retroarch"
+    name = _("RetroArch")
     available_on = {"linux"}
     iterator_class = RetroarchSourceIterator
 
