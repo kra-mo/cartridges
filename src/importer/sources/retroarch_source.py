@@ -34,6 +34,7 @@ class RetroarchSourceIterator(SourceIterator):
     source: "RetroarchSource"
 
     def generator_builder(self) -> SourceIterationResult:
+        # Get all playlist files, ending in .lpl
         playlist_files = self.source.config_location["playlists"].glob("*.lpl")
 
         for playlist_file in playlist_files:
@@ -48,13 +49,15 @@ class RetroarchSourceIterator(SourceIterator):
                 continue
 
             for item in playlist_json["items"]:
-                # Select the core. Try the content's core first, then the playlist's
-                # default core.
-                core_path = item["core_path"]
-                if core_path == "DETECT":
-                    default_core = playlist_json["default_core_path"]
-                    if default_core:
-                        core_path = default_core
+                # Select the core.
+                # Try the content's core first, then the playlist's default core.
+                # If none can be used, warn the user and continue.
+                for core_path in (
+                    item["core_path"],
+                    playlist_json["default_core_path"],
+                ):
+                    if core_path != "DETECT":
+                        break
                     else:
                         logging.warning("Cannot find core for: %s", str(item["path"]))
                         continue
