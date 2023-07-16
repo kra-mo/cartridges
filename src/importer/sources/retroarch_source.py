@@ -34,10 +34,7 @@ class RetroarchSourceIterator(SourceIterator):
     source: "RetroarchSource"
 
     def generator_builder(self) -> SourceIterationResult:
-        playlist_files = []
-        for file in os.listdir(self.source.config_location["playlists"]):
-            if file.endswith(".lpl"):
-                playlist_files.append(file)
+        playlist_files = self.source.config_location["playlists"].glob("*.lpl")
 
         for playlist_file in playlist_files:
             try:
@@ -82,7 +79,7 @@ class RetroarchSourceIterator(SourceIterator):
 
                 # Get boxart
                 boxart_image_name = item["label"].split(".", 1)[0] + ".png"
-                boxart_folder_name = playlist_file.split(".", 1)[0]
+                boxart_folder_name = playlist_file.name.split(".", 1)[0]
                 image_path = (
                     self.source.config_location["thumbnails"]
                     / boxart_folder_name
