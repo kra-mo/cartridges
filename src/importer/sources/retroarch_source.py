@@ -27,8 +27,7 @@ from time import time
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import (Source, SourceIterationResult,
-                                         SourceIterator)
+from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
 
 
 class RetroarchSourceIterator(SourceIterator):
@@ -40,13 +39,13 @@ class RetroarchSourceIterator(SourceIterator):
             if file.endswith(".lpl"):
                 playlist_files.append(file)
 
-        playlist_items = []
         for playlist_file in playlist_files:
-            open_file = open(
-                str(self.source.config_location["playlists"]) + "/" + playlist_file
-            )
             try:
-                playlist_json = json.load(open_file)
+                with open(
+                    self.source.config_location["playlists"] / playlist_file,
+                    encoding="utf-8",
+                ) as open_file:
+                    playlist_json = json.load(open_file)
             except (JSONDecodeError, OSError, KeyError):
                 logging.warning("Cannot read playlist file: %s", str(playlist_file))
                 continue
@@ -114,11 +113,11 @@ class RetroarchSource(Source):
             "thumbnails": (True, "thumbnails"),
         },
     )
-    
+
     @property
     def executable_format(self):
         self.config_location.resolve()
         is_flatpak = self.config_location.root.is_relative_to(shared.flatpak_dir)
         base = "flatpak run org.libretro.RetroArch" if is_flatpak else "retroarch"
         args = '-L "{core_path}" "{rom_path}"'
-        return f"{base} {args}"    
+        return f"{base} {args}"
