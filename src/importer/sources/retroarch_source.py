@@ -17,22 +17,18 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import json
+import logging
+import os
+from json import JSONDecodeError
 from pathlib import Path
 from time import time
-
-import json
-import os
-import logging
-from json import JSONDecodeError
 
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import (
-    SourceIterationResult,
-    SourceIterator,
-    Source
-)
+from src.importer.sources.source import (Source, SourceIterationResult,
+                                         SourceIterator)
 
 
 class RetroarchSourceIterator(SourceIterator):
@@ -41,12 +37,14 @@ class RetroarchSourceIterator(SourceIterator):
     def generator_builder(self) -> SourceIterationResult:
         playlist_files = []
         for file in os.listdir(self.source.config_location["playlists"]):
-            if file.endswith('.lpl'):
+            if file.endswith(".lpl"):
                 playlist_files.append(file)
 
         playlist_items = []
         for playlist_file in playlist_files:
-            open_file = open(str(self.source.config_location["playlists"]) + "/" + playlist_file)
+            open_file = open(
+                str(self.source.config_location["playlists"]) + "/" + playlist_file
+            )
             try:
                 playlist_json = json.load(open_file)
             except (JSONDecodeError, OSError, KeyError):
@@ -71,11 +69,13 @@ class RetroarchSourceIterator(SourceIterator):
                     "source": self.source.id,
                     "added": int(time()),
                     "name": game_title,
-                    "game_id": self.source.game_id_format.format(game_id=item["crc32"][:8]),
+                    "game_id": self.source.game_id_format.format(
+                        game_id=item["crc32"][:8]
+                    ),
                     "executable": self.source.executable_format.format(
-                        rom_path = item["path"],
-                        core_path = core_path,
-                    )
+                        rom_path=item["path"],
+                        core_path=core_path,
+                    ),
                 }
 
                 game = Game(values)
@@ -84,10 +84,15 @@ class RetroarchSourceIterator(SourceIterator):
                 # Get boxart
                 boxart_image_name = item["label"].split(".", 1)[0] + ".png"
                 boxart_folder_name = playlist_file.split(".", 1)[0]
-                image_path = self.source.config_location["thumbnails"] / boxart_folder_name / "Named_Boxarts" / boxart_image_name
+                image_path = (
+                    self.source.config_location["thumbnails"]
+                    / boxart_folder_name
+                    / "Named_Boxarts"
+                    / boxart_image_name
+                )
                 additional_data = {"local_image_path": image_path}
 
-                yield(game, additional_data)
+                yield (game, additional_data)
 
 
 class RetroarchSource(Source):
@@ -96,7 +101,6 @@ class RetroarchSource(Source):
     name = "Retroarch"
     available_on = {"linux"}
     iterator_class = RetroarchSourceIterator
-    executable_format = 'retroarch' + args
 
     config_location = Location(
         schema_key="retroarch-location",
@@ -110,10 +114,11 @@ class RetroarchSource(Source):
             "thumbnails": (True, "thumbnails"),
         },
     )
-
-    # Check if installation is flatpak'd.
-    # TODO: There's probably a MUCH better way of doing this.
-    # There's *is* a URI format, but it doesn't seem to work on the flatpak
-    # version of Retroarch. https://github.com/libretro/RetroArch/pull/13563
-    if str(shared.flatpak_dir) in str(config_location["playlists"]):
-        executable_format = 'flatpak run org.libretro.RetroArch' + args
+    
+    @property
+    def executable_format(self):
+        self.config_location.resolve()
+        is_flatpak = self.config_location.root.is_relative_to(shared.flatpak_dir)
+        base = "flatpak run org.libretro.RetroArch" if is_flatpak else "retroarch"
+        args = '-L "{core_path}" "{rom_path}"'
+        return f"{base} {args}"    
