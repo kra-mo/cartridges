@@ -63,7 +63,7 @@ class RetroarchSourceIterator(SourceIterator):
                     continue
 
                 # Build game
-                game_title = item["label"].split("(", 1)[0]
+                game_title = item["label"]
                 values = {
                     "source": self.source.id,
                     "added": int(time()),
