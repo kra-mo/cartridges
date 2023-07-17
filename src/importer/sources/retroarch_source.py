@@ -25,6 +25,7 @@ from pathlib import Path
 from time import time
 
 from src import shared
+from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.importer.sources.location import Location
 from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
@@ -36,6 +37,8 @@ class RetroarchSourceIterator(SourceIterator):
     def generator_builder(self) -> SourceIterationResult:
         # Get all playlist files, ending in .lpl
         playlist_files = self.source.config_location["playlists"].glob("*.lpl")
+
+        bad_playlists = set()
 
         for playlist_file in playlist_files:
             try:
@@ -56,10 +59,11 @@ class RetroarchSourceIterator(SourceIterator):
                     item["core_path"],
                     playlist_json["default_core_path"],
                 ):
-                    if core_path != "DETECT":
+                    if core_path not in ("DETECT", ""):
                         break
                 else:
                     logging.warning("Cannot find core for: %s", str(item["path"]))
+                    bad_playlists.add(playlist_file.stem)
                     continue
 
                 # Build game
@@ -92,6 +96,15 @@ class RetroarchSourceIterator(SourceIterator):
                 additional_data = {"local_image_path": image_path}
 
                 yield (game, additional_data)
+
+        if bad_playlists:
+            raise FriendlyError(
+                _("No RetroArch Core Selected"),
+                # The variable is a newline separated list of playlists
+                _("The following playlists have no default core:")
+                + "\n\n{}\n\n".format("\n".join(bad_playlists))
+                + _("Games with no core selected were not imported"),
+            )
 
 
 class RetroarchSource(Source):
