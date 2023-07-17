@@ -17,10 +17,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import hashlib
 import json
 import logging
+from hashlib import md5
 from json import JSONDecodeError
+from re import sub
 from time import time
 
 from src import shared
@@ -35,20 +36,18 @@ class RetroarchSourceIterator(SourceIterator):
 
     def generator_builder(self) -> SourceIterationResult:
         added_time = int(time())
+        bad_playlists = set()
 
         # Get all playlist files, ending in .lpl
         playlist_files = self.source.config_location["playlists"].glob("*.lpl")
 
-        bad_playlists = set()
-
         for playlist_file in playlist_files:
             try:
-                with open(
-                    self.source.config_location["playlists"] / playlist_file,
+                with playlist_file.open(
                     encoding="utf-8",
                 ) as open_file:
                     playlist_json = json.load(open_file)
-            except (JSONDecodeError, OSError, KeyError):
+            except (JSONDecodeError, OSError):
                 logging.warning("Cannot read playlist file: %s", str(playlist_file))
                 continue
 
@@ -68,7 +67,7 @@ class RetroarchSourceIterator(SourceIterator):
                     continue
 
                 # Build game
-                game_id = hashlib.md5(item["path"].encode("utf-8")).hexdigest()
+                game_id = md5(item["path"].encode("utf-8")).hexdigest()
 
                 values = {
                     "source": self.source.id,
@@ -82,12 +81,11 @@ class RetroarchSourceIterator(SourceIterator):
                 }
 
                 game = Game(values)
-                additional_data = {}
 
                 # Get boxart
                 boxart_image_name = item["label"] + ".png"
-                boxart_image_name = boxart_image_name.replace("&", "_")
-                boxart_folder_name = playlist_file.name.split(".", 1)[0]
+                boxart_image_name = sub(r"[&\*\/:`<>\?\\\|]", "_", boxart_image_name)
+                boxart_folder_name = playlist_file.stem
                 image_path = (
                     self.source.config_location["thumbnails"]
                     / boxart_folder_name
