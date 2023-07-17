@@ -21,7 +21,6 @@ import hashlib
 import json
 import logging
 from json import JSONDecodeError
-from pathlib import Path
 from time import time
 
 from src import shared
@@ -35,6 +34,8 @@ class RetroarchSourceIterator(SourceIterator):
     source: "RetroarchSource"
 
     def generator_builder(self) -> SourceIterationResult:
+        added_time = int(time())
+
         # Get all playlist files, ending in .lpl
         playlist_files = self.source.config_location["playlists"].glob("*.lpl")
 
@@ -71,7 +72,7 @@ class RetroarchSourceIterator(SourceIterator):
 
                 values = {
                     "source": self.source.id,
-                    "added": int(time()),
+                    "added": added_time,
                     "name": item["label"],
                     "game_id": self.source.game_id_format.format(game_id=game_id),
                     "executable": self.source.executable_format.format(
@@ -108,8 +109,6 @@ class RetroarchSourceIterator(SourceIterator):
 
 
 class RetroarchSource(Source):
-    args = ' -L "{core_path}" "{rom_path}"'
-
     name = _("RetroArch")
     available_on = {"linux"}
     iterator_class = RetroarchSourceIterator
