@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-05 14:36+0200\n"
-"PO-Revision-Date: 2023-05-26 18:10+0000\n"
+"PO-Revision-Date: 2023-07-15 22:51+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/tr/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
@@ -227,30 +227,24 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:151 data/gtk/preferences.blp:192
 #: data/gtk/preferences.blp:206 data/gtk/preferences.blp:220
 #: data/gtk/preferences.blp:234
-#, fuzzy
-#| msgid "itch Install Location"
 msgid "Install Location"
-msgstr "itch Kurulu Konumu"
+msgstr "Kurulu Konumu"
 
 #: data/gtk/preferences.blp:106
 msgid "Lutris"
 msgstr "Lutris"
 
 #: data/gtk/preferences.blp:119
-#, fuzzy
-#| msgid "Lutris Cache Location"
 msgid "Cache Location"
-msgstr "Lutris Önbellek Konumu"
+msgstr "Önbellek Konumu"
 
 #: data/gtk/preferences.blp:128
 msgid "Import Steam Games"
 msgstr "Steam Oyunlarını İçe Aktar"
 
 #: data/gtk/preferences.blp:137
-#, fuzzy
-#| msgid "Import Steam Games"
 msgid "Import Flatpak Games"
-msgstr "Steam Oyunlarını İçe Aktar"
+msgstr "Flatpak Oyunlarını İçe Aktarın"
 
 #: data/gtk/preferences.blp:147
 msgid "Heroic"
@@ -278,17 +272,15 @@ msgstr "itch"
 
 #: data/gtk/preferences.blp:216
 msgid "Legendary"
-msgstr ""
+msgstr "Efsanevi"
 
 #: data/gtk/preferences.blp:230
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: data/gtk/preferences.blp:243
-#, fuzzy
-#| msgid "Game Launcher"
 msgid "Import Game Launchers"
-msgstr "Oyun Başlatıcı"
+msgstr "Oyun Başlatıcıları İçe Aktar"
 
 #: data/gtk/preferences.blp:256
 msgid "SteamGridDB"
@@ -521,39 +513,29 @@ msgstr ""
 "oluşturabilirsiniz."
 
 #: src/preferences.py:284
-#, fuzzy
-#| msgid "Installation Not Found"
 msgid "Installation Not Found"
 msgstr "Kurulum Bulunamadı"
 
 #: src/preferences.py:286
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select a valid directory."
-msgstr "{} veri dizinini seç."
+msgstr "Geçerli bir dizin seçin."
 
 #: src/preferences.py:348
 msgid "Invalid Directory"
-msgstr ""
+msgstr "Geçersiz Dizin"
 
 #. The variable is the name of the source
 #: src/preferences.py:352
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select the {} cache directory."
-msgstr "{} veri dizinini seç."
+msgstr "{} önbellek dizinini seç."
 
 #. The variable is the name of the source
 #: src/preferences.py:355
-#, fuzzy
-#| msgid "Select the {} configuration directory."
 msgid "Select the {} configuration directory."
 msgstr "{} yapılandırma dizinini seç."
 
 #. The variable is the name of the source
 #: src/preferences.py:358
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select the {} data directory."
 msgstr "{} veri dizinini seç."
 
@@ -566,14 +548,12 @@ msgid "Dismiss"
 msgstr "Vazgeç"
 
 #: src/store/managers/sgdb_manager.py:47
-#, fuzzy
-#| msgid "Couldn't Connect to SteamGridDB"
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "SteamGridDBʼye bağlanılamadı"
+msgstr "SteamGridDB Kimlik Doğrulaması Yapılamadı"
 
 #: src/store/managers/sgdb_manager.py:48
 msgid "Verify your API key in preferences"
-msgstr ""
+msgstr "Tercihlerde API anahtarınızı doğrulayın"
 
 #, fuzzy
 #~| msgid "Cache Not Found"
