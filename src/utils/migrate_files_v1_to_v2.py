@@ -61,9 +61,9 @@ def migrate_files_v1_to_v2():
 
     logging.info("Migrating data dir %s", str(old_data_dir))
 
-    # Create the current data dir if needed
-    if not shared.data_dir.is_dir():
-        shared.data_dir.mkdir(parents=True)
+    # Create new directories
+    shared.games_dir.mkdir(parents=True, exist_ok=True)
+    shared.covers_dir.mkdir(parents=True, exist_ok=True)
 
     old_game_paths = set(old_games_dir.glob("*.json"))
     old_imported_game_paths = set(
