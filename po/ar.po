@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 12:01+0200\n"
-"PO-Revision-Date: 2023-05-26 18:10+0000\n"
+"POT-Creation-Date: 2023-07-05 14:36+0200\n"
+"PO-Revision-Date: 2023-07-09 07:59+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:146
+#: src/main.py:162
 msgid "Cartridges"
 msgstr "خراطيش"
 
@@ -112,7 +112,7 @@ msgstr "معلومات أكثر"
 msgid "Edit"
 msgstr "حرِّر"
 
-#: data/gtk/game.blp:107 src/window.py:169
+#: data/gtk/game.blp:107 src/window.py:171
 msgid "Hide"
 msgstr "أخفِ"
 
@@ -121,7 +121,7 @@ msgstr "أخفِ"
 msgid "Remove"
 msgstr "أزل"
 
-#: data/gtk/game.blp:126 src/window.py:171
+#: data/gtk/game.blp:126 src/window.py:173
 msgid "Unhide"
 msgstr "اكشف"
 
@@ -146,7 +146,7 @@ msgstr "أظهر التفضيلات"
 msgid "Shortcuts"
 msgstr "الاختصارات"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:103
+#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:112
 msgid "Undo"
 msgstr "تراجع"
 
@@ -174,7 +174,7 @@ msgstr "أظهر الألعاب المخفية"
 msgid "Remove game"
 msgstr "أزل اللعبة"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:236
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:268
 msgid "Behavior"
 msgstr "السلوك"
 
@@ -223,80 +223,89 @@ msgid "Steam"
 msgstr "ستيم"
 
 #: data/gtk/preferences.blp:96 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:142 data/gtk/preferences.blp:183
-#: data/gtk/preferences.blp:197 data/gtk/preferences.blp:211
-#, fuzzy
-#| msgid "itch Install Location"
+#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:206 data/gtk/preferences.blp:220
+#: data/gtk/preferences.blp:234
 msgid "Install Location"
-msgstr "موضع تثبيت إتش"
+msgstr "موضع التثبيت"
 
 #: data/gtk/preferences.blp:106
 msgid "Lutris"
 msgstr "لوترس"
 
 #: data/gtk/preferences.blp:119
-#, fuzzy
-#| msgid "Lutris Cache Location"
 msgid "Cache Location"
-msgstr "موضع ذكرة لوترس المؤقَّتة"
+msgstr "موضع الذاكرة المؤقتة"
 
 #: data/gtk/preferences.blp:128
 msgid "Import Steam Games"
 msgstr "استورد ألعابًا من ستيم"
 
-#: data/gtk/preferences.blp:138
+#: data/gtk/preferences.blp:137
+msgid "Import Flatpak Games"
+msgstr "استورد ألعاب فلاتباك"
+
+#: data/gtk/preferences.blp:147
 msgid "Heroic"
 msgstr "هِرُوِك"
 
-#: data/gtk/preferences.blp:151
+#: data/gtk/preferences.blp:160
 msgid "Import Epic Games"
 msgstr "استورد ألعاب أَبِك"
 
-#: data/gtk/preferences.blp:160
+#: data/gtk/preferences.blp:169
 msgid "Import GOG Games"
 msgstr "استورد ألعاب جي‌أو‌جي"
 
-#: data/gtk/preferences.blp:169
+#: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
 msgstr "استورد ألعابًا مثبَّتةً بغير متجر"
 
-#: data/gtk/preferences.blp:179
+#: data/gtk/preferences.blp:188
 msgid "Bottles"
 msgstr "قوارير"
 
-#: data/gtk/preferences.blp:193
+#: data/gtk/preferences.blp:202
 msgid "itch"
 msgstr "إتش"
 
-#: data/gtk/preferences.blp:207
+#: data/gtk/preferences.blp:216
 msgid "Legendary"
-msgstr ""
+msgstr "لجندري"
 
-#: data/gtk/preferences.blp:224
+#: data/gtk/preferences.blp:230
+msgid "Flatpak"
+msgstr "فلاتباك"
+
+#: data/gtk/preferences.blp:243
+msgid "Import Game Launchers"
+msgstr "استورد مشغِّلات ألعاب"
+
+#: data/gtk/preferences.blp:256
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:228
+#: data/gtk/preferences.blp:260
 msgid "Authentication"
 msgstr "الاستيثاق"
 
-#: data/gtk/preferences.blp:231
+#: data/gtk/preferences.blp:263
 msgid "API Key"
 msgstr "مفتاح واجهة البرمجة"
 
-#: data/gtk/preferences.blp:239
+#: data/gtk/preferences.blp:271
 msgid "Use SteamGridDB"
 msgstr "استخدم SteamGridDB"
 
-#: data/gtk/preferences.blp:240
+#: data/gtk/preferences.blp:272
 msgid "Download images when adding or importing games"
 msgstr "نزِّل الصور حينما تنزِّل أو تستورد الألعاب"
 
-#: data/gtk/preferences.blp:249
+#: data/gtk/preferences.blp:281
 msgid "Prefer Over Official Images"
 msgstr "فضِّلها على الصور الرسمية"
 
-#: data/gtk/preferences.blp:258
+#: data/gtk/preferences.blp:290
 msgid "Prefer Animated Images"
 msgstr "فضِّل الصور المتحرِّكة"
 
@@ -385,21 +394,21 @@ msgid "About Cartridges"
 msgstr "عن «خراطيش»"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:164
+#: src/main.py:180
 msgid "translator_credits"
 msgstr "Ali Aljishi <ahj696@hotmail.com>"
 
 #. The variable is the date when the game was added
-#: src/window.py:192
+#: src/window.py:194
 msgid "Added: {}"
 msgstr "أضيفت في: {}"
 
-#: src/window.py:195
+#: src/window.py:197
 msgid "Never"
 msgstr "أبدًا"
 
 #. The variable is the date when the game was last played
-#: src/window.py:199
+#: src/window.py:201
 msgid "Last played: {}"
 msgstr "لُعبت آخر مرَّة في: {}"
 
@@ -416,26 +425,26 @@ msgid "Confirm"
 msgstr "أكِّد"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:91
+#: src/details_window.py:92
 msgid "file.txt"
 msgstr "ملف.txt"
 
 #. As in software
-#: src/details_window.py:93
+#: src/details_window.py:94
 msgid "program"
 msgstr "البرنامج"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:98 src/details_window.py:100
+#: src/details_window.py:99 src/details_window.py:101
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\المسار\\إلى\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:104 src/details_window.py:106
+#: src/details_window.py:105 src/details_window.py:107
 msgid "/path/to/{}"
 msgstr "/المسار/إلى/{}"
 
-#: src/details_window.py:111
+#: src/details_window.py:112
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -457,15 +466,15 @@ msgstr ""
 "\n"
 "ولا تنسَ إحاطة المسار بعلامتي تنصيص مزدوجتين حالما تضمَّن مسافات!"
 
-#: src/details_window.py:146 src/details_window.py:152
+#: src/details_window.py:147 src/details_window.py:153
 msgid "Couldn't Add Game"
 msgstr "تعذَّرت إضافة اللعبة"
 
-#: src/details_window.py:146 src/details_window.py:181
+#: src/details_window.py:147 src/details_window.py:181
 msgid "Game title cannot be empty."
 msgstr "لا يجوز كون عنوان اللعبة فارغًا."
 
-#: src/details_window.py:152 src/details_window.py:189
+#: src/details_window.py:153 src/details_window.py:189
 msgid "Executable cannot be empty."
 msgstr "لا يجوز كون ملفِّ التنفيذ فارغًا."
 
@@ -474,34 +483,61 @@ msgid "Couldn't Apply Preferences"
 msgstr "تعذَّر تطبيق التفضيلات"
 
 #. The variable is the title of the game
-#: src/game.py:141
+#: src/game.py:138
 msgid "{} launched"
 msgstr "بُدئت {}"
 
 #. The variable is the title of the game
-#: src/game.py:154
+#: src/game.py:152
 msgid "{} hidden"
 msgstr "أٌخفيت {}"
 
-#: src/game.py:154
+#: src/game.py:152
 msgid "{} unhidden"
 msgstr "أٌظهرت {}"
 
-#: src/game.py:171
+#: src/game.py:169
 msgid "{} removed"
 msgstr "أزيلت {}"
 
-#: src/preferences.py:102
+#: src/preferences.py:111
 msgid "All games removed"
 msgstr "أُزيلت كلُّ الألعاب"
 
-#: src/preferences.py:149
+#: src/preferences.py:159
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "تحتاج مفتاح واجهة برمجة حال ما أردت استخدام SteamGridDB، {}هنا تولِّده{}."
 
-#: src/preferences.py:289
+#: src/preferences.py:284
+msgid "Installation Not Found"
+msgstr "لم يُعثر على التثبيت"
+
+#: src/preferences.py:286
+msgid "Select a valid directory."
+msgstr "حدِّد مجلَّدًا صالحًا."
+
+#: src/preferences.py:348
+msgid "Invalid Directory"
+msgstr "مجلَّد غير صالح"
+
+#. The variable is the name of the source
+#: src/preferences.py:352
+msgid "Select the {} cache directory."
+msgstr "حدِّد مجلَّد ذاكرة {} المؤقتة."
+
+#. The variable is the name of the source
+#: src/preferences.py:355
+msgid "Select the {} configuration directory."
+msgstr "حدِّد مجلَّد ضبط {}."
+
+#. The variable is the name of the source
+#: src/preferences.py:358
+msgid "Select the {} data directory."
+msgstr "حدِّد مجلَّد بيانات {}."
+
+#: src/preferences.py:364
 msgid "Set Location"
 msgstr "عيِّن الموضع"
 
@@ -509,38 +545,23 @@ msgstr "عيِّن الموضع"
 msgid "Dismiss"
 msgstr "تجاهل"
 
-#: src/importer/sources/source.py:106
-msgid "Data"
-msgstr ""
-
-#: src/importer/sources/source.py:107
-msgid "Cache"
-msgstr ""
-
-#: src/importer/sources/source.py:108
-#, fuzzy
-#| msgid "Confirm"
-msgid "Configuration"
-msgstr "أكِّد"
-
-#. The variables are the type of location (eg. cache) and the source's name (eg. Steam)
-#: src/importer/sources/source.py:119
-msgid "Invalid {} Location for {{}}"
-msgstr ""
-
-#: src/importer/sources/source.py:120
-msgid "Pick a new one or disable the source in preferences"
-msgstr ""
-
 #: src/store/managers/sgdb_manager.py:47
-#, fuzzy
-#| msgid "Couldn't Connect to SteamGridDB"
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "تعذَّر الاتصال ب‍ SteamGridDB"
+msgstr "تعذَّر استيثاق SteamGridDB"
 
 #: src/store/managers/sgdb_manager.py:48
 msgid "Verify your API key in preferences"
-msgstr ""
+msgstr "أكِّد مفتاح واجهة البرمجة في التفضيلات"
+
+#, fuzzy
+#~| msgid "The Steam directory cannot be found."
+#~ msgid "Directory not Valid"
+#~ msgstr "تعذَّر العثور على مجلَّد ستيم."
+
+#, fuzzy
+#~| msgid "Confirm"
+#~ msgid "Configuration"
+#~ msgstr "أكِّد"
 
 #~ msgid "Steam Install Location"
 #~ msgstr "موضع تثبيت ستيم"
@@ -565,15 +586,6 @@ msgstr ""
 
 #~ msgid "Select the Lutris cache directory."
 #~ msgstr "حدِّد مجلَّد ذاكرة لوترس المؤقَّتة."
-
-#~ msgid "Installation Not Found"
-#~ msgstr "لم يُعثر على التثبيت"
-
-#~ msgid "Select the {} configuration directory."
-#~ msgstr "حدِّد مجلَّد ضبط {}."
-
-#~ msgid "Select the {} data directory."
-#~ msgstr "حدِّد مجلَّد بيانات {}."
 
 #~ msgid "Importing Games…"
 #~ msgstr "تُستورد الألعاب…"
@@ -694,9 +706,6 @@ msgstr ""
 
 #~ msgid "No new games were found in the Steam library."
 #~ msgstr "لم يُعثر على ألعاب جديدة في مكتبة ستيم."
-
-#~ msgid "The Steam directory cannot be found."
-#~ msgstr "تعذَّر العثور على مجلَّد ستيم."
 
 #~ msgid "Talking to Steam"
 #~ msgstr "يُتواصل مع ستيم"

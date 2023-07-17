@@ -51,7 +51,7 @@ class LegendarySourceIterator(SourceIterator):
         data = {}
 
         # Get additional metadata from file (optional)
-        metadata_file = self.source.data_location["metadata"] / f"{app_name}.json"
+        metadata_file = self.source.config_location["metadata"] / f"{app_name}.json"
         try:
             metadata = json.load(metadata_file.open())
             values["developer"] = metadata["metadata"]["developer"]
@@ -67,7 +67,7 @@ class LegendarySourceIterator(SourceIterator):
 
     def generator_builder(self) -> Generator[SourceIterationResult, None, None]:
         # Open library
-        file = self.source.data_location["installed.json"]
+        file = self.source.config_location["installed.json"]
         try:
             library: dict = json.load(file.open())
         except (JSONDecodeError, OSError):
@@ -90,9 +90,9 @@ class LegendarySourceIterator(SourceIterator):
 
 
 class LegendarySource(Source):
-    name = "Legendary"
+    name = _("Legendary")
     executable_format = "legendary launch {app_name}"
-    available_on = {"linux", "win32"}
+    available_on = {"linux"}
 
     iterator_class = LegendarySourceIterator
     config_location: Location = Location(

@@ -7,5 +7,5 @@ Icon=@APP_ID@
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;Game;
-Keywords=gaming;launcher;steam;lutris;heroic;bottles;itch;
+Keywords=gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;
 StartupNotify=true

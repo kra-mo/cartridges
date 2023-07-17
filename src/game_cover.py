@@ -61,8 +61,8 @@ class GameCover:
 
         if path:
             if path.suffix == ".gif":
-                task = Gio.Task.new()
-                task.run_in_thread(self.create_func(self.path))
+                self.task = Gio.Task.new()
+                self.task.run_in_thread(self.create_func(self.path))
             else:
                 self.texture = Gdk.Texture.new_from_filename(str(path))
 
@@ -108,6 +108,8 @@ class GameCover:
         self.pictures.add(picture)
         if not self.animation:
             self.set_texture(self.texture)
+        else:
+            self.update_animation((self.task, self.animation))
 
     def set_texture(self, texture):
         self.pictures.discard(
@@ -131,5 +133,3 @@ class GameCover:
                 self.update_animation,
                 data,
             )
-        else:
-            data[0].return_value(False)

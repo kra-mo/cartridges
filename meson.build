@@ -1,5 +1,5 @@
 project('cartridges',
-          version: '1.5.6',
+          version: '2.0.4',
     meson_version: '>= 0.59.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
@@ -33,13 +33,9 @@ subdir('data')
 subdir('src')
 subdir('po')
 
-configure_file(
-  input: './windows/Cartridges.iss.in',
-  output: 'Cartridges.iss',
-  configuration: conf,
-  install: true,
-  install_dir: '.'
-)
+if host_machine.system() == 'windows'
+  subdir('windows')
+endif
 
 gnome.post_install(
      glib_compile_schemas: true,

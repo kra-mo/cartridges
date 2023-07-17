@@ -23,6 +23,9 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
+**Logs**
+If applicable, attatch your logs from `Main Menu > About Cartridges > Troubleshooting > Debugging Information` to the issue.
+
 **System (please complete the following information):**
  - OS: [e.g. Fedora Linux]
  - Installation method [e.g. Flatpak]

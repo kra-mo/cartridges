@@ -81,6 +81,7 @@ class DetailsWindow(Adw.Window):
         image_filter = Gtk.FileFilter(name=_("Images"))
         for extension in Image.registered_extensions():
             image_filter.add_suffix(extension[1:])
+            image_filter.add_suffix("svg")  # Gdk.Texture supports .svg but PIL doesn't
 
         file_filters = Gio.ListStore.new(Gtk.FileFilter)
         file_filters.append(image_filter)
@@ -154,20 +155,22 @@ class DetailsWindow(Adw.Window):
                 return
 
             # Increment the number after the game id (eg. imported_1, imported_2)
+            source_id = "imported"
             numbers = [0]
             game_id: str
-            for game_id in shared.store.games:
+            for game_id in shared.store.source_games.get(source_id, set()):
                 prefix = "imported_"
                 if not game_id.startswith(prefix):
                     continue
                 numbers.append(int(game_id.replace(prefix, "", 1)))
+
             game_number = max(numbers) + 1
 
             self.game = Game(
                 {
                     "game_id": f"imported_{game_number}",
                     "hidden": False,
-                    "source": "imported",
+                    "source": source_id,
                     "added": int(time()),
                 }
             )

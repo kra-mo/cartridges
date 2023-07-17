@@ -19,6 +19,7 @@
 
 import json
 import lzma
+import os
 import sys
 
 import gi
@@ -50,6 +51,7 @@ from src.store.managers.online_cover_manager import OnlineCoverManager
 from src.store.managers.sgdb_manager import SGDBManager
 from src.store.managers.steam_api_manager import SteamAPIManager
 from src.store.store import Store
+from src.utils.migrate_files_v1_to_v2 import migrate_files_v1_to_v2
 from src.window import CartridgesWindow
 
 
@@ -64,6 +66,12 @@ class CartridgesApplication(Adw.Application):
 
     def do_activate(self):  # pylint: disable=arguments-differ
         """Called on app creation"""
+
+        setup_logging()
+        log_system_info()
+
+        if os.name == "nt":
+            migrate_files_v1_to_v2()
 
         # Set fallback icon-name
         Gtk.Window.set_default_icon_name(shared.APP_ID)
@@ -94,7 +102,7 @@ class CartridgesApplication(Adw.Application):
         shared.store.add_manager(SteamAPIManager())
         shared.store.add_manager(OnlineCoverManager())
         shared.store.add_manager(SGDBManager())
-        shared.store.enable_manager_in_pipelines(FileManager)
+        shared.store.toggle_manager_in_pipelines(FileManager, True)
 
         # Create actions
         self.create_actions(
@@ -180,6 +188,7 @@ class CartridgesApplication(Adw.Application):
             # Translators: Replace this with your name for it to show up in the about window
             translator_credits=_("translator_credits"),
             debug_info=debug_str,
+            debug_info_filename="cartridges.log",
         )
         about.present()
 
@@ -282,7 +291,5 @@ class CartridgesApplication(Adw.Application):
 
 def main(_version):
     """App entry point"""
-    setup_logging()
-    log_system_info()
     app = CartridgesApplication()
     return app.run(sys.argv)
