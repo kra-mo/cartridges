@@ -44,11 +44,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.0.4" date="2023-07-09">
+    <release version="2.0.5" date="2023-07-17">
       <description translatable="no">
         <ul>
-          <li>Fixes an issue with adding new games manually</li>
-          <li>Translations since 2.0</li>
+          <li>Fixes an issue with Windows data storage</li>
+          <li>Translations since 2.0.4</li>
         </ul>
       </description>
     </release>
