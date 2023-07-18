@@ -73,7 +73,7 @@ def setup_logging():
             "PIL": {
                 "handlers": ["lib_console_handler", "file_handler"],
                 "propagate": False,
-                "level": "NOTSET",
+                "level": "WARNING",
             },
             "urllib3": {
                 "handlers": ["lib_console_handler", "file_handler"],
