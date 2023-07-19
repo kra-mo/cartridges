@@ -220,7 +220,7 @@ class LegendaryIterable(StoreSubSource):
         """Get the right path depending on the Heroic version"""
         heroic_config_path = self.source.config_location.root
         if (path := heroic_config_path / "legendaryConfig").is_dir():
-            # Heroic > 2.9
+            # Heroic >= 2.9
             pass
         else:
             # Heroic <= 2.8
