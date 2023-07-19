@@ -222,12 +222,17 @@ class LegendaryIterable(StoreSubSource):
         if (path := heroic_config_path / "legendaryConfig").is_dir():
             # Heroic > 2.9
             pass
-        elif heroic_config_path.is_relative_to(shared.flatpak_dir):
-            # Heroic flatpak < 2.8
-            path = shared.flatpak_dir / "com.heroicgameslauncher.hgl" / "config"
         else:
-            # Heroic < 2.8
-            path = Path.home() / ".config"
+            # Heroic <= 2.8
+            if heroic_config_path.is_relative_to(shared.flatpak_dir):
+                # Heroic flatpak
+                path = shared.flatpak_dir / "com.heroicgameslauncher.hgl" / "config"
+            elif shared.config_dir.is_relative_to(shared.flatpak_dir):
+                # Heroic native (from Cartridges flatpak)
+                path = Path.home() / ".config"
+            else:
+                # Heroic native (from other Cartridges installations)
+                path = shared.config_dir
         return path / "legendary" / "installed.json"
 
     def get_installed_app_names(self):
