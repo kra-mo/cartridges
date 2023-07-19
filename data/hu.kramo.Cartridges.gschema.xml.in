@@ -46,6 +46,9 @@
     <key name="heroic-import-sideload" type="b">
       <default>true</default>
     </key>
+    <key name="heroic-import-amazon" type="b">
+      <default>true</default>
+    </key>
     <key name="bottles" type="b">
       <default>true</default>
     </key>

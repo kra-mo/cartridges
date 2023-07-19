@@ -22,17 +22,38 @@ import json
 import logging
 from hashlib import sha256
 from json import JSONDecodeError
+from pathlib import Path
 from time import time
-from typing import Optional, TypedDict
+from typing import Optional, TypedDict, Generator, Iterable
+from abc import abstractmethod
 
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
 from src.importer.sources.source import (
-    URLExecutableSource,
     SourceIterationResult,
     SourceIterator,
+    URLExecutableSource,
 )
+
+
+def path_json_load(path: Path):
+    """
+    Load JSON from the file at the given path
+
+    :raises OSError: if the file can't be opened
+    :raises JSONDecodeError: if the file isn't valid JSON
+    """
+    with path.open("r", encoding="utf-8") as open_file:
+        return json.load(open_file)
+
+
+class InvalidLibraryFileError(Exception):
+    pass
+
+
+class InvalidInstalledFileError(Exception):
+    pass
 
 
 class HeroicLibraryEntry(TypedDict):
@@ -44,49 +65,38 @@ class HeroicLibraryEntry(TypedDict):
     art_square: str
 
 
-class HeroicSubSource(TypedDict):
-    service: str
-    path: tuple[str]
+class SubSource(Iterable):
+    """Class representing a Heroic sub-source"""
 
-
-class HeroicSourceIterator(SourceIterator):
     source: "HeroicSource"
+    name: str
+    service: str
+    image_uri_params: str = ""
+    relative_library_path: Path
+    library_json_entries_key: str = "library"
 
-    sub_sources: dict[str, HeroicSubSource] = {
-        "sideload": {
-            "service": "sideload",
-            "path": ("sideload_apps", "library.json"),
-        },
-        "legendary": {
-            "service": "epic",
-            "path": ("store_cache", "legendary_library.json"),
-        },
-        "gog": {
-            "service": "gog",
-            "path": ("store_cache", "gog_library.json"),
-        },
-    }
+    def __init__(self, source) -> None:
+        self.source = source
 
-    def game_from_library_entry(
+    @property
+    def library_path(self) -> Path:
+        return self.source.config_location.root / self.relative_library_path
+
+    def process_library_entry(
         self, entry: HeroicLibraryEntry, added_time: int
     ) -> SourceIterationResult:
-        """Helper method used to build a Game from a Heroic library entry"""
+        """Build a Game from a Heroic library entry"""
 
-        # Skip games that are not installed
-        if not entry["is_installed"]:
-            return None
+        app_name = entry["app_name"]
 
         # Build game
-        app_name = entry["app_name"]
-        runner = entry["runner"]
-        service = self.sub_sources[runner]["service"]
         values = {
-            "source": f"{self.source.id}_{service}",
+            "source": f"{self.source.id}_{self.service}",
             "added": added_time,
             "name": entry["title"],
             "developer": entry.get("developer", None),
             "game_id": self.source.game_id_format.format(
-                service=service, game_id=app_name
+                service=self.service, game_id=app_name
             ),
             "executable": self.source.executable_format.format(app_name=app_name),
         }
@@ -94,45 +104,202 @@ class HeroicSourceIterator(SourceIterator):
 
         # Get the image path from the heroic cache
         # Filenames are derived from the URL that heroic used to get the file
-        uri: str = entry["art_square"]
-        if service == "epic":
-            uri += "?h=400&resize=1&w=300"
+        uri: str = entry["art_square"] + self.image_uri_params
         digest = sha256(uri.encode()).hexdigest()
         image_path = self.source.config_location.root / "images-cache" / digest
         additional_data = {"local_image_path": image_path}
 
         return (game, additional_data)
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self) -> Generator[SourceIterationResult, None, None]:
+        """
+        Iterate through the installed games with a generator
+        :raises InvalidLibraryFileError: on initial call if the library file is bad
+        """
+        added_time = int(time())
+        try:
+            iterator = iter(
+                path_json_load(self.library_path)[self.library_json_entries_key]
+            )
+        except (OSError, JSONDecodeError, TypeError, KeyError) as error:
+            raise InvalidLibraryFileError(
+                f"Invalid {self.library_path.name}"
+            ) from error
+        for entry in iterator:
+            try:
+                yield self.process_library_entry(entry, added_time)
+            except KeyError as error:
+                logging.warning(
+                    "Skipped invalid %s game %s",
+                    self.name,
+                    entry.get("app_name", "UNKNOWN"),
+                    exc_info=error,
+                )
+                continue
+
+
+class StoreSubSource(SubSource):
+    """
+    Class representing a "store" sub source iterator.
+    Games can be installed or not, this class does the check accordingly.
+    """
+
+    relative_installed_path: Optional[Path]
+    installed_app_names: set[str]
+
+    @property
+    def installed_path(self) -> Path:
+        return self.source.config_location.root / self.relative_installed_path
+
+    @abstractmethod
+    def get_installed_app_names(self) -> set[str]:
+        """
+        Get the sub source's installed app names as a set.
+
+        :raises InvalidInstalledFileError: if the installed file data cannot be read
+            Whenever possible, `__cause__` is set with the original exception
+        """
+
+    def is_installed(self, app_name: str) -> bool:
+        return app_name in self.installed_app_names
+
+    def process_library_entry(self, entry, added_time):
+        # Skip games that are not installed
+        app_name = entry["app_name"]
+        if not self.is_installed(app_name):
+            logging.warning(
+                "Skipped %s game %s (%s): not installed",
+                self.service,
+                entry["title"],
+                app_name,
+            )
+            return None
+        # Process entry as normal
+        return super().process_library_entry(entry, added_time)
+
+    def __iter__(self):
+        """
+        Iterate through the installed games with a generator
+        :raises InvalidLibraryFileError: on initial call if the library file is bad
+        :raises InvalidInstalledFileError: on initial call if the installed file is bad
+        """
+        self.installed_app_names = self.get_installed_app_names()
+        # TODO check that this syntax works
+        yield from super()
+
+
+class SideloadIterable(SubSource):
+    name = "sideload"
+    service = "sideload"
+    relative_library_path = Path("sideload_apps") / "library.json"
+
+
+class LegendaryIterable(StoreSubSource):
+    name = "legendary"
+    service = "epic"
+    image_uri_params = "?h=400&resize=1&w=300"
+    relative_library_path = Path("store_cache") / "legendary_library.json"
+
+    # TODO simplify Heroic 2.9 has been out for a while
+    # (uncomment value and remove the library_path property override)
+    #
+    # relative_installed_path = (
+    #    Path("legendary") / "legendaryConfig" / "legendary" / "installed.json"
+    # )
+    relative_installed_path = None
+
+    @property
+    def library_path(self) -> Path:
+        """Get the right path depending on the Heroic version"""
+        heroic_config_path = self.source.config_location.root
+        if (path := heroic_config_path / "legendaryConfig").is_dir():
+            # Heroic > 2.9
+            pass
+        elif heroic_config_path.is_relative_to(shared.flatpak_dir):
+            # Heroic flatpak < 2.8
+            path = shared.flatpak_dir / "com.heroicgameslauncher.hgl" / "config"
+        else:
+            # Heroic < 2.8
+            path = Path.home() / ".config"
+        return path / "legendary" / "installed.json"
+
+    def get_installed_app_names(self):
+        try:
+            return set(path_json_load(self.installed_path).keys())
+        except (OSError, JSONDecodeError, AttributeError) as error:
+            raise InvalidInstalledFileError(
+                f"Invalid {self.installed_path.name}"
+            ) from error
+
+
+class GogIterable(StoreSubSource):
+    name = "gog"
+    service = "gog"
+    library_json_entries_key = "games"
+    relative_library_path = Path("store_cache") / "gog_library.json"
+    relative_installed_path = Path("gog_store") / "installed.json"
+
+    def get_installed_app_names(self):
+        try:
+            return (
+                app_name
+                for entry in path_json_load(self.installed_path)["installed"]
+                if (app_name := entry.get("appName")) is not None
+            )
+        except (OSError, JSONDecodeError, KeyError, AttributeError) as error:
+            raise InvalidInstalledFileError(
+                f"Invalid {self.installed_path.name}"
+            ) from error
+
+
+class NileIterable(StoreSubSource):
+    name = "nile"
+    service = "amazon"
+    relative_library_path = Path("store_cache") / "nile_library.json"
+    relative_installed_path = Path("nile_config") / "nile" / "installed.json"
+
+    def get_installed_app_names(self):
+        try:
+            installed_json = path_json_load(self.installed_path)
+            return (
+                app_name
+                for entry in installed_json
+                if (app_name := entry.get("id")) is not None
+            )
+        except (OSError, JSONDecodeError, AttributeError) as error:
+            raise InvalidInstalledFileError(
+                f"Invalid {self.installed_path.name}"
+            ) from error
+
+
+class HeroicSourceIterator(SourceIterator):
+    source: "HeroicSource"
+
+    def __iter__(self):
         """Generator method producing games from all the Heroic sub-sources"""
 
-        for sub_source_name, sub_source in self.sub_sources.items():
-            # Skip disabled sub-sources
-            if not shared.schema.get_boolean("heroic-import-" + sub_source["service"]):
+        for sub_source_class in (
+            SideloadIterable,
+            LegendaryIterable,
+            GogIterable,
+            NileIterable,
+        ):
+            sub_source = sub_source_class(self.source)
+
+            if not shared.schema.get_boolean("heroic-import-" + sub_source.service):
+                logging.debug("Skipping Heroic %s: disabled", sub_source.service)
                 continue
-            # Load games from JSON
-            file = self.source.config_location.root.joinpath(*sub_source["path"])
+
             try:
-                contents = json.load(file.open())
-                key = "library" if sub_source_name == "legendary" else "games"
-                library = contents[key]
-            except (JSONDecodeError, OSError, KeyError):
-                # Invalid library.json file, skip it
-                logging.warning("Couldn't open Heroic file: %s", str(file))
-                continue
+                sub_source_iterator = iter(sub_source)
+            except (InvalidLibraryFileError, InvalidInstalledFileError) as error:
+                logging.error(
+                    "Skipping bad Heroic sub-source %s",
+                    sub_source.service,
+                    exc_info=error,
+                )
 
-            added_time = int(time())
-
-            for entry in library:
-                try:
-                    result = self.game_from_library_entry(entry, added_time)
-                except KeyError as error:
-                    # Skip invalid games
-                    logging.warning(
-                        "Invalid Heroic game skipped in %s", str(file), exc_info=error
-                    )
-                    continue
-                yield result
+            yield from sub_source_iterator
 
 
 class HeroicSource(URLExecutableSource):
