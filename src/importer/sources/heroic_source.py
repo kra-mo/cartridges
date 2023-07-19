@@ -241,11 +241,11 @@ class GogIterable(StoreSubSource):
 
     def get_installed_app_names(self):
         try:
-            return (
+            return {
                 app_name
                 for entry in path_json_load(self.installed_path)["installed"]
                 if (app_name := entry.get("appName")) is not None
-            )
+            }
         except (OSError, JSONDecodeError, KeyError, AttributeError) as error:
             raise InvalidInstalledFileError(
                 f"Invalid {self.installed_path.name}"
@@ -261,11 +261,11 @@ class NileIterable(StoreSubSource):
     def get_installed_app_names(self):
         try:
             installed_json = path_json_load(self.installed_path)
-            return (
+            return {
                 app_name
                 for entry in installed_json
                 if (app_name := entry.get("id")) is not None
-            )
+            }
         except (OSError, JSONDecodeError, AttributeError) as error:
             raise InvalidInstalledFileError(
                 f"Invalid {self.installed_path.name}"
