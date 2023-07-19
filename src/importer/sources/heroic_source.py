@@ -56,6 +56,10 @@ class InvalidInstalledFileError(Exception):
     pass
 
 
+class InvalidStoreFileError(Exception):
+    pass
+
+
 class HeroicLibraryEntry(TypedDict):
     app_name: str
     installed: Optional[bool]
@@ -69,14 +73,16 @@ class SubSource(Iterable):
     """Class representing a Heroic sub-source"""
 
     source: "HeroicSource"
+    source_iterator: "HeroicSourceIterator"
     name: str
     service: str
     image_uri_params: str = ""
     relative_library_path: Path
     library_json_entries_key: str = "library"
 
-    def __init__(self, source) -> None:
+    def __init__(self, source, source_iterator) -> None:
         self.source = source
+        self.source_iterator = source_iterator
 
     @property
     def library_path(self) -> Path:
@@ -99,6 +105,7 @@ class SubSource(Iterable):
                 service=self.service, game_id=app_name
             ),
             "executable": self.source.executable_format.format(app_name=app_name),
+            "hidden": self.source_iterator.is_hidden(app_name),
         }
         game = Game(values)
 
@@ -275,16 +282,32 @@ class NileIterable(StoreSubSource):
 class HeroicSourceIterator(SourceIterator):
     source: "HeroicSource"
 
+    hidden_app_names: set[str] = set()
+
+    def is_hidden(self, app_name: str) -> bool:
+        return app_name in self.hidden_app_names
+
     def __iter__(self):
         """Generator method producing games from all the Heroic sub-sources"""
 
+        # Get the hidden app names
+        try:
+            store = path_json_load(self.source.config_location["store_config.json"])
+            self.hidden_app_names = {
+                game["appName"] for game in store["games"]["hidden"]
+            }
+        except (OSError, JSONDecodeError, KeyError, TypeError) as error:
+            logging.error("Invalid Heroic store file", exc_info=error)
+            raise InvalidStoreFileError() from error
+
+        # Get games from the sub sources
         for sub_source_class in (
             SideloadIterable,
             LegendaryIterable,
             GogIterable,
             NileIterable,
         ):
-            sub_source = sub_source_class(self.source)
+            sub_source = sub_source_class(self.source, self)
 
             if not shared.schema.get_boolean("heroic-import-" + sub_source.service):
                 logging.debug("Skipping Heroic %s: disabled", sub_source.service)
@@ -320,6 +343,7 @@ class HeroicSource(URLExecutableSource):
         ),
         paths={
             "config.json": (False, "config.json"),
+            "store_config.json": (False, ("store", "config.json")),
         },
     )
 
