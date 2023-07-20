@@ -27,11 +27,7 @@ from typing import Iterable
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import (
-    SourceIterationResult,
-    SourceIterator,
-    URLExecutableSource,
-)
+from src.importer.sources.source import SourceIterator, URLExecutableSource
 from src.utils.steam import SteamFileHelper, SteamInvalidManifestError
 
 
@@ -63,7 +59,7 @@ class SteamSourceIterator(SourceIterator):
             )
         return manifests
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
         appid_cache = set()
         manifests = self.get_manifests()

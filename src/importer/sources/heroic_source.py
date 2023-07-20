@@ -24,7 +24,7 @@ from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
 from time import time
-from typing import Optional, TypedDict, Generator, Iterable
+from typing import Optional, TypedDict, Iterable
 from abc import abstractmethod
 
 from src import shared
@@ -118,7 +118,7 @@ class SubSource(Iterable):
 
         return (game, additional_data)
 
-    def __iter__(self) -> Generator[SourceIterationResult, None, None]:
+    def __iter__(self):
         """
         Iterate through the installed games with a generator
         :raises InvalidLibraryFileError: on initial call if the library file is bad

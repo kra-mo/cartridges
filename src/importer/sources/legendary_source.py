@@ -21,7 +21,6 @@ import json
 import logging
 from json import JSONDecodeError
 from time import time
-from typing import Generator
 
 from src import shared
 from src.game import Game
@@ -65,7 +64,7 @@ class LegendarySourceIterator(SourceIterator):
         game = Game(values)
         return (game, data)
 
-    def generator_builder(self) -> Generator[SourceIterationResult, None, None]:
+    def __iter__(self):
         # Open library
         file = self.source.config_location["installed.json"]
         try:

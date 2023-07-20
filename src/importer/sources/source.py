@@ -29,25 +29,16 @@ from src.importer.sources.location import Location
 SourceIterationResult = None | Game | tuple[Game, tuple[Any]]
 
 
-class SourceIterator(Iterator):
+class SourceIterator:
     """Data producer for a source of games"""
 
     source: "Source" = None
-    generator: Generator = None
 
     def __init__(self, source: "Source") -> None:
-        super().__init__()
         self.source = source
-        self.generator = self.generator_builder()
-
-    def __iter__(self) -> "SourceIterator":
-        return self
-
-    def __next__(self) -> SourceIterationResult:
-        return next(self.generator)
 
     @abstractmethod
-    def generator_builder(self) -> Generator[SourceIterationResult, None, None]:
+    def __iter__(self) -> Generator[SourceIterationResult, None, None]:
         """
         Method that returns a generator that produces games
         * Should be implemented as a generator method
@@ -108,7 +99,7 @@ class Source(Iterable):
             if location is None:
                 continue
             location.resolve()
-        return self.iterator_class(self)
+        return iter(self.iterator_class(self))
 
 
 # pylint: disable=abstract-method
