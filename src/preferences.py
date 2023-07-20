@@ -68,6 +68,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     heroic_config_file_chooser_button = Gtk.Template.Child()
     heroic_import_epic_switch = Gtk.Template.Child()
     heroic_import_gog_switch = Gtk.Template.Child()
+    heroic_import_amazon_switch = Gtk.Template.Child()
     heroic_import_sideload_switch = Gtk.Template.Child()
 
     bottles_expander_row = Gtk.Template.Child()
@@ -181,6 +182,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "lutris-import-flatpak",
                 "heroic-import-epic",
                 "heroic-import-gog",
+                "heroic-import-amazon",
                 "heroic-import-sideload",
                 "flatpak-import-launchers",
                 "sgdb",

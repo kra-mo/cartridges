@@ -348,7 +348,7 @@ class HeroicSource(URLExecutableSource):
         ),
         paths={
             "config.json": (False, "config.json"),
-            "store_config.json": (False, ("store", "config.json")),
+            "store_config.json": (False, Path("store") / "config.json"),
         },
     )
 
