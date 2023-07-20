@@ -20,19 +20,19 @@
 
 import json
 import logging
+from abc import abstractmethod
 from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
 from time import time
-from typing import Optional, TypedDict, Iterable
-from abc import abstractmethod
+from typing import Iterable, Optional, TypedDict
 
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
 from src.importer.sources.source import (
-    SourceIterationResult,
     SourceIterable,
+    SourceIterationResult,
     URLExecutableSource,
 )
 
@@ -311,9 +311,10 @@ class HeroicSourceIterable(SourceIterable):
         # Get the hidden app names
         try:
             store = path_json_load(self.source.config_location["store_config.json"])
-            self.hidden_app_names = {
-                game["appName"] for game in store["games"]["hidden"]
-            }
+            if "hidden" in store["games"].keys():
+                self.hidden_app_names = {
+                    game["appName"] for game in store["games"]["hidden"]
+                }
         except (OSError, JSONDecodeError, KeyError, TypeError) as error:
             logging.error("Invalid Heroic store file", exc_info=error)
             raise InvalidStoreFileError() from error
