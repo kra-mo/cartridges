@@ -26,6 +26,7 @@ from json import JSONDecodeError
 from pathlib import Path
 from time import time
 from typing import Iterable, Optional, TypedDict
+from functools import cached_property
 
 from src import shared
 from src.game import Game
@@ -84,7 +85,7 @@ class SubSourceIterable(Iterable):
         self.source = source
         self.source_iterable = source_iterable
 
-    @property
+    @cached_property
     def library_path(self) -> Path:
         path = self.source.config_location.root / self.relative_library_path
         logging.debug("Using Heroic %s library.json path %s", self.name, path)
@@ -156,7 +157,7 @@ class StoreSubSourceIterable(SubSourceIterable):
     relative_installed_path: Path
     installed_app_names: set[str]
 
-    @property
+    @cached_property
     def installed_path(self) -> Path:
         path = self.source.config_location.root / self.relative_installed_path
         logging.debug("Using Heroic %s installed.json path %s", self.name, path)
@@ -215,7 +216,7 @@ class LegendaryIterable(StoreSubSourceIterable):
     #    Path("legendary") / "legendaryConfig" / "legendary" / "installed.json"
     # )
 
-    @property
+    @cached_property
     def installed_path(self) -> Path:
         """
         Get the right path depending on the Heroic version
