@@ -86,7 +86,9 @@ class SubSourceIterable(Iterable):
 
     @property
     def library_path(self) -> Path:
-        return self.source.config_location.root / self.relative_library_path
+        path = self.source.config_location.root / self.relative_library_path
+        logging.debug("Using Heroic %s library.json path %s", self.name, path)
+        return path
 
     def process_library_entry(
         self, entry: HeroicLibraryEntry, added_time: int
@@ -156,7 +158,9 @@ class StoreSubSourceIterable(SubSourceIterable):
 
     @property
     def installed_path(self) -> Path:
-        return self.source.config_location.root / self.relative_installed_path
+        path = self.source.config_location.root / self.relative_installed_path
+        logging.debug("Using Heroic %s installed.json path %s", self.name, path)
+        return path
 
     @abstractmethod
     def get_installed_app_names(self) -> set[str]:
@@ -198,6 +202,7 @@ class SideloadIterable(SubSourceIterable):
     name = "sideload"
     service = "sideload"
     relative_library_path = Path("sideload_apps") / "library.json"
+    library_json_entries_key = "games"
 
 
 class LegendaryIterable(StoreSubSourceIterable):
@@ -206,32 +211,42 @@ class LegendaryIterable(StoreSubSourceIterable):
     image_uri_params = "?h=400&resize=1&w=300"
     relative_library_path = Path("store_cache") / "legendary_library.json"
 
-    # TODO simplify Heroic 2.9 has been out for a while
-    # (uncomment value and remove the installed_path property override)
-    #
     # relative_installed_path = (
     #    Path("legendary") / "legendaryConfig" / "legendary" / "installed.json"
     # )
 
     @property
     def installed_path(self) -> Path:
-        """Get the right path depending on the Heroic version"""
+        """
+        Get the right path depending on the Heroic version
+
+        TODO after heroic 2.9 has been out for a while
+        We should use the commented out relative_installed_path
+        and remove this property override.
+        """
+
         heroic_config_path = self.source.config_location.root
         if (path := heroic_config_path / "legendaryConfig").is_dir():
             # Heroic >= 2.9
-            pass
+            logging.debug("Using Heroic >= 2.9 legendary file")
         else:
             # Heroic <= 2.8
             if heroic_config_path.is_relative_to(shared.flatpak_dir):
                 # Heroic flatpak
                 path = shared.flatpak_dir / "com.heroicgameslauncher.hgl" / "config"
+                logging.debug("Using Heroic flatpak <= 2.8 legendary file")
             elif shared.config_dir.is_relative_to(shared.flatpak_dir):
                 # Heroic native (from Cartridges flatpak)
+                logging.debug("Using Heroic native <= 2.8 legendary file")
                 path = Path.home() / ".config"
             else:
                 # Heroic native (from other Cartridges installations)
+                logging.debug("Using Heroic native <= 2.8 legendary file")
                 path = shared.config_dir
-        return path / "legendary" / "installed.json"
+
+        path = path / "legendary" / "installed.json"
+        logging.debug("Using Heroic %s installed.json path %s", self.name, path)
+        return path
 
     def get_installed_app_names(self):
         try:
