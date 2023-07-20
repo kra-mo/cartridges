@@ -26,10 +26,10 @@ import yaml
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import SourceIterator, URLExecutableSource
+from src.importer.sources.source import SourceIterable, URLExecutableSource
 
 
-class BottlesSourceIterator(SourceIterator):
+class BottlesSourceIterable(SourceIterable):
     source: "BottlesSource"
 
     def __iter__(self):
@@ -80,7 +80,7 @@ class BottlesSource(URLExecutableSource):
     """Generic Bottles source"""
 
     name = _("Bottles")
-    iterator_class = BottlesSourceIterator
+    iterator_class = BottlesSourceIterable
     url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
     available_on = {"linux"}
 

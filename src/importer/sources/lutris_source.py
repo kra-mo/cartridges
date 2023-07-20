@@ -24,11 +24,11 @@ from time import time
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import SourceIterator, URLExecutableSource
+from src.importer.sources.source import SourceIterable, URLExecutableSource
 from src.utils.sqlite import copy_db
 
 
-class LutrisSourceIterator(SourceIterator):
+class LutrisSourceIterable(SourceIterable):
     source: "LutrisSource"
 
     def __iter__(self):
@@ -87,7 +87,7 @@ class LutrisSource(URLExecutableSource):
     """Generic Lutris source"""
 
     name = _("Lutris")
-    iterator_class = LutrisSourceIterator
+    iterator_class = LutrisSourceIterable
     url_format = "lutris:rungameid/{game_id}"
     available_on = {"linux"}
 

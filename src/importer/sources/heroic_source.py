@@ -32,7 +32,7 @@ from src.game import Game
 from src.importer.sources.location import Location
 from src.importer.sources.source import (
     SourceIterationResult,
-    SourceIterator,
+    SourceIterable,
     URLExecutableSource,
 )
 
@@ -73,7 +73,7 @@ class SubSource(Iterable):
     """Class representing a Heroic sub-source"""
 
     source: "HeroicSource"
-    source_iterator: "HeroicSourceIterator"
+    source_iterator: "HeroicSourceIterable"
     name: str
     service: str
     image_uri_params: str = ""
@@ -284,7 +284,7 @@ class NileIterable(StoreSubSource):
             ) from error
 
 
-class HeroicSourceIterator(SourceIterator):
+class HeroicSourceIterable(SourceIterable):
     source: "HeroicSource"
 
     hidden_app_names: set[str] = set()
@@ -334,7 +334,7 @@ class HeroicSource(URLExecutableSource):
     """Generic Heroic Games Launcher source"""
 
     name = _("Heroic")
-    iterator_class = HeroicSourceIterator
+    iterator_class = HeroicSourceIterable
     url_format = "heroic://launch/{app_name}"
     available_on = {"linux", "win32"}
 

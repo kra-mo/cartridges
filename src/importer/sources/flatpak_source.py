@@ -25,10 +25,10 @@ from gi.repository import GLib, Gtk
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import Source, SourceIterator
+from src.importer.sources.source import Source, SourceIterable
 
 
-class FlatpakSourceIterator(SourceIterator):
+class FlatpakSourceIterable(SourceIterable):
     source: "FlatpakSource"
 
     def __iter__(self):
@@ -115,7 +115,7 @@ class FlatpakSource(Source):
     """Generic Flatpak source"""
 
     name = _("Flatpak")
-    iterator_class = FlatpakSourceIterator
+    iterator_class = FlatpakSourceIterable
     executable_format = "flatpak run {flatpak_id}"
     available_on = {"linux"}
 

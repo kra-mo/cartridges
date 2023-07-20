@@ -29,7 +29,7 @@ from src.importer.sources.location import Location
 SourceIterationResult = None | Game | tuple[Game, tuple[Any]]
 
 
-class SourceIterator:
+class SourceIterable(Iterable):
     """Data producer for a source of games"""
 
     source: "Source" = None
@@ -57,7 +57,7 @@ class Source(Iterable):
     data_location: Optional[Location] = None
     cache_location: Optional[Location] = None
     config_location: Optional[Location] = None
-    iterator_class: type[SourceIterator]
+    iterator_class: type[SourceIterable]
 
     @property
     def full_name(self) -> str:
@@ -89,7 +89,7 @@ class Source(Iterable):
     def executable_format(self) -> str:
         """The executable format used to construct game executables"""
 
-    def __iter__(self) -> SourceIterator:
+    def __iter__(self) -> Generator[SourceIterationResult, None, None]:
         """
         Get an iterator for the source
         :raises UnresolvableLocationError: Not iterable if any of the locations are unresolvable

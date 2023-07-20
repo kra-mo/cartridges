@@ -25,10 +25,10 @@ from time import time
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
+from src.importer.sources.source import Source, SourceIterationResult, SourceIterable
 
 
-class LegendarySourceIterator(SourceIterator):
+class LegendarySourceIterable(SourceIterable):
     source: "LegendarySource"
 
     def game_from_library_entry(
@@ -93,7 +93,7 @@ class LegendarySource(Source):
     executable_format = "legendary launch {app_name}"
     available_on = {"linux"}
 
-    iterator_class = LegendarySourceIterator
+    iterator_class = LegendarySourceIterable
     config_location: Location = Location(
         schema_key="legendary-location",
         candidates=(

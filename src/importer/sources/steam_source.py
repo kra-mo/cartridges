@@ -27,11 +27,11 @@ from typing import Iterable
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import SourceIterator, URLExecutableSource
+from src.importer.sources.source import SourceIterable, URLExecutableSource
 from src.utils.steam import SteamFileHelper, SteamInvalidManifestError
 
 
-class SteamSourceIterator(SourceIterator):
+class SteamSourceIterable(SourceIterable):
     source: "SteamSource"
 
     def get_manifest_dirs(self) -> Iterable[Path]:
@@ -112,7 +112,7 @@ class SteamSourceIterator(SourceIterator):
 class SteamSource(URLExecutableSource):
     name = _("Steam")
     available_on = {"linux", "win32"}
-    iterator_class = SteamSourceIterator
+    iterator_class = SteamSourceIterable
     url_format = "steam://rungameid/{game_id}"
 
     data_location = Location(
