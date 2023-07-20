@@ -57,7 +57,7 @@ class Source(Iterable):
     data_location: Optional[Location] = None
     cache_location: Optional[Location] = None
     config_location: Optional[Location] = None
-    iterator_class: type[SourceIterable]
+    iterable_class: type[SourceIterable]
 
     @property
     def full_name(self) -> str:
@@ -99,7 +99,7 @@ class Source(Iterable):
             if location is None:
                 continue
             location.resolve()
-        return iter(self.iterator_class(self))
+        return iter(self.iterable_class(self))
 
 
 # pylint: disable=abstract-method

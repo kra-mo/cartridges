@@ -112,7 +112,7 @@ class SteamSourceIterable(SourceIterable):
 class SteamSource(URLExecutableSource):
     name = _("Steam")
     available_on = {"linux", "win32"}
-    iterator_class = SteamSourceIterable
+    iterable_class = SteamSourceIterable
     url_format = "steam://rungameid/{game_id}"
 
     data_location = Location(

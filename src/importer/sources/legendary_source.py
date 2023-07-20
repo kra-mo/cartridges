@@ -93,7 +93,7 @@ class LegendarySource(Source):
     executable_format = "legendary launch {app_name}"
     available_on = {"linux"}
 
-    iterator_class = LegendarySourceIterable
+    iterable_class = LegendarySourceIterable
     config_location: Location = Location(
         schema_key="legendary-location",
         candidates=(

@@ -69,20 +69,20 @@ class HeroicLibraryEntry(TypedDict):
     art_square: str
 
 
-class SubSource(Iterable):
+class SubSourceIterable(Iterable):
     """Class representing a Heroic sub-source"""
 
     source: "HeroicSource"
-    source_iterator: "HeroicSourceIterable"
+    source_iterable: "HeroicSourceIterable"
     name: str
     service: str
     image_uri_params: str = ""
     relative_library_path: Path
     library_json_entries_key: str = "library"
 
-    def __init__(self, source, source_iterator) -> None:
+    def __init__(self, source, source_iterable) -> None:
         self.source = source
-        self.source_iterator = source_iterator
+        self.source_iterable = source_iterable
 
     @property
     def library_path(self) -> Path:
@@ -105,7 +105,7 @@ class SubSource(Iterable):
                 service=self.service, game_id=app_name
             ),
             "executable": self.source.executable_format.format(app_name=app_name),
-            "hidden": self.source_iterator.is_hidden(app_name),
+            "hidden": self.source_iterable.is_hidden(app_name),
         }
         game = Game(values)
 
@@ -120,7 +120,7 @@ class SubSource(Iterable):
 
     def __iter__(self):
         """
-        Iterate through the installed games with a generator
+        Iterate through the games with a generator
         :raises InvalidLibraryFileError: on initial call if the library file is bad
         """
         added_time = int(time())
@@ -145,13 +145,13 @@ class SubSource(Iterable):
                 continue
 
 
-class StoreSubSource(SubSource):
+class StoreSubSourceIterable(SubSourceIterable):
     """
-    Class representing a "store" sub source iterator.
+    Class representing a "store" sub source.
     Games can be installed or not, this class does the check accordingly.
     """
 
-    relative_installed_path: Optional[Path]
+    relative_installed_path: Path
     installed_app_names: set[str]
 
     @property
@@ -194,28 +194,27 @@ class StoreSubSource(SubSource):
         yield from super().__iter__()
 
 
-class SideloadIterable(SubSource):
+class SideloadIterable(SubSourceIterable):
     name = "sideload"
     service = "sideload"
     relative_library_path = Path("sideload_apps") / "library.json"
 
 
-class LegendaryIterable(StoreSubSource):
+class LegendaryIterable(StoreSubSourceIterable):
     name = "legendary"
     service = "epic"
     image_uri_params = "?h=400&resize=1&w=300"
     relative_library_path = Path("store_cache") / "legendary_library.json"
 
     # TODO simplify Heroic 2.9 has been out for a while
-    # (uncomment value and remove the library_path property override)
+    # (uncomment value and remove the installed_path property override)
     #
     # relative_installed_path = (
     #    Path("legendary") / "legendaryConfig" / "legendary" / "installed.json"
     # )
-    relative_installed_path = None
 
     @property
-    def library_path(self) -> Path:
+    def installed_path(self) -> Path:
         """Get the right path depending on the Heroic version"""
         heroic_config_path = self.source.config_location.root
         if (path := heroic_config_path / "legendaryConfig").is_dir():
@@ -243,7 +242,7 @@ class LegendaryIterable(StoreSubSource):
             ) from error
 
 
-class GogIterable(StoreSubSource):
+class GogIterable(StoreSubSourceIterable):
     name = "gog"
     service = "gog"
     library_json_entries_key = "games"
@@ -263,7 +262,7 @@ class GogIterable(StoreSubSource):
             ) from error
 
 
-class NileIterable(StoreSubSource):
+class NileIterable(StoreSubSourceIterable):
     name = "nile"
     service = "amazon"
     relative_library_path = Path("store_cache") / "nile_library.json"
@@ -316,24 +315,23 @@ class HeroicSourceIterable(SourceIterable):
             if not shared.schema.get_boolean("heroic-import-" + sub_source.service):
                 logging.debug("Skipping Heroic %s: disabled", sub_source.service)
                 continue
-
             try:
-                sub_source_iterator = iter(sub_source)
+                sub_source_iterable = iter(sub_source)
+                yield from sub_source_iterable
             except (InvalidLibraryFileError, InvalidInstalledFileError) as error:
                 logging.error(
                     "Skipping bad Heroic sub-source %s",
                     sub_source.service,
                     exc_info=error,
                 )
-
-            yield from sub_source_iterator
+                continue
 
 
 class HeroicSource(URLExecutableSource):
     """Generic Heroic Games Launcher source"""
 
     name = _("Heroic")
-    iterator_class = HeroicSourceIterable
+    iterable_class = HeroicSourceIterable
     url_format = "heroic://launch/{app_name}"
     available_on = {"linux", "win32"}
 

@@ -80,7 +80,7 @@ class BottlesSource(URLExecutableSource):
     """Generic Bottles source"""
 
     name = _("Bottles")
-    iterator_class = BottlesSourceIterable
+    iterable_class = BottlesSourceIterable
     url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
     available_on = {"linux"}
 

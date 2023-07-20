@@ -115,7 +115,7 @@ class FlatpakSource(Source):
     """Generic Flatpak source"""
 
     name = _("Flatpak")
-    iterator_class = FlatpakSourceIterable
+    iterable_class = FlatpakSourceIterable
     executable_format = "flatpak run {flatpak_id}"
     available_on = {"linux"}
 
