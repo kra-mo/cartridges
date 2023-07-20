@@ -191,8 +191,7 @@ class StoreSubSource(SubSource):
         :raises InvalidInstalledFileError: on initial call if the installed file is bad
         """
         self.installed_app_names = self.get_installed_app_names()
-        # TODO check that this syntax works
-        yield from super()
+        yield from super().__iter__()
 
 
 class SideloadIterable(SubSource):
