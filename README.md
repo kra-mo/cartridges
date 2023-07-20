@@ -1,30 +1,30 @@
 
-<div align="center">
-  <img src="data/icons/hicolor/scalable/apps/hu.kramo.Cartridges.svg" width="128" height="128">
-
- # Cartridges
-  
- A GTK4 + Libadwaita game launcher
-
-[![GNOME Circle][circle-image]][circle-url]
-[![Flathub][flathub-image]][flathub-url]
-[![Build status][github-actions-image]][github-actions-url]
-[![Translation Status][weblate-image]][weblate-url]
-[![Code style][code-style-image]][code-style-url]
-[![Discord][discord-image]][discord-url]
-
 [circle-url]: https://circle.gnome.org
 [circle-image]: https://circle.gnome.org/assets/button/badge.svg
-[github-actions-url]: https://github.com/kra-mo/cartridges
-[github-actions-image]: https://github.com/kra-mo/cartridges/actions/workflows/ci.yml/badge.svg
-[code-style-url]: https://github.com/psf/black
-[code-style-image]: https://img.shields.io/badge/code%20style-black-000000?style=flat
 [weblate-url]: https://hosted.weblate.org/engage/cartridges/
 [weblate-image]: https://hosted.weblate.org/widgets/cartridges/-/cartridges/svg-badge.svg
 [discord-url]: https://discord.gg/4KSFh3AmQR
-[discord-image]: https://img.shields.io/discord/1088155799299313754?color=%235865F2&label=discord&logo=discord&logoColor=%23FFFFFF
+[discord-image]: https://img.shields.io/discord/1088155799299313754?color=%235865F2&label=discord&logo=discord&logoColor=%23FFFFFF&style=for-the-badge
+[matrix-url]: https://matrix.to/#/#cartridges:matrix.org
+[matrix-image]: https://img.shields.io/matrix/cartridges:matrix.org?label=Matrix&logo=matrix&color=%230dbd8b&style=for-the-badge
 [flathub-url]: https://flathub.org/apps/hu.kramo.Cartridges
-[flathub-image]: https://img.shields.io/flathub/v/hu.kramo.Cartridges
+[flathub-image]: https://img.shields.io/flathub/v/hu.kramo.Cartridges?logo=flathub&style=for-the-badge
+[installs-image]: https://img.shields.io/flathub/downloads/hu.kramo.Cartridges?style=for-the-badge
+
+<div align="center">
+  <img src="data/icons/hicolor/scalable/apps/hu.kramo.Cartridges.svg" width="128" height="128">
+
+  # Cartridges
+
+  A GTK4 + Libadwaita game launcher
+
+  [![GNOME Circle][circle-image]][circle-url]
+  [![Translation Status][weblate-image]][weblate-url]
+
+  [![Flathub][flathub-image]][flathub-url]
+  [![Discord][discord-image]][discord-url]
+  [![Matrix][matrix-image]][matrix-url]
+  [![Installs][installs-image]][flathub-url]
 
   <img src="data/screenshots/1.png">
 </div>
@@ -50,7 +50,7 @@ Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita
 - Searching for games on various databases
 - Animated covers
 
-For updates and questions, join our [Discord server][discord-url]!
+For updates and questions, join our [Discord server][discord-url] (bridged to [Matrix](https://matrix.to/#/#cartridges:matrix.org))!
 
 # Installation
 
