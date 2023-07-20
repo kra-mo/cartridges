@@ -43,7 +43,7 @@ ninja -C build install
 
 # Code style
 
-All code is auto-formatted with [Black](https://github.com/psf/black) and linted with [pylint](https://github.com/pylint-dev/pylint). Imports are sorted by [isort](https://github.com/pycqa/isort).
+All code is auto-formatted with [Black](https://github.com/psf/black) and linted with [Pylint](https://github.com/pylint-dev/pylint). Imports are sorted by [isort](https://github.com/pycqa/isort).
 
 VSCode extensions are available for all of these and you can set them up with the following `settings.json` configuration:
 
