@@ -354,9 +354,9 @@ class HeroicSource(URLExecutableSource):
     config_location = Location(
         schema_key="heroic-location",
         candidates=(
-            shared.flatpak_dir / "com.heroicgameslauncher.hgl" / "config" / "heroic",
             shared.config_dir / "heroic",
             shared.home / ".config" / "heroic",
+            shared.flatpak_dir / "com.heroicgameslauncher.hgl" / "config" / "heroic",
             shared.appdata_dir / "heroic",
         ),
         paths={
