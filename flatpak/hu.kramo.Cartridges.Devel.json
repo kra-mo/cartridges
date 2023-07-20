@@ -15,6 +15,7 @@
         "--filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam/:ro",
         "--filesystem=~/.var/app/net.lutris.Lutris/:ro",
         "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/heroic/:ro",
+        "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/legendary/:ro",
         "--filesystem=~/.var/app/com.usebottles.bottles/data/bottles/:ro",
         "--filesystem=~/.var/app/io.itch.itch/config/itch/:ro",
         "--filesystem=/var/lib/flatpak:ro"
