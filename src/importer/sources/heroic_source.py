@@ -307,11 +307,14 @@ class HeroicSourceIterable(SourceIterable):
         # Get the hidden app names
         try:
             store = path_json_load(self.source.config_location["store_config.json"])
-            if "hidden" in store["games"].keys():
-                self.hidden_app_names = {
-                    game["appName"] for game in store["games"]["hidden"]
-                }
-        except (OSError, JSONDecodeError, KeyError, TypeError) as error:
+            self.hidden_app_names = {
+                app_name
+                for game in store["games"]["hidden"]
+                if (app_name := game.get("appName")) is not None
+            }
+        except KeyError:
+            logging.warning('No ["games"]["hidden"] key in Heroic store file')
+        except (OSError, JSONDecodeError, TypeError) as error:
             logging.error("Invalid Heroic store file", exc_info=error)
             raise InvalidStoreFileError() from error
 
