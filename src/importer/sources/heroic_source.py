@@ -227,23 +227,18 @@ class LegendaryIterable(StoreSubSourceIterable):
         """
 
         heroic_config_path = self.source.config_location.root
+        # Heroic >= 2.9
         if (path := heroic_config_path / "legendaryConfig").is_dir():
-            # Heroic >= 2.9
             logging.debug("Using Heroic >= 2.9 legendary file")
+        # Heroic <= 2.8
+        elif heroic_config_path.is_relative_to(shared.flatpak_dir):
+            # Heroic flatpak
+            path = shared.flatpak_dir / "com.heroicgameslauncher.hgl" / "config"
+            logging.debug("Using Heroic flatpak <= 2.8 legendary file")
         else:
-            # Heroic <= 2.8
-            if heroic_config_path.is_relative_to(shared.flatpak_dir):
-                # Heroic flatpak
-                path = shared.flatpak_dir / "com.heroicgameslauncher.hgl" / "config"
-                logging.debug("Using Heroic flatpak <= 2.8 legendary file")
-            elif shared.config_dir.is_relative_to(shared.flatpak_dir):
-                # Heroic native (from Cartridges flatpak)
-                logging.debug("Using Heroic native <= 2.8 legendary file")
-                path = Path.home() / ".config"
-            else:
-                # Heroic native (from other Cartridges installations)
-                logging.debug("Using Heroic native <= 2.8 legendary file")
-                path = shared.config_dir
+            # Heroic native
+            logging.debug("Using Heroic native <= 2.8 legendary file")
+            path = Path.home() / ".config"
 
         path = path / "legendary" / "installed.json"
         logging.debug("Using Heroic %s installed.json path %s", self.name, path)
