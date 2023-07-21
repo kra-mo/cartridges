@@ -172,30 +172,26 @@ class CartridgesApplication(Adw.Application):
             debug_str += log_file.read()
             log_file.close()
 
-        about = Adw.AboutWindow(
-            transient_for=self.win,
-            application_name=_("Cartridges"),
-            application_icon=shared.APP_ID,
-            developer_name="kramo",
-            version=shared.VERSION,
-            developers=[
+        about = Adw.AboutWindow.new_from_appdata(
+            shared.PREFIX + "/" + shared.APP_ID + ".metainfo.xml", shared.VERSION
+        )
+        about.set_transient_for(self.win)
+        about.set_developers(
+            (
                 "kramo https://kramo.hu",
                 "Geoffrey Coulaud https://geoffrey-coulaud.fr",
                 "Arcitec https://github.com/Arcitec",
                 "Domenico https://github.com/Domefemia",
                 "Paweł Lidwin https://github.com/imLinguin",
                 "Rafael Mardojai CM https://mardojai.com",
-            ],
-            designers=("kramo https://kramo.hu",),
-            copyright="© 2022-2023 kramo",
-            license_type=Gtk.License.GPL_3_0,
-            issue_url="https://github.com/kra-mo/cartridges/issues/new",
-            website="https://github.com/kra-mo/cartridges",
-            # Translators: Replace this with your name for it to show up in the about window
-            translator_credits=_("translator_credits"),
-            debug_info=debug_str,
-            debug_info_filename="cartridges.log",
+            )
         )
+        about.set_designers(("kramo https://kramo.hu",))
+        about.set_copyright("© 2022-2023 kramo")
+        # Translators: Replace this with your name for it to show up in the about window
+        about.set_translator_credits = (_("translator_credits"),)
+        about.set_debug_info(debug_str)
+        about.set_debug_info_filename("cartridges.log")
         about.add_legal_section(
             "Steam Branding",
             "© 2023 Valve Corporation",
