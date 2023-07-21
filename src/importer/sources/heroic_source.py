@@ -301,10 +301,12 @@ class HeroicSourceIterable(SourceIterable):
     def is_hidden(self, app_name: str) -> bool:
         return app_name in self.hidden_app_names
 
-    def __iter__(self):
-        """Generator method producing games from all the Heroic sub-sources"""
+    def get_hidden_app_names(self) -> set[str]:
+        """Get the hidden app names from store/config.json
 
-        # Get the hidden app names
+        :raises InvalidStoreFileError: if the store is invalid for some reason
+        """
+
         try:
             store = path_json_load(self.source.config_location["store_config.json"])
             self.hidden_app_names = {
@@ -317,6 +319,11 @@ class HeroicSourceIterable(SourceIterable):
         except (OSError, JSONDecodeError, TypeError) as error:
             logging.error("Invalid Heroic store file", exc_info=error)
             raise InvalidStoreFileError() from error
+
+    def __iter__(self):
+        """Generator method producing games from all the Heroic sub-sources"""
+
+        self.get_hidden_app_names()
 
         # Get games from the sub sources
         for sub_source_class in (
