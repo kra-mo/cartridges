@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+from pathlib import Path
 from time import time
 
 from src import shared
@@ -36,23 +37,25 @@ class DolphinIterator(SourceIterator):
         games_data = cache_reader.get_games()
 
         for game_data in games_data:
-            print(game_data["file_name"])
-
             # Build game
-            game = Game(values)
             values = {
                 "source": self.source.id,
                 "added": added_time,
-                #    "name": item["label"],
-                #    "game_id": self.source.game_id_format.format(game_id=game_id),
-                #    "executable": self.source.executable_format.format(
-                #        rom_path=item["path"],
-                #        core_path=core_path,
-                #    ),
+                "name": Path(game_data["file_name"]).stem,
+                "game_id": self.source.game_id_format.format(
+                    game_id=game_data["game_id"]
+                ),
+                "executable": self.source.executable_format.format(
+                    rom_path=game_data["file_path"],
+                ),
             }
 
             game = Game(values)
-            additional_data = {}
+
+            image_path = Path(
+                self.source.cache_location["covers"] / (game_data["game_id"] + ".png")
+            )
+            additional_data = {"local_image_path": image_path}
 
             yield (game, additional_data)
 
@@ -68,15 +71,13 @@ class DolphinSource(Source):
             shared.flatpak_dir / "org.DolphinEmu.dolphin-emu" / "cache" / "dolphin-emu",
             shared.home / ".cache" / "dolphin-emu",
         ),
-        paths={
-            "cache_file": (False, "gamelist.cache"),
-        },
+        paths={"cache_file": (False, "gamelist.cache"), "covers": (True, "GameCovers")},
     )
 
     @property
     def executable_format(self):
-        self.config_location.resolve()
-        is_flatpak = self.data_location.root.is_relative_to(shared.flatpak_dir)
+        self.cache_location.resolve()
+        is_flatpak = self.cache_location.root.is_relative_to(shared.flatpak_dir)
         base = "flatpak run org.DolphinEmu.dolphin-emu" if is_flatpak else "dolphin-emu"
         args = '-e "{rom_path}"'
         return f"{base} {args}"

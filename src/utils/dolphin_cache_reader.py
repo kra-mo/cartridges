@@ -1,10 +1,11 @@
 """Reads the Dolphin game database, stored in a binary format"""
-# Copyright 2022 strycore - Lutris
+# Copyright 2022-2023 strycore - Lutris
+# Copyright 2023 Rilic
 
 import logging
 from pathlib import Path
 
-SUPPORTED_CACHE_VERSION = 20
+SUPPORTED_CACHE_VERSION = 24
 
 
 def get_hex_string(string):
@@ -29,7 +30,7 @@ class DolphinCacheReader:
         "file_name": "s",
         "file_size": 8,
         "volume_size": 8,
-        "volume_size_is_accurate": 1,
+        "volume_size_type": 4,
         "is_datel_disc": 1,
         "is_nkit": 1,
         "short_names": "a",
