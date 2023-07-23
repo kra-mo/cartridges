@@ -26,6 +26,7 @@ from gi.repository import Adw, Gio, GLib, Gtk
 
 from src import shared
 from src.importer.sources.bottles_source import BottlesSource
+from src.importer.sources.dolphin_source import DolphinSource
 from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
@@ -73,6 +74,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
     bottles_expander_row = Gtk.Template.Child()
     bottles_data_action_row = Gtk.Template.Child()
     bottles_data_file_chooser_button = Gtk.Template.Child()
+
+    dolphin_expander_row = Gtk.Template.Child()
+    dolphin_cache_action_row = Gtk.Template.Child()
+    dolphin_cache_file_chooser_button = Gtk.Template.Child()
 
     itch_expander_row = Gtk.Template.Child()
     itch_config_action_row = Gtk.Template.Child()
@@ -133,6 +138,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         # Sources settings
         for source_class in (
             BottlesSource,
+            DolphinSource,
             FlatpakSource,
             HeroicSource,
             ItchSource,

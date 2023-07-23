@@ -198,6 +198,20 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         }
       }
 
+      Adw.ExpanderRow dolphin_expander_row {
+        title: _("Dolphin");
+        show-enable-switch: true;
+
+        Adw.ActionRow dolphin_cache_action_row {
+          title: _("Cache Location");
+
+          Button dolphin_cache_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+      }
+
       Adw.ExpanderRow itch_expander_row {
         title: _("itch");
         show-enable-switch: true;

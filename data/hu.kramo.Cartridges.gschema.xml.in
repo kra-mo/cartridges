@@ -52,6 +52,12 @@
     <key name="bottles-location" type="s">
       <default>"~/.var/app/com.usebottles.bottles/data/bottles/"</default>
     </key>
+    <key name="dolphin" type="b">
+      <default>true</default>
+    </key>
+    <key name="dolphin-cache-location" type="s">
+      <default>"~/.var/app/org.DolphinEmu.dolphin-emu/cache/dolphin-emu/"</default>
+    </key>
     <key name="itch" type="b">
       <default>true</default>
     </key>
