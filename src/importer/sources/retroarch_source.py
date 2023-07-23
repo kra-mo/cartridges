@@ -28,7 +28,7 @@ from time import time
 from src import shared
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, UnresolvableLocationError
 from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
 from src.importer.sources.steam_source import SteamSource
 
@@ -128,26 +128,6 @@ class RetroarchSourceIterator(SourceIterator):
 
 
 class RetroarchSource(Source):
-    def __init__(self) -> None:
-        super().__init__()
-        # Find steam location
-        libraryfolders = SteamSource().data_location["libraryfolders.vdf"]
-        library_path = ""
-
-        with open(libraryfolders, "r", encoding="utf-8") as open_file:
-            for line in open_file:
-                if '"path"' in line:
-                    library_path = re.findall(
-                        '"path"\\s+"(.*)"\n', line, re.IGNORECASE
-                    )[0]
-                elif "1118310" in line:
-                    break
-
-        if library_path:
-            self.config_location.candidates.append(
-                Path(f"{library_path}/steamapps/common/RetroArch")
-            )
-
     name = _("RetroArch")
     available_on = {"linux", "windows"}
     iterator_class = RetroarchSourceIterator
@@ -177,3 +157,30 @@ class RetroarchSource(Source):
         base = "flatpak run org.libretro.RetroArch" if is_flatpak else "retroarch"
         args = '-L "{core_path}" "{rom_path}"'
         return f"{base} {args}"
+
+    def __init__(self) -> None:
+        super().__init__()
+
+        try:
+            self.config_location.candidates.append(self.get_steam_location())
+        except (OSError, KeyError, UnresolvableLocationError):
+            pass
+
+    def get_steam_location(self) -> str:
+        # Find steam location
+        libraryfolders = SteamSource().data_location["libraryfolders.vdf"]
+        library_path = ""
+
+        with open(libraryfolders, "r", encoding="utf-8") as open_file:
+            for line in open_file:
+                if '"path"' in line:
+                    library_path = re.findall(
+                        '"path"\\s+"(.*)"\n', line, re.IGNORECASE
+                    )[0]
+                elif "1118310" in line:
+                    break
+
+        if library_path:
+            return Path(f"{library_path}/steamapps/common/RetroArch")
+
+        raise ValueError("No Steam RetroArch installed.")
