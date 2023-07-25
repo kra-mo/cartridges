@@ -44,10 +44,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.0.6" date="2023-07-21">
+    <release version="2.1" date="2023-07-25">
       <description translatable="no">
         <ul>
-          <li>Fixes an issue with Steam mods not importing properly</li>
+          <li>Added support for Amazon Games in the Heroic importer</li>
+          <li>Translations since 2.0</li>
         </ul>
       </description>
     </release>
