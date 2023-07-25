@@ -79,5 +79,5 @@ class DolphinSource(Source):
         self.cache_location.resolve()
         is_flatpak = self.cache_location.root.is_relative_to(shared.flatpak_dir)
         base = "flatpak run org.DolphinEmu.dolphin-emu" if is_flatpak else "dolphin-emu"
-        args = '-e "{rom_path}"'
+        args = '-b -e "{rom_path}"'
         return f"{base} {args}"
