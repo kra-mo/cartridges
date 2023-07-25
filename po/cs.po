@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-05 14:36+0200\n"
+"POT-Creation-Date: 2023-07-25 20:33+0200\n"
 "PO-Revision-Date: 2023-07-24 13:05+0000\n"
 "Last-Translator: foo expert <deferred_water346@simplelogin.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/cartridges/"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:162
+#: src/main.py:170
 msgid "Cartridges"
 msgstr "Kazety"
 
@@ -34,7 +34,9 @@ msgid "Launch all your games"
 msgstr "Spusťte všechny vaše hry"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
-msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
+#, fuzzy
+#| msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
+msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;"
 msgstr "hraní;spouštěč;steam;lutris;heroic;láhve;itch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
@@ -61,7 +63,7 @@ msgid "Game Details"
 msgstr "Podrobnosti o hře"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:416
-#: src/details_window.py:239
+#: src/details_window.py:241
 msgid "Preferences"
 msgstr "Předvolby"
 
@@ -144,7 +146,7 @@ msgstr "Zobrazit předvolby"
 msgid "Shortcuts"
 msgstr "Zkratky"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:112
+#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:113
 msgid "Undo"
 msgstr "Zpět"
 
@@ -172,7 +174,7 @@ msgstr "Zobrazit skryté hry"
 msgid "Remove game"
 msgstr "Odstranit hru"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:268
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:277
 msgid "Behavior"
 msgstr "Chování"
 
@@ -221,9 +223,9 @@ msgid "Steam"
 msgstr "Steam"
 
 #: data/gtk/preferences.blp:96 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:192
-#: data/gtk/preferences.blp:206 data/gtk/preferences.blp:220
-#: data/gtk/preferences.blp:234
+#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:201
+#: data/gtk/preferences.blp:215 data/gtk/preferences.blp:229
+#: data/gtk/preferences.blp:243
 msgid "Install Location"
 msgstr "Umístění instalace"
 
@@ -256,54 +258,60 @@ msgid "Import GOG Games"
 msgstr "Importovat GOG hry"
 
 #: data/gtk/preferences.blp:178
+#, fuzzy
+#| msgid "Import Steam Games"
+msgid "Import Amazon Games"
+msgstr "Importovat Steam hry"
+
+#: data/gtk/preferences.blp:187
 msgid "Import Sideloaded Games"
 msgstr "Importovat ručně načtené hry"
 
-#: data/gtk/preferences.blp:188
+#: data/gtk/preferences.blp:197
 msgid "Bottles"
 msgstr "Láhve"
 
-#: data/gtk/preferences.blp:202
+#: data/gtk/preferences.blp:211
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:216
+#: data/gtk/preferences.blp:225
 msgid "Legendary"
 msgstr "Legendary"
 
-#: data/gtk/preferences.blp:230
+#: data/gtk/preferences.blp:239
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: data/gtk/preferences.blp:243
+#: data/gtk/preferences.blp:252
 msgid "Import Game Launchers"
 msgstr "Importovat spouštěče her"
 
-#: data/gtk/preferences.blp:256
+#: data/gtk/preferences.blp:265
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:260
+#: data/gtk/preferences.blp:269
 msgid "Authentication"
 msgstr "Ověření"
 
-#: data/gtk/preferences.blp:263
+#: data/gtk/preferences.blp:272
 msgid "API Key"
 msgstr "Klíč API"
 
-#: data/gtk/preferences.blp:271
+#: data/gtk/preferences.blp:280
 msgid "Use SteamGridDB"
 msgstr "Používat SteamGridDB"
 
-#: data/gtk/preferences.blp:272
+#: data/gtk/preferences.blp:281
 msgid "Download images when adding or importing games"
 msgstr "Stahovat obrázky při přidávání nebo importování her"
 
-#: data/gtk/preferences.blp:281
+#: data/gtk/preferences.blp:290
 msgid "Prefer Over Official Images"
 msgstr "Upřednostnit před oficiálními obrázky"
 
-#: data/gtk/preferences.blp:290
+#: data/gtk/preferences.blp:299
 msgid "Prefer Animated Images"
 msgstr "Upřednostnit animované obrázky"
 
@@ -392,7 +400,7 @@ msgid "About Cartridges"
 msgstr "O Kazetách"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:180
+#: src/main.py:188
 msgid "translator_credits"
 msgstr "ooo.i.love.foo"
 
@@ -468,15 +476,15 @@ msgstr ""
 msgid "Couldn't Add Game"
 msgstr "Nelze přidat hru"
 
-#: src/details_window.py:147 src/details_window.py:181
+#: src/details_window.py:147 src/details_window.py:183
 msgid "Game title cannot be empty."
 msgstr "Název hry nemůže být prázdný."
 
-#: src/details_window.py:153 src/details_window.py:189
+#: src/details_window.py:153 src/details_window.py:191
 msgid "Executable cannot be empty."
 msgstr "Spustitelný soubor nemůže být prázdný."
 
-#: src/details_window.py:180 src/details_window.py:188
+#: src/details_window.py:182 src/details_window.py:190
 msgid "Couldn't Apply Preferences"
 msgstr "Nelze použít předvolby"
 
@@ -498,45 +506,45 @@ msgstr "{} odkryto"
 msgid "{} removed"
 msgstr "{} odstraněno"
 
-#: src/preferences.py:111
+#: src/preferences.py:112
 msgid "All games removed"
 msgstr "Všechny hry odstraněny"
 
-#: src/preferences.py:159
+#: src/preferences.py:160
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "K používání služby SteamGridDB je vyžadován klíč API. Můžete si ho "
 "vygenerovat {}zde{}."
 
-#: src/preferences.py:284
+#: src/preferences.py:285
 msgid "Installation Not Found"
 msgstr "Instalace nebyla nalezena"
 
-#: src/preferences.py:286
+#: src/preferences.py:287
 msgid "Select a valid directory."
 msgstr "Vyberte platný adresář."
 
-#: src/preferences.py:348
+#: src/preferences.py:349
 msgid "Invalid Directory"
 msgstr "Neplatný adresář"
 
 #. The variable is the name of the source
-#: src/preferences.py:352
+#: src/preferences.py:353
 msgid "Select the {} cache directory."
 msgstr "Vyberte adresář {} mezipaměti."
 
 #. The variable is the name of the source
-#: src/preferences.py:355
+#: src/preferences.py:356
 msgid "Select the {} configuration directory."
 msgstr "Vyberte konfigurační adresář {}."
 
 #. The variable is the name of the source
-#: src/preferences.py:358
+#: src/preferences.py:359
 msgid "Select the {} data directory."
 msgstr "Vyberte datový adresář {}."
 
-#: src/preferences.py:364
+#: src/preferences.py:365
 msgid "Set Location"
 msgstr "Nastavit umístění"
 
