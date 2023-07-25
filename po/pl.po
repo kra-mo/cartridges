@@ -4,13 +4,14 @@
 # Artur Wróblewski <krypalkora1984@gmail.com>, 2023.
 # Kshyso <Kshysio@protonmail.com>, 2023.
 # Eryk Michalak <gnu.ewm@protonmail.com>, 2023.
+# Michaks <fexwex3@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-05 14:36+0200\n"
-"PO-Revision-Date: 2023-07-14 15:51+0000\n"
-"Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
+"PO-Revision-Date: 2023-07-24 13:05+0000\n"
+"Last-Translator: Michaks <fexwex3@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/pl/>\n"
 "Language: pl\n"
@@ -25,7 +26,7 @@ msgstr ""
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
 #: src/main.py:162
 msgid "Cartridges"
-msgstr "Cartridges"
+msgstr "Kartridże"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
@@ -57,16 +58,16 @@ msgstr "Biblioteka"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:67
 msgid "Edit Game Details"
-msgstr "Edytuj detale gry"
+msgstr "Edycja szczegółów gry"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:71
 msgid "Game Details"
-msgstr "Detale gry"
+msgstr "Szczegóły gry"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:416
 #: src/details_window.py:239
 msgid "Preferences"
-msgstr "Ustawienia"
+msgstr "Preferencje"
 
 #: data/gtk/details-window.blp:25
 msgid "Cancel"
@@ -74,11 +75,11 @@ msgstr "Anuluj"
 
 #: data/gtk/details-window.blp:57
 msgid "New Cover"
-msgstr "Nowa Okładka"
+msgstr "Nowa okładka"
 
 #: data/gtk/details-window.blp:75
 msgid "Delete Cover"
-msgstr "Usuń Okładkę"
+msgstr "Usuń osłonę"
 
 #: data/gtk/details-window.blp:101 data/gtk/details-window.blp:106
 #: data/gtk/game.blp:80
@@ -87,7 +88,7 @@ msgstr "Tytuł"
 
 #: data/gtk/details-window.blp:102
 msgid "The title of the game"
-msgstr "Tytuł gry"
+msgstr "Tytuł Gry"
 
 #: data/gtk/details-window.blp:112 data/gtk/details-window.blp:117
 msgid "Developer"
@@ -150,7 +151,7 @@ msgstr "Skróty"
 
 #: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:112
 msgid "Undo"
-msgstr "Cofnij"
+msgstr "Wróć"
 
 #: data/gtk/help-overlay.blp:39
 msgid "Open menu"
@@ -162,7 +163,7 @@ msgstr "Gry"
 
 #: data/gtk/help-overlay.blp:48
 msgid "Add new game"
-msgstr "Dodaj nową grę"
+msgstr "Dodaj nową gre"
 
 #: data/gtk/help-overlay.blp:53
 msgid "Import games"
@@ -186,7 +187,7 @@ msgstr "Wyjdź po uruchomieniu gry"
 
 #: data/gtk/preferences.blp:25
 msgid "Cover Image Launches Game"
-msgstr "Obraz okładki startera gier"
+msgstr "Obraz okładki uruchamia grę"
 
 #: data/gtk/preferences.blp:26
 msgid "Swaps the behavior of the cover image and the play button"
@@ -337,7 +338,7 @@ msgstr "Gry, które ukryjesz, pojawią się tutaj."
 
 #: data/gtk/window.blp:64 data/gtk/window.blp:304
 msgid "Back"
-msgstr "Cofnij"
+msgstr "Powrót"
 
 #: data/gtk/window.blp:121
 msgid "Game Title"
@@ -345,7 +346,7 @@ msgstr "Tytuł gry"
 
 #: data/gtk/window.blp:176
 msgid "Play"
-msgstr "Uruchom"
+msgstr "Graj"
 
 #: data/gtk/window.blp:243 data/gtk/window.blp:435
 msgid "Add Game"
@@ -393,7 +394,7 @@ msgstr "Skróty klawiaturowe"
 
 #: data/gtk/window.blp:426
 msgid "About Cartridges"
-msgstr "O Cartridges"
+msgstr "O Kartridżach"
 
 #. Translators: Replace this with your name for it to show up in the about window
 #: src/main.py:180
@@ -420,7 +421,7 @@ msgstr "Zastosuj"
 
 #: src/details_window.py:78
 msgid "Add New Game"
-msgstr "Dodaj nową grę"
+msgstr "Dodaj nową Grę"
 
 #: src/details_window.py:79
 msgid "Confirm"
@@ -542,7 +543,7 @@ msgstr "Wybierz katalog z danymi {}."
 
 #: src/preferences.py:364
 msgid "Set Location"
-msgstr "Ustaw lokacje"
+msgstr "Ustaw położenie"
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"

@@ -4,13 +4,14 @@
 # Alessandro Iepure <alessandro.iepure@gmail.com>, 2023.
 # albanobattistella <albano_battistella@hotmail.com>, 2023.
 # kramo <contact@kramo.hu>, 2023.
+# Giasko <dibiame@hotmail.it>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-05 14:36+0200\n"
-"PO-Revision-Date: 2023-07-08 14:52+0000\n"
-"Last-Translator: Alessandro Iepure <alessandro.iepure@gmail.com>\n"
+"PO-Revision-Date: 2023-07-21 12:16+0000\n"
+"Last-Translator: Giasko <dibiame@hotmail.it>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/it/>\n"
 "Language: it\n"
@@ -132,7 +133,7 @@ msgstr "Generale"
 
 #: data/gtk/help-overlay.blp:14
 msgid "Quit"
-msgstr "Chiudi"
+msgstr "Esci"
 
 #: data/gtk/help-overlay.blp:19 data/gtk/window.blp:217 data/gtk/window.blp:257
 #: data/gtk/window.blp:323
@@ -273,7 +274,7 @@ msgstr "itch"
 
 #: data/gtk/preferences.blp:216
 msgid "Legendary"
-msgstr "Leggendario"
+msgstr "Legendary"
 
 #: data/gtk/preferences.blp:230
 msgid "Flatpak"
