@@ -18,6 +18,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import logging
+
 from gi.repository import GdkPixbuf
 
 from src import shared
@@ -35,6 +37,7 @@ class LocalCoverManager(Manager):
     def manager_logic(self, game: Game, additional_data: dict) -> None:
         if image_path := additional_data.get("local_image_path"):
             if not image_path.is_file():
+                logging.error("Local image path is not a file: %s", image_path)
                 return
             save_cover(game.game_id, resize_cover(image_path))
         elif icon_path := additional_data.get("local_icon_path"):

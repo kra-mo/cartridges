@@ -25,13 +25,13 @@ from gi.repository import GLib, Gtk
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
+from src.importer.sources.source import Source, SourceIterable
 
 
-class FlatpakSourceIterator(SourceIterator):
+class FlatpakSourceIterable(SourceIterable):
     source: "FlatpakSource"
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
 
         added_time = int(time())
@@ -115,7 +115,7 @@ class FlatpakSource(Source):
     """Generic Flatpak source"""
 
     name = _("Flatpak")
-    iterator_class = FlatpakSourceIterator
+    iterable_class = FlatpakSourceIterable
     executable_format = "flatpak run {flatpak_id}"
     available_on = {"linux"}
 

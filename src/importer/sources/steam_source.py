@@ -18,6 +18,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import logging
 import re
 from pathlib import Path
 from time import time
@@ -25,16 +26,12 @@ from typing import Iterable
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import (
-    SourceIterationResult,
-    SourceIterator,
-    URLExecutableSource,
-)
-from src.utils.steam import SteamFileHelper, SteamInvalidManifestError
 from src.importer.sources.location import Location
+from src.importer.sources.source import SourceIterable, URLExecutableSource
+from src.utils.steam import SteamFileHelper, SteamInvalidManifestError
 
 
-class SteamSourceIterator(SourceIterator):
+class SteamSourceIterable(SourceIterable):
     source: "SteamSource"
 
     def get_manifest_dirs(self) -> Iterable[Path]:
@@ -62,7 +59,7 @@ class SteamSourceIterator(SourceIterator):
             )
         return manifests
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
         appid_cache = set()
         manifests = self.get_manifests()
@@ -74,17 +71,20 @@ class SteamSourceIterator(SourceIterator):
             steam = SteamFileHelper()
             try:
                 local_data = steam.get_manifest_data(manifest)
-            except (OSError, SteamInvalidManifestError):
+            except (OSError, SteamInvalidManifestError) as error:
+                logging.debug("Couldn't load appmanifest %s", manifest, exc_info=error)
                 continue
 
             # Skip non installed games
             installed_mask = 4
             if not int(local_data["stateflags"]) & installed_mask:
+                logging.debug("Skipped %s: not installed", manifest)
                 continue
 
             # Skip duplicate appids
             appid = local_data["appid"]
             if appid in appid_cache:
+                logging.debug("Skipped %s: appid already seen during import", manifest)
                 continue
             appid_cache.add(appid)
 
@@ -112,7 +112,7 @@ class SteamSourceIterator(SourceIterator):
 class SteamSource(URLExecutableSource):
     name = _("Steam")
     available_on = {"linux", "win32"}
-    iterator_class = SteamSourceIterator
+    iterable_class = SteamSourceIterable
     url_format = "steam://rungameid/{game_id}"
 
     data_location = Location(

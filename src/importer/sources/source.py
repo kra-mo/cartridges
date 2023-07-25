@@ -29,25 +29,16 @@ from src.importer.sources.location import Location
 SourceIterationResult = None | Game | tuple[Game, tuple[Any]]
 
 
-class SourceIterator(Iterator):
+class SourceIterable(Iterable):
     """Data producer for a source of games"""
 
     source: "Source" = None
-    generator: Generator = None
 
     def __init__(self, source: "Source") -> None:
-        super().__init__()
         self.source = source
-        self.generator = self.generator_builder()
-
-    def __iter__(self) -> "SourceIterator":
-        return self
-
-    def __next__(self) -> SourceIterationResult:
-        return next(self.generator)
 
     @abstractmethod
-    def generator_builder(self) -> Generator[SourceIterationResult, None, None]:
+    def __iter__(self) -> Generator[SourceIterationResult, None, None]:
         """
         Method that returns a generator that produces games
         * Should be implemented as a generator method
@@ -66,7 +57,7 @@ class Source(Iterable):
     data_location: Optional[Location] = None
     cache_location: Optional[Location] = None
     config_location: Optional[Location] = None
-    iterator_class: type[SourceIterator]
+    iterable_class: type[SourceIterable]
 
     @property
     def full_name(self) -> str:
@@ -98,7 +89,7 @@ class Source(Iterable):
     def executable_format(self) -> str:
         """The executable format used to construct game executables"""
 
-    def __iter__(self) -> SourceIterator:
+    def __iter__(self) -> Generator[SourceIterationResult, None, None]:
         """
         Get an iterator for the source
         :raises UnresolvableLocationError: Not iterable if any of the locations are unresolvable
@@ -108,7 +99,7 @@ class Source(Iterable):
             if location is None:
                 continue
             location.resolve()
-        return self.iterator_class(self)
+        return iter(self.iterable_class(self))
 
 
 # pylint: disable=abstract-method

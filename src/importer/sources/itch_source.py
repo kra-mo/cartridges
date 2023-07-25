@@ -25,18 +25,14 @@ from time import time
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import (
-    SourceIterationResult,
-    SourceIterator,
-    URLExecutableSource,
-)
+from src.importer.sources.source import SourceIterable, URLExecutableSource
 from src.utils.sqlite import copy_db
 
 
-class ItchSourceIterator(SourceIterator):
+class ItchSourceIterable(SourceIterable):
     source: "ItchSource"
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
 
         # Query the database
@@ -80,7 +76,7 @@ class ItchSourceIterator(SourceIterator):
 
 class ItchSource(URLExecutableSource):
     name = _("itch")
-    iterator_class = ItchSourceIterator
+    iterable_class = ItchSourceIterable
     url_format = "itch://caves/{cave_id}/launch"
     available_on = {"linux", "win32"}
 

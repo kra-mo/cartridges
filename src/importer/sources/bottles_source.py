@@ -26,17 +26,13 @@ import yaml
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import (
-    SourceIterationResult,
-    SourceIterator,
-    URLExecutableSource,
-)
+from src.importer.sources.source import SourceIterable, URLExecutableSource
 
 
-class BottlesSourceIterator(SourceIterator):
+class BottlesSourceIterable(SourceIterable):
     source: "BottlesSource"
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
 
         data = self.source.data_location["library.yml"].read_text("utf-8")
@@ -84,7 +80,7 @@ class BottlesSource(URLExecutableSource):
     """Generic Bottles source"""
 
     name = _("Bottles")
-    iterator_class = BottlesSourceIterator
+    iterable_class = BottlesSourceIterable
     url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
     available_on = {"linux"}
 

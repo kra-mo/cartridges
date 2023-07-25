@@ -21,15 +21,14 @@ import json
 import logging
 from json import JSONDecodeError
 from time import time
-from typing import Generator
 
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location
-from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
+from src.importer.sources.source import Source, SourceIterationResult, SourceIterable
 
 
-class LegendarySourceIterator(SourceIterator):
+class LegendarySourceIterable(SourceIterable):
     source: "LegendarySource"
 
     def game_from_library_entry(
@@ -65,7 +64,7 @@ class LegendarySourceIterator(SourceIterator):
         game = Game(values)
         return (game, data)
 
-    def generator_builder(self) -> Generator[SourceIterationResult, None, None]:
+    def __iter__(self):
         # Open library
         file = self.source.config_location["installed.json"]
         try:
@@ -94,7 +93,7 @@ class LegendarySource(Source):
     executable_format = "legendary launch {app_name}"
     available_on = {"linux"}
 
-    iterator_class = LegendarySourceIterator
+    iterable_class = LegendarySourceIterable
     config_location: Location = Location(
         schema_key="legendary-location",
         candidates=(
