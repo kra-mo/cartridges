@@ -262,19 +262,19 @@ class PreferencesWindow(Adw.PreferencesWindow):
             subtitle = re.sub("/run/user/\\d*/doc/.*/", "", str(path))
             action_row.set_subtitle(subtitle)
 
-    def resolve_locations(self, source):
+    def resolve_locations(self, source: Source):
         """Resolve locations and add a warning if location cannot be found"""
 
         def clear_warning_selection(_widget, label):
             label.select_region(-1, -1)
 
-        for location_name in ("data", "config", "cache"):
+        for location_name, location in source.locations._asdict().items():
             action_row = getattr(self, f"{source.id}_{location_name}_action_row", None)
             if not action_row:
                 continue
 
             try:
-                getattr(source, f"{location_name}_location", None).resolve()
+                location.resolve()
 
             except UnresolvableLocationError:
                 popover = Gtk.Popover(
@@ -325,10 +325,14 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 return
 
             # Good picked location
-            location = getattr(source, f"{location_name}_location")
+            location = getattr(source.locations, location_name)
             if location.check_candidate(path):
                 # Set the schema
-                infix = "-cache" if location_name == "cache" else ""
+                match location_name:
+                    case "config" | "data":
+                        infix = ""
+                    case _:
+                        infix = f"-{location_name}"
                 key = f"{source.id}{infix}-location"
                 value = str(path)
                 shared.schema.set_string(key, value)
@@ -347,20 +351,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
             # Bad picked location, inform user
             else:
                 title = _("Invalid Directory")
-                match location_name:
-                    case "cache":
-                        # The variable is the name of the source
-                        subtitle_format = _("Select the {} cache directory.")
-                    case "config":
-                        # The variable is the name of the source
-                        subtitle_format = _("Select the {} configuration directory.")
-                    case "data":
-                        # The variable is the name of the source
-                        subtitle_format = _("Select the {} data directory.")
                 dialog = create_dialog(
                     self,
                     title,
-                    subtitle_format.format(source.name),
+                    location.invalid_subtitle.format(source.name),
                     "choose_folder",
                     _("Set Location"),
                 )
@@ -381,10 +375,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
         )
 
         # Connect dir picker buttons
-        for location in ("data", "config", "cache"):
-            button = getattr(self, f"{source.id}_{location}_file_chooser_button", None)
+        for location_name in source.locations._asdict():
+            button = getattr(
+                self, f"{source.id}_{location_name}_file_chooser_button", None
+            )
             if button is not None:
-                button.connect("clicked", self.choose_folder, set_dir, location)
+                button.connect("clicked", self.choose_folder, set_dir, location_name)
 
         # Set the source row subtitles
         self.resolve_locations(source)

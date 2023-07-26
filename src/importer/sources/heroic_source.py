@@ -25,12 +25,12 @@ from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
 from time import time
-from typing import Iterable, Optional, TypedDict
+from typing import Iterable, NamedTuple, Optional, TypedDict
 from functools import cached_property
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import (
     SourceIterable,
     SourceIterationResult,
@@ -87,7 +87,7 @@ class SubSourceIterable(Iterable):
 
     @cached_property
     def library_path(self) -> Path:
-        path = self.source.config_location.root / self.relative_library_path
+        path = self.source.locations.config.root / self.relative_library_path
         logging.debug("Using Heroic %s library.json path %s", self.name, path)
         return path
 
@@ -116,7 +116,7 @@ class SubSourceIterable(Iterable):
         # Filenames are derived from the URL that heroic used to get the file
         uri: str = entry["art_square"] + self.image_uri_params
         digest = sha256(uri.encode()).hexdigest()
-        image_path = self.source.config_location.root / "images-cache" / digest
+        image_path = self.source.locations.config.root / "images-cache" / digest
         additional_data = {"local_image_path": image_path}
 
         return (game, additional_data)
@@ -159,7 +159,7 @@ class StoreSubSourceIterable(SubSourceIterable):
 
     @cached_property
     def installed_path(self) -> Path:
-        path = self.source.config_location.root / self.relative_installed_path
+        path = self.source.locations.config.root / self.relative_installed_path
         logging.debug("Using Heroic %s installed.json path %s", self.name, path)
         return path
 
@@ -226,7 +226,7 @@ class LegendaryIterable(StoreSubSourceIterable):
         and remove this property override.
         """
 
-        heroic_config_path = self.source.config_location.root
+        heroic_config_path = self.source.locations.config.root
         # Heroic >= 2.9
         if (path := heroic_config_path / "legendaryConfig").is_dir():
             logging.debug("Using Heroic >= 2.9 legendary file")
@@ -308,7 +308,7 @@ class HeroicSourceIterable(SourceIterable):
         """
 
         try:
-            store = path_json_load(self.source.config_location["store_config.json"])
+            store = path_json_load(self.source.locations.config["store_config.json"])
             self.hidden_app_names = {
                 app_name
                 for game in store["games"]["hidden"]
@@ -349,6 +349,10 @@ class HeroicSourceIterable(SourceIterable):
                 continue
 
 
+class HeroicLocations(NamedTuple):
+    config: Location
+
+
 class HeroicSource(URLExecutableSource):
     """Generic Heroic Games Launcher source"""
 
@@ -357,18 +361,24 @@ class HeroicSource(URLExecutableSource):
     url_format = "heroic://launch/{app_name}"
     available_on = {"linux", "win32"}
 
-    config_location = Location(
-        schema_key="heroic-location",
-        candidates=(
-            shared.config_dir / "heroic",
-            shared.home / ".config" / "heroic",
-            shared.flatpak_dir / "com.heroicgameslauncher.hgl" / "config" / "heroic",
-            shared.appdata_dir / "heroic",
-        ),
-        paths={
-            "config.json": (False, "config.json"),
-            "store_config.json": (False, Path("store") / "config.json"),
-        },
+    locations = HeroicLocations(
+        Location(
+            schema_key="heroic-location",
+            candidates=(
+                shared.config_dir / "heroic",
+                shared.home / ".config" / "heroic",
+                shared.flatpak_dir
+                / "com.heroicgameslauncher.hgl"
+                / "config"
+                / "heroic",
+                shared.appdata_dir / "heroic",
+            ),
+            paths={
+                "config.json": LocationSubPath("config.json"),
+                "store_config.json": LocationSubPath("store/config.json"),
+            },
+            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+        )
     )
 
     @property

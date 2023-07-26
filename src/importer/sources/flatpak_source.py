@@ -19,12 +19,13 @@
 
 from pathlib import Path
 from time import time
+from typing import NamedTuple
 
 from gi.repository import GLib, Gtk
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import Source, SourceIterable
 
 
@@ -37,7 +38,7 @@ class FlatpakSourceIterable(SourceIterable):
         added_time = int(time())
 
         icon_theme = Gtk.IconTheme.new()
-        icon_theme.add_search_path(str(self.source.data_location["icons"]))
+        icon_theme.add_search_path(str(self.source.locations.data["icons"]))
 
         blacklist = (
             {"hu.kramo.Cartridges", "hu.kramo.Cartridges.Devel"}
@@ -53,7 +54,7 @@ class FlatpakSourceIterable(SourceIterable):
             }
         )
 
-        for entry in (self.source.data_location["applications"]).iterdir():
+        for entry in (self.source.locations.data["applications"]).iterdir():
             if entry.suffix != ".desktop":
                 continue
 
@@ -111,6 +112,10 @@ class FlatpakSourceIterable(SourceIterable):
             yield (game, additional_data)
 
 
+class FlatpakLocations(NamedTuple):
+    data: Location
+
+
 class FlatpakSource(Source):
     """Generic Flatpak source"""
 
@@ -119,14 +124,17 @@ class FlatpakSource(Source):
     executable_format = "flatpak run {flatpak_id}"
     available_on = {"linux"}
 
-    data_location = Location(
-        schema_key="flatpak-location",
-        candidates=(
-            "/var/lib/flatpak/",
-            shared.data_dir / "flatpak",
-        ),
-        paths={
-            "applications": (True, "exports/share/applications"),
-            "icons": (True, "exports/share/icons"),
-        },
+    locations = FlatpakLocations(
+        Location(
+            schema_key="flatpak-location",
+            candidates=(
+                "/var/lib/flatpak/",
+                shared.data_dir / "flatpak",
+            ),
+            paths={
+                "applications": LocationSubPath("exports/share/applications", True),
+                "icons": LocationSubPath("exports/share/icons", True),
+            },
+            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+        )
     )

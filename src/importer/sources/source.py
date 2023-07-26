@@ -19,8 +19,8 @@
 
 import sys
 from abc import abstractmethod
-from collections.abc import Iterable, Iterator
-from typing import Any, Generator, Optional
+from collections.abc import Iterable
+from typing import Any, Generator, Collection
 
 from src.game import Game
 from src.importer.sources.location import Location
@@ -54,10 +54,8 @@ class Source(Iterable):
     name: str
     variant: str = None
     available_on: set[str] = set()
-    data_location: Optional[Location] = None
-    cache_location: Optional[Location] = None
-    config_location: Optional[Location] = None
     iterable_class: type[SourceIterable]
+    locations: Collection[Location]
 
     @property
     def full_name(self) -> str:
