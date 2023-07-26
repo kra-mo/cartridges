@@ -24,7 +24,7 @@ from typing import NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import SourceIterable, URLExecutableSource
 from src.utils.sqlite import copy_db
 
@@ -119,7 +119,7 @@ class LutrisSource(URLExecutableSource):
                 shared.home / ".cache" / "lutris",
             ),
             paths={
-                "coverart": (True, "coverart"),
+                "coverart": LocationSubPath("coverart", True),
             },
         ),
     )

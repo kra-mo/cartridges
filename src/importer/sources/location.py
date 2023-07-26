@@ -1,13 +1,18 @@
 import logging
 from pathlib import Path
-from typing import Callable, Mapping, Iterable
+from typing import Mapping, Iterable, NamedTuple
 from os import PathLike
 
 from src import shared
 
 PathSegment = str | PathLike | Path
 PathSegments = Iterable[PathSegment]
-Candidate = PathSegments | Callable[[], PathSegments]
+Candidate = PathSegments
+
+
+class LocationSubPath(NamedTuple):
+    segment: PathSegment
+    is_directory: bool = False
 
 
 class UnresolvableLocationError(Exception):
@@ -26,14 +31,14 @@ class Location:
 
     schema_key: str
     candidates: Iterable[Candidate]
-    paths: Mapping[str, tuple[bool, PathSegments]]
+    paths: Mapping[str, LocationSubPath]
     root: Path = None
 
     def __init__(
         self,
         schema_key: str,
         candidates: Iterable[Candidate],
-        paths: Mapping[str, tuple[bool, PathSegments]],
+        paths: Mapping[str, LocationSubPath],
     ) -> None:
         super().__init__()
         self.schema_key = schema_key
@@ -42,13 +47,13 @@ class Location:
 
     def check_candidate(self, candidate: Path) -> bool:
         """Check if a candidate root has the necessary files and directories"""
-        for type_is_dir, subpath in self.paths.values():
-            subpath = Path(candidate) / Path(subpath)
-            if type_is_dir:
-                if not subpath.is_dir():
+        for segment, is_directory in self.paths.values():
+            path = Path(candidate) / segment
+            if is_directory:
+                if not path.is_dir():
                     return False
             else:
-                if not subpath.is_file():
+                if not path.is_file():
                     return False
         return True
 
@@ -81,4 +86,4 @@ class Location:
     def __getitem__(self, key: str):
         """Get the computed path from its key for the location"""
         self.resolve()
-        return self.root / self.paths[key][1]
+        return self.root / self.paths[key].segment

@@ -25,7 +25,7 @@ from typing import NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import Source, SourceIterationResult, SourceIterable
 
 
@@ -107,8 +107,8 @@ class LegendarySource(Source):
                 shared.home / ".config" / "legendary",
             ),
             paths={
-                "installed.json": (False, "installed.json"),
-                "metadata": (True, "metadata"),
+                "installed.json": LocationSubPath("installed.json"),
+                "metadata": LocationSubPath("metadata", True),
             },
         )
     )

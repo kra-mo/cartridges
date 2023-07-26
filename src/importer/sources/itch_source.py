@@ -25,7 +25,7 @@ from typing import NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import SourceIterable, URLExecutableSource
 from src.utils.sqlite import copy_db
 
@@ -94,6 +94,8 @@ class ItchSource(URLExecutableSource):
                 shared.home / ".config" / "itch",
                 shared.appdata_dir / "itch",
             ),
-            paths={"butler.db": (False, "db/butler.db")},
+            paths={
+                "butler.db": LocationSubPath("db/butler.db"),
+            },
         )
     )

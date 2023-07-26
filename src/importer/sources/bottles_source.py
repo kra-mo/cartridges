@@ -26,7 +26,7 @@ import yaml
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import SourceIterable, URLExecutableSource
 
 
@@ -98,8 +98,8 @@ class BottlesSource(URLExecutableSource):
                 shared.home / ".local" / "share" / "bottles",
             ),
             paths={
-                "library.yml": (False, "library.yml"),
-                "data.yml": (False, "data.yml"),
+                "library.yml": LocationSubPath("library.yml"),
+                "data.yml": LocationSubPath("data.yml"),
             },
         )
     )

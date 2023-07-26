@@ -25,7 +25,7 @@ from gi.repository import GLib, Gtk
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import Source, SourceIterable
 
 
@@ -132,8 +132,8 @@ class FlatpakSource(Source):
                 shared.data_dir / "flatpak",
             ),
             paths={
-                "applications": (True, "exports/share/applications"),
-                "icons": (True, "exports/share/icons"),
+                "applications": LocationSubPath("exports/share/applications", True),
+                "icons": LocationSubPath("exports/share/icons", True),
             },
         )
     )

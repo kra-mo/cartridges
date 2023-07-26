@@ -30,7 +30,7 @@ from functools import cached_property
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import (
     SourceIterable,
     SourceIterationResult,
@@ -374,8 +374,8 @@ class HeroicSource(URLExecutableSource):
                 shared.appdata_dir / "heroic",
             ),
             paths={
-                "config.json": (False, "config.json"),
-                "store_config.json": (False, Path("store") / "config.json"),
+                "config.json": LocationSubPath("config.json"),
+                "store_config.json": LocationSubPath("store/config.json"),
             },
         )
     )

@@ -26,7 +26,7 @@ from typing import Iterable, NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import SourceIterable, URLExecutableSource
 from src.utils.steam import SteamFileHelper, SteamInvalidManifestError
 
@@ -129,8 +129,8 @@ class SteamSource(URLExecutableSource):
                 shared.programfiles32_dir / "Steam",
             ),
             paths={
-                "libraryfolders.vdf": (False, "steamapps/libraryfolders.vdf"),
-                "librarycache": (True, "appcache/librarycache"),
+                "libraryfolders.vdf": LocationSubPath("steamapps/libraryfolders.vdf"),
+                "librarycache": LocationSubPath("appcache/librarycache", True),
             },
         )
     )
