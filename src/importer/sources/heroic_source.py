@@ -377,6 +377,7 @@ class HeroicSource(URLExecutableSource):
                 "config.json": LocationSubPath("config.json"),
                 "store_config.json": LocationSubPath("store/config.json"),
             },
+            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
         )
     )
 

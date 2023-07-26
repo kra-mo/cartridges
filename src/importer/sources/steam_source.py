@@ -132,5 +132,6 @@ class SteamSource(URLExecutableSource):
                 "libraryfolders.vdf": LocationSubPath("steamapps/libraryfolders.vdf"),
                 "librarycache": LocationSubPath("appcache/librarycache", True),
             },
+            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
         )
     )

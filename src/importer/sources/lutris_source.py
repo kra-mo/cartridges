@@ -110,6 +110,7 @@ class LutrisSource(URLExecutableSource):
             paths={
                 "pga.db": (False, "pga.db"),
             },
+            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
         ),
         Location(
             schema_key="lutris-cache-location",
@@ -121,6 +122,7 @@ class LutrisSource(URLExecutableSource):
             paths={
                 "coverart": LocationSubPath("coverart", True),
             },
+            invalid_subtitle=Location.CACHE_INVALID_SUBTITLE,
         ),
     )
 

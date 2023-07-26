@@ -101,5 +101,6 @@ class BottlesSource(URLExecutableSource):
                 "library.yml": LocationSubPath("library.yml"),
                 "data.yml": LocationSubPath("data.yml"),
             },
+            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
         )
     )

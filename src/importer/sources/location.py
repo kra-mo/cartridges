@@ -29,9 +29,18 @@ class Location:
     * When resolved, the schema is updated with the picked chosen
     """
 
+    # The variable is the name of the source
+    CACHE_INVALID_SUBTITLE = _("Select the {} cache directory.")
+    # The variable is the name of the source
+    CONFIG_INVALID_SUBTITLE = _("Select the {} configuration directory.")
+    # The variable is the name of the source
+    DATA_INVALID_SUBTITLE = _("Select the {} data directory.")
+
     schema_key: str
     candidates: Iterable[Candidate]
     paths: Mapping[str, LocationSubPath]
+    invalid_subtitle: str
+
     root: Path = None
 
     def __init__(
@@ -39,11 +48,13 @@ class Location:
         schema_key: str,
         candidates: Iterable[Candidate],
         paths: Mapping[str, LocationSubPath],
+        invalid_subtitle: str,
     ) -> None:
         super().__init__()
         self.schema_key = schema_key
         self.candidates = candidates
         self.paths = paths
+        self.invalid_subtitle = invalid_subtitle
 
     def check_candidate(self, candidate: Path) -> bool:
         """Check if a candidate root has the necessary files and directories"""

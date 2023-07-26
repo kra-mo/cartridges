@@ -97,5 +97,6 @@ class ItchSource(URLExecutableSource):
             paths={
                 "butler.db": LocationSubPath("db/butler.db"),
             },
+            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
         )
     )

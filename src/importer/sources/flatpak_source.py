@@ -135,5 +135,6 @@ class FlatpakSource(Source):
                 "applications": LocationSubPath("exports/share/applications", True),
                 "icons": LocationSubPath("exports/share/icons", True),
             },
+            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
         )
     )

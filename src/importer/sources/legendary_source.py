@@ -110,5 +110,6 @@ class LegendarySource(Source):
                 "installed.json": LocationSubPath("installed.json"),
                 "metadata": LocationSubPath("metadata", True),
             },
+            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
         )
     )
