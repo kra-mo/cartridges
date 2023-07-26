@@ -20,6 +20,7 @@
 
 from pathlib import Path
 from time import time
+from typing import NamedTuple
 
 import yaml
 
@@ -35,7 +36,7 @@ class BottlesSourceIterable(SourceIterable):
     def __iter__(self):
         """Generator method producing games"""
 
-        data = self.source.data_location["library.yml"].read_text("utf-8")
+        data = self.source.locations.data["library.yml"].read_text("utf-8")
         library: dict = yaml.safe_load(data)
         added_time = int(time())
 
@@ -58,11 +59,11 @@ class BottlesSourceIterable(SourceIterable):
                 # as Cartridges can't access directories picked via Bottles' file picker portal
                 bottles_location = Path(
                     yaml.safe_load(
-                        self.source.data_location["data.yml"].read_text("utf-8")
+                        self.source.locations.data["data.yml"].read_text("utf-8")
                     )["custom_bottles_path"]
                 )
             except (FileNotFoundError, KeyError):
-                bottles_location = self.source.data_location.root / "bottles"
+                bottles_location = self.source.locations.data.root / "bottles"
 
             bottle_path = entry["bottle"]["path"]
 
@@ -76,6 +77,10 @@ class BottlesSourceIterable(SourceIterable):
             yield (game, additional_data)
 
 
+class BottlesLocations(NamedTuple):
+    data: Location
+
+
 class BottlesSource(URLExecutableSource):
     """Generic Bottles source"""
 
@@ -84,15 +89,17 @@ class BottlesSource(URLExecutableSource):
     url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
     available_on = {"linux"}
 
-    data_location = Location(
-        schema_key="bottles-location",
-        candidates=(
-            shared.flatpak_dir / "com.usebottles.bottles" / "data" / "bottles",
-            shared.data_dir / "bottles/",
-            shared.home / ".local" / "share" / "bottles",
-        ),
-        paths={
-            "library.yml": (False, "library.yml"),
-            "data.yml": (False, "data.yml"),
-        },
+    locations = BottlesLocations(
+        Location(
+            schema_key="bottles-location",
+            candidates=(
+                shared.flatpak_dir / "com.usebottles.bottles" / "data" / "bottles",
+                shared.data_dir / "bottles/",
+                shared.home / ".local" / "share" / "bottles",
+            ),
+            paths={
+                "library.yml": (False, "library.yml"),
+                "data.yml": (False, "data.yml"),
+            },
+        )
     )

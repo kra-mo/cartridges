@@ -21,6 +21,7 @@ import json
 import logging
 from json import JSONDecodeError
 from time import time
+from typing import NamedTuple
 
 from src import shared
 from src.game import Game
@@ -50,7 +51,7 @@ class LegendarySourceIterable(SourceIterable):
         data = {}
 
         # Get additional metadata from file (optional)
-        metadata_file = self.source.config_location["metadata"] / f"{app_name}.json"
+        metadata_file = self.source.locations.config["metadata"] / f"{app_name}.json"
         try:
             metadata = json.load(metadata_file.open())
             values["developer"] = metadata["metadata"]["developer"]
@@ -66,7 +67,7 @@ class LegendarySourceIterable(SourceIterable):
 
     def __iter__(self):
         # Open library
-        file = self.source.config_location["installed.json"]
+        file = self.source.locations.config["installed.json"]
         try:
             library: dict = json.load(file.open())
         except (JSONDecodeError, OSError):
@@ -88,20 +89,26 @@ class LegendarySourceIterable(SourceIterable):
             yield result
 
 
+class LegendaryLocations(NamedTuple):
+    config: Location
+
+
 class LegendarySource(Source):
     name = _("Legendary")
     executable_format = "legendary launch {app_name}"
     available_on = {"linux"}
-
     iterable_class = LegendarySourceIterable
-    config_location: Location = Location(
-        schema_key="legendary-location",
-        candidates=(
-            shared.config_dir / "legendary",
-            shared.home / ".config" / "legendary",
-        ),
-        paths={
-            "installed.json": (False, "installed.json"),
-            "metadata": (True, "metadata"),
-        },
+
+    locations = LegendaryLocations(
+        Location(
+            schema_key="legendary-location",
+            candidates=(
+                shared.config_dir / "legendary",
+                shared.home / ".config" / "legendary",
+            ),
+            paths={
+                "installed.json": (False, "installed.json"),
+                "metadata": (True, "metadata"),
+            },
+        )
     )
