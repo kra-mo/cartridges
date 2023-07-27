@@ -51,6 +51,7 @@ class SourceIterable(Iterable):
 class Source(Iterable):
     """Source of games. E.g an installed app with a config file that lists game directories"""
 
+    source_id: str
     name: str
     variant: str = None
     available_on: set[str] = set()
@@ -66,17 +67,9 @@ class Source(Iterable):
         return full_name_
 
     @property
-    def id(self) -> str:  # pylint: disable=invalid-name
-        """The source's identifier"""
-        id_ = self.name.lower()
-        if self.variant is not None:
-            id_ += f"_{self.variant.lower()}"
-        return id_
-
-    @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
-        return self.id + "_{game_id}"
+        return self.source_id + "_{game_id}"
 
     @property
     def is_available(self):

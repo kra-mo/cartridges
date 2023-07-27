@@ -105,7 +105,7 @@ class Importer(ErrorProducer):
                 manager.reset_cancellable()
 
         for source in self.sources:
-            logging.debug("Importing games from source %s", source.id)
+            logging.debug("Importing games from source %s", source.source_id)
             task = Task.new(None, None, self.source_callback, (source,))
             self.n_source_tasks_created += 1
             task.set_task_data((source,))
@@ -138,16 +138,16 @@ class Importer(ErrorProducer):
 
         # Early exit if not available or not installed
         if not source.is_available:
-            logging.info("Source %s skipped, not available", source.id)
+            logging.info("Source %s skipped, not available", source.source_id)
             return
         try:
             iterator = iter(source)
         except UnresolvableLocationError:
-            logging.info("Source %s skipped, bad location", source.id)
+            logging.info("Source %s skipped, bad location", source.source_id)
             return
 
         # Get games from source
-        logging.info("Scanning source %s", source.id)
+        logging.info("Scanning source %s", source.source_id)
         while True:
             # Handle exceptions raised when iterating
             try:
@@ -155,7 +155,7 @@ class Importer(ErrorProducer):
             except StopIteration:
                 break
             except Exception as error:  # pylint: disable=broad-exception-caught
-                logging.exception("%s in %s", type(error).__name__, source.id)
+                logging.exception("%s in %s", type(error).__name__, source.source_id)
                 self.report_error(error)
                 continue
 
@@ -172,7 +172,7 @@ class Importer(ErrorProducer):
                 # Should not happen on production code
                 logging.warning(
                     "%s produced an invalid iteration return type %s",
-                    source.id,
+                    source.source_id,
                     type(iteration_result),
                 )
                 continue
@@ -194,7 +194,7 @@ class Importer(ErrorProducer):
     def source_callback(self, _obj, _result, data):
         """Callback executed when a source is fully scanned"""
         source, *_rest = data
-        logging.debug("Import done for source %s", source.id)
+        logging.debug("Import done for source %s", source.source_id)
         self.n_source_tasks_done += 1
         self.progress_changed_callback()
 

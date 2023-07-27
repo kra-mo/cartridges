@@ -43,7 +43,7 @@ class BottlesSourceIterable(SourceIterable):
         for entry in library.values():
             # Build game
             values = {
-                "source": self.source.id,
+                "source": self.source.source_id,
                 "added": added_time,
                 "name": entry["name"],
                 "game_id": self.source.game_id_format.format(game_id=entry["id"]),
@@ -84,6 +84,7 @@ class BottlesLocations(NamedTuple):
 class BottlesSource(URLExecutableSource):
     """Generic Bottles source"""
 
+    source_id = "bottles"
     name = _("Bottles")
     iterable_class = BottlesSourceIterable
     url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
