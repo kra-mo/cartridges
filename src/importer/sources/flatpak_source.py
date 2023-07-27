@@ -77,7 +77,7 @@ class FlatpakSourceIterable(SourceIterable):
                 continue
 
             values = {
-                "source": self.source.id,
+                "source": self.source.source_id,
                 "added": added_time,
                 "name": name,
                 "game_id": self.source.game_id_format.format(game_id=flatpak_id),
@@ -119,6 +119,7 @@ class FlatpakLocations(NamedTuple):
 class FlatpakSource(Source):
     """Generic Flatpak source"""
 
+    source_id = "flatpak"
     name = _("Flatpak")
     iterable_class = FlatpakSourceIterable
     executable_format = "flatpak run {flatpak_id}"

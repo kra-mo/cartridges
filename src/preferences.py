@@ -143,7 +143,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         ):
             source = source_class()
             if not source.is_available:
-                expander_row = getattr(self, f"{source.id}_expander_row")
+                expander_row = getattr(self, f"{source.source_id}_expander_row")
                 expander_row.set_visible(False)
             else:
                 self.init_source_row(source)
@@ -250,12 +250,14 @@ class PreferencesWindow(Adw.PreferencesWindow):
         """Set the dir subtitle for a source's action rows"""
         for location in ("data", "config", "cache"):
             # Get the action row to subtitle
-            action_row = getattr(self, f"{source.id}_{location}_action_row", None)
+            action_row = getattr(
+                self, f"{source.source_id}_{location}_action_row", None
+            )
             if not action_row:
                 continue
 
             infix = "-cache" if location == "cache" else ""
-            key = f"{source.id}{infix}-location"
+            key = f"{source.source_id}{infix}-location"
             path = Path(shared.schema.get_string(key)).expanduser()
 
             # Remove the path prefix if picked via Flatpak portal
@@ -269,7 +271,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
             label.select_region(-1, -1)
 
         for location_name, location in source.locations._asdict().items():
-            action_row = getattr(self, f"{source.id}_{location_name}_action_row", None)
+            action_row = getattr(
+                self, f"{source.source_id}_{location_name}_action_row", None
+            )
             if not action_row:
                 continue
 
@@ -311,7 +315,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 menu_button.add_css_class("warning")
 
                 action_row.add_prefix(menu_button)
-                self.warning_menu_buttons[source.id] = menu_button
+                self.warning_menu_buttons[source.source_id] = menu_button
 
     def init_source_row(self, source: Source):
         """Initialize a preference row for a source class"""
@@ -333,18 +337,18 @@ class PreferencesWindow(Adw.PreferencesWindow):
                         infix = ""
                     case _:
                         infix = f"-{location_name}"
-                key = f"{source.id}{infix}-location"
+                key = f"{source.source_id}{infix}-location"
                 value = str(path)
                 shared.schema.set_string(key, value)
                 # Update the row
                 self.update_source_action_row_paths(source)
 
-                if self.warning_menu_buttons.get(source.id):
+                if self.warning_menu_buttons.get(source.source_id):
                     action_row = getattr(
-                        self, f"{source.id}_{location_name}_action_row", None
+                        self, f"{source.source_id}_{location_name}_action_row", None
                     )
-                    action_row.remove(self.warning_menu_buttons[source.id])
-                    self.warning_menu_buttons.pop(source.id)
+                    action_row.remove(self.warning_menu_buttons[source.source_id])
+                    self.warning_menu_buttons.pop(source.source_id)
 
                 logging.debug("User-set value for schema key %s: %s", key, value)
 
@@ -366,9 +370,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 dialog.connect("response", on_response)
 
         # Bind expander row activation to source being enabled
-        expander_row = getattr(self, f"{source.id}_expander_row")
+        expander_row = getattr(self, f"{source.source_id}_expander_row")
         shared.schema.bind(
-            source.id,
+            source.source_id,
             expander_row,
             "enable-expansion",
             Gio.SettingsBindFlags.DEFAULT,
@@ -377,7 +381,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         # Connect dir picker buttons
         for location_name in source.locations._asdict():
             button = getattr(
-                self, f"{source.id}_{location_name}_file_chooser_button", None
+                self, f"{source.source_id}_{location_name}_file_chooser_button", None
             )
             if button is not None:
                 button.connect("clicked", self.choose_folder, set_dir, location_name)

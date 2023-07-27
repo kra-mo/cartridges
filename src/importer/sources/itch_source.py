@@ -62,7 +62,7 @@ class ItchSourceIterable(SourceIterable):
         for row in cursor:
             values = {
                 "added": added_time,
-                "source": self.source.id,
+                "source": self.source.source_id,
                 "name": row[1],
                 "game_id": self.source.game_id_format.format(game_id=row[0]),
                 "executable": self.source.executable_format.format(cave_id=row[4]),
@@ -80,6 +80,7 @@ class ItchLocations(NamedTuple):
 
 
 class ItchSource(URLExecutableSource):
+    source_id = "itch"
     name = _("itch")
     iterable_class = ItchSourceIterable
     url_format = "itch://caves/{cave_id}/launch"

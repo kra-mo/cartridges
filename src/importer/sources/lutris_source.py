@@ -65,7 +65,7 @@ class LutrisSourceIterable(SourceIterable):
                 "added": added_time,
                 "hidden": row[4],
                 "name": row[1],
-                "source": f"{self.source.id}_{row[3]}",
+                "source": f"{self.source.source_id}_{row[3]}",
                 "game_id": self.source.game_id_format.format(
                     runner=row[3], game_id=row[0]
                 ),
@@ -92,6 +92,7 @@ class LutrisLocations(NamedTuple):
 class LutrisSource(URLExecutableSource):
     """Generic Lutris source"""
 
+    source_id = "lutris"
     name = _("Lutris")
     iterable_class = LutrisSourceIterable
     url_format = "lutris:rungameid/{game_id}"
@@ -108,7 +109,7 @@ class LutrisSource(URLExecutableSource):
                 shared.home / ".local" / "share" / "lutris",
             ),
             paths={
-                "pga.db": (False, "pga.db"),
+                "pga.db": LocationSubPath("pga.db"),
             },
             invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
         ),
@@ -128,4 +129,4 @@ class LutrisSource(URLExecutableSource):
 
     @property
     def game_id_format(self):
-        return self.id + "_{runner}_{game_id}"
+        return self.source_id + "_{runner}_{game_id}"

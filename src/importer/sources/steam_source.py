@@ -92,7 +92,7 @@ class SteamSourceIterable(SourceIterable):
             values = {
                 "added": added_time,
                 "name": local_data["name"],
-                "source": self.source.id,
+                "source": self.source.source_id,
                 "game_id": self.source.game_id_format.format(game_id=appid),
                 "executable": self.source.executable_format.format(game_id=appid),
             }
@@ -114,6 +114,7 @@ class SteamLocations(NamedTuple):
 
 
 class SteamSource(URLExecutableSource):
+    source_id = "steam"
     name = _("Steam")
     available_on = {"linux", "win32"}
     iterable_class = SteamSourceIterable

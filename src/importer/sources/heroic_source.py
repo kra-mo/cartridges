@@ -100,7 +100,7 @@ class SubSourceIterable(Iterable):
 
         # Build game
         values = {
-            "source": f"{self.source.id}_{self.service}",
+            "source": f"{self.source.source_id}_{self.service}",
             "added": added_time,
             "name": entry["title"],
             "developer": entry.get("developer", None),
@@ -356,6 +356,7 @@ class HeroicLocations(NamedTuple):
 class HeroicSource(URLExecutableSource):
     """Generic Heroic Games Launcher source"""
 
+    source_id = "heroic"
     name = _("Heroic")
     iterable_class = HeroicSourceIterable
     url_format = "heroic://launch/{app_name}"
@@ -384,4 +385,4 @@ class HeroicSource(URLExecutableSource):
     @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
-        return self.id + "_{service}_{game_id}"
+        return self.source_id + "_{service}_{game_id}"

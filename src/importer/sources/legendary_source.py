@@ -43,7 +43,7 @@ class LegendarySourceIterable(SourceIterable):
         app_name = entry["app_name"]
         values = {
             "added": added_time,
-            "source": self.source.id,
+            "source": self.source.source_id,
             "name": entry["title"],
             "game_id": self.source.game_id_format.format(game_id=app_name),
             "executable": self.source.executable_format.format(app_name=app_name),
@@ -94,6 +94,7 @@ class LegendaryLocations(NamedTuple):
 
 
 class LegendarySource(Source):
+    source_id = "legendary"
     name = _("Legendary")
     executable_format = "legendary launch {app_name}"
     available_on = {"linux"}
