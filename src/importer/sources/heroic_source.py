@@ -108,7 +108,7 @@ class SubSourceIterable(Iterable):
             "game_id": self.source.game_id_format.format(
                 service=self.service, game_id=app_name
             ),
-            "executable": self.source.executable_format.format(runner=runner,app_name=app_name),
+            "executable": self.source.executable_format.format(runner=runner, app_name=app_name),
             "hidden": self.source_iterable.is_hidden(app_name),
         }
         game = Game(values)
