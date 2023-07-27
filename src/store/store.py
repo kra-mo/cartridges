@@ -130,7 +130,7 @@ class Store:
         # Connect signals
         for manager in self.managers.values():
             for signal in manager.signals:
-                game.connect(signal, manager.execute_resilient_manager_logic)
+                game.connect(signal, manager.run)
 
         # Add the game to the store
         if not game.source in self.source_games:

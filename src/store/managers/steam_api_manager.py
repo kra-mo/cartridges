@@ -42,7 +42,7 @@ class SteamAPIManager(AsyncManager):
         self.steam_rate_limiter = SteamRateLimiter()
         self.steam_api_helper = SteamAPIHelper(self.steam_rate_limiter)
 
-    def manager_logic(self, game: Game, additional_data: dict) -> None:
+    def main(self, game: Game, additional_data: dict) -> None:
         # Skip non-steam games
         appid = additional_data.get("steam_appid", None)
         if appid is None:

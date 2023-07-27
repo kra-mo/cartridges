@@ -34,7 +34,7 @@ class LocalCoverManager(Manager):
 
     run_after = (SteamAPIManager,)
 
-    def manager_logic(self, game: Game, additional_data: dict) -> None:
+    def main(self, game: Game, additional_data: dict) -> None:
         if image_path := additional_data.get("local_image_path"):
             if not image_path.is_file():
                 logging.error("Local image path is not a file: %s", image_path)

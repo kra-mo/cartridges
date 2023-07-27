@@ -56,7 +56,7 @@ class AsyncManager(Manager):
     def _task_thread_func(self, _task, _source_object, data, _cancellable):
         """Task thread entry point"""
         game, additional_data, *_rest = data
-        self.execute_resilient_manager_logic(game, additional_data)
+        self.run(game, additional_data)
 
     def _task_callback(self, _source_object, _result, data):
         """Method run after the task is done"""

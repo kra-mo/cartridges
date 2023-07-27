@@ -36,7 +36,7 @@ class SGDBManager(AsyncManager):
     run_after = (SteamAPIManager, LocalCoverManager, OnlineCoverManager)
     retryable_on = (HTTPError, SSLError, ConnectionError, JSONDecodeError)
 
-    def manager_logic(self, game: Game, _additional_data: dict) -> None:
+    def main(self, game: Game, _additional_data: dict) -> None:
         try:
             sgdb = SGDBHelper()
             sgdb.conditionaly_update_cover(game)

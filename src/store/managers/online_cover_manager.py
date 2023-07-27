@@ -93,7 +93,7 @@ class OnlineCoverManager(Manager):
         # Resize and save the cover
         save_cover(game.game_id, resize_cover(pixbuf=cover))
 
-    def manager_logic(self, game: Game, additional_data: dict) -> None:
+    def main(self, game: Game, additional_data: dict) -> None:
         # Ensure that we have a cover to download
         cover_url = additional_data.get("online_cover_url")
         if not cover_url:
