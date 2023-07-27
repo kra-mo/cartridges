@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-05 14:36+0200\n"
+"POT-Creation-Date: 2023-07-25 20:33+0200\n"
 "PO-Revision-Date: 2023-07-24 13:05+0000\n"
 "Last-Translator: Michaks <fexwex3@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/cartridges/"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:162
+#: src/main.py:170
 msgid "Cartridges"
 msgstr "Kartridże"
 
@@ -38,7 +38,9 @@ msgid "Launch all your games"
 msgstr "Uruchom wszystkie swoje gry"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
-msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
+#, fuzzy
+#| msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
+msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;"
 msgstr "gry;gaming;launcher;steam;lutris;heroic;bottles;itch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
@@ -65,7 +67,7 @@ msgid "Game Details"
 msgstr "Szczegóły gry"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:416
-#: src/details_window.py:239
+#: src/details_window.py:241
 msgid "Preferences"
 msgstr "Preferencje"
 
@@ -149,7 +151,7 @@ msgstr "Pokaż preferencje"
 msgid "Shortcuts"
 msgstr "Skróty"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:112
+#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:113
 msgid "Undo"
 msgstr "Wróć"
 
@@ -177,7 +179,7 @@ msgstr "Pokaż ukryte gry"
 msgid "Remove game"
 msgstr "Usuń grę"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:268
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:277
 msgid "Behavior"
 msgstr "Zachowanie"
 
@@ -226,9 +228,9 @@ msgid "Steam"
 msgstr "Steam"
 
 #: data/gtk/preferences.blp:96 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:192
-#: data/gtk/preferences.blp:206 data/gtk/preferences.blp:220
-#: data/gtk/preferences.blp:234
+#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:201
+#: data/gtk/preferences.blp:215 data/gtk/preferences.blp:229
+#: data/gtk/preferences.blp:243
 msgid "Install Location"
 msgstr "Lokalizacja instalacji"
 
@@ -261,54 +263,60 @@ msgid "Import GOG Games"
 msgstr "Importuj gry z GOG"
 
 #: data/gtk/preferences.blp:178
+#, fuzzy
+#| msgid "Import Steam Games"
+msgid "Import Amazon Games"
+msgstr "Importuj gry Steam"
+
+#: data/gtk/preferences.blp:187
 msgid "Import Sideloaded Games"
 msgstr "Importuj gry w wersji Sideloaded"
 
-#: data/gtk/preferences.blp:188
+#: data/gtk/preferences.blp:197
 msgid "Bottles"
 msgstr "Butelki"
 
-#: data/gtk/preferences.blp:202
+#: data/gtk/preferences.blp:211
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:216
+#: data/gtk/preferences.blp:225
 msgid "Legendary"
 msgstr "Legendarne"
 
-#: data/gtk/preferences.blp:230
+#: data/gtk/preferences.blp:239
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: data/gtk/preferences.blp:243
+#: data/gtk/preferences.blp:252
 msgid "Import Game Launchers"
 msgstr "Importuj programy uruchamiające gry"
 
-#: data/gtk/preferences.blp:256
+#: data/gtk/preferences.blp:265
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:260
+#: data/gtk/preferences.blp:269
 msgid "Authentication"
 msgstr "Uwierzytelnianie"
 
-#: data/gtk/preferences.blp:263
+#: data/gtk/preferences.blp:272
 msgid "API Key"
 msgstr "Klucz API"
 
-#: data/gtk/preferences.blp:271
+#: data/gtk/preferences.blp:280
 msgid "Use SteamGridDB"
 msgstr "Użyj SteamGridDB"
 
-#: data/gtk/preferences.blp:272
+#: data/gtk/preferences.blp:281
 msgid "Download images when adding or importing games"
 msgstr "Pobieranie obrazów podczas dodawania lub importowania gier"
 
-#: data/gtk/preferences.blp:281
+#: data/gtk/preferences.blp:290
 msgid "Prefer Over Official Images"
 msgstr "Preferuj ponad Oficjalne zdjęcia"
 
-#: data/gtk/preferences.blp:290
+#: data/gtk/preferences.blp:299
 msgid "Prefer Animated Images"
 msgstr "Preferuj animowane obrazy"
 
@@ -397,7 +405,7 @@ msgid "About Cartridges"
 msgstr "O Kartridżach"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:180
+#: src/main.py:188
 msgid "translator_credits"
 msgstr "kredyty tłumacza"
 
@@ -473,15 +481,15 @@ msgstr ""
 msgid "Couldn't Add Game"
 msgstr "Nie można było dodać gry"
 
-#: src/details_window.py:147 src/details_window.py:181
+#: src/details_window.py:147 src/details_window.py:183
 msgid "Game title cannot be empty."
 msgstr "Tytuł gry nie może być pusty."
 
-#: src/details_window.py:153 src/details_window.py:189
+#: src/details_window.py:153 src/details_window.py:191
 msgid "Executable cannot be empty."
 msgstr "Plik wykonywalny nie może być pusty."
 
-#: src/details_window.py:180 src/details_window.py:188
+#: src/details_window.py:182 src/details_window.py:190
 msgid "Couldn't Apply Preferences"
 msgstr "Nie można zastosować preferencji"
 
@@ -503,45 +511,45 @@ msgstr "{} nieukryty"
 msgid "{} removed"
 msgstr "{} usunięty"
 
-#: src/preferences.py:111
+#: src/preferences.py:112
 msgid "All games removed"
 msgstr "Wszystkie gry usunięte"
 
-#: src/preferences.py:159
+#: src/preferences.py:160
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Do korzystania z SteamGridDB wymagany jest klucz API. Możesz go wygenerować "
 "{} tutaj{}."
 
-#: src/preferences.py:284
+#: src/preferences.py:285
 msgid "Installation Not Found"
 msgstr "Nie znaleziono instalacji"
 
-#: src/preferences.py:286
+#: src/preferences.py:287
 msgid "Select a valid directory."
 msgstr "Wybierz prawidłowy katalog."
 
-#: src/preferences.py:348
+#: src/preferences.py:349
 msgid "Invalid Directory"
 msgstr "Nieprawidłowy katalog"
 
 #. The variable is the name of the source
-#: src/preferences.py:352
+#: src/preferences.py:353
 msgid "Select the {} cache directory."
 msgstr "Wybierz katalog pamięci podręcznej {}."
 
 #. The variable is the name of the source
-#: src/preferences.py:355
+#: src/preferences.py:356
 msgid "Select the {} configuration directory."
 msgstr "Wybierz katalog konfiguracyjny {}."
 
 #. The variable is the name of the source
-#: src/preferences.py:358
+#: src/preferences.py:359
 msgid "Select the {} data directory."
 msgstr "Wybierz katalog z danymi {}."
 
-#: src/preferences.py:364
+#: src/preferences.py:365
 msgid "Set Location"
 msgstr "Ustaw położenie"
 
