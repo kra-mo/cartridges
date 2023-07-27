@@ -97,6 +97,7 @@ class SubSourceIterable(Iterable):
         """Build a Game from a Heroic library entry"""
 
         app_name = entry["app_name"]
+        runner = entry["runner"]
 
         # Build game
         values = {
@@ -107,7 +108,7 @@ class SubSourceIterable(Iterable):
             "game_id": self.source.game_id_format.format(
                 service=self.service, game_id=app_name
             ),
-            "executable": self.source.executable_format.format(app_name=app_name),
+            "executable": self.source.executable_format.format(runner=runner, app_name=app_name),
             "hidden": self.source_iterable.is_hidden(app_name),
         }
         game = Game(values)
@@ -359,7 +360,7 @@ class HeroicSource(URLExecutableSource):
     source_id = "heroic"
     name = _("Heroic")
     iterable_class = HeroicSourceIterable
-    url_format = "heroic://launch/{app_name}"
+    url_format = "heroic://launch/{runner}/{app_name}"
     available_on = {"linux", "win32"}
 
     locations = HeroicLocations(
