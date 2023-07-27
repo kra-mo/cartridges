@@ -44,6 +44,14 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="2.1.1" date="2023-07-27">
+      <description translatable="no">
+        <ul>
+          <li>Fixes an issue with translations</li>
+          <li>Translations since 2.1</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.1" date="2023-07-25">
       <description translatable="no">
         <ul>
