@@ -167,6 +167,8 @@ class CoverManager(Manager):
         save_cover(game.game_id, resize_cover(pixbuf=cover))
 
     def main(self, game: Game, additional_data: dict) -> None:
+        if game.blacklisted:
+            return
         for key in (
             "local_image_path",
             "local_icon_path",
