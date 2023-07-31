@@ -18,12 +18,13 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import logging
 from pathlib import Path
-from typing import NamedTuple
+from typing import NamedTuple, Sequence
 
+import cairo
+from cairo import ImageSurface, Context, SurfacePattern
 import requests
-from gi.repository import GdkPixbuf, Gio
+from gi.repository import Gio, GdkPixbuf
 from PIL import Image
 from requests.exceptions import HTTPError, SSLError
 
@@ -34,9 +35,51 @@ from src.store.managers.steam_api_manager import SteamAPIManager
 from src.utils.save_cover import resize_cover, save_cover
 
 
+class UnsupportedGdkPixbufBitDepth(Exception):
+    """Error raised when a GdkPixbuf has an unsupported bit depth"""
+
+
+class UnsupportedGdkPixbufChannels(Exception):
+    """Error raised when a GdkPixbuf has an unexpected number of channels"""
+
+
+def swap_buffer_channels(buffer: bytearray, swap_destinations: Sequence[int]) -> None:
+    """
+    Swap in place the color channels in a bytearray.
+
+    For example, aRGB to RGBa
+    `self.swap_bytearray_channels(buffer, (3,0,1,2))
+
+    :param swaps: (source, target) swaps to perform
+    """
+    n_channels = len(swap_destinations)
+    n_pixels = int(len(buffer) / n_channels)
+    for pixel_index in range(n_pixels):
+        pixel_data_copy = bytearray(buffer[pixel_index : pixel_index + n_channels + 1])
+        for source_channel, destination_channel in enumerate(swap_destinations):
+            buffer[pixel_index + destination_channel] = pixel_data_copy[source_channel]
+
+
+def rotate_buffer_channels(
+    buffer: bytearray, n_channels: int = 4, shift: int = 1
+) -> None:
+    """
+    Rotate in place the color channels in a bytearray
+
+    :param buffer: buffer to edit in place
+    :param n_channels: number of 1 byte color channels
+    :param shift: number of places to shift. Use negative values to shift left.
+    """
+    swap_destinations = []
+    for source_channel in range(n_channels):
+        destination_channel = (source_channel + shift) % n_channels
+        swap_destinations.append(destination_channel)
+    swap_buffer_channels(buffer, swap_destinations)
+
+
 class ImageSize(NamedTuple):
-    width: float
-    height: float
+    width: float = 0
+    height: float = 0
 
     @property
     def aspect_ratio(self) -> float:
@@ -45,8 +88,93 @@ class ImageSize(NamedTuple):
     def __str__(self):
         return f"{self.width}x{self.height}"
 
-    def __mul__(self, scale: float) -> "ImageSize":
-        return ImageSize(self.width * scale, self.height * scale)
+    def __mul__(self, scale: float | int) -> "ImageSize":
+        return ImageSize(
+            self.width * scale,
+            self.height * scale,
+        )
+
+    def __truediv__(self, divisor: float | int) -> "ImageSize":
+        return self * (1 / divisor)
+
+    def __add__(self, other_size: "ImageSize") -> "ImageSize":
+        return ImageSize(
+            self.width + other_size.width,
+            self.height + other_size.height,
+        )
+
+    def __sub__(self, other_size: "ImageSize") -> "ImageSize":
+        return self + (other_size * -1)
+
+
+class ImageSurfaceBuilder:
+    """Utility class to build cairo ImageSurface-s"""
+
+    @property
+    def _supported_pixbuf_extensions(self) -> set[str]:
+        """
+        Get the list of image file extension supported by gdkpixbuf
+
+        Extensions are returned with a leading ".", even though
+        GdkPixbuf.PixbufFormat.extensions don't have it.
+        """
+        extensions = set()
+        for gdkpixbuf_format in GdkPixbuf.Pixbuf.get_formats():
+            for extension in gdkpixbuf_format.extensions:
+                extensions.add(f".{extension}")
+        return extensions
+
+    def _from_path_using_gdkpixbuf(self, path: Path) -> ImageSurface:
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(str(path))
+        buffer: bytes | bytearray
+        cairo_format: cairo.Format
+
+        # With alpha
+        if pixbuf.get_has_alpha():
+            # Pixbufs: RGBa | cairo's closest format: aRGB
+            # https://docs.gtk.org/gdk-pixbuf/class.Pixbuf.html#image-data
+            # https://www.cairographics.org/manual/cairo-Image-Surfaces.html#cairo-format-t
+            buffer = bytearray(pixbuf.get_pixels())
+            rotate_buffer_channels(buffer, 4, 1)
+            cairo_format = cairo.Format.ARGB32
+
+        # Without alpha
+        else:
+            buffer = pixbuf.get_pixels()
+            cairo_format = cairo.Format.RGB24
+
+        return ImageSurface.create_for_data(
+            buffer,
+            cairo_format,
+            pixbuf.get_width(),
+            pixbuf.get_height(),
+            pixbuf.get_rowstride(),
+        )
+
+    def _from_path_using_pil(self, path: Path):
+        with Image.open(path) as image:
+            if image.format != "RGBA":
+                if image.format == "RGB":
+                    image.putalpha(256)
+                else:
+                    image = image.convert(mode="RGBA")
+            buffer = bytearray(image.tobytes("raw", "RGBA"))
+            rotate_buffer_channels(buffer, 4, 1)
+            return cairo.ImageSurface.create_for_data(
+                buffer, cairo.Format.ARGB32, image.width, image.height
+            )
+
+    def from_path(self, path: Path) -> ImageSurface:
+        """
+        Get a cairo surface from an image path
+        using the most optimal method for the given file format
+        """
+        extension = path.suffix
+        if extension == ".png":
+            return ImageSurface.create_from_png(path)
+        if extension in self._supported_pixbuf_extensions:
+            return self._from_path_using_gdkpixbuf(path)
+        return self._from_path_using_pil(path)
 
 
 class CoverManager(Manager):
@@ -61,61 +189,6 @@ class CoverManager(Manager):
 
     run_after = (SteamAPIManager,)
     retryable_on = (HTTPError, SSLError, ConnectionError)
-
-    def save_composited_cover(
-        self, game: Game, path: Path, source_size: ImageSize, target_size: ImageSize
-    ) -> None:
-        """
-        Save the image composited with a background blur
-
-        Will scale the source image size as much as possible
-        while not overflowing the target size.
-        """
-
-        logging.debug(
-            "Compositing image for %s (%s) %s -> %s",
-            game.name,
-            game.game_id,
-            str(source_size),
-            str(target_size),
-        )
-
-        # Load game image
-        image = GdkPixbuf.Pixbuf.new_from_file(str(path))
-
-        # Create background blur of the size of the cover
-        cover = image.scale_simple(2, 2, GdkPixbuf.InterpType.BILINEAR).scale_simple(
-            target_size.width, target_size.height, GdkPixbuf.InterpType.BILINEAR
-        )
-
-        # Center the image above the blurred background
-        scale = min(
-            target_size.width / source_size.width,
-            target_size.height / source_size.height,
-        )
-        left_padding = (target_size.width - source_size.width * scale) / 2
-        top_padding = (target_size.height - source_size.height * scale) / 2
-        image.composite(
-            cover,
-            # Top left of overwritten area on the destination
-            left_padding,
-            top_padding,
-            # Size of the overwritten area on the destination
-            source_size.width * scale,
-            source_size.height * scale,
-            # Offset
-            left_padding,
-            top_padding,
-            # Scale to apply to the resized image
-            scale,
-            scale,
-            # Compositing stuff
-            GdkPixbuf.InterpType.BILINEAR,
-            255,
-        )
-
-        # Resize and save the cover
-        save_cover(game.game_id, resize_cover(pixbuf=cover))
 
     def download_image(self, url: str) -> Path:
         image_file = Gio.File.new_tmp()[0]
@@ -138,26 +211,100 @@ class CoverManager(Manager):
         stretch = 1 - (resized_height / cover_size.height)
         return stretch <= max_stretch
 
+    def save_composited_cover(
+        self,
+        game: Game,
+        image_path: Path,
+        scale: float = 1,
+        blur_size: ImageSize = ImageSize(2, 2),
+    ) -> None:
+        """
+        Save the image composited with a background blur.
+
+        1. Downscale the image to the blur size
+        2. Fill the cover by stretching the downscaled image
+        3. Scale the original image to be as big as possible with no overflow
+        4. Scale it to the (optional) specified factor
+        5. Center the image on the cover, above the blur
+        6. Save the cover
+
+        :param game: The game to save the cover for
+        :param path: Path where the source image is located
+        :param scale:
+            Scale of the smalled image side
+            compared to the corresponding side in the cover
+        :param blur_size: Size of the downscaled image used for the blur
+        """
+
+        # Create the cover surface
+        cover_size = ImageSize._make(shared.image_size)
+        cover = ImageSurface(cairo.Format.ARGB32, *cover_size)
+        cover_ctx = Context(cover)
+
+        # Load source image
+        source_surface = ImageSurfaceBuilder().from_path(image_path)
+        source_size = ImageSize(source_surface.get_width(), source_surface.get_height())
+        source_pattern = SurfacePattern(source_surface)
+        source_pattern.set_filter(cairo.Filter.BILINEAR)
+
+        # Create a small color grid from the source image
+        blur = ImageSurface(cairo.Format.ARGB32, *blur_size)
+        Context(blur).set_source(source_pattern).rectangle(0, 0, *blur_size).fill()
+
+        # Stretch the color grid to create a blurred cover background
+        blur_pattern = SurfacePattern(blur)
+        blur_pattern.set_filter(cairo.Filter.BILINEAR)
+        cover_ctx.rectangle(0, 0, *cover_size)
+        cover_ctx.set_source(blur_pattern)
+        cover_ctx.fill()
+
+        # Compute image scale
+        fit_scale = min(
+            cover_dimension / source_dimension
+            for cover_dimension, source_dimension in zip(cover_size, source_size)
+        )
+        scaled_size = source_size * fit_scale * scale
+        padding = cover_size - scaled_size / 2
+
+        # Apply scale and center in the cover
+        cover_ctx.rectangle(*padding, *scaled_size)
+        cover_ctx.set_source(source_pattern)
+        cover_ctx.fill()
+
+        # Save cover
+        cover_path = Path(Gio.File.new_tmp("XXXXXX.png")[0].get_path())
+        cover.write_to_png(cover_path)
+        save_cover(game.game_id, resize_cover(cover_path))
+
     def main(self, game: Game, additional_data: dict) -> None:
-        for key in ("local_image_path", "local_icon_path", "online_cover_url"):
+        for key in (
+            "local_image_path",
+            "local_icon_path",
+            "online_cover_url",
+        ):
             # Get an image path
             if not (value := additional_data.get(key)):
                 continue
             if key == "online_cover_url":
-                path = self.download_image(value)
+                image_path = self.download_image(value)
             else:
-                path = Path(value)
-            if not path.is_file():
+                image_path = Path(value)
+            if not image_path.is_file():
                 continue
 
-            # Save the cover with the necessary compositing
-            cover_size = ImageSize._make(shared.image_size)
+            # Icon cover
             if key == "local_icon_path":
-                target_size = cover_size * 0.7
-                self.save_composited_cover(game, path, target_size, target_size)
+                self.save_composited_cover(
+                    game, image_path, scale=0.7, blur_size=ImageSize(1, 2)
+                )
                 return
-            source_size = self.get_image_size(path)
+
+            # Stretchable cover with no compositing
+            source_size = self.get_image_size(image_path)
+            cover_size = ImageSize._make(shared.image_size)
             if self.is_stretchable(source_size, cover_size):
-                save_cover(game.game_id, resize_cover(path))
+                save_cover(game.game_id, resize_cover(image_path))
                 return
-            self.save_composited_cover(game, path, source_size, cover_size)
+
+            # Other covers, composite with a background blur
+            self.save_composited_cover(game, image_path)
