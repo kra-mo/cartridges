@@ -50,7 +50,7 @@ class Manager(ErrorProducer):
         return type(self).__name__
 
     @abstractmethod
-    def manager_logic(self, game: Game, additional_data: dict) -> None:
+    def main(self, game: Game, additional_data: dict) -> None:
         """
         Manager specific logic triggered by the run method
         * Implemented by final child classes
@@ -59,7 +59,7 @@ class Manager(ErrorProducer):
         * May raise other exceptions that will be reported
         """
 
-    def execute_resilient_manager_logic(self, game: Game, additional_data: dict):
+    def run(self, game: Game, additional_data: dict):
         """Handle errors (retry, ignore or raise) that occur in the manager logic"""
 
         # Keep track of the number of tries
@@ -106,7 +106,7 @@ class Manager(ErrorProducer):
 
         def try_manager_logic():
             try:
-                self.manager_logic(game, additional_data)
+                self.main(game, additional_data)
             except Exception as error:  # pylint: disable=broad-exception-caught
                 handle_error(error)
 
@@ -116,5 +116,5 @@ class Manager(ErrorProducer):
         self, game: Game, additional_data: dict, callback: Callable[["Manager"], Any]
     ) -> None:
         """Pass the game through the manager"""
-        self.execute_resilient_manager_logic(game, additional_data)
+        self.run(game, additional_data)
         callback(self)
