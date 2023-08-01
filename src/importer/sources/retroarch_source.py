@@ -139,7 +139,7 @@ class RetroarchLocations(NamedTuple):
 class RetroarchSource(Source):
     name = _("RetroArch")
     source_id = "retroarch"
-    available_on = {"linux", "windows"}
+    available_on = {"linux", "win32"}
     iterable_class = RetroarchSourceIterable
 
     locations = RetroarchLocations(
