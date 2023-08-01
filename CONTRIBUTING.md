@@ -1,7 +1,14 @@
 # Contributing
 
 ## Code
-Fork the repository, make your changes, then create a pull request.
+
+Be sure to follow the [code style](#code-style) of the project.
+
+### Adding a feature
+[Create an issue](https://github.com/kra-mo/cartridges/issues/new) or join the [Discord](https://discord.gg/4KSFh3AmQR)/[Matrix](https://matrix.to/#/#cartridges:matrix.org) to discuss it with the maintainers. We will provide additional guidance.
+
+### Fixing a bug
+Fork the repository, make your changes, then create a pull request. Be sure to mention the GitHub issue you're fixing if one was already open.
 
 ## Translations
 ### Weblate
@@ -17,7 +24,7 @@ The project can be translated on [Weblate](https://hosted.weblate.org/engage/car
 # Building
 
 ## GNOME Builder
-1. Install [GNOME Builder](https://flathub.org/apps/details/org.gnome.Builder).
+1. Install [GNOME Builder](https://flathub.org/apps/org.gnome.Builder).
 2. Click "Clone Repository" with `https://github.com/kra-mo/cartridges.git` as the URL.
 3. Click on the build button (hammer) at the top.
 
@@ -33,3 +40,23 @@ cd cartridges
 meson setup build
 ninja -C build install
 ```
+
+# Code style
+
+All code is auto-formatted with [Black](https://github.com/psf/black) and linted with [Pylint](https://github.com/pylint-dev/pylint). Imports are sorted by [isort](https://github.com/pycqa/isort).
+
+VSCode extensions are available for all of these and you can set them up with the following `settings.json` configuration:
+
+```json
+"python.formatting.provider": "none",
+"[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+},
+"isort.args":["--profile", "black"],
+```
+
+For other code editors, you can install them via `pip` and invoke them via the command line.

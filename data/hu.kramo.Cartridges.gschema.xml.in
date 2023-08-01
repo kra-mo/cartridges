@@ -43,6 +43,9 @@
     <key name="heroic-import-gog" type="b">
       <default>true</default>
     </key>
+    <key name="heroic-import-amazon" type="b">
+      <default>true</default>
+    </key>
     <key name="heroic-import-sideload" type="b">
       <default>true</default>
     </key>

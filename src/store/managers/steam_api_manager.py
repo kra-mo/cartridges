@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from requests.exceptions import HTTPError, SSLError
+from urllib3.exceptions import ConnectionError as Urllib3ConnectionError
 
 from src.game import Game
 from src.store.managers.async_manager import AsyncManager
@@ -32,7 +33,7 @@ from src.utils.steam import (
 class SteamAPIManager(AsyncManager):
     """Manager in charge of completing a game's data from the Steam API"""
 
-    retryable_on = (HTTPError, SSLError, ConnectionError)
+    retryable_on = (HTTPError, SSLError, Urllib3ConnectionError)
 
     steam_api_helper: SteamAPIHelper = None
     steam_rate_limiter: SteamRateLimiter = None
@@ -42,7 +43,7 @@ class SteamAPIManager(AsyncManager):
         self.steam_rate_limiter = SteamRateLimiter()
         self.steam_api_helper = SteamAPIHelper(self.steam_rate_limiter)
 
-    def manager_logic(self, game: Game, additional_data: dict) -> None:
+    def main(self, game: Game, additional_data: dict) -> None:
         # Skip non-steam games
         appid = additional_data.get("steam_appid", None)
         if appid is None:

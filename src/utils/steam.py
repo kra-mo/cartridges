@@ -142,8 +142,7 @@ class SteamAPIHelper:
             raise SteamGameNotFoundError()
 
         # Handle appid is not a game
-        game_types = ("game", "demo")
-        if data["data"]["type"] not in game_types:
+        if data["data"]["type"] not in {"game", "demo", "mod"}:
             logging.debug("Appid %s is not a game", appid)
             raise SteamNotAGameError()
 

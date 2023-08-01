@@ -20,22 +20,19 @@
 from shutil import rmtree
 from sqlite3 import connect
 from time import time
+from typing import NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
-from src.importer.sources.source import (
-    SourceIterationResult,
-    SourceIterator,
-    URLExecutableSource,
-)
+from src.importer.sources.location import Location, LocationSubPath
+from src.importer.sources.source import SourceIterable, URLExecutableSource
 from src.utils.sqlite import copy_db
 
 
-class LutrisSourceIterator(SourceIterator):
+class LutrisSourceIterable(SourceIterable):
     source: "LutrisSource"
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
 
         # Query the database
@@ -55,7 +52,7 @@ class LutrisSourceIterator(SourceIterator):
             "import_steam": shared.schema.get_boolean("lutris-import-steam"),
             "import_flatpak": shared.schema.get_boolean("lutris-import-flatpak"),
         }
-        db_path = copy_db(self.source.data_location["pga.db"])
+        db_path = copy_db(self.source.locations.config["pga.db"])
         connection = connect(db_path)
         cursor = connection.execute(request, params)
 
@@ -68,7 +65,7 @@ class LutrisSourceIterator(SourceIterator):
                 "added": added_time,
                 "hidden": row[4],
                 "name": row[1],
-                "source": f"{self.source.id}_{row[3]}",
+                "source": f"{self.source.source_id}_{row[3]}",
                 "game_id": self.source.game_id_format.format(
                     runner=row[3], game_id=row[0]
                 ),
@@ -77,7 +74,7 @@ class LutrisSourceIterator(SourceIterator):
             game = Game(values)
 
             # Get official image path
-            image_path = self.source.cache_location["coverart"] / f"{row[2]}.jpg"
+            image_path = self.source.locations.cache["coverart"] / f"{row[2]}.jpg"
             additional_data = {"local_image_path": image_path}
 
             # Produce game
@@ -87,40 +84,49 @@ class LutrisSourceIterator(SourceIterator):
         rmtree(str(db_path.parent))
 
 
+class LutrisLocations(NamedTuple):
+    config: Location
+    cache: Location
+
+
 class LutrisSource(URLExecutableSource):
     """Generic Lutris source"""
 
+    source_id = "lutris"
     name = _("Lutris")
-    iterator_class = LutrisSourceIterator
+    iterable_class = LutrisSourceIterable
     url_format = "lutris:rungameid/{game_id}"
     available_on = {"linux"}
 
-    # FIXME possible bug: location picks ~/.var... and cache_lcoation picks ~/.local...
+    # FIXME possible bug: config picks ~/.var... and cache picks ~/.local...
 
-    data_location = Location(
-        schema_key="lutris-location",
-        candidates=(
-            shared.flatpak_dir / "net.lutris.Lutris" / "data" / "lutris",
-            shared.data_dir / "lutris",
-            shared.home / ".local" / "share" / "lutris",
+    locations = LutrisLocations(
+        Location(
+            schema_key="lutris-location",
+            candidates=(
+                shared.flatpak_dir / "net.lutris.Lutris" / "data" / "lutris",
+                shared.data_dir / "lutris",
+                shared.home / ".local" / "share" / "lutris",
+            ),
+            paths={
+                "pga.db": LocationSubPath("pga.db"),
+            },
+            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
         ),
-        paths={
-            "pga.db": (False, "pga.db"),
-        },
-    )
-
-    cache_location = Location(
-        schema_key="lutris-cache-location",
-        candidates=(
-            shared.flatpak_dir / "net.lutris.Lutris" / "cache" / "lutris",
-            shared.cache_dir / "lutris",
-            shared.home / ".cache" / "lutris",
+        Location(
+            schema_key="lutris-cache-location",
+            candidates=(
+                shared.flatpak_dir / "net.lutris.Lutris" / "cache" / "lutris",
+                shared.cache_dir / "lutris",
+                shared.home / ".cache" / "lutris",
+            ),
+            paths={
+                "coverart": LocationSubPath("coverart", True),
+            },
+            invalid_subtitle=Location.CACHE_INVALID_SUBTITLE,
         ),
-        paths={
-            "coverart": (True, "coverart"),
-        },
     )
 
     @property
     def game_id_format(self):
-        return self.id + "_{runner}_{game_id}"
+        return self.source_id + "_{runner}_{game_id}"
