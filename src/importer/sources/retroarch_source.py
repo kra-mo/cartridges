@@ -24,16 +24,21 @@ from hashlib import md5
 from json import JSONDecodeError
 from pathlib import Path
 from time import time
+from typing import NamedTuple
 
 from src import shared
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
-from src.importer.sources.location import Location, UnresolvableLocationError
-from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
+from src.importer.sources.location import (
+    Location,
+    LocationSubPath,
+    UnresolvableLocationError,
+)
+from src.importer.sources.source import Source, SourceIterable
 from src.importer.sources.steam_source import SteamSource
 
 
-class RetroarchSourceIterator(SourceIterator):
+class RetroarchSourceIterable(SourceIterable):
     source: "RetroarchSource"
 
     def get_config_value(self, key: str, config_data: str):
@@ -43,11 +48,11 @@ class RetroarchSourceIterator(SourceIterator):
 
         raise KeyError(f"Key not found in RetroArch config: {key}")
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         added_time = int(time())
         bad_playlists = set()
 
-        config_file = self.source.config_location["config"]
+        config_file = self.source.locations.config["retroarch.cfg"]
         with config_file.open(encoding="utf-8") as open_file:
             config_data = open_file.read()
 
@@ -91,7 +96,7 @@ class RetroarchSourceIterator(SourceIterator):
                 game_id = md5(item["path"].encode("utf-8")).hexdigest()
 
                 values = {
-                    "source": self.source.id,
+                    "source": self.source.source_id,
                     "added": added_time,
                     "name": item["label"],
                     "game_id": self.source.game_id_format.format(game_id=game_id),
@@ -127,33 +132,41 @@ class RetroarchSourceIterator(SourceIterator):
             )
 
 
+class RetroarchLocations(NamedTuple):
+    config: Location
+
+
 class RetroarchSource(Source):
     name = _("RetroArch")
+    source_id = "retroarch"
     available_on = {"linux", "windows"}
-    iterator_class = RetroarchSourceIterator
+    iterable_class = RetroarchSourceIterable
 
-    config_location = Location(
-        schema_key="retroarch-location",
-        candidates=[
-            shared.flatpak_dir / "org.libretro.RetroArch" / "config" / "retroarch",
-            shared.config_dir / "retroarch",
-            shared.home / ".config" / "retroarch",
-            Path("C:\\RetroArch-Win64"),
-            Path("C:\\RetroArch-Win32"),
-            shared.local_appdata_dir
-            / "Packages"
-            / "1e4cf179-f3c2-404f-b9f3-cb2070a5aad8_8ngdn9a6dx1ma"
-            / "LocalState",
-        ],
-        paths={
-            "config": (False, "retroarch.cfg"),
-        },
+    locations = RetroarchLocations(
+        Location(
+            schema_key="retroarch-location",
+            candidates=[
+                shared.flatpak_dir / "org.libretro.RetroArch" / "config" / "retroarch",
+                shared.config_dir / "retroarch",
+                shared.home / ".config" / "retroarch",
+                Path("C:\\RetroArch-Win64"),
+                Path("C:\\RetroArch-Win32"),
+                shared.local_appdata_dir
+                / "Packages"
+                / "1e4cf179-f3c2-404f-b9f3-cb2070a5aad8_8ngdn9a6dx1ma"
+                / "LocalState",
+            ],
+            paths={
+                "retroarch.cfg": LocationSubPath("retroarch.cfg"),
+            },
+            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+        )
     )
 
     @property
     def executable_format(self):
-        self.config_location.resolve()
-        is_flatpak = self.config_location.root.is_relative_to(shared.flatpak_dir)
+        self.locations.config.resolve()
+        is_flatpak = self.locations.config.root.is_relative_to(shared.flatpak_dir)
         base = "flatpak run org.libretro.RetroArch" if is_flatpak else "retroarch"
         args = '-L "{core_path}" "{rom_path}"'
         return f"{base} {args}"
@@ -162,13 +175,13 @@ class RetroarchSource(Source):
         super().__init__()
 
         try:
-            self.config_location.candidates.append(self.get_steam_location())
+            self.locations.config.candidates.append(self.get_steam_location())
         except (OSError, KeyError, UnresolvableLocationError):
             pass
 
     def get_steam_location(self) -> str:
         # Find steam location
-        libraryfolders = SteamSource().data_location["libraryfolders.vdf"]
+        libraryfolders = SteamSource().locations.data["libraryfolders.vdf"]
         library_path = ""
 
         with open(libraryfolders, "r", encoding="utf-8") as open_file:
