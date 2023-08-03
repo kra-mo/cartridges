@@ -43,6 +43,9 @@ class RetroarchSourceIterable(SourceIterable):
 
     def get_config_value(self, key: str, config_data: str):
         for item in re.findall(f'{key}\\s*=\\s*"(.*)"\n', config_data, re.IGNORECASE):
+            if item.startswith(":"):
+                item = item.replace(":", str(self.source.locations.config.root))
+
             logging.debug(str(item))
             return item
 
@@ -139,7 +142,7 @@ class RetroarchLocations(NamedTuple):
 class RetroarchSource(Source):
     name = _("RetroArch")
     source_id = "retroarch"
-    available_on = {"linux", "win32"}
+    available_on = {"linux"}
     iterable_class = RetroarchSourceIterable
 
     locations = RetroarchLocations(
@@ -149,12 +152,14 @@ class RetroarchSource(Source):
                 shared.flatpak_dir / "org.libretro.RetroArch" / "config" / "retroarch",
                 shared.config_dir / "retroarch",
                 shared.home / ".config" / "retroarch",
-                Path("C:\\RetroArch-Win64"),
-                Path("C:\\RetroArch-Win32"),
-                shared.local_appdata_dir
-                / "Packages"
-                / "1e4cf179-f3c2-404f-b9f3-cb2070a5aad8_8ngdn9a6dx1ma"
-                / "LocalState",
+                # TODO: Windows support, waiting for executable path setting improvement
+                # Path("C:\\RetroArch-Win64"),
+                # Path("C:\\RetroArch-Win32"),
+                # TODO: UWP support (URL handler - https://github.com/libretro/RetroArch/pull/13563)
+                # shared.local_appdata_dir
+                # / "Packages"
+                # / "1e4cf179-f3c2-404f-b9f3-cb2070a5aad8_8ngdn9a6dx1ma"
+                # / "LocalState",
             ],
             paths={
                 "retroarch.cfg": LocationSubPath("retroarch.cfg"),
@@ -182,18 +187,20 @@ class RetroarchSource(Source):
     def get_steam_location(self) -> str:
         # Find steam location
         libraryfolders = SteamSource().locations.data["libraryfolders.vdf"]
-        library_path = ""
-
+        parse_apps = False
         with open(libraryfolders, "r", encoding="utf-8") as open_file:
+            # Search each line for a library path and store it each time a new one is found.
             for line in open_file:
                 if '"path"' in line:
                     library_path = re.findall(
                         '"path"\\s+"(.*)"\n', line, re.IGNORECASE
                     )[0]
-                elif "1118310" in line:
-                    break
-
-        if library_path:
-            return Path(f"{library_path}/steamapps/common/RetroArch")
-
-        raise ValueError("No Steam RetroArch installed.")
+                elif '"apps"' in line:
+                    parse_apps = True
+                elif parse_apps and "}" in line:
+                    parse_apps = False
+                # Stop searching, as the library path directly above the appid has been found.
+                elif parse_apps and '"1118310"' in line:
+                    return Path(f"{library_path}/steamapps/common/RetroArch")
+            else:
+                logging.debug("Steam RetroArch not installed.")
