@@ -19,25 +19,26 @@
 
 from pathlib import Path
 from time import time
+from typing import NamedTuple
 
 from gi.repository import GLib, Gtk
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
-from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
+from src.importer.sources.location import Location, LocationSubPath
+from src.importer.sources.source import Source, SourceIterable
 
 
-class FlatpakSourceIterator(SourceIterator):
+class FlatpakSourceIterable(SourceIterable):
     source: "FlatpakSource"
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
 
         added_time = int(time())
 
         icon_theme = Gtk.IconTheme.new()
-        icon_theme.add_search_path(str(self.source.data_location["icons"]))
+        icon_theme.add_search_path(str(self.source.locations.data["icons"]))
 
         blacklist = (
             {"hu.kramo.Cartridges", "hu.kramo.Cartridges.Devel"}
@@ -53,7 +54,7 @@ class FlatpakSourceIterator(SourceIterator):
             }
         )
 
-        for entry in (self.source.data_location["applications"]).iterdir():
+        for entry in (self.source.locations.data["applications"]).iterdir():
             if entry.suffix != ".desktop":
                 continue
 
@@ -76,7 +77,7 @@ class FlatpakSourceIterator(SourceIterator):
                 continue
 
             values = {
-                "source": self.source.id,
+                "source": self.source.source_id,
                 "added": added_time,
                 "name": name,
                 "game_id": self.source.game_id_format.format(game_id=flatpak_id),
@@ -111,22 +112,30 @@ class FlatpakSourceIterator(SourceIterator):
             yield (game, additional_data)
 
 
+class FlatpakLocations(NamedTuple):
+    data: Location
+
+
 class FlatpakSource(Source):
     """Generic Flatpak source"""
 
+    source_id = "flatpak"
     name = _("Flatpak")
-    iterator_class = FlatpakSourceIterator
+    iterable_class = FlatpakSourceIterable
     executable_format = "flatpak run {flatpak_id}"
     available_on = {"linux"}
 
-    data_location = Location(
-        schema_key="flatpak-location",
-        candidates=(
-            "/var/lib/flatpak/",
-            shared.data_dir / "flatpak",
-        ),
-        paths={
-            "applications": (True, "exports/share/applications"),
-            "icons": (True, "exports/share/icons"),
-        },
+    locations = FlatpakLocations(
+        Location(
+            schema_key="flatpak-location",
+            candidates=(
+                "/var/lib/flatpak/",
+                shared.data_dir / "flatpak",
+            ),
+            paths={
+                "applications": LocationSubPath("exports/share/applications", True),
+                "icons": LocationSubPath("exports/share/icons", True),
+            },
+            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+        )
     )

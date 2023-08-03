@@ -1,232 +1,222 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the cartridges package.
-# LINUX-SAUNA <linuxsauna@protonmail.com>, 2023.
-# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023.
-# Kopimi <tatuus@tutanota.com>, 2023.
-# Jiri Grönroos <jiri.gronroos@iki.fi>, 2023.
-# kramo <contact@kramo.hu>, 2023.
+# Copyright (C) YEAR kramo
+# This file is distributed under the same license as the Cartridges package.
+# foo expert <deferred_water346@simplelogin.com>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: cartridges\n"
+"Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-25 20:33+0200\n"
-"PO-Revision-Date: 2023-05-07 15:38+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
-"cartridges/fi/>\n"
-"Language: fi\n"
+"PO-Revision-Date: 2023-07-24 13:05+0000\n"
+"Last-Translator: foo expert <deferred_water346@simplelogin.com>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/cartridges/"
+"cartridges/cs/>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
 #: src/main.py:170
 msgid "Cartridges"
-msgstr "Cartridges"
+msgstr "Kazety"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr "Pelin käynnistin"
+msgstr "Spouštěč her"
 
 #: data/hu.kramo.Cartridges.desktop.in:5
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
-msgstr "Käynnistä kaikki pelisi"
+msgstr "Spusťte všechny vaše hry"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
+#, fuzzy
+#| msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
 msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;"
-msgstr ""
+msgstr "hraní;spouštěč;steam;lutris;heroic;láhve;itch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
-#, fuzzy
-#| msgid ""
-#| "Cartridges is a simple game launcher. It has support for importing your "
-#| "games from Steam, Heroic and Bottles with organizational features such as "
-#| "hiding and sorting by date added or last played."
 msgid ""
 "Cartridges is a simple game launcher for all of your games. It has support "
 "for importing games from Steam, Lutris, Heroic and more with no login "
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Cartridges on helppo pelikäynnistin. Se tukee pelien tuontia Steamista, "
-"Heroicista ja Bottlesista ja tarjoaa ominaisuuden järjestelyyn, kuten "
-"piilottamisen ja lajittelun lisäyspäivämäärän tai viimeisimmän pelatun pelin "
-"mukaan."
+"Kazety jsou jednoduchý spouštěč pro všechny vaše hry. Podporuje importovaní "
+"her ze služeb Steam, Lutris, Heroic a dalších bez nutnosti přihlášení. Hry "
+"můžete třídit a skrývat nebo stahovat obálky ze služby SteamGridDB."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:30
 msgid "Library"
-msgstr "Kirjasto"
+msgstr "Knihovna"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:67
 msgid "Edit Game Details"
-msgstr "Muokkaa pelin tietoja"
+msgstr "Upravit podrobnosti o hře"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:71
 msgid "Game Details"
-msgstr "Pelin tiedot"
+msgstr "Podrobnosti o hře"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:416
 #: src/details_window.py:241
 msgid "Preferences"
-msgstr "Asetukset"
+msgstr "Předvolby"
 
 #: data/gtk/details-window.blp:25
 msgid "Cancel"
-msgstr "Peru"
+msgstr "Zrušit"
 
 #: data/gtk/details-window.blp:57
 msgid "New Cover"
-msgstr ""
+msgstr "Nový obal"
 
 #: data/gtk/details-window.blp:75
 msgid "Delete Cover"
-msgstr ""
+msgstr "Odstranit obal"
 
 #: data/gtk/details-window.blp:101 data/gtk/details-window.blp:106
 #: data/gtk/game.blp:80
 msgid "Title"
-msgstr "Nimi"
+msgstr "Název"
 
 #: data/gtk/details-window.blp:102
 msgid "The title of the game"
-msgstr "Pelin nimi"
+msgstr "Název hry"
 
 #: data/gtk/details-window.blp:112 data/gtk/details-window.blp:117
 msgid "Developer"
-msgstr "Kehittäjä"
+msgstr "Vývojář"
 
 #: data/gtk/details-window.blp:113
 msgid "The developer or publisher (optional)"
-msgstr "Kehittäjä tai julkaisija (valinnainen)"
+msgstr "Vývojář nebo vydavatel (nepovinné)"
 
 #: data/gtk/details-window.blp:123 data/gtk/details-window.blp:155
 msgid "Executable"
-msgstr "Suoritettava"
+msgstr "Spustitelný soubor"
 
 #: data/gtk/details-window.blp:124
 msgid "File to open or command to run when launching the game"
-msgstr ""
-"Tiedosto, joka avataan tai komento, joka ajetaan pelin käynnistämisen "
-"yhteydessä"
+msgstr "Soubor nebo příkaz pro spuštění hry"
 
 #: data/gtk/details-window.blp:130
 msgid "More Info"
-msgstr ""
+msgstr "Více informací"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:195
 msgid "Edit"
-msgstr "Muokkaa"
+msgstr "Upravit"
 
 #: data/gtk/game.blp:107 src/window.py:171
 msgid "Hide"
-msgstr "Piilota"
+msgstr "Skrýt"
 
 #: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:56
 #: data/gtk/window.blp:209
 msgid "Remove"
-msgstr "Poista"
+msgstr "Odstranit"
 
 #: data/gtk/game.blp:126 src/window.py:173
 msgid "Unhide"
-msgstr "Näytä"
+msgstr "Odkrýt"
 
 #: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
-msgstr "Yleistä"
+msgstr "Obecné"
 
 #: data/gtk/help-overlay.blp:14
 msgid "Quit"
-msgstr "Lopeta"
+msgstr "Ukončit"
 
 #: data/gtk/help-overlay.blp:19 data/gtk/window.blp:217 data/gtk/window.blp:257
 #: data/gtk/window.blp:323
 msgid "Search"
-msgstr "Etsi"
+msgstr "Vyhledávání"
 
 #: data/gtk/help-overlay.blp:24
 msgid "Show preferences"
-msgstr "Näytä asetukset"
+msgstr "Zobrazit předvolby"
 
 #: data/gtk/help-overlay.blp:29
 msgid "Shortcuts"
-msgstr "Pikanäppäimet"
+msgstr "Zkratky"
 
 #: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:113
 msgid "Undo"
-msgstr "Kumoa"
+msgstr "Zpět"
 
 #: data/gtk/help-overlay.blp:39
 msgid "Open menu"
-msgstr "Avaa valikko"
+msgstr "Otevřít nabídku"
 
 #: data/gtk/help-overlay.blp:45
 msgid "Games"
-msgstr "Pelit"
+msgstr "Hry"
 
 #: data/gtk/help-overlay.blp:48
 msgid "Add new game"
-msgstr "Lisää uusi peli"
+msgstr "Přidat novou hru"
 
 #: data/gtk/help-overlay.blp:53
 msgid "Import games"
-msgstr "Tuo pelejä"
+msgstr "Importovat hry"
 
 #: data/gtk/help-overlay.blp:58
 msgid "Show hidden games"
-msgstr "Näytä piilotetut pelit"
+msgstr "Zobrazit skryté hry"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Remove game"
-msgstr "Poista peli"
+msgstr "Odstranit hru"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:277
 msgid "Behavior"
-msgstr "Toiminta"
+msgstr "Chování"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
-msgstr "Poistuminen pelin käynnistämisen jälkeen"
+msgstr "Ukončit po spuštění her"
 
 #: data/gtk/preferences.blp:25
 msgid "Cover Image Launches Game"
-msgstr "Kansikuva käynnistää pelin"
+msgstr "Obrázek na obálce spouští hru"
 
 #: data/gtk/preferences.blp:26
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr ""
+msgstr "Vymění chování obrázku na obálce a tlačítka pro přehrávání"
 
 #: data/gtk/preferences.blp:36 src/details_window.py:81
 msgid "Images"
-msgstr "Kuvat"
+msgstr "Obrázky"
 
 #: data/gtk/preferences.blp:39
 msgid "High Quality Images"
-msgstr "Korkealaatuiset kuvat"
+msgstr "Vysoce kvalitní obrázky"
 
 #: data/gtk/preferences.blp:40
 msgid "Save game covers losslessly at the cost of storage"
-msgstr "Tallenna pelien kansikuvat häviöttömästi tallennustilan kustannuksella"
+msgstr "Ukládat obaly her bezztrátově na úkor většího místa na disku"
 
 #: data/gtk/preferences.blp:50
 msgid "Danger Zone"
-msgstr "Vaaravyöhyke"
+msgstr "Nebezpečná zóna"
 
 #: data/gtk/preferences.blp:53
 msgid "Remove All Games"
-msgstr "Poista kaikki pelit"
+msgstr "Odstranit všechny hry"
 
 #: data/gtk/preferences.blp:85 data/gtk/window.blp:27 data/gtk/window.blp:442
 msgid "Import"
-msgstr "Tuo"
+msgstr "Import"
 
 #: data/gtk/preferences.blp:89
 msgid "Sources"
-msgstr "Lähteet"
+msgstr "Zdroje"
 
 #: data/gtk/preferences.blp:92
 msgid "Steam"
@@ -236,30 +226,24 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:151 data/gtk/preferences.blp:201
 #: data/gtk/preferences.blp:215 data/gtk/preferences.blp:229
 #: data/gtk/preferences.blp:243
-#, fuzzy
-#| msgid "itch Install Location"
 msgid "Install Location"
-msgstr "itch-asennuksen sijainti"
+msgstr "Umístění instalace"
 
 #: data/gtk/preferences.blp:106
 msgid "Lutris"
 msgstr "Lutris"
 
 #: data/gtk/preferences.blp:119
-#, fuzzy
-#| msgid "Lutris Cache Location"
 msgid "Cache Location"
-msgstr "Lutris-välimuistin sijainti"
+msgstr "Umístění dočasných souborů"
 
 #: data/gtk/preferences.blp:128
 msgid "Import Steam Games"
-msgstr "Tuo Steam-pelejä"
+msgstr "Importovat Steam hry"
 
 #: data/gtk/preferences.blp:137
-#, fuzzy
-#| msgid "Import Steam Games"
 msgid "Import Flatpak Games"
-msgstr "Tuo Steam-pelejä"
+msgstr "Importovat Flatpak hry"
 
 #: data/gtk/preferences.blp:147
 msgid "Heroic"
@@ -267,43 +251,41 @@ msgstr "Heroic"
 
 #: data/gtk/preferences.blp:160
 msgid "Import Epic Games"
-msgstr "Tuo Epic-pelejä"
+msgstr "Importovat Epic Games hry"
 
 #: data/gtk/preferences.blp:169
 msgid "Import GOG Games"
-msgstr "Tuo GOG-pelejä"
+msgstr "Importovat GOG hry"
 
 #: data/gtk/preferences.blp:178
 #, fuzzy
 #| msgid "Import Steam Games"
 msgid "Import Amazon Games"
-msgstr "Tuo Steam-pelejä"
+msgstr "Importovat Steam hry"
 
 #: data/gtk/preferences.blp:187
 msgid "Import Sideloaded Games"
-msgstr "Tuo Sideload-pelejä"
+msgstr "Importovat ručně načtené hry"
 
 #: data/gtk/preferences.blp:197
 msgid "Bottles"
-msgstr "Pullot"
+msgstr "Láhve"
 
 #: data/gtk/preferences.blp:211
 msgid "itch"
-msgstr ""
+msgstr "itch"
 
 #: data/gtk/preferences.blp:225
 msgid "Legendary"
-msgstr ""
+msgstr "Legendary"
 
 #: data/gtk/preferences.blp:239
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: data/gtk/preferences.blp:252
-#, fuzzy
-#| msgid "Game Launcher"
 msgid "Import Game Launchers"
-msgstr "Pelin käynnistin"
+msgstr "Importovat spouštěče her"
 
 #: data/gtk/preferences.blp:265
 msgid "SteamGridDB"
@@ -311,162 +293,162 @@ msgstr "SteamGridDB"
 
 #: data/gtk/preferences.blp:269
 msgid "Authentication"
-msgstr "Tunnistautuminen"
+msgstr "Ověření"
 
 #: data/gtk/preferences.blp:272
 msgid "API Key"
-msgstr "API-avain"
+msgstr "Klíč API"
 
 #: data/gtk/preferences.blp:280
 msgid "Use SteamGridDB"
-msgstr "Käytä SteamGridDB:tä"
+msgstr "Používat SteamGridDB"
 
 #: data/gtk/preferences.blp:281
 msgid "Download images when adding or importing games"
-msgstr "Lataa kuvat pelejä lisätessä tai tuotaessa"
+msgstr "Stahovat obrázky při přidávání nebo importování her"
 
 #: data/gtk/preferences.blp:290
 msgid "Prefer Over Official Images"
-msgstr "Suosi virallisten kuvien sijaan"
+msgstr "Upřednostnit před oficiálními obrázky"
 
 #: data/gtk/preferences.blp:299
 msgid "Prefer Animated Images"
-msgstr "Suosi animoituja kuvia"
+msgstr "Upřednostnit animované obrázky"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
-msgstr "Pelejä ei löydetty"
+msgstr "Nebyly nalezeny žádné hry"
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
 msgid "Try a different search."
-msgstr "Kokeile eri hakua."
+msgstr "Zkuste hledat něco jiného."
 
 #: data/gtk/window.blp:21
 msgid "No Games"
-msgstr "Ei pelejä"
+msgstr "Žádné hry"
 
 #: data/gtk/window.blp:22
 msgid "Use the + button to add games."
-msgstr "Käytä + lisätäksesi pelejä."
+msgstr "Tlačítkem + můžete přidávat hry."
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
-msgstr "Ei piilotettuja pelejä"
+msgstr "Žádné skryté hry"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here."
-msgstr "Piilotetut pelit näkyvät täällä."
+msgstr "Hry, které skryjete, se zobrazí zde."
 
 #: data/gtk/window.blp:64 data/gtk/window.blp:304
 msgid "Back"
-msgstr "Takaisin"
+msgstr "Zpět"
 
 #: data/gtk/window.blp:121
 msgid "Game Title"
-msgstr "Pelin nimi"
+msgstr "Název hry"
 
 #: data/gtk/window.blp:176
 msgid "Play"
-msgstr "Pelaa"
+msgstr "Hrát"
 
 #: data/gtk/window.blp:243 data/gtk/window.blp:435
 msgid "Add Game"
-msgstr "Lisää peli"
+msgstr "Přidat hru"
 
 #: data/gtk/window.blp:250 data/gtk/window.blp:316
 msgid "Main Menu"
-msgstr "Päävalikko"
+msgstr "Hlavní nabídka"
 
 #: data/gtk/window.blp:311
 msgid "Hidden Games"
-msgstr "Piilotetut pelit"
+msgstr "Skryté hry"
 
 #: data/gtk/window.blp:374
 msgid "Sort"
-msgstr "Lajittele"
+msgstr "Třídit"
 
 #: data/gtk/window.blp:377
 msgid "A-Z"
-msgstr "A-Z"
+msgstr "A-Ž"
 
 #: data/gtk/window.blp:383
 msgid "Z-A"
-msgstr "Z-A"
+msgstr "Ž-A"
 
 #: data/gtk/window.blp:389
 msgid "Newest"
-msgstr "Uusin"
+msgstr "Nejnovější"
 
 #: data/gtk/window.blp:395
 msgid "Oldest"
-msgstr "Vanhin"
+msgstr "Nejstarší"
 
 #: data/gtk/window.blp:401
 msgid "Last Played"
-msgstr "Viimeksi pelattu"
+msgstr "Naposledy hráno"
 
 #: data/gtk/window.blp:408
 msgid "Show Hidden"
-msgstr "Näytä piilotetut"
+msgstr "Zobrazit Skryté"
 
 #: data/gtk/window.blp:421
 msgid "Keyboard Shortcuts"
-msgstr "Pikanäppäimet"
+msgstr "Klávesové zkratky"
 
 #: data/gtk/window.blp:426
 msgid "About Cartridges"
-msgstr "Tietoja - Cartridges"
+msgstr "O Kazetách"
 
 #. Translators: Replace this with your name for it to show up in the about window
 #: src/main.py:188
 msgid "translator_credits"
-msgstr "Linux Sauna"
+msgstr "ooo.i.love.foo"
 
 #. The variable is the date when the game was added
 #: src/window.py:194
 msgid "Added: {}"
-msgstr "Lisätty: {}"
+msgstr "Přidáno: {}"
 
 #: src/window.py:197
 msgid "Never"
-msgstr "Ei koskaan"
+msgstr "Nikdy"
 
 #. The variable is the date when the game was last played
 #: src/window.py:201
 msgid "Last played: {}"
-msgstr "Viimeksi pelattu: {}"
+msgstr "Naposledy hráno: {}"
 
 #: src/details_window.py:72
 msgid "Apply"
-msgstr "Käytä"
+msgstr "Použít"
 
 #: src/details_window.py:78
 msgid "Add New Game"
-msgstr "Lisää uusi peli"
+msgstr "Přidat novou hru"
 
 #: src/details_window.py:79
 msgid "Confirm"
-msgstr "Vahvista"
+msgstr "Potvrdit"
 
 #. Translate this string as you would translate "file"
 #: src/details_window.py:92
 msgid "file.txt"
-msgstr "file.txt"
+msgstr "soubor.txt"
 
 #. As in software
 #: src/details_window.py:94
 msgid "program"
-msgstr "ohjelma"
+msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
 #: src/details_window.py:99 src/details_window.py:101
 msgid "C:\\path\\to\\{}"
-msgstr "C:\\polku\\kansioon\\{}"
+msgstr "C:\\cesta\\k\\{}"
 
 #. Translate this string as you would translate "path to {}"
 #: src/details_window.py:105 src/details_window.py:107
 msgid "/path/to/{}"
-msgstr "/polku/kansioon/{}"
+msgstr "/cesta/k/{}"
 
 #: src/details_window.py:112
 msgid ""
@@ -480,272 +462,100 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Käynnistääksesi suoritettavan ohjelman \"{exe_name}\", käytä komentoa:\n"
+"Chcete-li spustit spustitelný soubor \"{}\", použijte příkaz:\n"
 "\n"
 "<tt>\"{}\"</tt>\n"
 "\n"
-"Avataksesi tiedoston \"{}\" oletussovelluksella, käytä komentoa:\n"
+"Chcete-li otevřít soubor \"{}\" pomocí výchozí aplikace, použijte příkaz:\n"
 "\n"
 "<tt>{} \"{}\"</tt>\n"
 "\n"
-"Jos polku sisältää välilyöntejä, varmista, että se on suljettu "
-"kaksinkertaisiin lainausmerkkeihin!"
+"Pokud cesta obsahuje mezery, nezapomeňte ji zabalit do dvojitých uvozovek!"
 
 #: src/details_window.py:147 src/details_window.py:153
 msgid "Couldn't Add Game"
-msgstr "Peliä ei voitu lisätä"
+msgstr "Nelze přidat hru"
 
 #: src/details_window.py:147 src/details_window.py:183
 msgid "Game title cannot be empty."
-msgstr "Pelin nimi ei voi olla tyhjä."
+msgstr "Název hry nemůže být prázdný."
 
 #: src/details_window.py:153 src/details_window.py:191
 msgid "Executable cannot be empty."
-msgstr "Suoritettava ei voi olla tyhjä."
+msgstr "Spustitelný soubor nemůže být prázdný."
 
 #: src/details_window.py:182 src/details_window.py:190
 msgid "Couldn't Apply Preferences"
-msgstr "Asetuksia ei voitu ottaa käyttöön"
+msgstr "Nelze použít předvolby"
 
 #. The variable is the title of the game
 #: src/game.py:138
 msgid "{} launched"
-msgstr "{} käynnistetty"
+msgstr "{} spuštěno"
 
 #. The variable is the title of the game
 #: src/game.py:152
 msgid "{} hidden"
-msgstr "{} piilotettu"
+msgstr "{} skryto"
 
 #: src/game.py:152
 msgid "{} unhidden"
-msgstr "{} palautettu näkyviin"
+msgstr "{} odkryto"
 
 #: src/game.py:169
 msgid "{} removed"
-msgstr "{} poistettu"
+msgstr "{} odstraněno"
 
 #: src/preferences.py:112
 msgid "All games removed"
-msgstr "Kaikki pelit poistettu"
+msgstr "Všechny hry odstraněny"
 
 #: src/preferences.py:160
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
-"API-avain on pakollinen, jos haluat käyttää SteamGridDB:tä. Voit luoda "
-"avaimen {}täällä{}."
+"K používání služby SteamGridDB je vyžadován klíč API. Můžete si ho "
+"vygenerovat {}zde{}."
 
 #: src/preferences.py:285
-#, fuzzy
-#| msgid "Installation Not Found"
 msgid "Installation Not Found"
-msgstr "Asennusta ei löydy"
+msgstr "Instalace nebyla nalezena"
 
 #: src/preferences.py:287
 msgid "Select a valid directory."
-msgstr ""
+msgstr "Vyberte platný adresář."
 
 #: src/preferences.py:349
 msgid "Invalid Directory"
-msgstr ""
+msgstr "Neplatný adresář"
 
 #. The variable is the name of the source
 #: src/preferences.py:353
 msgid "Select the {} cache directory."
-msgstr ""
+msgstr "Vyberte adresář {} mezipaměti."
 
 #. The variable is the name of the source
 #: src/preferences.py:356
 msgid "Select the {} configuration directory."
-msgstr ""
+msgstr "Vyberte konfigurační adresář {}."
 
 #. The variable is the name of the source
 #: src/preferences.py:359
 msgid "Select the {} data directory."
-msgstr ""
+msgstr "Vyberte datový adresář {}."
 
 #: src/preferences.py:365
 msgid "Set Location"
-msgstr "Aseta sijainti"
+msgstr "Nastavit umístění"
 
 #: src/utils/create_dialog.py:25
 msgid "Dismiss"
-msgstr "Hylkää"
+msgstr "Zahodit"
 
 #: src/store/managers/sgdb_manager.py:47
-#, fuzzy
-#| msgid "Couldn't Connect to SteamGridDB"
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "Ei voitu yhdistää SteamGridDB:hen"
+msgstr "Nelze ověřit SteamGridDB"
 
 #: src/store/managers/sgdb_manager.py:48
 msgid "Verify your API key in preferences"
-msgstr ""
-
-#, fuzzy
-#~| msgid "The Steam directory cannot be found."
-#~ msgid "Directory not Valid"
-#~ msgstr "Steam-hakemistoa ei löydy."
-
-#, fuzzy
-#~| msgid "Confirm"
-#~ msgid "Configuration"
-#~ msgstr "Vahvista"
-
-#~ msgid "Steam Install Location"
-#~ msgstr "Steam-asennuksen sijainti"
-
-#~ msgid "Lutris Install Location"
-#~ msgstr "Lutris-asennuksen sijainti"
-
-#~ msgid "Heroic Install Location"
-#~ msgstr "Heroic-asennuksen sijainti"
-
-#~ msgid "Bottles Install Location"
-#~ msgstr "Bottles-asennuksen sijainti"
-
-#~ msgid "Today"
-#~ msgstr "Tänään"
-
-#~ msgid "Yesterday"
-#~ msgstr "Eilen"
-
-#~ msgid "Cache Not Found"
-#~ msgstr "Välimuistia ei löydy"
-
-#~ msgid "Importing Games…"
-#~ msgstr "Tuodaan pelejä…"
-
-#~ msgid "Importing Covers…"
-#~ msgstr "Tuodaan kansikuvia…"
-
-#, fuzzy
-#~| msgid "No Games Found"
-#~ msgid "No new games found"
-#~ msgstr "Pelejä ei löydetty"
-
-#, fuzzy
-#~| msgid "Game Imported"
-#~ msgid "1 game imported"
-#~ msgstr "Peli tuotu"
-
-#, fuzzy
-#~| msgid "Games Imported"
-#~ msgid "{} games imported"
-#~ msgstr "Pelit tuotu"
-
-#~ msgid "Directory to use when importing games"
-#~ msgstr "Hakemisto, jota käytetään pelejä tuotaessa"
-
-#~ msgid "Extra Steam Libraries"
-#~ msgstr "Steam-lisäkirjastot"
-
-#~ msgid "Select other directories where you have Steam games installed"
-#~ msgstr "Valitse muut hakemistot, joihin Steam-pelit on asennettu"
-
-#~ msgid "Clear"
-#~ msgstr "Tyhjennä"
-
-#, fuzzy
-#~| msgid "Directory to use when importing games"
-#~ msgid "Directory to use when importing game covers"
-#~ msgstr "Hakemisto, jota käytetään pelejä tuotaessa"
-
-#~ msgid "Details"
-#~ msgstr "Tiedot"
-
-#~ msgid "No new games were found on your system."
-#~ msgstr "Järjestelmästä ei löytynyt uusia pelejä."
-
-#~ msgid "Successfully imported 1 game."
-#~ msgstr "Onnistuneesti tuotu 1 peli."
-
-#~ msgid "Successfully imported {} games."
-#~ msgstr "{} peliä tuotu."
-
-#~ msgid ""
-#~ "Looks like you have multiple Steam libraries. Would you like to add them "
-#~ "in preferences?"
-#~ msgstr ""
-#~ "Vaikuttaa siltä, että sinulla on useita Steam-kirjastoja. Haluatko lisätä "
-#~ "ne asetuksissa?"
-
-#~ msgid "Launch your games"
-#~ msgstr "Käynnistä pelit"
-
-#, python-brace-format
-#~ msgid "Last played: {last_played_date}"
-#~ msgstr "Pelattu: {last_played_date}"
-
-#, python-brace-format
-#~ msgid "Successfully imported {games_no} games."
-#~ msgstr "Onnistuneesti tuotu {games_no} peliä."
-
-#, python-brace-format
-#~ msgid "C:\\path\\to\\{file_name}"
-#~ msgstr "C:\\polku\\kansioon\\{file_name}"
-
-#, python-brace-format
-#~ msgid "/path/to/{file_name}"
-#~ msgstr "/polku/kansioon/{file_name}"
-
-#, fuzzy
-#~| msgid "General"
-#~ msgctxt "shortcuts window"
-#~ msgid "General"
-#~ msgstr "Yleistä"
-
-#, fuzzy
-#~| msgid "Search"
-#~ msgctxt "shortcuts window"
-#~ msgid "Search"
-#~ msgstr "Etsi"
-
-#, fuzzy
-#~| msgid "Undo"
-#~ msgctxt "shortcuts window"
-#~ msgid "Undo"
-#~ msgstr "Kumoa"
-
-#~ msgid "First stable release"
-#~ msgstr "Ensimmäinen vakaa julkaisu"
-
-#~ msgctxt "shortcut window"
-#~ msgid "General"
-#~ msgstr "Yleistä"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Search"
-#~ msgstr "Etsi"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Undo"
-#~ msgstr "Kumoa"
-
-#~ msgid "Couldn't Import Games"
-#~ msgstr "Pelejä ei voitu tuoda"
-
-#~ msgid "The Bottles directory cannot be found."
-#~ msgstr "Bottles-hakemistoa ei löydy."
-
-#~ msgid "Set Bottles Location"
-#~ msgstr "Aseta Bottlesin sijainti"
-
-#~ msgid "No new games were found in the Bottles library."
-#~ msgstr "Bottles-kirjastosta ei löytynyt uusia pelejä."
-
-#~ msgid "Bottles Games Imported"
-#~ msgstr "Bottles-pelit on tuotu"
-
-#~ msgid "The Heroic directory cannot be found."
-#~ msgstr "Heroic-hakemistoa ei löytynyt."
-
-#~ msgid "Heroic Games Imported"
-#~ msgstr "Heroic-pelit tuotu"
-
-#~ msgid "No new games were found in the Steam library."
-#~ msgstr "Steam-kirjastosta ei löytynyt uusia pelejä."
-
-#~ msgid "Talking to Steam"
-#~ msgstr "Yhdistetään Steam-kirjastoon"
+msgstr "Ověřte váš klíč API v předvolbách"

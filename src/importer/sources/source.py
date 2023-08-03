@@ -19,8 +19,8 @@
 
 import sys
 from abc import abstractmethod
-from collections.abc import Iterable, Iterator
-from typing import Any, Generator, Optional
+from collections.abc import Iterable
+from typing import Any, Generator, Collection
 
 from src.game import Game
 from src.importer.sources.location import Location
@@ -29,25 +29,16 @@ from src.importer.sources.location import Location
 SourceIterationResult = None | Game | tuple[Game, tuple[Any]]
 
 
-class SourceIterator(Iterator):
+class SourceIterable(Iterable):
     """Data producer for a source of games"""
 
     source: "Source" = None
-    generator: Generator = None
 
     def __init__(self, source: "Source") -> None:
-        super().__init__()
         self.source = source
-        self.generator = self.generator_builder()
-
-    def __iter__(self) -> "SourceIterator":
-        return self
-
-    def __next__(self) -> SourceIterationResult:
-        return next(self.generator)
 
     @abstractmethod
-    def generator_builder(self) -> Generator[SourceIterationResult, None, None]:
+    def __iter__(self) -> Generator[SourceIterationResult, None, None]:
         """
         Method that returns a generator that produces games
         * Should be implemented as a generator method
@@ -60,13 +51,12 @@ class SourceIterator(Iterator):
 class Source(Iterable):
     """Source of games. E.g an installed app with a config file that lists game directories"""
 
+    source_id: str
     name: str
     variant: str = None
     available_on: set[str] = set()
-    data_location: Optional[Location] = None
-    cache_location: Optional[Location] = None
-    config_location: Optional[Location] = None
-    iterator_class: type[SourceIterator]
+    iterable_class: type[SourceIterable]
+    locations: Collection[Location]
 
     @property
     def full_name(self) -> str:
@@ -77,17 +67,9 @@ class Source(Iterable):
         return full_name_
 
     @property
-    def id(self) -> str:  # pylint: disable=invalid-name
-        """The source's identifier"""
-        id_ = self.name.lower()
-        if self.variant is not None:
-            id_ += f"_{self.variant.lower()}"
-        return id_
-
-    @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
-        return self.id + "_{game_id}"
+        return self.source_id + "_{game_id}"
 
     @property
     def is_available(self):
@@ -98,7 +80,7 @@ class Source(Iterable):
     def executable_format(self) -> str:
         """The executable format used to construct game executables"""
 
-    def __iter__(self) -> SourceIterator:
+    def __iter__(self) -> Generator[SourceIterationResult, None, None]:
         """
         Get an iterator for the source
         :raises UnresolvableLocationError: Not iterable if any of the locations are unresolvable
@@ -108,7 +90,7 @@ class Source(Iterable):
             if location is None:
                 continue
             location.resolve()
-        return self.iterator_class(self)
+        return iter(self.iterable_class(self))
 
 
 # pylint: disable=abstract-method

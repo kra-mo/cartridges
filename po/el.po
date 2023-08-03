@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-05 14:36+0200\n"
+"POT-Creation-Date: 2023-07-25 20:33+0200\n"
 "PO-Revision-Date: 2023-05-29 18:48+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/cartridges/"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:162
+#: src/main.py:170
 msgid "Cartridges"
 msgstr "Κασέτες"
 
@@ -34,7 +34,9 @@ msgid "Launch all your games"
 msgstr "Εκκινήστε όλα σας τα παιχνίδια"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
-msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
+#, fuzzy
+#| msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
+msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;"
 msgstr "gaming;εκκινητής;steam;lutris;heroic;bottles;itch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
@@ -63,7 +65,7 @@ msgid "Game Details"
 msgstr "Λεπτομέρειες Παιχνιδιού"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:416
-#: src/details_window.py:239
+#: src/details_window.py:241
 msgid "Preferences"
 msgstr "Προτιμήσεις"
 
@@ -147,7 +149,7 @@ msgstr "Εμφάνιση προτιμήσεων"
 msgid "Shortcuts"
 msgstr "Συντομεύσεις"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:112
+#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:113
 msgid "Undo"
 msgstr "Αναίρεση"
 
@@ -175,7 +177,7 @@ msgstr "Εμφάνιση κρυμμένων παιχνιδιών"
 msgid "Remove game"
 msgstr "Αφαίρεση παιχνιδιού"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:268
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:277
 msgid "Behavior"
 msgstr "Συμπεριφορά"
 
@@ -225,9 +227,9 @@ msgid "Steam"
 msgstr "Steam"
 
 #: data/gtk/preferences.blp:96 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:192
-#: data/gtk/preferences.blp:206 data/gtk/preferences.blp:220
-#: data/gtk/preferences.blp:234
+#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:201
+#: data/gtk/preferences.blp:215 data/gtk/preferences.blp:229
+#: data/gtk/preferences.blp:243
 #, fuzzy
 #| msgid "itch Install Location"
 msgid "Install Location"
@@ -266,56 +268,62 @@ msgid "Import GOG Games"
 msgstr "Εισαγωγή Παιχνιδιών GOG"
 
 #: data/gtk/preferences.blp:178
+#, fuzzy
+#| msgid "Import Steam Games"
+msgid "Import Amazon Games"
+msgstr "Εισαγωγή Παιχνιδιών Steam"
+
+#: data/gtk/preferences.blp:187
 msgid "Import Sideloaded Games"
 msgstr "Εισαγωγή Παιχνιδιών Μέσω Sideloading"
 
-#: data/gtk/preferences.blp:188
+#: data/gtk/preferences.blp:197
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:202
+#: data/gtk/preferences.blp:211
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:216
+#: data/gtk/preferences.blp:225
 msgid "Legendary"
 msgstr ""
 
-#: data/gtk/preferences.blp:230
+#: data/gtk/preferences.blp:239
 msgid "Flatpak"
 msgstr ""
 
-#: data/gtk/preferences.blp:243
+#: data/gtk/preferences.blp:252
 #, fuzzy
 #| msgid "Game Launcher"
 msgid "Import Game Launchers"
 msgstr "Πρόγραμμα Εκκίνησης Παιχνιδιών"
 
-#: data/gtk/preferences.blp:256
+#: data/gtk/preferences.blp:265
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:260
+#: data/gtk/preferences.blp:269
 msgid "Authentication"
 msgstr "Επιβεβαίωση"
 
-#: data/gtk/preferences.blp:263
+#: data/gtk/preferences.blp:272
 msgid "API Key"
 msgstr "Κλειδί API"
 
-#: data/gtk/preferences.blp:271
+#: data/gtk/preferences.blp:280
 msgid "Use SteamGridDB"
 msgstr "Χρήση SteamGridDB"
 
-#: data/gtk/preferences.blp:272
+#: data/gtk/preferences.blp:281
 msgid "Download images when adding or importing games"
 msgstr "Λήψη εικόνων κατά τη διάρκεια πρόσθεσης ή εισαγωγής παιχνιδιών"
 
-#: data/gtk/preferences.blp:281
+#: data/gtk/preferences.blp:290
 msgid "Prefer Over Official Images"
 msgstr "Προτίμηση Επίσημων Εικόνων"
 
-#: data/gtk/preferences.blp:290
+#: data/gtk/preferences.blp:299
 msgid "Prefer Animated Images"
 msgstr "Προτίμηση Κινούμενων Εικόνων"
 
@@ -404,7 +412,7 @@ msgid "About Cartridges"
 msgstr "Σχετικά με τις Κασέτες"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:180
+#: src/main.py:188
 msgid "translator_credits"
 msgstr "Yiannis Ioannides"
 
@@ -482,15 +490,15 @@ msgstr ""
 msgid "Couldn't Add Game"
 msgstr "Αδυναμία προσθήκης παιχνιδιού"
 
-#: src/details_window.py:147 src/details_window.py:181
+#: src/details_window.py:147 src/details_window.py:183
 msgid "Game title cannot be empty."
 msgstr "Ο τίτλος παιχνιδιού δεν μπορεί να είναι κενός."
 
-#: src/details_window.py:153 src/details_window.py:189
+#: src/details_window.py:153 src/details_window.py:191
 msgid "Executable cannot be empty."
 msgstr "Η εφαρμογή δεν μπορεί να είναι κενή."
 
-#: src/details_window.py:180 src/details_window.py:188
+#: src/details_window.py:182 src/details_window.py:190
 msgid "Couldn't Apply Preferences"
 msgstr "Αδυναμία Εφαρμογής Προτιμήσεων"
 
@@ -512,55 +520,55 @@ msgstr "{} φανερώθηκε"
 msgid "{} removed"
 msgstr "{} αφαιρέθηκε"
 
-#: src/preferences.py:111
+#: src/preferences.py:112
 msgid "All games removed"
 msgstr "Όλα τα παιχνίδια αφαιρέθηκαν"
 
-#: src/preferences.py:159
+#: src/preferences.py:160
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Για τη χρήση του SteamGridDB απαιτείται ένα κλειδί API. Μπορείτε να "
 "δημιουργήσετε ένα {}εδώ{}."
 
-#: src/preferences.py:284
+#: src/preferences.py:285
 #, fuzzy
 #| msgid "Installation Not Found"
 msgid "Installation Not Found"
 msgstr "Η εγκατάσταση δεν βρέθηκε"
 
-#: src/preferences.py:286
+#: src/preferences.py:287
 #, fuzzy
 #| msgid "Select the {} data directory."
 msgid "Select a valid directory."
 msgstr "Επιλέξτε τον κατάλογο δεδομένων {}."
 
-#: src/preferences.py:348
+#: src/preferences.py:349
 msgid "Invalid Directory"
 msgstr ""
 
 #. The variable is the name of the source
-#: src/preferences.py:352
+#: src/preferences.py:353
 #, fuzzy
 #| msgid "Select the {} data directory."
 msgid "Select the {} cache directory."
 msgstr "Επιλέξτε τον κατάλογο δεδομένων {}."
 
 #. The variable is the name of the source
-#: src/preferences.py:355
+#: src/preferences.py:356
 #, fuzzy
 #| msgid "Select the {} configuration directory."
 msgid "Select the {} configuration directory."
 msgstr "Επιλέξτε τον κατάλογο διαμόρφωσης {}."
 
 #. The variable is the name of the source
-#: src/preferences.py:358
+#: src/preferences.py:359
 #, fuzzy
 #| msgid "Select the {} data directory."
 msgid "Select the {} data directory."
 msgstr "Επιλέξτε τον κατάλογο δεδομένων {}."
 
-#: src/preferences.py:364
+#: src/preferences.py:365
 msgid "Set Location"
 msgstr "Ορίστε Τοποθεσία"
 

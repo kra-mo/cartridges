@@ -21,22 +21,19 @@
 from shutil import rmtree
 from sqlite3 import connect
 from time import time
+from typing import NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
-from src.importer.sources.source import (
-    SourceIterationResult,
-    SourceIterator,
-    URLExecutableSource,
-)
+from src.importer.sources.location import Location, LocationSubPath
+from src.importer.sources.source import SourceIterable, URLExecutableSource
 from src.utils.sqlite import copy_db
 
 
-class ItchSourceIterator(SourceIterator):
+class ItchSourceIterable(SourceIterable):
     source: "ItchSource"
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
 
         # Query the database
@@ -55,7 +52,7 @@ class ItchSourceIterator(SourceIterator):
             caves.game_id = games.id
         ;
         """
-        db_path = copy_db(self.source.config_location["butler.db"])
+        db_path = copy_db(self.source.locations.config["butler.db"])
         connection = connect(db_path)
         cursor = connection.execute(db_request)
 
@@ -65,7 +62,7 @@ class ItchSourceIterator(SourceIterator):
         for row in cursor:
             values = {
                 "added": added_time,
-                "source": self.source.id,
+                "source": self.source.source_id,
                 "name": row[1],
                 "game_id": self.source.game_id_format.format(game_id=row[0]),
                 "executable": self.source.executable_format.format(cave_id=row[4]),
@@ -78,19 +75,29 @@ class ItchSourceIterator(SourceIterator):
         rmtree(str(db_path.parent))
 
 
+class ItchLocations(NamedTuple):
+    config: Location
+
+
 class ItchSource(URLExecutableSource):
+    source_id = "itch"
     name = _("itch")
-    iterator_class = ItchSourceIterator
+    iterable_class = ItchSourceIterable
     url_format = "itch://caves/{cave_id}/launch"
     available_on = {"linux", "win32"}
 
-    config_location = Location(
-        schema_key="itch-location",
-        candidates=(
-            shared.flatpak_dir / "io.itch.itch" / "config" / "itch",
-            shared.config_dir / "itch",
-            shared.home / ".config" / "itch",
-            shared.appdata_dir / "itch",
-        ),
-        paths={"butler.db": (False, "db/butler.db")},
+    locations = ItchLocations(
+        Location(
+            schema_key="itch-location",
+            candidates=(
+                shared.flatpak_dir / "io.itch.itch" / "config" / "itch",
+                shared.config_dir / "itch",
+                shared.home / ".config" / "itch",
+                shared.appdata_dir / "itch",
+            ),
+            paths={
+                "butler.db": LocationSubPath("db/butler.db"),
+            },
+            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+        )
     )

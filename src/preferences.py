@@ -69,6 +69,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     heroic_config_file_chooser_button = Gtk.Template.Child()
     heroic_import_epic_switch = Gtk.Template.Child()
     heroic_import_gog_switch = Gtk.Template.Child()
+    heroic_import_amazon_switch = Gtk.Template.Child()
     heroic_import_sideload_switch = Gtk.Template.Child()
 
     bottles_expander_row = Gtk.Template.Child()
@@ -148,7 +149,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         ):
             source = source_class()
             if not source.is_available:
-                expander_row = getattr(self, f"{source.id}_expander_row")
+                expander_row = getattr(self, f"{source.source_id}_expander_row")
                 expander_row.set_visible(False)
             else:
                 self.init_source_row(source)
@@ -187,6 +188,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "lutris-import-flatpak",
                 "heroic-import-epic",
                 "heroic-import-gog",
+                "heroic-import-amazon",
                 "heroic-import-sideload",
                 "flatpak-import-launchers",
                 "sgdb",
@@ -254,31 +256,35 @@ class PreferencesWindow(Adw.PreferencesWindow):
         """Set the dir subtitle for a source's action rows"""
         for location in ("data", "config", "cache"):
             # Get the action row to subtitle
-            action_row = getattr(self, f"{source.id}_{location}_action_row", None)
+            action_row = getattr(
+                self, f"{source.source_id}_{location}_action_row", None
+            )
             if not action_row:
                 continue
 
             infix = "-cache" if location == "cache" else ""
-            key = f"{source.id}{infix}-location"
+            key = f"{source.source_id}{infix}-location"
             path = Path(shared.schema.get_string(key)).expanduser()
 
             # Remove the path prefix if picked via Flatpak portal
             subtitle = re.sub("/run/user/\\d*/doc/.*/", "", str(path))
             action_row.set_subtitle(subtitle)
 
-    def resolve_locations(self, source):
+    def resolve_locations(self, source: Source):
         """Resolve locations and add a warning if location cannot be found"""
 
         def clear_warning_selection(_widget, label):
             label.select_region(-1, -1)
 
-        for location_name in ("data", "config", "cache"):
-            action_row = getattr(self, f"{source.id}_{location_name}_action_row", None)
+        for location_name, location in source.locations._asdict().items():
+            action_row = getattr(
+                self, f"{source.source_id}_{location_name}_action_row", None
+            )
             if not action_row:
                 continue
 
             try:
-                getattr(source, f"{location_name}_location", None).resolve()
+                location.resolve()
 
             except UnresolvableLocationError:
                 popover = Gtk.Popover(
@@ -315,7 +321,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 menu_button.add_css_class("warning")
 
                 action_row.add_prefix(menu_button)
-                self.warning_menu_buttons[source.id] = menu_button
+                self.warning_menu_buttons[source.source_id] = menu_button
 
     def init_source_row(self, source: Source):
         """Initialize a preference row for a source class"""
@@ -329,42 +335,36 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 return
 
             # Good picked location
-            location = getattr(source, f"{location_name}_location")
+            location = getattr(source.locations, location_name)
             if location.check_candidate(path):
                 # Set the schema
-                infix = "-cache" if location_name == "cache" else ""
-                key = f"{source.id}{infix}-location"
+                match location_name:
+                    case "config" | "data":
+                        infix = ""
+                    case _:
+                        infix = f"-{location_name}"
+                key = f"{source.source_id}{infix}-location"
                 value = str(path)
                 shared.schema.set_string(key, value)
                 # Update the row
                 self.update_source_action_row_paths(source)
 
-                if self.warning_menu_buttons.get(source.id):
+                if self.warning_menu_buttons.get(source.source_id):
                     action_row = getattr(
-                        self, f"{source.id}_{location_name}_action_row", None
+                        self, f"{source.source_id}_{location_name}_action_row", None
                     )
-                    action_row.remove(self.warning_menu_buttons[source.id])
-                    self.warning_menu_buttons.pop(source.id)
+                    action_row.remove(self.warning_menu_buttons[source.source_id])
+                    self.warning_menu_buttons.pop(source.source_id)
 
                 logging.debug("User-set value for schema key %s: %s", key, value)
 
             # Bad picked location, inform user
             else:
                 title = _("Invalid Directory")
-                match location_name:
-                    case "cache":
-                        # The variable is the name of the source
-                        subtitle_format = _("Select the {} cache directory.")
-                    case "config":
-                        # The variable is the name of the source
-                        subtitle_format = _("Select the {} configuration directory.")
-                    case "data":
-                        # The variable is the name of the source
-                        subtitle_format = _("Select the {} data directory.")
                 dialog = create_dialog(
                     self,
                     title,
-                    subtitle_format.format(source.name),
+                    location.invalid_subtitle.format(source.name),
                     "choose_folder",
                     _("Set Location"),
                 )
@@ -376,19 +376,21 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 dialog.connect("response", on_response)
 
         # Bind expander row activation to source being enabled
-        expander_row = getattr(self, f"{source.id}_expander_row")
+        expander_row = getattr(self, f"{source.source_id}_expander_row")
         shared.schema.bind(
-            source.id,
+            source.source_id,
             expander_row,
             "enable-expansion",
             Gio.SettingsBindFlags.DEFAULT,
         )
 
         # Connect dir picker buttons
-        for location in ("data", "config", "cache"):
-            button = getattr(self, f"{source.id}_{location}_file_chooser_button", None)
+        for location_name in source.locations._asdict():
+            button = getattr(
+                self, f"{source.source_id}_{location_name}_file_chooser_button", None
+            )
             if button is not None:
-                button.connect("clicked", self.choose_folder, set_dir, location)
+                button.connect("clicked", self.choose_folder, set_dir, location_name)
 
         # Set the source row subtitles
         self.resolve_locations(source)

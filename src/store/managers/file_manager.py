@@ -31,7 +31,7 @@ class FileManager(AsyncManager):
     run_after = (SteamAPIManager,)
     signals = {"save-ready"}
 
-    def manager_logic(self, game: Game, additional_data: dict) -> None:
+    def main(self, game: Game, additional_data: dict) -> None:
         if additional_data.get("skip_save"):  # Skip saving when loading games from disk
             return
 
