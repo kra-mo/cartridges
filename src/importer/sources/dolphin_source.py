@@ -19,27 +19,28 @@
 
 from pathlib import Path
 from time import time
+from typing import NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
-from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
+from src.importer.sources.location import Location, LocationSubPath
+from src.importer.sources.source import Source, SourceIterable
 from src.utils.dolphin_cache_reader import DolphinCacheReader
 
 
-class DolphinIterator(SourceIterator):
+class DolphinSourceIterable(SourceIterable):
     source: "DolphinSource"
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         added_time = int(time())
 
-        cache_reader = DolphinCacheReader(self.source.cache_location["cache_file"])
+        cache_reader = DolphinCacheReader(self.source.locations.cache["cache_file"])
         games_data = cache_reader.get_games()
 
         for game_data in games_data:
             # Build game
             values = {
-                "source": self.source.id,
+                "source": self.source.source_id,
                 "added": added_time,
                 "name": Path(game_data["file_name"]).stem,
                 "game_id": self.source.game_id_format.format(
@@ -53,31 +54,45 @@ class DolphinIterator(SourceIterator):
             game = Game(values)
 
             image_path = Path(
-                self.source.cache_location["covers"] / (game_data["game_id"] + ".png")
+                self.source.locations.cache["covers"] / (game_data["game_id"] + ".png")
             )
             additional_data = {"local_image_path": image_path}
 
             yield (game, additional_data)
 
 
-class DolphinSource(Source):
-    name = "Dolphin"
-    available_on = {"linux"}
-    iterator_class = DolphinIterator
+class DolphinLocations(NamedTuple):
+    cache: Location
 
-    cache_location = Location(
-        schema_key="dolphin-cache-location",
-        candidates=(
-            shared.flatpak_dir / "org.DolphinEmu.dolphin-emu" / "cache" / "dolphin-emu",
-            shared.home / ".cache" / "dolphin-emu",
-        ),
-        paths={"cache_file": (False, "gamelist.cache"), "covers": (True, "GameCovers")},
+
+class DolphinSource(Source):
+    name = _("Dolphin")
+    source_id = "dolphin"
+    available_on = {"linux"}
+    iterable_class = DolphinSourceIterable
+
+    locations = DolphinLocations(
+        Location(
+            schema_key="dolphin-cache-location",
+            candidates=[
+                shared.flatpak_dir
+                / "org.DolphinEmu.dolphin-emu"
+                / "cache"
+                / "dolphin-emu",
+                shared.home / ".cache" / "dolphin-emu",
+            ],
+            paths={
+                "cache_file": LocationSubPath("gamelist.cache"),
+                "covers": LocationSubPath("GameCovers", True),
+            },
+            invalid_subtitle=Location.CACHE_INVALID_SUBTITLE,
+        )
     )
 
     @property
     def executable_format(self):
-        self.cache_location.resolve()
-        is_flatpak = self.cache_location.root.is_relative_to(shared.flatpak_dir)
+        self.locations.cache.resolve()
+        is_flatpak = self.locations.cache.root.is_relative_to(shared.flatpak_dir)
         base = "flatpak run org.DolphinEmu.dolphin-emu" if is_flatpak else "dolphin-emu"
         args = '-b -e "{rom_path}"'
         return f"{base} {args}"
