@@ -40,6 +40,7 @@ from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
 from src.importer.sources.legendary_source import LegendarySource
 from src.importer.sources.lutris_source import LutrisSource
+from src.importer.sources.retroarch_source import RetroarchSource
 from src.importer.sources.steam_source import SteamSource
 from src.logging.setup import log_system_info, setup_logging
 from src.preferences import PreferencesWindow
@@ -236,6 +237,9 @@ class CartridgesApplication(Adw.Application):
 
         if shared.schema.get_boolean("legendary"):
             importer.add_source(LegendarySource())
+
+        if shared.schema.get_boolean("retroarch"):
+            importer.add_source(RetroarchSource())
 
         importer.run()
 

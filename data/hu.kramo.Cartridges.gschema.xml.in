@@ -67,6 +67,12 @@
     <key name="legendary-location" type="s">
       <default>"~/.config/legendary/"</default>
     </key>
+    <key name="retroarch" type="b">
+      <default>true</default>
+    </key>
+    <key name="retroarch-location" type="s">
+      <default>"~/.var/app/org.libretro.RetroArch/config/retroarch/"</default>
+    </key>
     <key name="flatpak" type="b">
       <default>true</default>
     </key>

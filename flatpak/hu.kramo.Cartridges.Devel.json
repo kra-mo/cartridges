@@ -18,6 +18,7 @@
         "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/legendary/:ro",
         "--filesystem=~/.var/app/com.usebottles.bottles/data/bottles/:ro",
         "--filesystem=~/.var/app/io.itch.itch/config/itch/:ro",
+        "--filesystem=~/.var/app/org.libretro.RetroArch/config/retroarch/:ro",
         "--filesystem=/var/lib/flatpak:ro"
     ],
     "cleanup" : [

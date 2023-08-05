@@ -32,6 +32,7 @@ from src.importer.sources.itch_source import ItchSource
 from src.importer.sources.legendary_source import LegendarySource
 from src.importer.sources.location import UnresolvableLocationError
 from src.importer.sources.lutris_source import LutrisSource
+from src.importer.sources.retroarch_source import RetroarchSource
 from src.importer.sources.source import Source
 from src.importer.sources.steam_source import SteamSource
 from src.utils.create_dialog import create_dialog
@@ -82,6 +83,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
     legendary_expander_row = Gtk.Template.Child()
     legendary_config_action_row = Gtk.Template.Child()
     legendary_config_file_chooser_button = Gtk.Template.Child()
+
+    retroarch_expander_row = Gtk.Template.Child()
+    retroarch_config_action_row = Gtk.Template.Child()
+    retroarch_config_file_chooser_button = Gtk.Template.Child()
 
     flatpak_expander_row = Gtk.Template.Child()
     flatpak_data_action_row = Gtk.Template.Child()
@@ -139,6 +144,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             ItchSource,
             LegendarySource,
             LutrisSource,
+            RetroarchSource,
             SteamSource,
         ):
             source = source_class()
