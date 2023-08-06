@@ -178,13 +178,23 @@ class RetroarchSource(Source):
 
     def __init__(self) -> None:
         super().__init__()
-
         try:
             self.locations.config.candidates.append(self.get_steam_location())
         except (OSError, KeyError, UnresolvableLocationError):
-            pass
+            logging.debug("Steam isn't installed")
+        except ValueError as error:
+            logging.debug("RetroArch Steam location candiate not found", exc_info=error)
 
     def get_steam_location(self) -> str:
+        """
+        Get the RetroArch installed via Steam location
+
+        :raise UnresolvableLocationError: if steam isn't installed
+        :raise KeyError: if there is no libraryfolders.vdf subpath
+        :raise OSError: if libraryfolders.vdf can't be opened
+        :raise ValueError: if RetroArch isn't installed through Steam
+        """
+
         # Find steam location
         libraryfolders = SteamSource().locations.data["libraryfolders.vdf"]
         parse_apps = False
@@ -202,5 +212,5 @@ class RetroarchSource(Source):
                 # Stop searching, as the library path directly above the appid has been found.
                 elif parse_apps and '"1118310"' in line:
                     return Path(f"{library_path}/steamapps/common/RetroArch")
-            else:
-                logging.debug("Steam RetroArch not installed.")
+        # Not found
+        raise ValueError("RetroArch not found in Steam library")
