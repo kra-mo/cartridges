@@ -193,7 +193,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 value = "all"
             case self.added_row_box:
                 value = "imported"
-            case _default:
+            case _:
                 value = self.source_rows[row][0]
 
         self.library_page.set_title(self.get_application().get_source_name(value))
