@@ -97,10 +97,10 @@
   </schema>
   <schema id="@APP_ID@.State" path="@PREFIX@/State/">
     <key name="width" type="i">
-      <default>1110</default>
+      <default>1170</default>
     </key>
     <key name="height" type="i">
-      <default>795</default>
+      <default>798</default>
     </key>
     <key name="is-maximized" type="b">
       <default>false</default>

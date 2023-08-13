@@ -20,7 +20,7 @@
 import sys
 from abc import abstractmethod
 from collections.abc import Iterable
-from typing import Any, Generator, Collection
+from typing import Any, Collection, Generator
 
 from src.game import Game
 from src.importer.sources.location import Location

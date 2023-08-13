@@ -196,6 +196,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
             case _default:
                 value = self.source_rows[row][0]
 
+        self.library_page.set_title(self.get_application().get_source_name(value))
+
         self.filter_state = value
         self.library.invalidate_filter()
 
@@ -304,7 +306,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         if not filtered:
             if self.filter_state == "all":
                 pass
-            elif game.source != self.filter_state:
+            elif game.base_source != self.filter_state:
                 filtered = True
 
         game.filtered = filtered

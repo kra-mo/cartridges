@@ -19,6 +19,7 @@
   <file alias="itch-source-symbolic.svg">icons/sources/itch-source-symbolic.svg</file>
   <file alias="legendary-source-symbolic.svg">icons/sources/legendary-source-symbolic.svg</file>
   <file alias="lutris-source-symbolic.svg">icons/sources/lutris-source-symbolic.svg</file>
+  <file alias="retroarch-source-symbolic.svg">icons/sources/retroarch-source-symbolic.svg</file>
   <file alias="steam-source-symbolic.svg">icons/sources/steam-source-symbolic.svg</file>
   </gresource>
 </gresources>
