@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-25 20:33+0200\n"
+"POT-Creation-Date: 2023-08-13 12:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:170
+#: src/main.py:169
 msgid "Cartridges"
 msgstr ""
 
@@ -48,11 +48,12 @@ msgstr ""
 msgid "Library"
 msgstr ""
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:67
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34
 msgid "Edit Game Details"
 msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:71
+#: src/details_window.py:67
 msgid "Game Details"
 msgstr ""
 
@@ -73,32 +74,19 @@ msgstr ""
 msgid "Delete Cover"
 msgstr ""
 
-#: data/gtk/details-window.blp:101 data/gtk/details-window.blp:106
-#: data/gtk/game.blp:80
+#: data/gtk/details-window.blp:102 data/gtk/game.blp:80
 msgid "Title"
 msgstr ""
 
-#: data/gtk/details-window.blp:102
-msgid "The title of the game"
+#: data/gtk/details-window.blp:105
+msgid "Developer (optional)"
 msgstr ""
 
-#: data/gtk/details-window.blp:112 data/gtk/details-window.blp:117
-msgid "Developer"
-msgstr ""
-
-#: data/gtk/details-window.blp:113
-msgid "The developer or publisher (optional)"
-msgstr ""
-
-#: data/gtk/details-window.blp:123 data/gtk/details-window.blp:155
+#: data/gtk/details-window.blp:110
 msgid "Executable"
 msgstr ""
 
-#: data/gtk/details-window.blp:124
-msgid "File to open or command to run when launching the game"
-msgstr ""
-
-#: data/gtk/details-window.blp:130
+#: data/gtk/details-window.blp:116
 msgid "More Info"
 msgstr ""
 
@@ -140,7 +128,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:113
+#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:118
 msgid "Undo"
 msgstr ""
 
@@ -168,7 +156,7 @@ msgstr ""
 msgid "Remove game"
 msgstr ""
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:277
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:291
 msgid "Behavior"
 msgstr ""
 
@@ -219,7 +207,7 @@ msgstr ""
 #: data/gtk/preferences.blp:96 data/gtk/preferences.blp:110
 #: data/gtk/preferences.blp:151 data/gtk/preferences.blp:201
 #: data/gtk/preferences.blp:215 data/gtk/preferences.blp:229
-#: data/gtk/preferences.blp:243
+#: data/gtk/preferences.blp:243 data/gtk/preferences.blp:257
 msgid "Install Location"
 msgstr ""
 
@@ -272,38 +260,42 @@ msgid "Legendary"
 msgstr ""
 
 #: data/gtk/preferences.blp:239
+msgid "RetroArch"
+msgstr ""
+
+#: data/gtk/preferences.blp:253
 msgid "Flatpak"
 msgstr ""
 
-#: data/gtk/preferences.blp:252
+#: data/gtk/preferences.blp:266
 msgid "Import Game Launchers"
 msgstr ""
 
-#: data/gtk/preferences.blp:265
+#: data/gtk/preferences.blp:279
 msgid "SteamGridDB"
 msgstr ""
 
-#: data/gtk/preferences.blp:269
+#: data/gtk/preferences.blp:283
 msgid "Authentication"
 msgstr ""
 
-#: data/gtk/preferences.blp:272
+#: data/gtk/preferences.blp:286
 msgid "API Key"
 msgstr ""
 
-#: data/gtk/preferences.blp:280
+#: data/gtk/preferences.blp:294
 msgid "Use SteamGridDB"
 msgstr ""
 
-#: data/gtk/preferences.blp:281
+#: data/gtk/preferences.blp:295
 msgid "Download images when adding or importing games"
 msgstr ""
 
-#: data/gtk/preferences.blp:290
+#: data/gtk/preferences.blp:304
 msgid "Prefer Over Official Images"
 msgstr ""
 
-#: data/gtk/preferences.blp:299
+#: data/gtk/preferences.blp:313
 msgid "Prefer Animated Images"
 msgstr ""
 
@@ -419,7 +411,7 @@ msgid "Add New Game"
 msgstr ""
 
 #: src/details_window.py:79
-msgid "Confirm"
+msgid "Add"
 msgstr ""
 
 #. Translate this string as you would translate "file"
@@ -489,43 +481,28 @@ msgstr ""
 msgid "{} removed"
 msgstr ""
 
-#: src/preferences.py:112
+#: src/preferences.py:117
 msgid "All games removed"
 msgstr ""
 
-#: src/preferences.py:160
+#: src/preferences.py:166
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 
-#: src/preferences.py:285
+#: src/preferences.py:295
 msgid "Installation Not Found"
 msgstr ""
 
-#: src/preferences.py:287
+#: src/preferences.py:297
 msgid "Select a valid directory."
 msgstr ""
 
-#: src/preferences.py:349
+#: src/preferences.py:363
 msgid "Invalid Directory"
 msgstr ""
 
-#. The variable is the name of the source
-#: src/preferences.py:353
-msgid "Select the {} cache directory."
-msgstr ""
-
-#. The variable is the name of the source
-#: src/preferences.py:356
-msgid "Select the {} configuration directory."
-msgstr ""
-
-#. The variable is the name of the source
-#: src/preferences.py:359
-msgid "Select the {} data directory."
-msgstr ""
-
-#: src/preferences.py:365
+#: src/preferences.py:369
 msgid "Set Location"
 msgstr ""
 
@@ -533,10 +510,25 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
-#: src/store/managers/sgdb_manager.py:47
+#. The variable is the name of the source
+#: src/importer/sources/location.py:33
+msgid "Select the {} cache directory."
+msgstr ""
+
+#. The variable is the name of the source
+#: src/importer/sources/location.py:35
+msgid "Select the {} configuration directory."
+msgstr ""
+
+#. The variable is the name of the source
+#: src/importer/sources/location.py:37
+msgid "Select the {} data directory."
+msgstr ""
+
+#: src/store/managers/sgdb_manager.py:46
 msgid "Couldn't Authenticate SteamGridDB"
 msgstr ""
 
-#: src/store/managers/sgdb_manager.py:48
+#: src/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
 msgstr ""

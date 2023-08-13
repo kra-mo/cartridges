@@ -16,4 +16,5 @@ src/preferences.py
 
 src/utils/create_dialog.py
 src/importer/sources/source.py
+src/importer/sources/location.py
 src/store/managers/sgdb_manager.py
