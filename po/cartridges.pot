@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-13 12:49+0200\n"
+"POT-Creation-Date: 2023-08-13 15:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Game Details"
 msgstr ""
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:416
+#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:418
 #: src/details_window.py:241
 msgid "Preferences"
 msgstr ""
@@ -117,7 +117,7 @@ msgid "Quit"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:19 data/gtk/window.blp:217 data/gtk/window.blp:257
-#: data/gtk/window.blp:323
+#: data/gtk/window.blp:324
 msgid "Search"
 msgstr ""
 
@@ -193,7 +193,7 @@ msgstr ""
 msgid "Remove All Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:85 data/gtk/window.blp:27 data/gtk/window.blp:442
+#: data/gtk/preferences.blp:85 data/gtk/window.blp:27 data/gtk/window.blp:444
 msgid "Import"
 msgstr ""
 
@@ -324,7 +324,7 @@ msgstr ""
 msgid "Games you hide will appear here."
 msgstr ""
 
-#: data/gtk/window.blp:64 data/gtk/window.blp:304
+#: data/gtk/window.blp:64 data/gtk/window.blp:305
 msgid "Back"
 msgstr ""
 
@@ -336,51 +336,59 @@ msgstr ""
 msgid "Play"
 msgstr ""
 
-#: data/gtk/window.blp:243 data/gtk/window.blp:435
+#: data/gtk/window.blp:243 data/gtk/window.blp:437
 msgid "Add Game"
 msgstr ""
 
-#: data/gtk/window.blp:250 data/gtk/window.blp:316
+#: data/gtk/window.blp:250 data/gtk/window.blp:317
 msgid "Main Menu"
 msgstr ""
 
-#: data/gtk/window.blp:311
+#: data/gtk/window.blp:272
+msgid "Search games"
+msgstr ""
+
+#: data/gtk/window.blp:312
 msgid "Hidden Games"
 msgstr ""
 
-#: data/gtk/window.blp:374
+#: data/gtk/window.blp:339
+msgid "Search hidden games"
+msgstr ""
+
+#: data/gtk/window.blp:376
 msgid "Sort"
 msgstr ""
 
-#: data/gtk/window.blp:377
+#: data/gtk/window.blp:379
 msgid "A-Z"
 msgstr ""
 
-#: data/gtk/window.blp:383
+#: data/gtk/window.blp:385
 msgid "Z-A"
 msgstr ""
 
-#: data/gtk/window.blp:389
+#: data/gtk/window.blp:391
 msgid "Newest"
 msgstr ""
 
-#: data/gtk/window.blp:395
+#: data/gtk/window.blp:397
 msgid "Oldest"
 msgstr ""
 
-#: data/gtk/window.blp:401
+#: data/gtk/window.blp:403
 msgid "Last Played"
 msgstr ""
 
-#: data/gtk/window.blp:408
+#: data/gtk/window.blp:410
 msgid "Show Hidden"
 msgstr ""
 
-#: data/gtk/window.blp:421
+#: data/gtk/window.blp:423
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: data/gtk/window.blp:426
+#: data/gtk/window.blp:428
 msgid "About Cartridges"
 msgstr ""
 
