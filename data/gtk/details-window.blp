@@ -13,9 +13,9 @@ template $DetailsWindow : Adw.Window {
         }
     }
 
-    Box {
-        orientation: vertical;
+    Adw.ToolbarView {
 
+        [top]
         Adw.HeaderBar HeaderBar {
             show-start-title-buttons: false;
             show-end-title-buttons: false;
@@ -35,8 +35,6 @@ template $DetailsWindow : Adw.Window {
         }
 
         Adw.PreferencesPage {
-            vexpand: true;
-
             Adw.PreferencesGroup cover_group {
                 Adw.Clamp cover_clamp {
                     maximum-size: 200;
