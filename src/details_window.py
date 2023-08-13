@@ -64,7 +64,7 @@ class DetailsWindow(Adw.Window):
         self.set_transient_for(self.win)
 
         if self.game:
-            self.set_title(_("Edit Game Details"))
+            self.set_title(_("Game Details"))
             self.name.set_text(self.game.name)
             if self.game.developer:
                 self.developer.set_text(self.game.developer)
@@ -76,7 +76,7 @@ class DetailsWindow(Adw.Window):
                 self.cover_button_delete_revealer.set_reveal_child(True)
         else:
             self.set_title(_("Add New Game"))
-            self.apply_button.set_label(_("Confirm"))
+            self.apply_button.set_label(_("Add"))
 
         image_filter = Gtk.FileFilter(name=_("Images"))
         for extension in Image.registered_extensions():
@@ -123,9 +123,9 @@ class DetailsWindow(Adw.Window):
         self.cover_button_edit.connect("clicked", self.choose_cover)
         self.apply_button.connect("clicked", self.apply_preferences)
 
-        self.name.connect("activate", self.focus_executable)
-        self.developer.connect("activate", self.focus_executable)
-        self.executable.connect("activate", self.apply_preferences)
+        self.name.connect("entry-activated", self.focus_executable)
+        self.developer.connect("entry-activated", self.focus_executable)
+        self.executable.connect("entry-activated", self.apply_preferences)
 
         self.set_focus(self.name)
         self.present()

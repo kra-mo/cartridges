@@ -20,33 +20,30 @@
 
 from pathlib import Path
 from time import time
+from typing import NamedTuple
 
 import yaml
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
-from src.importer.sources.source import (
-    SourceIterationResult,
-    SourceIterator,
-    URLExecutableSource,
-)
+from src.importer.sources.location import Location, LocationSubPath
+from src.importer.sources.source import SourceIterable, URLExecutableSource
 
 
-class BottlesSourceIterator(SourceIterator):
+class BottlesSourceIterable(SourceIterable):
     source: "BottlesSource"
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
 
-        data = self.source.data_location["library.yml"].read_text("utf-8")
+        data = self.source.locations.data["library.yml"].read_text("utf-8")
         library: dict = yaml.safe_load(data)
         added_time = int(time())
 
         for entry in library.values():
             # Build game
             values = {
-                "source": self.source.id,
+                "source": self.source.source_id,
                 "added": added_time,
                 "name": entry["name"],
                 "game_id": self.source.game_id_format.format(game_id=entry["id"]),
@@ -62,11 +59,11 @@ class BottlesSourceIterator(SourceIterator):
                 # as Cartridges can't access directories picked via Bottles' file picker portal
                 bottles_location = Path(
                     yaml.safe_load(
-                        self.source.data_location["data.yml"].read_text("utf-8")
+                        self.source.locations.data["data.yml"].read_text("utf-8")
                     )["custom_bottles_path"]
                 )
             except (FileNotFoundError, KeyError):
-                bottles_location = self.source.data_location.root / "bottles"
+                bottles_location = self.source.locations.data.root / "bottles"
 
             bottle_path = entry["bottle"]["path"]
 
@@ -80,23 +77,31 @@ class BottlesSourceIterator(SourceIterator):
             yield (game, additional_data)
 
 
+class BottlesLocations(NamedTuple):
+    data: Location
+
+
 class BottlesSource(URLExecutableSource):
     """Generic Bottles source"""
 
+    source_id = "bottles"
     name = _("Bottles")
-    iterator_class = BottlesSourceIterator
+    iterable_class = BottlesSourceIterable
     url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
     available_on = {"linux"}
 
-    data_location = Location(
-        schema_key="bottles-location",
-        candidates=(
-            shared.flatpak_dir / "com.usebottles.bottles" / "data" / "bottles",
-            shared.data_dir / "bottles/",
-            shared.home / ".local" / "share" / "bottles",
-        ),
-        paths={
-            "library.yml": (False, "library.yml"),
-            "data.yml": (False, "data.yml"),
-        },
+    locations = BottlesLocations(
+        Location(
+            schema_key="bottles-location",
+            candidates=(
+                shared.flatpak_dir / "com.usebottles.bottles" / "data" / "bottles",
+                shared.data_dir / "bottles/",
+                shared.home / ".local" / "share" / "bottles",
+            ),
+            paths={
+                "library.yml": LocationSubPath("library.yml"),
+                "data.yml": LocationSubPath("data.yml"),
+            },
+            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+        )
     )

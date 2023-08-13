@@ -21,15 +21,15 @@ import json
 import logging
 from json import JSONDecodeError
 from time import time
-from typing import Generator
+from typing import NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location
-from src.importer.sources.source import Source, SourceIterationResult, SourceIterator
+from src.importer.sources.location import Location, LocationSubPath
+from src.importer.sources.source import Source, SourceIterationResult, SourceIterable
 
 
-class LegendarySourceIterator(SourceIterator):
+class LegendarySourceIterable(SourceIterable):
     source: "LegendarySource"
 
     def game_from_library_entry(
@@ -43,7 +43,7 @@ class LegendarySourceIterator(SourceIterator):
         app_name = entry["app_name"]
         values = {
             "added": added_time,
-            "source": self.source.id,
+            "source": self.source.source_id,
             "name": entry["title"],
             "game_id": self.source.game_id_format.format(game_id=app_name),
             "executable": self.source.executable_format.format(app_name=app_name),
@@ -51,7 +51,7 @@ class LegendarySourceIterator(SourceIterator):
         data = {}
 
         # Get additional metadata from file (optional)
-        metadata_file = self.source.config_location["metadata"] / f"{app_name}.json"
+        metadata_file = self.source.locations.config["metadata"] / f"{app_name}.json"
         try:
             metadata = json.load(metadata_file.open())
             values["developer"] = metadata["metadata"]["developer"]
@@ -65,9 +65,9 @@ class LegendarySourceIterator(SourceIterator):
         game = Game(values)
         return (game, data)
 
-    def generator_builder(self) -> Generator[SourceIterationResult, None, None]:
+    def __iter__(self):
         # Open library
-        file = self.source.config_location["installed.json"]
+        file = self.source.locations.config["installed.json"]
         try:
             library: dict = json.load(file.open())
         except (JSONDecodeError, OSError):
@@ -89,20 +89,28 @@ class LegendarySourceIterator(SourceIterator):
             yield result
 
 
+class LegendaryLocations(NamedTuple):
+    config: Location
+
+
 class LegendarySource(Source):
+    source_id = "legendary"
     name = _("Legendary")
     executable_format = "legendary launch {app_name}"
     available_on = {"linux"}
+    iterable_class = LegendarySourceIterable
 
-    iterator_class = LegendarySourceIterator
-    config_location: Location = Location(
-        schema_key="legendary-location",
-        candidates=(
-            shared.config_dir / "legendary",
-            shared.home / ".config" / "legendary",
-        ),
-        paths={
-            "installed.json": (False, "installed.json"),
-            "metadata": (True, "metadata"),
-        },
+    locations = LegendaryLocations(
+        Location(
+            schema_key="legendary-location",
+            candidates=(
+                shared.config_dir / "legendary",
+                shared.home / ".config" / "legendary",
+            ),
+            paths={
+                "installed.json": LocationSubPath("installed.json"),
+                "metadata": LocationSubPath("metadata", True),
+            },
+            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+        )
     )

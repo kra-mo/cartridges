@@ -2,7 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 template $DetailsWindow : Adw.Window {
-    default-width: 500;
+    default-width: 480; // Same as Nautilus' properties window
     default-height: -1;
     modal: true;
 
@@ -97,34 +97,20 @@ template $DetailsWindow : Adw.Window {
                 }
             }
 
-            Adw.PreferencesGroup title_group {
-                title: _("Title");
-                description: _("The title of the game");
-
-                Entry name {
-                    accessibility {
-                        label: _("Title");
-                    }
+            Adw.PreferencesGroup {
+                Adw.EntryRow name {
+                    title: _("Title");
+                }
+                Adw.EntryRow developer {
+                    title: _("Developer (optional)");
                 }
             }
+            Adw.PreferencesGroup {
+                Adw.EntryRow executable {
+                    title: _("Executable");
 
-            Adw.PreferencesGroup developer_group {
-                title: _("Developer");
-                description: _("The developer or publisher (optional)");
-
-                Entry developer {
-                    accessibility {
-                        label: _("Developer");
-                    }
-                }
-            }
-
-            Adw.PreferencesGroup exec_group {
-                title: _("Executable");
-                description: _("File to open or command to run when launching the game");
-
-                [header-suffix]
-                Gtk.MenuButton exec_info_button {
+                    [suffix]
+                    Gtk.MenuButton exec_info_button {
                     valign: center;
                     icon-name: "help-about-symbolic";
                     tooltip-text: _("More Info");
@@ -150,10 +136,6 @@ template $DetailsWindow : Adw.Window {
                     ]
                 }
 
-                Entry executable {
-                    accessibility {
-                        label: _("Executable");
-                    }
                 }
             }
         }

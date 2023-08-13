@@ -43,6 +43,9 @@
     <key name="heroic-import-gog" type="b">
       <default>true</default>
     </key>
+    <key name="heroic-import-amazon" type="b">
+      <default>true</default>
+    </key>
     <key name="heroic-import-sideload" type="b">
       <default>true</default>
     </key>
@@ -63,6 +66,12 @@
     </key>
     <key name="legendary-location" type="s">
       <default>"~/.config/legendary/"</default>
+    </key>
+    <key name="retroarch" type="b">
+      <default>true</default>
+    </key>
+    <key name="retroarch-location" type="s">
+      <default>"~/.var/app/org.libretro.RetroArch/config/retroarch/"</default>
     </key>
     <key name="flatpak" type="b">
       <default>true</default>

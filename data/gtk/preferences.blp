@@ -138,6 +138,10 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           title: _("Import GOG Games");
         }
 
+        Adw.SwitchRow heroic_import_amazon_switch  {
+          title: _("Import Amazon Games");
+        }
+
         Adw.SwitchRow heroic_import_sideload_switch {
           title: _("Import Sideloaded Games");
         }
@@ -179,6 +183,20 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           title: _("Install Location");
 
           Button legendary_config_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+          }
+        }
+      }
+
+      Adw.ExpanderRow retroarch_expander_row {
+        title: _("RetroArch");
+        show-enable-switch: true;
+
+        Adw.ActionRow retroarch_config_action_row {
+          title: _("Install Location");
+
+          Button retroarch_config_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
           }

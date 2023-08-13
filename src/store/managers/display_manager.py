@@ -31,7 +31,7 @@ class DisplayManager(Manager):
     run_after = (SteamAPIManager, SGDBManager)
     signals = {"update-ready"}
 
-    def manager_logic(self, game: Game, _additional_data: dict) -> None:
+    def main(self, game: Game, _additional_data: dict) -> None:
         if game.get_parent():
             game.get_parent().get_parent().remove(game)
             if game.get_parent():

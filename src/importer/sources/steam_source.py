@@ -18,28 +18,25 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import logging
 import re
 from pathlib import Path
 from time import time
-from typing import Iterable
+from typing import Iterable, NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import (
-    SourceIterationResult,
-    SourceIterator,
-    URLExecutableSource,
-)
+from src.importer.sources.location import Location, LocationSubPath
+from src.importer.sources.source import SourceIterable, URLExecutableSource
 from src.utils.steam import SteamFileHelper, SteamInvalidManifestError
-from src.importer.sources.location import Location
 
 
-class SteamSourceIterator(SourceIterator):
+class SteamSourceIterable(SourceIterable):
     source: "SteamSource"
 
     def get_manifest_dirs(self) -> Iterable[Path]:
         """Get dirs that contain steam app manifests"""
-        libraryfolders_path = self.source.data_location["libraryfolders.vdf"]
+        libraryfolders_path = self.source.locations.data["libraryfolders.vdf"]
         with open(libraryfolders_path, "r", encoding="utf-8") as file:
             contents = file.read()
         return [
@@ -62,7 +59,7 @@ class SteamSourceIterator(SourceIterator):
             )
         return manifests
 
-    def generator_builder(self) -> SourceIterationResult:
+    def __iter__(self):
         """Generator method producing games"""
         appid_cache = set()
         manifests = self.get_manifests()
@@ -74,17 +71,20 @@ class SteamSourceIterator(SourceIterator):
             steam = SteamFileHelper()
             try:
                 local_data = steam.get_manifest_data(manifest)
-            except (OSError, SteamInvalidManifestError):
+            except (OSError, SteamInvalidManifestError) as error:
+                logging.debug("Couldn't load appmanifest %s", manifest, exc_info=error)
                 continue
 
             # Skip non installed games
             installed_mask = 4
             if not int(local_data["stateflags"]) & installed_mask:
+                logging.debug("Skipped %s: not installed", manifest)
                 continue
 
             # Skip duplicate appids
             appid = local_data["appid"]
             if appid in appid_cache:
+                logging.debug("Skipped %s: appid already seen during import", manifest)
                 continue
             appid_cache.add(appid)
 
@@ -92,7 +92,7 @@ class SteamSourceIterator(SourceIterator):
             values = {
                 "added": added_time,
                 "name": local_data["name"],
-                "source": self.source.id,
+                "source": self.source.source_id,
                 "game_id": self.source.game_id_format.format(game_id=appid),
                 "executable": self.source.executable_format.format(game_id=appid),
             }
@@ -100,7 +100,7 @@ class SteamSourceIterator(SourceIterator):
 
             # Add official cover image
             image_path = (
-                self.source.data_location["librarycache"]
+                self.source.locations.data["librarycache"]
                 / f"{appid}_library_600x900.jpg"
             )
             additional_data = {"local_image_path": image_path, "steam_appid": appid}
@@ -109,22 +109,30 @@ class SteamSourceIterator(SourceIterator):
             yield (game, additional_data)
 
 
+class SteamLocations(NamedTuple):
+    data: Location
+
+
 class SteamSource(URLExecutableSource):
+    source_id = "steam"
     name = _("Steam")
     available_on = {"linux", "win32"}
-    iterator_class = SteamSourceIterator
+    iterable_class = SteamSourceIterable
     url_format = "steam://rungameid/{game_id}"
 
-    data_location = Location(
-        schema_key="steam-location",
-        candidates=(
-            shared.home / ".steam" / "steam",
-            shared.data_dir / "Steam",
-            shared.flatpak_dir / "com.valvesoftware.Steam" / "data" / "Steam",
-            shared.programfiles32_dir / "Steam",
-        ),
-        paths={
-            "libraryfolders.vdf": (False, "steamapps/libraryfolders.vdf"),
-            "librarycache": (True, "appcache/librarycache"),
-        },
+    locations = SteamLocations(
+        Location(
+            schema_key="steam-location",
+            candidates=(
+                shared.home / ".steam" / "steam",
+                shared.data_dir / "Steam",
+                shared.flatpak_dir / "com.valvesoftware.Steam" / "data" / "Steam",
+                shared.programfiles32_dir / "Steam",
+            ),
+            paths={
+                "libraryfolders.vdf": LocationSubPath("steamapps/libraryfolders.vdf"),
+                "librarycache": LocationSubPath("appcache/librarycache", True),
+            },
+            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+        )
     )
