@@ -75,10 +75,12 @@ class Source(Iterable):
     def is_available(self):
         return sys.platform in self.available_on
 
-    @property
     @abstractmethod
-    def executable_format(self) -> str:
-        """The executable format used to construct game executables"""
+    def make_executable(self, *args, **kwargs) -> str:
+        """
+        Create a game executable command.
+        Should be implemented by child classes.
+        """
 
     def __iter__(self) -> Generator[SourceIterationResult, None, None]:
         """
@@ -93,8 +95,21 @@ class Source(Iterable):
         return iter(self.iterable_class(self))
 
 
+class ExecutableFormatSource(Source):
+    """Source class that uses a simple executable format to start games"""
+
+    @property
+    @abstractmethod
+    def executable_format(self) -> str:
+        """The executable format used to construct game executables"""
+
+    def make_executable(self, *args, **kwargs) -> str:
+        """Use the executable format to"""
+        return self.executable_format.format(args, kwargs)
+
+
 # pylint: disable=abstract-method
-class URLExecutableSource(Source):
+class URLExecutableSource(ExecutableFormatSource):
     """Source class that use custom URLs to start games"""
 
     url_format: str

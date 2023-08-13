@@ -26,7 +26,7 @@ from gi.repository import GLib, Gtk
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location, LocationSubPath
-from src.importer.sources.source import Source, SourceIterable
+from src.importer.sources.source import ExecutableFormatSource, SourceIterable
 
 
 class FlatpakSourceIterable(SourceIterable):
@@ -116,7 +116,7 @@ class FlatpakLocations(NamedTuple):
     data: Location
 
 
-class FlatpakSource(Source):
+class FlatpakSource(ExecutableFormatSource):
     """Generic Flatpak source"""
 
     source_id = "flatpak"

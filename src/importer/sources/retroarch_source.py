@@ -26,6 +26,8 @@ from pathlib import Path
 from time import time
 from typing import NamedTuple
 
+from urllib.parse import quote
+
 from src import shared
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
@@ -103,7 +105,7 @@ class RetroarchSourceIterable(SourceIterable):
                     "added": added_time,
                     "name": item["label"],
                     "game_id": self.source.game_id_format.format(game_id=game_id),
-                    "executable": self.source.executable_format.format(
+                    "executable": self.source.make_executable(
                         rom_path=item["path"],
                         core_path=core_path,
                     ),
@@ -168,14 +170,6 @@ class RetroarchSource(Source):
         )
     )
 
-    @property
-    def executable_format(self):
-        self.locations.config.resolve()
-        is_flatpak = self.locations.config.root.is_relative_to(shared.flatpak_dir)
-        base = "flatpak run org.libretro.RetroArch" if is_flatpak else "retroarch"
-        args = '-L "{core_path}" "{rom_path}"'
-        return f"{base} {args}"
-
     def __init__(self) -> None:
         super().__init__()
         try:
@@ -214,3 +208,36 @@ class RetroarchSource(Source):
                     return Path(f"{library_path}/steamapps/common/RetroArch")
         # Not found
         raise ValueError("RetroArch not found in Steam library")
+
+    def make_executable(self, rom_path: Path, core_path: Path) -> str:
+        """
+        Generate an executable command from the rom path and core path,
+        depending on the source's location.
+
+        The format depends on RetroArch's installation method,
+        detected from the source config location
+
+        :param Path rom_path: the game's rom path
+        :param Path core_path: the game's core path
+        :return str: an executable command
+        """
+
+        self.locations.config.resolve()
+        args = f'-L "{core_path}" "{rom_path}"'
+
+        # Steam RetroArch
+        # (Must check before Flatpak, because Steam itself can be installed as one)
+        if self.locations.config.root.parent.parent.name == "steamapps":
+            uri = "steam://run/1118310//" + quote(args) + "/"
+            return f"xdg-open {uri}"
+
+        # Flatpak RetroArch
+        if self.locations.config.root.is_relative_to(shared.flatpak_dir):
+            return f"flatpak run org.libretro.RetroArch {args}"
+
+        # TODO executable override for non-sandboxed sources
+
+        # Linux native RetroArch
+        return f"retroarch {args}"
+
+        # TODO implement for windows (needs override)
