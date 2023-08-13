@@ -173,7 +173,7 @@ class CartridgesApplication(Adw.Application):
             developers=[
                 "kramo https://kramo.hu",
                 "Geoffrey Coulaud https://geoffrey-coulaud.fr",
-                "Rilic https://github.com/RilicTheFox",
+                "Rilic https://rilic.red",
                 "Arcitec https://github.com/Arcitec",
                 "Paweł Lidwin https://github.com/imLinguin",
                 "Domenico https://github.com/Domefemia",
