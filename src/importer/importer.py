@@ -49,7 +49,8 @@ class Importer(ErrorProducer):
     n_pipelines_done: int = 0
     game_pipelines: set[Pipeline] = None
 
-    removed_games: set[Game] = set()
+    removed_game_ids: set[str] = set()
+    imported_game_ids: set[str] = set()
 
     def __init__(self):
         super().__init__()
@@ -246,12 +247,13 @@ class Importer(ErrorProducer):
             game.removed = True
             game.save()
             game.update()
-            self.removed_games.add(game)
+            self.removed_game_ids.add(game.game_id)
 
     def import_callback(self):
         """Callback called when importing has finished"""
         logging.info("Import done")
         self.remove_games()
+        self.imported_game_ids = shared.store.new_game_ids
         shared.store.new_game_ids = set()
         shared.store.duplicate_game_ids = set()
         self.import_dialog.close()
@@ -311,27 +313,56 @@ class Importer(ErrorProducer):
 
         dialog.present()
 
+    def undo_import(self, *_args):
+        for game_id in self.imported_game_ids:
+            shared.store[game_id].removed = True
+            shared.store[game_id].update()
+            shared.store[game_id].save()
+
+        for game_id in self.removed_game_ids:
+            shared.store[game_id].removed = False
+            shared.store[game_id].update()
+            shared.store[game_id].save()
+
+        self.removed_game_ids = set()
+        self.summary_toast.dismiss()
+
     def create_summary_toast(self):
-        """N games imported toast"""
+        """N games imported, removed toast"""
 
         toast = Adw.Toast(timeout=0, priority=Adw.ToastPriority.HIGH)
 
-        if self.n_games_added == 0:
-            toast.set_title(_("No new games found"))
-            toast.set_button_label(_("Preferences"))
-            toast.connect(
-                "button-clicked",
-                self.dialog_response_callback,
-                "open_preferences",
-                "import",
-            )
+        if not self.n_games_added:
+            toast_title = _("No new games found")
+
+            if not self.removed_game_ids:
+                toast.set_button_label(_("Preferences"))
+                toast.connect(
+                    "button-clicked",
+                    self.dialog_response_callback,
+                    "open_preferences",
+                    "import",
+                )
 
         elif self.n_games_added == 1:
-            toast.set_title(_("1 game imported"))
+            toast_title = _("1 game imported")
 
         elif self.n_games_added > 1:
             # The variable is the number of games
-            toast.set_title(_("{} games imported").format(self.n_games_added))
+            toast_title = _("{} games imported").format(self.n_games_added)
+
+        if (removed_length := len(self.removed_game_ids)) == 1:
+            toast_title += ", " + _("1 game removed")
+
+        elif removed_length > 1:
+            # The variable is the number of games
+            toast_title += ", " + _("{} games removed").format(removed_length)
+
+        if self.n_games_added or self.removed_game_ids:
+            toast.set_button_label(_("Undo"))
+            toast.connect("button-clicked", self.undo_import)
+
+        toast.set_title(toast_title)
 
         shared.win.toast_overlay.add_toast(toast)
         return toast

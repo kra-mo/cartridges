@@ -127,6 +127,7 @@ class Store:
                 game.game_id,
             )
             self.cleanup_game(stored_game)
+            self.new_game_ids.add(game.game_id)
         else:
             # Duplicate game, ignore it
             logging.debug("Duplicate store game %s (%s)", game.name, game.game_id)
