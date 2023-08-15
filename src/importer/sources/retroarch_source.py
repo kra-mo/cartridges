@@ -170,6 +170,11 @@ class RetroarchSource(Source):
 
     def __init__(self) -> None:
         super().__init__()
+        # TODO enable when RetroArch Steam's executable issue is resolved
+        # self.add_steam_location_candidate()
+
+    def add_steam_location_candidate(self) -> None:
+        """Add the Steam RetroAcrh location to the config candidates"""
         try:
             self.locations.config.candidates.append(self.get_steam_location())
         except (OSError, KeyError, UnresolvableLocationError):
@@ -225,16 +230,10 @@ class RetroarchSource(Source):
 
         # Steam RetroArch
         # (Must check before Flatpak, because Steam itself can be installed as one)
-        if self.locations.config.root.parent.parent.name == "steamapps":
-            # TODO fix the RetroArch Steam arguments
-            # It seems that the space after "-L" is parsed as the value for that arg.
-            # The URI protocol is proprietary, a community doc is available:
-            # https://developer.valvesoftware.com/wiki/Steam_browser_protocol
-            # ... But it doesn't sepcify HOW the args should be formatted.
-            # Space delimited? Quoted individually? URL-Encoded?
-            # I don't know. It no workie :D
-            uri = f"steam://run/1118310//{args}/"
-            return f'xdg-open "{uri}"'
+        # TODO enable if/when we can pass args with steam://run
+        # if self.locations.config.root.parent.parent.name == "steamapps":
+        #     uri = f"steam://run/1118310//{args}/"
+        #     return f'xdg-open "{uri}"'
 
         # Flatpak RetroArch
         if self.locations.config.root.is_relative_to(shared.flatpak_dir):
