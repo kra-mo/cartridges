@@ -69,6 +69,7 @@ class Game(Gtk.Box):
         self.version = shared.SPEC_VERSION
 
         self.update_values(data)
+        self.base_source = self.source.split("_")[0]
 
         self.set_play_icon()
 
