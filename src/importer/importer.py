@@ -355,11 +355,12 @@ class Importer(ErrorProducer):
             toast_title = _("{} games imported").format(self.n_games_added)
 
         if (removed_length := len(self.removed_game_ids)) == 1:
-            toast_title += ", " + _("1 game removed")
+            # A single game removed
+            toast_title += ", " + _("1 removed")
 
         elif removed_length > 1:
-            # The variable is the number of games
-            toast_title += ", " + _("{} games removed").format(removed_length)
+            # The variable is the number of games removed
+            toast_title += ", " + _("{} removed").format(removed_length)
 
         if self.n_games_added or self.removed_game_ids:
             toast.set_button_label(_("Undo"))
