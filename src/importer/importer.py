@@ -324,8 +324,11 @@ class Importer(ErrorProducer):
             shared.store[game_id].update()
             shared.store[game_id].save()
 
+        self.imported_game_ids = set()
         self.removed_game_ids = set()
         self.summary_toast.dismiss()
+
+        logging.info("Import undone")
 
     def create_summary_toast(self):
         """N games imported, removed toast"""

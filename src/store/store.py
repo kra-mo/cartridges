@@ -91,13 +91,20 @@ class Store:
             self.pipeline_managers.discard(self.managers[manager_type])
 
     def cleanup_game(self, game: Game) -> None:
-        """Remove a game's files"""
+        """Remove a game's files, dismiss any loose toasts"""
         for path in (
             shared.games_dir / f"{game.game_id}.json",
             shared.covers_dir / f"{game.game_id}.tiff",
             shared.covers_dir / f"{game.game_id}.gif",
         ):
             path.unlink(missing_ok=True)
+
+        # TODO: don't run this if the state is startup
+        for undo in ("remove", "hide"):
+            try:
+                shared.win.toasts[(game, undo)].dismiss()
+            except KeyError:
+                pass
 
     def add_game(
         self, game: Game, additional_data: dict, run_pipeline=True
