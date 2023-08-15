@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
-from typing import MutableMapping, Generator, Any
+from typing import Any, Generator, MutableMapping
 
 from src import shared
 from src.game import Game
@@ -33,12 +33,16 @@ class Store:
     pipeline_managers: set[Manager]
     pipelines: dict[str, Pipeline]
     source_games: MutableMapping[str, MutableMapping[str, Game]]
+    new_game_ids: set[str]
+    duplicate_game_ids: set[str]
 
     def __init__(self) -> None:
         self.managers = {}
         self.pipeline_managers = set()
         self.pipelines = {}
         self.source_games = {}
+        self.new_game_ids = set()
+        self.duplicate_game_ids = set()
 
     def __contains__(self, obj: object) -> bool:
         """Check if the game is present in the store with the `in` keyword"""
@@ -114,6 +118,7 @@ class Store:
         if not stored_game:
             # New game, do as normal
             logging.debug("New store game %s (%s)", game.name, game.game_id)
+            self.new_game_ids.add(game.game_id)
         elif stored_game.removed:
             # Will replace a removed game, cleanup its remains
             logging.debug(
@@ -125,6 +130,7 @@ class Store:
         else:
             # Duplicate game, ignore it
             logging.debug("Duplicate store game %s (%s)", game.name, game.game_id)
+            self.duplicate_game_ids.add(game.game_id)
             return None
 
         # Connect signals

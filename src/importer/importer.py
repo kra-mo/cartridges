@@ -49,8 +49,15 @@ class Importer(ErrorProducer):
     n_pipelines_done: int = 0
     game_pipelines: set[Pipeline] = None
 
+    removed_games: set[Game] = set()
+
     def __init__(self):
         super().__init__()
+
+        # TODO: make this stateful
+        shared.store.new_game_ids = set()
+        shared.store.duplicate_game_ids = set()
+
         self.game_pipelines = set()
         self.sources = set()
 
@@ -217,9 +224,36 @@ class Importer(ErrorProducer):
         if self.finished:
             self.import_callback()
 
+    def remove_games(self):
+        """Set removed to True for missing games"""
+        if not shared.schema.get_boolean("remove-missing"):
+            return
+
+        for game in shared.store:
+            if game.removed:
+                continue
+            if game.source == "imported":
+                continue
+            if not shared.schema.get_boolean(game.base_source):
+                continue
+            if game.game_id in shared.store.duplicate_game_ids:
+                continue
+            if game.game_id in shared.store.new_game_ids:
+                continue
+
+            logging.debug("Removing missing game %s (%s)", game.name, game.game_id)
+
+            game.removed = True
+            game.save()
+            game.update()
+            self.removed_games.add(game)
+
     def import_callback(self):
         """Callback called when importing has finished"""
         logging.info("Import done")
+        self.remove_games()
+        shared.store.new_game_ids = set()
+        shared.store.duplicate_game_ids = set()
         self.import_dialog.close()
         self.summary_toast = self.create_summary_toast()
         self.create_error_dialog()

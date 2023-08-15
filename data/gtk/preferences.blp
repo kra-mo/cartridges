@@ -85,6 +85,19 @@ template $PreferencesWindow : Adw.PreferencesWindow {
     title: _("Import");
     icon-name: "document-save-symbolic";
 
+    Adw.PreferencesGroup import_behavior_group {
+      title: _("Behavior");
+
+      Adw.ActionRow {
+        title: _("Remove Missing Games");
+        activatable-widget: remove_missing_switch;
+
+        Switch remove_missing_switch {
+          valign: center;
+        }
+      }
+    }
+
     Adw.PreferencesGroup sources_group {
       title: _("Sources");
 

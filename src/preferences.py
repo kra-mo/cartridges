@@ -52,6 +52,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     cover_launches_game_switch = Gtk.Template.Child()
     high_quality_images_switch = Gtk.Template.Child()
 
+    remove_missing_switch = Gtk.Template.Child()
+
     steam_expander_row = Gtk.Template.Child()
     steam_data_action_row = Gtk.Template.Child()
     steam_data_file_chooser_button = Gtk.Template.Child()
@@ -184,6 +186,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "exit-after-launch",
                 "cover-launches-game",
                 "high-quality-images",
+                "remove-missing",
                 "lutris-import-steam",
                 "lutris-import-flatpak",
                 "heroic-import-epic",
