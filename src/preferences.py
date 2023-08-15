@@ -255,20 +255,16 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         shared.win.get_application().quit()
 
-    def update_source_action_row_paths(self, source):
+    def update_source_action_row_paths(self, source: Source):
         """Set the dir subtitle for a source's action rows"""
-        for location in ("data", "config", "cache"):
+        for location_name, location in source.locations._asdict().items():
             # Get the action row to subtitle
             action_row = getattr(
-                self, f"{source.source_id}_{location}_action_row", None
+                self, f"{source.source_id}_{location_name}_action_row", None
             )
             if not action_row:
                 continue
-
-            infix = "-cache" if location == "cache" else ""
-            key = f"{source.source_id}{infix}-location"
-            path = Path(shared.schema.get_string(key)).expanduser()
-
+            path = Path(shared.schema.get_string(location.schema_key)).expanduser()
             # Remove the path prefix if picked via Flatpak portal
             subtitle = re.sub("/run/user/\\d*/doc/.*/", "", str(path))
             action_row.set_subtitle(subtitle)
@@ -338,28 +334,17 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 return
 
             # Good picked location
-            location = getattr(source.locations, location_name)
+            location = source.locations._asdict()[location_name]
             if location.check_candidate(path):
-                # Set the schema
-                match location_name:
-                    case "config" | "data":
-                        infix = ""
-                    case _:
-                        infix = f"-{location_name}"
-                key = f"{source.source_id}{infix}-location"
-                value = str(path)
-                shared.schema.set_string(key, value)
-                # Update the row
+                shared.schema.set_string(location.schema_key, str(path))
                 self.update_source_action_row_paths(source)
-
                 if self.warning_menu_buttons.get(source.source_id):
                     action_row = getattr(
                         self, f"{source.source_id}_{location_name}_action_row", None
                     )
                     action_row.remove(self.warning_menu_buttons[source.source_id])
                     self.warning_menu_buttons.pop(source.source_id)
-
-                logging.debug("User-set value for schema key %s: %s", key, value)
+                logging.debug("User-set value for %s is %s", location.schema_key, path)
 
             # Bad picked location, inform user
             else:

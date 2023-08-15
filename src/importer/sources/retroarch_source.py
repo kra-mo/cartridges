@@ -145,28 +145,7 @@ class RetroarchSource(Source):
     available_on = {"linux"}
     iterable_class = RetroarchSourceIterable
 
-    locations = RetroarchLocations(
-        Location(
-            schema_key="retroarch-location",
-            candidates=[
-                shared.flatpak_dir / "org.libretro.RetroArch" / "config" / "retroarch",
-                shared.config_dir / "retroarch",
-                shared.home / ".config" / "retroarch",
-                # TODO: Windows support, waiting for executable path setting improvement
-                # Path("C:\\RetroArch-Win64"),
-                # Path("C:\\RetroArch-Win32"),
-                # TODO: UWP support (URL handler - https://github.com/libretro/RetroArch/pull/13563)
-                # shared.local_appdata_dir
-                # / "Packages"
-                # / "1e4cf179-f3c2-404f-b9f3-cb2070a5aad8_8ngdn9a6dx1ma"
-                # / "LocalState",
-            ],
-            paths={
-                "retroarch.cfg": LocationSubPath("retroarch.cfg"),
-            },
-            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
-        )
-    )
+    locations: RetroarchLocations
 
     @property
     def executable_format(self):
@@ -175,15 +154,6 @@ class RetroarchSource(Source):
         base = "flatpak run org.libretro.RetroArch" if is_flatpak else "retroarch"
         args = '-L "{core_path}" "{rom_path}"'
         return f"{base} {args}"
-
-    def __init__(self) -> None:
-        super().__init__()
-        try:
-            self.locations.config.candidates.append(self.get_steam_location())
-        except (OSError, KeyError, UnresolvableLocationError):
-            logging.debug("Steam isn't installed")
-        except ValueError as error:
-            logging.debug("RetroArch Steam location candiate not found", exc_info=error)
 
     def get_steam_location(self) -> str:
         """
@@ -214,3 +184,37 @@ class RetroarchSource(Source):
                     return Path(f"{library_path}/steamapps/common/RetroArch")
         # Not found
         raise ValueError("RetroArch not found in Steam library")
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = RetroarchLocations(
+            Location(
+                schema_key="retroarch-location",
+                candidates=[
+                    shared.flatpak_dir
+                    / "org.libretro.RetroArch"
+                    / "config"
+                    / "retroarch",
+                    shared.config_dir / "retroarch",
+                    shared.home / ".config" / "retroarch",
+                    # TODO: Windows support, waiting for executable path setting improvement
+                    # Path("C:\\RetroArch-Win64"),
+                    # Path("C:\\RetroArch-Win32"),
+                    # TODO: UWP support (URL handler - https://github.com/libretro/RetroArch/pull/13563)
+                    # shared.local_appdata_dir
+                    # / "Packages"
+                    # / "1e4cf179-f3c2-404f-b9f3-cb2070a5aad8_8ngdn9a6dx1ma"
+                    # / "LocalState",
+                ],
+                paths={
+                    "retroarch.cfg": LocationSubPath("retroarch.cfg"),
+                },
+                invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+            )
+        )
+        try:
+            self.locations.config.candidates.append(self.get_steam_location())
+        except (OSError, KeyError, UnresolvableLocationError):
+            logging.debug("Steam isn't installed")
+        except ValueError as error:
+            logging.debug("RetroArch Steam location candiate not found", exc_info=error)
