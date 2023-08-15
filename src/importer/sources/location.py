@@ -1,7 +1,7 @@
 import logging
-from pathlib import Path
-from typing import Mapping, Iterable, NamedTuple
 from os import PathLike
+from pathlib import Path
+from typing import Iterable, Mapping, NamedTuple
 
 from src import shared
 
@@ -70,7 +70,7 @@ class Location:
 
     def resolve(self) -> None:
         """Choose a root path from the candidates for the location.
-        If none fits, raise a UnresolvableLocationError"""
+        If none fits, raise an UnresolvableLocationError"""
 
         if self.root is not None:
             return

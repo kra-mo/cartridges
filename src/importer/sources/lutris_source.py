@@ -100,33 +100,37 @@ class LutrisSource(URLExecutableSource):
 
     # FIXME possible bug: config picks ~/.var... and cache picks ~/.local...
 
-    locations = LutrisLocations(
-        Location(
-            schema_key="lutris-location",
-            candidates=(
-                shared.flatpak_dir / "net.lutris.Lutris" / "data" / "lutris",
-                shared.data_dir / "lutris",
-                shared.home / ".local" / "share" / "lutris",
-            ),
-            paths={
-                "pga.db": LocationSubPath("pga.db"),
-            },
-            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
-        ),
-        Location(
-            schema_key="lutris-cache-location",
-            candidates=(
-                shared.flatpak_dir / "net.lutris.Lutris" / "cache" / "lutris",
-                shared.cache_dir / "lutris",
-                shared.home / ".cache" / "lutris",
-            ),
-            paths={
-                "coverart": LocationSubPath("coverart", True),
-            },
-            invalid_subtitle=Location.CACHE_INVALID_SUBTITLE,
-        ),
-    )
+    locations: LutrisLocations
 
     @property
     def game_id_format(self):
         return self.source_id + "_{runner}_{game_id}"
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = LutrisLocations(
+            Location(
+                schema_key="lutris-location",
+                candidates=(
+                    shared.flatpak_dir / "net.lutris.Lutris" / "data" / "lutris",
+                    shared.data_dir / "lutris",
+                    shared.home / ".local" / "share" / "lutris",
+                ),
+                paths={
+                    "pga.db": LocationSubPath("pga.db"),
+                },
+                invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+            ),
+            Location(
+                schema_key="lutris-cache-location",
+                candidates=(
+                    shared.flatpak_dir / "net.lutris.Lutris" / "cache" / "lutris",
+                    shared.cache_dir / "lutris",
+                    shared.home / ".cache" / "lutris",
+                ),
+                paths={
+                    "coverart": LocationSubPath("coverart", True),
+                },
+                invalid_subtitle=Location.CACHE_INVALID_SUBTITLE,
+            ),
+        )

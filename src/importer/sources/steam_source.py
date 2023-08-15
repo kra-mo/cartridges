@@ -120,19 +120,25 @@ class SteamSource(URLExecutableSource):
     iterable_class = SteamSourceIterable
     url_format = "steam://rungameid/{game_id}"
 
-    locations = SteamLocations(
-        Location(
-            schema_key="steam-location",
-            candidates=(
-                shared.home / ".steam" / "steam",
-                shared.data_dir / "Steam",
-                shared.flatpak_dir / "com.valvesoftware.Steam" / "data" / "Steam",
-                shared.programfiles32_dir / "Steam",
-            ),
-            paths={
-                "libraryfolders.vdf": LocationSubPath("steamapps/libraryfolders.vdf"),
-                "librarycache": LocationSubPath("appcache/librarycache", True),
-            },
-            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+    locations: SteamLocations
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = SteamLocations(
+            Location(
+                schema_key="steam-location",
+                candidates=(
+                    shared.home / ".steam" / "steam",
+                    shared.data_dir / "Steam",
+                    shared.flatpak_dir / "com.valvesoftware.Steam" / "data" / "Steam",
+                    shared.programfiles32_dir / "Steam",
+                ),
+                paths={
+                    "libraryfolders.vdf": LocationSubPath(
+                        "steamapps/libraryfolders.vdf"
+                    ),
+                    "librarycache": LocationSubPath("appcache/librarycache", True),
+                },
+                invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+            )
         )
-    )

@@ -20,7 +20,7 @@
 import sys
 from abc import abstractmethod
 from collections.abc import Iterable
-from typing import Any, Generator, Collection
+from typing import Any, Collection, Generator
 
 from src.game import Game
 from src.importer.sources.location import Location
@@ -56,6 +56,9 @@ class Source(Iterable):
     variant: str = None
     available_on: set[str] = set()
     iterable_class: type[SourceIterable]
+
+    # NOTE: Locations must be set at __init__ time, not in the class definition.
+    # They must not be shared between source instances.
     locations: Collection[Location]
 
     @property
@@ -85,10 +88,7 @@ class Source(Iterable):
         Get an iterator for the source
         :raises UnresolvableLocationError: Not iterable if any of the locations are unresolvable
         """
-        for location_name in ("data", "cache", "config"):
-            location = getattr(self, f"{location_name}_location", None)
-            if location is None:
-                continue
+        for location in self.locations:
             location.resolve()
         return iter(self.iterable_class(self))
 

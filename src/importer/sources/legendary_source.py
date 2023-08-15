@@ -26,7 +26,7 @@ from typing import NamedTuple
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location, LocationSubPath
-from src.importer.sources.source import Source, SourceIterationResult, SourceIterable
+from src.importer.sources.source import Source, SourceIterable, SourceIterationResult
 
 
 class LegendarySourceIterable(SourceIterable):
@@ -100,17 +100,21 @@ class LegendarySource(Source):
     available_on = {"linux"}
     iterable_class = LegendarySourceIterable
 
-    locations = LegendaryLocations(
-        Location(
-            schema_key="legendary-location",
-            candidates=(
-                shared.config_dir / "legendary",
-                shared.home / ".config" / "legendary",
-            ),
-            paths={
-                "installed.json": LocationSubPath("installed.json"),
-                "metadata": LocationSubPath("metadata", True),
-            },
-            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+    locations: LegendaryLocations
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = LegendaryLocations(
+            Location(
+                schema_key="legendary-location",
+                candidates=(
+                    shared.config_dir / "legendary",
+                    shared.home / ".config" / "legendary",
+                ),
+                paths={
+                    "installed.json": LocationSubPath("installed.json"),
+                    "metadata": LocationSubPath("metadata", True),
+                },
+                invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+            )
         )
-    )
