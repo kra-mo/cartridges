@@ -331,13 +331,19 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def on_undo_action(self, _widget, game=None, undo=None):
         if not game:  # If the action was activated via Ctrl + Z
-            try:
-                game = tuple(self.toasts.keys())[-1][0]
-                undo = tuple(self.toasts.keys())[-1][1]
-            except IndexError:
-                return
+            if shared.importer.imported_game_ids or shared.importer.removed_game_ids:
+                undo = "import"
+            else:
+                try:
+                    game = tuple(self.toasts.keys())[-1][0]
+                    undo = tuple(self.toasts.keys())[-1][1]
+                except IndexError:
+                    return
 
-        if undo == "hide":
+        if undo == "import":
+            shared.importer.undo_import()
+
+        elif undo == "hide":
             game.toggle_hidden(False)
 
         elif undo == "remove":
@@ -345,8 +351,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
             game.save()
             game.update()
 
-        self.toasts[(game, undo)].dismiss()
-        self.toasts.pop((game, undo))
+        if game:
+            self.toasts[(game, undo)].dismiss()
+            self.toasts.pop((game, undo))
 
     def on_open_menu_action(self, *_args):
         if self.stack.get_visible_child() == self.library_view:

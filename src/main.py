@@ -216,33 +216,33 @@ class CartridgesApplication(Adw.Application):
         DetailsWindow()
 
     def on_import_action(self, *_args):
-        importer = Importer()
+        shared.importer = Importer()
 
         if shared.schema.get_boolean("lutris"):
-            importer.add_source(LutrisSource())
+            shared.importer.add_source(LutrisSource())
 
         if shared.schema.get_boolean("steam"):
-            importer.add_source(SteamSource())
+            shared.importer.add_source(SteamSource())
 
         if shared.schema.get_boolean("heroic"):
-            importer.add_source(HeroicSource())
+            shared.importer.add_source(HeroicSource())
 
         if shared.schema.get_boolean("bottles"):
-            importer.add_source(BottlesSource())
+            shared.importer.add_source(BottlesSource())
 
         if shared.schema.get_boolean("flatpak"):
-            importer.add_source(FlatpakSource())
+            shared.importer.add_source(FlatpakSource())
 
         if shared.schema.get_boolean("itch"):
-            importer.add_source(ItchSource())
+            shared.importer.add_source(ItchSource())
 
         if shared.schema.get_boolean("legendary"):
-            importer.add_source(LegendarySource())
+            shared.importer.add_source(LegendarySource())
 
         if shared.schema.get_boolean("retroarch"):
-            importer.add_source(RetroarchSource())
+            shared.importer.add_source(RetroarchSource())
 
-        importer.run()
+        shared.importer.run()
 
     def on_remove_game_action(self, *_args):
         self.win.active_game.remove_game()
