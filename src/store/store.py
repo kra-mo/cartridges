@@ -103,6 +103,7 @@ class Store:
         for undo in ("remove", "hide"):
             try:
                 shared.win.toasts[(game, undo)].dismiss()
+                shared.win.toasts.pop((game, undo))
             except KeyError:
                 pass
 

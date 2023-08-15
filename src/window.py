@@ -331,7 +331,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def on_undo_action(self, _widget, game=None, undo=None):
         if not game:  # If the action was activated via Ctrl + Z
-            if shared.importer.imported_game_ids or shared.importer.removed_game_ids:
+            if shared.importer and (
+                shared.importer.imported_game_ids or shared.importer.removed_game_ids
+            ):
                 undo = "import"
             else:
                 try:
