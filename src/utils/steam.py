@@ -107,7 +107,11 @@ class SteamFileHelper:
                 raise SteamInvalidManifestError()
             data[key] = match.group(1)
 
-        return SteamManifestData(**data)
+        return SteamManifestData(
+            name=data["name"],
+            appid=data["appid"],
+            stateflags=data["stateflags"],
+        )
 
 
 class SteamAPIHelper:
