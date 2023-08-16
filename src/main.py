@@ -144,7 +144,10 @@ class CartridgesApplication(Adw.Application):
     def load_games_from_disk(self):
         if shared.games_dir.is_dir():
             for game_file in shared.games_dir.iterdir():
-                data = json.load(game_file.open())
+                try:
+                    data = json.load(game_file.open())
+                except (OSError, json.decoder.JSONDecodeError):
+                    continue
                 game = Game(data)
                 shared.store.add_game(game, {"skip_save": True})
 
