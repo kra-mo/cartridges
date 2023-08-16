@@ -48,6 +48,7 @@ class DetailsWindow(Adw.Window):
     developer = Gtk.Template.Child()
     executable = Gtk.Template.Child()
 
+    exec_info_button = Gtk.Template.Child()
     exec_info_label = Gtk.Template.Child()
     exec_info_popover = Gtk.Template.Child()
 
@@ -114,10 +115,18 @@ class DetailsWindow(Adw.Window):
 
         self.exec_info_label.set_label(exec_info_text)
 
-        def clear_info_selection(*_args: Any) -> None:
-            self.exec_info_label.select_region(-1, -1)
+        self.exec_info_popover.set_focusable(True)
+        self.exec_info_popover.update_property(
+            (Gtk.AccessibleProperty.LABEL,),
+            (
+                exec_info_text.replace("<tt>", "").replace("</tt>", ""),
+            ),  # Remove formatting, else the screen reader reads it
+        )
 
-        self.exec_info_popover.connect("show", clear_info_selection)
+        def set_exec_info_a11y_label(*_args: Any) -> None:
+            self.set_focus(self.exec_info_popover)
+
+        self.exec_info_popover.connect("show", set_exec_info_a11y_label)
 
         self.cover_button_delete.connect("clicked", self.delete_pixbuf)
         self.cover_button_edit.connect("clicked", self.choose_cover)
