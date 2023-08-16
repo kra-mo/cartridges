@@ -165,9 +165,10 @@ class Game(Gtk.Box):
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.win.on_go_back_action()
 
-        # The variable is the title of the game
         self.create_toast(
-            _("{} removed").format(GLib.markup_escape_text(self.name)), "remove"
+            # The variable is the title of the game
+            _("{} removed").format(GLib.markup_escape_text(self.name)),
+            "remove",
         )
 
     def set_loading(self, state):
