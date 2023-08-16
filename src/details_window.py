@@ -19,6 +19,7 @@
 
 import os
 from time import time
+from typing import Any
 
 from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
@@ -52,16 +53,15 @@ class DetailsWindow(Adw.Window):
 
     apply_button = Gtk.Template.Child()
 
-    cover_changed = False
+    cover_changed: bool = False
 
-    def __init__(self, game=None, **kwargs):
+    def __init__(self, game: Game | None = None, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self.win = shared.win
-        self.game = game
-        self.game_cover = GameCover({self.cover})
+        self.game: Game = game
+        self.game_cover: GameCover = GameCover({self.cover})
 
-        self.set_transient_for(self.win)
+        self.set_transient_for(shared.win)
 
         if self.game:
             self.set_title(_("Game Details"))
@@ -114,7 +114,7 @@ class DetailsWindow(Adw.Window):
 
         self.exec_info_label.set_label(exec_info_text)
 
-        def clear_info_selection(*_args):
+        def clear_info_selection(*_args: Any) -> None:
             self.exec_info_label.select_region(-1, -1)
 
         self.exec_info_popover.connect("show", clear_info_selection)
@@ -130,13 +130,13 @@ class DetailsWindow(Adw.Window):
         self.set_focus(self.name)
         self.present()
 
-    def delete_pixbuf(self, *_args):
+    def delete_pixbuf(self, *_args: Any) -> None:
         self.game_cover.new_cover()
 
         self.cover_button_delete_revealer.set_reveal_child(False)
         self.cover_changed = True
 
-    def apply_preferences(self, *_args):
+    def apply_preferences(self, *_args: Any) -> None:
         final_name = self.name.get_text()
         final_developer = self.developer.get_text()
         final_executable = self.executable.get_text()
@@ -202,10 +202,10 @@ class DetailsWindow(Adw.Window):
         self.game.developer = final_developer or None
         self.game.executable = final_executable
 
-        if self.game.game_id in self.win.game_covers.keys():
-            self.win.game_covers[self.game.game_id].animation = None
+        if self.game.game_id in shared.win.game_covers.keys():
+            shared.win.game_covers[self.game.game_id].animation = None
 
-        self.win.game_covers[self.game.game_id] = self.game_cover
+        shared.win.game_covers[self.game.game_id] = self.game_cover
 
         if self.cover_changed:
             save_cover(
@@ -228,9 +228,9 @@ class DetailsWindow(Adw.Window):
         self.game_cover.pictures.remove(self.cover)
 
         self.close()
-        self.win.show_details_page(self.game)
+        shared.win.show_details_page(self.game)
 
-    def update_cover_callback(self, manager: SGDBManager):
+    def update_cover_callback(self, manager: SGDBManager) -> None:
         # Set the game as not loading
         self.game.set_loading(-1)
         self.game.update()
@@ -247,25 +247,25 @@ class DetailsWindow(Adw.Window):
                     _("Preferences"),
                 ).connect("response", self.update_cover_error_response)
 
-    def update_cover_error_response(self, _widget, response):
+    def update_cover_error_response(self, _widget: Any, response: str) -> None:
         if response == "open_preferences":
             shared.win.get_application().on_preferences_action(page_name="sgdb")
 
-    def focus_executable(self, *_args):
+    def focus_executable(self, *_args: Any) -> None:
         self.set_focus(self.executable)
 
-    def toggle_loading(self):
+    def toggle_loading(self) -> None:
         self.apply_button.set_sensitive(not self.apply_button.get_sensitive())
         self.spinner.set_spinning(not self.spinner.get_spinning())
         self.cover_overlay.set_opacity(not self.cover_overlay.get_opacity())
 
-    def set_cover(self, _source, result, *_args):
+    def set_cover(self, _source: Any, result: Gio.Task, *_args: Any) -> None:
         try:
             path = self.file_dialog.open_finish(result).get_path()
         except GLib.GError:
             return
 
-        def resize():
+        def resize() -> None:
             if cover := resize_cover(path):
                 self.game_cover.new_cover(cover)
                 self.cover_button_delete_revealer.set_reveal_child(True)
@@ -275,5 +275,5 @@ class DetailsWindow(Adw.Window):
         self.toggle_loading()
         GLib.Thread.new(None, resize)
 
-    def choose_cover(self, *_args):
+    def choose_cover(self, *_args: Any) -> None:
         self.file_dialog.open(self, None, self.set_cover)

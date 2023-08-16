@@ -21,10 +21,12 @@ import logging
 import re
 from pathlib import Path
 from shutil import rmtree
+from typing import Any, Callable
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from src import shared
+from src.game import Game
 from src.importer.sources.bottles_source import BottlesSource
 from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
@@ -51,6 +53,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     exit_after_launch_switch = Gtk.Template.Child()
     cover_launches_game_switch = Gtk.Template.Child()
     high_quality_images_switch = Gtk.Template.Child()
+
+    remove_missing_switch = Gtk.Template.Child()
 
     steam_expander_row = Gtk.Template.Child()
     steam_data_action_row = Gtk.Template.Child()
@@ -104,10 +108,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
     reset_button = Gtk.Template.Child()
     remove_all_games_button = Gtk.Template.Child()
 
-    removed_games = set()
-    warning_menu_buttons = {}
+    removed_games: set[Game] = set()
+    warning_menu_buttons: dict = {}
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self.win = shared.win
         self.file_chooser = Gtk.FileDialog()
@@ -153,7 +157,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 self.init_source_row(source)
 
         # SteamGridDB
-        def sgdb_key_changed(*_args):
+        def sgdb_key_changed(*_args: Any) -> None:
             shared.schema.set_string("sgdb-key", self.sgdb_key_entry_row.get_text())
 
         self.sgdb_key_entry_row.set_text(shared.schema.get_string("sgdb-key"))
@@ -169,10 +173,11 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         # Switches
         self.bind_switches(
-            (
+            {
                 "exit-after-launch",
                 "cover-launches-game",
                 "high-quality-images",
+                "remove-missing",
                 "lutris-import-steam",
                 "lutris-import-flatpak",
                 "heroic-import-epic",
@@ -183,10 +188,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "sgdb",
                 "sgdb-prefer",
                 "sgdb-animated",
-            )
+            }
         )
 
-        def set_sgdb_sensitive(widget):
+        def set_sgdb_sensitive(widget: Adw.EntryRow) -> None:
             if not widget.get_text():
                 shared.schema.set_boolean("sgdb", False)
 
@@ -195,10 +200,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
         self.sgdb_key_entry_row.connect("changed", set_sgdb_sensitive)
         set_sgdb_sensitive(self.sgdb_key_entry_row)
 
-    def get_switch(self, setting):
+    def get_switch(self, setting: str) -> Any:
         return getattr(self, f'{setting.replace("-", "_")}_switch')
 
-    def bind_switches(self, settings):
+    def bind_switches(self, settings: set[str]) -> None:
         for setting in settings:
             shared.schema.bind(
                 setting,
@@ -207,10 +212,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 Gio.SettingsBindFlags.DEFAULT,
             )
 
-    def choose_folder(self, _widget, callback, callback_data=None):
+    def choose_folder(
+        self, _widget: Any, callback: Callable, callback_data: str | None = None
+    ) -> None:
         self.file_chooser.select_folder(self.win, None, callback, callback_data)
 
-    def undo_remove_all(self, *_args):
+    def undo_remove_all(self, *_args: Any) -> None:
         shared.win.get_application().state = shared.AppState.UNDO_REMOVE_ALL_GAMES
         for game in self.removed_games:
             game.removed = False
@@ -222,7 +229,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         shared.win.get_application().state = shared.AppState.DEFAULT
         shared.win.create_source_rows()
 
-    def remove_all_games(self, *_args):
+    def remove_all_games(self, *_args: Any) -> None:
         shared.win.get_application().state = shared.AppState.REMOVE_ALL_GAMES
         for game in shared.store:
             if not game.removed:
@@ -238,7 +245,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         shared.win.get_application().state = shared.AppState.DEFAULT
         shared.win.create_source_rows()
 
-    def reset_app(self, *_args):
+    def reset_app(self, *_args: Any) -> None:
         rmtree(shared.data_dir / "cartridges", True)
         rmtree(shared.config_dir / "cartridges", True)
         rmtree(shared.cache_dir / "cartridges", True)
@@ -256,28 +263,24 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         shared.win.get_application().quit()
 
-    def update_source_action_row_paths(self, source):
+    def update_source_action_row_paths(self, source: Source) -> None:
         """Set the dir subtitle for a source's action rows"""
-        for location in ("data", "config", "cache"):
+        for location_name, location in source.locations._asdict().items():
             # Get the action row to subtitle
             action_row = getattr(
-                self, f"{source.source_id}_{location}_action_row", None
+                self, f"{source.source_id}_{location_name}_action_row", None
             )
             if not action_row:
                 continue
-
-            infix = "-cache" if location == "cache" else ""
-            key = f"{source.source_id}{infix}-location"
-            path = Path(shared.schema.get_string(key)).expanduser()
-
+            path = Path(shared.schema.get_string(location.schema_key)).expanduser()
             # Remove the path prefix if picked via Flatpak portal
             subtitle = re.sub("/run/user/\\d*/doc/.*/", "", str(path))
             action_row.set_subtitle(subtitle)
 
-    def resolve_locations(self, source: Source):
+    def resolve_locations(self, source: Source) -> None:
         """Resolve locations and add a warning if location cannot be found"""
 
-        def clear_warning_selection(_widget, label):
+        def clear_warning_selection(_widget: Any, label: Gtk.Label) -> None:
             label.select_region(-1, -1)
 
         for location_name, location in source.locations._asdict().items():
@@ -327,40 +330,30 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 action_row.add_prefix(menu_button)
                 self.warning_menu_buttons[source.source_id] = menu_button
 
-    def init_source_row(self, source: Source):
+    def init_source_row(self, source: Source) -> None:
         """Initialize a preference row for a source class"""
 
-        def set_dir(_widget, result, location_name):
+        def set_dir(_widget: Any, result: Gio.Task, location_name: str) -> None:
             """Callback called when a dir picker button is clicked"""
-
             try:
                 path = Path(self.file_chooser.select_folder_finish(result).get_path())
             except GLib.GError:
                 return
 
             # Good picked location
-            location = getattr(source.locations, location_name)
+            location = source.locations._asdict()[location_name]
             if location.check_candidate(path):
-                # Set the schema
-                match location_name:
-                    case "config" | "data":
-                        infix = ""
-                    case _:
-                        infix = f"-{location_name}"
-                key = f"{source.source_id}{infix}-location"
-                value = str(path)
-                shared.schema.set_string(key, value)
-                # Update the row
+                shared.schema.set_string(location.schema_key, str(path))
                 self.update_source_action_row_paths(source)
-
                 if self.warning_menu_buttons.get(source.source_id):
                     action_row = getattr(
                         self, f"{source.source_id}_{location_name}_action_row", None
                     )
-                    action_row.remove(self.warning_menu_buttons[source.source_id])
+                    action_row.remove(  # type: ignore
+                        self.warning_menu_buttons[source.source_id]
+                    )
                     self.warning_menu_buttons.pop(source.source_id)
-
-                logging.debug("User-set value for schema key %s: %s", key, value)
+                logging.debug("User-set value for %s is %s", location.schema_key, path)
 
             # Bad picked location, inform user
             else:
@@ -373,7 +366,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                     _("Set Location"),
                 )
 
-                def on_response(widget, response):
+                def on_response(widget: Any, response: str) -> None:
                     if response == "choose_folder":
                         self.choose_folder(widget, set_dir, location_name)
 

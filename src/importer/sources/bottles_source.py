@@ -90,18 +90,22 @@ class BottlesSource(URLExecutableSource):
     url_format = 'bottles:run/"{bottle_name}"/"{game_name}"'
     available_on = {"linux"}
 
-    locations = BottlesLocations(
-        Location(
-            schema_key="bottles-location",
-            candidates=(
-                shared.flatpak_dir / "com.usebottles.bottles" / "data" / "bottles",
-                shared.data_dir / "bottles/",
-                shared.home / ".local" / "share" / "bottles",
-            ),
-            paths={
-                "library.yml": LocationSubPath("library.yml"),
-                "data.yml": LocationSubPath("data.yml"),
-            },
-            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+    locations: BottlesLocations
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = BottlesLocations(
+            Location(
+                schema_key="bottles-location",
+                candidates=(
+                    shared.flatpak_dir / "com.usebottles.bottles" / "data" / "bottles",
+                    shared.data_dir / "bottles/",
+                    shared.home / ".local" / "share" / "bottles",
+                ),
+                paths={
+                    "library.yml": LocationSubPath("library.yml"),
+                    "data.yml": LocationSubPath("data.yml"),
+                },
+                invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+            )
         )
-    )

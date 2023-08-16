@@ -106,5 +106,5 @@ class Pipeline(GObject.Object):
         self.advance()
 
     @GObject.Signal(name="advanced")
-    def advanced(self) -> None:
+    def advanced(self):  # type: ignore
         """Signal emitted when the pipeline has advanced"""

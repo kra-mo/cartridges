@@ -86,18 +86,22 @@ class ItchSource(URLExecutableSource):
     url_format = "itch://caves/{cave_id}/launch"
     available_on = {"linux", "win32"}
 
-    locations = ItchLocations(
-        Location(
-            schema_key="itch-location",
-            candidates=(
-                shared.flatpak_dir / "io.itch.itch" / "config" / "itch",
-                shared.config_dir / "itch",
-                shared.home / ".config" / "itch",
-                shared.appdata_dir / "itch",
-            ),
-            paths={
-                "butler.db": LocationSubPath("db/butler.db"),
-            },
-            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+    locations: ItchLocations
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = ItchLocations(
+            Location(
+                schema_key="itch-location",
+                candidates=(
+                    shared.flatpak_dir / "io.itch.itch" / "config" / "itch",
+                    shared.config_dir / "itch",
+                    shared.home / ".config" / "itch",
+                    shared.appdata_dir / "itch",
+                ),
+                paths={
+                    "butler.db": LocationSubPath("db/butler.db"),
+                },
+                invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+            )
         )
-    )

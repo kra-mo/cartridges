@@ -69,6 +69,14 @@ template $PreferencesWindow : Adw.PreferencesWindow {
     title: _("Import");
     icon-name: "document-save-symbolic";
 
+    Adw.PreferencesGroup import_behavior_group {
+      title: _("Behavior");
+
+      Adw.SwitchRow remove_missing_switch {
+        title: _("Remove Uninstalled Games");
+      }
+    }
+
     Adw.PreferencesGroup sources_group {
       title: _("Sources");
 
