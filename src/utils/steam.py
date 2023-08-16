@@ -21,6 +21,7 @@
 import json
 import logging
 import re
+from pathlib import Path
 from typing import TypedDict
 
 import requests
@@ -80,7 +81,7 @@ class SteamRateLimiter(RateLimiter):
         self.pick_history.remove_old_entries()
         super().__init__()
 
-    def acquire(self):
+    def acquire(self) -> None:
         """Get a token from the bucket and store the pick history in the schema"""
         super().acquire()
         timestamps_str = json.dumps(self.pick_history.copy_timestamps())
@@ -90,7 +91,9 @@ class SteamRateLimiter(RateLimiter):
 class SteamFileHelper:
     """Helper for steam file formats"""
 
-    def get_manifest_data(self, manifest_path) -> SteamManifestData:
+    def get_manifest_data(
+        self, manifest_path: Path
+    ) -> SteamManifestData:  # TODO: Geoff: fix typing issue
         """Get local data for a game from its manifest"""
 
         with open(manifest_path, "r", encoding="utf-8") as file:
@@ -116,7 +119,7 @@ class SteamAPIHelper:
     def __init__(self, rate_limiter: RateLimiter) -> None:
         self.rate_limiter = rate_limiter
 
-    def get_api_data(self, appid) -> SteamAPIData:
+    def get_api_data(self, appid: str) -> SteamAPIData:
         """
         Get online data for a game from its appid.
         May block to satisfy the Steam web API limitations.

@@ -17,11 +17,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from typing import Optional, Sized
-from threading import Lock, Thread, BoundedSemaphore
-from time import sleep, time
 from collections import deque
 from contextlib import AbstractContextManager
+from threading import BoundedSemaphore, Lock, Thread
+from time import sleep, time
+from typing import Any, Optional, Sized
 
 
 class PickHistory(Sized):
@@ -30,22 +30,22 @@ class PickHistory(Sized):
 
     period: int
 
-    timestamps: list[int] = None
-    timestamps_lock: Lock = None
+    timestamps: list[float]
+    timestamps_lock: Lock
 
     def __init__(self, period: int) -> None:
         self.period = period
         self.timestamps = []
         self.timestamps_lock = Lock()
 
-    def remove_old_entries(self):
+    def remove_old_entries(self) -> None:
         """Remove history entries older than the period"""
         now = time()
         cutoff = now - self.period
         with self.timestamps_lock:
             self.timestamps = [entry for entry in self.timestamps if entry > cutoff]
 
-    def add(self, *new_timestamps: Optional[int]):
+    def add(self, *new_timestamps: float) -> None:
         """Add timestamps to the history.
         If none given, will add the current timestamp"""
         if len(new_timestamps) == 0:
@@ -60,7 +60,7 @@ class PickHistory(Sized):
             return len(self.timestamps)
 
     @property
-    def start(self) -> int:
+    def start(self) -> float:
         """Get the time at which the history started"""
         self.remove_old_entries()
         with self.timestamps_lock:
@@ -70,7 +70,7 @@ class PickHistory(Sized):
                 entry = time()
         return entry
 
-    def copy_timestamps(self) -> str:
+    def copy_timestamps(self) -> list[float]:
         """Get a copy of the timestamps history"""
         self.remove_old_entries()
         with self.timestamps_lock:
@@ -88,22 +88,22 @@ class RateLimiter(AbstractContextManager):
     # Max number of tokens that can be consumed instantly
     burst_tokens: int
 
-    pick_history: PickHistory = None
-    bucket: BoundedSemaphore = None
-    queue: deque[Lock] = None
-    queue_lock: Lock = None
+    pick_history: Optional[PickHistory] = None  # TODO: Geoff: make this required
+    bucket: BoundedSemaphore
+    queue: deque[Lock]
+    queue_lock: Lock
 
     # Protect the number of tokens behind a lock
-    __n_tokens_lock: Lock = None
+    __n_tokens_lock: Lock
     __n_tokens = 0
 
     @property
-    def n_tokens(self):
+    def n_tokens(self) -> int:
         with self.__n_tokens_lock:
             return self.__n_tokens
 
     @n_tokens.setter
-    def n_tokens(self, value: int):
+    def n_tokens(self, value: int) -> None:
         with self.__n_tokens_lock:
             self.__n_tokens = value
 
@@ -147,8 +147,8 @@ class RateLimiter(AbstractContextManager):
         """
 
         # Compute ideal spacing
-        tokens_left = self.refill_period_tokens - len(self.pick_history)
-        seconds_left = self.pick_history.start + self.refill_period_seconds - time()
+        tokens_left = self.refill_period_tokens - len(self.pick_history)  # type: ignore
+        seconds_left = self.pick_history.start + self.refill_period_seconds - time()  # type: ignore
         try:
             spacing_seconds = seconds_left / tokens_left
         except ZeroDivisionError:
@@ -159,7 +159,7 @@ class RateLimiter(AbstractContextManager):
         natural_spacing = self.refill_period_seconds / self.refill_period_tokens
         return max(natural_spacing, spacing_seconds)
 
-    def refill(self):
+    def refill(self) -> None:
         """Add a token back in the bucket"""
         sleep(self.refill_spacing)
         try:
@@ -170,7 +170,7 @@ class RateLimiter(AbstractContextManager):
         else:
             self.n_tokens += 1
 
-    def refill_thread_func(self):
+    def refill_thread_func(self) -> None:
         """Entry point for the daemon thread that is refilling the bucket"""
         while True:
             self.refill()
@@ -200,18 +200,18 @@ class RateLimiter(AbstractContextManager):
             self.queue.appendleft(lock)
         return lock
 
-    def acquire(self):
+    def acquire(self) -> None:
         """Acquires a token from the bucket when it's your turn in queue"""
         lock = self.add_to_queue()
         self.update_queue()
         # Wait until our turn in queue
         lock.acquire()  # pylint: disable=consider-using-with
-        self.pick_history.add()
+        self.pick_history.add()  # type: ignore
 
     # --- Support for use in with statements
 
-    def __enter__(self):
+    def __enter__(self) -> None:
         self.acquire()
 
-    def __exit__(self, *_args):
+    def __exit__(self, *_args: Any) -> None:
         pass
