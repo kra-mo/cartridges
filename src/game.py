@@ -23,10 +23,12 @@ import shlex
 import subprocess
 from pathlib import Path
 from time import time
+from typing import Any
 
 from gi.repository import Adw, GLib, GObject, Gtk
 
 from src import shared
+from src.game_cover import GameCover
 
 
 # pylint: disable=too-many-instance-attributes
@@ -45,23 +47,23 @@ class Game(Gtk.Box):
     game_options = Gtk.Template.Child()
     hidden_game_options = Gtk.Template.Child()
 
-    loading = 0
-    filtered = False
+    loading: int = 0
+    filtered: bool = False
 
-    added = None
-    executable = None
-    game_id = None
-    source = None
-    hidden = False
-    last_played = 0
-    name = None
-    developer = None
-    removed = False
-    blacklisted = False
-    game_cover = None
-    version = 0
+    added: int
+    executable: str
+    game_id: str
+    source: str
+    hidden: bool = False
+    last_played: int = 0
+    name: str
+    developer: str | None = None
+    removed: bool = False
+    blacklisted: bool = False
+    game_cover: GameCover = None
+    version: int = 0
 
-    def __init__(self, data, **kwargs):
+    def __init__(self, data: dict[str, Any], **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.win = shared.win
@@ -82,20 +84,20 @@ class Game(Gtk.Box):
 
         shared.schema.connect("changed", self.schema_changed)
 
-    def update_values(self, data):
+    def update_values(self, data: dict[str, Any]) -> None:
         for key, value in data.items():
             # Convert executables to strings
             if key == "executable" and isinstance(value, list):
                 value = shlex.join(value)
             setattr(self, key, value)
 
-    def update(self):
+    def update(self) -> None:
         self.emit("update-ready", {})
 
-    def save(self):
+    def save(self) -> None:
         self.emit("save-ready", {})
 
-    def create_toast(self, title, action=None):
+    def create_toast(self, title: str, action: str | None = None) -> None:
         toast = Adw.Toast.new(title.format(self.name))
         toast.set_priority(Adw.ToastPriority.HIGH)
 
@@ -111,7 +113,7 @@ class Game(Gtk.Box):
 
         self.win.toast_overlay.add_toast(toast)
 
-    def launch(self):
+    def launch(self) -> None:
         self.last_played = int(time())
         self.save()
         self.update()
@@ -129,7 +131,7 @@ class Game(Gtk.Box):
             cwd=Path.home(),
             shell=True,
             start_new_session=True,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,  # type: ignore
         )
 
         if shared.schema.get_boolean("exit-after-launch"):
@@ -138,7 +140,7 @@ class Game(Gtk.Box):
         # The variable is the title of the game
         self.create_toast(_("{} launched"))
 
-    def toggle_hidden(self, toast=True):
+    def toggle_hidden(self, toast: bool = True) -> None:
         self.hidden = not self.hidden
         self.save()
 
@@ -156,7 +158,7 @@ class Game(Gtk.Box):
                 "hide",
             )
 
-    def remove_game(self):
+    def remove_game(self) -> None:
         # Add "removed=True" to the game properties so it can be deleted on next init
         self.removed = True
         self.save()
@@ -171,50 +173,52 @@ class Game(Gtk.Box):
             "remove",
         )
 
-    def set_loading(self, state):
+    def set_loading(self, state: int) -> None:
         self.loading += state
         loading = self.loading > 0
 
         self.cover.set_opacity(int(not loading))
         self.spinner.set_spinning(loading)
 
-    def get_cover_path(self):
+    def get_cover_path(self) -> Path | None:
         cover_path = shared.covers_dir / f"{self.game_id}.gif"
         if cover_path.is_file():
-            return cover_path
+            return cover_path  # type: ignore
 
         cover_path = shared.covers_dir / f"{self.game_id}.tiff"
         if cover_path.is_file():
-            return cover_path
+            return cover_path  # type: ignore
 
         return None
 
-    def toggle_play(self, _widget, _prop1, _prop2, state=True):
+    def toggle_play(
+        self, _widget: Any, _prop1: Any, _prop2: Any, state: bool = True
+    ) -> None:
         if not self.menu_button.get_active():
             self.play_revealer.set_reveal_child(not state)
             self.menu_revealer.set_reveal_child(not state)
 
-    def main_button_clicked(self, _widget, button):
+    def main_button_clicked(self, _widget: Any, button: bool) -> None:
         if shared.schema.get_boolean("cover-launches-game") ^ button:
             self.launch()
         else:
             self.win.show_details_view(self)
 
-    def set_play_icon(self):
+    def set_play_icon(self) -> None:
         self.play_button.set_icon_name(
             "help-about-symbolic"
             if shared.schema.get_boolean("cover-launches-game")
             else "media-playback-start-symbolic"
         )
 
-    def schema_changed(self, _settings, key):
+    def schema_changed(self, _settings: Any, key: str) -> None:
         if key == "cover-launches-game":
             self.set_play_icon()
 
     @GObject.Signal(name="update-ready", arg_types=[object])
-    def update_ready(self, _additional_data) -> None:
+    def update_ready(self, _additional_data):  # type: ignore
         """Signal emitted when the game needs updating"""
 
     @GObject.Signal(name="save-ready", arg_types=[object])
-    def save_ready(self, _additional_data) -> None:
+    def save_ready(self, _additional_data):  # type: ignore
         """Signal emitted when the game needs saving"""

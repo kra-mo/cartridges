@@ -21,6 +21,7 @@ import json
 import lzma
 import os
 import sys
+from typing import Any
 
 import gi
 
@@ -55,15 +56,15 @@ from src.window import CartridgesWindow
 
 
 class CartridgesApplication(Adw.Application):
-    win = None
+    win: CartridgesWindow
 
-    def __init__(self):
+    def __init__(self) -> None:
         shared.store = Store()
         super().__init__(
             application_id=shared.APP_ID, flags=Gio.ApplicationFlags.FLAGS_NONE
         )
 
-    def do_activate(self):  # pylint: disable=arguments-differ
+    def do_activate(self) -> None:  # pylint: disable=arguments-differ
         """Called on app creation"""
 
         setup_logging()
@@ -141,7 +142,7 @@ class CartridgesApplication(Adw.Application):
 
         self.win.present()
 
-    def load_games_from_disk(self):
+    def load_games_from_disk(self) -> None:
         if shared.games_dir.is_dir():
             for game_file in shared.games_dir.iterdir():
                 try:
@@ -151,7 +152,7 @@ class CartridgesApplication(Adw.Application):
                 game = Game(data)
                 shared.store.add_game(game, {"skip_save": True})
 
-    def on_about_action(self, *_args):
+    def on_about_action(self, *_args: Any) -> None:
         # Get the debug info from the log files
         debug_str = ""
         for i, path in enumerate(shared.log_files):
@@ -195,8 +196,12 @@ class CartridgesApplication(Adw.Application):
         about.present()
 
     def on_preferences_action(
-        self, _action=None, _parameter=None, page_name=None, expander_row=None
-    ):
+        self,
+        _action: Any = None,
+        _parameter: Any = None,
+        page_name: (str | None) = None,
+        expander_row: (str | None) = None,
+    ) -> CartridgesWindow:
         win = PreferencesWindow()
         if page_name:
             win.set_visible_page_name(page_name)
@@ -206,19 +211,19 @@ class CartridgesApplication(Adw.Application):
 
         return win
 
-    def on_launch_game_action(self, *_args):
+    def on_launch_game_action(self, *_args: Any) -> None:
         self.win.active_game.launch()
 
-    def on_hide_game_action(self, *_args):
+    def on_hide_game_action(self, *_args: Any) -> None:
         self.win.active_game.toggle_hidden()
 
-    def on_edit_game_action(self, *_args):
+    def on_edit_game_action(self, *_args: Any) -> None:
         DetailsWindow(self.win.active_game)
 
-    def on_add_game_action(self, *_args):
+    def on_add_game_action(self, *_args: Any) -> None:
         DetailsWindow()
 
-    def on_import_action(self, *_args):
+    def on_import_action(self, *_args: Any) -> None:
         shared.importer = Importer()
 
         if shared.schema.get_boolean("lutris"):
@@ -247,35 +252,35 @@ class CartridgesApplication(Adw.Application):
 
         shared.importer.run()
 
-    def on_remove_game_action(self, *_args):
+    def on_remove_game_action(self, *_args: Any) -> None:
         self.win.active_game.remove_game()
 
-    def on_remove_game_details_view_action(self, *_args):
+    def on_remove_game_details_view_action(self, *_args: Any) -> None:
         if self.win.stack.get_visible_child() == self.win.details_view:
             self.on_remove_game_action()
 
-    def search(self, uri):
+    def search(self, uri: str) -> None:
         Gio.AppInfo.launch_default_for_uri(f"{uri}{self.win.active_game.name}")
 
-    def on_igdb_search_action(self, *_args):
+    def on_igdb_search_action(self, *_args: Any) -> None:
         self.search("https://www.igdb.com/search?type=1&q=")
 
-    def on_sgdb_search_action(self, *_args):
+    def on_sgdb_search_action(self, *_args: Any) -> None:
         self.search("https://www.steamgriddb.com/search/grids?term=")
 
-    def on_protondb_search_action(self, *_args):
+    def on_protondb_search_action(self, *_args: Any) -> None:
         self.search("https://www.protondb.com/search?q=")
 
-    def on_lutris_search_action(self, *_args):
+    def on_lutris_search_action(self, *_args: Any) -> None:
         self.search("https://lutris.net/games?q=")
 
-    def on_hltb_search_action(self, *_args):
+    def on_hltb_search_action(self, *_args: Any) -> None:
         self.search("https://howlongtobeat.com/?q=")
 
-    def on_quit_action(self, *_args):
+    def on_quit_action(self, *_args: Any) -> None:
         self.quit()
 
-    def create_actions(self, actions):
+    def create_actions(self, actions: set) -> None:
         for action in actions:
             simple_action = Gio.SimpleAction.new(action[0], None)
 
@@ -291,7 +296,7 @@ class CartridgesApplication(Adw.Application):
             scope.add_action(simple_action)
 
 
-def main(_version):
+def main(_version: int) -> Any:
     """App entry point"""
     app = CartridgesApplication()
     return app.run(sys.argv)
