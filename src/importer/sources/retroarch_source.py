@@ -23,8 +23,10 @@ import re
 from hashlib import md5
 from json import JSONDecodeError
 from pathlib import Path
+from shlex import quote as shell_quote
 from time import time
 from typing import NamedTuple
+from urllib.parse import quote as url_quote
 
 from src import shared
 from src.errors.friendly_error import FriendlyError
@@ -104,8 +106,8 @@ class RetroarchSourceIterable(SourceIterable):
                     "name": item["label"],
                     "game_id": self.source.game_id_format.format(game_id=game_id),
                     "executable": self.source.make_executable(
-                        rom_path=item["path"],
                         core_path=core_path,
+                        rom_path=item["path"],
                     ),
                 }
 
@@ -170,8 +172,7 @@ class RetroarchSource(Source):
 
     def __init__(self) -> None:
         super().__init__()
-        # TODO enable when RetroArch Steam's executable issue is resolved
-        # self.add_steam_location_candidate()
+        self.add_steam_location_candidate()
 
     def add_steam_location_candidate(self) -> None:
         """Add the Steam RetroAcrh location to the config candidates"""
@@ -212,7 +213,7 @@ class RetroarchSource(Source):
         # Not found
         raise ValueError("RetroArch not found in Steam library")
 
-    def make_executable(self, rom_path: Path, core_path: Path) -> str:
+    def make_executable(self, core_path: Path, rom_path: Path) -> str:
         """
         Generate an executable command from the rom path and core path,
         depending on the source's location.
@@ -226,22 +227,26 @@ class RetroarchSource(Source):
         """
 
         self.locations.config.resolve()
-        args = f"-L '{core_path}' '{rom_path}'"
+        args = ("-L", core_path, rom_path)
 
         # Steam RetroArch
         # (Must check before Flatpak, because Steam itself can be installed as one)
-        # TODO enable if/when we can pass args with steam://run
-        # if self.locations.config.root.parent.parent.name == "steamapps":
-        #     uri = f"steam://run/1118310//{args}/"
-        #     return f'xdg-open "{uri}"'
+        if self.locations.config.root.parent.parent.name == "steamapps":
+            # steam://run exepects args to be url-encoded and separated by spaces.
+            args = map(lambda s: url_quote(str(s), safe=""), args)
+            args_str = " ".join(args)
+            uri = f"steam://run/1118310//{args_str}/"
+            return f"xdg-open {shell_quote(uri)}"
 
         # Flatpak RetroArch
+        args = map(lambda s: shell_quote(str(s)), args)
+        args_str = " ".join(args)
         if self.locations.config.root.is_relative_to(shared.flatpak_dir):
-            return f"flatpak run org.libretro.RetroArch {args}"
+            return f"flatpak run org.libretro.RetroArch {args_str}"
 
         # TODO executable override for non-sandboxed sources
 
         # Linux native RetroArch
-        return f"retroarch {args}"
+        return f"retroarch {args_str}"
 
         # TODO implement for windows (needs override)
