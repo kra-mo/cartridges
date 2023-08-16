@@ -85,8 +85,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
     filter_state: str = "all"
     source_rows: dict = {}
 
-    def create_source_rows(self):
-        def get_removed(source_id):
+    def create_source_rows(self) -> None:
+        def get_removed(source_id: str) -> Any:
             removed = tuple(
                 game.removed or game.hidden or game.blacklisted
                 for game in shared.store.source_games[source_id].values()
@@ -189,7 +189,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         if not restored:
             self.sidebar.select_row(self.all_games_row_box.get_parent())
 
-    def row_selected(self, _widget, row):
+    def row_selected(self, _widget: Any, row: Gtk.ListBoxRow | None) -> None:
         if not row:
             return
         match row.get_child():
@@ -274,7 +274,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                     continue
                 child = None
 
-        def remove_from_overlay(widget):
+        def remove_from_overlay(widget: Gtk.Widget) -> None:
             if isinstance(widget.get_parent(), Gtk.Overlay):
                 widget.get_parent().remove_overlay(widget)
 
@@ -405,12 +405,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         return ((get_value(0) > get_value(1)) ^ order) * 2 - 1
 
-    def set_show_hidden(self, widget, *_args):
+    def set_show_hidden(self, navigation_view: Adw.NavigationView, *_args: Any) -> None:
         self.lookup_action("show_hidden").set_enabled(
-            widget.get_visible_page() == self.library_page
+            navigation_view.get_visible_page() == self.library_page
         )
 
-    def on_show_sidebar_action(self, *_args):
+    def on_show_sidebar_action(self, *_args: Any) -> None:
         shared.state_schema.set_boolean(
             "show-sidebar", (value := not self.overlay_split_view.get_show_sidebar())
         )

@@ -166,11 +166,8 @@ class Game(Gtk.Box):
         if self.win.navigation_view.get_visible_page() == self.win.details_page:
             self.win.navigation_view.pop()
 
-        self.create_toast(
-            # The variable is the title of the game
-            _("{} removed").format(GLib.markup_escape_text(self.name)),
-            "remove",
-        )
+        # The variable is the title of the game
+        self.create_toast(_("{} removed").format(self.name), "remove")
 
     def set_loading(self, state: int) -> None:
         self.loading += state

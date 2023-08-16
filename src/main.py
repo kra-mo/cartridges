@@ -156,7 +156,7 @@ class CartridgesApplication(Adw.Application):
                 game = Game(data)
                 shared.store.add_game(game, {"skip_save": True})
 
-    def get_source_name(self, source_id: str):
+    def get_source_name(self, source_id: str) -> Any:
         if source_id == "all":
             name = _("All Games")
         elif source_id == "imported":
