@@ -21,7 +21,7 @@ import json
 import lzma
 import os
 import sys
-from typing import Any
+from typing import Any, Optional
 
 import gi
 
@@ -199,8 +199,8 @@ class CartridgesApplication(Adw.Application):
         self,
         _action: Any = None,
         _parameter: Any = None,
-        page_name: (str | None) = None,
-        expander_row: (str | None) = None,
+        page_name: Optional[str] = None,
+        expander_row: Optional[str] = None,
     ) -> CartridgesWindow:
         win = PreferencesWindow()
         if page_name:

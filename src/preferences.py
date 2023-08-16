@@ -21,7 +21,7 @@ import logging
 import re
 from pathlib import Path
 from shutil import rmtree
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -215,7 +215,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
 
     def choose_folder(
-        self, _widget: Any, callback: Callable, callback_data: str | None = None
+        self, _widget: Any, callback: Callable, callback_data: Optional[str] = None
     ) -> None:
         self.file_chooser.select_folder(self.win, None, callback, callback_data)
 

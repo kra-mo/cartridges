@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from typing import Any
+from typing import Any, Optional
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -71,7 +71,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     game_covers: dict = {}
     toasts: dict = {}
     active_game: Game
-    details_view_game_cover: GameCover | None = None
+    details_view_game_cover: Optional[GameCover] = None
     sort_state: str = "a-z"
 
     def __init__(self, **kwargs: Any) -> None:
@@ -334,7 +334,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             index += 1
 
     def on_undo_action(
-        self, _widget: Any, game: Game | None = None, undo: str | None = None
+        self, _widget: Any, game: Optional[Game] = None, undo: Optional[str] = None
     ) -> None:
         if not game:  # If the action was activated via Ctrl + Z
             if shared.importer and (

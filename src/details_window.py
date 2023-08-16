@@ -19,7 +19,7 @@
 
 import os
 from time import time
-from typing import Any
+from typing import Any, Optional
 
 from gi.repository import Adw, Gio, GLib, Gtk
 from PIL import Image
@@ -55,7 +55,7 @@ class DetailsWindow(Adw.Window):
 
     cover_changed: bool = False
 
-    def __init__(self, game: Game | None = None, **kwargs: Any):
+    def __init__(self, game: Optional[Game] = None, **kwargs: Any):
         super().__init__(**kwargs)
 
         self.game: Game = game

@@ -23,7 +23,7 @@ import shlex
 import subprocess
 from pathlib import Path
 from time import time
-from typing import Any
+from typing import Any, Optional
 
 from gi.repository import Adw, GLib, GObject, Gtk
 
@@ -57,7 +57,7 @@ class Game(Gtk.Box):
     hidden: bool = False
     last_played: int = 0
     name: str
-    developer: str | None = None
+    developer: Optional[str] = None
     removed: bool = False
     blacklisted: bool = False
     game_cover: GameCover = None
@@ -97,7 +97,7 @@ class Game(Gtk.Box):
     def save(self) -> None:
         self.emit("save-ready", {})
 
-    def create_toast(self, title: str, action: str | None = None) -> None:
+    def create_toast(self, title: str, action: Optional[str] = None) -> None:
         toast = Adw.Toast.new(title.format(self.name))
         toast.set_priority(Adw.ToastPriority.HIGH)
 
@@ -180,7 +180,7 @@ class Game(Gtk.Box):
         self.cover.set_opacity(int(not loading))
         self.spinner.set_spinning(loading)
 
-    def get_cover_path(self) -> Path | None:
+    def get_cover_path(self) -> Optional[Path]:
         cover_path = shared.covers_dir / f"{self.game_id}.gif"
         if cover_path.is_file():
             return cover_path  # type: ignore
