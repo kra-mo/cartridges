@@ -21,7 +21,7 @@ from collections import deque
 from contextlib import AbstractContextManager
 from threading import BoundedSemaphore, Lock, Thread
 from time import sleep, time
-from typing import Any, Optional, Sized
+from typing import Any, Sized
 
 
 class PickHistory(Sized):
@@ -79,16 +79,23 @@ class PickHistory(Sized):
 
 # pylint: disable=too-many-instance-attributes
 class RateLimiter(AbstractContextManager):
-    """Rate limiter implementing the token bucket algorithm"""
+    """
+    Base rate limiter implementing the token bucket algorithm.
 
-    # Period in which we have a max amount of tokens
+    Do not use directly, create a child class to tailor the rate limiting to the
+    underlying service's limits.
+
+    Subclasses must provide values to the following attributes:
+    * refill_period_seconds - Period in which we have a max amount of tokens
+    * refill_period_tokens - Number of tokens allowed in this period
+    * burst_tokens - Max number of tokens that can be consumed instantly
+    """
+
     refill_period_seconds: int
-    # Number of tokens allowed in this period
     refill_period_tokens: int
-    # Max number of tokens that can be consumed instantly
     burst_tokens: int
 
-    pick_history: Optional[PickHistory] = None  # TODO: Geoff: make this required
+    pick_history: PickHistory
     bucket: BoundedSemaphore
     queue: deque[Lock]
     queue_lock: Lock
@@ -107,23 +114,20 @@ class RateLimiter(AbstractContextManager):
         with self.__n_tokens_lock:
             self.__n_tokens = value
 
-    def __init__(
-        self,
-        refill_period_seconds: Optional[int] = None,
-        refill_period_tokens: Optional[int] = None,
-        burst_tokens: Optional[int] = None,
-    ) -> None:
+    def _init_pick_history(self) -> None:
+        """
+        Initialize the tocken pick history
+        (only for use in this class and its children)
+
+        By default, creates an empty pick history.
+        Should be overriden or extended by subclasses.
+        """
+        self.pick_history = PickHistory(self.refill_period_seconds)
+
+    def __init__(self) -> None:
         """Initialize the limiter"""
 
-        # Initialize default values
-        if refill_period_seconds is not None:
-            self.refill_period_seconds = refill_period_seconds
-        if refill_period_tokens is not None:
-            self.refill_period_tokens = refill_period_tokens
-        if burst_tokens is not None:
-            self.burst_tokens = burst_tokens
-        if self.pick_history is None:
-            self.pick_history = PickHistory(self.refill_period_seconds)
+        self._init_pick_history()
 
         # Create synchronization data
         self.__n_tokens_lock = Lock()
