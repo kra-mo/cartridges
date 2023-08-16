@@ -48,7 +48,6 @@ class DetailsWindow(Adw.Window):
     developer = Gtk.Template.Child()
     executable = Gtk.Template.Child()
 
-    exec_info_button = Gtk.Template.Child()
     exec_info_label = Gtk.Template.Child()
     exec_info_popover = Gtk.Template.Child()
 
@@ -115,7 +114,6 @@ class DetailsWindow(Adw.Window):
 
         self.exec_info_label.set_label(exec_info_text)
 
-        self.exec_info_popover.set_focusable(True)
         self.exec_info_popover.update_property(
             (Gtk.AccessibleProperty.LABEL,),
             (
