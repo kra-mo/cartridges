@@ -103,8 +103,8 @@ class Importer(ErrorProducer):
     def run(self) -> None:
         """Use several Gio.Task to import games from added sources"""
 
-        if Importer.summary_toast:
-            Importer.summary_toast.dismiss()
+        if self.__class__.summary_toast:
+            self.__class__.summary_toast.dismiss()
 
         shared.win.get_application().lookup_action("import").set_enabled(False)
 
@@ -266,7 +266,7 @@ class Importer(ErrorProducer):
         shared.store.new_game_ids = set()
         shared.store.duplicate_game_ids = set()
         self.import_dialog.close()
-        Importer.summary_toast = self.create_summary_toast()
+        self.__class__.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
         shared.win.get_application().lookup_action("import").set_enabled(True)
 
@@ -335,8 +335,8 @@ class Importer(ErrorProducer):
 
         self.imported_game_ids = set()
         self.removed_game_ids = set()
-        if Importer.summary_toast:
-            Importer.summary_toast.dismiss()
+        if self.__class__.summary_toast:
+            self.__class__.summary_toast.dismiss()
 
         logging.info("Import undone")
 
@@ -392,8 +392,8 @@ class Importer(ErrorProducer):
 
     def timeout_toast(self, *_args: Any) -> None:
         """Manually timeout the toast after the user has dismissed all warnings"""
-        if Importer.summary_toast:
-            GLib.timeout_add_seconds(5, Importer.summary_toast.dismiss)
+        if self.__class__.summary_toast:
+            GLib.timeout_add_seconds(5, self.__class__.summary_toast.dismiss)
 
     def dialog_response_callback(self, _widget: Any, response: str, *args: Any) -> None:
         """Handle after-import dialogs callback"""
