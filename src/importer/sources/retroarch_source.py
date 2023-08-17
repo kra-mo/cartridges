@@ -151,6 +151,31 @@ class RetroarchSource(Source):
 
     def __init__(self) -> None:
         super().__init__()
+        self.locations = RetroarchLocations(
+            Location(
+                schema_key="retroarch-location",
+                candidates=[
+                    shared.flatpak_dir
+                    / "org.libretro.RetroArch"
+                    / "config"
+                    / "retroarch",
+                    shared.config_dir / "retroarch",
+                    shared.home / ".config" / "retroarch",
+                    # TODO: Windows support, waiting for executable path setting improvement
+                    # Path("C:\\RetroArch-Win64"),
+                    # Path("C:\\RetroArch-Win32"),
+                    # TODO: UWP support (URL handler - https://github.com/libretro/RetroArch/pull/13563)
+                    # shared.local_appdata_dir
+                    # / "Packages"
+                    # / "1e4cf179-f3c2-404f-b9f3-cb2070a5aad8_8ngdn9a6dx1ma"
+                    # / "LocalState",
+                ],
+                paths={
+                    "retroarch.cfg": LocationSubPath("retroarch.cfg"),
+                },
+                invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+            )
+        )
         # TODO enable when we get the Steam RetroArch games work
         # self.add_steam_location_candidate()
 
