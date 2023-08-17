@@ -29,7 +29,7 @@ class ColorLogFormatter(Formatter):
     RED = "\033[31m"
     YELLOW = "\033[33m"
 
-    def format(self, record: LogRecord):
+    def format(self, record: LogRecord) -> str:
         super_format = super().format(record)
         match record.levelname:
             case "CRITICAL":

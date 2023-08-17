@@ -20,14 +20,17 @@
 
 from pathlib import Path
 from shutil import copyfile
+from typing import Optional
 
-from gi.repository import Gdk, Gio, GLib
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib
 from PIL import Image, ImageSequence, UnidentifiedImageError
 
 from src import shared
 
 
-def resize_cover(cover_path=None, pixbuf=None):
+def resize_cover(
+    cover_path: Optional[Path] = None, pixbuf: Optional[GdkPixbuf.Pixbuf] = None
+) -> Optional[Path]:
     if not cover_path and not pixbuf:
         return None
 
@@ -74,7 +77,7 @@ def resize_cover(cover_path=None, pixbuf=None):
     return tmp_path
 
 
-def save_cover(game_id, cover_path):
+def save_cover(game_id: str, cover_path: Path) -> None:
     shared.covers_dir.mkdir(parents=True, exist_ok=True)
 
     animated_path = shared.covers_dir / f"{game_id}.gif"

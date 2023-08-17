@@ -23,14 +23,14 @@ from pathlib import Path
 
 from src import shared
 
-old_data_dir = Path.home() / ".local" / "share"
+old_data_dir = shared.home / ".local" / "share"
 old_cartridges_data_dir = old_data_dir / "cartridges"
 migrated_file_path = old_cartridges_data_dir / ".migrated"
 old_games_dir = old_cartridges_data_dir / "games"
 old_covers_dir = old_cartridges_data_dir / "covers"
 
 
-def migrate_game_covers(game_path: Path):
+def migrate_game_covers(game_path: Path) -> None:
     """Migrate a game covers from a source game path to the current dir"""
     for suffix in (".tiff", ".gif"):
         cover_path = old_covers_dir / game_path.with_suffix(suffix).name
@@ -41,7 +41,7 @@ def migrate_game_covers(game_path: Path):
         cover_path.rename(destination_cover_path)
 
 
-def migrate_files_v1_to_v2():
+def migrate_files_v1_to_v2() -> None:
     """
     Migrate user data from the v1.X locations to the latest location.
 

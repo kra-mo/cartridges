@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
-from typing import MutableMapping, Generator, Any
+from typing import Any, Generator, MutableMapping, Optional
 
 from src import shared
 from src.game import Game
@@ -33,12 +33,16 @@ class Store:
     pipeline_managers: set[Manager]
     pipelines: dict[str, Pipeline]
     source_games: MutableMapping[str, MutableMapping[str, Game]]
+    new_game_ids: set[str]
+    duplicate_game_ids: set[str]
 
     def __init__(self) -> None:
         self.managers = {}
         self.pipeline_managers = set()
         self.pipelines = {}
         self.source_games = {}
+        self.new_game_ids = set()
+        self.duplicate_game_ids = set()
 
     def __contains__(self, obj: object) -> bool:
         """Check if the game is present in the store with the `in` keyword"""
@@ -73,13 +77,15 @@ class Store:
         except KeyError:
             return default
 
-    def add_manager(self, manager: Manager, in_pipeline=True):
+    def add_manager(self, manager: Manager, in_pipeline: bool = True) -> None:
         """Add a manager to the store"""
         manager_type = type(manager)
         self.managers[manager_type] = manager
         self.toggle_manager_in_pipelines(manager_type, in_pipeline)
 
-    def toggle_manager_in_pipelines(self, manager_type: type[Manager], enable: bool):
+    def toggle_manager_in_pipelines(
+        self, manager_type: type[Manager], enable: bool
+    ) -> None:
         """Change if a manager should run in new pipelines"""
         if enable:
             self.pipeline_managers.add(self.managers[manager_type])
@@ -87,7 +93,7 @@ class Store:
             self.pipeline_managers.discard(self.managers[manager_type])
 
     def cleanup_game(self, game: Game) -> None:
-        """Remove a game's files"""
+        """Remove a game's files, dismiss any loose toasts"""
         for path in (
             shared.games_dir / f"{game.game_id}.json",
             shared.covers_dir / f"{game.game_id}.tiff",
@@ -95,9 +101,17 @@ class Store:
         ):
             path.unlink(missing_ok=True)
 
+        # TODO: don't run this if the state is startup
+        for undo in ("remove", "hide"):
+            try:
+                shared.win.toasts[(game, undo)].dismiss()
+                shared.win.toasts.pop((game, undo))
+            except KeyError:
+                pass
+
     def add_game(
-        self, game: Game, additional_data: dict, run_pipeline=True
-    ) -> Pipeline | None:
+        self, game: Game, additional_data: dict, run_pipeline: bool = True
+    ) -> Optional[Pipeline]:
         """Add a game to the app"""
 
         # Ignore games from a newer spec version
@@ -114,6 +128,7 @@ class Store:
         if not stored_game:
             # New game, do as normal
             logging.debug("New store game %s (%s)", game.name, game.game_id)
+            self.new_game_ids.add(game.game_id)
         elif stored_game.removed:
             # Will replace a removed game, cleanup its remains
             logging.debug(
@@ -122,9 +137,11 @@ class Store:
                 game.game_id,
             )
             self.cleanup_game(stored_game)
+            self.new_game_ids.add(game.game_id)
         else:
             # Duplicate game, ignore it
             logging.debug("Duplicate store game %s (%s)", game.name, game.game_id)
+            self.duplicate_game_ids.add(game.game_id)
             return None
 
         # Connect signals

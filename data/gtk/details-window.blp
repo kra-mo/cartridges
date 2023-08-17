@@ -116,6 +116,7 @@ template $DetailsWindow : Adw.Window {
                     tooltip-text: _("More Info");
 
                     popover: Popover exec_info_popover {
+                        focusable: true;
 
                         Label exec_info_label {
                             use-markup: true;
@@ -127,7 +128,6 @@ template $DetailsWindow : Adw.Window {
                             margin-bottom: 6;
                             margin-start: 6;
                             margin-end: 6;
-                            selectable: true;
                         }
                     };
 

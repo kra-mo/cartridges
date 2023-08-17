@@ -20,19 +20,19 @@
 import sys
 from abc import abstractmethod
 from collections.abc import Iterable
-from typing import Any, Generator, Collection
+from typing import Any, Collection, Generator, Optional
 
 from src.game import Game
 from src.importer.sources.location import Location
 
 # Type of the data returned by iterating on a Source
-SourceIterationResult = None | Game | tuple[Game, tuple[Any]]
+SourceIterationResult = Optional[Game | tuple[Game, tuple[Any]]]
 
 
 class SourceIterable(Iterable):
     """Data producer for a source of games"""
 
-    source: "Source" = None
+    source: "Source"
 
     def __init__(self, source: "Source") -> None:
         self.source = source
@@ -53,16 +53,19 @@ class Source(Iterable):
 
     source_id: str
     name: str
-    variant: str = None
+    variant: Optional[str] = None
     available_on: set[str] = set()
     iterable_class: type[SourceIterable]
+
+    # NOTE: Locations must be set at __init__ time, not in the class definition.
+    # They must not be shared between source instances.
     locations: Collection[Location]
 
     @property
     def full_name(self) -> str:
         """The source's full name"""
         full_name_ = self.name
-        if self.variant is not None:
+        if self.variant:
             full_name_ += f" ({self.variant})"
         return full_name_
 
@@ -72,7 +75,7 @@ class Source(Iterable):
         return self.source_id + "_{game_id}"
 
     @property
-    def is_available(self):
+    def is_available(self) -> bool:
         return sys.platform in self.available_on
 
     @abstractmethod
@@ -87,10 +90,7 @@ class Source(Iterable):
         Get an iterator for the source
         :raises UnresolvableLocationError: Not iterable if any of the locations are unresolvable
         """
-        for location_name in ("data", "cache", "config"):
-            location = getattr(self, f"{location_name}_location", None)
-            if location is None:
-                continue
+        for location in self.locations:
             location.resolve()
         return iter(self.iterable_class(self))
 

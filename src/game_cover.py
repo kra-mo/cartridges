@@ -17,19 +17,22 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gdk, GdkPixbuf, Gio, GLib
+from pathlib import Path
+from typing import Any, Callable, Optional
+
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk
 from PIL import Image, ImageFilter, ImageStat
 
 from src import shared
 
 
 class GameCover:
-    texture = None
-    blurred = None
-    luminance = None
-    path = None
-    animation = None
-    anim_iter = None
+    texture: Optional[Gdk.Texture]
+    blurred: Optional[Gdk.Texture]
+    luminance: Optional[tuple[float, float]]
+    path: Optional[Path]
+    animation: Optional[GdkPixbuf.PixbufAnimation]
+    anim_iter: Optional[GdkPixbuf.PixbufAnimationIter]
 
     placeholder = Gdk.Texture.new_from_resource(
         shared.PREFIX + "/library_placeholder.svg"
@@ -38,21 +41,21 @@ class GameCover:
         shared.PREFIX + "/library_placeholder_small.svg"
     )
 
-    def __init__(self, pictures, path=None):
+    def __init__(self, pictures: set[Gtk.Picture], path: Optional[Path] = None) -> None:
         self.pictures = pictures
         self.new_cover(path)
 
     # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
-    def create_func(self, path):
+    def create_func(self, path: Optional[Path]) -> Callable:
         self.animation = GdkPixbuf.PixbufAnimation.new_from_file(str(path))
         self.anim_iter = self.animation.get_iter()
 
-        def wrapper(task, *_args):
+        def wrapper(task: Gio.Task, *_args: Any) -> None:
             self.update_animation((task, self.animation))
 
         return wrapper
 
-    def new_cover(self, path=None):
+    def new_cover(self, path: Optional[Path] = None) -> None:
         self.animation = None
         self.texture = None
         self.blurred = None
@@ -69,14 +72,14 @@ class GameCover:
         if not self.animation:
             self.set_texture(self.texture)
 
-    def get_texture(self):
+    def get_texture(self) -> Gdk.Texture:
         return (
             Gdk.Texture.new_for_pixbuf(self.animation.get_static_image())
             if self.animation
             else self.texture
         )
 
-    def get_blurred(self):
+    def get_blurred(self) -> Gdk.Texture:
         if not self.blurred:
             if self.path:
                 with Image.open(self.path) as image:
@@ -94,24 +97,24 @@ class GameCover:
                     stat = ImageStat.Stat(image.convert("L"))
 
                     # Luminance values for light and dark mode
-                    self.luminance = [
+                    self.luminance = (
                         min((stat.mean[0] + stat.extrema[0][0]) / 510, 0.7),
                         max((stat.mean[0] + stat.extrema[0][1]) / 510, 0.3),
-                    ]
+                    )
             else:
                 self.blurred = self.placeholder_small
                 self.luminance = (0.3, 0.5)
 
         return self.blurred
 
-    def add_picture(self, picture):
+    def add_picture(self, picture: Gtk.Picture) -> None:
         self.pictures.add(picture)
         if not self.animation:
             self.set_texture(self.texture)
         else:
             self.update_animation((self.task, self.animation))
 
-    def set_texture(self, texture):
+    def set_texture(self, texture: Gdk.Texture) -> None:
         self.pictures.discard(
             picture for picture in self.pictures if not picture.is_visible()
         )
@@ -121,13 +124,13 @@ class GameCover:
             for picture in self.pictures:
                 picture.set_paintable(texture or self.placeholder)
 
-    def update_animation(self, data):
+    def update_animation(self, data: GdkPixbuf.PixbufAnimation) -> None:
         if self.animation == data[1]:
-            self.anim_iter.advance()
+            self.anim_iter.advance()  # type: ignore
 
-            self.set_texture(Gdk.Texture.new_for_pixbuf(self.anim_iter.get_pixbuf()))
+            self.set_texture(Gdk.Texture.new_for_pixbuf(self.anim_iter.get_pixbuf()))  # type: ignore
 
-            delay_time = self.anim_iter.get_delay_time()
+            delay_time = self.anim_iter.get_delay_time()  # type: ignore
             GLib.timeout_add(
                 20 if delay_time < 20 else delay_time,
                 self.update_animation,

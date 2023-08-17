@@ -18,25 +18,28 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from functools import wraps
+from typing import Any, Callable
 
 from gi.repository import Gio
 
 
-def create_task_thread_func_closure(func, data):
+def create_task_thread_func_closure(func: Callable, data: Any) -> Callable:
     """Wrap a Gio.TaskThreadFunc with the given data in a closure"""
 
-    def closure(task, source_object, _data, cancellable):
+    def closure(
+        task: Gio.Task, source_object: object, _data: Any, cancellable: Gio.Cancellable
+    ) -> Any:
         func(task, source_object, data, cancellable)
 
     return closure
 
 
-def decorate_set_task_data(task):
+def decorate_set_task_data(task: Gio.Task) -> Callable:
     """Decorate Gio.Task.set_task_data to replace it"""
 
-    def decorator(original_method):
+    def decorator(original_method: Callable) -> Callable:
         @wraps(original_method)
-        def new_method(task_data):
+        def new_method(task_data: Any) -> None:
             task.task_data = task_data
 
         return new_method
@@ -44,13 +47,13 @@ def decorate_set_task_data(task):
     return decorator
 
 
-def decorate_run_in_thread(task):
+def decorate_run_in_thread(task: Gio.Task) -> Callable:
     """Decorate Gio.Task.run_in_thread to pass the task data correctly
     Creates a closure around task_thread_func with the task data available."""
 
-    def decorator(original_method):
+    def decorator(original_method: Callable) -> Callable:
         @wraps(original_method)
-        def new_method(task_thread_func):
+        def new_method(task_thread_func: Callable) -> None:
             closure = create_task_thread_func_closure(task_thread_func, task.task_data)
             original_method(closure)
 
@@ -64,11 +67,17 @@ class Task:
     """Wrapper around Gio.Task to patch task data not being passed"""
 
     @classmethod
-    def new(cls, source_object, cancellable, callback, callback_data):
+    def new(
+        cls,
+        source_object: object,
+        cancellable: Gio.Cancellable,
+        callback: Callable,
+        callback_data: Any,
+    ) -> Gio.Task:
         """Create a new, monkey-patched Gio.Task.
         The `set_task_data` and `run_in_thread` methods are decorated.
 
-        As of 2023-05-19, pygobject does not work well with Gio.Task, so to pass data
+        As of 2023-05-19, PyGObject does not work well with Gio.Task, so to pass data
         the only viable way it to create a closure with the thread function and its data.
         This class is supposed to make Gio.Task comply with its expected behaviour
         per the docs:

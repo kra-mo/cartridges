@@ -104,17 +104,21 @@ class LegendarySource(ExecutableFormatSource):
     available_on = {"linux"}
     iterable_class = LegendarySourceIterable
 
-    locations = LegendaryLocations(
-        Location(
-            schema_key="legendary-location",
-            candidates=(
-                shared.config_dir / "legendary",
-                shared.home / ".config" / "legendary",
-            ),
-            paths={
-                "installed.json": LocationSubPath("installed.json"),
-                "metadata": LocationSubPath("metadata", True),
-            },
-            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+    locations: LegendaryLocations
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = LegendaryLocations(
+            Location(
+                schema_key="legendary-location",
+                candidates=(
+                    shared.config_dir / "legendary",
+                    shared.home / ".config" / "legendary",
+                ),
+                paths={
+                    "installed.json": LocationSubPath("installed.json"),
+                    "metadata": LocationSubPath("metadata", True),
+                },
+                invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+            )
         )
-    )

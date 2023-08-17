@@ -125,17 +125,21 @@ class FlatpakSource(ExecutableFormatSource):
     executable_format = "flatpak run {flatpak_id}"
     available_on = {"linux"}
 
-    locations = FlatpakLocations(
-        Location(
-            schema_key="flatpak-location",
-            candidates=(
-                "/var/lib/flatpak/",
-                shared.data_dir / "flatpak",
-            ),
-            paths={
-                "applications": LocationSubPath("exports/share/applications", True),
-                "icons": LocationSubPath("exports/share/icons", True),
-            },
-            invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+    locations: FlatpakLocations
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = FlatpakLocations(
+            Location(
+                schema_key="flatpak-location",
+                candidates=(
+                    "/var/lib/flatpak/",
+                    shared.data_dir / "flatpak",
+                ),
+                paths={
+                    "applications": LocationSubPath("exports/share/applications", True),
+                    "icons": LocationSubPath("exports/share/icons", True),
+                },
+                invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+            )
         )
-    )

@@ -21,12 +21,12 @@
 import json
 import logging
 from abc import abstractmethod
+from functools import cached_property
 from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
 from time import time
 from typing import Iterable, NamedTuple, Optional, TypedDict
-from functools import cached_property
 
 from src import shared
 from src.game import Game
@@ -108,7 +108,9 @@ class SubSourceIterable(Iterable):
             "game_id": self.source.game_id_format.format(
                 service=self.service, game_id=app_name
             ),
-            "executable": self.source.executable_format.format(runner=runner, app_name=app_name),
+            "executable": self.source.executable_format.format(
+                runner=runner, app_name=app_name
+            ),
             "hidden": self.source_iterable.is_hidden(app_name),
         }
         game = Game(values)
@@ -239,7 +241,7 @@ class LegendaryIterable(StoreSubSourceIterable):
         else:
             # Heroic native
             logging.debug("Using Heroic native <= 2.8 legendary file")
-            path = Path.home() / ".config"
+            path = shared.home / ".config"
 
         path = path / "legendary" / "installed.json"
         logging.debug("Using Heroic %s installed.json path %s", self.name, path)
@@ -363,27 +365,31 @@ class HeroicSource(URLExecutableSource):
     url_format = "heroic://launch/{runner}/{app_name}"
     available_on = {"linux", "win32"}
 
-    locations = HeroicLocations(
-        Location(
-            schema_key="heroic-location",
-            candidates=(
-                shared.config_dir / "heroic",
-                shared.home / ".config" / "heroic",
-                shared.flatpak_dir
-                / "com.heroicgameslauncher.hgl"
-                / "config"
-                / "heroic",
-                shared.appdata_dir / "heroic",
-            ),
-            paths={
-                "config.json": LocationSubPath("config.json"),
-                "store_config.json": LocationSubPath("store/config.json"),
-            },
-            invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
-        )
-    )
+    locations: HeroicLocations
 
     @property
     def game_id_format(self) -> str:
         """The string format used to construct game IDs"""
         return self.source_id + "_{service}_{game_id}"
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = HeroicLocations(
+            Location(
+                schema_key="heroic-location",
+                candidates=(
+                    shared.config_dir / "heroic",
+                    shared.home / ".config" / "heroic",
+                    shared.flatpak_dir
+                    / "com.heroicgameslauncher.hgl"
+                    / "config"
+                    / "heroic",
+                    shared.appdata_dir / "heroic",
+                ),
+                paths={
+                    "config.json": LocationSubPath("config.json"),
+                    "store_config.json": LocationSubPath("store/config.json"),
+                },
+                invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+            )
+        )

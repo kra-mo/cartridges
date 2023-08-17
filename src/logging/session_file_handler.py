@@ -18,11 +18,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import lzma
-from io import StringIO
+from io import TextIOWrapper
 from logging import StreamHandler
 from lzma import FORMAT_XZ, PRESET_DEFAULT
 from os import PathLike
 from pathlib import Path
+from typing import Optional
 
 from src import shared
 
@@ -37,7 +38,7 @@ class SessionFileHandler(StreamHandler):
 
     backup_count: int
     filename: Path
-    log_file: StringIO = None
+    log_file: Optional[TextIOWrapper] = None
 
     def create_dir(self) -> None:
         """Create the log dir if needed"""
@@ -83,7 +84,7 @@ class SessionFileHandler(StreamHandler):
         logfiles.sort(key=self.file_sort_key, reverse=True)
         return logfiles
 
-    def rotate_file(self, path: Path):
+    def rotate_file(self, path: Path) -> None:
         """Rotate a file's number suffix and remove it if it's too old"""
 
         # If uncompressed, compress
@@ -128,5 +129,6 @@ class SessionFileHandler(StreamHandler):
         super().__init__(self.log_file)
 
     def close(self) -> None:
-        self.log_file.close()
+        if self.log_file:
+            self.log_file.close()
         super().close()

@@ -46,7 +46,7 @@ class Manager(ErrorProducer):
     max_tries: int = 3
 
     @property
-    def name(self):
+    def name(self) -> str:
         return type(self).__name__
 
     @abstractmethod
@@ -59,13 +59,13 @@ class Manager(ErrorProducer):
         * May raise other exceptions that will be reported
         """
 
-    def run(self, game: Game, additional_data: dict):
+    def run(self, game: Game, additional_data: dict) -> None:
         """Handle errors (retry, ignore or raise) that occur in the manager logic"""
 
         # Keep track of the number of tries
         tries = 1
 
-        def handle_error(error: Exception):
+        def handle_error(error: Exception) -> None:
             nonlocal tries
 
             # If FriendlyError, handle its cause instead
@@ -83,11 +83,11 @@ class Manager(ErrorProducer):
             retrying_format = "Retrying %s in %s for %s"
             unretryable_format = "Unretryable %s in %s for %s"
 
-            if error in self.continue_on:
+            if type(error) in self.continue_on:
                 # Handle skippable errors (skip silently)
                 return
 
-            if error in self.retryable_on:
+            if type(error) in self.retryable_on:
                 if tries > self.max_tries:
                     # Handle being out of retries
                     logging.error(out_of_retries_format, *log_args)
@@ -104,7 +104,7 @@ class Manager(ErrorProducer):
                 logging.error(unretryable_format, *log_args, exc_info=error)
                 self.report_error(base_error)
 
-        def try_manager_logic():
+        def try_manager_logic() -> None:
             try:
                 self.main(game, additional_data)
             except Exception as error:  # pylint: disable=broad-exception-caught
