@@ -44,10 +44,13 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.1.1" date="2023-07-27">
+    <release version="2.2" date="2023-08-17">
       <description translatable="no">
         <ul>
-          <li>Fixes an issue with translations</li>
+          <li>New import source: RetroArch</li>
+          <li>Added the option to automatically remove uninstalled games on import</li>
+          <li>Added the ability to undo an import</li>
+          <li>Various UX improvements</li>
           <li>Translations since 2.1</li>
         </ul>
       </description>
