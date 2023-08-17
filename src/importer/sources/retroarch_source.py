@@ -23,8 +23,10 @@ import re
 from hashlib import md5
 from json import JSONDecodeError
 from pathlib import Path
+from shlex import quote as shell_quote
 from time import time
 from typing import NamedTuple
+from urllib.parse import quote as url_quote
 
 from src import shared
 from src.errors.friendly_error import FriendlyError
@@ -103,9 +105,9 @@ class RetroarchSourceIterable(SourceIterable):
                     "added": added_time,
                     "name": item["label"],
                     "game_id": self.source.game_id_format.format(game_id=game_id),
-                    "executable": self.source.executable_format.format(
-                        rom_path=item["path"],
+                    "executable": self.source.make_executable(
                         core_path=core_path,
+                        rom_path=item["path"],
                     ),
                 }
 
@@ -147,13 +149,44 @@ class RetroarchSource(Source):
 
     locations: RetroarchLocations
 
-    @property
-    def executable_format(self):
-        self.locations.config.resolve()
-        is_flatpak = self.locations.config.root.is_relative_to(shared.flatpak_dir)
-        base = "flatpak run org.libretro.RetroArch" if is_flatpak else "retroarch"
-        args = '-L "{core_path}" "{rom_path}"'
-        return f"{base} {args}"
+    def __init__(self) -> None:
+        super().__init__()
+        self.locations = RetroarchLocations(
+            Location(
+                schema_key="retroarch-location",
+                candidates=[
+                    shared.flatpak_dir
+                    / "org.libretro.RetroArch"
+                    / "config"
+                    / "retroarch",
+                    shared.config_dir / "retroarch",
+                    shared.home / ".config" / "retroarch",
+                    # TODO: Windows support, waiting for executable path setting improvement
+                    # Path("C:\\RetroArch-Win64"),
+                    # Path("C:\\RetroArch-Win32"),
+                    # TODO: UWP support (URL handler - https://github.com/libretro/RetroArch/pull/13563)
+                    # shared.local_appdata_dir
+                    # / "Packages"
+                    # / "1e4cf179-f3c2-404f-b9f3-cb2070a5aad8_8ngdn9a6dx1ma"
+                    # / "LocalState",
+                ],
+                paths={
+                    "retroarch.cfg": LocationSubPath("retroarch.cfg"),
+                },
+                invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
+            )
+        )
+        # TODO enable when we get the Steam RetroArch games work
+        # self.add_steam_location_candidate()
+
+    def add_steam_location_candidate(self) -> None:
+        """Add the Steam RetroAcrh location to the config candidates"""
+        try:
+            self.locations.config.candidates.append(self.get_steam_location())
+        except (OSError, KeyError, UnresolvableLocationError):
+            logging.debug("Steam isn't installed")
+        except ValueError as error:
+            logging.debug("RetroArch Steam location candiate not found", exc_info=error)
 
     def get_steam_location(self) -> str:
         """
@@ -185,36 +218,41 @@ class RetroarchSource(Source):
         # Not found
         raise ValueError("RetroArch not found in Steam library")
 
-    def __init__(self) -> None:
-        super().__init__()
-        self.locations = RetroarchLocations(
-            Location(
-                schema_key="retroarch-location",
-                candidates=[
-                    shared.flatpak_dir
-                    / "org.libretro.RetroArch"
-                    / "config"
-                    / "retroarch",
-                    shared.config_dir / "retroarch",
-                    shared.home / ".config" / "retroarch",
-                    # TODO: Windows support, waiting for executable path setting improvement
-                    # Path("C:\\RetroArch-Win64"),
-                    # Path("C:\\RetroArch-Win32"),
-                    # TODO: UWP support (URL handler - https://github.com/libretro/RetroArch/pull/13563)
-                    # shared.local_appdata_dir
-                    # / "Packages"
-                    # / "1e4cf179-f3c2-404f-b9f3-cb2070a5aad8_8ngdn9a6dx1ma"
-                    # / "LocalState",
-                ],
-                paths={
-                    "retroarch.cfg": LocationSubPath("retroarch.cfg"),
-                },
-                invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
-            )
-        )
-        try:
-            self.locations.config.candidates.append(self.get_steam_location())
-        except (OSError, KeyError, UnresolvableLocationError):
-            logging.debug("Steam isn't installed")
-        except ValueError as error:
-            logging.debug("RetroArch Steam location candiate not found", exc_info=error)
+    def make_executable(self, core_path: Path, rom_path: Path) -> str:
+        """
+        Generate an executable command from the rom path and core path,
+        depending on the source's location.
+
+        The format depends on RetroArch's installation method,
+        detected from the source config location
+
+        :param Path rom_path: the game's rom path
+        :param Path core_path: the game's core path
+        :return str: an executable command
+        """
+
+        self.locations.config.resolve()
+        args = ("-L", core_path, rom_path)
+
+        # Steam RetroArch
+        # (Must check before Flatpak, because Steam itself can be installed as one)
+        # TODO enable when we get Steam RetroArch executable to work
+        # if self.locations.config.root.parent.parent.name == "steamapps":
+        #     # steam://run exepects args to be url-encoded and separated by spaces.
+        #     args = map(lambda s: url_quote(str(s), safe=""), args)
+        #     args_str = " ".join(args)
+        #     uri = f"steam://run/1118310//{args_str}/"
+        #     return f"xdg-open {shell_quote(uri)}"
+
+        # Flatpak RetroArch
+        args = map(lambda s: shell_quote(str(s)), args)
+        args_str = " ".join(args)
+        if self.locations.config.root.is_relative_to(shared.flatpak_dir):
+            return f"flatpak run org.libretro.RetroArch {args_str}"
+
+        # TODO executable override for non-sandboxed sources
+
+        # Linux native RetroArch
+        return f"retroarch {args_str}"
+
+        # TODO implement for windows (needs override)

@@ -26,7 +26,11 @@ from typing import NamedTuple
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location, LocationSubPath
-from src.importer.sources.source import Source, SourceIterable, SourceIterationResult
+from src.importer.sources.source import (
+    ExecutableFormatSource,
+    SourceIterationResult,
+    SourceIterable,
+)
 
 
 class LegendarySourceIterable(SourceIterable):
@@ -93,7 +97,7 @@ class LegendaryLocations(NamedTuple):
     config: Location
 
 
-class LegendarySource(Source):
+class LegendarySource(ExecutableFormatSource):
     source_id = "legendary"
     name = _("Legendary")
     executable_format = "legendary launch {app_name}"
