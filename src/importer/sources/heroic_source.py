@@ -115,8 +115,8 @@ class SubSourceIterable(Iterable):
         }
         game = Game(values)
 
-        # Get the image path from the heroic cache
-        # Filenames are derived from the URL that heroic used to get the file
+        # Get the image path from the Heroic cache
+        # Filenames are derived from the URL that Heroic used to get the file
         uri: str = entry["art_square"] + self.image_uri_params
         digest = sha256(uri.encode()).hexdigest()
         image_path = self.source.locations.config.root / "images-cache" / digest
@@ -221,13 +221,10 @@ class LegendaryIterable(StoreSubSourceIterable):
 
     @cached_property
     def installed_path(self) -> Path:
-        """
-        Get the right path depending on the Heroic version
-
-        TODO after heroic 2.9 has been out for a while
-        We should use the commented out relative_installed_path
-        and remove this property override.
-        """
+        """Get the right path depending on the Heroic version"""
+        # TODO after Heroic 2.9 has been out for a while
+        # We should use the commented out relative_installed_path
+        # and remove this property override.
 
         heroic_config_path = self.source.locations.config.root
         # Heroic >= 2.9

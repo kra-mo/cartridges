@@ -176,7 +176,7 @@ class RetroarchSource(Source):
                 invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
             )
         )
-        # TODO enable when we get the Steam RetroArch games work
+        # TODO enable when we get the Steam RetroArch games working
         # self.add_steam_location_candidate()
 
     def add_steam_location_candidate(self) -> None:
@@ -192,13 +192,13 @@ class RetroarchSource(Source):
         """
         Get the RetroArch installed via Steam location
 
-        :raise UnresolvableLocationError: if steam isn't installed
+        :raise UnresolvableLocationError: if Steam isn't installed
         :raise KeyError: if there is no libraryfolders.vdf subpath
         :raise OSError: if libraryfolders.vdf can't be opened
         :raise ValueError: if RetroArch isn't installed through Steam
         """
 
-        # Find steam location
+        # Find Steam location
         libraryfolders = SteamSource().locations.data["libraryfolders.vdf"]
         parse_apps = False
         with open(libraryfolders, "r", encoding="utf-8") as open_file:

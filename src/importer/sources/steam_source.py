@@ -35,7 +35,7 @@ class SteamSourceIterable(SourceIterable):
     source: "SteamSource"
 
     def get_manifest_dirs(self) -> Iterable[Path]:
-        """Get dirs that contain steam app manifests"""
+        """Get dirs that contain Steam app manifests"""
         libraryfolders_path = self.source.locations.data["libraryfolders.vdf"]
         with open(libraryfolders_path, "r", encoding="utf-8") as file:
             contents = file.read()

@@ -91,7 +91,7 @@ class SteamRateLimiter(RateLimiter):
 
 
 class SteamFileHelper:
-    """Helper for steam file formats"""
+    """Helper for Steam file formats"""
 
     def get_manifest_data(self, manifest_path: Path) -> SteamManifestData:
         """Get local data for a game from its manifest"""
