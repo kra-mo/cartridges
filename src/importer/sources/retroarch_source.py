@@ -176,8 +176,7 @@ class RetroarchSource(Source):
                 invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
             )
         )
-        # TODO enable when we get the Steam RetroArch games work
-        # self.add_steam_location_candidate()
+        self.add_steam_location_candidate()
 
     def add_steam_location_candidate(self) -> None:
         """Add the Steam RetroAcrh location to the config candidates"""
@@ -236,13 +235,12 @@ class RetroarchSource(Source):
 
         # Steam RetroArch
         # (Must check before Flatpak, because Steam itself can be installed as one)
-        # TODO enable when we get Steam RetroArch executable to work
-        # if self.locations.config.root.parent.parent.name == "steamapps":
-        #     # steam://run exepects args to be url-encoded and separated by spaces.
-        #     args = map(lambda s: url_quote(str(s), safe=""), args)
-        #     args_str = " ".join(args)
-        #     uri = f"steam://run/1118310//{args_str}/"
-        #     return f"xdg-open {shell_quote(uri)}"
+        if self.locations.config.root.parent.parent.name == "steamapps":
+            # steam://run exepects args to be url-encoded and separated by spaces.
+            args = map(lambda s: url_quote(str(s), safe=""), args)
+            args_str = " ".join(args)
+            uri = f"steam://run/1118310//{args_str}/"
+            return f"xdg-open {shell_quote(uri)}"
 
         # Flatpak RetroArch
         args = map(lambda s: shell_quote(str(s)), args)
