@@ -50,8 +50,8 @@ class Importer(ErrorProducer):
     n_pipelines_done: int = 0
     game_pipelines: set[Pipeline]
 
-    removed_game_ids: set[str] = set()
-    imported_game_ids: set[str] = set()
+    removed_game_ids: set[str]
+    imported_game_ids: set[str]
 
     def __init__(self) -> None:
         super().__init__()
@@ -59,6 +59,9 @@ class Importer(ErrorProducer):
         # TODO: make this stateful
         shared.store.new_game_ids = set()
         shared.store.duplicate_game_ids = set()
+
+        self.removed_game_ids = set()
+        self.imported_game_ids = set()
 
         self.game_pipelines = set()
         self.sources = set()
