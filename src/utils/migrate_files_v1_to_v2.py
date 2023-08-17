@@ -23,7 +23,7 @@ from pathlib import Path
 
 from src import shared
 
-old_data_dir = Path.home() / ".local" / "share"
+old_data_dir = shared.home / ".local" / "share"
 old_cartridges_data_dir = old_data_dir / "cartridges"
 migrated_file_path = old_cartridges_data_dir / ".migrated"
 old_games_dir = old_cartridges_data_dir / "games"

@@ -241,7 +241,7 @@ class LegendaryIterable(StoreSubSourceIterable):
         else:
             # Heroic native
             logging.debug("Using Heroic native <= 2.8 legendary file")
-            path = Path.home() / ".config"
+            path = shared.home / ".config"
 
         path = path / "legendary" / "installed.json"
         logging.debug("Using Heroic %s installed.json path %s", self.name, path)
