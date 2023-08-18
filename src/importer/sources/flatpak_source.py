@@ -51,6 +51,7 @@ class FlatpakSourceIterable(SourceIterable):
                 "com.heroicgameslauncher.hgl",
                 "com.usebottles.Bottles",
                 "io.itch.itch",
+                "org.libretro.RetroArch",
             }
         )
 
