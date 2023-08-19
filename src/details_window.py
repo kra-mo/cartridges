@@ -85,18 +85,18 @@ class DetailsWindow(Adw.Window):
             image_filter.add_suffix(extension[1:])
             image_filter.add_suffix("svg")  # Gdk.Texture supports .svg but PIL doesn't
 
-        exec_filter = Gtk.FileFilter(name=_("Executables"))
-        exec_filter.add_mime_type("application/x-executable")
-
         image_filters = Gio.ListStore.new(Gtk.FileFilter)
         image_filters.append(image_filter)
+
+        exec_filter = Gtk.FileFilter(name=_("Executables"))
+        exec_filter.add_mime_type("application/x-executable")
 
         exec_filters = Gio.ListStore.new(Gtk.FileFilter)
         exec_filters.append(exec_filter)
 
-        self.file_dialog = Gtk.FileDialog()
-        self.file_dialog.set_filters(image_filters)
-        self.file_dialog.set_default_filter(image_filter)
+        self.image_file_dialog = Gtk.FileDialog()
+        self.image_file_dialog.set_filters(image_filters)
+        self.image_file_dialog.set_default_filter(image_filter)
 
         self.exec_file_dialog = Gtk.FileDialog()
         self.exec_file_dialog.set_filters(exec_filters)
@@ -277,7 +277,7 @@ class DetailsWindow(Adw.Window):
 
     def set_cover(self, _source: Any, result: Gio.Task, *_args: Any) -> None:
         try:
-            path = self.file_dialog.open_finish(result).get_path()
+            path = self.image_file_dialog.open_finish(result).get_path()
         except GLib.GError:
             return
 
@@ -303,4 +303,4 @@ class DetailsWindow(Adw.Window):
         self.exec_file_dialog.open(self, None, self.set_executable)
 
     def choose_cover(self, *_args: Any) -> None:
-        self.file_dialog.open(self, None, self.set_cover)
+        self.image_file_dialog.open(self, None, self.set_cover)
