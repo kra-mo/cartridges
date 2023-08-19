@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+import shlex
 from time import time
 from typing import Any, Optional
 
@@ -50,6 +51,7 @@ class DetailsWindow(Adw.Window):
 
     exec_info_label = Gtk.Template.Child()
     exec_info_popover = Gtk.Template.Child()
+    file_chooser_button = Gtk.Template.Child()
 
     apply_button = Gtk.Template.Child()
 
@@ -83,10 +85,22 @@ class DetailsWindow(Adw.Window):
             image_filter.add_suffix(extension[1:])
             image_filter.add_suffix("svg")  # Gdk.Texture supports .svg but PIL doesn't
 
-        file_filters = Gio.ListStore.new(Gtk.FileFilter)
-        file_filters.append(image_filter)
+        exec_filter = Gtk.FileFilter(name=_("Executables"))
+        exec_filter.add_mime_type("application/x-executable")
+
+        image_filters = Gio.ListStore.new(Gtk.FileFilter)
+        image_filters.append(image_filter)
+
+        exec_filters = Gio.ListStore.new(Gtk.FileFilter)
+        exec_filters.append(exec_filter)
+
         self.file_dialog = Gtk.FileDialog()
-        self.file_dialog.set_filters(file_filters)
+        self.file_dialog.set_filters(image_filters)
+        self.file_dialog.set_default_filter(image_filter)
+
+        self.exec_file_dialog = Gtk.FileDialog()
+        self.exec_file_dialog.set_filters(exec_filters)
+        self.exec_file_dialog.set_default_filter(exec_filter)
 
         # Translate this string as you would translate "file"
         file_name = _("file.txt")
@@ -128,6 +142,7 @@ class DetailsWindow(Adw.Window):
 
         self.cover_button_delete.connect("clicked", self.delete_pixbuf)
         self.cover_button_edit.connect("clicked", self.choose_cover)
+        self.file_chooser_button.connect("clicked", self.choose_executable)
         self.apply_button.connect("clicked", self.apply_preferences)
 
         self.name.connect("entry-activated", self.focus_executable)
@@ -275,6 +290,17 @@ class DetailsWindow(Adw.Window):
 
         self.toggle_loading()
         GLib.Thread.new(None, resize)
+
+    def set_executable(self, _source: Any, result: Gio.Task, *_args: Any) -> None:
+        try:
+            path = self.exec_file_dialog.open_finish(result).get_path()
+        except GLib.GError:
+            return
+
+        self.executable.set_text(shlex.quote(path))
+
+    def choose_executable(self, *_args: Any) -> None:
+        self.exec_file_dialog.open(self, None, self.set_executable)
 
     def choose_cover(self, *_args: Any) -> None:
         self.file_dialog.open(self, None, self.set_cover)

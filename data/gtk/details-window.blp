@@ -110,31 +110,42 @@ template $DetailsWindow : Adw.Window {
                     title: _("Executable");
 
                     [suffix]
+                    Gtk.Button file_chooser_button {
+                        valign: center;
+                        icon-name: "folder-symbolic";
+                        tooltip-text: _("Select File");
+
+                        styles [
+                            "flat"
+                        ]
+                    }
+
+                    [suffix]
                     Gtk.MenuButton exec_info_button {
-                    valign: center;
-                    icon-name: "help-about-symbolic";
-                    tooltip-text: _("More Info");
+                        valign: center;
+                        icon-name: "help-about-symbolic";
+                        tooltip-text: _("More Info");
 
-                    popover: Popover exec_info_popover {
-                        focusable: true;
+                        popover: Popover exec_info_popover {
+                            focusable: true;
 
-                        Label exec_info_label {
-                            use-markup: true;
-                            wrap: true;
-                            max-width-chars: 50;
-                            halign: center;
-                            valign: center;
-                            margin-top: 6;
-                            margin-bottom: 6;
-                            margin-start: 6;
-                            margin-end: 6;
-                        }
-                    };
+                            Label exec_info_label {
+                                use-markup: true;
+                                wrap: true;
+                                max-width-chars: 50;
+                                halign: center;
+                                valign: center;
+                                margin-top: 6;
+                                margin-bottom: 6;
+                                margin-start: 6;
+                                margin-end: 6;
+                            }
+                        };
 
-                    styles [
-                        "flat"
-                    ]
-                }
+                        styles [
+                            "flat"
+                        ]
+                    }
 
                 }
             }
