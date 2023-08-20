@@ -45,16 +45,6 @@ class GameCover:
         self.pictures = pictures
         self.new_cover(path)
 
-    # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
-    def create_func(self, path: Optional[Path]) -> Callable:
-        self.animation = GdkPixbuf.PixbufAnimation.new_from_file(str(path))
-        self.anim_iter = self.animation.get_iter()
-
-        def wrapper(task: Gio.Task, *_args: Any) -> None:
-            self.update_animation((task, self.animation))
-
-        return wrapper
-
     def new_cover(self, path: Optional[Path] = None) -> None:
         self.animation = None
         self.texture = None
@@ -64,8 +54,12 @@ class GameCover:
 
         if path:
             if path.suffix == ".gif":
+                self.animation = GdkPixbuf.PixbufAnimation.new_from_file(str(path))
+                self.anim_iter = self.animation.get_iter()
                 self.task = Gio.Task.new()
-                self.task.run_in_thread(self.create_func(self.path))
+                self.task.run_in_thread(
+                    lambda *_: self.update_animation((self.task, self.animation))
+                )
             else:
                 self.texture = Gdk.Texture.new_from_filename(str(path))
 

@@ -21,7 +21,7 @@
 import logging
 from typing import Any, Optional
 
-from gi.repository import Adw, GLib, Gtk
+from gi.repository import Adw, Gio, GLib, Gtk
 
 from src import shared
 from src.errors.error_producer import ErrorProducer
@@ -31,7 +31,6 @@ from src.importer.sources.location import UnresolvableLocationError
 from src.importer.sources.source import Source
 from src.store.managers.async_manager import AsyncManager
 from src.store.pipeline import Pipeline
-from src.utils.task import Task
 
 
 # pylint: disable=too-many-instance-attributes
@@ -121,10 +120,13 @@ class Importer(ErrorProducer):
 
         for source in self.sources:
             logging.debug("Importing games from source %s", source.source_id)
-            task = Task.new(None, None, self.source_callback, (source,))
+            task = Gio.Task.new(None, None, self.source_callback, (source,))
             self.n_source_tasks_created += 1
-            task.set_task_data((source,))
-            task.run_in_thread(self.source_task_thread_func)
+            task.run_in_thread(
+                lambda _task, _obj, _data, _cancellable, src=source: self.source_task_thread_func(
+                    (src,)
+                )
+            )
 
         self.progress_changed_callback()
 
@@ -145,9 +147,7 @@ class Importer(ErrorProducer):
         )
         self.import_dialog.present()
 
-    def source_task_thread_func(
-        self, _task: Any, _obj: Any, data: tuple, _cancellable: Any
-    ) -> None:
+    def source_task_thread_func(self, data: tuple) -> None:
         """Source import task code"""
 
         source: Source

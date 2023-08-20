@@ -17,13 +17,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from typing import Callable, Any
+from typing import Any, Callable
 
 from gi.repository import Gio
 
 from src.game import Game
 from src.store.managers.manager import Manager
-from src.utils.task import Task
 
 
 class AsyncManager(Manager):
@@ -49,11 +48,10 @@ class AsyncManager(Manager):
         self, game: Game, additional_data: dict, callback: Callable[["Manager"], Any]
     ) -> None:
         """Create a task to process the game in a separate thread"""
-        task = Task.new(None, self.cancellable, self._task_callback, (callback,))
-        task.set_task_data((game, additional_data))
-        task.run_in_thread(self._task_thread_func)
+        task = Gio.Task.new(None, self.cancellable, self._task_callback, (callback,))
+        task.run_in_thread(lambda *_: self._task_thread_func((game, additional_data)))
 
-    def _task_thread_func(self, _task, _source_object, data, _cancellable):
+    def _task_thread_func(self, data):
         """Task thread entry point"""
         game, additional_data, *_rest = data
         self.run(game, additional_data)
