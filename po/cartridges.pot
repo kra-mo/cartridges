@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-19 12:45+0200\n"
+"POT-Creation-Date: 2023-08-21 16:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:173
+#: src/main.py:174
 msgid "Cartridges"
 msgstr ""
 
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Game Details"
 msgstr ""
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:418
+#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:430
 #: src/details_window.py:263 src/importer/importer.py:301
 #: src/importer/importer.py:352
 msgid "Preferences"
@@ -68,31 +68,31 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: data/gtk/details-window.blp:57
+#: data/gtk/details-window.blp:58
 msgid "New Cover"
 msgstr ""
 
-#: data/gtk/details-window.blp:75
+#: data/gtk/details-window.blp:77
 msgid "Delete Cover"
 msgstr ""
 
-#: data/gtk/details-window.blp:102 data/gtk/game.blp:80
+#: data/gtk/details-window.blp:105 data/gtk/game.blp:80
 msgid "Title"
 msgstr ""
 
-#: data/gtk/details-window.blp:105
+#: data/gtk/details-window.blp:109
 msgid "Developer (optional)"
 msgstr ""
 
-#: data/gtk/details-window.blp:110
+#: data/gtk/details-window.blp:115 data/gtk/preferences.blp:310
 msgid "Executable"
 msgstr ""
 
-#: data/gtk/details-window.blp:116
+#: data/gtk/details-window.blp:121
 msgid "Select File"
 msgstr ""
 
-#: data/gtk/details-window.blp:127
+#: data/gtk/details-window.blp:132
 msgid "More Info"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgid "Hide"
 msgstr ""
 
 #: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:56
-#: data/gtk/window.blp:209
+#: data/gtk/window.blp:215
 msgid "Remove"
 msgstr ""
 
@@ -121,8 +121,8 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:217 data/gtk/window.blp:257
-#: data/gtk/window.blp:324
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:226 data/gtk/window.blp:269
+#: data/gtk/window.blp:336
 msgid "Search"
 msgstr ""
 
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:122
+#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:128
 #: src/importer/importer.py:376
 msgid "Undo"
 msgstr ""
@@ -163,8 +163,8 @@ msgstr ""
 msgid "Remove game"
 msgstr ""
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:89
-#: data/gtk/preferences.blp:304
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:88
+#: data/gtk/preferences.blp:332
 msgid "Behavior"
 msgstr ""
 
@@ -200,114 +200,130 @@ msgstr ""
 msgid "Remove All Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:85 data/gtk/window.blp:27 data/gtk/window.blp:444
+#: data/gtk/preferences.blp:84 data/gtk/window.blp:27 data/gtk/window.blp:456
 msgid "Import"
 msgstr ""
 
-#: data/gtk/preferences.blp:92
+#: data/gtk/preferences.blp:91
 msgid "Remove Uninstalled Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:102
+#: data/gtk/preferences.blp:101
 msgid "Sources"
 msgstr ""
 
-#: data/gtk/preferences.blp:105
+#: data/gtk/preferences.blp:104
 msgid "Steam"
 msgstr ""
 
-#: data/gtk/preferences.blp:109 data/gtk/preferences.blp:123
-#: data/gtk/preferences.blp:164 data/gtk/preferences.blp:214
-#: data/gtk/preferences.blp:228 data/gtk/preferences.blp:242
-#: data/gtk/preferences.blp:256 data/gtk/preferences.blp:270
+#: data/gtk/preferences.blp:108 data/gtk/preferences.blp:122
+#: data/gtk/preferences.blp:163 data/gtk/preferences.blp:213
+#: data/gtk/preferences.blp:227 data/gtk/preferences.blp:241
+#: data/gtk/preferences.blp:255 data/gtk/preferences.blp:269
 msgid "Install Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:119
+#: data/gtk/preferences.blp:118
 msgid "Lutris"
 msgstr ""
 
-#: data/gtk/preferences.blp:132
+#: data/gtk/preferences.blp:131
 msgid "Cache Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:141
+#: data/gtk/preferences.blp:140
 msgid "Import Steam Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:150
+#: data/gtk/preferences.blp:149
 msgid "Import Flatpak Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:160
+#: data/gtk/preferences.blp:159
 msgid "Heroic"
 msgstr ""
 
-#: data/gtk/preferences.blp:173
+#: data/gtk/preferences.blp:172
 msgid "Import Epic Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:182
+#: data/gtk/preferences.blp:181
 msgid "Import GOG Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:191
+#: data/gtk/preferences.blp:190
 msgid "Import Amazon Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:200
+#: data/gtk/preferences.blp:199
 msgid "Import Sideloaded Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:210
+#: data/gtk/preferences.blp:209
 msgid "Bottles"
 msgstr ""
 
-#: data/gtk/preferences.blp:224
+#: data/gtk/preferences.blp:223
 msgid "itch"
 msgstr ""
 
-#: data/gtk/preferences.blp:238
+#: data/gtk/preferences.blp:237
 msgid "Legendary"
 msgstr ""
 
-#: data/gtk/preferences.blp:252
+#: data/gtk/preferences.blp:251
 msgid "RetroArch"
 msgstr ""
 
-#: data/gtk/preferences.blp:266
+#: data/gtk/preferences.blp:265
 msgid "Flatpak"
 msgstr ""
 
-#: data/gtk/preferences.blp:279
+#: data/gtk/preferences.blp:278
 msgid "Import Game Launchers"
 msgstr ""
 
+#: data/gtk/preferences.blp:288
+msgid "Desktop Entries"
+msgstr ""
+
 #: data/gtk/preferences.blp:292
-msgid "SteamGridDB"
+msgid "Terminal"
+msgstr ""
+
+#: data/gtk/preferences.blp:293
+msgid "Used only by games that require one to run"
 msgstr ""
 
 #: data/gtk/preferences.blp:296
+msgid "Custom"
+msgstr ""
+
+#: data/gtk/preferences.blp:320
+msgid "SteamGridDB"
+msgstr ""
+
+#: data/gtk/preferences.blp:324
 msgid "Authentication"
 msgstr ""
 
-#: data/gtk/preferences.blp:299
+#: data/gtk/preferences.blp:327
 msgid "API Key"
 msgstr ""
 
-#: data/gtk/preferences.blp:307
+#: data/gtk/preferences.blp:335
 msgid "Use SteamGridDB"
 msgstr ""
 
-#: data/gtk/preferences.blp:308
+#: data/gtk/preferences.blp:336
 msgid "Download images when adding or importing games"
 msgstr ""
 
-#: data/gtk/preferences.blp:317
+#: data/gtk/preferences.blp:345
 msgid "Prefer Over Official Images"
 msgstr ""
 
-#: data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:354
 msgid "Prefer Animated Images"
 msgstr ""
 
@@ -335,7 +351,7 @@ msgstr ""
 msgid "Games you hide will appear here."
 msgstr ""
 
-#: data/gtk/window.blp:64 data/gtk/window.blp:305
+#: data/gtk/window.blp:64 data/gtk/window.blp:317
 msgid "Back"
 msgstr ""
 
@@ -347,64 +363,64 @@ msgstr ""
 msgid "Play"
 msgstr ""
 
-#: data/gtk/window.blp:243 data/gtk/window.blp:437
+#: data/gtk/window.blp:255 data/gtk/window.blp:449
 msgid "Add Game"
 msgstr ""
 
-#: data/gtk/window.blp:250 data/gtk/window.blp:317
+#: data/gtk/window.blp:262 data/gtk/window.blp:329
 msgid "Main Menu"
 msgstr ""
 
-#: data/gtk/window.blp:272
+#: data/gtk/window.blp:284
 msgid "Search games"
 msgstr ""
 
-#: data/gtk/window.blp:312
+#: data/gtk/window.blp:324
 msgid "Hidden Games"
 msgstr ""
 
-#: data/gtk/window.blp:339
+#: data/gtk/window.blp:351
 msgid "Search hidden games"
 msgstr ""
 
-#: data/gtk/window.blp:376
+#: data/gtk/window.blp:388
 msgid "Sort"
 msgstr ""
 
-#: data/gtk/window.blp:379
+#: data/gtk/window.blp:391
 msgid "A-Z"
 msgstr ""
 
-#: data/gtk/window.blp:385
+#: data/gtk/window.blp:397
 msgid "Z-A"
 msgstr ""
 
-#: data/gtk/window.blp:391
+#: data/gtk/window.blp:403
 msgid "Newest"
 msgstr ""
 
-#: data/gtk/window.blp:397
+#: data/gtk/window.blp:409
 msgid "Oldest"
 msgstr ""
 
-#: data/gtk/window.blp:403
+#: data/gtk/window.blp:415
 msgid "Last Played"
 msgstr ""
 
-#: data/gtk/window.blp:410
+#: data/gtk/window.blp:422
 msgid "Show Hidden"
 msgstr ""
 
-#: data/gtk/window.blp:423
+#: data/gtk/window.blp:435
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: data/gtk/window.blp:428
+#: data/gtk/window.blp:440
 msgid "About Cartridges"
 msgstr ""
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:192
+#: src/main.py:193
 msgid "translator_credits"
 msgstr ""
 
@@ -434,8 +450,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#. Gdk.Texture supports .svg but PIL doesn't
-#: src/details_window.py:88
+#: src/details_window.py:91
 msgid "Executables"
 msgstr ""
 
@@ -508,28 +523,28 @@ msgstr ""
 msgid "{} removed"
 msgstr ""
 
-#: src/preferences.py:121
+#: src/preferences.py:127
 msgid "All games removed"
 msgstr ""
 
-#: src/preferences.py:170
+#: src/preferences.py:207
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 
-#: src/preferences.py:298
+#: src/preferences.py:335
 msgid "Installation Not Found"
 msgstr ""
 
-#: src/preferences.py:300
+#: src/preferences.py:337
 msgid "Select a valid directory."
 msgstr ""
 
-#: src/preferences.py:356
+#: src/preferences.py:393
 msgid "Invalid Directory"
 msgstr ""
 
-#: src/preferences.py:362
+#: src/preferences.py:399
 msgid "Set Location"
 msgstr ""
 
@@ -537,7 +552,7 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
-#: src/importer/importer.py:135
+#: src/importer/importer.py:137
 msgid "Importing Games…"
 msgstr ""
 

@@ -165,7 +165,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             else:
                 self.init_source_row(source)
 
-        # Desktop Terminal Exec
+        # Desktop Terminal Executable
         def set_terminal_exec(widget: Adw.ComboRow, _param: Any) -> None:
             shared.schema.set_enum("desktop-terminal", widget.get_selected())
             self.desktop_tereminal_custom_exec_revealer.set_reveal_child(
