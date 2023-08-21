@@ -156,9 +156,9 @@ class CartridgesApplication(Adw.Application):
     def on_about_action(self, *_args: Any) -> None:
         # Get the debug info from the log files
         debug_str = ""
-        for i, path in enumerate(shared.log_files):
+        for index, path in enumerate(shared.log_files):
             # Add a horizontal line between runs
-            if i > 0:
+            if index > 0:
                 debug_str += "─" * 37 + "\n"
             # Add the run's logs
             log_file = (

@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import shlex
+from hashlib import sha3_256
 from pathlib import Path
 from time import time
 from typing import NamedTuple
@@ -113,7 +114,10 @@ class DesktopSourceIterable(SourceIterable):
                     "source": self.source.source_id,
                     "added": added_time,
                     "name": name,
-                    "game_id": "desktop" + executable.replace(" ", "_"),
+                    "game_id": "desktop_"
+                    + sha3_256(
+                        str(path).encode("utf-8"), usedforsecurity=False
+                    ).hexdigest(),
                     "executable": self.source.executable_format.format(
                         exec=cd_path
                         + (
