@@ -194,13 +194,19 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                       action-name: "app.edit_game";
                       tooltip-text: _("Edit");
 
-                      styles ["raised", "circular"]
+                      styles [
+                        "raised",
+                        "circular",
+                      ]
                     }
 
                     Button details_view_hide_button {
                       action-name: "app.hide_game";
 
-                      styles ["raised", "circular"]
+                      styles [
+                        "raised",
+                        "circular",
+                      ]
                     }
 
                     Button {
@@ -208,7 +214,10 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                       action-name: "app.remove_game";
                       tooltip-text: _("Remove");
 
-                      styles ["raised", "circular"]
+                      styles [
+                        "raised",
+                        "circular",
+                      ]
                     }
 
                     MenuButton {
@@ -216,7 +225,10 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                       menu-model: search;
                       tooltip-text: _("Search");
 
-                      styles ["raised", "circular"]
+                      styles [
+                        "raised",
+                        "circular",
+                      ]
                     }
 
                     styles [
