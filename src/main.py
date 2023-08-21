@@ -36,6 +36,7 @@ from src.details_window import DetailsWindow
 from src.game import Game
 from src.importer.importer import Importer
 from src.importer.sources.bottles_source import BottlesSource
+from src.importer.sources.desktop_source import DesktopSource
 from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
@@ -240,6 +241,9 @@ class CartridgesApplication(Adw.Application):
 
         if shared.schema.get_boolean("flatpak"):
             shared.importer.add_source(FlatpakSource())
+
+        if shared.schema.get_boolean("desktop"):
+            shared.importer.add_source(DesktopSource())
 
         if shared.schema.get_boolean("itch"):
             shared.importer.add_source(ItchSource())

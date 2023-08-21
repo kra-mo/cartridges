@@ -105,7 +105,6 @@ class SteamSourceIterable(SourceIterable):
             )
             additional_data = {"local_image_path": image_path, "steam_appid": appid}
 
-            # Produce game
             yield (game, additional_data)
 
 

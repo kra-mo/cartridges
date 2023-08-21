@@ -109,7 +109,6 @@ class FlatpakSourceIterable(SourceIterable):
             except GLib.GError:
                 pass
 
-            # Produce game
             yield (game, additional_data)
 
 
