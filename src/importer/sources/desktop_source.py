@@ -83,6 +83,10 @@ class DesktopSourceIterable(SourceIterable):
                 if entry.suffix != ".desktop":
                     continue
 
+                # Skip Lutris games
+                if str(entry.name).startswith("net.lutris."):
+                    continue
+
                 keyfile = GLib.KeyFile.new()
 
                 try:
@@ -94,9 +98,29 @@ class DesktopSourceIterable(SourceIterable):
                         continue
 
                     name = keyfile.get_string("Desktop Entry", "Name")
-                    executable = keyfile.get_string("Desktop Entry", "Exec")
+                    executable = keyfile.get_string("Desktop Entry", "Exec").split(
+                        " %"
+                    )[0]
                 except GLib.GError:
                     continue
+
+                # Skip Steam games
+                if "steam://rungameid/" in executable:
+                    continue
+
+                # Skip Heroic games
+                if "heroic://launch/" in executable:
+                    continue
+
+                # Skip Bottles games
+                if "bottles-cli " in executable:
+                    continue
+
+                try:
+                    if keyfile.get_boolean("Desktop Entry", "NoDisplay"):
+                        continue
+                except GLib.GError:
+                    pass
 
                 try:
                     terminal = keyfile.get_boolean("Desktop Entry", "Terminal")
@@ -116,7 +140,7 @@ class DesktopSourceIterable(SourceIterable):
                     "name": name,
                     "game_id": "desktop_"
                     + sha3_256(
-                        str(path).encode("utf-8"), usedforsecurity=False
+                        str(entry).encode("utf-8"), usedforsecurity=False
                     ).hexdigest(),
                     "executable": self.source.executable_format.format(
                         exec=cd_path
@@ -130,25 +154,36 @@ class DesktopSourceIterable(SourceIterable):
                 game = Game(values)
 
                 additional_data = {}
+                icon_name = None
 
                 try:
-                    if (
-                        icon_path := icon_theme.lookup_icon(
-                            keyfile.get_string("Desktop Entry", "Icon"),
-                            None,
-                            512,
-                            1,
-                            shared.win.get_direction(),
-                            0,
-                        )
-                        .get_file()
-                        .get_path()
-                    ):
-                        additional_data = {"local_icon_path": Path(icon_path)}
+                    icon_str = keyfile.get_string("Desktop Entry", "Icon")
+                    if "/" in icon_str:
+                        additional_data = {"local_icon_path": Path(icon_str)}
                     else:
-                        pass
+                        icon_name = icon_str
                 except GLib.GError:
                     pass
+
+                if icon_name:
+                    try:
+                        if (
+                            icon_path := icon_theme.lookup_icon(
+                                icon_name,
+                                None,
+                                512,
+                                1,
+                                shared.win.get_direction(),
+                                0,
+                            )
+                            .get_file()
+                            .get_path()
+                        ):
+                            additional_data = {"local_icon_path": Path(icon_path)}
+                        else:
+                            pass
+                    except GLib.GError:
+                        pass
 
                 yield (game, additional_data)
 
