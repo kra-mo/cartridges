@@ -89,7 +89,7 @@
     <key name="desktop" type="b">
       <default>true</default>
     </key>
-    <key name='desktop-terminal' enum='@APP_ID@.terminals'>
+    <key name="desktop-terminal" enum="@APP_ID@.terminals">
       <default>"xdg-terminal-exec"</default>
     </key>
     <key name="desktop-terminal-custom-exec" type="s">
@@ -140,6 +140,9 @@
     </key>
     <key name="steam-limiter-tokens-history" type="s">
       <default>"[]"</default>
+    </key>
+    <key name="terminal-check-done" type="b">
+      <default>false</default>
     </key>
   </schema>
 </schemalist>
