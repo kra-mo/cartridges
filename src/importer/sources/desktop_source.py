@@ -41,13 +41,20 @@ class DesktopSourceIterable(SourceIterable):
         icon_theme = Gtk.IconTheme.new()
 
         search_paths = GLib.get_system_data_dirs() + [
+            "/usr/share/pixmaps",
             "/run/host/usr/share",
             "/run/host/usr/local/share",
+            "/run/host/usr/share/pixmaps",
             shared.home / ".local" / "share",
         ]
 
         for search_path in search_paths:
-            if not (path := Path(search_path) / "icons").exists():
+            path = Path(search_path)
+
+            if not str(search_path).endswith("/pixmaps"):
+                path = path / "icons"
+
+            if not path.is_dir():
                 continue
 
             if str(path).startswith("/app/"):
