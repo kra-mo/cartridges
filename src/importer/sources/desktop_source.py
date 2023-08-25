@@ -27,7 +27,7 @@ from gi.repository import GLib, Gtk
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import ExecutableFormatSource, SourceIterable
+from src.importer.sources.source import Source, SourceIterable
 
 
 class DesktopSourceIterable(SourceIterable):
@@ -62,20 +62,7 @@ class DesktopSourceIterable(SourceIterable):
 
             icon_theme.add_search_path(str(path))
 
-        match shared.schema.get_enum("desktop-terminal"):
-            case 0:
-                terminal_exec = shared.schema.get_string("desktop-terminal-custom-exec")
-            case 1:
-                terminal_exec = "xdg-terminal-exec"
-            case 2:
-                terminal_exec = "kgx -e"
-            case 3:
-                terminal_exec = "gnome-terminal --"
-            case 4:
-                terminal_exec = "konsole -e"
-            case 5:
-                terminal_exec = "xterm -e"
-        terminal_exec += " "
+        terminal_exec = self.get_terminal_exec()
 
         for path in search_paths:
             if str(path).startswith("/app/"):
@@ -149,63 +136,75 @@ class DesktopSourceIterable(SourceIterable):
                     + sha3_256(
                         str(entry).encode("utf-8"), usedforsecurity=False
                     ).hexdigest(),
-                    "executable": self.source.executable_format.format(
-                        exec=cd_path
-                        + (
-                            (terminal_exec + shlex.quote(executable))
-                            if terminal
-                            else executable
-                        )
+                    "executable": cd_path
+                    + (
+                        (terminal_exec + shlex.quote(executable))
+                        if terminal
+                        else executable
                     ),
                 }
                 game = Game(values)
 
                 additional_data = {}
-                icon_name = None
 
                 try:
                     icon_str = keyfile.get_string("Desktop Entry", "Icon")
+                except GLib.GError:
+                    print("AAAAAAAAAAAAAAAAAAAAAAA")
+                    yield game
+                    continue
+                else:
                     if "/" in icon_str:
                         additional_data = {"local_icon_path": Path(icon_str)}
-                    else:
-                        icon_name = icon_str
+                        yield (game, additional_data)
+                        continue
+
+                try:
+                    if (
+                        icon_path := icon_theme.lookup_icon(
+                            icon_str,
+                            None,
+                            512,
+                            1,
+                            shared.win.get_direction(),
+                            0,
+                        )
+                        .get_file()
+                        .get_path()
+                    ):
+                        additional_data = {"local_icon_path": Path(icon_path)}
                 except GLib.GError:
                     pass
 
-                if icon_name:
-                    try:
-                        if (
-                            icon_path := icon_theme.lookup_icon(
-                                icon_name,
-                                None,
-                                512,
-                                1,
-                                shared.win.get_direction(),
-                                0,
-                            )
-                            .get_file()
-                            .get_path()
-                        ):
-                            additional_data = {"local_icon_path": Path(icon_path)}
-                        else:
-                            pass
-                    except GLib.GError:
-                        pass
-
                 yield (game, additional_data)
+
+    def get_terminal_exec(self) -> str:
+        match shared.schema.get_enum("desktop-terminal"):
+            case 0:
+                terminal_exec = shared.schema.get_string("desktop-terminal-custom-exec")
+            case 1:
+                terminal_exec = "xdg-terminal-exec"
+            case 2:
+                terminal_exec = "kgx -e"
+            case 3:
+                terminal_exec = "gnome-terminal --"
+            case 4:
+                terminal_exec = "konsole -e"
+            case 5:
+                terminal_exec = "xterm -e"
+        return terminal_exec + " "
 
 
 class DesktopLocations(NamedTuple):
     pass
 
 
-class DesktopSource(ExecutableFormatSource):
+class DesktopSource(Source):
     """Generic Flatpak source"""
 
     source_id = "desktop"
     name = _("Desktop")
     iterable_class = DesktopSourceIterable
-    executable_format = "{exec}"
     available_on = {"linux"}
 
     locations: DesktopLocations

@@ -150,7 +150,7 @@ class CartridgesApplication(Adw.Application):
         self.win.present()
 
     def check_desktop_terminals(self) -> None:
-        """Look for an installed terminal for desktop entries"""
+        """Look for an installed terminal for desktop entries and set the relevant gsetting"""
         terminals = ("xdg-terminal-exec", "kgx", "gnome-terminal", "konsole", "xterm")
 
         for index, command in enumerate(terminals):

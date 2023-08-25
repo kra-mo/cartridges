@@ -78,7 +78,6 @@ class Source(Iterable):
     def is_available(self) -> bool:
         return sys.platform in self.available_on
 
-    @abstractmethod
     def make_executable(self, *args, **kwargs) -> str:
         """
         Create a game executable command.
