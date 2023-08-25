@@ -77,7 +77,6 @@ class LutrisSourceIterable(SourceIterable):
             image_path = self.source.locations.cache["coverart"] / f"{row[2]}.jpg"
             additional_data = {"local_image_path": image_path}
 
-            # Produce game
             yield (game, additional_data)
 
         # Cleanup

@@ -20,6 +20,8 @@
 import json
 import lzma
 import os
+import shlex
+import subprocess
 import sys
 from typing import Any, Optional
 
@@ -36,6 +38,7 @@ from src.details_window import DetailsWindow
 from src.game import Game
 from src.importer.importer import Importer
 from src.importer.sources.bottles_source import BottlesSource
+from src.importer.sources.desktop_source import DesktopSource
 from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
@@ -72,6 +75,10 @@ class CartridgesApplication(Adw.Application):
 
         if os.name == "nt":
             migrate_files_v1_to_v2()
+        else:
+            if not shared.state_schema.get_boolean("terminal-check-done"):
+                self.check_desktop_terminals()
+                shared.state_schema.set_boolean("terminal-check-done", True)
 
         # Set fallback icon-name
         Gtk.Window.set_default_icon_name(shared.APP_ID)
@@ -142,6 +149,22 @@ class CartridgesApplication(Adw.Application):
 
         self.win.present()
 
+    def check_desktop_terminals(self) -> None:
+        """Look for an installed terminal for desktop entries and set the relevant gsetting"""
+        terminals = ("xdg-terminal-exec", "kgx", "gnome-terminal", "konsole", "xterm")
+
+        for index, command in enumerate(terminals):
+            command = f"type {command} &> /dev/null"
+            if os.getenv("FLATPAK_ID") == shared.APP_ID:
+                command = "flatpak-spawn --host /bin/sh -c " + shlex.quote(command)
+
+            try:
+                subprocess.run(command, shell=True, check=True)
+                shared.schema.set_enum("desktop-terminal", index + 1)
+                return
+            except subprocess.CalledProcessError:
+                pass
+
     def load_games_from_disk(self) -> None:
         if shared.games_dir.is_dir():
             for game_file in shared.games_dir.iterdir():
@@ -155,9 +178,9 @@ class CartridgesApplication(Adw.Application):
     def on_about_action(self, *_args: Any) -> None:
         # Get the debug info from the log files
         debug_str = ""
-        for i, path in enumerate(shared.log_files):
+        for index, path in enumerate(shared.log_files):
             # Add a horizontal line between runs
-            if i > 0:
+            if index > 0:
                 debug_str += "─" * 37 + "\n"
             # Add the run's logs
             log_file = (
@@ -240,6 +263,9 @@ class CartridgesApplication(Adw.Application):
 
         if shared.schema.get_boolean("flatpak"):
             shared.importer.add_source(FlatpakSource())
+
+        if shared.schema.get_boolean("desktop"):
+            shared.importer.add_source(DesktopSource())
 
         if shared.schema.get_boolean("itch"):
             shared.importer.add_source(ItchSource())

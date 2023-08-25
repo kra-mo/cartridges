@@ -73,7 +73,6 @@ class BottlesSourceIterable(SourceIterable):
                 image_path = bottles_location / bottle_path / "grids" / image_name
                 additional_data = {"local_image_path": image_path}
 
-            # Produce game
             yield (game, additional_data)
 
 

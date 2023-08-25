@@ -76,7 +76,6 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           ]
         }
       }
-
     }
   }
 
@@ -308,6 +307,35 @@ template $PreferencesWindow : Adw.PreferencesWindow {
 
           Switch flatpak_import_launchers_switch {
             valign: center;
+          }
+        }
+      }
+
+      Adw.ExpanderRow desktop_expander_row {
+        title: _("Desktop Entries");
+        show-enable-switch: true;
+
+        Adw.ComboRow desktop_terminal_exec_row {
+          title: _("Terminal");
+          subtitle: _("Used only by games that require one to run");
+          model: StringList {
+            strings [
+            _("Custom"),
+            "xdg-terminal-exec", 
+            "GNOME Console",
+            "GNOME Terminal",
+            "Konsole",
+            "XTerm"
+            ]
+          };
+          [suffix]
+          Revealer desktop_tereminal_custom_exec_revealer {
+            transition-type: slide_right;
+
+            Entry desktop_tereminal_custom_exec {
+              valign: center;
+              placeholder-text: _("Executable");
+            }
           }
         }
       }
