@@ -61,6 +61,7 @@ def convert_cover(
                     tmp_path,
                     save_all=True,
                     append_images=frames[1:],
+                    disposal=2,
                 )
 
             else:
