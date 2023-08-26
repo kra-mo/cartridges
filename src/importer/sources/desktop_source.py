@@ -150,7 +150,6 @@ class DesktopSourceIterable(SourceIterable):
                 try:
                     icon_str = keyfile.get_string("Desktop Entry", "Icon")
                 except GLib.GError:
-                    print("AAAAAAAAAAAAAAAAAAAAAAA")
                     yield game
                     continue
                 else:

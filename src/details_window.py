@@ -19,6 +19,7 @@
 
 import os
 import shlex
+from pathlib import Path
 from time import time
 from typing import Any, Optional
 
@@ -29,9 +30,10 @@ from src import shared
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.game_cover import GameCover
+from src.store.managers.cover_manager import CoverManager
 from src.store.managers.sgdb_manager import SGDBManager
 from src.utils.create_dialog import create_dialog
-from src.utils.save_cover import resize_cover, save_cover
+from src.utils.save_cover import convert_cover, save_cover
 
 
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/details-window.ui")
@@ -281,15 +283,17 @@ class DetailsWindow(Adw.Window):
         except GLib.GError:
             return
 
-        def resize() -> None:
-            if cover := resize_cover(path):
-                self.game_cover.new_cover(cover)
-                self.cover_button_delete_revealer.set_reveal_child(True)
-                self.cover_changed = True
+        def thread_func() -> None:
+            if new_path := convert_cover(
+                pixbuf=shared.store.managers[CoverManager].composite_cover(Path(path))
+            ):
+                self.game_cover.new_cover(new_path)
+            self.cover_button_delete_revealer.set_reveal_child(True)
+            self.cover_changed = True
             self.toggle_loading()
 
         self.toggle_loading()
-        GLib.Thread.new(None, resize)
+        GLib.Thread.new(None, thread_func)
 
     def set_executable(self, _source: Any, result: Gio.Task, *_args: Any) -> None:
         try:

@@ -28,11 +28,21 @@ from PIL import Image, ImageSequence, UnidentifiedImageError
 from src import shared
 
 
-def resize_cover(
-    cover_path: Optional[Path] = None, pixbuf: Optional[GdkPixbuf.Pixbuf] = None
+def convert_cover(
+    cover_path: Optional[Path] = None,
+    pixbuf: Optional[GdkPixbuf.Pixbuf] = None,
+    resize: bool = True,
 ) -> Optional[Path]:
     if not cover_path and not pixbuf:
         return None
+
+    pixbuf_extensions = set()
+    for pixbuf_format in GdkPixbuf.Pixbuf.get_formats():
+        for pixbuf_extension in pixbuf_format.get_extensions():
+            pixbuf_extensions.add(pixbuf_extension)
+
+    if not resize and cover_path and cover_path.suffix.lower()[1:] in pixbuf_extensions:
+        return cover_path
 
     if pixbuf:
         cover_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
@@ -42,7 +52,8 @@ def resize_cover(
         with Image.open(cover_path) as image:
             if getattr(image, "is_animated", False):
                 frames = tuple(
-                    frame.resize((200, 300)) for frame in ImageSequence.Iterator(image)
+                    frame.resize((200, 300)) if resize else frame
+                    for frame in ImageSequence.Iterator(image)
                 )
 
                 tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
@@ -59,7 +70,7 @@ def resize_cover(
                     image = image.convert("RGBA")
 
                 tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
-                image.resize(shared.image_size).save(
+                (image.resize(shared.image_size) if resize else image).save(
                     tmp_path,
                     compression="tiff_adobe_deflate"
                     if shared.schema.get_boolean("high-quality-images")
@@ -70,7 +81,7 @@ def resize_cover(
             Gdk.Texture.new_from_filename(str(cover_path)).save_to_tiff(
                 tmp_path := Gio.File.new_tmp("XXXXXX.tiff")[0].get_path()
             )
-            return resize_cover(tmp_path)
+            return convert_cover(tmp_path)
         except GLib.GError:
             return None
 

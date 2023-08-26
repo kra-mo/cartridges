@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Optional
 
 from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk
 from PIL import Image, ImageFilter, ImageStat

@@ -22,14 +22,14 @@ from pathlib import Path
 from typing import NamedTuple
 
 import requests
-from gi.repository import Gio, GdkPixbuf
+from gi.repository import GdkPixbuf, Gio
 from requests.exceptions import HTTPError, SSLError
 
 from src import shared
 from src.game import Game
 from src.store.managers.manager import Manager
 from src.store.managers.steam_api_manager import SteamAPIManager
-from src.utils.save_cover import resize_cover, save_cover
+from src.utils.save_cover import convert_cover, save_cover
 
 
 class ImageSize(NamedTuple):
@@ -110,18 +110,16 @@ class CoverManager(Manager):
         stretch = 1 - (resized_height / cover_size.height)
         return stretch <= max_stretch
 
-    def save_composited_cover(
+    def composite_cover(
         self,
-        game: Game,
         image_path: Path,
         scale: float = 1,
         blur_size: ImageSize = ImageSize(2, 2),
-    ) -> None:
+    ) -> GdkPixbuf.Pixbuf:
         """
-        Save the image composited with a background blur.
+        Return the image composited with a background blur.
         If the image is stretchable, just stretch it.
 
-        :param game: The game to save the cover for
         :param path: Path where the source image is located
         :param scale:
             Scale of the smalled image side
@@ -130,14 +128,15 @@ class CoverManager(Manager):
         """
 
         # Load source image
-        source = GdkPixbuf.Pixbuf.new_from_file(str(image_path))
+        source = GdkPixbuf.Pixbuf.new_from_file(
+            str(convert_cover(image_path, resize=False))
+        )
         source_size = ImageSize(source.get_width(), source.get_height())
         cover_size = ImageSize._make(shared.image_size)
 
         # Stretch if possible
         if scale == 1 and self.is_stretchable(source_size, cover_size):
-            save_cover(game.game_id, resize_cover(pixbuf=source))
-            return
+            return source
 
         # Create the blurred cover background
         # fmt: off
@@ -164,7 +163,7 @@ class CoverManager(Manager):
             GdkPixbuf.InterpType.BILINEAR,
             255,
         )
-        save_cover(game.game_id, resize_cover(pixbuf=cover))
+        return cover
 
     def main(self, game: Game, additional_data: dict) -> None:
         if game.blacklisted:
@@ -185,13 +184,15 @@ class CoverManager(Manager):
                 continue
 
             # Icon cover
-            if key == "local_icon_path":
-                self.save_composited_cover(
-                    game,
-                    image_path,
-                    scale=0.7,
-                    blur_size=ImageSize(1, 2),
-                )
-                return
+            composite_kwargs = {}
 
-            self.save_composited_cover(game, image_path)
+            if key == "local_icon_path":
+                composite_kwargs["scale"] = 0.7
+                composite_kwargs["blur_size"] = ImageSize(1, 2)
+
+            save_cover(
+                game.game_id,
+                convert_cover(
+                    pixbuf=self.composite_cover(image_path, **composite_kwargs)
+                ),
+            )

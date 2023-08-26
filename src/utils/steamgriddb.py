@@ -28,7 +28,7 @@ from requests.exceptions import HTTPError
 
 from src import shared
 from src.game import Game
-from src.utils.save_cover import resize_cover, save_cover
+from src.utils.save_cover import convert_cover, save_cover
 
 
 class SGDBError(Exception):
@@ -134,7 +134,7 @@ class SGDBHelper:
                 tmp_file = Gio.File.new_tmp()[0]
                 tmp_file_path = tmp_file.get_path()
                 Path(tmp_file_path).write_bytes(response.content)
-                save_cover(game.game_id, resize_cover(tmp_file_path))
+                save_cover(game.game_id, convert_cover(tmp_file_path))
             except SGDBAuthError as error:
                 # Let caller handle auth errors
                 raise error
