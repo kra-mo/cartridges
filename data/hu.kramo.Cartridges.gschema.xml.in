@@ -116,6 +116,9 @@
     <key name="sgdb-animated" type="b">
       <default>false</default>
     </key>
+    <key name="library-rows" type="i">
+      <default>0</default>
+    </key>
   </schema>
 
   <schema id="@APP_ID@.State" path="@PREFIX@/State/">

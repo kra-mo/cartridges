@@ -114,6 +114,21 @@ class CartridgesWindow(Adw.ApplicationWindow):
         style_manager.connect("notify::dark", self.set_details_view_opacity)
         style_manager.connect("notify::high-contrast", self.set_details_view_opacity)
 
+        # Allow for a custom number of rows for the library
+        if shared.schema.get_int("library-rows"):
+            shared.schema.bind(
+                "library-rows",
+                self.library,
+                "max-children-per-line",
+                Gio.SettingsBindFlags.DEFAULT,
+            )
+            shared.schema.bind(
+                "library-rows",
+                self.hidden_library,
+                "max-children-per-line",
+                Gio.SettingsBindFlags.DEFAULT,
+            )
+
     def search_changed(self, _widget: Any, hidden: bool) -> None:
         # Refresh search filter on keystroke in search box
         (self.hidden_library if hidden else self.library).invalidate_filter()
