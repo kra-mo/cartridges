@@ -28,6 +28,22 @@ from PIL import Image, ImageSequence, UnidentifiedImageError
 from src import shared
 
 
+def _crop(image):
+    if shared.schema.get_boolean("stretch-images"):
+        return image
+    w, h = image.size
+    x, y = shared.image_size
+    w_ratio = w / x
+    h_ratio = h / y
+    if w_ratio > h_ratio:
+        x_crop = (w - x * h_ratio) // 2
+        image = image.crop((x_crop, 0, w - x_crop, h))
+    elif h_ratio > w_ratio:
+        y_crop = (h - y * w_ratio) // 2
+        image = image.crop((0, y_crop, w, h - y_crop))
+    return image
+
+
 def resize_cover(
     cover_path: Optional[Path] = None, pixbuf: Optional[GdkPixbuf.Pixbuf] = None
 ) -> Optional[Path]:
@@ -42,7 +58,7 @@ def resize_cover(
         with Image.open(cover_path) as image:
             if getattr(image, "is_animated", False):
                 frames = tuple(
-                    frame.resize((200, 300)) for frame in ImageSequence.Iterator(image)
+                    _crop(frame).resize((200, 300)) for frame in ImageSequence.Iterator(image)
                 )
 
                 tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
@@ -59,7 +75,7 @@ def resize_cover(
                     image = image.convert("RGBA")
 
                 tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
-                image.resize(shared.image_size).save(
+                _crop(image).resize(shared.image_size).save(
                     tmp_path,
                     compression="tiff_adobe_deflate"
                     if shared.schema.get_boolean("high-quality-images")

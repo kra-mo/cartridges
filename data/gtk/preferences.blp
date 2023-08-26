@@ -44,6 +44,16 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           valign: center;
         }
       }
+
+      Adw.ActionRow {
+        title: _("Stretch Images To Fit");
+        subtitle: _("Stretch images to the desired aspect ratio");
+        activatable-widget: stretch_images_switch;
+
+        Switch stretch_images_switch {
+          valign: center;
+        }
+      }
     }
 
     Adw.PreferencesGroup danger_zone_group {

@@ -20,6 +20,9 @@
     <key name="high-quality-images" type="b">
       <default>false</default>
     </key>
+    <key name="stretch-images" type="b">
+      <default>true</default>
+    </key>
     <key name="remove-missing" type="b">
       <default>true</default>
     </key>

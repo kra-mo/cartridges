@@ -54,6 +54,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     exit_after_launch_switch = Gtk.Template.Child()
     cover_launches_game_switch = Gtk.Template.Child()
     high_quality_images_switch = Gtk.Template.Child()
+    stretch_images_switch = Gtk.Template.Child()
 
     remove_missing_switch = Gtk.Template.Child()
 
@@ -225,6 +226,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "exit-after-launch",
                 "cover-launches-game",
                 "high-quality-images",
+                "stretch-images",
                 "remove-missing",
                 "lutris-import-steam",
                 "lutris-import-flatpak",
