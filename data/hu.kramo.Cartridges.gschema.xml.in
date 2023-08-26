@@ -116,7 +116,7 @@
     <key name="sgdb-animated" type="b">
       <default>false</default>
     </key>
-    <key name="library-rows" type="i">
+    <key name="library-rows" type="u">
       <default>0</default>
     </key>
   </schema>

@@ -115,7 +115,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         style_manager.connect("notify::high-contrast", self.set_details_view_opacity)
 
         # Allow for a custom number of rows for the library
-        if shared.schema.get_int("library-rows"):
+        if shared.schema.get_uint("library-rows"):
             shared.schema.bind(
                 "library-rows",
                 self.library,
