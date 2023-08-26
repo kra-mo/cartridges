@@ -24,7 +24,7 @@ from time import time
 from typing import Any, Optional
 
 from gi.repository import Adw, Gio, GLib, Gtk
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 
 from src import shared
 from src.errors.friendly_error import FriendlyError
@@ -284,12 +284,27 @@ class DetailsWindow(Adw.Window):
             return
 
         def thread_func() -> None:
-            if new_path := convert_cover(
-                pixbuf=shared.store.managers[CoverManager].composite_cover(Path(path))
-            ):
+            new_path = None
+
+            try:
+                with Image.open(path) as image:
+                    if getattr(image, "is_animated", False):
+                        new_path = convert_cover(path)
+            except UnidentifiedImageError:
+                pass
+
+            if not new_path:
+                new_path = convert_cover(
+                    pixbuf=shared.store.managers[CoverManager].composite_cover(
+                        Path(path)
+                    )
+                )
+
+            if new_path:
                 self.game_cover.new_cover(new_path)
-            self.cover_button_delete_revealer.set_reveal_child(True)
-            self.cover_changed = True
+                self.cover_button_delete_revealer.set_reveal_child(True)
+                self.cover_changed = True
+
             self.toggle_loading()
 
         self.toggle_loading()
