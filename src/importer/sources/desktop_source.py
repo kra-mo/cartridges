@@ -168,6 +168,7 @@ class DesktopSourceIterable(SourceIterable):
         flatpak_str = "flatpak-spawn --host /bin/sh -c "
 
         for command, full_path in commands:
+            # Even if `gio` is available, `gio launch` is only available on GLib >= 2.67.2
             check_command = (
                 "gio help launch"
                 if command == "gio launch"
