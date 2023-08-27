@@ -65,7 +65,7 @@ class ItchSourceIterable(SourceIterable):
                 "source": self.source.source_id,
                 "name": row[1],
                 "game_id": self.source.game_id_format.format(game_id=row[0]),
-                "executable": self.source.executable_format.format(cave_id=row[4]),
+                "executable": self.source.make_executable(cave_id=row[4]),
             }
             additional_data = {"online_cover_url": row[3] or row[2]}
             game = Game(values)

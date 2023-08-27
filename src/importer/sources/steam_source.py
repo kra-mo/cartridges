@@ -94,7 +94,7 @@ class SteamSourceIterable(SourceIterable):
                 "name": local_data["name"],
                 "source": self.source.source_id,
                 "game_id": self.source.game_id_format.format(game_id=appid),
-                "executable": self.source.executable_format.format(game_id=appid),
+                "executable": self.source.make_executable(game_id=appid),
             }
             game = Game(values)
 

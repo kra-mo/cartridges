@@ -82,9 +82,7 @@ class FlatpakSourceIterable(SourceIterable):
                 "added": added_time,
                 "name": name,
                 "game_id": self.source.game_id_format.format(game_id=flatpak_id),
-                "executable": self.source.executable_format.format(
-                    flatpak_id=flatpak_id
-                ),
+                "executable": self.source.make_executable(flatpak_id=flatpak_id),
             }
             game = Game(values)
 
