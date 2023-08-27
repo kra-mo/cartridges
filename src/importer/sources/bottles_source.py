@@ -47,8 +47,9 @@ class BottlesSourceIterable(SourceIterable):
                 "added": added_time,
                 "name": entry["name"],
                 "game_id": self.source.game_id_format.format(game_id=entry["id"]),
-                "executable": self.source.executable_format.format(
-                    bottle_name=entry["bottle"]["name"], game_name=entry["name"]
+                "executable": self.source.make_executable(
+                    bottle_name=entry["bottle"]["name"],
+                    game_name=entry["name"],
                 ),
             }
             game = Game(values)

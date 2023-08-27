@@ -28,8 +28,8 @@ from src.game import Game
 from src.importer.sources.location import Location, LocationSubPath
 from src.importer.sources.source import (
     ExecutableFormatSource,
-    SourceIterationResult,
     SourceIterable,
+    SourceIterationResult,
 )
 
 
@@ -50,7 +50,7 @@ class LegendarySourceIterable(SourceIterable):
             "source": self.source.source_id,
             "name": entry["title"],
             "game_id": self.source.game_id_format.format(game_id=app_name),
-            "executable": self.source.executable_format.format(app_name=app_name),
+            "executable": self.source.make_executable(app_name=app_name),
         }
         data = {}
 

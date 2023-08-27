@@ -104,7 +104,7 @@ class ExecutableFormatSource(Source):
 
     def make_executable(self, *args, **kwargs) -> str:
         """Use the executable format to"""
-        return self.executable_format.format(args, kwargs)
+        return self.executable_format.format(*args, **kwargs)
 
 
 # pylint: disable=abstract-method
