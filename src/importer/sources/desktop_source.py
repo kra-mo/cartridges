@@ -17,7 +17,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
 import shlex
+import subprocess
 from hashlib import sha3_256
 from pathlib import Path
 from time import time
@@ -62,7 +64,7 @@ class DesktopSourceIterable(SourceIterable):
 
             icon_theme.add_search_path(str(path))
 
-        terminal_exec = self.get_terminal_exec()
+        launch_command, full_path = self.check_launch_command()
 
         for path in search_paths:
             if str(path).startswith("/app/"):
@@ -116,18 +118,6 @@ class DesktopSourceIterable(SourceIterable):
                 except GLib.GError:
                     pass
 
-                try:
-                    terminal = keyfile.get_boolean("Desktop Entry", "Terminal")
-                except GLib.GError:
-                    terminal = False
-
-                try:
-                    cd_path = (
-                        "cd " + keyfile.get_string("Desktop Entry", "Path") + " && "
-                    )
-                except GLib.GError:
-                    cd_path = ""
-
                 values = {
                     "source": self.source.source_id,
                     "added": added_time,
@@ -136,12 +126,7 @@ class DesktopSourceIterable(SourceIterable):
                     + sha3_256(
                         str(entry).encode("utf-8"), usedforsecurity=False
                     ).hexdigest(),
-                    "executable": cd_path
-                    + (
-                        (terminal_exec + shlex.quote(executable))
-                        if terminal
-                        else executable
-                    ),
+                    "executable": f"{launch_command} {shlex.quote(str(entry if full_path else entry.stem))}",
                 }
                 game = Game(values)
 
@@ -177,21 +162,27 @@ class DesktopSourceIterable(SourceIterable):
 
                 yield (game, additional_data)
 
-    def get_terminal_exec(self) -> str:
-        match shared.schema.get_enum("desktop-terminal"):
-            case 0:
-                terminal_exec = shared.schema.get_string("desktop-terminal-custom-exec")
-            case 1:
-                terminal_exec = "xdg-terminal-exec"
-            case 2:
-                terminal_exec = "kgx -e"
-            case 3:
-                terminal_exec = "gnome-terminal --"
-            case 4:
-                terminal_exec = "konsole -e"
-            case 5:
-                terminal_exec = "xterm -e"
-        return terminal_exec + " "
+    def check_launch_command(self) -> (str, bool):
+        """Check whether `gio launch` `gtk4-launch` or `gtk-launch` are available on the system"""
+        commands = (("gio launch", True), ("gtk4-launch", False), ("gtk-launch", False))
+        flatpak_str = "flatpak-spawn --host /bin/sh -c "
+
+        for command, full_path in commands:
+            check_command = (
+                "gio help launch"
+                if command == "gio launch"
+                else f"type {command} &> /dev/null"
+            )
+            if os.getenv("FLATPAK_ID") == shared.APP_ID:
+                check_command = flatpak_str + shlex.quote(check_command)
+
+            try:
+                subprocess.run(check_command, shell=True, check=True)
+                return command, full_path
+            except subprocess.CalledProcessError:
+                pass
+
+        return commands[2]
 
 
 class DesktopLocations(NamedTuple):

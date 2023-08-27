@@ -75,10 +75,6 @@ class CartridgesApplication(Adw.Application):
 
         if os.name == "nt":
             migrate_files_v1_to_v2()
-        else:
-            if not shared.state_schema.get_boolean("terminal-check-done"):
-                self.check_desktop_terminals()
-                shared.state_schema.set_boolean("terminal-check-done", True)
 
         # Set fallback icon-name
         Gtk.Window.set_default_icon_name(shared.APP_ID)
@@ -148,22 +144,6 @@ class CartridgesApplication(Adw.Application):
         self.win.on_sort_action(sort_action, shared.state_schema.get_value("sort-mode"))
 
         self.win.present()
-
-    def check_desktop_terminals(self) -> None:
-        """Look for an installed terminal for desktop entries and set the relevant gsetting"""
-        terminals = ("xdg-terminal-exec", "kgx", "gnome-terminal", "konsole", "xterm")
-
-        for index, command in enumerate(terminals):
-            command = f"type {command} &> /dev/null"
-            if os.getenv("FLATPAK_ID") == shared.APP_ID:
-                command = "flatpak-spawn --host /bin/sh -c " + shlex.quote(command)
-
-            try:
-                subprocess.run(command, shell=True, check=True)
-                shared.schema.set_enum("desktop-terminal", index + 1)
-                return
-            except subprocess.CalledProcessError:
-                pass
 
     def load_games_from_disk(self) -> None:
         if shared.games_dir.is_dir():

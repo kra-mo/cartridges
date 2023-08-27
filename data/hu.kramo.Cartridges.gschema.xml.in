@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="cartridges">
 
-  <enum id="@APP_ID@.terminals">
-    <value nick="custom" value="0"/>
-    <value nick="xdg-terminal-exec" value="1"/>
-    <value nick="kgx" value="2"/>
-    <value nick="gnome-terminal" value="3"/>
-    <value nick="konsole" value="4"/>
-    <value nick="xterm" value="5"/>
-  </enum>
-
   <schema id="@APP_ID@" path="@PREFIX@/">
     <key name="exit-after-launch" type="b">
       <default>false</default>
@@ -89,12 +80,6 @@
     <key name="desktop" type="b">
       <default>true</default>
     </key>
-    <key name="desktop-terminal" enum="@APP_ID@.terminals">
-      <default>"xdg-terminal-exec"</default>
-    </key>
-    <key name="desktop-terminal-custom-exec" type="s">
-      <default>""</default>
-    </key>
     <key name="flatpak" type="b">
       <default>true</default>
     </key>
@@ -143,9 +128,6 @@
     </key>
     <key name="steam-limiter-tokens-history" type="s">
       <default>"[]"</default>
-    </key>
-    <key name="terminal-check-done" type="b">
-      <default>false</default>
     </key>
   </schema>
 </schemalist>

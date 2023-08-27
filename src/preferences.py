@@ -28,7 +28,6 @@ from gi.repository import Adw, Gio, GLib, Gtk
 from src import shared
 from src.game import Game
 from src.importer.sources.bottles_source import BottlesSource
-from src.importer.sources.desktop_source import DesktopSource
 from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
@@ -98,10 +97,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     flatpak_data_file_chooser_button = Gtk.Template.Child()
     flatpak_import_launchers_switch = Gtk.Template.Child()
 
-    desktop_expander_row = Gtk.Template.Child()
-    desktop_terminal_exec_row = Gtk.Template.Child()
-    desktop_tereminal_custom_exec_revealer = Gtk.Template.Child()
-    desktop_tereminal_custom_exec = Gtk.Template.Child()
+    desktop_switch = Gtk.Template.Child()
 
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
@@ -150,7 +146,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
         for source_class in (
             BottlesSource,
             FlatpakSource,
-            DesktopSource,
             HeroicSource,
             ItchSource,
             LegendarySource,
@@ -164,36 +159,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 expander_row.set_visible(False)
             else:
                 self.init_source_row(source)
-
-        # Desktop Terminal Executable
-        def set_terminal_exec(widget: Adw.ComboRow, _param: Any) -> None:
-            shared.schema.set_enum("desktop-terminal", widget.get_selected())
-            self.desktop_tereminal_custom_exec_revealer.set_reveal_child(
-                widget.get_selected() == 0
-            )
-
-        self.desktop_terminal_exec_row.connect("notify::selected", set_terminal_exec)
-        self.desktop_terminal_exec_row.set_selected(
-            terminal_value := shared.schema.get_enum("desktop-terminal")
-        )
-        if not terminal_value:
-            set_terminal_exec(
-                self.desktop_terminal_exec_row, None
-            )  # The default value is supposed to be 4294967295, but it's 0 and I can't change it
-
-        self.desktop_tereminal_custom_exec.set_text(
-            shared.schema.get_string("desktop-terminal-custom-exec")
-        )
-
-        def desktop_custom_exec_changed(*_args: Any) -> None:
-            shared.schema.set_string(
-                "desktop-terminal-custom-exec",
-                self.desktop_tereminal_custom_exec.get_text(),
-            )
-
-        self.desktop_tereminal_custom_exec.connect(
-            "changed", desktop_custom_exec_changed
-        )
 
         # SteamGridDB
         def sgdb_key_changed(*_args: Any) -> None:
@@ -236,6 +201,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "sgdb",
                 "sgdb-prefer",
                 "sgdb-animated",
+                "desktop",
             }
         )
 

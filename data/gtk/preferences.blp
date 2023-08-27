@@ -311,32 +311,12 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         }
       }
 
-      Adw.ExpanderRow desktop_expander_row {
+      Adw.ActionRow {
         title: _("Desktop Entries");
-        show-enable-switch: true;
+        activatable-widget: desktop_switch;
 
-        Adw.ComboRow desktop_terminal_exec_row {
-          title: _("Terminal");
-          subtitle: _("Used only by games that require one to run");
-          model: StringList {
-            strings [
-            _("Custom"),
-            "xdg-terminal-exec", 
-            "GNOME Console",
-            "GNOME Terminal",
-            "Konsole",
-            "XTerm"
-            ]
-          };
-          [suffix]
-          Revealer desktop_tereminal_custom_exec_revealer {
-            transition-type: slide_right;
-
-            Entry desktop_tereminal_custom_exec {
-              valign: center;
-              placeholder-text: _("Executable");
-            }
-          }
+        Switch desktop_switch {
+          valign: center;
         }
       }
     }
