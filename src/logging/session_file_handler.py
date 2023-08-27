@@ -89,18 +89,24 @@ class SessionFileHandler(StreamHandler):
 
         # If uncompressed, compress
         if not path.name.endswith(".xz"):
+            try:
+                with open(path, "r", encoding="utf-8") as original_file:
+                    original_data = original_file.read()
+            except UnicodeDecodeError:
+                # If the file is corrupted, throw it away
+                path.unlink()
+                return
+
+            # Compress the file
             compressed_path = path.with_suffix(path.suffix + ".xz")
-            with (
-                lzma.open(
-                    compressed_path,
-                    "wt",
-                    format=FORMAT_XZ,
-                    preset=PRESET_DEFAULT,
-                    encoding="utf-8",
-                ) as lzma_file,
-                open(path, "r", encoding="utf-8") as original_file,
-            ):
-                lzma_file.write(original_file.read())
+            with lzma.open(
+                compressed_path,
+                "wt",
+                format=FORMAT_XZ,
+                preset=PRESET_DEFAULT,
+                encoding="utf-8",
+            ) as lzma_file:
+                lzma_file.write(original_data)
             path.unlink()
             path = compressed_path
 
