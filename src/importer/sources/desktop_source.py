@@ -20,7 +20,6 @@
 import os
 import shlex
 import subprocess
-from hashlib import sha3_256
 from pathlib import Path
 from time import time
 from typing import NamedTuple
@@ -118,15 +117,18 @@ class DesktopSourceIterable(SourceIterable):
                 except GLib.GError:
                     pass
 
+                # Strip /run/host from Flatpak paths
+                if entry.is_relative_to(prefix := "/run/host"):
+                    entry = Path("/") / entry.relative_to(prefix)
+
+                launch_arg = shlex.quote(str(entry if full_path else entry.stem))
+
                 values = {
                     "source": self.source.source_id,
                     "added": added_time,
                     "name": name,
-                    "game_id": "desktop_"
-                    + sha3_256(
-                        str(entry).encode("utf-8"), usedforsecurity=False
-                    ).hexdigest(),
-                    "executable": f"{launch_command} {shlex.quote(str(entry if full_path else entry.stem))}",
+                    "game_id": f"desktop_{entry.stem}",
+                    "executable": f"{launch_command} {launch_arg}",
                 }
                 game = Game(values)
 
