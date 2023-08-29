@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-27 14:03+0200\n"
-"PO-Revision-Date: 2023-08-26 11:55+0000\n"
+"POT-Creation-Date: 2023-08-16 11:06+0200\n"
+"PO-Revision-Date: 2023-08-13 10:23+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/nl/>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:176
+#: src/main.py:169
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -35,11 +35,13 @@ msgid "Launch all your games"
 msgstr "Start al uw games op"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
+#, fuzzy
+#| msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;"
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
-"gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
-"spelen;games;starten;opstarten;"
+"gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;spelen;"
+"games;starten;opstarten;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -62,13 +64,13 @@ msgid "Edit Game Details"
 msgstr "Game-details bewerken"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:71
-#: src/details_window.py:71
+#: src/details_window.py:67
 msgid "Game Details"
 msgstr "Game-details"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:430
-#: src/details_window.py:265 src/importer/importer.py:301
-#: src/importer/importer.py:352
+#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:418
+#: src/details_window.py:241 src/importer/importer.py:292
+#: src/importer/importer.py:342
 msgid "Preferences"
 msgstr "Voorkeuren"
 
@@ -76,31 +78,29 @@ msgstr "Voorkeuren"
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: data/gtk/details-window.blp:58
+#: data/gtk/details-window.blp:57
 msgid "New Cover"
 msgstr "Nieuwe cover"
 
-#: data/gtk/details-window.blp:77
+#: data/gtk/details-window.blp:75
 msgid "Delete Cover"
 msgstr "Cover verwijderen"
 
-#: data/gtk/details-window.blp:105 data/gtk/game.blp:80
+#: data/gtk/details-window.blp:102 data/gtk/game.blp:80
 msgid "Title"
 msgstr "Titel"
 
-#: data/gtk/details-window.blp:109
+#: data/gtk/details-window.blp:105
+#, fuzzy
+#| msgid "The developer or publisher (optional)"
 msgid "Developer (optional)"
-msgstr "Ontwikkelaar (optioneel)"
+msgstr "De ontwikkelaar of uitgever (optioneel)"
 
-#: data/gtk/details-window.blp:115
+#: data/gtk/details-window.blp:110
 msgid "Executable"
 msgstr "Programmabestand"
 
-#: data/gtk/details-window.blp:121
-msgid "Select File"
-msgstr "Bestand selecteren"
-
-#: data/gtk/details-window.blp:132
+#: data/gtk/details-window.blp:116
 msgid "More Info"
 msgstr "Meer info"
 
@@ -108,16 +108,16 @@ msgstr "Meer info"
 msgid "Edit"
 msgstr "Bewerken"
 
-#: data/gtk/game.blp:107 src/window.py:190
+#: data/gtk/game.blp:107 src/window.py:171
 msgid "Hide"
 msgstr "Verbergen"
 
 #: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:56
-#: data/gtk/window.blp:215
+#: data/gtk/window.blp:209
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: data/gtk/game.blp:126 src/window.py:192
+#: data/gtk/game.blp:126 src/window.py:173
 msgid "Unhide"
 msgstr "Niet meer verbergen"
 
@@ -129,8 +129,8 @@ msgstr "Algemeen"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:226 data/gtk/window.blp:269
-#: data/gtk/window.blp:336
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:217 data/gtk/window.blp:257
+#: data/gtk/window.blp:324
 msgid "Search"
 msgstr "Zoeken"
 
@@ -142,8 +142,8 @@ msgstr "Voorkeuren tonen"
 msgid "Shortcuts"
 msgstr "Sneltoetsen"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:124
-#: src/importer/importer.py:376
+#: data/gtk/help-overlay.blp:34 src/game.py:103 src/preferences.py:120
+#: src/importer/importer.py:366
 msgid "Undo"
 msgstr "Ongedaan maken"
 
@@ -171,8 +171,8 @@ msgstr "Verborgen games tonen"
 msgid "Remove game"
 msgstr "Game verwijderen"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:88
-#: data/gtk/preferences.blp:339
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:89
+#: data/gtk/preferences.blp:304
 msgid "Behavior"
 msgstr "Gedrag"
 
@@ -188,7 +188,7 @@ msgstr "Cover-afbeelding start game"
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "Wisselt het gedrag van de cover-afbeelding en de speelknop om"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:85
+#: data/gtk/preferences.blp:36 src/details_window.py:81
 msgid "Images"
 msgstr "Afbeeldingen"
 
@@ -209,118 +209,116 @@ msgstr "Gevarenzone"
 msgid "Remove All Games"
 msgstr "Alle games verwijderen"
 
-#: data/gtk/preferences.blp:84 data/gtk/window.blp:27 data/gtk/window.blp:456
+#: data/gtk/preferences.blp:85 data/gtk/window.blp:27 data/gtk/window.blp:444
 msgid "Import"
 msgstr "Importeren"
 
-#: data/gtk/preferences.blp:91
+#: data/gtk/preferences.blp:92
+#, fuzzy
+#| msgid "Remove All Games"
 msgid "Remove Uninstalled Games"
-msgstr "Gedeïnstalleerde games verwijderen"
+msgstr "Alle games verwijderen"
 
-#: data/gtk/preferences.blp:101
+#: data/gtk/preferences.blp:102
 msgid "Sources"
 msgstr "Bronnen"
 
-#: data/gtk/preferences.blp:104
+#: data/gtk/preferences.blp:105
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:108 data/gtk/preferences.blp:125
-#: data/gtk/preferences.blp:172 data/gtk/preferences.blp:225
-#: data/gtk/preferences.blp:242 data/gtk/preferences.blp:259
-#: data/gtk/preferences.blp:276 data/gtk/preferences.blp:293
+#: data/gtk/preferences.blp:109 data/gtk/preferences.blp:123
+#: data/gtk/preferences.blp:164 data/gtk/preferences.blp:214
+#: data/gtk/preferences.blp:228 data/gtk/preferences.blp:242
+#: data/gtk/preferences.blp:256 data/gtk/preferences.blp:270
 msgid "Install Location"
 msgstr "Installatielocatie"
 
-#: data/gtk/preferences.blp:121
+#: data/gtk/preferences.blp:119
 msgid "Lutris"
 msgstr "Lutris"
 
-#: data/gtk/preferences.blp:137
+#: data/gtk/preferences.blp:132
 msgid "Cache Location"
 msgstr "Cache-locatie"
 
-#: data/gtk/preferences.blp:149
+#: data/gtk/preferences.blp:141
 msgid "Import Steam Games"
 msgstr "Steam-games importeren"
 
-#: data/gtk/preferences.blp:158
+#: data/gtk/preferences.blp:150
 msgid "Import Flatpak Games"
 msgstr "Flatpak-games importeren"
 
-#: data/gtk/preferences.blp:168
+#: data/gtk/preferences.blp:160
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:184
+#: data/gtk/preferences.blp:173
 msgid "Import Epic Games"
 msgstr "Epic-games importeren"
 
-#: data/gtk/preferences.blp:193
+#: data/gtk/preferences.blp:182
 msgid "Import GOG Games"
 msgstr "GOG-games importeren"
 
-#: data/gtk/preferences.blp:202
+#: data/gtk/preferences.blp:191
 msgid "Import Amazon Games"
 msgstr "Amazon-games importeren"
 
-#: data/gtk/preferences.blp:211
+#: data/gtk/preferences.blp:200
 msgid "Import Sideloaded Games"
 msgstr "Gesideloade games importeren"
 
-#: data/gtk/preferences.blp:221
+#: data/gtk/preferences.blp:210
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:238
+#: data/gtk/preferences.blp:224
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:255
+#: data/gtk/preferences.blp:238
 msgid "Legendary"
 msgstr "Legendary"
 
-#: data/gtk/preferences.blp:272
+#: data/gtk/preferences.blp:252
 msgid "RetroArch"
-msgstr "RetroArch"
+msgstr ""
 
-#: data/gtk/preferences.blp:289
+#: data/gtk/preferences.blp:266
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: data/gtk/preferences.blp:305
+#: data/gtk/preferences.blp:279
 msgid "Import Game Launchers"
 msgstr "Game-launchers importeren"
 
-#: data/gtk/preferences.blp:315
-msgid "Desktop Entries"
-msgstr "Apps"
-
-#: data/gtk/preferences.blp:327
+#: data/gtk/preferences.blp:292
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:331
+#: data/gtk/preferences.blp:296
 msgid "Authentication"
 msgstr "Authenticatie"
 
-#: data/gtk/preferences.blp:334
+#: data/gtk/preferences.blp:299
 msgid "API Key"
 msgstr "API-sleutel"
 
-#: data/gtk/preferences.blp:342
+#: data/gtk/preferences.blp:307
 msgid "Use SteamGridDB"
 msgstr "SteamGridDB gebruiken"
 
-#: data/gtk/preferences.blp:343
+#: data/gtk/preferences.blp:308
 msgid "Download images when adding or importing games"
 msgstr "Afbeeldingen downloaden bij het toevoegen of importeren van games"
 
-#: data/gtk/preferences.blp:352
+#: data/gtk/preferences.blp:317
 msgid "Prefer Over Official Images"
 msgstr "Voorkeur geven boven officiële afbeeldingen"
 
-#: data/gtk/preferences.blp:361
+#: data/gtk/preferences.blp:326
 msgid "Prefer Animated Images"
 msgstr "Voorkeur geven aan geanimeerde afbeeldingen"
 
@@ -348,7 +346,7 @@ msgstr "Geen verborgen games"
 msgid "Games you hide will appear here."
 msgstr "Games die u verbergt zullen hier verschijnen."
 
-#: data/gtk/window.blp:64 data/gtk/window.blp:317
+#: data/gtk/window.blp:64 data/gtk/window.blp:305
 msgid "Back"
 msgstr "Terug"
 
@@ -360,118 +358,118 @@ msgstr "Game-titel"
 msgid "Play"
 msgstr "Spelen"
 
-#: data/gtk/window.blp:255 data/gtk/window.blp:449
+#: data/gtk/window.blp:243 data/gtk/window.blp:437
 msgid "Add Game"
 msgstr "Game toevoegen"
 
-#: data/gtk/window.blp:262 data/gtk/window.blp:329
+#: data/gtk/window.blp:250 data/gtk/window.blp:317
 msgid "Main Menu"
 msgstr "Hoofdmenu"
 
-#: data/gtk/window.blp:284
+#: data/gtk/window.blp:272
+#, fuzzy
+#| msgid "Search"
 msgid "Search games"
-msgstr "Games zoeken"
+msgstr "Zoeken"
 
-#: data/gtk/window.blp:324
+#: data/gtk/window.blp:312
 msgid "Hidden Games"
 msgstr "Verborgen games"
 
-#: data/gtk/window.blp:351
+#: data/gtk/window.blp:339
+#, fuzzy
+#| msgid "Show hidden games"
 msgid "Search hidden games"
-msgstr "Verborgen games zoeken"
+msgstr "Verborgen games tonen"
 
-#: data/gtk/window.blp:388
+#: data/gtk/window.blp:376
 msgid "Sort"
 msgstr "Sorteren"
 
-#: data/gtk/window.blp:391
+#: data/gtk/window.blp:379
 msgid "A-Z"
 msgstr "A-Z"
 
-#: data/gtk/window.blp:397
+#: data/gtk/window.blp:385
 msgid "Z-A"
 msgstr "Z-A"
 
-#: data/gtk/window.blp:403
+#: data/gtk/window.blp:391
 msgid "Newest"
 msgstr "Nieuwste"
 
-#: data/gtk/window.blp:409
+#: data/gtk/window.blp:397
 msgid "Oldest"
 msgstr "Oudste"
 
-#: data/gtk/window.blp:415
+#: data/gtk/window.blp:403
 msgid "Last Played"
 msgstr "Laatst gespeeld"
 
-#: data/gtk/window.blp:422
+#: data/gtk/window.blp:410
 msgid "Show Hidden"
 msgstr "Verborgen games tonen"
 
-#: data/gtk/window.blp:435
+#: data/gtk/window.blp:423
 msgid "Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
-#: data/gtk/window.blp:440
+#: data/gtk/window.blp:428
 msgid "About Cartridges"
 msgstr "Over Cartridges"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:195
+#: src/main.py:188
 msgid "translator_credits"
 msgstr "Philip Goto https://flipflop97.github.io/"
 
 #. The variable is the date when the game was added
-#: src/window.py:213
+#: src/window.py:194
 msgid "Added: {}"
 msgstr "Toegevoegd op {}"
 
-#: src/window.py:216
+#: src/window.py:197
 msgid "Never"
 msgstr "Nooit"
 
 #. The variable is the date when the game was last played
-#: src/window.py:220
+#: src/window.py:201
 msgid "Last played: {}"
 msgstr "Laatst gespeeld: {}"
 
-#: src/details_window.py:76
+#: src/details_window.py:72
 msgid "Apply"
 msgstr "Toepassen"
 
-#: src/details_window.py:82
+#: src/details_window.py:78
 msgid "Add New Game"
 msgstr "Nieuwe game toevoegen"
 
-#: src/details_window.py:83
+#: src/details_window.py:79
 msgid "Add"
-msgstr "Toevoegen"
-
-#: src/details_window.py:93
-msgid "Executables"
-msgstr "Programmabestanden"
+msgstr ""
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:108
+#: src/details_window.py:92
 msgid "file.txt"
 msgstr "bestand.txt"
 
 #. As in software
-#: src/details_window.py:110
+#: src/details_window.py:94
 msgid "program"
 msgstr "programma"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:115 src/details_window.py:117
+#: src/details_window.py:99 src/details_window.py:101
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\pad\\naar\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:121 src/details_window.py:123
+#: src/details_window.py:105 src/details_window.py:107
 msgid "/path/to/{}"
 msgstr "/pad/naar/{}"
 
-#: src/details_window.py:128
+#: src/details_window.py:112
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -495,102 +493,104 @@ msgstr ""
 "Indien het pad spaties bevat, zorg er dan voor dat er dubbele "
 "aanhalingstekens omheen staan!"
 
-#: src/details_window.py:171 src/details_window.py:177
+#: src/details_window.py:147 src/details_window.py:153
 msgid "Couldn't Add Game"
 msgstr "Kon game niet toevoegen"
 
-#: src/details_window.py:171 src/details_window.py:207
+#: src/details_window.py:147 src/details_window.py:183
 msgid "Game title cannot be empty."
 msgstr "Game-titel mag niet leeg zijn."
 
-#: src/details_window.py:177 src/details_window.py:215
+#: src/details_window.py:153 src/details_window.py:191
 msgid "Executable cannot be empty."
 msgstr "Programmabestand mag niet leeg zijn."
 
-#: src/details_window.py:206 src/details_window.py:214
+#: src/details_window.py:182 src/details_window.py:190
 msgid "Couldn't Apply Preferences"
 msgstr "Kon voorkeuren niet toepassen"
 
 #. The variable is the title of the game
-#: src/game.py:141
+#: src/game.py:139
 msgid "{} launched"
 msgstr "{} gestart"
 
 #. The variable is the title of the game
-#: src/game.py:155
+#: src/game.py:153
 msgid "{} hidden"
 msgstr "{} verborgen"
 
-#: src/game.py:155
+#: src/game.py:153
 msgid "{} unhidden"
 msgstr "{} hersteld"
 
 #. The variable is the title of the game
 #. The variable is the number of games removed
-#: src/game.py:172 src/importer/importer.py:373
+#: src/game.py:170 src/importer/importer.py:363
 msgid "{} removed"
 msgstr "{} verwijderd"
 
-#: src/preferences.py:123
+#: src/preferences.py:119
 msgid "All games removed"
 msgstr "Alle games verwijderd"
 
-#: src/preferences.py:172
+#: src/preferences.py:168
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Een API-sleutel is vereist om SteamGridDB te gebruiken. U kunt er {}hier{} "
 "één genereren."
 
-#: src/preferences.py:293
+#: src/preferences.py:294
 msgid "Installation Not Found"
 msgstr "Installatie niet gevonden"
 
-#: src/preferences.py:294
+#: src/preferences.py:296
 msgid "Select a valid directory."
 msgstr "Selecteer een geldige map."
 
-#: src/preferences.py:330 src/importer/importer.py:299
-msgid "Warning"
-msgstr "Wasrschuwing"
-
-#: src/preferences.py:364
+#: src/preferences.py:351
 msgid "Invalid Directory"
 msgstr "Ongeldige map"
 
-#: src/preferences.py:370
+#: src/preferences.py:357
 msgid "Set Location"
 msgstr "Locatie instellen"
 
-#: src/utils/create_dialog.py:33 src/importer/importer.py:300
+#: src/utils/create_dialog.py:25 src/importer/importer.py:291
 msgid "Dismiss"
 msgstr "Sluiten"
 
-#: src/importer/importer.py:137
+#: src/importer/importer.py:128
 msgid "Importing Games…"
 msgstr "Games importeren…"
 
-#: src/importer/importer.py:320
-msgid "The following errors occured during import:"
-msgstr "De volgende fouten zijn opgetreden tijdens het importeren:"
+#: src/importer/importer.py:290
+msgid "Warning"
+msgstr ""
 
-#: src/importer/importer.py:349
+#: src/importer/importer.py:311
+msgid "The following errors occured during import:"
+msgstr ""
+
+#: src/importer/importer.py:339
 msgid "No new games found"
 msgstr "Geen nieuwe games gevonden"
 
-#: src/importer/importer.py:361
+#: src/importer/importer.py:351
 msgid "1 game imported"
 msgstr "1 game geïmporteerd"
 
 #. The variable is the number of games
-#: src/importer/importer.py:365
+#: src/importer/importer.py:355
 msgid "{} games imported"
 msgstr "{} games geïmporteerd"
 
 #. A single game removed
-#: src/importer/importer.py:369
+#: src/importer/importer.py:359
+#, fuzzy
+#| msgid "{} removed"
 msgid "1 removed"
-msgstr "1 verwijderd"
+msgstr "{} verwijderd"
 
 #. The variable is the name of the source
 #: src/importer/sources/location.py:33
@@ -614,15 +614,6 @@ msgstr "Kan SteamGridDB niet authenticeren"
 #: src/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
 msgstr "Verifieer uw API-sleutel onder voorkeuren"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#~ msgid "Used only by games that require one to run"
-#~ msgstr "Enkel gebruikt door games die dit vereisen om te worden uitgevoerd"
-
-#~ msgid "Custom"
-#~ msgstr "Aangepast"
 
 #~ msgid "The title of the game"
 #~ msgstr "De titel van de game"
