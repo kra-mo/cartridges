@@ -20,7 +20,6 @@
 
 from shutil import rmtree
 from sqlite3 import connect
-from time import time
 from typing import NamedTuple
 
 from src import shared
@@ -56,12 +55,10 @@ class ItchSourceIterable(SourceIterable):
         connection = connect(db_path)
         cursor = connection.execute(db_request)
 
-        added_time = int(time())
-
         # Create games from the db results
         for row in cursor:
             values = {
-                "added": added_time,
+                "added": shared.import_time,
                 "source": self.source.source_id,
                 "name": row[1],
                 "game_id": self.source.game_id_format.format(game_id=row[0]),

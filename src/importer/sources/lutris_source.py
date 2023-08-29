@@ -19,7 +19,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 from shutil import rmtree
 from sqlite3 import connect
-from time import time
 from typing import NamedTuple
 
 from src import shared
@@ -56,13 +55,11 @@ class LutrisSourceIterable(SourceIterable):
         connection = connect(db_path)
         cursor = connection.execute(request, params)
 
-        added_time = int(time())
-
         # Create games from the DB results
         for row in cursor:
             # Create game
             values = {
-                "added": added_time,
+                "added": shared.import_time,
                 "hidden": row[4],
                 "name": row[1],
                 "source": f"{self.source.source_id}_{row[3]}",

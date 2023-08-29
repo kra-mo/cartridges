@@ -21,7 +21,6 @@ import os
 import shlex
 import subprocess
 from pathlib import Path
-from time import time
 from typing import NamedTuple
 
 from gi.repository import GLib, Gtk
@@ -36,8 +35,6 @@ class DesktopSourceIterable(SourceIterable):
 
     def __iter__(self):
         """Generator method producing games"""
-
-        added_time = int(time())
 
         icon_theme = Gtk.IconTheme.new()
 
@@ -125,7 +122,7 @@ class DesktopSourceIterable(SourceIterable):
 
                 values = {
                     "source": self.source.source_id,
-                    "added": added_time,
+                    "added": shared.import_time,
                     "name": name,
                     "game_id": f"desktop_{entry.stem}",
                     "executable": f"{launch_command} {launch_arg}",

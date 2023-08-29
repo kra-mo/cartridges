@@ -258,7 +258,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             ).lower()
 
         if var != "name" and get_value(0) == get_value(1):
-            var, order = "name", True
+            var, order = "name", False
 
         return ((get_value(0) > get_value(1)) ^ order) * 2 - 1
 

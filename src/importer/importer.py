@@ -19,6 +19,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
+from time import time
 from typing import Any, Optional
 
 from gi.repository import Adw, Gio, GLib, Gtk
@@ -54,6 +55,8 @@ class Importer(ErrorProducer):
 
     def __init__(self) -> None:
         super().__init__()
+
+        shared.import_time = int(time())
 
         # TODO: make this stateful
         shared.store.new_game_ids = set()

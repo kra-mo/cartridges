@@ -24,9 +24,7 @@ from hashlib import md5
 from json import JSONDecodeError
 from pathlib import Path
 from shlex import quote as shell_quote
-from time import time
 from typing import NamedTuple
-from urllib.parse import quote as url_quote
 
 from src import shared
 from src.errors.friendly_error import FriendlyError
@@ -54,7 +52,6 @@ class RetroarchSourceIterable(SourceIterable):
         raise KeyError(f"Key not found in RetroArch config: {key}")
 
     def __iter__(self):
-        added_time = int(time())
         bad_playlists = set()
 
         config_file = self.source.locations.config["retroarch.cfg"]
@@ -102,7 +99,7 @@ class RetroarchSourceIterable(SourceIterable):
 
                 values = {
                     "source": self.source.source_id,
-                    "added": added_time,
+                    "added": shared.import_time,
                     "name": item["label"],
                     "game_id": self.source.game_id_format.format(game_id=game_id),
                     "executable": self.source.make_executable(

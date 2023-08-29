@@ -25,7 +25,6 @@ from functools import cached_property
 from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
-from time import time
 from typing import Iterable, NamedTuple, Optional, TypedDict
 
 from src import shared
@@ -91,9 +90,7 @@ class SubSourceIterable(Iterable):
         logging.debug("Using Heroic %s library.json path %s", self.name, path)
         return path
 
-    def process_library_entry(
-        self, entry: HeroicLibraryEntry, added_time: int
-    ) -> SourceIterationResult:
+    def process_library_entry(self, entry: HeroicLibraryEntry) -> SourceIterationResult:
         """Build a Game from a Heroic library entry"""
 
         app_name = entry["app_name"]
@@ -102,7 +99,7 @@ class SubSourceIterable(Iterable):
         # Build game
         values = {
             "source": f"{self.source.source_id}_{self.service}",
-            "added": added_time,
+            "added": shared.import_time,
             "name": entry["title"],
             "developer": entry.get("developer", None),
             "game_id": self.source.game_id_format.format(
@@ -127,7 +124,7 @@ class SubSourceIterable(Iterable):
         Iterate through the games with a generator
         :raises InvalidLibraryFileError: on initial call if the library file is bad
         """
-        added_time = int(time())
+
         try:
             iterator = iter(
                 path_json_load(self.library_path)[self.library_json_entries_key]
@@ -138,7 +135,7 @@ class SubSourceIterable(Iterable):
             ) from error
         for entry in iterator:
             try:
-                yield self.process_library_entry(entry, added_time)
+                yield self.process_library_entry(entry)
             except KeyError as error:
                 logging.warning(
                     "Skipped invalid %s game %s",
@@ -176,7 +173,7 @@ class StoreSubSourceIterable(SubSourceIterable):
     def is_installed(self, app_name: str) -> bool:
         return app_name in self.installed_app_names
 
-    def process_library_entry(self, entry, added_time):
+    def process_library_entry(self, entry):
         # Skip games that are not installed
         app_name = entry["app_name"]
         if not self.is_installed(app_name):
@@ -188,7 +185,7 @@ class StoreSubSourceIterable(SubSourceIterable):
             )
             return None
         # Process entry as normal
-        return super().process_library_entry(entry, added_time)
+        return super().process_library_entry(entry)
 
     def __iter__(self):
         """

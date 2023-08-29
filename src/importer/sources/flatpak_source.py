@@ -18,7 +18,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from pathlib import Path
-from time import time
 from typing import NamedTuple
 
 from gi.repository import GLib, Gtk
@@ -34,8 +33,6 @@ class FlatpakSourceIterable(SourceIterable):
 
     def __iter__(self):
         """Generator method producing games"""
-
-        added_time = int(time())
 
         icon_theme = Gtk.IconTheme.new()
         icon_theme.add_search_path(str(self.source.locations.data["icons"]))
@@ -79,7 +76,7 @@ class FlatpakSourceIterable(SourceIterable):
 
             values = {
                 "source": self.source.source_id,
-                "added": added_time,
+                "added": shared.import_time,
                 "name": name,
                 "game_id": self.source.game_id_format.format(game_id=flatpak_id),
                 "executable": self.source.make_executable(flatpak_id=flatpak_id),

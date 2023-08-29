@@ -52,5 +52,6 @@ image_size = (200 * scale_factor, 300 * scale_factor)
 # pylint: disable=invalid-name
 win = None
 importer = None
+import_time = None
 store = None
 log_files = None
