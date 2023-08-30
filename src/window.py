@@ -142,7 +142,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
             row.append(
                 Gtk.Image.new_from_icon_name(
-                    f'{source_id.split("_")[0]}-source-symbolic'
+                    "user-desktop-symbolic"
+                    if (split_id := source_id.split("_")[0]) == "desktop"
+                    else f"{split_id}-source-symbolic"
                 )
             )
 
