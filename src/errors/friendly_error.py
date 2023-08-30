@@ -1,4 +1,4 @@
-from typing import Iterable
+from typing import Iterable, Optional
 
 
 class FriendlyError(Exception):
@@ -27,8 +27,8 @@ class FriendlyError(Exception):
         self,
         title: str,
         subtitle: str,
-        title_args: Iterable[str] = None,
-        subtitle_args: Iterable[str] = None,
+        title_args: Optional[Iterable[str]] = None,
+        subtitle_args: Optional[Iterable[str]] = None,
     ) -> None:
         """Create a friendly error
 

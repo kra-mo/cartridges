@@ -20,8 +20,10 @@
 import json
 import lzma
 import os
+import shlex
+import subprocess
 import sys
-from typing import Any
+from typing import Any, Optional
 
 import gi
 
@@ -36,6 +38,7 @@ from src.details_window import DetailsWindow
 from src.game import Game
 from src.importer.importer import Importer
 from src.importer.sources.bottles_source import BottlesSource
+from src.importer.sources.desktop_source import DesktopSource
 from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
@@ -78,19 +81,19 @@ class CartridgesApplication(Adw.Application):
         Gtk.Window.set_default_icon_name(shared.APP_ID)
 
         # Create the main window
-        self.win = self.props.active_window  # pylint: disable=no-member
-        if not self.win:
-            shared.win = self.win = CartridgesWindow(application=self)
+        win = self.props.active_window  # pylint: disable=no-member
+        if not win:
+            shared.win = win = CartridgesWindow(application=self)
 
         # Save window geometry
         shared.state_schema.bind(
-            "width", self.win, "default-width", Gio.SettingsBindFlags.DEFAULT
+            "width", shared.win, "default-width", Gio.SettingsBindFlags.DEFAULT
         )
         shared.state_schema.bind(
-            "height", self.win, "default-height", Gio.SettingsBindFlags.DEFAULT
+            "height", shared.win, "default-height", Gio.SettingsBindFlags.DEFAULT
         )
         shared.state_schema.bind(
-            "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
+            "is-maximized", shared.win, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
 
         # Load games from disk
@@ -99,7 +102,7 @@ class CartridgesApplication(Adw.Application):
         self.state = shared.AppState.LOAD_FROM_DISK
         self.load_games_from_disk()
         self.state = shared.AppState.DEFAULT
-        self.win.create_source_rows()
+        shared.win.create_source_rows()
 
         # Add rest of the managers for game imports
         shared.store.add_manager(CoverManager())
@@ -125,26 +128,28 @@ class CartridgesApplication(Adw.Application):
                 ("protondb_search",),
                 ("lutris_search",),
                 ("hltb_search",),
-                ("show_sidebar", ("F9",), self.win),
-                ("show_hidden", ("<primary>h",), self.win),
-                ("go_to_parent", ("<alt>Up",), self.win),
-                ("go_home", ("<alt>Home",), self.win),
-                ("toggle_search", ("<primary>f",), self.win),
-                ("escape", ("Escape",), self.win),
-                ("undo", ("<primary>z",), self.win),
-                ("open_menu", ("F10",), self.win),
-                ("close", ("<primary>w",), self.win),
+                ("show_sidebar", ("F9",), shared.win),
+                ("show_hidden", ("<primary>h",), shared.win),
+                ("go_to_parent", ("<alt>Up",), shared.win),
+                ("go_home", ("<alt>Home",), shared.win),
+                ("toggle_search", ("<primary>f",), shared.win),
+                ("escape", ("Escape",), shared.win),
+                ("undo", ("<primary>z",), shared.win),
+                ("open_menu", ("F10",), shared.win),
+                ("close", ("<primary>w",), shared.win),
             }
         )
 
         sort_action = Gio.SimpleAction.new_stateful(
             "sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z")
         )
-        sort_action.connect("activate", self.win.on_sort_action)
-        self.win.add_action(sort_action)
-        self.win.on_sort_action(sort_action, shared.state_schema.get_value("sort-mode"))
+        sort_action.connect("activate", shared.win.on_sort_action)
+        shared.win.add_action(sort_action)
+        shared.win.on_sort_action(
+            sort_action, shared.state_schema.get_value("sort-mode")
+        )
 
-        self.win.present()
+        shared.win.present()
 
     def load_games_from_disk(self) -> None:
         if shared.games_dir.is_dir():
@@ -168,9 +173,9 @@ class CartridgesApplication(Adw.Application):
     def on_about_action(self, *_args: Any) -> None:
         # Get the debug info from the log files
         debug_str = ""
-        for i, path in enumerate(shared.log_files):
+        for index, path in enumerate(shared.log_files):
             # Add a horizontal line between runs
-            if i > 0:
+            if index > 0:
                 debug_str += "─" * 37 + "\n"
             # Add the run's logs
             log_file = (
@@ -184,7 +189,7 @@ class CartridgesApplication(Adw.Application):
         about = Adw.AboutWindow.new_from_appdata(
             shared.PREFIX + "/" + shared.APP_ID + ".metainfo.xml", shared.VERSION
         )
-        about.set_transient_for(self.win)
+        about.set_transient_for(shared.win)
         about.set_developers(
             (
                 "kramo https://kramo.hu",
@@ -214,8 +219,8 @@ class CartridgesApplication(Adw.Application):
         self,
         _action: Any = None,
         _parameter: Any = None,
-        page_name: (str | None) = None,
-        expander_row: (str | None) = None,
+        page_name: Optional[str] = None,
+        expander_row: Optional[str] = None,
     ) -> CartridgesWindow:
         win = PreferencesWindow()
         if page_name:
@@ -227,13 +232,13 @@ class CartridgesApplication(Adw.Application):
         return win
 
     def on_launch_game_action(self, *_args: Any) -> None:
-        self.win.active_game.launch()
+        shared.win.active_game.launch()
 
     def on_hide_game_action(self, *_args: Any) -> None:
-        self.win.active_game.toggle_hidden()
+        shared.win.active_game.toggle_hidden()
 
     def on_edit_game_action(self, *_args: Any) -> None:
-        DetailsWindow(self.win.active_game)
+        DetailsWindow(shared.win.active_game)
 
     def on_add_game_action(self, *_args: Any) -> None:
         DetailsWindow()
@@ -256,6 +261,9 @@ class CartridgesApplication(Adw.Application):
         if shared.schema.get_boolean("flatpak"):
             shared.importer.add_source(FlatpakSource())
 
+        if shared.schema.get_boolean("desktop"):
+            shared.importer.add_source(DesktopSource())
+
         if shared.schema.get_boolean("itch"):
             shared.importer.add_source(ItchSource())
 
@@ -268,14 +276,14 @@ class CartridgesApplication(Adw.Application):
         shared.importer.run()
 
     def on_remove_game_action(self, *_args: Any) -> None:
-        self.win.active_game.remove_game()
+        shared.win.active_game.remove_game()
 
     def on_remove_game_details_view_action(self, *_args: Any) -> None:
-        if self.win.navigation_view.get_visible_page() == self.win.details_page:
+        if shared.win.navigation_view.get_visible_page() == shared.win.details_page:
             self.on_remove_game_action()
 
     def search(self, uri: str) -> None:
-        Gio.AppInfo.launch_default_for_uri(f"{uri}{self.win.active_game.name}")
+        Gio.AppInfo.launch_default_for_uri(f"{uri}{shared.win.active_game.name}")
 
     def on_igdb_search_action(self, *_args: Any) -> None:
         self.search("https://www.igdb.com/search?type=1&q=")

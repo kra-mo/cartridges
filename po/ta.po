@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-25 20:33+0200\n"
-"PO-Revision-Date: 2023-07-09 07:59+0000\n"
+"POT-Creation-Date: 2023-08-27 14:03+0200\n"
+"PO-Revision-Date: 2023-08-29 10:45+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:170
+#: src/main.py:176
 msgid "Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள்"
 
@@ -36,10 +36,11 @@ msgid "Launch all your games"
 msgstr "உங்கள் எல்லா விளையாட்டுகளையும் தொடங்கவும்"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
-#, fuzzy
-#| msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
-msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;"
-msgstr "விளையாட்டு; துவக்கி; steam;lutris;heroic;பாட்டில்கள்;itch;"
+msgid ""
+"gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
+msgstr ""
+"விளையாட்டு; துவக்கி; steam;lutris;heroic;பாட்டில்கள்;itch;flatpak;legendary;"
+"Retroarch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -57,16 +58,18 @@ msgstr ""
 msgid "Library"
 msgstr "நூலகம்"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 src/details_window.py:67
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34
 msgid "Edit Game Details"
 msgstr "விளையாட்டு விவரங்களைத் திருத்து"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:71
+#: src/details_window.py:71
 msgid "Game Details"
 msgstr "விளையாட்டு விவரங்கள்"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:416
-#: src/details_window.py:241
+#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:430
+#: src/details_window.py:265 src/importer/importer.py:301
+#: src/importer/importer.py:352
 msgid "Preferences"
 msgstr "விருப்பங்கள்"
 
@@ -74,40 +77,31 @@ msgstr "விருப்பங்கள்"
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: data/gtk/details-window.blp:57
+#: data/gtk/details-window.blp:58
 msgid "New Cover"
 msgstr "புதிய அட்டை"
 
-#: data/gtk/details-window.blp:75
+#: data/gtk/details-window.blp:77
 msgid "Delete Cover"
 msgstr "அட்டையை நீக்கு"
 
-#: data/gtk/details-window.blp:101 data/gtk/details-window.blp:106
-#: data/gtk/game.blp:80
+#: data/gtk/details-window.blp:105 data/gtk/game.blp:80
 msgid "Title"
 msgstr "தலைப்பு"
 
-#: data/gtk/details-window.blp:102
-msgid "The title of the game"
-msgstr "விளையாட்டின் தலைப்பு"
+#: data/gtk/details-window.blp:109
+msgid "Developer (optional)"
+msgstr "டெவலப்பர் (விரும்பினால்)"
 
-#: data/gtk/details-window.blp:112 data/gtk/details-window.blp:117
-msgid "Developer"
-msgstr "டெவலப்பர்"
-
-#: data/gtk/details-window.blp:113
-msgid "The developer or publisher (optional)"
-msgstr "டெவலப்பர் அல்லது வெளியீட்டாளர் (விரும்பினால்)"
-
-#: data/gtk/details-window.blp:123 data/gtk/details-window.blp:155
+#: data/gtk/details-window.blp:115
 msgid "Executable"
 msgstr "செயல்படுத்தக்கூடியது"
 
-#: data/gtk/details-window.blp:124
-msgid "File to open or command to run when launching the game"
-msgstr "விளையாட்டைத் தொடங்கும் போது திறக்க கோப்பு அல்லது இயக்க கட்டளை"
+#: data/gtk/details-window.blp:121
+msgid "Select File"
+msgstr "கோப்பைத் தேர்ந்தெடுக்கவும்"
 
-#: data/gtk/details-window.blp:130
+#: data/gtk/details-window.blp:132
 msgid "More Info"
 msgstr "மேலும் தகவல்"
 
@@ -115,16 +109,16 @@ msgstr "மேலும் தகவல்"
 msgid "Edit"
 msgstr "தொகு"
 
-#: data/gtk/game.blp:107 src/window.py:171
+#: data/gtk/game.blp:107 src/window.py:190
 msgid "Hide"
 msgstr "மறை"
 
 #: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:56
-#: data/gtk/window.blp:209
+#: data/gtk/window.blp:215
 msgid "Remove"
 msgstr "அகற்று"
 
-#: data/gtk/game.blp:126 src/window.py:173
+#: data/gtk/game.blp:126 src/window.py:192
 msgid "Unhide"
 msgstr "மறை காட்டு"
 
@@ -136,8 +130,8 @@ msgstr "பொது"
 msgid "Quit"
 msgstr "வெளியேறு"
 
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:217 data/gtk/window.blp:257
-#: data/gtk/window.blp:323
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:226 data/gtk/window.blp:269
+#: data/gtk/window.blp:336
 msgid "Search"
 msgstr "தேடு"
 
@@ -149,7 +143,8 @@ msgstr "விருப்பங்களைக் காட்டு"
 msgid "Shortcuts"
 msgstr "குறுக்குவழிகள்"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:102 src/preferences.py:113
+#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:124
+#: src/importer/importer.py:376
 msgid "Undo"
 msgstr "செயல்தவிர்"
 
@@ -177,7 +172,8 @@ msgstr "மறைக்கப்பட்ட விளையாட்டுக�
 msgid "Remove game"
 msgstr "விளையாட்டை அகற்று"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:277
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:88
+#: data/gtk/preferences.blp:339
 msgid "Behavior"
 msgstr "நடத்தை"
 
@@ -193,7 +189,7 @@ msgstr "அட்டைப் படம் விளையாட்டை தொ
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "அட்டைப் படத்தின் நடத்தை மற்றும் பிளே பட்டனை மாற்றுகிறது"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:81
+#: data/gtk/preferences.blp:36 src/details_window.py:85
 msgid "Images"
 msgstr "படங்கள்"
 
@@ -213,109 +209,119 @@ msgstr "ஆபத்து மண்டலம்"
 msgid "Remove All Games"
 msgstr "அனைத்து விளையாட்டுகளையும் அகற்று"
 
-#: data/gtk/preferences.blp:85 data/gtk/window.blp:27 data/gtk/window.blp:442
+#: data/gtk/preferences.blp:84 data/gtk/window.blp:27 data/gtk/window.blp:456
 msgid "Import"
 msgstr "இறக்குமதி"
 
-#: data/gtk/preferences.blp:89
+#: data/gtk/preferences.blp:91
+msgid "Remove Uninstalled Games"
+msgstr "நிறுவல் நீக்கப்பட்ட விளையாட்டுகளை அகற்று"
+
+#: data/gtk/preferences.blp:101
 msgid "Sources"
 msgstr "மூலங்கள்"
 
-#: data/gtk/preferences.blp:92
+#: data/gtk/preferences.blp:104
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:96 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:151 data/gtk/preferences.blp:201
-#: data/gtk/preferences.blp:215 data/gtk/preferences.blp:229
-#: data/gtk/preferences.blp:243
+#: data/gtk/preferences.blp:108 data/gtk/preferences.blp:125
+#: data/gtk/preferences.blp:172 data/gtk/preferences.blp:225
+#: data/gtk/preferences.blp:242 data/gtk/preferences.blp:259
+#: data/gtk/preferences.blp:276 data/gtk/preferences.blp:293
 msgid "Install Location"
 msgstr "நிறுவல் இடம்"
 
-#: data/gtk/preferences.blp:106
+#: data/gtk/preferences.blp:121
 msgid "Lutris"
 msgstr "Lutris"
 
-#: data/gtk/preferences.blp:119
+#: data/gtk/preferences.blp:137
 msgid "Cache Location"
 msgstr "தற்காலிக சேமிப்பு இடம்"
 
-#: data/gtk/preferences.blp:128
+#: data/gtk/preferences.blp:149
 msgid "Import Steam Games"
 msgstr "Steam விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: data/gtk/preferences.blp:137
+#: data/gtk/preferences.blp:158
 msgid "Import Flatpak Games"
 msgstr "Flatpak கேம்களை இறக்குமதி செய்யவும்"
 
-#: data/gtk/preferences.blp:147
+#: data/gtk/preferences.blp:168
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:160
+#: data/gtk/preferences.blp:184
 msgid "Import Epic Games"
 msgstr "Epic விளையாட்டுகளை இறக்குமதி செய்"
 
-#: data/gtk/preferences.blp:169
+#: data/gtk/preferences.blp:193
 msgid "Import GOG Games"
 msgstr "GOG விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: data/gtk/preferences.blp:178
-#, fuzzy
-#| msgid "Import Steam Games"
+#: data/gtk/preferences.blp:202
 msgid "Import Amazon Games"
-msgstr "Steam விளையாட்டுகளை இறக்குமதி செய்யவும்"
+msgstr "Amazon விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: data/gtk/preferences.blp:187
+#: data/gtk/preferences.blp:211
 msgid "Import Sideloaded Games"
 msgstr "பக்க ஏற்றப்பட்ட விளையாட்டுகளை இறக்குமதி செய்யவும்"
 
-#: data/gtk/preferences.blp:197
+#: data/gtk/preferences.blp:221
 msgid "Bottles"
 msgstr "பாட்டில்கள்"
 
-#: data/gtk/preferences.blp:211
+#: data/gtk/preferences.blp:238
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:225
+#: data/gtk/preferences.blp:255
 msgid "Legendary"
 msgstr "Legendary"
 
-#: data/gtk/preferences.blp:239
+#: data/gtk/preferences.blp:272
+msgid "RetroArch"
+msgstr "RetroArch"
+
+#: data/gtk/preferences.blp:289
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: data/gtk/preferences.blp:252
+#: data/gtk/preferences.blp:305
 msgid "Import Game Launchers"
 msgstr "விளையாட்டு துவக்கிகளை இறக்குமதி செய்"
 
-#: data/gtk/preferences.blp:265
+#: data/gtk/preferences.blp:315
+msgid "Desktop Entries"
+msgstr "டெஸ்க்டாப் உள்ளீடுகள்"
+
+#: data/gtk/preferences.blp:327
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:269
+#: data/gtk/preferences.blp:331
 msgid "Authentication"
 msgstr "அங்கீகாரம்"
 
-#: data/gtk/preferences.blp:272
+#: data/gtk/preferences.blp:334
 msgid "API Key"
 msgstr "API விசை"
 
-#: data/gtk/preferences.blp:280
+#: data/gtk/preferences.blp:342
 msgid "Use SteamGridDB"
 msgstr "SteamGridDB ஐப் பயன்படுத்தவும்"
 
-#: data/gtk/preferences.blp:281
+#: data/gtk/preferences.blp:343
 msgid "Download images when adding or importing games"
 msgstr ""
 "விளையாட்டுகளைச் சேர்க்கும் போது அல்லது இறக்குமதி செய்யும் போது படங்களைப் பதிவிறக்கவும்"
 
-#: data/gtk/preferences.blp:290
+#: data/gtk/preferences.blp:352
 msgid "Prefer Over Official Images"
 msgstr "அதிகாரப்பூர்வ படங்களை விட முன்னுரிமை"
 
-#: data/gtk/preferences.blp:299
+#: data/gtk/preferences.blp:361
 msgid "Prefer Animated Images"
 msgstr "இயங்குபடம் செய்யப்பட்ட படங்களுக்கு முன்னுரிமை கொடுங்கள்"
 
@@ -343,7 +349,7 @@ msgstr "மறைக்கப்பட்ட விளையாட்டுக�
 msgid "Games you hide will appear here."
 msgstr "நீங்கள் மறைக்கும் விளையாட்டுகள் இங்கே தோன்றும்."
 
-#: data/gtk/window.blp:64 data/gtk/window.blp:304
+#: data/gtk/window.blp:64 data/gtk/window.blp:317
 msgid "Back"
 msgstr "மீண்டும்"
 
@@ -355,106 +361,118 @@ msgstr "விளையாட்டு தலைப்பு"
 msgid "Play"
 msgstr "விளையாடு"
 
-#: data/gtk/window.blp:243 data/gtk/window.blp:435
+#: data/gtk/window.blp:255 data/gtk/window.blp:449
 msgid "Add Game"
 msgstr "விளையாட்டைச் சேர்க்கவும்"
 
-#: data/gtk/window.blp:250 data/gtk/window.blp:316
+#: data/gtk/window.blp:262 data/gtk/window.blp:329
 msgid "Main Menu"
 msgstr "முதன்மை பட்டியல்"
 
-#: data/gtk/window.blp:311
+#: data/gtk/window.blp:284
+msgid "Search games"
+msgstr "விளையாட்டுகளைத் தேடுங்கள்"
+
+#: data/gtk/window.blp:324
 msgid "Hidden Games"
 msgstr "மறைக்கப்பட்ட விளையாட்டுகள்"
 
-#: data/gtk/window.blp:374
+#: data/gtk/window.blp:351
+msgid "Search hidden games"
+msgstr "மறைக்கப்பட்ட விளையாட்டுகளைத் தேடுங்கள்"
+
+#: data/gtk/window.blp:388
 msgid "Sort"
 msgstr "வகைபடுத்து"
 
-#: data/gtk/window.blp:377
+#: data/gtk/window.blp:391
 msgid "A-Z"
 msgstr "A-Z"
 
-#: data/gtk/window.blp:383
+#: data/gtk/window.blp:397
 msgid "Z-A"
 msgstr "Z-A"
 
-#: data/gtk/window.blp:389
+#: data/gtk/window.blp:403
 msgid "Newest"
 msgstr "புதியது"
 
-#: data/gtk/window.blp:395
+#: data/gtk/window.blp:409
 msgid "Oldest"
 msgstr "பழமையானது"
 
-#: data/gtk/window.blp:401
+#: data/gtk/window.blp:415
 msgid "Last Played"
 msgstr "கடைசியாக விளையாடியது"
 
-#: data/gtk/window.blp:408
+#: data/gtk/window.blp:422
 msgid "Show Hidden"
 msgstr "மறைக்கப்பட்டதைக் காட்டு"
 
-#: data/gtk/window.blp:421
+#: data/gtk/window.blp:435
 msgid "Keyboard Shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
 
-#: data/gtk/window.blp:426
+#: data/gtk/window.blp:440
 msgid "About Cartridges"
 msgstr "கார்ட்ரிட்ஜ்கள் பற்றி"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:188
+#: src/main.py:195
 msgid "translator_credits"
 msgstr "K.B.Dharun Krishna <kbdharunkrishna@gmail.com>"
 
 #. The variable is the date when the game was added
-#: src/window.py:194
+#: src/window.py:213
 msgid "Added: {}"
 msgstr "சேர்க்கப்பட்டது: {}"
 
-#: src/window.py:197
+#: src/window.py:216
 msgid "Never"
 msgstr "ஒருபோதும் இல்லை"
 
 #. The variable is the date when the game was last played
-#: src/window.py:201
+#: src/window.py:220
 msgid "Last played: {}"
 msgstr "கடைசியாக விளையாடியது: {}"
 
-#: src/details_window.py:72
+#: src/details_window.py:76
 msgid "Apply"
 msgstr "விண்ணப்பி"
 
-#: src/details_window.py:78
+#: src/details_window.py:82
 msgid "Add New Game"
 msgstr "புதிய விளையாட்டைச் சேர்க்கவும்"
 
-#: src/details_window.py:79
-msgid "Confirm"
-msgstr "உறுதிப்படுத்தவும்"
+#: src/details_window.py:83
+msgid "Add"
+msgstr "சேர்"
+
+#: src/details_window.py:93
+msgid "Executables"
+msgstr "செயல்படுத்தக்கூடியவை"
 
 #. Translate this string as you would translate "file"
-#: src/details_window.py:92
+#: src/details_window.py:108
 msgid "file.txt"
 msgstr "கோப்பு.txt"
 
 #. As in software
-#: src/details_window.py:94
+#: src/details_window.py:110
 msgid "program"
 msgstr "பயன்பாடு"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:99 src/details_window.py:101
+#: src/details_window.py:115 src/details_window.py:117
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\பாதை\\டு \\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:105 src/details_window.py:107
+#: src/details_window.py:121 src/details_window.py:123
 msgid "/path/to/{}"
 msgstr "/பாதை/டு/ {}"
 
-#: src/details_window.py:112
+#: src/details_window.py:128
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -476,99 +494,141 @@ msgstr ""
 "\n"
 "பாதையில் இடைவெளிகள் இருந்தால், அதை இரட்டை மேற்கோள்களில் போர்த்துவதை உறுதிசெய்யவும்!"
 
-#: src/details_window.py:147 src/details_window.py:153
+#: src/details_window.py:171 src/details_window.py:177
 msgid "Couldn't Add Game"
 msgstr "விளையாட்டைச் சேர்க்க முடியவில்லை"
 
-#: src/details_window.py:147 src/details_window.py:183
+#: src/details_window.py:171 src/details_window.py:207
 msgid "Game title cannot be empty."
 msgstr "விளையாட்டு தலைப்பு காலியாக இருக்கக்கூடாது."
 
-#: src/details_window.py:153 src/details_window.py:191
+#: src/details_window.py:177 src/details_window.py:215
 msgid "Executable cannot be empty."
 msgstr "இயங்கக்கூடியது காலியாக இருக்க முடியாது."
 
-#: src/details_window.py:182 src/details_window.py:190
+#: src/details_window.py:206 src/details_window.py:214
 msgid "Couldn't Apply Preferences"
 msgstr "விருப்பங்களைப் பயன்படுத்த முடியவில்லை"
 
 #. The variable is the title of the game
-#: src/game.py:138
+#: src/game.py:141
 msgid "{} launched"
 msgstr "{} தொடங்கப்பட்டது"
 
 #. The variable is the title of the game
-#: src/game.py:152
+#: src/game.py:155
 msgid "{} hidden"
 msgstr "{} மறைக்கப்பட்டுள்ளது"
 
-#: src/game.py:152
+#: src/game.py:155
 msgid "{} unhidden"
 msgstr "{} மறைக்கப்படாதது"
 
-#: src/game.py:169
+#. The variable is the title of the game
+#. The variable is the number of games removed
+#: src/game.py:172 src/importer/importer.py:373
 msgid "{} removed"
 msgstr "{} அகற்றப்பட்டது"
 
-#: src/preferences.py:112
+#: src/preferences.py:123
 msgid "All games removed"
 msgstr "அனைத்து விளையாட்டுகளும் அகற்றப்பட்டன"
 
-#: src/preferences.py:160
+#: src/preferences.py:172
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr "SteamGridDB ஐப் பயன்படுத்த API விசை தேவை. நீங்கள் ஒன்றை {}இங்கே{} உருவாக்கலாம்."
 
-#: src/preferences.py:285
+#: src/preferences.py:293
 msgid "Installation Not Found"
 msgstr "நிறுவல் கிடைக்கவில்லை"
 
-#: src/preferences.py:287
+#: src/preferences.py:294
 msgid "Select a valid directory."
 msgstr "சரியான கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
-#: src/preferences.py:349
+#: src/preferences.py:330 src/importer/importer.py:299
+msgid "Warning"
+msgstr "எச்சரிக்கை"
+
+#: src/preferences.py:364
 msgid "Invalid Directory"
 msgstr "தவறான கோப்பகம்"
 
+#: src/preferences.py:370
+msgid "Set Location"
+msgstr "இருப்பிடத்தை அமைக்கவும்"
+
+#: src/utils/create_dialog.py:33 src/importer/importer.py:300
+msgid "Dismiss"
+msgstr "நிராகரி"
+
+#: src/importer/importer.py:137
+msgid "Importing Games…"
+msgstr "விளையாட்டுகளை இறக்குமதி செய்கிறது…"
+
+#: src/importer/importer.py:320
+msgid "The following errors occured during import:"
+msgstr "இறக்குமதியின் போது பின்வரும் பிழைகள் ஏற்பட்டன:"
+
+#: src/importer/importer.py:349
+msgid "No new games found"
+msgstr "புதிய விளையாட்டுகள் எதுவும் கண்டறியப்படவில்லை"
+
+#: src/importer/importer.py:361
+msgid "1 game imported"
+msgstr "1 விளையாட்டு இறக்குமதி செய்யப்பட்டது"
+
+#. The variable is the number of games
+#: src/importer/importer.py:365
+msgid "{} games imported"
+msgstr "{} விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
+
+#. A single game removed
+#: src/importer/importer.py:369
+msgid "1 removed"
+msgstr "1 அகற்றப்பட்டது"
+
 #. The variable is the name of the source
-#: src/preferences.py:353
+#: src/importer/sources/location.py:33
 msgid "Select the {} cache directory."
 msgstr "{} கேச் கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
 #. The variable is the name of the source
-#: src/preferences.py:356
+#: src/importer/sources/location.py:35
 msgid "Select the {} configuration directory."
 msgstr "{} கட்டமைப்பு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
 #. The variable is the name of the source
-#: src/preferences.py:359
+#: src/importer/sources/location.py:37
 msgid "Select the {} data directory."
 msgstr "{} தரவு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
-#: src/preferences.py:365
-msgid "Set Location"
-msgstr "இருப்பிடத்தை அமைக்கவும்"
-
-#: src/utils/create_dialog.py:25
-msgid "Dismiss"
-msgstr "நிராகரி"
-
-#: src/store/managers/sgdb_manager.py:47
+#: src/store/managers/sgdb_manager.py:46
 msgid "Couldn't Authenticate SteamGridDB"
 msgstr "SteamGridDB ஐ அங்கீகரிக்க முடியவில்லை"
 
-#: src/store/managers/sgdb_manager.py:48
+#: src/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
 msgstr "உங்கள் API விசையை விருப்பங்களில் சரிபார்க்கவும்"
 
+#~ msgid "The title of the game"
+#~ msgstr "விளையாட்டின் தலைப்பு"
+
+#~ msgid "Developer"
+#~ msgstr "டெவலப்பர்"
+
+#~ msgid "File to open or command to run when launching the game"
+#~ msgstr "விளையாட்டைத் தொடங்கும் போது திறக்க கோப்பு அல்லது இயக்க கட்டளை"
+
+#~ msgid "Confirm"
+#~ msgstr "உறுதிப்படுத்தவும்"
+
 #, fuzzy
-#~| msgid "The Steam directory cannot be found."
 #~ msgid "Directory not Valid"
 #~ msgstr "Steam (ஸ்டீம்) கோப்பகத்தைக் கண்டறிய முடியவில்லை."
 
 #, fuzzy
-#~| msgid "Confirm"
 #~ msgid "Configuration"
 #~ msgstr "உறுதிப்படுத்தவும்"
 
@@ -596,20 +656,8 @@ msgstr "உங்கள் API விசையை விருப்பங்க
 #~ msgid "Select the Lutris cache directory."
 #~ msgstr "லூட்ரிஸ் தற்காலிக சேமிப்பு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
-#~ msgid "Importing Games…"
-#~ msgstr "விளையாட்டுகளை இறக்குமதி செய்கிறது…"
-
 #~ msgid "Importing Covers…"
 #~ msgstr "அட்டைகளை இறக்குமதி செய்கிறது…"
-
-#~ msgid "No new games found"
-#~ msgstr "புதிய விளையாட்டுகள் எதுவும் கண்டறியப்படவில்லை"
-
-#~ msgid "1 game imported"
-#~ msgstr "1 விளையாட்டு இறக்குமதி செய்யப்பட்டது"
-
-#~ msgid "{} games imported"
-#~ msgstr "{} விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
 
 #~ msgid "Directory to use when importing games"
 #~ msgstr "விளையாட்டுகளை இறக்குமதி செய்யும் போது பயன்படுத்த வேண்டிய அடைவு"
@@ -665,19 +713,16 @@ msgstr "உங்கள் API விசையை விருப்பங்க
 #~ msgstr "/பாதை/டு /{file_name}"
 
 #, fuzzy
-#~| msgid "General"
 #~ msgctxt "shortcuts window"
 #~ msgid "General"
 #~ msgstr "பொது"
 
 #, fuzzy
-#~| msgid "Search"
 #~ msgctxt "shortcuts window"
 #~ msgid "Search"
 #~ msgstr "தேடு"
 
 #, fuzzy
-#~| msgid "Undo"
 #~ msgctxt "shortcuts window"
 #~ msgid "Undo"
 #~ msgstr "செயல்தவிர்"
@@ -740,3 +785,6 @@ msgstr "உங்கள் API விசையை விருப்பங்க
 
 #~ msgid "kramo"
 #~ msgstr "கிராமோ"
+
+#~ msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
+#~ msgstr "விளையாட்டு; துவக்கி; steam;lutris;heroic;பாட்டில்கள்;itch;"

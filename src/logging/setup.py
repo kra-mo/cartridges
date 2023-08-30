@@ -27,7 +27,7 @@ import sys
 from src import shared
 
 
-def setup_logging():
+def setup_logging() -> None:
     """Intitate the app's logging"""
 
     is_dev = shared.PROFILE == "development"
@@ -89,7 +89,7 @@ def setup_logging():
     logging_dot_config.dictConfig(config)
 
 
-def log_system_info():
+def log_system_info() -> None:
     """Log system debug information"""
 
     logging.debug("Starting %s v%s (%s)", shared.APP_ID, shared.VERSION, shared.PROFILE)

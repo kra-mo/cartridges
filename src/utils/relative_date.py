@@ -18,11 +18,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from datetime import datetime
+from typing import Any
 
 from gi.repository import GLib
 
 
-def relative_date(timestamp):  # pylint: disable=too-many-return-statements
+def relative_date(timestamp: int) -> Any:  # pylint: disable=too-many-return-statements
     days_no = ((today := datetime.today()) - datetime.fromtimestamp(timestamp)).days
 
     if days_no == 0:

@@ -23,7 +23,7 @@ import re
 from hashlib import md5
 from json import JSONDecodeError
 from pathlib import Path
-from time import time
+from shlex import quote as shell_quote
 from typing import NamedTuple
 
 from src import shared
@@ -52,7 +52,6 @@ class RetroarchSourceIterable(SourceIterable):
         raise KeyError(f"Key not found in RetroArch config: {key}")
 
     def __iter__(self):
-        added_time = int(time())
         bad_playlists = set()
 
         config_file = self.source.locations.config["retroarch.cfg"]
@@ -100,12 +99,12 @@ class RetroarchSourceIterable(SourceIterable):
 
                 values = {
                     "source": self.source.source_id,
-                    "added": added_time,
+                    "added": shared.import_time,
                     "name": item["label"],
                     "game_id": self.source.game_id_format.format(game_id=game_id),
-                    "executable": self.source.executable_format.format(
-                        rom_path=item["path"],
+                    "executable": self.source.make_executable(
                         core_path=core_path,
+                        rom_path=item["path"],
                     ),
                 }
 
@@ -147,44 +146,6 @@ class RetroarchSource(Source):
 
     locations: RetroarchLocations
 
-    @property
-    def executable_format(self):
-        self.locations.config.resolve()
-        is_flatpak = self.locations.config.root.is_relative_to(shared.flatpak_dir)
-        base = "flatpak run org.libretro.RetroArch" if is_flatpak else "retroarch"
-        args = '-L "{core_path}" "{rom_path}"'
-        return f"{base} {args}"
-
-    def get_steam_location(self) -> str:
-        """
-        Get the RetroArch installed via Steam location
-
-        :raise UnresolvableLocationError: if steam isn't installed
-        :raise KeyError: if there is no libraryfolders.vdf subpath
-        :raise OSError: if libraryfolders.vdf can't be opened
-        :raise ValueError: if RetroArch isn't installed through Steam
-        """
-
-        # Find steam location
-        libraryfolders = SteamSource().locations.data["libraryfolders.vdf"]
-        parse_apps = False
-        with open(libraryfolders, "r", encoding="utf-8") as open_file:
-            # Search each line for a library path and store it each time a new one is found.
-            for line in open_file:
-                if '"path"' in line:
-                    library_path = re.findall(
-                        '"path"\\s+"(.*)"\n', line, re.IGNORECASE
-                    )[0]
-                elif '"apps"' in line:
-                    parse_apps = True
-                elif parse_apps and "}" in line:
-                    parse_apps = False
-                # Stop searching, as the library path directly above the appid has been found.
-                elif parse_apps and '"1118310"' in line:
-                    return Path(f"{library_path}/steamapps/common/RetroArch")
-        # Not found
-        raise ValueError("RetroArch not found in Steam library")
-
     def __init__(self) -> None:
         super().__init__()
         self.locations = RetroarchLocations(
@@ -212,9 +173,83 @@ class RetroarchSource(Source):
                 invalid_subtitle=Location.CONFIG_INVALID_SUBTITLE,
             )
         )
+        # TODO enable when we get the Steam RetroArch games working
+        # self.add_steam_location_candidate()
+
+    def add_steam_location_candidate(self) -> None:
+        """Add the Steam RetroAcrh location to the config candidates"""
         try:
             self.locations.config.candidates.append(self.get_steam_location())
         except (OSError, KeyError, UnresolvableLocationError):
             logging.debug("Steam isn't installed")
         except ValueError as error:
             logging.debug("RetroArch Steam location candiate not found", exc_info=error)
+
+    def get_steam_location(self) -> str:
+        """
+        Get the RetroArch installed via Steam location
+
+        :raise UnresolvableLocationError: if Steam isn't installed
+        :raise KeyError: if there is no libraryfolders.vdf subpath
+        :raise OSError: if libraryfolders.vdf can't be opened
+        :raise ValueError: if RetroArch isn't installed through Steam
+        """
+
+        # Find Steam location
+        libraryfolders = SteamSource().locations.data["libraryfolders.vdf"]
+        parse_apps = False
+        with open(libraryfolders, "r", encoding="utf-8") as open_file:
+            # Search each line for a library path and store it each time a new one is found.
+            for line in open_file:
+                if '"path"' in line:
+                    library_path = re.findall(
+                        '"path"\\s+"(.*)"\n', line, re.IGNORECASE
+                    )[0]
+                elif '"apps"' in line:
+                    parse_apps = True
+                elif parse_apps and "}" in line:
+                    parse_apps = False
+                # Stop searching, as the library path directly above the appid has been found.
+                elif parse_apps and '"1118310"' in line:
+                    return Path(f"{library_path}/steamapps/common/RetroArch")
+        # Not found
+        raise ValueError("RetroArch not found in Steam library")
+
+    def make_executable(self, core_path: Path, rom_path: Path) -> str:
+        """
+        Generate an executable command from the rom path and core path,
+        depending on the source's location.
+
+        The format depends on RetroArch's installation method,
+        detected from the source config location
+
+        :param Path rom_path: the game's rom path
+        :param Path core_path: the game's core path
+        :return str: an executable command
+        """
+
+        self.locations.config.resolve()
+        args = ("-L", core_path, rom_path)
+
+        # Steam RetroArch
+        # (Must check before Flatpak, because Steam itself can be installed as one)
+        # TODO enable when we get Steam RetroArch executable to work
+        # if self.locations.config.root.parent.parent.name == "steamapps":
+        #     # steam://run exepects args to be url-encoded and separated by spaces.
+        #     args = map(lambda s: url_quote(str(s), safe=""), args)
+        #     args_str = " ".join(args)
+        #     uri = f"steam://run/1118310//{args_str}/"
+        #     return f"xdg-open {shell_quote(uri)}"
+
+        # Flatpak RetroArch
+        args = map(lambda s: shell_quote(str(s)), args)
+        args_str = " ".join(args)
+        if self.locations.config.root.is_relative_to(shared.flatpak_dir):
+            return f"flatpak run org.libretro.RetroArch {args_str}"
+
+        # TODO executable override for non-sandboxed sources
+
+        # Linux native RetroArch
+        return f"retroarch {args_str}"
+
+        # TODO implement for windows (needs override)

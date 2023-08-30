@@ -18,19 +18,22 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+import shlex
+from pathlib import Path
 from time import time
-from typing import Any
+from typing import Any, Optional
 
 from gi.repository import Adw, Gio, GLib, Gtk
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 
 from src import shared
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.game_cover import GameCover
+from src.store.managers.cover_manager import CoverManager
 from src.store.managers.sgdb_manager import SGDBManager
 from src.utils.create_dialog import create_dialog
-from src.utils.save_cover import resize_cover, save_cover
+from src.utils.save_cover import convert_cover, save_cover
 
 
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/details-window.ui")
@@ -50,12 +53,13 @@ class DetailsWindow(Adw.Window):
 
     exec_info_label = Gtk.Template.Child()
     exec_info_popover = Gtk.Template.Child()
+    file_chooser_button = Gtk.Template.Child()
 
     apply_button = Gtk.Template.Child()
 
     cover_changed: bool = False
 
-    def __init__(self, game: Game | None = None, **kwargs: Any):
+    def __init__(self, game: Optional[Game] = None, **kwargs: Any):
         super().__init__(**kwargs)
 
         self.game: Game = game
@@ -83,10 +87,22 @@ class DetailsWindow(Adw.Window):
             image_filter.add_suffix(extension[1:])
             image_filter.add_suffix("svg")  # Gdk.Texture supports .svg but PIL doesn't
 
-        file_filters = Gio.ListStore.new(Gtk.FileFilter)
-        file_filters.append(image_filter)
-        self.file_dialog = Gtk.FileDialog()
-        self.file_dialog.set_filters(file_filters)
+        image_filters = Gio.ListStore.new(Gtk.FileFilter)
+        image_filters.append(image_filter)
+
+        exec_filter = Gtk.FileFilter(name=_("Executables"))
+        exec_filter.add_mime_type("application/x-executable")
+
+        exec_filters = Gio.ListStore.new(Gtk.FileFilter)
+        exec_filters.append(exec_filter)
+
+        self.image_file_dialog = Gtk.FileDialog()
+        self.image_file_dialog.set_filters(image_filters)
+        self.image_file_dialog.set_default_filter(image_filter)
+
+        self.exec_file_dialog = Gtk.FileDialog()
+        self.exec_file_dialog.set_filters(exec_filters)
+        self.exec_file_dialog.set_default_filter(exec_filter)
 
         # Translate this string as you would translate "file"
         file_name = _("file.txt")
@@ -114,13 +130,21 @@ class DetailsWindow(Adw.Window):
 
         self.exec_info_label.set_label(exec_info_text)
 
-        def clear_info_selection(*_args: Any) -> None:
-            self.exec_info_label.select_region(-1, -1)
+        self.exec_info_popover.update_property(
+            (Gtk.AccessibleProperty.LABEL,),
+            (
+                exec_info_text.replace("<tt>", "").replace("</tt>", ""),
+            ),  # Remove formatting, else the screen reader reads it
+        )
 
-        self.exec_info_popover.connect("show", clear_info_selection)
+        def set_exec_info_a11y_label(*_args: Any) -> None:
+            self.set_focus(self.exec_info_popover)
+
+        self.exec_info_popover.connect("show", set_exec_info_a11y_label)
 
         self.cover_button_delete.connect("clicked", self.delete_pixbuf)
         self.cover_button_edit.connect("clicked", self.choose_cover)
+        self.file_chooser_button.connect("clicked", self.choose_executable)
         self.apply_button.connect("clicked", self.apply_preferences)
 
         self.name.connect("entry-activated", self.focus_executable)
@@ -175,11 +199,11 @@ class DetailsWindow(Adw.Window):
                 }
             )
 
-            if self.win.sidebar.get_selected_row().get_child() not in (
-                self.win.all_games_row_box,
-                self.win.added_row_box,
+            if shared.win.sidebar.get_selected_row().get_child() not in (
+                shared.win.all_games_row_box,
+                shared.win.added_row_box,
             ):
-                self.win.sidebar.select_row(self.win.added_row_box.get_parent())
+                shared.win.sidebar.select_row(shared.win.added_row_box.get_parent())
 
         else:
             if final_name == "":
@@ -261,19 +285,47 @@ class DetailsWindow(Adw.Window):
 
     def set_cover(self, _source: Any, result: Gio.Task, *_args: Any) -> None:
         try:
-            path = self.file_dialog.open_finish(result).get_path()
+            path = self.image_file_dialog.open_finish(result).get_path()
         except GLib.GError:
             return
 
-        def resize() -> None:
-            if cover := resize_cover(path):
-                self.game_cover.new_cover(cover)
+        def thread_func() -> None:
+            new_path = None
+
+            try:
+                with Image.open(path) as image:
+                    if getattr(image, "is_animated", False):
+                        new_path = convert_cover(path)
+            except UnidentifiedImageError:
+                pass
+
+            if not new_path:
+                new_path = convert_cover(
+                    pixbuf=shared.store.managers[CoverManager].composite_cover(
+                        Path(path)
+                    )
+                )
+
+            if new_path:
+                self.game_cover.new_cover(new_path)
                 self.cover_button_delete_revealer.set_reveal_child(True)
                 self.cover_changed = True
+
             self.toggle_loading()
 
         self.toggle_loading()
-        GLib.Thread.new(None, resize)
+        GLib.Thread.new(None, thread_func)
+
+    def set_executable(self, _source: Any, result: Gio.Task, *_args: Any) -> None:
+        try:
+            path = self.exec_file_dialog.open_finish(result).get_path()
+        except GLib.GError:
+            return
+
+        self.executable.set_text(shlex.quote(path))
+
+    def choose_executable(self, *_args: Any) -> None:
+        self.exec_file_dialog.open(self, None, self.set_executable)
 
     def choose_cover(self, *_args: Any) -> None:
-        self.file_dialog.open(self, None, self.set_cover)
+        self.image_file_dialog.open(self, None, self.set_cover)

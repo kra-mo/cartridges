@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from typing import Any
+from typing import Any, Optional
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -80,7 +80,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     game_covers: dict = {}
     toasts: dict = {}
     active_game: Game
-    details_view_game_cover: GameCover | None = None
+    details_view_game_cover: Optional[GameCover] = None
     sort_state: str = "a-z"
     filter_state: str = "all"
     source_rows: dict = {}
@@ -253,6 +253,21 @@ class CartridgesWindow(Adw.ApplicationWindow):
         style_manager.connect("notify::dark", self.set_details_view_opacity)
         style_manager.connect("notify::high-contrast", self.set_details_view_opacity)
 
+        # Allow for a custom number of rows for the library
+        if shared.schema.get_uint("library-rows"):
+            shared.schema.bind(
+                "library-rows",
+                self.library,
+                "max-children-per-line",
+                Gio.SettingsBindFlags.DEFAULT,
+            )
+            shared.schema.bind(
+                "library-rows",
+                self.hidden_library,
+                "max-children-per-line",
+                Gio.SettingsBindFlags.DEFAULT,
+            )
+
     def search_changed(self, _widget: Any, hidden: bool) -> None:
         # Refresh search filter on keystroke in search box
         (self.hidden_library if hidden else self.library).invalidate_filter()
@@ -401,7 +416,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             ).lower()
 
         if var != "name" and get_value(0) == get_value(1):
-            var, order = "name", True
+            var, order = "name", False
 
         return ((get_value(0) > get_value(1)) ^ order) * 2 - 1
 
@@ -476,7 +491,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
             index += 1
 
     def on_undo_action(
-        self, _widget: Any, game: Game | None = None, undo: str | None = None
+        self, _widget: Any, game: Optional[Game] = None, undo: Optional[str] = None
     ) -> None:
         if not game:  # If the action was activated via Ctrl + Z
             if shared.importer and (

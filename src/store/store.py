@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
-from typing import Any, Generator, MutableMapping
+from typing import Any, Generator, MutableMapping, Optional
 
 from src import shared
 from src.game import Game
@@ -77,13 +77,15 @@ class Store:
         except KeyError:
             return default
 
-    def add_manager(self, manager: Manager, in_pipeline=True):
+    def add_manager(self, manager: Manager, in_pipeline: bool = True) -> None:
         """Add a manager to the store"""
         manager_type = type(manager)
         self.managers[manager_type] = manager
         self.toggle_manager_in_pipelines(manager_type, in_pipeline)
 
-    def toggle_manager_in_pipelines(self, manager_type: type[Manager], enable: bool):
+    def toggle_manager_in_pipelines(
+        self, manager_type: type[Manager], enable: bool
+    ) -> None:
         """Change if a manager should run in new pipelines"""
         if enable:
             self.pipeline_managers.add(self.managers[manager_type])
@@ -108,8 +110,8 @@ class Store:
                 pass
 
     def add_game(
-        self, game: Game, additional_data: dict, run_pipeline=True
-    ) -> Pipeline | None:
+        self, game: Game, additional_data: dict, run_pipeline: bool = True
+    ) -> Optional[Pipeline]:
         """Add a game to the app"""
 
         # Ignore games from a newer spec version

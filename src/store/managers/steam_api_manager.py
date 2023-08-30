@@ -23,8 +23,8 @@ from urllib3.exceptions import ConnectionError as Urllib3ConnectionError
 from src.game import Game
 from src.store.managers.async_manager import AsyncManager
 from src.utils.steam import (
-    SteamGameNotFoundError,
     SteamAPIHelper,
+    SteamGameNotFoundError,
     SteamNotAGameError,
     SteamRateLimiter,
 )
@@ -44,7 +44,7 @@ class SteamAPIManager(AsyncManager):
         self.steam_api_helper = SteamAPIHelper(self.steam_rate_limiter)
 
     def main(self, game: Game, additional_data: dict) -> None:
-        # Skip non-steam games
+        # Skip non-Steam games
         appid = additional_data.get("steam_appid", None)
         if appid is None:
             return

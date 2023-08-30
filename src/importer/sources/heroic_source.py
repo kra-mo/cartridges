@@ -25,7 +25,6 @@ from functools import cached_property
 from hashlib import sha256
 from json import JSONDecodeError
 from pathlib import Path
-from time import time
 from typing import Iterable, NamedTuple, Optional, TypedDict
 
 from src import shared
@@ -91,9 +90,7 @@ class SubSourceIterable(Iterable):
         logging.debug("Using Heroic %s library.json path %s", self.name, path)
         return path
 
-    def process_library_entry(
-        self, entry: HeroicLibraryEntry, added_time: int
-    ) -> SourceIterationResult:
+    def process_library_entry(self, entry: HeroicLibraryEntry) -> SourceIterationResult:
         """Build a Game from a Heroic library entry"""
 
         app_name = entry["app_name"]
@@ -102,21 +99,19 @@ class SubSourceIterable(Iterable):
         # Build game
         values = {
             "source": f"{self.source.source_id}_{self.service}",
-            "added": added_time,
+            "added": shared.import_time,
             "name": entry["title"],
             "developer": entry.get("developer", None),
             "game_id": self.source.game_id_format.format(
                 service=self.service, game_id=app_name
             ),
-            "executable": self.source.executable_format.format(
-                runner=runner, app_name=app_name
-            ),
+            "executable": self.source.make_executable(runner=runner, app_name=app_name),
             "hidden": self.source_iterable.is_hidden(app_name),
         }
         game = Game(values)
 
-        # Get the image path from the heroic cache
-        # Filenames are derived from the URL that heroic used to get the file
+        # Get the image path from the Heroic cache
+        # Filenames are derived from the URL that Heroic used to get the file
         uri: str = entry["art_square"] + self.image_uri_params
         digest = sha256(uri.encode()).hexdigest()
         image_path = self.source.locations.config.root / "images-cache" / digest
@@ -129,7 +124,7 @@ class SubSourceIterable(Iterable):
         Iterate through the games with a generator
         :raises InvalidLibraryFileError: on initial call if the library file is bad
         """
-        added_time = int(time())
+
         try:
             iterator = iter(
                 path_json_load(self.library_path)[self.library_json_entries_key]
@@ -140,7 +135,7 @@ class SubSourceIterable(Iterable):
             ) from error
         for entry in iterator:
             try:
-                yield self.process_library_entry(entry, added_time)
+                yield self.process_library_entry(entry)
             except KeyError as error:
                 logging.warning(
                     "Skipped invalid %s game %s",
@@ -178,7 +173,7 @@ class StoreSubSourceIterable(SubSourceIterable):
     def is_installed(self, app_name: str) -> bool:
         return app_name in self.installed_app_names
 
-    def process_library_entry(self, entry, added_time):
+    def process_library_entry(self, entry):
         # Skip games that are not installed
         app_name = entry["app_name"]
         if not self.is_installed(app_name):
@@ -190,7 +185,7 @@ class StoreSubSourceIterable(SubSourceIterable):
             )
             return None
         # Process entry as normal
-        return super().process_library_entry(entry, added_time)
+        return super().process_library_entry(entry)
 
     def __iter__(self):
         """
@@ -221,13 +216,10 @@ class LegendaryIterable(StoreSubSourceIterable):
 
     @cached_property
     def installed_path(self) -> Path:
-        """
-        Get the right path depending on the Heroic version
-
-        TODO after heroic 2.9 has been out for a while
-        We should use the commented out relative_installed_path
-        and remove this property override.
-        """
+        """Get the right path depending on the Heroic version"""
+        # TODO after Heroic 2.9 has been out for a while
+        # We should use the commented out relative_installed_path
+        # and remove this property override.
 
         heroic_config_path = self.source.locations.config.root
         # Heroic >= 2.9
@@ -241,7 +233,7 @@ class LegendaryIterable(StoreSubSourceIterable):
         else:
             # Heroic native
             logging.debug("Using Heroic native <= 2.8 legendary file")
-            path = Path.home() / ".config"
+            path = shared.home / ".config"
 
         path = path / "legendary" / "installed.json"
         logging.debug("Using Heroic %s installed.json path %s", self.name, path)

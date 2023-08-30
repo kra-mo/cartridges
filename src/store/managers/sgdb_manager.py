@@ -24,13 +24,13 @@ from requests.exceptions import HTTPError, SSLError
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.store.managers.async_manager import AsyncManager
-from src.store.managers.steam_api_manager import SteamAPIManager
 from src.store.managers.cover_manager import CoverManager
+from src.store.managers.steam_api_manager import SteamAPIManager
 from src.utils.steamgriddb import SGDBAuthError, SGDBHelper
 
 
 class SGDBManager(AsyncManager):
-    """Manager in charge of downloading a game's cover from steamgriddb"""
+    """Manager in charge of downloading a game's cover from SteamGridDB"""
 
     run_after = (SteamAPIManager, CoverManager)
     retryable_on = (HTTPError, SSLError, ConnectionError, JSONDecodeError)

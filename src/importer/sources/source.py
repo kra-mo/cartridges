@@ -20,19 +20,19 @@
 import sys
 from abc import abstractmethod
 from collections.abc import Iterable
-from typing import Any, Collection, Generator
+from typing import Any, Collection, Generator, Optional
 
 from src.game import Game
 from src.importer.sources.location import Location
 
 # Type of the data returned by iterating on a Source
-SourceIterationResult = None | Game | tuple[Game, tuple[Any]]
+SourceIterationResult = Optional[Game | tuple[Game, tuple[Any]]]
 
 
 class SourceIterable(Iterable):
     """Data producer for a source of games"""
 
-    source: "Source" = None
+    source: "Source"
 
     def __init__(self, source: "Source") -> None:
         self.source = source
@@ -53,7 +53,7 @@ class Source(Iterable):
 
     source_id: str
     name: str
-    variant: str = None
+    variant: Optional[str] = None
     available_on: set[str] = set()
     iterable_class: type[SourceIterable]
 
@@ -65,7 +65,7 @@ class Source(Iterable):
     def full_name(self) -> str:
         """The source's full name"""
         full_name_ = self.name
-        if self.variant is not None:
+        if self.variant:
             full_name_ += f" ({self.variant})"
         return full_name_
 
@@ -75,13 +75,14 @@ class Source(Iterable):
         return self.source_id + "_{game_id}"
 
     @property
-    def is_available(self):
+    def is_available(self) -> bool:
         return sys.platform in self.available_on
 
-    @property
-    @abstractmethod
-    def executable_format(self) -> str:
-        """The executable format used to construct game executables"""
+    def make_executable(self, *args, **kwargs) -> str:
+        """
+        Create a game executable command.
+        Should be implemented by child classes.
+        """
 
     def __iter__(self) -> Generator[SourceIterationResult, None, None]:
         """
@@ -93,8 +94,21 @@ class Source(Iterable):
         return iter(self.iterable_class(self))
 
 
+class ExecutableFormatSource(Source):
+    """Source class that uses a simple executable format to start games"""
+
+    @property
+    @abstractmethod
+    def executable_format(self) -> str:
+        """The executable format used to construct game executables"""
+
+    def make_executable(self, *args, **kwargs) -> str:
+        """Use the executable format to"""
+        return self.executable_format.format(*args, **kwargs)
+
+
 # pylint: disable=abstract-method
-class URLExecutableSource(Source):
+class URLExecutableSource(ExecutableFormatSource):
     """Source class that use custom URLs to start games"""
 
     url_format: str

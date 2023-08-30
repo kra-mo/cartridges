@@ -108,12 +108,24 @@ template $DetailsWindow : Adw.Window {
                     title: _("Executable");
 
                     [suffix]
-                    Gtk.MenuButton exec_info_button {
+                    Button file_chooser_button {
+                      valign: center;
+                      icon-name: "document-open-symbolic";
+                      tooltip-text: _("Select File");
+
+                      styles [
+                        "flat",
+                      ]
+                    }
+
+                    [suffix]
+                    MenuButton exec_info_button {
                     valign: center;
                     icon-name: "help-about-symbolic";
                     tooltip-text: _("More Info");
 
                     popover: Popover exec_info_popover {
+                        focusable: true;
 
                         Label exec_info_label {
                             use-markup: true;
@@ -125,7 +137,6 @@ template $DetailsWindow : Adw.Window {
                             margin-bottom: 6;
                             margin-start: 6;
                             margin-end: 6;
-                            selectable: true;
                         }
                     };
 

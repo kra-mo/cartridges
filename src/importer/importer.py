@@ -19,8 +19,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
+from time import time
+from typing import Any, Optional
 
-from gi.repository import Adw, GLib, Gtk
+from gi.repository import Adw, Gio, GLib, Gtk
 
 from src import shared
 from src.errors.error_producer import ErrorProducer
@@ -30,56 +32,60 @@ from src.importer.sources.location import UnresolvableLocationError
 from src.importer.sources.source import Source
 from src.store.managers.async_manager import AsyncManager
 from src.store.pipeline import Pipeline
-from src.utils.task import Task
 
 
 # pylint: disable=too-many-instance-attributes
 class Importer(ErrorProducer):
     """A class in charge of scanning sources for games"""
 
-    progressbar = None
-    import_statuspage = None
-    import_dialog = None
-    summary_toast = None
+    progressbar: Gtk.ProgressBar
+    import_statuspage: Adw.StatusPage
+    import_dialog: Adw.MessageDialog
+    summary_toast: Optional[Adw.Toast] = None
 
-    sources: set[Source] = None
+    sources: set[Source]
 
     n_source_tasks_created: int = 0
     n_source_tasks_done: int = 0
     n_pipelines_done: int = 0
-    game_pipelines: set[Pipeline] = None
+    game_pipelines: set[Pipeline]
 
-    removed_game_ids: set[str] = set()
-    imported_game_ids: set[str] = set()
+    removed_game_ids: set[str]
+    imported_game_ids: set[str]
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
+
+        shared.import_time = int(time())
 
         # TODO: make this stateful
         shared.store.new_game_ids = set()
         shared.store.duplicate_game_ids = set()
 
+        self.removed_game_ids = set()
+        self.imported_game_ids = set()
+
         self.game_pipelines = set()
         self.sources = set()
 
     @property
-    def n_games_added(self):
+    def n_games_added(self) -> int:
         return sum(
             1 if not (pipeline.game.blacklisted or pipeline.game.removed) else 0
             for pipeline in self.game_pipelines
         )
 
     @property
-    def pipelines_progress(self):
+    def pipelines_progress(self) -> float:
         progress = sum(pipeline.progress for pipeline in self.game_pipelines)
         try:
             progress = progress / len(self.game_pipelines)
         except ZeroDivisionError:
             progress = 0
-        return progress
+        return progress  # type: ignore
 
     @property
-    def sources_progress(self):
+    def sources_progress(self) -> float:
         try:
             progress = self.n_source_tasks_done / self.n_source_tasks_created
         except ZeroDivisionError:
@@ -87,19 +93,23 @@ class Importer(ErrorProducer):
         return progress
 
     @property
-    def finished(self):
+    def finished(self) -> bool:
         return (
             self.n_source_tasks_created == self.n_source_tasks_done
             and len(self.game_pipelines) == self.n_pipelines_done
         )
 
-    def add_source(self, source):
+    def add_source(self, source: Source) -> None:
         self.sources.add(source)
 
-    def run(self):
+    def run(self) -> None:
         """Use several Gio.Task to import games from added sources"""
 
         shared.win.get_application().state = shared.AppState.IMPORT
+
+        if self.__class__.summary_toast:
+            self.__class__.summary_toast.dismiss()
+
         shared.win.get_application().lookup_action("import").set_enabled(False)
 
         self.create_dialog()
@@ -115,14 +125,17 @@ class Importer(ErrorProducer):
 
         for source in self.sources:
             logging.debug("Importing games from source %s", source.source_id)
-            task = Task.new(None, None, self.source_callback, (source,))
+            task = Gio.Task.new(None, None, self.source_callback, (source,))
             self.n_source_tasks_created += 1
-            task.set_task_data((source,))
-            task.run_in_thread(self.source_task_thread_func)
+            task.run_in_thread(
+                lambda _task, _obj, _data, _cancellable, src=source: self.source_task_thread_func(
+                    (src,)
+                )
+            )
 
         self.progress_changed_callback()
 
-    def create_dialog(self):
+    def create_dialog(self) -> None:
         """Create the import dialog"""
         self.progressbar = Gtk.ProgressBar(margin_start=12, margin_end=12)
         self.import_statuspage = Adw.StatusPage(
@@ -139,7 +152,7 @@ class Importer(ErrorProducer):
         )
         self.import_dialog.present()
 
-    def source_task_thread_func(self, _task, _obj, data, _cancellable):
+    def source_task_thread_func(self, data: tuple) -> None:
         """Source import task code"""
 
         source: Source
@@ -193,27 +206,27 @@ class Importer(ErrorProducer):
                 pipeline.connect("advanced", self.pipeline_advanced_callback)
                 self.game_pipelines.add(pipeline)
 
-    def update_progressbar(self):
+    def update_progressbar(self) -> None:
         """Update the progressbar to show the overall import progress"""
         # Reserve 10% for the sources discovery, the rest is the pipelines
         self.progressbar.set_fraction(
             (0.1 * self.sources_progress) + (0.9 * self.pipelines_progress)
         )
 
-    def source_callback(self, _obj, _result, data):
+    def source_callback(self, _obj: Any, _result: Any, data: tuple) -> None:
         """Callback executed when a source is fully scanned"""
         source, *_rest = data
         logging.debug("Import done for source %s", source.source_id)
         self.n_source_tasks_done += 1
         self.progress_changed_callback()
 
-    def pipeline_advanced_callback(self, pipeline: Pipeline):
+    def pipeline_advanced_callback(self, pipeline: Pipeline) -> None:
         """Callback called when a pipeline for a game has advanced"""
         if pipeline.is_done:
             self.n_pipelines_done += 1
             self.progress_changed_callback()
 
-    def progress_changed_callback(self):
+    def progress_changed_callback(self) -> None:
         """
         Callback called when the import process has progressed
 
@@ -226,7 +239,7 @@ class Importer(ErrorProducer):
         if self.finished:
             self.import_callback()
 
-    def remove_games(self):
+    def remove_games(self) -> None:
         """Set removed to True for missing games"""
         if not shared.schema.get_boolean("remove-missing"):
             return
@@ -250,7 +263,7 @@ class Importer(ErrorProducer):
             game.update()
             self.removed_game_ids.add(game.game_id)
 
-    def import_callback(self):
+    def import_callback(self) -> None:
         """Callback called when importing has finished"""
         logging.info("Import done")
         self.remove_games()
@@ -258,17 +271,17 @@ class Importer(ErrorProducer):
         shared.store.new_game_ids = set()
         shared.store.duplicate_game_ids = set()
         self.import_dialog.close()
-        self.summary_toast = self.create_summary_toast()
+        self.__class__.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
         shared.win.get_application().lookup_action("import").set_enabled(True)
         shared.win.get_application().state = shared.AppState.DEFAULT
         shared.win.create_source_rows()
 
-    def create_error_dialog(self):
+    def create_error_dialog(self) -> None:
         """Dialog containing all errors raised by importers"""
 
         # Collect all errors that happened in the importer and the managers
-        errors: list[Exception] = []
+        errors = []
         errors.extend(self.collect_errors())
         for manager in shared.store.managers.values():
             errors.extend(manager.collect_errors())
@@ -316,7 +329,7 @@ class Importer(ErrorProducer):
 
         dialog.present()
 
-    def undo_import(self, *_args):
+    def undo_import(self, *_args: Any) -> None:
         for game_id in self.imported_game_ids:
             shared.store[game_id].removed = True
             shared.store[game_id].update()
@@ -329,11 +342,12 @@ class Importer(ErrorProducer):
 
         self.imported_game_ids = set()
         self.removed_game_ids = set()
-        self.summary_toast.dismiss()
+        if self.__class__.summary_toast:
+            self.__class__.summary_toast.dismiss()
 
         logging.info("Import undone")
 
-    def create_summary_toast(self):
+    def create_summary_toast(self) -> Adw.Toast:
         """N games imported, removed toast"""
 
         toast = Adw.Toast(timeout=0, priority=Adw.ToastPriority.HIGH)
@@ -374,16 +388,21 @@ class Importer(ErrorProducer):
         shared.win.toast_overlay.add_toast(toast)
         return toast
 
-    def open_preferences(self, page=None, expander_row=None):
+    def open_preferences(
+        self,
+        page_name: Optional[str] = None,
+        expander_row: Optional[Adw.ExpanderRow] = None,
+    ) -> Adw.PreferencesWindow:
         return shared.win.get_application().on_preferences_action(
-            page_name=page, expander_row=expander_row
+            page_name=page_name, expander_row=expander_row
         )
 
-    def timeout_toast(self, *_args):
+    def timeout_toast(self, *_args: Any) -> None:
         """Manually timeout the toast after the user has dismissed all warnings"""
-        GLib.timeout_add_seconds(5, self.summary_toast.dismiss)
+        if self.__class__.summary_toast:
+            GLib.timeout_add_seconds(5, self.__class__.summary_toast.dismiss)
 
-    def dialog_response_callback(self, _widget, response, *args):
+    def dialog_response_callback(self, _widget: Any, response: str, *args: Any) -> None:
         """Handle after-import dialogs callback"""
         logging.debug("After-import dialog response: %s (%s)", response, str(args))
         if response == "open_preferences":

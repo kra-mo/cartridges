@@ -21,13 +21,14 @@
 import json
 import logging
 import re
+from pathlib import Path
 from typing import TypedDict
 
 import requests
 from requests.exceptions import HTTPError
 
 from src import shared
-from src.utils.rate_limiter import PickHistory, RateLimiter
+from src.utils.rate_limiter import RateLimiter
 
 
 class SteamError(Exception):
@@ -71,16 +72,18 @@ class SteamRateLimiter(RateLimiter):
     refill_period_tokens = 200
     burst_tokens = 100
 
-    def __init__(self) -> None:
-        # Load pick history from schema
-        # (Remember API limits through restarts of Cartridges)
+    def _init_pick_history(self) -> None:
+        """
+        Load the pick history from schema.
+
+        Allows remembering API limits through restarts of Cartridges.
+        """
+        super()._init_pick_history()
         timestamps_str = shared.state_schema.get_string("steam-limiter-tokens-history")
-        self.pick_history = PickHistory(self.refill_period_seconds)
         self.pick_history.add(*json.loads(timestamps_str))
         self.pick_history.remove_old_entries()
-        super().__init__()
 
-    def acquire(self):
+    def acquire(self) -> None:
         """Get a token from the bucket and store the pick history in the schema"""
         super().acquire()
         timestamps_str = json.dumps(self.pick_history.copy_timestamps())
@@ -88,9 +91,9 @@ class SteamRateLimiter(RateLimiter):
 
 
 class SteamFileHelper:
-    """Helper for steam file formats"""
+    """Helper for Steam file formats"""
 
-    def get_manifest_data(self, manifest_path) -> SteamManifestData:
+    def get_manifest_data(self, manifest_path: Path) -> SteamManifestData:
         """Get local data for a game from its manifest"""
 
         with open(manifest_path, "r", encoding="utf-8") as file:
@@ -104,7 +107,11 @@ class SteamFileHelper:
                 raise SteamInvalidManifestError()
             data[key] = match.group(1)
 
-        return SteamManifestData(**data)
+        return SteamManifestData(
+            name=data["name"],
+            appid=data["appid"],
+            stateflags=data["stateflags"],
+        )
 
 
 class SteamAPIHelper:
@@ -116,7 +123,7 @@ class SteamAPIHelper:
     def __init__(self, rate_limiter: RateLimiter) -> None:
         self.rate_limiter = rate_limiter
 
-    def get_api_data(self, appid) -> SteamAPIData:
+    def get_api_data(self, appid: str) -> SteamAPIData:
         """
         Get online data for a game from its appid.
         May block to satisfy the Steam web API limitations.

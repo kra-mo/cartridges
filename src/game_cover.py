@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from pathlib import Path
-from typing import Any, Callable
+from typing import Optional
 
 from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk
 from PIL import Image, ImageFilter, ImageStat
@@ -27,12 +27,12 @@ from src import shared
 
 
 class GameCover:
-    texture: Gdk.Texture | None
-    blurred: Gdk.Texture | None
-    luminance: tuple[float, float] | None
-    path: Path | None
-    animation: GdkPixbuf.PixbufAnimation | None
-    anim_iter: GdkPixbuf.PixbufAnimationIter | None
+    texture: Optional[Gdk.Texture]
+    blurred: Optional[Gdk.Texture]
+    luminance: Optional[tuple[float, float]]
+    path: Optional[Path]
+    animation: Optional[GdkPixbuf.PixbufAnimation]
+    anim_iter: Optional[GdkPixbuf.PixbufAnimationIter]
 
     placeholder = Gdk.Texture.new_from_resource(
         shared.PREFIX + "/library_placeholder.svg"
@@ -41,21 +41,11 @@ class GameCover:
         shared.PREFIX + "/library_placeholder_small.svg"
     )
 
-    def __init__(self, pictures: set[Gtk.Picture], path: Path | None = None) -> None:
+    def __init__(self, pictures: set[Gtk.Picture], path: Optional[Path] = None) -> None:
         self.pictures = pictures
         self.new_cover(path)
 
-    # Wrap the function in another one as Gio.Task.run_in_thread does not allow for passing args
-    def create_func(self, path: Path | None) -> Callable:
-        self.animation = GdkPixbuf.PixbufAnimation.new_from_file(str(path))
-        self.anim_iter = self.animation.get_iter()
-
-        def wrapper(task: Gio.Task, *_args: Any) -> None:
-            self.update_animation((task, self.animation))
-
-        return wrapper
-
-    def new_cover(self, path: Path | None = None) -> None:
+    def new_cover(self, path: Optional[Path] = None) -> None:
         self.animation = None
         self.texture = None
         self.blurred = None
@@ -64,8 +54,12 @@ class GameCover:
 
         if path:
             if path.suffix == ".gif":
+                self.animation = GdkPixbuf.PixbufAnimation.new_from_file(str(path))
+                self.anim_iter = self.animation.get_iter()
                 self.task = Gio.Task.new()
-                self.task.run_in_thread(self.create_func(self.path))
+                self.task.run_in_thread(
+                    lambda *_: self.update_animation((self.task, self.animation))
+                )
             else:
                 self.texture = Gdk.Texture.new_from_filename(str(path))
 

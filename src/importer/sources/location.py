@@ -1,7 +1,7 @@
 import logging
 from os import PathLike
 from pathlib import Path
-from typing import Iterable, Mapping, NamedTuple
+from typing import Iterable, Mapping, NamedTuple, Optional
 
 from src import shared
 
@@ -41,7 +41,7 @@ class Location:
     paths: Mapping[str, LocationSubPath]
     invalid_subtitle: str
 
-    root: Path = None
+    root: Optional[Path] = None
 
     def __init__(
         self,
@@ -94,7 +94,9 @@ class Location:
         shared.schema.set_string(self.schema_key, value)
         logging.debug("Resolved value for schema key %s: %s", self.schema_key, value)
 
-    def __getitem__(self, key: str):
+    def __getitem__(self, key: str) -> Optional[Path]:
         """Get the computed path from its key for the location"""
         self.resolve()
-        return self.root / self.paths[key].segment
+        if self.root:
+            return self.root / self.paths[key].segment
+        return None

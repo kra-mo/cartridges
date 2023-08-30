@@ -83,7 +83,7 @@ class Pipeline(GObject.Object):
             progress = 1
         return progress
 
-    def advance(self):
+    def advance(self) -> None:
         """Spawn tasks for managers that are able to run for a game"""
 
         # Separate blocking / async managers

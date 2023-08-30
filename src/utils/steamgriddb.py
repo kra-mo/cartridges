@@ -20,13 +20,15 @@
 
 import logging
 from pathlib import Path
+from typing import Any
 
 import requests
 from gi.repository import Gio
 from requests.exceptions import HTTPError
 
 from src import shared
-from src.utils.save_cover import resize_cover, save_cover
+from src.game import Game
+from src.utils.save_cover import convert_cover, save_cover
 
 
 class SGDBError(Exception):
@@ -55,12 +57,12 @@ class SGDBHelper:
     base_url = "https://www.steamgriddb.com/api/v2/"
 
     @property
-    def auth_headers(self):
+    def auth_headers(self) -> dict[str, str]:
         key = shared.schema.get_string("sgdb-key")
         headers = {"Authorization": f"Bearer {key}"}
         return headers
 
-    def get_game_id(self, game):
+    def get_game_id(self, game: Game) -> Any:
         """Get grid results for a game. Can raise an exception."""
         uri = f"{self.base_url}search/autocomplete/{game.name}"
         res = requests.get(uri, headers=self.auth_headers, timeout=5)
@@ -74,7 +76,7 @@ class SGDBHelper:
             case _:
                 res.raise_for_status()
 
-    def get_image_uri(self, game_id, animated=False):
+    def get_image_uri(self, game_id: str, animated: bool = False) -> Any:
         """Get the image for a SGDB game id"""
         uri = f"{self.base_url}grids/game/{game_id}?dimensions=600x900"
         if animated:
@@ -93,7 +95,7 @@ class SGDBHelper:
             case _:
                 res.raise_for_status()
 
-    def conditionaly_update_cover(self, game):
+    def conditionaly_update_cover(self, game: Game) -> None:
         """Update the game's cover if appropriate"""
 
         # Obvious skips
@@ -132,7 +134,7 @@ class SGDBHelper:
                 tmp_file = Gio.File.new_tmp()[0]
                 tmp_file_path = tmp_file.get_path()
                 Path(tmp_file_path).write_bytes(response.content)
-                save_cover(game.game_id, resize_cover(tmp_file_path))
+                save_cover(game.game_id, convert_cover(tmp_file_path))
             except SGDBAuthError as error:
                 # Let caller handle auth errors
                 raise error

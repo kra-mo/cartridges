@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="cartridges">
+
   <schema id="@APP_ID@" path="@PREFIX@/">
     <key name="exit-after-launch" type="b">
       <default>false</default>
@@ -76,6 +77,9 @@
     <key name="retroarch-location" type="s">
       <default>"~/.var/app/org.libretro.RetroArch/config/retroarch/"</default>
     </key>
+    <key name="desktop" type="b">
+      <default>true</default>
+    </key>
     <key name="flatpak" type="b">
       <default>true</default>
     </key>
@@ -97,7 +101,11 @@
     <key name="sgdb-animated" type="b">
       <default>false</default>
     </key>
+    <key name="library-rows" type="u">
+      <default>0</default>
+    </key>
   </schema>
+
   <schema id="@APP_ID@.State" path="@PREFIX@/State/">
     <key name="width" type="i">
       <default>1170</default>

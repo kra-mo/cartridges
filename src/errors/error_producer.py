@@ -8,14 +8,14 @@ class ErrorProducer:
     Specifies the report_error and collect_errors methods in a thread-safe manner.
     """
 
-    errors: list[Exception] = None
-    errors_lock: Lock = None
+    errors: list[Exception]
+    errors_lock: Lock
 
     def __init__(self) -> None:
         self.errors = []
         self.errors_lock = Lock()
 
-    def report_error(self, error: Exception):
+    def report_error(self, error: Exception) -> None:
         """Report an error"""
         with self.errors_lock:
             self.errors.append(error)

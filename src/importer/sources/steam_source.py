@@ -21,7 +21,6 @@
 import logging
 import re
 from pathlib import Path
-from time import time
 from typing import Iterable, NamedTuple
 
 from src import shared
@@ -35,7 +34,7 @@ class SteamSourceIterable(SourceIterable):
     source: "SteamSource"
 
     def get_manifest_dirs(self) -> Iterable[Path]:
-        """Get dirs that contain steam app manifests"""
+        """Get dirs that contain Steam app manifests"""
         libraryfolders_path = self.source.locations.data["libraryfolders.vdf"]
         with open(libraryfolders_path, "r", encoding="utf-8") as file:
             contents = file.read()
@@ -64,8 +63,6 @@ class SteamSourceIterable(SourceIterable):
         appid_cache = set()
         manifests = self.get_manifests()
 
-        added_time = int(time())
-
         for manifest in manifests:
             # Get metadata from manifest
             steam = SteamFileHelper()
@@ -90,11 +87,11 @@ class SteamSourceIterable(SourceIterable):
 
             # Build game from local data
             values = {
-                "added": added_time,
+                "added": shared.import_time,
                 "name": local_data["name"],
                 "source": self.source.source_id,
                 "game_id": self.source.game_id_format.format(game_id=appid),
-                "executable": self.source.executable_format.format(game_id=appid),
+                "executable": self.source.make_executable(game_id=appid),
             }
             game = Game(values)
 
@@ -105,7 +102,6 @@ class SteamSourceIterable(SourceIterable):
             )
             additional_data = {"local_image_path": image_path, "steam_appid": appid}
 
-            # Produce game
             yield (game, additional_data)
 
 

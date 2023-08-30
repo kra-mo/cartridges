@@ -19,7 +19,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 from shutil import rmtree
 from sqlite3 import connect
-from time import time
 from typing import NamedTuple
 
 from src import shared
@@ -56,20 +55,18 @@ class LutrisSourceIterable(SourceIterable):
         connection = connect(db_path)
         cursor = connection.execute(request, params)
 
-        added_time = int(time())
-
         # Create games from the DB results
         for row in cursor:
             # Create game
             values = {
-                "added": added_time,
+                "added": shared.import_time,
                 "hidden": row[4],
                 "name": row[1],
                 "source": f"{self.source.source_id}_{row[3]}",
                 "game_id": self.source.game_id_format.format(
                     runner=row[3], game_id=row[0]
                 ),
-                "executable": self.source.executable_format.format(game_id=row[0]),
+                "executable": self.source.make_executable(game_id=row[0]),
             }
             game = Game(values)
 
@@ -77,7 +74,6 @@ class LutrisSourceIterable(SourceIterable):
             image_path = self.source.locations.cache["coverart"] / f"{row[2]}.jpg"
             additional_data = {"local_image_path": image_path}
 
-            # Produce game
             yield (game, additional_data)
 
         # Cleanup

@@ -20,21 +20,22 @@
 import json
 import logging
 from json import JSONDecodeError
-from time import time
 from typing import NamedTuple
 
 from src import shared
 from src.game import Game
 from src.importer.sources.location import Location, LocationSubPath
-from src.importer.sources.source import Source, SourceIterable, SourceIterationResult
+from src.importer.sources.source import (
+    ExecutableFormatSource,
+    SourceIterable,
+    SourceIterationResult,
+)
 
 
 class LegendarySourceIterable(SourceIterable):
     source: "LegendarySource"
 
-    def game_from_library_entry(
-        self, entry: dict, added_time: int
-    ) -> SourceIterationResult:
+    def game_from_library_entry(self, entry: dict) -> SourceIterationResult:
         # Skip non-games
         if entry["is_dlc"]:
             return None
@@ -42,11 +43,11 @@ class LegendarySourceIterable(SourceIterable):
         # Build game
         app_name = entry["app_name"]
         values = {
-            "added": added_time,
+            "added": shared.import_time,
             "source": self.source.source_id,
             "name": entry["title"],
             "game_id": self.source.game_id_format.format(game_id=app_name),
-            "executable": self.source.executable_format.format(app_name=app_name),
+            "executable": self.source.make_executable(app_name=app_name),
         }
         data = {}
 
@@ -74,12 +75,10 @@ class LegendarySourceIterable(SourceIterable):
             logging.warning("Couldn't open Legendary file: %s", str(file))
             return
 
-        added_time = int(time())
-
         # Generate games from library
         for entry in library.values():
             try:
-                result = self.game_from_library_entry(entry, added_time)
+                result = self.game_from_library_entry(entry)
             except KeyError as error:
                 # Skip invalid games
                 logging.warning(
@@ -93,7 +92,7 @@ class LegendaryLocations(NamedTuple):
     config: Location
 
 
-class LegendarySource(Source):
+class LegendarySource(ExecutableFormatSource):
     source_id = "legendary"
     name = _("Legendary")
     executable_format = "legendary launch {app_name}"

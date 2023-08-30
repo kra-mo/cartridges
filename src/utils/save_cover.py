@@ -20,16 +20,29 @@
 
 from pathlib import Path
 from shutil import copyfile
+from typing import Optional
 
-from gi.repository import Gdk, Gio, GLib
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib
 from PIL import Image, ImageSequence, UnidentifiedImageError
 
 from src import shared
 
 
-def resize_cover(cover_path=None, pixbuf=None):
+def convert_cover(
+    cover_path: Optional[Path] = None,
+    pixbuf: Optional[GdkPixbuf.Pixbuf] = None,
+    resize: bool = True,
+) -> Optional[Path]:
     if not cover_path and not pixbuf:
         return None
+
+    pixbuf_extensions = set()
+    for pixbuf_format in GdkPixbuf.Pixbuf.get_formats():
+        for pixbuf_extension in pixbuf_format.get_extensions():
+            pixbuf_extensions.add(pixbuf_extension)
+
+    if not resize and cover_path and cover_path.suffix.lower()[1:] in pixbuf_extensions:
+        return cover_path
 
     if pixbuf:
         cover_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
@@ -39,7 +52,8 @@ def resize_cover(cover_path=None, pixbuf=None):
         with Image.open(cover_path) as image:
             if getattr(image, "is_animated", False):
                 frames = tuple(
-                    frame.resize((200, 300)) for frame in ImageSequence.Iterator(image)
+                    frame.resize((200, 300)) if resize else frame
+                    for frame in ImageSequence.Iterator(image)
                 )
 
                 tmp_path = Path(Gio.File.new_tmp("XXXXXX.gif")[0].get_path())
@@ -47,6 +61,7 @@ def resize_cover(cover_path=None, pixbuf=None):
                     tmp_path,
                     save_all=True,
                     append_images=frames[1:],
+                    disposal=2,
                 )
 
             else:
@@ -56,7 +71,7 @@ def resize_cover(cover_path=None, pixbuf=None):
                     image = image.convert("RGBA")
 
                 tmp_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
-                image.resize(shared.image_size).save(
+                (image.resize(shared.image_size) if resize else image).save(
                     tmp_path,
                     compression="tiff_adobe_deflate"
                     if shared.schema.get_boolean("high-quality-images")
@@ -67,14 +82,14 @@ def resize_cover(cover_path=None, pixbuf=None):
             Gdk.Texture.new_from_filename(str(cover_path)).save_to_tiff(
                 tmp_path := Gio.File.new_tmp("XXXXXX.tiff")[0].get_path()
             )
-            return resize_cover(tmp_path)
+            return convert_cover(tmp_path)
         except GLib.GError:
             return None
 
     return tmp_path
 
 
-def save_cover(game_id, cover_path):
+def save_cover(game_id: str, cover_path: Path) -> None:
     shared.covers_dir.mkdir(parents=True, exist_ok=True)
 
     animated_path = shared.covers_dir / f"{game_id}.gif"

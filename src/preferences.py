@@ -21,7 +21,7 @@ import logging
 import re
 from pathlib import Path
 from shutil import rmtree
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 
 from gi.repository import Adw, Gio, GLib, Gtk
 
@@ -97,6 +97,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     flatpak_data_file_chooser_button = Gtk.Template.Child()
     flatpak_import_launchers_switch = Gtk.Template.Child()
 
+    desktop_switch = Gtk.Template.Child()
+
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
     sgdb_switch = Gtk.Template.Child()
@@ -113,9 +115,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.win = shared.win
         self.file_chooser = Gtk.FileDialog()
-        self.set_transient_for(self.win)
+        self.set_transient_for(shared.win)
 
         self.toast = Adw.Toast.new(_("All games removed"))
         self.toast.set_button_label(_("Undo"))
@@ -188,6 +189,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "sgdb",
                 "sgdb-prefer",
                 "sgdb-animated",
+                "desktop",
             }
         )
 
@@ -213,9 +215,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
 
     def choose_folder(
-        self, _widget: Any, callback: Callable, callback_data: str | None = None
+        self, _widget: Any, callback: Callable, callback_data: Optional[str] = None
     ) -> None:
-        self.file_chooser.select_folder(self.win, None, callback, callback_data)
+        self.file_chooser.select_folder(shared.win, None, callback, callback_data)
 
     def undo_remove_all(self, *_args: Any) -> None:
         shared.win.get_application().state = shared.AppState.UNDO_REMOVE_ALL_GAMES
@@ -238,8 +240,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 game.save()
                 game.update()
 
-        if self.win.navigation_view.get_visible_page() == self.win.details_page:
-            self.win.navigation_view.pop()
+        if shared.win.navigation_view.get_visible_page() == shared.win.details_page:
+            shared.win.navigation_view.pop()
 
         self.add_toast(self.toast)
         shared.win.get_application().state = shared.AppState.DEFAULT
@@ -280,9 +282,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
     def resolve_locations(self, source: Source) -> None:
         """Resolve locations and add a warning if location cannot be found"""
 
-        def clear_warning_selection(_widget: Any, label: Gtk.Label) -> None:
-            label.select_region(-1, -1)
-
         for location_name, location in source.locations._asdict().items():
             action_row = getattr(
                 self, f"{source.source_id}_{location_name}_action_row", None
@@ -294,15 +293,16 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 location.resolve()
 
             except UnresolvableLocationError:
+                title = _("Installation Not Found")
+                description = _("Select a valid directory.")
+                format_start = '<span rise="12pt"><b><big>'
+                format_end = "</big></b></span>\n"
+
                 popover = Gtk.Popover(
+                    focusable=True,
                     child=(
-                        label := Gtk.Label(
-                            label=(
-                                '<span rise="12pt"><b><big>'
-                                + _("Installation Not Found")
-                                + "</big></b></span>\n"
-                                + _("Select a valid directory.")
-                            ),
+                        Gtk.Label(
+                            label=format_start + title + format_end + description,
                             use_markup=True,
                             wrap=True,
                             max_width_chars=50,
@@ -313,17 +313,24 @@ class PreferencesWindow(Adw.PreferencesWindow):
                             margin_bottom=9,
                             margin_start=12,
                             margin_end=12,
-                            selectable=True,
                         )
-                    )
+                    ),
                 )
 
-                popover.connect("show", clear_warning_selection, label)
+                popover.update_property(
+                    (Gtk.AccessibleProperty.LABEL,), (title + description,)
+                )
+
+                def set_a11y_label(widget: Gtk.Popover) -> None:
+                    self.set_focus(widget)
+
+                popover.connect("show", set_a11y_label)
 
                 menu_button = Gtk.MenuButton(
                     icon_name="dialog-warning-symbolic",
                     valign=Gtk.Align.CENTER,
                     popover=popover,
+                    tooltip_text=_("Warning"),
                 )
                 menu_button.add_css_class("warning")
 
