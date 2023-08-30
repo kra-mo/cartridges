@@ -193,7 +193,7 @@ class DesktopSource(Source):
     """Generic Flatpak source"""
 
     source_id = "desktop"
-    name = _("Desktop")
+    name = _("Desktop Entries")
     iterable_class = DesktopSourceIterable
     available_on = {"linux"}
 

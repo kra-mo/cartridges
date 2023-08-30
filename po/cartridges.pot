@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR kramo
-# This file is distributed under the same license as the Cartridges package.
+# This file is distributed under the same license as the Cartridges~ package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Cartridges\n"
+"Project-Id-Version: Cartridges~\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-27 14:03+0200\n"
+"POT-Creation-Date: 2023-08-30 10:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,8 +59,8 @@ msgid "Game Details"
 msgstr ""
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:430
-#: src/details_window.py:265 src/importer/importer.py:301
-#: src/importer/importer.py:352
+#: src/details_window.py:265 src/importer/importer.py:304
+#: src/importer/importer.py:355
 msgid "Preferences"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgid "Shortcuts"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:124
-#: src/importer/importer.py:376
+#: src/importer/importer.py:379
 msgid "Undo"
 msgstr ""
 
@@ -212,7 +212,7 @@ msgstr ""
 msgid "Sources"
 msgstr ""
 
-#: data/gtk/preferences.blp:104
+#: data/gtk/preferences.blp:104 src/importer/sources/steam_source.py:114
 msgid "Steam"
 msgstr ""
 
@@ -223,7 +223,7 @@ msgstr ""
 msgid "Install Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:121
+#: data/gtk/preferences.blp:121 src/importer/sources/lutris_source.py:92
 msgid "Lutris"
 msgstr ""
 
@@ -239,7 +239,7 @@ msgstr ""
 msgid "Import Flatpak Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:168
+#: data/gtk/preferences.blp:168 src/importer/sources/heroic_source.py:355
 msgid "Heroic"
 msgstr ""
 
@@ -259,23 +259,23 @@ msgstr ""
 msgid "Import Sideloaded Games"
 msgstr ""
 
-#: data/gtk/preferences.blp:221
+#: data/gtk/preferences.blp:221 src/importer/sources/bottles_source.py:86
 msgid "Bottles"
 msgstr ""
 
-#: data/gtk/preferences.blp:238
+#: data/gtk/preferences.blp:238 src/importer/sources/itch_source.py:81
 msgid "itch"
 msgstr ""
 
-#: data/gtk/preferences.blp:255
+#: data/gtk/preferences.blp:255 src/importer/sources/legendary_source.py:97
 msgid "Legendary"
 msgstr ""
 
-#: data/gtk/preferences.blp:272
+#: data/gtk/preferences.blp:272 src/importer/sources/retroarch_source.py:142
 msgid "RetroArch"
 msgstr ""
 
-#: data/gtk/preferences.blp:289
+#: data/gtk/preferences.blp:289 src/importer/sources/flatpak_source.py:118
 msgid "Flatpak"
 msgstr ""
 
@@ -283,7 +283,7 @@ msgstr ""
 msgid "Import Game Launchers"
 msgstr ""
 
-#: data/gtk/preferences.blp:315
+#: data/gtk/preferences.blp:315 src/importer/sources/desktop_source.py:196
 msgid "Desktop Entries"
 msgstr ""
 
@@ -507,7 +507,7 @@ msgstr ""
 
 #. The variable is the title of the game
 #. The variable is the number of games removed
-#: src/game.py:172 src/importer/importer.py:373
+#: src/game.py:172 src/importer/importer.py:376
 msgid "{} removed"
 msgstr ""
 
@@ -528,7 +528,7 @@ msgstr ""
 msgid "Select a valid directory."
 msgstr ""
 
-#: src/preferences.py:330 src/importer/importer.py:299
+#: src/preferences.py:330 src/importer/importer.py:302
 msgid "Warning"
 msgstr ""
 
@@ -540,33 +540,33 @@ msgstr ""
 msgid "Set Location"
 msgstr ""
 
-#: src/utils/create_dialog.py:33 src/importer/importer.py:300
+#: src/utils/create_dialog.py:33 src/importer/importer.py:303
 msgid "Dismiss"
 msgstr ""
 
-#: src/importer/importer.py:137
+#: src/importer/importer.py:140
 msgid "Importing Games…"
 msgstr ""
 
-#: src/importer/importer.py:320
+#: src/importer/importer.py:323
 msgid "The following errors occured during import:"
 msgstr ""
 
-#: src/importer/importer.py:349
+#: src/importer/importer.py:352
 msgid "No new games found"
 msgstr ""
 
-#: src/importer/importer.py:361
+#: src/importer/importer.py:364
 msgid "1 game imported"
 msgstr ""
 
 #. The variable is the number of games
-#: src/importer/importer.py:365
+#: src/importer/importer.py:368
 msgid "{} games imported"
 msgstr ""
 
 #. A single game removed
-#: src/importer/importer.py:369
+#: src/importer/importer.py:372
 msgid "1 removed"
 msgstr ""
 
@@ -591,4 +591,17 @@ msgstr ""
 
 #: src/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
+msgstr ""
+
+#: src/importer/sources/retroarch_source.py:129
+msgid "No RetroArch Core Selected"
+msgstr ""
+
+#. The variable is a newline separated list of playlists
+#: src/importer/sources/retroarch_source.py:131
+msgid "The following playlists have no default core:"
+msgstr ""
+
+#: src/importer/sources/retroarch_source.py:133
+msgid "Games with no core selected were not imported"
 msgstr ""
