@@ -233,6 +233,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def remove_all_games(self, *_args: Any) -> None:
         shared.win.get_application().state = shared.AppState.REMOVE_ALL_GAMES
+        shared.win.row_selected(None, shared.win.all_games_row_box.get_parent())
         for game in shared.store:
             if not game.removed:
                 self.removed_games.add(game)
