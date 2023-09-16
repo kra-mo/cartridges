@@ -250,23 +250,13 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           }
         }
 
-        Adw.ActionRow flatpak_import_launchers_row {
+        Adw.SwitchRow flatpak_import_launchers_switch {
           title: _("Import Game Launchers");
-          activatable-widget: flatpak_import_launchers_switch;
-
-          Switch flatpak_import_launchers_switch {
-            valign: center;
-          }
         }
       }
 
-      Adw.ActionRow {
+      Adw.SwitchRow desktop_switch {
         title: _("Desktop Entries");
-        activatable-widget: desktop_switch;
-
-        Switch desktop_switch {
-          valign: center;
-        }
       }
     }
   }

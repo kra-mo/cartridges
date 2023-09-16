@@ -155,7 +155,7 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                 [start]
                 Revealer {
                   transition-type: slide_right;
-                  reveal-child: bind-property overlay_split_view.show-sidebar inverted;
+                  reveal-child: bind overlay_split_view.show-sidebar inverted;
                   Button show_sidebar_button {
                     icon-name: "sidebar-show-symbolic";
                     action-name: "win.show_sidebar";
@@ -187,7 +187,7 @@ template $CartridgesWindow : Adw.ApplicationWindow {
 
               [top]
               SearchBar search_bar {
-                search-mode-enabled: bind-property search_button.active bidirectional;
+                search-mode-enabled: bind search_button.active bidirectional;
                 key-capture-widget: library_view;
 
                 Adw.Clamp {
@@ -246,7 +246,7 @@ Adw.NavigationPage hidden_library_page {
 
     [top]
     SearchBar hidden_search_bar {
-      search-mode-enabled: bind-property hidden_search_button.active bidirectional;
+      search-mode-enabled: bind hidden_search_button.active bidirectional;
       key-capture-widget: hidden_library_view;
 
       Adw.Clamp {
