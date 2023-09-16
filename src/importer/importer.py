@@ -111,6 +111,7 @@ class Importer(ErrorProducer):
             self.__class__.summary_toast.dismiss()
 
         shared.win.get_application().lookup_action("import").set_enabled(False)
+        shared.win.get_application().lookup_action("add_game").set_enabled(False)
 
         self.create_dialog()
 
@@ -274,6 +275,7 @@ class Importer(ErrorProducer):
         self.__class__.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
         shared.win.get_application().lookup_action("import").set_enabled(True)
+        shared.win.get_application().lookup_action("add_game").set_enabled(True)
         shared.win.get_application().state = shared.AppState.DEFAULT
         shared.win.create_source_rows()
 
