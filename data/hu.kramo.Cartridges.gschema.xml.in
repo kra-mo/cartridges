@@ -111,7 +111,7 @@
       <default>1170</default>
     </key>
     <key name="height" type="i">
-      <default>798</default>
+      <default>795</default>
     </key>
     <key name="is-maximized" type="b">
       <default>false</default>
