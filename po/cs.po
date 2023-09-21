@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 11:06+0200\n"
+"POT-Creation-Date: 2023-08-30 10:43+0200\n"
 "PO-Revision-Date: 2023-08-05 08:07+0000\n"
 "Last-Translator: foo expert <deferred_water346@simplelogin.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/cartridges/"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:169
+#: data/gtk/window.blp:80
 msgid "Cartridges"
 msgstr "Kazety"
 
@@ -59,14 +59,14 @@ msgstr "Knihovna"
 msgid "Edit Game Details"
 msgstr "Upravit podrobnosti o hře"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:71
-#: src/details_window.py:67
+#: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:286
+#: src/details_window.py:71
 msgid "Game Details"
 msgstr "Podrobnosti o hře"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:418
-#: src/details_window.py:241 src/importer/importer.py:292
-#: src/importer/importer.py:342
+#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:513
+#: src/details_window.py:271 src/importer/importer.py:308
+#: src/importer/importer.py:359
 msgid "Preferences"
 msgstr "Předvolby"
 
@@ -74,50 +74,54 @@ msgstr "Předvolby"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: data/gtk/details-window.blp:57
+#: data/gtk/details-window.blp:55
 msgid "New Cover"
 msgstr "Nový obal"
 
-#: data/gtk/details-window.blp:75
+#: data/gtk/details-window.blp:73
 msgid "Delete Cover"
 msgstr "Odstranit obal"
 
-#: data/gtk/details-window.blp:102 data/gtk/game.blp:80
+#: data/gtk/details-window.blp:100 data/gtk/game.blp:80
 msgid "Title"
 msgstr "Název"
 
-#: data/gtk/details-window.blp:105
+#: data/gtk/details-window.blp:103
 #, fuzzy
 #| msgid "The developer or publisher (optional)"
 msgid "Developer (optional)"
 msgstr "Vývojář nebo vydavatel (nepovinné)"
 
-#: data/gtk/details-window.blp:110
+#: data/gtk/details-window.blp:108
 msgid "Executable"
 msgstr "Spustitelný soubor"
 
-#: data/gtk/details-window.blp:116
+#: data/gtk/details-window.blp:114
+msgid "Select File"
+msgstr ""
+
+#: data/gtk/details-window.blp:125
 msgid "More Info"
 msgstr "Více informací"
 
-#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:195
+#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:413
 msgid "Edit"
 msgstr "Upravit"
 
-#: data/gtk/game.blp:107 src/window.py:171
+#: data/gtk/game.blp:107 src/window.py:348
 msgid "Hide"
 msgstr "Skrýt"
 
-#: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:56
-#: data/gtk/window.blp:209
+#: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:40
+#: data/gtk/window.blp:433
 msgid "Remove"
 msgstr "Odstranit"
 
-#: data/gtk/game.blp:126 src/window.py:173
+#: data/gtk/game.blp:126 src/window.py:350
 msgid "Unhide"
 msgstr "Odkrýt"
 
-#: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
+#: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:8
 msgid "General"
 msgstr "Obecné"
 
@@ -125,8 +129,8 @@ msgstr "Obecné"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:217 data/gtk/window.blp:257
-#: data/gtk/window.blp:324
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:182 data/gtk/window.blp:241
+#: data/gtk/window.blp:444
 msgid "Search"
 msgstr "Vyhledávání"
 
@@ -138,8 +142,8 @@ msgstr "Zobrazit předvolby"
 msgid "Shortcuts"
 msgstr "Zkratky"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:103 src/preferences.py:120
-#: src/importer/importer.py:366
+#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:122
+#: src/importer/importer.py:383
 msgid "Undo"
 msgstr "Zpět"
 
@@ -167,153 +171,157 @@ msgstr "Zobrazit skryté hry"
 msgid "Remove game"
 msgstr "Odstranit hru"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:89
-#: data/gtk/preferences.blp:304
+#: data/gtk/preferences.blp:12 data/gtk/preferences.blp:72
+#: data/gtk/preferences.blp:288
 msgid "Behavior"
 msgstr "Chování"
 
-#: data/gtk/preferences.blp:16
+#: data/gtk/preferences.blp:15
 msgid "Exit After Launching Games"
 msgstr "Ukončit po spuštění her"
 
-#: data/gtk/preferences.blp:25
+#: data/gtk/preferences.blp:19
 msgid "Cover Image Launches Game"
 msgstr "Obrázek na obálce spouští hru"
 
-#: data/gtk/preferences.blp:26
+#: data/gtk/preferences.blp:20
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "Vymění chování obrázku na obálce a tlačítka pro přehrávání"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:81
+#: data/gtk/preferences.blp:25 src/details_window.py:85
 msgid "Images"
 msgstr "Obrázky"
 
-#: data/gtk/preferences.blp:39
+#: data/gtk/preferences.blp:28
 msgid "High Quality Images"
 msgstr "Vysoce kvalitní obrázky"
 
-#: data/gtk/preferences.blp:40
+#: data/gtk/preferences.blp:29
 msgid "Save game covers losslessly at the cost of storage"
 msgstr "Ukládat obaly her bezztrátově na úkor většího místa na disku"
 
-#: data/gtk/preferences.blp:50
+#: data/gtk/preferences.blp:34
 msgid "Danger Zone"
 msgstr "Nebezpečná zóna"
 
-#: data/gtk/preferences.blp:53
+#: data/gtk/preferences.blp:37
 msgid "Remove All Games"
 msgstr "Odstranit všechny hry"
 
-#: data/gtk/preferences.blp:85 data/gtk/window.blp:27 data/gtk/window.blp:444
+#: data/gtk/preferences.blp:68 data/gtk/window.blp:27 data/gtk/window.blp:539
 msgid "Import"
 msgstr "Import"
 
-#: data/gtk/preferences.blp:92
+#: data/gtk/preferences.blp:75
 #, fuzzy
 #| msgid "Remove All Games"
 msgid "Remove Uninstalled Games"
 msgstr "Odstranit všechny hry"
 
-#: data/gtk/preferences.blp:102
+#: data/gtk/preferences.blp:80
 msgid "Sources"
 msgstr "Zdroje"
 
-#: data/gtk/preferences.blp:105
+#: data/gtk/preferences.blp:83 src/importer/sources/steam_source.py:114
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:109 data/gtk/preferences.blp:123
-#: data/gtk/preferences.blp:164 data/gtk/preferences.blp:214
-#: data/gtk/preferences.blp:228 data/gtk/preferences.blp:242
-#: data/gtk/preferences.blp:256 data/gtk/preferences.blp:270
+#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:104
+#: data/gtk/preferences.blp:141 data/gtk/preferences.blp:174
+#: data/gtk/preferences.blp:191 data/gtk/preferences.blp:208
+#: data/gtk/preferences.blp:225 data/gtk/preferences.blp:242
 msgid "Install Location"
 msgstr "Umístění instalace"
 
-#: data/gtk/preferences.blp:119
+#: data/gtk/preferences.blp:100 src/importer/sources/lutris_source.py:92
 msgid "Lutris"
 msgstr "Lutris"
 
-#: data/gtk/preferences.blp:132
+#: data/gtk/preferences.blp:116
 msgid "Cache Location"
 msgstr "Umístění dočasných souborů"
 
-#: data/gtk/preferences.blp:141
+#: data/gtk/preferences.blp:128
 msgid "Import Steam Games"
 msgstr "Importovat Steam hry"
 
-#: data/gtk/preferences.blp:150
+#: data/gtk/preferences.blp:132
 msgid "Import Flatpak Games"
 msgstr "Importovat Flatpak hry"
 
-#: data/gtk/preferences.blp:160
+#: data/gtk/preferences.blp:137 src/importer/sources/heroic_source.py:355
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:173
+#: data/gtk/preferences.blp:153
 msgid "Import Epic Games"
 msgstr "Importovat Epic Games hry"
 
-#: data/gtk/preferences.blp:182
+#: data/gtk/preferences.blp:157
 msgid "Import GOG Games"
 msgstr "Importovat GOG hry"
 
-#: data/gtk/preferences.blp:191
+#: data/gtk/preferences.blp:161
 msgid "Import Amazon Games"
 msgstr "Importovat Amazon hry"
 
-#: data/gtk/preferences.blp:200
+#: data/gtk/preferences.blp:165
 msgid "Import Sideloaded Games"
 msgstr "Importovat ručně načtené hry"
 
-#: data/gtk/preferences.blp:210
+#: data/gtk/preferences.blp:170 src/importer/sources/bottles_source.py:86
 msgid "Bottles"
 msgstr "Láhve"
 
-#: data/gtk/preferences.blp:224
+#: data/gtk/preferences.blp:187 src/importer/sources/itch_source.py:81
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:238
+#: data/gtk/preferences.blp:204 src/importer/sources/legendary_source.py:97
 msgid "Legendary"
 msgstr "Legendary"
 
-#: data/gtk/preferences.blp:252
+#: data/gtk/preferences.blp:221 src/importer/sources/retroarch_source.py:142
 msgid "RetroArch"
 msgstr ""
 
-#: data/gtk/preferences.blp:266
+#: data/gtk/preferences.blp:238 src/importer/sources/flatpak_source.py:118
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: data/gtk/preferences.blp:279
+#: data/gtk/preferences.blp:254
 msgid "Import Game Launchers"
 msgstr "Importovat spouštěče her"
 
-#: data/gtk/preferences.blp:292
+#: data/gtk/preferences.blp:264 src/importer/sources/desktop_source.py:196
+msgid "Desktop Entries"
+msgstr ""
+
+#: data/gtk/preferences.blp:276
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:296
+#: data/gtk/preferences.blp:280
 msgid "Authentication"
 msgstr "Ověření"
 
-#: data/gtk/preferences.blp:299
+#: data/gtk/preferences.blp:283
 msgid "API Key"
 msgstr "Klíč API"
 
-#: data/gtk/preferences.blp:307
+#: data/gtk/preferences.blp:291
 msgid "Use SteamGridDB"
 msgstr "Používat SteamGridDB"
 
-#: data/gtk/preferences.blp:308
+#: data/gtk/preferences.blp:292
 msgid "Download images when adding or importing games"
 msgstr "Stahovat obrázky při přidávání nebo importování her"
 
-#: data/gtk/preferences.blp:317
+#: data/gtk/preferences.blp:296
 msgid "Prefer Over Official Images"
 msgstr "Upřednostnit před oficiálními obrázky"
 
-#: data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:300
 msgid "Prefer Animated Images"
 msgstr "Upřednostnit animované obrázky"
 
@@ -341,130 +349,142 @@ msgstr "Žádné skryté hry"
 msgid "Games you hide will appear here."
 msgstr "Hry, které skryjete, se zobrazí zde."
 
-#: data/gtk/window.blp:64 data/gtk/window.blp:305
-msgid "Back"
-msgstr "Zpět"
+#: data/gtk/window.blp:75 data/gtk/window.blp:105 src/main.py:166
+#, fuzzy
+#| msgid "Remove All Games"
+msgid "All Games"
+msgstr "Odstranit všechny hry"
 
-#: data/gtk/window.blp:121
-msgid "Game Title"
-msgstr "Název hry"
+#: data/gtk/window.blp:88 data/gtk/window.blp:162
+msgid "Toggle Sidebar"
+msgstr ""
 
-#: data/gtk/window.blp:176
-msgid "Play"
-msgstr "Hrát"
+#: data/gtk/window.blp:125 src/main.py:168
+#, fuzzy
+#| msgid "Added: {}"
+msgid "Added"
+msgstr "Přidáno: {}"
 
-#: data/gtk/window.blp:243 data/gtk/window.blp:437
+#: data/gtk/window.blp:140
+#, fuzzy
+#| msgid "Import"
+msgid "Imported"
+msgstr "Import"
+
+#: data/gtk/window.blp:168 data/gtk/window.blp:532
 msgid "Add Game"
 msgstr "Přidat hru"
 
-#: data/gtk/window.blp:250 data/gtk/window.blp:317
+#: data/gtk/window.blp:175 data/gtk/window.blp:234
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
-#: data/gtk/window.blp:272
-#, fuzzy
-#| msgid "Search"
-msgid "Search games"
-msgstr "Vyhledávání"
-
-#: data/gtk/window.blp:312
+#: data/gtk/window.blp:227
 msgid "Hidden Games"
 msgstr "Skryté hry"
 
-#: data/gtk/window.blp:339
-#, fuzzy
-#| msgid "Show hidden games"
-msgid "Search hidden games"
-msgstr "Zobrazit skryté hry"
+#: data/gtk/window.blp:337
+msgid "Game Title"
+msgstr "Název hry"
 
-#: data/gtk/window.blp:376
+#: data/gtk/window.blp:394
+msgid "Play"
+msgstr "Hrát"
+
+#: data/gtk/window.blp:471
 msgid "Sort"
 msgstr "Třídit"
 
-#: data/gtk/window.blp:379
+#: data/gtk/window.blp:474
 msgid "A-Z"
 msgstr "A-Ž"
 
-#: data/gtk/window.blp:385
+#: data/gtk/window.blp:480
 msgid "Z-A"
 msgstr "Ž-A"
 
-#: data/gtk/window.blp:391
+#: data/gtk/window.blp:486
 msgid "Newest"
 msgstr "Nejnovější"
 
-#: data/gtk/window.blp:397
+#: data/gtk/window.blp:492
 msgid "Oldest"
 msgstr "Nejstarší"
 
-#: data/gtk/window.blp:403
+#: data/gtk/window.blp:498
 msgid "Last Played"
 msgstr "Naposledy hráno"
 
-#: data/gtk/window.blp:410
+#: data/gtk/window.blp:505
 msgid "Show Hidden"
 msgstr "Zobrazit Skryté"
 
-#: data/gtk/window.blp:423
+#: data/gtk/window.blp:518
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
-#: data/gtk/window.blp:428
+#: data/gtk/window.blp:523
 msgid "About Cartridges"
 msgstr "O Kazetách"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:188
+#: src/main.py:207
 msgid "translator_credits"
 msgstr "ooo.i.love.foo"
 
 #. The variable is the date when the game was added
-#: src/window.py:194
+#: src/window.py:371
 msgid "Added: {}"
 msgstr "Přidáno: {}"
 
-#: src/window.py:197
+#: src/window.py:374
 msgid "Never"
 msgstr "Nikdy"
 
 #. The variable is the date when the game was last played
-#: src/window.py:201
+#: src/window.py:378
 msgid "Last played: {}"
 msgstr "Naposledy hráno: {}"
 
-#: src/details_window.py:72
+#: src/details_window.py:76
 msgid "Apply"
 msgstr "Použít"
 
-#: src/details_window.py:78
+#: src/details_window.py:82
 msgid "Add New Game"
 msgstr "Přidat novou hru"
 
-#: src/details_window.py:79
+#: src/details_window.py:83
 msgid "Add"
 msgstr ""
 
+#: src/details_window.py:93
+#, fuzzy
+#| msgid "Executable"
+msgid "Executables"
+msgstr "Spustitelný soubor"
+
 #. Translate this string as you would translate "file"
-#: src/details_window.py:92
+#: src/details_window.py:108
 msgid "file.txt"
 msgstr "soubor.txt"
 
 #. As in software
-#: src/details_window.py:94
+#: src/details_window.py:110
 msgid "program"
 msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:99 src/details_window.py:101
+#: src/details_window.py:115 src/details_window.py:117
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\cesta\\k\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:105 src/details_window.py:107
+#: src/details_window.py:121 src/details_window.py:123
 msgid "/path/to/{}"
 msgstr "/cesta/k/{}"
 
-#: src/details_window.py:112
+#: src/details_window.py:128
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -486,108 +506,108 @@ msgstr ""
 "\n"
 "Pokud cesta obsahuje mezery, nezapomeňte ji zabalit do dvojitých uvozovek!"
 
-#: src/details_window.py:147 src/details_window.py:153
+#: src/details_window.py:171 src/details_window.py:177
 msgid "Couldn't Add Game"
 msgstr "Nelze přidat hru"
 
-#: src/details_window.py:147 src/details_window.py:183
+#: src/details_window.py:171 src/details_window.py:213
 msgid "Game title cannot be empty."
 msgstr "Název hry nemůže být prázdný."
 
-#: src/details_window.py:153 src/details_window.py:191
+#: src/details_window.py:177 src/details_window.py:221
 msgid "Executable cannot be empty."
 msgstr "Spustitelný soubor nemůže být prázdný."
 
-#: src/details_window.py:182 src/details_window.py:190
+#: src/details_window.py:212 src/details_window.py:220
 msgid "Couldn't Apply Preferences"
 msgstr "Nelze použít předvolby"
 
 #. The variable is the title of the game
-#: src/game.py:139
+#: src/game.py:141
 msgid "{} launched"
 msgstr "{} spuštěno"
 
 #. The variable is the title of the game
-#: src/game.py:153
+#: src/game.py:155
 msgid "{} hidden"
 msgstr "{} skryto"
 
-#: src/game.py:153
+#: src/game.py:155
 msgid "{} unhidden"
 msgstr "{} odkryto"
 
 #. The variable is the title of the game
 #. The variable is the number of games removed
-#: src/game.py:170 src/importer/importer.py:363
+#: src/game.py:169 src/importer/importer.py:380
 msgid "{} removed"
 msgstr "{} odstraněno"
 
-#: src/preferences.py:119
+#: src/preferences.py:121
 msgid "All games removed"
 msgstr "Všechny hry odstraněny"
 
-#: src/preferences.py:168
+#: src/preferences.py:169
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "K používání služby SteamGridDB je vyžadován klíč API. Můžete si ho "
 "vygenerovat {}zde{}."
 
-#: src/preferences.py:294
+#: src/preferences.py:296
 msgid "Installation Not Found"
 msgstr "Instalace nebyla nalezena"
 
-#: src/preferences.py:296
+#: src/preferences.py:297
 msgid "Select a valid directory."
 msgstr "Vyberte platný adresář."
 
-#: src/preferences.py:351
+#: src/preferences.py:333 src/importer/importer.py:306
+msgid "Warning"
+msgstr ""
+
+#: src/preferences.py:367
 msgid "Invalid Directory"
 msgstr "Neplatný adresář"
 
-#: src/preferences.py:357
+#: src/preferences.py:373
 msgid "Set Location"
 msgstr "Nastavit umístění"
 
-#: src/utils/create_dialog.py:25 src/importer/importer.py:291
+#: src/utils/create_dialog.py:33 src/importer/importer.py:307
 msgid "Dismiss"
 msgstr "Zahodit"
 
-#: src/importer/importer.py:128
+#: src/importer/importer.py:142
 #, fuzzy
 #| msgid "Import Epic Games"
 msgid "Importing Games…"
 msgstr "Importovat Epic Games hry"
 
-#: src/importer/importer.py:290
-msgid "Warning"
-msgstr ""
-
-#: src/importer/importer.py:311
+#: src/importer/importer.py:327
 msgid "The following errors occured during import:"
 msgstr ""
 
-#: src/importer/importer.py:339
+#: src/importer/importer.py:356
 #, fuzzy
 #| msgid "No Games Found"
 msgid "No new games found"
 msgstr "Nebyly nalezeny žádné hry"
 
-#: src/importer/importer.py:351
+#: src/importer/importer.py:368
 #, fuzzy
 #| msgid "All games removed"
 msgid "1 game imported"
 msgstr "Všechny hry odstraněny"
 
 #. The variable is the number of games
-#: src/importer/importer.py:355
+#: src/importer/importer.py:372
 #, fuzzy
 #| msgid "All games removed"
 msgid "{} games imported"
 msgstr "Všechny hry odstraněny"
 
 #. A single game removed
-#: src/importer/importer.py:359
+#: src/importer/importer.py:376
 #, fuzzy
 #| msgid "{} removed"
 msgid "1 removed"
@@ -615,6 +635,32 @@ msgstr "Nelze ověřit SteamGridDB"
 #: src/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
 msgstr "Ověřte váš klíč API v předvolbách"
+
+#: src/importer/sources/retroarch_source.py:129
+msgid "No RetroArch Core Selected"
+msgstr ""
+
+#. The variable is a newline separated list of playlists
+#: src/importer/sources/retroarch_source.py:131
+msgid "The following playlists have no default core:"
+msgstr ""
+
+#: src/importer/sources/retroarch_source.py:133
+msgid "Games with no core selected were not imported"
+msgstr ""
+
+#~ msgid "Back"
+#~ msgstr "Zpět"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgid "Search games"
+#~ msgstr "Vyhledávání"
+
+#, fuzzy
+#~| msgid "Show hidden games"
+#~ msgid "Search hidden games"
+#~ msgstr "Zobrazit skryté hry"
 
 #~ msgid "The title of the game"
 #~ msgstr "Název hry"
