@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 11:06+0200\n"
+"POT-Creation-Date: 2023-08-30 10:43+0200\n"
 "PO-Revision-Date: 2023-04-06 08:09+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
-#: src/main.py:169
+#: data/gtk/window.blp:80
 msgid "Cartridges"
 msgstr "Cartridges"
 
@@ -59,14 +59,14 @@ msgstr "Bibliotek"
 msgid "Edit Game Details"
 msgstr "Rediger spilldetaljer"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:71
-#: src/details_window.py:67
+#: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:286
+#: src/details_window.py:71
 msgid "Game Details"
 msgstr "Spilldetaljer"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:418
-#: src/details_window.py:241 src/importer/importer.py:292
-#: src/importer/importer.py:342
+#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:513
+#: src/details_window.py:271 src/importer/importer.py:308
+#: src/importer/importer.py:359
 msgid "Preferences"
 msgstr "Innstillinger"
 
@@ -74,50 +74,54 @@ msgstr "Innstillinger"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: data/gtk/details-window.blp:57
+#: data/gtk/details-window.blp:55
 msgid "New Cover"
 msgstr ""
 
-#: data/gtk/details-window.blp:75
+#: data/gtk/details-window.blp:73
 msgid "Delete Cover"
 msgstr ""
 
-#: data/gtk/details-window.blp:102 data/gtk/game.blp:80
+#: data/gtk/details-window.blp:100 data/gtk/game.blp:80
 msgid "Title"
 msgstr "Navn"
 
-#: data/gtk/details-window.blp:105
+#: data/gtk/details-window.blp:103
 #, fuzzy
 #| msgid "The developer or publisher (optional)"
 msgid "Developer (optional)"
 msgstr "Utvikler eller utgiver (valgfritt)"
 
-#: data/gtk/details-window.blp:110
+#: data/gtk/details-window.blp:108
 msgid "Executable"
 msgstr "Kjørbar"
 
-#: data/gtk/details-window.blp:116
+#: data/gtk/details-window.blp:114
+msgid "Select File"
+msgstr ""
+
+#: data/gtk/details-window.blp:125
 msgid "More Info"
 msgstr ""
 
-#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:195
+#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:413
 msgid "Edit"
 msgstr "Rediger"
 
-#: data/gtk/game.blp:107 src/window.py:171
+#: data/gtk/game.blp:107 src/window.py:348
 msgid "Hide"
 msgstr "Skjul"
 
-#: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:56
-#: data/gtk/window.blp:209
+#: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:40
+#: data/gtk/window.blp:433
 msgid "Remove"
 msgstr "Fjern"
 
-#: data/gtk/game.blp:126 src/window.py:173
+#: data/gtk/game.blp:126 src/window.py:350
 msgid "Unhide"
 msgstr "Opphev fjerning"
 
-#: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
+#: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:8
 msgid "General"
 msgstr "Generelt"
 
@@ -125,8 +129,8 @@ msgstr "Generelt"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:217 data/gtk/window.blp:257
-#: data/gtk/window.blp:324
+#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:182 data/gtk/window.blp:241
+#: data/gtk/window.blp:444
 #, fuzzy
 msgid "Search"
 msgstr "Søk"
@@ -139,8 +143,8 @@ msgstr "Vis innstillinger"
 msgid "Shortcuts"
 msgstr "Snarveier"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:103 src/preferences.py:120
-#: src/importer/importer.py:366
+#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:122
+#: src/importer/importer.py:383
 msgid "Undo"
 msgstr "Angre"
 
@@ -169,163 +173,167 @@ msgstr "Vis skjulte spill"
 msgid "Remove game"
 msgstr "Fjern spill"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:89
-#: data/gtk/preferences.blp:304
+#: data/gtk/preferences.blp:12 data/gtk/preferences.blp:72
+#: data/gtk/preferences.blp:288
 #, fuzzy
 msgid "Behavior"
 msgstr "Adferd"
 
-#: data/gtk/preferences.blp:16
+#: data/gtk/preferences.blp:15
 msgid "Exit After Launching Games"
 msgstr "Avslutt etter oppstart av spill"
 
-#: data/gtk/preferences.blp:25
+#: data/gtk/preferences.blp:19
 msgid "Cover Image Launches Game"
 msgstr "Omslagsbilde starter spill"
 
-#: data/gtk/preferences.blp:26
+#: data/gtk/preferences.blp:20
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "Bytter adferd for omslagsbilde og spill-knapp"
 
-#: data/gtk/preferences.blp:36 src/details_window.py:81
+#: data/gtk/preferences.blp:25 src/details_window.py:85
 msgid "Images"
 msgstr "Bilder"
 
-#: data/gtk/preferences.blp:39
+#: data/gtk/preferences.blp:28
 msgid "High Quality Images"
 msgstr "Høykvalitetsbilder"
 
-#: data/gtk/preferences.blp:40
+#: data/gtk/preferences.blp:29
 msgid "Save game covers losslessly at the cost of storage"
 msgstr "Lagre spillomslag tapsfritt på bekostning av lagringsplass"
 
-#: data/gtk/preferences.blp:50
+#: data/gtk/preferences.blp:34
 msgid "Danger Zone"
 msgstr "Faresone"
 
-#: data/gtk/preferences.blp:53
+#: data/gtk/preferences.blp:37
 msgid "Remove All Games"
 msgstr "Fjern alle spill"
 
-#: data/gtk/preferences.blp:85 data/gtk/window.blp:27 data/gtk/window.blp:444
+#: data/gtk/preferences.blp:68 data/gtk/window.blp:27 data/gtk/window.blp:539
 msgid "Import"
 msgstr "Importer"
 
-#: data/gtk/preferences.blp:92
+#: data/gtk/preferences.blp:75
 #, fuzzy
 #| msgid "Remove All Games"
 msgid "Remove Uninstalled Games"
 msgstr "Fjern alle spill"
 
-#: data/gtk/preferences.blp:102
+#: data/gtk/preferences.blp:80
 msgid "Sources"
 msgstr "Kilder"
 
-#: data/gtk/preferences.blp:105
+#: data/gtk/preferences.blp:83 src/importer/sources/steam_source.py:114
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:109 data/gtk/preferences.blp:123
-#: data/gtk/preferences.blp:164 data/gtk/preferences.blp:214
-#: data/gtk/preferences.blp:228 data/gtk/preferences.blp:242
-#: data/gtk/preferences.blp:256 data/gtk/preferences.blp:270
+#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:104
+#: data/gtk/preferences.blp:141 data/gtk/preferences.blp:174
+#: data/gtk/preferences.blp:191 data/gtk/preferences.blp:208
+#: data/gtk/preferences.blp:225 data/gtk/preferences.blp:242
 #, fuzzy
 msgid "Install Location"
 msgstr "Installasjonssted for itch"
 
-#: data/gtk/preferences.blp:119
+#: data/gtk/preferences.blp:100 src/importer/sources/lutris_source.py:92
 msgid "Lutris"
 msgstr "Lutris"
 
-#: data/gtk/preferences.blp:132
+#: data/gtk/preferences.blp:116
 #, fuzzy
 msgid "Cache Location"
 msgstr "Posisjon for Lutris-hurtiglager"
 
-#: data/gtk/preferences.blp:141
+#: data/gtk/preferences.blp:128
 #, fuzzy
 msgid "Import Steam Games"
 msgstr "Importer sideinnlastede spill"
 
-#: data/gtk/preferences.blp:150
+#: data/gtk/preferences.blp:132
 #, fuzzy
 msgid "Import Flatpak Games"
 msgstr "Importer sideinnlastede spill"
 
-#: data/gtk/preferences.blp:160
+#: data/gtk/preferences.blp:137 src/importer/sources/heroic_source.py:355
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:173
+#: data/gtk/preferences.blp:153
 msgid "Import Epic Games"
 msgstr "Importer Epic-spill"
 
-#: data/gtk/preferences.blp:182
+#: data/gtk/preferences.blp:157
 msgid "Import GOG Games"
 msgstr "Importer GOG-spill"
 
-#: data/gtk/preferences.blp:191
+#: data/gtk/preferences.blp:161
 msgid "Import Amazon Games"
 msgstr "Importer Amazon-spill"
 
-#: data/gtk/preferences.blp:200
+#: data/gtk/preferences.blp:165
 msgid "Import Sideloaded Games"
 msgstr "Importer sideinnlastede spill"
 
-#: data/gtk/preferences.blp:210
+#: data/gtk/preferences.blp:170 src/importer/sources/bottles_source.py:86
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:224
+#: data/gtk/preferences.blp:187 src/importer/sources/itch_source.py:81
 #, fuzzy
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:238
+#: data/gtk/preferences.blp:204 src/importer/sources/legendary_source.py:97
 msgid "Legendary"
 msgstr ""
 
-#: data/gtk/preferences.blp:252
+#: data/gtk/preferences.blp:221 src/importer/sources/retroarch_source.py:142
 msgid "RetroArch"
 msgstr ""
 
-#: data/gtk/preferences.blp:266
+#: data/gtk/preferences.blp:238 src/importer/sources/flatpak_source.py:118
 msgid "Flatpak"
 msgstr ""
 
-#: data/gtk/preferences.blp:279
+#: data/gtk/preferences.blp:254
 #, fuzzy
 msgid "Import Game Launchers"
 msgstr "Spillutvalgstarter"
 
-#: data/gtk/preferences.blp:292
+#: data/gtk/preferences.blp:264 src/importer/sources/desktop_source.py:196
+msgid "Desktop Entries"
+msgstr ""
+
+#: data/gtk/preferences.blp:276
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:296
+#: data/gtk/preferences.blp:280
 msgid "Authentication"
 msgstr "Identitetsbekreftelse"
 
-#: data/gtk/preferences.blp:299
+#: data/gtk/preferences.blp:283
 #, fuzzy
 msgid "API Key"
 msgstr "API-nøkkel"
 
-#: data/gtk/preferences.blp:307
+#: data/gtk/preferences.blp:291
 msgid "Use SteamGridDB"
 msgstr "Bruk SteamGridDB"
 
-#: data/gtk/preferences.blp:308
+#: data/gtk/preferences.blp:292
 #, fuzzy
 msgid "Download images when adding or importing games"
 msgstr "Mappe å bruke ved import av spill"
 
-#: data/gtk/preferences.blp:317
+#: data/gtk/preferences.blp:296
 #, fuzzy
 msgid "Prefer Over Official Images"
 msgstr "Foretrekk over offisielle bilder"
 
-#: data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:300
 #, fuzzy
 msgid "Prefer Animated Images"
 msgstr "Foretrekk over offisielle bilder"
@@ -354,129 +362,142 @@ msgstr "Ingen skjulte spill"
 msgid "Games you hide will appear here."
 msgstr "Spill du skjuler vil vises her."
 
-#: data/gtk/window.blp:64 data/gtk/window.blp:305
-msgid "Back"
-msgstr "Tilbake"
+#: data/gtk/window.blp:75 data/gtk/window.blp:105 src/main.py:166
+#, fuzzy
+#| msgid "Remove All Games"
+msgid "All Games"
+msgstr "Fjern alle spill"
 
-#: data/gtk/window.blp:121
-msgid "Game Title"
-msgstr "Spillnavn"
+#: data/gtk/window.blp:88 data/gtk/window.blp:162
+msgid "Toggle Sidebar"
+msgstr ""
 
-#: data/gtk/window.blp:176
-msgid "Play"
-msgstr "Spill"
+#: data/gtk/window.blp:125 src/main.py:168
+#, fuzzy
+#| msgid "Added: {}"
+msgid "Added"
+msgstr "Tillagt: {}"
 
-#: data/gtk/window.blp:243 data/gtk/window.blp:437
+#: data/gtk/window.blp:140
+#, fuzzy
+#| msgid "Import"
+msgid "Imported"
+msgstr "Importer"
+
+#: data/gtk/window.blp:168 data/gtk/window.blp:532
 msgid "Add Game"
 msgstr "Legg til spill"
 
-#: data/gtk/window.blp:250 data/gtk/window.blp:317
+#: data/gtk/window.blp:175 data/gtk/window.blp:234
 msgid "Main Menu"
 msgstr "Hovedmeny"
 
-#: data/gtk/window.blp:272
-#, fuzzy
-msgid "Search games"
-msgstr "Søk"
-
-#: data/gtk/window.blp:312
+#: data/gtk/window.blp:227
 msgid "Hidden Games"
 msgstr "Skjulte spill"
 
-#: data/gtk/window.blp:339
-#, fuzzy
-#| msgid "Show hidden games"
-msgid "Search hidden games"
-msgstr "Vis skjulte spill"
+#: data/gtk/window.blp:337
+msgid "Game Title"
+msgstr "Spillnavn"
 
-#: data/gtk/window.blp:376
+#: data/gtk/window.blp:394
+msgid "Play"
+msgstr "Spill"
+
+#: data/gtk/window.blp:471
 msgid "Sort"
 msgstr "Sorter"
 
-#: data/gtk/window.blp:379
+#: data/gtk/window.blp:474
 msgid "A-Z"
 msgstr "A-Å"
 
-#: data/gtk/window.blp:385
+#: data/gtk/window.blp:480
 msgid "Z-A"
 msgstr "Å-A"
 
-#: data/gtk/window.blp:391
+#: data/gtk/window.blp:486
 msgid "Newest"
 msgstr "Nyeste"
 
-#: data/gtk/window.blp:397
+#: data/gtk/window.blp:492
 msgid "Oldest"
 msgstr "Eldste"
 
-#: data/gtk/window.blp:403
+#: data/gtk/window.blp:498
 msgid "Last Played"
 msgstr "Sist spilt"
 
-#: data/gtk/window.blp:410
+#: data/gtk/window.blp:505
 msgid "Show Hidden"
 msgstr "Vis skjulte"
 
-#: data/gtk/window.blp:423
+#: data/gtk/window.blp:518
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
-#: data/gtk/window.blp:428
+#: data/gtk/window.blp:523
 msgid "About Cartridges"
 msgstr "Om"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:188
+#: src/main.py:207
 msgid "translator_credits"
 msgstr "Allan Nordhøy, <epost@anotheragency.no>"
 
 #. The variable is the date when the game was added
-#: src/window.py:194
+#: src/window.py:371
 msgid "Added: {}"
 msgstr "Tillagt: {}"
 
-#: src/window.py:197
+#: src/window.py:374
 msgid "Never"
 msgstr "Aldri"
 
 #. The variable is the date when the game was last played
-#: src/window.py:201
+#: src/window.py:378
 msgid "Last played: {}"
 msgstr "Sist spilt: {}"
 
-#: src/details_window.py:72
+#: src/details_window.py:76
 msgid "Apply"
 msgstr "Bruk"
 
-#: src/details_window.py:78
+#: src/details_window.py:82
 msgid "Add New Game"
 msgstr "Legg til nytt spill"
 
-#: src/details_window.py:79
+#: src/details_window.py:83
 msgid "Add"
 msgstr ""
 
+#: src/details_window.py:93
+#, fuzzy
+#| msgid "Executable"
+msgid "Executables"
+msgstr "Kjørbar"
+
 #. Translate this string as you would translate "file"
-#: src/details_window.py:92
+#: src/details_window.py:108
 msgid "file.txt"
 msgstr "fil.txt"
 
 #. As in software
-#: src/details_window.py:94
+#: src/details_window.py:110
 msgid "program"
 msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:99 src/details_window.py:101
+#: src/details_window.py:115 src/details_window.py:117
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\sti\\til\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: src/details_window.py:105 src/details_window.py:107
+#: src/details_window.py:121 src/details_window.py:123
 msgid "/path/to/{}"
 msgstr "/sti/til/{}"
 
-#: src/details_window.py:112
+#: src/details_window.py:128
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -499,106 +520,106 @@ msgstr ""
 "Hvis stien inneholder mellomrom må du pakke den inn i doble engelske "
 "sitattegn."
 
-#: src/details_window.py:147 src/details_window.py:153
+#: src/details_window.py:171 src/details_window.py:177
 msgid "Couldn't Add Game"
 msgstr "Kunne ikke legge til spill"
 
-#: src/details_window.py:147 src/details_window.py:183
+#: src/details_window.py:171 src/details_window.py:213
 msgid "Game title cannot be empty."
 msgstr "Spillnavnet kan ikke være tomt."
 
-#: src/details_window.py:153 src/details_window.py:191
+#: src/details_window.py:177 src/details_window.py:221
 msgid "Executable cannot be empty."
 msgstr "Kjørbar fil må angis."
 
-#: src/details_window.py:182 src/details_window.py:190
+#: src/details_window.py:212 src/details_window.py:220
 msgid "Couldn't Apply Preferences"
 msgstr "Kunne ikke ta i bruk endringer"
 
 #. The variable is the title of the game
-#: src/game.py:139
+#: src/game.py:141
 msgid "{} launched"
 msgstr "{} startet"
 
 #. The variable is the title of the game
-#: src/game.py:153
+#: src/game.py:155
 #, fuzzy
 msgid "{} hidden"
 msgstr "{} skjult"
 
-#: src/game.py:153
+#: src/game.py:155
 msgid "{} unhidden"
 msgstr "{} synlig"
 
 #. The variable is the title of the game
 #. The variable is the number of games removed
-#: src/game.py:170 src/importer/importer.py:363
+#: src/game.py:169 src/importer/importer.py:380
 msgid "{} removed"
 msgstr "{} fjernet"
 
-#: src/preferences.py:119
+#: src/preferences.py:121
 msgid "All games removed"
 msgstr "Alle spill fjernet"
 
-#: src/preferences.py:168
+#: src/preferences.py:169
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "En API-nøkkel kreves for å bruke SteamGridDB. Du kan generere en {}her{}."
 
-#: src/preferences.py:294
+#: src/preferences.py:296
 #, fuzzy
 msgid "Installation Not Found"
 msgstr "Fant ikke installasjonen"
 
-#: src/preferences.py:296
+#: src/preferences.py:297
 #, fuzzy
 msgid "Select a valid directory."
 msgstr "Velg {}-datamappen."
 
-#: src/preferences.py:351
+#: src/preferences.py:333 src/importer/importer.py:306
+msgid "Warning"
+msgstr ""
+
+#: src/preferences.py:367
 msgid "Invalid Directory"
 msgstr ""
 
-#: src/preferences.py:357
+#: src/preferences.py:373
 #, fuzzy
 msgid "Set Location"
 msgstr "Velg mappe"
 
-#: src/utils/create_dialog.py:25 src/importer/importer.py:291
+#: src/utils/create_dialog.py:33 src/importer/importer.py:307
 msgid "Dismiss"
 msgstr "Forkast"
 
-#: src/importer/importer.py:128
+#: src/importer/importer.py:142
 msgid "Importing Games…"
 msgstr "Importerer spill …"
 
-#: src/importer/importer.py:290
-msgid "Warning"
-msgstr ""
-
-#: src/importer/importer.py:311
+#: src/importer/importer.py:327
 msgid "The following errors occured during import:"
 msgstr ""
 
-#: src/importer/importer.py:339
+#: src/importer/importer.py:356
 #, fuzzy
 msgid "No new games found"
 msgstr "Fant ingen spill"
 
-#: src/importer/importer.py:351
+#: src/importer/importer.py:368
 #, fuzzy
 msgid "1 game imported"
 msgstr "Spill importert"
 
 #. The variable is the number of games
-#: src/importer/importer.py:355
+#: src/importer/importer.py:372
 #, fuzzy
 msgid "{} games imported"
 msgstr "Spill importert"
 
 #. A single game removed
-#: src/importer/importer.py:359
+#: src/importer/importer.py:376
 #, fuzzy
 #| msgid "{} removed"
 msgid "1 removed"
@@ -630,6 +651,31 @@ msgstr "Kunne ikke koble til SteamGridDB"
 #: src/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
 msgstr ""
+
+#: src/importer/sources/retroarch_source.py:129
+msgid "No RetroArch Core Selected"
+msgstr ""
+
+#. The variable is a newline separated list of playlists
+#: src/importer/sources/retroarch_source.py:131
+msgid "The following playlists have no default core:"
+msgstr ""
+
+#: src/importer/sources/retroarch_source.py:133
+msgid "Games with no core selected were not imported"
+msgstr ""
+
+#~ msgid "Back"
+#~ msgstr "Tilbake"
+
+#, fuzzy
+#~ msgid "Search games"
+#~ msgstr "Søk"
+
+#, fuzzy
+#~| msgid "Show hidden games"
+#~ msgid "Search hidden games"
+#~ msgstr "Vis skjulte spill"
 
 #~ msgid "The title of the game"
 #~ msgstr "Navnet på spillet"
