@@ -114,6 +114,12 @@ class DesktopSourceIterable(SourceIterable):
                 except GLib.GError:
                     pass
 
+                try:
+                    if keyfile.get_boolean("Desktop Entry", "Hidden"):
+                        continue
+                except GLib.GError:
+                    pass
+
                 # Strip /run/host from Flatpak paths
                 if entry.is_relative_to(prefix := "/run/host"):
                     entry = Path("/") / entry.relative_to(prefix)
