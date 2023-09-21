@@ -31,25 +31,33 @@ from src.utils.relative_date import relative_date
 class CartridgesWindow(Adw.ApplicationWindow):
     __gtype_name__ = "CartridgesWindow"
 
+    overlay_split_view = Gtk.Template.Child()
+    navigation_view = Gtk.Template.Child()
+    sidebar = Gtk.Template.Child()
+    all_games_row_box = Gtk.Template.Child()
+    all_games_no_label = Gtk.Template.Child()
+    added_row_box = Gtk.Template.Child()
+    added_games_no_label = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     primary_menu_button = Gtk.Template.Child()
-    stack = Gtk.Template.Child()
+    show_sidebar_button = Gtk.Template.Child()
     details_view = Gtk.Template.Child()
+    library_page = Gtk.Template.Child()
     library_view = Gtk.Template.Child()
     library = Gtk.Template.Child()
     scrolledwindow = Gtk.Template.Child()
-    library_bin = Gtk.Template.Child()
+    library_overlay = Gtk.Template.Child()
     notice_empty = Gtk.Template.Child()
     notice_no_results = Gtk.Template.Child()
     search_bar = Gtk.Template.Child()
     search_entry = Gtk.Template.Child()
     search_button = Gtk.Template.Child()
 
-    details_view_box = Gtk.Template.Child()
+    details_page = Gtk.Template.Child()
+    details_view_toolbar_view = Gtk.Template.Child()
     details_view_cover = Gtk.Template.Child()
     details_view_spinner = Gtk.Template.Child()
     details_view_title = Gtk.Template.Child()
-    details_view_header_bar_title = Gtk.Template.Child()
     details_view_blurred_cover = Gtk.Template.Child()
     details_view_play_button = Gtk.Template.Child()
     details_view_developer = Gtk.Template.Child()
@@ -57,11 +65,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
     details_view_last_played = Gtk.Template.Child()
     details_view_hide_button = Gtk.Template.Child()
 
+    hidden_library_page = Gtk.Template.Child()
     hidden_primary_menu_button = Gtk.Template.Child()
     hidden_library = Gtk.Template.Child()
     hidden_library_view = Gtk.Template.Child()
     hidden_scrolledwindow = Gtk.Template.Child()
-    hidden_library_bin = Gtk.Template.Child()
+    hidden_library_overlay = Gtk.Template.Child()
     hidden_notice_empty = Gtk.Template.Child()
     hidden_notice_no_results = Gtk.Template.Child()
     hidden_search_bar = Gtk.Template.Child()
@@ -73,14 +82,139 @@ class CartridgesWindow(Adw.ApplicationWindow):
     active_game: Game
     details_view_game_cover: Optional[GameCover] = None
     sort_state: str = "a-z"
+    filter_state: str = "all"
+    source_rows: dict = {}
+
+    def create_source_rows(self) -> None:
+        def get_removed(source_id: str) -> Any:
+            removed = tuple(
+                game.removed or game.hidden or game.blacklisted
+                for game in shared.store.source_games[source_id].values()
+            )
+            return (
+                (count,) if (count := sum(removed)) != len(removed) else False
+            )  # Return a tuple because 0 == False and 1 == True
+
+        total_games_no = 0
+        restored = False
+
+        selected_id = (
+            self.source_rows[selected_row][0]
+            if (selected_row := self.sidebar.get_selected_row()) in self.source_rows
+            else None
+        )
+
+        if selected_row == self.added_row_box.get_parent():
+            self.sidebar.select_row(self.added_row_box.get_parent())
+            restored = True
+
+        if added_missing := (
+            not shared.store.source_games.get("imported")
+            or not (removed := get_removed("imported"))
+        ):
+            self.sidebar.select_row(self.all_games_row_box.get_parent())
+        else:
+            games_no = len(shared.store.source_games["imported"]) - removed[0]
+            self.added_games_no_label.set_label(str(games_no))
+            total_games_no += games_no
+        self.added_row_box.get_parent().set_visible(not added_missing)
+
+        self.sidebar.get_row_at_index(2).set_visible(False)
+
+        while row := self.sidebar.get_row_at_index(3):
+            self.sidebar.remove(row)
+
+        for source_id in shared.store.source_games:
+            if source_id == "imported":
+                continue
+            if not (removed := get_removed(source_id)):
+                continue
+
+            row = Gtk.Box(
+                margin_top=12,
+                margin_bottom=12,
+                margin_start=6,
+                margin_end=6,
+                spacing=12,
+            )
+            games_no = len(shared.store.source_games[source_id]) - removed[0]
+            total_games_no += games_no
+
+            row.append(
+                Gtk.Image.new_from_icon_name(
+                    "user-desktop-symbolic"
+                    if (split_id := source_id.split("_")[0]) == "desktop"
+                    else f"{split_id}-source-symbolic"
+                )
+            )
+
+            row.append(
+                Gtk.Label(
+                    label=self.get_application().get_source_name(source_id),
+                    halign=Gtk.Align.START,
+                )
+            )
+
+            row.append(
+                games_no_label := Gtk.Label(
+                    label=games_no,
+                    hexpand=True,
+                    halign=Gtk.Align.END,
+                )
+            )
+
+            games_no_label.add_css_class("dim-label")
+
+            # Order rows based on the number of games in them
+            index = 3
+            while source_row := self.sidebar.get_row_at_index(index):
+                if self.source_rows[source_row][1] < games_no:
+                    self.sidebar.insert(row, index)
+                    break
+                index += 1
+            if not row.get_parent():
+                self.sidebar.append(row)
+
+            self.source_rows[row.get_parent()] = (
+                source_id,
+                games_no,
+            )
+
+            if source_id == selected_id:
+                self.sidebar.select_row(row.get_parent())
+                restored = True
+
+            self.sidebar.get_row_at_index(2).set_visible(True)
+
+        self.all_games_no_label.set_label(str(total_games_no))
+
+        if not restored:
+            self.sidebar.select_row(self.all_games_row_box.get_parent())
+
+    def row_selected(self, _widget: Any, row: Gtk.ListBoxRow | None) -> None:
+        if not row:
+            return
+        match row.get_child():
+            case self.all_games_row_box:
+                value = "all"
+            case self.added_row_box:
+                value = "imported"
+            case _:
+                value = self.source_rows[row][0]
+
+        self.library_page.set_title(self.get_application().get_source_name(value))
+
+        self.filter_state = value
+        self.library.invalidate_filter()
+
+        if self.overlay_split_view.get_collapsed():
+            self.overlay_split_view.set_show_sidebar(False)
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
-        self.previous_page = self.library_view
-
-        self.details_view.set_measure_overlay(self.details_view_box, True)
-        self.details_view.set_clip_overlay(self.details_view_box, False)
+        self.details_view.set_measure_overlay(self.details_view_toolbar_view, True)
+        self.details_view.set_clip_overlay(self.details_view_toolbar_view, False)
 
         self.library.set_filter_func(self.filter_func)
         self.hidden_library.set_filter_func(self.filter_func)
@@ -91,6 +225,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.set_library_child()
 
         self.notice_empty.set_icon_name(shared.APP_ID + "-symbolic")
+
+        self.overlay_split_view.set_show_sidebar(
+            shared.state_schema.get_boolean("show-sidebar")
+        )
+
+        self.sidebar.select_row(self.all_games_row_box.get_parent())
 
         if shared.PROFILE == "development":
             self.add_css_class("devel")
@@ -103,12 +243,13 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.search_entry.connect("search-changed", self.search_changed, False)
         self.hidden_search_entry.connect("search-changed", self.search_changed, True)
 
-        self.search_entry.connect("activate", self.show_details_view_search)
-        self.hidden_search_entry.connect("activate", self.show_details_view_search)
+        self.search_entry.connect("activate", self.show_details_page_search)
+        self.hidden_search_entry.connect("activate", self.show_details_page_search)
 
-        back_mouse_button = Gtk.GestureClick(button=8)
-        (back_mouse_button).connect("pressed", self.on_go_back_action)
-        self.add_controller(back_mouse_button)
+        self.navigation_view.connect("popped", self.set_show_hidden)
+        self.navigation_view.connect("pushed", self.set_show_hidden)
+
+        self.sidebar.connect("row-selected", self.row_selected)
 
         style_manager = Adw.StyleManager.get_default()
         style_manager.connect("notify::dark", self.set_details_view_opacity)
@@ -140,25 +281,38 @@ class CartridgesWindow(Adw.ApplicationWindow):
             if game.removed or game.blacklisted:
                 continue
             if game.hidden:
-                if game.filtered and hidden_child != self.hidden_scrolledwindow:
+                if game.filtered and hidden_child:
                     hidden_child = self.hidden_notice_no_results
                     continue
-                hidden_child = self.hidden_scrolledwindow
+                hidden_child = None
             else:
-                if game.filtered and child != self.scrolledwindow:
+                if game.filtered and child:
                     child = self.notice_no_results
                     continue
-                child = self.scrolledwindow
+                child = None
 
-        self.library_bin.set_child(child)
-        self.hidden_library_bin.set_child(hidden_child)
+        def remove_from_overlay(widget: Gtk.Widget) -> None:
+            if isinstance(widget.get_parent(), Gtk.Overlay):
+                widget.get_parent().remove_overlay(widget)
+
+        if child:
+            self.library_overlay.add_overlay(child)
+        else:
+            remove_from_overlay(self.notice_empty)
+            remove_from_overlay(self.notice_no_results)
+
+        if hidden_child:
+            self.hidden_library_overlay.add_overlay(hidden_child)
+        else:
+            remove_from_overlay(self.hidden_notice_empty)
+            remove_from_overlay(self.hidden_notice_no_results)
 
     def filter_func(self, child: Gtk.Widget) -> bool:
         game = child.get_child()
         text = (
             (
                 self.hidden_search_entry
-                if self.stack.get_visible_child() == self.hidden_library_view
+                if self.navigation_view.get_visible_page() == self.hidden_library_page
                 else self.search_entry
             )
             .get_text()
@@ -170,6 +324,12 @@ class CartridgesWindow(Adw.ApplicationWindow):
             or (text in game.developer.lower() if game.developer else False)
         )
 
+        if not filtered:
+            if self.filter_state == "all":
+                pass
+            elif game.base_source != self.filter_state:
+                filtered = True
+
         game.filtered = filtered
         self.set_library_child()
 
@@ -178,7 +338,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     def set_active_game(self, _widget: Any, _pspec: Any, game: Game) -> None:
         self.active_game = game
 
-    def show_details_view(self, game: Game) -> None:
+    def show_details_page(self, game: Game) -> None:
         self.active_game = game
 
         self.details_view_cover.set_opacity(int(not game.loading))
@@ -205,7 +365,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         )
 
         self.details_view_title.set_label(game.name)
-        self.details_view_header_bar_title.set_title(game.name)
+        self.details_page.set_title(game.name)
 
         date = relative_date(game.added)
         self.details_view_added.set_label(
@@ -220,14 +380,14 @@ class CartridgesWindow(Adw.ApplicationWindow):
             _("Last played: {}").format(last_played_date)
         )
 
-        if self.stack.get_visible_child() != self.details_view:
-            self.navigate(self.details_view)
+        if self.navigation_view.get_visible_page() != self.details_page:
+            self.navigation_view.push(self.details_page)
             self.set_focus(self.details_view_play_button)
 
         self.set_details_view_opacity()
 
     def set_details_view_opacity(self, *_args: Any) -> None:
-        if self.stack.get_visible_child() != self.details_view:
+        if self.navigation_view.get_visible_page() != self.details_page:
             return
 
         if (
@@ -262,42 +422,26 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         return ((get_value(0) > get_value(1)) ^ order) * 2 - 1
 
-    def navigate(self, next_page: Gtk.Widget) -> None:
-        levels = (self.library_view, self.hidden_library_view, self.details_view)
-        self.stack.set_transition_type(
-            Gtk.StackTransitionType.UNDER_RIGHT
-            if levels.index(self.stack.get_visible_child()) - levels.index(next_page)
-            > 0
-            else Gtk.StackTransitionType.OVER_LEFT
+    def set_show_hidden(self, navigation_view: Adw.NavigationView, *_args: Any) -> None:
+        self.lookup_action("show_hidden").set_enabled(
+            navigation_view.get_visible_page() == self.library_page
         )
 
-        if next_page in (self.library_view, self.hidden_library_view):
-            self.previous_page = next_page
-            self.lookup_action("show_hidden").set_enabled(
-                next_page == self.library_view
-            )
-
-        self.stack.set_visible_child(next_page)
-
-    def on_go_back_action(self, *_args: Any) -> None:
-        if self.stack.get_visible_child() == self.hidden_library_view:
-            self.navigate(self.library_view)
-        elif self.stack.get_visible_child() == self.details_view:
-            self.on_go_to_parent_action()
+    def on_show_sidebar_action(self, *_args: Any) -> None:
+        shared.state_schema.set_boolean(
+            "show-sidebar", (value := not self.overlay_split_view.get_show_sidebar())
+        )
+        self.overlay_split_view.set_show_sidebar(value)
 
     def on_go_to_parent_action(self, *_args: Any) -> None:
-        if self.stack.get_visible_child() == self.details_view:
-            self.navigate(
-                self.hidden_library_view
-                if self.previous_page == self.hidden_library_view
-                else self.library_view
-            )
+        if self.navigation_view.get_visible_page() == self.details_page:
+            self.navigation_view.pop()
 
     def on_go_home_action(self, *_args: Any) -> None:
-        self.navigate(self.library_view)
+        self.navigation_view.pop_to_page(self.library_page)
 
     def on_show_hidden_action(self, *_args: Any) -> None:
-        self.navigate(self.hidden_library_view)
+        self.navigation_view.push(self.hidden_library_page)
 
     def on_sort_action(self, action: Gio.SimpleAction, state: GLib.Variant) -> None:
         action.set_state(state)
@@ -307,10 +451,10 @@ class CartridgesWindow(Adw.ApplicationWindow):
         shared.state_schema.set_string("sort-mode", self.sort_state)
 
     def on_toggle_search_action(self, *_args: Any) -> None:
-        if self.stack.get_visible_child() == self.library_view:
+        if self.navigation_view.get_visible_page() == self.library_page:
             search_bar = self.search_bar
             search_entry = self.search_entry
-        elif self.stack.get_visible_child() == self.hidden_library_view:
+        elif self.navigation_view.get_visible_page() == self.hidden_library_page:
             search_bar = self.hidden_search_bar
             search_entry = self.hidden_search_entry
         else:
@@ -330,9 +474,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         ):
             self.on_toggle_search_action()
         else:
-            self.on_go_back_action()
+            self.navigation_view.pop()
 
-    def show_details_view_search(self, widget: Gtk.Widget) -> None:
+    def show_details_page_search(self, widget: Gtk.Widget) -> None:
         library = (
             self.hidden_library if widget == self.hidden_search_entry else self.library
         )
@@ -343,7 +487,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 break
 
             if self.filter_func(child):
-                self.show_details_view(child.get_child())
+                self.show_details_page(child.get_child())
                 break
 
             index += 1
@@ -377,9 +521,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
             self.toasts.pop((game, undo))
 
     def on_open_menu_action(self, *_args: Any) -> None:
-        if self.stack.get_visible_child() == self.library_view:
+        if self.navigation_view.get_visible_page() == self.library_page:
             self.primary_menu_button.popup()
-        elif self.stack.get_visible_child() == self.hidden_library_view:
+        elif self.navigation_view.get_visible_page() == self.hidden_library_page:
             self.hidden_primary_menu_button.popup()
 
     def on_close_action(self, *_args: Any) -> None:

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="@PREFIX@">
+    <file preprocess="xml-stripblanks">@APP_ID@.metainfo.xml</file>
     <file preprocess="xml-stripblanks">gtk/window.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
     <file preprocess="xml-stripblanks">gtk/game.ui</file>
@@ -10,5 +11,15 @@
     <file alias="style-dark.css">gtk/style-dark.css</file>
     <file>library_placeholder.svg</file>
     <file>library_placeholder_small.svg</file>
+  </gresource>
+  <gresource prefix="@PREFIX@/icons/scalable/categories/">
+  <file alias="bottles-source-symbolic.svg">icons/sources/bottles-source-symbolic.svg</file>
+  <file alias="flatpak-source-symbolic.svg">icons/sources/flatpak-source-symbolic.svg</file>
+  <file alias="heroic-source-symbolic.svg">icons/sources/heroic-source-symbolic.svg</file>
+  <file alias="itch-source-symbolic.svg">icons/sources/itch-source-symbolic.svg</file>
+  <file alias="legendary-source-symbolic.svg">icons/sources/legendary-source-symbolic.svg</file>
+  <file alias="lutris-source-symbolic.svg">icons/sources/lutris-source-symbolic.svg</file>
+  <file alias="retroarch-source-symbolic.svg">icons/sources/retroarch-source-symbolic.svg</file>
+  <file alias="steam-source-symbolic.svg">icons/sources/steam-source-symbolic.svg</file>
   </gresource>
 </gresources>

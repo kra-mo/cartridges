@@ -102,7 +102,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
     sgdb_switch = Gtk.Template.Child()
-    sgdb_switch_row = Gtk.Template.Child()
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
 
@@ -116,9 +115,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.win = shared.win
         self.file_chooser = Gtk.FileDialog()
-        self.set_transient_for(self.win)
+        self.set_transient_for(shared.win)
 
         self.toast = Adw.Toast.new(_("All games removed"))
         self.toast.set_button_label(_("Undo"))
@@ -140,7 +138,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
         if shared.PROFILE == "development":
             self.reset_action_row.set_visible(True)
             self.reset_button.connect("clicked", self.reset_app)
-            self.set_default_size(-1, 560)
 
         # Sources settings
         for source_class in (
@@ -175,15 +172,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
         )
 
-        def set_sgdb_sensitive(widget: Adw.EntryRow) -> None:
-            if not widget.get_text():
-                shared.schema.set_boolean("sgdb", False)
-
-            self.sgdb_switch_row.set_sensitive(widget.get_text())
-
-        self.sgdb_key_entry_row.connect("changed", set_sgdb_sensitive)
-        set_sgdb_sensitive(self.sgdb_key_entry_row)
-
         # Switches
         self.bind_switches(
             {
@@ -205,6 +193,15 @@ class PreferencesWindow(Adw.PreferencesWindow):
             }
         )
 
+        def set_sgdb_sensitive(widget: Adw.EntryRow) -> None:
+            if not widget.get_text():
+                shared.schema.set_boolean("sgdb", False)
+
+            self.sgdb_switch.set_sensitive(widget.get_text())
+
+        self.sgdb_key_entry_row.connect("changed", set_sgdb_sensitive)
+        set_sgdb_sensitive(self.sgdb_key_entry_row)
+
     def get_switch(self, setting: str) -> Any:
         return getattr(self, f'{setting.replace("-", "_")}_switch')
 
@@ -220,9 +217,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
     def choose_folder(
         self, _widget: Any, callback: Callable, callback_data: Optional[str] = None
     ) -> None:
-        self.file_chooser.select_folder(self.win, None, callback, callback_data)
+        self.file_chooser.select_folder(shared.win, None, callback, callback_data)
 
     def undo_remove_all(self, *_args: Any) -> None:
+        shared.win.get_application().state = shared.AppState.UNDO_REMOVE_ALL_GAMES
         for game in self.removed_games:
             game.removed = False
             game.save()
@@ -230,8 +228,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         self.removed_games = set()
         self.toast.dismiss()
+        shared.win.get_application().state = shared.AppState.DEFAULT
+        shared.win.create_source_rows()
 
     def remove_all_games(self, *_args: Any) -> None:
+        shared.win.get_application().state = shared.AppState.REMOVE_ALL_GAMES
+        shared.win.row_selected(None, shared.win.all_games_row_box.get_parent())
         for game in shared.store:
             if not game.removed:
                 self.removed_games.add(game)
@@ -239,10 +241,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 game.save()
                 game.update()
 
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action()
+        if shared.win.navigation_view.get_visible_page() == shared.win.details_page:
+            shared.win.navigation_view.pop()
 
         self.add_toast(self.toast)
+        shared.win.get_application().state = shared.AppState.DEFAULT
+        shared.win.create_source_rows()
 
     def reset_app(self, *_args: Any) -> None:
         rmtree(shared.data_dir / "cartridges", True)

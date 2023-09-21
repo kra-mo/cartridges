@@ -2,7 +2,6 @@ using Gtk 4.0;
 using Adw 1;
 
 template $PreferencesWindow : Adw.PreferencesWindow {
-  default-height: 500;
 
   Adw.PreferencesPage general_page {
     name: "general";
@@ -12,37 +11,22 @@ template $PreferencesWindow : Adw.PreferencesWindow {
     Adw.PreferencesGroup behavior_group {
       title: _("Behavior");
 
-      Adw.ActionRow {
+      Adw.SwitchRow exit_after_launch_switch {
         title: _("Exit After Launching Games");
-        activatable-widget: exit_after_launch_switch;
-
-        Switch exit_after_launch_switch {
-          valign: center;
-        }
       }
 
-      Adw.ActionRow {
+      Adw.SwitchRow cover_launches_game_switch {
         title: _("Cover Image Launches Game");
         subtitle: _("Swaps the behavior of the cover image and the play button");
-        activatable-widget: cover_launches_game_switch;
-
-        Switch cover_launches_game_switch {
-          valign: center;
-        }
       }
     }
 
     Adw.PreferencesGroup images_group {
       title: _("Images");
 
-      Adw.ActionRow {
+      Adw.SwitchRow high_quality_images_switch {
         title: _("High Quality Images");
         subtitle: _("Save game covers losslessly at the cost of storage");
-        activatable-widget: high_quality_images_switch;
-
-        Switch high_quality_images_switch {
-          valign: center;
-        }
       }
     }
 
@@ -87,13 +71,8 @@ template $PreferencesWindow : Adw.PreferencesWindow {
     Adw.PreferencesGroup import_behavior_group {
       title: _("Behavior");
 
-      Adw.ActionRow {
+      Adw.SwitchRow remove_missing_switch {
         title: _("Remove Uninstalled Games");
-        activatable-widget: remove_missing_switch;
-
-        Switch remove_missing_switch {
-          valign: center;
-        }
       }
     }
 
@@ -145,22 +124,12 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           }
         }
 
-        Adw.ActionRow {
+        Adw.SwitchRow lutris_import_steam_switch {
           title: _("Import Steam Games");
-          activatable-widget: lutris_import_steam_switch;
-
-          Switch lutris_import_steam_switch {
-            valign: center;
-          }
         }
 
-        Adw.ActionRow {
+        Adw.SwitchRow lutris_import_flatpak_switch {
           title: _("Import Flatpak Games");
-          activatable-widget: lutris_import_flatpak_switch;
-
-          Switch lutris_import_flatpak_switch {
-            valign: center;
-          }
         }
       }
 
@@ -180,40 +149,20 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           }
         }
 
-        Adw.ActionRow {
+        Adw.SwitchRow heroic_import_epic_switch {
           title: _("Import Epic Games");
-          activatable-widget: heroic_import_epic_switch;
-
-          Switch heroic_import_epic_switch {
-            valign: center;
-          }
         }
 
-        Adw.ActionRow {
+        Adw.SwitchRow heroic_import_gog_switch {
           title: _("Import GOG Games");
-          activatable-widget: heroic_import_gog_switch;
-
-          Switch heroic_import_gog_switch {
-            valign: center;
-          }
         }
 
-        Adw.ActionRow {
+        Adw.SwitchRow heroic_import_amazon_switch  {
           title: _("Import Amazon Games");
-          activatable-widget: heroic_import_amazon_switch;
-
-          Switch heroic_import_amazon_switch {
-            valign: center;
-          }
         }
 
-        Adw.ActionRow {
+        Adw.SwitchRow heroic_import_sideload_switch {
           title: _("Import Sideloaded Games");
-          activatable-widget: heroic_import_sideload_switch;
-
-          Switch heroic_import_sideload_switch {
-            valign: center;
-          }
         }
       }
 
@@ -301,23 +250,13 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           }
         }
 
-        Adw.ActionRow flatpak_import_launchers_row {
+        Adw.SwitchRow flatpak_import_launchers_switch {
           title: _("Import Game Launchers");
-          activatable-widget: flatpak_import_launchers_switch;
-
-          Switch flatpak_import_launchers_switch {
-            valign: center;
-          }
         }
       }
 
-      Adw.ActionRow {
+      Adw.SwitchRow desktop_switch {
         title: _("Desktop Entries");
-        activatable-widget: desktop_switch;
-
-        Switch desktop_switch {
-          valign: center;
-        }
       }
     }
   }
@@ -338,32 +277,17 @@ template $PreferencesWindow : Adw.PreferencesWindow {
     Adw.PreferencesGroup sgdb_behavior_group {
       title: _("Behavior");
 
-      Adw.ActionRow sgdb_switch_row {
+      Adw.SwitchRow sgdb_switch {
         title: _("Use SteamGridDB");
         subtitle: _("Download images when adding or importing games");
-        activatable-widget: sgdb_switch;
-
-        Switch sgdb_switch {
-          valign: center;
-        }
       }
 
-      Adw.ActionRow {
+      Adw.SwitchRow sgdb_prefer_switch {
         title: _("Prefer Over Official Images");
-        activatable-widget: sgdb_prefer_switch;
-
-        Switch sgdb_prefer_switch {
-          valign: center;
-        }
       }
 
-      Adw.ActionRow {
+      Adw.SwitchRow sgdb_animated_switch {
         title: _("Prefer Animated Images");
-        activatable-widget: sgdb_animated_switch;
-
-        Switch sgdb_animated_switch {
-          valign: center;
-        }
       }
     }
   }

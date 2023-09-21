@@ -59,6 +59,7 @@ from src.window import CartridgesWindow
 
 
 class CartridgesApplication(Adw.Application):
+    state = shared.AppState.DEFAULT
     win: CartridgesWindow
 
     def __init__(self) -> None:
@@ -80,25 +81,28 @@ class CartridgesApplication(Adw.Application):
         Gtk.Window.set_default_icon_name(shared.APP_ID)
 
         # Create the main window
-        self.win = self.props.active_window  # pylint: disable=no-member
-        if not self.win:
-            shared.win = self.win = CartridgesWindow(application=self)
+        win = self.props.active_window  # pylint: disable=no-member
+        if not win:
+            shared.win = win = CartridgesWindow(application=self)
 
         # Save window geometry
         shared.state_schema.bind(
-            "width", self.win, "default-width", Gio.SettingsBindFlags.DEFAULT
+            "width", shared.win, "default-width", Gio.SettingsBindFlags.DEFAULT
         )
         shared.state_schema.bind(
-            "height", self.win, "default-height", Gio.SettingsBindFlags.DEFAULT
+            "height", shared.win, "default-height", Gio.SettingsBindFlags.DEFAULT
         )
         shared.state_schema.bind(
-            "is-maximized", self.win, "maximized", Gio.SettingsBindFlags.DEFAULT
+            "is-maximized", shared.win, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
 
         # Load games from disk
         shared.store.add_manager(FileManager(), False)
         shared.store.add_manager(DisplayManager())
+        self.state = shared.AppState.LOAD_FROM_DISK
         self.load_games_from_disk()
+        self.state = shared.AppState.DEFAULT
+        shared.win.create_source_rows()
 
         # Add rest of the managers for game imports
         shared.store.add_manager(CoverManager())
@@ -124,26 +128,28 @@ class CartridgesApplication(Adw.Application):
                 ("protondb_search",),
                 ("lutris_search",),
                 ("hltb_search",),
-                ("show_hidden", ("<primary>h",), self.win),
-                ("go_back", ("<alt>Left",), self.win),
-                ("go_to_parent", ("<alt>Up",), self.win),
-                ("go_home", ("<alt>Home",), self.win),
-                ("toggle_search", ("<primary>f",), self.win),
-                ("escape", ("Escape",), self.win),
-                ("undo", ("<primary>z",), self.win),
-                ("open_menu", ("F10",), self.win),
-                ("close", ("<primary>w",), self.win),
+                ("show_sidebar", ("F9",), shared.win),
+                ("show_hidden", ("<primary>h",), shared.win),
+                ("go_to_parent", ("<alt>Up",), shared.win),
+                ("go_home", ("<alt>Home",), shared.win),
+                ("toggle_search", ("<primary>f",), shared.win),
+                ("escape", ("Escape",), shared.win),
+                ("undo", ("<primary>z",), shared.win),
+                ("open_menu", ("F10",), shared.win),
+                ("close", ("<primary>w",), shared.win),
             }
         )
 
         sort_action = Gio.SimpleAction.new_stateful(
             "sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z")
         )
-        sort_action.connect("activate", self.win.on_sort_action)
-        self.win.add_action(sort_action)
-        self.win.on_sort_action(sort_action, shared.state_schema.get_value("sort-mode"))
+        sort_action.connect("activate", shared.win.on_sort_action)
+        shared.win.add_action(sort_action)
+        shared.win.on_sort_action(
+            sort_action, shared.state_schema.get_value("sort-mode")
+        )
 
-        self.win.present()
+        shared.win.present()
 
     def load_games_from_disk(self) -> None:
         if shared.games_dir.is_dir():
@@ -154,6 +160,15 @@ class CartridgesApplication(Adw.Application):
                     continue
                 game = Game(data)
                 shared.store.add_game(game, {"skip_save": True})
+
+    def get_source_name(self, source_id: str) -> Any:
+        if source_id == "all":
+            name = _("All Games")
+        elif source_id == "imported":
+            name = _("Added")
+        else:
+            name = globals()[f'{source_id.split("_")[0].title()}Source'].name
+        return name
 
     def on_about_action(self, *_args: Any) -> None:
         # Get the debug info from the log files
@@ -171,13 +186,12 @@ class CartridgesApplication(Adw.Application):
             debug_str += log_file.read()
             log_file.close()
 
-        about = Adw.AboutWindow(
-            transient_for=self.win,
-            application_name=_("Cartridges"),
-            application_icon=shared.APP_ID,
-            developer_name="kramo",
-            version=shared.VERSION,
-            developers=[
+        about = Adw.AboutWindow.new_from_appdata(
+            shared.PREFIX + "/" + shared.APP_ID + ".metainfo.xml", shared.VERSION
+        )
+        about.set_transient_for(shared.win)
+        about.set_developers(
+            (
                 "kramo https://kramo.hu",
                 "Geoffrey Coulaud https://geoffrey-coulaud.fr",
                 "Rilic https://rilic.red",
@@ -185,16 +199,19 @@ class CartridgesApplication(Adw.Application):
                 "Paweł Lidwin https://github.com/imLinguin",
                 "Domenico https://github.com/Domefemia",
                 "Rafael Mardojai CM https://mardojai.com",
-            ],
-            designers=("kramo https://kramo.hu",),
-            copyright="© 2022-2023 kramo",
-            license_type=Gtk.License.GPL_3_0,
-            issue_url="https://github.com/kra-mo/cartridges/issues/new",
-            website="https://github.com/kra-mo/cartridges",
-            # Translators: Replace this with your name for it to show up in the about window
-            translator_credits=_("translator_credits"),
-            debug_info=debug_str,
-            debug_info_filename="cartridges.log",
+            )
+        )
+        about.set_designers(("kramo https://kramo.hu",))
+        about.set_copyright("© 2022-2023 kramo")
+        # Translators: Replace this with your name for it to show up in the about window
+        about.set_translator_credits = (_("translator_credits"),)
+        about.set_debug_info(debug_str)
+        about.set_debug_info_filename("cartridges.log")
+        about.add_legal_section(
+            "Steam Branding",
+            "© 2023 Valve Corporation",
+            Gtk.License.CUSTOM,
+            "Steam and the Steam logo are trademarks and/or registered trademarks of Valve Corporation in the U.S. and/or other countries.",  # pylint: disable=line-too-long
         )
         about.present()
 
@@ -215,13 +232,13 @@ class CartridgesApplication(Adw.Application):
         return win
 
     def on_launch_game_action(self, *_args: Any) -> None:
-        self.win.active_game.launch()
+        shared.win.active_game.launch()
 
     def on_hide_game_action(self, *_args: Any) -> None:
-        self.win.active_game.toggle_hidden()
+        shared.win.active_game.toggle_hidden()
 
     def on_edit_game_action(self, *_args: Any) -> None:
-        DetailsWindow(self.win.active_game)
+        DetailsWindow(shared.win.active_game)
 
     def on_add_game_action(self, *_args: Any) -> None:
         DetailsWindow()
@@ -259,14 +276,14 @@ class CartridgesApplication(Adw.Application):
         shared.importer.run()
 
     def on_remove_game_action(self, *_args: Any) -> None:
-        self.win.active_game.remove_game()
+        shared.win.active_game.remove_game()
 
     def on_remove_game_details_view_action(self, *_args: Any) -> None:
-        if self.win.stack.get_visible_child() == self.win.details_view:
+        if shared.win.navigation_view.get_visible_page() == shared.win.details_page:
             self.on_remove_game_action()
 
     def search(self, uri: str) -> None:
-        Gio.AppInfo.launch_default_for_uri(f"{uri}{self.win.active_game.name}")
+        Gio.AppInfo.launch_default_for_uri(f"{uri}{shared.win.active_game.name}")
 
     def on_igdb_search_action(self, *_args: Any) -> None:
         self.search("https://www.igdb.com/search?type=1&q=")

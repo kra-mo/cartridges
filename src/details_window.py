@@ -199,6 +199,12 @@ class DetailsWindow(Adw.Window):
                 }
             )
 
+            if shared.win.sidebar.get_selected_row().get_child() not in (
+                shared.win.all_games_row_box,
+                shared.win.added_row_box,
+            ):
+                shared.win.sidebar.select_row(shared.win.added_row_box.get_parent())
+
         else:
             if final_name == "":
                 create_dialog(
@@ -246,7 +252,7 @@ class DetailsWindow(Adw.Window):
         self.game_cover.pictures.remove(self.cover)
 
         self.close()
-        shared.win.show_details_view(self.game)
+        shared.win.show_details_page(self.game)
 
     def update_cover_callback(self, manager: SGDBManager) -> None:
         # Set the game as not loading

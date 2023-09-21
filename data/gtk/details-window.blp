@@ -2,159 +2,151 @@ using Gtk 4.0;
 using Adw 1;
 
 template $DetailsWindow : Adw.Window {
-  default-width: 480; // Same as Nautilus' properties window
-  default-height: -1;
-  modal: true;
+    default-width: 480; // Same as Nautilus' properties window
+    default-height: -1;
+    modal: true;
 
-  ShortcutController {
-    Shortcut {
-      trigger: "Escape";
-      action: "action(window.close)";
-    }
-  }
-
-  Box {
-    orientation: vertical;
-
-    Adw.HeaderBar HeaderBar {
-      show-start-title-buttons: false;
-      show-end-title-buttons: false;
-
-      [start]
-      Button cancel_button {
-        label: _("Cancel");
-        action-name: "window.close";
-      }
-
-      [end]
-      Button apply_button {
-        styles [
-          "suggested-action",
-        ]
-      }
+    ShortcutController {
+        Shortcut {
+            trigger: "Escape";
+            action: "action(window.close)";
+        }
     }
 
-    Adw.PreferencesPage {
-      vexpand: true;
+    Adw.ToolbarView {
 
-      Adw.PreferencesGroup cover_group {
-        Adw.Clamp cover_clamp {
-          maximum-size: 200;
+        [top]
+        Adw.HeaderBar HeaderBar {
+            show-start-title-buttons: false;
+            show-end-title-buttons: false;
 
-          Overlay {
-            [overlay]
-            Spinner spinner {
-              margin-start: 72;
-              margin-end: 72;
+            [start]
+            Button cancel_button {
+                label: _("Cancel");
+                action-name: "window.close";
             }
 
-            Overlay cover_overlay {
-              halign: center;
-              valign: center;
-
-              [overlay]
-              Button cover_button_edit {
-                icon-name: "document-edit-symbolic";
-                tooltip-text: _("New Cover");
-                halign: end;
-                valign: end;
-                margin-bottom: 6;
-                margin-end: 6;
-
+            [end]
+            Button apply_button {
                 styles [
-                  "circular",
-                  "osd",
+                    "suggested-action"
                 ]
-              }
+            }
+        }
 
-              [overlay]
-              Revealer cover_button_delete_revealer {
-                transition-type: crossfade;
-                margin-end: 40;
+        Adw.PreferencesPage {
+            Adw.PreferencesGroup cover_group {
+                Adw.Clamp cover_clamp {
+                    maximum-size: 200;
+                    Overlay {
+                        [overlay]
+                        Spinner spinner {
+                            margin-start: 72;
+                            margin-end: 72;
+                        }
 
-                Button cover_button_delete {
-                  icon-name: "user-trash-symbolic";
-                  tooltip-text: _("Delete Cover");
-                  halign: end;
-                  valign: end;
-                  margin-bottom: 6;
-                  margin-end: 6;
+                        Overlay cover_overlay {
+                            halign: center;
+                            valign: center;
 
-                  styles [
-                    "circular",
-                    "osd",
-                  ]
+                            [overlay]
+                            Button cover_button_edit {
+                                icon-name: "document-edit-symbolic";
+                                tooltip-text: _("New Cover");
+                                halign: end;
+                                valign: end;
+                                margin-bottom: 6;
+                                margin-end: 6;
+
+                                styles [
+                                    "circular", "osd"
+                                ]
+                            }
+
+                            [overlay]
+                            Revealer cover_button_delete_revealer {
+                                transition-type: crossfade;
+                                margin-end: 40;
+
+                                Button cover_button_delete {
+                                    icon-name: "user-trash-symbolic";
+                                    tooltip-text: _("Delete Cover");
+                                    halign: end;
+                                    valign: end;
+                                    margin-bottom: 6;
+                                    margin-end: 6;
+
+                                    styles [
+                                        "circular", "osd"
+                                    ]
+                                }
+                            }
+
+                            Picture cover {
+                                width-request: 200;
+                                height-request: 300;
+                                
+                                styles [
+                                    "card"
+                                ]
+                            }
+                        }
+                    }
                 }
-              }
-
-              Picture cover {
-                width-request: 200;
-                height-request: 300;
-
-                styles [
-                  "card",
-                ]
-              }
-            }
-          }
-        }
-      }
-
-      Adw.PreferencesGroup {
-        Adw.EntryRow name {
-          title: _("Title");
-        }
-
-        Adw.EntryRow developer {
-          title: _("Developer (optional)");
-        }
-      }
-
-      Adw.PreferencesGroup {
-        Adw.EntryRow executable {
-          title: _("Executable");
-
-          [suffix]
-          Button file_chooser_button {
-            valign: center;
-            icon-name: "document-open-symbolic";
-            tooltip-text: _("Select File");
-
-            styles [
-              "flat",
-            ]
-          }
-
-          [suffix]
-          MenuButton exec_info_button {
-            valign: center;
-            icon-name: "help-about-symbolic";
-            tooltip-text: _("More Info");
-            popover: 
-            Popover exec_info_popover {
-              focusable: true;
-
-              Label exec_info_label {
-                use-markup: true;
-                wrap: true;
-                max-width-chars: 50;
-                halign: center;
-                valign: center;
-                margin-top: 6;
-                margin-bottom: 6;
-                margin-start: 6;
-                margin-end: 6;
-              }
             }
 
-            ;
+            Adw.PreferencesGroup {
+                Adw.EntryRow name {
+                    title: _("Title");
+                }
+                Adw.EntryRow developer {
+                    title: _("Developer (optional)");
+                }
+            }
+            Adw.PreferencesGroup {
+                Adw.EntryRow executable {
+                    title: _("Executable");
 
-            styles [
-              "flat",
-            ]
-          }
+                    [suffix]
+                    Button file_chooser_button {
+                      valign: center;
+                      icon-name: "document-open-symbolic";
+                      tooltip-text: _("Select File");
+
+                      styles [
+                        "flat",
+                      ]
+                    }
+
+                    [suffix]
+                    MenuButton exec_info_button {
+                    valign: center;
+                    icon-name: "help-about-symbolic";
+                    tooltip-text: _("More Info");
+
+                    popover: Popover exec_info_popover {
+                        focusable: true;
+
+                        Label exec_info_label {
+                            use-markup: true;
+                            wrap: true;
+                            max-width-chars: 50;
+                            halign: center;
+                            valign: center;
+                            margin-top: 6;
+                            margin-bottom: 6;
+                            margin-start: 6;
+                            margin-end: 6;
+                        }
+                    };
+
+                    styles [
+                        "flat"
+                    ]
+                }
+
+                }
+            }
         }
-      }
     }
-  }
 }

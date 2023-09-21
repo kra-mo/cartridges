@@ -48,7 +48,7 @@ class Store:
         """Check if the game is present in the store with the `in` keyword"""
         if not isinstance(obj, Game):
             return False
-        if not (source_mapping := self.source_games.get(obj.source)):
+        if not (source_mapping := self.source_games.get(obj.base_source)):
             return False
         return obj.game_id in source_mapping
 
@@ -150,9 +150,9 @@ class Store:
                 game.connect(signal, manager.run)
 
         # Add the game to the store
-        if not game.source in self.source_games:
-            self.source_games[game.source] = {}
-        self.source_games[game.source][game.game_id] = game
+        if not game.base_source in self.source_games:
+            self.source_games[game.base_source] = {}
+        self.source_games[game.base_source][game.game_id] = game
 
         # Run the pipeline for the game
         if not run_pipeline:
