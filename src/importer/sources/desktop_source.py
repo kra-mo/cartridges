@@ -169,9 +169,7 @@ class DesktopSourceIterable(SourceIterable):
         for command, full_path in commands:
             # Even if `gio` is available, `gio launch` is only available on GLib >= 2.67.2
             check_command = (
-                "gio help launch"
-                if command == "gio launch"
-                else f"type {command} &> /dev/null"
+                "gio help launch" if command == "gio launch" else f"which {command}"
             )
             if os.getenv("FLATPAK_ID") == shared.APP_ID:
                 check_command = flatpak_str + shlex.quote(check_command)
