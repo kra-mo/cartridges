@@ -60,7 +60,7 @@ class DesktopSourceIterable(SourceIterable):
 
             icon_theme.add_search_path(str(path))
 
-        launch_command, full_path = self.check_launch_command()
+        launch_command, full_path = self.check_launch_commands()
 
         for path in search_paths:
             if str(path).startswith("/app/"):
@@ -95,6 +95,16 @@ class DesktopSourceIterable(SourceIterable):
                     )[0]
                 except GLib.GError:
                     continue
+
+                try:
+                    try_exec = "which " + (
+                        keyfile.get_string("Desktop Entry", "TryExec").split(" %")[0]
+                    )
+                    if not self.check_command(try_exec):
+                        continue
+
+                except GLib.GError:
+                    pass
 
                 # Skip Steam games
                 if "steam://rungameid/" in executable:
@@ -167,24 +177,31 @@ class DesktopSourceIterable(SourceIterable):
 
                 yield (game, additional_data)
 
-    def check_launch_command(self) -> (str, bool):
+    def check_command(self, command) -> bool:
+        flatpak_str = "flatpak-spawn --host /bin/sh -c "
+
+        if os.getenv("FLATPAK_ID") == shared.APP_ID:
+            command = flatpak_str + shlex.quote(command)
+
+        try:
+            subprocess.run(command, shell=True, check=True)
+        except subprocess.CalledProcessError:
+            return False
+
+        return True
+
+    def check_launch_commands(self) -> (str, bool):
         """Check whether `gio launch` `gtk4-launch` or `gtk-launch` are available on the system"""
         commands = (("gio launch", True), ("gtk4-launch", False), ("gtk-launch", False))
-        flatpak_str = "flatpak-spawn --host /bin/sh -c "
 
         for command, full_path in commands:
             # Even if `gio` is available, `gio launch` is only available on GLib >= 2.67.2
-            check_command = (
+            command_to_check = (
                 "gio help launch" if command == "gio launch" else f"which {command}"
             )
-            if os.getenv("FLATPAK_ID") == shared.APP_ID:
-                check_command = flatpak_str + shlex.quote(check_command)
 
-            try:
-                subprocess.run(check_command, shell=True, check=True)
+            if self.check_command(command_to_check):
                 return command, full_path
-            except subprocess.CalledProcessError:
-                pass
 
         return commands[2]
 
