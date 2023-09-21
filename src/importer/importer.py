@@ -53,6 +53,8 @@ class Importer(ErrorProducer):
     removed_game_ids: set[str]
     imported_game_ids: set[str]
 
+    close_req_id: int
+
     def __init__(self) -> None:
         super().__init__()
 
@@ -151,6 +153,11 @@ class Importer(ErrorProducer):
             transient_for=shared.win,
             deletable=False,
         )
+
+        self.close_req_id = self.import_dialog.connect(
+            "close-request", lambda *_: shared.win.close()
+        )
+
         self.import_dialog.present()
 
     def source_task_thread_func(self, data: tuple) -> None:
@@ -271,6 +278,8 @@ class Importer(ErrorProducer):
         self.imported_game_ids = shared.store.new_game_ids
         shared.store.new_game_ids = set()
         shared.store.duplicate_game_ids = set()
+        # Disconnect the close-request signal that closes the main window
+        self.import_dialog.disconnect(self.close_req_id)
         self.import_dialog.close()
         self.__class__.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
