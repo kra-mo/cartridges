@@ -89,60 +89,62 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                   }
                 }
 
-                ListBox sidebar {
-                  Box all_games_row_box {
-                    margin-top: 12;
-                    margin-bottom: 12;
-                    margin-start: 6;
-                    margin-end: 6;
-                    spacing: 12;
-
-                    Image {
-                      icon-name: "view-grid-symbolic";
-                    }
-                    Label {
-                      halign: start;
-                      label: _("All Games");
-                    }
-                    Label all_games_no_label {
-                      hexpand: true;
-                      halign: end;
-
-                      styles ["dim-label"]
-                    }
-                  }
-                  Box added_row_box {
-                    margin-top: 12;
-                    margin-bottom: 12;
-                    margin-start: 6;
-                    spacing: 12;
-
-                    Image {
-                      icon-name: "list-add-symbolic";
-                    }
-                    Label {
-                      halign: start;
-                      label: _("Added");
+                ScrolledWindow {
+                  ListBox sidebar {
+                    Box all_games_row_box {
+                      margin-top: 12;
+                      margin-bottom: 12;
+                      margin-start: 6;
                       margin-end: 6;
-                    }
-                    Label added_games_no_label {
-                      hexpand: true;
-                      halign: end;
-                      margin-end: 6;
+                      spacing: 12;
 
-                      styles ["dim-label"]
+                      Image {
+                        icon-name: "view-grid-symbolic";
+                      }
+                      Label {
+                        halign: start;
+                        label: _("All Games");
+                      }
+                      Label all_games_no_label {
+                        hexpand: true;
+                        halign: end;
+
+                        styles ["dim-label"]
+                      }
                     }
-                  }
-                  ListBoxRow {
-                    selectable: false;
-                    activatable: false;
-                    Label {
-                      label: _("Imported");
-                      styles ["heading"]
-                      halign: start;
+                    Box added_row_box {
+                      margin-top: 12;
+                      margin-bottom: 12;
+                      margin-start: 6;
+                      spacing: 12;
+
+                      Image {
+                        icon-name: "list-add-symbolic";
+                      }
+                      Label {
+                        halign: start;
+                        label: _("Added");
+                        margin-end: 6;
+                      }
+                      Label added_games_no_label {
+                        hexpand: true;
+                        halign: end;
+                        margin-end: 6;
+
+                        styles ["dim-label"]
+                      }
                     }
+                    ListBoxRow {
+                      selectable: false;
+                      activatable: false;
+                      Label {
+                        label: _("Imported");
+                        styles ["heading"]
+                        halign: start;
+                      }
+                    }
+                    styles ["navigation-sidebar"]
                   }
-                  styles ["navigation-sidebar"]
                 }
               }
             }
