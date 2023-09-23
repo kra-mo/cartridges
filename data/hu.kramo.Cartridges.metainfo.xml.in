@@ -44,6 +44,14 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="2.4.1" date="2023-09-23">
+      <description translatable="no">
+        <ul>
+          <li>Improved adaptivity for small screens</li>
+          <li>Translations since 2.4</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.4" date="2023-09-21">
       <description translatable="no">
         <ul>
