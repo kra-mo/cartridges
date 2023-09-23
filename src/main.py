@@ -199,6 +199,7 @@ class CartridgesApplication(Adw.Application):
                 "Paweł Lidwin https://github.com/imLinguin",
                 "Domenico https://github.com/Domefemia",
                 "Rafael Mardojai CM https://mardojai.com",
+                "Clara Hobbs https://github.com/Ratfink",
             )
         )
         about.set_designers(("kramo https://kramo.hu",))
