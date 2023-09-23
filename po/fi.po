@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-30 10:43+0200\n"
-"PO-Revision-Date: 2023-05-07 15:38+0000\n"
+"PO-Revision-Date: 2023-09-23 06:00+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fi/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
@@ -84,21 +84,19 @@ msgstr "Peru"
 
 #: data/gtk/details-window.blp:55
 msgid "New Cover"
-msgstr ""
+msgstr "Uusi kansi"
 
 #: data/gtk/details-window.blp:73
 msgid "Delete Cover"
-msgstr ""
+msgstr "Poista kansi"
 
 #: data/gtk/details-window.blp:100 data/gtk/game.blp:80
 msgid "Title"
 msgstr "Nimi"
 
 #: data/gtk/details-window.blp:103
-#, fuzzy
-#| msgid "The developer or publisher (optional)"
 msgid "Developer (optional)"
-msgstr "Kehittäjä tai julkaisija (valinnainen)"
+msgstr "Kehittäjä (valinnainen)"
 
 #: data/gtk/details-window.blp:108
 msgid "Executable"
@@ -106,11 +104,11 @@ msgstr "Suoritettava"
 
 #: data/gtk/details-window.blp:114
 msgid "Select File"
-msgstr ""
+msgstr "Valitse tiedosto"
 
 #: data/gtk/details-window.blp:125
 msgid "More Info"
-msgstr ""
+msgstr "Lisätietoja"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:413
 msgid "Edit"
@@ -194,7 +192,7 @@ msgstr "Kansikuva käynnistää pelin"
 
 #: data/gtk/preferences.blp:20
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr ""
+msgstr "Vaihtaa keskenään kansikuvan ja Pelaa-painikkeen toiminnallisuuden"
 
 #: data/gtk/preferences.blp:25 src/details_window.py:85
 msgid "Images"
@@ -221,10 +219,8 @@ msgid "Import"
 msgstr "Tuo"
 
 #: data/gtk/preferences.blp:75
-#, fuzzy
-#| msgid "Remove All Games"
 msgid "Remove Uninstalled Games"
-msgstr "Poista kaikki pelit"
+msgstr "Poista kaikki pelit, joiden asennus on poistettu"
 
 #: data/gtk/preferences.blp:80
 msgid "Sources"
@@ -238,30 +234,24 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:141 data/gtk/preferences.blp:174
 #: data/gtk/preferences.blp:191 data/gtk/preferences.blp:208
 #: data/gtk/preferences.blp:225 data/gtk/preferences.blp:242
-#, fuzzy
-#| msgid "itch Install Location"
 msgid "Install Location"
-msgstr "itch-asennuksen sijainti"
+msgstr "Asennussijainti"
 
 #: data/gtk/preferences.blp:100 src/importer/sources/lutris_source.py:92
 msgid "Lutris"
 msgstr "Lutris"
 
 #: data/gtk/preferences.blp:116
-#, fuzzy
-#| msgid "Lutris Cache Location"
 msgid "Cache Location"
-msgstr "Lutris-välimuistin sijainti"
+msgstr "Välimuistin sijainti"
 
 #: data/gtk/preferences.blp:128
 msgid "Import Steam Games"
 msgstr "Tuo Steam-pelejä"
 
 #: data/gtk/preferences.blp:132
-#, fuzzy
-#| msgid "Import Steam Games"
 msgid "Import Flatpak Games"
-msgstr "Tuo Steam-pelejä"
+msgstr "Tuo Flatpak-pelejä"
 
 #: data/gtk/preferences.blp:137 src/importer/sources/heroic_source.py:355
 msgid "Heroic"
@@ -276,10 +266,8 @@ msgid "Import GOG Games"
 msgstr "Tuo GOG-pelejä"
 
 #: data/gtk/preferences.blp:161
-#, fuzzy
-#| msgid "Import Steam Games"
 msgid "Import Amazon Games"
-msgstr "Tuo Steam-pelejä"
+msgstr "Tuo Amazon-pelejä"
 
 #: data/gtk/preferences.blp:165
 msgid "Import Sideloaded Games"
@@ -291,7 +279,7 @@ msgstr "Pullot"
 
 #: data/gtk/preferences.blp:187 src/importer/sources/itch_source.py:81
 msgid "itch"
-msgstr ""
+msgstr "itch"
 
 #: data/gtk/preferences.blp:204 src/importer/sources/legendary_source.py:97
 msgid "Legendary"
@@ -299,21 +287,19 @@ msgstr ""
 
 #: data/gtk/preferences.blp:221 src/importer/sources/retroarch_source.py:142
 msgid "RetroArch"
-msgstr ""
+msgstr "RetroArch"
 
 #: data/gtk/preferences.blp:238 src/importer/sources/flatpak_source.py:118
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: data/gtk/preferences.blp:254
-#, fuzzy
-#| msgid "Game Launcher"
 msgid "Import Game Launchers"
-msgstr "Pelin käynnistin"
+msgstr "Tuo pelikäynnistimiä"
 
 #: data/gtk/preferences.blp:264 src/importer/sources/desktop_source.py:196
 msgid "Desktop Entries"
-msgstr ""
+msgstr "Työpöytätietueet"
 
 #: data/gtk/preferences.blp:276
 msgid "SteamGridDB"
@@ -368,26 +354,20 @@ msgid "Games you hide will appear here."
 msgstr "Piilotetut pelit näkyvät täällä."
 
 #: data/gtk/window.blp:75 data/gtk/window.blp:105 src/main.py:166
-#, fuzzy
-#| msgid "Remove All Games"
 msgid "All Games"
-msgstr "Poista kaikki pelit"
+msgstr "Kaikki pelit"
 
 #: data/gtk/window.blp:88 data/gtk/window.blp:162
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Sivupalkki päälle/pois"
 
 #: data/gtk/window.blp:125 src/main.py:168
-#, fuzzy
-#| msgid "Added: {}"
 msgid "Added"
-msgstr "Lisätty: {}"
+msgstr "Lisätty"
 
 #: data/gtk/window.blp:140
-#, fuzzy
-#| msgid "Import"
 msgid "Imported"
-msgstr "Tuo"
+msgstr "Tuotu"
 
 #: data/gtk/window.blp:168 data/gtk/window.blp:532
 msgid "Add Game"
@@ -474,13 +454,11 @@ msgstr "Lisää uusi peli"
 
 #: src/details_window.py:83
 msgid "Add"
-msgstr ""
+msgstr "Lisää"
 
 #: src/details_window.py:93
-#, fuzzy
-#| msgid "Executable"
 msgid "Executables"
-msgstr "Suoritettava"
+msgstr "Suoritettavat tiedostot"
 
 #. Translate this string as you would translate "file"
 #: src/details_window.py:108
@@ -573,22 +551,20 @@ msgstr ""
 "avaimen {}täällä{}."
 
 #: src/preferences.py:296
-#, fuzzy
-#| msgid "Installation Not Found"
 msgid "Installation Not Found"
 msgstr "Asennusta ei löydy"
 
 #: src/preferences.py:297
 msgid "Select a valid directory."
-msgstr ""
+msgstr "Valitse kelvollinen kansio."
 
 #: src/preferences.py:333 src/importer/importer.py:306
 msgid "Warning"
-msgstr ""
+msgstr "Varoitus"
 
 #: src/preferences.py:367
 msgid "Invalid Directory"
-msgstr ""
+msgstr "Virheellinen kansio"
 
 #: src/preferences.py:373
 msgid "Set Location"
@@ -604,48 +580,40 @@ msgstr "Tuodaan pelejä…"
 
 #: src/importer/importer.py:327
 msgid "The following errors occured during import:"
-msgstr ""
+msgstr "Seuraavat virheet tapahtuivat tuonnin aikana:"
 
 #: src/importer/importer.py:356
-#, fuzzy
-#| msgid "No Games Found"
 msgid "No new games found"
-msgstr "Pelejä ei löydetty"
+msgstr "Uusia pelejä ei löytynyt"
 
 #: src/importer/importer.py:368
-#, fuzzy
-#| msgid "Game Imported"
 msgid "1 game imported"
-msgstr "Peli tuotu"
+msgstr "1 peli tuotu"
 
 #. The variable is the number of games
 #: src/importer/importer.py:372
-#, fuzzy
-#| msgid "Games Imported"
 msgid "{} games imported"
-msgstr "Pelit tuotu"
+msgstr "{} peliä tuotu"
 
 #. A single game removed
 #: src/importer/importer.py:376
-#, fuzzy
-#| msgid "{} removed"
 msgid "1 removed"
-msgstr "{} poistettu"
+msgstr "1 poistettu"
 
 #. The variable is the name of the source
 #: src/importer/sources/location.py:33
 msgid "Select the {} cache directory."
-msgstr ""
+msgstr "Valitse {}-välimuistikansio."
 
 #. The variable is the name of the source
 #: src/importer/sources/location.py:35
 msgid "Select the {} configuration directory."
-msgstr ""
+msgstr "Valitse {}-asetuskansio."
 
 #. The variable is the name of the source
 #: src/importer/sources/location.py:37
 msgid "Select the {} data directory."
-msgstr ""
+msgstr "Valitse {}-datakansio."
 
 #: src/store/managers/sgdb_manager.py:46
 #, fuzzy
@@ -655,20 +623,20 @@ msgstr "Ei voitu yhdistää SteamGridDB:hen"
 
 #: src/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
-msgstr ""
+msgstr "Vahvista API-avaimesi asetuksissa"
 
 #: src/importer/sources/retroarch_source.py:129
 msgid "No RetroArch Core Selected"
-msgstr ""
+msgstr "RetroArch-ydintä ei ole valittu"
 
 #. The variable is a newline separated list of playlists
 #: src/importer/sources/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr ""
+msgstr "Seuraavilla soittolistoilla ei ole oletusydintä:"
 
 #: src/importer/sources/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
-msgstr ""
+msgstr "Pelejä, joihin ei ole valittu ydintä, ei tuotu"
 
 #~ msgid "Back"
 #~ msgstr "Takaisin"

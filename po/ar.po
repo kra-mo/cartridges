@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-30 10:43+0200\n"
-"PO-Revision-Date: 2023-09-01 19:55+0000\n"
+"PO-Revision-Date: 2023-09-23 06:00+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
@@ -347,26 +347,20 @@ msgid "Games you hide will appear here."
 msgstr "هنا يظهر ما أخفيت من ألعاب."
 
 #: data/gtk/window.blp:75 data/gtk/window.blp:105 src/main.py:166
-#, fuzzy
-#| msgid "Remove All Games"
 msgid "All Games"
-msgstr "أزل كلَّ الألعاب"
+msgstr "كلُّ الألعاب"
 
 #: data/gtk/window.blp:88 data/gtk/window.blp:162
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "أظهر شريط الجانب"
 
 #: data/gtk/window.blp:125 src/main.py:168
-#, fuzzy
-#| msgid "Added: {}"
 msgid "Added"
-msgstr "أضيفت في: {}"
+msgstr "أُضيفَت"
 
 #: data/gtk/window.blp:140
-#, fuzzy
-#| msgid "Import"
 msgid "Imported"
-msgstr "استورد"
+msgstr "اُستوردَت"
 
 #: data/gtk/window.blp:168 data/gtk/window.blp:532
 msgid "Add Game"
