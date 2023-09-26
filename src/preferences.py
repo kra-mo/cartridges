@@ -28,16 +28,16 @@ from gi.repository import Adw, Gio, GLib, Gtk
 from src import shared
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
-from src.importer.sources.bottles_source import BottlesSource
-from src.importer.sources.flatpak_source import FlatpakSource
-from src.importer.sources.heroic_source import HeroicSource
-from src.importer.sources.itch_source import ItchSource
-from src.importer.sources.legendary_source import LegendarySource
-from src.importer.sources.location import UnresolvableLocationError
-from src.importer.sources.lutris_source import LutrisSource
-from src.importer.sources.retroarch_source import RetroarchSource
-from src.importer.sources.source import Source
-from src.importer.sources.steam_source import SteamSource
+from src.importer.bottles_source import BottlesSource
+from src.importer.flatpak_source import FlatpakSource
+from src.importer.heroic_source import HeroicSource
+from src.importer.itch_source import ItchSource
+from src.importer.legendary_source import LegendarySource
+from src.importer.location import UnresolvableLocationError
+from src.importer.lutris_source import LutrisSource
+from src.importer.retroarch_source import RetroarchSource
+from src.importer.source import Source
+from src.importer.steam_source import SteamSource
 from src.store.managers.sgdb_manager import SgdbManager
 from src.utils.create_dialog import create_dialog
 

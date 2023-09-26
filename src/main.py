@@ -20,8 +20,6 @@
 import json
 import lzma
 import os
-import shlex
-import subprocess
 import sys
 from typing import Any, Optional
 
@@ -36,16 +34,16 @@ from gi.repository import Adw, Gio, GLib, Gtk
 from src import shared
 from src.details_window import DetailsWindow
 from src.game import Game
+from src.importer.bottles_source import BottlesSource
+from src.importer.desktop_source import DesktopSource
+from src.importer.flatpak_source import FlatpakSource
+from src.importer.heroic_source import HeroicSource
 from src.importer.importer import Importer
-from src.importer.sources.bottles_source import BottlesSource
-from src.importer.sources.desktop_source import DesktopSource
-from src.importer.sources.flatpak_source import FlatpakSource
-from src.importer.sources.heroic_source import HeroicSource
-from src.importer.sources.itch_source import ItchSource
-from src.importer.sources.legendary_source import LegendarySource
-from src.importer.sources.lutris_source import LutrisSource
-from src.importer.sources.retroarch_source import RetroarchSource
-from src.importer.sources.steam_source import SteamSource
+from src.importer.itch_source import ItchSource
+from src.importer.legendary_source import LegendarySource
+from src.importer.lutris_source import LutrisSource
+from src.importer.retroarch_source import RetroarchSource
+from src.importer.steam_source import SteamSource
 from src.logging.setup import log_system_info, setup_logging
 from src.preferences import PreferencesWindow
 from src.store.managers.cover_manager import CoverManager

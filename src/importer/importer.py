@@ -28,8 +28,8 @@ from src import shared
 from src.errors.error_producer import ErrorProducer
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
-from src.importer.sources.location import UnresolvableLocationError
-from src.importer.sources.source import Source
+from src.importer.location import UnresolvableLocationError
+from src.importer.source import Source
 from src.store.managers.async_manager import AsyncManager
 from src.store.pipeline import Pipeline
 

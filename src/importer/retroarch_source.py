@@ -29,13 +29,9 @@ from typing import NamedTuple
 from src import shared
 from src.errors.friendly_error import FriendlyError
 from src.game import Game
-from src.importer.sources.location import (
-    Location,
-    LocationSubPath,
-    UnresolvableLocationError,
-)
-from src.importer.sources.source import Source, SourceIterable
-from src.importer.sources.steam_source import SteamSource
+from src.importer.location import Location, LocationSubPath, UnresolvableLocationError
+from src.importer.source import Source, SourceIterable
+from src.importer.steam_source import SteamSource
 
 
 class RetroarchSourceIterable(SourceIterable):

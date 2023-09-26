@@ -27,7 +27,7 @@ from gi.repository import GLib, Gtk
 
 from src import shared
 from src.game import Game
-from src.importer.sources.source import Source, SourceIterable
+from src.importer.source import Source, SourceIterable
 
 
 class DesktopSourceIterable(SourceIterable):

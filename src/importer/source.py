@@ -23,7 +23,7 @@ from collections.abc import Iterable
 from typing import Any, Collection, Generator, Optional
 
 from src.game import Game
-from src.importer.sources.location import Location
+from src.importer.location import Location
 
 # Type of the data returned by iterating on a Source
 SourceIterationResult = Optional[Game | tuple[Game, tuple[Any]]]

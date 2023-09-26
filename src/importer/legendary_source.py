@@ -24,8 +24,8 @@ from typing import NamedTuple
 
 from src import shared
 from src.game import Game
-from src.importer.sources.location import Location, LocationSubPath
-from src.importer.sources.source import (
+from src.importer.location import Location, LocationSubPath
+from src.importer.source import (
     ExecutableFormatSource,
     SourceIterable,
     SourceIterationResult,
