@@ -177,7 +177,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         def redownload_sgdb(*_args) -> None:
             counter = 0
-            games_len = shared.store.__len__() - 1  # IDK why it returns one more
+            games_len = len(shared.store)
             sgdb_manager = shared.store.managers[SGDBManager]
             sgdb_manager.reset_cancellable()
 
