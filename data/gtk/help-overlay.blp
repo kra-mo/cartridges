@@ -11,22 +11,17 @@ ShortcutsWindow help_overlay {
       title: _("General");
 
       ShortcutsShortcut {
-        title: _("Quit");
-        action-name: "app.quit";
-      }
-
-      ShortcutsShortcut {
         title: _("Search");
         action-name: "win.toggle_search";
       }
 
       ShortcutsShortcut {
-        title: _("Show preferences");
+        title: _("Preferences");
         action-name: "app.preferences";
       }
 
       ShortcutsShortcut {
-        title: _("Shortcuts");
+        title: _("Keyboard Shortcuts");
         action-name: "win.show-help-overlay";
       }
 
@@ -36,7 +31,17 @@ ShortcutsWindow help_overlay {
       }
 
       ShortcutsShortcut {
-        title: _("Open menu");
+        title: _("Quit");
+        action-name: "app.quit";
+      }
+
+      ShortcutsShortcut {
+        title: _("Toggle Sidebar");
+        action-name: "win.show_sidebar";
+      }
+
+      ShortcutsShortcut {
+        title: _("Main Menu");
         action-name: "win.open_menu";
       }
     }
@@ -45,22 +50,22 @@ ShortcutsWindow help_overlay {
       title: _("Games");
 
       ShortcutsShortcut {
-        title: _("Add new game");
+        title: _("Add Game");
         action-name: "app.add_game";
       }
 
       ShortcutsShortcut {
-        title: _("Import games");
+        title: _("Import");
         action-name: "app.import";
       }
 
       ShortcutsShortcut {
-        title: _("Show hidden games");
+        title: _("Show Hidden Games");
         action-name: "win.show_hidden";
       }
 
       ShortcutsShortcut {
-        title: _("Remove game");
+        title: _("Remove Game");
         action-name: "app.remove_game_details_view";
       }
     }

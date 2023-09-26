@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="cartridges">
 
-  <enum id="@APP_ID@.terminals">
-    <value nick="custom" value="0"/>
-    <value nick="xdg-terminal-exec" value="1"/>
-    <value nick="kgx" value="2"/>
-    <value nick="gnome-terminal" value="3"/>
-    <value nick="konsole" value="4"/>
-    <value nick="xterm" value="5"/>
-  </enum>
-
   <schema id="@APP_ID@" path="@PREFIX@/">
     <key name="exit-after-launch" type="b">
       <default>false</default>
@@ -89,12 +80,6 @@
     <key name="desktop" type="b">
       <default>true</default>
     </key>
-    <key name="desktop-terminal" enum="@APP_ID@.terminals">
-      <default>"xdg-terminal-exec"</default>
-    </key>
-    <key name="desktop-terminal-custom-exec" type="s">
-      <default>""</default>
-    </key>
     <key name="flatpak" type="b">
       <default>true</default>
     </key>
@@ -123,10 +108,10 @@
 
   <schema id="@APP_ID@.State" path="@PREFIX@/State/">
     <key name="width" type="i">
-      <default>1110</default>
+      <default>1170</default>
     </key>
     <key name="height" type="i">
-      <default>820</default>
+      <default>795</default>
     </key>
     <key name="is-maximized" type="b">
       <default>false</default>
@@ -141,11 +126,11 @@
       </choices>
       <default>"a-z"</default>
     </key>
+    <key name="show-sidebar" type="b">
+      <default>false</default>
+    </key>
     <key name="steam-limiter-tokens-history" type="s">
       <default>"[]"</default>
-    </key>
-    <key name="terminal-check-done" type="b">
-      <default>false</default>
     </key>
   </schema>
 </schemalist>

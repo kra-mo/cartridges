@@ -45,13 +45,24 @@ Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita
   - Legendary
   - RetroArch
   - Flatpak
-- Hiding games
+  - Desktop Entries
+- Filtering games by source
 - Searching and sorting by title, date added and last played
+- Hiding games
 - Automatically downloading cover art from [SteamGridDB](https://www.steamgriddb.com/)
 - Searching for games on various databases
 - Animated covers
 
 For updates and questions, join our [Discord server][discord-url] (bridged to [Matrix](https://matrix.to/#/#cartridges:matrix.org))!
+
+## Donations
+We accept donations through GitHub Sponsors to our main contributors:
+
+[Sponsor kramo](https://github.com/sponsors/kra-mo)
+
+[Sponsor Geoffrey Coulaud](https://github.com/sponsors/geoffreycoulaud)
+
+Thank you for your generosity! 💜
 
 # Installation
 

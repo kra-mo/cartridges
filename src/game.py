@@ -25,7 +25,7 @@ from pathlib import Path
 from time import time
 from typing import Any, Optional
 
-from gi.repository import Adw, GLib, GObject, Gtk
+from gi.repository import Adw, GObject, Gtk
 
 from src import shared
 from src.game_cover import GameCover
@@ -66,8 +66,7 @@ class Game(Gtk.Box):
     def __init__(self, data: dict[str, Any], **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
-        self.win = shared.win
-        self.app = self.win.get_application()
+        self.app = shared.win.get_application()
         self.version = shared.SPEC_VERSION
 
         self.update_values(data)
@@ -100,18 +99,19 @@ class Game(Gtk.Box):
     def create_toast(self, title: str, action: Optional[str] = None) -> None:
         toast = Adw.Toast.new(title.format(self.name))
         toast.set_priority(Adw.ToastPriority.HIGH)
+        toast.set_use_markup(False)
 
         if action:
             toast.set_button_label(_("Undo"))
-            toast.connect("button-clicked", self.win.on_undo_action, self, action)
+            toast.connect("button-clicked", shared.win.on_undo_action, self, action)
 
-            if (self, action) in self.win.toasts.keys():
+            if (self, action) in shared.win.toasts.keys():
                 # Dismiss the toast if there already is one
-                self.win.toasts[(self, action)].dismiss()
+                shared.win.toasts[(self, action)].dismiss()
 
-            self.win.toasts[(self, action)] = toast
+            shared.win.toasts[(self, action)] = toast
 
-        self.win.toast_overlay.add_toast(toast)
+        shared.win.toast_overlay.add_toast(toast)
 
     def launch(self) -> None:
         self.last_played = int(time())
@@ -144,17 +144,15 @@ class Game(Gtk.Box):
         self.hidden = not self.hidden
         self.save()
 
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action()
+        if shared.win.navigation_view.get_visible_page() == shared.win.details_page:
+            shared.win.navigation_view.pop()
 
         self.update()
 
         if toast:
             self.create_toast(
                 # The variable is the title of the game
-                (_("{} hidden") if self.hidden else _("{} unhidden")).format(
-                    GLib.markup_escape_text(self.name)
-                ),
+                (_("{} hidden") if self.hidden else _("{} unhidden")).format(self.name),
                 "hide",
             )
 
@@ -164,14 +162,11 @@ class Game(Gtk.Box):
         self.save()
         self.update()
 
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action()
+        if shared.win.navigation_view.get_visible_page() == shared.win.details_page:
+            shared.win.navigation_view.pop()
 
-        self.create_toast(
-            # The variable is the title of the game
-            _("{} removed").format(GLib.markup_escape_text(self.name)),
-            "remove",
-        )
+        # The variable is the title of the game
+        self.create_toast(_("{} removed").format(self.name), "remove")
 
     def set_loading(self, state: int) -> None:
         self.loading += state
@@ -202,7 +197,7 @@ class Game(Gtk.Box):
         if shared.schema.get_boolean("cover-launches-game") ^ button:
             self.launch()
         else:
-            self.win.show_details_view(self)
+            shared.win.show_details_page(self)
 
     def set_play_icon(self) -> None:
         self.play_button.set_icon_name(

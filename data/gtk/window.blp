@@ -45,339 +45,424 @@ Adw.StatusPage hidden_notice_empty {
 
 template $CartridgesWindow : Adw.ApplicationWindow {
   title: _("Cartridges");
+  width-request: 281;
+  height-request: 100;
+
+  Adw.Breakpoint {
+    condition ("max-width: 564px")
+    setters {
+      overlay_split_view.collapsed: true;
+      details_view_box.orientation: vertical;
+      details_view_box.margin-top: 12;
+      details_view_box.margin-start: 12;
+      details_view_box.margin-end: 12;
+      details_view_details_box.margin-start: 0;
+      details_view_details_box.margin-end: 0;
+      details_view_title.margin-top: 30;
+      details_view_title.halign: center;
+      details_view_developer.halign: center;
+      details_view_date_box.halign: center;
+      details_view_toolbar.halign: center;
+      details_view_toolbar.orientation: vertical;
+      details_view_play_button.halign: center;
+      details_view_toolbar_buttons.margin-start: 0;
+    }
+  }
 
   Adw.ToastOverlay toast_overlay {
-    Stack stack {
-      visible-child: library_view;
-      transition-type: over_left;
+    Adw.NavigationView navigation_view {
+        Adw.NavigationPage library_page {
+          title: _("All Games");
 
-      Overlay details_view {
-        name: "details_view";
-
-        [overlay]
-        Box details_view_box {
-          orientation: vertical;
-
-          Adw.HeaderBar {
-            [start]
-            Button back_button {
-              tooltip-text: _("Back");
-              action-name: "win.go_back";
-              icon-name: "go-previous-symbolic";
-            }
-
-            [title]
-            Adw.WindowTitle details_view_header_bar_title {
-              title: _("Game Details");
-            }
-
-            styles [
-              "flat",
-            ]
-          }
-
-          Adw.Bin {
-            hexpand: true;
-            vexpand: true;
-
-            Box {
-              halign: center;
-              valign: center;
-              margin-start: 24;
-              margin-end: 24;
-              margin-top: 24;
-              margin-bottom: 24;
-
-              Adw.Clamp {
-                maximum-size: 200;
-
-                Overlay {
-                  [overlay]
-                  Spinner details_view_spinner {
-                    margin-start: 72;
-                    margin-end: 72;
+          Adw.OverlaySplitView overlay_split_view {
+            [sidebar]
+            Adw.NavigationPage {
+              title: _("Cartridges");
+              Adw.ToolbarView {
+                [top]
+                Adw.HeaderBar {
+                  [start]
+                  Button {
+                    icon-name: "sidebar-show-symbolic";
+                    action-name: "win.show_sidebar";
+                    tooltip-text: _("Toggle Sidebar");
                   }
+                }
 
-                  Picture details_view_cover {
-                    halign: end;
+                ScrolledWindow {
+                  ListBox sidebar {
+                    Box all_games_row_box {
+                      margin-top: 12;
+                      margin-bottom: 12;
+                      margin-start: 6;
+                      margin-end: 6;
+                      spacing: 12;
+
+                      Image {
+                        icon-name: "view-grid-symbolic";
+                      }
+                      Label {
+                        halign: start;
+                        label: _("All Games");
+                      }
+                      Label all_games_no_label {
+                        hexpand: true;
+                        halign: end;
+
+                        styles ["dim-label"]
+                      }
+                    }
+                    Box added_row_box {
+                      margin-top: 12;
+                      margin-bottom: 12;
+                      margin-start: 6;
+                      spacing: 12;
+
+                      Image {
+                        icon-name: "list-add-symbolic";
+                      }
+                      Label {
+                        halign: start;
+                        label: _("Added");
+                        margin-end: 6;
+                      }
+                      Label added_games_no_label {
+                        hexpand: true;
+                        halign: end;
+                        margin-end: 6;
+
+                        styles ["dim-label"]
+                      }
+                    }
+                    ListBoxRow {
+                      selectable: false;
+                      activatable: false;
+                      Label {
+                        label: _("Imported");
+                        styles ["heading"]
+                        halign: start;
+                      }
+                    }
+                    styles ["navigation-sidebar"]
+                  }
+                }
+              }
+            }
+
+            Adw.ToolbarView library_view {
+
+              [top]
+              Adw.HeaderBar header_bar {
+
+                [start]
+                Revealer {
+                  transition-type: slide_right;
+                  reveal-child: bind overlay_split_view.show-sidebar inverted;
+                  Button show_sidebar_button {
+                    icon-name: "sidebar-show-symbolic";
+                    action-name: "win.show_sidebar";
+                    tooltip-text: _("Toggle Sidebar");
+                  }
+                }
+
+                [start]
+                MenuButton {
+                  tooltip-text: _("Add Game");
+                  icon-name: "list-add-symbolic";
+                  menu-model: add_games;
+                }
+
+                [end]
+                MenuButton primary_menu_button {
+                  tooltip-text: _("Main Menu");
+                  icon-name: "open-menu-symbolic";
+                  menu-model: primary_menu;
+                }
+
+                [end]
+                ToggleButton search_button {
+                  tooltip-text: _("Search");
+                  icon-name: "system-search-symbolic";
+                  action-name: "win.toggle_search";
+                }
+              }
+
+              [top]
+              SearchBar search_bar {
+                search-mode-enabled: bind search_button.active bidirectional;
+                key-capture-widget: navigation_view;
+
+                Adw.Clamp {
+                  maximum-size: 500;
+                  tightening-threshold: 500;
+
+                  SearchEntry search_entry {
+                    hexpand: true;
+                  }
+                }
+              }
+
+              Overlay library_overlay {
+                ScrolledWindow scrolledwindow {
+                  FlowBox library {
+                    homogeneous: true;
+                    halign: center;
                     valign: start;
-                    width-request: 200;
-                    height-request: 300;
-
-                    styles [
-                      "card",
-                    ]
+                    column-spacing: 12;
+                    row-spacing: 12;
+                    margin-top: 15;
+                    margin-bottom: 15;
+                    margin-start: 15;
+                    margin-end: 15;
+                    selection-mode: none;
                   }
                 }
               }
+            }
+          }
+        }
+      }
+    }
+  }
 
-              Box {
-                orientation: vertical;
-                margin-start: 48;
-                vexpand: true;
+Adw.NavigationPage hidden_library_page {
+  title: _("Hidden Games");
+
+  Adw.ToolbarView hidden_library_view {
+    [top]
+    Adw.HeaderBar hidden_header_bar {
+      [end]
+      MenuButton hidden_primary_menu_button {
+        tooltip-text: _("Main Menu");
+        icon-name: "open-menu-symbolic";
+        menu-model: primary_menu;
+      }
+
+      [end]
+      ToggleButton hidden_search_button {
+        tooltip-text: _("Search");
+        icon-name: "system-search-symbolic";
+        action-name: "win.toggle_search";
+      }
+    }
+
+    [top]
+    SearchBar hidden_search_bar {
+      search-mode-enabled: bind hidden_search_button.active bidirectional;
+      key-capture-widget: hidden_library_view;
+
+      Adw.Clamp {
+        maximum-size: 500;
+        tightening-threshold: 500;
+
+        SearchEntry hidden_search_entry {
+          hexpand: true;
+        }
+      }
+    }
+
+    Overlay hidden_library_overlay {
+      ScrolledWindow hidden_scrolledwindow {
+        FlowBox hidden_library {
+          homogeneous: true;
+          halign: center;
+          valign: start;
+          column-spacing: 12;
+          row-spacing: 12;
+          margin-top: 15;
+          margin-bottom: 15;
+          margin-start: 15;
+          margin-end: 15;
+          selection-mode: none;
+        }
+      }
+    }
+
+    styles [
+      "background",
+    ]
+  }
+}
+
+Adw.NavigationPage details_page {
+  title: _("Game Details");
+
+  Overlay details_view {
+    name: "details_view";
+
+    [overlay]
+    Adw.ToolbarView details_view_toolbar_view {
+
+      [top]
+      Adw.HeaderBar {
+      }
+
+      ScrolledWindow {
+        Box details_view_box {
+          halign: center;
+          valign: center;
+          margin-start: 24;
+          margin-end: 24;
+          margin-top: 24;
+          margin-bottom: 24;
+
+          Adw.Clamp {
+            maximum-size: 200;
+
+            Overlay {
+              [overlay]
+              Spinner details_view_spinner {
+                margin-start: 72;
+                margin-end: 72;
+              }
+
+              Picture details_view_cover {
+                halign: end;
+                valign: start;
+                width-request: 200;
+                height-request: 300;
+
+                styles [
+                  "card",
+                ]
+              }
+            }
+          }
+
+          Box details_view_details_box {
+            orientation: vertical;
+            margin-start: 48;
+            vexpand: true;
+            valign: center;
+
+            Label details_view_title {
+              label: _("Game Title");
+              hexpand: true;
+              halign: start;
+              max-width-chars: 24;
+              wrap: true;
+              wrap-mode: word_char;
+              natural-wrap-mode: word;
+
+              styles [
+                "title-1",
+              ]
+            }
+
+            Label details_view_developer {
+              margin-top: 6;
+              hexpand: true;
+              halign: start;
+              max-width-chars: 36;
+              wrap: true;
+              wrap-mode: word_char;
+              natural-wrap-mode: word;
+
+              styles [
+                "heading",
+              ]
+            }
+
+            Box details_view_date_box {
+              orientation: horizontal;
+              margin-top: 15;
+              hexpand: true;
+              halign: start;
+
+              Label details_view_added {
+                wrap: true;
+                wrap-mode: word_char;
+                natural-wrap-mode: word;
+                justify: center;
+              }
+
+              Label details_view_last_played {
+                margin-start: 12;
+                wrap: true;
+                wrap-mode: word_char;
+                natural-wrap-mode: word;
+                justify: center;
+              }
+            }
+
+            Box details_view_toolbar {
+              hexpand: true;
+              vexpand: true;
+              valign: center;
+
+              Button details_view_play_button {
+                name: "details_view_play_button";
+                action-name: "app.launch_game";
+                label: _("Play");
+                halign: start;
+                margin-top: 24;
+
+                styles [
+                  "opaque",
+                  "pill",
+                ]
+              }
+
+              Box details_view_toolbar_buttons {
+                halign: start;
                 valign: center;
+                margin-top: 24;
+                margin-start: 9;
 
-                Label details_view_title {
-                  label: _("Game Title");
-                  hexpand: true;
-                  halign: start;
-                  max-width-chars: 24;
-                  wrap: true;
-                  wrap-mode: word_char;
-                  natural-wrap-mode: word;
+                Button {
+                  icon-name: "document-edit-symbolic";
+                  action-name: "app.edit_game";
+                  tooltip-text: _("Edit");
 
                   styles [
-                    "title-1",
+                    "raised",
+                    "circular",
                   ]
                 }
 
-                Label details_view_developer {
-                  margin-top: 6;
-                  hexpand: true;
-                  halign: start;
-                  max-width-chars: 36;
-                  wrap: true;
-                  wrap-mode: word_char;
-                  natural-wrap-mode: word;
+                Button details_view_hide_button {
+                  action-name: "app.hide_game";
 
                   styles [
-                    "heading",
+                    "raised",
+                    "circular",
                   ]
                 }
 
-                Box {
-                  orientation: horizontal;
-                  margin-top: 15;
-                  hexpand: true;
-                  halign: start;
+                Button {
+                  icon-name: "user-trash-symbolic";
+                  action-name: "app.remove_game";
+                  tooltip-text: _("Remove");
 
-                  Label details_view_added {
-                    wrap: true;
-                    wrap-mode: word_char;
-                    natural-wrap-mode: word;
-                  }
-
-                  Label details_view_last_played {
-                    margin-start: 12;
-                    wrap: true;
-                    wrap-mode: word_char;
-                    natural-wrap-mode: word;
-                  }
+                  styles [
+                    "raised",
+                    "circular",
+                  ]
                 }
 
-                Box {
-                  hexpand: true;
-                  vexpand: true;
-                  valign: center;
+                MenuButton {
+                  icon-name: "system-search-symbolic";
+                  menu-model: search;
+                  tooltip-text: _("Search");
 
-                  Button details_view_play_button {
-                    name: "details_view_play_button";
-                    action-name: "app.launch_game";
-                    label: _("Play");
-                    halign: start;
-                    margin-top: 24;
-
-                    styles [
-                      "opaque",
-                      "pill",
-                    ]
-                  }
-
-                  Box {
-                    halign: start;
-                    valign: center;
-                    margin-top: 24;
-                    margin-start: 9;
-
-                    Button {
-                      icon-name: "document-edit-symbolic";
-                      action-name: "app.edit_game";
-                      tooltip-text: _("Edit");
-
-                      styles [
-                        "raised",
-                        "circular",
-                      ]
-                    }
-
-                    Button details_view_hide_button {
-                      action-name: "app.hide_game";
-
-                      styles [
-                        "raised",
-                        "circular",
-                      ]
-                    }
-
-                    Button {
-                      icon-name: "user-trash-symbolic";
-                      action-name: "app.remove_game";
-                      tooltip-text: _("Remove");
-
-                      styles [
-                        "raised",
-                        "circular",
-                      ]
-                    }
-
-                    MenuButton {
-                      icon-name: "system-search-symbolic";
-                      menu-model: search;
-                      tooltip-text: _("Search");
-
-                      styles [
-                        "raised",
-                        "circular",
-                      ]
-                    }
-
-                    styles [
-                      "toolbar",
-                    ]
-                  }
+                  styles [
+                    "raised",
+                    "circular",
+                  ]
                 }
+
+                styles [
+                  "toolbar",
+                ]
               }
             }
           }
         }
-
-        Picture details_view_blurred_cover {
-          keep-aspect-ratio: false;
-        }
       }
+    }
 
-      Box library_view {
-        orientation: vertical;
-
-        Adw.HeaderBar header_bar {
-          [start]
-          MenuButton {
-            tooltip-text: _("Add Game");
-            icon-name: "list-add-symbolic";
-            menu-model: add_games;
-          }
-
-          [end]
-          MenuButton primary_menu_button {
-            tooltip-text: _("Main Menu");
-            icon-name: "open-menu-symbolic";
-            menu-model: primary_menu;
-          }
-
-          [end]
-          ToggleButton search_button {
-            tooltip-text: _("Search");
-            icon-name: "system-search-symbolic";
-            action-name: "win.toggle_search";
-          }
-        }
-
-        SearchBar search_bar {
-          search-mode-enabled: bind-property search_button.active bidirectional;
-          key-capture-widget: library_view;
-
-          Adw.Clamp {
-            maximum-size: 500;
-            tightening-threshold: 500;
-
-            SearchEntry search_entry {
-              placeholder-text: _("Search games");
-              hexpand: true;
-            }
-          }
-        }
-
-        Adw.Bin library_bin {
-          ScrolledWindow scrolledwindow {
-            hexpand: true;
-            vexpand: true;
-
-            FlowBox library {
-              homogeneous: true;
-              halign: center;
-              valign: start;
-              column-spacing: 12;
-              row-spacing: 12;
-              margin-top: 15;
-              margin-bottom: 15;
-              margin-start: 15;
-              margin-end: 15;
-              selection-mode: none;
-            }
-          }
-        }
-      }
-
-      Box hidden_library_view {
-        orientation: vertical;
-
-        Adw.HeaderBar hidden_header_bar {
-          [start]
-          Button hidden_back_button {
-            tooltip-text: _("Back");
-            action-name: "win.go_back";
-            icon-name: "go-previous-symbolic";
-          }
-
-          [title]
-          Adw.WindowTitle {
-            title: _("Hidden Games");
-          }
-
-          [end]
-          MenuButton hidden_primary_menu_button {
-            tooltip-text: _("Main Menu");
-            icon-name: "open-menu-symbolic";
-            menu-model: primary_menu;
-          }
-
-          [end]
-          ToggleButton hidden_search_button {
-            tooltip-text: _("Search");
-            icon-name: "system-search-symbolic";
-            action-name: "win.toggle_search";
-          }
-        }
-
-        SearchBar hidden_search_bar {
-          search-mode-enabled: bind-property hidden_search_button.active bidirectional;
-          key-capture-widget: hidden_library_view;
-
-          Adw.Clamp {
-            maximum-size: 500;
-            tightening-threshold: 500;
-
-            SearchEntry hidden_search_entry {
-              placeholder-text: _("Search hidden games");
-              hexpand: true;
-            }
-          }
-        }
-
-        Adw.Bin hidden_library_bin {
-          ScrolledWindow hidden_scrolledwindow {
-            hexpand: true;
-            vexpand: true;
-
-            FlowBox hidden_library {
-              homogeneous: true;
-              halign: center;
-              valign: start;
-              column-spacing: 12;
-              row-spacing: 12;
-              margin-top: 15;
-              margin-bottom: 15;
-              margin-start: 15;
-              margin-end: 15;
-              selection-mode: none;
-            }
-          }
-        }
-
-        styles [
-          "background",
-        ]
-      }
+    Picture details_view_blurred_cover {
+      keep-aspect-ratio: false;
     }
   }
 }

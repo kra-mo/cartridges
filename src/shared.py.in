@@ -18,9 +18,19 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+from enum import IntEnum, auto
 from pathlib import Path
 
 from gi.repository import Gdk, Gio, GLib
+
+
+class AppState(IntEnum):
+    DEFAULT = auto()
+    LOAD_FROM_DISK = auto()
+    IMPORT = auto()
+    REMOVE_ALL_GAMES = auto()
+    UNDO_REMOVE_ALL_GAMES = auto()
+
 
 APP_ID = "@APP_ID@"
 VERSION = "@VERSION@"
@@ -52,5 +62,6 @@ image_size = (200 * scale_factor, 300 * scale_factor)
 # pylint: disable=invalid-name
 win = None
 importer = None
+import_time = None
 store = None
 log_files = None

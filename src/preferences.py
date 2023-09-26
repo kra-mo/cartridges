@@ -26,9 +26,9 @@ from typing import Any, Callable, Optional
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from src import shared
+from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.importer.sources.bottles_source import BottlesSource
-from src.importer.sources.desktop_source import DesktopSource
 from src.importer.sources.flatpak_source import FlatpakSource
 from src.importer.sources.heroic_source import HeroicSource
 from src.importer.sources.itch_source import ItchSource
@@ -38,6 +38,7 @@ from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.retroarch_source import RetroarchSource
 from src.importer.sources.source import Source
 from src.importer.sources.steam_source import SteamSource
+from src.store.managers.sgdb_manager import SGDBManager
 from src.utils.create_dialog import create_dialog
 
 
@@ -98,17 +99,14 @@ class PreferencesWindow(Adw.PreferencesWindow):
     flatpak_data_file_chooser_button = Gtk.Template.Child()
     flatpak_import_launchers_switch = Gtk.Template.Child()
 
-    desktop_expander_row = Gtk.Template.Child()
-    desktop_terminal_exec_row = Gtk.Template.Child()
-    desktop_tereminal_custom_exec_revealer = Gtk.Template.Child()
-    desktop_tereminal_custom_exec = Gtk.Template.Child()
+    desktop_switch = Gtk.Template.Child()
 
     sgdb_key_group = Gtk.Template.Child()
     sgdb_key_entry_row = Gtk.Template.Child()
     sgdb_switch = Gtk.Template.Child()
-    sgdb_switch_row = Gtk.Template.Child()
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
+    sgdb_fetch_button = Gtk.Template.Child()
 
     danger_zone_group = Gtk.Template.Child()
     reset_action_row = Gtk.Template.Child()
@@ -120,9 +118,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.win = shared.win
         self.file_chooser = Gtk.FileDialog()
-        self.set_transient_for(self.win)
+        self.set_transient_for(shared.win)
 
         self.toast = Adw.Toast.new(_("All games removed"))
         self.toast.set_button_label(_("Undo"))
@@ -144,13 +141,11 @@ class PreferencesWindow(Adw.PreferencesWindow):
         if shared.PROFILE == "development":
             self.reset_action_row.set_visible(True)
             self.reset_button.connect("clicked", self.reset_app)
-            self.set_default_size(-1, 560)
 
         # Sources settings
         for source_class in (
             BottlesSource,
             FlatpakSource,
-            DesktopSource,
             HeroicSource,
             ItchSource,
             LegendarySource,
@@ -164,36 +159,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 expander_row.set_visible(False)
             else:
                 self.init_source_row(source)
-
-        # Desktop Terminal Executable
-        def set_terminal_exec(widget: Adw.ComboRow, _param: Any) -> None:
-            shared.schema.set_enum("desktop-terminal", widget.get_selected())
-            self.desktop_tereminal_custom_exec_revealer.set_reveal_child(
-                widget.get_selected() == 0
-            )
-
-        self.desktop_terminal_exec_row.connect("notify::selected", set_terminal_exec)
-        self.desktop_terminal_exec_row.set_selected(
-            terminal_value := shared.schema.get_enum("desktop-terminal")
-        )
-        if not terminal_value:
-            set_terminal_exec(
-                self.desktop_terminal_exec_row, None
-            )  # The default value is supposed to be 4294967295, but it's 0 and I can't change it
-
-        self.desktop_tereminal_custom_exec.set_text(
-            shared.schema.get_string("desktop-terminal-custom-exec")
-        )
-
-        def desktop_custom_exec_changed(*_args: Any) -> None:
-            shared.schema.set_string(
-                "desktop-terminal-custom-exec",
-                self.desktop_tereminal_custom_exec.get_text(),
-            )
-
-        self.desktop_tereminal_custom_exec.connect(
-            "changed", desktop_custom_exec_changed
-        )
 
         # SteamGridDB
         def sgdb_key_changed(*_args: Any) -> None:
@@ -210,14 +175,40 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
         )
 
-        def set_sgdb_sensitive(widget: Adw.EntryRow) -> None:
-            if not widget.get_text():
-                shared.schema.set_boolean("sgdb", False)
+        def redownload_sgdb(*_args) -> None:
+            counter = 0
+            games_len = shared.store.__len__() - 1  # IDK why it returns one more
+            sgdb_manager = shared.store.managers[SGDBManager]
+            sgdb_manager.reset_cancellable()
 
-            self.sgdb_switch_row.set_sensitive(widget.get_text())
+            self.add_toast(download_toast := Adw.Toast.new(_("Downloading covers…")))
 
-        self.sgdb_key_entry_row.connect("changed", set_sgdb_sensitive)
-        set_sgdb_sensitive(self.sgdb_key_entry_row)
+            def update_cover_callback(manager: SGDBManager) -> None:
+                nonlocal counter
+                nonlocal games_len
+                nonlocal download_toast
+
+                counter += 1
+                if counter != games_len:
+                    return
+
+                for error in manager.collect_errors():
+                    if isinstance(error, FriendlyError):
+                        create_dialog(self, error.title, error.subtitle)
+                        break
+
+                for game in shared.store:
+                    game.update()
+
+                toast = Adw.Toast.new(_("Covers updated"))
+                toast.set_priority(Adw.ToastPriority.HIGH)
+                download_toast.dismiss()
+                self.add_toast(toast)
+
+            for game in shared.store:
+                sgdb_manager.process_game(game, {}, update_cover_callback)
+
+        self.sgdb_fetch_button.connect("clicked", redownload_sgdb)
 
         # Switches
         self.bind_switches(
@@ -236,8 +227,18 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 "sgdb",
                 "sgdb-prefer",
                 "sgdb-animated",
+                "desktop",
             }
         )
+
+        def set_sgdb_sensitive(widget: Adw.EntryRow) -> None:
+            if not widget.get_text():
+                shared.schema.set_boolean("sgdb", False)
+
+            self.sgdb_switch.set_sensitive(widget.get_text())
+
+        self.sgdb_key_entry_row.connect("changed", set_sgdb_sensitive)
+        set_sgdb_sensitive(self.sgdb_key_entry_row)
 
     def get_switch(self, setting: str) -> Any:
         return getattr(self, f'{setting.replace("-", "_")}_switch')
@@ -254,9 +255,10 @@ class PreferencesWindow(Adw.PreferencesWindow):
     def choose_folder(
         self, _widget: Any, callback: Callable, callback_data: Optional[str] = None
     ) -> None:
-        self.file_chooser.select_folder(self.win, None, callback, callback_data)
+        self.file_chooser.select_folder(shared.win, None, callback, callback_data)
 
     def undo_remove_all(self, *_args: Any) -> None:
+        shared.win.get_application().state = shared.AppState.UNDO_REMOVE_ALL_GAMES
         for game in self.removed_games:
             game.removed = False
             game.save()
@@ -264,8 +266,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
         self.removed_games = set()
         self.toast.dismiss()
+        shared.win.get_application().state = shared.AppState.DEFAULT
+        shared.win.create_source_rows()
 
     def remove_all_games(self, *_args: Any) -> None:
+        shared.win.get_application().state = shared.AppState.REMOVE_ALL_GAMES
+        shared.win.row_selected(None, shared.win.all_games_row_box.get_parent())
         for game in shared.store:
             if not game.removed:
                 self.removed_games.add(game)
@@ -273,10 +279,12 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 game.save()
                 game.update()
 
-        if self.win.stack.get_visible_child() == self.win.details_view:
-            self.win.on_go_back_action()
+        if shared.win.navigation_view.get_visible_page() == shared.win.details_page:
+            shared.win.navigation_view.pop()
 
         self.add_toast(self.toast)
+        shared.win.get_application().state = shared.AppState.DEFAULT
+        shared.win.create_source_rows()
 
     def reset_app(self, *_args: Any) -> None:
         rmtree(shared.data_dir / "cartridges", True)

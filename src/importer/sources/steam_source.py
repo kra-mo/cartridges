@@ -21,7 +21,6 @@
 import logging
 import re
 from pathlib import Path
-from time import time
 from typing import Iterable, NamedTuple
 
 from src import shared
@@ -64,8 +63,6 @@ class SteamSourceIterable(SourceIterable):
         appid_cache = set()
         manifests = self.get_manifests()
 
-        added_time = int(time())
-
         for manifest in manifests:
             # Get metadata from manifest
             steam = SteamFileHelper()
@@ -90,7 +87,7 @@ class SteamSourceIterable(SourceIterable):
 
             # Build game from local data
             values = {
-                "added": added_time,
+                "added": shared.import_time,
                 "name": local_data["name"],
                 "source": self.source.source_id,
                 "game_id": self.source.game_id_format.format(game_id=appid),

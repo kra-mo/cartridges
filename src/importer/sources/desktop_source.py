@@ -17,10 +17,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
 import shlex
-from hashlib import sha3_256
+import subprocess
 from pathlib import Path
-from time import time
 from typing import NamedTuple
 
 from gi.repository import GLib, Gtk
@@ -35,8 +35,6 @@ class DesktopSourceIterable(SourceIterable):
 
     def __iter__(self):
         """Generator method producing games"""
-
-        added_time = int(time())
 
         icon_theme = Gtk.IconTheme.new()
 
@@ -62,7 +60,7 @@ class DesktopSourceIterable(SourceIterable):
 
             icon_theme.add_search_path(str(path))
 
-        terminal_exec = self.get_terminal_exec()
+        launch_command, full_path = self.check_launch_commands()
 
         for path in search_paths:
             if str(path).startswith("/app/"):
@@ -98,6 +96,16 @@ class DesktopSourceIterable(SourceIterable):
                 except GLib.GError:
                     continue
 
+                try:
+                    try_exec = "which " + (
+                        keyfile.get_string("Desktop Entry", "TryExec").split(" %")[0]
+                    )
+                    if not self.check_command(try_exec):
+                        continue
+
+                except GLib.GError:
+                    pass
+
                 # Skip Steam games
                 if "steam://rungameid/" in executable:
                     continue
@@ -117,31 +125,23 @@ class DesktopSourceIterable(SourceIterable):
                     pass
 
                 try:
-                    terminal = keyfile.get_boolean("Desktop Entry", "Terminal")
+                    if keyfile.get_boolean("Desktop Entry", "Hidden"):
+                        continue
                 except GLib.GError:
-                    terminal = False
+                    pass
 
-                try:
-                    cd_path = (
-                        "cd " + keyfile.get_string("Desktop Entry", "Path") + " && "
-                    )
-                except GLib.GError:
-                    cd_path = ""
+                # Strip /run/host from Flatpak paths
+                if entry.is_relative_to(prefix := "/run/host"):
+                    entry = Path("/") / entry.relative_to(prefix)
+
+                launch_arg = shlex.quote(str(entry if full_path else entry.stem))
 
                 values = {
                     "source": self.source.source_id,
-                    "added": added_time,
+                    "added": shared.import_time,
                     "name": name,
-                    "game_id": "desktop_"
-                    + sha3_256(
-                        str(entry).encode("utf-8"), usedforsecurity=False
-                    ).hexdigest(),
-                    "executable": cd_path
-                    + (
-                        (terminal_exec + shlex.quote(executable))
-                        if terminal
-                        else executable
-                    ),
+                    "game_id": f"desktop_{entry.stem}",
+                    "executable": f"{launch_command} {launch_arg}",
                 }
                 game = Game(values)
 
@@ -177,21 +177,33 @@ class DesktopSourceIterable(SourceIterable):
 
                 yield (game, additional_data)
 
-    def get_terminal_exec(self) -> str:
-        match shared.schema.get_enum("desktop-terminal"):
-            case 0:
-                terminal_exec = shared.schema.get_string("desktop-terminal-custom-exec")
-            case 1:
-                terminal_exec = "xdg-terminal-exec"
-            case 2:
-                terminal_exec = "kgx -e"
-            case 3:
-                terminal_exec = "gnome-terminal --"
-            case 4:
-                terminal_exec = "konsole -e"
-            case 5:
-                terminal_exec = "xterm -e"
-        return terminal_exec + " "
+    def check_command(self, command) -> bool:
+        flatpak_str = "flatpak-spawn --host /bin/sh -c "
+
+        if os.getenv("FLATPAK_ID") == shared.APP_ID:
+            command = flatpak_str + shlex.quote(command)
+
+        try:
+            subprocess.run(command, shell=True, check=True)
+        except subprocess.CalledProcessError:
+            return False
+
+        return True
+
+    def check_launch_commands(self) -> (str, bool):
+        """Check whether `gio launch` `gtk4-launch` or `gtk-launch` are available on the system"""
+        commands = (("gio launch", True), ("gtk4-launch", False), ("gtk-launch", False))
+
+        for command, full_path in commands:
+            # Even if `gio` is available, `gio launch` is only available on GLib >= 2.67.2
+            command_to_check = (
+                "gio help launch" if command == "gio launch" else f"which {command}"
+            )
+
+            if self.check_command(command_to_check):
+                return command, full_path
+
+        return commands[2]
 
 
 class DesktopLocations(NamedTuple):
@@ -202,7 +214,7 @@ class DesktopSource(Source):
     """Generic Flatpak source"""
 
     source_id = "desktop"
-    name = _("Desktop")
+    name = _("Desktop Entries")
     iterable_class = DesktopSourceIterable
     available_on = {"linux"}
 

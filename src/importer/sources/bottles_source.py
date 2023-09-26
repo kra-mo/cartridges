@@ -19,7 +19,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from pathlib import Path
-from time import time
 from typing import NamedTuple
 
 import yaml
@@ -38,13 +37,12 @@ class BottlesSourceIterable(SourceIterable):
 
         data = self.source.locations.data["library.yml"].read_text("utf-8")
         library: dict = yaml.safe_load(data)
-        added_time = int(time())
 
         for entry in library.values():
             # Build game
             values = {
                 "source": self.source.source_id,
-                "added": added_time,
+                "added": shared.import_time,
                 "name": entry["name"],
                 "game_id": self.source.game_id_format.format(game_id=entry["id"]),
                 "executable": self.source.make_executable(
