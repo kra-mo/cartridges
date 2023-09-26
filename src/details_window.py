@@ -31,7 +31,7 @@ from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.game_cover import GameCover
 from src.store.managers.cover_manager import CoverManager
-from src.store.managers.sgdb_manager import SGDBManager
+from src.store.managers.sgdb_manager import SgdbManager
 from src.utils.create_dialog import create_dialog
 from src.utils.save_cover import convert_cover, save_cover
 
@@ -245,7 +245,7 @@ class DetailsWindow(Adw.Window):
         # Get a cover from SGDB if none is present
         if not self.game_cover.get_texture():
             self.game.set_loading(1)
-            sgdb_manager = shared.store.managers[SGDBManager]
+            sgdb_manager = shared.store.managers[SgdbManager]
             sgdb_manager.reset_cancellable()
             sgdb_manager.process_game(self.game, {}, self.update_cover_callback)
 
@@ -254,7 +254,7 @@ class DetailsWindow(Adw.Window):
         self.close()
         shared.win.show_details_page(self.game)
 
-    def update_cover_callback(self, manager: SGDBManager) -> None:
+    def update_cover_callback(self, manager: SgdbManager) -> None:
         # Set the game as not loading
         self.game.set_loading(-1)
         self.game.update()

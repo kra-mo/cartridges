@@ -26,10 +26,10 @@ from src.game import Game
 from src.store.managers.async_manager import AsyncManager
 from src.store.managers.cover_manager import CoverManager
 from src.store.managers.steam_api_manager import SteamAPIManager
-from src.utils.steamgriddb import SGDBAuthError, SGDBHelper
+from src.utils.steamgriddb import SgdbAuthError, SgdbHelper
 
 
-class SGDBManager(AsyncManager):
+class SgdbManager(AsyncManager):
     """Manager in charge of downloading a game's cover from SteamGridDB"""
 
     run_after = (SteamAPIManager, CoverManager)
@@ -37,9 +37,9 @@ class SGDBManager(AsyncManager):
 
     def main(self, game: Game, _additional_data: dict) -> None:
         try:
-            sgdb = SGDBHelper()
+            sgdb = SgdbHelper()
             sgdb.conditionaly_update_cover(game)
-        except SGDBAuthError as error:
+        except SgdbAuthError as error:
             # If invalid auth, cancel all SGDBManager tasks
             self.cancellable.cancel()
             raise FriendlyError(

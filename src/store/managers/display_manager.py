@@ -21,14 +21,14 @@ from src import shared
 from src.game import Game
 from src.game_cover import GameCover
 from src.store.managers.manager import Manager
-from src.store.managers.sgdb_manager import SGDBManager
+from src.store.managers.sgdb_manager import SgdbManager
 from src.store.managers.steam_api_manager import SteamAPIManager
 
 
 class DisplayManager(Manager):
     """Manager in charge of adding a game to the UI"""
 
-    run_after = (SteamAPIManager, SGDBManager)
+    run_after = (SteamAPIManager, SgdbManager)
     signals = {"update-ready"}
 
     def main(self, game: Game, _additional_data: dict) -> None:

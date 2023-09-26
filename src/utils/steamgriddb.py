@@ -31,27 +31,27 @@ from src.game import Game
 from src.utils.save_cover import convert_cover, save_cover
 
 
-class SGDBError(Exception):
+class SgdbError(Exception):
     pass
 
 
-class SGDBAuthError(SGDBError):
+class SgdbAuthError(SgdbError):
     pass
 
 
-class SGDBGameNotFoundError(SGDBError):
+class SgdbGameNotFound(SgdbError):
     pass
 
 
-class SGDBBadRequestError(SGDBError):
+class SgdbBadRequest(SgdbError):
     pass
 
 
-class SGDBNoImageFoundError(SGDBError):
+class SgdbNoImageFound(SgdbError):
     pass
 
 
-class SGDBHelper:
+class SgdbHelper:
     """Helper class to make queries to SteamGridDB"""
 
     base_url = "https://www.steamgriddb.com/api/v2/"
@@ -70,9 +70,9 @@ class SGDBHelper:
             case 200:
                 return res.json()["data"][0]["id"]
             case 401:
-                raise SGDBAuthError(res.json()["errors"][0])
+                raise SgdbAuthError(res.json()["errors"][0])
             case 404:
-                raise SGDBGameNotFoundError(res.status_code)
+                raise SgdbGameNotFound(res.status_code)
             case _:
                 res.raise_for_status()
 
@@ -86,12 +86,12 @@ class SGDBHelper:
             case 200:
                 data = res.json()["data"]
                 if len(data) == 0:
-                    raise SGDBNoImageFoundError()
+                    raise SgdbNoImageFound()
                 return data[0]["url"]
             case 401:
-                raise SGDBAuthError(res.json()["errors"][0])
+                raise SgdbAuthError(res.json()["errors"][0])
             case 404:
-                raise SGDBGameNotFoundError(res.status_code)
+                raise SgdbGameNotFound(res.status_code)
             case _:
                 res.raise_for_status()
 
@@ -115,7 +115,7 @@ class SGDBHelper:
         # Get ID for the game
         try:
             sgdb_id = self.get_game_id(game)
-        except (HTTPError, SGDBError) as error:
+        except (HTTPError, SgdbError) as error:
             logging.warning(
                 "%s while getting SGDB ID for %s", type(error).__name__, game.name
             )
@@ -135,10 +135,10 @@ class SGDBHelper:
                 tmp_file_path = tmp_file.get_path()
                 Path(tmp_file_path).write_bytes(response.content)
                 save_cover(game.game_id, convert_cover(tmp_file_path))
-            except SGDBAuthError as error:
+            except SgdbAuthError as error:
                 # Let caller handle auth errors
                 raise error
-            except (HTTPError, SGDBError) as error:
+            except (HTTPError, SgdbError) as error:
                 logging.warning(
                     "%s while getting image for %s kwargs=%s",
                     type(error).__name__,
@@ -156,4 +156,4 @@ class SGDBHelper:
             game.name,
             sgdb_id,
         )
-        raise SGDBNoImageFoundError()
+        raise SgdbNoImageFound()

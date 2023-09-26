@@ -38,7 +38,7 @@ from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.retroarch_source import RetroarchSource
 from src.importer.sources.source import Source
 from src.importer.sources.steam_source import SteamSource
-from src.store.managers.sgdb_manager import SGDBManager
+from src.store.managers.sgdb_manager import SgdbManager
 from src.utils.create_dialog import create_dialog
 
 
@@ -175,15 +175,15 @@ class PreferencesWindow(Adw.PreferencesWindow):
             )
         )
 
-        def redownload_sgdb(*_args) -> None:
+        def update_sgdb(*_args: Any) -> None:
             counter = 0
             games_len = len(shared.store)
-            sgdb_manager = shared.store.managers[SGDBManager]
+            sgdb_manager = shared.store.managers[SgdbManager]
             sgdb_manager.reset_cancellable()
 
             self.add_toast(download_toast := Adw.Toast.new(_("Downloading covers…")))
 
-            def update_cover_callback(manager: SGDBManager) -> None:
+            def update_cover_callback(manager: SgdbManager) -> None:
                 nonlocal counter
                 nonlocal games_len
                 nonlocal download_toast
@@ -208,7 +208,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             for game in shared.store:
                 sgdb_manager.process_game(game, {}, update_cover_callback)
 
-        self.sgdb_fetch_button.connect("clicked", redownload_sgdb)
+        self.sgdb_fetch_button.connect("clicked", update_sgdb)
 
         # Switches
         self.bind_switches(

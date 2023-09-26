@@ -51,7 +51,7 @@ from src.preferences import PreferencesWindow
 from src.store.managers.cover_manager import CoverManager
 from src.store.managers.display_manager import DisplayManager
 from src.store.managers.file_manager import FileManager
-from src.store.managers.sgdb_manager import SGDBManager
+from src.store.managers.sgdb_manager import SgdbManager
 from src.store.managers.steam_api_manager import SteamAPIManager
 from src.store.store import Store
 from src.utils.migrate_files_v1_to_v2 import migrate_files_v1_to_v2
@@ -107,7 +107,7 @@ class CartridgesApplication(Adw.Application):
         # Add rest of the managers for game imports
         shared.store.add_manager(CoverManager())
         shared.store.add_manager(SteamAPIManager())
-        shared.store.add_manager(SGDBManager())
+        shared.store.add_manager(SgdbManager())
         shared.store.toggle_manager_in_pipelines(FileManager, True)
 
         # Create actions
