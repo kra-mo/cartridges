@@ -293,12 +293,12 @@ template $PreferencesWindow : Adw.PreferencesWindow {
 
     Adw.PreferencesGroup {
       Adw.ActionRow {
-        title: _("Redownload Covers");
+        title: _("Update Covers");
         subtitle: _("Fetch covers for games already in your library");
         sensitive: bind sgdb_switch.active;
 
         Button sgdb_fetch_button {
-          label: _("Download");
+          label: _("Update");
           valign: center;
         }
       }
