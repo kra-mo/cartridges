@@ -60,7 +60,7 @@ class Store:
 
     def __len__(self) -> int:
         """Get the number of games in the store with the `len` builtin"""
-        return sum(len(source_mapping) for source_mapping in self.source_games)
+        return sum(len(source_mapping) for source_mapping in self.source_games.values())
 
     def __getitem__(self, game_id: str) -> Game:
         """Get a game by its id with `store["game_id_goes_here"]`"""
