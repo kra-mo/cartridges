@@ -26,6 +26,7 @@ from typing import Any, Callable, Optional
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from src import shared
+from src.errors.friendly_error import FriendlyError
 from src.game import Game
 from src.importer.sources.bottles_source import BottlesSource
 from src.importer.sources.flatpak_source import FlatpakSource
@@ -37,6 +38,7 @@ from src.importer.sources.lutris_source import LutrisSource
 from src.importer.sources.retroarch_source import RetroarchSource
 from src.importer.sources.source import Source
 from src.importer.sources.steam_source import SteamSource
+from src.store.managers.sgdb_manager import SGDBManager
 from src.utils.create_dialog import create_dialog
 
 
@@ -104,6 +106,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_switch = Gtk.Template.Child()
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
+    sgdb_fetch_button = Gtk.Template.Child()
 
     danger_zone_group = Gtk.Template.Child()
     reset_action_row = Gtk.Template.Child()
@@ -171,6 +174,41 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 '<a href="https://www.steamgriddb.com/profile/preferences/api">', "</a>"
             )
         )
+
+        def redownload_sgdb(*_args) -> None:
+            counter = 0
+            games_len = shared.store.__len__() - 1  # IDK why it returns one more
+            sgdb_manager = shared.store.managers[SGDBManager]
+            sgdb_manager.reset_cancellable()
+
+            self.add_toast(download_toast := Adw.Toast.new(_("Downloading covers…")))
+
+            def update_cover_callback(manager: SGDBManager) -> None:
+                nonlocal counter
+                nonlocal games_len
+                nonlocal download_toast
+
+                counter += 1
+                if counter != games_len:
+                    return
+
+                for error in manager.collect_errors():
+                    if isinstance(error, FriendlyError):
+                        create_dialog(self, error.title, error.subtitle)
+                        break
+
+                for game in shared.store:
+                    game.update()
+
+                toast = Adw.Toast.new(_("Covers updated"))
+                toast.set_priority(Adw.ToastPriority.HIGH)
+                download_toast.dismiss()
+                self.add_toast(toast)
+
+            for game in shared.store:
+                sgdb_manager.process_game(game, {}, update_cover_callback)
+
+        self.sgdb_fetch_button.connect("clicked", redownload_sgdb)
 
         # Switches
         self.bind_switches(
