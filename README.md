@@ -62,7 +62,7 @@ We accept donations through GitHub Sponsors to our main contributors:
 
 [Sponsor Geoffrey Coulaud](https://github.com/sponsors/geoffreycoulaud)
 
-Thank you for your genorosity! 💜
+Thank you for your generosity! 💜
 
 # Installation
 
