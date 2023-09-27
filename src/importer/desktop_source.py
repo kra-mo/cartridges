@@ -97,9 +97,7 @@ class DesktopSourceIterable(SourceIterable):
                     continue
 
                 try:
-                    try_exec = "which " + (
-                        keyfile.get_string("Desktop Entry", "TryExec").split(" %")[0]
-                    )
+                    try_exec = "which " + keyfile.get_string("Desktop Entry", "TryExec")
                     if not self.check_command(try_exec):
                         continue
 
