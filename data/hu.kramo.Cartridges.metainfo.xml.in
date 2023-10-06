@@ -44,12 +44,14 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.4.1" date="2023-09-23">
+    <release version="2.5" date="2023-10-06">
       <description translatable="no">
         <ul>
-          <li>Improved adaptivity for small screens</li>
+          <li>Added the ability to refetch covers from SteamGridDB</li>
+          <li>Fixed an issue with fractional scaling</li>
           <li>Translations since 2.4</li>
         </ul>
+        <p>The project now accepts donations. Thank you so much if you decide to donate! 💜</p>
       </description>
     </release>
     <release version="2.4" date="2023-09-21">
