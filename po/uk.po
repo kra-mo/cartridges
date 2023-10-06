@@ -5,13 +5,14 @@
 # Dan <denqwerta@gmail.com>, 2023.
 # Вова Смірнов <vovasmirnon5895@gmail.com>, 2023.
 # Dan <jonweblin2205@protonmail.com>, 2023.
+# Andrii Murha <flat.assembly@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 10:43+0200\n"
-"PO-Revision-Date: 2023-09-18 10:59+0000\n"
-"Last-Translator: Dan <jonweblin2205@protonmail.com>\n"
+"POT-Creation-Date: 2023-09-26 13:51+0200\n"
+"PO-Revision-Date: 2023-10-05 19:10+0000\n"
+"Last-Translator: Andrii Murha <flat.assembly@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/uk/>\n"
 "Language: uk\n"
@@ -20,10 +21,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.0.2\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
-#: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6
+#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:47
 #: data/gtk/window.blp:80
 msgid "Cartridges"
 msgstr "Картриджі"
@@ -55,22 +57,18 @@ msgstr ""
 "можете сортувати та приховувати ігри або завантажувати обкладинки з "
 "SteamGridDB."
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:30
-msgid "Library"
-msgstr "Бібліотека"
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34
-msgid "Edit Game Details"
-msgstr "Редагувати інформацію про гру"
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:286
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:288
 #: src/details_window.py:71
 msgid "Game Details"
 msgstr "Подробиці гри"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:513
-#: src/details_window.py:271 src/importer/importer.py:308
-#: src/importer/importer.py:359
+#: data/hu.kramo.Cartridges.metainfo.xml.in:38
+msgid "Edit Game Details"
+msgstr "Редагувати інформацію про гру"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/help-overlay.blp:19
+#: data/gtk/window.blp:515 src/details_window.py:271
+#: src/importer/importer.py:319 src/importer/importer.py:370
 msgid "Preferences"
 msgstr "Параметри"
 
@@ -106,20 +104,20 @@ msgstr "Вибрати файл"
 msgid "More Info"
 msgstr "Більше інформації"
 
-#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:413
+#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:415
 msgid "Edit"
 msgstr "Редагувати"
 
-#: data/gtk/game.blp:107 src/window.py:348
+#: data/gtk/game.blp:107 src/window.py:350
 msgid "Hide"
 msgstr "Приховати"
 
 #: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:40
-#: data/gtk/window.blp:433
+#: data/gtk/window.blp:435
 msgid "Remove"
 msgstr "Видалити"
 
-#: data/gtk/game.blp:126 src/window.py:350
+#: data/gtk/game.blp:126 src/window.py:352
 msgid "Unhide"
 msgstr "Показати"
 
@@ -127,54 +125,55 @@ msgstr "Показати"
 msgid "General"
 msgstr "Загальний"
 
-#: data/gtk/help-overlay.blp:14
-msgid "Quit"
-msgstr "Вийти"
-
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:182 data/gtk/window.blp:241
-#: data/gtk/window.blp:444
+#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:184 data/gtk/window.blp:243
+#: data/gtk/window.blp:446
 msgid "Search"
 msgstr "Пошук"
 
-#: data/gtk/help-overlay.blp:24
-msgid "Show preferences"
-msgstr "Показати параметри"
+#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:520
+msgid "Keyboard Shortcuts"
+msgstr "Комбінації клавіш"
 
-#: data/gtk/help-overlay.blp:29
-msgid "Shortcuts"
-msgstr "Ярлики"
-
-#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:122
-#: src/importer/importer.py:383
+#: data/gtk/help-overlay.blp:29 src/game.py:105 src/preferences.py:125
+#: src/importer/importer.py:394
 msgid "Undo"
 msgstr "Відмінити"
 
-#: data/gtk/help-overlay.blp:39
-msgid "Open menu"
-msgstr "Відкрити меню"
+#: data/gtk/help-overlay.blp:34
+msgid "Quit"
+msgstr "Вийти"
 
-#: data/gtk/help-overlay.blp:45
+#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:88 data/gtk/window.blp:164
+msgid "Toggle Sidebar"
+msgstr "Перкключити бічну панель"
+
+#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:177 data/gtk/window.blp:236
+msgid "Main Menu"
+msgstr "Головне меню"
+
+#: data/gtk/help-overlay.blp:50
 msgid "Games"
 msgstr "Ігри"
 
-#: data/gtk/help-overlay.blp:48
-msgid "Add new game"
-msgstr "Додати нову гру"
+#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:170 data/gtk/window.blp:534
+msgid "Add Game"
+msgstr "Додати гру"
 
-#: data/gtk/help-overlay.blp:53
-msgid "Import games"
-msgstr "Імпорт ігор"
-
-#: data/gtk/help-overlay.blp:58
-msgid "Show hidden games"
-msgstr "Показати приховані ігри"
+#: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:68
+#: data/gtk/window.blp:27 data/gtk/window.blp:541
+msgid "Import"
+msgstr "Імпорт"
 
 #: data/gtk/help-overlay.blp:63
-msgid "Remove game"
-msgstr "Видалити гру"
+msgid "Show Hidden Games"
+msgstr "Показати приховані ігри"
+
+#: data/gtk/help-overlay.blp:68
+msgid "Remove Game"
+msgstr "Видалити Гру"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:72
-#: data/gtk/preferences.blp:288
+#: data/gtk/preferences.blp:278
 msgid "Behavior"
 msgstr "Поведінка"
 
@@ -209,10 +208,6 @@ msgstr "Небезпечна зона"
 #: data/gtk/preferences.blp:37
 msgid "Remove All Games"
 msgstr "Видалити всі ігри"
-
-#: data/gtk/preferences.blp:68 data/gtk/window.blp:27 data/gtk/window.blp:539
-msgid "Import"
-msgstr "Імпорт"
 
 #: data/gtk/preferences.blp:75
 msgid "Remove Uninstalled Games"
@@ -293,37 +288,49 @@ msgstr "Flatpak"
 msgid "Import Game Launchers"
 msgstr "Імпортувати ігрові лаунчери"
 
-#: data/gtk/preferences.blp:264 src/importer/sources/desktop_source.py:196
+#: data/gtk/preferences.blp:259 src/importer/sources/desktop_source.py:217
 msgid "Desktop Entries"
 msgstr "Записи на робочому столі"
 
-#: data/gtk/preferences.blp:276
+#: data/gtk/preferences.blp:266
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:280
+#: data/gtk/preferences.blp:270
 msgid "Authentication"
 msgstr "Аутентифікація"
 
-#: data/gtk/preferences.blp:283
+#: data/gtk/preferences.blp:273
 msgid "API Key"
 msgstr "Ключ API"
 
-#: data/gtk/preferences.blp:291
+#: data/gtk/preferences.blp:281
 msgid "Use SteamGridDB"
 msgstr "Використовувати SteamGridDB"
 
-#: data/gtk/preferences.blp:292
+#: data/gtk/preferences.blp:282
 msgid "Download images when adding or importing games"
 msgstr "Завантаження зображень під час додавання або імпорту ігор"
 
-#: data/gtk/preferences.blp:296
+#: data/gtk/preferences.blp:286
 msgid "Prefer Over Official Images"
 msgstr "Надавати перевагу офіційним зображенням"
 
-#: data/gtk/preferences.blp:300
+#: data/gtk/preferences.blp:290
 msgid "Prefer Animated Images"
 msgstr "Надавати перевагу анімованим зображенням"
+
+#: data/gtk/preferences.blp:296
+msgid "Update Covers"
+msgstr "Оновити обкладинку"
+
+#: data/gtk/preferences.blp:297
+msgid "Fetch covers for games already in your library"
+msgstr "Отримані обкладинки для ігор вже у вашій бібліотеці"
+
+#: data/gtk/preferences.blp:301
+msgid "Update"
+msgstr "Оновити"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -349,100 +356,78 @@ msgstr "Ніяких прихованих ігор"
 msgid "Games you hide will appear here."
 msgstr "Ігри, які ви сховали, з'являться тут."
 
-#: data/gtk/window.blp:75 data/gtk/window.blp:105 src/main.py:166
-#, fuzzy
-#| msgid "Remove All Games"
+#: data/gtk/window.blp:75 data/gtk/window.blp:106 src/main.py:166
 msgid "All Games"
-msgstr "Видалити всі ігри"
+msgstr "Всі Ігри"
 
-#: data/gtk/window.blp:88 data/gtk/window.blp:162
-msgid "Toggle Sidebar"
-msgstr ""
-
-#: data/gtk/window.blp:125 src/main.py:168
-#, fuzzy
-#| msgid "Added: {}"
+#: data/gtk/window.blp:126 src/main.py:168
 msgid "Added"
-msgstr "Додано: {}"
+msgstr "Додано"
 
-#: data/gtk/window.blp:140
-#, fuzzy
-#| msgid "Import"
+#: data/gtk/window.blp:141
 msgid "Imported"
-msgstr "Імпорт"
+msgstr "Імпортовано"
 
-#: data/gtk/window.blp:168 data/gtk/window.blp:532
-msgid "Add Game"
-msgstr "Додати гру"
-
-#: data/gtk/window.blp:175 data/gtk/window.blp:234
-msgid "Main Menu"
-msgstr "Головне меню"
-
-#: data/gtk/window.blp:227
+#: data/gtk/window.blp:229
 msgid "Hidden Games"
 msgstr "Приховані ігри"
 
-#: data/gtk/window.blp:337
+#: data/gtk/window.blp:339
 msgid "Game Title"
 msgstr "Назва гри"
 
-#: data/gtk/window.blp:394
+#: data/gtk/window.blp:396
 msgid "Play"
 msgstr "Грати"
 
-#: data/gtk/window.blp:471
+#: data/gtk/window.blp:473
 msgid "Sort"
 msgstr "Сортувати"
 
-#: data/gtk/window.blp:474
+#: data/gtk/window.blp:476
 msgid "A-Z"
 msgstr "А-Я"
 
-#: data/gtk/window.blp:480
+#: data/gtk/window.blp:482
 msgid "Z-A"
 msgstr "Я-А"
 
-#: data/gtk/window.blp:486
+#: data/gtk/window.blp:488
 msgid "Newest"
 msgstr "Найновіші"
 
-#: data/gtk/window.blp:492
+#: data/gtk/window.blp:494
 msgid "Oldest"
 msgstr "Найстаріші"
 
-#: data/gtk/window.blp:498
+#: data/gtk/window.blp:500
 msgid "Last Played"
 msgstr "Остання гра"
 
-#: data/gtk/window.blp:505
+#: data/gtk/window.blp:507
 msgid "Show Hidden"
 msgstr "Показати приховане"
 
-#: data/gtk/window.blp:518
-msgid "Keyboard Shortcuts"
-msgstr "Комбінації клавіш"
-
-#: data/gtk/window.blp:523
+#: data/gtk/window.blp:525
 msgid "About Cartridges"
 msgstr "Про Картриджі"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:207
+#: src/main.py:208
 msgid "translator_credits"
 msgstr "kefir2105"
 
 #. The variable is the date when the game was added
-#: src/window.py:371
+#: src/window.py:373
 msgid "Added: {}"
 msgstr "Додано: {}"
 
-#: src/window.py:374
+#: src/window.py:376
 msgid "Never"
 msgstr "Ніколи"
 
 #. The variable is the date when the game was last played
-#: src/window.py:378
+#: src/window.py:380
 msgid "Last played: {}"
 msgstr "Востаннє грали: {}"
 
@@ -537,68 +522,76 @@ msgstr "{} показано"
 
 #. The variable is the title of the game
 #. The variable is the number of games removed
-#: src/game.py:169 src/importer/importer.py:380
+#: src/game.py:169 src/importer/importer.py:391
 msgid "{} removed"
 msgstr "{} видалено"
 
-#: src/preferences.py:121
+#: src/preferences.py:124
 msgid "All games removed"
 msgstr "Всі ігри видалено"
 
-#: src/preferences.py:169
+#: src/preferences.py:172
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Для використання SteamGridDB потрібен ключ API. Ви можете згенерувати його {}"
 "тут{}."
 
-#: src/preferences.py:296
+#: src/preferences.py:184
+msgid "Downloading covers…"
+msgstr "Завантаження обкладинок…"
+
+#: src/preferences.py:203
+msgid "Covers updated"
+msgstr "Обкладинки оновлені"
+
+#: src/preferences.py:335
 msgid "Installation Not Found"
 msgstr "Встановлення не знайдено"
 
-#: src/preferences.py:297
+#: src/preferences.py:336
 msgid "Select a valid directory."
 msgstr "Виберіть правильний каталог."
 
-#: src/preferences.py:333 src/importer/importer.py:306
+#: src/preferences.py:372 src/importer/importer.py:317
 msgid "Warning"
 msgstr "Увага"
 
-#: src/preferences.py:367
+#: src/preferences.py:406
 msgid "Invalid Directory"
 msgstr "Неправильний каталог"
 
-#: src/preferences.py:373
+#: src/preferences.py:412
 msgid "Set Location"
 msgstr "Встановити місцезнаходження"
 
-#: src/utils/create_dialog.py:33 src/importer/importer.py:307
+#: src/utils/create_dialog.py:33 src/importer/importer.py:318
 msgid "Dismiss"
 msgstr "Відхилити"
 
-#: src/importer/importer.py:142
+#: src/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Імпорт ігор…"
 
-#: src/importer/importer.py:327
+#: src/importer/importer.py:338
 msgid "The following errors occured during import:"
 msgstr "Під час імпорту виникли наступні помилки:"
 
-#: src/importer/importer.py:356
+#: src/importer/importer.py:367
 msgid "No new games found"
 msgstr "Нових ігор не знайдено"
 
-#: src/importer/importer.py:368
+#: src/importer/importer.py:379
 msgid "1 game imported"
 msgstr "1 гру імпортовано"
 
 #. The variable is the number of games
-#: src/importer/importer.py:372
+#: src/importer/importer.py:383
 msgid "{} games imported"
 msgstr "{} гри імпортовано"
 
 #. A single game removed
-#: src/importer/importer.py:376
+#: src/importer/importer.py:387
 msgid "1 removed"
 msgstr "1 вилучено"
 
@@ -637,6 +630,24 @@ msgstr "Наведені нижче списки відтворення не м�
 #: src/importer/sources/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
 msgstr "Ігри без вибраного ядра не імпортувалися"
+
+#~ msgid "Library"
+#~ msgstr "Бібліотека"
+
+#~ msgid "Show preferences"
+#~ msgstr "Показати параметри"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Ярлики"
+
+#~ msgid "Open menu"
+#~ msgstr "Відкрити меню"
+
+#~ msgid "Add new game"
+#~ msgstr "Додати нову гру"
+
+#~ msgid "Import games"
+#~ msgstr "Імпорт ігор"
 
 #~ msgid "Back"
 #~ msgstr "Назад"
@@ -702,9 +713,6 @@ msgstr "Ігри без вибраного ядра не імпортували�
 
 #~ msgid "Select the Lutris cache directory."
 #~ msgstr "Виберіть каталог кешу Lutris."
-
-#~ msgid "Importing Covers…"
-#~ msgstr "Імпорт обкладинок…"
 
 #~ msgid "Directory to use when importing games"
 #~ msgstr "Каталог для імпорту ігор"

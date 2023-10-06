@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 10:43+0200\n"
-"PO-Revision-Date: 2023-09-01 19:55+0000\n"
+"POT-Creation-Date: 2023-09-26 13:51+0200\n"
+"PO-Revision-Date: 2023-09-26 07:17+0000\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/pt_BR/>\n"
@@ -19,10 +19,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
-#: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6
+#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:47
 #: data/gtk/window.blp:80
 msgid "Cartridges"
 msgstr "Cartuchos"
@@ -55,22 +56,18 @@ msgstr ""
 "necessidade de login. Você pode ordenar e esconder jogos ou baixar arte de "
 "capa do SteamGridDB."
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:30
-msgid "Library"
-msgstr "Biblioteca"
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34
-msgid "Edit Game Details"
-msgstr "Editar detalhes do jogo"
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:286
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:288
 #: src/details_window.py:71
 msgid "Game Details"
 msgstr "Detalhes do jogo"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:513
-#: src/details_window.py:271 src/importer/importer.py:308
-#: src/importer/importer.py:359
+#: data/hu.kramo.Cartridges.metainfo.xml.in:38
+msgid "Edit Game Details"
+msgstr "Editar detalhes do jogo"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/help-overlay.blp:19
+#: data/gtk/window.blp:515 src/details_window.py:271
+#: src/importer/importer.py:319 src/importer/importer.py:370
 msgid "Preferences"
 msgstr "Preferências"
 
@@ -106,20 +103,20 @@ msgstr "Selecionar arquivo"
 msgid "More Info"
 msgstr "Mais informações"
 
-#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:413
+#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:415
 msgid "Edit"
 msgstr "Editar"
 
-#: data/gtk/game.blp:107 src/window.py:348
+#: data/gtk/game.blp:107 src/window.py:350
 msgid "Hide"
 msgstr "Esconder"
 
 #: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:40
-#: data/gtk/window.blp:433
+#: data/gtk/window.blp:435
 msgid "Remove"
 msgstr "Remover"
 
-#: data/gtk/game.blp:126 src/window.py:350
+#: data/gtk/game.blp:126 src/window.py:352
 msgid "Unhide"
 msgstr "Exibir"
 
@@ -127,54 +124,55 @@ msgstr "Exibir"
 msgid "General"
 msgstr "Geral"
 
-#: data/gtk/help-overlay.blp:14
-msgid "Quit"
-msgstr "Sair"
-
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:182 data/gtk/window.blp:241
-#: data/gtk/window.blp:444
+#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:184 data/gtk/window.blp:243
+#: data/gtk/window.blp:446
 msgid "Search"
 msgstr "Buscar"
 
-#: data/gtk/help-overlay.blp:24
-msgid "Show preferences"
-msgstr "Mostrar preferências"
+#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:520
+msgid "Keyboard Shortcuts"
+msgstr "Atalhos de teclado"
 
-#: data/gtk/help-overlay.blp:29
-msgid "Shortcuts"
-msgstr "Atalhos"
-
-#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:122
-#: src/importer/importer.py:383
+#: data/gtk/help-overlay.blp:29 src/game.py:105 src/preferences.py:125
+#: src/importer/importer.py:394
 msgid "Undo"
 msgstr "Desfazer"
 
-#: data/gtk/help-overlay.blp:39
-msgid "Open menu"
-msgstr "Abrir menu"
+#: data/gtk/help-overlay.blp:34
+msgid "Quit"
+msgstr "Sair"
 
-#: data/gtk/help-overlay.blp:45
+#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:88 data/gtk/window.blp:164
+msgid "Toggle Sidebar"
+msgstr "Alternar barra lateral"
+
+#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:177 data/gtk/window.blp:236
+msgid "Main Menu"
+msgstr "Menu Principal"
+
+#: data/gtk/help-overlay.blp:50
 msgid "Games"
 msgstr "Jogos"
 
-#: data/gtk/help-overlay.blp:48
-msgid "Add new game"
-msgstr "Adicionar novo jogo"
+#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:170 data/gtk/window.blp:534
+msgid "Add Game"
+msgstr "Adicionar jogo"
 
-#: data/gtk/help-overlay.blp:53
-msgid "Import games"
-msgstr "Importar jogos"
-
-#: data/gtk/help-overlay.blp:58
-msgid "Show hidden games"
-msgstr "Exibir jogos ocultos"
+#: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:68
+#: data/gtk/window.blp:27 data/gtk/window.blp:541
+msgid "Import"
+msgstr "Importar"
 
 #: data/gtk/help-overlay.blp:63
-msgid "Remove game"
+msgid "Show Hidden Games"
+msgstr "Exibir jogos ocultos"
+
+#: data/gtk/help-overlay.blp:68
+msgid "Remove Game"
 msgstr "Remover jogo"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:72
-#: data/gtk/preferences.blp:288
+#: data/gtk/preferences.blp:278
 msgid "Behavior"
 msgstr "Comportamento"
 
@@ -209,10 +207,6 @@ msgstr "Zona de Perigo"
 #: data/gtk/preferences.blp:37
 msgid "Remove All Games"
 msgstr "Remover todos os jogos"
-
-#: data/gtk/preferences.blp:68 data/gtk/window.blp:27 data/gtk/window.blp:539
-msgid "Import"
-msgstr "Importar"
 
 #: data/gtk/preferences.blp:75
 msgid "Remove Uninstalled Games"
@@ -293,37 +287,51 @@ msgstr "Flatpak"
 msgid "Import Game Launchers"
 msgstr "Importar iniciadores de jogos"
 
-#: data/gtk/preferences.blp:264 src/importer/sources/desktop_source.py:196
+#: data/gtk/preferences.blp:259 src/importer/sources/desktop_source.py:217
 msgid "Desktop Entries"
 msgstr "Entradas desktop"
 
-#: data/gtk/preferences.blp:276
+#: data/gtk/preferences.blp:266
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:280
+#: data/gtk/preferences.blp:270
 msgid "Authentication"
 msgstr "Autenticação"
 
-#: data/gtk/preferences.blp:283
+#: data/gtk/preferences.blp:273
 msgid "API Key"
 msgstr "Chave da API"
 
-#: data/gtk/preferences.blp:291
+#: data/gtk/preferences.blp:281
 msgid "Use SteamGridDB"
 msgstr "Usar SteamGridDB"
 
-#: data/gtk/preferences.blp:292
+#: data/gtk/preferences.blp:282
 msgid "Download images when adding or importing games"
 msgstr "Baixar imagens ao adicionar ou importar jogos"
 
-#: data/gtk/preferences.blp:296
+#: data/gtk/preferences.blp:286
 msgid "Prefer Over Official Images"
 msgstr "Preferir mais que as imagens oficiais"
 
-#: data/gtk/preferences.blp:300
+#: data/gtk/preferences.blp:290
 msgid "Prefer Animated Images"
 msgstr "Preferir imagens animadas"
+
+#: data/gtk/preferences.blp:296
+#, fuzzy
+#| msgid "Delete Cover"
+msgid "Update Covers"
+msgstr "Excluir capa"
+
+#: data/gtk/preferences.blp:297
+msgid "Fetch covers for games already in your library"
+msgstr ""
+
+#: data/gtk/preferences.blp:301
+msgid "Update"
+msgstr ""
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -349,100 +357,78 @@ msgstr "Sem jogos ocultos"
 msgid "Games you hide will appear here."
 msgstr "Os jogos ocultos aparecerão aqui."
 
-#: data/gtk/window.blp:75 data/gtk/window.blp:105 src/main.py:166
-#, fuzzy
-#| msgid "Remove All Games"
+#: data/gtk/window.blp:75 data/gtk/window.blp:106 src/main.py:166
 msgid "All Games"
-msgstr "Remover todos os jogos"
+msgstr "Todos os jogos"
 
-#: data/gtk/window.blp:88 data/gtk/window.blp:162
-msgid "Toggle Sidebar"
-msgstr ""
-
-#: data/gtk/window.blp:125 src/main.py:168
-#, fuzzy
-#| msgid "Added: {}"
+#: data/gtk/window.blp:126 src/main.py:168
 msgid "Added"
-msgstr "Adicionado: {}"
+msgstr "Adicionado"
 
-#: data/gtk/window.blp:140
-#, fuzzy
-#| msgid "Import"
+#: data/gtk/window.blp:141
 msgid "Imported"
-msgstr "Importar"
+msgstr "Importado"
 
-#: data/gtk/window.blp:168 data/gtk/window.blp:532
-msgid "Add Game"
-msgstr "Adicionar jogo"
-
-#: data/gtk/window.blp:175 data/gtk/window.blp:234
-msgid "Main Menu"
-msgstr "Menu Principal"
-
-#: data/gtk/window.blp:227
+#: data/gtk/window.blp:229
 msgid "Hidden Games"
 msgstr "Jogos ocultos"
 
-#: data/gtk/window.blp:337
+#: data/gtk/window.blp:339
 msgid "Game Title"
 msgstr "Título do jogo"
 
-#: data/gtk/window.blp:394
+#: data/gtk/window.blp:396
 msgid "Play"
 msgstr "Jogar"
 
-#: data/gtk/window.blp:471
+#: data/gtk/window.blp:473
 msgid "Sort"
 msgstr "Ordenar"
 
-#: data/gtk/window.blp:474
+#: data/gtk/window.blp:476
 msgid "A-Z"
 msgstr "A-Z"
 
-#: data/gtk/window.blp:480
+#: data/gtk/window.blp:482
 msgid "Z-A"
 msgstr "Z-A"
 
-#: data/gtk/window.blp:486
+#: data/gtk/window.blp:488
 msgid "Newest"
 msgstr "Mais novo"
 
-#: data/gtk/window.blp:492
+#: data/gtk/window.blp:494
 msgid "Oldest"
 msgstr "Mais antigo"
 
-#: data/gtk/window.blp:498
+#: data/gtk/window.blp:500
 msgid "Last Played"
 msgstr "Última vez jogado"
 
-#: data/gtk/window.blp:505
+#: data/gtk/window.blp:507
 msgid "Show Hidden"
 msgstr "Mostrar ocultados"
 
-#: data/gtk/window.blp:518
-msgid "Keyboard Shortcuts"
-msgstr "Atalhos de teclado"
-
-#: data/gtk/window.blp:523
+#: data/gtk/window.blp:525
 msgid "About Cartridges"
 msgstr "Sobre o Cartuchos"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:207
+#: src/main.py:208
 msgid "translator_credits"
 msgstr "Pedro Sader Azevedo, Vinícius \"Stalck\""
 
 #. The variable is the date when the game was added
-#: src/window.py:371
+#: src/window.py:373
 msgid "Added: {}"
 msgstr "Adicionado: {}"
 
-#: src/window.py:374
+#: src/window.py:376
 msgid "Never"
 msgstr "Nunca"
 
 #. The variable is the date when the game was last played
-#: src/window.py:378
+#: src/window.py:380
 msgid "Last played: {}"
 msgstr "Jogado pela última vez: {}"
 
@@ -536,68 +522,78 @@ msgstr "{} exibido"
 
 #. The variable is the title of the game
 #. The variable is the number of games removed
-#: src/game.py:169 src/importer/importer.py:380
+#: src/game.py:169 src/importer/importer.py:391
 msgid "{} removed"
 msgstr "{} removido"
 
-#: src/preferences.py:121
+#: src/preferences.py:124
 msgid "All games removed"
 msgstr "Todos os jogos foram removidos"
 
-#: src/preferences.py:169
+#: src/preferences.py:172
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Uma chave de API é necessária para utilizar o SteamGridDB. Você pode gerar "
 "uma {}aqui{}."
 
-#: src/preferences.py:296
+#: src/preferences.py:184
+#, fuzzy
+#| msgid "Importing Covers…"
+msgid "Downloading covers…"
+msgstr "Importando capas…"
+
+#: src/preferences.py:203
+msgid "Covers updated"
+msgstr ""
+
+#: src/preferences.py:335
 msgid "Installation Not Found"
 msgstr "Instalação não encontrada"
 
-#: src/preferences.py:297
+#: src/preferences.py:336
 msgid "Select a valid directory."
 msgstr "Selecione um diretório válido."
 
-#: src/preferences.py:333 src/importer/importer.py:306
+#: src/preferences.py:372 src/importer/importer.py:317
 msgid "Warning"
 msgstr "Atenção"
 
-#: src/preferences.py:367
+#: src/preferences.py:406
 msgid "Invalid Directory"
 msgstr "Diretório inválido"
 
-#: src/preferences.py:373
+#: src/preferences.py:412
 msgid "Set Location"
 msgstr "Definir local"
 
-#: src/utils/create_dialog.py:33 src/importer/importer.py:307
+#: src/utils/create_dialog.py:33 src/importer/importer.py:318
 msgid "Dismiss"
 msgstr "Dispensar"
 
-#: src/importer/importer.py:142
+#: src/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Importando jogos…"
 
-#: src/importer/importer.py:327
+#: src/importer/importer.py:338
 msgid "The following errors occured during import:"
 msgstr "Ocorreram os seguintes erros durante a importação:"
 
-#: src/importer/importer.py:356
+#: src/importer/importer.py:367
 msgid "No new games found"
 msgstr "Nenhum jogo novo encontrado"
 
-#: src/importer/importer.py:368
+#: src/importer/importer.py:379
 msgid "1 game imported"
 msgstr "1 jogo importado"
 
 #. The variable is the number of games
-#: src/importer/importer.py:372
+#: src/importer/importer.py:383
 msgid "{} games imported"
 msgstr "{} jogos importados"
 
 #. A single game removed
-#: src/importer/importer.py:376
+#: src/importer/importer.py:387
 msgid "1 removed"
 msgstr "1 removido"
 
@@ -636,6 +632,24 @@ msgstr "As seguintes listas de jogos não têm núcleo padrão:"
 #: src/importer/sources/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
 msgstr "Jogos sem núcleo selecionado não foram importados"
+
+#~ msgid "Library"
+#~ msgstr "Biblioteca"
+
+#~ msgid "Show preferences"
+#~ msgstr "Mostrar preferências"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Atalhos"
+
+#~ msgid "Open menu"
+#~ msgstr "Abrir menu"
+
+#~ msgid "Add new game"
+#~ msgstr "Adicionar novo jogo"
+
+#~ msgid "Import games"
+#~ msgstr "Importar jogos"
 
 #~ msgid "Back"
 #~ msgstr "Voltar"
@@ -688,9 +702,6 @@ msgstr "Jogos sem núcleo selecionado não foram importados"
 
 #~ msgid "Select the Lutris cache directory."
 #~ msgstr "Selecione o diretório de cache do Lutris."
-
-#~ msgid "Importing Covers…"
-#~ msgstr "Importando capas…"
 
 #~ msgid "Directory to use when importing games"
 #~ msgstr "Diretório para usar ao importar jogos"

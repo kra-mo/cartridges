@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 10:43+0200\n"
-"PO-Revision-Date: 2023-09-21 14:55+0000\n"
+"POT-Creation-Date: 2023-09-26 13:51+0200\n"
+"PO-Revision-Date: 2023-09-26 12:33+0000\n"
 "Last-Translator: kramo <contact@kramo.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
@@ -21,7 +21,8 @@ msgstr ""
 "X-Generator: Weblate 5.1-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
-#: data/hu.kramo.Cartridges.metainfo.xml.in:6 data/gtk/window.blp:47
+#: data/hu.kramo.Cartridges.metainfo.xml.in:6
+#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:47
 #: data/gtk/window.blp:80
 msgid "Cartridges"
 msgstr "Kazetták"
@@ -52,22 +53,18 @@ msgstr ""
 "ból, Heroic-ból és több más forrásból bejelentkezés nélkül. Rendezheti és "
 "elrejtheti a játékait, valamint letölthet borítóképeket a SteamGridDB-ről."
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:30
-msgid "Library"
-msgstr "Könyvtár"
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34
-msgid "Edit Game Details"
-msgstr "Játék Szerkesztése"
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:38 data/gtk/window.blp:286
+#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:288
 #: src/details_window.py:71
 msgid "Game Details"
 msgstr "Játék Tulajdonságai"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/window.blp:513
-#: src/details_window.py:271 src/importer/importer.py:308
-#: src/importer/importer.py:359
+#: data/hu.kramo.Cartridges.metainfo.xml.in:38
+msgid "Edit Game Details"
+msgstr "Játék Szerkesztése"
+
+#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/help-overlay.blp:19
+#: data/gtk/window.blp:515 src/details_window.py:271
+#: src/importer/importer.py:319 src/importer/importer.py:370
 msgid "Preferences"
 msgstr "Beállítások"
 
@@ -103,20 +100,20 @@ msgstr "Fájl kiválasztása"
 msgid "More Info"
 msgstr "Több infó"
 
-#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:413
+#: data/gtk/game.blp:102 data/gtk/game.blp:121 data/gtk/window.blp:415
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: data/gtk/game.blp:107 src/window.py:348
+#: data/gtk/game.blp:107 src/window.py:350
 msgid "Hide"
 msgstr "Elrejtés"
 
 #: data/gtk/game.blp:112 data/gtk/game.blp:131 data/gtk/preferences.blp:40
-#: data/gtk/window.blp:433
+#: data/gtk/window.blp:435
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: data/gtk/game.blp:126 src/window.py:350
+#: data/gtk/game.blp:126 src/window.py:352
 msgid "Unhide"
 msgstr "Elrejtés visszavonása"
 
@@ -124,54 +121,55 @@ msgstr "Elrejtés visszavonása"
 msgid "General"
 msgstr "Általános"
 
-#: data/gtk/help-overlay.blp:14
-msgid "Quit"
-msgstr "Kilépés"
-
-#: data/gtk/help-overlay.blp:19 data/gtk/window.blp:182 data/gtk/window.blp:241
-#: data/gtk/window.blp:444
+#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:184 data/gtk/window.blp:243
+#: data/gtk/window.blp:446
 msgid "Search"
 msgstr "Keresés"
 
-#: data/gtk/help-overlay.blp:24
-msgid "Show preferences"
-msgstr "Beállítások megjelenítése"
-
-#: data/gtk/help-overlay.blp:29
-msgid "Shortcuts"
+#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:520
+msgid "Keyboard Shortcuts"
 msgstr "Gyorsbillentyűk"
 
-#: data/gtk/help-overlay.blp:34 src/game.py:105 src/preferences.py:122
-#: src/importer/importer.py:383
+#: data/gtk/help-overlay.blp:29 src/game.py:105 src/preferences.py:125
+#: src/importer/importer.py:394
 msgid "Undo"
 msgstr "Visszavonás"
 
-#: data/gtk/help-overlay.blp:39
-msgid "Open menu"
-msgstr "Menü megnyitása"
+#: data/gtk/help-overlay.blp:34
+msgid "Quit"
+msgstr "Kilépés"
 
-#: data/gtk/help-overlay.blp:45
+#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:88 data/gtk/window.blp:164
+msgid "Toggle Sidebar"
+msgstr "Oldalsáv megjelenítése"
+
+#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:177 data/gtk/window.blp:236
+msgid "Main Menu"
+msgstr "Főmenü"
+
+#: data/gtk/help-overlay.blp:50
 msgid "Games"
 msgstr "Játékok"
 
-#: data/gtk/help-overlay.blp:48
-msgid "Add new game"
-msgstr "Új játék hozzáadása"
+#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:170 data/gtk/window.blp:534
+msgid "Add Game"
+msgstr "Játék hozzáadása"
 
-#: data/gtk/help-overlay.blp:53
-msgid "Import games"
-msgstr "Játékok importálása"
-
-#: data/gtk/help-overlay.blp:58
-msgid "Show hidden games"
-msgstr "Rejtett játékok megjelenítése"
+#: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:68
+#: data/gtk/window.blp:27 data/gtk/window.blp:541
+msgid "Import"
+msgstr "Importálás"
 
 #: data/gtk/help-overlay.blp:63
-msgid "Remove game"
+msgid "Show Hidden Games"
+msgstr "Rejtett játékok megjelenítése"
+
+#: data/gtk/help-overlay.blp:68
+msgid "Remove Game"
 msgstr "Játék eltávolítása"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:72
-#: data/gtk/preferences.blp:288
+#: data/gtk/preferences.blp:278
 msgid "Behavior"
 msgstr "Működés"
 
@@ -206,10 +204,6 @@ msgstr "Veszélyzóna"
 #: data/gtk/preferences.blp:37
 msgid "Remove All Games"
 msgstr "Az összes játék eltávolítása"
-
-#: data/gtk/preferences.blp:68 data/gtk/window.blp:27 data/gtk/window.blp:539
-msgid "Import"
-msgstr "Importálás"
 
 #: data/gtk/preferences.blp:75
 msgid "Remove Uninstalled Games"
@@ -290,37 +284,49 @@ msgstr "Flatpak"
 msgid "Import Game Launchers"
 msgstr "Játékindítók importálása"
 
-#: data/gtk/preferences.blp:264 src/importer/sources/desktop_source.py:196
+#: data/gtk/preferences.blp:259 src/importer/sources/desktop_source.py:217
 msgid "Desktop Entries"
 msgstr "Asztali bejegyzések"
 
-#: data/gtk/preferences.blp:276
+#: data/gtk/preferences.blp:266
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:280
+#: data/gtk/preferences.blp:270
 msgid "Authentication"
 msgstr "Hitelesítés"
 
-#: data/gtk/preferences.blp:283
+#: data/gtk/preferences.blp:273
 msgid "API Key"
 msgstr "API kulcs"
 
-#: data/gtk/preferences.blp:291
+#: data/gtk/preferences.blp:281
 msgid "Use SteamGridDB"
 msgstr "SteamGridDB használata"
 
-#: data/gtk/preferences.blp:292
+#: data/gtk/preferences.blp:282
 msgid "Download images when adding or importing games"
 msgstr "Képek letöltése játékok hozzáadásakor és importálásakor"
 
-#: data/gtk/preferences.blp:296
+#: data/gtk/preferences.blp:286
 msgid "Prefer Over Official Images"
 msgstr "SteamGridDB képek előnyben részesítése"
 
-#: data/gtk/preferences.blp:300
+#: data/gtk/preferences.blp:290
 msgid "Prefer Animated Images"
 msgstr "Animált képek előnyben részesítése"
+
+#: data/gtk/preferences.blp:296
+msgid "Update Covers"
+msgstr "Borítók frissítése"
+
+#: data/gtk/preferences.blp:297
+msgid "Fetch covers for games already in your library"
+msgstr "Borítók letöltése játékokhoz, amik már a könyvtárában vannak"
+
+#: data/gtk/preferences.blp:301
+msgid "Update"
+msgstr "Frissítés"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -346,94 +352,78 @@ msgstr "Nincsenek rejtett játékok"
 msgid "Games you hide will appear here."
 msgstr "A rejtett játékaid itt lesznek megtalálhatóak."
 
-#: data/gtk/window.blp:75 data/gtk/window.blp:105 src/main.py:166
+#: data/gtk/window.blp:75 data/gtk/window.blp:106 src/main.py:166
 msgid "All Games"
 msgstr "Összes játék"
 
-#: data/gtk/window.blp:88 data/gtk/window.blp:162
-msgid "Toggle Sidebar"
-msgstr "Oldalsáv megjelenítése"
-
-#: data/gtk/window.blp:125 src/main.py:168
+#: data/gtk/window.blp:126 src/main.py:168
 msgid "Added"
 msgstr "Hozzáadva"
 
-#: data/gtk/window.blp:140
+#: data/gtk/window.blp:141
 msgid "Imported"
 msgstr "Importálva"
 
-#: data/gtk/window.blp:168 data/gtk/window.blp:532
-msgid "Add Game"
-msgstr "Játék hozzáadása"
-
-#: data/gtk/window.blp:175 data/gtk/window.blp:234
-msgid "Main Menu"
-msgstr "Főmenü"
-
-#: data/gtk/window.blp:227
+#: data/gtk/window.blp:229
 msgid "Hidden Games"
 msgstr "Rejtett játékok"
 
-#: data/gtk/window.blp:337
+#: data/gtk/window.blp:339
 msgid "Game Title"
 msgstr "Cím"
 
-#: data/gtk/window.blp:394
+#: data/gtk/window.blp:396
 msgid "Play"
 msgstr "Játék"
 
-#: data/gtk/window.blp:471
+#: data/gtk/window.blp:473
 msgid "Sort"
 msgstr "Rendezés"
 
-#: data/gtk/window.blp:474
+#: data/gtk/window.blp:476
 msgid "A-Z"
 msgstr "A-Z"
 
-#: data/gtk/window.blp:480
+#: data/gtk/window.blp:482
 msgid "Z-A"
 msgstr "Z-A"
 
-#: data/gtk/window.blp:486
+#: data/gtk/window.blp:488
 msgid "Newest"
 msgstr "Legújabb"
 
-#: data/gtk/window.blp:492
+#: data/gtk/window.blp:494
 msgid "Oldest"
 msgstr "Legrégebbi"
 
-#: data/gtk/window.blp:498
+#: data/gtk/window.blp:500
 msgid "Last Played"
 msgstr "Legutóbb játszott"
 
-#: data/gtk/window.blp:505
+#: data/gtk/window.blp:507
 msgid "Show Hidden"
 msgstr "Rejtett játékok"
 
-#: data/gtk/window.blp:518
-msgid "Keyboard Shortcuts"
-msgstr "Gyorsbillentyűk"
-
-#: data/gtk/window.blp:523
+#: data/gtk/window.blp:525
 msgid "About Cartridges"
 msgstr "A Kazetták névjegye"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: src/main.py:207
+#: src/main.py:208
 msgid "translator_credits"
 msgstr "kramo https://kramo.hu"
 
 #. The variable is the date when the game was added
-#: src/window.py:371
+#: src/window.py:373
 msgid "Added: {}"
 msgstr "Hozzáadva: {}"
 
-#: src/window.py:374
+#: src/window.py:376
 msgid "Never"
 msgstr "Soha"
 
 #. The variable is the date when the game was last played
-#: src/window.py:378
+#: src/window.py:380
 msgid "Last played: {}"
 msgstr "Legutóbbi játékmenet: {}"
 
@@ -528,68 +518,76 @@ msgstr "{} elrejtése visszavonva"
 
 #. The variable is the title of the game
 #. The variable is the number of games removed
-#: src/game.py:169 src/importer/importer.py:380
+#: src/game.py:169 src/importer/importer.py:391
 msgid "{} removed"
 msgstr "{} eltávolítva"
 
-#: src/preferences.py:121
+#: src/preferences.py:124
 msgid "All games removed"
 msgstr "Az összes játék eltávolítva"
 
-#: src/preferences.py:169
+#: src/preferences.py:172
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Egy API kulcs szükséges a SteamGridDB használatához. {}Itt{} generálhat "
 "egyet."
 
-#: src/preferences.py:296
+#: src/preferences.py:184
+msgid "Downloading covers…"
+msgstr "Borítóképek letöltése folyamatban…"
+
+#: src/preferences.py:203
+msgid "Covers updated"
+msgstr "Borítóképek frissítve"
+
+#: src/preferences.py:335
 msgid "Installation Not Found"
 msgstr "A telepítés nem található"
 
-#: src/preferences.py:297
+#: src/preferences.py:336
 msgid "Select a valid directory."
 msgstr "Válasszon ki egy érvényes mappát."
 
-#: src/preferences.py:333 src/importer/importer.py:306
+#: src/preferences.py:372 src/importer/importer.py:317
 msgid "Warning"
 msgstr "Figyelem"
 
-#: src/preferences.py:367
+#: src/preferences.py:406
 msgid "Invalid Directory"
 msgstr "Érvénytelen mappa"
 
-#: src/preferences.py:373
+#: src/preferences.py:412
 msgid "Set Location"
 msgstr "Mappa kiválasztása"
 
-#: src/utils/create_dialog.py:33 src/importer/importer.py:307
+#: src/utils/create_dialog.py:33 src/importer/importer.py:318
 msgid "Dismiss"
 msgstr "Rendben"
 
-#: src/importer/importer.py:142
+#: src/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Játékok importálása folyamatban…"
 
-#: src/importer/importer.py:327
+#: src/importer/importer.py:338
 msgid "The following errors occured during import:"
 msgstr "A következő hibák történtek importálás közben:"
 
-#: src/importer/importer.py:356
+#: src/importer/importer.py:367
 msgid "No new games found"
 msgstr "Nem találhatóak új játékok"
 
-#: src/importer/importer.py:368
+#: src/importer/importer.py:379
 msgid "1 game imported"
 msgstr "1 játék importálva"
 
 #. The variable is the number of games
-#: src/importer/importer.py:372
+#: src/importer/importer.py:383
 msgid "{} games imported"
 msgstr "{} játék importálva"
 
 #. A single game removed
-#: src/importer/importer.py:376
+#: src/importer/importer.py:387
 msgid "1 removed"
 msgstr "1 eltávolítva"
 
@@ -628,6 +626,24 @@ msgstr "A következő listáknak nincs core-ja:"
 #: src/importer/sources/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
 msgstr "Játékok, aminek nincs kiválasztott core-ja nem lettek importálva"
+
+#~ msgid "Library"
+#~ msgstr "Könyvtár"
+
+#~ msgid "Show preferences"
+#~ msgstr "Beállítások megjelenítése"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Gyorsbillentyűk"
+
+#~ msgid "Open menu"
+#~ msgstr "Menü megnyitása"
+
+#~ msgid "Add new game"
+#~ msgstr "Új játék hozzáadása"
+
+#~ msgid "Import games"
+#~ msgstr "Játékok importálása"
 
 #~ msgid "Back"
 #~ msgstr "Vissza"
@@ -692,9 +708,6 @@ msgstr "Játékok, aminek nincs kiválasztott core-ja nem lettek importálva"
 
 #~ msgid "Select the Lutris cache directory."
 #~ msgstr "Válassza ki Lutris gyorsítótár mappáját."
-
-#~ msgid "Importing Covers…"
-#~ msgstr "Borítóképek importálása folyamatban…"
 
 #~ msgid "Directory to use when importing games"
 #~ msgstr "Az importáláshoz használt mappa"
