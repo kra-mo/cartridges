@@ -31,7 +31,7 @@
 
 # The Project
 
-Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita.
+Cartridges is an easy-to-use, elegant game launcher written in Python using GTK4 and Libadwaita.
 
 ## Features
 
@@ -52,11 +52,12 @@ Cartridges is a simple game launcher written in Python using GTK4 and Libadwaita
 - Automatically downloading cover art from [SteamGridDB](https://www.steamgriddb.com/)
 - Searching for games on various databases
 - Animated covers
+- A search provider for GNOME
 
 For updates and questions, join our [Discord server][discord-url] (bridged to [Matrix](https://matrix.to/#/#cartridges:matrix.org))!
 
 ## Donations
-We accept donations through [GitHub Sponsors](https://github.com/sponsors/kra-mo).
+I accept donations through [GitHub Sponsors](https://github.com/sponsors/kra-mo).
 
 Thank you for your generosity! 💜
 
