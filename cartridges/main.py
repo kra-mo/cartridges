@@ -59,11 +59,13 @@ from cartridges.window import CartridgesWindow
 class CartridgesApplication(Adw.Application):
     state = shared.AppState.DEFAULT
     win: CartridgesWindow
+    init_search_term: str = None
 
     def __init__(self) -> None:
         shared.store = Store()
         super().__init__(
-            application_id=shared.APP_ID, flags=Gio.ApplicationFlags.FLAGS_NONE
+            application_id=shared.APP_ID,
+            flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
         )
 
     def do_activate(self) -> None:  # pylint: disable=arguments-differ
@@ -147,7 +149,19 @@ class CartridgesApplication(Adw.Application):
             sort_action, shared.state_schema.get_value("sort-mode")
         )
 
+        if self.init_search_term: # For command line activation
+            shared.win.search_bar.set_search_mode(True)
+            shared.win.search_entry.set_text(self.init_search_term)
+
         shared.win.present()
+
+    def do_command_line(self, command_line) -> int:
+        for index, arg in enumerate(args := command_line.get_arguments()):
+            if arg == "--search":
+                self.init_search_term = args[index + 1]
+                break
+        self.activate()
+        return 0
 
     def load_games_from_disk(self) -> None:
         if shared.games_dir.is_dir():

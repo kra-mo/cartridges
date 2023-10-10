@@ -154,8 +154,6 @@ class SearchCartridgesService(Server, Gio.Application):
         )
         Server.__init__(self, self.__bus, self.__PATH_BUS)
 
-        print(self.GetInitialResultSet(["don't", "starve"]))
-
     def load_games_from_disk(self):
         if not shared.games_dir.is_dir():
             return
@@ -166,15 +164,15 @@ class SearchCartridgesService(Server, Gio.Application):
             except (OSError, json.decoder.JSONDecodeError):
                 continue
 
-            executable = ""
-
             try:
                 if any({data["hidden"], data["blacklisted"], data["removed"]}):
                     continue
 
                 # TODO: Stay DRY
 
-                if isinstance(data["executable"], list):
+                executable = data["executable"]
+
+                if isinstance(executable, list):
                     executable = shlex.join(executable)
 
                 args = (
@@ -205,11 +203,12 @@ class SearchCartridgesService(Server, Gio.Application):
 
     def GetResultMetas(self, game_ids):
         results = []
+        # TODO: Maybe make this not look like shit
         try:
             for game_id in game_ids:
                 icon = None
-                if (path := (shared.covers_dir / (game_id + ".tiff"))).is_file() or (
-                    path := (shared.covers_dir / (game_id + ".gif"))
+                if (path := shared.covers_dir / (game_id + ".tiff")).is_file() or (
+                    path := shared.covers_dir / (game_id + ".gif")
                 ).is_file():
                     icon = Gio.FileIcon.new(
                         Gio.File.new_for_path(str(path))
@@ -234,8 +233,16 @@ class SearchCartridgesService(Server, Gio.Application):
         return self.__search(new_terms)
 
     def LaunchSearch(self, terms, _utime):
-        # TODO
-        pass
+        search = " ".join(terms)
+        argv = ["cartridges", "--search", search]
+        (pid, _stdin, _stdout, _stderr) = GLib.spawn_async(
+            argv,
+            flags=GLib.SpawnFlags.SEARCH_PATH,
+            standard_input=False,
+            standard_output=False,
+            standard_error=False,
+        )
+        GLib.spawn_close_pid(pid)
 
     def __search(self, terms):
         ids = []
