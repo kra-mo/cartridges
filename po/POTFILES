@@ -8,25 +8,26 @@ data/gtk/help-overlay.blp
 data/gtk/preferences.blp
 data/gtk/window.blp
 
-src/main.py
-src/window.py
-src/details_window.py
-src/game.py
-src/preferences.py
+cartridges/main.py
+cartridges/window.py
+cartridges/details_window.py
+cartridges/game.py
+cartridges/preferences.py
 
-src/utils/create_dialog.py
-src/importer/importer.py
-src/importer/sources/source.py
-src/importer/sources/location.py
-src/importer/sources/location.py
-src/store/managers/sgdb_manager.py
+cartridges/utils/create_dialog.py
 
-src/importer/sources/bottles_source.py
-src/importer/sources/desktop_source.py
-src/importer/sources/flatpak_source.py
-src/importer/sources/heroic_source.py
-src/importer/sources/itch_source.py
-src/importer/sources/legendary_source.py
-src/importer/sources/lutris_source.py
-src/importer/sources/retroarch_source.py
-src/importer/sources/steam_source.py
+cartridges/importer/importer.py
+cartridges/importer/source.py
+cartridges/importer/location.py
+cartridges/importer/location.py
+cartridges/importer/bottles_source.py
+cartridges/importer/desktop_source.py
+cartridges/importer/flatpak_source.py
+cartridges/importer/heroic_source.py
+cartridges/importer/itch_source.py
+cartridges/importer/legendary_source.py
+cartridges/importer/lutris_source.py
+cartridges/importer/retroarch_source.py
+cartridges/importer/steam_source.py
+
+cartridges/store/managers/sgdb_manager.py
