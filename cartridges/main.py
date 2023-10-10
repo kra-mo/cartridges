@@ -61,7 +61,7 @@ from cartridges.window import CartridgesWindow
 class CartridgesApplication(Adw.Application):
     state = shared.AppState.DEFAULT
     win: CartridgesWindow
-    init_search_term: str = None
+    init_search_term: Optional[str] = None
 
     def __init__(self) -> None:
         shared.store = Store()
