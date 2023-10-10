@@ -15,18 +15,19 @@ cartridges/game.py
 cartridges/preferences.py
 
 cartridges/utils/create_dialog.py
-cartridges/importer/importer.py
-cartridges/importer/sources/source.py
-cartridges/importer/sources/location.py
-cartridges/importer/sources/location.py
-cartridges/store/managers/sgdb_manager.py
 
-cartridges/importer/sources/bottles_source.py
-cartridges/importer/sources/desktop_source.py
-cartridges/importer/sources/flatpak_source.py
-cartridges/importer/sources/heroic_source.py
-cartridges/importer/sources/itch_source.py
-cartridges/importer/sources/legendary_source.py
-cartridges/importer/sources/lutris_source.py
-cartridges/importer/sources/retroarch_source.py
-cartridges/importer/sources/steam_source.py
+cartridges/importer/importer.py
+cartridges/importer/source.py
+cartridges/importer/location.py
+cartridges/importer/location.py
+cartridges/importer/bottles_source.py
+cartridges/importer/desktop_source.py
+cartridges/importer/flatpak_source.py
+cartridges/importer/heroic_source.py
+cartridges/importer/itch_source.py
+cartridges/importer/legendary_source.py
+cartridges/importer/lutris_source.py
+cartridges/importer/retroarch_source.py
+cartridges/importer/steam_source.py
+
+cartridges/store/managers/sgdb_manager.py

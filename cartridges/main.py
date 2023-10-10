@@ -154,6 +154,7 @@ class CartridgesApplication(Adw.Application):
         if self.init_search_term:  # For command line activation
             shared.win.search_bar.set_search_mode(True)
             shared.win.search_entry.set_text(self.init_search_term)
+            shared.win.search_entry.set_position(-1)
 
         shared.win.present()
 
@@ -165,6 +166,7 @@ class CartridgesApplication(Adw.Application):
                 except IndexError:
                     pass
                 break
+
             if arg == "--launch":
                 try:
                     game_id = args[index + 1]
@@ -175,12 +177,16 @@ class CartridgesApplication(Adw.Application):
                         else data["executable"]
                     )
                     name = data["name"]
+
                     run_executable(executable)
                 except (IndexError, KeyError, OSError, json.decoder.JSONDecodeError):
                     return 1
+
+                notification = Gio.Notification.new(_("Cartridges"))
+                notification.set_body(_("{} launched").format(name))
                 self.send_notification(
                     "launch",
-                    Gio.Notification.new(_("{} launched").format(name)),
+                    notification,
                 )
                 return 0
         self.activate()

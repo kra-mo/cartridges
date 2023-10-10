@@ -187,7 +187,7 @@ class SearchCartridgesService(Server, Gio.Application):
 
     def GetResultMetas(self, game_ids):
         results = []
-        # TODO: Maybe make this not look like shit
+
         try:
             for game_id in game_ids:
                 empty_pixbuf = GdkPixbuf.Pixbuf.new(
