@@ -17,10 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import logging
-import os
 import shlex
-import subprocess
 from pathlib import Path
 from time import time
 from typing import Any, Optional
@@ -29,6 +26,7 @@ from gi.repository import Adw, GObject, Gtk
 
 from cartridges import shared
 from cartridges.game_cover import GameCover
+from cartridges.utils.run_executable import run_executable
 
 
 # pylint: disable=too-many-instance-attributes
@@ -118,21 +116,7 @@ class Game(Gtk.Box):
         self.save()
         self.update()
 
-        args = (
-            "flatpak-spawn --host /bin/sh -c " + shlex.quote(self.executable)  # Flatpak
-            if os.getenv("FLATPAK_ID") == shared.APP_ID
-            else self.executable  # Others
-        )
-
-        logging.info("Starting %s: %s", self.name, str(args))
-        # pylint: disable=consider-using-with
-        subprocess.Popen(
-            args,
-            cwd=shared.home,
-            shell=True,
-            start_new_session=True,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,  # type: ignore
-        )
+        run_executable(self.executable)
 
         if shared.schema.get_boolean("exit-after-launch"):
             self.app.quit()

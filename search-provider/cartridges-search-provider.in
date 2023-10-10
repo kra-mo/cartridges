@@ -23,16 +23,14 @@
 # https://gitlab.gnome.org/World/lollypop/-/blob/master/search-provider/lollypop-sp.in
 
 import json
-import os
-import shlex
-import subprocess
 
 import gi
 
 gi.require_version("Gdk", "4.0")
+gi.require_version("GdkPixbuf", "2.0")
 
 # pylint: disable=wrong-import-position
-from gi.repository import Gio, GLib
+from gi.repository import GdkPixbuf, Gio, GLib
 
 from cartridges import shared
 
@@ -169,35 +167,20 @@ class SearchCartridgesService(Server, Gio.Application):
                 if any({data["hidden"], data["blacklisted"], data["removed"]}):
                     continue
 
-                # TODO: Stay DRY
-
-                executable = data["executable"]
-
-                if isinstance(executable, list):
-                    executable = shlex.join(executable)
-
-                args = (
-                    "flatpak-spawn --host /bin/sh -c "
-                    + shlex.quote(executable)  # Flatpak
-                    if os.getenv("FLATPAK_ID") == shared.APP_ID
-                    else executable  # Others
-                )
-
-                self.games[data["game_id"]] = (data["name"], data["developer"], args)
+                self.games[data["game_id"]] = (data["name"], data["developer"])
             except KeyError:
                 continue
 
-    def ActivateResult(self, search_id, _array, _utime):
-        try:
-            # TODO: Stay DRY
-            subprocess.Popen(
-                self.games[search_id][2],
-                cwd=shared.home,
-                shell=True,
-                start_new_session=True,
-            )
-        except Exception as e:  # pylint: disable=broad-exception-caught
-            print("SearchCartridgesService::ActivateResult():", e)
+    def ActivateResult(self, game_id, _array, _utime):
+        argv = ["cartridges", "--launch", game_id]
+        (pid, _stdin, _stdout, _stderr) = GLib.spawn_async(
+            argv,
+            flags=GLib.SpawnFlags.SEARCH_PATH,
+            standard_input=False,
+            standard_output=False,
+            standard_error=False,
+        )
+        GLib.spawn_close_pid(pid)
 
     def GetInitialResultSet(self, terms):
         return self.__search(terms)
@@ -207,19 +190,57 @@ class SearchCartridgesService(Server, Gio.Application):
         # TODO: Maybe make this not look like shit
         try:
             for game_id in game_ids:
-                icon = None
-                if (path := shared.covers_dir / (game_id + ".tiff")).is_file() or (
-                    path := shared.covers_dir / (game_id + ".gif")
-                ).is_file():
-                    icon = Gio.FileIcon.new(
-                        Gio.File.new_for_path(str(path))
-                    ).to_string()
+                empty_pixbuf = GdkPixbuf.Pixbuf.new(
+                    GdkPixbuf.Colorspace.RGB, True, 8, 32, 32
+                )
+                pixbuf = None
+                if (path := shared.covers_dir / (game_id + ".tiff")).is_file():
+                    try:
+                        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                            str(path), -1, 32, True
+                        )
+                    except GLib.GError as e:
+                        print(e)
+                        continue
+                elif (path := shared.covers_dir / (game_id + ".gif")).is_file():
+                    try:
+                        pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(
+                            str(path)
+                        ).get_static_image()
+                    except GLib.GError as e:
+                        print(e)
+                        continue
                 d = {
                     "id": GLib.Variant("s", game_id),
                     "name": GLib.Variant("s", self.games[game_id][0]),
                 }
-                if icon:
-                    d["icon"] = GLib.Variant("s", icon)
+                if pixbuf:
+                    pixbuf.composite(
+                        empty_pixbuf,
+                        6,
+                        0,
+                        21,
+                        32,
+                        6,
+                        0,
+                        21 / pixbuf.get_width(),
+                        32 / pixbuf.get_height(),
+                        GdkPixbuf.InterpType.NEAREST,
+                        255,
+                    )
+
+                    d["icon-data"] = GLib.Variant(
+                        "(iiibiiay)",
+                        [
+                            empty_pixbuf.get_width(),
+                            empty_pixbuf.get_height(),
+                            empty_pixbuf.get_rowstride(),
+                            empty_pixbuf.get_has_alpha(),
+                            empty_pixbuf.get_bits_per_sample(),
+                            empty_pixbuf.get_n_channels(),
+                            empty_pixbuf.read_pixel_bytes().get_data(),
+                        ],
+                    )
                 if self.games[game_id][1]:
                     d["description"] = GLib.Variant(
                         "s", GLib.markup_escape_text(self.games[game_id][1])
@@ -246,20 +267,20 @@ class SearchCartridgesService(Server, Gio.Application):
         GLib.spawn_close_pid(pid)
 
     def __search(self, terms):
-        ids = []
+        game_ids = []
         search = " ".join(terms).lower()
         try:
             for game_id, data in self.games.items():
                 print(game_id, data)
                 if search in data[0].lower():
-                    ids.append(game_id)
+                    game_ids.append(game_id)
                     continue
                 if data[1] and search in data[1].lower():
-                    ids.append(game_id)
+                    game_ids.append(game_id)
                     continue
         except Exception as e:  # pylint: disable=broad-exception-caught
             print("SearchCartridgesService::__search():", e)
-        return ids
+        return game_ids
 
 
 def main():

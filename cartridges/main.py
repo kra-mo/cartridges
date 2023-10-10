@@ -20,6 +20,7 @@
 import json
 import lzma
 import os
+import shlex
 import sys
 from typing import Any, Optional
 
@@ -53,6 +54,7 @@ from cartridges.store.managers.sgdb_manager import SgdbManager
 from cartridges.store.managers.steam_api_manager import SteamAPIManager
 from cartridges.store.store import Store
 from cartridges.utils.migrate_files_v1_to_v2 import migrate_files_v1_to_v2
+from cartridges.utils.run_executable import run_executable
 from cartridges.window import CartridgesWindow
 
 
@@ -149,7 +151,7 @@ class CartridgesApplication(Adw.Application):
             sort_action, shared.state_schema.get_value("sort-mode")
         )
 
-        if self.init_search_term: # For command line activation
+        if self.init_search_term:  # For command line activation
             shared.win.search_bar.set_search_mode(True)
             shared.win.search_entry.set_text(self.init_search_term)
 
@@ -158,8 +160,29 @@ class CartridgesApplication(Adw.Application):
     def do_command_line(self, command_line) -> int:
         for index, arg in enumerate(args := command_line.get_arguments()):
             if arg == "--search":
-                self.init_search_term = args[index + 1]
+                try:
+                    self.init_search_term = args[index + 1]
+                except IndexError:
+                    pass
                 break
+            if arg == "--launch":
+                try:
+                    game_id = args[index + 1]
+                    data = json.load((shared.games_dir / (game_id + ".json")).open("r"))
+                    executable = (
+                        shlex.join(data["executable"])
+                        if isinstance(data["executable"], list)
+                        else data["executable"]
+                    )
+                    name = data["name"]
+                    run_executable(executable)
+                except (IndexError, KeyError, OSError, json.decoder.JSONDecodeError):
+                    return 1
+                self.send_notification(
+                    "launch",
+                    Gio.Notification.new(_("{} launched").format(name)),
+                )
+                return 0
         self.activate()
         return 0
 
