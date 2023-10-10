@@ -33,7 +33,7 @@ if os.name == "nt":
         windll.kernel32.GetUserDefaultUILanguage()
     ]
     PKGDATADIR = os.path.join(os.path.dirname(__file__), "..", "share", "cartridges")
-    localedir = os.path.join(os.path.dirname(__file__), "..", "share", "locale")
+    LOCALEDIR = os.path.join(os.path.dirname(__file__), "..", "share", "locale")
 else:
     PKGDATADIR = "@pkgdatadir@"
     LOCALEDIR = "@localedir@"

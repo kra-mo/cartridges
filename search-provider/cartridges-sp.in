@@ -203,15 +203,23 @@ class SearchCartridgesService(Server, Gio.Application):
     def GetInitialResultSet(self, terms):
         return self.__search(terms)
 
-    def GetResultMetas(self, ids):
+    def GetResultMetas(self, game_ids):
         results = []
         try:
-            for game_id in ids:
-                # TODO: Cover art
+            for game_id in game_ids:
+                icon = None
+                if (path := (shared.covers_dir / (game_id + ".tiff"))).is_file() or (
+                    path := (shared.covers_dir / (game_id + ".gif"))
+                ).is_file():
+                    icon = Gio.FileIcon.new(
+                        Gio.File.new_for_path(str(path))
+                    ).to_string()
                 d = {
                     "id": GLib.Variant("s", game_id),
                     "name": GLib.Variant("s", self.games[game_id][0]),
                 }
+                if icon:
+                    d["icon"] = GLib.Variant("s", icon)
                 if self.games[game_id][1]:
                     d["description"] = GLib.Variant(
                         "s", GLib.markup_escape_text(self.games[game_id][1])
