@@ -37,23 +37,5 @@ Cartridges is a simple game launcher for all of your games. It has support for i
       </foaf:account>
     </foaf:Person>
   </maintainer>
-  <maintainer>
-    <foaf:Person>
-      <foaf:name>Geoffrey Coulaud</foaf:name>
-      <foaf:mbox rdf:resource="mailto:geoffrey.coulaud@gmail.com" />
-      <foaf:account>
-        <foaf:OnlineAccount>
-          <foaf:accountServiceHomepage rdf:resource="https://github.com"/>
-          <foaf:accountName>GeoffreyCoulaud</foaf:accountName>
-        </foaf:OnlineAccount>
-      </foaf:account>
-      <foaf:account>
-        <foaf:OnlineAccount>
-          <foaf:accountServiceHomepage rdf:resource="https://gitlab.gnome.org"/>
-          <foaf:accountName>GeoffreyCoulaud</foaf:accountName>
-        </foaf:OnlineAccount>
-      </foaf:account>
-    </foaf:Person>
-  </maintainer>
 
 </Project>
