@@ -1,6 +1,6 @@
 #!@PYTHON@
 
-# cartridges-sp.in
+# cartridges-search-provider.in
 #
 # Copyright 2023 kramo
 #
@@ -143,6 +143,7 @@ class SearchCartridgesService(Server, Gio.Application):
             self,
             application_id="@APP_ID@.SearchProvider",
             flags=Gio.ApplicationFlags.IS_SERVICE,
+            inactivity_timeout=10000,
         )
 
         self.games = {}
@@ -263,7 +264,6 @@ class SearchCartridgesService(Server, Gio.Application):
 
 def main():
     service = SearchCartridgesService()
-    service.hold()
     service.run()
 
 

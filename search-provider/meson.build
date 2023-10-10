@@ -4,8 +4,8 @@ service_dir = join_paths(get_option('datadir'), 'dbus-1', 'services')
 serarch_provider_dir = join_paths(get_option('datadir'), 'gnome-shell', 'search-providers')
 
 configure_file(
-  input: 'cartridges-sp.in',
-  output: 'cartridges-sp',
+  input: 'cartridges-search-provider.in',
+  output: 'cartridges-search-provider',
   configuration: conf,
   install_dir: libexecdir
 )
