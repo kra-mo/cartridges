@@ -18,3 +18,239 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+
+# Heavily inspired by:
+# https://gitlab.gnome.org/World/lollypop/-/blob/master/search-provider/lollypop-sp.in
+
+import json
+import os
+import shlex
+import subprocess
+
+import gi
+
+gi.require_version("Gdk", "4.0")
+
+# pylint: disable=wrong-import-position
+from gi.repository import Gio, GLib
+
+from cartridges import shared
+
+
+class Server:
+    def __init__(self, con, path):
+        method_outargs = {}
+        method_inargs = {}
+        for interface in Gio.DBusNodeInfo.new_for_xml(self.__doc__).interfaces:
+            for method in interface.methods:
+                method_outargs[method.name] = (
+                    "(" + "".join([arg.signature for arg in method.out_args]) + ")"
+                )
+                method_inargs[method.name] = tuple(
+                    arg.signature for arg in method.in_args
+                )
+
+            con.register_object(
+                object_path=path,
+                interface_info=interface,
+                method_call_closure=self.on_method_call,
+            )
+
+        self.method_inargs = method_inargs
+        self.method_outargs = method_outargs
+
+    def on_method_call(
+        self,
+        _connection,
+        _sender,
+        _object_path,
+        _interface_name,
+        method_name,
+        parameters,
+        invocation,
+    ):
+        args = list(parameters.unpack())
+        for i, sig in enumerate(self.method_inargs[method_name]):
+            if sig == "h":
+                msg = invocation.get_message()
+                fd_list = msg.get_unix_fd_list()
+                args[i] = fd_list.get(args[i])
+
+        try:
+            result = getattr(self, method_name)(*args)
+
+            # out_args is atleast (signature1).
+            # We therefore always wrap the result as a tuple.
+            # Refer to https://bugzilla.gnome.org/show_bug.cgi?id=765603
+            result = (result,)
+
+            out_args = self.method_outargs[method_name]
+            if out_args != "()":
+                variant = GLib.Variant(out_args, result)
+                invocation.return_value(variant)
+            else:
+                invocation.return_value(None)
+        except Exception:  # pylint: disable=broad-exception-caught
+            pass
+
+
+class SearchCartridgesService(Server, Gio.Application):
+    """
+    <!DOCTYPE node PUBLIC
+    '-//freedesktop//DTD D-BUS Object Introspection 1.0//EN'
+    'http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd'>
+    <node>
+    <interface name="org.gnome.Shell.SearchProvider2">
+
+    <method name="GetInitialResultSet">
+      <arg type="as" name="terms" direction="in" />
+      <arg type="as" name="results" direction="out" />
+    </method>
+
+    <method name="GetSubsearchResultSet">
+      <arg type="as" name="previous_results" direction="in" />
+      <arg type="as" name="terms" direction="in" />
+      <arg type="as" name="results" direction="out" />
+    </method>
+
+    <method name="GetResultMetas">
+      <arg type="as" name="identifiers" direction="in" />
+      <arg type="aa{sv}" name="metas" direction="out" />
+    </method>
+
+    <method name="ActivateResult">
+      <arg type="s" name="identifier" direction="in" />
+      <arg type="as" name="terms" direction="in" />
+      <arg type="u" name="timestamp" direction="in" />
+    </method>
+
+    <method name="LaunchSearch">
+      <arg type="as" name="terms" direction="in" />
+      <arg type="u" name="timestamp" direction="in" />
+    </method>
+
+    </interface>
+    </node>
+    """
+
+    # pylint: disable=invalid-name
+
+    __SEARCH_BUS = "org.gnome.Shell.SearchProvider2"
+    __PATH_BUS = "@PREFIX@/SearchProvider"
+
+    def __init__(self):
+        Gio.Application.__init__(
+            self,
+            application_id="@APP_ID@.SearchProvider",
+            flags=Gio.ApplicationFlags.IS_SERVICE,
+        )
+
+        self.games = {}
+        self.load_games_from_disk()
+
+        self.__bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
+        Gio.bus_own_name_on_connection(
+            self.__bus, self.__SEARCH_BUS, Gio.BusNameOwnerFlags.NONE, None, None
+        )
+        Server.__init__(self, self.__bus, self.__PATH_BUS)
+
+        print(self.GetInitialResultSet(["don't", "starve"]))
+
+    def load_games_from_disk(self):
+        if not shared.games_dir.is_dir():
+            return
+
+        for game_file in shared.games_dir.iterdir():
+            try:
+                data = json.load(game_file.open())
+            except (OSError, json.decoder.JSONDecodeError):
+                continue
+
+            executable = ""
+
+            try:
+                if any({data["hidden"], data["blacklisted"], data["removed"]}):
+                    continue
+
+                # TODO: Stay DRY
+
+                if isinstance(data["executable"], list):
+                    executable = shlex.join(executable)
+
+                args = (
+                    "flatpak-spawn --host /bin/sh -c "
+                    + shlex.quote(executable)  # Flatpak
+                    if os.getenv("FLATPAK_ID") == shared.APP_ID
+                    else executable  # Others
+                )
+
+                self.games[data["game_id"]] = (data["name"], data["developer"], args)
+            except KeyError:
+                continue
+
+    def ActivateResult(self, search_id, _array, _utime):
+        try:
+            # TODO: Stay DRY
+            subprocess.Popen(
+                self.games[search_id][2],
+                cwd=shared.home,
+                shell=True,
+                start_new_session=True,
+            )
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            print("SearchCartridgesService::ActivateResult():", e)
+
+    def GetInitialResultSet(self, terms):
+        return self.__search(terms)
+
+    def GetResultMetas(self, ids):
+        results = []
+        try:
+            for game_id in ids:
+                # TODO: Cover art
+                d = {
+                    "id": GLib.Variant("s", game_id),
+                    "name": GLib.Variant("s", self.games[game_id][0]),
+                }
+                if self.games[game_id][1]:
+                    d["description"] = GLib.Variant(
+                        "s", GLib.markup_escape_text(self.games[game_id][1])
+                    )
+                results.append(d)
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            print("SearchCartridgesService::GetResultMetas():", e)
+            return []
+        return results
+
+    def GetSubsearchResultSet(self, _previous_results, new_terms):
+        return self.__search(new_terms)
+
+    def LaunchSearch(self, terms, _utime):
+        # TODO
+        pass
+
+    def __search(self, terms):
+        ids = []
+        search = " ".join(terms).lower()
+        try:
+            for game_id, data in self.games.items():
+                print(game_id, data)
+                if search in data[0].lower():
+                    ids.append(game_id)
+                    continue
+                if data[1] and search in data[1].lower():
+                    ids.append(game_id)
+                    continue
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            print("SearchCartridgesService::__search():", e)
+        return ids
+
+
+def main():
+    service = SearchCartridgesService()
+    service.hold()
+    service.run()
+
+
+if __name__ == "__main__":
+    main()

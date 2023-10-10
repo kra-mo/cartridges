@@ -8,8 +8,12 @@ i18n = import('i18n')
 gnome = import('gnome')
 python = import('python')
 
+py_installation = python.find_installation('python3')
+python_dir = join_paths(get_option('prefix'), py_installation.get_install_dir())
+
+python_dir = join_paths(get_option('prefix'), py_installation.get_install_dir())
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-libexecdir = get_option('libexecdir')
+libexecdir = join_paths(get_option('prefix'), get_option('libexecdir'))
 
 profile = get_option('profile')
 if profile == 'development'
@@ -21,8 +25,8 @@ elif profile ==  'release'
 endif
 
 conf = configuration_data()
-conf.set('PYTHON', python.find_installation('python3').full_path())
-conf.set('PYTHON_VERSION', python.find_installation('python3').language_version())
+conf.set('PYTHON', py_installation.full_path())
+conf.set('PYTHON_VERSION', py_installation.language_version())
 conf.set('APP_ID', app_id)
 conf.set('PREFIX', prefix)
 conf.set('VERSION', meson.project_version())
@@ -32,7 +36,7 @@ conf.set('pkgdatadir', pkgdatadir)
 conf.set('libexecdir', libexecdir)
 
 subdir('data')
-subdir('src')
+subdir('cartridges')
 subdir('po')
 
 if host_machine.system() == 'windows'

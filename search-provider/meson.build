@@ -17,8 +17,9 @@ configure_file(
   install_dir: service_dir
 )
 
-install_data(
-  'hu.kramo.Cartridges.SearchProvider.ini',
-  rename : app_id + '.SearchProvider.ini',
+configure_file(
+  input: 'hu.kramo.Cartridges.SearchProvider.ini',
+  output: app_id + '.SearchProvider.ini',
+  configuration: conf,
   install_dir: serarch_provider_dir
 )
