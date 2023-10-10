@@ -48,6 +48,12 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="2.6" date="2023-10-11">
+      <description translatable="no">
+        <p>You can now search your Cartridges library from GNOME!</p>
+        <p>To enable the functionality, go to "Search" in the Settings app and toggle "Cartridges" on.</p>
+      </description>
+    </release>
     <release version="2.5" date="2023-10-06">
       <description translatable="no">
         <ul>
