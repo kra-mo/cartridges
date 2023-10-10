@@ -9,6 +9,7 @@ gnome = import('gnome')
 python = import('python')
 
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
+libexecdir = get_option('libexecdir')
 
 profile = get_option('profile')
 if profile == 'development'
@@ -28,6 +29,7 @@ conf.set('VERSION', meson.project_version())
 conf.set('PROFILE', profile)
 conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
 conf.set('pkgdatadir', pkgdatadir)
+conf.set('libexecdir', libexecdir)
 
 subdir('data')
 subdir('src')
@@ -35,6 +37,8 @@ subdir('po')
 
 if host_machine.system() == 'windows'
   subdir('windows')
+else
+  subdir('search-provider')
 endif
 
 gnome.post_install(

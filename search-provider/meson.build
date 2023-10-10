@@ -1,0 +1,24 @@
+# Heavily inspired by https://gitlab.gnome.org/World/lollypop/-/blob/master/search-provider/meson.build
+
+service_dir = join_paths(get_option('datadir'), 'dbus-1', 'services')
+serarch_provider_dir = join_paths(get_option('datadir'), 'gnome-shell', 'search-providers')
+
+configure_file(
+  input: 'cartridges-sp.in',
+  output: 'cartridges-sp',
+  configuration: conf,
+  install_dir: libexecdir
+)
+
+configure_file(
+  input: 'hu.kramo.Cartridges.SearchProvider.service.in',
+  output: app_id + '.SearchProvider.service',
+  configuration: conf,
+  install_dir: service_dir
+)
+
+install_data(
+  'hu.kramo.Cartridges.SearchProvider.ini',
+  rename : app_id + '.SearchProvider.ini',
+  install_dir: serarch_provider_dir
+)
