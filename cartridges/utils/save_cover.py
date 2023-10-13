@@ -74,7 +74,7 @@ def convert_cover(
                     tmp_path,
                     compression="tiff_adobe_deflate"
                     if shared.schema.get_boolean("high-quality-images")
-                    else "webp",
+                    else shared.TIFF_COMPRESSION,
                 )
     except UnidentifiedImageError:
         try:

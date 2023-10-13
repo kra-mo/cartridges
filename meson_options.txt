@@ -7,3 +7,12 @@ option(
   ],
   value: 'release'
 )
+option(
+  'tiff_compression',
+  type: 'combo',
+  choices: [
+    'webp',
+    'jpeg',
+  ],
+  value: 'webp'
+)

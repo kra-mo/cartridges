@@ -36,6 +36,7 @@ APP_ID = "@APP_ID@"
 VERSION = "@VERSION@"
 PREFIX = "@PREFIX@"
 PROFILE = "@PROFILE@"
+TIFF_COMPRESSION = "@TIFF_COMPRESSION@"
 SPEC_VERSION = 1.5  # The version of the game_id.json spec
 
 schema = Gio.Settings.new(APP_ID)
