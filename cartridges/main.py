@@ -22,6 +22,7 @@ import lzma
 import os
 import shlex
 import sys
+from time import time
 from typing import Any, Optional
 
 import gi
@@ -170,7 +171,9 @@ class CartridgesApplication(Adw.Application):
             if arg == "--launch":
                 try:
                     game_id = args[index + 1]
-                    data = json.load((shared.games_dir / (game_id + ".json")).open("r"))
+                    data = json.load(
+                        (path := shared.games_dir / (game_id + ".json")).open("r")
+                    )
                     executable = (
                         shlex.join(data["executable"])
                         if isinstance(data["executable"], list)
@@ -179,6 +182,10 @@ class CartridgesApplication(Adw.Application):
                     name = data["name"]
 
                     run_executable(executable)
+
+                    data["last_played"] = int(time())
+                    json.dump(data, path.open("w"))
+
                 except (IndexError, KeyError, OSError, json.decoder.JSONDecodeError):
                     return 1
 
