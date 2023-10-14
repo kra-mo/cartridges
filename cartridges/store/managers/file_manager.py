@@ -53,7 +53,7 @@ class FileManager(AsyncManager):
 
         json.dump(
             {attr: getattr(game, attr) for attr in attrs if attr},
-            (shared.games_dir / f"{game.game_id}.json").open("w"),
+            (shared.games_dir / f"{game.game_id}.json").open("w", encoding="utf-8"),
             indent=4,
             sort_keys=True,
         )

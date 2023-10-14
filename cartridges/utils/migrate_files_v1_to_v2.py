@@ -76,7 +76,7 @@ def migrate_files_v1_to_v2() -> None:
     imported_execs = set()
     for game_path in shared.games_dir.glob("imported_*.json"):
         try:
-            game_data = json.load(game_path.open("r"))
+            game_data = json.load(game_path.open("r", encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             continue
         number = int(game_data["game_id"].replace("imported_", ""))
@@ -86,7 +86,7 @@ def migrate_files_v1_to_v2() -> None:
     # Migrate imported game files
     for game_path in old_imported_game_paths:
         try:
-            game_data = json.load(game_path.open("r"))
+            game_data = json.load(game_path.open("r", encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             continue
 
@@ -104,7 +104,7 @@ def migrate_files_v1_to_v2() -> None:
         )
         json.dump(
             game_data,
-            destination_game_path.open("w"),
+            destination_game_path.open("w", encoding="utf-8"),
             indent=4,
             sort_keys=True,
         )

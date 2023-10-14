@@ -172,7 +172,9 @@ class CartridgesApplication(Adw.Application):
                 try:
                     game_id = args[index + 1]
                     data = json.load(
-                        (path := shared.games_dir / (game_id + ".json")).open("r")
+                        (path := shared.games_dir / (game_id + ".json")).open(
+                            "r", encoding="utf-8"
+                        )
                     )
                     executable = (
                         shlex.join(data["executable"])
@@ -184,7 +186,7 @@ class CartridgesApplication(Adw.Application):
                     run_executable(executable)
 
                     data["last_played"] = int(time())
-                    json.dump(data, path.open("w"))
+                    json.dump(data, path.open("w", encoding="utf-8"))
 
                 except (IndexError, KeyError, OSError, json.decoder.JSONDecodeError):
                     return 1
