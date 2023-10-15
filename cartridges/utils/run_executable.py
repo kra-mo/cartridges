@@ -1,4 +1,4 @@
-# save_cover.py
+# run_executable.py
 #
 # Copyright 2023 kramo
 #
