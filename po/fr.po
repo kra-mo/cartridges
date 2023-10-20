@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-10 22:22+0200\n"
-"PO-Revision-Date: 2023-09-21 14:55+0000\n"
-"Last-Translator: Geoffrey Coulaud <geoffrey.coulaud+github@gmail.com>\n"
+"PO-Revision-Date: 2023-10-14 05:01+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
 "Language: fr\n"
@@ -164,14 +164,10 @@ msgid "Import"
 msgstr "Importer"
 
 #: data/gtk/help-overlay.blp:63
-#, fuzzy
-#| msgid "Show hidden games"
 msgid "Show Hidden Games"
 msgstr "Afficher les jeux masqués"
 
 #: data/gtk/help-overlay.blp:68
-#, fuzzy
-#| msgid "Remove game"
 msgid "Remove Game"
 msgstr "Supprimer le jeu"
 
@@ -327,18 +323,16 @@ msgid "Prefer Animated Images"
 msgstr "Préférer les images animées"
 
 #: data/gtk/preferences.blp:296
-#, fuzzy
-#| msgid "Delete Cover"
 msgid "Update Covers"
-msgstr "Supprimer la couverture"
+msgstr "Mettre à jour les pochettes des jeux"
 
 #: data/gtk/preferences.blp:297
 msgid "Fetch covers for games already in your library"
-msgstr ""
+msgstr "Récupérer les pochettes des jeux déjà présents dans votre bibliothèque"
 
 #: data/gtk/preferences.blp:301
 msgid "Update"
-msgstr ""
+msgstr "Mise à jour"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -546,14 +540,12 @@ msgstr ""
 "une {}ici{}."
 
 #: cartridges/preferences.py:184
-#, fuzzy
-#| msgid "Importing Covers…"
 msgid "Downloading covers…"
-msgstr "Importation des pochettes des jeux…"
+msgstr "Téléchargement des pochettes des jeux…"
 
 #: cartridges/preferences.py:203
 msgid "Covers updated"
-msgstr ""
+msgstr "Pochettes mises à jour"
 
 #: cartridges/preferences.py:335
 msgid "Installation Not Found"
