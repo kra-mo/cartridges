@@ -24,10 +24,6 @@
   <recommends>
     <display_length compare="gt">280</display_length>
   </recommends>
-  <custom>
-    <value key="Purism::form_factor">workstation</value>
-    <value key="Purism::form_factor">mobile</value>
-  </custom>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/1.png</image>
