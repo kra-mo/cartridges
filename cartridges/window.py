@@ -413,9 +413,11 @@ class CartridgesWindow(Adw.ApplicationWindow):
             order = False
 
         def get_value(index: int) -> str:
-            return str(
-                getattr((child1.get_child(), child2.get_child())[index], var)
-            ).lower()
+            return (
+                str(getattr((child1.get_child(), child2.get_child())[index], var))
+                .lower()
+                .removeprefix("the ")
+            )
 
         if var != "name" and get_value(0) == get_value(1):
             var, order = "name", False
