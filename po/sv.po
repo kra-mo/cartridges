@@ -4,13 +4,14 @@
 # micke <mikanybe@gmail.com>, 2023.
 # micke <micke@users.noreply.hosted.weblate.org>, 2023.
 # Luna Jernberg <droidbittin@gmail.com>, 2023.
+# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-10 22:22+0200\n"
-"PO-Revision-Date: 2023-09-06 03:24+0000\n"
-"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
+"PO-Revision-Date: 2023-10-20 04:03+0000\n"
+"Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/sv/>\n"
 "Language: sv\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.1\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -142,7 +143,7 @@ msgstr "Avsluta"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:88 data/gtk/window.blp:164
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Växla sidofält"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:177 data/gtk/window.blp:236
 msgid "Main Menu"
@@ -162,14 +163,10 @@ msgid "Import"
 msgstr "Importera"
 
 #: data/gtk/help-overlay.blp:63
-#, fuzzy
-#| msgid "Show hidden games"
 msgid "Show Hidden Games"
 msgstr "Visa dolda spel"
 
 #: data/gtk/help-overlay.blp:68
-#, fuzzy
-#| msgid "Remove game"
 msgid "Remove Game"
 msgstr "Ta bort spel"
 
@@ -323,18 +320,16 @@ msgid "Prefer Animated Images"
 msgstr "Föredra animerade bilder"
 
 #: data/gtk/preferences.blp:296
-#, fuzzy
-#| msgid "Delete Cover"
 msgid "Update Covers"
-msgstr "Ta bort omslag"
+msgstr "Uppdatera omslag"
 
 #: data/gtk/preferences.blp:297
 msgid "Fetch covers for games already in your library"
-msgstr ""
+msgstr "Hämta omslag till spel som redan finns i ditt bibliotek"
 
 #: data/gtk/preferences.blp:301
 msgid "Update"
-msgstr ""
+msgstr "Uppdatera"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -361,22 +356,16 @@ msgid "Games you hide will appear here."
 msgstr "Spel som du döljer kommer visas här."
 
 #: data/gtk/window.blp:75 data/gtk/window.blp:106 cartridges/main.py:207
-#, fuzzy
-#| msgid "Remove All Games"
 msgid "All Games"
-msgstr "Ta bort alla spel"
+msgstr "Alla spel"
 
 #: data/gtk/window.blp:126 cartridges/main.py:209
-#, fuzzy
-#| msgid "Added: {}"
 msgid "Added"
-msgstr "Tillagt: {}"
+msgstr "Tillagt"
 
 #: data/gtk/window.blp:141
-#, fuzzy
-#| msgid "Import"
 msgid "Imported"
-msgstr "Importera"
+msgstr "Importerad"
 
 #: data/gtk/window.blp:229
 msgid "Hidden Games"
@@ -547,14 +536,12 @@ msgstr ""
 "En API-nyckel krävs för att använda SteamGridDB. Du kan generera en {}här{}."
 
 #: cartridges/preferences.py:184
-#, fuzzy
-#| msgid "Importing Covers…"
 msgid "Downloading covers…"
-msgstr "Importerar omslagsbilder…"
+msgstr "Laddar ner omslagsbilder…"
 
 #: cartridges/preferences.py:203
 msgid "Covers updated"
-msgstr ""
+msgstr "Omslagsbilder uppdaterade"
 
 #: cartridges/preferences.py:335
 msgid "Installation Not Found"

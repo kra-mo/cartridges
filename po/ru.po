@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-10 22:22+0200\n"
-"PO-Revision-Date: 2023-09-26 15:28+0000\n"
+"PO-Revision-Date: 2023-10-14 05:01+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ru/>\n"
@@ -35,7 +35,7 @@ msgstr "Средство запуска игр"
 #: data/hu.kramo.Cartridges.desktop.in:5
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
-msgstr "Запустите все свои игры"
+msgstr "Запускайте все свои игры"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
 msgid ""
