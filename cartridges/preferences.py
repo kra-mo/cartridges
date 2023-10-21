@@ -107,6 +107,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     sgdb_prefer_switch = Gtk.Template.Child()
     sgdb_animated_switch = Gtk.Template.Child()
     sgdb_fetch_button = Gtk.Template.Child()
+    sgdb_stack = Gtk.Template.Child()
+    sgdb_spinner = Gtk.Template.Child()
 
     danger_zone_group = Gtk.Template.Child()
     reset_action_row = Gtk.Template.Child()
@@ -181,6 +183,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
             sgdb_manager = shared.store.managers[SgdbManager]
             sgdb_manager.reset_cancellable()
 
+            self.sgdb_spinner.set_spinning(True)
+            self.sgdb_stack.set_visible_child(self.sgdb_spinner)
+
             self.add_toast(download_toast := Adw.Toast.new(_("Downloading covers…")))
 
             def update_cover_callback(manager: SgdbManager) -> None:
@@ -204,6 +209,9 @@ class PreferencesWindow(Adw.PreferencesWindow):
                 toast.set_priority(Adw.ToastPriority.HIGH)
                 download_toast.dismiss()
                 self.add_toast(toast)
+
+                self.sgdb_spinner.set_spinning(False)
+                self.sgdb_stack.set_visible_child(self.sgdb_fetch_button)
 
             for game in shared.store:
                 sgdb_manager.process_game(game, {}, update_cover_callback)
