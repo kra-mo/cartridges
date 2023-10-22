@@ -511,36 +511,19 @@ menu primary_menu {
   }
 
   section {
-    item {
-      label: _("Preferences");
-      action: "app.preferences";
-    }
-
-    item {
-      label: _("Keyboard Shortcuts");
-      action: "win.show-help-overlay";
-    }
-
-    item {
-      label: _("About Cartridges");
-      action: "app.about";
-    }
+    item (_("Preferences"), "app.preferences")
+    item (_("Keyboard Shortcuts"), "win.show-help-overlay")
+    item (_("About Cartridges"), "app.about")
   }
 }
 
 menu add_games {
   section {
-    item {
-      label: _("Add Game");
-      action: "app.add_game";
-    }
+    item (_("Add Game"), "app.add_game")
   }
 
   section {
-    item {
-      label: _("Import");
-      action: "app.import";
-    }
+    item (_("Import"), "app.import")
   }
 }
 
@@ -548,29 +531,10 @@ menu search {
   section {
     label: "Search on…";
 
-    item {
-      label: "IGDB";
-      action: "app.igdb_search";
-    }
-
-    item {
-      label: "SteamGridDB";
-      action: "app.sgdb_search";
-    }
-
-    item {
-      label: "ProtonDB";
-      action: "app.protondb_search";
-    }
-
-    item {
-      label: "Lutris";
-      action: "app.lutris_search";
-    }
-
-    item {
-      label: "HowLongToBeat";
-      action: "app.hltb_search";
-    }
+    item (_("IGDB"), "app.igdb_search")
+    item (_("SteamGridDB"), "app.sgdb_search")
+    item (_("ProtonDB"), "app.protondb_search")
+    item (_("Lutris"), "app.lutris_search")
+    item (_("HowLongToBeat"), "app.hltb_search")
   }
 }

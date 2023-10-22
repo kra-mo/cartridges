@@ -99,38 +99,16 @@ template $Game : Box {
 
 menu game_options {
   section {
-    item {
-      label: _("Edit");
-      action: "app.edit_game";
-    }
-
-    item {
-      label: _("Hide");
-      action: "app.hide_game";
-    }
-
-    item {
-      label: _("Remove");
-      action: "app.remove_game";
-    }
+    item (_("Edit"), "app.edit_game")
+    item (_("Hide"), "app.hide_game")
+    item (_("Remove"), "app.remove_game")
   }
 }
 
 menu hidden_game_options {
   section {
-    item {
-      label: _("Edit");
-      action: "app.edit_game";
-    }
-
-    item {
-      label: _("Unhide");
-      action: "app.hide_game";
-    }
-
-    item {
-      label: _("Remove");
-      action: "app.remove_game";
-    }
+    item (_("Edit"), "app.edit_game")
+    item (_("Unhide"), "app.hide_game")
+    item (_("Remove"), "app.remove_game")
   }
 }
