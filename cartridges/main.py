@@ -66,10 +66,27 @@ class CartridgesApplication(Adw.Application):
 
     def __init__(self) -> None:
         shared.store = Store()
-        super().__init__(
-            application_id=shared.APP_ID,
-            flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
-        )
+        super().__init__(application_id=shared.APP_ID)
+
+        search = GLib.OptionEntry()
+        search.long_name = "search"
+        search.short_name = ord("s")
+        search.flags = 0
+        search.arg = int(GLib.OptionArg.STRING)
+        search.arg_data = None
+        search.description = "Open the app with this term in the search entry"
+        search.arg_description = "TERM"
+
+        launch = GLib.OptionEntry()
+        launch.long_name = "launch"
+        launch.short_name = ord("l")
+        launch.flags = 0
+        launch.arg = int(GLib.OptionArg.STRING)
+        launch.arg_data = None
+        launch.description = "Run a game with the given game_id"
+        launch.arg_description = "GAME_ID"
+
+        self.add_main_option_entries((search, launch))
 
     def do_activate(self) -> None:  # pylint: disable=arguments-differ
         """Called on app creation"""
@@ -159,47 +176,40 @@ class CartridgesApplication(Adw.Application):
 
         shared.win.present()
 
-    def do_command_line(self, command_line) -> int:
-        for index, arg in enumerate(args := command_line.get_arguments()):
-            if arg == "--search":
-                try:
-                    self.init_search_term = args[index + 1]
-                except IndexError:
-                    pass
-                break
-
-            if arg == "--launch":
-                try:
-                    game_id = args[index + 1]
-                    data = json.load(
-                        (path := shared.games_dir / (game_id + ".json")).open(
-                            "r", encoding="utf-8"
-                        )
+    def do_handle_local_options(self, options: GLib.VariantDict) -> int:
+        if search := options.lookup_value("search"):
+            self.init_search_term = search.get_string()
+        elif game_id := options.lookup_value("launch"):
+            try:
+                data = json.load(
+                    (path := shared.games_dir / (game_id.get_string() + ".json")).open(
+                        "r", encoding="utf-8"
                     )
-                    executable = (
-                        shlex.join(data["executable"])
-                        if isinstance(data["executable"], list)
-                        else data["executable"]
-                    )
-                    name = data["name"]
-
-                    run_executable(executable)
-
-                    data["last_played"] = int(time())
-                    json.dump(data, path.open("w", encoding="utf-8"))
-
-                except (IndexError, KeyError, OSError, json.decoder.JSONDecodeError):
-                    return 1
-
-                notification = Gio.Notification.new(_("Cartridges"))
-                notification.set_body(_("{} launched").format(name))
-                self.send_notification(
-                    "launch",
-                    notification,
                 )
-                return 0
-        self.activate()
-        return 0
+                executable = (
+                    shlex.join(data["executable"])
+                    if isinstance(data["executable"], list)
+                    else data["executable"]
+                )
+                name = data["name"]
+
+                run_executable(executable)
+
+                data["last_played"] = int(time())
+                json.dump(data, path.open("w", encoding="utf-8"))
+
+            except (IndexError, KeyError, OSError, json.decoder.JSONDecodeError):
+                return 1
+
+            self.register()
+            notification = Gio.Notification.new(_("Cartridges"))
+            notification.set_body(_("{} launched").format(name))
+            self.send_notification(
+                "launch",
+                notification,
+            )
+            return 0
+        return -1
 
     def load_games_from_disk(self) -> None:
         if shared.games_dir.is_dir():
