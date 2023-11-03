@@ -15,6 +15,7 @@
   <url type="vcs-browser">https://github.com/kra-mo/cartridges</url>
   <url type="contribute">https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md</url>
   <developer_name translatable="no">kramo</developer_name>
+  <project_group>GNOME</project_group>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
   <supports>
     <control>pointing</control>
