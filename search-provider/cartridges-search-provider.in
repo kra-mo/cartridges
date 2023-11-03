@@ -165,7 +165,11 @@ class SearchCartridgesService(Server, Gio.Application):
                 continue
 
             try:
-                if any({data["hidden"], data["blacklisted"], data["removed"]}):
+                # Use .get for compatibility with pre-2.0 games
+                if any(
+                    {data.get("hidden"), data.get("blacklisted"), data.get("removed")}
+                ):
+                    print(f"Skipped {game_file.name}")
                     continue
 
                 self.games[data["game_id"]] = (data["name"], data["developer"])
@@ -272,7 +276,6 @@ class SearchCartridgesService(Server, Gio.Application):
         search = " ".join(terms).lower()
         try:
             for game_id, data in self.games.items():
-                print(game_id, data)
                 if search in data[0].lower():
                     game_ids.append(game_id)
                     continue
