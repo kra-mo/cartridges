@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the Cartridges package.
 # Yahor <k1llo2810@gmail.com>, 2023.
 # Yahor <g_egor98@tut.by>, 2023.
+# Yahor <k1llo2810@protonmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-10 22:22+0200\n"
-"PO-Revision-Date: 2023-10-20 17:54+0000\n"
-"Last-Translator: Yahor <g_egor98@tut.by>\n"
+"PO-Revision-Date: 2023-11-01 17:02+0000\n"
+"Last-Translator: Yahor <k1llo2810@protonmail.com>\n"
 "Language-Team: Belarusian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/be/>\n"
 "Language: be\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -50,7 +51,7 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Картрыджы - гэта простая праграма для запуску ўсіх вашых гульняў. Ён "
+"Картрыджы - гэта простая праграма для запуску ўсіх вашых гульняў. Яна "
 "падтрымлівае імпарт гульняў з Steam, Lutris, Heroic і іншых без неабходнасці "
 "ўваходу ў сістэму. Вы можаце сартаваць і хаваць гульні або спампоўваць "
 "вокладку з SteamGridDB."
