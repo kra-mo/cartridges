@@ -16,6 +16,23 @@
   <url type="contribute">https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md</url>
   <developer_name translatable="no">kramo</developer_name>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
+  <translation type="gettext">cartridges</translation>
+  <categories>
+    <category>GNOME</category>
+    <category>GTK</category>
+    <category>Game</category>
+  </categories>
+  <keywords>
+    <keyword>gaming</keyword>
+    <keyword>launcher</keyword>
+    <keyword translate="no">steam</keyword>
+    <keyword translate="no">lutris</keyword>
+    <keyword>bottles</keyword>
+    <keyword translate="no">itch</keyword>
+    <keyword translate="no">flatpak</keyword>
+    <keyword translate="no">legendary</keyword>
+    <keyword translate="no">retroarch</keyword>
+  </keywords>
   <supports>
     <control>pointing</control>
     <control>keyboard</control>
