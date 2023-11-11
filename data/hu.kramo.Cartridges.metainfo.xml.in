@@ -25,13 +25,13 @@
   <keywords>
     <keyword>gaming</keyword>
     <keyword>launcher</keyword>
-    <keyword translate="no">steam</keyword>
-    <keyword translate="no">lutris</keyword>
-    <keyword>bottles</keyword>
+    <keyword translate="no">Steam</keyword>
+    <keyword translate="no">Lutris</keyword>
+    <keyword>Bottles</keyword>
     <keyword translate="no">itch</keyword>
-    <keyword translate="no">flatpak</keyword>
-    <keyword translate="no">legendary</keyword>
-    <keyword translate="no">retroarch</keyword>
+    <keyword translate="no">Flatpak</keyword>
+    <keyword translate="no">Legendary</keyword>
+    <keyword translate="no">Retroarch</keyword>
   </keywords>
   <supports>
     <control>pointing</control>
