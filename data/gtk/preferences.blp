@@ -33,32 +33,76 @@ template $PreferencesWindow : Adw.PreferencesWindow {
     Adw.PreferencesGroup danger_zone_group {
       title: _("Danger Zone");
 
-      Adw.ActionRow {
-        title: _("Remove All Games");
+      ListBox remove_all_games_list_box {
+        Adw.PreferencesRow {
+        activatable: true;
+        selectable: false;
 
-        Button remove_all_games_button {
-          label: _("Remove");
+        Box {
+          spacing: 6;
           valign: center;
+          halign: center;
+
+          Label {
+            label: _("Remove All Games");
+            ellipsize: end;
+
+            styles [
+              "heading",
+            ]
+          }
 
           styles [
-            "destructive-action",
+            "header",
           ]
         }
+
+          styles [
+            "error",
+          ]
+        }
+
+        styles [
+          "boxed-list",
+        ]
       }
+    }
 
-      Adw.ActionRow reset_action_row {
-        title: "Reset App";
-        subtitle: "Completely resets and quits Cartridges";
-        visible: false;
+    Adw.PreferencesGroup reset_group {
+      visible: false;
 
-        Button reset_button {
-          label: "Reset";
+      ListBox reset_list_box {
+        Adw.PreferencesRow {
+        activatable: true;
+        selectable: false;
+
+        Box {
+          spacing: 6;
           valign: center;
+          halign: center;
+
+          Label {
+            label: _("Reset App");
+            ellipsize: end;
+
+            styles [
+              "heading",
+            ]
+          }
 
           styles [
-            "destructive-action",
+            "header",
           ]
         }
+
+          styles [
+            "error",
+          ]
+        }
+
+        styles [
+          "boxed-list",
+        ]
       }
     }
   }
