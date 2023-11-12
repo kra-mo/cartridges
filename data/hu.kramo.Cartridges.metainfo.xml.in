@@ -17,6 +17,7 @@
   <developer_name translatable="no">kramo</developer_name>
   <project_group>GNOME</project_group>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
+  <translation type="gettext">cartridges</translation>
   <supports>
     <control>pointing</control>
     <control>keyboard</control>
