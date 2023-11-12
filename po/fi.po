@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-10 22:22+0200\n"
-"PO-Revision-Date: 2023-10-05 19:10+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"PO-Revision-Date: 2023-11-03 22:32+0000\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fi/>\n"
 "Language: fi\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -42,13 +42,10 @@ msgstr "Käynnistä kaikki pelisi"
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
+"gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
+"peli;pelaaminen;pullot;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
-#, fuzzy
-#| msgid ""
-#| "Cartridges is a simple game launcher. It has support for importing your "
-#| "games from Steam, Heroic and Bottles with organizational features such as "
-#| "hiding and sorting by date added or last played."
 msgid ""
 "Cartridges is a simple game launcher for all of your games. It has support "
 "for importing games from Steam, Lutris, Heroic and more with no login "
@@ -56,9 +53,8 @@ msgid ""
 "SteamGridDB."
 msgstr ""
 "Cartridges on helppo pelikäynnistin. Se tukee pelien tuontia Steamista, "
-"Heroicista ja Bottlesista ja tarjoaa ominaisuuden järjestelyyn, kuten "
-"piilottamisen ja lajittelun lisäyspäivämäärän tai viimeisimmän pelatun pelin "
-"mukaan."
+"Heroicista ja Bottlesista, sekä muistaa ilman kirjautumista. Voit lajitella "
+"tai piilottaa pelejä ja ladata kansikuvan SteamGridDB tietokannasta."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:288
 #: cartridges/details_window.py:71
@@ -202,7 +198,7 @@ msgstr "Korkealaatuiset kuvat"
 
 #: data/gtk/preferences.blp:29
 msgid "Save game covers losslessly at the cost of storage"
-msgstr "Tallenna pelien kansikuvat häviöttömästi tallennustilan kustannuksella"
+msgstr "Tallenna pelin kannet häviöttömästi tallennustilan kustannuksella."
 
 #: data/gtk/preferences.blp:34
 msgid "Danger Zone"
@@ -229,7 +225,7 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:191 data/gtk/preferences.blp:208
 #: data/gtk/preferences.blp:225 data/gtk/preferences.blp:242
 msgid "Install Location"
-msgstr "Asennussijainti"
+msgstr "Asennuspaikka"
 
 #: data/gtk/preferences.blp:100 cartridges/importer/lutris_source.py:92
 msgid "Lutris"
@@ -277,7 +273,7 @@ msgstr "itch"
 
 #: data/gtk/preferences.blp:204 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
-msgstr ""
+msgstr "Legendaarinen"
 
 #: data/gtk/preferences.blp:221 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
@@ -289,7 +285,7 @@ msgstr "Flatpak"
 
 #: data/gtk/preferences.blp:254
 msgid "Import Game Launchers"
-msgstr "Tuo pelikäynnistimiä"
+msgstr "Tuo pelin käynnistimet"
 
 #: data/gtk/preferences.blp:259 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
@@ -313,15 +309,15 @@ msgstr "Käytä SteamGridDB:tä"
 
 #: data/gtk/preferences.blp:282
 msgid "Download images when adding or importing games"
-msgstr "Lataa kuvat pelejä lisätessä tai tuotaessa"
+msgstr "Lataa kuvia, kun lisäät tai tuot pelejä"
 
 #: data/gtk/preferences.blp:286
 msgid "Prefer Over Official Images"
-msgstr "Suosi virallisten kuvien sijaan"
+msgstr "Mieluummin kuin virallisia kuvia"
 
 #: data/gtk/preferences.blp:290
 msgid "Prefer Animated Images"
-msgstr "Suosi animoituja kuvia"
+msgstr "Mieluummin animoituja kuvia"
 
 #: data/gtk/preferences.blp:296
 msgid "Update Covers"
@@ -453,7 +449,7 @@ msgstr "Lisää"
 
 #: cartridges/details_window.py:93
 msgid "Executables"
-msgstr "Suoritettavat tiedostot"
+msgstr "Suoritettava"
 
 #. Translate this string as you would translate "file"
 #: cartridges/details_window.py:108
@@ -487,11 +483,11 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Käynnistääksesi suoritettavan ohjelman \"{exe_name}\", käytä komentoa:\n"
+"Käynnistääksesi suoritettavan ohjelman \"{}\", käytä komentoa:\n"
 "\n"
 "<tt>\"{}\"</tt>\n"
 "\n"
-"Avataksesi tiedoston \"{}\" oletussovelluksella, käytä komentoa:\n"
+"Jos haluat avata tiedoston \"{}\" oletussovelluksella, käytä komentoa:\n"
 "\n"
 "<tt>{} \"{}\"</tt>\n"
 "\n"
@@ -537,8 +533,8 @@ msgstr "Kaikki pelit poistettu"
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
-"API-avain on pakollinen, jos haluat käyttää SteamGridDB:tä. Voit luoda "
-"avaimen {}täällä{}."
+"SteamGridDB:n käyttäminen edellyttää API-avainta. Voit luoda sellaisen "
+"{}täältä{}."
 
 #: cartridges/preferences.py:184
 msgid "Downloading covers…"
@@ -627,10 +623,8 @@ msgid "Games with no core selected were not imported"
 msgstr "Pelejä, joihin ei ole valittu ydintä, ei tuotu"
 
 #: cartridges/store/managers/sgdb_manager.py:46
-#, fuzzy
-#| msgid "Couldn't Connect to SteamGridDB"
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "Ei voitu yhdistää SteamGridDB:hen"
+msgstr "Ei voitu kirjautua SteamGridDB:hen"
 
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
