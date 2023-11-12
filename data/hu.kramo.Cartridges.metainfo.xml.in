@@ -17,22 +17,6 @@
   <developer_name translatable="no">kramo</developer_name>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
   <translation type="gettext">cartridges</translation>
-  <categories>
-    <category>GNOME</category>
-    <category>GTK</category>
-    <category>Game</category>
-  </categories>
-  <keywords>
-    <keyword>gaming</keyword>
-    <keyword>launcher</keyword>
-    <keyword translate="no">Steam</keyword>
-    <keyword translate="no">Lutris</keyword>
-    <keyword>Bottles</keyword>
-    <keyword translate="no">itch</keyword>
-    <keyword translate="no">Flatpak</keyword>
-    <keyword translate="no">Legendary</keyword>
-    <keyword translate="no">Retroarch</keyword>
-  </keywords>
   <supports>
     <control>pointing</control>
     <control>keyboard</control>
