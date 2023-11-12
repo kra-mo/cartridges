@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-10 22:22+0200\n"
-"PO-Revision-Date: 2023-10-03 16:11+0000\n"
+"PO-Revision-Date: 2023-11-03 16:11+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/tr/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -175,7 +175,7 @@ msgstr "Davranış"
 
 #: data/gtk/preferences.blp:15
 msgid "Exit After Launching Games"
-msgstr "Oyunu Başlatıldıktan Sonra Çık"
+msgstr "Oyunları Başlattıktan Sonra Çık"
 
 #: data/gtk/preferences.blp:19
 msgid "Cover Image Launches Game"
