@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-10 22:22+0200\n"
-"PO-Revision-Date: 2023-09-30 08:01+0000\n"
+"PO-Revision-Date: 2023-11-12 11:42+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -40,8 +40,8 @@ msgstr "உங்கள் எல்லா விளையாட்டுகள�
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
-"விளையாட்டு; துவக்கி; steam;lutris;heroic;பாட்டில்கள்;itch;flatpak;legendary;"
-"Retroarch;"
+"விளையாட்டு; துவக்கி; "
+"steam;lutris;heroic;பாட்டில்கள்;itch;flatpak;legendary;retroarch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
