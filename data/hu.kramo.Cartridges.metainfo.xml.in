@@ -46,11 +46,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.6.2" date="2023-11-03">
+    <release version="2.6.3" date="2023-11-16">
       <description translatable="no">
         <ul>
-          <li>Fixed an issue with some games not showing up in GNOME search</li>
-          <li>Command line options are now properly supported</li>
+          <li>Fixed an issue with custom Lutris locations</li>
+          <li>UI improvements</li>
         </ul>
       </description>
     </release>
