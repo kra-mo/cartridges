@@ -80,7 +80,7 @@ class CartridgesApplication(Adw.Application):
         launch = GLib.OptionEntry()
         launch.long_name = "launch"
         launch.short_name = ord("l")
-        launch.flags = 0
+        launch.flags = int(GLib.OptionFlags.NONE)
         launch.arg = int(GLib.OptionArg.STRING)
         launch.arg_data = None
         launch.description = "Run a game with the given game_id"
