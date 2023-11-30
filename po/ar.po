@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-10 22:22+0200\n"
-"PO-Revision-Date: 2023-09-26 17:47+0000\n"
+"POT-Creation-Date: 2023-11-17 17:08+0100\n"
+"PO-Revision-Date: 2023-11-18 20:09+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.2\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
-#: data/hu.kramo.Cartridges.metainfo.xml.in:30 data/gtk/window.blp:47
-#: data/gtk/window.blp:80 cartridges/main.py:185
+#: data/hu.kramo.Cartridges.metainfo.xml.in:32 data/gtk/window.blp:47
+#: data/gtk/window.blp:80 cartridges/main.py:205
 msgid "Cartridges"
 msgstr "خراطيش"
 
@@ -53,17 +53,17 @@ msgstr ""
 "وبرامج أخرى، وذلك دون تسجيل دخول. ولك ترتيب وإخفاء الألعاب فيه كيفما شئت، "
 "وكذلك تستطيع منه تنزيل غُلُف الألعاب من SteamGridDB."
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:34 data/gtk/window.blp:288
+#: data/hu.kramo.Cartridges.metainfo.xml.in:36 data/gtk/window.blp:290
 #: cartridges/details_window.py:71
 msgid "Game Details"
 msgstr "تفاصيل اللعبة"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:38
+#: data/hu.kramo.Cartridges.metainfo.xml.in:40
 msgid "Edit Game Details"
 msgstr "حرِّر تفاصيل اللعبة"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:42 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:515 cartridges/details_window.py:271
+#: data/hu.kramo.Cartridges.metainfo.xml.in:44 data/gtk/help-overlay.blp:19
+#: data/gtk/window.blp:516 cartridges/details_window.py:271
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:370
 msgid "Preferences"
 msgstr "التفضيلات"
@@ -100,20 +100,19 @@ msgstr "اختر ملفًّا"
 msgid "More Info"
 msgstr "معلومات أكثر"
 
-#: data/gtk/game.blp:103 data/gtk/game.blp:122 data/gtk/window.blp:415
+#: data/gtk/game.blp:102 data/gtk/game.blp:110 data/gtk/window.blp:417
 msgid "Edit"
 msgstr "حرِّر"
 
-#: data/gtk/game.blp:108 cartridges/window.py:350
+#: data/gtk/game.blp:103 cartridges/window.py:350
 msgid "Hide"
 msgstr "أخفِ"
 
-#: data/gtk/game.blp:113 data/gtk/game.blp:132 data/gtk/preferences.blp:40
-#: data/gtk/window.blp:435
+#: data/gtk/game.blp:104 data/gtk/game.blp:112 data/gtk/window.blp:437
 msgid "Remove"
 msgstr "أزل"
 
-#: data/gtk/game.blp:127 cartridges/window.py:352
+#: data/gtk/game.blp:111 cartridges/window.py:352
 msgid "Unhide"
 msgstr "اكشف"
 
@@ -121,17 +120,17 @@ msgstr "اكشف"
 msgid "General"
 msgstr "عام"
 
-#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:184 data/gtk/window.blp:243
-#: data/gtk/window.blp:446
+#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:184 data/gtk/window.blp:200
+#: data/gtk/window.blp:244 data/gtk/window.blp:260 data/gtk/window.blp:448
 msgid "Search"
 msgstr "ابحث"
 
-#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:520
+#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:517
 msgid "Keyboard Shortcuts"
 msgstr "اختصارات لوحة المفاتيح"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:125 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:127 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "تراجع"
 
@@ -143,7 +142,7 @@ msgstr "أنهِ"
 msgid "Toggle Sidebar"
 msgstr "أظهر شريط الجانب"
 
-#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:177 data/gtk/window.blp:236
+#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:177 data/gtk/window.blp:237
 msgid "Main Menu"
 msgstr "القائمة الرئيسة"
 
@@ -151,12 +150,12 @@ msgstr "القائمة الرئيسة"
 msgid "Games"
 msgstr "الألعاب"
 
-#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:170 data/gtk/window.blp:534
+#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:170 data/gtk/window.blp:524
 msgid "Add Game"
 msgstr "أضف لعبةً"
 
-#: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:68
-#: data/gtk/window.blp:27 data/gtk/window.blp:541
+#: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:112
+#: data/gtk/window.blp:27 data/gtk/window.blp:528
 msgid "Import"
 msgstr "استورد"
 
@@ -168,8 +167,8 @@ msgstr "أظهر الألعاب المخفية"
 msgid "Remove Game"
 msgstr "أزل اللعبة"
 
-#: data/gtk/preferences.blp:12 data/gtk/preferences.blp:72
-#: data/gtk/preferences.blp:278
+#: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:367
 msgid "Behavior"
 msgstr "السلوك"
 
@@ -201,130 +200,131 @@ msgstr "احفظ غُلُف الألعاب دون فقد على حساب مسا�
 msgid "Danger Zone"
 msgstr "منطقة خطر"
 
-#: data/gtk/preferences.blp:37
+#: data/gtk/preferences.blp:47
 msgid "Remove All Games"
 msgstr "أزل كلَّ الألعاب"
 
-#: data/gtk/preferences.blp:75
+#: data/gtk/preferences.blp:119
 msgid "Remove Uninstalled Games"
 msgstr "أزل الألعاب المحذوفة"
 
-#: data/gtk/preferences.blp:80
+#: data/gtk/preferences.blp:124
 msgid "Sources"
 msgstr "المصادر"
 
-#: data/gtk/preferences.blp:83 cartridges/importer/steam_source.py:114
+#: data/gtk/preferences.blp:127 cartridges/importer/steam_source.py:114
 msgid "Steam"
 msgstr "ستيم"
 
-#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:104
-#: data/gtk/preferences.blp:141 data/gtk/preferences.blp:174
-#: data/gtk/preferences.blp:191 data/gtk/preferences.blp:208
-#: data/gtk/preferences.blp:225 data/gtk/preferences.blp:242
+#: data/gtk/preferences.blp:136 data/gtk/preferences.blp:158
+#: data/gtk/preferences.blp:200 data/gtk/preferences.blp:238
+#: data/gtk/preferences.blp:260 data/gtk/preferences.blp:282
+#: data/gtk/preferences.blp:304 data/gtk/preferences.blp:326
 msgid "Install Location"
 msgstr "موضع التثبيت"
 
-#: data/gtk/preferences.blp:100 cartridges/importer/lutris_source.py:92
+#: data/gtk/preferences.blp:149 data/gtk/window.blp:539
+#: cartridges/importer/lutris_source.py:92
 msgid "Lutris"
 msgstr "لوترس"
 
-#: data/gtk/preferences.blp:116
+#: data/gtk/preferences.blp:170
 msgid "Cache Location"
 msgstr "موضع الذاكرة المؤقتة"
 
-#: data/gtk/preferences.blp:128
+#: data/gtk/preferences.blp:182
 msgid "Import Steam Games"
 msgstr "استورد ألعابًا من ستيم"
 
-#: data/gtk/preferences.blp:132
+#: data/gtk/preferences.blp:186
 msgid "Import Flatpak Games"
 msgstr "استورد ألعاب فلاتباك"
 
-#: data/gtk/preferences.blp:137 cartridges/importer/heroic_source.py:355
+#: data/gtk/preferences.blp:191 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
 msgstr "هِرُوِك"
 
-#: data/gtk/preferences.blp:153
+#: data/gtk/preferences.blp:212
 msgid "Import Epic Games"
 msgstr "استورد ألعاب أَبِك"
 
-#: data/gtk/preferences.blp:157
+#: data/gtk/preferences.blp:216
 msgid "Import GOG Games"
 msgstr "استورد ألعاب جي‌أو‌جي"
 
-#: data/gtk/preferences.blp:161
+#: data/gtk/preferences.blp:220
 msgid "Import Amazon Games"
 msgstr "استورد ألعابًا من أمازون"
 
-#: data/gtk/preferences.blp:165
+#: data/gtk/preferences.blp:224
 msgid "Import Sideloaded Games"
 msgstr "استورد ألعابًا مثبَّتةً بغير متجر"
 
-#: data/gtk/preferences.blp:170 cartridges/importer/bottles_source.py:86
+#: data/gtk/preferences.blp:229 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
 msgstr "قوارير"
 
-#: data/gtk/preferences.blp:187 cartridges/importer/itch_source.py:81
+#: data/gtk/preferences.blp:251 cartridges/importer/itch_source.py:81
 msgid "itch"
 msgstr "إتش"
 
-#: data/gtk/preferences.blp:204 cartridges/importer/legendary_source.py:97
+#: data/gtk/preferences.blp:273 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
 msgstr "لجندري"
 
-#: data/gtk/preferences.blp:221 cartridges/importer/retroarch_source.py:142
+#: data/gtk/preferences.blp:295 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
 msgstr "رتروآرتش"
 
-#: data/gtk/preferences.blp:238 cartridges/importer/flatpak_source.py:118
+#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:118
 msgid "Flatpak"
 msgstr "فلاتباك"
 
-#: data/gtk/preferences.blp:254
+#: data/gtk/preferences.blp:338
 msgid "Import Game Launchers"
 msgstr "استورد مشغِّلات ألعاب"
 
-#: data/gtk/preferences.blp:259 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:343 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "مدخلات سطح المكتب"
 
-#: data/gtk/preferences.blp:266
+#: data/gtk/preferences.blp:355 data/gtk/window.blp:537
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:270
+#: data/gtk/preferences.blp:359
 msgid "Authentication"
 msgstr "الاستيثاق"
 
-#: data/gtk/preferences.blp:273
+#: data/gtk/preferences.blp:362
 msgid "API Key"
 msgstr "مفتاح واجهة البرمجة"
 
-#: data/gtk/preferences.blp:281
+#: data/gtk/preferences.blp:370
 msgid "Use SteamGridDB"
 msgstr "استخدم SteamGridDB"
 
-#: data/gtk/preferences.blp:282
+#: data/gtk/preferences.blp:371
 msgid "Download images when adding or importing games"
 msgstr "نزِّل الصور حينما تنزِّل أو تستورد الألعاب"
 
-#: data/gtk/preferences.blp:286
+#: data/gtk/preferences.blp:375
 msgid "Prefer Over Official Images"
 msgstr "فضِّلها على الصور الرسمية"
 
-#: data/gtk/preferences.blp:290
+#: data/gtk/preferences.blp:379
 msgid "Prefer Animated Images"
 msgstr "فضِّل الصور المتحرِّكة"
 
-#: data/gtk/preferences.blp:296
+#: data/gtk/preferences.blp:385
 msgid "Update Covers"
 msgstr "حدِّث الغُلُف"
 
-#: data/gtk/preferences.blp:297
+#: data/gtk/preferences.blp:386
 msgid "Fetch covers for games already in your library"
 msgstr "اجلب غُلُفًا للألعاب التي في المكتبة"
 
-#: data/gtk/preferences.blp:301
+#: data/gtk/preferences.blp:391
 msgid "Update"
 msgstr "حدِّث"
 
@@ -352,11 +352,11 @@ msgstr "لا توجد ألعاب مخفية"
 msgid "Games you hide will appear here."
 msgstr "هنا يظهر ما أخفيت من ألعاب."
 
-#: data/gtk/window.blp:75 data/gtk/window.blp:106 cartridges/main.py:207
+#: data/gtk/window.blp:75 data/gtk/window.blp:106 cartridges/main.py:226
 msgid "All Games"
 msgstr "كلُّ الألعاب"
 
-#: data/gtk/window.blp:126 cartridges/main.py:209
+#: data/gtk/window.blp:126 cartridges/main.py:228
 msgid "Added"
 msgstr "أُضيفَت"
 
@@ -364,57 +364,69 @@ msgstr "أُضيفَت"
 msgid "Imported"
 msgstr "اُستوردَت"
 
-#: data/gtk/window.blp:229
+#: data/gtk/window.blp:230
 msgid "Hidden Games"
 msgstr "الألعاب المخفية"
 
-#: data/gtk/window.blp:339
+#: data/gtk/window.blp:341
 msgid "Game Title"
 msgstr "عنوان اللعبة"
 
-#: data/gtk/window.blp:396
+#: data/gtk/window.blp:398
 msgid "Play"
 msgstr "العب"
 
-#: data/gtk/window.blp:473
+#: data/gtk/window.blp:475
 msgid "Sort"
 msgstr "رتِّب"
 
-#: data/gtk/window.blp:476
+#: data/gtk/window.blp:478
 msgid "A-Z"
 msgstr "أ-ي"
 
-#: data/gtk/window.blp:482
+#: data/gtk/window.blp:484
 msgid "Z-A"
 msgstr "ي-أ"
 
-#: data/gtk/window.blp:488
+#: data/gtk/window.blp:490
 msgid "Newest"
 msgstr "الأجدد"
 
-#: data/gtk/window.blp:494
+#: data/gtk/window.blp:496
 msgid "Oldest"
 msgstr "الأقدم"
 
-#: data/gtk/window.blp:500
+#: data/gtk/window.blp:502
 msgid "Last Played"
 msgstr "لُعبت آخر مرَّة"
 
-#: data/gtk/window.blp:507
+#: data/gtk/window.blp:509
 msgid "Show Hidden"
 msgstr "أظهر ما أخفي"
 
-#: data/gtk/window.blp:525
+#: data/gtk/window.blp:518
 msgid "About Cartridges"
 msgstr "عن «خراطيش»"
 
+#: data/gtk/window.blp:536
+msgid "IGDB"
+msgstr "IGDB"
+
+#: data/gtk/window.blp:538
+msgid "ProtonDB"
+msgstr "ProtonDB"
+
+#: data/gtk/window.blp:540
+msgid "HowLongToBeat"
+msgstr "HowLongToBeat"
+
 #. The variable is the title of the game
-#: cartridges/main.py:186 cartridges/game.py:125
+#: cartridges/main.py:206 cartridges/game.py:125
 msgid "{} launched"
 msgstr "بُدئت {}"
 
 #. Translators: Replace this with your name for it to show up in the about window
-#: cartridges/main.py:249
+#: cartridges/main.py:269
 msgid "translator_credits"
 msgstr "Ali Aljishi <ahj696@hotmail.com>"
 
@@ -521,41 +533,41 @@ msgstr "أٌظهرت {}"
 msgid "{} removed"
 msgstr "أزيلت {}"
 
-#: cartridges/preferences.py:124
+#: cartridges/preferences.py:126
 msgid "All games removed"
 msgstr "أُزيلت كلُّ الألعاب"
 
-#: cartridges/preferences.py:172
+#: cartridges/preferences.py:174
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "تحتاج مفتاح واجهة برمجة حال ما أردت استخدام SteamGridDB، {}هنا تولِّده{}."
 
-#: cartridges/preferences.py:184
+#: cartridges/preferences.py:189
 msgid "Downloading covers…"
 msgstr "تُنزَّل الغُلُف…"
 
-#: cartridges/preferences.py:203
+#: cartridges/preferences.py:208
 msgid "Covers updated"
 msgstr "حُدِّثت الغُلُف"
 
-#: cartridges/preferences.py:335
+#: cartridges/preferences.py:343
 msgid "Installation Not Found"
 msgstr "لم يُعثر على التثبيت"
 
-#: cartridges/preferences.py:336
+#: cartridges/preferences.py:344
 msgid "Select a valid directory."
 msgstr "حدِّد مجلَّدًا صالحًا."
 
-#: cartridges/preferences.py:372 cartridges/importer/importer.py:317
+#: cartridges/preferences.py:380 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "تحذير"
 
-#: cartridges/preferences.py:406
+#: cartridges/preferences.py:414
 msgid "Invalid Directory"
 msgstr "مجلَّد غير صالح"
 
-#: cartridges/preferences.py:412
+#: cartridges/preferences.py:420
 msgid "Set Location"
 msgstr "عيِّن الموضع"
 
