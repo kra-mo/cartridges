@@ -46,11 +46,10 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.6.3" date="2023-11-16">
+    <release version="2.7" date="2023-12-12">
       <description translatable="no">
         <ul>
-          <li>Fixed an issue with custom Lutris locations</li>
-          <li>UI improvements</li>
+          <li>Flatpaks installed for the user and system-wide ones can now be imported separately</li>
         </ul>
       </description>
     </release>
