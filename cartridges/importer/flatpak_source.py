@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+from itertools import chain
 from pathlib import Path
 from typing import NamedTuple
 
@@ -35,7 +36,8 @@ class FlatpakSourceIterable(SourceIterable):
         """Generator method producing games"""
 
         icon_theme = Gtk.IconTheme.new()
-        icon_theme.add_search_path(str(self.source.locations.data["icons"]))
+        icon_theme.add_search_path(str(self.source.locations.system_data["icons"]))
+        icon_theme.add_search_path(str(self.source.locations.user_data["icons"]))
 
         blacklist = (
             {"hu.kramo.Cartridges", "hu.kramo.Cartridges.Devel"}
@@ -52,7 +54,10 @@ class FlatpakSourceIterable(SourceIterable):
             }
         )
 
-        for entry in (self.source.locations.data["applications"]).iterdir():
+        for entry in chain(
+            (self.source.locations.system_data["applications"]).iterdir(),
+            (self.source.locations.user_data["applications"]).iterdir(),
+        ):
             if entry.suffix != ".desktop":
                 continue
 
@@ -108,7 +113,8 @@ class FlatpakSourceIterable(SourceIterable):
 
 
 class FlatpakLocations(NamedTuple):
-    data: Location
+    system_data: Location
+    user_data: Location
 
 
 class FlatpakSource(ExecutableFormatSource):
@@ -126,15 +132,21 @@ class FlatpakSource(ExecutableFormatSource):
         super().__init__()
         self.locations = FlatpakLocations(
             Location(
-                schema_key="flatpak-location",
-                candidates=(
-                    "/var/lib/flatpak/",
-                    shared.data_dir / "flatpak",
-                ),
+                schema_key="flatpak-system-location",
+                candidates=("/var/lib/flatpak/",),
                 paths={
                     "applications": LocationSubPath("exports/share/applications", True),
                     "icons": LocationSubPath("exports/share/icons", True),
                 },
                 invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
-            )
+            ),
+            Location(
+                schema_key="flatpak-user-location",
+                candidates=(shared.data_dir / "flatpak",),
+                paths={
+                    "applications": LocationSubPath("exports/share/applications", True),
+                    "icons": LocationSubPath("exports/share/icons", True),
+                },
+                invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+            ),
         )

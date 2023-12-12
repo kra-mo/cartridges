@@ -83,8 +83,11 @@
     <key name="flatpak" type="b">
       <default>true</default>
     </key>
-    <key name="flatpak-location" type="s">
+    <key name="flatpak-system-location" type="s">
       <default>"/var/lib/flatpak/"</default>
+    </key>
+    <key name="flatpak-user-location" type="s">
+      <default>"~/.local/share/flatpak/"</default>
     </key>
     <key name="flatpak-import-launchers" type="b">
       <default>false</default>

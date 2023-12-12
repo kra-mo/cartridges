@@ -322,10 +322,22 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           icon-name: "flatpak-source-symbolic";
         }
 
-        Adw.ActionRow flatpak_data_action_row {
-          title: _("Install Location");
+        Adw.ActionRow flatpak_system_data_action_row {
+          title: _("System Location");
 
-          Button flatpak_data_file_chooser_button {
+          Button flatpak_system_data_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+            styles [
+              "flat"
+            ]
+          }
+        }
+
+        Adw.ActionRow flatpak_user_data_action_row {
+          title: _("User Location");
+
+          Button flatpak_user_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
             styles [
