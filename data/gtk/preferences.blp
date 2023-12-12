@@ -323,6 +323,7 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         }
 
         Adw.ActionRow flatpak_system_data_action_row {
+          // The location of the system-wide data directory
           title: _("System Location");
 
           Button flatpak_system_data_file_chooser_button {
@@ -335,6 +336,7 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         }
 
         Adw.ActionRow flatpak_user_data_action_row {
+          // The location of the user-specific data directory
           title: _("User Location");
 
           Button flatpak_user_data_file_chooser_button {

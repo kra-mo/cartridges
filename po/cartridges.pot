@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-12 10:25+0100\n"
+"POT-Creation-Date: 2023-12-12 10:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -161,7 +161,7 @@ msgid "Remove Game"
 msgstr ""
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:381
 msgid "Behavior"
 msgstr ""
 
@@ -273,59 +273,61 @@ msgstr ""
 msgid "Flatpak"
 msgstr ""
 
-#: data/gtk/preferences.blp:326
+#. The location of the system-wide data directory
+#: data/gtk/preferences.blp:327
 msgid "System Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:338
+#. The location of the user-specific data directory
+#: data/gtk/preferences.blp:340
 msgid "User Location"
 msgstr ""
 
-#: data/gtk/preferences.blp:350
+#: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
 msgstr ""
 
-#: data/gtk/preferences.blp:355 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr ""
 
-#: data/gtk/preferences.blp:367 data/gtk/window.blp:537
+#: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
 msgstr ""
 
-#: data/gtk/preferences.blp:371
+#: data/gtk/preferences.blp:373
 msgid "Authentication"
 msgstr ""
 
-#: data/gtk/preferences.blp:374
+#: data/gtk/preferences.blp:376
 msgid "API Key"
 msgstr ""
 
-#: data/gtk/preferences.blp:382
+#: data/gtk/preferences.blp:384
 msgid "Use SteamGridDB"
 msgstr ""
 
-#: data/gtk/preferences.blp:383
+#: data/gtk/preferences.blp:385
 msgid "Download images when adding or importing games"
 msgstr ""
 
-#: data/gtk/preferences.blp:387
+#: data/gtk/preferences.blp:389
 msgid "Prefer Over Official Images"
 msgstr ""
 
-#: data/gtk/preferences.blp:391
+#: data/gtk/preferences.blp:393
 msgid "Prefer Animated Images"
 msgstr ""
 
-#: data/gtk/preferences.blp:397
+#: data/gtk/preferences.blp:399
 msgid "Update Covers"
 msgstr ""
 
-#: data/gtk/preferences.blp:398
+#: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
 msgstr ""
 
-#: data/gtk/preferences.blp:403
+#: data/gtk/preferences.blp:405
 msgid "Update"
 msgstr ""
 
