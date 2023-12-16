@@ -204,7 +204,7 @@ class SearchCartridgesService(Server, Gio.Application):
                         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
                             str(path), -1, 32, True
                         )
-                    except GLib.GError as e:
+                    except GLib.Error as e:
                         print(e)
                         continue
                 elif (path := shared.covers_dir / (game_id + ".gif")).is_file():
@@ -212,7 +212,7 @@ class SearchCartridgesService(Server, Gio.Application):
                         pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(
                             str(path)
                         ).get_static_image()
-                    except GLib.GError as e:
+                    except GLib.Error as e:
                         print(e)
                         continue
                 d = {

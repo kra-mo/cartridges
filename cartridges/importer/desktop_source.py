@@ -93,7 +93,7 @@ class DesktopSourceIterable(SourceIterable):
                     executable = keyfile.get_string("Desktop Entry", "Exec").split(
                         " %"
                     )[0]
-                except GLib.GError:
+                except GLib.Error:
                     continue
 
                 try:
@@ -101,7 +101,7 @@ class DesktopSourceIterable(SourceIterable):
                     if not self.check_command(try_exec):
                         continue
 
-                except GLib.GError:
+                except GLib.Error:
                     pass
 
                 # Skip Steam games
@@ -119,13 +119,13 @@ class DesktopSourceIterable(SourceIterable):
                 try:
                     if keyfile.get_boolean("Desktop Entry", "NoDisplay"):
                         continue
-                except GLib.GError:
+                except GLib.Error:
                     pass
 
                 try:
                     if keyfile.get_boolean("Desktop Entry", "Hidden"):
                         continue
-                except GLib.GError:
+                except GLib.Error:
                     pass
 
                 # Strip /run/host from Flatpak paths
@@ -147,7 +147,7 @@ class DesktopSourceIterable(SourceIterable):
 
                 try:
                     icon_str = keyfile.get_string("Desktop Entry", "Icon")
-                except GLib.GError:
+                except GLib.Error:
                     yield game
                     continue
                 else:
@@ -170,7 +170,7 @@ class DesktopSourceIterable(SourceIterable):
                         .get_path()
                     ):
                         additional_data = {"local_icon_path": Path(icon_path)}
-                except GLib.GError:
+                except GLib.Error:
                     pass
 
                 yield (game, additional_data)

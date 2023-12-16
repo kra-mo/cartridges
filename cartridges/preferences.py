@@ -393,7 +393,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
             """Callback called when a dir picker button is clicked"""
             try:
                 path = Path(self.file_chooser.select_folder_finish(result).get_path())
-            except GLib.GError:
+            except GLib.Error:
                 return
 
             # Good picked location

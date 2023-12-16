@@ -286,7 +286,7 @@ class DetailsWindow(Adw.Window):
     def set_cover(self, _source: Any, result: Gio.Task, *_args: Any) -> None:
         try:
             path = self.image_file_dialog.open_finish(result).get_path()
-        except GLib.GError:
+        except GLib.Error:
             return
 
         def thread_func() -> None:
@@ -319,7 +319,7 @@ class DetailsWindow(Adw.Window):
     def set_executable(self, _source: Any, result: Gio.Task, *_args: Any) -> None:
         try:
             path = self.exec_file_dialog.open_finish(result).get_path()
-        except GLib.GError:
+        except GLib.Error:
             return
 
         self.executable.set_text(shlex.quote(path))

@@ -82,7 +82,7 @@ def convert_cover(
                 tmp_path := Gio.File.new_tmp("XXXXXX.tiff")[0].get_path()
             )
             return convert_cover(tmp_path)
-        except GLib.GError:
+        except GLib.Error:
             return None
 
     return tmp_path

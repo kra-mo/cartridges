@@ -76,7 +76,7 @@ class FlatpakSourceIterable(SourceIterable):
 
                 name = keyfile.get_string("Desktop Entry", "Name")
 
-            except GLib.GError:
+            except GLib.Error:
                 continue
 
             values = {
@@ -106,7 +106,7 @@ class FlatpakSourceIterable(SourceIterable):
                     additional_data = {"local_icon_path": Path(icon_path)}
                 else:
                     pass
-            except GLib.GError:
+            except GLib.Error:
                 pass
 
             yield (game, additional_data)
