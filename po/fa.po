@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-17 17:08+0100\n"
+"POT-Creation-Date: 2023-12-12 10:32+0100\n"
 "PO-Revision-Date: 2023-09-24 16:04+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/cartridges/"
@@ -130,7 +130,7 @@ msgid "Keyboard Shortcuts"
 msgstr "میان‌برهیا صفحه‌کلید"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:127 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:129 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "برگردان"
 
@@ -168,7 +168,7 @@ msgid "Remove Game"
 msgstr "برداشتن بازی"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
-#: data/gtk/preferences.blp:367
+#: data/gtk/preferences.blp:381
 msgid "Behavior"
 msgstr "رفتار"
 
@@ -219,7 +219,7 @@ msgstr "استیم"
 #: data/gtk/preferences.blp:136 data/gtk/preferences.blp:158
 #: data/gtk/preferences.blp:200 data/gtk/preferences.blp:238
 #: data/gtk/preferences.blp:260 data/gtk/preferences.blp:282
-#: data/gtk/preferences.blp:304 data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:304
 msgid "Install Location"
 msgstr "مکان نصب"
 
@@ -276,57 +276,71 @@ msgstr "لجندری"
 msgid "RetroArch"
 msgstr "رتروآرچ"
 
-#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:118
+#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:124
 msgid "Flatpak"
 msgstr "فلت‌پک"
 
-#: data/gtk/preferences.blp:338
+#. The location of the system-wide data directory
+#: data/gtk/preferences.blp:327
+#, fuzzy
+#| msgid "Set Location"
+msgid "System Location"
+msgstr "تنظیم مکان"
+
+#. The location of the user-specific data directory
+#: data/gtk/preferences.blp:340
+#, fuzzy
+#| msgid "Set Location"
+msgid "User Location"
+msgstr "تنظیم مکان"
+
+#: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
 msgstr "درون‌ریزی اجراگرهای بازی"
 
-#: data/gtk/preferences.blp:343 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "ورودی‌های میزکار"
 
-#: data/gtk/preferences.blp:355 data/gtk/window.blp:537
+#: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:359
+#: data/gtk/preferences.blp:373
 msgid "Authentication"
 msgstr "هویت‌سنجی"
 
-#: data/gtk/preferences.blp:362
+#: data/gtk/preferences.blp:376
 msgid "API Key"
 msgstr "کلید API"
 
-#: data/gtk/preferences.blp:370
+#: data/gtk/preferences.blp:384
 msgid "Use SteamGridDB"
 msgstr "استفاده از SteamGridDB"
 
-#: data/gtk/preferences.blp:371
+#: data/gtk/preferences.blp:385
 msgid "Download images when adding or importing games"
 msgstr "بارگیری تصویرها هنگام افزودن یا درون‌ریزی بازی‌ها"
 
-#: data/gtk/preferences.blp:375
+#: data/gtk/preferences.blp:389
 msgid "Prefer Over Official Images"
 msgstr "ترجیح به تصویرهای رسمی"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:393
 msgid "Prefer Animated Images"
 msgstr "ترچیح تصویرهای پویا"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:399
 #, fuzzy
 #| msgid "Delete Cover"
 msgid "Update Covers"
 msgstr "حذف طرح جلد"
 
-#: data/gtk/preferences.blp:386
+#: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
 msgstr ""
 
-#: data/gtk/preferences.blp:391
+#: data/gtk/preferences.blp:405
 msgid "Update"
 msgstr ""
 
@@ -535,42 +549,42 @@ msgstr "{} نانهفته"
 msgid "{} removed"
 msgstr "{} برداشته"
 
-#: cartridges/preferences.py:126
+#: cartridges/preferences.py:128
 msgid "All games removed"
 msgstr "همهٔ بازی‌ها برداشته شدند"
 
-#: cartridges/preferences.py:174
+#: cartridges/preferences.py:176
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "برای استفاده از SteamGridDB نیاز به یک کلید API است. می‌توانید {}این‌جا{} یکی "
 "بسازید."
 
-#: cartridges/preferences.py:189
+#: cartridges/preferences.py:191
 msgid "Downloading covers…"
 msgstr ""
 
-#: cartridges/preferences.py:208
+#: cartridges/preferences.py:210
 msgid "Covers updated"
 msgstr ""
 
-#: cartridges/preferences.py:343
+#: cartridges/preferences.py:345
 msgid "Installation Not Found"
 msgstr "نصب پیدا نشد"
 
-#: cartridges/preferences.py:344
+#: cartridges/preferences.py:346
 msgid "Select a valid directory."
 msgstr "گزینش شاخه‌ای معتبر."
 
-#: cartridges/preferences.py:380 cartridges/importer/importer.py:317
+#: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "هشدار"
 
-#: cartridges/preferences.py:414
+#: cartridges/preferences.py:416
 msgid "Invalid Directory"
 msgstr "شاخهٔ نامعتبر"
 
-#: cartridges/preferences.py:420
+#: cartridges/preferences.py:422
 msgid "Set Location"
 msgstr "تنظیم مکان"
 
