@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-17 17:08+0100\n"
-"PO-Revision-Date: 2023-11-05 22:34+0000\n"
-"Last-Translator: John Donne <akheron@zaclys.net>\n"
+"POT-Creation-Date: 2023-12-12 10:32+0100\n"
+"PO-Revision-Date: 2023-12-16 21:06+0000\n"
+"Last-Translator: \"J. Lavoie\" <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.3\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -133,7 +133,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:127 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:129 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "Annuler"
 
@@ -171,7 +171,7 @@ msgid "Remove Game"
 msgstr "Supprimer le jeu"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
-#: data/gtk/preferences.blp:367
+#: data/gtk/preferences.blp:381
 msgid "Behavior"
 msgstr "Comportement"
 
@@ -225,7 +225,7 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:136 data/gtk/preferences.blp:158
 #: data/gtk/preferences.blp:200 data/gtk/preferences.blp:238
 #: data/gtk/preferences.blp:260 data/gtk/preferences.blp:282
-#: data/gtk/preferences.blp:304 data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:304
 msgid "Install Location"
 msgstr "Emplacement d'installation"
 
@@ -282,55 +282,65 @@ msgstr "Légendaire"
 msgid "RetroArch"
 msgstr "RetroArch"
 
-#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:118
+#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:124
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: data/gtk/preferences.blp:338
+#. The location of the system-wide data directory
+#: data/gtk/preferences.blp:327
+msgid "System Location"
+msgstr "Emplacement du système"
+
+#. The location of the user-specific data directory
+#: data/gtk/preferences.blp:340
+msgid "User Location"
+msgstr "Emplacement de l'utilisateur"
+
+#: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
 msgstr "Importer des lanceurs de jeux"
 
-#: data/gtk/preferences.blp:343 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "Éléments de bureau"
 
-#: data/gtk/preferences.blp:355 data/gtk/window.blp:537
+#: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:359
+#: data/gtk/preferences.blp:373
 msgid "Authentication"
 msgstr "Authentification"
 
-#: data/gtk/preferences.blp:362
+#: data/gtk/preferences.blp:376
 msgid "API Key"
 msgstr "Clé API"
 
-#: data/gtk/preferences.blp:370
+#: data/gtk/preferences.blp:384
 msgid "Use SteamGridDB"
 msgstr "Utiliser SteamGridDB"
 
-#: data/gtk/preferences.blp:371
+#: data/gtk/preferences.blp:385
 msgid "Download images when adding or importing games"
 msgstr "Télécharger les images lors de l’ajout ou de l’importation de jeux"
 
-#: data/gtk/preferences.blp:375
+#: data/gtk/preferences.blp:389
 msgid "Prefer Over Official Images"
 msgstr "Préférer à la place des images officielles"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:393
 msgid "Prefer Animated Images"
 msgstr "Préférer les images animées"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:399
 msgid "Update Covers"
 msgstr "Mettre à jour les pochettes des jeux"
 
-#: data/gtk/preferences.blp:386
+#: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
 msgstr "Récupérer les pochettes des jeux déjà présents dans votre bibliothèque"
 
-#: data/gtk/preferences.blp:391
+#: data/gtk/preferences.blp:405
 msgid "Update"
 msgstr "Mise à jour"
 
@@ -416,15 +426,15 @@ msgstr "À propos de Cartouches"
 
 #: data/gtk/window.blp:536
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:538
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:540
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:206 cartridges/game.py:125
@@ -540,42 +550,42 @@ msgstr "{} affiché"
 msgid "{} removed"
 msgstr "{} retiré"
 
-#: cartridges/preferences.py:126
+#: cartridges/preferences.py:128
 msgid "All games removed"
 msgstr "Tous les jeux ont été supprimés"
 
-#: cartridges/preferences.py:174
+#: cartridges/preferences.py:176
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Une clé API est requise pour utiliser SteamGridDB. Vous pouvez en générer "
 "une {}ici{}."
 
-#: cartridges/preferences.py:189
+#: cartridges/preferences.py:191
 msgid "Downloading covers…"
 msgstr "Téléchargement des pochettes des jeux…"
 
-#: cartridges/preferences.py:208
+#: cartridges/preferences.py:210
 msgid "Covers updated"
 msgstr "Couvertures des jeux mises à jour"
 
-#: cartridges/preferences.py:343
+#: cartridges/preferences.py:345
 msgid "Installation Not Found"
 msgstr "Installation introuvable"
 
-#: cartridges/preferences.py:344
+#: cartridges/preferences.py:346
 msgid "Select a valid directory."
 msgstr "Sélectionnez un répertoire valide."
 
-#: cartridges/preferences.py:380 cartridges/importer/importer.py:317
+#: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "Attention"
 
-#: cartridges/preferences.py:414
+#: cartridges/preferences.py:416
 msgid "Invalid Directory"
 msgstr "Répertoire invalide"
 
-#: cartridges/preferences.py:420
+#: cartridges/preferences.py:422
 msgid "Set Location"
 msgstr "Définir l’emplacement"
 
