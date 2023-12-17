@@ -17,8 +17,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os
 from enum import IntEnum, auto
+from os import getenv
 from pathlib import Path
 
 from gi.repository import Gdk, Gio, GLib
@@ -43,19 +43,26 @@ schema = Gio.Settings.new(APP_ID)
 state_schema = Gio.Settings.new(APP_ID + ".State")
 
 home = Path.home()
+
 data_dir = Path(GLib.get_user_data_dir())
+host_data_dir = Path(getenv("HOST_XDG_DATA_HOME", Path.home() / ".local" / "share"))
+
 config_dir = Path(GLib.get_user_config_dir())
+host_config_dir = Path(getenv("HOST_XDG_CONFIG_HOME", Path.home() / ".config"))
+
 cache_dir = Path(GLib.get_user_cache_dir())
+host_cache_dir = Path(getenv("HOST_XDG_CACHE_HOME", Path.home() / ".cache"))
+
 flatpak_dir = home / ".var" / "app"
 
 games_dir = data_dir / "cartridges" / "games"
 covers_dir = data_dir / "cartridges" / "covers"
 
-appdata_dir = Path(os.getenv("appdata") or "C:\\Users\\Default\\AppData\\Roaming")
+appdata_dir = Path(getenv("appdata") or r"C:\Users\Default\AppData\Roaming")
 local_appdata_dir = Path(
-    os.getenv("csidl_local_appdata") or "C:\\Users\\Default\\AppData\\Local"
+    getenv("csidl_local_appdata") or r"C:\Users\Default\AppData\Local"
 )
-programfiles32_dir = Path(os.getenv("programfiles(x86)") or "C:\\Program Files (x86)")
+programfiles32_dir = Path(getenv("programfiles(x86)") or r"C:\Program Files (x86)")
 
 try:
     scale_factor = max(

@@ -157,7 +157,7 @@ class RetroarchSource(Source):
                     / "config"
                     / "retroarch",
                     shared.config_dir / "retroarch",
-                    shared.home / ".config" / "retroarch",
+                    shared.host_config_dir / "retroarch",
                     # TODO: Windows support, waiting for executable path setting improvement
                     # Path("C:\\RetroArch-Win64"),
                     # Path("C:\\RetroArch-Win32"),

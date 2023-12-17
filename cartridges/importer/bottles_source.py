@@ -98,7 +98,7 @@ class BottlesSource(URLExecutableSource):
                 candidates=(
                     shared.flatpak_dir / "com.usebottles.bottles" / "data" / "bottles",
                     shared.data_dir / "bottles/",
-                    shared.home / ".local" / "share" / "bottles",
+                    shared.host_data_dir / "bottles",
                 ),
                 paths={
                     "library.yml": LocationSubPath("library.yml"),

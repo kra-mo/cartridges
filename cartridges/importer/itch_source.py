@@ -93,7 +93,7 @@ class ItchSource(URLExecutableSource):
                 candidates=(
                     shared.flatpak_dir / "io.itch.itch" / "config" / "itch",
                     shared.config_dir / "itch",
-                    shared.home / ".config" / "itch",
+                    shared.host_config_dir / "itch",
                     shared.appdata_dir / "itch",
                 ),
                 paths={

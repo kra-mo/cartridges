@@ -110,7 +110,7 @@ class LutrisSource(URLExecutableSource):
                 candidates=(
                     shared.flatpak_dir / "net.lutris.Lutris" / "data" / "lutris",
                     shared.data_dir / "lutris",
-                    shared.home / ".local" / "share" / "lutris",
+                    shared.host_data_dir / "lutris",
                 ),
                 paths={
                     "pga.db": LocationSubPath("pga.db"),
@@ -122,7 +122,7 @@ class LutrisSource(URLExecutableSource):
                 candidates=(
                     shared.flatpak_dir / "net.lutris.Lutris" / "cache" / "lutris",
                     shared.cache_dir / "lutris",
-                    shared.home / ".cache" / "lutris",
+                    shared.host_cache_dir / "lutris",
                 ),
                 paths={
                     "coverart": LocationSubPath("coverart", True),

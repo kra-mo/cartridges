@@ -108,7 +108,7 @@ class LegendarySource(ExecutableFormatSource):
                 schema_key="legendary-location",
                 candidates=(
                     shared.config_dir / "legendary",
-                    shared.home / ".config" / "legendary",
+                    shared.host_config_dir / "legendary",
                 ),
                 paths={
                     "installed.json": LocationSubPath("installed.json"),

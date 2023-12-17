@@ -39,7 +39,7 @@ class DesktopSourceIterable(SourceIterable):
         icon_theme = Gtk.IconTheme.new()
 
         search_paths = [
-            shared.home / ".local" / "share",
+            shared.host_data_dir,
             "/run/host/usr/local/share",
             "/run/host/usr/share",
             "/run/host/usr/share/pixmaps",

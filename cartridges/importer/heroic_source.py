@@ -233,7 +233,7 @@ class LegendaryIterable(StoreSubSourceIterable):
         else:
             # Heroic native
             logging.debug("Using Heroic native <= 2.8 legendary file")
-            path = shared.home / ".config"
+            path = shared.host_config_dir
 
         path = path / "legendary" / "installed.json"
         logging.debug("Using Heroic %s installed.json path %s", self.name, path)
@@ -371,7 +371,7 @@ class HeroicSource(URLExecutableSource):
                 schema_key="heroic-location",
                 candidates=(
                     shared.config_dir / "heroic",
-                    shared.home / ".config" / "heroic",
+                    shared.host_config_dir / "heroic",
                     shared.flatpak_dir
                     / "com.heroicgameslauncher.hgl"
                     / "config"
