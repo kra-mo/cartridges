@@ -54,7 +54,8 @@ class FlatpakSourceIterable(SourceIterable):
             }
         )
 
-        if source.locations
+        if not source.locations:
+            return # TODO: I'm doing this on my phone, I don't even know why this is here lol
 
         generators = set(location.iterdir() for location in (self.source.locations.user_data["applications"], self.source.locations.system_data["applications"]) if location)
 
