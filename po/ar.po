@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the cartridges package.
 # Ali Aljishi <ahj696@hotmail.com>, 2023.
 # kramo <contact@kramo.hu>, 2023.
+# Ali-98 <ahj696@hotmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-17 17:08+0100\n"
-"PO-Revision-Date: 2023-11-18 20:09+0000\n"
-"Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
+"POT-Creation-Date: 2023-12-12 10:32+0100\n"
+"PO-Revision-Date: 2023-12-15 13:10+0000\n"
+"Last-Translator: Ali-98 <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
 "Language: ar\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.2\n"
+"X-Generator: Weblate 5.3\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -130,7 +131,7 @@ msgid "Keyboard Shortcuts"
 msgstr "اختصارات لوحة المفاتيح"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:127 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:129 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "تراجع"
 
@@ -168,7 +169,7 @@ msgid "Remove Game"
 msgstr "أزل اللعبة"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
-#: data/gtk/preferences.blp:367
+#: data/gtk/preferences.blp:381
 msgid "Behavior"
 msgstr "السلوك"
 
@@ -219,7 +220,7 @@ msgstr "ستيم"
 #: data/gtk/preferences.blp:136 data/gtk/preferences.blp:158
 #: data/gtk/preferences.blp:200 data/gtk/preferences.blp:238
 #: data/gtk/preferences.blp:260 data/gtk/preferences.blp:282
-#: data/gtk/preferences.blp:304 data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:304
 msgid "Install Location"
 msgstr "موضع التثبيت"
 
@@ -276,55 +277,65 @@ msgstr "لجندري"
 msgid "RetroArch"
 msgstr "رتروآرتش"
 
-#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:118
+#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:124
 msgid "Flatpak"
 msgstr "فلاتباك"
 
-#: data/gtk/preferences.blp:338
+#. The location of the system-wide data directory
+#: data/gtk/preferences.blp:327
+msgid "System Location"
+msgstr "موضع النظام"
+
+#. The location of the user-specific data directory
+#: data/gtk/preferences.blp:340
+msgid "User Location"
+msgstr "موضع المستخدم"
+
+#: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
 msgstr "استورد مشغِّلات ألعاب"
 
-#: data/gtk/preferences.blp:343 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "مدخلات سطح المكتب"
 
-#: data/gtk/preferences.blp:355 data/gtk/window.blp:537
+#: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:359
+#: data/gtk/preferences.blp:373
 msgid "Authentication"
 msgstr "الاستيثاق"
 
-#: data/gtk/preferences.blp:362
+#: data/gtk/preferences.blp:376
 msgid "API Key"
 msgstr "مفتاح واجهة البرمجة"
 
-#: data/gtk/preferences.blp:370
+#: data/gtk/preferences.blp:384
 msgid "Use SteamGridDB"
 msgstr "استخدم SteamGridDB"
 
-#: data/gtk/preferences.blp:371
+#: data/gtk/preferences.blp:385
 msgid "Download images when adding or importing games"
 msgstr "نزِّل الصور حينما تنزِّل أو تستورد الألعاب"
 
-#: data/gtk/preferences.blp:375
+#: data/gtk/preferences.blp:389
 msgid "Prefer Over Official Images"
 msgstr "فضِّلها على الصور الرسمية"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:393
 msgid "Prefer Animated Images"
 msgstr "فضِّل الصور المتحرِّكة"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:399
 msgid "Update Covers"
 msgstr "حدِّث الغُلُف"
 
-#: data/gtk/preferences.blp:386
+#: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
 msgstr "اجلب غُلُفًا للألعاب التي في المكتبة"
 
-#: data/gtk/preferences.blp:391
+#: data/gtk/preferences.blp:405
 msgid "Update"
 msgstr "حدِّث"
 
@@ -533,41 +544,41 @@ msgstr "أٌظهرت {}"
 msgid "{} removed"
 msgstr "أزيلت {}"
 
-#: cartridges/preferences.py:126
+#: cartridges/preferences.py:128
 msgid "All games removed"
 msgstr "أُزيلت كلُّ الألعاب"
 
-#: cartridges/preferences.py:174
+#: cartridges/preferences.py:176
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "تحتاج مفتاح واجهة برمجة حال ما أردت استخدام SteamGridDB، {}هنا تولِّده{}."
 
-#: cartridges/preferences.py:189
+#: cartridges/preferences.py:191
 msgid "Downloading covers…"
 msgstr "تُنزَّل الغُلُف…"
 
-#: cartridges/preferences.py:208
+#: cartridges/preferences.py:210
 msgid "Covers updated"
 msgstr "حُدِّثت الغُلُف"
 
-#: cartridges/preferences.py:343
+#: cartridges/preferences.py:345
 msgid "Installation Not Found"
 msgstr "لم يُعثر على التثبيت"
 
-#: cartridges/preferences.py:344
+#: cartridges/preferences.py:346
 msgid "Select a valid directory."
 msgstr "حدِّد مجلَّدًا صالحًا."
 
-#: cartridges/preferences.py:380 cartridges/importer/importer.py:317
+#: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "تحذير"
 
-#: cartridges/preferences.py:414
+#: cartridges/preferences.py:416
 msgid "Invalid Directory"
 msgstr "مجلَّد غير صالح"
 
-#: cartridges/preferences.py:420
+#: cartridges/preferences.py:422
 msgid "Set Location"
 msgstr "عيِّن الموضع"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-17 17:08+0100\n"
+"POT-Creation-Date: 2023-12-12 10:32+0100\n"
 "PO-Revision-Date: 2023-11-23 23:17+0000\n"
 "Last-Translator: Float <float.hu+@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -39,7 +39,8 @@ msgstr "启动所有游戏"
 #: data/hu.kramo.Cartridges.desktop.in:11
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
-msgstr "游戏;启动器;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
+msgstr ""
+"游戏;启动器;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -48,9 +49,9 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Cartridges 是一个简单的游戏启动器，适用于您的所有游戏。它支持从Steam、Lutris"
-"、Heroic等游戏平台导入游戏且无需登录。您可以排序和隐藏游戏，也可以从SteamGrid"
-"DB下载封面。"
+"Cartridges 是一个简单的游戏启动器，适用于您的所有游戏。它支持从Steam、"
+"Lutris、Heroic等游戏平台导入游戏且无需登录。您可以排序和隐藏游戏，也可以从"
+"SteamGridDB下载封面。"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:36 data/gtk/window.blp:290
 #: cartridges/details_window.py:71
@@ -129,7 +130,7 @@ msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:127 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:129 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "撤销"
 
@@ -167,7 +168,7 @@ msgid "Remove Game"
 msgstr "移除游戏"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
-#: data/gtk/preferences.blp:367
+#: data/gtk/preferences.blp:381
 msgid "Behavior"
 msgstr "表现方式"
 
@@ -218,7 +219,7 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:136 data/gtk/preferences.blp:158
 #: data/gtk/preferences.blp:200 data/gtk/preferences.blp:238
 #: data/gtk/preferences.blp:260 data/gtk/preferences.blp:282
-#: data/gtk/preferences.blp:304 data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:304
 msgid "Install Location"
 msgstr "安装位置"
 
@@ -275,55 +276,69 @@ msgstr "Legendary"
 msgid "RetroArch"
 msgstr "RetroArch"
 
-#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:118
+#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:124
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: data/gtk/preferences.blp:338
+#. The location of the system-wide data directory
+#: data/gtk/preferences.blp:327
+#, fuzzy
+#| msgid "Set Location"
+msgid "System Location"
+msgstr "设置位置"
+
+#. The location of the user-specific data directory
+#: data/gtk/preferences.blp:340
+#, fuzzy
+#| msgid "Set Location"
+msgid "User Location"
+msgstr "设置位置"
+
+#: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
 msgstr "导入游戏启动器"
 
-#: data/gtk/preferences.blp:343 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "桌面项"
 
-#: data/gtk/preferences.blp:355 data/gtk/window.blp:537
+#: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:359
+#: data/gtk/preferences.blp:373
 msgid "Authentication"
 msgstr "身份认证"
 
-#: data/gtk/preferences.blp:362
+#: data/gtk/preferences.blp:376
 msgid "API Key"
 msgstr "API 密钥"
 
-#: data/gtk/preferences.blp:370
+#: data/gtk/preferences.blp:384
 msgid "Use SteamGridDB"
 msgstr "使用 SteamGridDB"
 
-#: data/gtk/preferences.blp:371
+#: data/gtk/preferences.blp:385
 msgid "Download images when adding or importing games"
 msgstr "添加或导入游戏时下载图像"
 
-#: data/gtk/preferences.blp:375
+#: data/gtk/preferences.blp:389
 msgid "Prefer Over Official Images"
 msgstr "偏好官方图片"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:393
 msgid "Prefer Animated Images"
 msgstr "偏好可活动的图像"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:399
 msgid "Update Covers"
 msgstr "更新封面"
 
-#: data/gtk/preferences.blp:386
+#: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
 msgstr "获取您库中已有游戏的封面"
 
-#: data/gtk/preferences.blp:391
+#: data/gtk/preferences.blp:405
 msgid "Update"
 msgstr "更新"
 
@@ -532,40 +547,40 @@ msgstr "{} 已取消隐藏"
 msgid "{} removed"
 msgstr "{} 已删除"
 
-#: cartridges/preferences.py:126
+#: cartridges/preferences.py:128
 msgid "All games removed"
 msgstr "所有游戏均已删除"
 
-#: cartridges/preferences.py:174
+#: cartridges/preferences.py:176
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr "使用 SteamGridDB 需要 API 密钥。 您可以在{}此处{}生成一个。"
 
-#: cartridges/preferences.py:189
+#: cartridges/preferences.py:191
 msgid "Downloading covers…"
 msgstr "正在下载封面…"
 
-#: cartridges/preferences.py:208
+#: cartridges/preferences.py:210
 msgid "Covers updated"
 msgstr "封面已更新"
 
-#: cartridges/preferences.py:343
+#: cartridges/preferences.py:345
 msgid "Installation Not Found"
 msgstr "未找到安装程序"
 
-#: cartridges/preferences.py:344
+#: cartridges/preferences.py:346
 msgid "Select a valid directory."
 msgstr "选择一个有效的目录。"
 
-#: cartridges/preferences.py:380 cartridges/importer/importer.py:317
+#: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "警告"
 
-#: cartridges/preferences.py:414
+#: cartridges/preferences.py:416
 msgid "Invalid Directory"
 msgstr "无效的目录"
 
-#: cartridges/preferences.py:420
+#: cartridges/preferences.py:422
 msgid "Set Location"
 msgstr "设置位置"
 

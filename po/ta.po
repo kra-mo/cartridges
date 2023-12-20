@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-17 17:08+0100\n"
-"PO-Revision-Date: 2023-11-23 13:14+0000\n"
+"POT-Creation-Date: 2023-12-12 10:32+0100\n"
+"PO-Revision-Date: 2023-12-15 13:10+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.2.1-rc\n"
+"X-Generator: Weblate 5.3\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -132,7 +132,7 @@ msgid "Keyboard Shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:127 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:129 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "செயல்தவிர்"
 
@@ -170,7 +170,7 @@ msgid "Remove Game"
 msgstr "விளையாட்டை அகற்று"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
-#: data/gtk/preferences.blp:367
+#: data/gtk/preferences.blp:381
 msgid "Behavior"
 msgstr "நடத்தை"
 
@@ -221,7 +221,7 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:136 data/gtk/preferences.blp:158
 #: data/gtk/preferences.blp:200 data/gtk/preferences.blp:238
 #: data/gtk/preferences.blp:260 data/gtk/preferences.blp:282
-#: data/gtk/preferences.blp:304 data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:304
 msgid "Install Location"
 msgstr "நிறுவல் இடம்"
 
@@ -278,56 +278,66 @@ msgstr "Legendary"
 msgid "RetroArch"
 msgstr "RetroArch"
 
-#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:118
+#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:124
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: data/gtk/preferences.blp:338
+#. The location of the system-wide data directory
+#: data/gtk/preferences.blp:327
+msgid "System Location"
+msgstr "கணினி இருப்பிடம்"
+
+#. The location of the user-specific data directory
+#: data/gtk/preferences.blp:340
+msgid "User Location"
+msgstr "பயனர் இருப்பிடம்"
+
+#: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
 msgstr "விளையாட்டு துவக்கிகளை இறக்குமதி செய்"
 
-#: data/gtk/preferences.blp:343 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "டெஸ்க்டாப் உள்ளீடுகள்"
 
-#: data/gtk/preferences.blp:355 data/gtk/window.blp:537
+#: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:359
+#: data/gtk/preferences.blp:373
 msgid "Authentication"
 msgstr "அங்கீகாரம்"
 
-#: data/gtk/preferences.blp:362
+#: data/gtk/preferences.blp:376
 msgid "API Key"
 msgstr "API விசை"
 
-#: data/gtk/preferences.blp:370
+#: data/gtk/preferences.blp:384
 msgid "Use SteamGridDB"
 msgstr "SteamGridDB ஐப் பயன்படுத்தவும்"
 
-#: data/gtk/preferences.blp:371
+#: data/gtk/preferences.blp:385
 msgid "Download images when adding or importing games"
 msgstr ""
 "விளையாட்டுகளைச் சேர்க்கும் போது அல்லது இறக்குமதி செய்யும் போது படங்களைப் பதிவிறக்கவும்"
 
-#: data/gtk/preferences.blp:375
+#: data/gtk/preferences.blp:389
 msgid "Prefer Over Official Images"
 msgstr "அதிகாரப்பூர்வ படங்களை விட முன்னுரிமை"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:393
 msgid "Prefer Animated Images"
 msgstr "இயங்குபடம் செய்யப்பட்ட படங்களுக்கு முன்னுரிமை கொடுங்கள்"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:399
 msgid "Update Covers"
 msgstr "அட்டைகளை புதுப்பிக்கவும்"
 
-#: data/gtk/preferences.blp:386
+#: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
 msgstr "ஏற்கனவே உங்கள் நூலகத்தில் உள்ள விளையாட்டுகளுக்கான அட்டைகளைப் பெறவும்"
 
-#: data/gtk/preferences.blp:391
+#: data/gtk/preferences.blp:405
 msgid "Update"
 msgstr "புதுப்பிக்கவும்"
 
@@ -536,40 +546,40 @@ msgstr "{} மறைக்கப்படாதது"
 msgid "{} removed"
 msgstr "{} அகற்றப்பட்டது"
 
-#: cartridges/preferences.py:126
+#: cartridges/preferences.py:128
 msgid "All games removed"
 msgstr "அனைத்து விளையாட்டுகளும் அகற்றப்பட்டன"
 
-#: cartridges/preferences.py:174
+#: cartridges/preferences.py:176
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr "SteamGridDB ஐப் பயன்படுத்த API விசை தேவை. நீங்கள் ஒன்றை {}இங்கே{} உருவாக்கலாம்."
 
-#: cartridges/preferences.py:189
+#: cartridges/preferences.py:191
 msgid "Downloading covers…"
 msgstr "அட்டைகளைப் பதிவிறக்குகிறது…"
 
-#: cartridges/preferences.py:208
+#: cartridges/preferences.py:210
 msgid "Covers updated"
 msgstr "அட்டைகள் புதுப்பிக்கப்பட்டன"
 
-#: cartridges/preferences.py:343
+#: cartridges/preferences.py:345
 msgid "Installation Not Found"
 msgstr "நிறுவல் கிடைக்கவில்லை"
 
-#: cartridges/preferences.py:344
+#: cartridges/preferences.py:346
 msgid "Select a valid directory."
 msgstr "சரியான கோப்பகத்தைத் தேர்ந்தெடுக்கவும்."
 
-#: cartridges/preferences.py:380 cartridges/importer/importer.py:317
+#: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "எச்சரிக்கை"
 
-#: cartridges/preferences.py:414
+#: cartridges/preferences.py:416
 msgid "Invalid Directory"
 msgstr "தவறான கோப்பகம்"
 
-#: cartridges/preferences.py:420
+#: cartridges/preferences.py:422
 msgid "Set Location"
 msgstr "இருப்பிடத்தை அமைக்கவும்"
 

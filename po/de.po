@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-17 17:08+0100\n"
+"POT-Creation-Date: 2023-12-12 10:32+0100\n"
 "PO-Revision-Date: 2023-08-05 08:07+0000\n"
 "Last-Translator: Simon Hahne <simonhahne@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/cartridges/"
@@ -135,7 +135,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Tastaturkürzel"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:127 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:129 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "Rückgängig"
 
@@ -177,7 +177,7 @@ msgid "Remove Game"
 msgstr "Spiel entfernen"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
-#: data/gtk/preferences.blp:367
+#: data/gtk/preferences.blp:381
 msgid "Behavior"
 msgstr "Verhalten"
 
@@ -230,7 +230,7 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:136 data/gtk/preferences.blp:158
 #: data/gtk/preferences.blp:200 data/gtk/preferences.blp:238
 #: data/gtk/preferences.blp:260 data/gtk/preferences.blp:282
-#: data/gtk/preferences.blp:304 data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:304
 msgid "Install Location"
 msgstr "Installationsort"
 
@@ -287,57 +287,71 @@ msgstr "Legendary"
 msgid "RetroArch"
 msgstr ""
 
-#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:118
+#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:124
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: data/gtk/preferences.blp:338
+#. The location of the system-wide data directory
+#: data/gtk/preferences.blp:327
+#, fuzzy
+#| msgid "Set Location"
+msgid "System Location"
+msgstr "Ort festlegen"
+
+#. The location of the user-specific data directory
+#: data/gtk/preferences.blp:340
+#, fuzzy
+#| msgid "Set Location"
+msgid "User Location"
+msgstr "Ort festlegen"
+
+#: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
 msgstr "Spiele-Launcher importieren"
 
-#: data/gtk/preferences.blp:343 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr ""
 
-#: data/gtk/preferences.blp:355 data/gtk/window.blp:537
+#: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:359
+#: data/gtk/preferences.blp:373
 msgid "Authentication"
 msgstr "Authentifizierung"
 
-#: data/gtk/preferences.blp:362
+#: data/gtk/preferences.blp:376
 msgid "API Key"
 msgstr "API-Schlüssel"
 
-#: data/gtk/preferences.blp:370
+#: data/gtk/preferences.blp:384
 msgid "Use SteamGridDB"
 msgstr "SteamGridDB benutzen"
 
-#: data/gtk/preferences.blp:371
+#: data/gtk/preferences.blp:385
 msgid "Download images when adding or importing games"
 msgstr "Lade Bilder herunter, wenn Spiele hinzugefügt oder importiert werden"
 
-#: data/gtk/preferences.blp:375
+#: data/gtk/preferences.blp:389
 msgid "Prefer Over Official Images"
 msgstr "Über offizielien Images bevorzugen"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:393
 msgid "Prefer Animated Images"
 msgstr "Animierte Bilder bevorzugen"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:399
 #, fuzzy
 #| msgid "Delete Cover"
 msgid "Update Covers"
 msgstr "Cover löschen"
 
-#: data/gtk/preferences.blp:386
+#: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
 msgstr ""
 
-#: data/gtk/preferences.blp:391
+#: data/gtk/preferences.blp:405
 msgid "Update"
 msgstr ""
 
@@ -555,44 +569,44 @@ msgstr "{} unversteckt"
 msgid "{} removed"
 msgstr "{} entfernt"
 
-#: cartridges/preferences.py:126
+#: cartridges/preferences.py:128
 msgid "All games removed"
 msgstr "Alle Spiele entfernt"
 
-#: cartridges/preferences.py:174
+#: cartridges/preferences.py:176
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Für die Nutzung von SteamGridDB ist ein API-Schlüssel erforderlich. Sie "
 "können ihn {}hier{} generieren."
 
-#: cartridges/preferences.py:189
+#: cartridges/preferences.py:191
 #, fuzzy
 #| msgid "Importing Covers…"
 msgid "Downloading covers…"
 msgstr "Spielecover werden importiert…"
 
-#: cartridges/preferences.py:208
+#: cartridges/preferences.py:210
 msgid "Covers updated"
 msgstr ""
 
-#: cartridges/preferences.py:343
+#: cartridges/preferences.py:345
 msgid "Installation Not Found"
 msgstr "Installation nicht gefunden"
 
-#: cartridges/preferences.py:344
+#: cartridges/preferences.py:346
 msgid "Select a valid directory."
 msgstr "Wähle ein gültiges Verzeichnis aus."
 
-#: cartridges/preferences.py:380 cartridges/importer/importer.py:317
+#: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr ""
 
-#: cartridges/preferences.py:414
+#: cartridges/preferences.py:416
 msgid "Invalid Directory"
 msgstr "Ungültiges Verzeichnis"
 
-#: cartridges/preferences.py:420
+#: cartridges/preferences.py:422
 msgid "Set Location"
 msgstr "Ort festlegen"
 

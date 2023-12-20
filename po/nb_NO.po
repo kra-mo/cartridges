@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-17 17:08+0100\n"
+"POT-Creation-Date: 2023-12-12 10:32+0100\n"
 "PO-Revision-Date: 2023-04-06 08:09+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -132,7 +132,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:127 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:129 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "Angre"
 
@@ -173,7 +173,7 @@ msgid "Remove Game"
 msgstr "Fjern spill"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
-#: data/gtk/preferences.blp:367
+#: data/gtk/preferences.blp:381
 #, fuzzy
 msgid "Behavior"
 msgstr "Adferd"
@@ -227,7 +227,7 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:136 data/gtk/preferences.blp:158
 #: data/gtk/preferences.blp:200 data/gtk/preferences.blp:238
 #: data/gtk/preferences.blp:260 data/gtk/preferences.blp:282
-#: data/gtk/preferences.blp:304 data/gtk/preferences.blp:326
+#: data/gtk/preferences.blp:304
 #, fuzzy
 msgid "Install Location"
 msgstr "Installasjonssted for itch"
@@ -289,60 +289,72 @@ msgstr ""
 msgid "RetroArch"
 msgstr ""
 
-#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:118
+#: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:124
 msgid "Flatpak"
 msgstr ""
 
-#: data/gtk/preferences.blp:338
+#. The location of the system-wide data directory
+#: data/gtk/preferences.blp:327
+#, fuzzy
+msgid "System Location"
+msgstr "Velg mappe"
+
+#. The location of the user-specific data directory
+#: data/gtk/preferences.blp:340
+#, fuzzy
+msgid "User Location"
+msgstr "Velg mappe"
+
+#: data/gtk/preferences.blp:352
 #, fuzzy
 msgid "Import Game Launchers"
 msgstr "Spillutvalgstarter"
 
-#: data/gtk/preferences.blp:343 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr ""
 
-#: data/gtk/preferences.blp:355 data/gtk/window.blp:537
+#: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:359
+#: data/gtk/preferences.blp:373
 msgid "Authentication"
 msgstr "Identitetsbekreftelse"
 
-#: data/gtk/preferences.blp:362
+#: data/gtk/preferences.blp:376
 #, fuzzy
 msgid "API Key"
 msgstr "API-nøkkel"
 
-#: data/gtk/preferences.blp:370
+#: data/gtk/preferences.blp:384
 msgid "Use SteamGridDB"
 msgstr "Bruk SteamGridDB"
 
-#: data/gtk/preferences.blp:371
+#: data/gtk/preferences.blp:385
 #, fuzzy
 msgid "Download images when adding or importing games"
 msgstr "Mappe å bruke ved import av spill"
 
-#: data/gtk/preferences.blp:375
+#: data/gtk/preferences.blp:389
 #, fuzzy
 msgid "Prefer Over Official Images"
 msgstr "Foretrekk over offisielle bilder"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:393
 #, fuzzy
 msgid "Prefer Animated Images"
 msgstr "Foretrekk over offisielle bilder"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:399
 msgid "Update Covers"
 msgstr ""
 
-#: data/gtk/preferences.blp:386
+#: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
 msgstr ""
 
-#: data/gtk/preferences.blp:391
+#: data/gtk/preferences.blp:405
 msgid "Update"
 msgstr ""
 
@@ -561,45 +573,45 @@ msgstr "{} synlig"
 msgid "{} removed"
 msgstr "{} fjernet"
 
-#: cartridges/preferences.py:126
+#: cartridges/preferences.py:128
 msgid "All games removed"
 msgstr "Alle spill fjernet"
 
-#: cartridges/preferences.py:174
+#: cartridges/preferences.py:176
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "En API-nøkkel kreves for å bruke SteamGridDB. Du kan generere en {}her{}."
 
-#: cartridges/preferences.py:189
+#: cartridges/preferences.py:191
 #, fuzzy
 #| msgid "Importing Covers…"
 msgid "Downloading covers…"
 msgstr "Importerer omslag …"
 
-#: cartridges/preferences.py:208
+#: cartridges/preferences.py:210
 msgid "Covers updated"
 msgstr ""
 
-#: cartridges/preferences.py:343
+#: cartridges/preferences.py:345
 #, fuzzy
 msgid "Installation Not Found"
 msgstr "Fant ikke installasjonen"
 
-#: cartridges/preferences.py:344
+#: cartridges/preferences.py:346
 #, fuzzy
 msgid "Select a valid directory."
 msgstr "Velg {}-datamappen."
 
-#: cartridges/preferences.py:380 cartridges/importer/importer.py:317
+#: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr ""
 
-#: cartridges/preferences.py:414
+#: cartridges/preferences.py:416
 msgid "Invalid Directory"
 msgstr ""
 
-#: cartridges/preferences.py:420
+#: cartridges/preferences.py:422
 #, fuzzy
 msgid "Set Location"
 msgstr "Velg mappe"
