@@ -54,10 +54,14 @@ class FlatpakSourceIterable(SourceIterable):
             }
         )
 
-        if not source.locations:
-            return # TODO: I'm doing this on my phone, I don't even know why this is here lol
-
-        generators = set(location.iterdir() for location in (self.source.locations.user_data["applications"], self.source.locations.system_data["applications"]) if location)
+        generators = set(
+            location.iterdir()
+            for location in (
+                self.source.locations.user_data["applications"],
+                self.source.locations.system_data["applications"],
+            )
+            if location
+        )
 
         for entry in chain(*generators):
             if entry.suffix != ".desktop":

@@ -2,8 +2,8 @@
 
 ignore=importers
 
-[MESSAGES CONTROL]
 
+[MESSAGES CONTROL]
 
 disable=raw-checker-failed,
         bad-inline-option,
