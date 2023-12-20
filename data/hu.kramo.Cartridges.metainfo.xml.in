@@ -46,6 +46,13 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="2.7.1" date="2023-12-20">
+      <description translatable="no">
+        <ul>
+          <li>Fixes a bug with Flatpak games not importing</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.7" date="2023-12-12">
       <description translatable="no">
         <ul>
