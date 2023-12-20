@@ -23,7 +23,7 @@ from collections.abc import Iterable
 from typing import Any, Collection, Generator, Optional
 
 from cartridges.game import Game
-from cartridges.importer.location import Location
+from cartridges.importer.location import Location, UnresolvableLocationError
 
 # Type of the data returned by iterating on a Source
 SourceIterationResult = Optional[Game | tuple[Game, tuple[Any]]]
@@ -87,10 +87,15 @@ class Source(Iterable):
     def __iter__(self) -> Generator[SourceIterationResult, None, None]:
         """
         Get an iterator for the source
-        :raises UnresolvableLocationError: Not iterable if any of the locations are unresolvable
+        :raises UnresolvableLocationError: Not iterable
+        if any of the mandatory locations are unresolvable
         """
         for location in self.locations:
-            location.resolve()
+            try:
+                location.resolve()
+            except UnresolvableLocationError as error:
+                if not error.optional:
+                    raise UnresolvableLocationError from error
         return iter(self.iterable_class(self))
 
 

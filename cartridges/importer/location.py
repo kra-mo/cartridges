@@ -16,7 +16,8 @@ class LocationSubPath(NamedTuple):
 
 
 class UnresolvableLocationError(Exception):
-    pass
+    def __init__(self, optional):
+        self.optional = optional
 
 
 class Location:
@@ -49,12 +50,14 @@ class Location:
         candidates: Iterable[Candidate],
         paths: Mapping[str, LocationSubPath],
         invalid_subtitle: str,
+        optional: Optional[bool] = False,
     ) -> None:
         super().__init__()
         self.schema_key = schema_key
         self.candidates = candidates
         self.paths = paths
         self.invalid_subtitle = invalid_subtitle
+        self.optional = optional
 
     def check_candidate(self, candidate: Path) -> bool:
         """Check if a candidate root has the necessary files and directories"""
@@ -87,7 +90,7 @@ class Location:
             break
         else:
             # No good candidate found
-            raise UnresolvableLocationError()
+            raise UnresolvableLocationError(self.optional)
 
         # Update the schema with the found candidate
         value = str(candidate)
@@ -96,7 +99,13 @@ class Location:
 
     def __getitem__(self, key: str) -> Optional[Path]:
         """Get the computed path from its key for the location"""
-        self.resolve()
+        try:
+            self.resolve()
+        except UnresolvableLocationError as error:
+            if error.optional:
+                return None
+            raise UnresolvableLocationError from error
+
         if self.root:
             return self.root / self.paths[key].segment
         return None
