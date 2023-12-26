@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-12 10:32+0100\n"
-"PO-Revision-Date: 2023-11-30 06:17+0000\n"
+"PO-Revision-Date: 2023-12-23 17:07+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -283,17 +283,13 @@ msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:327
-#, fuzzy
-#| msgid "Set Location"
 msgid "System Location"
-msgstr "Postavi lokaciju"
+msgstr "Lokacija sustava"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:340
-#, fuzzy
-#| msgid "Set Location"
 msgid "User Location"
-msgstr "Postavi lokaciju"
+msgstr "Lokacija korisnika"
 
 #: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
