@@ -38,7 +38,12 @@ class FlatpakSourceIterable(SourceIterable):
         icon_theme = Gtk.IconTheme.new()
         if user_data := self.source.locations.user_data["icons"]:
             icon_theme.add_search_path(str(user_data))
-        icon_theme.add_search_path(str(self.source.locations.system_data["icons"]))
+
+        if system_data := self.source.locations.system_data["icons"]:
+            icon_theme.add_search_path(str(system_data))
+
+        if not (system_data or user_data):
+            return
 
         blacklist = (
             {"hu.kramo.Cartridges", "hu.kramo.Cartridges.Devel"}
@@ -146,6 +151,7 @@ class FlatpakSource(ExecutableFormatSource):
                     "icons": LocationSubPath("exports/share/icons", True),
                 },
                 invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+                optional=True,
             ),
             Location(
                 schema_key="flatpak-user-location",
