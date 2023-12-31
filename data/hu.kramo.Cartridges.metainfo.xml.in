@@ -46,10 +46,10 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.7.1" date="2023-12-20">
+    <release version="2.7.2" date="2023-12-31">
       <description translatable="no">
         <ul>
-          <li>Fixes a bug with Flatpak games not importing</li>
+          <li>Fixes a bug with Flatpak user games not importing</li>
         </ul>
       </description>
     </release>
