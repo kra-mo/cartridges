@@ -81,7 +81,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     toasts: dict = {}
     active_game: Game
     details_view_game_cover: Optional[GameCover] = None
-    sort_state: str = "a-z"
+    sort_state: str = "last_played"
     filter_state: str = "all"
     source_rows: dict = {}
 

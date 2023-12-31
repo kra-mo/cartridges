@@ -127,7 +127,7 @@
         <choice value="oldest" />
         <choice value="last_played" />
       </choices>
-      <default>"a-z"</default>
+      <default>"last_played"</default>
     </key>
     <key name="show-sidebar" type="b">
       <default>false</default>

@@ -161,13 +161,13 @@ class CartridgesApplication(Adw.Application):
         )
 
         sort_action = Gio.SimpleAction.new_stateful(
-            "sort_by", GLib.VariantType.new("s"), GLib.Variant("s", "a-z")
+            "sort_by",
+            GLib.VariantType.new("s"),
+            sort_mode := GLib.Variant("s", shared.state_schema.get_string("sort-mode")),
         )
         sort_action.connect("activate", shared.win.on_sort_action)
         shared.win.add_action(sort_action)
-        shared.win.on_sort_action(
-            sort_action, shared.state_schema.get_value("sort-mode")
-        )
+        shared.win.on_sort_action(sort_action, sort_mode)
 
         if self.init_search_term:  # For command line activation
             shared.win.search_bar.set_search_mode(True)
