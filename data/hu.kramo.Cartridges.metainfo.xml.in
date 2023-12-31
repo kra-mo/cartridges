@@ -14,7 +14,11 @@
   <url type="contact">https://www.kramo.hu/about/</url>
   <url type="vcs-browser">https://github.com/kra-mo/cartridges</url>
   <url type="contribute">https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md</url>
+  <!-- developer_name tag deprecated with Appstream 1.0 -->
   <developer_name translatable="no">kramo</developer_name>
+  <developer id="github.com">
+      <name translatable="no">kramo</name>
+  </developer>
   <project_group>GNOME</project_group>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
   <translation type="gettext">cartridges</translation>

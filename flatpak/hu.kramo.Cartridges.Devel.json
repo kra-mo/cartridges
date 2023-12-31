@@ -123,6 +123,7 @@
             "name" : "cartridges",
             "builddir" : true,
             "buildsystem" : "meson",
+            "run-tests" : true,
             "config-opts": [
                 "-Dprofile=development"
             ],
