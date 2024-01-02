@@ -10,14 +10,14 @@ jobs:
     name: Flatpak
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-44
+      image: bilelmoussaoui/flatpak-github-actions:gnome-45
       options: --privileged
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Flatpak Builder
-      uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6.3
       with:
         bundle: hu.kramo.Cartridges.Devel.flatpak
         manifest-path: flatpak/hu.kramo.Cartridges.Devel.json
@@ -27,7 +27,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2

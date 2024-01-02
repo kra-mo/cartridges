@@ -59,4 +59,4 @@ VSCode extensions are available for all of these and you can set them up with th
 "isort.args":["--profile", "black"],
 ```
 
-For other code editors, you can install them via `pip` and invoke them via the command line.
+For other code editors, you can install them via `pip` and invoke them from the command line.
