@@ -71,6 +71,7 @@ class Game(Gtk.Box):
         self.base_source = self.source.split("_")[0]
 
         self.set_play_icon()
+        self.update_title_shown()
 
         self.event_contoller_motion = Gtk.EventControllerMotion.new()
         self.add_controller(self.event_contoller_motion)
@@ -190,9 +191,17 @@ class Game(Gtk.Box):
             else "media-playback-start-symbolic"
         )
 
+    def update_title_shown(self) -> None:
+        self.title.hide()
+
+        if shared.schema.get_boolean("show-game-title"):
+            self.title.show()
+
     def schema_changed(self, _settings: Any, key: str) -> None:
         if key == "cover-launches-game":
             self.set_play_icon()
+        elif key == "show-game-title":
+            self.update_title_shown()
 
     @GObject.Signal(name="update-ready", arg_types=[object])
     def update_ready(self, _additional_data):  # type: ignore

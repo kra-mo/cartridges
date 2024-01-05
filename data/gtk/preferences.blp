@@ -28,6 +28,11 @@ template $PreferencesWindow : Adw.PreferencesWindow {
         title: _("High Quality Images");
         subtitle: _("Save game covers losslessly at the cost of storage");
       }
+
+      Adw.SwitchRow show_game_title_switch {
+        title: _("Game Title");
+        subtitle: _("Display game title below cover image");
+      }
     }
 
     Adw.PreferencesGroup danger_zone_group {

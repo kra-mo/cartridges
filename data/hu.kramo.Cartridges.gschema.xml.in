@@ -14,6 +14,9 @@
     <key name="remove-missing" type="b">
       <default>true</default>
     </key>
+    <key name="show-game-title" type="b">
+      <default>true</default>
+    </key>
     <key name="steam" type="b">
       <default>true</default>
     </key>
