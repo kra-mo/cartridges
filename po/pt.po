@@ -5,13 +5,14 @@
 # kramo <contact@kramo.hu>, 2023.
 # Henrique Machado <henriquecamposrj@gmail.com>, 2023.
 # João Alves <joao.2003.couto@gmail.com>, 2023.
+# ssantos <ssantos@web.de>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-12 10:32+0100\n"
-"PO-Revision-Date: 2023-06-04 22:47+0000\n"
-"Last-Translator: João Alves <joao.2003.couto@gmail.com>\n"
+"PO-Revision-Date: 2024-01-08 09:06+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/pt/>\n"
 "Language: pt\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -38,11 +39,11 @@ msgid "Launch all your games"
 msgstr "Inicie todos os seus jogos"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
-#, fuzzy
-#| msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
-msgstr "gaming;iniciador;steam;lutris;heroic;bottles;itch;"
+msgstr ""
+"Jogos;lançador;gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legen"
+"dary;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -88,10 +89,8 @@ msgid "Title"
 msgstr "Título"
 
 #: data/gtk/details-window.blp:103
-#, fuzzy
-#| msgid "The developer or publisher (optional)"
 msgid "Developer (optional)"
-msgstr "O desenvolvedor ou publicador (opcional)"
+msgstr "Programador (opcional)"
 
 #: data/gtk/details-window.blp:108
 msgid "Executable"
@@ -99,7 +98,7 @@ msgstr "Executável"
 
 #: data/gtk/details-window.blp:114
 msgid "Select File"
-msgstr ""
+msgstr "Selecionar ficheiro"
 
 #: data/gtk/details-window.blp:125
 msgid "More Info"
@@ -145,7 +144,7 @@ msgstr "Sair"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:88 data/gtk/window.blp:164
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Alternar barra lateral"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:177 data/gtk/window.blp:237
 msgid "Main Menu"
@@ -165,14 +164,10 @@ msgid "Import"
 msgstr "Importar"
 
 #: data/gtk/help-overlay.blp:63
-#, fuzzy
-#| msgid "Show hidden games"
 msgid "Show Hidden Games"
-msgstr "Exibir jogos ocultados"
+msgstr "Exibir jogos ocultos"
 
 #: data/gtk/help-overlay.blp:68
-#, fuzzy
-#| msgid "Remove game"
 msgid "Remove Game"
 msgstr "Remover jogo"
 
@@ -214,10 +209,8 @@ msgid "Remove All Games"
 msgstr "Remover todos os jogos"
 
 #: data/gtk/preferences.blp:119
-#, fuzzy
-#| msgid "Remove All Games"
 msgid "Remove Uninstalled Games"
-msgstr "Remover todos os jogos"
+msgstr "Remover jogos desinstalados"
 
 #: data/gtk/preferences.blp:124
 msgid "Sources"
@@ -231,10 +224,8 @@ msgstr "Steam"
 #: data/gtk/preferences.blp:200 data/gtk/preferences.blp:238
 #: data/gtk/preferences.blp:260 data/gtk/preferences.blp:282
 #: data/gtk/preferences.blp:304
-#, fuzzy
-#| msgid "itch Install Location"
 msgid "Install Location"
-msgstr "Local de instalação do itch"
+msgstr "Local de instalação"
 
 #: data/gtk/preferences.blp:149 data/gtk/window.blp:539
 #: cartridges/importer/lutris_source.py:92
@@ -242,20 +233,16 @@ msgid "Lutris"
 msgstr "Lutris"
 
 #: data/gtk/preferences.blp:170
-#, fuzzy
-#| msgid "Lutris Cache Location"
 msgid "Cache Location"
-msgstr "Local do cache do Lutris"
+msgstr "Local do cache"
 
 #: data/gtk/preferences.blp:182
 msgid "Import Steam Games"
 msgstr "Importar jogos da Steam"
 
 #: data/gtk/preferences.blp:186
-#, fuzzy
-#| msgid "Import Steam Games"
 msgid "Import Flatpak Games"
-msgstr "Importar jogos da Steam"
+msgstr "Importar jogos do Flatpak"
 
 #: data/gtk/preferences.blp:191 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
@@ -270,10 +257,8 @@ msgid "Import GOG Games"
 msgstr "Importar jogos do GOG"
 
 #: data/gtk/preferences.blp:220
-#, fuzzy
-#| msgid "Import Steam Games"
 msgid "Import Amazon Games"
-msgstr "Importar jogos da Steam"
+msgstr "Importar jogos da Amazon"
 
 #: data/gtk/preferences.blp:224
 msgid "Import Sideloaded Games"
@@ -289,39 +274,33 @@ msgstr "itch"
 
 #: data/gtk/preferences.blp:273 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
-msgstr ""
+msgstr "Lendário"
 
 #: data/gtk/preferences.blp:295 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
-msgstr ""
+msgstr "RetroArch"
 
 #: data/gtk/preferences.blp:317 cartridges/importer/flatpak_source.py:124
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:327
-#, fuzzy
-#| msgid "Set Location"
 msgid "System Location"
-msgstr "Definir local"
+msgstr "Local dos Dados no Sistema"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:340
-#, fuzzy
-#| msgid "Set Location"
 msgid "User Location"
-msgstr "Definir local"
+msgstr "Local dos Dados de Utilizador"
 
 #: data/gtk/preferences.blp:352
-#, fuzzy
-#| msgid "Game Launcher"
 msgid "Import Game Launchers"
-msgstr "Iniciador de jogos"
+msgstr "Importar iniciadores de jogos"
 
 #: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
-msgstr ""
+msgstr "Entradas desktop"
 
 #: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
@@ -352,18 +331,16 @@ msgid "Prefer Animated Images"
 msgstr "Preferir imagens animadas"
 
 #: data/gtk/preferences.blp:399
-#, fuzzy
-#| msgid "Delete Cover"
 msgid "Update Covers"
-msgstr "Apagar capa"
+msgstr "Atualizar capas"
 
 #: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
-msgstr ""
+msgstr "Obter capas para jogos que já estão na sua biblioteca"
 
 #: data/gtk/preferences.blp:405
 msgid "Update"
-msgstr ""
+msgstr "Atualizar"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -390,22 +367,16 @@ msgid "Games you hide will appear here."
 msgstr "Jogos ocultados vão aparecer aqui."
 
 #: data/gtk/window.blp:75 data/gtk/window.blp:106 cartridges/main.py:226
-#, fuzzy
-#| msgid "Remove All Games"
 msgid "All Games"
-msgstr "Remover todos os jogos"
+msgstr "Todos os jogos"
 
 #: data/gtk/window.blp:126 cartridges/main.py:228
-#, fuzzy
-#| msgid "Added: {}"
 msgid "Added"
-msgstr "Adicionado: {}"
+msgstr "Adicionado"
 
 #: data/gtk/window.blp:141
-#, fuzzy
-#| msgid "Import"
 msgid "Imported"
-msgstr "Importar"
+msgstr "Importado"
 
 #: data/gtk/window.blp:230
 msgid "Hidden Games"
@@ -441,7 +412,7 @@ msgstr "Mais antigo"
 
 #: data/gtk/window.blp:502
 msgid "Last Played"
-msgstr "Última vez jogado"
+msgstr "Jogou pela última vez"
 
 #: data/gtk/window.blp:509
 msgid "Show Hidden"
@@ -453,15 +424,15 @@ msgstr "Sobre o Cartuchos"
 
 #: data/gtk/window.blp:536
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:538
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:540
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:206 cartridges/game.py:125
@@ -485,7 +456,7 @@ msgstr "Nunca"
 #. The variable is the date when the game was last played
 #: cartridges/window.py:380
 msgid "Last played: {}"
-msgstr "Última vez jogado"
+msgstr "Jogou pela última vez: {}"
 
 #: cartridges/details_window.py:76
 msgid "Apply"
@@ -497,13 +468,11 @@ msgstr "Adicionar novo jogo"
 
 #: cartridges/details_window.py:83
 msgid "Add"
-msgstr ""
+msgstr "Adicionar"
 
 #: cartridges/details_window.py:93
-#, fuzzy
-#| msgid "Executable"
 msgid "Executables"
-msgstr "Executável"
+msgstr "Executáveis"
 
 #. Translate this string as you would translate "file"
 #: cartridges/details_window.py:108
@@ -590,34 +559,28 @@ msgstr ""
 "chave {}aqui{}."
 
 #: cartridges/preferences.py:191
-#, fuzzy
-#| msgid "Importing Covers…"
 msgid "Downloading covers…"
-msgstr "Importando capas…"
+msgstr "A descarregar capas…"
 
 #: cartridges/preferences.py:210
 msgid "Covers updated"
-msgstr ""
+msgstr "Capas atualizadas"
 
 #: cartridges/preferences.py:345
-#, fuzzy
-#| msgid "Installation Not Found"
 msgid "Installation Not Found"
 msgstr "Instalação não encontrada"
 
 #: cartridges/preferences.py:346
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select a valid directory."
-msgstr "Selecione o diretório de informações de {}."
+msgstr "Selecione um diretório válido."
 
 #: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
-msgstr ""
+msgstr "Atenção"
 
 #: cartridges/preferences.py:416
 msgid "Invalid Directory"
-msgstr ""
+msgstr "Diretório inválido"
 
 #: cartridges/preferences.py:422
 msgid "Set Location"
@@ -633,7 +596,7 @@ msgstr "Importando jogos…"
 
 #: cartridges/importer/importer.py:338
 msgid "The following errors occured during import:"
-msgstr ""
+msgstr "Ocorreram os seguintes erros durante a importação:"
 
 #: cartridges/importer/importer.py:367
 msgid "No new games found"
@@ -650,54 +613,44 @@ msgstr "{} jogos importados"
 
 #. A single game removed
 #: cartridges/importer/importer.py:387
-#, fuzzy
-#| msgid "{} removed"
 msgid "1 removed"
-msgstr "{} removido"
+msgstr "1 removido"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:33
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select the {} cache directory."
-msgstr "Selecione o diretório de informações de {}."
+msgstr "Selecione o diretório de cache {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:35
-#, fuzzy
-#| msgid "Select the {} configuration directory."
 msgid "Select the {} configuration directory."
-msgstr "Selecione o diretório de configuração de {}."
+msgstr "Selecione o diretório de configuração do(a) {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:37
-#, fuzzy
-#| msgid "Select the {} data directory."
 msgid "Select the {} data directory."
-msgstr "Selecione o diretório de informações de {}."
+msgstr "Selecione o diretório de dados do(a) {}."
 
 #: cartridges/importer/retroarch_source.py:129
 msgid "No RetroArch Core Selected"
-msgstr ""
+msgstr "Nenhum núcleo RetroArch selecionado"
 
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr ""
+msgstr "As seguintes listas de jogos não têm núcleo padrão:"
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
-msgstr ""
+msgstr "Jogos sem núcleo selecionado não foram importados"
 
 #: cartridges/store/managers/sgdb_manager.py:46
-#, fuzzy
-#| msgid "Couldn't Connect to SteamGridDB"
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "Não foi possível conectar à SteamGridDB"
+msgstr "Não foi possível autenticar no SteamGridDB"
 
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
-msgstr ""
+msgstr "Verifique a sua chave de API nas preferências"
 
 #~ msgid "Library"
 #~ msgstr "Biblioteca"
