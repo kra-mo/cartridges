@@ -211,7 +211,11 @@ class Importer(ErrorProducer):
             pipeline: Pipeline = shared.store.add_game(game, additional_data)
             if pipeline is not None:
                 logging.info("Imported %s (%s)", game.name, game.game_id)
-                pipeline.connect("advanced", self.pipeline_advanced_callback)
+                pipeline.connect(
+                    "advanced",
+                    # I'm not sure idle_add is needed here, but a widget is updated in the callback
+                    lambda *args: GLib.idle_add(self.pipeline_advanced_callback, args),
+                )
                 self.game_pipelines.add(pipeline)
 
     def update_progressbar(self) -> None:
