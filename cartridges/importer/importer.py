@@ -214,7 +214,7 @@ class Importer(ErrorProducer):
                 pipeline.connect(
                     "advanced",
                     # I'm not sure idle_add is needed here, but a widget is updated in the callback
-                    lambda *args: GLib.idle_add(self.pipeline_advanced_callback, args),
+                    lambda *args: GLib.idle_add(self.pipeline_advanced_callback, *args),
                 )
                 self.game_pipelines.add(pipeline)
 
