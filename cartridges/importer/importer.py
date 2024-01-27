@@ -407,7 +407,7 @@ class Importer(ErrorProducer):
         self,
         page_name: Optional[str] = None,
         expander_row: Optional[Adw.ExpanderRow] = None,
-    ) -> Adw.PreferencesWindow:
+    ) -> Adw.PreferencesDialog:
         return shared.win.get_application().on_preferences_action(
             page_name=page_name, expander_row=expander_row
         )

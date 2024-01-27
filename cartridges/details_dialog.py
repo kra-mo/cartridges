@@ -36,9 +36,9 @@ from cartridges.utils.create_dialog import create_dialog
 from cartridges.utils.save_cover import convert_cover, save_cover
 
 
-@Gtk.Template(resource_path=shared.PREFIX + "/gtk/details-window.ui")
-class DetailsWindow(Adw.Window):
-    __gtype_name__ = "DetailsWindow"
+@Gtk.Template(resource_path=shared.PREFIX + "/gtk/details-dialog.ui")
+class DetailsDialog(Adw.Dialog):
+    __gtype_name__ = "DetailsDialog"
 
     cover_overlay = Gtk.Template.Child()
     cover = Gtk.Template.Child()
@@ -61,11 +61,8 @@ class DetailsWindow(Adw.Window):
 
     def __init__(self, game: Optional[Game] = None, **kwargs: Any):
         super().__init__(**kwargs)
-
         self.game: Game = game
         self.game_cover: GameCover = GameCover({self.cover})
-
-        self.set_transient_for(shared.win)
 
         if self.game:
             self.set_title(_("Game Details"))
@@ -152,7 +149,6 @@ class DetailsWindow(Adw.Window):
         self.executable.connect("entry-activated", self.apply_preferences)
 
         self.set_focus(self.name)
-        self.present()
 
     def delete_pixbuf(self, *_args: Any) -> None:
         self.game_cover.new_cover()

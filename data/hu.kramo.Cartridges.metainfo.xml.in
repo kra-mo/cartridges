@@ -28,7 +28,7 @@
     <control>touch</control>
   </supports>
   <recommends>
-    <display_length compare="gt">280</display_length>
+    <display_length compare="ge">360</display_length>
   </recommends>
   <screenshots>
     <screenshot type="default">
