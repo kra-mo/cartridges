@@ -153,7 +153,6 @@ class CartridgesApplication(Adw.Application):
                 ("go_to_parent", ("<alt>Up",), shared.win),
                 ("go_home", ("<alt>Home",), shared.win),
                 ("toggle_search", ("<primary>f",), shared.win),
-                ("escape", ("Escape",), shared.win),
                 ("undo", ("<primary>z",), shared.win),
                 ("open_menu", ("F10",), shared.win),
                 ("close", ("<primary>w",), shared.win),
