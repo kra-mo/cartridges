@@ -22,7 +22,7 @@ Cartridges is a simple game launcher for all of your games. It has support for i
   <maintainer>
     <foaf:Person>
       <foaf:name>kramo</foaf:name>
-      <foaf:mbox rdf:resource="mailto:contact@kramo.hu" />
+      <foaf:mbox rdf:resource="mailto:contact@kramo.page" />
       <foaf:account>
         <foaf:OnlineAccount>
           <foaf:accountServiceHomepage rdf:resource="https://github.com"/>

@@ -250,7 +250,7 @@ class CartridgesApplication(Adw.Application):
         )
         about.set_developers(
             (
-                "kramo https://kramo.hu",
+                "kramo https://kramo.page",
                 "Geoffrey Coulaud https://geoffrey-coulaud.fr",
                 "Rilic https://rilic.red",
                 "Arcitec https://github.com/Arcitec",
@@ -261,7 +261,7 @@ class CartridgesApplication(Adw.Application):
                 "Sabri Ünal https://github.com/sabriunal",
             )
         )
-        about.set_designers(("kramo https://kramo.hu",))
+        about.set_designers(("kramo https://kramo.page",))
         about.set_copyright("© 2022-2023 kramo")
         # Translators: Replace this with your name for it to show up in the about window
         about.set_translator_credits = (_("translator_credits"),)
