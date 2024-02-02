@@ -5,13 +5,14 @@
 # Vinícius Gama Santos <vinny.stalck@protonmail.com>, 2023.
 # Vítor Fernandes Almado <vfalmado@gmail.com>, 2023.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2023.
+# Filipe Motta <luiz_filipe_motta@hotmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-12 10:32+0100\n"
-"PO-Revision-Date: 2023-09-26 07:17+0000\n"
-"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"PO-Revision-Date: 2024-01-04 04:07+0000\n"
+"Last-Translator: Filipe Motta <luiz_filipe_motta@hotmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -285,17 +286,13 @@ msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:327
-#, fuzzy
-#| msgid "Set Location"
 msgid "System Location"
-msgstr "Definir local"
+msgstr "Local dos Dados no Sistema"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:340
-#, fuzzy
-#| msgid "Set Location"
 msgid "User Location"
-msgstr "Definir local"
+msgstr "Local dos Dados de Usuário"
 
 #: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
@@ -334,18 +331,16 @@ msgid "Prefer Animated Images"
 msgstr "Preferir imagens animadas"
 
 #: data/gtk/preferences.blp:399
-#, fuzzy
-#| msgid "Delete Cover"
 msgid "Update Covers"
-msgstr "Excluir capa"
+msgstr "Atualizar capas"
 
 #: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
-msgstr ""
+msgstr "Obter capas para jogos que já estão na sua biblioteca"
 
 #: data/gtk/preferences.blp:405
 msgid "Update"
-msgstr ""
+msgstr "Atualizar"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -429,15 +424,15 @@ msgstr "Sobre o Cartuchos"
 
 #: data/gtk/window.blp:536
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:538
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:540
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:206 cartridges/game.py:125
@@ -447,7 +442,9 @@ msgstr "{} iniciado"
 #. Translators: Replace this with your name for it to show up in the about window
 #: cartridges/main.py:269
 msgid "translator_credits"
-msgstr "Pedro Sader Azevedo, Vinícius \"Stalck\""
+msgstr ""
+"Pedro Sader Azevedo, Vinícius \"Stalck\", Filipe Motta <luizfilipemotta@gmail"
+".com>"
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:373
@@ -564,14 +561,12 @@ msgstr ""
 "uma {}aqui{}."
 
 #: cartridges/preferences.py:191
-#, fuzzy
-#| msgid "Importing Covers…"
 msgid "Downloading covers…"
-msgstr "Importando capas…"
+msgstr "Baixando capas…"
 
 #: cartridges/preferences.py:210
 msgid "Covers updated"
-msgstr ""
+msgstr "Capas atualizadas"
 
 #: cartridges/preferences.py:345
 msgid "Installation Not Found"

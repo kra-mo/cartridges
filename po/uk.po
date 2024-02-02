@@ -6,13 +6,14 @@
 # Вова Смірнов <vovasmirnon5895@gmail.com>, 2023.
 # Dan <jonweblin2205@protonmail.com>, 2023.
 # Andrii Murha <flat.assembly@gmail.com>, 2023.
+# Сергій <sergiy.goncharuk.1@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-12 10:32+0100\n"
-"PO-Revision-Date: 2023-10-24 17:02+0000\n"
-"Last-Translator: Andrii Murha <flat.assembly@gmail.com>\n"
+"PO-Revision-Date: 2024-01-08 09:06+0000\n"
+"Last-Translator: Сергій <sergiy.goncharuk.1@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/uk/>\n"
 "Language: uk\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -169,7 +170,7 @@ msgstr "Показати приховані ігри"
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
-msgstr "Видалити Гру"
+msgstr "Видалити гру"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
 #: data/gtk/preferences.blp:381
@@ -286,17 +287,13 @@ msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:327
-#, fuzzy
-#| msgid "Set Location"
 msgid "System Location"
-msgstr "Встановити місцезнаходження"
+msgstr "Розташування системного каталогу"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:340
-#, fuzzy
-#| msgid "Set Location"
 msgid "User Location"
-msgstr "Встановити місцезнаходження"
+msgstr "Розташування каталогу користувача"
 
 #: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
@@ -428,15 +425,15 @@ msgstr "Про Картриджі"
 
 #: data/gtk/window.blp:536
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:538
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:540
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:206 cartridges/game.py:125
