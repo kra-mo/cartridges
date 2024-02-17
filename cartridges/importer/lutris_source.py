@@ -51,7 +51,7 @@ class LutrisSourceIterable(SourceIterable):
             "import_steam": shared.schema.get_boolean("lutris-import-steam"),
             "import_flatpak": shared.schema.get_boolean("lutris-import-flatpak"),
         }
-        db_path = copy_db(self.source.locations.config["pga.db"])
+        db_path = copy_db(self.source.locations.data["pga.db"])
         connection = connect(db_path)
         cursor = connection.execute(request, params)
 
@@ -71,7 +71,7 @@ class LutrisSourceIterable(SourceIterable):
             game = Game(values)
 
             # Get official image path
-            image_path = self.source.locations.cache["coverart"] / f"{row[2]}.jpg"
+            image_path = self.source.locations.data["coverart"] / f"{row[2]}.jpg"
             additional_data = {"local_image_path": image_path}
 
             yield (game, additional_data)
@@ -81,8 +81,7 @@ class LutrisSourceIterable(SourceIterable):
 
 
 class LutrisLocations(NamedTuple):
-    config: Location
-    cache: Location
+    data: Location
 
 
 class LutrisSource(URLExecutableSource):
@@ -93,8 +92,6 @@ class LutrisSource(URLExecutableSource):
     iterable_class = LutrisSourceIterable
     url_format = "lutris:rungameid/{game_id}"
     available_on = {"linux"}
-
-    # FIXME possible bug: config picks ~/.var... and cache picks ~/.local...
 
     locations: LutrisLocations
 
@@ -114,19 +111,8 @@ class LutrisSource(URLExecutableSource):
                 ),
                 paths={
                     "pga.db": LocationSubPath("pga.db"),
-                },
-                invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
-            ),
-            Location(
-                schema_key="lutris-cache-location",
-                candidates=(
-                    shared.flatpak_dir / "net.lutris.Lutris" / "cache" / "lutris",
-                    shared.cache_dir / "lutris",
-                    shared.host_cache_dir / "lutris",
-                ),
-                paths={
                     "coverart": LocationSubPath("coverart", True),
                 },
-                invalid_subtitle=Location.CACHE_INVALID_SUBTITLE,
-            ),
+                invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
+            )
         )

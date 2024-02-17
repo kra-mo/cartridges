@@ -63,10 +63,8 @@ class PreferencesWindow(Adw.PreferencesWindow):
     steam_data_file_chooser_button = Gtk.Template.Child()
 
     lutris_expander_row = Gtk.Template.Child()
-    lutris_config_action_row = Gtk.Template.Child()
-    lutris_config_file_chooser_button = Gtk.Template.Child()
-    lutris_cache_action_row = Gtk.Template.Child()
-    lutris_cache_file_chooser_button = Gtk.Template.Child()
+    lutris_data_action_row = Gtk.Template.Child()
+    lutris_data_file_chooser_button = Gtk.Template.Child()
     lutris_import_steam_switch = Gtk.Template.Child()
     lutris_import_flatpak_switch = Gtk.Template.Child()
 

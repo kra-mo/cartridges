@@ -154,22 +154,10 @@ template $PreferencesWindow : Adw.PreferencesWindow {
           icon-name: "lutris-source-symbolic";
         }
 
-        Adw.ActionRow lutris_config_action_row {
+        Adw.ActionRow lutris_data_action_row {
           title: _("Install Location");
 
-          Button lutris_config_file_chooser_button {
-            icon-name: "folder-symbolic";
-            valign: center;
-            styles [
-              "flat"
-            ]
-          }
-        }
-
-        Adw.ActionRow lutris_cache_action_row {
-          title: _("Cache Location");
-
-          Button lutris_cache_file_chooser_button {
+          Button lutris_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
             styles [
