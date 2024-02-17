@@ -19,7 +19,6 @@
   <developer id="kramo.page">
       <name translatable="no">kramo</name>
   </developer>
-  <project_group>GNOME</project_group>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
   <translation type="gettext">cartridges</translation>
   <supports>
