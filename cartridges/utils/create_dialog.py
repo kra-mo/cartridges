@@ -28,12 +28,12 @@ def create_dialog(
     body: str,
     extra_option: Optional[str] = None,
     extra_label: Optional[str] = None,
-) -> Adw.MessageDialog:
-    dialog = Adw.MessageDialog.new(win, heading, body)
+) -> Adw.AlertDialog:
+    dialog = Adw.AlertDialog.new(heading, body)
     dialog.add_response("dismiss", _("Dismiss"))
 
     if extra_option:
         dialog.add_response(extra_option, _(extra_label))
 
-    dialog.present()
+    dialog.choose(win)
     return dialog
