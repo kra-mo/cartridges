@@ -50,10 +50,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.7.2" date="2023-12-31">
+    <release version="2.7.3" date="2024-02-17">
       <description translatable="no">
         <ul>
-          <li>Fixes a bug with Flatpak user games not importing</li>
+          <li>Updated Lutris locations so importing works again</li>
+          <li>Other miscellaneous bug fixes</li>
         </ul>
       </description>
     </release>
