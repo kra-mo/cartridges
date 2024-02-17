@@ -16,7 +16,7 @@ class LocationSubPath(NamedTuple):
 
 
 class UnresolvableLocationError(Exception):
-    def __init__(self, optional):
+    def __init__(self, optional: Optional[bool] = False):
         self.optional = optional
 
 
