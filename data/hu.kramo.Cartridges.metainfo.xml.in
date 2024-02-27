@@ -21,6 +21,10 @@
   </developer>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
   <translation type="gettext">cartridges</translation>
+  <branding>
+    <color type="primary" scheme_preference="light">#d5b0e7</color>
+    <color type="primary" scheme_preference="dark">#501a5c</color>
+  </branding>
   <supports>
     <control>pointing</control>
     <control>keyboard</control>
