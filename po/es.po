@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
-# Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate.org>, 2023.
+# Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate.org>, 2023, 2024.
 # gallegonovato <fran-carro@hotmail.es>, 2023.
 # kramo <contact@kramo.hu>, 2023.
 msgid ""
@@ -9,8 +9,9 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-12 10:32+0100\n"
-"PO-Revision-Date: 2023-12-15 13:10+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2024-02-19 06:35+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
+".org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/es/>\n"
 "Language: es\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.4\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -40,8 +41,8 @@ msgstr "Lance todos sus juegos"
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
-"juegos;lanzador;steam;lutris;heroico;botellas;itch;flatpak;legendario;"
-"retroarch;"
+"gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
+"juegos;lanzador;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
@@ -96,7 +97,7 @@ msgstr "Ejecutable"
 
 #: data/gtk/details-window.blp:114
 msgid "Select File"
-msgstr "Seleccionar el archivo"
+msgstr "Seleccionar archivo"
 
 #: data/gtk/details-window.blp:125
 msgid "More Info"
@@ -142,7 +143,7 @@ msgstr "Salir"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:88 data/gtk/window.blp:164
 msgid "Toggle Sidebar"
-msgstr "Alternar la barra lateral"
+msgstr "Conmutar la barra lateral"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:177 data/gtk/window.blp:237
 msgid "Main Menu"
@@ -163,11 +164,11 @@ msgstr "Importar"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Show Hidden Games"
-msgstr "Mostrar los juegos ocultos"
+msgstr "Mostrar juegos ocultos"
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
-msgstr "Eliminar el juego"
+msgstr "Eliminar juego"
 
 #: data/gtk/preferences.blp:12 data/gtk/preferences.blp:116
 #: data/gtk/preferences.blp:381
@@ -257,7 +258,7 @@ msgstr "Importar juegos de GOG"
 
 #: data/gtk/preferences.blp:220
 msgid "Import Amazon Games"
-msgstr "Importar de Amazon Games"
+msgstr "Importar juegos de Amazon"
 
 #: data/gtk/preferences.blp:224
 msgid "Import Sideloaded Games"
@@ -299,7 +300,7 @@ msgstr "Importar lanzadores de juegos"
 
 #: data/gtk/preferences.blp:357 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
-msgstr "Entradas en el escritorio"
+msgstr "Entradas de escritorio"
 
 #: data/gtk/preferences.blp:369 data/gtk/window.blp:537
 msgid "SteamGridDB"
@@ -331,11 +332,11 @@ msgstr "Prefiero las imágenes animadas"
 
 #: data/gtk/preferences.blp:399
 msgid "Update Covers"
-msgstr "Actualización de las portadas"
+msgstr "Actualizar las portadas"
 
 #: data/gtk/preferences.blp:400
 msgid "Fetch covers for games already in your library"
-msgstr "Busca las carátulas de los juegos de tu biblioteca"
+msgstr "Busca las portadas de los juegos de su biblioteca"
 
 #: data/gtk/preferences.blp:405
 msgid "Update"
@@ -571,7 +572,7 @@ msgstr "Instalación no encontrada"
 
 #: cartridges/preferences.py:346
 msgid "Select a valid directory."
-msgstr "Selecciona un directorio válido."
+msgstr "Seleccione un directorio válido."
 
 #: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
@@ -579,7 +580,7 @@ msgstr "Advertencia"
 
 #: cartridges/preferences.py:416
 msgid "Invalid Directory"
-msgstr "Directorio incorrecto"
+msgstr "Directorio no válido"
 
 #: cartridges/preferences.py:422
 msgid "Set Location"
@@ -608,7 +609,7 @@ msgstr "1 juego importado"
 #. The variable is the number of games
 #: cartridges/importer/importer.py:383
 msgid "{} games imported"
-msgstr "0 juegos importados"
+msgstr "{} juegos importados"
 
 #. A single game removed
 #: cartridges/importer/importer.py:387
@@ -618,26 +619,27 @@ msgstr "1 eliminado"
 #. The variable is the name of the source
 #: cartridges/importer/location.py:33
 msgid "Select the {} cache directory."
-msgstr "Seleccione el directorio de la caché {}."
+msgstr "Seleccione el directorio de la caché de {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:35
 msgid "Select the {} configuration directory."
-msgstr "Seleccione el directorio de configuración {}."
+msgstr "Seleccione el directorio de configuración de {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:37
 msgid "Select the {} data directory."
-msgstr "Seleccione el directorio de datos {}."
+msgstr "Selecciona el directorio de los datos {}."
 
 #: cartridges/importer/retroarch_source.py:129
 msgid "No RetroArch Core Selected"
-msgstr "No seleccionaste ningún núcleo para RetroArch"
+msgstr "No hay ningún núcleo RetroArch seleccionado"
 
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr "Las siguientes listas de reproducción no tienen un núcleo por defecto:"
+msgstr ""
+"Las siguientes listas de reproducción no tienen un núcleo predeterminado:"
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
@@ -649,7 +651,7 @@ msgstr "No se ha podido autenticar SteamGridDB"
 
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
-msgstr "Verifica tu clave API en las preferencias"
+msgstr "Verifique su clave API en las preferencias"
 
 #~ msgid "Library"
 #~ msgstr "Biblioteca"
