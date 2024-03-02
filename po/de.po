@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-12 10:32+0100\n"
-"PO-Revision-Date: 2024-02-17 13:07+0000\n"
+"PO-Revision-Date: 2024-02-19 06:35+0000\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/de/>\n"
@@ -36,7 +36,7 @@ msgstr "Spiele-Launcher"
 #: data/hu.kramo.Cartridges.desktop.in:5
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
 msgid "Launch all your games"
-msgstr "Starte all deine Spiele"
+msgstr "Starten Sie alle Ihre Spiele"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
 msgid ""
@@ -51,10 +51,10 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Cartridges ist ein einfacher Spiel-Launcher. Es unterstützt das Importieren "
-"von Spielen aus Steam, Lutris, Heroic und mehr, keine Anmeldung "
-"erforderlich. Du kannst sortieren, Spiele verstecken oder das Cover-Art aus "
-"SteamGRID herunterladen."
+"Cartridges ist ein einfacher Game Launcher für alle deine Spiele. Es bietet "
+"Unterstützung für den Import von Spielen aus Steam, Lutris, Heroic und mehr, "
+"ohne dass eine Anmeldung erforderlich ist. Sie können Spiele sortieren und "
+"ausblenden oder Cover-Art von SteamGridDB herunterladen."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:36 data/gtk/window.blp:290
 #: cartridges/details_window.py:71
