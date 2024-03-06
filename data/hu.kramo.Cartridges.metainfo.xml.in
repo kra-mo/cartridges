@@ -53,11 +53,10 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.7.3" date="2024-02-17">
+    <release version="2.7.4" date="2024-03-06">
       <description translatable="no">
         <ul>
-          <li>Updated Lutris locations so importing works again</li>
-          <li>Other miscellaneous bug fixes</li>
+          <li>Updated the app's metadata</li>
         </ul>
       </description>
     </release>
