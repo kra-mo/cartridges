@@ -21,8 +21,6 @@ jobs:
       with:
         bundle: hu.kramo.Cartridges.Devel.flatpak
         manifest-path: flatpak/hu.kramo.Cartridges.Devel.json
-        repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
-        repository-name: gnome-nightly
 
   windows:
     name: Windows
