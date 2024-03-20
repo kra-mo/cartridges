@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
-# Philip Goto <philip.goto@gmail.com>, 2023.
+# Philip Goto <philip.goto@gmail.com>, 2023, 2024.
 # kramo <contact@kramo.hu>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-12 10:32+0100\n"
-"PO-Revision-Date: 2023-09-30 08:01+0000\n"
+"PO-Revision-Date: 2024-02-15 17:02+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -284,17 +284,13 @@ msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:327
-#, fuzzy
-#| msgid "Set Location"
 msgid "System Location"
-msgstr "Locatie instellen"
+msgstr "Systeem­locatie"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:340
-#, fuzzy
-#| msgid "Set Location"
 msgid "User Location"
-msgstr "Locatie instellen"
+msgstr "Gebruikers­locatie"
 
 #: data/gtk/preferences.blp:352
 msgid "Import Game Launchers"
@@ -426,15 +422,15 @@ msgstr "Over Cartridges"
 
 #: data/gtk/window.blp:536
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:538
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:540
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:206 cartridges/game.py:125

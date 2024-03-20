@@ -5,13 +5,14 @@
 # albanobattistella <albano_battistella@hotmail.com>, 2023.
 # kramo <contact@kramo.hu>, 2023.
 # Giasko <dibiame@hotmail.it>, 2023.
+# Andrea Costola <lamaildiandreac@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-12 10:32+0100\n"
-"PO-Revision-Date: 2023-12-26 16:08+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"PO-Revision-Date: 2024-02-24 08:02+0000\n"
+"Last-Translator: Andrea Costola <lamaildiandreac@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/it/>\n"
 "Language: it\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -423,7 +424,7 @@ msgstr "Informazioni su Cartucce"
 
 #: data/gtk/window.blp:536
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:538
 msgid "ProtonDB"

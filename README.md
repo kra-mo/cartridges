@@ -82,7 +82,7 @@ Note: Windows might present you with a warning when trying to install the app. T
 
 ### Winget
 
-Install the latest release with the command: `winget install cartridges`. 
+Install the latest release with the command: `winget install cartridges`.
 
 ## Building manually
 
@@ -96,6 +96,6 @@ Thanks to [Weblate](https://weblate.org/) for hosting our translations!
 
 # Code of Conduct
 
-The project follows the [GNOME Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct).
+The project follows the [GNOME Code of Conduct](https://conduct.gnome.org/).
 
 See [CODE_OF_CONDUCT.md](https://github.com/kra-mo/cartridges/blob/main/CODE_OF_CONDUCT.md).
