@@ -45,7 +45,7 @@ Adw.StatusPage hidden_notice_empty {
 
 template $CartridgesWindow : Adw.ApplicationWindow {
   title: _("Cartridges");
-  width-request: 281;
+  width-request: 360;
   height-request: 100;
 
   Adw.Breakpoint {
@@ -75,6 +75,8 @@ template $CartridgesWindow : Adw.ApplicationWindow {
           title: _("All Games");
 
           Adw.OverlaySplitView overlay_split_view {
+            sidebar-width-fraction: .2;
+
             [sidebar]
             Adw.NavigationPage {
               title: _("Cartridges");
@@ -199,6 +201,13 @@ template $CartridgesWindow : Adw.ApplicationWindow {
                   SearchEntry search_entry {
                     placeholder-text: _("Search");
                     hexpand: true;
+
+                    ShortcutController {
+                      Shortcut {
+                          trigger: "Escape";
+                          action: "action(win.toggle_search)";
+                      }
+                    }
                   }
                 }
               }
@@ -259,6 +268,11 @@ Adw.NavigationPage hidden_library_page {
         SearchEntry hidden_search_entry {
           placeholder-text: _("Search");
           hexpand: true;
+
+          Shortcut {
+            trigger: "Escape";
+            action: "action(win.toggle_search)";
+          }
         }
       }
     }

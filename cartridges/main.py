@@ -34,7 +34,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GLib, Gtk
 
 from cartridges import shared
-from cartridges.details_window import DetailsWindow
+from cartridges.details_dialog import DetailsDialog
 from cartridges.game import Game
 from cartridges.importer.bottles_source import BottlesSource
 from cartridges.importer.desktop_source import DesktopSource
@@ -47,7 +47,7 @@ from cartridges.importer.lutris_source import LutrisSource
 from cartridges.importer.retroarch_source import RetroarchSource
 from cartridges.importer.steam_source import SteamSource
 from cartridges.logging.setup import log_system_info, setup_logging
-from cartridges.preferences import PreferencesWindow
+from cartridges.preferences import CartridgesPreferences
 from cartridges.store.managers.cover_manager import CoverManager
 from cartridges.store.managers.display_manager import DisplayManager
 from cartridges.store.managers.file_manager import FileManager
@@ -153,7 +153,6 @@ class CartridgesApplication(Adw.Application):
                 ("go_to_parent", ("<alt>Up",), shared.win),
                 ("go_home", ("<alt>Home",), shared.win),
                 ("toggle_search", ("<primary>f",), shared.win),
-                ("escape", ("Escape",), shared.win),
                 ("undo", ("<primary>z",), shared.win),
                 ("open_menu", ("F10",), shared.win),
                 ("close", ("<primary>w",), shared.win),
@@ -246,10 +245,9 @@ class CartridgesApplication(Adw.Application):
             debug_str += log_file.read()
             log_file.close()
 
-        about = Adw.AboutWindow.new_from_appdata(
+        about = Adw.AboutDialog.new_from_appdata(
             shared.PREFIX + "/" + shared.APP_ID + ".metainfo.xml", shared.VERSION
         )
-        about.set_transient_for(shared.win)
         about.set_developers(
             (
                 "kramo https://kramo.page",
@@ -275,7 +273,7 @@ class CartridgesApplication(Adw.Application):
             Gtk.License.CUSTOM,
             "Steam and the Steam logo are trademarks and/or registered trademarks of Valve Corporation in the U.S. and/or other countries.",  # pylint: disable=line-too-long
         )
-        about.present()
+        about.present(shared.win)
 
     def on_preferences_action(
         self,
@@ -284,12 +282,12 @@ class CartridgesApplication(Adw.Application):
         page_name: Optional[str] = None,
         expander_row: Optional[str] = None,
     ) -> CartridgesWindow:
-        win = PreferencesWindow()
+        win = CartridgesPreferences()
         if page_name:
             win.set_visible_page_name(page_name)
         if expander_row:
             getattr(win, expander_row).set_expanded(True)
-        win.present()
+        win.present(shared.win)
 
         return win
 
@@ -300,10 +298,10 @@ class CartridgesApplication(Adw.Application):
         shared.win.active_game.toggle_hidden()
 
     def on_edit_game_action(self, *_args: Any) -> None:
-        DetailsWindow(shared.win.active_game)
+        DetailsDialog(shared.win.active_game).present(shared.win)
 
     def on_add_game_action(self, *_args: Any) -> None:
-        DetailsWindow()
+        DetailsDialog().present(shared.win)
 
     def on_import_action(self, *_args: Any) -> None:
         shared.importer = Importer()

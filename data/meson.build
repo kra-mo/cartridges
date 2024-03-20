@@ -4,7 +4,7 @@ blueprints = custom_target('blueprints',
     'gtk/window.blp',
     'gtk/game.blp',
     'gtk/preferences.blp',
-    'gtk/details-window.blp'
+    'gtk/details-dialog.blp'
   ),
   output: '.',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],

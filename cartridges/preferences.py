@@ -43,8 +43,8 @@ from cartridges.utils.create_dialog import create_dialog
 
 
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/preferences.ui")
-class PreferencesWindow(Adw.PreferencesWindow):
-    __gtype_name__ = "PreferencesWindow"
+class CartridgesPreferences(Adw.PreferencesDialog):
+    __gtype_name__ = "CartridgesPreferences"
 
     general_page = Gtk.Template.Child()
     import_page = Gtk.Template.Child()
@@ -121,7 +121,6 @@ class PreferencesWindow(Adw.PreferencesWindow):
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self.file_chooser = Gtk.FileDialog()
-        self.set_transient_for(shared.win)
 
         self.toast = Adw.Toast.new(_("All games removed"))
         self.toast.set_button_label(_("Undo"))

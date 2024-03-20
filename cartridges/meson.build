@@ -18,7 +18,7 @@ install_data(
     'main.py',
     'window.py',
     'preferences.py',
-    'details_window.py',
+    'details_dialog.py',
     'game.py',
     'game_cover.py',
     configure_file(

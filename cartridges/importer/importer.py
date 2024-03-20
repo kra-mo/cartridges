@@ -40,7 +40,7 @@ class Importer(ErrorProducer):
 
     progressbar: Gtk.ProgressBar
     import_statuspage: Adw.StatusPage
-    import_dialog: Adw.MessageDialog
+    import_dialog: Adw.AlertDialog
     summary_toast: Optional[Adw.Toast] = None
 
     sources: set[Source]
@@ -53,7 +53,7 @@ class Importer(ErrorProducer):
     removed_game_ids: set[str]
     imported_game_ids: set[str]
 
-    close_req_id: int
+    close_attempt_id: int
 
     def __init__(self) -> None:
         super().__init__()
@@ -145,20 +145,17 @@ class Importer(ErrorProducer):
             title=_("Importing Games…"),
             child=self.progressbar,
         )
-        self.import_dialog = Adw.Window(
-            content=self.import_statuspage,
-            modal=True,
-            default_width=350,
-            default_height=-1,
-            transient_for=shared.win,
-            deletable=False,
+        self.import_dialog = Adw.Dialog(
+            child=self.import_statuspage,
+            content_width=350,
+            can_close=False,
         )
 
-        self.close_req_id = self.import_dialog.connect(
-            "close-request", lambda *_: shared.win.close()
+        self.close_attempt_id = self.import_dialog.connect(
+            "close-attempt", lambda *_: shared.win.close()
         )
 
-        self.import_dialog.present()
+        self.import_dialog.present(shared.win)
 
     def source_task_thread_func(self, data: tuple) -> None:
         """Source import task code"""
@@ -282,9 +279,9 @@ class Importer(ErrorProducer):
         self.imported_game_ids = shared.store.new_game_ids
         shared.store.new_game_ids = set()
         shared.store.duplicate_game_ids = set()
-        # Disconnect the close-request signal that closes the main window
-        self.import_dialog.disconnect(self.close_req_id)
-        self.import_dialog.close()
+        # Disconnect the close-attempt signal that closes the main window
+        self.import_dialog.disconnect(self.close_attempt_id)
+        self.import_dialog.force_close()
         self.__class__.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
         shared.win.get_application().lookup_action("import").set_enabled(True)
@@ -317,13 +314,12 @@ class Importer(ErrorProducer):
             return
 
         # Create error dialog
-        dialog = Adw.MessageDialog()
+        dialog = Adw.AlertDialog()
         dialog.set_heading(_("Warning"))
         dialog.add_response("close", _("Dismiss"))
         dialog.add_response("open_preferences_import", _("Preferences"))
         dialog.set_default_response("open_preferences_import")
         dialog.connect("response", self.dialog_response_callback)
-        dialog.set_transient_for(shared.win)
 
         if len(errors) == 1:
             dialog.set_heading((error := next(iter(errors)))[0])
@@ -342,7 +338,7 @@ class Importer(ErrorProducer):
             dialog.set_body(_("The following errors occured during import:"))
             dialog.set_extra_child(list_box)
 
-        dialog.present()
+        dialog.present(shared.win)
 
     def undo_import(self, *_args: Any) -> None:
         for game_id in self.imported_game_ids:
@@ -407,7 +403,7 @@ class Importer(ErrorProducer):
         self,
         page_name: Optional[str] = None,
         expander_row: Optional[Adw.ExpanderRow] = None,
-    ) -> Adw.PreferencesWindow:
+    ) -> Adw.PreferencesDialog:
         return shared.win.get_application().on_preferences_action(
             page_name=page_name, expander_row=expander_row
         )

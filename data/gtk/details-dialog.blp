@@ -1,17 +1,8 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $DetailsWindow : Adw.Window {
-    default-width: 480; // Same as Nautilus' properties window
-    default-height: -1;
-    modal: true;
-
-    ShortcutController {
-        Shortcut {
-            trigger: "Escape";
-            action: "action(window.close)";
-        }
-    }
+template $DetailsDialog : Adw.Dialog {
+    content-width: 480;
 
     Adw.ToolbarView {
 
@@ -85,7 +76,7 @@ template $DetailsWindow : Adw.Window {
                             Picture cover {
                                 width-request: 200;
                                 height-request: 300;
-                                
+
                                 styles [
                                     "card"
                                 ]

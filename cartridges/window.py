@@ -469,15 +469,6 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
         search_entry.set_text("")
 
-    def on_escape_action(self, *_args: Any) -> None:
-        if (
-            self.get_focus() == self.search_entry.get_focus_child()
-            or self.hidden_search_entry.get_focus_child()
-        ):
-            self.on_toggle_search_action()
-        else:
-            self.navigation_view.pop()
-
     def show_details_page_search(self, widget: Gtk.Widget) -> None:
         library = (
             self.hidden_library if widget == self.hidden_search_entry else self.library

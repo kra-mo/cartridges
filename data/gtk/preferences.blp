@@ -1,7 +1,8 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $PreferencesWindow : Adw.PreferencesWindow {
+template $CartridgesPreferences : Adw.PreferencesDialog {
+  search-enabled: true;
 
   Adw.PreferencesPage general_page {
     name: "general";
