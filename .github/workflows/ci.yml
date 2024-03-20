@@ -22,39 +22,39 @@ jobs:
         bundle: hu.kramo.Cartridges.Devel.flatpak
         manifest-path: flatpak/hu.kramo.Cartridges.Devel.json
 
-  windows:
-    name: Windows
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  # windows:
+  #   name: Windows
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
 
-      - name: Setup MSYS2
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: UCRT64
-          update: true
-          install: mingw-w64-ucrt-x86_64-gtk4 mingw-w64-ucrt-x86_64-libadwaita mingw-w64-ucrt-x86_64-python-gobject mingw-w64-ucrt-x86_64-python-yaml mingw-w64-ucrt-x86_64-python-requests mingw-w64-ucrt-x86_64-python-pillow mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-ca-certificates mingw-w64-ucrt-x86_64-meson git
+  #     - name: Setup MSYS2
+  #       uses: msys2/setup-msys2@v2
+  #       with:
+  #         msystem: UCRT64
+  #         update: true
+  #         install: mingw-w64-ucrt-x86_64-gtk4 mingw-w64-ucrt-x86_64-libadwaita mingw-w64-ucrt-x86_64-python-gobject mingw-w64-ucrt-x86_64-python-yaml mingw-w64-ucrt-x86_64-python-requests mingw-w64-ucrt-x86_64-python-pillow mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-ca-certificates mingw-w64-ucrt-x86_64-meson git
 
-      - name: Compile
-        shell: msys2 {0}
-        run: |
-          meson setup _build
-          ninja -C _build install
-          pacman --noconfirm -Rs mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-meson git
-          find /ucrt64/share/locale/ -type f ! -name "*cartridges.mo" -delete
+  #     - name: Compile
+  #       shell: msys2 {0}
+  #       run: |
+  #         meson setup _build
+  #         ninja -C _build install
+  #         pacman --noconfirm -Rs mingw-w64-ucrt-x86_64-desktop-file-utils mingw-w64-ucrt-x86_64-meson git
+  #         find /ucrt64/share/locale/ -type f ! -name "*cartridges.mo" -delete
 
-      - name: Test
-        shell: msys2 {0}
-        run: |
-          set +e
-          timeout 2 cartridges; [ "$?" -eq "124" ]
+  #     - name: Test
+  #       shell: msys2 {0}
+  #       run: |
+  #         set +e
+  #         timeout 2 cartridges; [ "$?" -eq "124" ]
 
-      - name: Inno Setup
-        run: iscc ".\_build\windows\Cartridges.iss"
+  #     - name: Inno Setup
+  #       run: iscc ".\_build\windows\Cartridges.iss"
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Windows Installer
-          path: _build/windows/Output/Cartridges Setup.exe
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: Windows Installer
+  #         path: _build/windows/Output/Cartridges Setup.exe

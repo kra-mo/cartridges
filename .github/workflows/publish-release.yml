@@ -39,7 +39,7 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v0.1.15
         with:
-          files: Windows Installer/Cartridges Setup.exe
-          fail_on_unmatched_files: true
+          # files: Windows Installer/Cartridges Setup.exe
+          # fail_on_unmatched_files: true
           tag_name: ${{ steps.get_tag_name.outputs.tag_name }}
           body_path: release_notes
