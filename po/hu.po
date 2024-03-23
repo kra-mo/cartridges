@@ -4,13 +4,14 @@
 # kramo, 2023.
 #
 # kramo <contact@kramo.hu>, 2023, 2024.
+# Balázs Meskó <meskobalazs@mailbox.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-12 10:32+0100\n"
-"PO-Revision-Date: 2024-01-28 19:06+0000\n"
-"Last-Translator: kramo <contact@kramo.hu>\n"
+"PO-Revision-Date: 2024-03-23 19:56+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
 "Language: hu\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
@@ -29,7 +30,7 @@ msgstr "Kazetták"
 
 #: data/hu.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr "Játék Indító"
+msgstr "Játékindító"
 
 #: data/hu.kramo.Cartridges.desktop.in:5
 #: data/hu.kramo.Cartridges.metainfo.xml.in:7
@@ -49,18 +50,19 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"A Kazetták egy egyszerű játékindító. Importálhat játékokat Steam-ből, Lutris-"
-"ból, Heroic-ból és több más forrásból bejelentkezés nélkül. Rendezheti és "
-"elrejtheti a játékait, valamint letölthet borítóképeket a SteamGridDB-ről."
+"A Kazetták egy egyszerű játékindító. Importálhat játékokat a Steamből, a "
+"Lutrisból, a Heroicból és több más forrásból bejelentkezés nélkül. "
+"Rendezheti és elrejtheti a játékait, valamint letölthet borítóképeket a "
+"SteamGridDB-ről."
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:36 data/gtk/window.blp:290
 #: cartridges/details_window.py:71
 msgid "Game Details"
-msgstr "Játék Tulajdonságai"
+msgstr "Játék tulajdonságai"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:40
 msgid "Edit Game Details"
-msgstr "Játék Szerkesztése"
+msgstr "Játék szerkesztése"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:44 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:516 cartridges/details_window.py:271
@@ -98,7 +100,7 @@ msgstr "Fájl kiválasztása"
 
 #: data/gtk/details-window.blp:125
 msgid "More Info"
-msgstr "Több infó"
+msgstr "További információk"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:110 data/gtk/window.blp:417
 msgid "Edit"
@@ -182,7 +184,7 @@ msgstr "A borítókép indítja el a játékot"
 
 #: data/gtk/preferences.blp:20
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr "Felcseréli a \"Játék\" gomb és a borítókép funkcióját"
+msgstr "Felcseréli a „Játék” gomb és a borítókép funkcióját"
 
 #: data/gtk/preferences.blp:25 cartridges/details_window.py:85
 msgid "Images"
@@ -258,7 +260,7 @@ msgstr "Amazon játékok importálása"
 
 #: data/gtk/preferences.blp:224
 msgid "Import Sideloaded Games"
-msgstr "Manuálisan hozzáadott játékok importálása"
+msgstr "Kézileg hozzáadott játékok importálása"
 
 #: data/gtk/preferences.blp:229 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
@@ -308,7 +310,7 @@ msgstr "Hitelesítés"
 
 #: data/gtk/preferences.blp:376
 msgid "API Key"
-msgstr "API kulcs"
+msgstr "API-kulcs"
 
 #: data/gtk/preferences.blp:384
 msgid "Use SteamGridDB"
@@ -316,11 +318,11 @@ msgstr "SteamGridDB használata"
 
 #: data/gtk/preferences.blp:385
 msgid "Download images when adding or importing games"
-msgstr "Képek letöltése játékok hozzáadásakor és importálásakor"
+msgstr "Képek letöltése a játékok hozzáadásakor és importálásakor"
 
 #: data/gtk/preferences.blp:389
 msgid "Prefer Over Official Images"
-msgstr "SteamGridDB képek előnyben részesítése"
+msgstr "A SteamGridDB-ből származó képek előnyben részesítése"
 
 #: data/gtk/preferences.blp:393
 msgid "Prefer Animated Images"
@@ -344,7 +346,7 @@ msgstr "Nem találhatóak játékok"
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
 msgid "Try a different search."
-msgstr "Próbálkozz más kereséssel."
+msgstr "Próbáljon egy másik keresést."
 
 #: data/gtk/window.blp:21
 msgid "No Games"
@@ -360,7 +362,7 @@ msgstr "Nincsenek rejtett játékok"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here."
-msgstr "A rejtett játékaid itt lesznek megtalálhatóak."
+msgstr "A rejtett játékok itt fognak megjelenni."
 
 #: data/gtk/window.blp:75 data/gtk/window.blp:106 cartridges/main.py:226
 msgid "All Games"
@@ -392,11 +394,11 @@ msgstr "Rendezés"
 
 #: data/gtk/window.blp:478
 msgid "A-Z"
-msgstr "A-Z"
+msgstr "A–Z"
 
 #: data/gtk/window.blp:484
 msgid "Z-A"
-msgstr "Z-A"
+msgstr "Z–A"
 
 #: data/gtk/window.blp:490
 msgid "Newest"
@@ -438,7 +440,7 @@ msgstr "{} elindítva"
 #. Translators: Replace this with your name for it to show up in the about window
 #: cartridges/main.py:269
 msgid "translator_credits"
-msgstr "kramo https://kramo.page"
+msgstr "Meskó Balázs <mesko dot balazs at fsf dot hu>, 2024."
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:373
@@ -452,7 +454,7 @@ msgstr "Soha"
 #. The variable is the date when the game was last played
 #: cartridges/window.py:380
 msgid "Last played: {}"
-msgstr "Legutóbbi játékmenet: {}"
+msgstr "Legutóbb játszva: {}"
 
 #: cartridges/details_window.py:76
 msgid "Apply"
@@ -464,7 +466,7 @@ msgstr "Új játék hozzáadása"
 
 #: cartridges/details_window.py:83
 msgid "Add"
-msgstr "Hozzáad"
+msgstr "Hozzáadás"
 
 #: cartridges/details_window.py:93
 msgid "Executables"
@@ -502,12 +504,12 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Az \"{}\" program elindításához használja ezt a parancsot:\n"
+"A(z) „{}” program indításához használja ezt a parancsot:\n"
 "\n"
 "<tt>\"{}\"</tt>\n"
 "\n"
-"A \"{}\" fájl megnyitásához az alapértelmezett programmal használja ezt a "
-"parancsot:\n"
+"A(z) „{}” fájl alapértelmezett programmal történő megnyitásához használja "
+"ezt:\n"
 "\n"
 "<tt>{} \"{}\"</tt>\n"
 "\n"
@@ -552,12 +554,12 @@ msgstr "Az összes játék eltávolítva"
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
-"Egy API kulcs szükséges a SteamGridDB használatához. {}Itt{} generálhat "
+"Egy API-kulcs szükséges a SteamGridDB használatához. {}Itt{} állíthat elő "
 "egyet."
 
 #: cartridges/preferences.py:191
 msgid "Downloading covers…"
-msgstr "Borítóképek letöltése folyamatban…"
+msgstr "Borítóképek letöltése…"
 
 #: cartridges/preferences.py:210
 msgid "Covers updated"
@@ -569,11 +571,11 @@ msgstr "A telepítés nem található"
 
 #: cartridges/preferences.py:346
 msgid "Select a valid directory."
-msgstr "Válasszon ki egy érvényes mappát."
+msgstr "Válasszon egy érvényes mappát."
 
 #: cartridges/preferences.py:382 cartridges/importer/importer.py:317
 msgid "Warning"
-msgstr "Figyelem"
+msgstr "Figyelmeztetés"
 
 #: cartridges/preferences.py:416
 msgid "Invalid Directory"
@@ -581,15 +583,15 @@ msgstr "Érvénytelen mappa"
 
 #: cartridges/preferences.py:422
 msgid "Set Location"
-msgstr "Mappa kiválasztása"
+msgstr "Hely megadása"
 
 #: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
-msgstr "Rendben"
+msgstr "Eltüntetés"
 
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
-msgstr "Játékok importálása folyamatban…"
+msgstr "Játékok importálása…"
 
 #: cartridges/importer/importer.py:338
 msgid "The following errors occured during import:"
@@ -616,38 +618,38 @@ msgstr "1 eltávolítva"
 #. The variable is the name of the source
 #: cartridges/importer/location.py:33
 msgid "Select the {} cache directory."
-msgstr "Válassza ki {} gyorsítótár mappáját."
+msgstr "Válassza ki a(z) {} gyorsítótármappáját."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:35
 msgid "Select the {} configuration directory."
-msgstr "Válassza ki {} konfigurációs mappáját."
+msgstr "Válassza ki a(z) {} konfigurációs mappáját."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:37
 msgid "Select the {} data directory."
-msgstr "Válassza ki {} adatok mappáját."
+msgstr "Válassza ki a(z) {} adatok mappáját."
 
 #: cartridges/importer/retroarch_source.py:129
 msgid "No RetroArch Core Selected"
-msgstr "Nincs kiválasztott RetroArch core"
+msgstr "Nincs RetroArch magprogram kiválasztva"
 
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr "A következő listáknak nincs core-ja:"
+msgstr "A következő játéklistákhoz nem tartozik alapértelmezett magprogram:"
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
-msgstr "Játékok, aminek nincs kiválasztott core-ja nem lettek importálva"
+msgstr "A magprogrammal nem rendelkező játékok nem lettek importálva"
 
 #: cartridges/store/managers/sgdb_manager.py:46
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "Nem lehet hitelesíteni SteamGridDB-t"
+msgstr "A SteamGridDB-hitelesítés nem sikerült"
 
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
-msgstr "Ellenőrizze az API kulcsát a beállításokban"
+msgstr "Ellenőrizze az API-kulcsát a beállításokban"
 
 #~ msgid "Library"
 #~ msgstr "Könyvtár"
