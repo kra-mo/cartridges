@@ -321,7 +321,7 @@ class DetailsDialog(Adw.Dialog):
         self.executable.set_text(shlex.quote(path))
 
     def choose_executable(self, *_args: Any) -> None:
-        self.exec_file_dialog.open(self, None, self.set_executable)
+        self.exec_file_dialog.open(self.get_root(), None, self.set_executable)
 
     def choose_cover(self, *_args: Any) -> None:
-        self.image_file_dialog.open(self, None, self.set_cover)
+        self.image_file_dialog.open(self.get_root(), None, self.set_cover)
