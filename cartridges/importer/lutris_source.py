@@ -54,6 +54,9 @@ class LutrisSourceIterable(SourceIterable):
         db_path = copy_db(self.source.locations.data["pga.db"])
         connection = connect(db_path)
         cursor = connection.execute(request, params)
+        coverart_is_dir = (
+            coverart_path := self.source.locations.data.root / "coverart"
+        ).is_dir()
 
         # Create games from the DB results
         for row in cursor:
@@ -69,10 +72,12 @@ class LutrisSourceIterable(SourceIterable):
                 "executable": self.source.make_executable(game_id=row[0]),
             }
             game = Game(values)
+            additional_data = {}
 
             # Get official image path
-            image_path = self.source.locations.data["coverart"] / f"{row[2]}.jpg"
-            additional_data = {"local_image_path": image_path}
+            if coverart_is_dir:
+                image_path = coverart_path / f"{row[2]}.jpg"
+                additional_data["local_image_path"] = image_path
 
             yield (game, additional_data)
 
@@ -111,7 +116,6 @@ class LutrisSource(URLExecutableSource):
                 ),
                 paths={
                     "pga.db": LocationSubPath("pga.db"),
-                    "coverart": LocationSubPath("coverart", True),
                 },
                 invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
             )
