@@ -201,12 +201,15 @@ class CartridgesApplication(Adw.Application):
                 return 1
 
             self.register()
-            notification = Gio.Notification.new(_("Cartridges"))
-            notification.set_body(_("{} launched").format(name))
             self.send_notification(
-                "launch",
-                notification,
+                "launch", Gio.Notification.new(_("{} launched").format(name))
             )
+
+            # Sleep for 6 seconds before withdrawing the notification
+            # The amount a notification stays up is ~5, so leave an extra second for the animation
+            GLib.usleep(6000000)
+            self.withdraw_notification("launch")
+
             return 0
         return -1
 
