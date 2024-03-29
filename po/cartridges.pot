@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-29 14:20+0100\n"
+"POT-Creation-Date: 2024-03-29 14:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: data/hu.kramo.Cartridges.desktop.in:3
 #: data/hu.kramo.Cartridges.metainfo.xml.in:6
-#: data/hu.kramo.Cartridges.metainfo.xml.in:39 data/gtk/window.blp:47
+#: data/hu.kramo.Cartridges.metainfo.xml.in:37 data/gtk/window.blp:47
 #: data/gtk/window.blp:82
 msgid "Cartridges"
 msgstr ""
@@ -46,21 +46,16 @@ msgid ""
 "SteamGridDB."
 msgstr ""
 
-#. developer_name tag deprecated with Appstream 1.0
-#: data/hu.kramo.Cartridges.metainfo.xml.in:18
-msgid "kramo"
-msgstr ""
-
-#: data/hu.kramo.Cartridges.metainfo.xml.in:43 data/gtk/window.blp:299
+#: data/hu.kramo.Cartridges.metainfo.xml.in:41 data/gtk/window.blp:299
 #: cartridges/details_dialog.py:68
 msgid "Game Details"
 msgstr ""
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:47
+#: data/hu.kramo.Cartridges.metainfo.xml.in:45
 msgid "Edit Game Details"
 msgstr ""
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:51 data/gtk/help-overlay.blp:19
+#: data/hu.kramo.Cartridges.metainfo.xml.in:49 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:525 cartridges/details_dialog.py:267
 #: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
