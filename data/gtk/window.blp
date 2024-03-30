@@ -43,13 +43,14 @@ Adw.StatusPage hidden_notice_empty {
   valign: center;
 }
 
-template $CartridgesWindow : Adw.ApplicationWindow {
+template $CartridgesWindow: Adw.ApplicationWindow {
   title: _("Cartridges");
   width-request: 360;
   height-request: 100;
 
   Adw.Breakpoint {
     condition ("max-width: 564px")
+
     setters {
       overlay_split_view.collapsed: true;
       details_view_box.orientation: vertical;
@@ -71,161 +72,178 @@ template $CartridgesWindow : Adw.ApplicationWindow {
 
   Adw.ToastOverlay toast_overlay {
     Adw.NavigationView navigation_view {
-        Adw.NavigationPage library_page {
-          title: _("All Games");
+      Adw.NavigationPage library_page {
+        title: _("All Games");
 
-          Adw.OverlaySplitView overlay_split_view {
-            sidebar-width-fraction: .2;
+        Adw.OverlaySplitView overlay_split_view {
+          sidebar-width-fraction: .2;
 
-            [sidebar]
-            Adw.NavigationPage {
-              title: _("Cartridges");
-              Adw.ToolbarView {
-                [top]
-                Adw.HeaderBar {
-                  [start]
-                  Button {
-                    icon-name: "sidebar-show-symbolic";
-                    action-name: "win.show_sidebar";
-                    tooltip-text: _("Toggle Sidebar");
-                  }
+          [sidebar]
+          Adw.NavigationPage {
+            title: _("Cartridges");
+
+            Adw.ToolbarView {
+              [top]
+              Adw.HeaderBar {
+                [start]
+                Button {
+                  icon-name: "sidebar-show-symbolic";
+                  action-name: "win.show_sidebar";
+                  tooltip-text: _("Toggle Sidebar");
                 }
+              }
 
-                ScrolledWindow {
-                  ListBox sidebar {
-                    Box all_games_row_box {
-                      margin-top: 12;
-                      margin-bottom: 12;
-                      margin-start: 6;
+              ScrolledWindow {
+                ListBox sidebar {
+                  Box all_games_row_box {
+                    margin-top: 12;
+                    margin-bottom: 12;
+                    margin-start: 6;
+                    margin-end: 6;
+                    spacing: 12;
+
+                    Image {
+                      icon-name: "view-grid-symbolic";
+                    }
+
+                    Label {
+                      halign: start;
+                      label: _("All Games");
+                    }
+
+                    Label all_games_no_label {
+                      hexpand: true;
+                      halign: end;
+
+                      styles [
+                        "dim-label"
+                      ]
+                    }
+                  }
+
+                  Box added_row_box {
+                    margin-top: 12;
+                    margin-bottom: 12;
+                    margin-start: 6;
+                    spacing: 12;
+
+                    Image {
+                      icon-name: "list-add-symbolic";
+                    }
+
+                    Label {
+                      halign: start;
+                      label: _("Added");
                       margin-end: 6;
-                      spacing: 12;
-
-                      Image {
-                        icon-name: "view-grid-symbolic";
-                      }
-                      Label {
-                        halign: start;
-                        label: _("All Games");
-                      }
-                      Label all_games_no_label {
-                        hexpand: true;
-                        halign: end;
-
-                        styles ["dim-label"]
-                      }
                     }
-                    Box added_row_box {
-                      margin-top: 12;
-                      margin-bottom: 12;
-                      margin-start: 6;
-                      spacing: 12;
 
-                      Image {
-                        icon-name: "list-add-symbolic";
-                      }
-                      Label {
-                        halign: start;
-                        label: _("Added");
-                        margin-end: 6;
-                      }
-                      Label added_games_no_label {
-                        hexpand: true;
-                        halign: end;
-                        margin-end: 6;
+                    Label added_games_no_label {
+                      hexpand: true;
+                      halign: end;
+                      margin-end: 6;
 
-                        styles ["dim-label"]
-                      }
+                      styles [
+                        "dim-label"
+                      ]
                     }
-                    ListBoxRow {
-                      selectable: false;
-                      activatable: false;
-                      Label {
-                        label: _("Imported");
-                        styles ["heading"]
-                        halign: start;
-                      }
+                  }
+
+                  ListBoxRow {
+                    selectable: false;
+                    activatable: false;
+
+                    Label {
+                      label: _("Imported");
+
+                      styles [
+                        "heading"
+                      ]
+
+                      halign: start;
                     }
-                    styles ["navigation-sidebar"]
+                  }
+
+                  styles [
+                    "navigation-sidebar"
+                  ]
+                }
+              }
+            }
+          }
+
+          Adw.ToolbarView library_view {
+            [top]
+            Adw.HeaderBar header_bar {
+              [start]
+              Revealer {
+                transition-type: slide_right;
+                reveal-child: bind overlay_split_view.show-sidebar inverted;
+
+                Button show_sidebar_button {
+                  icon-name: "sidebar-show-symbolic";
+                  action-name: "win.show_sidebar";
+                  tooltip-text: _("Toggle Sidebar");
+                }
+              }
+
+              [start]
+              MenuButton {
+                tooltip-text: _("Add Game");
+                icon-name: "list-add-symbolic";
+                menu-model: add_games;
+              }
+
+              [end]
+              MenuButton primary_menu_button {
+                tooltip-text: _("Main Menu");
+                icon-name: "open-menu-symbolic";
+                menu-model: primary_menu;
+              }
+
+              [end]
+              ToggleButton search_button {
+                tooltip-text: _("Search");
+                icon-name: "system-search-symbolic";
+                action-name: "win.toggle_search";
+              }
+            }
+
+            [top]
+            SearchBar search_bar {
+              search-mode-enabled: bind search_button.active bidirectional;
+              key-capture-widget: navigation_view;
+
+              Adw.Clamp {
+                maximum-size: 500;
+                tightening-threshold: 500;
+
+                SearchEntry search_entry {
+                  placeholder-text: _("Search");
+                  hexpand: true;
+
+                  ShortcutController {
+                    Shortcut {
+                      trigger: "Escape";
+                      action: "action(win.toggle_search)";
+                    }
                   }
                 }
               }
             }
 
-            Adw.ToolbarView library_view {
-
-              [top]
-              Adw.HeaderBar header_bar {
-
-                [start]
-                Revealer {
-                  transition-type: slide_right;
-                  reveal-child: bind overlay_split_view.show-sidebar inverted;
-                  Button show_sidebar_button {
-                    icon-name: "sidebar-show-symbolic";
-                    action-name: "win.show_sidebar";
-                    tooltip-text: _("Toggle Sidebar");
-                  }
-                }
-
-                [start]
-                MenuButton {
-                  tooltip-text: _("Add Game");
-                  icon-name: "list-add-symbolic";
-                  menu-model: add_games;
-                }
-
-                [end]
-                MenuButton primary_menu_button {
-                  tooltip-text: _("Main Menu");
-                  icon-name: "open-menu-symbolic";
-                  menu-model: primary_menu;
-                }
-
-                [end]
-                ToggleButton search_button {
-                  tooltip-text: _("Search");
-                  icon-name: "system-search-symbolic";
-                  action-name: "win.toggle_search";
-                }
-              }
-
-              [top]
-              SearchBar search_bar {
-                search-mode-enabled: bind search_button.active bidirectional;
-                key-capture-widget: navigation_view;
-
-                Adw.Clamp {
-                  maximum-size: 500;
-                  tightening-threshold: 500;
-
-                  SearchEntry search_entry {
-                    placeholder-text: _("Search");
-                    hexpand: true;
-
-                    ShortcutController {
-                      Shortcut {
-                          trigger: "Escape";
-                          action: "action(win.toggle_search)";
-                      }
-                    }
-                  }
-                }
-              }
-
-              Overlay library_overlay {
-                ScrolledWindow scrolledwindow {
-                  FlowBox library {
-                    homogeneous: true;
-                    halign: center;
-                    valign: start;
-                    column-spacing: 12;
-                    row-spacing: 12;
-                    margin-top: 15;
-                    margin-bottom: 15;
-                    margin-start: 15;
-                    margin-end: 15;
-                    selection-mode: none;
-                  }
+            Overlay library_overlay {
+              ScrolledWindow scrolledwindow {
+                FlowBox library {
+                  homogeneous: true;
+                  halign: center;
+                  valign: start;
+                  column-spacing: 12;
+                  row-spacing: 12;
+                  margin-top: 15;
+                  margin-bottom: 15;
+                  margin-start: 15;
+                  margin-end: 15;
+                  selection-mode: none;
                 }
               }
             }
@@ -234,6 +252,7 @@ template $CartridgesWindow : Adw.ApplicationWindow {
       }
     }
   }
+}
 
 Adw.NavigationPage hidden_library_page {
   title: _("Hidden Games");
@@ -303,10 +322,8 @@ Adw.NavigationPage details_page {
 
     [overlay]
     Adw.ToolbarView details_view_toolbar_view {
-
       [top]
-      Adw.HeaderBar {
-      }
+      Adw.HeaderBar {}
 
       ScrolledWindow {
         Box details_view_box {
@@ -541,7 +558,6 @@ menu add_games {
 menu search {
   section {
     label: "Search on…";
-
     item (_("IGDB"), "app.igdb_search")
     item (_("SteamGridDB"), "app.sgdb_search")
     item (_("ProtonDB"), "app.protondb_search")

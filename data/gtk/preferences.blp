@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $CartridgesPreferences : Adw.PreferencesDialog {
+template $CartridgesPreferences: Adw.PreferencesDialog {
   search-enabled: true;
 
   Adw.PreferencesPage general_page {
@@ -36,27 +36,27 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
 
       ListBox remove_all_games_list_box {
         Adw.PreferencesRow {
-        activatable: true;
-        selectable: false;
+          activatable: true;
+          selectable: false;
 
-        Box {
-          spacing: 6;
-          valign: center;
-          halign: center;
+          Box {
+            spacing: 6;
+            valign: center;
+            halign: center;
 
-          Label {
-            label: _("Remove All Games");
-            ellipsize: end;
+            Label {
+              label: _("Remove All Games");
+              ellipsize: end;
+
+              styles [
+                "heading",
+              ]
+            }
 
             styles [
-              "heading",
+              "header",
             ]
           }
-
-          styles [
-            "header",
-          ]
-        }
 
           styles [
             "error",
@@ -74,27 +74,27 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
 
       ListBox reset_list_box {
         Adw.PreferencesRow {
-        activatable: true;
-        selectable: false;
+          activatable: true;
+          selectable: false;
 
-        Box {
-          spacing: 6;
-          valign: center;
-          halign: center;
+          Box {
+            spacing: 6;
+            valign: center;
+            halign: center;
 
-          Label {
-            label: "Reset App";
-            ellipsize: end;
+            Label {
+              label: "Reset App";
+              ellipsize: end;
+
+              styles [
+                "heading",
+              ]
+            }
 
             styles [
-              "heading",
+              "header",
             ]
           }
-
-          styles [
-            "header",
-          ]
-        }
 
           styles [
             "error",
@@ -139,6 +139,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           Button steam_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
+
             styles [
               "flat"
             ]
@@ -161,6 +162,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           Button lutris_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
+
             styles [
               "flat"
             ]
@@ -191,6 +193,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           Button heroic_config_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
+
             styles [
               "flat"
             ]
@@ -205,7 +208,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           title: _("Import GOG Games");
         }
 
-        Adw.SwitchRow heroic_import_amazon_switch  {
+        Adw.SwitchRow heroic_import_amazon_switch {
           title: _("Import Amazon Games");
         }
 
@@ -229,6 +232,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           Button bottles_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
+
             styles [
               "flat"
             ]
@@ -251,6 +255,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           Button itch_config_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
+
             styles [
               "flat"
             ]
@@ -273,6 +278,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           Button legendary_config_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
+
             styles [
               "flat"
             ]
@@ -295,6 +301,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           Button retroarch_config_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
+
             styles [
               "flat"
             ]
@@ -318,6 +325,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           Button flatpak_system_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
+
             styles [
               "flat"
             ]
@@ -331,6 +339,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
           Button flatpak_user_data_file_chooser_button {
             icon-name: "folder-symbolic";
             valign: center;
+
             styles [
               "flat"
             ]
@@ -394,6 +403,7 @@ template $CartridgesPreferences : Adw.PreferencesDialog {
             label: _("Update");
             valign: center;
           }
+
           Spinner sgdb_spinner {
             valign: center;
           }
