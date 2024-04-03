@@ -16,11 +16,11 @@ libexecdir = join_paths(get_option('prefix'), get_option('libexecdir'))
 
 profile = get_option('profile')
 if profile == 'development'
-  app_id = 'hu.kramo.Cartridges.Devel'
-  prefix = '/hu/kramo/Cartridges/Devel'
+  app_id = 'page.kramo.Cartridges.Devel'
+  prefix = '/page/kramo/Cartridges/Devel'
 elif profile ==  'release'
-  app_id = 'hu.kramo.Cartridges'
-  prefix = '/hu/kramo/Cartridges'
+  app_id = 'page.kramo.Cartridges'
+  prefix = '/page/kramo/Cartridges'
 endif
 
 conf = configuration_data()

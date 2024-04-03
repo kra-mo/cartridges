@@ -19,8 +19,8 @@ jobs:
     - name: Flatpak Builder
       uses: flatpak/flatpak-github-actions/flatpak-builder@v6.3
       with:
-        bundle: hu.kramo.Cartridges.Devel.flatpak
-        manifest-path: flatpak/hu.kramo.Cartridges.Devel.json
+        bundle: page.kramo.Cartridges.Devel.flatpak
+        manifest-path: flatpak/page.kramo.Cartridges.Devel.json
 
   # windows:
   #   name: Windows

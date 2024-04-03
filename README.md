@@ -7,12 +7,12 @@
 [discord-image]: https://img.shields.io/discord/1088155799299313754?color=%235865F2&label=discord&logo=discord&logoColor=%23FFFFFF&style=for-the-badge
 [matrix-url]: https://matrix.to/#/#cartridges:matrix.org
 [matrix-image]: https://img.shields.io/matrix/cartridges:matrix.org?label=Matrix&logo=matrix&color=%230dbd8b&style=for-the-badge
-[flathub-url]: https://flathub.org/apps/hu.kramo.Cartridges
-[flathub-image]: https://img.shields.io/flathub/v/hu.kramo.Cartridges?logo=flathub&style=for-the-badge
-[installs-image]: https://img.shields.io/flathub/downloads/hu.kramo.Cartridges?style=for-the-badge
+[flathub-url]: https://flathub.org/apps/page.kramo.Cartridges
+[flathub-image]: https://img.shields.io/flathub/v/page.kramo.Cartridges?logo=flathub&style=for-the-badge
+[installs-image]: https://img.shields.io/flathub/downloads/page.kramo.Cartridges?style=for-the-badge
 
 <div align="center">
-  <img src="data/icons/hicolor/scalable/apps/hu.kramo.Cartridges.svg" width="128" height="128">
+  <img src="data/icons/hicolor/scalable/apps/page.kramo.Cartridges.svg" width="128" height="128">
 
   # Cartridges
 
@@ -69,7 +69,7 @@ Thank you for your generosity! 💜
 
 The app is available on Flathub.
 
-<a href=https://flathub.org/apps/hu.kramo.Cartridges><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+<a href=https://flathub.org/apps/page.kramo.Cartridges><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
 ## Windows
 

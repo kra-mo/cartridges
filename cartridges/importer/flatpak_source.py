@@ -46,11 +46,18 @@ class FlatpakSourceIterable(SourceIterable):
             return
 
         blacklist = (
-            {"hu.kramo.Cartridges", "hu.kramo.Cartridges.Devel"}
+            {
+                "hu.kramo.Cartridges",
+                "hu.kramo.Cartridges.Devel",
+                "page.kramo.Cartridges",
+                "page.kramo.Cartridges.Devel",
+            }
             if shared.schema.get_boolean("flatpak-import-launchers")
             else {
                 "hu.kramo.Cartridges",
                 "hu.kramo.Cartridges.Devel",
+                "page.kramo.Cartridges",
+                "page.kramo.Cartridges.Devel",
                 "com.valvesoftware.Steam",
                 "net.lutris.Lutris",
                 "com.heroicgameslauncher.hgl",

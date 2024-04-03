@@ -23,7 +23,7 @@ jobs:
         shell: python
         run: |
           import re, textwrap
-          open_file = open("./data/hu.kramo.Cartridges.metainfo.xml.in", "r", encoding="utf-8")
+          open_file = open("./data/page.kramo.Cartridges.metainfo.xml.in", "r", encoding="utf-8")
           string = open_file.read()
           open_file.close()
           string = re.findall("<release.*>\s*<description.*>\n([\s\S]*?)\s*</description>\s*<\/release>", string)[0]
