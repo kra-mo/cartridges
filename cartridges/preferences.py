@@ -118,8 +118,15 @@ class CartridgesPreferences(Adw.PreferencesDialog):
     removed_games: set[Game] = set()
     warning_menu_buttons: dict = {}
 
+    is_open = False
+
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
+
+        # Make it so only one dialog can be open at a time
+        self.__class__.is_open = True
+        self.connect("closed", lambda *_: self.set_is_open(False))
+
         self.file_chooser = Gtk.FileDialog()
 
         self.toast = Adw.Toast.new(_("All games removed"))
@@ -246,6 +253,9 @@ class CartridgesPreferences(Adw.PreferencesDialog):
 
         self.sgdb_key_entry_row.connect("changed", set_sgdb_sensitive)
         set_sgdb_sensitive(self.sgdb_key_entry_row)
+
+    def set_is_open(self, is_open: bool) -> None:
+        self.__class__.is_open = is_open
 
     def get_switch(self, setting: str) -> Any:
         return getattr(self, f'{setting.replace("-", "_")}_switch')

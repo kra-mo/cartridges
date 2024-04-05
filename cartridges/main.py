@@ -285,6 +285,9 @@ class CartridgesApplication(Adw.Application):
         page_name: Optional[str] = None,
         expander_row: Optional[str] = None,
     ) -> CartridgesWindow:
+        if CartridgesPreferences.is_open:
+            return
+
         win = CartridgesPreferences()
         if page_name:
             win.set_visible_page_name(page_name)
