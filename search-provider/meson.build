@@ -11,14 +11,14 @@ configure_file(
 )
 
 configure_file(
-  input: 'hu.kramo.Cartridges.SearchProvider.service.in',
+  input: 'page.kramo.Cartridges.SearchProvider.service.in',
   output: app_id + '.SearchProvider.service',
   configuration: conf,
   install_dir: service_dir
 )
 
 configure_file(
-  input: 'hu.kramo.Cartridges.SearchProvider.ini',
+  input: 'page.kramo.Cartridges.SearchProvider.ini',
   output: app_id + '.SearchProvider.ini',
   configuration: conf,
   install_dir: serarch_provider_dir

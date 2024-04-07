@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>@APP_ID@</id>
-	<metadata_license>CC0-1.0</metadata_license>
-	<project_license>GPL-3.0-or-later</project_license>
+  <replaces>
+    <id>hu.kramo.Cartridges</id>
+  </replaces>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
   <name>Cartridges</name>
   <summary>Launch all your games</summary>
-	<description>
-	  <p>Cartridges is a simple game launcher for all of your games. It has support for importing games from Steam, Lutris, Heroic and more with no login necessary. You can sort and hide games or download cover art from SteamGridDB.</p>
-	</description>
+  <description>
+    <p>Cartridges is a simple game launcher for all of your games. It has support for importing games from Steam, Lutris, Heroic and more with no login necessary. You can sort and hide games or download cover art from SteamGridDB.</p>
+  </description>
   <url type="homepage">https://github.com/kra-mo/cartridges</url>
   <url type="bugtracker">https://github.com/kra-mo/cartridges/issues</url>
   <url type="translate">https://hosted.weblate.org/engage/cartridges/</url>
@@ -15,7 +18,7 @@
   <url type="vcs-browser">https://github.com/kra-mo/cartridges</url>
   <url type="contribute">https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md</url>
   <developer id="page.kramo">
-      <name translate="no">kramo</name>
+    <name translate="no">kramo</name>
   </developer>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
   <translation type="gettext">cartridges</translation>

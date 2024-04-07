@@ -24,7 +24,7 @@ gnome.compile_resources('cartridges',
 
 desktop_file = i18n.merge_file(
         input: configure_file(
-          input: 'hu.kramo.Cartridges.desktop.in',
+          input: 'page.kramo.Cartridges.desktop.in',
           output: app_id + '.desktop.in',
           configuration: conf
         ),
@@ -42,7 +42,7 @@ endif
 
 appstream_file = i18n.merge_file(
         input: configure_file(
-          input: 'hu.kramo.Cartridges.metainfo.xml.in',
+          input: 'page.kramo.Cartridges.metainfo.xml.in',
           output: app_id + '.metainfo.xml.in',
           configuration: conf
         ),
@@ -63,7 +63,7 @@ endif
 
 install_data(
   configure_file(
-    input: 'hu.kramo.Cartridges.gschema.xml.in',
+    input: 'page.kramo.Cartridges.gschema.xml.in',
     output: app_id + '.gschema.xml',
     configuration: conf
   ),

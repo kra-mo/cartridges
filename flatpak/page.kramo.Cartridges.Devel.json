@@ -1,5 +1,5 @@
 {
-    "id" : "hu.kramo.Cartridges.Devel",
+    "id" : "page.kramo.Cartridges.Devel",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "46",
     "sdk" : "org.gnome.Sdk",
