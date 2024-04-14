@@ -358,7 +358,7 @@ msgstr "Χρησιμοποιήστε το κουμπί + για να προσθ�
 msgid "No Hidden Games"
 msgstr "Δεν υπάρχουν κρυφά παιχνίδια"
 
-#: data/gtk/window.blp:
+#: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
 msgstr "Τα παιχνίδια που κρύβετε θα εμφανίζονται εδώ"
 
