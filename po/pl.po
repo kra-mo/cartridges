@@ -6,13 +6,14 @@
 # Eryk Michalak <gnu.ewm@protonmail.com>, 2023.
 # Michaks <fexwex3@gmail.com>, 2023.
 # Igor Popowicz <igorpopowicz12@gmail.com>, 2024.
+# polswert1 <polswert1@users.noreply.hosted.weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-29 14:27+0100\n"
-"PO-Revision-Date: 2024-04-01 16:01+0000\n"
-"Last-Translator: Igor Popowicz <igorpopowicz12@gmail.com>\n"
+"PO-Revision-Date: 2024-04-14 07:01+0000\n"
+"Last-Translator: polswert1 <polswert1@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/pl/>\n"
 "Language: pl\n"
@@ -40,11 +41,10 @@ msgid "Launch all your games"
 msgstr "Uruchom wszystkie swoje gry"
 
 #: data/hu.kramo.Cartridges.desktop.in:11
-#, fuzzy
-#| msgid "gaming;launcher;steam;lutris;heroic;bottles;itch;"
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
-msgstr "gry;gaming;launcher;steam;lutris;heroic;bottles;itch;"
+msgstr ""
+"gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 
 #: data/hu.kramo.Cartridges.metainfo.xml.in:9
 msgid ""
