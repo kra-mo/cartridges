@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-29 14:27+0100\n"
+"POT-Creation-Date: 2024-04-14 12:48+0200\n"
 "PO-Revision-Date: 2024-03-02 19:01+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/cartridges/"
@@ -19,23 +19,23 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.5-dev\n"
 
-#: data/hu.kramo.Cartridges.desktop.in:3
-#: data/hu.kramo.Cartridges.metainfo.xml.in:6
-#: data/hu.kramo.Cartridges.metainfo.xml.in:37 data/gtk/window.blp:47
-#: data/gtk/window.blp:82
+#: data/page.kramo.Cartridges.desktop.in:3
+#: data/page.kramo.Cartridges.metainfo.xml.in:9
+#: data/page.kramo.Cartridges.metainfo.xml.in:40 data/gtk/window.blp:47
+#: data/gtk/window.blp:83
 msgid "Cartridges"
 msgstr "카트리지"
 
-#: data/hu.kramo.Cartridges.desktop.in:4
+#: data/page.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
 msgstr "게임 런처"
 
-#: data/hu.kramo.Cartridges.desktop.in:5
-#: data/hu.kramo.Cartridges.metainfo.xml.in:7
+#: data/page.kramo.Cartridges.desktop.in:5
+#: data/page.kramo.Cartridges.metainfo.xml.in:10
 msgid "Launch all your games"
 msgstr "모든 게임을 실행합니다"
 
-#: data/hu.kramo.Cartridges.desktop.in:11
+#: data/page.kramo.Cartridges.desktop.in:11
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
@@ -43,7 +43,7 @@ msgstr ""
 "heroic;히어로익;bottles;보틀즈;itch;잇치;flatpak;플랫팩;legendary;레젠더리;"
 "retroarch;레트로아키;"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:9
+#: data/page.kramo.Cartridges.metainfo.xml.in:12
 msgid ""
 "Cartridges is a simple game launcher for all of your games. It has support "
 "for importing games from Steam, Lutris, Heroic and more with no login "
@@ -54,22 +54,22 @@ msgstr ""
 "이트에서 로그인을 하지 않고 게임을 가져올 수 있습니다. 게임을 정리하고 숨기거"
 "나, SteamGridDB에서 표지를 다운로드할 수 있습니다."
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:41 data/gtk/window.blp:299
+#: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:318
 #: cartridges/details_dialog.py:68
 msgid "Game Details"
 msgstr "게임 세부 정보"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:45
+#: data/page.kramo.Cartridges.metainfo.xml.in:48
 msgid "Edit Game Details"
 msgstr "게임 세부 정보 편집"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:49 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:525 cartridges/details_dialog.py:267
+#: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
+#: data/gtk/window.blp:542 cartridges/details_dialog.py:267
 #: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
 msgstr "기본 설정"
 
-#: data/gtk/details-dialog.blp:16
+#: data/gtk/details-dialog.blp:15
 msgid "Cancel"
 msgstr "취소"
 
@@ -77,31 +77,31 @@ msgstr "취소"
 msgid "New Cover"
 msgstr "새 표지"
 
-#: data/gtk/details-dialog.blp:64
+#: data/gtk/details-dialog.blp:65
 msgid "Delete Cover"
 msgstr "표지 삭제"
 
-#: data/gtk/details-dialog.blp:91 data/gtk/game.blp:81
+#: data/gtk/details-dialog.blp:93 data/gtk/game.blp:81
 msgid "Title"
 msgstr "제목"
 
-#: data/gtk/details-dialog.blp:94
+#: data/gtk/details-dialog.blp:97
 msgid "Developer (optional)"
 msgstr "개발자 (옵션)"
 
-#: data/gtk/details-dialog.blp:99
+#: data/gtk/details-dialog.blp:103
 msgid "Executable"
 msgstr "실행 가능"
 
-#: data/gtk/details-dialog.blp:105
+#: data/gtk/details-dialog.blp:109
 msgid "Select File"
 msgstr "파일 선택"
 
-#: data/gtk/details-dialog.blp:116
+#: data/gtk/details-dialog.blp:120
 msgid "More Info"
 msgstr "추가 정보"
 
-#: data/gtk/game.blp:102 data/gtk/game.blp:110 data/gtk/window.blp:426
+#: data/gtk/game.blp:102 data/gtk/game.blp:110 data/gtk/window.blp:443
 msgid "Edit"
 msgstr "편집"
 
@@ -109,7 +109,7 @@ msgstr "편집"
 msgid "Hide"
 msgstr "숨기기"
 
-#: data/gtk/game.blp:104 data/gtk/game.blp:112 data/gtk/window.blp:446
+#: data/gtk/game.blp:104 data/gtk/game.blp:112 data/gtk/window.blp:463
 msgid "Remove"
 msgstr "제거"
 
@@ -121,17 +121,17 @@ msgstr "숨기기 취소"
 msgid "General"
 msgstr "일반"
 
-#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:186 data/gtk/window.blp:202
-#: data/gtk/window.blp:253 data/gtk/window.blp:269 data/gtk/window.blp:457
+#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:205 data/gtk/window.blp:221
+#: data/gtk/window.blp:272 data/gtk/window.blp:288 data/gtk/window.blp:474
 msgid "Search"
 msgstr "검색"
 
-#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:526
+#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:543
 msgid "Keyboard Shortcuts"
 msgstr "키보드 바로 가기 키"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:126 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:134 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "실행 취소"
 
@@ -139,11 +139,11 @@ msgstr "실행 취소"
 msgid "Quit"
 msgstr "끝내기"
 
-#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:90 data/gtk/window.blp:166
+#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:185
 msgid "Toggle Sidebar"
 msgstr "가장 자리 창 표시 전환"
 
-#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:179 data/gtk/window.blp:246
+#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:198 data/gtk/window.blp:265
 msgid "Main Menu"
 msgstr "메인 메뉴"
 
@@ -151,12 +151,12 @@ msgstr "메인 메뉴"
 msgid "Games"
 msgstr "게임"
 
-#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:172 data/gtk/window.blp:533
+#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:191 data/gtk/window.blp:550
 msgid "Add Game"
 msgstr "게임 추가"
 
 #: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:113
-#: data/gtk/window.blp:27 data/gtk/window.blp:537
+#: data/gtk/window.blp:27 data/gtk/window.blp:554
 msgid "Import"
 msgstr "가져오기"
 
@@ -169,7 +169,7 @@ msgid "Remove Game"
 msgstr "게임 제거"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:370
+#: data/gtk/preferences.blp:415
 msgid "Behavior"
 msgstr "동작"
 
@@ -217,121 +217,121 @@ msgstr "공급원"
 msgid "Steam"
 msgstr "스팀"
 
-#: data/gtk/preferences.blp:137 data/gtk/preferences.blp:159
-#: data/gtk/preferences.blp:189 data/gtk/preferences.blp:227
-#: data/gtk/preferences.blp:249 data/gtk/preferences.blp:271
-#: data/gtk/preferences.blp:293
+#: data/gtk/preferences.blp:137 data/gtk/preferences.blp:164
+#: data/gtk/preferences.blp:199 data/gtk/preferences.blp:242
+#: data/gtk/preferences.blp:269 data/gtk/preferences.blp:296
+#: data/gtk/preferences.blp:323
 msgid "Install Location"
 msgstr "설치 위치"
 
-#: data/gtk/preferences.blp:150 data/gtk/window.blp:548
+#: data/gtk/preferences.blp:155 data/gtk/window.blp:564
 #: cartridges/importer/lutris_source.py:96
 msgid "Lutris"
 msgstr "루트리스"
 
-#: data/gtk/preferences.blp:171
+#: data/gtk/preferences.blp:181
 msgid "Import Steam Games"
 msgstr "스팀 게임 가져오기"
 
-#: data/gtk/preferences.blp:175
+#: data/gtk/preferences.blp:185
 msgid "Import Flatpak Games"
 msgstr "플랫팩 게임 가져오기"
 
-#: data/gtk/preferences.blp:180 cartridges/importer/heroic_source.py:355
+#: data/gtk/preferences.blp:190 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
 msgstr "히어로익"
 
-#: data/gtk/preferences.blp:201
+#: data/gtk/preferences.blp:216
 msgid "Import Epic Games"
 msgstr "에픽 게임 가져오기"
 
-#: data/gtk/preferences.blp:205
+#: data/gtk/preferences.blp:220
 msgid "Import GOG Games"
 msgstr "GOG 게임 가져오기"
 
-#: data/gtk/preferences.blp:209
+#: data/gtk/preferences.blp:224
 msgid "Import Amazon Games"
 msgstr "아마존 게임 가져오기"
 
-#: data/gtk/preferences.blp:213
+#: data/gtk/preferences.blp:228
 msgid "Import Sideloaded Games"
 msgstr "사이드로디드 게임 가져오기"
 
-#: data/gtk/preferences.blp:218 cartridges/importer/bottles_source.py:86
+#: data/gtk/preferences.blp:233 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
 msgstr "보틀즈"
 
-#: data/gtk/preferences.blp:240 cartridges/importer/itch_source.py:81
+#: data/gtk/preferences.blp:260 cartridges/importer/itch_source.py:81
 msgid "itch"
 msgstr "잇치"
 
-#: data/gtk/preferences.blp:262 cartridges/importer/legendary_source.py:97
+#: data/gtk/preferences.blp:287 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
 msgstr "레젠더리"
 
-#: data/gtk/preferences.blp:284 cartridges/importer/retroarch_source.py:142
+#: data/gtk/preferences.blp:314 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
 msgstr "레트로아키"
 
-#: data/gtk/preferences.blp:306 cartridges/importer/flatpak_source.py:136
+#: data/gtk/preferences.blp:341 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
 msgstr "플랫팩"
 
 #. The location of the system-wide data directory
-#: data/gtk/preferences.blp:316
+#: data/gtk/preferences.blp:351
 msgid "System Location"
 msgstr "시스템 위치"
 
 #. The location of the user-specific data directory
-#: data/gtk/preferences.blp:329
+#: data/gtk/preferences.blp:369
 msgid "User Location"
 msgstr "사용자 위치"
 
-#: data/gtk/preferences.blp:341
+#: data/gtk/preferences.blp:386
 msgid "Import Game Launchers"
 msgstr "게임 실행 프로그램 가져오기"
 
-#: data/gtk/preferences.blp:346 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:391 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "데스크톱 항목"
 
-#: data/gtk/preferences.blp:358 data/gtk/window.blp:546
+#: data/gtk/preferences.blp:403 data/gtk/window.blp:562
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:362
+#: data/gtk/preferences.blp:407
 msgid "Authentication"
 msgstr "인증"
 
-#: data/gtk/preferences.blp:365
+#: data/gtk/preferences.blp:410
 msgid "API Key"
 msgstr "API 키"
 
-#: data/gtk/preferences.blp:373
+#: data/gtk/preferences.blp:418
 msgid "Use SteamGridDB"
 msgstr "SteamGridDB 활용"
 
-#: data/gtk/preferences.blp:374
+#: data/gtk/preferences.blp:419
 msgid "Download images when adding or importing games"
 msgstr "게임을 추가하거나 가져올 때 표지 그림 다운로드"
 
-#: data/gtk/preferences.blp:378
+#: data/gtk/preferences.blp:423
 msgid "Prefer Over Official Images"
 msgstr "공식 그림 우선"
 
-#: data/gtk/preferences.blp:382
+#: data/gtk/preferences.blp:427
 msgid "Prefer Animated Images"
 msgstr "움직이는 그림 우선"
 
-#: data/gtk/preferences.blp:388
+#: data/gtk/preferences.blp:433
 msgid "Update Covers"
 msgstr "표지 그림 업데이트"
 
-#: data/gtk/preferences.blp:389
+#: data/gtk/preferences.blp:434
 msgid "Fetch covers for games already in your library"
 msgstr "라이브러리에 이미 있는 게임 표지 그림 가져오기"
 
-#: data/gtk/preferences.blp:394
+#: data/gtk/preferences.blp:439
 msgid "Update"
 msgstr "업데이트"
 
@@ -340,90 +340,90 @@ msgid "No Games Found"
 msgstr "게임 없음"
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
-msgid "Try a different search."
-msgstr "다른 단어로 검색해보십시오."
+msgid "Try a different search"
+msgstr "다른 단어로 검색해보십시오"
 
 #: data/gtk/window.blp:21
 msgid "No Games"
 msgstr "게임 없음"
 
 #: data/gtk/window.blp:22
-msgid "Use the + button to add games."
-msgstr "게임을 추가하려면 + 단추를 사용하십시오."
+msgid "Use the + button to add games"
+msgstr "게임을 추가하려면 + 단추를 사용하십시오"
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
 msgstr "숨긴 게임 없음"
 
 #: data/gtk/window.blp:41
-msgid "Games you hide will appear here."
-msgstr "숨긴 게임이 이곳에 나타납니다."
+msgid "Games you hide will appear here"
+msgstr "숨긴 게임이 이곳에 나타납니다"
 
-#: data/gtk/window.blp:75 data/gtk/window.blp:108 cartridges/main.py:228
+#: data/gtk/window.blp:76 data/gtk/window.blp:111 cartridges/main.py:228
 msgid "All Games"
 msgstr "모든 게임"
 
-#: data/gtk/window.blp:128 cartridges/main.py:230
+#: data/gtk/window.blp:136 cartridges/main.py:230
 msgid "Added"
 msgstr "추가함"
 
-#: data/gtk/window.blp:143
+#: data/gtk/window.blp:156
 msgid "Imported"
 msgstr "가져옴"
 
-#: data/gtk/window.blp:239
+#: data/gtk/window.blp:258
 msgid "Hidden Games"
 msgstr "숨긴 게임"
 
-#: data/gtk/window.blp:350
+#: data/gtk/window.blp:367
 msgid "Game Title"
 msgstr "게임 제목"
 
-#: data/gtk/window.blp:407
+#: data/gtk/window.blp:424
 msgid "Play"
 msgstr "게임하기"
 
-#: data/gtk/window.blp:484
+#: data/gtk/window.blp:501
 msgid "Sort"
 msgstr "정렬"
 
-#: data/gtk/window.blp:487
+#: data/gtk/window.blp:504
 msgid "A-Z"
 msgstr "오름차순"
 
-#: data/gtk/window.blp:493
+#: data/gtk/window.blp:510
 msgid "Z-A"
 msgstr "내림차순"
 
-#: data/gtk/window.blp:499
+#: data/gtk/window.blp:516
 msgid "Newest"
 msgstr "최신순"
 
-#: data/gtk/window.blp:505
+#: data/gtk/window.blp:522
 msgid "Oldest"
 msgstr "과거순"
 
-#: data/gtk/window.blp:511
+#: data/gtk/window.blp:528
 msgid "Last Played"
 msgstr "최근 플레이"
 
-#: data/gtk/window.blp:518
+#: data/gtk/window.blp:535
 msgid "Show Hidden"
 msgstr "숨긴 게임 표시"
 
-#: data/gtk/window.blp:527
+#: data/gtk/window.blp:544
 msgid "About Cartridges"
 msgstr "카트리지 정보"
 
-#: data/gtk/window.blp:545
+#: data/gtk/window.blp:561
 msgid "IGDB"
 msgstr "IGDB"
 
-#: data/gtk/window.blp:547
+#: data/gtk/window.blp:563
 msgid "ProtonDB"
 msgstr "ProtonDB"
 
-#: data/gtk/window.blp:549
+#: data/gtk/window.blp:565
 msgid "HowLongToBeat"
 msgstr "HowLongToBeat"
 
@@ -541,41 +541,41 @@ msgstr "{} 숨김 해제함"
 msgid "{} removed"
 msgstr "{} 제거함"
 
-#: cartridges/preferences.py:125
+#: cartridges/preferences.py:133
 msgid "All games removed"
 msgstr "모든 게임을 제거했습니다"
 
-#: cartridges/preferences.py:173
+#: cartridges/preferences.py:181
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "SteamGridDB를 활용하려면 API 키가 필요합니다. {}여기{}에서 만들 수 있습니다."
 
-#: cartridges/preferences.py:188
+#: cartridges/preferences.py:196
 msgid "Downloading covers…"
 msgstr "표지 그림 다운로드 중…"
 
-#: cartridges/preferences.py:207
+#: cartridges/preferences.py:215
 msgid "Covers updated"
 msgstr "표지 그림을 업데이트했습니다"
 
-#: cartridges/preferences.py:342
+#: cartridges/preferences.py:360
 msgid "Installation Not Found"
 msgstr "설치한 항목이 없습니다"
 
-#: cartridges/preferences.py:343
-msgid "Select a valid directory."
-msgstr "올바른 디렉터리를 선택하십시오."
+#: cartridges/preferences.py:361
+msgid "Select a valid directory"
+msgstr "올바른 디렉터리를 선택하십시오"
 
-#: cartridges/preferences.py:379 cartridges/importer/importer.py:318
+#: cartridges/preferences.py:397 cartridges/importer/importer.py:318
 msgid "Warning"
 msgstr "경고"
 
-#: cartridges/preferences.py:413
+#: cartridges/preferences.py:431
 msgid "Invalid Directory"
 msgstr "부적절한 디렉터리"
 
-#: cartridges/preferences.py:419
+#: cartridges/preferences.py:437
 msgid "Set Location"
 msgstr "위치 설정"
 

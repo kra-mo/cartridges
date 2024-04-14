@@ -1,6 +1,6 @@
-data/hu.kramo.Cartridges.desktop.in
-data/hu.kramo.Cartridges.gschema.xml.in
-data/hu.kramo.Cartridges.metainfo.xml.in
+data/page.kramo.Cartridges.desktop.in
+data/page.kramo.Cartridges.gschema.xml.in
+data/page.kramo.Cartridges.metainfo.xml.in
 
 data/gtk/details-dialog.blp
 data/gtk/game.blp

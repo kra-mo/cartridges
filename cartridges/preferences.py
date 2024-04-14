@@ -358,7 +358,7 @@ class CartridgesPreferences(Adw.PreferencesDialog):
 
             except UnresolvableLocationError:
                 title = _("Installation Not Found")
-                description = _("Select a valid directory.")
+                description = _("Select a valid directory")
                 format_start = '<span rise="12pt"><b><big>'
                 format_end = "</big></b></span>\n"
 

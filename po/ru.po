@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-29 14:27+0100\n"
+"POT-Creation-Date: 2024-04-14 12:48+0200\n"
 "PO-Revision-Date: 2023-12-15 13:10+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/cartridges/"
@@ -21,30 +21,30 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.3\n"
 
-#: data/hu.kramo.Cartridges.desktop.in:3
-#: data/hu.kramo.Cartridges.metainfo.xml.in:6
-#: data/hu.kramo.Cartridges.metainfo.xml.in:37 data/gtk/window.blp:47
-#: data/gtk/window.blp:82
+#: data/page.kramo.Cartridges.desktop.in:3
+#: data/page.kramo.Cartridges.metainfo.xml.in:9
+#: data/page.kramo.Cartridges.metainfo.xml.in:40 data/gtk/window.blp:47
+#: data/gtk/window.blp:83
 msgid "Cartridges"
 msgstr "Картриджи"
 
-#: data/hu.kramo.Cartridges.desktop.in:4
+#: data/page.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
 msgstr "Средство запуска игр"
 
-#: data/hu.kramo.Cartridges.desktop.in:5
-#: data/hu.kramo.Cartridges.metainfo.xml.in:7
+#: data/page.kramo.Cartridges.desktop.in:5
+#: data/page.kramo.Cartridges.metainfo.xml.in:10
 msgid "Launch all your games"
 msgstr "Запускайте все свои игры"
 
-#: data/hu.kramo.Cartridges.desktop.in:11
+#: data/page.kramo.Cartridges.desktop.in:11
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 "игры;стим;"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:9
+#: data/page.kramo.Cartridges.metainfo.xml.in:12
 msgid ""
 "Cartridges is a simple game launcher for all of your games. It has support "
 "for importing games from Steam, Lutris, Heroic and more with no login "
@@ -56,22 +56,22 @@ msgstr ""
 "систему. Вы можете сортировать и скрывать игры или загружать обложки из "
 "SteamGridDB."
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:41 data/gtk/window.blp:299
+#: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:318
 #: cartridges/details_dialog.py:68
 msgid "Game Details"
 msgstr "Подробности об игре"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:45
+#: data/page.kramo.Cartridges.metainfo.xml.in:48
 msgid "Edit Game Details"
 msgstr "Редактировать подробности об игре"
 
-#: data/hu.kramo.Cartridges.metainfo.xml.in:49 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:525 cartridges/details_dialog.py:267
+#: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
+#: data/gtk/window.blp:542 cartridges/details_dialog.py:267
 #: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
 msgstr "Параметры"
 
-#: data/gtk/details-dialog.blp:16
+#: data/gtk/details-dialog.blp:15
 msgid "Cancel"
 msgstr "Отменить"
 
@@ -79,31 +79,31 @@ msgstr "Отменить"
 msgid "New Cover"
 msgstr "Новая обложка"
 
-#: data/gtk/details-dialog.blp:64
+#: data/gtk/details-dialog.blp:65
 msgid "Delete Cover"
 msgstr "Удалить обложку"
 
-#: data/gtk/details-dialog.blp:91 data/gtk/game.blp:81
+#: data/gtk/details-dialog.blp:93 data/gtk/game.blp:81
 msgid "Title"
 msgstr "Название"
 
-#: data/gtk/details-dialog.blp:94
+#: data/gtk/details-dialog.blp:97
 msgid "Developer (optional)"
 msgstr "Разработчик (необязательно)"
 
-#: data/gtk/details-dialog.blp:99
+#: data/gtk/details-dialog.blp:103
 msgid "Executable"
 msgstr "Исполняемый"
 
-#: data/gtk/details-dialog.blp:105
+#: data/gtk/details-dialog.blp:109
 msgid "Select File"
 msgstr "Выбрать файл"
 
-#: data/gtk/details-dialog.blp:116
+#: data/gtk/details-dialog.blp:120
 msgid "More Info"
 msgstr "Дополнительная информация"
 
-#: data/gtk/game.blp:102 data/gtk/game.blp:110 data/gtk/window.blp:426
+#: data/gtk/game.blp:102 data/gtk/game.blp:110 data/gtk/window.blp:443
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -111,7 +111,7 @@ msgstr "Редактировать"
 msgid "Hide"
 msgstr "Скрыть"
 
-#: data/gtk/game.blp:104 data/gtk/game.blp:112 data/gtk/window.blp:446
+#: data/gtk/game.blp:104 data/gtk/game.blp:112 data/gtk/window.blp:463
 msgid "Remove"
 msgstr "Удалить"
 
@@ -123,17 +123,17 @@ msgstr "Показать"
 msgid "General"
 msgstr "Общее"
 
-#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:186 data/gtk/window.blp:202
-#: data/gtk/window.blp:253 data/gtk/window.blp:269 data/gtk/window.blp:457
+#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:205 data/gtk/window.blp:221
+#: data/gtk/window.blp:272 data/gtk/window.blp:288 data/gtk/window.blp:474
 msgid "Search"
 msgstr "Поиск"
 
-#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:526
+#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:543
 msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:126 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:134 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr "Вернуть"
 
@@ -141,11 +141,11 @@ msgstr "Вернуть"
 msgid "Quit"
 msgstr "Выйти"
 
-#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:90 data/gtk/window.blp:166
+#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:185
 msgid "Toggle Sidebar"
 msgstr "Переключить боковую панель"
 
-#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:179 data/gtk/window.blp:246
+#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:198 data/gtk/window.blp:265
 msgid "Main Menu"
 msgstr "Главное меню"
 
@@ -153,12 +153,12 @@ msgstr "Главное меню"
 msgid "Games"
 msgstr "Игры"
 
-#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:172 data/gtk/window.blp:533
+#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:191 data/gtk/window.blp:550
 msgid "Add Game"
 msgstr "Добавить игру"
 
 #: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:113
-#: data/gtk/window.blp:27 data/gtk/window.blp:537
+#: data/gtk/window.blp:27 data/gtk/window.blp:554
 msgid "Import"
 msgstr "Импорт"
 
@@ -171,7 +171,7 @@ msgid "Remove Game"
 msgstr "Удалить игру"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:370
+#: data/gtk/preferences.blp:415
 msgid "Behavior"
 msgstr "Поведение"
 
@@ -219,121 +219,121 @@ msgstr "Источники"
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:137 data/gtk/preferences.blp:159
-#: data/gtk/preferences.blp:189 data/gtk/preferences.blp:227
-#: data/gtk/preferences.blp:249 data/gtk/preferences.blp:271
-#: data/gtk/preferences.blp:293
+#: data/gtk/preferences.blp:137 data/gtk/preferences.blp:164
+#: data/gtk/preferences.blp:199 data/gtk/preferences.blp:242
+#: data/gtk/preferences.blp:269 data/gtk/preferences.blp:296
+#: data/gtk/preferences.blp:323
 msgid "Install Location"
 msgstr "Место установки"
 
-#: data/gtk/preferences.blp:150 data/gtk/window.blp:548
+#: data/gtk/preferences.blp:155 data/gtk/window.blp:564
 #: cartridges/importer/lutris_source.py:96
 msgid "Lutris"
 msgstr "Lutris"
 
-#: data/gtk/preferences.blp:171
+#: data/gtk/preferences.blp:181
 msgid "Import Steam Games"
 msgstr "Импорт игр Steam"
 
-#: data/gtk/preferences.blp:175
+#: data/gtk/preferences.blp:185
 msgid "Import Flatpak Games"
 msgstr "Импорт игр Flatpak"
 
-#: data/gtk/preferences.blp:180 cartridges/importer/heroic_source.py:355
+#: data/gtk/preferences.blp:190 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:201
+#: data/gtk/preferences.blp:216
 msgid "Import Epic Games"
 msgstr "Импорт игр Epic"
 
-#: data/gtk/preferences.blp:205
+#: data/gtk/preferences.blp:220
 msgid "Import GOG Games"
 msgstr "Импорт игр GOG"
 
-#: data/gtk/preferences.blp:209
+#: data/gtk/preferences.blp:224
 msgid "Import Amazon Games"
 msgstr "Импорт игр Amazon"
 
-#: data/gtk/preferences.blp:213
+#: data/gtk/preferences.blp:228
 msgid "Import Sideloaded Games"
 msgstr "Импорт сторонних игр"
 
-#: data/gtk/preferences.blp:218 cartridges/importer/bottles_source.py:86
+#: data/gtk/preferences.blp:233 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:240 cartridges/importer/itch_source.py:81
+#: data/gtk/preferences.blp:260 cartridges/importer/itch_source.py:81
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:262 cartridges/importer/legendary_source.py:97
+#: data/gtk/preferences.blp:287 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
 msgstr "Legendary"
 
-#: data/gtk/preferences.blp:284 cartridges/importer/retroarch_source.py:142
+#: data/gtk/preferences.blp:314 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
 msgstr "RetroArch"
 
-#: data/gtk/preferences.blp:306 cartridges/importer/flatpak_source.py:136
+#: data/gtk/preferences.blp:341 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
 msgstr "Flatpak"
 
 #. The location of the system-wide data directory
-#: data/gtk/preferences.blp:316
+#: data/gtk/preferences.blp:351
 msgid "System Location"
 msgstr "Расположение системного каталога"
 
 #. The location of the user-specific data directory
-#: data/gtk/preferences.blp:329
+#: data/gtk/preferences.blp:369
 msgid "User Location"
 msgstr "Расположение каталога пользователя"
 
-#: data/gtk/preferences.blp:341
+#: data/gtk/preferences.blp:386
 msgid "Import Game Launchers"
 msgstr "Импорт средств запуска игр"
 
-#: data/gtk/preferences.blp:346 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:391 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "Интеграция в среду рабочего стола"
 
-#: data/gtk/preferences.blp:358 data/gtk/window.blp:546
+#: data/gtk/preferences.blp:403 data/gtk/window.blp:562
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:362
+#: data/gtk/preferences.blp:407
 msgid "Authentication"
 msgstr "Аутентификация"
 
-#: data/gtk/preferences.blp:365
+#: data/gtk/preferences.blp:410
 msgid "API Key"
 msgstr "API-ключ"
 
-#: data/gtk/preferences.blp:373
+#: data/gtk/preferences.blp:418
 msgid "Use SteamGridDB"
 msgstr "Использовать SteamGridDB"
 
-#: data/gtk/preferences.blp:374
+#: data/gtk/preferences.blp:419
 msgid "Download images when adding or importing games"
 msgstr "Загрузка изображений при добавлении или импорте игр"
 
-#: data/gtk/preferences.blp:378
+#: data/gtk/preferences.blp:423
 msgid "Prefer Over Official Images"
 msgstr "Отдавать предпочтение официальным изображениям"
 
-#: data/gtk/preferences.blp:382
+#: data/gtk/preferences.blp:427
 msgid "Prefer Animated Images"
 msgstr "Отдавать предпочтение анимированным изображениям"
 
-#: data/gtk/preferences.blp:388
+#: data/gtk/preferences.blp:433
 msgid "Update Covers"
 msgstr "Обновить обложки"
 
-#: data/gtk/preferences.blp:389
+#: data/gtk/preferences.blp:434
 msgid "Fetch covers for games already in your library"
 msgstr "Получите обложки для игр, которые уже есть в вашей библиотеке"
 
-#: data/gtk/preferences.blp:394
+#: data/gtk/preferences.blp:439
 msgid "Update"
 msgstr "Обновить"
 
@@ -342,90 +342,90 @@ msgid "No Games Found"
 msgstr "Игры не найдены"
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
-msgid "Try a different search."
-msgstr "Попробуйте другой поиск."
+msgid "Try a different search"
+msgstr "Попробуйте другой поиск"
 
 #: data/gtk/window.blp:21
 msgid "No Games"
 msgstr "Игр нет"
 
 #: data/gtk/window.blp:22
-msgid "Use the + button to add games."
-msgstr "Используйте кнопку «+» для добавления игр."
+msgid "Use the + button to add games"
+msgstr "Используйте кнопку «+» для добавления игр"
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
 msgstr "Нет скрытых игр"
 
 #: data/gtk/window.blp:41
-msgid "Games you hide will appear here."
-msgstr "Здесь появятся скрытые игры."
+msgid "Games you hide will appear here"
+msgstr "Здесь появятся скрытые игры"
 
-#: data/gtk/window.blp:75 data/gtk/window.blp:108 cartridges/main.py:228
+#: data/gtk/window.blp:76 data/gtk/window.blp:111 cartridges/main.py:228
 msgid "All Games"
 msgstr "Все игры"
 
-#: data/gtk/window.blp:128 cartridges/main.py:230
+#: data/gtk/window.blp:136 cartridges/main.py:230
 msgid "Added"
 msgstr "Добавлено"
 
-#: data/gtk/window.blp:143
+#: data/gtk/window.blp:156
 msgid "Imported"
 msgstr "Импортировано"
 
-#: data/gtk/window.blp:239
+#: data/gtk/window.blp:258
 msgid "Hidden Games"
 msgstr "Скрытые игры"
 
-#: data/gtk/window.blp:350
+#: data/gtk/window.blp:367
 msgid "Game Title"
 msgstr "Название игры"
 
-#: data/gtk/window.blp:407
+#: data/gtk/window.blp:424
 msgid "Play"
 msgstr "Играть"
 
-#: data/gtk/window.blp:484
+#: data/gtk/window.blp:501
 msgid "Sort"
 msgstr "Сортировать"
 
-#: data/gtk/window.blp:487
+#: data/gtk/window.blp:504
 msgid "A-Z"
 msgstr "А-Я"
 
-#: data/gtk/window.blp:493
+#: data/gtk/window.blp:510
 msgid "Z-A"
 msgstr "Я-А"
 
-#: data/gtk/window.blp:499
+#: data/gtk/window.blp:516
 msgid "Newest"
 msgstr "Сначала новые"
 
-#: data/gtk/window.blp:505
+#: data/gtk/window.blp:522
 msgid "Oldest"
 msgstr "Сначала старые"
 
-#: data/gtk/window.blp:511
+#: data/gtk/window.blp:528
 msgid "Last Played"
 msgstr "Последняя игра"
 
-#: data/gtk/window.blp:518
+#: data/gtk/window.blp:535
 msgid "Show Hidden"
 msgstr "Показать скрытые"
 
-#: data/gtk/window.blp:527
+#: data/gtk/window.blp:544
 msgid "About Cartridges"
 msgstr "О приложении"
 
-#: data/gtk/window.blp:545
+#: data/gtk/window.blp:561
 msgid "IGDB"
 msgstr "IGDB"
 
-#: data/gtk/window.blp:547
+#: data/gtk/window.blp:563
 msgid "ProtonDB"
 msgstr "ProtonDB"
 
-#: data/gtk/window.blp:549
+#: data/gtk/window.blp:565
 msgid "HowLongToBeat"
 msgstr "HowLongToBeat"
 
@@ -542,42 +542,42 @@ msgstr "{} - не скрыта"
 msgid "{} removed"
 msgstr "{} удалена"
 
-#: cartridges/preferences.py:125
+#: cartridges/preferences.py:133
 msgid "All games removed"
 msgstr "Все игры удалены"
 
-#: cartridges/preferences.py:173
+#: cartridges/preferences.py:181
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Для использования SteamGridDB требуется ключ API. Вы можете сгенерировать "
 "его {}здесь{}."
 
-#: cartridges/preferences.py:188
+#: cartridges/preferences.py:196
 msgid "Downloading covers…"
 msgstr "Скачивание обложек…"
 
-#: cartridges/preferences.py:207
+#: cartridges/preferences.py:215
 msgid "Covers updated"
 msgstr "Обложки обновлены"
 
-#: cartridges/preferences.py:342
+#: cartridges/preferences.py:360
 msgid "Installation Not Found"
 msgstr "Установка не найдена"
 
-#: cartridges/preferences.py:343
-msgid "Select a valid directory."
-msgstr "Выберите действующий каталог."
+#: cartridges/preferences.py:361
+msgid "Select a valid directory"
+msgstr "Выберите действующий каталог"
 
-#: cartridges/preferences.py:379 cartridges/importer/importer.py:318
+#: cartridges/preferences.py:397 cartridges/importer/importer.py:318
 msgid "Warning"
 msgstr "Предупреждение"
 
-#: cartridges/preferences.py:413
+#: cartridges/preferences.py:431
 msgid "Invalid Directory"
 msgstr "Неверный каталог"
 
-#: cartridges/preferences.py:419
+#: cartridges/preferences.py:437
 msgid "Set Location"
 msgstr "Установить расположение"
 
