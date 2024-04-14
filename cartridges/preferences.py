@@ -21,6 +21,7 @@ import logging
 import re
 from pathlib import Path
 from shutil import rmtree
+from sys import platform
 from typing import Any, Callable, Optional
 
 from gi.repository import Adw, Gio, GLib, Gtk
@@ -330,9 +331,16 @@ class CartridgesPreferences(Adw.PreferencesDialog):
             )
             if not action_row:
                 continue
-            path = Path(shared.schema.get_string(location.schema_key)).expanduser()
-            # Remove the path prefix if picked via Flatpak portal
-            subtitle = re.sub("/run/user/\\d*/doc/.*/", "", str(path))
+
+            subtitle = str(Path(shared.schema.get_string(location.schema_key)))
+
+            if platform == "linux":
+                # Remove the path prefix if picked via Flatpak portal
+                subtitle = re.sub("/run/user/\\d*/doc/.*/", "", subtitle)
+
+                # Replace the home directory with "~"
+                subtitle = re.sub(f"^{str(shared.home)}", "~", subtitle)
+
             action_row.set_subtitle(subtitle)
 
     def resolve_locations(self, source: Source) -> None:
