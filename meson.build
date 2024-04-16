@@ -4,7 +4,12 @@ project('cartridges',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
 
-i18n = import('i18n')
+# Translations are broken on Windows for multiple reasons
+# gresources don't work and MSYS2 seems to have also broken the gettext package
+if host_machine.system() != 'windows'
+  i18n = import('i18n')
+endif
+
 gnome = import('gnome')
 python = import('python')
 
@@ -42,8 +47,6 @@ if host_machine.system() == 'windows'
   subdir('windows')
 else
   subdir('search-provider')
-  # Translations are broken on Windows for multiple reasons
-  # gresources don't work and MSYS2 seems to have also broken the gettext package
   subdir('po')
 endif
 
