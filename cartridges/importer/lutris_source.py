@@ -36,17 +36,28 @@ class LutrisSourceIterable(SourceIterable):
 
         # Query the database
         request = """
-            SELECT id, name, slug, runner, hidden
-            FROM 'games'
+            SELECT
+                games.id,
+                games.name,
+                games.slug,
+                games.runner,
+                categories.name = ".hidden" as hidden
+            FROM
+                games
+            LEFT JOIN
+                games_categories ON games_categories.game_id = games.id
+            FULL JOIN
+                categories ON games_categories.category_id = categories.id
             WHERE
-                name IS NOT NULL
-                AND slug IS NOT NULL
-                AND configPath IS NOT NULL
-                AND installed
-                AND (runner IS NOT "steam" OR :import_steam)
-                AND (runner IS NOT "flatpak" OR :import_flatpak)
+                games.name IS NOT NULL
+                AND games.slug IS NOT NULL
+                AND games.configPath IS NOT NULL
+                AND games.installed
+                AND (games.runner IS NOT "steam" OR :import_steam)
+                AND (games.runner IS NOT "flatpak" OR :import_flatpak)
             ;
         """
+
         params = {
             "import_steam": shared.schema.get_boolean("lutris-import-steam"),
             "import_flatpak": shared.schema.get_boolean("lutris-import-flatpak"),
