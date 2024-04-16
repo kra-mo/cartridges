@@ -281,7 +281,8 @@ class Importer(ErrorProducer):
         shared.store.duplicate_game_ids = set()
         # Disconnect the close-attempt signal that closes the main window
         self.import_dialog.disconnect(self.close_attempt_id)
-        self.import_dialog.force_close()
+        # Stupid hack because stupid libadwaita is stupid
+        GLib.timeout_add(50, self.import_dialog.force_close)
         self.__class__.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
         shared.win.get_application().lookup_action("import").set_enabled(True)
