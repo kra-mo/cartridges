@@ -32,8 +32,9 @@ LOCALEDIR = "@localedir@"
 sys.path.insert(1, PKGDATADIR)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-locale.bindtextdomain("cartridges", LOCALEDIR)
-locale.textdomain("cartridges")
+if os.name != "nt":
+    locale.bindtextdomain("cartridges", LOCALEDIR)
+    locale.textdomain("cartridges")
 
 gettext.install("cartridges", LOCALEDIR)
 
