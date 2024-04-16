@@ -26,24 +26,14 @@ import signal
 import sys
 
 VERSION = "@VERSION@"
-if os.name == "nt":
-    from ctypes import windll
-
-    os.environ["LANGUAGE"] = locale.windows_locale[
-        windll.kernel32.GetUserDefaultUILanguage()
-    ]
-    PKGDATADIR = os.path.join(os.path.dirname(__file__), "..", "share", "cartridges")
-    LOCALEDIR = os.path.join(os.path.dirname(__file__), "..", "share", "locale")
-else:
-    PKGDATADIR = "@pkgdatadir@"
-    LOCALEDIR = "@localedir@"
+PKGDATADIR = "@pkgdatadir@"
+LOCALEDIR = "@localedir@"
 
 sys.path.insert(1, PKGDATADIR)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-if os.name != "nt":
-    locale.bindtextdomain("cartridges", LOCALEDIR)
-    locale.textdomain("cartridges")
+locale.bindtextdomain("cartridges", LOCALEDIR)
+locale.textdomain("cartridges")
 
 gettext.install("cartridges", LOCALEDIR)
 

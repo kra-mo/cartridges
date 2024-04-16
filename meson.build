@@ -37,12 +37,14 @@ conf.set('libexecdir', libexecdir)
 
 subdir('data')
 subdir('cartridges')
-subdir('po')
 
 if host_machine.system() == 'windows'
   subdir('windows')
 else
   subdir('search-provider')
+  # Translations are broken on Windows for multiple reasons
+  # gresources don't work and MSYS2 seems to have also broken the gettext package
+  subdir('po')
 endif
 
 gnome.post_install(
