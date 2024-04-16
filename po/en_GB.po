@@ -338,7 +338,7 @@ msgstr "Update"
 msgid "No Games Found"
 msgstr "No Games Found"
 
-#: data/gtk/window.blp:7 data/gtk/window.blp:
+#: data/gtk/window.blp:7 data/gtk/window.blp:15
 msgid "Try a different search"
 msgstr "Try a different search"
 
@@ -346,7 +346,7 @@ msgstr "Try a different search"
 msgid "No Games"
 msgstr "No Games"
 
-#: data/gtk/window.blp:
+#: data/gtk/window.blp:22
 msgid "Use the + button to add games"
 msgstr "Use the + button to add games"
 
@@ -354,7 +354,7 @@ msgstr "Use the + button to add games"
 msgid "No Hidden Games"
 msgstr "No Hidden Games"
 
-#: data/gtk/window.blp:
+#: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
 msgstr "Games you hide will appear here"
 
