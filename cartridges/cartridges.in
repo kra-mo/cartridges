@@ -26,8 +26,12 @@ import signal
 import sys
 
 VERSION = "@VERSION@"
-PKGDATADIR = "@pkgdatadir@"
-LOCALEDIR = "@localedir@"
+
+if os.name == "nt":
+    PKGDATADIR = os.path.join(os.path.dirname(__file__), "..", "share", "cartridges")
+else:
+    PKGDATADIR = "@pkgdatadir@"
+    LOCALEDIR = "@localedir@"
 
 sys.path.insert(1, PKGDATADIR)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -35,8 +39,9 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 if os.name != "nt":
     locale.bindtextdomain("cartridges", LOCALEDIR)
     locale.textdomain("cartridges")
-
-gettext.install("cartridges", LOCALEDIR)
+    gettext.install("cartridges", LOCALEDIR)
+else:
+    gettext.install("cartridges")
 
 if __name__ == "__main__":
     from gi.repository import Gio

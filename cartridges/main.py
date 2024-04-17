@@ -54,7 +54,6 @@ from cartridges.store.managers.file_manager import FileManager
 from cartridges.store.managers.sgdb_manager import SgdbManager
 from cartridges.store.managers.steam_api_manager import SteamAPIManager
 from cartridges.store.store import Store
-from cartridges.utils.migrate_files_v1_to_v2 import migrate_files_v1_to_v2
 from cartridges.utils.run_executable import run_executable
 from cartridges.window import CartridgesWindow
 
@@ -93,9 +92,6 @@ class CartridgesApplication(Adw.Application):
 
         setup_logging()
         log_system_info()
-
-        if os.name == "nt":
-            migrate_files_v1_to_v2()
 
         # Set fallback icon-name
         Gtk.Window.set_default_icon_name(shared.APP_ID)
