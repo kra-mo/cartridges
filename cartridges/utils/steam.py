@@ -32,15 +32,24 @@ from cartridges.utils.rate_limiter import RateLimiter
 
 
 class SteamError(Exception):
-    pass
+    """Base Steam error"""
 
 
-class SteamGameNotFoundError(SteamError):
-    pass
+class SteamInvalidGameError(SteamError):
+    """Base class for cases where the Steam API informs that a game is invalid"""
 
 
-class SteamNotAGameError(SteamError):
-    pass
+class SteamGameNotFoundError(SteamInvalidGameError):
+    """
+    Error raised when a game is not found in the Steam API
+
+    This doesn't necessarily mean the appid doesn't exist, it may be a non-game appid.
+    For example, proton versions have an appid but are not games.
+    """
+
+
+class SteamNotAGameError(SteamInvalidGameError):
+    """Error raised when the appid is not a game"""
 
 
 class SteamInvalidManifestError(SteamError):

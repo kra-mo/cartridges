@@ -1,6 +1,6 @@
 # steam_api_manager.py
 #
-# Copyright 2023 Geoffrey Coulaud
+# Copyright 2023-2024 Geoffrey Coulaud
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,8 +24,7 @@ from cartridges.game import Game
 from cartridges.store.managers.async_manager import AsyncManager
 from cartridges.utils.steam import (
     SteamAPIHelper,
-    SteamGameNotFoundError,
-    SteamNotAGameError,
+    SteamInvalidGameError,
     SteamRateLimiter,
 )
 
@@ -52,12 +51,7 @@ class SteamAPIManager(AsyncManager):
         # Get online metadata
         try:
             online_data = self.steam_api_helper.get_api_data(appid=appid)
-
-        except SteamGameNotFoundError:
-            return
-
-        except SteamNotAGameError:
+        except SteamInvalidGameError:
             game.update_values({"blacklisted": True})
-
         else:
             game.update_values(online_data)
