@@ -177,6 +177,23 @@ template $CartridgesPreferences: Adw.PreferencesDialog {
           ]
         }
 
+        Adw.ActionRow lutris_cache_action_row {
+          title: _("Cache Location");
+
+          Button lutris_cache_file_chooser_button {
+            icon-name: "folder-symbolic";
+            valign: center;
+
+            styles [
+              "flat"
+            ]
+          }
+
+          styles [
+            "property"
+          ]
+        }
+
         Adw.SwitchRow lutris_import_steam_switch {
           title: _("Import Steam Games");
         }

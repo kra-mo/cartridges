@@ -1,7 +1,7 @@
 # lutris_source.py
 #
 # Copyright 2022-2024 kramo
-# Copyright 2023 Geoffrey Coulaud
+# Copyright 2023-2024 Geoffrey Coulaud
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ class LutrisSourceIterable(SourceIterable):
         connection = connect(db_path)
         cursor = connection.execute(request, params)
         coverart_is_dir = (
-            coverart_path := self.source.locations.data.root / "coverart"
+            coverart_path := self.source.locations.cache["coverart"]
         ).is_dir()
 
         # Create games from the DB results
@@ -87,8 +87,12 @@ class LutrisSourceIterable(SourceIterable):
 
             # Get official image path
             if coverart_is_dir:
-                image_path = coverart_path / f"{row[2]}.jpg"
-                additional_data["local_image_path"] = image_path
+                for ext in ("jpg", "png"):
+                    image_path = coverart_path / f"{row[2]}.{ext}"
+                    if not image_path.is_file():
+                        continue
+                    additional_data["local_image_path"] = image_path
+                    break
 
             yield (game, additional_data)
 
@@ -98,6 +102,7 @@ class LutrisSourceIterable(SourceIterable):
 
 class LutrisLocations(NamedTuple):
     data: Location
+    cache: Location
 
 
 class LutrisSource(URLExecutableSource):
@@ -118,7 +123,7 @@ class LutrisSource(URLExecutableSource):
     def __init__(self) -> None:
         super().__init__()
         self.locations = LutrisLocations(
-            Location(
+            data=Location(
                 schema_key="lutris-location",
                 candidates=(
                     shared.flatpak_dir / "net.lutris.Lutris" / "data" / "lutris",
@@ -129,5 +134,17 @@ class LutrisSource(URLExecutableSource):
                     "pga.db": LocationSubPath("pga.db"),
                 },
                 invalid_subtitle=Location.DATA_INVALID_SUBTITLE,
-            )
+            ),
+            cache=Location(
+                schema_key="lutris-cache-location",
+                candidates=(
+                    shared.flatpak_dir / "net.lutris.Lutris" / "cache" / "lutris",
+                    shared.cache_dir / "lutris",
+                    shared.host_cache_dir / "lutris",
+                ),
+                paths={
+                    "coverart": LocationSubPath("coverart", True),
+                },
+                invalid_subtitle=Location.CACHE_INVALID_SUBTITLE,
+            ),
         )
