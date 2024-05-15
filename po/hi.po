@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-14 12:48+0200\n"
-"PO-Revision-Date: 2024-03-27 19:15+0000\n"
+"PO-Revision-Date: 2024-05-07 09:07+0000\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.4-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -65,7 +65,7 @@ msgstr "गेम विवरण संपादन"
 #: data/gtk/window.blp:542 cartridges/details_dialog.py:267
 #: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
-msgstr "प्राथमिकताएँ"
+msgstr "प्राथमिकताएं"
 
 #: data/gtk/details-dialog.blp:15
 msgid "Cancel"
@@ -77,7 +77,7 @@ msgstr "नया कवर"
 
 #: data/gtk/details-dialog.blp:65
 msgid "Delete Cover"
-msgstr "कवर हटाएँ"
+msgstr "कवर मिटाएं"
 
 #: data/gtk/details-dialog.blp:93 data/gtk/game.blp:81
 msgid "Title"
@@ -89,7 +89,7 @@ msgstr "विकासकर्ता (वैकल्पिक)"
 
 #: data/gtk/details-dialog.blp:103
 msgid "Executable"
-msgstr "एक्सेक्यूटेबल"
+msgstr "निष्पादनयोग्य"
 
 #: data/gtk/details-dialog.blp:109
 msgid "Select File"
@@ -109,15 +109,15 @@ msgstr "छुपाएं"
 
 #: data/gtk/game.blp:104 data/gtk/game.blp:112 data/gtk/window.blp:463
 msgid "Remove"
-msgstr "हटाएँ"
+msgstr "हटाएं"
 
 #: data/gtk/game.blp:111 cartridges/window.py:352
 msgid "Unhide"
-msgstr "सामने लाएँ"
+msgstr "सामने लाएं"
 
 #: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
-msgstr "जनरल"
+msgstr "सामान्य"
 
 #: data/gtk/help-overlay.blp:14 data/gtk/window.blp:205 data/gtk/window.blp:221
 #: data/gtk/window.blp:272 data/gtk/window.blp:288 data/gtk/window.blp:474
@@ -131,7 +131,7 @@ msgstr "कीबोर्ड शॉर्टकट"
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
 #: cartridges/preferences.py:134 cartridges/importer/importer.py:394
 msgid "Undo"
-msgstr "पूर्ववत"
+msgstr "पूर्ववत करें"
 
 #: data/gtk/help-overlay.blp:34
 msgid "Quit"
@@ -139,11 +139,11 @@ msgstr "छोड़ें"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:185
 msgid "Toggle Sidebar"
-msgstr "साइडबार टॉगल करें"
+msgstr "पार्श्वपट्टी टॉगल करें"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:198 data/gtk/window.blp:265
 msgid "Main Menu"
-msgstr "मुख्य मेन्यू"
+msgstr "मुख्य मेनू"
 
 #: data/gtk/help-overlay.blp:50
 msgid "Games"
@@ -160,7 +160,7 @@ msgstr "आयात"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Show Hidden Games"
-msgstr "छिपे हुए गेम्स दिखाएँ"
+msgstr "छिपे हुए गेम्स दिखाएं"
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
@@ -205,7 +205,7 @@ msgstr "सभी गेम्स हटाएं"
 
 #: data/gtk/preferences.blp:120
 msgid "Remove Uninstalled Games"
-msgstr "अनइंस्टॉल किए गए गेम्स हटाएं"
+msgstr "अस्थापित गेम्स हटाएं"
 
 #: data/gtk/preferences.blp:125
 msgid "Sources"
@@ -291,7 +291,7 @@ msgstr "गेम लॉन्चर आयात करें"
 
 #: data/gtk/preferences.blp:391 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
-msgstr "डेस्कटॉप प्रविष्टियाँ"
+msgstr "डेस्कटॉप प्रविष्टियां"
 
 #: data/gtk/preferences.blp:403 data/gtk/window.blp:562
 msgid "SteamGridDB"
@@ -319,11 +319,11 @@ msgstr "आधिकारिक छवियों से अधिक प्�
 
 #: data/gtk/preferences.blp:427
 msgid "Prefer Animated Images"
-msgstr "एनिमेटेड छवियों को प्राथमिकता दें"
+msgstr "सजीव छवियों को प्राथमिकता दें"
 
 #: data/gtk/preferences.blp:433
 msgid "Update Covers"
-msgstr "कवर अपडेट करें"
+msgstr "कवर अद्यतन करें"
 
 #: data/gtk/preferences.blp:434
 msgid "Fetch covers for games already in your library"
@@ -331,7 +331,7 @@ msgstr "अपनी लाइब्रेरी में पहले से �
 
 #: data/gtk/preferences.blp:439
 msgid "Update"
-msgstr "अपडेट"
+msgstr "अद्यतन"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -339,7 +339,7 @@ msgstr "कोई गेम नहीं मिला"
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
 msgid "Try a different search"
-msgstr "कोई भिन्न खोज आज़माएँ।"
+msgstr "भिन्न खोज का प्रयास करें"
 
 #: data/gtk/window.blp:21
 msgid "No Games"
@@ -347,7 +347,7 @@ msgstr "कोई गेम नहीं"
 
 #: data/gtk/window.blp:22
 msgid "Use the + button to add games"
-msgstr "गेम जोड़ने के लिए + बटन का उपयोग करें।"
+msgstr "गेम जोड़ने के लिए + बटन का उपयोग करें"
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
@@ -355,7 +355,7 @@ msgstr "कोई छुपे गेम्स नहीं"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
-msgstr "आपके द्वारा छिपाए गए गेम यहां दिखाई देंगे।"
+msgstr "आपके द्वारा छिपाए गए गेम यहां दिखाई देंगे"
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:111 cartridges/main.py:228
 msgid "All Games"
@@ -407,7 +407,7 @@ msgstr "अंतिम बार खेला गया"
 
 #: data/gtk/window.blp:535
 msgid "Show Hidden"
-msgstr "छुपा हुआ दिखाए"
+msgstr "छुपे हुआ दिखाएं"
 
 #: data/gtk/window.blp:544
 msgid "About Cartridges"
@@ -451,7 +451,7 @@ msgstr "अंतिम बार खेला गया: {}"
 
 #: cartridges/details_dialog.py:73
 msgid "Apply"
-msgstr "लागू"
+msgstr "लागू करें"
 
 #: cartridges/details_dialog.py:79
 msgid "Add New Game"
@@ -463,7 +463,7 @@ msgstr "जोड़ें"
 
 #: cartridges/details_dialog.py:90
 msgid "Executables"
-msgstr "एक्सेक्यूटेबल"
+msgstr "निष्पादनयोग्य"
 
 #. Translate this string as you would translate "file"
 #: cartridges/details_dialog.py:105
@@ -497,15 +497,16 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"एक्सेक्यूटेबल \"{}\" लॉन्च करने के लिए, कमांड का उपयोग करें:\n"
+"निष्पादनयोग्य \"{}\" लॉन्च करने के लिए, कमांड का उपयोग करें:\n"
 "\n"
 "<tt>\"{}\"</tt>\n"
 "\n"
-"डिफ़ॉल्ट एप्लिकेशन के साथ \"{}\" फाइल खोलने के लिए, इसका उपयोग करें:\n"
+"तयशुदा अनुप्रयोग के साथ \"{}\" फाइल खोलने के लिए, इसका उपयोग करें:\n"
 "\n"
 "<tt>{} \"{}\"</tt>\n"
 "\n"
-"यदि पथ में रिक्त स्थान हैं, तो इसे दोहरे उद्धरण चिह्नों में लपेटना सुनिश्चित करें!"
+"यदि पथ में रिक्त स्थान हैं, तो इसे दोहरे उद्धरण चिह्नों में लपेटना सुनिश्चित "
+"करें!"
 
 #: cartridges/details_dialog.py:167 cartridges/details_dialog.py:173
 msgid "Couldn't Add Game"
@@ -517,11 +518,11 @@ msgstr "गेम का शीर्षक रिक्त नहीं हो 
 
 #: cartridges/details_dialog.py:173 cartridges/details_dialog.py:217
 msgid "Executable cannot be empty."
-msgstr "Executable खाली नहीं हो सकता।"
+msgstr "निष्पादनयोग्य खाली नहीं हो सकता।"
 
 #: cartridges/details_dialog.py:208 cartridges/details_dialog.py:216
 msgid "Couldn't Apply Preferences"
-msgstr "प्राथमिकताएँ लागू नहीं की जा सकीं"
+msgstr "प्राथमिकताएं लागू नहीं की जा सकी"
 
 #. The variable is the title of the game
 #: cartridges/game.py:139
@@ -555,7 +556,7 @@ msgstr "कवर डाउनलोड हो रहा है…"
 
 #: cartridges/preferences.py:215
 msgid "Covers updated"
-msgstr "कवर अप्डैटिड"
+msgstr "कवर अद्यतित"
 
 #: cartridges/preferences.py:360
 msgid "Installation Not Found"
@@ -563,7 +564,7 @@ msgstr "इंस्टालेशन नहीं मिला"
 
 #: cartridges/preferences.py:361
 msgid "Select a valid directory"
-msgstr "एक वैध डॉयरेक्टरी का चयन करें।"
+msgstr "एक मान्य निर्देशिका चुनें"
 
 #: cartridges/preferences.py:397 cartridges/importer/importer.py:318
 msgid "Warning"
@@ -571,7 +572,7 @@ msgstr "चेतावनी"
 
 #: cartridges/preferences.py:431
 msgid "Invalid Directory"
-msgstr "अवैध डॉयरेक्टरी"
+msgstr "अमान्य निर्देशिका"
 
 #: cartridges/preferences.py:437
 msgid "Set Location"
@@ -579,7 +580,7 @@ msgstr "स्थान तय करें"
 
 #: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
 msgid "Dismiss"
-msgstr "खारिज"
+msgstr "खारिज करें"
 
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
@@ -587,7 +588,7 @@ msgstr "गेम्स आयात किया जा रहा है…"
 
 #: cartridges/importer/importer.py:338
 msgid "The following errors occured during import:"
-msgstr "आयात के दौरान निम्नलिखित त्रुटियाँ हुईं:"
+msgstr "आयात के दौरान निम्नलिखित त्रुटियां हुईं:"
 
 #: cartridges/importer/importer.py:367
 msgid "No new games found"
@@ -605,22 +606,22 @@ msgstr "{} गेम्स आयातित"
 #. A single game removed
 #: cartridges/importer/importer.py:387
 msgid "1 removed"
-msgstr "1 हटाया"
+msgstr "1 हटाया गया"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
 msgid "Select the {} cache directory."
-msgstr "{} कैशे डॉयरेक्टरी का चयन करें।"
+msgstr "{} कैशे निर्देशिका का चयन करें।"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:36
 msgid "Select the {} configuration directory."
-msgstr "{} कॉन्फ़िगरेशन डॉयरेक्टरी का चयन करें।"
+msgstr "{} विन्यास निर्देशिका का चयन करें।"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:38
 msgid "Select the {} data directory."
-msgstr "{} डेटा डॉयरेक्टरी का चयन करें।"
+msgstr "{} डेटा निर्देशिका का चयन करें।"
 
 #: cartridges/importer/retroarch_source.py:129
 msgid "No RetroArch Core Selected"
@@ -629,7 +630,7 @@ msgstr "कोई RetroArch कोर चयनित नहीं"
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr "निम्नलिखित प्लेलिस्ट में कोई डिफ़ॉल्ट कोर नहीं है:"
+msgstr "निम्नलिखित प्लेलिस्ट में कोई तयशुदा कोर नहीं है:"
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
