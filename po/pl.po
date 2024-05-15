@@ -7,13 +7,14 @@
 # Michaks <fexwex3@gmail.com>, 2023.
 # Igor Popowicz <igorpopowicz12@gmail.com>, 2024.
 # polswert1 <polswert1@users.noreply.hosted.weblate.org>, 2024.
+# Karol <k.derbotprogramista@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-14 12:48+0200\n"
-"PO-Revision-Date: 2024-04-14 07:01+0000\n"
-"Last-Translator: polswert1 <polswert1@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2024-05-15 14:01+0000\n"
+"Last-Translator: Karol <k.derbotprogramista@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/pl/>\n"
 "Language: pl\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -98,7 +99,7 @@ msgstr "Plik wykonywalny"
 
 #: data/gtk/details-dialog.blp:109
 msgid "Select File"
-msgstr ""
+msgstr "Wybierz Plik"
 
 #: data/gtk/details-dialog.blp:120
 msgid "More Info"
@@ -143,8 +144,9 @@ msgid "Quit"
 msgstr "Wyjdź"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:185
+#, fuzzy
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "przełącz pasek boczny"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:198 data/gtk/window.blp:265
 msgid "Main Menu"
@@ -164,14 +166,12 @@ msgid "Import"
 msgstr "Importuj"
 
 #: data/gtk/help-overlay.blp:63
-#, fuzzy
 msgid "Show Hidden Games"
-msgstr "Pokaż ukryte gry"
+msgstr "Pokaż Ukryte Gry"
 
 #: data/gtk/help-overlay.blp:68
-#, fuzzy
 msgid "Remove Game"
-msgstr "Usuń grę"
+msgstr "Usuń Grę"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:117
 #: data/gtk/preferences.blp:415
@@ -211,9 +211,8 @@ msgid "Remove All Games"
 msgstr "Usuń wszystkie gry"
 
 #: data/gtk/preferences.blp:120
-#, fuzzy
 msgid "Remove Uninstalled Games"
-msgstr "Usuń wszystkie gry"
+msgstr "Usuń Odinstalowane Gry"
 
 #: data/gtk/preferences.blp:125
 msgid "Sources"
@@ -256,9 +255,8 @@ msgid "Import GOG Games"
 msgstr "Importuj gry z GOG"
 
 #: data/gtk/preferences.blp:224
-#, fuzzy
 msgid "Import Amazon Games"
-msgstr "Importuj gry Steam"
+msgstr "Importuj gry Amazon"
 
 #: data/gtk/preferences.blp:228
 msgid "Import Sideloaded Games"
@@ -278,7 +276,7 @@ msgstr "Legendarne"
 
 #: data/gtk/preferences.blp:314 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
-msgstr ""
+msgstr "RetroArch"
 
 #: data/gtk/preferences.blp:341 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
