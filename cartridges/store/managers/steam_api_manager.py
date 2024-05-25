@@ -48,16 +48,10 @@ class SteamAPIManager(AsyncManager):
         appid = additional_data.get("steam_appid", None)
         if appid is None:
             return
-
         # Get online metadata
         try:
             online_data = self.steam_api_helper.get_api_data(appid=appid)
-
-        except SteamGameNotFoundError:
-            return
-
-        except SteamNotAGameError:
+        except (SteamNotAGameError, SteamGameNotFoundError):
             game.update_values({"blacklisted": True})
-
         else:
             game.update_values(online_data)
