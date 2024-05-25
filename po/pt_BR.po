@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-14 12:48+0200\n"
-"PO-Revision-Date: 2024-01-04 04:07+0000\n"
+"PO-Revision-Date: 2024-04-20 05:07+0000\n"
 "Last-Translator: Filipe Motta <luiz_filipe_motta@hotmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/pt_BR/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -343,27 +343,24 @@ msgid "No Games Found"
 msgstr "Nenhum jogo encontrado"
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
-#, fuzzy
 msgid "Try a different search"
-msgstr "Tente uma busca diferente."
+msgstr "Tente uma busca diferente"
 
 #: data/gtk/window.blp:21
 msgid "No Games"
 msgstr "Sem jogos"
 
 #: data/gtk/window.blp:22
-#, fuzzy
 msgid "Use the + button to add games"
-msgstr "Use o botão + para adicionar jogos."
+msgstr "Use o botão + para adicionar jogos"
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
 msgstr "Sem jogos ocultos"
 
 #: data/gtk/window.blp:41
-#, fuzzy
 msgid "Games you hide will appear here"
-msgstr "Os jogos ocultos aparecerão aqui."
+msgstr "Os jogos ocultos aparecerão aqui"
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:111 cartridges/main.py:228
 msgid "All Games"
