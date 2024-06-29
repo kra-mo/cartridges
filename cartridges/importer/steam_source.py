@@ -128,6 +128,7 @@ class SteamSource(URLExecutableSource):
                     shared.data_dir / "Steam",
                     shared.flatpak_dir / "com.valvesoftware.Steam" / "data" / "Steam",
                     shared.programfiles32_dir / "Steam",
+                    shared.app_support_dir / "Steam",
                 ),
                 paths={
                     "libraryfolders.vdf": LocationSubPath(
