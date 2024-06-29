@@ -2,7 +2,7 @@
 
 # cartridges.in
 #
-# Copyright 2022-2023 kramo
+# Copyright 2022-2024 kramo
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@ import locale
 import os
 import signal
 import sys
+from platform import system
 
 VERSION = "@VERSION@"
 
@@ -36,7 +37,7 @@ else:
 sys.path.insert(1, PKGDATADIR)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-if os.name != "nt":
+if system() == "Linux":
     locale.bindtextdomain("cartridges", LOCALEDIR)
     locale.textdomain("cartridges")
     gettext.install("cartridges", LOCALEDIR)
