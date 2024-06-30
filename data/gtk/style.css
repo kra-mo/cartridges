@@ -1,5 +1,7 @@
-@define-color accent_color @purple_5;
-@define-color accent_bg_color @purple_3;
+:root {
+  --accent-color: var(--purple-5);
+  --accent-bg-color: var(--purple-3);
+}
 
 #details_view {
     background-color: white;
