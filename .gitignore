@@ -2,3 +2,4 @@
 /.flatpak
 /.flatpak-builder
 /.vscode
+.DS_Store
