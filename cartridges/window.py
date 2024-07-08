@@ -19,7 +19,7 @@
 
 from typing import Any, Optional
 
-from gi.repository import Adw, Gio, GLib, Gtk
+from gi.repository import Adw, Gio, GLib, Gtk, Pango
 
 from cartridges import shared
 from cartridges.game import Game
@@ -152,6 +152,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 Gtk.Label(
                     label=self.get_application().get_source_name(source_id),
                     halign=Gtk.Align.START,
+                    wrap=True,
+                    wrap_mode=Pango.WrapMode.CHAR,
                 )
             )
 

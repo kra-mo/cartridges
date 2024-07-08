@@ -94,6 +94,8 @@ template $CartridgesWindow: Adw.ApplicationWindow {
               }
 
               ScrolledWindow {
+                hscrollbar-policy: never;
+
                 ListBox sidebar {
                   Box all_games_row_box {
                     margin-top: 12;
@@ -109,6 +111,8 @@ template $CartridgesWindow: Adw.ApplicationWindow {
                     Label {
                       halign: start;
                       label: _("All Games");
+                      wrap: true;
+                      wrap-mode: char;
                     }
 
                     Label all_games_no_label {
@@ -135,6 +139,8 @@ template $CartridgesWindow: Adw.ApplicationWindow {
                       halign: start;
                       label: _("Added");
                       margin-end: 6;
+                      wrap: true;
+                      wrap-mode: char;
                     }
 
                     Label added_games_no_label {
