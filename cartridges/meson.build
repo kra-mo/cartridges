@@ -1,4 +1,4 @@
-moduledir = join_paths(python_dir, 'cartridges')
+moduledir = python_dir / 'cartridges'
 
 configure_file(
   input: 'cartridges.in',
