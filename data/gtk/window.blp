@@ -181,15 +181,11 @@ template $CartridgesWindow: Adw.ApplicationWindow {
             [top]
             Adw.HeaderBar header_bar {
               [start]
-              Revealer {
-                transition-type: slide_right;
-                reveal-child: bind overlay_split_view.show-sidebar inverted;
-
-                Button show_sidebar_button {
-                  icon-name: "sidebar-show-symbolic";
-                  action-name: "win.show_sidebar";
-                  tooltip-text: _("Toggle Sidebar");
-                }
+              Button show_sidebar_button {
+                icon-name: "sidebar-show-symbolic";
+                action-name: "win.show_sidebar";
+                tooltip-text: _("Toggle Sidebar");
+                visible: bind overlay_split_view.show-sidebar inverted;
               }
 
               [start]
