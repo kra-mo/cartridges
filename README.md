@@ -69,7 +69,7 @@ Thank you for your generosity! 💜
 
 The app is available on Flathub.
 
-<a href=https://flathub.org/apps/page.kramo.Cartridges><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+<a href=https://flathub.org/apps/page.kramo.Cartridges><img alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en'/></a>
 
 ## Windows
 
