@@ -35,7 +35,7 @@ Stored as a Unix time stamp.
 
 The executable to run when launching a game.
 
-If the source has a URL handler, using that is preferred. In that case, the value should be `"xdg-open url://example/url"` for Linux and `"start url://example/url"` for Windows.
+If the source has a URL handler, using that is preferred. In that case, the value should be `"xdg-open url://example/url"` for Linux, `"start url://example/url"` for Windows and `"open url://example/url"` for macOS.
 
 Stored as either a string (preferred) or an argument vector to be passed to the shell through [subprocess.Popen](https://docs.python.org/3/library/subprocess.html#popen-constructor).
 
