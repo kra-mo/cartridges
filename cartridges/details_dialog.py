@@ -59,8 +59,15 @@ class DetailsDialog(Adw.Dialog):
 
     cover_changed: bool = False
 
+    is_open = False
+
     def __init__(self, game: Optional[Game] = None, **kwargs: Any):
         super().__init__(**kwargs)
+
+        # Make it so only one dialog can be open at a time
+        self.__class__.is_open = True
+        self.connect("closed", lambda *_: self.set_is_open(False))
+
         self.game: Game = game
         self.game_cover: GameCover = GameCover({self.cover})
 
@@ -325,3 +332,6 @@ class DetailsDialog(Adw.Dialog):
 
     def choose_cover(self, *_args: Any) -> None:
         self.image_file_dialog.open(self.get_root(), None, self.set_cover)
+
+    def set_is_open(self, is_open: bool) -> None:
+        self.__class__.is_open = is_open

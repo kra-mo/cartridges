@@ -69,11 +69,31 @@ if sys.platform == "darwin":
         def applicationDidFinishLaunching_(self, *_args: Any) -> None:
             main_menu = NSApp.mainMenu()
 
+            add_game_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
+                "Add Game", "add:", "n"
+            )
+
+            import_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
+                "Import", "import:", "i"
+            )
+
+            file_menu = NSMenu.alloc().init()
+            file_menu.addItem_(add_game_menu_item)
+            file_menu.addItem_(import_menu_item)
+
+            file_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
+                "File", None, ""
+            )
+            file_menu_item.setSubmenu_(file_menu)
+            main_menu.addItem_(file_menu_item)
+
             show_hidden_menu_item = (
                 NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
                     "Show Hidden", "hidden:", "h"
                 )
             )
+
+            windows_menu = NSMenu.alloc().init()
 
             view_menu = NSMenu.alloc().init()
             view_menu.addItem_(show_hidden_menu_item)
@@ -111,11 +131,23 @@ if sys.platform == "darwin":
 
             NSApp.setHelpMenu_(help_menu)
 
+        def add_(self, *_args: Any) -> None:
+            if (not shared.win) or (not (app := shared.win.get_application())):
+                return
+
+            app.lookup_action("add_game").activate()
+
+        def import_(self, *_args: Any) -> None:
+            if (not shared.win) or (not (app := shared.win.get_application())):
+                return
+
+            app.lookup_action("import").activate()
+
         def hidden_(self, *_args: Any) -> None:
             if not shared.win:
                 return
 
-            shared.win.on_show_hidden_action()
+            shared.win.lookup_action("show_hidden").activate()
 
         def shortcuts_(self, *_args: Any) -> None:
             if (not shared.win) or (not (overlay := shared.win.get_help_overlay())):
@@ -360,7 +392,7 @@ class CartridgesApplication(Adw.Application):
         _parameter: Any = None,
         page_name: Optional[str] = None,
         expander_row: Optional[str] = None,
-    ) -> CartridgesWindow:
+    ) -> Optional[CartridgesPreferences]:
         if CartridgesPreferences.is_open:
             return
 
@@ -383,6 +415,9 @@ class CartridgesApplication(Adw.Application):
         DetailsDialog(shared.win.active_game).present(shared.win)
 
     def on_add_game_action(self, *_args: Any) -> None:
+        if DetailsDialog.is_open:
+            return
+
         DetailsDialog().present(shared.win)
 
     def on_import_action(self, *_args: Any) -> None:
