@@ -81,4 +81,4 @@ win = None
 importer = None
 import_time = None
 store = None
-log_files = None
+log_files = []

@@ -3,5 +3,5 @@ configure_file(
   output: 'Cartridges.iss',
   configuration: conf,
   install: true,
-  install_dir: '.'
+  install_dir: '.',
 )
