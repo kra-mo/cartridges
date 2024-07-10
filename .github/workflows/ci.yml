@@ -21,7 +21,7 @@ jobs:
       uses: flatpak/flatpak-github-actions/flatpak-builder@v6.3
       with:
         bundle: page.kramo.Cartridges.Devel.flatpak
-        manifest-path: flatpak/page.kramo.Cartridges.Devel.json
+        manifest-path: build-aux/flatpak/page.kramo.Cartridges.Devel.json
 
   windows:
     name: Windows

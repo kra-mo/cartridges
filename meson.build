@@ -44,7 +44,7 @@ subdir('data')
 subdir('cartridges')
 
 if host_machine.system() == 'windows'
-  subdir('windows')
+  subdir('build-aux/windows')
 else
   subdir('search-provider')
   subdir('po')

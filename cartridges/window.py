@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from typing import Any, Optional
+from sys import platform
 
 from gi.repository import Adw, Gio, GLib, Gtk, Pango
 
@@ -33,6 +34,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     overlay_split_view = Gtk.Template.Child()
     navigation_view = Gtk.Template.Child()
+    sidebar_navigation_page = Gtk.Template.Child()
     sidebar = Gtk.Template.Child()
     all_games_row_box = Gtk.Template.Child()
     all_games_no_label = Gtk.Template.Child()
@@ -214,6 +216,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
+
+        if platform == "darwin":
+            self.sidebar_navigation_page.set_title("")
 
         self.details_view.set_measure_overlay(self.details_view_toolbar_view, True)
         self.details_view.set_clip_overlay(self.details_view_toolbar_view, False)

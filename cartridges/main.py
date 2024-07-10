@@ -87,10 +87,17 @@ class CartridgesApplication(Adw.Application):
 
         self.add_main_option_entries((search, launch))
 
+        if sys.platform == "darwin" and (settings := Gtk.Settings.get_default()):
+            settings.props.gtk_decoration_layout = "close,minimize,maximize:"
+
     def do_activate(self) -> None:  # pylint: disable=arguments-differ
         """Called on app creation"""
 
-        setup_logging()
+        try:
+            setup_logging()
+        except ValueError:
+            pass
+
         log_system_info()
 
         # Set fallback icon-name
@@ -375,7 +382,7 @@ class CartridgesApplication(Adw.Application):
             if action[1:2]:
                 self.set_accels_for_action(
                     f"app.{action[0]}" if scope == self else f"win.{action[0]}",
-                    action[1],
+                    tuple(s.replace("<primary>", "<meta>") for s in action[1]),
                 )
 
             scope.add_action(simple_action)
