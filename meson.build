@@ -1,6 +1,6 @@
 project(
   'cartridges',
-  version: '2.9',
+  version: '2.9.1',
   meson_version: '>= 0.59.0',
   default_options: [
     'warning_level=2',
