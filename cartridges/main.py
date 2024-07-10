@@ -24,6 +24,7 @@ import shlex
 import sys
 from time import time
 from typing import Any, Optional
+from urllib.parse import quote
 
 import gi
 
@@ -424,7 +425,7 @@ class CartridgesApplication(Adw.Application):
             self.on_remove_game_action()
 
     def search(self, uri: str) -> None:
-        Gio.AppInfo.launch_default_for_uri(f"{uri}{shared.win.active_game.name}")
+        Gio.AppInfo.launch_default_for_uri(f"{uri}{quote(shared.win.active_game.name)}")
 
     def on_igdb_search_action(self, *_args: Any) -> None:
         self.search("https://www.igdb.com/search?type=1&q=")
