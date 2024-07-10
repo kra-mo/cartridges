@@ -30,6 +30,7 @@ from cartridges import shared
 from cartridges.errors.friendly_error import FriendlyError
 from cartridges.game import Game
 from cartridges.importer.bottles_source import BottlesSource
+from cartridges.importer.desktop_source import DesktopSource
 from cartridges.importer.flatpak_source import FlatpakSource
 from cartridges.importer.heroic_source import HeroicSource
 from cartridges.importer.itch_source import ItchSource
@@ -168,6 +169,10 @@ class CartridgesPreferences(Adw.PreferencesDialog):
                 expander_row.set_visible(False)
             else:
                 self.init_source_row(source)
+
+        # Special case for the desktop source
+        if not DesktopSource().is_available:
+            self.desktop_switch.set_visible(False)
 
         # SteamGridDB
         def sgdb_key_changed(*_args: Any) -> None:

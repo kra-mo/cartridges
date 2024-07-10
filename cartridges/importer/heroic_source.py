@@ -355,7 +355,7 @@ class HeroicSource(URLExecutableSource):
     name = _("Heroic")
     iterable_class = HeroicSourceIterable
     url_format = "heroic://launch/{runner}/{app_name}"
-    available_on = {"linux", "win32"}
+    available_on = {"linux", "win32", "darwin"}
 
     locations: HeroicLocations
 
@@ -377,6 +377,7 @@ class HeroicSource(URLExecutableSource):
                     / "config"
                     / "heroic",
                     shared.appdata_dir / "heroic",
+                    shared.app_support_dir / "heroic",
                 ),
                 paths={
                     "config.json": LocationSubPath("config.json"),
