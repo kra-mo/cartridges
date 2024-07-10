@@ -73,7 +73,7 @@ jobs:
       - name: Install Dependencies
         run: |
           brew install meson pygobject3 libadwaita adwaita-icon-theme desktop-file-utils pyinstaller pillow
-          pip3 install --break-system-packages requests PyYAML
+          pip3 install --break-system-packages requests PyYAML pyobjc
 
       - name: Meson Build
         run: |

@@ -450,6 +450,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.navigation_view.pop_to_page(self.library_page)
 
     def on_show_hidden_action(self, *_args: Any) -> None:
+        if self.navigation_view.get_visible_page() == self.hidden_library_page:
+            return
+
         self.navigation_view.push(self.hidden_library_page)
 
     def on_sort_action(self, action: Gio.SimpleAction, state: GLib.Variant) -> None:

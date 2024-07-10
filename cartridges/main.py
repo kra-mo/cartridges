@@ -58,6 +58,71 @@ from cartridges.utils.run_executable import run_executable
 from cartridges.window import CartridgesWindow
 
 
+if sys.platform == "darwin":
+    from AppKit import NSApp, NSApplication, NSMenu, NSMenuItem  # type: ignore
+
+    from Foundation import NSObject  # type: ignore
+    from PyObjCTools import AppHelper
+
+    class ApplicationDelegate(NSObject):  # type: ignore
+        def applicationDidFinishLaunching_(self, *_args: Any) -> None:
+            main_menu = NSApp.mainMenu()
+
+            show_hidden_menu_item = (
+                NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
+                    "Show Hidden", "hidden:", "h"
+                )
+            )
+
+            view_menu = NSMenu.alloc().init()
+            view_menu.addItem_(show_hidden_menu_item)
+
+            view_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
+                "View", None, ""
+            )
+            view_menu_item.setSubmenu_(view_menu)
+            main_menu.addItem_(view_menu_item)
+
+            windows_menu = NSMenu.alloc().init()
+
+            windows_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
+                "Window", None, ""
+            )
+            windows_menu_item.setSubmenu_(windows_menu)
+            main_menu.addItem_(windows_menu_item)
+
+            NSApp.setWindowsMenu_(windows_menu)
+
+            keyboard_shortcuts_menu_item = (
+                NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
+                    "Keyboard Shortcuts", "shortcuts:", "?"
+                )
+            )
+
+            help_menu = NSMenu.alloc().init()
+            help_menu.addItem_(keyboard_shortcuts_menu_item)
+
+            help_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
+                "Help", None, ""
+            )
+            help_menu_item.setSubmenu_(help_menu)
+            main_menu.addItem_(help_menu_item)
+
+            NSApp.setHelpMenu_(help_menu)
+
+        def hidden_(self, *_args: Any) -> None:
+            if not shared.win:
+                return
+
+            shared.win.on_show_hidden_action()
+
+        def shortcuts_(self, *_args: Any) -> None:
+            if (not shared.win) or (not (overlay := shared.win.get_help_overlay())):
+                return
+
+            overlay.present()
+
+
 class CartridgesApplication(Adw.Application):
     state = shared.AppState.DEFAULT
     win: CartridgesWindow
@@ -87,8 +152,15 @@ class CartridgesApplication(Adw.Application):
 
         self.add_main_option_entries((search, launch))
 
-        if sys.platform == "darwin" and (settings := Gtk.Settings.get_default()):
-            settings.props.gtk_decoration_layout = "close,minimize,maximize:"
+        if sys.platform == "darwin":
+            if settings := Gtk.Settings.get_default():
+                settings.props.gtk_decoration_layout = "close,minimize,maximize:"
+
+            def setup_app_delegate() -> None:
+                NSApp.setDelegate_(ApplicationDelegate.alloc().init())  # type: ignore
+                AppHelper.runEventLoop()  # type: ignore
+
+            GLib.Thread.new(None, setup_app_delegate)
 
     def do_activate(self) -> None:  # pylint: disable=arguments-differ
         """Called on app creation"""
