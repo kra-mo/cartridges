@@ -1,8 +1,7 @@
 name: Publish Release
 on:
   push:
-    tags:
-      "*"
+    tags: "*"
 
 concurrency:
   group: release-${{ github.sha }}
@@ -41,7 +40,9 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v2.0.6
         with:
-          files: Windows Installer/Cartridges Setup.exe
+          files: |
+            Windows Installer/Cartridges Windows.exe
+            macOS Application/Cartridges macOS.zip
           fail_on_unmatched_files: true
           tag_name: ${{ steps.get_tag_name.outputs.tag_name }}
           body_path: release_notes

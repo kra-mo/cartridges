@@ -14,14 +14,14 @@ jobs:
       image: bilelmoussaoui/flatpak-github-actions:gnome-46
       options: --privileged
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Flatpak Builder
-      uses: flatpak/flatpak-github-actions/flatpak-builder@v6.3
-      with:
-        bundle: page.kramo.Cartridges.Devel.flatpak
-        manifest-path: build-aux/flatpak/page.kramo.Cartridges.Devel.json
+      - name: Flatpak Builder
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.3
+        with:
+          bundle: page.kramo.Cartridges.Devel.flatpak
+          manifest-path: build-aux/flatpak/page.kramo.Cartridges.Devel.json
 
   windows:
     name: Windows
@@ -51,10 +51,49 @@ jobs:
           timeout 2 cartridges; [ "$?" -eq "124" ]
 
       - name: Inno Setup
-        run: iscc ".\_build\windows\Cartridges.iss"
+        run: iscc ".\_build\build-aux\windows\Cartridges.iss"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Windows Installer
-          path: _build/windows/Output/Cartridges Setup.exe
+          path: _build/build-aux/windows/Output/Cartridges Windows.exe
+
+  macos:
+    name: macOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Install Dependencies
+        run: |
+          brew install meson pygobject3 libadwaita adwaita-icon-theme desktop-file-utils pyinstaller pillow
+          pip3 install --break-system-packages requests PyYAML
+
+      - name: Meson Build
+        run: |
+          meson setup _build
+          ninja install -C _build
+
+      - name: PyInstaller
+        env:
+          PYTHONPATH: /opt/homebrew/opt/homebrew/lib/python3.12/site-packages
+        run: |
+          cd build-aux/macos
+          pyinstaller ./cartridges.spec
+
+      - name: Zip
+        run: |
+          cd build-aux/macos/dist
+          zip -yr Cartridges\ macOS.zip Cartridges.app
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: build-aux/macos/dist/Cartridges macOS.zip
+          name: macOS Application
