@@ -77,7 +77,7 @@ jobs:
 
       - name: Meson Build
         run: |
-          meson setup _build
+          meson setup _build -Dtiff_compression=jpeg
           ninja install -C _build
 
       - name: PyInstaller
