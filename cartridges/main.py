@@ -58,102 +58,11 @@ from cartridges.store.store import Store
 from cartridges.utils.run_executable import run_executable
 from cartridges.window import CartridgesWindow
 
-
 if sys.platform == "darwin":
-    from AppKit import NSApp, NSApplication, NSMenu, NSMenuItem  # type: ignore
-
-    from Foundation import NSObject  # type: ignore
+    from AppKit import NSApp  # type: ignore
     from PyObjCTools import AppHelper
 
-    class ApplicationDelegate(NSObject):  # type: ignore
-        def applicationDidFinishLaunching_(self, *_args: Any) -> None:
-            main_menu = NSApp.mainMenu()
-
-            add_game_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                "Add Game", "add:", "n"
-            )
-
-            import_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                "Import", "import:", "i"
-            )
-
-            file_menu = NSMenu.alloc().init()
-            file_menu.addItem_(add_game_menu_item)
-            file_menu.addItem_(import_menu_item)
-
-            file_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                "File", None, ""
-            )
-            file_menu_item.setSubmenu_(file_menu)
-            main_menu.addItem_(file_menu_item)
-
-            show_hidden_menu_item = (
-                NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                    "Show Hidden", "hidden:", "h"
-                )
-            )
-
-            windows_menu = NSMenu.alloc().init()
-
-            view_menu = NSMenu.alloc().init()
-            view_menu.addItem_(show_hidden_menu_item)
-
-            view_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                "View", None, ""
-            )
-            view_menu_item.setSubmenu_(view_menu)
-            main_menu.addItem_(view_menu_item)
-
-            windows_menu = NSMenu.alloc().init()
-
-            windows_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                "Window", None, ""
-            )
-            windows_menu_item.setSubmenu_(windows_menu)
-            main_menu.addItem_(windows_menu_item)
-
-            NSApp.setWindowsMenu_(windows_menu)
-
-            keyboard_shortcuts_menu_item = (
-                NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                    "Keyboard Shortcuts", "shortcuts:", "?"
-                )
-            )
-
-            help_menu = NSMenu.alloc().init()
-            help_menu.addItem_(keyboard_shortcuts_menu_item)
-
-            help_menu_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                "Help", None, ""
-            )
-            help_menu_item.setSubmenu_(help_menu)
-            main_menu.addItem_(help_menu_item)
-
-            NSApp.setHelpMenu_(help_menu)
-
-        def add_(self, *_args: Any) -> None:
-            if (not shared.win) or (not (app := shared.win.get_application())):
-                return
-
-            app.lookup_action("add_game").activate()
-
-        def import_(self, *_args: Any) -> None:
-            if (not shared.win) or (not (app := shared.win.get_application())):
-                return
-
-            app.lookup_action("import").activate()
-
-        def hidden_(self, *_args: Any) -> None:
-            if not shared.win:
-                return
-
-            shared.win.lookup_action("show_hidden").activate()
-
-        def shortcuts_(self, *_args: Any) -> None:
-            if (not shared.win) or (not (overlay := shared.win.get_help_overlay())):
-                return
-
-            overlay.present()
+    from cartridges.application_delegate import ApplicationDelegate
 
 
 class CartridgesApplication(Adw.Application):
