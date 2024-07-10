@@ -25,7 +25,8 @@ from typing import Any
 from AppKit import NSApp, NSApplication, NSMenu, NSMenuItem  # type: ignore
 from Foundation import NSObject  # type: ignore
 from gi.repository import Gio  # type: ignore
-from showtime import shared
+
+from cartridges import shared
 
 
 class ApplicationDelegate(NSObject):  # type: ignore
