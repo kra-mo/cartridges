@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the Cartridges package.
 # سید حسین موسوی فرد <shmf1385@protonmail.com>, 2023.
 # Danial Behzadi <dani.behzi@ubuntu.com>, 2023.
+# آوید <avds+git@disroot.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-14 12:48+0200\n"
-"PO-Revision-Date: 2023-09-24 16:04+0000\n"
-"Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
+"PO-Revision-Date: 2024-07-14 20:09+0000\n"
+"Last-Translator: آوید <avds+git@disroot.org>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fa/>\n"
 "Language: fa\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -74,7 +75,7 @@ msgstr "لغو"
 
 #: data/gtk/details-dialog.blp:46
 msgid "New Cover"
-msgstr "طرج جلد جدید"
+msgstr "طرح جلد جدید"
 
 #: data/gtk/details-dialog.blp:65
 msgid "Delete Cover"
@@ -98,7 +99,7 @@ msgstr "گزینش پرونده"
 
 #: data/gtk/details-dialog.blp:120
 msgid "More Info"
-msgstr "اطّلاعات بیش‌تر"
+msgstr "اطلاعات بیشتر"
 
 #: data/gtk/game.blp:102 data/gtk/game.blp:110 data/gtk/window.blp:443
 msgid "Edit"
@@ -127,7 +128,7 @@ msgstr "جست‌وجو"
 
 #: data/gtk/help-overlay.blp:24 data/gtk/window.blp:543
 msgid "Keyboard Shortcuts"
-msgstr "میان‌برهیا صفحه‌کلید"
+msgstr "میان‌برهای صفحه‌کلید"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
 #: cartridges/preferences.py:134 cartridges/importer/importer.py:394
@@ -182,7 +183,7 @@ msgstr "طرح جلد بازی را اجرا می‌کند"
 
 #: data/gtk/preferences.blp:21
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr "تعویض رفتار تصویر جلد و دکمهٔ بازی کردن"
+msgstr "تغییر رفتار تصویر جلد و دکمهٔ بازی کردن"
 
 #: data/gtk/preferences.blp:26 cartridges/details_dialog.py:82
 msgid "Images"
@@ -194,7 +195,7 @@ msgstr "عکس‌های با کیفیت بالا"
 
 #: data/gtk/preferences.blp:30
 msgid "Save game covers losslessly at the cost of storage"
-msgstr "ذخیرهٔ طرح جلدهای بدون اتلاف به فیمت ذخیره‌سازی"
+msgstr "ذخیرهٔ طرح جلدهای بدون اتلاف به قیمت ذخیره‌سازی"
 
 #: data/gtk/preferences.blp:35
 msgid "Danger Zone"
@@ -206,7 +207,7 @@ msgstr "حذف کردن همهٔ بازی‌ها"
 
 #: data/gtk/preferences.blp:120
 msgid "Remove Uninstalled Games"
-msgstr "برداشن بازی‌های نصب نشده"
+msgstr "برداشتن بازی‌های نصب‌نشده"
 
 #: data/gtk/preferences.blp:125
 msgid "Sources"
@@ -254,7 +255,7 @@ msgstr "درون‌ریزی بازی‌های آمازون"
 
 #: data/gtk/preferences.blp:228
 msgid "Import Sideloaded Games"
-msgstr "درون‌ریزی بازی‌های نصب شده"
+msgstr "درون‌ریزی بازی‌های نصب‌شده"
 
 #: data/gtk/preferences.blp:233 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
@@ -278,15 +279,13 @@ msgstr "فلت‌پک"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:351
-#, fuzzy
 msgid "System Location"
-msgstr "تنظیم مکان"
+msgstr "مکان سامانه"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:369
-#, fuzzy
 msgid "User Location"
-msgstr "تنظیم مکان"
+msgstr "مکان کاربر"
 
 #: data/gtk/preferences.blp:386
 msgid "Import Game Launchers"
@@ -322,20 +321,19 @@ msgstr "ترجیح به تصویرهای رسمی"
 
 #: data/gtk/preferences.blp:427
 msgid "Prefer Animated Images"
-msgstr "ترچیح تصویرهای پویا"
+msgstr "ترجیح تصویرهای پویا"
 
 #: data/gtk/preferences.blp:433
-#, fuzzy
 msgid "Update Covers"
-msgstr "حذف طرح جلد"
+msgstr "به‌روزرسانی طرح جلد"
 
 #: data/gtk/preferences.blp:434
 msgid "Fetch covers for games already in your library"
-msgstr ""
+msgstr "دریافت طرح جلد بازی‌های کنونی کتاب‌خانه‌تان"
 
 #: data/gtk/preferences.blp:439
 msgid "Update"
-msgstr ""
+msgstr "به‌روزرسانی"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -359,7 +357,7 @@ msgstr "بدون بازی نهفته"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
-msgstr "بازی‌هایی که پنهان می‌کنید، این‌جا ظاهر خواهند شد"
+msgstr "بازی‌هایی که پنهان می‌کنید، این‌جا نمایان خواهند شد"
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:111 cartridges/main.py:228
 msgid "All Games"
@@ -407,7 +405,7 @@ msgstr "قدیمی‌ترین"
 
 #: data/gtk/window.blp:528
 msgid "Last Played"
-msgstr "آخرین بازی شده"
+msgstr "آخرین بازی‌شده"
 
 #: data/gtk/window.blp:535
 msgid "Show Hidden"
@@ -419,15 +417,15 @@ msgstr "دربارهٔ کارتریج‌ها"
 
 #: data/gtk/window.blp:561
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:563
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:565
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:205 cartridges/game.py:125
@@ -451,7 +449,7 @@ msgstr "هرگز"
 #. The variable is the date when the game was last played
 #: cartridges/window.py:380
 msgid "Last played: {}"
-msgstr "آخرین بازی شده: {}"
+msgstr "آخرین بازی‌شده: {}"
 
 #: cartridges/details_dialog.py:73
 msgid "Apply"
@@ -505,7 +503,7 @@ msgstr ""
 "\n"
 "<tt>\"{}\"</tt>\n"
 "\n"
-"برای گشودن پروندهٔ {}‌با برنامهٔ پیش‌گزیده:\n"
+"برای گشودن پروندهٔ {}‌ با برنامهٔ پیش‌گزیده:\n"
 "\n"
 "<tt>{} \"{}\"</tt>\n"
 "\n"
@@ -530,7 +528,7 @@ msgstr "نتوانست ترجیحات را اعمال کند"
 #. The variable is the title of the game
 #: cartridges/game.py:139
 msgid "{} hidden"
-msgstr "{}‌نهفته"
+msgstr "{}‌ نهفته"
 
 #: cartridges/game.py:139
 msgid "{} unhidden"
@@ -555,11 +553,11 @@ msgstr ""
 
 #: cartridges/preferences.py:196
 msgid "Downloading covers…"
-msgstr ""
+msgstr "در حال دریافت طرح‌های جلد…"
 
 #: cartridges/preferences.py:215
 msgid "Covers updated"
-msgstr ""
+msgstr "طرح‌های جلد به‌روزرسانی شد"
 
 #: cartridges/preferences.py:360
 msgid "Installation Not Found"
@@ -599,7 +597,7 @@ msgstr "هیچ بازی جدیدی پیدا نشد"
 
 #: cartridges/importer/importer.py:379
 msgid "1 game imported"
-msgstr "۱ بازی درون‌ریخته شد"
+msgstr "یک بازی درون‌ریخته شد"
 
 #. The variable is the number of games
 #: cartridges/importer/importer.py:383
