@@ -399,7 +399,11 @@ class CartridgesApplication(Adw.Application):
             if action[1:2]:
                 self.set_accels_for_action(
                     f"app.{action[0]}" if scope == self else f"win.{action[0]}",
-                    tuple(s.replace("<primary>", "<meta>") for s in action[1]),
+                    (
+                        tuple(s.replace("<primary>", "<meta>") for s in action[1])
+                        if sys.platform == "darwin"
+                        else action[1]
+                    ),
                 )
 
             scope.add_action(simple_action)
