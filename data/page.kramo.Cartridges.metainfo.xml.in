@@ -54,11 +54,10 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.9.2" date="2024-07-11">
+    <release version="2.9.3" date="2024-07-18">
       <description translate="no">
         <ul>
-          <li>Cartridges now utilizes the menu bar on macOS</li>
-          <li>Various bug fixes</li>
+          <li>Fixed incorrect modifiers being used for keyboard shortcuts</li>
         </ul>
       </description>
     </release>
