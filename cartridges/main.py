@@ -41,7 +41,7 @@ from cartridges.importer.bottles_source import BottlesSource
 from cartridges.importer.desktop_source import DesktopSource
 from cartridges.importer.flatpak_source import FlatpakSource
 from cartridges.importer.heroic_source import HeroicSource
-from cartridges.importer.importer import Importer
+from cartridges.importer.importer import Importer  # yo dawg
 from cartridges.importer.itch_source import ItchSource
 from cartridges.importer.legendary_source import LegendarySource
 from cartridges.importer.lutris_source import LutrisSource
