@@ -17,6 +17,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+# pyright: reportAssignmentType=none
+
 import shlex
 from pathlib import Path
 from sys import platform
@@ -40,26 +42,26 @@ from cartridges.utils.save_cover import convert_cover, save_cover
 class DetailsDialog(Adw.Dialog):
     __gtype_name__ = "DetailsDialog"
 
-    cover_overlay = Gtk.Template.Child()
-    cover = Gtk.Template.Child()
-    cover_button_edit = Gtk.Template.Child()
-    cover_button_delete_revealer = Gtk.Template.Child()
-    cover_button_delete = Gtk.Template.Child()
-    spinner = Gtk.Template.Child()
+    cover_overlay: Gtk.Overlay = Gtk.Template.Child()
+    cover: Gtk.Picture = Gtk.Template.Child()
+    cover_button_edit: Gtk.Button = Gtk.Template.Child()
+    cover_button_delete_revealer: Gtk.Revealer = Gtk.Template.Child()
+    cover_button_delete: Gtk.Button = Gtk.Template.Child()
+    spinner: Gtk.Spinner = Gtk.Template.Child()
 
-    name = Gtk.Template.Child()
-    developer = Gtk.Template.Child()
-    executable = Gtk.Template.Child()
+    name: Adw.EntryRow = Gtk.Template.Child()
+    developer: Adw.EntryRow = Gtk.Template.Child()
+    executable: Adw.EntryRow = Gtk.Template.Child()
 
-    exec_info_label = Gtk.Template.Child()
-    exec_info_popover = Gtk.Template.Child()
-    file_chooser_button = Gtk.Template.Child()
+    exec_info_label: Gtk.Label = Gtk.Template.Child()
+    exec_info_popover: Gtk.Popover = Gtk.Template.Child()
+    file_chooser_button: Gtk.Button = Gtk.Template.Child()
 
-    apply_button = Gtk.Template.Child()
+    apply_button: Gtk.Button = Gtk.Template.Child()
 
     cover_changed: bool = False
 
-    is_open = False
+    is_open: bool = False
 
     def __init__(self, game: Optional[Game] = None, **kwargs: Any):
         super().__init__(**kwargs)
@@ -68,7 +70,7 @@ class DetailsDialog(Adw.Dialog):
         self.__class__.is_open = True
         self.connect("closed", lambda *_: self.set_is_open(False))
 
-        self.game: Game = game
+        self.game: Optional[Game] = game
         self.game_cover: GameCover = GameCover({self.cover})
 
         if self.game:

@@ -33,7 +33,7 @@ def create_dialog(
     dialog.add_response("dismiss", _("Dismiss"))
 
     if extra_option:
-        dialog.add_response(extra_option, _(extra_label))
+        dialog.add_response(extra_option, extra_label or "")
 
     dialog.choose(win)
     return dialog

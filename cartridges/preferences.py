@@ -17,6 +17,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+# pyright: reportAssignmentType=none
+
 import logging
 import re
 from pathlib import Path
@@ -48,74 +50,74 @@ from cartridges.utils.create_dialog import create_dialog
 class CartridgesPreferences(Adw.PreferencesDialog):
     __gtype_name__ = "CartridgesPreferences"
 
-    general_page = Gtk.Template.Child()
-    import_page = Gtk.Template.Child()
-    sgdb_page = Gtk.Template.Child()
+    general_page: Adw.PreferencesPage = Gtk.Template.Child()
+    import_page: Adw.PreferencesPage = Gtk.Template.Child()
+    sgdb_page: Adw.PreferencesPage = Gtk.Template.Child()
 
-    sources_group = Gtk.Template.Child()
+    sources_group: Adw.PreferencesGroup = Gtk.Template.Child()
 
-    exit_after_launch_switch = Gtk.Template.Child()
-    cover_launches_game_switch = Gtk.Template.Child()
-    high_quality_images_switch = Gtk.Template.Child()
+    exit_after_launch_switch: Adw.SwitchRow = Gtk.Template.Child()
+    cover_launches_game_switch: Adw.SwitchRow = Gtk.Template.Child()
+    high_quality_images_switch: Adw.SwitchRow = Gtk.Template.Child()
 
-    remove_missing_switch = Gtk.Template.Child()
+    remove_missing_switch: Adw.SwitchRow = Gtk.Template.Child()
 
-    steam_expander_row = Gtk.Template.Child()
-    steam_data_action_row = Gtk.Template.Child()
-    steam_data_file_chooser_button = Gtk.Template.Child()
+    steam_expander_row: Adw.ExpanderRow = Gtk.Template.Child()
+    steam_data_action_row: Adw.ActionRow = Gtk.Template.Child()
+    steam_data_file_chooser_button: Gtk.Button = Gtk.Template.Child()
 
-    lutris_expander_row = Gtk.Template.Child()
-    lutris_data_action_row = Gtk.Template.Child()
-    lutris_data_file_chooser_button = Gtk.Template.Child()
-    lutris_import_steam_switch = Gtk.Template.Child()
-    lutris_import_flatpak_switch = Gtk.Template.Child()
+    lutris_expander_row: Adw.ExpanderRowClass = Gtk.Template.Child()
+    lutris_data_action_row: Adw.ActionRow = Gtk.Template.Child()
+    lutris_data_file_chooser_button: Gtk.Button = Gtk.Template.Child()
+    lutris_import_steam_switch: Adw.SwitchRow = Gtk.Template.Child()
+    lutris_import_flatpak_switch: Adw.SwitchRow = Gtk.Template.Child()
 
-    heroic_expander_row = Gtk.Template.Child()
-    heroic_config_action_row = Gtk.Template.Child()
-    heroic_config_file_chooser_button = Gtk.Template.Child()
-    heroic_import_epic_switch = Gtk.Template.Child()
-    heroic_import_gog_switch = Gtk.Template.Child()
-    heroic_import_amazon_switch = Gtk.Template.Child()
-    heroic_import_sideload_switch = Gtk.Template.Child()
+    heroic_expander_row: Adw.ExpanderRow = Gtk.Template.Child()
+    heroic_config_action_row: Adw.ActionRow = Gtk.Template.Child()
+    heroic_config_file_chooser_button: Gtk.Button = Gtk.Template.Child()
+    heroic_import_epic_switch: Adw.SwitchRow = Gtk.Template.Child()
+    heroic_import_gog_switch: Adw.SwitchRow = Gtk.Template.Child()
+    heroic_import_amazon_switch: Adw.SwitchRow = Gtk.Template.Child()
+    heroic_import_sideload_switch: Adw.SwitchRow = Gtk.Template.Child()
 
-    bottles_expander_row = Gtk.Template.Child()
-    bottles_data_action_row = Gtk.Template.Child()
-    bottles_data_file_chooser_button = Gtk.Template.Child()
+    bottles_expander_row: Adw.ExpanderRow = Gtk.Template.Child()
+    bottles_data_action_row: Adw.ActionRow = Gtk.Template.Child()
+    bottles_data_file_chooser_button: Gtk.Button = Gtk.Template.Child()
 
-    itch_expander_row = Gtk.Template.Child()
-    itch_config_action_row = Gtk.Template.Child()
-    itch_config_file_chooser_button = Gtk.Template.Child()
+    itch_expander_row: Adw.ExpanderRow = Gtk.Template.Child()
+    itch_config_action_row: Adw.ActionRow = Gtk.Template.Child()
+    itch_config_file_chooser_button: Gtk.Button = Gtk.Template.Child()
 
-    legendary_expander_row = Gtk.Template.Child()
-    legendary_config_action_row = Gtk.Template.Child()
-    legendary_config_file_chooser_button = Gtk.Template.Child()
+    legendary_expander_row: Adw.ExpanderRow = Gtk.Template.Child()
+    legendary_config_action_row: Adw.ActionRow = Gtk.Template.Child()
+    legendary_config_file_chooser_button: Gtk.Button = Gtk.Template.Child()
 
-    retroarch_expander_row = Gtk.Template.Child()
-    retroarch_config_action_row = Gtk.Template.Child()
-    retroarch_config_file_chooser_button = Gtk.Template.Child()
+    retroarch_expander_row: Adw.ExpanderRow = Gtk.Template.Child()
+    retroarch_config_action_row: Adw.ActionRow = Gtk.Template.Child()
+    retroarch_config_file_chooser_button: Gtk.Button = Gtk.Template.Child()
 
-    flatpak_expander_row = Gtk.Template.Child()
-    flatpak_system_data_action_row = Gtk.Template.Child()
-    flatpak_system_data_file_chooser_button = Gtk.Template.Child()
-    flatpak_user_data_action_row = Gtk.Template.Child()
-    flatpak_user_data_file_chooser_button = Gtk.Template.Child()
-    flatpak_import_launchers_switch = Gtk.Template.Child()
+    flatpak_expander_row: Adw.ExpanderRow = Gtk.Template.Child()
+    flatpak_system_data_action_row: Adw.ActionRow = Gtk.Template.Child()
+    flatpak_system_data_file_chooser_button: Gtk.Button = Gtk.Template.Child()
+    flatpak_user_data_action_row: Adw.ActionRow = Gtk.Template.Child()
+    flatpak_user_data_file_chooser_button: Gtk.Button = Gtk.Template.Child()
+    flatpak_import_launchers_switch: Adw.SwitchRow = Gtk.Template.Child()
 
-    desktop_switch = Gtk.Template.Child()
+    desktop_switch: Adw.SwitchRow = Gtk.Template.Child()
 
-    sgdb_key_group = Gtk.Template.Child()
-    sgdb_key_entry_row = Gtk.Template.Child()
-    sgdb_switch = Gtk.Template.Child()
-    sgdb_prefer_switch = Gtk.Template.Child()
-    sgdb_animated_switch = Gtk.Template.Child()
-    sgdb_fetch_button = Gtk.Template.Child()
-    sgdb_stack = Gtk.Template.Child()
-    sgdb_spinner = Gtk.Template.Child()
+    sgdb_key_group: Adw.PreferencesGroup = Gtk.Template.Child()
+    sgdb_key_entry_row: Adw.EntryRow = Gtk.Template.Child()
+    sgdb_switch: Adw.SwitchRow = Gtk.Template.Child()
+    sgdb_prefer_switch: Adw.SwitchRow = Gtk.Template.Child()
+    sgdb_animated_switch: Adw.SwitchRow = Gtk.Template.Child()
+    sgdb_fetch_button: Gtk.Button = Gtk.Template.Child()
+    sgdb_stack: Gtk.Stack = Gtk.Template.Child()
+    sgdb_spinner: Gtk.Spinner = Gtk.Template.Child()
 
-    danger_zone_group = Gtk.Template.Child()
-    remove_all_games_list_box = Gtk.Template.Child()
-    reset_list_box = Gtk.Template.Child()
-    reset_group = Gtk.Template.Child()
+    danger_zone_group: Adw.PreferencesGroup = Gtk.Template.Child()
+    remove_all_games_list_box: Gtk.ListBox = Gtk.Template.Child()
+    reset_list_box: Gtk.ListBox = Gtk.Template.Child()
+    reset_group: Adw.PreferencesGroup = Gtk.Template.Child()
 
     removed_games: set[Game] = set()
     warning_menu_buttons: dict = {}
@@ -280,7 +282,7 @@ class CartridgesPreferences(Adw.PreferencesDialog):
     ) -> None:
         self.file_chooser.select_folder(shared.win, None, callback, callback_data)
 
-    def undo_remove_all(self, *_args: Any) -> None:
+    def undo_remove_all(self, *_args: Any) -> bool:
         shared.win.get_application().state = shared.AppState.UNDO_REMOVE_ALL_GAMES
         for game in self.removed_games:
             game.removed = False
@@ -291,6 +293,8 @@ class CartridgesPreferences(Adw.PreferencesDialog):
         self.toast.dismiss()
         shared.win.get_application().state = shared.AppState.DEFAULT
         shared.win.create_source_rows()
+
+        return True
 
     def remove_all_games(self, *_args: Any) -> None:
         shared.win.get_application().state = shared.AppState.REMOVE_ALL_GAMES
