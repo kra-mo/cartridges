@@ -31,9 +31,9 @@
     <control>keyboard</control>
     <control>touch</control>
   </supports>
-  <recommends>
+  <requires>
     <display_length compare="ge">360</display_length>
-  </recommends>
+  </requires>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/1.png</image>
