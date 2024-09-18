@@ -112,7 +112,7 @@ class CartridgesPreferences(Adw.PreferencesDialog):
     sgdb_animated_switch: Adw.SwitchRow = Gtk.Template.Child()
     sgdb_fetch_button: Gtk.Button = Gtk.Template.Child()
     sgdb_stack: Gtk.Stack = Gtk.Template.Child()
-    sgdb_spinner: Gtk.Spinner = Gtk.Template.Child()
+    sgdb_spinner: Adw.Spinner = Gtk.Template.Child()
 
     danger_zone_group = Gtk.Template.Child()
     remove_all_games_button_row = Gtk.Template.Child()
@@ -196,7 +196,7 @@ class CartridgesPreferences(Adw.PreferencesDialog):
             sgdb_manager = shared.store.managers[SgdbManager]
             sgdb_manager.reset_cancellable()
 
-            self.sgdb_spinner.set_spinning(True)
+            self.sgdb_spinner.set_visible(True)
             self.sgdb_stack.set_visible_child(self.sgdb_spinner)
 
             self.add_toast(download_toast := Adw.Toast.new(_("Downloading covers…")))
@@ -223,7 +223,7 @@ class CartridgesPreferences(Adw.PreferencesDialog):
                 download_toast.dismiss()
                 self.add_toast(toast)
 
-                self.sgdb_spinner.set_spinning(False)
+                self.sgdb_spinner.set_visible(False)
                 self.sgdb_stack.set_visible_child(self.sgdb_fetch_button)
 
             for game in shared.store:
