@@ -1,7 +1,7 @@
 {
     "id" : "page.kramo.Cartridges.Devel",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "master",
+    "runtime-version" : "47",
     "sdk" : "org.gnome.Sdk",
     "command" : "cartridges",
     "finish-args" : [
