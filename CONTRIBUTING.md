@@ -33,6 +33,11 @@ The project can be translated on [Weblate](https://hosted.weblate.org/engage/car
 2. From the MSYS2 shell, install the required dependencies listed [here](https://github.com/kra-mo/cartridges/blob/main/.github/workflows/ci.yml).
 3. Build it via Meson.
 
+## For macOS
+1. Install [Homebrew](https://brew.sh/).
+2. Using `brew` and `pip3`, install the required dependencies listed [here](https://github.com/kra-mo/cartridges/blob/main/.github/workflows/ci.yml).
+3. Build it via Meson.
+
 ## Meson
 ```bash
 git clone https://github.com/kra-mo/cartridges.git

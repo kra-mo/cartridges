@@ -1,20 +1,28 @@
-blueprints = custom_target('blueprints',
+blueprints = custom_target(
+  'blueprints',
   input: files(
-    'gtk/help-overlay.blp',
-    'gtk/window.blp',
+    'gtk/details-dialog.blp',
     'gtk/game.blp',
+    'gtk/help-overlay.blp',
     'gtk/preferences.blp',
-    'gtk/details-dialog.blp'
+    'gtk/window.blp',
   ),
   output: '.',
-  command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
+  command: [
+    find_program('blueprint-compiler'),
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
 )
 
-gnome.compile_resources('cartridges',
+gnome.compile_resources(
+  'cartridges',
   configure_file(
     input: 'cartridges.gresource.xml.in',
     output: 'cartridges.gresource.xml',
-    configuration: conf
+    configuration: conf,
   ),
   gresource_bundle: true,
   install: true,
@@ -22,27 +30,26 @@ gnome.compile_resources('cartridges',
   dependencies: blueprints,
 )
 
-
 if host_machine.system() == 'windows'
   desktop_file = configure_file(
     input: 'page.kramo.Cartridges.desktop.in',
     output: app_id + '.desktop.in',
     configuration: conf,
     install: true,
-    install_dir: join_paths(get_option('datadir'), 'applications')
+    install_dir: join_paths(get_option('datadir'), 'applications'),
   )
 else
   desktop_file = i18n.merge_file(
     input: configure_file(
       input: 'page.kramo.Cartridges.desktop.in',
       output: app_id + '.desktop.in',
-      configuration: conf
+      configuration: conf,
     ),
     output: app_id + '.desktop',
     type: 'desktop',
     po_dir: '../po',
     install: true,
-    install_dir: join_paths(get_option('datadir'), 'applications')
+    install_dir: join_paths(get_option('datadir'), 'applications'),
   )
 endif
 
@@ -59,29 +66,30 @@ if host_machine.system() == 'windows'
     output: app_id + '.metainfo.xml',
     configuration: conf,
     install: true,
-    install_dir: join_paths(get_option('datadir'), 'metainfo')
+    install_dir: join_paths(get_option('datadir'), 'metainfo'),
   )
 else
   appstream_file = i18n.merge_file(
     input: configure_file(
       input: 'page.kramo.Cartridges.metainfo.xml.in',
       output: app_id + '.metainfo.xml.in',
-      configuration: conf
+      configuration: conf,
     ),
     output: app_id + '.metainfo.xml',
     po_dir: '../po',
     install: true,
-    install_dir: join_paths(get_option('datadir'), 'metainfo')
+    install_dir: join_paths(get_option('datadir'), 'metainfo'),
   )
 endif
 
 if host_machine.system() != 'windows'
   appstreamcli = find_program('appstreamcli', required: false)
   if appstreamcli.found()
-    test('Validate appstream file',
+    test(
+      'Validate appstream file',
       appstreamcli,
       args: ['validate', '--no-net', '--explain', appstream_file],
-      workdir: meson.current_build_dir()
+      workdir: meson.current_build_dir(),
     )
   endif
 endif
@@ -90,16 +98,18 @@ install_data(
   configure_file(
     input: 'page.kramo.Cartridges.gschema.xml.in',
     output: app_id + '.gschema.xml',
-    configuration: conf
+    configuration: conf,
   ),
-  install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
+  install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas'),
 )
 
 compile_schemas = find_program('glib-compile-schemas', required: false)
 if compile_schemas.found()
-  test('Validate schema file',
-       compile_schemas,
-       args: ['--strict', '--dry-run', meson.current_source_dir()])
+  test(
+    'Validate schema file',
+    compile_schemas,
+    args: ['--strict', '--dry-run', meson.current_source_dir()],
+  )
 endif
 
 subdir('icons')

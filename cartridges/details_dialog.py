@@ -17,9 +17,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os
+# pyright: reportAssignmentType=none
+
 import shlex
 from pathlib import Path
+from sys import platform
 from time import time
 from typing import Any, Optional
 
@@ -40,28 +42,35 @@ from cartridges.utils.save_cover import convert_cover, save_cover
 class DetailsDialog(Adw.Dialog):
     __gtype_name__ = "DetailsDialog"
 
-    cover_overlay = Gtk.Template.Child()
-    cover = Gtk.Template.Child()
-    cover_button_edit = Gtk.Template.Child()
-    cover_button_delete_revealer = Gtk.Template.Child()
-    cover_button_delete = Gtk.Template.Child()
-    spinner = Gtk.Template.Child()
+    cover_overlay: Gtk.Overlay = Gtk.Template.Child()
+    cover: Gtk.Picture = Gtk.Template.Child()
+    cover_button_edit: Gtk.Button = Gtk.Template.Child()
+    cover_button_delete_revealer: Gtk.Revealer = Gtk.Template.Child()
+    cover_button_delete: Gtk.Button = Gtk.Template.Child()
+    spinner: Gtk.Spinner = Gtk.Template.Child()
 
-    name = Gtk.Template.Child()
-    developer = Gtk.Template.Child()
-    executable = Gtk.Template.Child()
+    name: Adw.EntryRow = Gtk.Template.Child()
+    developer: Adw.EntryRow = Gtk.Template.Child()
+    executable: Adw.EntryRow = Gtk.Template.Child()
 
-    exec_info_label = Gtk.Template.Child()
-    exec_info_popover = Gtk.Template.Child()
-    file_chooser_button = Gtk.Template.Child()
+    exec_info_label: Gtk.Label = Gtk.Template.Child()
+    exec_info_popover: Gtk.Popover = Gtk.Template.Child()
+    file_chooser_button: Gtk.Button = Gtk.Template.Child()
 
-    apply_button = Gtk.Template.Child()
+    apply_button: Gtk.Button = Gtk.Template.Child()
 
     cover_changed: bool = False
 
+    is_open: bool = False
+
     def __init__(self, game: Optional[Game] = None, **kwargs: Any):
         super().__init__(**kwargs)
-        self.game: Game = game
+
+        # Make it so only one dialog can be open at a time
+        self.__class__.is_open = True
+        self.connect("closed", lambda *_: self.set_is_open(False))
+
+        self.game: Optional[Game] = game
         self.game_cover: GameCover = GameCover({self.cover})
 
         if self.game:
@@ -106,7 +115,7 @@ class DetailsDialog(Adw.Dialog):
         # As in software
         exe_name = _("program")
 
-        if os.name == "nt":
+        if platform == "win32":
             exe_name += ".exe"
             # Translate this string as you would translate "path to {}"
             exe_path = _("C:\\path\\to\\{}").format(exe_name)
@@ -118,7 +127,7 @@ class DetailsDialog(Adw.Dialog):
             exe_path = _("/path/to/{}").format(exe_name)
             # Translate this string as you would translate "path to {}"
             file_path = _("/path/to/{}").format(file_name)
-            command = "xdg-open"
+            command = "open" if platform == "darwin" else "xdg-open"
 
         # pylint: disable=line-too-long
         exec_info_text = _(
@@ -325,3 +334,6 @@ class DetailsDialog(Adw.Dialog):
 
     def choose_cover(self, *_args: Any) -> None:
         self.image_file_dialog.open(self.get_root(), None, self.set_cover)
+
+    def set_is_open(self, is_open: bool) -> None:
+        self.__class__.is_open = is_open

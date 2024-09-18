@@ -1,11 +1,11 @@
-moduledir = join_paths(python_dir, 'cartridges')
+moduledir = python_dir / 'cartridges'
 
 configure_file(
   input: 'cartridges.in',
   output: 'cartridges',
   configuration: conf,
   install: true,
-  install_dir: get_option('bindir')
+  install_dir: get_option('bindir'),
 )
 
 install_subdir('importer', install_dir: moduledir)
@@ -15,17 +15,14 @@ install_subdir('logging', install_dir: moduledir)
 install_subdir('errors', install_dir: moduledir)
 install_data(
   [
+    'application_delegate.py',
     'main.py',
     'window.py',
     'preferences.py',
     'details_dialog.py',
     'game.py',
     'game_cover.py',
-    configure_file(
-      input: 'shared.py.in',
-      output: 'shared.py',
-      configuration: conf
-    )
+    configure_file(input: 'shared.py.in', output: 'shared.py', configuration: conf),
   ],
-  install_dir: moduledir
+  install_dir: moduledir,
 )

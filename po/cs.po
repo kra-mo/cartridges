@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
-# foo expert <deferred_water346@simplelogin.com>, 2023.
+# foo expert <deferred_water346@simplelogin.com>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-14 12:48+0200\n"
-"PO-Revision-Date: 2023-09-24 16:04+0000\n"
+"PO-Revision-Date: 2024-06-28 07:09+0000\n"
 "Last-Translator: foo expert <deferred_water346@simplelogin.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/cs/>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -276,15 +276,13 @@ msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:351
-#, fuzzy
 msgid "System Location"
-msgstr "Nastavit umístění"
+msgstr "Systémové umístění"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:369
-#, fuzzy
 msgid "User Location"
-msgstr "Nastavit umístění"
+msgstr "Uživatelské umístění"
 
 #: data/gtk/preferences.blp:386
 msgid "Import Game Launchers"
@@ -323,17 +321,16 @@ msgid "Prefer Animated Images"
 msgstr "Upřednostnit animované obrázky"
 
 #: data/gtk/preferences.blp:433
-#, fuzzy
 msgid "Update Covers"
-msgstr "Odstranit obal"
+msgstr "Aktualizovat obálky"
 
 #: data/gtk/preferences.blp:434
 msgid "Fetch covers for games already in your library"
-msgstr ""
+msgstr "Najít obálky pro hry ve vaší knihovně"
 
 #: data/gtk/preferences.blp:439
 msgid "Update"
-msgstr ""
+msgstr "Aktualizovat"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -417,15 +414,15 @@ msgstr "O Kazetách"
 
 #: data/gtk/window.blp:561
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:563
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:565
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:205 cartridges/game.py:125
@@ -553,11 +550,11 @@ msgstr ""
 
 #: cartridges/preferences.py:196
 msgid "Downloading covers…"
-msgstr ""
+msgstr "Stahování obálek…"
 
 #: cartridges/preferences.py:215
 msgid "Covers updated"
-msgstr ""
+msgstr "Obálky aktualizovány"
 
 #: cartridges/preferences.py:360
 msgid "Installation Not Found"

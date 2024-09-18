@@ -64,6 +64,8 @@ local_appdata_dir = Path(
 )
 programfiles32_dir = Path(getenv("programfiles(x86)") or r"C:\Program Files (x86)")
 
+app_support_dir = home / "Library" / "Application Support"
+
 try:
     scale_factor = max(
         monitor.get_scale_factor()
@@ -79,4 +81,4 @@ win = None
 importer = None
 import_time = None
 store = None
-log_files = None
+log_files = []

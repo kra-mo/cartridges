@@ -17,9 +17,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+# pyright: reportAssignmentType=none
+
+from sys import platform
 from typing import Any, Optional
 
-from gi.repository import Adw, Gio, GLib, Gtk
+from gi.repository import Adw, Gio, GLib, Gtk, Pango
 
 from cartridges import shared
 from cartridges.game import Game
@@ -31,51 +34,52 @@ from cartridges.utils.relative_date import relative_date
 class CartridgesWindow(Adw.ApplicationWindow):
     __gtype_name__ = "CartridgesWindow"
 
-    overlay_split_view = Gtk.Template.Child()
-    navigation_view = Gtk.Template.Child()
-    sidebar = Gtk.Template.Child()
-    all_games_row_box = Gtk.Template.Child()
-    all_games_no_label = Gtk.Template.Child()
-    added_row_box = Gtk.Template.Child()
-    added_games_no_label = Gtk.Template.Child()
-    toast_overlay = Gtk.Template.Child()
-    primary_menu_button = Gtk.Template.Child()
-    show_sidebar_button = Gtk.Template.Child()
-    details_view = Gtk.Template.Child()
-    library_page = Gtk.Template.Child()
-    library_view = Gtk.Template.Child()
-    library = Gtk.Template.Child()
-    scrolledwindow = Gtk.Template.Child()
-    library_overlay = Gtk.Template.Child()
-    notice_empty = Gtk.Template.Child()
-    notice_no_results = Gtk.Template.Child()
-    search_bar = Gtk.Template.Child()
-    search_entry = Gtk.Template.Child()
-    search_button = Gtk.Template.Child()
+    overlay_split_view: Adw.OverlaySplitView = Gtk.Template.Child()
+    navigation_view: Adw.NavigationView = Gtk.Template.Child()
+    sidebar_navigation_page: Adw.NavigationPage = Gtk.Template.Child()
+    sidebar: Gtk.ListBox = Gtk.Template.Child()
+    all_games_row_box: Gtk.Box = Gtk.Template.Child()
+    all_games_no_label: Gtk.Label = Gtk.Template.Child()
+    added_row_box: Gtk.Box = Gtk.Template.Child()
+    added_games_no_label: Gtk.Label = Gtk.Template.Child()
+    toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
+    primary_menu_button: Gtk.MenuButton = Gtk.Template.Child()
+    show_sidebar_button: Gtk.Button = Gtk.Template.Child()
+    details_view: Gtk.Overlay = Gtk.Template.Child()
+    library_page: Adw.NavigationPage = Gtk.Template.Child()
+    library_view: Adw.ToolbarView = Gtk.Template.Child()
+    library: Gtk.FlowBox = Gtk.Template.Child()
+    scrolledwindow: Gtk.ScrolledWindow = Gtk.Template.Child()
+    library_overlay: Gtk.Overlay = Gtk.Template.Child()
+    notice_empty: Adw.StatusPage = Gtk.Template.Child()
+    notice_no_results: Adw.StatusPage = Gtk.Template.Child()
+    search_bar: Gtk.SearchBar = Gtk.Template.Child()
+    search_entry: Gtk.SearchEntry = Gtk.Template.Child()
+    search_button: Gtk.ToggleButton = Gtk.Template.Child()
 
-    details_page = Gtk.Template.Child()
-    details_view_toolbar_view = Gtk.Template.Child()
-    details_view_cover = Gtk.Template.Child()
-    details_view_spinner = Gtk.Template.Child()
-    details_view_title = Gtk.Template.Child()
-    details_view_blurred_cover = Gtk.Template.Child()
-    details_view_play_button = Gtk.Template.Child()
-    details_view_developer = Gtk.Template.Child()
-    details_view_added = Gtk.Template.Child()
-    details_view_last_played = Gtk.Template.Child()
-    details_view_hide_button = Gtk.Template.Child()
+    details_page: Adw.NavigationPage = Gtk.Template.Child()
+    details_view_toolbar_view: Adw.ToolbarView = Gtk.Template.Child()
+    details_view_cover: Gtk.Picture = Gtk.Template.Child()
+    details_view_spinner: Gtk.Spinner = Gtk.Template.Child()
+    details_view_title: Gtk.Label = Gtk.Template.Child()
+    details_view_blurred_cover: Gtk.Picture = Gtk.Template.Child()
+    details_view_play_button: Gtk.Button = Gtk.Template.Child()
+    details_view_developer: Gtk.Label = Gtk.Template.Child()
+    details_view_added: Gtk.ShortcutLabel = Gtk.Template.Child()
+    details_view_last_played: Gtk.Label = Gtk.Template.Child()
+    details_view_hide_button: Gtk.Button = Gtk.Template.Child()
 
-    hidden_library_page = Gtk.Template.Child()
-    hidden_primary_menu_button = Gtk.Template.Child()
-    hidden_library = Gtk.Template.Child()
-    hidden_library_view = Gtk.Template.Child()
-    hidden_scrolledwindow = Gtk.Template.Child()
-    hidden_library_overlay = Gtk.Template.Child()
-    hidden_notice_empty = Gtk.Template.Child()
-    hidden_notice_no_results = Gtk.Template.Child()
-    hidden_search_bar = Gtk.Template.Child()
-    hidden_search_entry = Gtk.Template.Child()
-    hidden_search_button = Gtk.Template.Child()
+    hidden_library_page: Adw.NavigationPage = Gtk.Template.Child()
+    hidden_primary_menu_button: Gtk.MenuButton = Gtk.Template.Child()
+    hidden_library: Gtk.FlowBox = Gtk.Template.Child()
+    hidden_library_view: Adw.ToolbarView = Gtk.Template.Child()
+    hidden_scrolledwindow: Gtk.ScrolledWindow = Gtk.Template.Child()
+    hidden_library_overlay: Gtk.Overlay = Gtk.Template.Child()
+    hidden_notice_empty: Adw.StatusPage = Gtk.Template.Child()
+    hidden_notice_no_results: Adw.StatusPage = Gtk.Template.Child()
+    hidden_search_bar: Gtk.SearchBar = Gtk.Template.Child()
+    hidden_search_entry: Gtk.SearchEntry = Gtk.Template.Child()
+    hidden_search_button: Gtk.ToggleButton = Gtk.Template.Child()
 
     game_covers: dict = {}
     toasts: dict = {}
@@ -152,6 +156,8 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 Gtk.Label(
                     label=self.get_application().get_source_name(source_id),
                     halign=Gtk.Align.START,
+                    wrap=True,
+                    wrap_mode=Pango.WrapMode.CHAR,
                 )
             )
 
@@ -212,6 +218,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
+
+        if platform == "darwin":
+            self.sidebar_navigation_page.set_title("")
 
         self.details_view.set_measure_overlay(self.details_view_toolbar_view, True)
         self.details_view.set_clip_overlay(self.details_view_toolbar_view, False)
@@ -443,6 +452,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.navigation_view.pop_to_page(self.library_page)
 
     def on_show_hidden_action(self, *_args: Any) -> None:
+        if self.navigation_view.get_visible_page() == self.hidden_library_page:
+            return
+
         self.navigation_view.push(self.hidden_library_page)
 
     def on_sort_action(self, action: Gio.SimpleAction, state: GLib.Variant) -> None:

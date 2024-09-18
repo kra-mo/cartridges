@@ -125,6 +125,8 @@ class URLExecutableSource(ExecutableFormatSource):
                 return "start " + self.url_format
             case "linux":
                 return "xdg-open " + self.url_format
+            case "darwin":
+                return "open " + self.url_format
             case other:
                 raise NotImplementedError(
                     f"No URL handler command available for {other}"

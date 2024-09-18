@@ -1,7 +1,11 @@
-project('cartridges',
-          version: '2.8.3',
-    meson_version: '>= 0.59.0',
-  default_options: [ 'warning_level=2', 'werror=false', ],
+project(
+  'cartridges',
+  version: '2.9.3',
+  meson_version: '>= 0.59.0',
+  default_options: [
+    'warning_level=2',
+    'werror=false',
+  ],
 )
 
 # Translations are broken on Windows for multiple reasons
@@ -23,7 +27,7 @@ profile = get_option('profile')
 if profile == 'development'
   app_id = 'page.kramo.Cartridges.Devel'
   prefix = '/page/kramo/Cartridges/Devel'
-elif profile ==  'release'
+elif profile == 'release'
   app_id = 'page.kramo.Cartridges'
   prefix = '/page/kramo/Cartridges'
 endif
@@ -44,14 +48,14 @@ subdir('data')
 subdir('cartridges')
 
 if host_machine.system() == 'windows'
-  subdir('windows')
+  subdir('build-aux/windows')
 else
   subdir('search-provider')
   subdir('po')
 endif
 
 gnome.post_install(
-     glib_compile_schemas: true,
-    gtk_update_icon_cache: true,
+  glib_compile_schemas: true,
+  gtk_update_icon_cache: true,
   update_desktop_database: true,
 )

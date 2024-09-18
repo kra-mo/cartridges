@@ -15,10 +15,10 @@ AppSupportURL=https://github.com/kra-mo/cartridges/issues
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf64}\{#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=..\..\LICENSE
+LicenseFile=..\..\..\LICENSE
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=Cartridges Setup
-SetupIconFile=..\..\windows\icon.ico
+OutputBaseFilename=Cartridges Windows
+SetupIconFile=..\..\..\build-aux\windows\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -49,7 +49,7 @@ Source: "D:\a\_temp\msys64\ucrt64\share\icons\*"; DestDir: "{app}\share\icons"; 
 Source: "D:\a\_temp\msys64\ucrt64\share\glib-2.0\*"; DestDir: "{app}\share\glib-2.0"; Flags: recursesubdirs ignoreversion
 Source: "D:\a\_temp\msys64\ucrt64\share\gtk-4.0\*"; DestDir: "{app}\share\gtk-4.0"; Flags: recursesubdirs ignoreversion
 
-Source: "..\..\windows\icon.ico"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
+Source: "..\..\..\build-aux\windows\icon.ico"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"; Parameters: """{app}\bin\cartridges"""; IconFilename: "{app}\icon.ico"

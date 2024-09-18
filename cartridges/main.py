@@ -24,6 +24,7 @@ import shlex
 import sys
 from time import time
 from typing import Any, Optional
+from urllib.parse import quote
 
 import gi
 
@@ -40,7 +41,7 @@ from cartridges.importer.bottles_source import BottlesSource
 from cartridges.importer.desktop_source import DesktopSource
 from cartridges.importer.flatpak_source import FlatpakSource
 from cartridges.importer.heroic_source import HeroicSource
-from cartridges.importer.importer import Importer
+from cartridges.importer.importer import Importer  # yo dawg
 from cartridges.importer.itch_source import ItchSource
 from cartridges.importer.legendary_source import LegendarySource
 from cartridges.importer.lutris_source import LutrisSource
@@ -56,6 +57,12 @@ from cartridges.store.managers.steam_api_manager import SteamAPIManager
 from cartridges.store.store import Store
 from cartridges.utils.run_executable import run_executable
 from cartridges.window import CartridgesWindow
+
+if sys.platform == "darwin":
+    from AppKit import NSApp  # type: ignore
+    from PyObjCTools import AppHelper
+
+    from cartridges.application_delegate import ApplicationDelegate
 
 
 class CartridgesApplication(Adw.Application):
@@ -87,10 +94,28 @@ class CartridgesApplication(Adw.Application):
 
         self.add_main_option_entries((search, launch))
 
+        if sys.platform == "darwin":
+            if settings := Gtk.Settings.get_default():
+                settings.props.gtk_decoration_layout = "close,minimize,maximize:"
+
+            def setup_app_delegate() -> None:
+                NSApp.setDelegate_(ApplicationDelegate.alloc().init())  # type: ignore
+                AppHelper.runEventLoop()  # type: ignore
+
+            GLib.Thread.new(None, setup_app_delegate)
+
     def do_activate(self) -> None:  # pylint: disable=arguments-differ
         """Called on app creation"""
 
-        setup_logging()
+        if os.getenv("XDG_CURRENT_DESKOP") == "COSMIC":
+            Gio.AppInfo.launch_default_for_uri("https://stopthemingmy.app")
+            self.quit()
+
+        try:
+            setup_logging()
+        except ValueError:
+            pass
+
         log_system_info()
 
         # Set fallback icon-name
@@ -280,7 +305,7 @@ class CartridgesApplication(Adw.Application):
         _parameter: Any = None,
         page_name: Optional[str] = None,
         expander_row: Optional[str] = None,
-    ) -> CartridgesWindow:
+    ) -> Optional[CartridgesPreferences]:
         if CartridgesPreferences.is_open:
             return
 
@@ -303,6 +328,9 @@ class CartridgesApplication(Adw.Application):
         DetailsDialog(shared.win.active_game).present(shared.win)
 
     def on_add_game_action(self, *_args: Any) -> None:
+        if DetailsDialog.is_open:
+            return
+
         DetailsDialog().present(shared.win)
 
     def on_import_action(self, *_args: Any) -> None:
@@ -345,7 +373,7 @@ class CartridgesApplication(Adw.Application):
             self.on_remove_game_action()
 
     def search(self, uri: str) -> None:
-        Gio.AppInfo.launch_default_for_uri(f"{uri}{shared.win.active_game.name}")
+        Gio.AppInfo.launch_default_for_uri(f"{uri}{quote(shared.win.active_game.name)}")
 
     def on_igdb_search_action(self, *_args: Any) -> None:
         self.search("https://www.igdb.com/search?type=1&q=")
@@ -375,7 +403,11 @@ class CartridgesApplication(Adw.Application):
             if action[1:2]:
                 self.set_accels_for_action(
                     f"app.{action[0]}" if scope == self else f"win.{action[0]}",
-                    action[1],
+                    (
+                        tuple(s.replace("<primary>", "<meta>") for s in action[1])
+                        if sys.platform == "darwin"
+                        else action[1]
+                    ),
                 )
 
             scope.add_action(simple_action)

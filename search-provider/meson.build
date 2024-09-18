@@ -7,19 +7,19 @@ configure_file(
   input: 'cartridges-search-provider.in',
   output: 'cartridges-search-provider',
   configuration: conf,
-  install_dir: libexecdir
+  install_dir: libexecdir,
 )
 
 configure_file(
   input: 'page.kramo.Cartridges.SearchProvider.service.in',
   output: app_id + '.SearchProvider.service',
   configuration: conf,
-  install_dir: service_dir
+  install_dir: service_dir,
 )
 
 configure_file(
   input: 'page.kramo.Cartridges.SearchProvider.ini',
   output: app_id + '.SearchProvider.ini',
   configuration: conf,
-  install_dir: serarch_provider_dir
+  install_dir: serarch_provider_dir,
 )

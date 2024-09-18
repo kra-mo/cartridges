@@ -2,7 +2,7 @@
 
 # cartridges.in
 #
-# Copyright 2022-2023 kramo
+# Copyright 2022-2024 kramo
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,6 +24,8 @@ import locale
 import os
 import signal
 import sys
+from pathlib import Path
+from platform import system
 
 VERSION = "@VERSION@"
 
@@ -36,7 +38,7 @@ else:
 sys.path.insert(1, PKGDATADIR)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-if os.name != "nt":
+if system() == "Linux":
     locale.bindtextdomain("cartridges", LOCALEDIR)
     locale.textdomain("cartridges")
     gettext.install("cartridges", LOCALEDIR)
@@ -44,9 +46,15 @@ else:
     gettext.install("cartridges")
 
 if __name__ == "__main__":
-    from gi.repository import Gio
+    from gi.repository import Gio, GLib
 
-    resource = Gio.Resource.load(os.path.join(PKGDATADIR, "cartridges.gresource"))
+    try:
+        # For a macOS application bundle
+        resource = Gio.Resource.load(
+            str(Path(__file__).parent / "Resources" / "cartridges.gresource")
+        )
+    except GLib.GError:
+        resource = Gio.Resource.load(os.path.join(PKGDATADIR, "cartridges.gresource"))
     resource._register()  # pylint: disable=protected-access
 
     from cartridges import main

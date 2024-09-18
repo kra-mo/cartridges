@@ -65,11 +65,9 @@ Thank you for your generosity! 💜
 
 ## Linux
 
-### Flathub
-
 The app is available on Flathub.
 
-<a href=https://flathub.org/apps/page.kramo.Cartridges><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+<a href=https://flathub.org/apps/page.kramo.Cartridges><img alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en'/></a>
 
 ## Windows
 
@@ -83,6 +81,13 @@ Note: Windows might present you with a warning when trying to install the app. T
 ### Winget
 
 Install the latest release with the command: `winget install cartridges`.
+
+## macOS
+
+1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
+2. Move the app into your Applications folder.
+
+Note: macOS might tell you that the application could not be checked for malicious software or something similar. In this case, open System Settings > Privacy & Security, scroll down, find the warning about Cartridges and click "Open Anyway". More information can be found [here](https://support.apple.com/en-us/102445).
 
 ## Building manually
 
