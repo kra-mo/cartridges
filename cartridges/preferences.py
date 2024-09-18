@@ -112,12 +112,11 @@ class CartridgesPreferences(Adw.PreferencesDialog):
     sgdb_animated_switch: Adw.SwitchRow = Gtk.Template.Child()
     sgdb_fetch_button: Gtk.Button = Gtk.Template.Child()
     sgdb_stack: Gtk.Stack = Gtk.Template.Child()
-    sgdb_spinner: Gtk.Spinner = Gtk.Template.Child()
+    sgdb_spinner: Adw.Spinner = Gtk.Template.Child()
 
-    danger_zone_group: Adw.PreferencesGroup = Gtk.Template.Child()
-    remove_all_games_list_box: Gtk.ListBox = Gtk.Template.Child()
-    reset_list_box: Gtk.ListBox = Gtk.Template.Child()
-    reset_group: Adw.PreferencesGroup = Gtk.Template.Child()
+    danger_zone_group = Gtk.Template.Child()
+    remove_all_games_button_row = Gtk.Template.Child()
+    reset_button_row = Gtk.Template.Child()
 
     removed_games: set[Game] = set()
     warning_menu_buttons: dict = {}
@@ -147,12 +146,12 @@ class CartridgesPreferences(Adw.PreferencesDialog):
         self.add_controller(shortcut_controller)
 
         # General
-        self.remove_all_games_list_box.connect("row-activated", self.remove_all_games)
+        self.remove_all_games_button_row.connect("activated", self.remove_all_games)
 
         # Debug
         if shared.PROFILE == "development":
-            self.reset_group.set_visible(True)
-            self.reset_list_box.connect("row-activated", self.reset_app)
+            self.reset_button_row.set_visible(True)
+            self.reset_button_row.connect("activated", self.reset_app)
 
         # Sources settings
         for source_class in (
@@ -197,7 +196,7 @@ class CartridgesPreferences(Adw.PreferencesDialog):
             sgdb_manager = shared.store.managers[SgdbManager]
             sgdb_manager.reset_cancellable()
 
-            self.sgdb_spinner.set_spinning(True)
+            self.sgdb_spinner.set_visible(True)
             self.sgdb_stack.set_visible_child(self.sgdb_spinner)
 
             self.add_toast(download_toast := Adw.Toast.new(_("Downloading covers…")))
@@ -224,7 +223,7 @@ class CartridgesPreferences(Adw.PreferencesDialog):
                 download_toast.dismiss()
                 self.add_toast(toast)
 
-                self.sgdb_spinner.set_spinning(False)
+                self.sgdb_spinner.set_visible(False)
                 self.sgdb_stack.set_visible_child(self.sgdb_fetch_button)
 
             for game in shared.store:

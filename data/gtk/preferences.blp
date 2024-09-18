@@ -33,76 +33,21 @@ template $CartridgesPreferences: Adw.PreferencesDialog {
 
     Adw.PreferencesGroup danger_zone_group {
       title: _("Danger Zone");
+      separate-rows: true;
 
-      ListBox remove_all_games_list_box {
-        Adw.PreferencesRow {
-          activatable: true;
-          selectable: false;
-
-          Box {
-            spacing: 6;
-            valign: center;
-            halign: center;
-
-            Label {
-              label: _("Remove All Games");
-              ellipsize: end;
-
-              styles [
-                "heading",
-              ]
-            }
-
-            styles [
-              "header",
-            ]
-          }
-
-          styles [
-            "error",
-          ]
-        }
+      Adw.ButtonRow remove_all_games_button_row {
+        title: _("Remove All Games");
 
         styles [
-          "boxed-list",
+          "destructive-action"
         ]
       }
-    }
 
-    Adw.PreferencesGroup reset_group {
-      visible: false;
-
-      ListBox reset_list_box {
-        Adw.PreferencesRow {
-          activatable: true;
-          selectable: false;
-
-          Box {
-            spacing: 6;
-            valign: center;
-            halign: center;
-
-            Label {
-              label: "Reset App";
-              ellipsize: end;
-
-              styles [
-                "heading",
-              ]
-            }
-
-            styles [
-              "header",
-            ]
-          }
-
-          styles [
-            "error",
-          ]
-        }
+      Adw.ButtonRow reset_button_row {
+        title: _("Reset App");
 
         styles [
-          "boxed-list",
+          "destructive-action"
         ]
       }
     }
@@ -123,6 +68,7 @@ template $CartridgesPreferences: Adw.PreferencesDialog {
 
     Adw.PreferencesGroup sources_group {
       title: _("Sources");
+      separate-rows: true;
 
       Adw.ExpanderRow steam_expander_row {
         title: _("Steam");
@@ -440,7 +386,8 @@ template $CartridgesPreferences: Adw.PreferencesDialog {
             valign: center;
           }
 
-          Spinner sgdb_spinner {
+          Adw.Spinner sgdb_spinner {
+            visible: false;
             valign: center;
           }
         }

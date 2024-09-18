@@ -60,7 +60,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
     details_page: Adw.NavigationPage = Gtk.Template.Child()
     details_view_toolbar_view: Adw.ToolbarView = Gtk.Template.Child()
     details_view_cover: Gtk.Picture = Gtk.Template.Child()
-    details_view_spinner: Gtk.Spinner = Gtk.Template.Child()
+    details_view_spinner: Adw.Spinner = Gtk.Template.Child()
     details_view_title: Gtk.Label = Gtk.Template.Child()
     details_view_blurred_cover: Gtk.Picture = Gtk.Template.Child()
     details_view_play_button: Gtk.Button = Gtk.Template.Child()
@@ -351,7 +351,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
         self.active_game = game
 
         self.details_view_cover.set_opacity(int(not game.loading))
-        self.details_view_spinner.set_spinning(game.loading)
+        self.details_view_spinner.set_visible(game.loading)
 
         self.details_view_developer.set_label(game.developer or "")
         self.details_view_developer.set_visible(bool(game.developer))
