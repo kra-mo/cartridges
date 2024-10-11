@@ -285,7 +285,7 @@ class DetailsDialog(Adw.Dialog):
 
     def toggle_loading(self) -> None:
         self.apply_button.set_sensitive(not self.apply_button.get_sensitive())
-        self.spinner.set_visible(not self.spinner.get_spinning())
+        self.spinner.set_visible(not self.spinner.get_visible())
         self.cover_overlay.set_opacity(not self.cover_overlay.get_opacity())
 
     def set_cover(self, _source: Any, result: Gio.Task, *_args: Any) -> None:
