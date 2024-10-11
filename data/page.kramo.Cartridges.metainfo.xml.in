@@ -54,6 +54,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="2.10.1" date="2024-10-11">
+      <description translate="no">
+        <p>Fixed an issue with manually changing game cover art</p>
+      </description>
+    </release>
     <release version="2.10.0" date="2024-09-18">
       <description translate="no">
         <p>Updated for GNOME 47</p>
