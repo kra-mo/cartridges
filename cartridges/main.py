@@ -288,7 +288,7 @@ class CartridgesApplication(Adw.Application):
         about.set_designers(("kramo https://kramo.page",))
         about.set_copyright("© 2022-2024 kramo")
         # Translators: Replace this with your name for it to show up in the about window
-        about.set_translator_credits = (_("translator_credits"),)
+        about.set_translator_credits = (_("translator-credits"),)
         about.set_debug_info(debug_str)
         about.set_debug_info_filename("cartridges.log")
         about.add_legal_section(

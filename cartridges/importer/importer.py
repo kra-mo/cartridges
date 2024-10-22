@@ -18,6 +18,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import gettext
 import logging
 from time import time
 from typing import Any, Optional
@@ -32,7 +33,6 @@ from cartridges.importer.location import UnresolvableLocationError
 from cartridges.importer.source import Source
 from cartridges.store.managers.async_manager import AsyncManager
 from cartridges.store.pipeline import Pipeline
-
 
 # pylint: disable=too-many-instance-attributes
 class Importer(ErrorProducer):
@@ -376,20 +376,13 @@ class Importer(ErrorProducer):
                     "import",
                 )
 
-        elif self.n_games_added == 1:
-            toast_title = _("1 game imported")
+        elif self.n_games_added >= 1:
+            # The variable is the number of games imported
+            toast_title = gettext.ngettext("1 game imported", "{} games imported", self.n_games_added).format(self.n_games_added)
 
-        elif self.n_games_added > 1:
-            # The variable is the number of games
-            toast_title = _("{} games imported").format(self.n_games_added)
-
-        if (removed_length := len(self.removed_game_ids)) == 1:
-            # A single game removed
-            toast_title += ", " + _("1 removed")
-
-        elif removed_length > 1:
+        if (removed_length := len(self.removed_game_ids)) >= 1:
             # The variable is the number of games removed
-            toast_title += ", " + _("{} removed").format(removed_length)
+            toast_title += ", " + gettext.ngettext("1 removed", "{} removed", removed_length).format(removed_length)
 
         if self.n_games_added or self.removed_game_ids:
             toast.set_button_label(_("Undo"))
