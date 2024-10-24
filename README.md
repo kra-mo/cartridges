@@ -57,7 +57,7 @@ Cartridges is an easy-to-use, elegant game launcher written in Python using GTK4
 For updates and questions, join our [Discord server][discord-url] (bridged to [Matrix](https://matrix.to/#/#cartridges:matrix.org))!
 
 ## Donations
-I accept donations through [GitHub Sponsors](https://github.com/sponsors/kra-mo).
+I accept donations through [GitHub Sponsors](https://github.com/sponsors/kra-mo) and [Liberapay](https://liberapay.com/kramo).
 
 Thank you for your generosity! 💜
 
