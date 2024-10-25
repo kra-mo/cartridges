@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 12:57+0200\n"
+"POT-Creation-Date: 2024-10-25 21:54+0200\n"
 "PO-Revision-Date: 2024-01-28 19:06+0000\n"
 "Last-Translator: Float <float.hu+@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -435,9 +435,8 @@ msgstr "多久响一次"
 msgid "{} launched"
 msgstr "{} 已启动"
 
-#. Translators: Replace this with your name for it to show up in the about window
+#. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
-#, fuzzy
 msgid "translator-credits"
 msgstr "译者名单"
 

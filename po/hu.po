@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 12:57+0200\n"
+"POT-Creation-Date: 2024-10-25 21:54+0200\n"
 "PO-Revision-Date: 2024-03-23 19:56+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
@@ -437,11 +437,10 @@ msgstr "HowLongToBeat"
 msgid "{} launched"
 msgstr "{} elindítva"
 
-#. Translators: Replace this with your name for it to show up in the about window
+#. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
-#, fuzzy
 msgid "translator-credits"
-msgstr "Meskó Balázs <mesko dot balazs at fsf dot hu>, 2024."
+msgstr "Meskó Balázs <mesko.balazs@fsf.hu>"
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:382

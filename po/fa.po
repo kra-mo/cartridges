@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 12:57+0200\n"
+"POT-Creation-Date: 2024-10-25 21:54+0200\n"
 "PO-Revision-Date: 2024-07-14 20:09+0000\n"
 "Last-Translator: آوید <avds+git@disroot.org>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/cartridges/"
@@ -436,9 +436,8 @@ msgstr "HowLongToBeat"
 msgid "{} launched"
 msgstr "{} اجرا شد"
 
-#. Translators: Replace this with your name for it to show up in the about window
+#. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
-#, fuzzy
 msgid "translator-credits"
 msgstr "دانیال بهزادی <dani.behzi@ubuntu.com>"
 
