@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 14:23+0100\n"
+"POT-Creation-Date: 2024-10-31 14:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -195,10 +195,6 @@ msgstr ""
 
 #: data/gtk/preferences.blp:39
 msgid "Remove All Games"
-msgstr ""
-
-#: data/gtk/preferences.blp:47
-msgid "Reset App"
 msgstr ""
 
 #: data/gtk/preferences.blp:65
