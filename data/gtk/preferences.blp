@@ -44,7 +44,7 @@ template $CartridgesPreferences: Adw.PreferencesDialog {
       }
 
       Adw.ButtonRow reset_button_row {
-        title: _("Reset App");
+        title: "Reset App";
 
         styles [
           "destructive-action"
@@ -60,6 +60,10 @@ template $CartridgesPreferences: Adw.PreferencesDialog {
 
     Adw.PreferencesGroup import_behavior_group {
       title: _("Behavior");
+
+      Adw.SwitchRow auto_import_switch {
+        title: _("Import Games Automatically");
+      }
 
       Adw.SwitchRow remove_missing_switch {
         title: _("Remove Uninstalled Games");

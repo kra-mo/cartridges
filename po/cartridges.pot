@@ -9,6 +9,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 21:54+0200\n"
+"POT-Creation-Date: 2024-10-31 14:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +59,7 @@ msgstr ""
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:321 cartridges/importer/importer.py:371
+#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
 msgstr ""
 
@@ -124,7 +125,7 @@ msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:136 cartridges/importer/importer.py:388
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:394
 msgid "Undo"
 msgstr ""
 
@@ -162,7 +163,7 @@ msgid "Remove Game"
 msgstr ""
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
-#: data/gtk/preferences.blp:361
+#: data/gtk/preferences.blp:365
 msgid "Behavior"
 msgstr ""
 
@@ -198,6 +199,7 @@ msgstr ""
 msgid "Remove All Games"
 msgstr ""
 
+<<<<<<< HEAD
 #: data/gtk/preferences.blp:47
 msgid "Reset App"
 msgstr ""
@@ -222,6 +224,31 @@ msgid "Install Location"
 msgstr ""
 
 #: data/gtk/preferences.blp:101 data/gtk/window.blp:565
+=======
+#: data/gtk/preferences.blp:65
+msgid "Import Games Automatically"
+msgstr ""
+
+#: data/gtk/preferences.blp:69
+msgid "Remove Uninstalled Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:74
+msgid "Sources"
+msgstr ""
+
+#: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
+msgid "Steam"
+msgstr ""
+
+#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
+#: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
+#: data/gtk/preferences.blp:273
+msgid "Install Location"
+msgstr ""
+
+#: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
 msgstr ""
@@ -271,15 +298,62 @@ msgid "RetroArch"
 msgstr ""
 
 #: data/gtk/preferences.blp:287 cartridges/importer/flatpak_source.py:143
+=======
+#: data/gtk/preferences.blp:131
+msgid "Import Steam Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:135
+msgid "Import Flatpak Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
+msgid "Heroic"
+msgstr ""
+
+#: data/gtk/preferences.blp:166
+msgid "Import Epic Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:170
+msgid "Import GOG Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:174
+msgid "Import Amazon Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:178
+msgid "Import Sideloaded Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
+msgid "Bottles"
+msgstr ""
+
+#: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
+msgid "itch"
+msgstr ""
+
+#: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
+msgid "Legendary"
+msgstr ""
+
+#: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
+msgid "RetroArch"
+msgstr ""
+
+#: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
 msgstr ""
 
 #. The location of the system-wide data directory
-#: data/gtk/preferences.blp:297
+#: data/gtk/preferences.blp:301
 msgid "System Location"
 msgstr ""
 
 #. The location of the user-specific data directory
+<<<<<<< HEAD
 #: data/gtk/preferences.blp:315
 msgid "User Location"
 msgstr ""
@@ -329,6 +403,56 @@ msgid "Fetch covers for games already in your library"
 msgstr ""
 
 #: data/gtk/preferences.blp:385
+=======
+#: data/gtk/preferences.blp:319
+msgid "User Location"
+msgstr ""
+
+#: data/gtk/preferences.blp:336
+msgid "Import Game Launchers"
+msgstr ""
+
+#: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
+msgid "Desktop Entries"
+msgstr ""
+
+#: data/gtk/preferences.blp:353 data/gtk/window.blp:563
+msgid "SteamGridDB"
+msgstr ""
+
+#: data/gtk/preferences.blp:357
+msgid "Authentication"
+msgstr ""
+
+#: data/gtk/preferences.blp:360
+msgid "API Key"
+msgstr ""
+
+#: data/gtk/preferences.blp:368
+msgid "Use SteamGridDB"
+msgstr ""
+
+#: data/gtk/preferences.blp:369
+msgid "Download images when adding or importing games"
+msgstr ""
+
+#: data/gtk/preferences.blp:373
+msgid "Prefer Over Official Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:377
+msgid "Prefer Animated Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:383
+msgid "Update Covers"
+msgstr ""
+
+#: data/gtk/preferences.blp:384
+msgid "Fetch covers for games already in your library"
+msgstr ""
+
+#: data/gtk/preferences.blp:389
 msgid "Update"
 msgstr ""
 
@@ -429,6 +553,7 @@ msgstr ""
 msgid "{} launched"
 msgstr ""
 
+<<<<<<< HEAD
 #. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
 msgid "translator-credits"
@@ -527,15 +652,23 @@ msgstr ""
 msgid "{} removed"
 msgstr ""
 
+<<<<<<< HEAD
 #: cartridges/preferences.py:135
 msgid "All games removed"
 msgstr ""
 
 #: cartridges/preferences.py:187
+=======
+#: cartridges/preferences.py:136
+msgid "All games removed"
+msgstr ""
+
+#: cartridges/preferences.py:188
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 
+<<<<<<< HEAD
 #: cartridges/preferences.py:202
 msgid "Downloading covers…"
 msgstr ""
@@ -561,6 +694,32 @@ msgid "Invalid Directory"
 msgstr ""
 
 #: cartridges/preferences.py:445
+=======
+#: cartridges/preferences.py:203
+msgid "Downloading covers…"
+msgstr ""
+
+#: cartridges/preferences.py:222
+msgid "Covers updated"
+msgstr ""
+
+#: cartridges/preferences.py:370
+msgid "Installation Not Found"
+msgstr ""
+
+#: cartridges/preferences.py:371
+msgid "Select a valid directory"
+msgstr ""
+
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
+msgid "Warning"
+msgstr ""
+
+#: cartridges/preferences.py:441
+msgid "Invalid Directory"
+msgstr ""
+
+#: cartridges/preferences.py:447
 msgid "Set Location"
 msgstr ""
 

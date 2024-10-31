@@ -106,7 +106,6 @@ class Importer(ErrorProducer):
 
     def run(self) -> None:
         """Use several Gio.Task to import games from added sources"""
-
         shared.win.get_application().state = shared.AppState.IMPORT
 
         if self.__class__.summary_toast:
@@ -137,6 +136,7 @@ class Importer(ErrorProducer):
             )
 
         self.progress_changed_callback()
+        GLib.timeout_add(100, self.__watchdog)
 
     def create_dialog(self) -> None:
         """Create the import dialog"""
@@ -281,8 +281,7 @@ class Importer(ErrorProducer):
         shared.store.duplicate_game_ids = set()
         # Disconnect the close-attempt signal that closes the main window
         self.import_dialog.disconnect(self.close_attempt_id)
-        # Stupid hack because stupid libadwaita is stupid
-        GLib.timeout_add(50, self.import_dialog.force_close)
+        self.import_dialog.force_close()
         self.__class__.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
         shared.win.get_application().lookup_action("import").set_enabled(True)
@@ -390,7 +389,13 @@ class Importer(ErrorProducer):
 
         toast.set_title(toast_title)
 
-        shared.win.toast_overlay.add_toast(toast)
+        if not (
+            self.n_games_added == 0
+            and removed_length == 0
+            and shared.schema.get_boolean("auto-import")
+        ):
+            shared.win.toast_overlay.add_toast(toast)
+
         return toast
 
     def open_preferences(
@@ -416,3 +421,11 @@ class Importer(ErrorProducer):
             self.open_preferences(*args).connect("close-request", self.timeout_toast)
         else:
             self.timeout_toast()
+
+    def __watchdog(self) -> bool:
+        # This can help resolve a race condition where the dialog would stay open
+        if not self.finished:
+            return True
+
+        self.import_dialog.force_close()
+        return shared.win.get_visible_dialog() == self.import_dialog
