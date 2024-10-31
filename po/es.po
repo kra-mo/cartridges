@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 21:54+0200\n"
+"POT-Creation-Date: 2024-10-31 17:38+0100\n"
 "PO-Revision-Date: 2024-02-19 06:35+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -67,7 +67,7 @@ msgstr "Editar detalles del juego"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:321 cartridges/importer/importer.py:371
+#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -133,7 +133,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Atajos del teclado"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:136 cartridges/importer/importer.py:388
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
 msgid "Undo"
 msgstr "Deshacer"
 
@@ -171,7 +171,7 @@ msgid "Remove Game"
 msgstr "Eliminar juego"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
-#: data/gtk/preferences.blp:361
+#: data/gtk/preferences.blp:365
 msgid "Behavior"
 msgstr "Comportamiento"
 
@@ -208,137 +208,137 @@ msgstr "Zona de peligro"
 msgid "Remove All Games"
 msgstr "Eliminar todos los juegos"
 
-#: data/gtk/preferences.blp:47
-msgid "Reset App"
+#: data/gtk/preferences.blp:65
+msgid "Import Games Automatically"
 msgstr ""
 
-#: data/gtk/preferences.blp:65
+#: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
 msgstr "Eliminar los juegos desinstalados"
 
-#: data/gtk/preferences.blp:70
+#: data/gtk/preferences.blp:74
 msgid "Sources"
 msgstr "Fuentes"
 
-#: data/gtk/preferences.blp:74 cartridges/importer/steam_source.py:114
+#: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:83 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:145 data/gtk/preferences.blp:188
-#: data/gtk/preferences.blp:215 data/gtk/preferences.blp:242
-#: data/gtk/preferences.blp:269
+#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
+#: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
+#: data/gtk/preferences.blp:273
 msgid "Install Location"
 msgstr "Ruta de instalación"
 
-#: data/gtk/preferences.blp:101 data/gtk/window.blp:565
+#: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
 msgstr "Lutris"
 
-#: data/gtk/preferences.blp:127
+#: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
 msgstr "Importar juegos de Steam"
 
-#: data/gtk/preferences.blp:131
+#: data/gtk/preferences.blp:135
 msgid "Import Flatpak Games"
 msgstr "Importar juegos Flatpak"
 
-#: data/gtk/preferences.blp:136 cartridges/importer/heroic_source.py:355
+#: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:162
+#: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
 msgstr "Importar juegos de Epic"
 
-#: data/gtk/preferences.blp:166
+#: data/gtk/preferences.blp:170
 msgid "Import GOG Games"
 msgstr "Importar juegos de GOG"
 
-#: data/gtk/preferences.blp:170
+#: data/gtk/preferences.blp:174
 msgid "Import Amazon Games"
 msgstr "Importar juegos de Amazon"
 
-#: data/gtk/preferences.blp:174
+#: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
 msgstr "Importar juegos descargados"
 
-#: data/gtk/preferences.blp:179 cartridges/importer/bottles_source.py:86
+#: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:206 cartridges/importer/itch_source.py:81
+#: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:233 cartridges/importer/legendary_source.py:97
+#: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
 msgstr "Legendario"
 
-#: data/gtk/preferences.blp:260 cartridges/importer/retroarch_source.py:142
+#: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
 msgstr "RetroArch"
 
-#: data/gtk/preferences.blp:287 cartridges/importer/flatpak_source.py:143
+#: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
 msgstr "Flatpak"
 
 #. The location of the system-wide data directory
-#: data/gtk/preferences.blp:297
+#: data/gtk/preferences.blp:301
 msgid "System Location"
 msgstr "Ubicación del sistema"
 
 #. The location of the user-specific data directory
-#: data/gtk/preferences.blp:315
+#: data/gtk/preferences.blp:319
 msgid "User Location"
 msgstr "Ubicación del usuario"
 
-#: data/gtk/preferences.blp:332
+#: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
 msgstr "Importar lanzadores de juegos"
 
-#: data/gtk/preferences.blp:337 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "Entradas de escritorio"
 
-#: data/gtk/preferences.blp:349 data/gtk/window.blp:563
+#: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:353
+#: data/gtk/preferences.blp:357
 msgid "Authentication"
 msgstr "Autenticación"
 
-#: data/gtk/preferences.blp:356
+#: data/gtk/preferences.blp:360
 msgid "API Key"
 msgstr "Clave API"
 
-#: data/gtk/preferences.blp:364
+#: data/gtk/preferences.blp:368
 msgid "Use SteamGridDB"
 msgstr "Usar SteamGridDB"
 
-#: data/gtk/preferences.blp:365
+#: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
 msgstr "Descargar las imágenes al añadir o importar juegos"
 
-#: data/gtk/preferences.blp:369
+#: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
 msgstr "Preferir las imágenes oficiales"
 
-#: data/gtk/preferences.blp:373
+#: data/gtk/preferences.blp:377
 msgid "Prefer Animated Images"
 msgstr "Prefiero las imágenes animadas"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:383
 msgid "Update Covers"
 msgstr "Actualizar las portadas"
 
-#: data/gtk/preferences.blp:380
+#: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
 msgstr "Busca las portadas de los juegos de su biblioteca"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:389
 msgid "Update"
 msgstr "Actualizar"
 
@@ -546,46 +546,46 @@ msgstr "{} visible"
 msgid "{} removed"
 msgstr "{} eliminado"
 
-#: cartridges/preferences.py:135
+#: cartridges/preferences.py:136
 msgid "All games removed"
 msgstr "Todos los juegos eliminados"
 
-#: cartridges/preferences.py:187
+#: cartridges/preferences.py:188
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Se necesita una clave API para utilizar SteamGridDB. Puedes generar una {}"
 "aquí{}."
 
-#: cartridges/preferences.py:202
+#: cartridges/preferences.py:203
 msgid "Downloading covers…"
 msgstr "Descargando las portadas…"
 
-#: cartridges/preferences.py:221
+#: cartridges/preferences.py:222
 msgid "Covers updated"
 msgstr "Portadas actualizadas"
 
-#: cartridges/preferences.py:368
+#: cartridges/preferences.py:370
 msgid "Installation Not Found"
 msgstr "Instalación no encontrada"
 
-#: cartridges/preferences.py:369
+#: cartridges/preferences.py:371
 msgid "Select a valid directory"
 msgstr "Seleccione un directorio válido"
 
-#: cartridges/preferences.py:405 cartridges/importer/importer.py:319
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
 msgid "Warning"
 msgstr "Advertencia"
 
-#: cartridges/preferences.py:439
+#: cartridges/preferences.py:441
 msgid "Invalid Directory"
 msgstr "Directorio no válido"
 
-#: cartridges/preferences.py:445
+#: cartridges/preferences.py:447
 msgid "Set Location"
 msgstr "Escoger la ubicación"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:320
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
 msgid "Dismiss"
 msgstr "Descartar"
 
@@ -593,16 +593,16 @@ msgstr "Descartar"
 msgid "Importing Games…"
 msgstr "Importando juegos…"
 
-#: cartridges/importer/importer.py:339
+#: cartridges/importer/importer.py:338
 msgid "The following errors occured during import:"
 msgstr "Han sucedido los siguientes fallos durante la importación:"
 
-#: cartridges/importer/importer.py:368
+#: cartridges/importer/importer.py:367
 msgid "No new games found"
 msgstr "No se encontraron juegos nuevos"
 
 #. The variable is the number of games imported
-#: cartridges/importer/importer.py:381
+#: cartridges/importer/importer.py:380
 #, fuzzy
 msgid "1 game imported"
 msgid_plural "{} games imported"
@@ -610,7 +610,7 @@ msgstr[0] "1 juego importado"
 msgstr[1] "{} juegos importados"
 
 #. The variable is the number of games removed
-#: cartridges/importer/importer.py:385
+#: cartridges/importer/importer.py:384
 #, fuzzy
 msgid "1 removed"
 msgid_plural "{} removed"

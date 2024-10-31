@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 21:54+0200\n"
+"POT-Creation-Date: 2024-10-31 17:38+0100\n"
 "PO-Revision-Date: 2024-10-08 10:06+0530\n"
 "Last-Translator: Aryan Karamtoth <aryankmmiv@outlook.com>\n"
 "Language-Team: Telugu\n"
@@ -62,7 +62,7 @@ msgstr "గేమ్ వివరాలను సవరించండి"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:321 cartridges/importer/importer.py:371
+#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
 msgstr "ప్రాధాన్యతలు"
 
@@ -128,7 +128,7 @@ msgid "Keyboard Shortcuts"
 msgstr "కీబోర్డ్ సత్వరమార్గాలు"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:136 cartridges/importer/importer.py:388
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
 msgid "Undo"
 msgstr "అన్డు"
 
@@ -166,7 +166,7 @@ msgid "Remove Game"
 msgstr "గేమ్‌ని తీసివేయండి"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
-#: data/gtk/preferences.blp:361
+#: data/gtk/preferences.blp:365
 msgid "Behavior"
 msgstr "ప్రవర్తన"
 
@@ -202,137 +202,137 @@ msgstr "డేంజర్ జోన్"
 msgid "Remove All Games"
 msgstr "అన్ని ఆటలను తీసివేయండి"
 
-#: data/gtk/preferences.blp:47
-msgid "Reset App"
+#: data/gtk/preferences.blp:65
+msgid "Import Games Automatically"
 msgstr ""
 
-#: data/gtk/preferences.blp:65
+#: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
 msgstr "అన్‌ఇన్‌స్టాల్ చేసిన గేమ్‌లను తీసివేయండి"
 
-#: data/gtk/preferences.blp:70
+#: data/gtk/preferences.blp:74
 msgid "Sources"
 msgstr "మూలాలు"
 
-#: data/gtk/preferences.blp:74 cartridges/importer/steam_source.py:114
+#: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
 msgstr "స్టిం"
 
-#: data/gtk/preferences.blp:83 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:145 data/gtk/preferences.blp:188
-#: data/gtk/preferences.blp:215 data/gtk/preferences.blp:242
-#: data/gtk/preferences.blp:269
+#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
+#: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
+#: data/gtk/preferences.blp:273
 msgid "Install Location"
 msgstr "స్థానాన్ని ఇన్‌స్టాల్ చేయండి"
 
-#: data/gtk/preferences.blp:101 data/gtk/window.blp:565
+#: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
 msgstr "లుట్రిస్"
 
-#: data/gtk/preferences.blp:127
+#: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
 msgstr "స్టిం గేమ్‌లను దిగుమతి చేయండి"
 
-#: data/gtk/preferences.blp:131
+#: data/gtk/preferences.blp:135
 msgid "Import Flatpak Games"
 msgstr "ఫ్లాట్‌పాక్ గేమ్‌లను దిగుమతి చేయండి"
 
-#: data/gtk/preferences.blp:136 cartridges/importer/heroic_source.py:355
+#: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
 msgstr "హిరోఇక్"
 
-#: data/gtk/preferences.blp:162
+#: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
 msgstr "ఎపిక్ గేమ్‌లను దిగుమతి చేయండి"
 
-#: data/gtk/preferences.blp:166
+#: data/gtk/preferences.blp:170
 msgid "Import GOG Games"
 msgstr "GOG గేమ్‌లను దిగుమతి చేయండి"
 
-#: data/gtk/preferences.blp:170
+#: data/gtk/preferences.blp:174
 msgid "Import Amazon Games"
 msgstr "అమెజాన్ గేమ్‌లను దిగుమతి చేయండి"
 
-#: data/gtk/preferences.blp:174
+#: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
 msgstr "సైడ్‌లోడెడ్ గేమ్‌లను దిగుమతి చేయండి"
 
-#: data/gtk/preferences.blp:179 cartridges/importer/bottles_source.py:86
+#: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
 msgstr "బాటిల్స్"
 
-#: data/gtk/preferences.blp:206 cartridges/importer/itch_source.py:81
+#: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
 msgstr "ఇచ్చ్"
 
-#: data/gtk/preferences.blp:233 cartridges/importer/legendary_source.py:97
+#: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
 msgstr "లెజెండరీ"
 
-#: data/gtk/preferences.blp:260 cartridges/importer/retroarch_source.py:142
+#: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
 msgstr "RetroArch"
 
-#: data/gtk/preferences.blp:287 cartridges/importer/flatpak_source.py:143
+#: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
 msgstr "ఫ్లాట్‌పాక్"
 
 #. The location of the system-wide data directory
-#: data/gtk/preferences.blp:297
+#: data/gtk/preferences.blp:301
 msgid "System Location"
 msgstr "సిస్టమ్ స్థానం"
 
 #. The location of the user-specific data directory
-#: data/gtk/preferences.blp:315
+#: data/gtk/preferences.blp:319
 msgid "User Location"
 msgstr "వినియోగదారు స్థానం"
 
-#: data/gtk/preferences.blp:332
+#: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
 msgstr "దిగుమతి గేమ్ లాంచర్లు"
 
-#: data/gtk/preferences.blp:337 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "డెస్క్‌టాప్ ఎంట్రీలు"
 
-#: data/gtk/preferences.blp:349 data/gtk/window.blp:563
+#: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:353
+#: data/gtk/preferences.blp:357
 msgid "Authentication"
 msgstr "ప్రమాణీకరణ"
 
-#: data/gtk/preferences.blp:356
+#: data/gtk/preferences.blp:360
 msgid "API Key"
 msgstr "API కీ"
 
-#: data/gtk/preferences.blp:364
+#: data/gtk/preferences.blp:368
 msgid "Use SteamGridDB"
 msgstr "SteamGridDBని ఉపయోగించండి"
 
-#: data/gtk/preferences.blp:365
+#: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
 msgstr "గేమ్‌లను జోడించేటప్పుడు లేదా దిగుమతి చేస్తున్నప్పుడు చిత్రాలను డౌన్‌లోడ్ చేయండి"
 
-#: data/gtk/preferences.blp:369
+#: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
 msgstr "అధికారిక చిత్రాల కంటే ప్రాధాన్యత ఇవ్వండి"
 
-#: data/gtk/preferences.blp:373
+#: data/gtk/preferences.blp:377
 msgid "Prefer Animated Images"
 msgstr "యానిమేటెడ్ చిత్రాలకు ప్రాధాన్యత ఇవ్వండి"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:383
 msgid "Update Covers"
 msgstr "కవర్‌లను నవీకరించండి"
 
-#: data/gtk/preferences.blp:380
+#: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
 msgstr "ఇప్పటికే మీ లైబ్రరీలో ఉన్న గేమ్‌ల కోసం కవర్‌లను పొందండి"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:389
 msgid "Update"
 msgstr "నవీకరించు"
 
@@ -540,44 +540,44 @@ msgstr "{} దాచబడలేదు"
 msgid "{} removed"
 msgstr "{} తీసివేయబడింది"
 
-#: cartridges/preferences.py:135
+#: cartridges/preferences.py:136
 msgid "All games removed"
 msgstr "అన్ని గేమ్‌లు తీసివేయబడ్డాయి"
 
-#: cartridges/preferences.py:187
+#: cartridges/preferences.py:188
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr "SteamGridDBని ఉపయోగించడానికి API కీ అవసరం. మీరు {}ఇక్కడ{} ఒకదాన్ని రూపొందించవచ్చు."
 
-#: cartridges/preferences.py:202
+#: cartridges/preferences.py:203
 msgid "Downloading covers…"
 msgstr "కవర్‌లను డౌన్‌లోడ్ చేస్తోంది…"
 
-#: cartridges/preferences.py:221
+#: cartridges/preferences.py:222
 msgid "Covers updated"
 msgstr "కవర్లు నవీకరించబడ్డాయి"
 
-#: cartridges/preferences.py:368
+#: cartridges/preferences.py:370
 msgid "Installation Not Found"
 msgstr "ఇన్‌స్టాలేషన్ కనుగొనబడలేదు"
 
-#: cartridges/preferences.py:369
+#: cartridges/preferences.py:371
 msgid "Select a valid directory"
 msgstr "చెల్లుబాటు అయ్యే డైరెక్టరీని ఎంచుకోండి"
 
-#: cartridges/preferences.py:405 cartridges/importer/importer.py:319
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
 msgid "Warning"
 msgstr "హెచ్చరిక"
 
-#: cartridges/preferences.py:439
+#: cartridges/preferences.py:441
 msgid "Invalid Directory"
 msgstr "చెల్లని డైరెక్టరీ"
 
-#: cartridges/preferences.py:445
+#: cartridges/preferences.py:447
 msgid "Set Location"
 msgstr "స్థానాన్ని సెట్ చేయండి"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:320
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
 msgid "Dismiss"
 msgstr "తొలగించు"
 
@@ -585,16 +585,16 @@ msgstr "తొలగించు"
 msgid "Importing Games…"
 msgstr "గేమ్‌లను దిగుమతి చేస్తోంది..."
 
-#: cartridges/importer/importer.py:339
+#: cartridges/importer/importer.py:338
 msgid "The following errors occured during import:"
 msgstr "దిగుమతి సమయంలో క్రింది లోపాలు సంభవించాయి:"
 
-#: cartridges/importer/importer.py:368
+#: cartridges/importer/importer.py:367
 msgid "No new games found"
 msgstr "కొత్త గేమ్‌లు ఏవీ కనుగొనబడలేదు"
 
 #. The variable is the number of games imported
-#: cartridges/importer/importer.py:381
+#: cartridges/importer/importer.py:380
 #, fuzzy
 msgid "1 game imported"
 msgid_plural "{} games imported"
@@ -602,7 +602,7 @@ msgstr[0] "1 గేమ్ దిగుమతి చేయబడింది"
 msgstr[1] "{} గేమ్‌లు దిగుమతి చేయబడ్డాయి"
 
 #. The variable is the number of games removed
-#: cartridges/importer/importer.py:385
+#: cartridges/importer/importer.py:384
 #, fuzzy
 msgid "1 removed"
 msgid_plural "{} removed"

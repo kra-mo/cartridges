@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 21:54+0200\n"
+"POT-Creation-Date: 2024-10-31 17:38+0100\n"
 "PO-Revision-Date: 2024-01-28 19:06+0000\n"
 "Last-Translator: Float <float.hu+@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -64,7 +64,7 @@ msgstr "编辑游戏详情"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:321 cartridges/importer/importer.py:371
+#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
 msgstr "偏好"
 
@@ -130,7 +130,7 @@ msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:136 cartridges/importer/importer.py:388
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
 msgid "Undo"
 msgstr "撤销"
 
@@ -168,7 +168,7 @@ msgid "Remove Game"
 msgstr "移除游戏"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
-#: data/gtk/preferences.blp:361
+#: data/gtk/preferences.blp:365
 msgid "Behavior"
 msgstr "表现方式"
 
@@ -204,137 +204,137 @@ msgstr "危险区域"
 msgid "Remove All Games"
 msgstr "移除所有游戏"
 
-#: data/gtk/preferences.blp:47
-msgid "Reset App"
+#: data/gtk/preferences.blp:65
+msgid "Import Games Automatically"
 msgstr ""
 
-#: data/gtk/preferences.blp:65
+#: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
 msgstr "删除已卸载的游戏"
 
-#: data/gtk/preferences.blp:70
+#: data/gtk/preferences.blp:74
 msgid "Sources"
 msgstr "来源"
 
-#: data/gtk/preferences.blp:74 cartridges/importer/steam_source.py:114
+#: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:83 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:145 data/gtk/preferences.blp:188
-#: data/gtk/preferences.blp:215 data/gtk/preferences.blp:242
-#: data/gtk/preferences.blp:269
+#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
+#: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
+#: data/gtk/preferences.blp:273
 msgid "Install Location"
 msgstr "安装位置"
 
-#: data/gtk/preferences.blp:101 data/gtk/window.blp:565
+#: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
 msgstr "Lutris"
 
-#: data/gtk/preferences.blp:127
+#: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
 msgstr "导入 Steam 游戏"
 
-#: data/gtk/preferences.blp:131
+#: data/gtk/preferences.blp:135
 msgid "Import Flatpak Games"
 msgstr "导入 Flatpak 游戏"
 
-#: data/gtk/preferences.blp:136 cartridges/importer/heroic_source.py:355
+#: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:162
+#: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
 msgstr "导入 Epic 游戏"
 
-#: data/gtk/preferences.blp:166
+#: data/gtk/preferences.blp:170
 msgid "Import GOG Games"
 msgstr "导入 GOG 游戏"
 
-#: data/gtk/preferences.blp:170
+#: data/gtk/preferences.blp:174
 msgid "Import Amazon Games"
 msgstr "导入 Amazon 游戏"
 
-#: data/gtk/preferences.blp:174
+#: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
 msgstr "导入 Sideloaded 游戏"
 
-#: data/gtk/preferences.blp:179 cartridges/importer/bottles_source.py:86
+#: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:206 cartridges/importer/itch_source.py:81
+#: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:233 cartridges/importer/legendary_source.py:97
+#: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
 msgstr "Legendary"
 
-#: data/gtk/preferences.blp:260 cartridges/importer/retroarch_source.py:142
+#: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
 msgstr "RetroArch"
 
-#: data/gtk/preferences.blp:287 cartridges/importer/flatpak_source.py:143
+#: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
 msgstr "Flatpak"
 
 #. The location of the system-wide data directory
-#: data/gtk/preferences.blp:297
+#: data/gtk/preferences.blp:301
 msgid "System Location"
 msgstr "系统位置"
 
 #. The location of the user-specific data directory
-#: data/gtk/preferences.blp:315
+#: data/gtk/preferences.blp:319
 msgid "User Location"
 msgstr "用户位置"
 
-#: data/gtk/preferences.blp:332
+#: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
 msgstr "导入游戏启动器"
 
-#: data/gtk/preferences.blp:337 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "桌面项"
 
-#: data/gtk/preferences.blp:349 data/gtk/window.blp:563
+#: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:353
+#: data/gtk/preferences.blp:357
 msgid "Authentication"
 msgstr "身份认证"
 
-#: data/gtk/preferences.blp:356
+#: data/gtk/preferences.blp:360
 msgid "API Key"
 msgstr "API 密钥"
 
-#: data/gtk/preferences.blp:364
+#: data/gtk/preferences.blp:368
 msgid "Use SteamGridDB"
 msgstr "使用 SteamGridDB"
 
-#: data/gtk/preferences.blp:365
+#: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
 msgstr "添加或导入游戏时下载图像"
 
-#: data/gtk/preferences.blp:369
+#: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
 msgstr "偏好官方图片"
 
-#: data/gtk/preferences.blp:373
+#: data/gtk/preferences.blp:377
 msgid "Prefer Animated Images"
 msgstr "偏好可活动的图像"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:383
 msgid "Update Covers"
 msgstr "更新封面"
 
-#: data/gtk/preferences.blp:380
+#: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
 msgstr "获取您库中已有游戏的封面"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:389
 msgid "Update"
 msgstr "更新"
 
@@ -542,44 +542,44 @@ msgstr "{} 已取消隐藏"
 msgid "{} removed"
 msgstr "{} 已删除"
 
-#: cartridges/preferences.py:135
+#: cartridges/preferences.py:136
 msgid "All games removed"
 msgstr "所有游戏均已删除"
 
-#: cartridges/preferences.py:187
+#: cartridges/preferences.py:188
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr "使用 SteamGridDB 需要 API 密钥。 您可以在{}此处{}生成一个。"
 
-#: cartridges/preferences.py:202
+#: cartridges/preferences.py:203
 msgid "Downloading covers…"
 msgstr "正在下载封面…"
 
-#: cartridges/preferences.py:221
+#: cartridges/preferences.py:222
 msgid "Covers updated"
 msgstr "封面已更新"
 
-#: cartridges/preferences.py:368
+#: cartridges/preferences.py:370
 msgid "Installation Not Found"
 msgstr "未找到安装程序"
 
-#: cartridges/preferences.py:369
+#: cartridges/preferences.py:371
 msgid "Select a valid directory"
 msgstr "选择一个有效的目录。"
 
-#: cartridges/preferences.py:405 cartridges/importer/importer.py:319
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
 msgid "Warning"
 msgstr "警告"
 
-#: cartridges/preferences.py:439
+#: cartridges/preferences.py:441
 msgid "Invalid Directory"
 msgstr "无效的目录"
 
-#: cartridges/preferences.py:445
+#: cartridges/preferences.py:447
 msgid "Set Location"
 msgstr "设置位置"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:320
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
 msgid "Dismiss"
 msgstr "不考虑"
 
@@ -587,23 +587,23 @@ msgstr "不考虑"
 msgid "Importing Games…"
 msgstr "正在导入游戏…"
 
-#: cartridges/importer/importer.py:339
+#: cartridges/importer/importer.py:338
 msgid "The following errors occured during import:"
 msgstr "导入过程中出现以下错误："
 
-#: cartridges/importer/importer.py:368
+#: cartridges/importer/importer.py:367
 msgid "No new games found"
 msgstr "没有发现新游戏"
 
 #. The variable is the number of games imported
-#: cartridges/importer/importer.py:381
+#: cartridges/importer/importer.py:380
 #, fuzzy
 msgid "1 game imported"
 msgid_plural "{} games imported"
 msgstr[0] "导入 {} 款游戏"
 
 #. The variable is the number of games removed
-#: cartridges/importer/importer.py:385
+#: cartridges/importer/importer.py:384
 #, fuzzy
 msgid "1 removed"
 msgid_plural "{} removed"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 21:54+0200\n"
+"POT-Creation-Date: 2024-10-31 17:38+0100\n"
 "PO-Revision-Date: 2024-01-16 06:06+0000\n"
 "Last-Translator: Scott Anecito <scott.anecito@linux.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
@@ -68,7 +68,7 @@ msgstr "Muokkaa pelin tietoja"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:321 cartridges/importer/importer.py:371
+#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
 msgstr "Asetukset"
 
@@ -134,7 +134,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:136 cartridges/importer/importer.py:388
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
 msgid "Undo"
 msgstr "Kumoa"
 
@@ -172,7 +172,7 @@ msgid "Remove Game"
 msgstr "Poista peli"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
-#: data/gtk/preferences.blp:361
+#: data/gtk/preferences.blp:365
 msgid "Behavior"
 msgstr "Toiminta"
 
@@ -208,139 +208,139 @@ msgstr "Vaaravyöhyke"
 msgid "Remove All Games"
 msgstr "Poista kaikki pelit"
 
-#: data/gtk/preferences.blp:47
-msgid "Reset App"
+#: data/gtk/preferences.blp:65
+msgid "Import Games Automatically"
 msgstr ""
 
-#: data/gtk/preferences.blp:65
+#: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
 msgstr "Poista kaikki pelit, joiden asennus on poistettu"
 
-#: data/gtk/preferences.blp:70
+#: data/gtk/preferences.blp:74
 msgid "Sources"
 msgstr "Lähteet"
 
-#: data/gtk/preferences.blp:74 cartridges/importer/steam_source.py:114
+#: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:83 data/gtk/preferences.blp:110
-#: data/gtk/preferences.blp:145 data/gtk/preferences.blp:188
-#: data/gtk/preferences.blp:215 data/gtk/preferences.blp:242
-#: data/gtk/preferences.blp:269
+#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
+#: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
+#: data/gtk/preferences.blp:273
 msgid "Install Location"
 msgstr "Asennuspaikka"
 
-#: data/gtk/preferences.blp:101 data/gtk/window.blp:565
+#: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
 msgstr "Lutris"
 
-#: data/gtk/preferences.blp:127
+#: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
 msgstr "Tuo Steam-pelejä"
 
-#: data/gtk/preferences.blp:131
+#: data/gtk/preferences.blp:135
 msgid "Import Flatpak Games"
 msgstr "Tuo Flatpak-pelejä"
 
-#: data/gtk/preferences.blp:136 cartridges/importer/heroic_source.py:355
+#: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:162
+#: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
 msgstr "Tuo Epic-pelejä"
 
-#: data/gtk/preferences.blp:166
+#: data/gtk/preferences.blp:170
 msgid "Import GOG Games"
 msgstr "Tuo GOG-pelejä"
 
-#: data/gtk/preferences.blp:170
+#: data/gtk/preferences.blp:174
 msgid "Import Amazon Games"
 msgstr "Tuo Amazon-pelejä"
 
-#: data/gtk/preferences.blp:174
+#: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
 msgstr "Tuo Sideload-pelejä"
 
-#: data/gtk/preferences.blp:179 cartridges/importer/bottles_source.py:86
+#: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
 msgstr "Pullot"
 
-#: data/gtk/preferences.blp:206 cartridges/importer/itch_source.py:81
+#: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:233 cartridges/importer/legendary_source.py:97
+#: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
 msgstr "Legendaarinen"
 
-#: data/gtk/preferences.blp:260 cartridges/importer/retroarch_source.py:142
+#: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
 msgstr "RetroArch"
 
-#: data/gtk/preferences.blp:287 cartridges/importer/flatpak_source.py:143
+#: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
 msgstr "Flatpak"
 
 #. The location of the system-wide data directory
-#: data/gtk/preferences.blp:297
+#: data/gtk/preferences.blp:301
 #, fuzzy
 msgid "System Location"
 msgstr "Aseta sijainti"
 
 #. The location of the user-specific data directory
-#: data/gtk/preferences.blp:315
+#: data/gtk/preferences.blp:319
 #, fuzzy
 msgid "User Location"
 msgstr "Aseta sijainti"
 
-#: data/gtk/preferences.blp:332
+#: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
 msgstr "Tuo pelin käynnistimet"
 
-#: data/gtk/preferences.blp:337 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "Työpöytätietueet"
 
-#: data/gtk/preferences.blp:349 data/gtk/window.blp:563
+#: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:353
+#: data/gtk/preferences.blp:357
 msgid "Authentication"
 msgstr "Tunnistautuminen"
 
-#: data/gtk/preferences.blp:356
+#: data/gtk/preferences.blp:360
 msgid "API Key"
 msgstr "API-avain"
 
-#: data/gtk/preferences.blp:364
+#: data/gtk/preferences.blp:368
 msgid "Use SteamGridDB"
 msgstr "Käytä SteamGridDB:tä"
 
-#: data/gtk/preferences.blp:365
+#: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
 msgstr "Lataa kuvia, kun lisäät tai tuot pelejä"
 
-#: data/gtk/preferences.blp:369
+#: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
 msgstr "Mieluummin kuin virallisia kuvia"
 
-#: data/gtk/preferences.blp:373
+#: data/gtk/preferences.blp:377
 msgid "Prefer Animated Images"
 msgstr "Mieluummin animoituja kuvia"
 
-#: data/gtk/preferences.blp:379
+#: data/gtk/preferences.blp:383
 msgid "Update Covers"
 msgstr "Päivitä kannet"
 
-#: data/gtk/preferences.blp:380
+#: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
 msgstr "Nouda kuoret jo kirjastossa oleville peleille"
 
-#: data/gtk/preferences.blp:385
+#: data/gtk/preferences.blp:389
 msgid "Update"
 msgstr "Päivitä"
 
@@ -549,46 +549,46 @@ msgstr "{} palautettu näkyviin"
 msgid "{} removed"
 msgstr "{} poistettu"
 
-#: cartridges/preferences.py:135
+#: cartridges/preferences.py:136
 msgid "All games removed"
 msgstr "Kaikki pelit poistettu"
 
-#: cartridges/preferences.py:187
+#: cartridges/preferences.py:188
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "SteamGridDB:n käyttäminen edellyttää API-avainta. Voit luoda sellaisen {}"
 "täältä{}."
 
-#: cartridges/preferences.py:202
+#: cartridges/preferences.py:203
 msgid "Downloading covers…"
 msgstr "Ladataan kansikuvia…"
 
-#: cartridges/preferences.py:221
+#: cartridges/preferences.py:222
 msgid "Covers updated"
 msgstr "Kannet päivitetty"
 
-#: cartridges/preferences.py:368
+#: cartridges/preferences.py:370
 msgid "Installation Not Found"
 msgstr "Asennusta ei löydy"
 
-#: cartridges/preferences.py:369
+#: cartridges/preferences.py:371
 msgid "Select a valid directory"
 msgstr "Valitse kelvollinen kansio"
 
-#: cartridges/preferences.py:405 cartridges/importer/importer.py:319
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
 msgid "Warning"
 msgstr "Varoitus"
 
-#: cartridges/preferences.py:439
+#: cartridges/preferences.py:441
 msgid "Invalid Directory"
 msgstr "Virheellinen kansio"
 
-#: cartridges/preferences.py:445
+#: cartridges/preferences.py:447
 msgid "Set Location"
 msgstr "Aseta sijainti"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:320
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
 msgid "Dismiss"
 msgstr "Hylkää"
 
@@ -596,16 +596,16 @@ msgstr "Hylkää"
 msgid "Importing Games…"
 msgstr "Tuodaan pelejä…"
 
-#: cartridges/importer/importer.py:339
+#: cartridges/importer/importer.py:338
 msgid "The following errors occured during import:"
 msgstr "Seuraavat virheet tapahtuivat tuonnin aikana:"
 
-#: cartridges/importer/importer.py:368
+#: cartridges/importer/importer.py:367
 msgid "No new games found"
 msgstr "Uusia pelejä ei löytynyt"
 
 #. The variable is the number of games imported
-#: cartridges/importer/importer.py:381
+#: cartridges/importer/importer.py:380
 #, fuzzy
 msgid "1 game imported"
 msgid_plural "{} games imported"
@@ -613,7 +613,7 @@ msgstr[0] "1 peli tuotu"
 msgstr[1] "{} peliä tuotu"
 
 #. The variable is the number of games removed
-#: cartridges/importer/importer.py:385
+#: cartridges/importer/importer.py:384
 #, fuzzy
 msgid "1 removed"
 msgid_plural "{} removed"
