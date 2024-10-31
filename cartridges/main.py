@@ -118,9 +118,6 @@ class CartridgesApplication(Adw.Application):
 
         log_system_info()
 
-        # Set fallback icon-name
-        Gtk.Window.set_default_icon_name(shared.APP_ID)
-
         # Create the main window
         win = self.props.active_window  # pylint: disable=no-member
         if not win:
@@ -195,6 +192,9 @@ class CartridgesApplication(Adw.Application):
             shared.win.search_entry.set_position(-1)
 
         shared.win.present()
+
+        if shared.schema.get_boolean("auto-import"):
+            self.on_import_action()
 
     def do_handle_local_options(self, options: GLib.VariantDict) -> int:
         if search := options.lookup_value("search"):
