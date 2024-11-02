@@ -133,12 +133,13 @@ class CoverManager(Manager):
                 str(image_path)
             )
         except GLib.Error:
-            new_path = convert_cover(image_path, resize=False)
+            tmp_cover_path = convert_cover(image_path, resize=False)
 
-            if new_path:
+            if tmp_cover_path:
                 source = GdkPixbuf.Pixbuf.new_from_file(
-                    str(new_path)
+                    str(tmp_cover_path)
                 )
+                tmp_cover_path.unlink(missing_ok=True)
             else:
                 return None
 
@@ -205,3 +206,6 @@ class CoverManager(Manager):
                 game.game_id,
                 pixbuf=self.composite_cover(image_path, **composite_kwargs),
             )
+
+            if key == "online_cover_url":
+                image_path.unlink(missing_ok=True)

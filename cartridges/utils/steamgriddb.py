@@ -134,7 +134,11 @@ class SgdbHelper:
                 tmp_file = Gio.File.new_tmp()[0]
                 tmp_file_path = tmp_file.get_path()
                 Path(tmp_file_path).write_bytes(response.content)
-                save_cover(game.game_id, convert_cover(tmp_file_path))
+                tmp_cover_path = convert_cover(tmp_file_path)
+                if tmp_cover_path:
+                    save_cover(game.game_id, tmp_cover_path)
+                    tmp_cover_path.unlink(missing_ok=True)
+                tmp_file_path.unlink(missing_ok=True)
             except SgdbAuthError as error:
                 # Let caller handle auth errors
                 raise error
