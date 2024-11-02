@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2023-12-23 17:07+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/cartridges/"
@@ -539,9 +539,14 @@ msgid "{} unhidden"
 msgstr "Prikazano: {}"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "Uklonjeno: {}"
+msgid_plural "{} removed"
+msgstr[0] "Uklonjeno: {}"
+msgstr[1] "Uklonjeno: {}"
+msgstr[2] "Uklonjeno: {}"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -586,6 +591,32 @@ msgstr "Postavi lokaciju"
 msgid "Dismiss"
 msgstr "Odbaci"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Zadnje igrane"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Zadnje igrane"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Uvoz igri …"
@@ -601,20 +632,11 @@ msgstr "Nije pronađena nijedna nova igra"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "Jedna igra je uvezena"
+msgstr[0] "Broj uvezenih igri: {}"
 msgstr[1] "Broj uvezenih igri: {}"
 msgstr[2] "Broj uvezenih igri: {}"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "Jedna je uklonjena"
-msgstr[1] "{} je uklonjena"
-msgstr[2] "{} je uklonjena"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -652,8 +674,19 @@ msgstr "Neuspjela autentifikacija SteamGridDB-a"
 msgid "Verify your API key in preferences"
 msgstr "Potvrdi tvoj API ključ u postavkama"
 
-#~ msgid "{} games imported"
-#~ msgstr "Broj uvezenih igri: {}"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "Jedna igra je uvezena"
+#~ msgstr[1] "Broj uvezenih igri: {}"
+#~ msgstr[2] "Broj uvezenih igri: {}"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "Jedna je uklonjena"
+#~ msgstr[1] "{} je uklonjena"
+#~ msgstr[2] "{} je uklonjena"
 
 #~ msgid "Cache Location"
 #~ msgstr "Lokacija predmemorije"

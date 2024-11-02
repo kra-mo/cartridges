@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2023-12-13 09:28+0000\n"
 "Last-Translator: Yahor <k1llo2810@protonmail.com>\n"
 "Language-Team: Belarusian <https://hosted.weblate.org/projects/cartridges/"
@@ -541,9 +541,14 @@ msgid "{} unhidden"
 msgstr "{} непрыхавана"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} выдалена"
+msgid_plural "{} removed"
+msgstr[0] "{} выдалена"
+msgstr[1] "{} выдалена"
+msgstr[2] "{} выдалена"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -588,6 +593,32 @@ msgstr "Задаць размяшчэнне"
 msgid "Dismiss"
 msgstr "Адхіліць"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Апошняя гульня"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Апошняя гульня"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Імпарт гульняў…"
@@ -603,20 +634,11 @@ msgstr "Новыя гульні не знойдзены"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "Імпартавана 1 гульня"
-msgstr[1] "Імпартавана {} гульня"
-msgstr[2] "Імпартавана {} гульня"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 выдалена"
-msgstr[1] "{} выдалена"
-msgstr[2] "{} выдалена"
+msgstr[0] "{} гульняў імпартавана"
+msgstr[1] "{} гульняў імпартавана"
+msgstr[2] "{} гульняў імпартавана"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -654,8 +676,19 @@ msgstr "Немагчыма аўтэнтыфікаваць SteamGridDB"
 msgid "Verify your API key in preferences"
 msgstr "Праверце свой ключ API ў наладах"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} гульняў імпартавана"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "Імпартавана 1 гульня"
+#~ msgstr[1] "Імпартавана {} гульня"
+#~ msgstr[2] "Імпартавана {} гульня"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 выдалена"
+#~ msgstr[1] "{} выдалена"
+#~ msgstr[2] "{} выдалена"
 
 #~ msgid "Cache Location"
 #~ msgstr "Размяшчэнне кэша"

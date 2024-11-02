@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2023-12-16 23:25+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/cartridges/"
@@ -540,9 +540,13 @@ msgid "{} unhidden"
 msgstr "{} görünür"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} kaldırıldı"
+msgid_plural "{} removed"
+msgstr[0] "{} kaldırıldı"
+msgstr[1] "{} kaldırıldı"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -587,6 +591,32 @@ msgstr "Konum Ayarla"
 msgid "Dismiss"
 msgstr "Vazgeç"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "Bugün"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "Dün"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Son Oynanan"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Son Oynanan"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Oyunlar İçe Aktarılıyor…"
@@ -602,18 +632,10 @@ msgstr "Yeni oyun bulunamadı"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "1 oyun içe aktarıldı"
+msgstr[0] "{} oyun içe aktarıldı"
 msgstr[1] "{} oyun içe aktarıldı"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 kaldırıldı"
-msgstr[1] "{} kaldırıldı"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -651,8 +673,17 @@ msgstr "SteamGridDB Kimlik Doğrulaması Yapılamadı"
 msgid "Verify your API key in preferences"
 msgstr "Tercihlerde API anahtarınızı doğrulayın"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} oyun içe aktarıldı"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 oyun içe aktarıldı"
+#~ msgstr[1] "{} oyun içe aktarıldı"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 kaldırıldı"
+#~ msgstr[1] "{} kaldırıldı"
 
 #~ msgid "Cache Location"
 #~ msgstr "Önbellek Konumu"
@@ -717,12 +748,6 @@ msgstr "Tercihlerde API anahtarınızı doğrulayın"
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Şişeler Kurulu Konumu"
-
-#~ msgid "Today"
-#~ msgstr "Bugün"
-
-#~ msgid "Yesterday"
-#~ msgstr "Dün"
 
 #~ msgid "Select the Lutris cache directory."
 #~ msgstr "Lutris önbellek dizinini seç."

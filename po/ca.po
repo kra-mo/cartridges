@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2023-12-15 13:10+0000\n"
 "Last-Translator: jolupa <jolupameister@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/cartridges/"
@@ -537,9 +537,13 @@ msgid "{} unhidden"
 msgstr "{} mostrar"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} eliminat"
+msgid_plural "{} removed"
+msgstr[0] "{} eliminat"
+msgstr[1] "{} eliminat"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -584,6 +588,32 @@ msgstr "Escull una ubicació"
 msgid "Dismiss"
 msgstr "Descartar"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Últim jugat"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Últim jugat"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Important jocs…"
@@ -599,18 +629,10 @@ msgstr "No s'han trobat jocs nous"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "1 joc importat"
+msgstr[0] "{} jocs importats"
 msgstr[1] "{} jocs importats"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 eliminat"
-msgstr[1] "{} eliminats"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -648,8 +670,17 @@ msgstr "No es pot Autenticar a SteamGridDB"
 msgid "Verify your API key in preferences"
 msgstr "Verifica la teva clau API en les preferències"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} jocs importats"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 joc importat"
+#~ msgstr[1] "{} jocs importats"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 eliminat"
+#~ msgstr[1] "{} eliminats"
 
 #~ msgid "Cache Location"
 #~ msgstr "Ubicació de la memòria cau"

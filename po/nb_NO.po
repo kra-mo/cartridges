@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
-"PO-Revision-Date: 2024-10-22 13:02+0200\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
+"PO-Revision-Date: 2024-11-02 23:02+0100\n"
 "Last-Translator: Sunniva Løvstad <turtle@turtle.garden>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/nb_NO/>\n"
@@ -208,7 +208,7 @@ msgstr "Fjern alle spill"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Importer spill automatisk"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -508,11 +508,11 @@ msgid ""
 msgstr ""
 "Start den kjørbare «{}»-filen med denne kommandoen:\n"
 "\n"
-"<tt>«{}»</tt>\n"
+"<tt>{}</tt>\n"
 "\n"
 "For å åpne filen «{}» med forvalgt program bruker du:\n"
 "\n"
-"<tt>{} «{}»</tt>\n"
+"<tt>{} {}</tt>\n"
 "\n"
 "Hvis stien inneholder mellomrom, må du pakke den inn i doble engelske "
 "sitattegn."
@@ -543,9 +543,12 @@ msgid "{} unhidden"
 msgstr "{} synlig"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
 msgid "{} removed"
-msgstr "{} fjernet"
+msgid_plural "{} removed"
+msgstr[0] "{} fjernet"
+msgstr[1] "{} fjernet"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -589,6 +592,30 @@ msgstr "Angi lagringssted"
 msgid "Dismiss"
 msgstr "Forkast"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "I dag"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "I går"
+
+#: cartridges/utils/relative_date.py:36
+msgid "Last Week"
+msgstr "Forrige uke"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr "Denne måneden"
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr "Forrige måned"
+
+#: cartridges/utils/relative_date.py:44
+msgid "Last Year"
+msgstr "I fjor"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Importerer spill …"
@@ -603,17 +630,10 @@ msgstr "Fant ingen nye spill"
 
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "Ett spill importert"
+msgstr[0] "{} spill importert"
 msgstr[1] "{} spill importert"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "Ett spill fjernet"
-msgstr[1] "{} spill fjernet"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -651,11 +671,18 @@ msgstr "Kunne ikke autentisere SteamGridDB"
 msgid "Verify your API key in preferences"
 msgstr "Verifiser API-nøkkelen din i Brukervalg"
 
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "{} spill importert"
+#~ msgstr[1] "{} spill importert"
+
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "{} spill fjernet"
+#~ msgstr[1] "{} spill fjernet"
+
 #~ msgid "Reset App"
 #~ msgstr "Tilbakestill"
-
-#~ msgid "{} games imported"
-#~ msgstr "{} spill importert"
 
 #, fuzzy
 #~ msgid "Cache Location"
@@ -722,12 +749,6 @@ msgstr "Verifiser API-nøkkelen din i Brukervalg"
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Installasjonssted for Bottles"
-
-#~ msgid "Today"
-#~ msgstr "I dag"
-
-#~ msgid "Yesterday"
-#~ msgstr "I går"
 
 #, fuzzy
 #~ msgid "Cache Not Found"

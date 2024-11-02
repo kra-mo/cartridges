@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2024-05-15 14:01+0000\n"
 "Last-Translator: Karol <k.derbotprogramista@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/cartridges/"
@@ -550,9 +550,14 @@ msgid "{} unhidden"
 msgstr "{} nieukryty"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} usunięty"
+msgid_plural "{} removed"
+msgstr[0] "{} usunięty"
+msgstr[1] "{} usunięty"
+msgstr[2] "{} usunięty"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -598,6 +603,32 @@ msgstr "Ustaw położenie"
 msgid "Dismiss"
 msgstr "Odrzucić"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "Dzisiaj"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "Wczoraj"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Ostatnio odtwarzane"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Ostatnio odtwarzane"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Importowanie gier…"
@@ -614,20 +645,11 @@ msgstr "Nie znaleziono żadnych gier"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} Importowana"
-msgstr[1] "{} Importowana"
-msgstr[2] "{} Importowana"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "{} usunięty"
-msgstr[1] "{} usunięty"
-msgstr[2] "{} usunięty"
+msgstr[0] "Gry Przywiezione"
+msgstr[1] "Gry Przywiezione"
+msgstr[2] "Gry Przywiezione"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -666,8 +688,18 @@ msgid "Verify your API key in preferences"
 msgstr "Zweryfikuj swój klucz API w preferencjach"
 
 #, fuzzy
-#~ msgid "{} games imported"
-#~ msgstr "Gry Przywiezione"
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "{} Importowana"
+#~ msgstr[1] "{} Importowana"
+#~ msgstr[2] "{} Importowana"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "{} usunięty"
+#~ msgstr[1] "{} usunięty"
+#~ msgstr[2] "{} usunięty"
 
 #~ msgid "Cache Location"
 #~ msgstr "Lokalizacja pamięci podręcznej"
@@ -737,12 +769,6 @@ msgstr "Zweryfikuj swój klucz API w preferencjach"
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Butelki Miejsce montażu"
-
-#~ msgid "Today"
-#~ msgstr "Dzisiaj"
-
-#~ msgid "Yesterday"
-#~ msgstr "Wczoraj"
 
 #~ msgid "Select the Lutris cache directory."
 #~ msgstr "Wybierz katalog pamięci podręcznej Lutris."

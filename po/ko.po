@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2024-03-02 19:01+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/cartridges/"
@@ -540,9 +540,12 @@ msgid "{} unhidden"
 msgstr "{} 숨김 해제함"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} 제거함"
+msgid_plural "{} removed"
+msgstr[0] "{} 제거함"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -586,6 +589,32 @@ msgstr "위치 설정"
 msgid "Dismiss"
 msgstr "버리기"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "최근 플레이"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "최근 플레이"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "게임 가져오는 중…"
@@ -601,16 +630,9 @@ msgstr "새 게임이 없습니다"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "게임 {}건을 가져왔습니다"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "{}건을 제거했습니다"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -648,8 +670,15 @@ msgstr "SteamGridDB를 인증할 수 없습니다"
 msgid "Verify your API key in preferences"
 msgstr "기본 설정에서 API 키를 검증하십시오"
 
-#~ msgid "{} games imported"
-#~ msgstr "게임 {}건을 가져왔습니다"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "게임 {}건을 가져왔습니다"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "{}건을 제거했습니다"
 
 #~ msgid "Cache Location"
 #~ msgstr "캐시 위치"

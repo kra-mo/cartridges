@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2024-02-19 06:35+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -542,9 +542,13 @@ msgid "{} unhidden"
 msgstr "{} visible"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} eliminado"
+msgid_plural "{} removed"
+msgstr[0] "{} eliminado"
+msgstr[1] "{} eliminado"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -589,6 +593,32 @@ msgstr "Escoger la ubicación"
 msgid "Dismiss"
 msgstr "Descartar"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "Hoy"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "Ayer"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Último jugado"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Último jugado"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Importando juegos…"
@@ -604,18 +634,10 @@ msgstr "No se encontraron juegos nuevos"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "1 juego importado"
+msgstr[0] "{} juegos importados"
 msgstr[1] "{} juegos importados"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 eliminado"
-msgstr[1] "{} eliminados"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -654,8 +676,17 @@ msgstr "No se ha podido autenticar SteamGridDB"
 msgid "Verify your API key in preferences"
 msgstr "Verifique su clave API en las preferencias"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} juegos importados"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 juego importado"
+#~ msgstr[1] "{} juegos importados"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 eliminado"
+#~ msgstr[1] "{} eliminados"
 
 #~ msgid "Cache Location"
 #~ msgstr "Ruta de la caché"
@@ -718,12 +749,6 @@ msgstr "Verifique su clave API en las preferencias"
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Ubicación de instalación de Bottles"
-
-#~ msgid "Today"
-#~ msgstr "Hoy"
-
-#~ msgid "Yesterday"
-#~ msgstr "Ayer"
 
 #~ msgid "Cache Not Found"
 #~ msgstr "Caché no encontrada"

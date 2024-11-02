@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2024-10-14 00:15+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/cartridges/"
@@ -545,9 +545,14 @@ msgid "{} unhidden"
 msgstr "{} afișat"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} eliminat"
+msgid_plural "{} removed"
+msgstr[0] "{} eliminat"
+msgstr[1] "{} eliminat"
+msgstr[2] "{} eliminat"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -592,6 +597,32 @@ msgstr "Stabilește locația"
 msgid "Dismiss"
 msgstr "Revocare"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Jucat ultima dată"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Jucat ultima dată"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Se importă jocurile…"
@@ -606,19 +637,12 @@ msgstr "Nu s-au găsit jocuri noi"
 
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
-msgid "1 game imported"
+#, fuzzy
+msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "Un joc importat"
 msgstr[1] "{} jocuri importate"
 msgstr[2] "{} jocuri importate"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "Un joc eliminat"
-msgstr[1] ""
-msgstr[2] ""
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -655,6 +679,12 @@ msgstr "Nu s-a putut autentifica SteamGridDB"
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
 msgstr "Verificați cheia API în preferințe"
+
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "Un joc eliminat"
+#~ msgstr[1] ""
+#~ msgstr[2] ""
 
 #~ msgid "Library"
 #~ msgstr "Bibliotecă"

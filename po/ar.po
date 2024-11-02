@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2023-12-15 13:10+0000\n"
 "Last-Translator: Ali-98 <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
@@ -539,9 +539,17 @@ msgid "{} unhidden"
 msgstr "أٌظهرت {}"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "أزيلت {}"
+msgid_plural "{} removed"
+msgstr[0] "أزيلت {}"
+msgstr[1] "أزيلت {}"
+msgstr[2] "أزيلت {}"
+msgstr[3] "أزيلت {}"
+msgstr[4] "أزيلت {}"
+msgstr[5] "أزيلت {}"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -585,6 +593,32 @@ msgstr "عيِّن الموضع"
 msgid "Dismiss"
 msgstr "تجاهل"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "اليوم"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "أمس"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "لُعبت آخر مرَّة"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "لُعبت آخر مرَّة"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "تُستورد الألعاب…"
@@ -600,26 +634,14 @@ msgstr "لم يُعثر على ألعاب جديدة"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "اُستوردت لعبة واحدة"
+msgstr[0] "اُستوردت {} لعبة"
 msgstr[1] "اُستوردت {} لعبة"
 msgstr[2] "اُستوردت {} لعبة"
 msgstr[3] "اُستوردت {} لعبة"
 msgstr[4] "اُستوردت {} لعبة"
 msgstr[5] "اُستوردت {} لعبة"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "أزيل ١"
-msgstr[1] "أزيل {}"
-msgstr[2] "أزيل {}"
-msgstr[3] "أزيل {}"
-msgstr[4] "أزيل {}"
-msgstr[5] "أزيل {}"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -657,8 +679,25 @@ msgstr "تعذَّر استيثاق SteamGridDB"
 msgid "Verify your API key in preferences"
 msgstr "أكِّد مفتاح واجهة البرمجة في التفضيلات"
 
-#~ msgid "{} games imported"
-#~ msgstr "اُستوردت {} لعبة"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "اُستوردت لعبة واحدة"
+#~ msgstr[1] "اُستوردت {} لعبة"
+#~ msgstr[2] "اُستوردت {} لعبة"
+#~ msgstr[3] "اُستوردت {} لعبة"
+#~ msgstr[4] "اُستوردت {} لعبة"
+#~ msgstr[5] "اُستوردت {} لعبة"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "أزيل ١"
+#~ msgstr[1] "أزيل {}"
+#~ msgstr[2] "أزيل {}"
+#~ msgstr[3] "أزيل {}"
+#~ msgstr[4] "أزيل {}"
+#~ msgstr[5] "أزيل {}"
 
 #~ msgid "Cache Location"
 #~ msgstr "موضع الذاكرة المؤقتة"
@@ -723,12 +762,6 @@ msgstr "أكِّد مفتاح واجهة البرمجة في التفضيلات"
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "موضع تثبيت قوارير"
-
-#~ msgid "Today"
-#~ msgstr "اليوم"
-
-#~ msgid "Yesterday"
-#~ msgstr "أمس"
 
 #~ msgid "Cache Not Found"
 #~ msgstr "لم يُعثر على الذاكرة المؤقَّتة"

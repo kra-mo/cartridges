@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2023-12-16 21:06+0000\n"
 "Last-Translator: \"J. Lavoie\" <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
@@ -547,9 +547,13 @@ msgid "{} unhidden"
 msgstr "{} affiché"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} retiré"
+msgid_plural "{} removed"
+msgstr[0] "{} retiré"
+msgstr[1] "{} retiré"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -594,6 +598,32 @@ msgstr "Définir l’emplacement"
 msgid "Dismiss"
 msgstr "Fermer"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "Aujourd’hui"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "Hier"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Dernière session"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Dernière session"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Importation des jeux…"
@@ -609,18 +639,10 @@ msgstr "Aucun nouveau jeu trouvé"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "1 jeu importé"
+msgstr[0] "{} jeux importés"
 msgstr[1] "{} jeux importés"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 retiré"
-msgstr[1] "{} retirés"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -658,8 +680,17 @@ msgstr "Impossible de se connecter à SteamGridDB"
 msgid "Verify your API key in preferences"
 msgstr "Vérifiez votre clé API dans les préférences"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} jeux importés"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 jeu importé"
+#~ msgstr[1] "{} jeux importés"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 retiré"
+#~ msgstr[1] "{} retirés"
 
 #~ msgid "Cache Location"
 #~ msgstr "Emplacement du cache"
@@ -724,12 +755,6 @@ msgstr "Vérifiez votre clé API dans les préférences"
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Emplacement de l’installation de Bouteilles"
-
-#~ msgid "Today"
-#~ msgstr "Aujourd’hui"
-
-#~ msgid "Yesterday"
-#~ msgstr "Hier"
 
 #~ msgid "Cache Not Found"
 #~ msgstr "Cache non trouvé"
