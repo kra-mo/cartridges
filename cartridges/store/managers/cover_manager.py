@@ -19,10 +19,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from pathlib import Path
-from typing import NamedTuple
+from typing import NamedTuple, Optional
 
 import requests
-from gi.repository import GdkPixbuf, Gio
+from gi.repository import GdkPixbuf, Gio, GLib
 from requests.exceptions import HTTPError, SSLError
 
 from cartridges import shared
@@ -128,9 +128,20 @@ class CoverManager(Manager):
         """
 
         # Load source image
-        source = GdkPixbuf.Pixbuf.new_from_file(
-            str(convert_cover(image_path, resize=False))
-        )
+        try:
+            source = GdkPixbuf.Pixbuf.new_from_file(
+                str(image_path)
+            )
+        except GLib.Error:
+            new_path = convert_cover(image_path, resize=False)
+
+            if new_path:
+                source = GdkPixbuf.Pixbuf.new_from_file(
+                    str(new_path)
+                )
+            else:
+                return None
+
         source_size = ImageSize(source.get_width(), source.get_height())
         cover_size = ImageSize._make(shared.image_size)
 

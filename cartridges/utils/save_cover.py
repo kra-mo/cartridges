@@ -35,14 +35,6 @@ def convert_cover(
     if not cover_path and not pixbuf:
         return None
 
-    pixbuf_extensions = set()
-    for pixbuf_format in GdkPixbuf.Pixbuf.get_formats():
-        for pixbuf_extension in pixbuf_format.get_extensions():
-            pixbuf_extensions.add(pixbuf_extension)
-
-    if not resize and cover_path and cover_path.suffix.lower()[1:] in pixbuf_extensions:
-        return cover_path
-
     try:
         with Image.open(cover_path) as image:
             if getattr(image, "is_animated", False):
