@@ -302,7 +302,7 @@ class DetailsDialog(Adw.Dialog):
                 with Image.open(path) as image:
                     if getattr(image, "is_animated", False):
                         new_path = convert_cover(path)
-            except UnidentifiedImageError:
+            except (UnidentifiedImageError, OSError, ValueError):
                 pass
 
             if new_path:

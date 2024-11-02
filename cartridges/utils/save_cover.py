@@ -63,7 +63,7 @@ def convert_cover(
                     if shared.schema.get_boolean("high-quality-images")
                     else shared.TIFF_COMPRESSION,
                 )
-    except UnidentifiedImageError:
+    except (UnidentifiedImageError, OSError, ValueError):
         try:
             Gdk.Texture.new_from_filename(str(cover_path)).save_to_tiff(
                 tmp_path := Gio.File.new_tmp("XXXXXX.tiff")[0].get_path()
