@@ -30,7 +30,6 @@ from cartridges import shared
 
 def convert_cover(
     cover_path: Optional[Path] = None,
-    pixbuf: Optional[GdkPixbuf.Pixbuf] = None,
     resize: bool = True,
 ) -> Optional[Path]:
     if not cover_path and not pixbuf:
@@ -43,10 +42,6 @@ def convert_cover(
 
     if not resize and cover_path and cover_path.suffix.lower()[1:] in pixbuf_extensions:
         return cover_path
-
-    if pixbuf:
-        cover_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
-        pixbuf.savev(str(cover_path), "tiff", ["compression"], ["1"])
 
     try:
         with Image.open(cover_path) as image:
@@ -88,7 +83,11 @@ def convert_cover(
     return tmp_path
 
 
-def save_cover(game_id: str, cover_path: Path) -> None:
+def save_cover(
+    game_id: str,
+    cover_path: Optional[Path] = None,
+    pixbuf: Optional[GdkPixbuf.Pixbuf] = None,
+) -> None:
     shared.covers_dir.mkdir(parents=True, exist_ok=True)
 
     animated_path = shared.covers_dir / f"{game_id}.gif"
@@ -98,7 +97,15 @@ def save_cover(game_id: str, cover_path: Path) -> None:
     animated_path.unlink(missing_ok=True)
     static_path.unlink(missing_ok=True)
 
-    if not cover_path:
+    if not cover_path and not pixbuf:
+        return
+
+    if pixbuf:
+        pixbuf.savev(str(static_path), "tiff", ["compression"], ["1"])
+
+        if game_id in shared.win.game_covers:
+            shared.win.game_covers[game_id].new_cover(static_path)
+
         return
 
     copyfile(

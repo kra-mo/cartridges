@@ -45,12 +45,22 @@ class GameCover:
         self.pictures = pictures
         self.new_cover(path)
 
-    def new_cover(self, path: Optional[Path] = None) -> None:
+    def new_cover(
+        self,
+        path: Optional[Path] = None,
+        pixbuf: Optional[GdkPixbuf.Pixbuf] = None
+    ) -> None:
         self.animation = None
         self.texture = None
         self.blurred = None
         self.luminance = None
         self.path = path
+        self.pixbuf = pixbuf
+
+        if pixbuf:
+             self.texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+             self.set_texture(self.texture)
+             return
 
         if path:
             if path.suffix == ".gif":

@@ -192,7 +192,5 @@ class CoverManager(Manager):
 
             save_cover(
                 game.game_id,
-                convert_cover(
-                    pixbuf=self.composite_cover(image_path, **composite_kwargs)
-                ),
+                pixbuf=self.composite_cover(image_path, **composite_kwargs),
             )

@@ -240,6 +240,7 @@ class DetailsDialog(Adw.Dialog):
             save_cover(
                 self.game.game_id,
                 self.game_cover.path,
+                self.game_cover.pixbuf,
             )
 
         shared.store.add_game(self.game, {}, run_pipeline=False)
@@ -304,17 +305,17 @@ class DetailsDialog(Adw.Dialog):
             except UnidentifiedImageError:
                 pass
 
-            if not new_path:
-                new_path = convert_cover(
+            if new_path:
+                self.game_cover.new_cover(new_path)
+            else:
+                self.game_cover.new_cover(
                     pixbuf=shared.store.managers[CoverManager].composite_cover(
                         Path(path)
                     )
                 )
 
-            if new_path:
-                self.game_cover.new_cover(new_path)
-                self.cover_button_delete_revealer.set_reveal_child(True)
-                self.cover_changed = True
+            self.cover_button_delete_revealer.set_reveal_child(True)
+            self.cover_changed = True
 
             self.toggle_loading()
 
