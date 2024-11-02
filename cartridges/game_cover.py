@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+from io import BytesIO
 from pathlib import Path
 from typing import Optional
 
@@ -83,10 +84,11 @@ class GameCover:
                         .filter(ImageFilter.GaussianBlur(20))
                     )
 
-                    tmp_path = Gio.File.new_tmp(None)[0].get_path()
-                    image.save(tmp_path, "tiff", compression=None)
+                    buffer = BytesIO()
+                    image.save(buffer, "tiff", compression=None)
+                    gbytes = GLib.Bytes.new(buffer.getvalue())
 
-                    self.blurred = Gdk.Texture.new_from_filename(tmp_path)
+                    self.blurred = Gdk.Texture.new_from_bytes(gbytes)
 
                     stat = ImageStat.Stat(image.convert("L"))
 
