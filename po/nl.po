@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2024-02-15 17:02+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
@@ -542,9 +542,13 @@ msgid "{} unhidden"
 msgstr "{} hersteld"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} verwijderd"
+msgid_plural "{} removed"
+msgstr[0] "{} verwijderd"
+msgstr[1] "{} verwijderd"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -589,6 +593,32 @@ msgstr "Locatie instellen"
 msgid "Dismiss"
 msgstr "Sluiten"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "Vandaag"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "Gisteren"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Laatst gespeeld"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Laatst gespeeld"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Games importeren…"
@@ -604,18 +634,10 @@ msgstr "Geen nieuwe games gevonden"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "1 game geïmporteerd"
+msgstr[0] "{} games geïmporteerd"
 msgstr[1] "{} games geïmporteerd"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 verwijderd"
-msgstr[1] "{} verwijderd"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -653,8 +675,17 @@ msgstr "Kan SteamGridDB niet authenticeren"
 msgid "Verify your API key in preferences"
 msgstr "Verifieer uw API-sleutel onder voorkeuren"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} games geïmporteerd"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 game geïmporteerd"
+#~ msgstr[1] "{} games geïmporteerd"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 verwijderd"
+#~ msgstr[1] "{} verwijderd"
 
 #~ msgid "Cache Location"
 #~ msgstr "Cache-locatie"
@@ -724,12 +755,6 @@ msgstr "Verifieer uw API-sleutel onder voorkeuren"
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Installatielocatie van Bottles"
-
-#~ msgid "Today"
-#~ msgstr "Vandaag"
-
-#~ msgid "Yesterday"
-#~ msgstr "Gisteren"
 
 #~ msgid "Cache Not Found"
 #~ msgstr "Cache niet gevonden"

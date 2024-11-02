@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2024-01-16 06:06+0000\n"
 "Last-Translator: Scott Anecito <scott.anecito@linux.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
@@ -545,9 +545,13 @@ msgid "{} unhidden"
 msgstr "{} palautettu näkyviin"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} poistettu"
+msgid_plural "{} removed"
+msgstr[0] "{} poistettu"
+msgstr[1] "{} poistettu"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -592,6 +596,32 @@ msgstr "Aseta sijainti"
 msgid "Dismiss"
 msgstr "Hylkää"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "Tänään"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "Eilen"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Viimeksi pelattu"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Viimeksi pelattu"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Tuodaan pelejä…"
@@ -607,18 +637,10 @@ msgstr "Uusia pelejä ei löytynyt"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "1 peli tuotu"
+msgstr[0] "{} peliä tuotu"
 msgstr[1] "{} peliä tuotu"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 poistettu"
-msgstr[1] "{} poistettu"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -656,8 +678,17 @@ msgstr "Ei voitu kirjautua SteamGridDB:hen"
 msgid "Verify your API key in preferences"
 msgstr "Vahvista API-avaimesi asetuksissa"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} peliä tuotu"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 peli tuotu"
+#~ msgstr[1] "{} peliä tuotu"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 poistettu"
+#~ msgstr[1] "{} poistettu"
 
 #~ msgid "Cache Location"
 #~ msgstr "Välimuistin sijainti"
@@ -728,12 +759,6 @@ msgstr "Vahvista API-avaimesi asetuksissa"
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Bottles-asennuksen sijainti"
-
-#~ msgid "Today"
-#~ msgstr "Tänään"
-
-#~ msgid "Yesterday"
-#~ msgstr "Eilen"
 
 #~ msgid "Cache Not Found"
 #~ msgstr "Välimuistia ei löydy"

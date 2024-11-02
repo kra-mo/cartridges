@@ -377,11 +377,11 @@ class Importer(ErrorProducer):
 
         elif self.n_games_added >= 1:
             # The variable is the number of games imported
-            toast_title = gettext.ngettext("1 game imported", "{} games imported", self.n_games_added).format(self.n_games_added)
+            toast_title = gettext.ngettext("{} game imported", "{} games imported", self.n_games_added).format(self.n_games_added)
 
         if (removed_length := len(self.removed_game_ids)) >= 1:
-            # The variable is the number of games removed
-            toast_title += ", " + gettext.ngettext("1 removed", "{} removed", removed_length).format(removed_length)
+            # The variable is the number of games removed. This comes after the text "{} games imported, ".
+            toast_title += ", " + gettext.ngettext("{} removed", "{} removed", removed_length).format(removed_length)
 
         if self.n_games_added or self.removed_game_ids:
             toast.set_button_label(_("Undo"))

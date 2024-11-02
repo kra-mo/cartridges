@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2023-12-15 13:10+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
@@ -541,9 +541,13 @@ msgid "{} unhidden"
 msgstr "{} மறைக்கப்படாதது"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} அகற்றப்பட்டது"
+msgid_plural "{} removed"
+msgstr[0] "{} அகற்றப்பட்டது"
+msgstr[1] "{} அகற்றப்பட்டது"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -586,6 +590,32 @@ msgstr "இருப்பிடத்தை அமைக்கவும்"
 msgid "Dismiss"
 msgstr "நிராகரி"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "இன்று"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "நேற்று"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "கடைசியாக விளையாடியது"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "கடைசியாக விளையாடியது"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "விளையாட்டுகளை இறக்குமதி செய்கிறது…"
@@ -601,18 +631,10 @@ msgstr "புதிய விளையாட்டுகள் எதுவு�
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "1 விளையாட்டு இறக்குமதி செய்யப்பட்டது"
+msgstr[0] "{} விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
 msgstr[1] "{} விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 அகற்றப்பட்டது"
-msgstr[1] "{} அகற்றப்பட்டது"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -650,8 +672,17 @@ msgstr "SteamGridDB ஐ அங்கீகரிக்க முடியவி�
 msgid "Verify your API key in preferences"
 msgstr "உங்கள் API விசையை விருப்பங்களில் சரிபார்க்கவும்"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 விளையாட்டு இறக்குமதி செய்யப்பட்டது"
+#~ msgstr[1] "{} விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 அகற்றப்பட்டது"
+#~ msgstr[1] "{} அகற்றப்பட்டது"
 
 #~ msgid "kramo"
 #~ msgstr "கிராமோ"
@@ -717,12 +748,6 @@ msgstr "உங்கள் API விசையை விருப்பங்க
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Bottles (பாட்டில்கள்) நிறுவும் இடம்"
-
-#~ msgid "Today"
-#~ msgstr "இன்று"
-
-#~ msgid "Yesterday"
-#~ msgstr "நேற்று"
 
 #~ msgid "Cache Not Found"
 #~ msgstr "தற்காலிக சேமிப்பு கிடைக்கவில்லை"

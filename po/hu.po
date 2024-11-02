@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2024-10-22 10:56+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
@@ -541,9 +541,13 @@ msgid "{} unhidden"
 msgstr "{} elrejtése visszavonva"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} eltávolítva"
+msgid_plural "{} removed"
+msgstr[0] "{} eltávolítva"
+msgstr[1] "{} eltávolítva"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -588,6 +592,32 @@ msgstr "Hely megadása"
 msgid "Dismiss"
 msgstr "Eltüntetés"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "Ma"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "Tegnap"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Legutóbb játszott"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Legutóbb játszott"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "Játékok importálása…"
@@ -603,18 +633,10 @@ msgstr "Nem találhatóak új játékok"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "1 játék importálva"
+msgstr[0] "{} játék importálva"
 msgstr[1] "{} játék importálva"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 eltávolítva"
-msgstr[1] "{} eltávolítva"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -652,8 +674,17 @@ msgstr "A SteamGridDB-hitelesítés nem sikerült"
 msgid "Verify your API key in preferences"
 msgstr "Ellenőrizze az API-kulcsát a beállításokban"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} játék importálva"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 játék importálva"
+#~ msgstr[1] "{} játék importálva"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 eltávolítva"
+#~ msgstr[1] "{} eltávolítva"
 
 #~ msgid "kramo"
 #~ msgstr "kramo"
@@ -730,12 +761,6 @@ msgstr "Ellenőrizze az API-kulcsát a beállításokban"
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Palackok telepítés helye"
-
-#~ msgid "Today"
-#~ msgstr "Ma"
-
-#~ msgid "Yesterday"
-#~ msgstr "Tegnap"
 
 #~ msgid "Cache Not Found"
 #~ msgstr "Gyorsítótár nem található"

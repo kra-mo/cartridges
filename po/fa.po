@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2024-07-14 20:09+0000\n"
 "Last-Translator: آوید <avds+git@disroot.org>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/cartridges/"
@@ -539,9 +539,13 @@ msgid "{} unhidden"
 msgstr "{} نانهفته"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} برداشته"
+msgid_plural "{} removed"
+msgstr[0] "{} برداشته"
+msgstr[1] "{} برداشته"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -586,6 +590,32 @@ msgstr "تنظیم مکان"
 msgid "Dismiss"
 msgstr "رد"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "آخرین بازی‌شده"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "آخرین بازی‌شده"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "درون‌ریزی بازی‌ها…"
@@ -601,18 +631,10 @@ msgstr "هیچ بازی جدیدی پیدا نشد"
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "یک بازی درون‌ریخته شد"
+msgstr[0] "{} بازی درون‌ریخته شدند"
 msgstr[1] "{} بازی درون‌ریخته شدند"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "یکی برداشته شد"
-msgstr[1] "{} برداشته شد"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -650,8 +672,17 @@ msgstr "نتوانست در SteamGridDB هویت‌سنجی کند"
 msgid "Verify your API key in preferences"
 msgstr "کلید APIتان را در ترجیحات تأیید کنید"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} بازی درون‌ریخته شدند"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "یک بازی درون‌ریخته شد"
+#~ msgstr[1] "{} بازی درون‌ریخته شدند"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "یکی برداشته شد"
+#~ msgstr[1] "{} برداشته شد"
 
 #~ msgid "Cache Location"
 #~ msgstr "مکان انباره"

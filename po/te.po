@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 17:38+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2024-10-08 10:06+0530\n"
 "Last-Translator: Aryan Karamtoth <aryankmmiv@outlook.com>\n"
 "Language-Team: Telugu\n"
@@ -536,9 +536,13 @@ msgid "{} unhidden"
 msgstr "{} దాచబడలేదు"
 
 #. The variable is the title of the game
-#: cartridges/game.py:153
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} తీసివేయబడింది"
+msgid_plural "{} removed"
+msgstr[0] "{} తీసివేయబడింది"
+msgstr[1] "{} తీసివేయబడింది"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -581,6 +585,32 @@ msgstr "స్థానాన్ని సెట్ చేయండి"
 msgid "Dismiss"
 msgstr "తొలగించు"
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "చివరిగా ఆడినది"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "చివరిగా ఆడినది"
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr "గేమ్‌లను దిగుమతి చేస్తోంది..."
@@ -596,18 +626,10 @@ msgstr "కొత్త గేమ్‌లు ఏవీ కనుగొనబడ
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
 #, fuzzy
-msgid "1 game imported"
+msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "1 గేమ్ దిగుమతి చేయబడింది"
+msgstr[0] "{} గేమ్‌లు దిగుమతి చేయబడ్డాయి"
 msgstr[1] "{} గేమ్‌లు దిగుమతి చేయబడ్డాయి"
-
-#. The variable is the number of games removed
-#: cartridges/importer/importer.py:384
-#, fuzzy
-msgid "1 removed"
-msgid_plural "{} removed"
-msgstr[0] "1 తీసివేయబడింది"
-msgstr[1] "{} తీసివేయబడింది"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -645,5 +667,14 @@ msgstr "SteamGridDB ని ప్రమాణీకరించడం సాధ�
 msgid "Verify your API key in preferences"
 msgstr "ప్రాధాన్యతలలో మీ API కీని ధృవీకరించండి"
 
-#~ msgid "{} games imported"
-#~ msgstr "{} గేమ్‌లు దిగుమతి చేయబడ్డాయి"
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 గేమ్ దిగుమతి చేయబడింది"
+#~ msgstr[1] "{} గేమ్‌లు దిగుమతి చేయబడ్డాయి"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 తీసివేయబడింది"
+#~ msgstr[1] "{} తీసివేయబడింది"
