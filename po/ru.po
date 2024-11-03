@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-02 23:03+0100\n"
+"POT-Creation-Date: 2024-11-03 16:33+0100\n"
 "PO-Revision-Date: 2023-12-15 13:10+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/cartridges/"
@@ -67,7 +67,7 @@ msgstr "Редактировать подробности об игре"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
+#: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "Параметры"
 
@@ -133,7 +133,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
 msgstr "Вернуть"
 
@@ -541,14 +541,10 @@ msgid "{} unhidden"
 msgstr "{} - не скрыта"
 
 #. The variable is the title of the game
-#. The variable is the number of games removed. This comes after the text "{} games imported, ".
-#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#: cartridges/game.py:153
 #, fuzzy
 msgid "{} removed"
-msgid_plural "{} removed"
-msgstr[0] "{} удалена"
-msgstr[1] "{} удалена"
-msgstr[2] "{} удалена"
+msgstr "{} удалена"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -577,7 +573,7 @@ msgstr "Установка не найдена"
 msgid "Select a valid directory"
 msgstr "Выберите действующий каталог"
 
-#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -589,7 +585,7 @@ msgstr "Неверный каталог"
 msgid "Set Location"
 msgstr "Установить расположение"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
 msgstr "Отклонить"
 
@@ -619,26 +615,35 @@ msgstr ""
 msgid "Last Year"
 msgstr "Последняя игра"
 
-#: cartridges/importer/importer.py:145
+#: cartridges/importer/importer.py:144
 msgid "Importing Games…"
 msgstr "Импорт игр…"
 
-#: cartridges/importer/importer.py:338
+#: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
 msgstr "При импорте возникли следующие ошибки:"
 
-#: cartridges/importer/importer.py:367
+#: cartridges/importer/importer.py:366
 msgid "No new games found"
 msgstr "Новых игр не найдено"
 
-#. The variable is the number of games imported
-#: cartridges/importer/importer.py:380
+#. The variable is the number of games.
+#: cartridges/importer/importer.py:379
 #, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "{} игр(ы) импортировано"
 msgstr[1] "{} игр(ы) импортировано"
 msgstr[2] "{} игр(ы) импортировано"
+
+#. The variable is the number of games. This text comes after "{0} games imported".
+#: cartridges/importer/importer.py:383
+#, fuzzy
+msgid ", {} removed"
+msgid_plural ", {} removed"
+msgstr[0] "{} удалена"
+msgstr[1] "{} удалена"
+msgstr[2] "{} удалена"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

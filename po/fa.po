@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-02 23:03+0100\n"
+"POT-Creation-Date: 2024-11-03 16:33+0100\n"
 "PO-Revision-Date: 2024-07-14 20:09+0000\n"
 "Last-Translator: آوید <avds+git@disroot.org>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/cartridges/"
@@ -65,7 +65,7 @@ msgstr "ویرایش جزییات بازی"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
+#: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "ترجیحات"
 
@@ -131,7 +131,7 @@ msgid "Keyboard Shortcuts"
 msgstr "میان‌برهای صفحه‌کلید"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
 msgstr "برگردان"
 
@@ -539,13 +539,10 @@ msgid "{} unhidden"
 msgstr "{} نانهفته"
 
 #. The variable is the title of the game
-#. The variable is the number of games removed. This comes after the text "{} games imported, ".
-#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#: cartridges/game.py:153
 #, fuzzy
 msgid "{} removed"
-msgid_plural "{} removed"
-msgstr[0] "{} برداشته"
-msgstr[1] "{} برداشته"
+msgstr "{} برداشته"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -574,7 +571,7 @@ msgstr "نصب پیدا نشد"
 msgid "Select a valid directory"
 msgstr "گزینش شاخه‌ای معتبر"
 
-#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "هشدار"
 
@@ -586,7 +583,7 @@ msgstr "شاخهٔ نامعتبر"
 msgid "Set Location"
 msgstr "تنظیم مکان"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
 msgstr "رد"
 
@@ -616,25 +613,33 @@ msgstr ""
 msgid "Last Year"
 msgstr "آخرین بازی‌شده"
 
-#: cartridges/importer/importer.py:145
+#: cartridges/importer/importer.py:144
 msgid "Importing Games…"
 msgstr "درون‌ریزی بازی‌ها…"
 
-#: cartridges/importer/importer.py:338
+#: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
 msgstr "هنگام درون‌ریزی خطاهای زیر رخ دادند:"
 
-#: cartridges/importer/importer.py:367
+#: cartridges/importer/importer.py:366
 msgid "No new games found"
 msgstr "هیچ بازی جدیدی پیدا نشد"
 
-#. The variable is the number of games imported
-#: cartridges/importer/importer.py:380
+#. The variable is the number of games.
+#: cartridges/importer/importer.py:379
 #, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "{} بازی درون‌ریخته شدند"
 msgstr[1] "{} بازی درون‌ریخته شدند"
+
+#. The variable is the number of games. This text comes after "{0} games imported".
+#: cartridges/importer/importer.py:383
+#, fuzzy
+msgid ", {} removed"
+msgid_plural ", {} removed"
+msgstr[0] "{} برداشته"
+msgstr[1] "{} برداشته"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

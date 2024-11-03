@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-02 23:03+0100\n"
+"POT-Creation-Date: 2024-11-03 16:33+0100\n"
 "PO-Revision-Date: 2024-02-15 17:02+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
@@ -65,7 +65,7 @@ msgstr "Game-details bewerken"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
+#: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "Voorkeuren"
 
@@ -131,7 +131,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
 msgstr "Ongedaan maken"
 
@@ -542,13 +542,10 @@ msgid "{} unhidden"
 msgstr "{} hersteld"
 
 #. The variable is the title of the game
-#. The variable is the number of games removed. This comes after the text "{} games imported, ".
-#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#: cartridges/game.py:153
 #, fuzzy
 msgid "{} removed"
-msgid_plural "{} removed"
-msgstr[0] "{} verwijderd"
-msgstr[1] "{} verwijderd"
+msgstr "{} verwijderd"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -577,7 +574,7 @@ msgstr "Installatie niet gevonden"
 msgid "Select a valid directory"
 msgstr "Selecteer een geldige map"
 
-#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "Waarschuwing"
 
@@ -589,7 +586,7 @@ msgstr "Ongeldige map"
 msgid "Set Location"
 msgstr "Locatie instellen"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
 msgstr "Sluiten"
 
@@ -619,25 +616,33 @@ msgstr ""
 msgid "Last Year"
 msgstr "Laatst gespeeld"
 
-#: cartridges/importer/importer.py:145
+#: cartridges/importer/importer.py:144
 msgid "Importing Games…"
 msgstr "Games importeren…"
 
-#: cartridges/importer/importer.py:338
+#: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
 msgstr "De volgende fouten zijn opgetreden tijdens het importeren:"
 
-#: cartridges/importer/importer.py:367
+#: cartridges/importer/importer.py:366
 msgid "No new games found"
 msgstr "Geen nieuwe games gevonden"
 
-#. The variable is the number of games imported
-#: cartridges/importer/importer.py:380
+#. The variable is the number of games.
+#: cartridges/importer/importer.py:379
 #, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "{} games geïmporteerd"
 msgstr[1] "{} games geïmporteerd"
+
+#. The variable is the number of games. This text comes after "{0} games imported".
+#: cartridges/importer/importer.py:383
+#, fuzzy
+msgid ", {} removed"
+msgid_plural ", {} removed"
+msgstr[0] "{} verwijderd"
+msgstr[1] "{} verwijderd"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

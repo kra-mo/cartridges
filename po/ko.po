@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-02 23:03+0100\n"
+"POT-Creation-Date: 2024-11-03 16:33+0100\n"
 "PO-Revision-Date: 2024-03-02 19:01+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/cartridges/"
@@ -65,7 +65,7 @@ msgstr "게임 세부 정보 편집"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
+#: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "기본 설정"
 
@@ -131,7 +131,7 @@ msgid "Keyboard Shortcuts"
 msgstr "키보드 바로 가기 키"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
 msgstr "실행 취소"
 
@@ -540,12 +540,10 @@ msgid "{} unhidden"
 msgstr "{} 숨김 해제함"
 
 #. The variable is the title of the game
-#. The variable is the number of games removed. This comes after the text "{} games imported, ".
-#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#: cartridges/game.py:153
 #, fuzzy
 msgid "{} removed"
-msgid_plural "{} removed"
-msgstr[0] "{} 제거함"
+msgstr "{} 제거함"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -573,7 +571,7 @@ msgstr "설치한 항목이 없습니다"
 msgid "Select a valid directory"
 msgstr "올바른 디렉터리를 선택하십시오"
 
-#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "경고"
 
@@ -585,7 +583,7 @@ msgstr "부적절한 디렉터리"
 msgid "Set Location"
 msgstr "위치 설정"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
 msgstr "버리기"
 
@@ -615,24 +613,31 @@ msgstr ""
 msgid "Last Year"
 msgstr "최근 플레이"
 
-#: cartridges/importer/importer.py:145
+#: cartridges/importer/importer.py:144
 msgid "Importing Games…"
 msgstr "게임 가져오는 중…"
 
-#: cartridges/importer/importer.py:338
+#: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
 msgstr "가져오는 동안 다음 오류가 나타났습니다:"
 
-#: cartridges/importer/importer.py:367
+#: cartridges/importer/importer.py:366
 msgid "No new games found"
 msgstr "새 게임이 없습니다"
 
-#. The variable is the number of games imported
-#: cartridges/importer/importer.py:380
+#. The variable is the number of games.
+#: cartridges/importer/importer.py:379
 #, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "게임 {}건을 가져왔습니다"
+
+#. The variable is the number of games. This text comes after "{0} games imported".
+#: cartridges/importer/importer.py:383
+#, fuzzy
+msgid ", {} removed"
+msgid_plural ", {} removed"
+msgstr[0] "{} 제거함"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-02 23:03+0100\n"
+"POT-Creation-Date: 2024-11-03 16:33+0100\n"
 "PO-Revision-Date: 2024-10-08 10:06+0530\n"
 "Last-Translator: Aryan Karamtoth <aryankmmiv@outlook.com>\n"
 "Language-Team: Telugu\n"
@@ -62,7 +62,7 @@ msgstr "గేమ్ వివరాలను సవరించండి"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
+#: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "ప్రాధాన్యతలు"
 
@@ -128,7 +128,7 @@ msgid "Keyboard Shortcuts"
 msgstr "కీబోర్డ్ సత్వరమార్గాలు"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
 msgstr "అన్డు"
 
@@ -536,13 +536,10 @@ msgid "{} unhidden"
 msgstr "{} దాచబడలేదు"
 
 #. The variable is the title of the game
-#. The variable is the number of games removed. This comes after the text "{} games imported, ".
-#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#: cartridges/game.py:153
 #, fuzzy
 msgid "{} removed"
-msgid_plural "{} removed"
-msgstr[0] "{} తీసివేయబడింది"
-msgstr[1] "{} తీసివేయబడింది"
+msgstr "{} తీసివేయబడింది"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -569,7 +566,7 @@ msgstr "ఇన్‌స్టాలేషన్ కనుగొనబడలే�
 msgid "Select a valid directory"
 msgstr "చెల్లుబాటు అయ్యే డైరెక్టరీని ఎంచుకోండి"
 
-#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "హెచ్చరిక"
 
@@ -581,7 +578,7 @@ msgstr "చెల్లని డైరెక్టరీ"
 msgid "Set Location"
 msgstr "స్థానాన్ని సెట్ చేయండి"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
 msgstr "తొలగించు"
 
@@ -611,25 +608,33 @@ msgstr ""
 msgid "Last Year"
 msgstr "చివరిగా ఆడినది"
 
-#: cartridges/importer/importer.py:145
+#: cartridges/importer/importer.py:144
 msgid "Importing Games…"
 msgstr "గేమ్‌లను దిగుమతి చేస్తోంది..."
 
-#: cartridges/importer/importer.py:338
+#: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
 msgstr "దిగుమతి సమయంలో క్రింది లోపాలు సంభవించాయి:"
 
-#: cartridges/importer/importer.py:367
+#: cartridges/importer/importer.py:366
 msgid "No new games found"
 msgstr "కొత్త గేమ్‌లు ఏవీ కనుగొనబడలేదు"
 
-#. The variable is the number of games imported
-#: cartridges/importer/importer.py:380
+#. The variable is the number of games.
+#: cartridges/importer/importer.py:379
 #, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "{} గేమ్‌లు దిగుమతి చేయబడ్డాయి"
 msgstr[1] "{} గేమ్‌లు దిగుమతి చేయబడ్డాయి"
+
+#. The variable is the number of games. This text comes after "{0} games imported".
+#: cartridges/importer/importer.py:383
+#, fuzzy
+msgid ", {} removed"
+msgid_plural ", {} removed"
+msgstr[0] "{} తీసివేయబడింది"
+msgstr[1] "{} తీసివేయబడింది"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
