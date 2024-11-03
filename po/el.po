@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-14 12:48+0200\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: 2023-10-08 16:00+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/cartridges/"
@@ -54,8 +54,8 @@ msgstr ""
 "να κρύψετε τα παιχνίδια σας, καθώς και να κατεβάσετε τα εξώφυλλα τους από το "
 "SteamGridDB."
 
-#: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:318
-#: cartridges/details_dialog.py:68
+#: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
+#: cartridges/details_dialog.py:77
 msgid "Game Details"
 msgstr "Λεπτομέρειες Παιχνιδιού"
 
@@ -64,7 +64,7 @@ msgid "Edit Game Details"
 msgstr "Επεξεργασία Λεπτομερειών Παιχνιδιού"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:542 cartridges/details_dialog.py:267
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:276
 #: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
 msgid "Preferences"
 msgstr "Προτιμήσεις"
@@ -73,47 +73,47 @@ msgstr "Προτιμήσεις"
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: data/gtk/details-dialog.blp:46
+#: data/gtk/details-dialog.blp:45
 msgid "New Cover"
 msgstr "Νέο Εξώφυλλο"
 
-#: data/gtk/details-dialog.blp:65
+#: data/gtk/details-dialog.blp:64
 msgid "Delete Cover"
 msgstr "Διαγραφή Εξώφυλλου"
 
-#: data/gtk/details-dialog.blp:93 data/gtk/game.blp:81
+#: data/gtk/details-dialog.blp:92 data/gtk/game.blp:80
 msgid "Title"
 msgstr "Τίτλος"
 
-#: data/gtk/details-dialog.blp:97
+#: data/gtk/details-dialog.blp:96
 msgid "Developer (optional)"
 msgstr "Προγραμματιστής (προαιρετικό)"
 
-#: data/gtk/details-dialog.blp:103
+#: data/gtk/details-dialog.blp:102
 msgid "Executable"
 msgstr "Εκτελέσιμο αρχείο"
 
-#: data/gtk/details-dialog.blp:109
+#: data/gtk/details-dialog.blp:108
 msgid "Select File"
 msgstr "Επιλογή αρχείου"
 
-#: data/gtk/details-dialog.blp:120
+#: data/gtk/details-dialog.blp:119
 msgid "More Info"
 msgstr "Περισσότερες Πληροφορίες"
 
-#: data/gtk/game.blp:102 data/gtk/game.blp:110 data/gtk/window.blp:443
+#: data/gtk/game.blp:101 data/gtk/game.blp:109 data/gtk/window.blp:444
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: data/gtk/game.blp:103 cartridges/window.py:350
+#: data/gtk/game.blp:102 cartridges/window.py:359
 msgid "Hide"
 msgstr "Απόκρυψη"
 
-#: data/gtk/game.blp:104 data/gtk/game.blp:112 data/gtk/window.blp:463
+#: data/gtk/game.blp:103 data/gtk/game.blp:111 data/gtk/window.blp:464
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: data/gtk/game.blp:111 cartridges/window.py:352
+#: data/gtk/game.blp:110 cartridges/window.py:361
 msgid "Unhide"
 msgstr "Φανέρωση"
 
@@ -121,17 +121,17 @@ msgstr "Φανέρωση"
 msgid "General"
 msgstr "Γενικά"
 
-#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:205 data/gtk/window.blp:221
-#: data/gtk/window.blp:272 data/gtk/window.blp:288 data/gtk/window.blp:474
+#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:207 data/gtk/window.blp:223
+#: data/gtk/window.blp:274 data/gtk/window.blp:290 data/gtk/window.blp:475
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:543
+#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:544
 msgid "Keyboard Shortcuts"
 msgstr "Συντομεύσεις Πληκτρολογίου"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:134 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
 msgid "Undo"
 msgstr "Αναίρεση"
 
@@ -139,11 +139,11 @@ msgstr "Αναίρεση"
 msgid "Quit"
 msgstr "Κλείσιμο"
 
-#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:185
+#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:187
 msgid "Toggle Sidebar"
 msgstr "Ρύθμιση πάνελ"
 
-#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:198 data/gtk/window.blp:265
+#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:200 data/gtk/window.blp:267
 msgid "Main Menu"
 msgstr "Κύριο μενού"
 
@@ -151,12 +151,12 @@ msgstr "Κύριο μενού"
 msgid "Games"
 msgstr "Παιχνίδια"
 
-#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:191 data/gtk/window.blp:550
+#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:193 data/gtk/window.blp:551
 msgid "Add Game"
 msgstr "Προσθήκη παιχνιδιού"
 
-#: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:113
-#: data/gtk/window.blp:27 data/gtk/window.blp:554
+#: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:58
+#: data/gtk/window.blp:27 data/gtk/window.blp:555
 msgid "Import"
 msgstr "Εισαγωγή"
 
@@ -168,8 +168,8 @@ msgstr "Εμφάνιση κρυμμένων παιχνιδιών"
 msgid "Remove Game"
 msgstr "Αφαίρεση παιχνιδιού"
 
-#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:117
-#: data/gtk/preferences.blp:415
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
+#: data/gtk/preferences.blp:365
 msgid "Behavior"
 msgstr "Συμπεριφορά"
 
@@ -185,7 +185,7 @@ msgstr "Εξώφυλλο εκκινεί το παιχνίδι"
 msgid "Swaps the behavior of the cover image and the play button"
 msgstr "Αντικατάσταση συμπεριφοράς εξωφύλλου και του κουμπιού αναπαραγωγής"
 
-#: data/gtk/preferences.blp:26 cartridges/details_dialog.py:82
+#: data/gtk/preferences.blp:26 cartridges/details_dialog.py:91
 msgid "Images"
 msgstr "Εικόνες"
 
@@ -202,139 +202,143 @@ msgstr ""
 msgid "Danger Zone"
 msgstr "Επικίνδυνη Ζώνη"
 
-#: data/gtk/preferences.blp:48
+#: data/gtk/preferences.blp:39
 msgid "Remove All Games"
 msgstr "Αφαίρεση Όλων Των Παιχνιδιών"
 
-#: data/gtk/preferences.blp:120
+#: data/gtk/preferences.blp:65
+msgid "Import Games Automatically"
+msgstr ""
+
+#: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
 msgstr "Αφαίρεση απεγκατεστημένων παιχνιδιών"
 
-#: data/gtk/preferences.blp:125
+#: data/gtk/preferences.blp:74
 msgid "Sources"
 msgstr "Πηγές"
 
-#: data/gtk/preferences.blp:128 cartridges/importer/steam_source.py:114
+#: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
 msgstr "Steam"
 
-#: data/gtk/preferences.blp:137 data/gtk/preferences.blp:164
-#: data/gtk/preferences.blp:199 data/gtk/preferences.blp:242
-#: data/gtk/preferences.blp:269 data/gtk/preferences.blp:296
-#: data/gtk/preferences.blp:323
+#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
+#: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
+#: data/gtk/preferences.blp:273
 msgid "Install Location"
 msgstr "Τοποθεσία εγκατάστασης"
 
-#: data/gtk/preferences.blp:155 data/gtk/window.blp:564
-#: cartridges/importer/lutris_source.py:96
+#: data/gtk/preferences.blp:105 data/gtk/window.blp:565
+#: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
 msgstr "Lutris"
 
-#: data/gtk/preferences.blp:181
+#: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
 msgstr "Εισαγωγή παιχνιδιών Steam"
 
-#: data/gtk/preferences.blp:185
+#: data/gtk/preferences.blp:135
 msgid "Import Flatpak Games"
 msgstr "Εισαγωγή παιχνιδιών Flatpak"
 
-#: data/gtk/preferences.blp:190 cartridges/importer/heroic_source.py:355
+#: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
 msgstr "Heroic"
 
-#: data/gtk/preferences.blp:216
+#: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
 msgstr "Εισαγωγή παιχνιδιών Epic"
 
-#: data/gtk/preferences.blp:220
+#: data/gtk/preferences.blp:170
 msgid "Import GOG Games"
 msgstr "Εισαγωγή παιχνιδιών GOG"
 
-#: data/gtk/preferences.blp:224
+#: data/gtk/preferences.blp:174
 msgid "Import Amazon Games"
 msgstr "Εισαγωγή παιχνιδιών Amazon"
 
-#: data/gtk/preferences.blp:228
+#: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
 msgstr "Εισαγωγή παιχνιδιών μέσω sideloading"
 
-#: data/gtk/preferences.blp:233 cartridges/importer/bottles_source.py:86
+#: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
 msgstr "Bottles"
 
-#: data/gtk/preferences.blp:260 cartridges/importer/itch_source.py:81
+#: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
 msgstr "itch"
 
-#: data/gtk/preferences.blp:287 cartridges/importer/legendary_source.py:97
+#: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
 msgstr "Legendary"
 
-#: data/gtk/preferences.blp:314 cartridges/importer/retroarch_source.py:142
+#: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
 msgstr "RetroArch"
 
-#: data/gtk/preferences.blp:341 cartridges/importer/flatpak_source.py:143
+#: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
 msgstr "Flatpak"
 
 #. The location of the system-wide data directory
-#: data/gtk/preferences.blp:351
+#: data/gtk/preferences.blp:301
 #, fuzzy
 msgid "System Location"
 msgstr "Ορίστε Τοποθεσία"
 
 #. The location of the user-specific data directory
-#: data/gtk/preferences.blp:369
+#: data/gtk/preferences.blp:319
 #, fuzzy
 msgid "User Location"
 msgstr "Ορίστε Τοποθεσία"
 
-#: data/gtk/preferences.blp:386
+#: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
 msgstr "Εισαγωγή εκκινητών παιχνιδιών"
 
-#: data/gtk/preferences.blp:391 cartridges/importer/desktop_source.py:215
+#: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
 msgstr "Εισαγωγές desktop"
 
-#: data/gtk/preferences.blp:403 data/gtk/window.blp:562
+#: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
 msgstr "SteamGridDB"
 
-#: data/gtk/preferences.blp:407
+#: data/gtk/preferences.blp:357
 msgid "Authentication"
 msgstr "Επιβεβαίωση"
 
-#: data/gtk/preferences.blp:410
+#: data/gtk/preferences.blp:360
 msgid "API Key"
 msgstr "Κλειδί API"
 
-#: data/gtk/preferences.blp:418
+#: data/gtk/preferences.blp:368
 msgid "Use SteamGridDB"
 msgstr "Χρήση SteamGridDB"
 
-#: data/gtk/preferences.blp:419
+#: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
 msgstr "Λήψη εικόνων κατά τη διάρκεια πρόσθεσης ή εισαγωγής παιχνιδιών"
 
-#: data/gtk/preferences.blp:423
+#: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
 msgstr "Προτίμηση Επίσημων Εικόνων"
 
-#: data/gtk/preferences.blp:427
+#: data/gtk/preferences.blp:377
 msgid "Prefer Animated Images"
 msgstr "Προτίμηση Κινούμενων Εικόνων"
 
-#: data/gtk/preferences.blp:433
+#: data/gtk/preferences.blp:383
 msgid "Update Covers"
 msgstr "Ανανέωση εξώφυλλου"
 
-#: data/gtk/preferences.blp:434
+#: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
 msgstr "Ανάκτηση εξώφυλλων για τα προϋπάρχων παιχνίδια στη βιβλιοθήκη σας"
 
-#: data/gtk/preferences.blp:439
+#: data/gtk/preferences.blp:389
 msgid "Update"
 msgstr "Ανανέωση"
 
@@ -362,135 +366,135 @@ msgstr "Δεν υπάρχουν κρυφά παιχνίδια"
 msgid "Games you hide will appear here"
 msgstr "Τα παιχνίδια που κρύβετε θα εμφανίζονται εδώ"
 
-#: data/gtk/window.blp:76 data/gtk/window.blp:111 cartridges/main.py:228
+#: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
 msgid "All Games"
 msgstr "Όλα τα παιχνίδια"
 
-#: data/gtk/window.blp:136 cartridges/main.py:230
+#: data/gtk/window.blp:140 cartridges/main.py:251
 msgid "Added"
 msgstr "Προστέθηκε"
 
-#: data/gtk/window.blp:156
+#: data/gtk/window.blp:162
 msgid "Imported"
 msgstr "Εισήχθη"
 
-#: data/gtk/window.blp:258
+#: data/gtk/window.blp:260
 msgid "Hidden Games"
 msgstr "Κρυμμένα παιχνίδια"
 
-#: data/gtk/window.blp:367
+#: data/gtk/window.blp:368
 msgid "Game Title"
 msgstr "Τίτλος παιχνιδιού"
 
-#: data/gtk/window.blp:424
+#: data/gtk/window.blp:425
 msgid "Play"
 msgstr "Παίξτε"
 
-#: data/gtk/window.blp:501
+#: data/gtk/window.blp:502
 msgid "Sort"
 msgstr "Ταξινόμηση"
 
-#: data/gtk/window.blp:504
+#: data/gtk/window.blp:505
 msgid "A-Z"
 msgstr "Α-Ζ"
 
-#: data/gtk/window.blp:510
+#: data/gtk/window.blp:511
 msgid "Z-A"
 msgstr "Ζ-Α"
 
-#: data/gtk/window.blp:516
+#: data/gtk/window.blp:517
 msgid "Newest"
 msgstr "Νεότερο"
 
-#: data/gtk/window.blp:522
+#: data/gtk/window.blp:523
 msgid "Oldest"
 msgstr "Παλαιότερο"
 
-#: data/gtk/window.blp:528
+#: data/gtk/window.blp:529
 msgid "Last Played"
 msgstr "Τελευταία αναπαραγωγή"
 
-#: data/gtk/window.blp:535
+#: data/gtk/window.blp:536
 msgid "Show Hidden"
 msgstr "Εμφάνιση Κρυφών"
 
-#: data/gtk/window.blp:544
+#: data/gtk/window.blp:545
 msgid "About Cartridges"
 msgstr "Σχετικά με τις Κασέτες"
 
-#: data/gtk/window.blp:561
+#: data/gtk/window.blp:562
 msgid "IGDB"
 msgstr ""
 
-#: data/gtk/window.blp:563
+#: data/gtk/window.blp:564
 msgid "ProtonDB"
 msgstr ""
 
-#: data/gtk/window.blp:565
+#: data/gtk/window.blp:566
 msgid "HowLongToBeat"
 msgstr ""
 
 #. The variable is the title of the game
-#: cartridges/main.py:205 cartridges/game.py:125
+#: cartridges/main.py:226 cartridges/game.py:125
 msgid "{} launched"
 msgstr "{} εκκινήθη"
 
-#. Translators: Replace this with your name for it to show up in the about window
-#: cartridges/main.py:270
-msgid "translator_credits"
+#. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
+#: cartridges/main.py:291
+msgid "translator-credits"
 msgstr "Yiannis Ioannides"
 
 #. The variable is the date when the game was added
-#: cartridges/window.py:373
+#: cartridges/window.py:382
 msgid "Added: {}"
 msgstr "Προστέθηκε: {}"
 
-#: cartridges/window.py:376
+#: cartridges/window.py:385
 msgid "Never"
 msgstr "Ποτέ"
 
 #. The variable is the date when the game was last played
-#: cartridges/window.py:380
+#: cartridges/window.py:389
 msgid "Last played: {}"
 msgstr "Τελευταία αναπαραγωγή: {}"
 
-#: cartridges/details_dialog.py:73
+#: cartridges/details_dialog.py:82
 msgid "Apply"
 msgstr "Εφαρμογή"
 
-#: cartridges/details_dialog.py:79
+#: cartridges/details_dialog.py:88
 msgid "Add New Game"
 msgstr "Προσθήκη νέου παιχνιδιού"
 
-#: cartridges/details_dialog.py:80
+#: cartridges/details_dialog.py:89
 msgid "Add"
 msgstr "Προσθήκη"
 
-#: cartridges/details_dialog.py:90
+#: cartridges/details_dialog.py:99
 msgid "Executables"
 msgstr "Προγράμματα"
 
 #. Translate this string as you would translate "file"
-#: cartridges/details_dialog.py:105
+#: cartridges/details_dialog.py:114
 msgid "file.txt"
 msgstr "αρχειο.txt"
 
 #. As in software
-#: cartridges/details_dialog.py:107
+#: cartridges/details_dialog.py:116
 msgid "program"
 msgstr "πρόγραμμα"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:112 cartridges/details_dialog.py:114
+#: cartridges/details_dialog.py:121 cartridges/details_dialog.py:123
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\προς\\φάκελο\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:118 cartridges/details_dialog.py:120
+#: cartridges/details_dialog.py:127 cartridges/details_dialog.py:129
 msgid "/path/to/{}"
 msgstr "/προς/φάκελο/{}"
 
-#: cartridges/details_dialog.py:125
+#: cartridges/details_dialog.py:134
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -514,19 +518,19 @@ msgstr ""
 "Αν η διεύθυνση φακέλου περιέχει κενά, φροντίστε να την περικλείσετε σε διπλά "
 "εισαγωγικά!"
 
-#: cartridges/details_dialog.py:167 cartridges/details_dialog.py:173
+#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:182
 msgid "Couldn't Add Game"
 msgstr "Αδυναμία προσθήκης παιχνιδιού"
 
-#: cartridges/details_dialog.py:167 cartridges/details_dialog.py:209
+#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:218
 msgid "Game title cannot be empty."
 msgstr "Ο τίτλος παιχνιδιού δεν μπορεί να είναι κενός."
 
-#: cartridges/details_dialog.py:173 cartridges/details_dialog.py:217
+#: cartridges/details_dialog.py:182 cartridges/details_dialog.py:226
 msgid "Executable cannot be empty."
 msgstr "Η εφαρμογή δεν μπορεί να είναι κενή."
 
-#: cartridges/details_dialog.py:208 cartridges/details_dialog.py:216
+#: cartridges/details_dialog.py:217 cartridges/details_dialog.py:225
 msgid "Couldn't Apply Preferences"
 msgstr "Αδυναμία Εφαρμογής Προτιμήσεων"
 
@@ -540,53 +544,82 @@ msgid "{} unhidden"
 msgstr "{} φανερώθηκε"
 
 #. The variable is the title of the game
-#. The variable is the number of games removed
-#: cartridges/game.py:153 cartridges/importer/importer.py:391
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#, fuzzy
 msgid "{} removed"
-msgstr "{} αφαιρέθηκε"
+msgid_plural "{} removed"
+msgstr[0] "{} αφαιρέθηκε"
+msgstr[1] "{} αφαιρέθηκε"
 
-#: cartridges/preferences.py:133
+#: cartridges/preferences.py:136
 msgid "All games removed"
 msgstr "Όλα τα παιχνίδια αφαιρέθηκαν"
 
-#: cartridges/preferences.py:181
+#: cartridges/preferences.py:188
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
 "Για τη χρήση του SteamGridDB απαιτείται ένα κλειδί API. Μπορείτε να "
 "δημιουργήσετε ένα {}εδώ{}."
 
-#: cartridges/preferences.py:196
+#: cartridges/preferences.py:203
 msgid "Downloading covers…"
 msgstr "Λήψη εξώφυλλων…"
 
-#: cartridges/preferences.py:215
+#: cartridges/preferences.py:222
 msgid "Covers updated"
 msgstr "Τα εξώφυλλα ανανεώθηκαν"
 
-#: cartridges/preferences.py:360
+#: cartridges/preferences.py:370
 msgid "Installation Not Found"
 msgstr "Η εγκατάσταση δεν βρέθηκε"
 
-#: cartridges/preferences.py:361
+#: cartridges/preferences.py:371
 msgid "Select a valid directory"
 msgstr "Επιλέξτε έναν έγκυρο προορισμό"
 
-#: cartridges/preferences.py:397 cartridges/importer/importer.py:318
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
 msgid "Warning"
 msgstr "Προσοχή"
 
-#: cartridges/preferences.py:431
+#: cartridges/preferences.py:441
 msgid "Invalid Directory"
 msgstr "Μη έγκυρος προορισμός"
 
-#: cartridges/preferences.py:437
+#: cartridges/preferences.py:447
 msgid "Set Location"
 msgstr "Ορίστε Τοποθεσία"
 
 #: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
 msgid "Dismiss"
 msgstr "Απόρριψη"
+
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr "Σήμερα"
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr "Χθες"
+
+#: cartridges/utils/relative_date.py:36
+#, fuzzy
+msgid "Last Week"
+msgstr "Τελευταία αναπαραγωγή"
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+#, fuzzy
+msgid "Last Year"
+msgstr "Τελευταία αναπαραγωγή"
 
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
@@ -600,19 +633,13 @@ msgstr "Τα παρακάτω σφάλματα παρουσιάστηκαν κα
 msgid "No new games found"
 msgstr "Δεν βρέθηκαν νέα παιχνίδια"
 
-#: cartridges/importer/importer.py:379
-msgid "1 game imported"
-msgstr "1 παιχνίδι εισήχθη"
-
-#. The variable is the number of games
-#: cartridges/importer/importer.py:383
-msgid "{} games imported"
-msgstr "{} παιχνίδια εισήχθησαν"
-
-#. A single game removed
-#: cartridges/importer/importer.py:387
-msgid "1 removed"
-msgstr "1 αφαιρέθηκε"
+#. The variable is the number of games imported
+#: cartridges/importer/importer.py:380
+#, fuzzy
+msgid "{} game imported"
+msgid_plural "{} games imported"
+msgstr[0] "{} παιχνίδια εισήχθησαν"
+msgstr[1] "{} παιχνίδια εισήχθησαν"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -650,6 +677,18 @@ msgstr ""
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
 msgstr "Επιβεβαιώστε το κλειδί API σας στις ρυθμίσεις"
+
+#, fuzzy
+#~ msgid "1 game imported"
+#~ msgid_plural "{} games imported"
+#~ msgstr[0] "1 παιχνίδι εισήχθη"
+#~ msgstr[1] "{} παιχνίδια εισήχθησαν"
+
+#, fuzzy
+#~ msgid "1 removed"
+#~ msgid_plural "{} removed"
+#~ msgstr[0] "1 αφαιρέθηκε"
+#~ msgstr[1] "{} αφαιρέθηκε"
 
 #~ msgid "Cache Location"
 #~ msgstr "Τοποθεσία cache"
@@ -715,12 +754,6 @@ msgstr "Επιβεβαιώστε το κλειδί API σας στις ρυθμ�
 
 #~ msgid "Bottles Install Location"
 #~ msgstr "Τοποθεσία Εγκατάστασης Bottles"
-
-#~ msgid "Today"
-#~ msgstr "Σήμερα"
-
-#~ msgid "Yesterday"
-#~ msgstr "Χθες"
 
 #~ msgid "Select the Lutris cache directory."
 #~ msgstr "Επιλέξτε τη τοποθεσία cache του Lutris."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 14:25+0100\n"
+"POT-Creation-Date: 2024-11-02 23:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -123,7 +124,7 @@ msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:137 cartridges/importer/importer.py:394
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
 msgid "Undo"
 msgstr ""
 
@@ -428,9 +429,9 @@ msgstr ""
 msgid "{} launched"
 msgstr ""
 
-#. Translators: Replace this with your name for it to show up in the about window
+#. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
-msgid "translator_credits"
+msgid "translator-credits"
 msgstr ""
 
 #. The variable is the date when the game was added
@@ -522,10 +523,12 @@ msgid "{} unhidden"
 msgstr ""
 
 #. The variable is the title of the game
-#. The variable is the number of games removed
-#: cartridges/game.py:153 cartridges/importer/importer.py:391
+#. The variable is the number of games removed. This comes after the text "{} games imported, ".
+#: cartridges/game.py:153 cartridges/importer/importer.py:384
 msgid "{} removed"
-msgstr ""
+msgid_plural "{} removed"
+msgstr[0] ""
+msgstr[1] ""
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -568,6 +571,30 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:36
+msgid "Last Week"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+msgid "Last Year"
+msgstr ""
+
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
 msgstr ""
@@ -580,19 +607,12 @@ msgstr ""
 msgid "No new games found"
 msgstr ""
 
-#: cartridges/importer/importer.py:379
-msgid "1 game imported"
-msgstr ""
-
-#. The variable is the number of games
-#: cartridges/importer/importer.py:383
-msgid "{} games imported"
-msgstr ""
-
-#. A single game removed
-#: cartridges/importer/importer.py:387
-msgid "1 removed"
-msgstr ""
+#. The variable is the number of games imported
+#: cartridges/importer/importer.py:380
+msgid "{} game imported"
+msgid_plural "{} games imported"
+msgstr[0] ""
+msgstr[1] ""
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
