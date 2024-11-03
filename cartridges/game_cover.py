@@ -117,6 +117,7 @@ class GameCover:
         else:
             for picture in self.pictures:
                 picture.set_paintable(texture or self.placeholder)
+                picture.queue_draw()
 
     def update_animation(self, data: GdkPixbuf.PixbufAnimation) -> None:
         if self.animation == data[1]:
