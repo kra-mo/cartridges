@@ -89,9 +89,12 @@ class DetailsDialog(Adw.Dialog):
             self.apply_button.set_label(_("Add"))
 
         image_filter = Gtk.FileFilter(name=_("Images"))
-        for extension in Image.registered_extensions():
+
+        # .palm and .pdf are write-only
+        for extension in set(Image.registered_extensions()) - {".palm", ".pdf"}:
             image_filter.add_suffix(extension[1:])
-            image_filter.add_suffix("svg")  # Gdk.Texture supports .svg but PIL doesn't
+
+        image_filter.add_suffix("svg")  # Gdk.Texture supports .svg but PIL doesn't
 
         image_filters = Gio.ListStore.new(Gtk.FileFilter)
         image_filters.append(image_filter)
