@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-03 16:33+0100\n"
+"POT-Creation-Date: 2024-11-05 14:01+0100\n"
 "PO-Revision-Date: 2023-12-15 13:10+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
@@ -65,7 +65,7 @@ msgid "Edit Game Details"
 msgstr "விளையாட்டு விவரங்களைத் திருத்து"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:543 cartridges/details_dialog.py:276
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "விருப்பங்கள்"
@@ -469,31 +469,31 @@ msgstr "புதிய விளையாட்டைச் சேர்க்�
 msgid "Add"
 msgstr "சேர்"
 
-#: cartridges/details_dialog.py:99
+#: cartridges/details_dialog.py:102
 msgid "Executables"
 msgstr "செயல்படுத்தக்கூடியவை"
 
 #. Translate this string as you would translate "file"
-#: cartridges/details_dialog.py:114
+#: cartridges/details_dialog.py:117
 msgid "file.txt"
 msgstr "கோப்பு.txt"
 
 #. As in software
-#: cartridges/details_dialog.py:116
+#: cartridges/details_dialog.py:119
 msgid "program"
 msgstr "பயன்பாடு"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:121 cartridges/details_dialog.py:123
+#: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\பாதை\\டு \\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:127 cartridges/details_dialog.py:129
+#: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
 msgstr "/பாதை/டு/ {}"
 
-#: cartridges/details_dialog.py:134
+#: cartridges/details_dialog.py:137
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -515,19 +515,19 @@ msgstr ""
 "\n"
 "பாதையில் இடைவெளிகள் இருந்தால், அதை இரட்டை மேற்கோள்களில் போர்த்துவதை உறுதிசெய்யவும்!"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:182
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
 msgstr "விளையாட்டைச் சேர்க்க முடியவில்லை"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:218
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
 msgstr "விளையாட்டு தலைப்பு காலியாக இருக்கக்கூடாது."
 
-#: cartridges/details_dialog.py:182 cartridges/details_dialog.py:226
+#: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
 msgstr "இயங்கக்கூடியது காலியாக இருக்க முடியாது."
 
-#: cartridges/details_dialog.py:217 cartridges/details_dialog.py:225
+#: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
 msgstr "விருப்பங்களைப் பயன்படுத்த முடியவில்லை"
 

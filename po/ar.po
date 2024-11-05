@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-03 16:33+0100\n"
+"POT-Creation-Date: 2024-11-05 14:01+0100\n"
 "PO-Revision-Date: 2023-12-15 13:10+0000\n"
 "Last-Translator: Ali-98 <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
@@ -64,7 +64,7 @@ msgid "Edit Game Details"
 msgstr "حرِّر تفاصيل اللعبة"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:543 cartridges/details_dialog.py:276
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "التفضيلات"
@@ -467,31 +467,31 @@ msgstr "أضف لعبةً جديدةً"
 msgid "Add"
 msgstr "أضف"
 
-#: cartridges/details_dialog.py:99
+#: cartridges/details_dialog.py:102
 msgid "Executables"
 msgstr "ملفات التنفيذ"
 
 #. Translate this string as you would translate "file"
-#: cartridges/details_dialog.py:114
+#: cartridges/details_dialog.py:117
 msgid "file.txt"
 msgstr "ملف.txt"
 
 #. As in software
-#: cartridges/details_dialog.py:116
+#: cartridges/details_dialog.py:119
 msgid "program"
 msgstr "البرنامج"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:121 cartridges/details_dialog.py:123
+#: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\المسار\\إلى\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:127 cartridges/details_dialog.py:129
+#: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
 msgstr "/المسار/إلى/{}"
 
-#: cartridges/details_dialog.py:134
+#: cartridges/details_dialog.py:137
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -513,19 +513,19 @@ msgstr ""
 "\n"
 "ولا تنسَ إحاطة المسار بعلامتي تنصيص مزدوجتين حالما تضمَّن مسافات!"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:182
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
 msgstr "تعذَّرت إضافة اللعبة"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:218
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
 msgstr "لا يجوز كون عنوان اللعبة فارغًا."
 
-#: cartridges/details_dialog.py:182 cartridges/details_dialog.py:226
+#: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
 msgstr "لا يجوز كون ملفِّ التنفيذ فارغًا."
 
-#: cartridges/details_dialog.py:217 cartridges/details_dialog.py:225
+#: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
 msgstr "تعذَّر تطبيق التفضيلات"
 

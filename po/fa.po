@@ -2,15 +2,15 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # سید حسین موسوی فرد <shmf1385@protonmail.com>, 2023.
-# Danial Behzadi <dani.behzi@ubuntu.com>, 2023.
+# Danial Behzadi <dani.behzi@ubuntu.com>, 2023, 2024.
 # آوید <avds+git@disroot.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-03 16:33+0100\n"
-"PO-Revision-Date: 2024-07-14 20:09+0000\n"
-"Last-Translator: آوید <avds+git@disroot.org>\n"
+"POT-Creation-Date: 2024-11-05 14:01+0100\n"
+"PO-Revision-Date: 2024-11-04 11:01+0000\n"
+"Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fa/>\n"
 "Language: fa\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -64,7 +64,7 @@ msgid "Edit Game Details"
 msgstr "ویرایش جزییات بازی"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:543 cartridges/details_dialog.py:276
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "ترجیحات"
@@ -207,7 +207,7 @@ msgstr "حذف کردن همهٔ بازی‌ها"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "درون‌ریزی خودکار بازی‌ها"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -467,31 +467,31 @@ msgstr "افزودن بازی جدید"
 msgid "Add"
 msgstr "افزودن"
 
-#: cartridges/details_dialog.py:99
+#: cartridges/details_dialog.py:102
 msgid "Executables"
 msgstr "اجرایی‌ها"
 
 #. Translate this string as you would translate "file"
-#: cartridges/details_dialog.py:114
+#: cartridges/details_dialog.py:117
 msgid "file.txt"
 msgstr "پرونده.txt"
 
 #. As in software
-#: cartridges/details_dialog.py:116
+#: cartridges/details_dialog.py:119
 msgid "program"
 msgstr "برنامه"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:121 cartridges/details_dialog.py:123
+#: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\Path\\to\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:127 cartridges/details_dialog.py:129
+#: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
 msgstr "/path/to/{}"
 
-#: cartridges/details_dialog.py:134
+#: cartridges/details_dialog.py:137
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -513,19 +513,19 @@ msgstr ""
 "\n"
 "اگر مسیر فاصله داشت، مطمئن شوید در نقل‌قول گذاشته‌ایدش!"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:182
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
 msgstr "نتوانست بازی بیفزاید"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:218
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
 msgstr "عنوان بازی نمی‌تواند خالی باشد."
 
-#: cartridges/details_dialog.py:182 cartridges/details_dialog.py:226
+#: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
 msgstr "اجرایی نمی‌تواند خالی باشد."
 
-#: cartridges/details_dialog.py:217 cartridges/details_dialog.py:225
+#: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
 msgstr "نتوانست ترجیحات را اعمال کند"
 
@@ -542,7 +542,7 @@ msgstr "{} نانهفته"
 #: cartridges/game.py:153
 #, fuzzy
 msgid "{} removed"
-msgstr "{} برداشته"
+msgstr "{} برداشته شد"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -589,29 +589,27 @@ msgstr "رد"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "امروز"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "دیروز"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "آخرین بازی‌شده"
+msgstr "هفتهٔ گذشته"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "این ماه"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "ماه گذشته"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "آخرین بازی‌شده"
+msgstr "پارسال"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -627,19 +625,18 @@ msgstr "هیچ بازی جدیدی پیدا نشد"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} بازی درون‌ریخته شدند"
-msgstr[1] "{} بازی درون‌ریخته شدند"
+msgstr[0] "{} بازی درون‌ریزی شد"
+msgstr[1] "{} بازی درون‌ریزی شدند"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
 #, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} برداشته"
-msgstr[1] "{} برداشته"
+msgstr[0] "{} برداشته شد"
+msgstr[1] "{} برداشته شدند"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

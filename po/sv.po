@@ -4,13 +4,14 @@
 # micke <mikanybe@gmail.com>, 2023.
 # micke <micke@users.noreply.hosted.weblate.org>, 2023.
 # Luna Jernberg <droidbittin@gmail.com>, 2023.
-# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023.
+# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023, 2024.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-03 16:33+0100\n"
-"PO-Revision-Date: 2023-12-15 13:10+0000\n"
+"POT-Creation-Date: 2024-11-05 14:01+0100\n"
+"PO-Revision-Date: 2024-11-04 11:01+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/sv/>\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -65,7 +66,7 @@ msgid "Edit Game Details"
 msgstr "Redigera speldetaljer"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:543 cartridges/details_dialog.py:276
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "Inställningar"
@@ -209,7 +210,7 @@ msgstr "Ta bort alla spel"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Importera spel automatiskt"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -469,31 +470,31 @@ msgstr "Lägg till nytt spel"
 msgid "Add"
 msgstr "Lägg till"
 
-#: cartridges/details_dialog.py:99
+#: cartridges/details_dialog.py:102
 msgid "Executables"
 msgstr "Körbara filer"
 
 #. Translate this string as you would translate "file"
-#: cartridges/details_dialog.py:114
+#: cartridges/details_dialog.py:117
 msgid "file.txt"
 msgstr "fil.txt"
 
 #. As in software
-#: cartridges/details_dialog.py:116
+#: cartridges/details_dialog.py:119
 msgid "program"
 msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:121 cartridges/details_dialog.py:123
+#: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\sökväg\\till\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:127 cartridges/details_dialog.py:129
+#: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
 msgstr "/sökväg/till/{}"
 
-#: cartridges/details_dialog.py:134
+#: cartridges/details_dialog.py:137
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -516,19 +517,19 @@ msgstr ""
 "Om sökvägen innehåller mellanslag, se till att den omsluts av dubbla "
 "citationstecken!"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:182
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
 msgstr "Kunde inte lägga till spelet"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:218
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
 msgstr "Spelets titel kan inte vara tom."
 
-#: cartridges/details_dialog.py:182 cartridges/details_dialog.py:226
+#: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
 msgstr "Den körbara filen kan inte vara tom."
 
-#: cartridges/details_dialog.py:217 cartridges/details_dialog.py:225
+#: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
 msgstr "Kunde inte tillämpa inställningar"
 
@@ -545,7 +546,7 @@ msgstr "{} synlig"
 #: cartridges/game.py:153
 #, fuzzy
 msgid "{} removed"
-msgstr "{} borttaget"
+msgstr "{} borttagen"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -598,22 +599,20 @@ msgid "Yesterday"
 msgstr "Igår"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Senast spelad"
+msgstr "Senaste veckan"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Denna månaden"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Senaste månaden"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Senast spelad"
+msgstr "Senaste året"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -629,19 +628,18 @@ msgstr "Inga nya spel hittades"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "{} spel importerade"
-msgstr[1] "{} spel importerade"
+msgstr[1] "{} flera spel importerade"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
 #, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} borttaget"
-msgstr[1] "{} borttaget"
+msgstr[0] "{} borttagen"
+msgstr[1] "{} borttagna"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

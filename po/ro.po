@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-03 16:33+0100\n"
-"PO-Revision-Date: 2024-10-14 00:15+0000\n"
+"POT-Creation-Date: 2024-11-05 14:01+0100\n"
+"PO-Revision-Date: 2024-11-05 09:49+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ro/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -65,7 +65,7 @@ msgid "Edit Game Details"
 msgstr "Editați detaliile jocului"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:543 cartridges/details_dialog.py:276
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "Preferințe"
@@ -211,7 +211,7 @@ msgstr "Elimină toate jocurile"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Importă automat jocuri"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -473,31 +473,31 @@ msgstr "Adaugă un joc nou"
 msgid "Add"
 msgstr "Adaugă"
 
-#: cartridges/details_dialog.py:99
+#: cartridges/details_dialog.py:102
 msgid "Executables"
 msgstr "Executabili"
 
 #. Translate this string as you would translate "file"
-#: cartridges/details_dialog.py:114
+#: cartridges/details_dialog.py:117
 msgid "file.txt"
 msgstr "fișier.txt"
 
 #. As in software
-#: cartridges/details_dialog.py:116
+#: cartridges/details_dialog.py:119
 msgid "program"
 msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:121 cartridges/details_dialog.py:123
+#: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
 msgstr "C:\ruta\\către\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:127 cartridges/details_dialog.py:129
+#: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
 msgstr "/ruta/către/{}"
 
-#: cartridges/details_dialog.py:134
+#: cartridges/details_dialog.py:137
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -519,19 +519,19 @@ msgstr ""
 "\n"
 "Dacă ruta conține spații, asigurați-vă că o includeți între ghilimele duble!"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:182
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
 msgstr "Nu s-a putut adăuga jocul"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:218
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
 msgstr "Titlul jocului nu poate fi gol."
 
-#: cartridges/details_dialog.py:182 cartridges/details_dialog.py:226
+#: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
 msgstr "Executabilul nu poate fi gol."
 
-#: cartridges/details_dialog.py:217 cartridges/details_dialog.py:225
+#: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
 msgstr "Nu s-au putut aplica preferințele"
 
@@ -595,29 +595,27 @@ msgstr "Revocare"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "Astăzi"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "Ieri"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Jucat ultima dată"
+msgstr "Ultima săptămână"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Luna aceasta"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Ultima lună"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Jucat ultima dată"
+msgstr "Ultimul an"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -633,12 +631,11 @@ msgstr "Nu s-au găsit jocuri noi"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "Un joc importat"
+msgstr[0] "{} joc importat"
 msgstr[1] "{} jocuri importate"
-msgstr[2] "{} jocuri importate"
+msgstr[2] "{} de jocuri importate"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
@@ -646,8 +643,8 @@ msgstr[2] "{} jocuri importate"
 msgid ", {} removed"
 msgid_plural ", {} removed"
 msgstr[0] "{} eliminat"
-msgstr[1] "{} eliminat"
-msgstr[2] "{} eliminat"
+msgstr[1] "{} eliminate"
+msgstr[2] "{} de eliminate"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

@@ -1,25 +1,27 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
-# Сергей <asvmail.as@gmail.com>, 2023.
+# Сергей <asvmail.as@gmail.com>, 2023, 2024.
 # kramo <contact@kramo.hu>, 2023.
 # Сергей Ворон <voron.s.a@gmail.com>, 2023.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-03 16:33+0100\n"
-"PO-Revision-Date: 2023-12-15 13:10+0000\n"
-"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
+"POT-Creation-Date: 2024-11-05 14:01+0100\n"
+"PO-Revision-Date: 2024-11-05 09:49+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -66,7 +68,7 @@ msgid "Edit Game Details"
 msgstr "Редактировать подробности об игре"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:543 cartridges/details_dialog.py:276
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "Параметры"
@@ -209,7 +211,7 @@ msgstr "Удалить все игры"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Импортировать игры автоматически"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -469,31 +471,31 @@ msgstr "Добавить новую игру"
 msgid "Add"
 msgstr "Добавить"
 
-#: cartridges/details_dialog.py:99
+#: cartridges/details_dialog.py:102
 msgid "Executables"
 msgstr "Исполняемые"
 
 #. Translate this string as you would translate "file"
-#: cartridges/details_dialog.py:114
+#: cartridges/details_dialog.py:117
 msgid "file.txt"
 msgstr "file.txt"
 
 #. As in software
-#: cartridges/details_dialog.py:116
+#: cartridges/details_dialog.py:119
 msgid "program"
 msgstr "программа"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:121 cartridges/details_dialog.py:123
+#: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\путь\\к\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:127 cartridges/details_dialog.py:129
+#: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
 msgstr "/путь/к/{}"
 
-#: cartridges/details_dialog.py:134
+#: cartridges/details_dialog.py:137
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -515,19 +517,19 @@ msgstr ""
 "\n"
 "Если путь содержит пробелы, обязательно заключите его в двойные кавычки!"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:182
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
 msgstr "Не удалось добавить игру"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:218
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
 msgstr "Название игры не может быть пустым."
 
-#: cartridges/details_dialog.py:182 cartridges/details_dialog.py:226
+#: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
 msgstr "Исполняемый файл не может быть пустым."
 
-#: cartridges/details_dialog.py:217 cartridges/details_dialog.py:225
+#: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
 msgstr "Не удалось применить параметры"
 
@@ -598,22 +600,20 @@ msgid "Yesterday"
 msgstr "Вчера"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Последняя игра"
+msgstr "На прошлой неделе"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "В этом месяце"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "В прошлом месяце"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Последняя игра"
+msgstr "В прошедшем году"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -629,12 +629,11 @@ msgstr "Новых игр не найдено"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} игр(ы) импортировано"
-msgstr[1] "{} игр(ы) импортировано"
-msgstr[2] "{} игр(ы) импортировано"
+msgstr[0] "{} игра импортирована"
+msgstr[1] "{} игры импортировано"
+msgstr[2] "{} игр импортировано"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
@@ -642,8 +641,8 @@ msgstr[2] "{} игр(ы) импортировано"
 msgid ", {} removed"
 msgid_plural ", {} removed"
 msgstr[0] "{} удалена"
-msgstr[1] "{} удалена"
-msgstr[2] "{} удалена"
+msgstr[1] "{} удалены"
+msgstr[2] "{} удалено"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-03 16:33+0100\n"
+"POT-Creation-Date: 2024-11-05 14:01+0100\n"
 "PO-Revision-Date: 2024-11-02 23:02+0100\n"
 "Last-Translator: Sunniva Løvstad <turtle@turtle.garden>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -65,7 +65,7 @@ msgid "Edit Game Details"
 msgstr "Rediger spilldetaljer"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:543 cartridges/details_dialog.py:276
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "Brukervalg"
@@ -470,31 +470,31 @@ msgstr "Legg til nytt spill"
 msgid "Add"
 msgstr "Legg til"
 
-#: cartridges/details_dialog.py:99
+#: cartridges/details_dialog.py:102
 msgid "Executables"
 msgstr "Kjørbare filer"
 
 #. Translate this string as you would translate "file"
-#: cartridges/details_dialog.py:114
+#: cartridges/details_dialog.py:117
 msgid "file.txt"
 msgstr "fil.txt"
 
 #. As in software
-#: cartridges/details_dialog.py:116
+#: cartridges/details_dialog.py:119
 msgid "program"
 msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:121 cartridges/details_dialog.py:123
+#: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\sti\\til\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:127 cartridges/details_dialog.py:129
+#: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
 msgstr "/sti/til/{}"
 
-#: cartridges/details_dialog.py:134
+#: cartridges/details_dialog.py:137
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -508,28 +508,28 @@ msgid ""
 msgstr ""
 "Start den kjørbare «{}»-filen med denne kommandoen:\n"
 "\n"
-"<tt>{}</tt>\n"
+"<tt>«{}»</tt>\n"
 "\n"
 "For å åpne filen «{}» med forvalgt program bruker du:\n"
 "\n"
-"<tt>{} {}</tt>\n"
+"<tt>{} «{}»</tt>\n"
 "\n"
 "Hvis stien inneholder mellomrom, må du pakke den inn i doble engelske "
 "sitattegn."
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:182
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
 msgstr "Kunne ikke legge til spill"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:218
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
 msgstr "Spillnavnet kan ikke være tomt."
 
-#: cartridges/details_dialog.py:182 cartridges/details_dialog.py:226
+#: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
 msgstr "Kjørbar fil må angis."
 
-#: cartridges/details_dialog.py:217 cartridges/details_dialog.py:225
+#: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
 msgstr "Kunne ikke ta i bruk endringer"
 
@@ -544,6 +544,7 @@ msgstr "{} synlig"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
+#, fuzzy
 msgid "{} removed"
 msgstr "{} fjernet"
 
@@ -634,10 +635,11 @@ msgstr[1] "{} spill importert"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
+#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] ", {} fjernet"
-msgstr[1] ", {} fjernet"
+msgstr[0] "{} fjernet"
+msgstr[1] "{} fjernet"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
