@@ -41,9 +41,9 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 if system() == "Linux":
     locale.bindtextdomain("cartridges", LOCALEDIR)
     locale.textdomain("cartridges")
-    gettext.install("cartridges", LOCALEDIR)
+    gettext.install("cartridges", LOCALEDIR, names=['ngettext'])
 else:
-    gettext.install("cartridges")
+    gettext.install("cartridges", names=['ngettext'])
 
 if __name__ == "__main__":
     from gi.repository import Gio, GLib

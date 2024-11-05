@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-02 23:03+0100\n"
+"POT-Creation-Date: 2024-11-05 14:01+0100\n"
 "PO-Revision-Date: 2024-11-04 11:01+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/cartridges/"
@@ -64,8 +64,8 @@ msgid "Edit Game Details"
 msgstr "ویرایش جزییات بازی"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
-#: data/gtk/window.blp:543 cartridges/details_dialog.py:276
-#: cartridges/importer/importer.py:320 cartridges/importer/importer.py:370
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:279
+#: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
 msgstr "ترجیحات"
 
@@ -131,7 +131,7 @@ msgid "Keyboard Shortcuts"
 msgstr "میان‌برهای صفحه‌کلید"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
-#: cartridges/preferences.py:137 cartridges/importer/importer.py:387
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
 msgstr "برگردان"
 
@@ -467,31 +467,31 @@ msgstr "افزودن بازی جدید"
 msgid "Add"
 msgstr "افزودن"
 
-#: cartridges/details_dialog.py:99
+#: cartridges/details_dialog.py:102
 msgid "Executables"
 msgstr "اجرایی‌ها"
 
 #. Translate this string as you would translate "file"
-#: cartridges/details_dialog.py:114
+#: cartridges/details_dialog.py:117
 msgid "file.txt"
 msgstr "پرونده.txt"
 
 #. As in software
-#: cartridges/details_dialog.py:116
+#: cartridges/details_dialog.py:119
 msgid "program"
 msgstr "برنامه"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:121 cartridges/details_dialog.py:123
+#: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
 msgstr "C:\\Path\\to\\{}"
 
 #. Translate this string as you would translate "path to {}"
-#: cartridges/details_dialog.py:127 cartridges/details_dialog.py:129
+#: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
 msgstr "/path/to/{}"
 
-#: cartridges/details_dialog.py:134
+#: cartridges/details_dialog.py:137
 msgid ""
 "To launch the executable \"{}\", use the command:\n"
 "\n"
@@ -513,19 +513,19 @@ msgstr ""
 "\n"
 "اگر مسیر فاصله داشت، مطمئن شوید در نقل‌قول گذاشته‌ایدش!"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:182
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
 msgstr "نتوانست بازی بیفزاید"
 
-#: cartridges/details_dialog.py:176 cartridges/details_dialog.py:218
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
 msgstr "عنوان بازی نمی‌تواند خالی باشد."
 
-#: cartridges/details_dialog.py:182 cartridges/details_dialog.py:226
+#: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
 msgstr "اجرایی نمی‌تواند خالی باشد."
 
-#: cartridges/details_dialog.py:217 cartridges/details_dialog.py:225
+#: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
 msgstr "نتوانست ترجیحات را اعمال کند"
 
@@ -539,12 +539,10 @@ msgid "{} unhidden"
 msgstr "{} نانهفته"
 
 #. The variable is the title of the game
-#. The variable is the number of games removed. This comes after the text "{} games imported, ".
-#: cartridges/game.py:153 cartridges/importer/importer.py:384
+#: cartridges/game.py:153
+#, fuzzy
 msgid "{} removed"
-msgid_plural "{} removed"
-msgstr[0] "{} برداشته شد"
-msgstr[1] "{} برداشته شدند"
+msgstr "{} برداشته شد"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -573,7 +571,7 @@ msgstr "نصب پیدا نشد"
 msgid "Select a valid directory"
 msgstr "گزینش شاخه‌ای معتبر"
 
-#: cartridges/preferences.py:407 cartridges/importer/importer.py:318
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
 msgstr "هشدار"
 
@@ -585,7 +583,7 @@ msgstr "شاخهٔ نامعتبر"
 msgid "Set Location"
 msgstr "تنظیم مکان"
 
-#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:319
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
 msgstr "رد"
 
@@ -613,24 +611,32 @@ msgstr "ماه گذشته"
 msgid "Last Year"
 msgstr "پارسال"
 
-#: cartridges/importer/importer.py:145
+#: cartridges/importer/importer.py:144
 msgid "Importing Games…"
 msgstr "درون‌ریزی بازی‌ها…"
 
-#: cartridges/importer/importer.py:338
+#: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
 msgstr "هنگام درون‌ریزی خطاهای زیر رخ دادند:"
 
-#: cartridges/importer/importer.py:367
+#: cartridges/importer/importer.py:366
 msgid "No new games found"
 msgstr "هیچ بازی جدیدی پیدا نشد"
 
-#. The variable is the number of games imported
-#: cartridges/importer/importer.py:380
+#. The variable is the number of games.
+#: cartridges/importer/importer.py:379
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "{} بازی درون‌ریزی شد"
 msgstr[1] "{} بازی درون‌ریزی شدند"
+
+#. The variable is the number of games. This text comes after "{0} games imported".
+#: cartridges/importer/importer.py:383
+#, fuzzy
+msgid ", {} removed"
+msgid_plural ", {} removed"
+msgstr[0] "{} برداشته شد"
+msgstr[1] "{} برداشته شدند"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
