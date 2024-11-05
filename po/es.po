@@ -2,16 +2,15 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
 # Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate.org>, 2023, 2024.
-# gallegonovato <fran-carro@hotmail.es>, 2023.
+# gallegonovato <fran-carro@hotmail.es>, 2023, 2024.
 # kramo <contact@kramo.hu>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-02 23:03+0100\n"
-"PO-Revision-Date: 2024-02-19 06:35+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
+"PO-Revision-Date: 2024-11-04 11:01+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/es/>\n"
 "Language: es\n"
@@ -19,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -210,7 +209,7 @@ msgstr "Eliminar todos los juegos"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Importar juegos automáticamente"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -544,11 +543,10 @@ msgstr "{} visible"
 #. The variable is the title of the game
 #. The variable is the number of games removed. This comes after the text "{} games imported, ".
 #: cartridges/game.py:153 cartridges/importer/importer.py:384
-#, fuzzy
 msgid "{} removed"
 msgid_plural "{} removed"
 msgstr[0] "{} eliminado"
-msgstr[1] "{} eliminado"
+msgstr[1] "{} eliminados"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -602,22 +600,20 @@ msgid "Yesterday"
 msgstr "Ayer"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Último jugado"
+msgstr "Última semana"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Este mes"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Último mes"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Último jugado"
+msgstr "Último año"
 
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
@@ -633,10 +629,9 @@ msgstr "No se encontraron juegos nuevos"
 
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} juegos importados"
+msgstr[0] "{} juego importado"
 msgstr[1] "{} juegos importados"
 
 #. The variable is the name of the source
