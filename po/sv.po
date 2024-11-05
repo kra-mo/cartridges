@@ -4,13 +4,14 @@
 # micke <mikanybe@gmail.com>, 2023.
 # micke <micke@users.noreply.hosted.weblate.org>, 2023.
 # Luna Jernberg <droidbittin@gmail.com>, 2023.
-# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023.
+# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023, 2024.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-02 23:03+0100\n"
-"PO-Revision-Date: 2023-12-15 13:10+0000\n"
+"PO-Revision-Date: 2024-11-04 11:01+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/sv/>\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -209,7 +210,7 @@ msgstr "Ta bort alla spel"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Importera spel automatiskt"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -544,11 +545,10 @@ msgstr "{} synlig"
 #. The variable is the title of the game
 #. The variable is the number of games removed. This comes after the text "{} games imported, ".
 #: cartridges/game.py:153 cartridges/importer/importer.py:384
-#, fuzzy
 msgid "{} removed"
 msgid_plural "{} removed"
-msgstr[0] "{} borttaget"
-msgstr[1] "{} borttaget"
+msgstr[0] "{} borttagen"
+msgstr[1] "{} borttagna"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -601,22 +601,20 @@ msgid "Yesterday"
 msgstr "Igår"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Senast spelad"
+msgstr "Senaste veckan"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Denna månaden"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Senaste månaden"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Senast spelad"
+msgstr "Senaste året"
 
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
@@ -632,11 +630,10 @@ msgstr "Inga nya spel hittades"
 
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "{} spel importerade"
-msgstr[1] "{} spel importerade"
+msgstr[1] "{} flera spel importerade"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

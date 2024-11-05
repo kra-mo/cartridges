@@ -5,13 +5,15 @@
 #
 # kramo <contact@kramo.hu>, 2023, 2024.
 # Balázs Meskó <meskobalazs@mailbox.org>, 2024.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
+# kramo <contact@kramo.page>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-02 23:03+0100\n"
-"PO-Revision-Date: 2024-10-22 10:56+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>\n"
+"PO-Revision-Date: 2024-11-04 11:01+0000\n"
+"Last-Translator: kramo <contact@kramo.page>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hu/>\n"
 "Language: hu\n"
@@ -19,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-rc\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -208,7 +210,7 @@ msgstr "Az összes játék eltávolítása"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Játékok automatikus importálása"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -543,7 +545,6 @@ msgstr "{} elrejtése visszavonva"
 #. The variable is the title of the game
 #. The variable is the number of games removed. This comes after the text "{} games imported, ".
 #: cartridges/game.py:153 cartridges/importer/importer.py:384
-#, fuzzy
 msgid "{} removed"
 msgid_plural "{} removed"
 msgstr[0] "{} eltávolítva"
@@ -601,22 +602,20 @@ msgid "Yesterday"
 msgstr "Tegnap"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Legutóbb játszott"
+msgstr "Múlt héten"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Ebben a hónapban"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Múlt hónapban"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Legutóbb játszott"
+msgstr "Múlt évben"
 
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
@@ -632,7 +631,6 @@ msgstr "Nem találhatóak új játékok"
 
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "{} játék importálva"

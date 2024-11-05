@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-02 23:03+0100\n"
-"PO-Revision-Date: 2024-10-14 00:15+0000\n"
+"PO-Revision-Date: 2024-11-05 09:49+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ro/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -211,7 +211,7 @@ msgstr "Elimină toate jocurile"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Importă automat jocuri"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -547,12 +547,11 @@ msgstr "{} afișat"
 #. The variable is the title of the game
 #. The variable is the number of games removed. This comes after the text "{} games imported, ".
 #: cartridges/game.py:153 cartridges/importer/importer.py:384
-#, fuzzy
 msgid "{} removed"
 msgid_plural "{} removed"
 msgstr[0] "{} eliminat"
-msgstr[1] "{} eliminat"
-msgstr[2] "{} eliminat"
+msgstr[1] "{} eliminate"
+msgstr[2] "{} de eliminate"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -599,29 +598,27 @@ msgstr "Revocare"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "Astăzi"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "Ieri"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Jucat ultima dată"
+msgstr "Ultima săptămână"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Luna aceasta"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Ultima lună"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Jucat ultima dată"
+msgstr "Ultimul an"
 
 #: cartridges/importer/importer.py:145
 msgid "Importing Games…"
@@ -637,12 +634,11 @@ msgstr "Nu s-au găsit jocuri noi"
 
 #. The variable is the number of games imported
 #: cartridges/importer/importer.py:380
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "Un joc importat"
+msgstr[0] "{} joc importat"
 msgstr[1] "{} jocuri importate"
-msgstr[2] "{} jocuri importate"
+msgstr[2] "{} de jocuri importate"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
