@@ -33,6 +33,7 @@ from cartridges.importer.source import Source
 from cartridges.store.managers.async_manager import AsyncManager
 from cartridges.store.pipeline import Pipeline
 
+
 # pylint: disable=too-many-instance-attributes
 class Importer(ErrorProducer):
     """A class in charge of scanning sources for games"""
@@ -379,11 +380,15 @@ class Importer(ErrorProducer):
 
         elif self.n_games_added >= 1:
             # The variable is the number of games.
-            toast_title = ngettext("{} game imported", "{} games imported", self.n_games_added).format(self.n_games_added)
+            toast_title = ngettext(
+                "{} game imported", "{} games imported", self.n_games_added
+            ).format(self.n_games_added)
 
         if (removed_length := len(self.removed_game_ids)) >= 1:
             # The variable is the number of games. This text comes after "{0} games imported".
-            toast_title += ngettext(", {} removed", ", {} removed", removed_length).format(removed_length)
+            toast_title += ngettext(
+                ", {} removed", ", {} removed", removed_length
+            ).format(removed_length)
 
         if self.n_games_added or self.removed_game_ids:
             toast.set_button_label(_("Undo"))
