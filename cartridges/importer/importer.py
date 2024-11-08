@@ -209,8 +209,12 @@ class Importer(ErrorProducer):
                 logging.info("Imported %s (%s)", game.name, game.game_id)
                 pipeline.connect(
                     "advanced",
-                    # I'm not sure idle_add is needed here, but a widget is updated in the callback
-                    lambda *args: GLib.idle_add(self.pipeline_advanced_callback, *args),
+                    self.pipeline_advanced_callback,
+                )
+                pipeline.connect(
+                    "advanced",
+                    # Update widget in main loop
+                    lambda *args: GLib.idle_add(self.update_progressbar),
                 )
                 self.game_pipelines.add(pipeline)
 
@@ -243,7 +247,6 @@ class Importer(ErrorProducer):
         * A source finishes
         * A pipeline finishes
         """
-        self.update_progressbar()
         if self.finished:
             self.import_callback()
 
