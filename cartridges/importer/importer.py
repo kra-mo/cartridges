@@ -104,9 +104,10 @@ class Importer(ErrorProducer):
     def add_source(self, source: Source) -> None:
         self.sources.add(source)
 
-    def __watchdog(self) -> bool:
+    def monitor_gui(self) -> bool:
         # TODO make this a dedicated GUI manager method that runs on main loop
         if not self.finished:
+            self.update_progressbar()
             return True
 
         # Clean up GUI once it's finished
@@ -122,12 +123,13 @@ class Importer(ErrorProducer):
 
         shared.win.get_application().lookup_action("import").set_enabled(False)
         shared.win.get_application().lookup_action("add_game").set_enabled(False)
+        shared.win.get_application().lookup_action("preferences").set_enabled(False)
 
         self.n_pipelines_done = 0
         self.n_source_tasks_done = 0
 
         self.create_dialog()
-        GLib.timeout_add(100, self.__watchdog)
+        GLib.timeout_add(100, self.monitor_gui)
 
         # Collect all errors and reset the cancellables for the managers
         # - Only one importer exists at any given time
@@ -223,11 +225,6 @@ class Importer(ErrorProducer):
                     "advanced",
                     self.pipeline_advanced_callback,
                 )
-                pipeline.connect(
-                    "advanced",
-                    # Update widget in main loop
-                    lambda *args: GLib.idle_add(self.update_progressbar),
-                )
                 self.game_pipelines.add(pipeline)
 
     def update_progressbar(self) -> None:
@@ -286,6 +283,7 @@ class Importer(ErrorProducer):
         self.create_error_dialog()
         shared.win.get_application().lookup_action("import").set_enabled(True)
         shared.win.get_application().lookup_action("add_game").set_enabled(True)
+        shared.win.get_application().lookup_action("preferences").set_enabled(True)
         shared.win.get_application().state = shared.AppState.DEFAULT
         shared.win.create_source_rows()
 
