@@ -104,6 +104,15 @@ class Importer(ErrorProducer):
     def add_source(self, source: Source) -> None:
         self.sources.add(source)
 
+    def __watchdog(self) -> bool:
+        # TODO make this a dedicated GUI manager method that runs on main loop
+        if not self.finished:
+            return True
+
+        # Clean up GUI once it's finished
+        self.import_callback()
+        return False
+
     def run(self) -> None:
         """Use several Gio.Task to import games from added sources"""
         shared.win.get_application().state = shared.AppState.IMPORT
@@ -114,7 +123,11 @@ class Importer(ErrorProducer):
         shared.win.get_application().lookup_action("import").set_enabled(False)
         shared.win.get_application().lookup_action("add_game").set_enabled(False)
 
+        self.n_pipelines_done = 0
+        self.n_source_tasks_done = 0
+
         self.create_dialog()
+        GLib.timeout_add(100, self.__watchdog)
 
         # Collect all errors and reset the cancellables for the managers
         # - Only one importer exists at any given time
@@ -135,8 +148,6 @@ class Importer(ErrorProducer):
                 )
             )
 
-        self.progress_changed_callback()
-        GLib.timeout_add(100, self.__watchdog)
 
     def create_dialog(self) -> None:
         """Create the import dialog"""
@@ -231,25 +242,11 @@ class Importer(ErrorProducer):
         source, *_rest = data
         logging.debug("Import done for source %s", source.source_id)
         self.n_source_tasks_done += 1
-        self.progress_changed_callback()
 
     def pipeline_advanced_callback(self, pipeline: Pipeline) -> None:
         """Callback called when a pipeline for a game has advanced"""
         if pipeline.is_done:
             self.n_pipelines_done += 1
-            self.progress_changed_callback()
-
-    def progress_changed_callback(self) -> None:
-        """
-        Callback called when the import process has progressed
-
-        Triggered when:
-        * All sources have been started
-        * A source finishes
-        * A pipeline finishes
-        """
-        if self.finished:
-            self.import_callback()
 
     def remove_games(self) -> None:
         """Set removed to True for missing games"""
@@ -429,10 +426,4 @@ class Importer(ErrorProducer):
         else:
             self.timeout_toast()
 
-    def __watchdog(self) -> bool:
-        # This can help resolve a race condition where the dialog would stay open
-        if not self.finished:
-            return True
 
-        self.import_dialog.force_close()
-        return shared.win.get_visible_dialog() == self.import_dialog
