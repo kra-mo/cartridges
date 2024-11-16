@@ -70,6 +70,9 @@ class Importer(ErrorProducer):
         self.game_pipelines = set()
         self.sources = set()
 
+
+    """PUBLIC"""
+
     @property
     def n_games_added(self) -> int:
         return sum(
@@ -104,16 +107,6 @@ class Importer(ErrorProducer):
     def add_source(self, source: Source) -> None:
         self.sources.add(source)
 
-    def monitor_gui(self) -> bool:
-        # TODO make this a dedicated GUI manager method that runs on main loop
-        if not self.finished:
-            self.update_progressbar()
-            return True
-
-        # Clean up GUI once it's finished
-        self.import_callback()
-        return False
-
     def run(self) -> None:
         """Use several Gio.Task to import games from added sources"""
         shared.win.get_application().state = shared.AppState.IMPORT
@@ -129,7 +122,7 @@ class Importer(ErrorProducer):
         self.n_source_tasks_done = 0
 
         self.create_dialog()
-        GLib.timeout_add(100, self.monitor_gui)
+        GLib.timeout_add(100, self.monitor_import)
 
         # Collect all errors and reset the cancellables for the managers
         # - Only one importer exists at any given time
@@ -150,25 +143,61 @@ class Importer(ErrorProducer):
                 )
             )
 
+    """PRIVATE"""
 
-    def create_dialog(self) -> None:
-        """Create the import dialog"""
-        self.progressbar = Gtk.ProgressBar(margin_start=12, margin_end=12)
-        self.import_statuspage = Adw.StatusPage(
-            title=_("Importing Games…"),
-            child=self.progressbar,
-        )
-        self.import_dialog = Adw.Dialog(
-            child=self.import_statuspage,
-            content_width=350,
-            can_close=False,
-        )
+    def monitor_import(self) -> bool:
+        """Monitor import progress to update dialog and to trigger import cleanup
+        once the work has finished"""
+        if not self.finished:
+            self.update_progressbar()
+            return True
 
-        self.close_attempt_id = self.import_dialog.connect(
-            "close-attempt", lambda *_: shared.win.close()
-        )
+        self.finish_import()
+        return False
 
-        self.import_dialog.present(shared.win)
+    def finish_import(self) -> None:
+        """Callback called when importing has finished"""
+        logging.info("Import done")
+        self.remove_games()
+        self.imported_game_ids = shared.store.new_game_ids
+        shared.store.new_game_ids = set()
+        shared.store.duplicate_game_ids = set()
+        # Disconnect the close-attempt signal that closes the main window
+        self.import_dialog.disconnect(self.close_attempt_id)
+        self.import_dialog.force_close()
+        self.__class__.summary_toast = self.create_summary_toast()
+        self.create_error_dialog()
+        shared.win.get_application().lookup_action("import").set_enabled(True)
+        shared.win.get_application().lookup_action("add_game").set_enabled(True)
+        shared.win.get_application().lookup_action("preferences").set_enabled(True)
+        shared.win.get_application().state = shared.AppState.DEFAULT
+        shared.win.create_source_rows()
+
+    def remove_games(self) -> None:
+        """Set removed to True for missing games"""
+        if not shared.schema.get_boolean("remove-missing"):
+            return
+
+        for game in shared.store:
+            if game.removed:
+                continue
+            if game.source == "imported":
+                continue
+            if not shared.schema.get_boolean(game.base_source):
+                continue
+            if game.game_id in shared.store.duplicate_game_ids:
+                continue
+            if game.game_id in shared.store.new_game_ids:
+                continue
+
+            logging.debug("Removing missing game %s (%s)", game.name, game.game_id)
+
+            game.removed = True
+            game.save()
+            game.update()
+            self.removed_game_ids.add(game.game_id)
+
+    """Import Actions — Threaded; None of this should touch GUI"""
 
     def source_task_thread_func(self, data: tuple) -> None:
         """Source import task code"""
@@ -218,6 +247,7 @@ class Importer(ErrorProducer):
                 continue
 
             # Register game
+            # TODO investigate this
             pipeline: Pipeline = shared.store.add_game(game, additional_data)
             if pipeline is not None:
                 logging.info("Imported %s (%s)", game.name, game.game_id)
@@ -227,65 +257,44 @@ class Importer(ErrorProducer):
                 )
                 self.game_pipelines.add(pipeline)
 
+    def source_callback(self, _obj: Any, _result: Any, data: tuple) -> None:
+        """Callback executed when a source is fully scanned"""
+        source, *_rest = data
+        logging.debug("Import done for source %s", source.source_id)
+        self.n_source_tasks_done += 1 # TODO is this threadsafe?
+
+    def pipeline_advanced_callback(self, pipeline: Pipeline) -> None:
+        """Callback called when a pipeline for a game has advanced"""
+        if pipeline.is_done:
+            self.n_pipelines_done += 1 # TODO is this threadsafe?
+
+    """GUI Actions"""
+
+    def create_dialog(self) -> None:
+        """Create the import dialog"""
+        self.progressbar = Gtk.ProgressBar(margin_start=12, margin_end=12)
+        self.import_statuspage = Adw.StatusPage(
+            title=_("Importing Games…"),
+            child=self.progressbar,
+        )
+        self.import_dialog = Adw.Dialog(
+            child=self.import_statuspage,
+            content_width=350,
+            can_close=False,
+        )
+
+        self.close_attempt_id = self.import_dialog.connect(
+            "close-attempt", lambda *_: shared.win.close()
+        )
+
+        self.import_dialog.present(shared.win)
+
     def update_progressbar(self) -> None:
         """Update the progressbar to show the overall import progress"""
         # Reserve 10% for the sources discovery, the rest is the pipelines
         self.progressbar.set_fraction(
             (0.1 * self.sources_progress) + (0.9 * self.pipelines_progress)
         )
-
-    def source_callback(self, _obj: Any, _result: Any, data: tuple) -> None:
-        """Callback executed when a source is fully scanned"""
-        source, *_rest = data
-        logging.debug("Import done for source %s", source.source_id)
-        self.n_source_tasks_done += 1
-
-    def pipeline_advanced_callback(self, pipeline: Pipeline) -> None:
-        """Callback called when a pipeline for a game has advanced"""
-        if pipeline.is_done:
-            self.n_pipelines_done += 1
-
-    def remove_games(self) -> None:
-        """Set removed to True for missing games"""
-        if not shared.schema.get_boolean("remove-missing"):
-            return
-
-        for game in shared.store:
-            if game.removed:
-                continue
-            if game.source == "imported":
-                continue
-            if not shared.schema.get_boolean(game.base_source):
-                continue
-            if game.game_id in shared.store.duplicate_game_ids:
-                continue
-            if game.game_id in shared.store.new_game_ids:
-                continue
-
-            logging.debug("Removing missing game %s (%s)", game.name, game.game_id)
-
-            game.removed = True
-            game.save()
-            game.update()
-            self.removed_game_ids.add(game.game_id)
-
-    def import_callback(self) -> None:
-        """Callback called when importing has finished"""
-        logging.info("Import done")
-        self.remove_games()
-        self.imported_game_ids = shared.store.new_game_ids
-        shared.store.new_game_ids = set()
-        shared.store.duplicate_game_ids = set()
-        # Disconnect the close-attempt signal that closes the main window
-        self.import_dialog.disconnect(self.close_attempt_id)
-        self.import_dialog.force_close()
-        self.__class__.summary_toast = self.create_summary_toast()
-        self.create_error_dialog()
-        shared.win.get_application().lookup_action("import").set_enabled(True)
-        shared.win.get_application().lookup_action("add_game").set_enabled(True)
-        shared.win.get_application().lookup_action("preferences").set_enabled(True)
-        shared.win.get_application().state = shared.AppState.DEFAULT
-        shared.win.create_source_rows()
 
     def create_error_dialog(self) -> None:
         """Dialog containing all errors raised by importers"""
@@ -423,5 +432,3 @@ class Importer(ErrorProducer):
             self.open_preferences(*args).connect("close-request", self.timeout_toast)
         else:
             self.timeout_toast()
-
-
