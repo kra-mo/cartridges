@@ -70,7 +70,6 @@ class Importer(ErrorProducer):
         self.game_pipelines = set()
         self.sources = set()
 
-
     """PUBLIC"""
 
     @property
@@ -261,12 +260,12 @@ class Importer(ErrorProducer):
         """Callback executed when a source is fully scanned"""
         source, *_rest = data
         logging.debug("Import done for source %s", source.source_id)
-        self.n_source_tasks_done += 1 # TODO is this threadsafe?
+        self.n_source_tasks_done += 1  # TODO is this threadsafe?
 
     def pipeline_advanced_callback(self, pipeline: Pipeline) -> None:
         """Callback called when a pipeline for a game has advanced"""
         if pipeline.is_done:
-            self.n_pipelines_done += 1 # TODO is this threadsafe?
+            self.n_pipelines_done += 1  # TODO is this threadsafe?
 
     """GUI Actions"""
 
