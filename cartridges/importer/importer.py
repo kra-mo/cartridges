@@ -70,8 +70,6 @@ class Importer(ErrorProducer):
         self.game_pipelines = set()
         self.sources = set()
 
-    """PUBLIC"""
-
     @property
     def n_games_added(self) -> int:
         return sum(
@@ -122,6 +120,7 @@ class Importer(ErrorProducer):
 
         self.create_dialog()
         GLib.timeout_add(100, self.monitor_import)
+        GLib.timeout_add(100, self.__watchdog)
 
         # Collect all errors and reset the cancellables for the managers
         # - Only one importer exists at any given time
@@ -142,7 +141,15 @@ class Importer(ErrorProducer):
                 )
             )
 
-    """PRIVATE"""
+    # Workaround: Adw bug: Dialog won't close if closed too soon after opening
+    def __watchdog(self) -> bool:
+        """Make sure import dialog closes when import is finished"""
+        if not self.finished:
+            return True
+
+        self.import_dialog.force_close()
+        return shared.win.get_visible_dialog() == self.import_dialog
+
 
     def monitor_import(self) -> bool:
         """Monitor import progress to update dialog and to trigger import cleanup
@@ -163,6 +170,7 @@ class Importer(ErrorProducer):
         shared.store.duplicate_game_ids = set()
         # Disconnect the close-attempt signal that closes the main window
         self.import_dialog.disconnect(self.close_attempt_id)
+        # Workaround: Dialog won't close if closed too soon after opening.
         self.import_dialog.force_close()
         self.__class__.summary_toast = self.create_summary_toast()
         self.create_error_dialog()
