@@ -68,7 +68,8 @@ class DetailsDialog(Adw.Dialog):
 
         # Make it so only one dialog can be open at a time
         self.__class__.is_open = True
-        self.connect("closed", lambda *_: self.set_is_open(False))
+        self.tmp_cover_path = None
+        self.connect("closed", self.on_closed)
 
         self.game: Optional[Game] = game
         self.game_cover: GameCover = GameCover({self.cover})
@@ -163,10 +164,19 @@ class DetailsDialog(Adw.Dialog):
         self.set_focus(self.name)
 
     def delete_pixbuf(self, *_args: Any) -> None:
+        if self.tmp_cover_path:
+            self.tmp_cover_path.unlink(missing_ok=True)
+
         self.game_cover.new_cover()
 
         self.cover_button_delete_revealer.set_reveal_child(False)
         self.cover_changed = True
+
+    def on_closed(self, *args):
+        if self.tmp_cover_path:
+            self.tmp_cover_path.unlink(missing_ok=True)
+
+        self.set_is_open(False)
 
     def apply_preferences(self, *_args: Any) -> None:
         final_name = self.name.get_text()
@@ -243,6 +253,7 @@ class DetailsDialog(Adw.Dialog):
             save_cover(
                 self.game.game_id,
                 self.game_cover.path,
+                self.game_cover.pixbuf,
             )
 
         shared.store.add_game(self.game, {}, run_pipeline=False)
@@ -298,26 +309,29 @@ class DetailsDialog(Adw.Dialog):
             return
 
         def thread_func() -> None:
-            new_path = None
+            is_animated = False
 
             try:
                 with Image.open(path) as image:
                     if getattr(image, "is_animated", False):
-                        new_path = convert_cover(path)
-            except UnidentifiedImageError:
+                        is_animated = True
+            except (UnidentifiedImageError, OSError, ValueError):
                 pass
 
-            if not new_path:
-                new_path = convert_cover(
+            if is_animated:
+                if self.tmp_cover_path:
+                    self.tmp_cover_path.unlink(missing_ok=True)
+                self.tmp_cover_path = convert_cover(path)
+                self.game_cover.new_cover(self.tmp_cover_path)
+            else:
+                self.game_cover.new_cover(
                     pixbuf=shared.store.managers[CoverManager].composite_cover(
                         Path(path)
                     )
                 )
 
-            if new_path:
-                self.game_cover.new_cover(new_path)
-                self.cover_button_delete_revealer.set_reveal_child(True)
-                self.cover_changed = True
+            self.cover_button_delete_revealer.set_reveal_child(True)
+            self.cover_changed = True
 
             self.toggle_loading()
 
