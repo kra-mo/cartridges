@@ -278,6 +278,9 @@ class CartridgesWindow(Adw.ApplicationWindow):
                 "max-children-per-line",
                 Gio.SettingsBindFlags.DEFAULT,
             )
+        else:
+            self.library.set_max_children_per_line(10)
+            self.hidden_library.set_max_children_per_line(10)
 
     def search_changed(self, _widget: Any, hidden: bool) -> None:
         # Refresh search filter on keystroke in search box
