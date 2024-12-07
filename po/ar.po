@@ -4,13 +4,15 @@
 # Ali Aljishi <ahj696@hotmail.com>, 2023.
 # kramo <contact@kramo.hu>, 2023.
 # Ali-98 <ahj696@hotmail.com>, 2023.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
+# "Jadiir M. Aal Jaidaan" <ashrafquatre@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2023-12-15 13:10+0000\n"
-"Last-Translator: Ali-98 <ahj696@hotmail.com>\n"
+"PO-Revision-Date: 2024-11-27 20:00+0000\n"
+"Last-Translator: \"Jadiir M. Aal Jaidaan\" <ashrafquatre@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
 "Language: ar\n"
@@ -19,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -207,7 +209,7 @@ msgstr "أزل كلَّ الألعاب"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "استيراد الألعاب تلقائيًا"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -540,7 +542,6 @@ msgstr "أٌظهرت {}"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "أزيلت {}"
 
@@ -601,16 +602,15 @@ msgstr "لُعبت آخر مرَّة"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "هذا الشهر"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "الشهر الماضي"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "لُعبت آخر مرَّة"
+msgstr "العام الماضي"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"

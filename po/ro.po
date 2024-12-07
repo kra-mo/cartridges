@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-11-05 09:49+0000\n"
+"PO-Revision-Date: 2024-11-06 19:00+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ro/>\n"
@@ -546,7 +546,6 @@ msgstr "{} afișat"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} eliminat"
 
@@ -639,12 +638,11 @@ msgstr[2] "{} de jocuri importate"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} eliminat"
-msgstr[1] "{} eliminate"
-msgstr[2] "{} de eliminate"
+msgstr[0] ", {} eliminat"
+msgstr[1] ", {} eliminate"
+msgstr[2] ", {} de eliminate"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

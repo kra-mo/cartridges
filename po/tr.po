@@ -2,13 +2,14 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # Sabri Ünal <libreajans@gmail.com>, 2023.
+# Ömer Faruk Kaygısız <farukkaygisiz24@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2023-12-16 23:25+0000\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
+"PO-Revision-Date: 2024-12-01 16:00+0000\n"
+"Last-Translator: Ömer Faruk Kaygısız <farukkaygisiz24@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/tr/>\n"
 "Language: tr\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -208,7 +209,7 @@ msgstr "Tüm Oyunları Kaldır"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Oyunları otomatik içeri aktar"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -541,7 +542,6 @@ msgstr "{} görünür"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} kaldırıldı"
 
@@ -597,22 +597,20 @@ msgid "Yesterday"
 msgstr "Dün"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Son Oynanan"
+msgstr "Geçen Hafta"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Bu Ay"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Geçen Ay"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Son Oynanan"
+msgstr "Geçen Yıl"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -628,19 +626,17 @@ msgstr "Yeni oyun bulunamadı"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "{} oyun içe aktarıldı"
-msgstr[1] "{} oyun içe aktarıldı"
+msgstr[1] "{} oyunlar içe aktarıldı"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
 msgstr[0] "{} kaldırıldı"
-msgstr[1] "{} kaldırıldı"
+msgstr[1] "{} kaldırıldılar"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
