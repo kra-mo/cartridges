@@ -4,15 +4,17 @@
 # Henrique Machado <henriquecamposrj@gmail.com>, 2023.
 # Vinícius Gama Santos <vinny.stalck@protonmail.com>, 2023.
 # Vítor Fernandes Almado <vfalmado@gmail.com>, 2023.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2023.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2023, 2024.
 # Filipe Motta <luiz_filipe_motta@hotmail.com>, 2024.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-04-20 05:07+0000\n"
-"Last-Translator: Filipe Motta <luiz_filipe_motta@hotmail.com>\n"
+"PO-Revision-Date: 2024-11-06 19:00+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -20,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -210,7 +212,7 @@ msgstr "Remover todos os jogos"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Importar jogos automaticamente"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -445,7 +447,8 @@ msgid "translator-credits"
 msgstr ""
 "Pedro Sader Azevedo\n"
 "Vinícius \"Stalck\"\n"
-"Filipe Motta <luizfilipemotta@gmail.com>"
+"Filipe Motta <luizfilipemotta@gmail.com>\n"
+"Rafael Fontenelle <rafaelff@gnome.org>"
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:382
@@ -546,7 +549,6 @@ msgstr "{} exibido"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} removido"
 
@@ -602,22 +604,20 @@ msgid "Yesterday"
 msgstr "Ontem"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Última vez jogado"
+msgstr "Semana passada"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Este mês"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Mês passado"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Última vez jogado"
+msgstr "Ano passado"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -633,19 +633,17 @@ msgstr "Nenhum jogo novo encontrado"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} jogos importados"
+msgstr[0] "{} jogo importado"
 msgstr[1] "{} jogos importados"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
 msgstr[0] "{} removido"
-msgstr[1] "{} removido"
+msgstr[1] "{} removidos"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
