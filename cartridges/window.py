@@ -19,6 +19,8 @@
 
 # pyright: reportAssignmentType=none
 
+cool change
+
 from sys import platform
 from typing import Any, Optional
 
