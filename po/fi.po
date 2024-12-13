@@ -7,13 +7,14 @@
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2023.
 # kramo <contact@kramo.hu>, 2023.
 # Scott Anecito <scott.anecito@linux.com>, 2024.
+# Ricky Tigg <ricky.tigg@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-01-16 06:06+0000\n"
-"Last-Translator: Scott Anecito <scott.anecito@linux.com>\n"
+"PO-Revision-Date: 2024-12-03 12:00+0000\n"
+"Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fi/>\n"
 "Language: fi\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -53,9 +54,10 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Cartridges on helppo pelikäynnistin. Se tukee pelien tuontia Steamista, "
-"Heroicista ja Bottlesista, sekä muistaa ilman kirjautumista. Voit lajitella "
-"tai piilottaa pelejä ja ladata kansikuvan SteamGridDB tietokannasta."
+"Cartridges on yksinkertainen pelien käynnistysohjelma kaikille peleillesi. "
+"Se tukee pelien tuontia Steamista, Lutriksesta, Heroicista ja muista ilman "
+"kirjautumista. Voit lajitella ja piilottaa pelejä tai ladata kansikuvia "
+"SteamGridDB:stä."
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
 #: cartridges/details_dialog.py:77
@@ -174,7 +176,7 @@ msgstr "Poista peli"
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
 #: data/gtk/preferences.blp:365
 msgid "Behavior"
-msgstr "Toiminta"
+msgstr "Käyttäytyminen"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
@@ -186,7 +188,7 @@ msgstr "Kansikuva käynnistää pelin"
 
 #: data/gtk/preferences.blp:21
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr "Vaihtaa keskenään kansikuvan ja Pelaa-painikkeen toiminnallisuuden"
+msgstr "Vaihtaa kansikuvan ja toistonäppäimen käyttäytymistä"
 
 #: data/gtk/preferences.blp:26 cartridges/details_dialog.py:91
 msgid "Images"
@@ -210,7 +212,7 @@ msgstr "Poista kaikki pelit"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Tuo pelit automaattisesti"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -270,7 +272,7 @@ msgstr "Pullot"
 
 #: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
-msgstr "itch"
+msgstr "kutittaa"
 
 #: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
@@ -286,15 +288,13 @@ msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:301
-#, fuzzy
 msgid "System Location"
-msgstr "Aseta sijainti"
+msgstr "Järjestelmän sijainti"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:319
-#, fuzzy
 msgid "User Location"
-msgstr "Aseta sijainti"
+msgstr "Käyttäjän sijainti"
 
 #: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
@@ -310,7 +310,7 @@ msgstr "SteamGridDB"
 
 #: data/gtk/preferences.blp:357
 msgid "Authentication"
-msgstr "Tunnistautuminen"
+msgstr "Todennus"
 
 #: data/gtk/preferences.blp:360
 msgid "API Key"
@@ -546,7 +546,6 @@ msgstr "{} palautettu näkyviin"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} poistettu"
 
@@ -602,22 +601,20 @@ msgid "Yesterday"
 msgstr "Eilen"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Viimeksi pelattu"
+msgstr "Viime viikko"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Tämä kuukausi"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Viime kuukausi"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Viimeksi pelattu"
+msgstr "Viime vuosi"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -633,15 +630,13 @@ msgstr "Uusia pelejä ei löytynyt"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} peliä tuotu"
+msgstr[0] "{} peli tuotu"
 msgstr[1] "{} peliä tuotu"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
 msgstr[0] "{} poistettu"
@@ -650,17 +645,17 @@ msgstr[1] "{} poistettu"
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
 msgid "Select the {} cache directory."
-msgstr "Valitse {}-välimuistikansio."
+msgstr "Valitse {}-välimuistihakemisto."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:36
 msgid "Select the {} configuration directory."
-msgstr "Valitse {}-asetuskansio."
+msgstr "Valitse {}-kokoonpanohakemisto."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:38
 msgid "Select the {} data directory."
-msgstr "Valitse {}-datakansio."
+msgstr "Valitse {}-tietohakemisto."
 
 #: cartridges/importer/retroarch_source.py:129
 msgid "No RetroArch Core Selected"
