@@ -4,13 +4,14 @@
 # K.B.Dharun Krishna <kbdharunkrishna@gmail.com>, 2023.
 # kramo <contact@kramo.hu>, 2023.
 # "K.B.Dharun Krishna" <kbdharunkrishna@gmail.com>, 2023.
+# தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2023-12-15 13:10+0000\n"
-"Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
+"PO-Revision-Date: 2024-12-13 06:00+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
 "Language: ta\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -208,7 +209,7 @@ msgstr "அனைத்து விளையாட்டுகளையும�
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "விளையாட்டுகளை தானாக இறக்குமதி செய்யுங்கள்"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -220,7 +221,7 @@ msgstr "மூலங்கள்"
 
 #: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
-msgstr "Steam"
+msgstr "நீராவி"
 
 #: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
 #: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
@@ -232,7 +233,7 @@ msgstr "நிறுவல் இடம்"
 #: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
-msgstr "Lutris"
+msgstr "லூட்டர்"
 
 #: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
@@ -244,7 +245,7 @@ msgstr "Flatpak கேம்களை இறக்குமதி செய்�
 
 #: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
-msgstr "Heroic"
+msgstr "வீர"
 
 #: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
@@ -268,19 +269,19 @@ msgstr "பாட்டில்கள்"
 
 #: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
-msgstr "itch"
+msgstr "நமைச்சல்"
 
 #: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
-msgstr "Legendary"
+msgstr "புகழ்பெற்ற"
 
 #: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
-msgstr "RetroArch"
+msgstr "பின்னோக்கி"
 
 #: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
-msgstr "Flatpak"
+msgstr "பிளாட்பாக்"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:301
@@ -302,7 +303,7 @@ msgstr "டெஸ்க்டாப் உள்ளீடுகள்"
 
 #: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
-msgstr "SteamGridDB"
+msgstr "STEAMEGRIDDB"
 
 #: data/gtk/preferences.blp:357
 msgid "Authentication"
@@ -395,11 +396,11 @@ msgstr "வகைபடுத்து"
 
 #: data/gtk/window.blp:505
 msgid "A-Z"
-msgstr "A-Z"
+msgstr "A-z"
 
 #: data/gtk/window.blp:511
 msgid "Z-A"
-msgstr "Z-A"
+msgstr "Z-A."
 
 #: data/gtk/window.blp:517
 msgid "Newest"
@@ -427,11 +428,11 @@ msgstr "IGDB"
 
 #: data/gtk/window.blp:564
 msgid "ProtonDB"
-msgstr "ProtonDB"
+msgstr "புரோட்டொண்டிபி"
 
 #: data/gtk/window.blp:566
 msgid "HowLongToBeat"
-msgstr "HowLongToBeat"
+msgstr "அவுலாங்க்டோபீட்"
 
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
@@ -542,7 +543,6 @@ msgstr "{} மறைக்கப்படாதது"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} அகற்றப்பட்டது"
 
@@ -596,22 +596,20 @@ msgid "Yesterday"
 msgstr "நேற்று"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "கடைசியாக விளையாடியது"
+msgstr "கடந்த வாரம்"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "இந்த மாதம்"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "கடந்த மாதம்"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "கடைசியாக விளையாடியது"
+msgstr "கடந்த ஆண்டு"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -627,19 +625,17 @@ msgstr "புதிய விளையாட்டுகள் எதுவு�
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
-msgstr[1] "{} விளையாட்டுகள் இறக்குமதி செய்யப்பட்டன"
+msgstr[0] "{} விளையாட்டு இறக்குமதி செய்யப்பட்டது"
+msgstr[1] "இறக்குமதி செய்யப்பட்ட விளையாட்டுகள்"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} அகற்றப்பட்டது"
-msgstr[1] "{} அகற்றப்பட்டது"
+msgstr[0] ",}} அகற்றப்பட்டது"
+msgstr[1] ",}} அகற்றப்பட்டது"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
