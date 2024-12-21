@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-11-04 11:01+0000\n"
+"PO-Revision-Date: 2024-11-06 19:00+0000\n"
 "Last-Translator: Dan <jonweblin2205@protonmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/uk/>\n"
@@ -545,7 +545,6 @@ msgstr "{} показано"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} видалено"
 
@@ -638,7 +637,6 @@ msgstr[2] "{} ігор імпортовано"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
 msgstr[0] "{} видалено"

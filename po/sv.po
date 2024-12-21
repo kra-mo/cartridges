@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-11-04 11:01+0000\n"
+"PO-Revision-Date: 2024-11-06 19:00+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/sv/>\n"
@@ -544,9 +544,8 @@ msgstr "{} synlig"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
-msgstr "{} borttagen"
+msgstr "{} har tagits bort"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -635,11 +634,10 @@ msgstr[1] "{} flera spel importerade"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} borttagen"
-msgstr[1] "{} borttagna"
+msgstr[0] "{} har tagits bort"
+msgstr[1] "flera {} har tagits bort"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

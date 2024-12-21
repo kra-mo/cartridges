@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-11-04 11:01+0000\n"
+"PO-Revision-Date: 2024-11-06 19:00+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/es/>\n"
@@ -542,7 +542,6 @@ msgstr "{} visible"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} eliminado"
 
@@ -634,11 +633,10 @@ msgstr[1] "{} juegos importados"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} eliminado"
-msgstr[1] "{} eliminados"
+msgstr[0] ", {} eliminado"
+msgstr[1] ", {} eliminados"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
