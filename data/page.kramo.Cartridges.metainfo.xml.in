@@ -56,10 +56,12 @@
   <releases>
     <release version="2.11" date="2024-12-21">
       <description translate="no">
-        <p>Added the option to import games automatically</p>
-        <p>Increased the number of games per row on wide screens</p>
-        <p>Fixed an issue where animated covers would not play</p>
-        <p>Fixed an issue where the import dialog would stay open</p>
+        <ul>
+          <li>Added the option to import games automatically</li>
+          <li>Increased the number of games per row on wide screens</li>
+          <li>Fixed an issue where animated covers would not play</li>
+          <li>Fixed an issue where the import dialog would stay open</li>
+        </ul>
       </description>
     </release>
     <release version="2.10" date="2024-09-18">
