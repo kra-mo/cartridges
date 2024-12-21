@@ -19,17 +19,14 @@
 
 # pyright: reportAssignmentType=none
 
-cool change
-
 from sys import platform
 from typing import Any, Optional
-
-from gi.repository import Adw, Gio, GLib, Gtk, Pango
 
 from cartridges import shared
 from cartridges.game import Game
 from cartridges.game_cover import GameCover
 from cartridges.utils.relative_date import relative_date
+from gi.repository import Adw, Gio, GLib, Gtk, Pango
 
 
 @Gtk.Template(resource_path=shared.PREFIX + "/gtk/window.ui")
