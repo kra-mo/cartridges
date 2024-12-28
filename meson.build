@@ -8,6 +8,9 @@ project(
   ],
 )
 
+dependency('gtk4', version: '>= 4.15.0')
+dependency('libadwaita-1', version: '>= 1.6.beta')
+
 # Translations are broken on Windows for multiple reasons
 # gresources don't work and MSYS2 seems to have also broken the gettext package
 if host_machine.system() != 'windows'
