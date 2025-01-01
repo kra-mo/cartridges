@@ -38,7 +38,7 @@ jobs:
         run: echo tag_name=${GITHUB_REF#refs/tags/} >> $GITHUB_OUTPUT
 
       - name: Publish release
-        uses: softprops/action-gh-release@v2.1.0
+        uses: softprops/action-gh-release@v2.2.0
         with:
           files: |
             Windows Installer/Cartridges Windows.exe
