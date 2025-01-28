@@ -58,7 +58,7 @@ from cartridges.store.store import Store
 from cartridges.utils.run_executable import run_executable
 from cartridges.window import CartridgesWindow
 
-if sys.platform == "darwin":
+if sys.platform.startswith("darwin"):
     from AppKit import NSApp  # type: ignore
     from PyObjCTools import AppHelper
 
@@ -94,7 +94,7 @@ class CartridgesApplication(Adw.Application):
 
         self.add_main_option_entries((search, launch))
 
-        if sys.platform == "darwin":
+        if sys.platform.startswith("darwin"):
             if settings := Gtk.Settings.get_default():
                 settings.props.gtk_decoration_layout = "close,minimize,maximize:"
 
@@ -405,7 +405,7 @@ class CartridgesApplication(Adw.Application):
                     f"app.{action[0]}" if scope == self else f"win.{action[0]}",
                     (
                         tuple(s.replace("<primary>", "<meta>") for s in action[1])
-                        if sys.platform == "darwin"
+                        if sys.platform.startswith("darwin")
                         else action[1]
                     ),
                 )

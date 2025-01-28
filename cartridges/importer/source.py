@@ -76,7 +76,7 @@ class Source(Iterable):
 
     @property
     def is_available(self) -> bool:
-        return sys.platform in self.available_on
+        return any(sys.platform.startswith(platform) for platform in self.available_on)
 
     def make_executable(self, *args, **kwargs) -> str:
         """
@@ -120,14 +120,15 @@ class URLExecutableSource(ExecutableFormatSource):
 
     @property
     def executable_format(self) -> str:
-        match sys.platform:
-            case "win32":
-                return "start " + self.url_format
-            case "linux":
-                return "xdg-open " + self.url_format
-            case "darwin":
-                return "open " + self.url_format
-            case other:
-                raise NotImplementedError(
-                    f"No URL handler command available for {other}"
-                )
+        if sys.platform.startswith("win32"):
+            return f"start {self.url_format}"
+
+        if sys.platform.startswith("linux"):
+            return f"xdg-open {self.url_format}"
+
+        if sys.platform.startswith("darwin"):
+            return f"open {self.url_format}"
+
+        raise NotImplementedError(
+            f"No URL handler command available for {sys.platform}"
+        )
