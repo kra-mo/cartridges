@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download workflow artifact
-        uses: dawidd6/action-download-artifact@v7
+        uses: dawidd6/action-download-artifact@v8
         with:
           workflow: ci.yml
           commit: ${{ github.sha }}
