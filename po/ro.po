@@ -2,13 +2,13 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # Matt C <matei.gurzu@gmail.com>, 2023.
-# Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024.
+# Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-11-06 19:00+0000\n"
+"PO-Revision-Date: 2025-02-06 08:01+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ro/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -34,7 +34,7 @@ msgstr "Lansator de jocuri"
 #: data/page.kramo.Cartridges.desktop.in:5
 #: data/page.kramo.Cartridges.metainfo.xml.in:10
 msgid "Launch all your games"
-msgstr "Lansați toate jocurile dvs"
+msgstr "Lansați toate jocurile dvs."
 
 #: data/page.kramo.Cartridges.desktop.in:11
 msgid ""
