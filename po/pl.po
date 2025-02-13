@@ -8,13 +8,14 @@
 # Igor Popowicz <igorpopowicz12@gmail.com>, 2024.
 # polswert1 <polswert1@users.noreply.hosted.weblate.org>, 2024.
 # Karol <k.derbotprogramista@gmail.com>, 2024.
+# Stan Ulbrych <stanulbrych@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-05-15 14:01+0000\n"
-"Last-Translator: Karol <k.derbotprogramista@gmail.com>\n"
+"PO-Revision-Date: 2025-02-13 23:01+0000\n"
+"Last-Translator: Stan Ulbrych <stanulbrych@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/pl/>\n"
 "Language: pl\n"
@@ -23,14 +24,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.10-rc\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
 #: data/page.kramo.Cartridges.metainfo.xml.in:40 data/gtk/window.blp:47
 #: data/gtk/window.blp:83
 msgid "Cartridges"
-msgstr "Kartridże"
+msgstr "Cartridges"
 
 #: data/page.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
@@ -372,17 +373,14 @@ msgid "Games you hide will appear here"
 msgstr "Gry, które ukryjesz, pojawią się tutaj"
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
-#, fuzzy
 msgid "All Games"
-msgstr "Usuń wszystkie gry"
+msgstr "Wszystkie gry"
 
 #: data/gtk/window.blp:140 cartridges/main.py:251
-#, fuzzy
 msgid "Added"
-msgstr "Dodano: {}"
+msgstr "Dodano"
 
 #: data/gtk/window.blp:162
-#, fuzzy
 msgid "Imported"
 msgstr "Importuj"
 
@@ -432,15 +430,15 @@ msgstr "O Kartridżach"
 
 #: data/gtk/window.blp:562
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:564
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:566
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
@@ -450,7 +448,7 @@ msgstr "{} uruchomiony"
 #. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
 msgid "translator-credits"
-msgstr ""
+msgstr "Stan Ulbrych <stanulbrych@gmail.com>"
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:382
@@ -551,7 +549,6 @@ msgstr "{} nieukryty"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} usunięty"
 
@@ -567,7 +564,6 @@ msgstr ""
 "{} tutaj{}."
 
 #: cartridges/preferences.py:203
-#, fuzzy
 msgid "Downloading covers…"
 msgstr "Importowanie okładek…"
 
@@ -608,7 +604,6 @@ msgid "Yesterday"
 msgstr "Wczoraj"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
 msgstr "Ostatnio odtwarzane"
 
@@ -677,8 +672,9 @@ msgstr ""
 
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
+#, fuzzy
 msgid "The following playlists have no default core:"
-msgstr ""
+msgstr "Poniższe zestawienie nie mają domyślnego rdzenia"
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
