@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
-# Milo Ivir <mail@milotype.de>, 2023, 2024.
+# Milo Ivir <mail@milotype.de>, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-12-07 13:00+0000\n"
+"PO-Revision-Date: 2025-02-08 21:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/hr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -532,16 +532,16 @@ msgstr "Neuspjela primjena postavki"
 #. The variable is the title of the game
 #: cartridges/game.py:139
 msgid "{} hidden"
-msgstr "{} skrivena"
+msgstr "{} skriven"
 
 #: cartridges/game.py:139
 msgid "{} unhidden"
-msgstr "{} neskrivena"
+msgstr "{} neskriven"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
 msgid "{} removed"
-msgstr "{} uklonjena"
+msgstr "{} uklonjen"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
