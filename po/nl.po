@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the cartridges package.
-# Philip Goto <philip.goto@gmail.com>, 2023, 2024.
+# Philip Goto <philip.goto@gmail.com>, 2023, 2024, 2025.
 # kramo <contact@kramo.hu>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-02-15 17:02+0000\n"
+"PO-Revision-Date: 2025-02-01 12:02+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -79,7 +79,7 @@ msgstr "Nieuwe cover"
 
 #: data/gtk/details-dialog.blp:64
 msgid "Delete Cover"
-msgstr "Cover verwijderen"
+msgstr "Cover verwĳderen"
 
 #: data/gtk/details-dialog.blp:92 data/gtk/game.blp:80
 msgid "Title"
@@ -111,7 +111,7 @@ msgstr "Verbergen"
 
 #: data/gtk/game.blp:103 data/gtk/game.blp:111 data/gtk/window.blp:464
 msgid "Remove"
-msgstr "Verwijderen"
+msgstr "Verwĳderen"
 
 #: data/gtk/game.blp:110 cartridges/window.py:361
 msgid "Unhide"
@@ -141,7 +141,7 @@ msgstr "Afsluiten"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:187
 msgid "Toggle Sidebar"
-msgstr "Zijbalk omschakelen"
+msgstr "Zĳbalk omschakelen"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:200 data/gtk/window.blp:267
 msgid "Main Menu"
@@ -166,7 +166,7 @@ msgstr "Verborgen games tonen"
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
-msgstr "Game verwijderen"
+msgstr "Game verwĳderen"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
 #: data/gtk/preferences.blp:365
@@ -204,15 +204,15 @@ msgstr "Gevarenzone"
 
 #: data/gtk/preferences.blp:39
 msgid "Remove All Games"
-msgstr "Alle games verwijderen"
+msgstr "Alle games verwĳderen"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Games automatisch importeren"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
-msgstr "Gedeïnstalleerde games verwijderen"
+msgstr "Gedeïnstalleerde games verwĳderen"
 
 #: data/gtk/preferences.blp:74
 msgid "Sources"
@@ -318,7 +318,7 @@ msgstr "SteamGridDB gebruiken"
 
 #: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
-msgstr "Afbeeldingen downloaden bij het toevoegen of importeren van games"
+msgstr "Afbeeldingen downloaden bĳ het toevoegen of importeren van games"
 
 #: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
@@ -330,7 +330,7 @@ msgstr "Voorkeur geven aan geanimeerde afbeeldingen"
 
 #: data/gtk/preferences.blp:383
 msgid "Update Covers"
-msgstr "Covers bijwerken"
+msgstr "Covers bĳwerken"
 
 #: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
@@ -338,7 +338,7 @@ msgstr "Haal covers op voor games in uw bibliotheek"
 
 #: data/gtk/preferences.blp:389
 msgid "Update"
-msgstr "Bijwerken"
+msgstr "Bĳwerken"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -362,7 +362,7 @@ msgstr "Geen verborgen games"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
-msgstr "Games die u verbergt zullen hier verschijnen"
+msgstr "Games die u verbergt zullen hier verschĳnen"
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
 msgid "All Games"
@@ -522,11 +522,11 @@ msgstr "Kon game niet toevoegen"
 
 #: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
-msgstr "Game-titel mag niet leeg zijn."
+msgstr "Game-titel mag niet leeg zĳn."
 
 #: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
-msgstr "Programmabestand mag niet leeg zijn."
+msgstr "Programmabestand mag niet leeg zĳn."
 
 #: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
@@ -543,13 +543,12 @@ msgstr "{} hersteld"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
-msgstr "{} verwijderd"
+msgstr "{} is verwĳderd"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
-msgstr "Alle games verwijderd"
+msgstr "Alle games verwĳderd"
 
 #: cartridges/preferences.py:188
 msgid ""
@@ -564,7 +563,7 @@ msgstr "Covers downloaden…"
 
 #: cartridges/preferences.py:222
 msgid "Covers updated"
-msgstr "Covers bijgewerkt"
+msgstr "Covers bĳgewerkt"
 
 #: cartridges/preferences.py:370
 msgid "Installation Not Found"
@@ -599,22 +598,20 @@ msgid "Yesterday"
 msgstr "Gisteren"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Laatst gespeeld"
+msgstr "Afgelopen week"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Deze maand"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Afgelopen maand"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Laatst gespeeld"
+msgstr "Afgelopen jaar"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -622,7 +619,7 @@ msgstr "Games importeren…"
 
 #: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
-msgstr "De volgende fouten zijn opgetreden tijdens het importeren:"
+msgstr "De volgende fouten zĳn opgetreden tĳdens het importeren:"
 
 #: cartridges/importer/importer.py:366
 msgid "No new games found"
@@ -630,19 +627,17 @@ msgstr "Geen nieuwe games gevonden"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} games geïmporteerd"
+msgstr[0] "{} game geïmporteerd"
 msgstr[1] "{} games geïmporteerd"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} verwijderd"
-msgstr[1] "{} verwijderd"
+msgstr[0] ", {} verwĳderd"
+msgstr[1] ", {} verwĳderd"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -666,11 +661,11 @@ msgstr "Geen RetroArch-core geselecteerd"
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr "De volgende afspeellijsten hebben geen standaard-core:"
+msgstr "De volgende afspeel­lĳsten hebben geen standaard-core:"
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
-msgstr "Games zonder geselecteerde core zijn niet geïmporteerd"
+msgstr "Games zonder geselecteerde core zĳn niet geïmporteerd"
 
 #: cartridges/store/managers/sgdb_manager.py:46
 msgid "Couldn't Authenticate SteamGridDB"
