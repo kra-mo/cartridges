@@ -54,6 +54,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="2.11.1" date="2025-03-15">
+      <description translate="no">
+        <p>Updated the location of Steam covers, so they should correctly import again</p>
+      </description>
+    </release>
     <release version="2.11" date="2024-12-21">
       <description translate="no">
         <ul>
