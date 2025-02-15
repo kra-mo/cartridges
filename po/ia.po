@@ -1,46 +1,41 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
-# Milo Ivir <mail@milotype.de>, 2023, 2024, 2025.
+# "Emilio S." <emism.translations@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2025-02-08 21:22+0000\n"
-"Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/cartridges/"
-"cartridges/hr/>\n"
-"Language: hr\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.10-dev\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
 #: data/page.kramo.Cartridges.metainfo.xml.in:40 data/gtk/window.blp:47
 #: data/gtk/window.blp:83
 msgid "Cartridges"
-msgstr "Cartridges"
+msgstr ""
 
 #: data/page.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr "Pokretač za igre"
+msgstr ""
 
 #: data/page.kramo.Cartridges.desktop.in:5
 #: data/page.kramo.Cartridges.metainfo.xml.in:10
 msgid "Launch all your games"
-msgstr "Pokreni sve svoje igre"
+msgstr ""
 
 #: data/page.kramo.Cartridges.desktop.in:11
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
-"igranje;pokretač;para;lutris;heroic;bottles;butelje;itch;flatpak;legendary;"
-"retroarch;"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:12
 msgid ""
@@ -49,447 +44,443 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Cartridges je jednostavan pokretač igri za sve tvoje igre. Podržava uvoz "
-"igri sa Steama, Lutrisa, Heroica i drugih bez potrebe za prijavom. Možeš "
-"promijeniti redoslijed igri, sakriti igre ili preuzeti naslovnice sa "
-"SteamGridDB-a."
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
 #: cartridges/details_dialog.py:77
 msgid "Game Details"
-msgstr "Detalji igre"
+msgstr ""
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:48
 msgid "Edit Game Details"
-msgstr "Uredi detalje igre"
+msgstr ""
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
-msgstr "Postavke"
+msgstr ""
 
 #: data/gtk/details-dialog.blp:15
 msgid "Cancel"
-msgstr "Otkaži"
+msgstr ""
 
 #: data/gtk/details-dialog.blp:45
 msgid "New Cover"
-msgstr "Nova naslovnica"
+msgstr ""
 
 #: data/gtk/details-dialog.blp:64
 msgid "Delete Cover"
-msgstr "Izbriši naslovnicu"
+msgstr ""
 
 #: data/gtk/details-dialog.blp:92 data/gtk/game.blp:80
 msgid "Title"
-msgstr "Naslov"
+msgstr ""
 
 #: data/gtk/details-dialog.blp:96
 msgid "Developer (optional)"
-msgstr "Programer (opcionalno)"
+msgstr ""
 
 #: data/gtk/details-dialog.blp:102
 msgid "Executable"
-msgstr "Izvršna datoteka"
+msgstr ""
 
 #: data/gtk/details-dialog.blp:108
 msgid "Select File"
-msgstr "Odaberi datoteku"
+msgstr ""
 
 #: data/gtk/details-dialog.blp:119
 msgid "More Info"
-msgstr "Daljnje informacije"
+msgstr ""
 
 #: data/gtk/game.blp:101 data/gtk/game.blp:109 data/gtk/window.blp:444
 msgid "Edit"
-msgstr "Uredi"
+msgstr ""
 
 #: data/gtk/game.blp:102 cartridges/window.py:359
 msgid "Hide"
-msgstr "Sakrij"
+msgstr ""
 
 #: data/gtk/game.blp:103 data/gtk/game.blp:111 data/gtk/window.blp:464
 msgid "Remove"
-msgstr "Ukloni"
+msgstr ""
 
 #: data/gtk/game.blp:110 cartridges/window.py:361
 msgid "Unhide"
-msgstr "Prikaži"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
-msgstr "Općenito"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:14 data/gtk/window.blp:207 data/gtk/window.blp:223
 #: data/gtk/window.blp:274 data/gtk/window.blp:290 data/gtk/window.blp:475
 msgid "Search"
-msgstr "Traži"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:24 data/gtk/window.blp:544
 msgid "Keyboard Shortcuts"
-msgstr "Tipkovnički prečaci"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
 #: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
-msgstr "Poništi"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:34
 msgid "Quit"
-msgstr "Zatvori aplikaciju"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:187
 msgid "Toggle Sidebar"
-msgstr "Uključi/Isključi bočnu traku"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:200 data/gtk/window.blp:267
 msgid "Main Menu"
-msgstr "Glavni izbornik"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:50
 msgid "Games"
-msgstr "Igre"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:53 data/gtk/window.blp:193 data/gtk/window.blp:551
 msgid "Add Game"
-msgstr "Dodaj igru"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:58
 #: data/gtk/window.blp:27 data/gtk/window.blp:555
 msgid "Import"
-msgstr "Uvezi"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:63
 msgid "Show Hidden Games"
-msgstr "Prikaži skrivene igre"
+msgstr ""
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
-msgstr "Ukloni igru"
+msgstr ""
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
 #: data/gtk/preferences.blp:365
 msgid "Behavior"
-msgstr "Ponašanje"
+msgstr ""
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
-msgstr "Izađi nakon pokretanja igri"
+msgstr ""
 
 #: data/gtk/preferences.blp:20
 msgid "Cover Image Launches Game"
-msgstr "Slika naslovnice pokreće igru"
+msgstr ""
 
 #: data/gtk/preferences.blp:21
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr "Zamjenjuje ponašanje slike naslovnice i gumba za pokretanje igre"
+msgstr ""
 
 #: data/gtk/preferences.blp:26 cartridges/details_dialog.py:91
 msgid "Images"
-msgstr "Slike"
+msgstr ""
 
 #: data/gtk/preferences.blp:29
 msgid "High Quality Images"
-msgstr "Slike visoke kvalitete"
+msgstr ""
 
 #: data/gtk/preferences.blp:30
 msgid "Save game covers losslessly at the cost of storage"
-msgstr "Spremi nalsovnice igri bez gubitka kvalitete nauštrb memorije"
+msgstr ""
 
 #: data/gtk/preferences.blp:35
 msgid "Danger Zone"
-msgstr "Opasno područje"
+msgstr ""
 
 #: data/gtk/preferences.blp:39
 msgid "Remove All Games"
-msgstr "Ukloni sve igre"
+msgstr ""
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr "Uvezi igre automatski"
+msgstr ""
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
-msgstr "Ukloni deinstalirane igre"
+msgstr ""
 
 #: data/gtk/preferences.blp:74
 msgid "Sources"
-msgstr "Izvori"
+msgstr ""
 
 #: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
-msgstr "Steam"
+msgstr ""
 
 #: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
 #: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
 #: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
 #: data/gtk/preferences.blp:273
 msgid "Install Location"
-msgstr "Instaliraj lokaciju"
+msgstr ""
 
 #: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
-msgstr "Lutris"
+msgstr ""
 
 #: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
-msgstr "Uvezi Steam igre"
+msgstr ""
 
 #: data/gtk/preferences.blp:135
 msgid "Import Flatpak Games"
-msgstr "Uvezi Flatpak igre"
+msgstr ""
 
 #: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
-msgstr "Heroic"
+msgstr ""
 
 #: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
-msgstr "Uvezi Epic igre"
+msgstr ""
 
 #: data/gtk/preferences.blp:170
 msgid "Import GOG Games"
-msgstr "Uvezi GOG igre"
+msgstr ""
 
 #: data/gtk/preferences.blp:174
 msgid "Import Amazon Games"
-msgstr "Uvezi Amazon igre"
+msgstr ""
 
 #: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
-msgstr "Uvezi Sideloaded igre"
+msgstr ""
 
 #: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
-msgstr "Butelje"
+msgstr ""
 
 #: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
-msgstr "itch"
+msgstr ""
 
 #: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
-msgstr "Legendary"
+msgstr ""
 
 #: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
-msgstr "RetroArch"
+msgstr ""
 
 #: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
-msgstr "Flatpak"
+msgstr ""
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:301
 msgid "System Location"
-msgstr "Lokacija sustava"
+msgstr ""
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:319
 msgid "User Location"
-msgstr "Lokacija korisnika"
+msgstr ""
 
 #: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
-msgstr "Uvezi pokretače igri"
+msgstr ""
 
 #: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
-msgstr "Desktop unosi"
+msgstr ""
 
 #: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
-msgstr "SteamGridDB"
+msgstr ""
 
 #: data/gtk/preferences.blp:357
 msgid "Authentication"
-msgstr "Autentifikacija"
+msgstr ""
 
 #: data/gtk/preferences.blp:360
 msgid "API Key"
-msgstr "API Ključ"
+msgstr ""
 
 #: data/gtk/preferences.blp:368
 msgid "Use SteamGridDB"
-msgstr "Koristi SteamGridDB"
+msgstr ""
 
 #: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
-msgstr "Preuzmi slike prilikom dodavanja ili uvoza igri"
+msgstr ""
 
 #: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
-msgstr "Preferiraj službene slike"
+msgstr ""
 
 #: data/gtk/preferences.blp:377
 msgid "Prefer Animated Images"
-msgstr "Preferiraj animirane slike"
+msgstr ""
 
 #: data/gtk/preferences.blp:383
 msgid "Update Covers"
-msgstr "Aktualiziraj naslovnice"
+msgstr ""
 
 #: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
-msgstr "Preuzmi naslovnice za igre koje se već nalaze u tvojoj knjižnici"
+msgstr ""
 
 #: data/gtk/preferences.blp:389
 msgid "Update"
-msgstr "Aktualiziraj"
+msgstr ""
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
-msgstr "Nije pronađena nijedna igra"
+msgstr ""
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
 msgid "Try a different search"
-msgstr "Pokušaj drugačiju pretragu"
+msgstr ""
 
 #: data/gtk/window.blp:21
 msgid "No Games"
-msgstr "Nema igri"
+msgstr ""
 
 #: data/gtk/window.blp:22
 msgid "Use the + button to add games"
-msgstr "Koristi gumb + za dodavanje igri"
+msgstr ""
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
-msgstr "Nema skrivenih igri"
+msgstr ""
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
-msgstr "Igre koje sakriješ će se pojaviti ovdje"
+msgstr ""
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
 msgid "All Games"
-msgstr "Sve igre"
+msgstr ""
 
 #: data/gtk/window.blp:140 cartridges/main.py:251
 msgid "Added"
-msgstr "Dodano"
+msgstr ""
 
 #: data/gtk/window.blp:162
 msgid "Imported"
-msgstr "Uvezeno"
+msgstr ""
 
 #: data/gtk/window.blp:260
 msgid "Hidden Games"
-msgstr "Skrivene igre"
+msgstr ""
 
 #: data/gtk/window.blp:368
 msgid "Game Title"
-msgstr "Naslov igre"
+msgstr ""
 
 #: data/gtk/window.blp:425
 msgid "Play"
-msgstr "Igraj"
+msgstr ""
 
 #: data/gtk/window.blp:502
 msgid "Sort"
-msgstr "Redoslijed"
+msgstr ""
 
 #: data/gtk/window.blp:505
 msgid "A-Z"
-msgstr "A-Z"
+msgstr ""
 
 #: data/gtk/window.blp:511
 msgid "Z-A"
-msgstr "Z-A"
+msgstr ""
 
 #: data/gtk/window.blp:517
 msgid "Newest"
-msgstr "Najnovije"
+msgstr ""
 
 #: data/gtk/window.blp:523
 msgid "Oldest"
-msgstr "Najstarije"
+msgstr ""
 
 #: data/gtk/window.blp:529
 msgid "Last Played"
-msgstr "Zadnje igrane"
+msgstr ""
 
 #: data/gtk/window.blp:536
 msgid "Show Hidden"
-msgstr "Prikaži skrivene"
+msgstr ""
 
 #: data/gtk/window.blp:545
 msgid "About Cartridges"
-msgstr "Informacije o Cartridges"
+msgstr ""
 
 #: data/gtk/window.blp:562
 msgid "IGDB"
-msgstr "IGDB"
+msgstr ""
 
 #: data/gtk/window.blp:564
 msgid "ProtonDB"
-msgstr "ProtonDB"
+msgstr ""
 
 #: data/gtk/window.blp:566
 msgid "HowLongToBeat"
-msgstr "HowLongToBeat"
+msgstr ""
 
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
 msgid "{} launched"
-msgstr "{} pokrenuta"
+msgstr ""
 
 #. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
 msgid "translator-credits"
-msgstr "Milo Ivir <mail@milotype.de>"
+msgstr ""
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:382
 msgid "Added: {}"
-msgstr "Dodano: {}"
+msgstr ""
 
 #: cartridges/window.py:385
 msgid "Never"
-msgstr "Nikada"
+msgstr ""
 
 #. The variable is the date when the game was last played
 #: cartridges/window.py:389
 msgid "Last played: {}"
-msgstr "Zadnji put igrana: {}"
+msgstr ""
 
 #: cartridges/details_dialog.py:82
 msgid "Apply"
-msgstr "Primijeni"
+msgstr ""
 
 #: cartridges/details_dialog.py:88
 msgid "Add New Game"
-msgstr "Dodaj novu igru"
+msgstr ""
 
 #: cartridges/details_dialog.py:89
 msgid "Add"
-msgstr "Dodaj"
+msgstr ""
 
 #: cartridges/details_dialog.py:102
 msgid "Executables"
-msgstr "Izvršne datoteke"
+msgstr ""
 
 #. Translate this string as you would translate "file"
 #: cartridges/details_dialog.py:117
 msgid "file.txt"
-msgstr "datoteka.txt"
+msgstr ""
 
 #. As in software
 #: cartridges/details_dialog.py:119
 msgid "program"
-msgstr "program"
+msgstr ""
 
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
-msgstr "C:\\putanja\\do\\{}"
+msgstr ""
 
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
-msgstr "\\putanja\\do\\{}"
+msgstr ""
 
 #: cartridges/details_dialog.py:137
 msgid ""
@@ -503,190 +494,160 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Za pokretanje izvršne datoteke „{}” koristi naredbu:\n"
-"\n"
-"<tt>„{}”</tt>\n"
-"\n"
-"Za otvaranje datoteke „{}” sa zadanom aplikacijom, koristi:\n"
-"\n"
-"<tt>{} „{}”</tt>\n"
-"\n"
-"Ako putanja sadrži razmake, obavezno je stavi u navodnike!"
 
 #: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
-msgstr "Neuspjelo dodavanje igre"
+msgstr ""
 
 #: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
-msgstr "Naslov igre ne može biti prazan."
+msgstr ""
 
 #: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
-msgstr "Izvršna datoteka ne može biti prazna."
+msgstr ""
 
 #: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
-msgstr "Neuspjela primjena postavki"
+msgstr ""
 
 #. The variable is the title of the game
 #: cartridges/game.py:139
 msgid "{} hidden"
-msgstr "{} skriven"
+msgstr ""
 
 #: cartridges/game.py:139
 msgid "{} unhidden"
-msgstr "{} neskriven"
+msgstr ""
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
 msgid "{} removed"
-msgstr "{} uklonjen"
+msgstr ""
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
-msgstr "Sve igre su uklonjene"
+msgstr ""
 
 #: cartridges/preferences.py:188
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
-"Za korištenje SteamGridDB-a je potreban API ključ. Možeš ga generirati {}"
-"ovdje{}."
 
 #: cartridges/preferences.py:203
 msgid "Downloading covers…"
-msgstr "Preuzimanje naslovnica …"
+msgstr ""
 
 #: cartridges/preferences.py:222
 msgid "Covers updated"
-msgstr "Naslovnice su aktualizirane"
+msgstr ""
 
 #: cartridges/preferences.py:370
 msgid "Installation Not Found"
-msgstr "Instalacija nije pronađena"
+msgstr ""
 
 #: cartridges/preferences.py:371
 msgid "Select a valid directory"
-msgstr "Odaberi jedan valjani direktorij"
+msgstr ""
 
 #: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
-msgstr "Upozorenje"
+msgstr ""
 
 #: cartridges/preferences.py:441
 msgid "Invalid Directory"
-msgstr "Nevaljani direktorij"
+msgstr ""
 
 #: cartridges/preferences.py:447
 msgid "Set Location"
-msgstr "Postavi lokaciju"
+msgstr ""
 
 #: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
-msgstr "Odbaci"
+msgstr ""
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr "Danas"
+msgstr ""
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr "Jučer"
+msgstr ""
 
 #: cartridges/utils/relative_date.py:36
 msgid "Last Week"
-msgstr "Prošli tjedan"
+msgstr ""
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr "Ovaj mjesec"
+msgstr ""
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr "Prošli mjesec"
+msgstr ""
 
 #: cartridges/utils/relative_date.py:44
 msgid "Last Year"
-msgstr "Prošla godina"
+msgstr ""
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
-msgstr "Uvoz igri …"
+msgstr ""
 
 #: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
-msgstr "Dogodile su se sljedeće greške tijekom uvoza:"
+msgstr ""
 
 #: cartridges/importer/importer.py:366
 msgid "No new games found"
-msgstr "Nije pronađena nijedna nova igra"
+msgstr ""
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} igra uvezena"
-msgstr[1] "{} igre uvezene"
-msgstr[2] "{} igri uvezeno"
+msgstr[0] ""
+msgstr[1] ""
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] ", {} uklonjena"
-msgstr[1] ", {} uklonjene"
-msgstr[2] ", {} uklonjeno"
+msgstr[0] ""
+msgstr[1] ""
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
 msgid "Select the {} cache directory."
-msgstr "Odaberi {} direktorij predmemorije."
+msgstr ""
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:36
 msgid "Select the {} configuration directory."
-msgstr "Odaberi {} direktorij konfiguracije."
+msgstr ""
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:38
 msgid "Select the {} data directory."
-msgstr "Odaberi {} direktorij podataka."
+msgstr ""
 
 #: cartridges/importer/retroarch_source.py:129
 msgid "No RetroArch Core Selected"
-msgstr "Nije odabrana RetroArch jezgra"
+msgstr ""
 
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr "Ovi popisi igri nemaju zadane jezgre:"
+msgstr ""
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
-msgstr "Igre bez odabrane jezgre nisu uvezene"
+msgstr ""
 
 #: cartridges/store/managers/sgdb_manager.py:46
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr "Neuspjela autentifikacija SteamGridDB-a"
+msgstr ""
 
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
-msgstr "Potvrdi tvoj API ključ u postavkama"
-
-#, fuzzy
-#~ msgid "1 game imported"
-#~ msgid_plural "{} games imported"
-#~ msgstr[0] "Jedna igra je uvezena"
-#~ msgstr[1] "Broj uvezenih igri: {}"
-#~ msgstr[2] "Broj uvezenih igri: {}"
-
-#, fuzzy
-#~ msgid "1 removed"
-#~ msgid_plural "{} removed"
-#~ msgstr[0] "Jedna je uklonjena"
-#~ msgstr[1] "{} je uklonjena"
-#~ msgstr[2] "{} je uklonjena"
-
-#~ msgid "Cache Location"
-#~ msgstr "Lokacija predmemorije"
+msgstr ""
