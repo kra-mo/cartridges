@@ -6,6 +6,6 @@ Exec=cartridges
 Icon=@APP_ID@
 Terminal=false
 Type=Application
-Categories=GNOME;GTK;Game;
+Categories=GNOME;GTK;Game;PackageManager;
 Keywords=gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;
 StartupNotify=true
