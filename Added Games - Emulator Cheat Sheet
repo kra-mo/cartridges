@@ -1,0 +1,49 @@
+--------------------------------
+General Explanation & Tips
+--------------------------------
+* Content added to Cartridges manually will be in the "Added" Category.
+* First load the Application ID and then apply an Argument (Args) for a specific game.
+* Be mindful of what extensions your emulator supports, and be sure to replace the placeholder material with your directories.
+* On Linux if your folder name has spaces you may need to add "" in those sections.
+* On Windows make sure your folders do not use spaces.
+
+
+EXAMPLES
+--------------------------------
+Linux Retroarch Flatpak Example - This example does work in Lutris
+--------------------------------
+Application ID
+org.libretro.RetroArch
+
+Args
+--libretro "/home/usernamehere/.var/app/org.libretro.RetroArch/config/retroarch/cores/corename_libretro.so" "/pathtogame.fileextension"
+
+--------------------------------
+Windows Retroarch Example
+--------------------------------
+Application ID
+RetroarchInstallDirectory\retroarch.exe
+
+Args
+--libretro RetroarchInstallDirectory\cores\corename.dll --fullscreen "gamefolder\gamename.fileextension"
+
+
+ACTUAL FORMATTING
+--------------------------------
+Retroarch Linux - Flatpak
+--------------------------------
+org.libretro.RetroArch --libretro "/home/usernamehere/.var/app/org.libretro.RetroArch/config/retroarch/cores/corename_libretro.so" "/pathtogame.fileextension"
+
+--------------------------------
+Retroarch Windows - Installer, Portable & Itch
+--------------------------------
+RetroarchInstallDirectory\retroarch.exe --libretro RetroarchInstallDirectory\cores\corename.dll --fullscreen "gamefolder\gamename.fileextension"
+
+--------------------------------
+Simple 64 - No Zip Files
+--------------------------------
+Linux Flatpak
+io.github.simple64.simple64 "gamefolder\gamename.fileextension"
+
+Windows
+Simple64InstallFolder\simple64-gui.exe "gamefolder\gamename.fileextension"
