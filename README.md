@@ -1,6 +1,8 @@
 
 [circle-url]: https://circle.gnome.org
 [circle-image]: https://circle.gnome.org/assets/button/badge.svg
+[donttheme-url]: https://stopthemingmy.app
+[donttheme-image]: https://stopthemingmy.app/badge.svg
 [weblate-url]: https://hosted.weblate.org/engage/cartridges/
 [weblate-image]: https://hosted.weblate.org/widgets/cartridges/-/cartridges/svg-badge.svg
 [discord-url]: https://discord.gg/4KSFh3AmQR
@@ -19,6 +21,7 @@
   A GTK4 + Libadwaita game launcher
 
   [![GNOME Circle][circle-image]][circle-url]
+  [![Please do not theme this app][donttheme-image]][donttheme-url] 
   [![Translation Status][weblate-image]][weblate-url]
 
   [![Flathub][flathub-image]][flathub-url]
