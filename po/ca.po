@@ -2,13 +2,14 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # jolupa <jolupameister@gmail.com>, 2023.
+# Moreno <hibarioath@proton.me>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2023-12-15 13:10+0000\n"
-"Last-Translator: jolupa <jolupameister@gmail.com>\n"
+"PO-Revision-Date: 2025-03-15 04:51+0000\n"
+"Last-Translator: Moreno <hibarioath@proton.me>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ca/>\n"
 "Language: ca\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -205,7 +206,7 @@ msgstr "Esborrar tots els jocs"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Importar jocs automàticament"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -538,7 +539,6 @@ msgstr "{} mostrar"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} eliminat"
 
@@ -587,29 +587,27 @@ msgstr "Descartar"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "Avui"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "Ahir"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Últim jugat"
+msgstr "Última setmana"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Aquest mes"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Últim mes"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Últim jugat"
+msgstr "Any passat"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -625,19 +623,17 @@ msgstr "No s'han trobat jocs nous"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} jocs importats"
+msgstr[0] "{} joc importat"
 msgstr[1] "{} jocs importats"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
 msgstr[0] "{} eliminat"
-msgstr[1] "{} eliminat"
+msgstr[1] "{} eliminats"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
