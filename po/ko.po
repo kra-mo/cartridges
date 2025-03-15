@@ -2,13 +2,13 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # MJKim <kmj10727@gmail.com>, 2023.
-# Seong-ho Cho <darkcircle.0426@gmail.com>, 2024.
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-03-02 19:01+0000\n"
+"PO-Revision-Date: 2025-02-24 14:34+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ko/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.10.1-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -207,7 +207,7 @@ msgstr "모든 게임 제거"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "자동으로 게임 가져오기"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -361,7 +361,7 @@ msgstr "숨긴 게임 없음"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
-msgstr "숨긴 게임이 이곳에 나타납니다"
+msgstr "숨긴 게임은 이곳에 나타납니다"
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
 msgid "All Games"
@@ -541,7 +541,6 @@ msgstr "{} 숨김 해제함"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} 제거함"
 
@@ -589,29 +588,27 @@ msgstr "버리기"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "오늘"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "어제"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "최근 플레이"
+msgstr "지난 주"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "이번 달"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "지난 달"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "최근 플레이"
+msgstr "작년"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -627,17 +624,15 @@ msgstr "새 게임이 없습니다"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "게임 {}건을 가져왔습니다"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} 제거함"
+msgstr[0] ", {} 제거함"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
