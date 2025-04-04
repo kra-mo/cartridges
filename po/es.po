@@ -4,13 +4,15 @@
 # Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate.org>, 2023, 2024.
 # gallegonovato <fran-carro@hotmail.es>, 2023, 2024.
 # kramo <contact@kramo.hu>, 2023.
+# Francisco Serrador <fserrador@gmail.com>, 2025.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-11-06 19:00+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2025-04-04 12:43+0000\n"
+"Last-Translator: Francisco Serrador <fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/es/>\n"
 "Language: es\n"
@@ -18,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -419,7 +421,7 @@ msgstr "Mostrar ocultos"
 
 #: data/gtk/window.blp:545
 msgid "About Cartridges"
-msgstr "Acerca de Cartuchos"
+msgstr "Acerca de los cartuchos"
 
 #: data/gtk/window.blp:562
 msgid "IGDB"
@@ -436,7 +438,7 @@ msgstr "HowLongToBeat"
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
 msgid "{} launched"
-msgstr "{} comenzó"
+msgstr "{} lanzado"
 
 #. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
@@ -582,11 +584,11 @@ msgstr "Directorio no válido"
 
 #: cartridges/preferences.py:447
 msgid "Set Location"
-msgstr "Escoger la ubicación"
+msgstr "Escoger lugar"
 
 #: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
-msgstr "Descartar"
+msgstr "Desestimar"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
@@ -635,18 +637,18 @@ msgstr[1] "{} juegos importados"
 #: cartridges/importer/importer.py:383
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] ", {} eliminado"
-msgstr[1] ", {} eliminados"
+msgstr[0] "{} eliminado"
+msgstr[1] "{} eliminados"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
 msgid "Select the {} cache directory."
-msgstr "Seleccione el directorio de la caché de {}."
+msgstr "Seleccione el directorio de caché {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:36
 msgid "Select the {} configuration directory."
-msgstr "Seleccione el directorio de configuración de {}."
+msgstr "Selecciona el directorio de la configuración {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:38
