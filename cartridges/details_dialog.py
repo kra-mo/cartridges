@@ -1,4 +1,4 @@
-# details_window.py
+# details_dialog.py
 #
 # Copyright 2022-2024 kramo
 #
