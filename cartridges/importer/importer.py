@@ -136,9 +136,11 @@ class Importer(ErrorProducer):
             task = Gio.Task.new(None, None, self.source_callback, (source,))
             self.n_source_tasks_created += 1
             task.run_in_thread(
-                lambda _task, _obj, _data, _cancellable, src=source: self.source_task_thread_func(
-                    (src,)
-                )
+                lambda _task,
+                _obj,
+                _data,
+                _cancellable,
+                src=source: self.source_task_thread_func((src,))
             )
 
     # Workaround: Adw bug: Dialog won't close if closed too soon after opening
@@ -149,7 +151,6 @@ class Importer(ErrorProducer):
 
         self.import_dialog.force_close()
         return shared.win.get_visible_dialog() == self.import_dialog
-
 
     def monitor_import(self) -> bool:
         """Monitor import progress to update dialog and to trigger import cleanup
@@ -185,12 +186,16 @@ class Importer(ErrorProducer):
         if not shared.schema.get_boolean("remove-missing"):
             return
 
+        keys = shared.schema.list_keys()
+
         for game in shared.store:
             if game.removed:
                 continue
             if game.source == "imported":
                 continue
-            if not shared.schema.get_boolean(game.base_source):
+            if (game.base_source in keys) and (
+                not shared.schema.get_boolean(game.base_source)
+            ):
                 continue
             if game.game_id in shared.store.duplicate_game_ids:
                 continue

@@ -250,7 +250,10 @@ class CartridgesApplication(Adw.Application):
         elif source_id == "imported":
             name = _("Added")
         else:
-            name = globals()[f'{source_id.split("_")[0].title()}Source'].name
+            try:
+                name = globals()[f"{source_id.split('_')[0].title()}Source"].name
+            except KeyError:
+                return source_id
         return name
 
     def on_about_action(self, *_args: Any) -> None:
