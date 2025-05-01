@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Flatpak Builder
-        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.4
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.5
         with:
           bundle: page.kramo.Cartridges.Devel.flatpak
           manifest-path: build-aux/flatpak/page.kramo.Cartridges.Devel.json
