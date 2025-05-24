@@ -4,13 +4,13 @@
 # K.B.Dharun Krishna <kbdharunkrishna@gmail.com>, 2023.
 # kramo <contact@kramo.hu>, 2023.
 # "K.B.Dharun Krishna" <kbdharunkrishna@gmail.com>, 2023.
-# தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024.
+# தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-12-13 06:00+0000\n"
+"PO-Revision-Date: 2025-04-28 08:02+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ta/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -634,8 +634,8 @@ msgstr[1] "இறக்குமதி செய்யப்பட்ட வி�
 #: cartridges/importer/importer.py:383
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] ",}} அகற்றப்பட்டது"
-msgstr[1] ",}} அகற்றப்பட்டது"
+msgstr[0] ", {} அகற்றப்பட்டது"
+msgstr[1] ", {} அகற்றப்பட்டன"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34

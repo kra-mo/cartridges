@@ -2,13 +2,15 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # yiannis ioannides <sub@wai.ai>, 2023.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2025.
+# GiannosOB <giannos2105@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2023-10-08 16:00+0000\n"
-"Last-Translator: yiannis ioannides <sub@wai.ai>\n"
+"PO-Revision-Date: 2025-04-24 17:02+0000\n"
+"Last-Translator: GiannosOB <giannos2105@gmail.com>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/el/>\n"
 "Language: el\n"
@@ -16,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -48,10 +50,10 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Οι Κασέτες είναι ένας απλός εκκινητής παιχνιδιών για όλα σας τα παιχνίδια. "
-"Υποστηρίζει την εισαγωγή παιχνιδιών από το Steam, Heroic και άλλες "
-"πλατφόρμες χωρίς σύνδεση να είναι απαραίτητη. Μπορείτε να ταξινομήσετε και "
-"να κρύψετε τα παιχνίδια σας, καθώς και να κατεβάσετε τα εξώφυλλα τους από το "
+"Το Cartridges είναι ένας απλός εκτοξευτής παιχνιδιών για όλα τα παιχνίδια "
+"σας. Διαθέτει υποστήριξη για την εισαγωγή παιχνιδιών από το Steam, το "
+"Lutris, το Heroic και άλλα, χωρίς να απαιτείται σύνδεση. Μπορείτε να "
+"ταξινομήσετε και να αποκρύψετε παιχνίδια ή να κατεβάσετε εξώφυλλα από το "
 "SteamGridDB."
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
@@ -115,7 +117,7 @@ msgstr "Αφαίρεση"
 
 #: data/gtk/game.blp:110 cartridges/window.py:361
 msgid "Unhide"
-msgstr "Φανέρωση"
+msgstr "Αποκάλυψη"
 
 #: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
@@ -179,7 +181,7 @@ msgstr "Έξοδος μετά την εκκίνηση παιχνιδιών"
 
 #: data/gtk/preferences.blp:20
 msgid "Cover Image Launches Game"
-msgstr "Εξώφυλλο εκκινεί το παιχνίδι"
+msgstr "Εικόνα εξωφύλλου Εκκινεί το παιχνίδι"
 
 #: data/gtk/preferences.blp:21
 msgid "Swaps the behavior of the cover image and the play button"
@@ -195,20 +197,19 @@ msgstr "Εικόνες Υψηλής Ποιότητας"
 
 #: data/gtk/preferences.blp:30
 msgid "Save game covers losslessly at the cost of storage"
-msgstr ""
-"Αποθήκευση εξωφύλλου παιχνιδιού σε υψηλή ευκρίνεια, με κόστος τη χωρητικότητα"
+msgstr "Αποθήκευση καλύψεων παιχνιδιού χωρίς απώλειες με κόστος αποθήκευσης"
 
 #: data/gtk/preferences.blp:35
 msgid "Danger Zone"
-msgstr "Επικίνδυνη Ζώνη"
+msgstr "Ζώνη κινδύνου"
 
 #: data/gtk/preferences.blp:39
 msgid "Remove All Games"
-msgstr "Αφαίρεση Όλων Των Παιχνιδιών"
+msgstr "Αφαίρεση όλων των παιχνιδιών"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Εισαγωγή παιχνιδιών αυτόματα"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -248,7 +249,7 @@ msgstr "Heroic"
 
 #: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
-msgstr "Εισαγωγή παιχνιδιών Epic"
+msgstr "Εισαγωγή Epic Games"
 
 #: data/gtk/preferences.blp:170
 msgid "Import GOG Games"
@@ -260,11 +261,11 @@ msgstr "Εισαγωγή παιχνιδιών Amazon"
 
 #: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
-msgstr "Εισαγωγή παιχνιδιών μέσω sideloading"
+msgstr "Εισαγωγή παιχνιδιών Sideloaded"
 
 #: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
-msgstr "Bottles"
+msgstr "Μπουκάλια"
 
 #: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
@@ -284,19 +285,17 @@ msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:301
-#, fuzzy
 msgid "System Location"
-msgstr "Ορίστε Τοποθεσία"
+msgstr "Τοποθεσία συστήματος"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:319
-#, fuzzy
 msgid "User Location"
-msgstr "Ορίστε Τοποθεσία"
+msgstr "Τοποθεσία χρήστη"
 
 #: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
-msgstr "Εισαγωγή εκκινητών παιχνιδιών"
+msgstr "Εισαγωγή εκτοξευτών παιχνιδιών"
 
 #: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
@@ -424,15 +423,15 @@ msgstr "Σχετικά με τις Κασέτες"
 
 #: data/gtk/window.blp:562
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:564
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:566
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
@@ -545,7 +544,6 @@ msgstr "{} φανερώθηκε"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} αφαιρέθηκε"
 
@@ -601,22 +599,20 @@ msgid "Yesterday"
 msgstr "Χθες"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Τελευταία αναπαραγωγή"
+msgstr "Τελευταία εβδομάδα"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Αυτόν τον μήνα"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Τελευταίος μήνας"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Τελευταία αναπαραγωγή"
+msgstr "Τελευταίο έτος"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -632,19 +628,17 @@ msgstr "Δεν βρέθηκαν νέα παιχνίδια"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} παιχνίδια εισήχθησαν"
-msgstr[1] "{} παιχνίδια εισήχθησαν"
+msgstr[0] "{} παιχνίδι που έχει εισαχθεί"
+msgstr[1] "{} παιχνίδια που έχουν εισαχθεί"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} αφαιρέθηκε"
-msgstr[1] "{} αφαιρέθηκε"
+msgstr[0] ", {} αφαιρέθηκε"
+msgstr[1] ", {} αφαιρέθηκαν"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
