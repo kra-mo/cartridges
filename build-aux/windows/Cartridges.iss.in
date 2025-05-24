@@ -1,7 +1,7 @@
 #define MyAppName "Cartridges"
 #define MyAppVersion "@VERSION@"
 #define MyAppPublisher "kramo"
-#define MyAppURL "https://github.com/kra-mo/cartridges"
+#define MyAppURL "https://apps.gnome.org/Cartridges/"
 #define MyAppExeName "pythonw.exe"
 
 [Setup]
@@ -11,7 +11,7 @@ AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
-AppSupportURL=https://github.com/kra-mo/cartridges/issues
+AppSupportURL=https://git.kramo.page/cartridges/issues
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf64}\{#MyAppName}
 DisableProgramGroupPage=yes

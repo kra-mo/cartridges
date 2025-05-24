@@ -5,10 +5,10 @@
 Be sure to follow the [code style](#code-style) of the project.
 
 ### Adding a feature
-[Create an issue](https://github.com/kra-mo/cartridges/issues/new) or join the [Discord](https://discord.gg/4KSFh3AmQR)/[Matrix](https://matrix.to/#/#cartridges:matrix.org) to discuss it with the maintainers. We will provide additional guidance.
+[Create an issue](https://git.kramo.page/cartridges/issues/new) or join the [Discord](https://discord.gg/4KSFh3AmQR)/[Matrix](https://matrix.to/#/#cartridges:matrix.org) to discuss it with the maintainers. We will provide additional guidance.
 
 ### Fixing a bug
-Fork the repository, make your changes, then create a pull request. Be sure to mention the GitHub issue you're fixing if one was already open.
+Fork the repository, make your changes, then create a pull request. Be sure to mention the issue you're fixing if one was already open.
 
 ## Translations
 ### Weblate
@@ -25,7 +25,7 @@ The project can be translated on [Weblate](https://hosted.weblate.org/engage/car
 
 ## GNOME Builder
 1. Install [GNOME Builder](https://flathub.org/apps/org.gnome.Builder).
-2. Click "Clone Repository" with `https://github.com/kra-mo/cartridges.git` as the URL.
+2. Click "Clone Repository" with `https://git.kramo.page/cartridges.git` as the URL.
 3. Click on the build button (hammer) at the top.
 
 ## For Windows
@@ -40,7 +40,7 @@ The project can be translated on [Weblate](https://hosted.weblate.org/engage/car
 
 ## Meson
 ```bash
-git clone https://github.com/kra-mo/cartridges.git
+git clone https://git.kramo.page/cartridges.git
 cd cartridges
 meson setup build
 ninja -C build install

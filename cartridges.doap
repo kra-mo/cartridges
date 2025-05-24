@@ -11,9 +11,9 @@
 Cartridges is a simple game launcher for all of your games. It has support for importing games from Steam, Lutris, Heroic and more with no login necessary. You can sort and hide games or download cover art from SteamGridDB.
   </description>
 
-  <homepage rdf:resource="https://github.com/kra-mo/cartridges" />
-  <download-page rdf:resource="https://github.com/kra-mo/cartridges" />
-  <bug-database rdf:resource="https://github.com/kra-mo/cartridges/issues" />
+  <homepage rdf:resource="https://git.kramo.page/cartridges" />
+  <download-page rdf:resource="https://git.kramo.page/cartridges" />
+  <bug-database rdf:resource="https://git.kramo.page/cartridges/issues" />
 
   <programming-language>Python</programming-language>
   <platform>GTK 4</platform>

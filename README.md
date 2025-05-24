@@ -76,7 +76,7 @@ The app is available on Flathub.
 
 ### From Releases
 
-1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
+1. Download the latest release from [GitHub Releases](https://github.com/kra-mo/cartridges/releases).
 2. Run the downloaded installer.
 
 Note: Windows might present you with a warning when trying to install the app. This is expected, just ignore the warning.
@@ -87,18 +87,18 @@ Install the latest release with the command: `winget install cartridges`.
 
 ## macOS
 
-1. Download the latest release from [Releases](https://github.com/kra-mo/cartridges/releases).
+1. Download the latest release from [GitHub Releases](https://github.com/kra-mo/cartridges/releases).
 2. Move the app into your Applications folder.
 
 Note: macOS might tell you that the application could not be checked for malicious software or something similar. In this case, open System Settings > Privacy & Security, scroll down, find the warning about Cartridges and click "Open Anyway". More information can be found [here](https://support.apple.com/en-us/102445).
 
 ## Building manually
 
-See [Building](https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md#building).
+See [Building](https://codeberg.org/kramo/cartridges/src/branch/main/CONTRIBUTING.md#building).
 
 # Contributing
 
-See [CONTRIBUTING.md](https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md).
+See [CONTRIBUTING.md](https://codeberg.org/kramo/cartridges/src/branch/main/CONTRIBUTING.md).
 
 Thanks to [Weblate](https://weblate.org/) for hosting our translations!
 
@@ -106,4 +106,4 @@ Thanks to [Weblate](https://weblate.org/) for hosting our translations!
 
 The project follows the [GNOME Code of Conduct](https://conduct.gnome.org/).
 
-See [CODE_OF_CONDUCT.md](https://github.com/kra-mo/cartridges/blob/main/CODE_OF_CONDUCT.md).
+See [CODE_OF_CONDUCT.md](https://codeberg.org/kramo/cartridges/src/branch/main/CODE_OF_CONDUCT.md).

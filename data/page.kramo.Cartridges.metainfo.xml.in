@@ -11,12 +11,12 @@
   <description>
     <p>Cartridges is a simple game launcher for all of your games. It has support for importing games from Steam, Lutris, Heroic and more with no login necessary. You can sort and hide games or download cover art from SteamGridDB.</p>
   </description>
-  <url type="homepage">https://github.com/kra-mo/cartridges</url>
-  <url type="bugtracker">https://github.com/kra-mo/cartridges/issues</url>
+  <url type="homepage">https://apps.gnome.org/Cartridges/</url>
+  <url type="bugtracker">https://git.kramo.page/cartridges/issues</url>
   <url type="translate">https://hosted.weblate.org/engage/cartridges/</url>
   <url type="contact">https://www.kramo.page/about/</url>
-  <url type="vcs-browser">https://github.com/kra-mo/cartridges</url>
-  <url type="contribute">https://github.com/kra-mo/cartridges/blob/main/CONTRIBUTING.md</url>
+  <url type="vcs-browser">https://git.kramo.page/cartridges</url>
+  <url type="contribute">https://git.kramo.page/cartridges/blob/main/CONTRIBUTING.md</url>
   <developer id="page.kramo">
     <name translate="no">kramo</name>
   </developer>
@@ -36,19 +36,19 @@
   </requires>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/1.png</image>
+      <image>https://codeberg.org/kramo/cartridges/raw/branch/main/data/screenshots/1.png</image>
       <caption>Cartridges</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/2.png</image>
+      <image>https://codeberg.org/kramo/cartridges/raw/branch/main/data/screenshots/2.png</image>
       <caption>Game Details</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/3.png</image>
+      <image>https://codeberg.org/kramo/cartridges/raw/branch/main/data/screenshots/3.png</image>
       <caption>Edit Game Details</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/kra-mo/cartridges/main/data/screenshots/4.png</image>
+      <image>https://codeberg.org/kramo/cartridges/raw/branch/main/data/screenshots/4.png</image>
       <caption>Preferences</caption>
     </screenshot>
   </screenshots>
