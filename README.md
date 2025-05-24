@@ -1,4 +1,3 @@
-
 [circle-url]: https://circle.gnome.org
 [circle-image]: https://circle.gnome.org/assets/button/badge.svg
 [weblate-url]: https://hosted.weblate.org/engage/cartridges/
@@ -10,6 +9,10 @@
 [flathub-url]: https://flathub.org/apps/page.kramo.Cartridges
 [flathub-image]: https://img.shields.io/flathub/v/page.kramo.Cartridges?logo=flathub&style=for-the-badge
 [installs-image]: https://img.shields.io/flathub/downloads/page.kramo.Cartridges?style=for-the-badge
+
+> [!IMPORTANT]
+> Please use [Codeberg](https://codeberg.org/kramo/cartridges) for issues and pull requests.
+> The GitHub repository is a [mirror](https://en.wikipedia.org/wiki/Mirror_site).
 
 <div align="center">
   <img src="data/icons/hicolor/scalable/apps/page.kramo.Cartridges.svg" width="128" height="128">
