@@ -357,7 +357,7 @@ msgstr "Keine Spiele"
 
 #: data/gtk/window.blp:22
 msgid "Use the + button to add games"
-msgstr "Benutze denn + Knopf um Spiele hinzuzufügen"
+msgstr "Benutze den + Knopf um Spiele hinzuzufügen"
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
