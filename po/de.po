@@ -7,14 +7,14 @@
 # Simon Hahne <simonhahne@web.de>, 2023.
 # Konstantin Tutsch <mail@konstantintutsch.com>, 2024.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2025.
+# UnclePsymon <junk@simon-enderle.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2025-03-15 16:28+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"PO-Revision-Date: 2025-07-10 11:01+0000\n"
+"Last-Translator: UnclePsymon <junk@simon-enderle.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/de/>\n"
 "Language: de\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -357,7 +357,7 @@ msgstr "Keine Spiele"
 
 #: data/gtk/window.blp:22
 msgid "Use the + button to add games"
-msgstr "Benutze denn + Knopf um Spiele hinzuzufügen"
+msgstr "Benutze dnn + Knopf um Spiele hinzuzufügen"
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
