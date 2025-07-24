@@ -4,8 +4,6 @@
 [weblate-image]: https://hosted.weblate.org/widgets/cartridges/-/cartridges/svg-badge.svg
 [discord-url]: https://discord.gg/4KSFh3AmQR
 [discord-image]: https://img.shields.io/discord/1088155799299313754?color=%235865F2&label=discord&logo=discord&logoColor=%23FFFFFF&style=for-the-badge
-[matrix-url]: https://matrix.to/#/#cartridges:matrix.org
-[matrix-image]: https://img.shields.io/matrix/cartridges:matrix.org?label=Matrix&logo=matrix&color=%230dbd8b&style=for-the-badge
 [flathub-url]: https://flathub.org/apps/page.kramo.Cartridges
 [flathub-image]: https://img.shields.io/flathub/v/page.kramo.Cartridges?logo=flathub&style=for-the-badge
 [installs-image]: https://img.shields.io/flathub/downloads/page.kramo.Cartridges?style=for-the-badge
@@ -26,7 +24,6 @@
 
   [![Flathub][flathub-image]][flathub-url]
   [![Discord][discord-image]][discord-url]
-  [![Matrix][matrix-image]][matrix-url]
   [![Installs][installs-image]][flathub-url]
 
   <img src="data/screenshots/1.png">
@@ -57,7 +54,7 @@ Cartridges is an easy-to-use, elegant game launcher written in Python using GTK4
 - Animated covers
 - A search provider for GNOME
 
-For updates and questions, join our [Discord server][discord-url] (bridged to [Matrix](https://matrix.to/#/#cartridges:matrix.org))!
+For updates and questions, join our [Discord server][discord-url]!
 
 ## Donations
 I accept donations through [GitHub Sponsors](https://github.com/sponsors/kra-mo) and [Liberapay](https://liberapay.com/kramo).
