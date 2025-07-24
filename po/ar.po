@@ -6,13 +6,14 @@
 # Ali-98 <ahj696@hotmail.com>, 2023.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 # "Jadiir M. Aal Jaidaan" <ashrafquatre@gmail.com>, 2024.
+# Ahmed Najmawi <iramosu@protonmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-11-27 20:00+0000\n"
-"Last-Translator: \"Jadiir M. Aal Jaidaan\" <ashrafquatre@gmail.com>\n"
+"PO-Revision-Date: 2025-07-24 05:02+0000\n"
+"Last-Translator: Ahmed Najmawi <iramosu@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
 "Language: ar\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -596,9 +597,8 @@ msgid "Yesterday"
 msgstr "أمس"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "لُعبت آخر مرَّة"
+msgstr "آخر أسبوع"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
@@ -626,13 +626,12 @@ msgstr "لم يُعثر على ألعاب جديدة"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "اُستوردت {} لعبة"
+msgstr[0] "لم تستورد لعبة"
 msgstr[1] "اُستوردت {} لعبة"
-msgstr[2] "اُستوردت {} لعبة"
-msgstr[3] "اُستوردت {} لعبة"
+msgstr[2] "اُستوردت لعبتان"
+msgstr[3] "اُستوردت {} ألعاب"
 msgstr[4] "اُستوردت {} لعبة"
 msgstr[5] "اُستوردت {} لعبة"
 
