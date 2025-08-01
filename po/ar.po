@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2025-07-24 05:02+0000\n"
+"PO-Revision-Date: 2025-08-01 22:02+0000\n"
 "Last-Translator: Ahmed Najmawi <iramosu@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ar/>\n"
@@ -637,15 +637,14 @@ msgstr[5] "اُستوردت {} لعبة"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "أزيلت {}"
-msgstr[1] "أزيلت {}"
-msgstr[2] "أزيلت {}"
-msgstr[3] "أزيلت {}"
-msgstr[4] "أزيلت {}"
-msgstr[5] "أزيلت {}"
+msgstr[0] "، ولم تُزل أي لعبة"
+msgstr[1] "، وأزيلت لعبة"
+msgstr[2] "، وأزيلت لعبتان"
+msgstr[3] "، وأزيلت {} ألعاب"
+msgstr[4] "، وأزيلت {} لعبة"
+msgstr[5] "، وأزيلت {} لعبة"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
