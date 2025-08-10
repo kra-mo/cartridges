@@ -4,13 +4,14 @@
 # kramo <contact@kramo.hu>, 2023.
 # Allan Nordhøy <epost@anotheragency.no>, 2023.
 # sunniva <weblate@turtle.garden>, 2024.
+# Sunniva Løvstad <weblate@turtle.garden>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-11-02 23:02+0100\n"
-"Last-Translator: Sunniva Løvstad <turtle@turtle.garden>\n"
+"PO-Revision-Date: 2025-08-10 00:15+0000\n"
+"Last-Translator: Sunniva Løvstad <weblate@turtle.garden>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "cartridges/cartridges/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -544,7 +545,6 @@ msgstr "{} synlig"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} fjernet"
 
@@ -635,11 +635,10 @@ msgstr[1] "{} spill importert"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} fjernet"
-msgstr[1] "{} fjernet"
+msgstr[0] ", {} fjernet"
+msgstr[1] ", {} fjernet"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
