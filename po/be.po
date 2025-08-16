@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Cartridges package.
 # Yahor <k1llo2810@gmail.com>, 2023.
 # Yahor <g_egor98@tut.by>, 2023.
-# Yahor <k1llo2810@protonmail.com>, 2023.
+# Yahor <k1llo2810@protonmail.com>, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2023-12-13 09:28+0000\n"
+"PO-Revision-Date: 2025-08-16 12:02+0000\n"
 "Last-Translator: Yahor <k1llo2810@protonmail.com>\n"
 "Language-Team: Belarusian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/be/>\n"
@@ -17,9 +17,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.3-rc\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.13\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -209,7 +209,7 @@ msgstr "Выдаліць усе гульні"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Імпартаваць гульні аўтаматычна"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -542,7 +542,6 @@ msgstr "{} непрыхавана"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} выдалена"
 
@@ -591,29 +590,27 @@ msgstr "Адхіліць"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "Сёння"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "Учора"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Апошняя гульня"
+msgstr "На мінулым тыдні"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "У гэтым месяцы"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "У мінулым месяцы"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Апошняя гульня"
+msgstr "У мінулым годзе"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -629,16 +626,14 @@ msgstr "Новыя гульні не знойдзены"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "{} гульняў імпартавана"
-msgstr[1] "{} гульняў імпартавана"
+msgstr[0] "{} гульня імпартавана"
+msgstr[1] "{} гульні імпартавана"
 msgstr[2] "{} гульняў імпартавана"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
 msgstr[0] "{} выдалена"
