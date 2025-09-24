@@ -46,7 +46,7 @@ def convert_cover(
 
     if pixbuf:
         cover_path = Path(Gio.File.new_tmp("XXXXXX.tiff")[0].get_path())
-        pixbuf.savev(str(cover_path), "tiff", ["compression"], ["1"])
+        pixbuf.savev(str(cover_path), "tiff")
 
     try:
         with Image.open(cover_path) as image:
