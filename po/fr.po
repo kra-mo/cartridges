@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2025-09-06 15:02+0000\n"
+"PO-Revision-Date: 2025-09-24 18:50+0000\n"
 "Last-Translator: p-sage <p-sage@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
@@ -599,19 +599,19 @@ msgstr "Fermer"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr "Aujourd’hui"
+msgstr "aujourd’hui"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr "Hier"
+msgstr "hier"
 
 #: cartridges/utils/relative_date.py:36
 msgid "Last Week"
-msgstr "La semaine dernière"
+msgstr "la semaine dernière"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr "Ce mois"
+msgstr "ce mois-ci"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
