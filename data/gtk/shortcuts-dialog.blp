@@ -1,0 +1,67 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.ShortcutsDialog shortcuts_dialog {
+  Adw.ShortcutsSection {
+    title: _("General");
+
+    Adw.ShortcutsItem {
+      title: _("Search");
+      action-name: "win.toggle_search";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Preferences");
+      action-name: "app.preferences";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Keyboard Shortcuts");
+      action-name: "app.shortcuts";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Undo");
+      action-name: "win.undo";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Quit");
+      action-name: "app.quit";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Toggle Sidebar");
+      action-name: "win.show_sidebar";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Main Menu");
+      action-name: "win.open_menu";
+    }
+  }
+
+  Adw.ShortcutsSection {
+    title: _("Games");
+
+    Adw.ShortcutsItem {
+      title: _("Add Game");
+      action-name: "app.add_game";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Import");
+      action-name: "app.import";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Show Hidden Games");
+      action-name: "win.show_hidden";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Remove Game");
+      action-name: "app.remove_game_details_view";
+    }
+  }
+}

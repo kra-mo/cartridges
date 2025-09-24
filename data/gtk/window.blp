@@ -246,6 +246,10 @@ template $CartridgesWindow: Adw.ApplicationWindow {
                   margin-start: 15;
                   margin-end: 15;
                   selection-mode: none;
+                  
+                  styles [
+                    "no-hover",
+                  ]
                 }
               }
             }
@@ -306,6 +310,10 @@ Adw.NavigationPage hidden_library_page {
           margin-start: 15;
           margin-end: 15;
           selection-mode: none;
+          
+          styles [
+            "no-hover",
+          ]
         }
       }
     }
@@ -541,7 +549,7 @@ menu primary_menu {
 
   section {
     item (_("Preferences"), "app.preferences")
-    item (_("Keyboard Shortcuts"), "win.show-help-overlay")
+    item (_("Keyboard Shortcuts"), "app.shortcuts")
     item (_("About Cartridges"), "app.about")
   }
 }

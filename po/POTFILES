@@ -4,8 +4,8 @@ data/page.kramo.Cartridges.metainfo.xml.in
 
 data/gtk/details-dialog.blp
 data/gtk/game.blp
-data/gtk/help-overlay.blp
 data/gtk/preferences.blp
+data/gtk/shortcuts-dialog.blp
 data/gtk/window.blp
 
 cartridges/main.py

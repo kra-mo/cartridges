@@ -3,11 +3,31 @@
   --accent-bg-color: var(--purple-3);
 }
 
+.no-hover > flowboxchild:hover {
+  background-color: transparent;
+}
+
 #details_view {
-    background-color: white;
+  background-color: white;
 }
 
 #details_view_play_button {
-    color: white;
-    background-color: rgba(0, 0, 0, .8);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent-color: var(--purple-1);
+    --accent-bg-color: var(--purple-4);
+  }
+
+  #details_view {
+    background-color: black;
+  }
+
+  #details_view_play_button {
+    color: rgba(0, 0, 0, 0.8);
+    background-color: white;
+  }
 }

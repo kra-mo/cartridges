@@ -54,6 +54,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="2.13" date="2025-09-24">
+      <description translate="no">
+        <p>Updated for GNOME 49, using the new keyboard shortcuts dialog.</p>
+      </description>
+    </release>
     <release version="2.12.1" date="2025-03-23">
       <description translate="no">
         <p>Removed an option used for debugging that would accidentally show up for all users.</p>
