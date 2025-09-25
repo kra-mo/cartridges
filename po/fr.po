@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2025-09-24 18:50+0000\n"
+"PO-Revision-Date: 2025-09-25 19:01+0000\n"
 "Last-Translator: p-sage <p-sage@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
@@ -145,7 +145,7 @@ msgstr "Quitter"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:187
 msgid "Toggle Sidebar"
-msgstr "Afficher ou Cacher la Barre Latérale"
+msgstr "Afficher ou cacher la barre latérale"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:200 data/gtk/window.blp:267
 msgid "Main Menu"
@@ -162,7 +162,7 @@ msgstr "Ajouter un jeu"
 #: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:58
 #: data/gtk/window.blp:27 data/gtk/window.blp:555
 msgid "Import"
-msgstr "Importer"
+msgstr "Importation"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Show Hidden Games"
@@ -218,7 +218,7 @@ msgstr "Importer les jeux automatiquement"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
-msgstr "Retirer les jeux désinstallés"
+msgstr "Supprimer les jeux désinstallés"
 
 #: data/gtk/preferences.blp:74
 msgid "Sources"
@@ -246,7 +246,7 @@ msgstr "Importer les jeux de Steam"
 
 #: data/gtk/preferences.blp:135
 msgid "Import Flatpak Games"
-msgstr "Importer des jeux Flatpak"
+msgstr "Importer les jeux Flatpak"
 
 #: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
@@ -266,7 +266,7 @@ msgstr "Importer les jeux Amazon"
 
 #: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
-msgstr "Importer des jeux Sideloaded"
+msgstr "Importer les jeux Sideloaded"
 
 #: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
@@ -278,7 +278,7 @@ msgstr "itch"
 
 #: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
-msgstr "Légendaire"
+msgstr "Legendary"
 
 #: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
@@ -300,7 +300,7 @@ msgstr "Emplacement de l'utilisateur"
 
 #: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
-msgstr "Importer des lanceurs de jeux"
+msgstr "Importer les lanceurs de jeux"
 
 #: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
@@ -376,11 +376,11 @@ msgstr "Tous les jeux"
 
 #: data/gtk/window.blp:140 cartridges/main.py:251
 msgid "Added"
-msgstr "Ajouté"
+msgstr "Ajoutés"
 
 #: data/gtk/window.blp:162
 msgid "Imported"
-msgstr "Importé"
+msgstr "Importés"
 
 #: data/gtk/window.blp:260
 msgid "Hidden Games"
@@ -458,7 +458,7 @@ msgstr "Ajouté : {}"
 
 #: cartridges/window.py:385
 msgid "Never"
-msgstr "Jamais"
+msgstr "jamais"
 
 #. The variable is the date when the game was last played
 #: cartridges/window.py:389
@@ -552,7 +552,7 @@ msgstr "{} affiché"
 #. The variable is the title of the game
 #: cartridges/game.py:153
 msgid "{} removed"
-msgstr "{} retiré"
+msgstr "{} supprimé"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -615,11 +615,11 @@ msgstr "ce mois-ci"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr "Le mois dernier"
+msgstr "le mois dernier"
 
 #: cartridges/utils/relative_date.py:44
 msgid "Last Year"
-msgstr "L'année dernière"
+msgstr "l'année dernière"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -644,8 +644,8 @@ msgstr[1] "{} jeux importés"
 #: cartridges/importer/importer.py:383
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} retiré"
-msgstr[1] "{} retirés"
+msgstr[0] "{} supprimé"
+msgstr[1] "{} supprimés"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
