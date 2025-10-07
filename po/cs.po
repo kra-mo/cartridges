@@ -2,13 +2,14 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # foo expert <deferred_water346@simplelogin.com>, 2023, 2024.
+# AsciiWolf <mail@asciiwolf.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-06-28 07:09+0000\n"
-"Last-Translator: foo expert <deferred_water346@simplelogin.com>\n"
+"PO-Revision-Date: 2025-10-07 21:02+0000\n"
+"Last-Translator: AsciiWolf <mail@asciiwolf.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/cs/>\n"
 "Language: cs\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -204,7 +205,7 @@ msgstr "Odstranit všechny hry"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Importovat hry automaticky"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -538,7 +539,6 @@ msgstr "{} odkryto"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} odstraněno"
 
@@ -587,29 +587,27 @@ msgstr "Zahodit"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "dnes"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "včera"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "Naposledy hráno"
+msgstr "minulý týden"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "tento měsíc"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "minulý měsíc"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "Naposledy hráno"
+msgstr "minulý rok"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -625,21 +623,19 @@ msgstr "Nebyly nalezeny žádné nové hry"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] "Přidány {} hry"
+msgstr[0] "Přidána {} hra"
 msgstr[1] "Přidány {} hry"
-msgstr[2] "Přidány {} hry"
+msgstr[2] "Přidáno {} her"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} odstraněno"
-msgstr[1] "{} odstraněno"
-msgstr[2] "{} odstraněno"
+msgstr[0] ", {} odstraněna"
+msgstr[1] ", {} odstraněny"
+msgstr[2] ", {} odstraněno"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
