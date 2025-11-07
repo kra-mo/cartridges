@@ -7,13 +7,13 @@
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2023.
 # kramo <contact@kramo.hu>, 2023.
 # Scott Anecito <scott.anecito@linux.com>, 2024.
-# Ricky Tigg <ricky.tigg@gmail.com>, 2024.
+# Ricky Tigg <ricky.tigg@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-12-03 12:00+0000\n"
+"PO-Revision-Date: 2025-11-07 13:51+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fi/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -200,7 +200,7 @@ msgstr "Korkealaatuiset kuvat"
 
 #: data/gtk/preferences.blp:30
 msgid "Save game covers losslessly at the cost of storage"
-msgstr "Tallenna pelin kannet häviöttömästi tallennustilan kustannuksella."
+msgstr "Tallenna pelin kannet häviöttömästi tallennustilan kustannuksella"
 
 #: data/gtk/preferences.blp:35
 msgid "Danger Zone"
@@ -639,8 +639,8 @@ msgstr[1] "{} peliä tuotu"
 #: cartridges/importer/importer.py:383
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} poistettu"
-msgstr[1] "{} poistettu"
+msgstr[0] ", {} poistettu"
+msgstr[1] ", {} poistettu"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
