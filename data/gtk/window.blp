@@ -120,7 +120,7 @@ template $CartridgesWindow: Adw.ApplicationWindow {
                       halign: end;
 
                       styles [
-                        "dim-label"
+                        "dim-label",
                       ]
                     }
                   }
@@ -149,7 +149,7 @@ template $CartridgesWindow: Adw.ApplicationWindow {
                       margin-end: 6;
 
                       styles [
-                        "dim-label"
+                        "dim-label",
                       ]
                     }
                   }
@@ -162,7 +162,7 @@ template $CartridgesWindow: Adw.ApplicationWindow {
                       label: _("Imported");
 
                       styles [
-                        "heading"
+                        "heading",
                       ]
 
                       halign: start;
@@ -170,7 +170,7 @@ template $CartridgesWindow: Adw.ApplicationWindow {
                   }
 
                   styles [
-                    "navigation-sidebar"
+                    "navigation-sidebar",
                   ]
                 }
               }
@@ -246,7 +246,7 @@ template $CartridgesWindow: Adw.ApplicationWindow {
                   margin-start: 15;
                   margin-end: 15;
                   selection-mode: none;
-                  
+
                   styles [
                     "no-hover",
                   ]
@@ -310,7 +310,7 @@ Adw.NavigationPage hidden_library_page {
           margin-start: 15;
           margin-end: 15;
           selection-mode: none;
-          
+
           styles [
             "no-hover",
           ]
@@ -570,6 +570,7 @@ menu search {
     item (_("IGDB"), "app.igdb_search")
     item (_("SteamGridDB"), "app.sgdb_search")
     item (_("ProtonDB"), "app.protondb_search")
+    item (_("PCGamingWiki"), "app.pcgw_search")
     item (_("Lutris"), "app.lutris_search")
     item (_("HowLongToBeat"), "app.hltb_search")
   }

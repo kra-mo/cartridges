@@ -164,6 +164,7 @@ class CartridgesApplication(Adw.Application):
                 ("igdb_search",),
                 ("sgdb_search",),
                 ("protondb_search",),
+                ("pcgw_search",),
                 ("lutris_search",),
                 ("hltb_search",),
                 ("show_sidebar", ("F9",), shared.win),
@@ -386,6 +387,9 @@ class CartridgesApplication(Adw.Application):
 
     def on_protondb_search_action(self, *_args: Any) -> None:
         self.search("https://www.protondb.com/search?q=")
+
+    def on_pcgw_search_action(self, *_args: Any) -> None:
+        self.search("https://www.pcgamingwiki.com/w/index.php?search=")
 
     def on_lutris_search_action(self, *_args: Any) -> None:
         self.search("https://lutris.net/games?q=")
