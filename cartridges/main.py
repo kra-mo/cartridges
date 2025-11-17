@@ -58,12 +58,6 @@ from cartridges.store.store import Store
 from cartridges.utils.run_executable import run_executable
 from cartridges.window import CartridgesWindow
 
-if sys.platform.startswith("darwin"):
-    from AppKit import NSApp  # type: ignore
-    from PyObjCTools import AppHelper
-
-    from cartridges.application_delegate import ApplicationDelegate
-
 
 class CartridgesApplication(Adw.Application):
     state = shared.AppState.DEFAULT
@@ -97,12 +91,6 @@ class CartridgesApplication(Adw.Application):
         if sys.platform.startswith("darwin"):
             if settings := Gtk.Settings.get_default():
                 settings.props.gtk_decoration_layout = "close,minimize,maximize:"
-
-            def setup_app_delegate() -> None:
-                NSApp.setDelegate_(ApplicationDelegate.alloc().init())  # type: ignore
-                AppHelper.runEventLoop()  # type: ignore
-
-            GLib.Thread.new(None, setup_app_delegate)
 
     def do_activate(self) -> None:  # pylint: disable=arguments-differ
         """Called on app creation"""
