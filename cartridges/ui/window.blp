@@ -28,12 +28,18 @@ template $Window: Adw.ApplicationWindow {
       }
     }
 
-    content: Label {
-      label: _("Hello, World!");
+    content: GridView {
+      model: NoSelection {
+        model: bind template.games;
+      };
 
-      styles [
-        "title-1",
-      ]
+      factory: BuilderListItemFactory {
+        template ListItem {
+          child: Label {
+              label: bind template.item as <$Game>.name;
+          };
+        }
+      };
     };
   };
 }

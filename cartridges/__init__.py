@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
+
 import gettext
 import locale
 import signal
@@ -9,6 +12,7 @@ import gi
 gi.require_versions({
     "Gtk": "4.0",
     "Adw": "1",
+    "Json": "1.0",
 })
 
 from gi.repository import Gio

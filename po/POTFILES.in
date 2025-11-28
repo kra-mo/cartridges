@@ -1,4 +1,5 @@
 cartridges/application.py
+cartridges/games.py
 cartridges/ui/window.blp
 cartridges/ui/window.py
 data/page.kramo.Cartridges.desktop.in

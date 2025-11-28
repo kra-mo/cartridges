@@ -1,5 +1,5 @@
 python.install_sources(
-    files('__init__.py', '__main__.py', 'application.py'),
+    files('__init__.py', '__main__.py', 'application.py', 'games.py'),
     subdir: 'cartridges',
 )
 

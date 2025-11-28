@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
+
 from gettext import gettext as _
 from typing import override
 
