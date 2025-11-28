@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Cartridges
+Exec=cartridges
+Icon=@APP_ID@
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

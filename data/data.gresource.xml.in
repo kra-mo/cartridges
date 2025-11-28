@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gresources>
+  <gresource prefix="@PREFIX@">
+    <file preprocess="xml-stripblanks">@APP_ID@.metainfo.xml</file>
+  </gresource>
+</gresources>

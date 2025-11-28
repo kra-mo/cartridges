@@ -1,0 +1,39 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $Window: Adw.ApplicationWindow {
+  title: _("Cartridges");
+  default-width: 800;
+  default-height: 600;
+
+  ShortcutController {
+    Shortcut {
+      trigger: "<Control>w";
+      action: "action(window.close)";
+    }
+  }
+
+  content: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [end]
+      MenuButton {
+        tooltip-text: _("Main Menu");
+        icon-name: "open-menu-symbolic";
+        primary: true;
+
+        menu-model: menu {
+          item (_("About Cartridges"), "app.about")
+        };
+      }
+    }
+
+    content: Label {
+      label: _("Hello, World!");
+
+      styles [
+        "title-1",
+      ]
+    };
+  };
+}

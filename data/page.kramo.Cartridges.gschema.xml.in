@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schemalist gettext-domain="cartridges">
+  <schema id="@APP_ID@" path="@PREFIX@/">
+  </schema>
+</schemalist>

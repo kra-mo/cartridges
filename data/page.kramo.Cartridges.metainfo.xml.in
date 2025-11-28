@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>@APP_ID@</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <name>Cartridges</name>
+  <summary>Keep the summary shorter, between 10 and 35 characters</summary>
+  <description>
+    <p>No description</p>
+  </description>
+
+  <developer id="page.kramo">
+    <name translate="no">Developer Name</name>
+  </developer>
+
+  <url type="homepage">https://example.org/</url>
+  <url type="vcs-browser">https://example.org/repository</url>
+  <url type="bugtracker">https://example.org/issues</url>
+  <url type="translate">https://example.org/translate</url>
+  <url type="faq">https://example.org/faq</url>
+  <url type="help">https://example.org/help</url>
+  <url type="donation">https://example.org/donate</url>
+  <url type="contact">https://example.org/contact</url>
+  <url type="contribute">https://example.org/contribute</url>
+
+  <translation type="gettext">cartridges</translation>
+  <launchable type="desktop-id">@APP_ID@.desktop</launchable>
+  <content_rating type="oars-1.1" />
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </supports>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#ff00ff</color>
+    <color type="primary" scheme_preference="dark">#993d3d</color>
+  </branding>
+
+  <releases>
+    <release version="49.0"/>
+  </releases>
+
+</component>

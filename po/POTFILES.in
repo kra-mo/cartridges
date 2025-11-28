@@ -1,0 +1,6 @@
+cartridges/application.py
+cartridges/ui/window.blp
+cartridges/ui/window.py
+data/page.kramo.Cartridges.desktop.in
+data/page.kramo.Cartridges.gschema.xml.in
+data/page.kramo.Cartridges.metainfo.xml.in
