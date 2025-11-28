@@ -1,0 +1,71 @@
+[tool.pyright]
+exclude = ["**/__pycache__", "**/.*", "_build/**"]
+typeCheckingMode = "strict"
+
+reportMatchNotExhaustive = "none"
+reportMissingModuleSource = "none"
+reportMissingParameterType = "none"
+reportMissingTypeStubs = "none"
+reportRedeclaration = "none"
+reportUnknownArgumentType = "none"
+reportUnknownLambdaType = "none"
+reportUnknownMemberType = "none"
+reportUnknownParameterType = "none"
+reportUntypedFunctionDecorator = "none"
+reportUnusedImport = "none"
+reportUnusedVariable = "none"
+
+[tool.ruff]
+builtins = ["_"]
+format.preview = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "C901",
+  "COM812",
+  "COM819",
+  "D100",
+  "D105",
+  "D107",
+  "D203",
+  "D206",
+  "D213",
+  "D300",
+  "E111",
+  "E114",
+  "E117",
+  "E402",
+  "ERA001",
+  "FA102",
+  "FBT",
+  "FIX",
+  "FLY002",
+  "PLC0415",
+  "PLR0904",
+  "PLR0911",
+  "PLR0912",
+  "PLR0913",
+  "PLR0914",
+  "PLR0915",
+  "PLR0916",
+  "PLR0917",
+  "Q000",
+  "Q001",
+  "Q002",
+  "Q003",
+  "S310",
+  "TD",
+  "TRY301",
+  "W191",
+]
+
+[tool.ruff.lint.flake8-annotations]
+allow-star-arg-any = true
+suppress-dummy-args = true
+suppress-none-returning = true
+
+[tool.ruff.lint.pydocstyle]
+property-decorators = [
+  "gi.repository.GObject.Property",
+]
