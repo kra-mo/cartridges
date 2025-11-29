@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
+# SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 import gettext
 import locale
@@ -12,12 +13,13 @@ import gi
 gi.require_versions({
     "Gtk": "4.0",
     "Adw": "1",
-    "Json": "1.0",
 })
 
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 
 from .config import LOCALEDIR, PKGDATADIR
+
+DATA_DIR = Path(GLib.get_user_data_dir(), "cartridges")
 
 _RESOURCES = ("data", "icons", "ui")
 
