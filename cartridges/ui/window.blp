@@ -26,16 +26,65 @@ template $Window: Adw.ApplicationWindow {
   content: Adw.ToolbarView {
     [top]
     Adw.HeaderBar {
-      title-widget: Adw.Clamp {
-        maximum-size: 500;
-        tightening-threshold: 500;
+      title-widget: Adw.Clamp clamp {
+        tightening-threshold: bind clamp.maximum-size;
 
-        child: SearchEntry search_entry {
+        child: CenterBox {
           hexpand: true;
-          placeholder-text: _("Search games");
-          search-started => $_search_started();
-          search-changed => $_search_changed();
-          stop-search => $_stop_search();
+
+          center-widget: SearchEntry search_entry {
+            hexpand: true;
+            placeholder-text: _("Search games");
+            search-started => $_search_started();
+            search-changed => $_search_changed();
+            stop-search => $_stop_search();
+          };
+
+          end-widget: MenuButton {
+            icon-name: "filter-symbolic";
+            tooltip-text: _("Sort & Filter");
+            margin-start: 6;
+
+            menu-model: menu {
+              section {
+                label: _("Sort");
+
+                item {
+                  label: _("A-Z");
+                  action: "win.sort";
+                  target: "a-z";
+                }
+
+                item {
+                  label: _("Z-A");
+                  action: "win.sort";
+                  target: "z-a";
+                }
+
+                item {
+                  label: _("Newest");
+                  action: "win.sort";
+                  target: "newest";
+                }
+
+                item {
+                  label: _("Oldest");
+                  action: "win.sort";
+                  target: "oldest";
+                }
+
+                item {
+                  label: _("Last Played");
+                  action: "win.sort";
+                  target: "last_played";
+                }
+              }
+
+              section {
+                item (_("Show Hidden Games"), "win.show-hidden")
+              }
+            };
+          };
         };
       };
 
@@ -47,52 +96,6 @@ template $Window: Adw.ApplicationWindow {
 
         menu-model: menu {
           item (_("About Cartridges"), "app.about")
-        };
-      }
-
-      [end]
-      MenuButton {
-        icon-name: "filter-symbolic";
-        tooltip-text: _("Sort & Filter");
-
-        menu-model: menu {
-          section {
-            label: _("Sort");
-
-            item {
-              label: _("A-Z");
-              action: "win.sort";
-              target: "a-z";
-            }
-
-            item {
-              label: _("Z-A");
-              action: "win.sort";
-              target: "z-a";
-            }
-
-            item {
-              label: _("Newest");
-              action: "win.sort";
-              target: "newest";
-            }
-
-            item {
-              label: _("Oldest");
-              action: "win.sort";
-              target: "oldest";
-            }
-
-            item {
-              label: _("Last Played");
-              action: "win.sort";
-              target: "last_played";
-            }
-          }
-
-          section {
-            item (_("Show Hidden Games"), "win.show-hidden")
-          }
         };
       }
     }
