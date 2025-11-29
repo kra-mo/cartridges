@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
+# SPDX-FileCopyrightText: Copyright 2025 kramo
 
 import locale
 from collections.abc import Generator
