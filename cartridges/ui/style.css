@@ -1,3 +1,7 @@
+:root {
+  --accent-bg-color: var(--accent-purple);
+}
+
 #grid {
   padding: 6px 12px 12px;
 }

@@ -1,11 +1,5 @@
-# PyGObject Template
-
-Create a project by running the following command with your app ID:
-
-```sh
-./create_project.py org.example.AppName
-```
-
-## Credit
-
-A huge thanks to [GNOME Builder](https://gitlab.gnome.org/GNOME/gnome-builder/), this repository is an opinionated modification of its Python template.
+<div align="center">
+  <img alt="" src="data/icons/page.kramo.Cartridges.svg" width="128" height="128">
+  <h1>Cartridges</h1>
+  <p>Launch all your games</p>
+</div>

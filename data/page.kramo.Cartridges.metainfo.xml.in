@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>@APP_ID@</id>
+  <replaces>
+    <id>hu.kramo.Cartridges</id>
+  </replaces>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Cartridges</name>
-  <summary>Keep the summary shorter, between 10 and 35 characters</summary>
+  <summary>Launch all your games</summary>
   <description>
-    <p>No description</p>
+    <p>Cartridges is a simple game launcher for all of your games.</p>
   </description>
 
   <developer id="page.kramo">
-    <name translate="no">Developer Name</name>
+    <name translate="no">Jamie, Laura, Zoey</name>
   </developer>
 
-  <url type="homepage">https://example.org/</url>
-  <url type="vcs-browser">https://example.org/repository</url>
-  <url type="bugtracker">https://example.org/issues</url>
-  <url type="translate">https://example.org/translate</url>
-  <url type="faq">https://example.org/faq</url>
-  <url type="help">https://example.org/help</url>
-  <url type="donation">https://example.org/donate</url>
-  <url type="contact">https://example.org/contact</url>
-  <url type="contribute">https://example.org/contribute</url>
+  <url type="homepage">https://apps.gnome.org/Cartridges/</url>
+  <url type="vcs-browser">https://git.kramo.page/cartridges</url>
+  <url type="bugtracker">https://git.kramo.page/cartridges/issues</url>
+  <url type="translate">https://hosted.weblate.org/engage/cartridges/</url>
+  <url type="contact">https://discord.gg/yrJfddyt56</url>
+  <url type="contribute">https://git.kramo.page/cartridges/src/branch/main/CONTRIBUTING.md</url>
 
   <translation type="gettext">cartridges</translation>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
@@ -38,8 +38,8 @@
   </supports>
 
   <branding>
-    <color type="primary" scheme_preference="light">#ff00ff</color>
-    <color type="primary" scheme_preference="dark">#993d3d</color>
+    <color type="primary" scheme_preference="light">#d5b0e7</color>
+    <color type="primary" scheme_preference="dark">#501a5c</color>
   </branding>
 
   <releases>

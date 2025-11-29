@@ -1,10 +1,13 @@
 [Desktop Entry]
 Name=Cartridges
+GenericName=Game Launcher
+Comment=Launch all your games
 Exec=cartridges
 Icon=@APP_ID@
 Terminal=false
 Type=Application
-Categories=Utility;
-Keywords=GTK;
+Categories=GNOME;GTK;Game;PackageManager;
+# Translators: Leave "cartridges" untranslated here.
+Keywords=gaming;games;play;cartridges;launch;launcher;steam;lutris;heroic;epic;bottles;itch;legendary;retroarch;
 StartupNotify=true
 DBusActivatable=true
