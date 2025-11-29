@@ -11,6 +11,7 @@ reportUnknownArgumentType = "none"
 reportUnknownLambdaType = "none"
 reportUnknownMemberType = "none"
 reportUnknownParameterType = "none"
+reportUnknownVariableType = "none"
 reportUntypedFunctionDecorator = "none"
 reportUnusedImport = "none"
 reportUnusedVariable = "none"
@@ -68,6 +69,4 @@ suppress-dummy-args = true
 suppress-none-returning = true
 
 [tool.ruff.lint.pydocstyle]
-property-decorators = [
-  "gi.repository.GObject.Property",
-]
+property-decorators = ["gi.repository.GObject.Property"]

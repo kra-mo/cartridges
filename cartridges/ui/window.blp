@@ -8,6 +8,11 @@ template $Window: Adw.ApplicationWindow {
 
   ShortcutController {
     Shortcut {
+      trigger: "<Control>f";
+      action: "action(win.search)";
+    }
+
+    Shortcut {
       trigger: "<Control>w";
       action: "action(window.close)";
     }
@@ -16,24 +21,114 @@ template $Window: Adw.ApplicationWindow {
   content: Adw.ToolbarView {
     [top]
     Adw.HeaderBar {
+      title-widget: Adw.Clamp {
+        maximum-size: 500;
+        tightening-threshold: 500;
+
+        child: SearchEntry search_entry {
+          hexpand: true;
+          placeholder-text: _("Search games");
+          search-started => $_search_started();
+          search-changed => $_search_changed();
+          stop-search => $_stop_search();
+        };
+      };
+
       [end]
       MenuButton {
-        tooltip-text: _("Main Menu");
         icon-name: "open-menu-symbolic";
+        tooltip-text: _("Main Menu");
         primary: true;
 
         menu-model: menu {
           item (_("About Cartridges"), "app.about")
         };
       }
+
+      [end]
+      MenuButton {
+        icon-name: "filter-symbolic";
+        tooltip-text: _("Sort & Filter");
+
+        menu-model: menu {
+          section {
+            label: _("Sort");
+
+            item {
+              label: _("A-Z");
+              action: "win.sort";
+              target: "a-z";
+            }
+
+            item {
+              label: _("Z-A");
+              action: "win.sort";
+              target: "z-a";
+            }
+
+            item {
+              label: _("Newest");
+              action: "win.sort";
+              target: "newest";
+            }
+
+            item {
+              label: _("Oldest");
+              action: "win.sort";
+              target: "oldest";
+            }
+
+            item {
+              label: _("Last Played");
+              action: "win.sort";
+              target: "last_played";
+            }
+          }
+        };
+      }
     }
 
     content: ScrolledWindow {
-      child: GridView {
+      child: GridView grid {
         name: "grid";
 
         model: NoSelection {
-          model: bind template.games;
+          model: SortListModel {
+            sorter: CustomSorter sorter {};
+
+            model: FilterListModel {
+              filter: EveryFilter {
+                AnyFilter {
+                  StringFilter {
+                    expression: expr item as <$Game>.name;
+                    search: bind template.search-text;
+                  }
+
+                  StringFilter {
+                    expression: expr item as <$Game>.developer;
+                    search: bind template.search-text;
+                  }
+                }
+
+                BoolFilter {
+                  expression: expr item as <$Game>.hidden;
+                  invert: true;
+                }
+
+                BoolFilter {
+                  expression: expr item as <$Game>.removed;
+                  invert: true;
+                }
+
+                BoolFilter {
+                  expression: expr item as <$Game>.blacklisted;
+                  invert: true;
+                }
+              };
+
+              model: bind template.games;
+            };
+          };
         };
 
         factory: BuilderListItemFactory {

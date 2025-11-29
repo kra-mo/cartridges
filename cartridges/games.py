@@ -11,7 +11,7 @@ from gi.repository import (
     Gio,
     GLib,
     GObject,
-    Json,  # pyright: ignore[reportAttributeAccessIssue, reportUnknownVariableType]
+    Json,  # pyright: ignore[reportAttributeAccessIssue]
 )
 
 DATA_DIR = Path(GLib.get_user_data_dir(), "cartridges")
