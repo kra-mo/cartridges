@@ -13,11 +13,11 @@ from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game
 
 SORT_MODES = {
+    "last_played": ("last-played", True),
     "a-z": ("name", False),
     "z-a": ("name", True),
     "newest": ("added", False),
     "oldest": ("added", True),
-    "last_played": ("last-played", True),
 }
 
 
@@ -34,8 +34,8 @@ class Window(Adw.ApplicationWindow):
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
 
-    _sort_prop = "name"
-    _invert_sort = False
+    _sort_prop = "last-played"
+    _invert_sort = True
 
     @GObject.Property(type=Gio.ListStore)
     def games(self) -> Gio.ListStore:
@@ -55,7 +55,7 @@ class Window(Adw.ApplicationWindow):
         self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
         self.add_action_entries((
             ("search", lambda *_: self.search_entry.grab_focus()),
-            ("sort", self._sort, "s", "'a-z'"),
+            ("sort", self._sort, "s", "'last_played'"),
         ))
 
     @Gtk.Template.Callback()

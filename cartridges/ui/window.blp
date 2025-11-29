@@ -50,6 +50,12 @@ template $Window: Adw.ApplicationWindow {
                 label: _("Sort");
 
                 item {
+                  label: _("Last Played");
+                  action: "win.sort";
+                  target: "last_played";
+                }
+
+                item {
                   label: _("A-Z");
                   action: "win.sort";
                   target: "a-z";
@@ -71,12 +77,6 @@ template $Window: Adw.ApplicationWindow {
                   label: _("Oldest");
                   action: "win.sort";
                   target: "oldest";
-                }
-
-                item {
-                  label: _("Last Played");
-                  action: "win.sort";
-                  target: "last_played";
                 }
               }
 
