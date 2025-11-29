@@ -59,6 +59,8 @@ def load() -> Generator[Game]:
                 game.cover = Gdk.Texture.new_from_filename(filename)
             except GLib.Error:
                 continue
+            else:
+                break
 
         yield game
 
