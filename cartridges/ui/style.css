@@ -1,0 +1,8 @@
+#grid {
+  padding: 6px 12px 12px;
+}
+
+#grid > child {
+  padding: 12px;
+  border-radius: 24px;
+}

@@ -1,18 +1,22 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
+# SPDX-FileCopyrightText: Copyright 2025 kramo
 
 from collections.abc import Generator
 from pathlib import Path
+from typing import cast
 
 from gi.repository import (
+    Gdk,
     Gio,
     GLib,
     GObject,
     Json,  # pyright: ignore[reportAttributeAccessIssue, reportUnknownVariableType]
 )
 
-
-GAMES_DIR = Path(GLib.get_user_data_dir(), "cartridges", "games")
+DATA_DIR = Path(GLib.get_user_data_dir(), "cartridges")
+GAMES_DIR = DATA_DIR / "games"
+COVERS_DIR = DATA_DIR / "covers"
 
 
 class Game(GObject.Object):
@@ -32,15 +36,31 @@ class Game(GObject.Object):
     blacklisted = GObject.Property(type=bool, default=False)
     version = GObject.Property(type=float, default=2.0)
 
+    cover = GObject.Property(type=Gdk.Texture)
+
 
 def load() -> Generator[Game]:
     """Load the user's games from disk."""
-    for game in GAMES_DIR.iterdir():
-        data = game.read_text("utf-8")
+    for path in GAMES_DIR.glob("*.json"):
         try:
-            yield Json.gobject_from_data(Game, data, len(data))
+            data = path.read_text("utf-8")
+        except UnicodeError:
+            continue
+
+        try:
+            game = cast(Game, Json.gobject_from_data(Game, data, len(data)))
         except GLib.Error:
             continue
+
+        cover_path = COVERS_DIR / game.game_id
+        for ext in ".gif", ".tiff":
+            filename = str(cover_path.with_suffix(ext))
+            try:
+                game.cover = Gdk.Texture.new_from_filename(filename)
+            except GLib.Error:
+                continue
+
+        yield game
 
 
 model = Gio.ListStore.new(Game)

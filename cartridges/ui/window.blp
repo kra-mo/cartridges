@@ -3,8 +3,8 @@ using Adw 1;
 
 template $Window: Adw.ApplicationWindow {
   title: _("Cartridges");
-  default-width: 800;
-  default-height: 600;
+  default-width: 920;
+  default-height: 700;
 
   ShortcutController {
     Shortcut {
@@ -28,18 +28,43 @@ template $Window: Adw.ApplicationWindow {
       }
     }
 
-    content: GridView {
-      model: NoSelection {
-        model: bind template.games;
-      };
+    content: ScrolledWindow {
+      child: GridView {
+        name: "grid";
 
-      factory: BuilderListItemFactory {
-        template ListItem {
-          child: Label {
-              label: bind template.item as <$Game>.name;
-          };
-        }
+        model: NoSelection {
+          model: bind template.games;
+        };
+
+        factory: BuilderListItemFactory {
+          template ListItem {
+            child: Box {
+              orientation: vertical;
+              spacing: 12;
+
+              Picture {
+                paintable: bind template.item as <$Game>.cover;
+                width-request: 200;
+                height-request: 300;
+                halign: center;
+
+                styles [
+                  "card",
+                ]
+              }
+
+              Label {
+                label: bind template.item as <$Game>.name;
+                ellipsize: middle;
+              }
+            };
+          }
+        };
       };
     };
+
+    styles [
+      "view",
+    ]
   };
 }
