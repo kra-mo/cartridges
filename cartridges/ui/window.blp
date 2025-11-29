@@ -13,6 +13,11 @@ template $Window: Adw.ApplicationWindow {
     }
 
     Shortcut {
+      trigger: "<Control>h";
+      action: "action(win.show-hidden)";
+    }
+
+    Shortcut {
       trigger: "<Control>w";
       action: "action(window.close)";
     }
@@ -84,6 +89,10 @@ template $Window: Adw.ApplicationWindow {
               target: "last_played";
             }
           }
+
+          section {
+            item (_("Show Hidden Games"), "win.show-hidden")
+          }
         };
       }
     }
@@ -112,7 +121,7 @@ template $Window: Adw.ApplicationWindow {
 
                 BoolFilter {
                   expression: expr item as <$Game>.hidden;
-                  invert: true;
+                  invert: bind template.show-hidden inverted;
                 }
 
                 BoolFilter {

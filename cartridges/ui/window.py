@@ -31,6 +31,7 @@ class Window(Adw.ApplicationWindow):
     sorter: Gtk.CustomSorter = Gtk.Template.Child()
 
     search_text = GObject.Property(type=str)
+    show_hidden = GObject.Property(type=bool, default=False)
 
     _sort_prop = "name"
     _invert_sort = False
@@ -50,10 +51,25 @@ class Window(Adw.ApplicationWindow):
         self.search_entry.set_key_capture_widget(self)
         self.sorter.set_sort_func(self._sort_func)
 
+        self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
         self.add_action_entries((
             ("search", lambda *_: self.search_entry.grab_focus()),
             ("sort", self._sort, "s", "'a-z'"),
         ))
+
+    @Gtk.Template.Callback()
+    def _search_started(self, entry: Gtk.SearchEntry) -> None:
+        entry.grab_focus()
+
+    @Gtk.Template.Callback()
+    def _search_changed(self, entry: Gtk.SearchEntry) -> None:
+        self.search_text = entry.props.text
+        entry.grab_focus()
+
+    @Gtk.Template.Callback()
+    def _stop_search(self, entry: Gtk.SearchEntry) -> None:
+        entry.props.text = ""
+        self.grid.grab_focus()
 
     def _sort(self, action: Gio.SimpleAction, parameter: GLib.Variant, *_args) -> None:
         action.change_state(parameter)
@@ -78,17 +94,3 @@ class Window(Adw.ApplicationWindow):
     def _sortable(*strings: str) -> Generator[str]:
         for string in strings:
             yield string.lower().removeprefix("the ")
-
-    @Gtk.Template.Callback()
-    def _search_started(self, entry: Gtk.SearchEntry) -> None:
-        entry.grab_focus()
-
-    @Gtk.Template.Callback()
-    def _search_changed(self, entry: Gtk.SearchEntry) -> None:
-        self.search_text = entry.props.text
-        entry.grab_focus()
-
-    @Gtk.Template.Callback()
-    def _stop_search(self, entry: Gtk.SearchEntry) -> None:
-        entry.props.text = ""
-        self.grid.grab_focus()
