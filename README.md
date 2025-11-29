@@ -2,7 +2,7 @@
 [circle-image]: https://circle.gnome.org/assets/button/badge.svg
 [weblate-url]: https://hosted.weblate.org/engage/cartridges/
 [weblate-image]: https://hosted.weblate.org/widgets/cartridges/-/cartridges/svg-badge.svg
-[discord-url]: https://discord.gg/4KSFh3AmQR
+[discord-url]: https://discord.gg/yrJfddyt56
 [discord-image]: https://img.shields.io/discord/1088155799299313754?color=%235865F2&label=discord&logo=discord&logoColor=%23FFFFFF&style=for-the-badge
 [flathub-url]: https://flathub.org/apps/page.kramo.Cartridges
 [flathub-image]: https://img.shields.io/flathub/v/page.kramo.Cartridges?logo=flathub&style=for-the-badge
