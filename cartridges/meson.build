@@ -4,6 +4,7 @@ python.install_sources(
         '__main__.py',
         'application.py',
         'games.py',
+        'gamepads.py',
         'sources.py',
     ),
     subdir: 'cartridges',

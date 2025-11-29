@@ -13,6 +13,7 @@ import gi
 gi.require_versions({
     "Gtk": "4.0",
     "Adw": "1",
+    "Manette": "0.2",
 })
 
 from gi.repository import Gio, GLib

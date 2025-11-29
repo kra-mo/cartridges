@@ -9,7 +9,7 @@ from typing import Any, TypeVar, cast
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-from cartridges import games, state_settings
+from cartridges import games, gamepads, state_settings
 from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game, GameSorter
 
@@ -39,6 +39,10 @@ class Window(Adw.ApplicationWindow):
     search_entry: Gtk.SearchEntry = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: GameSorter = Gtk.Template.Child()
+    sort_button: Gtk.MenuButton = Gtk.Template.Child()
+    main_menu: Gtk.MenuButton = Gtk.Template.Child()
+    title_box: Gtk.CenterBox = Gtk.Template.Child()
+    header_bar: Adw.HeaderBar = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
     search_text = GObject.Property(type=str)
@@ -48,6 +52,11 @@ class Window(Adw.ApplicationWindow):
     def games(self) -> Gio.ListStore:
         """Model of the user's games."""
         return games.model
+
+    @GObject.Property(type=Gio.ListStore)
+    def gamepads(self) -> Gio.ListStore:
+        """Model of connected gamepads."""
+        return gamepads.model
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -65,14 +74,22 @@ class Window(Adw.ApplicationWindow):
 
         self.add_action(state_settings.create_action("sort-mode"))
         self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
-        self.add_action_entries((
-            ("search", lambda *_: self.search_entry.grab_focus()),
-            ("edit", lambda _action, param, *_: self._edit(param.get_uint32()), "u"),
-            ("add", lambda *_: self._add()),
-            ("undo", lambda *_: self._undo()),
-        ))
+        self.add_action_entries(
+            (
+                ("search", lambda *_: self.search_entry.grab_focus()),
+                (
+                    "edit",
+                    lambda _action, param, *_: self._edit(param.get_uint32()),
+                    "u",
+                ),
+                ("add", lambda *_: self._add()),
+                ("undo", lambda *_: self._undo()),
+            )
+        )
 
         self._history: dict[Adw.Toast, _UndoFunc] = {}
+
+        gamepads.window = self
 
     def send_toast(self, title: str, *, undo: _UndoFunc | None = None):
         """Notify the user with a toast.
