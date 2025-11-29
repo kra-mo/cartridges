@@ -11,6 +11,7 @@
     "--socket=wayland",
     "--talk-name=org.freedesktop.Flatpak",
     "--filesystem=host:ro",
+    "--device=input",
     "--filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam/:ro"
   ],
   "cleanup": [
