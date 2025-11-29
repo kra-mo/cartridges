@@ -5,7 +5,7 @@
 Be sure to follow the [code style](#code-style) of the project.
 
 ### Adding a feature
-[Create an issue](https://git.kramo.page/cartridges/issues/new) or join the [Discord](https://discord.gg/4KSFh3AmQR)/[Matrix](https://matrix.to/#/#cartridges:matrix.org) to discuss it with the maintainers. We will provide additional guidance.
+[Create an issue](https://git.kramo.page/cartridges/issues/new) or join the [Discord](https://discord.gg/yrJfddyt56) to discuss it with the maintainers. We will provide additional guidance.
 
 ### Fixing a bug
 Fork the repository, make your changes, then create a pull request. Be sure to mention the issue you're fixing if one was already open.
