@@ -40,9 +40,6 @@ class Window(Adw.ApplicationWindow):
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
 
-    _sort_prop = "last-played"
-    _invert_sort = True
-
     @GObject.Property(type=Gio.ListStore)
     def games(self) -> Gio.ListStore:
         """Model of the user's games."""
@@ -58,6 +55,7 @@ class Window(Adw.ApplicationWindow):
             "width": "default-width",
             "height": "default-height",
             "is-maximized": "maximized",
+            "show-hidden": "show-hidden",
         }.items():
             state_settings.bind(key, self, name, Gio.SettingsBindFlags.DEFAULT)
 
@@ -68,7 +66,12 @@ class Window(Adw.ApplicationWindow):
         self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
         self.add_action_entries((
             ("search", lambda *_: self.search_entry.grab_focus()),
-            ("sort", self._sort, "s", "'last_played'"),
+            (
+                "sort",
+                self._sort,
+                "s",
+                state_settings.get_value("sort-mode").print_(False),
+            ),
         ))
 
     @Gtk.Template.Callback()
@@ -136,16 +139,21 @@ class Window(Adw.ApplicationWindow):
 
     def _sort(self, action: Gio.SimpleAction, parameter: GLib.Variant, *_args):
         action.change_state(parameter)
-        prop, invert = SORT_MODES[parameter.get_string()]
-        opposite = (self._sort_prop == prop) and (self._invert_sort != invert)
-        self._sort_prop, self._invert_sort = prop, invert
+        sort_mode = parameter.get_string()
+
+        prop, invert = SORT_MODES[sort_mode]
+        prev_prop, prev_invert = SORT_MODES[state_settings.get_string("sort-mode")]
+        opposite = (prev_prop == prop) and (prev_invert != invert)
+
+        state_settings.set_string("sort-mode", sort_mode)
         self.sorter.changed(
             Gtk.SorterChange.INVERTED if opposite else Gtk.SorterChange.DIFFERENT
         )
 
     def _sort_func(self, game1: Game, game2: Game, _) -> int:
-        a = (game2 if self._invert_sort else game1).get_property(self._sort_prop)
-        b = (game1 if self._invert_sort else game2).get_property(self._sort_prop)
+        prop, invert = SORT_MODES[state_settings.get_string("sort-mode")]
+        a = (game2 if invert else game1).get_property(prop)
+        b = (game1 if invert else game2).get_property(prop)
         return (
             locale.strcoll(*self._sortable(a, b))
             if isinstance(a, str)

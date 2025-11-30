@@ -12,5 +12,18 @@
     <key name="is-maximized" type="b">
       <default>false</default>
     </key>
+    <key name="sort-mode" type="s">
+      <choices>
+        <choice value="last_played" />
+        <choice value="a-z" />
+        <choice value="z-a" />
+        <choice value="newest" />
+        <choice value="oldest" />
+      </choices>
+      <default>"last_played"</default>
+    </key>
+    <key name="show-hidden" type="b">
+      <default>false</default>
+    </key>
   </schema>
 </schemalist>
