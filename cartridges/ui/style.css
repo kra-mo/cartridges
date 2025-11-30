@@ -10,3 +10,13 @@
   padding: 12px;
   border-radius: 24px;
 }
+
+#background {
+  filter: saturate(300%) opacity(0.5);
+}
+
+@media (prefers-contrast: more) {
+  #background {
+    filter: saturate(300%) opacity(0.2);
+  }
+}

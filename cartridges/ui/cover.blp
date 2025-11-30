@@ -1,0 +1,28 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $Cover: Adw.Bin {
+  child: Adw.Clamp {
+    orientation: vertical;
+    unit: px;
+    maximum-size: bind picture.height-request;
+    tightening-threshold: bind picture.height-request;
+
+    Adw.Clamp {
+      unit: px;
+      maximum-size: bind picture.width-request;
+      tightening-threshold: bind picture.width-request;
+
+      Picture picture {
+        paintable: bind template.paintable;
+        width-request: 200;
+        height-request: 300;
+        content-fit: cover;
+
+        styles [
+          "card",
+        ]
+      }
+    }
+  };
+}

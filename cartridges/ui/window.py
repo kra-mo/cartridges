@@ -1,16 +1,20 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
-# SPDX-FileCopyrightText: Copyright 2025 kramo
+# SPDX-FileCopyrightText: Copyright 2022-2025 kramo
 
 import locale
 from collections.abc import Generator
+from datetime import UTC, datetime
+from gettext import gettext as _
 from typing import Any
 
-from gi.repository import Adw, Gio, GLib, GObject, Gtk
+from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
 
 from cartridges import games
 from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game
+
+from .cover import Cover  # noqa: F401
 
 SORT_MODES = {
     "last_played": ("last-played", True),
@@ -27,10 +31,12 @@ class Window(Adw.ApplicationWindow):
 
     __gtype_name__ = __qualname__
 
+    navigation_view: Adw.NavigationView = Gtk.Template.Child()
     search_entry: Gtk.SearchEntry = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: Gtk.CustomSorter = Gtk.Template.Child()
 
+    active_game = GObject.Property(type=Game)
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
 
@@ -57,6 +63,51 @@ class Window(Adw.ApplicationWindow):
             ("search", lambda *_: self.search_entry.grab_focus()),
             ("sort", self._sort, "s", "'last_played'"),
         ))
+
+    @Gtk.Template.Callback()
+    def _activate_game(self, grid: Gtk.GridView, position: int):
+        if isinstance(model := grid.props.model, Gio.ListModel):
+            self.active_game = model.get_item(position)
+            self.navigation_view.push_by_tag("details")
+
+    @Gtk.Template.Callback()
+    def _downscale_image(self, _obj, cover: Gdk.Texture | None) -> Gdk.Texture | None:
+        if cover and (renderer := self.get_renderer()):
+            cover.snapshot(snapshot := Gtk.Snapshot.new(), 3, 3)
+            if node := snapshot.to_node():
+                return renderer.render_texture(node)
+
+        return None
+
+    @Gtk.Template.Callback()
+    def _date_label(self, _obj, label: str, timestamp: int) -> str:
+        date = datetime.fromtimestamp(timestamp, UTC)
+        now = datetime.now(UTC)
+        return label.format(
+            _("Never")
+            if not timestamp
+            else _("Today")
+            if (n_days := (now - date).days) == 0
+            else _("Yesterday")
+            if n_days == 1
+            else date.strftime("%A")
+            if n_days <= (day_of_week := now.weekday())
+            else _("Last Week")
+            if n_days <= day_of_week + 7
+            else _("This Month")
+            if n_days <= (day_of_month := now.day)
+            else _("Last Month")
+            if n_days <= day_of_month + 30
+            else date.strftime("%B")
+            if n_days < (day_of_year := now.timetuple().tm_yday)
+            else _("Last Year")
+            if n_days <= day_of_year + 365
+            else date.strftime("%Y")
+        )
+
+    @Gtk.Template.Callback()
+    def _bool(self, _obj, o: object) -> bool:
+        return bool(o)
 
     @Gtk.Template.Callback()
     def _search_started(self, entry: Gtk.SearchEntry):

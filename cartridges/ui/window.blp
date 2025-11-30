@@ -1,4 +1,5 @@
 using Gtk 4.0;
+using Gdk 4.0;
 using Adw 1;
 
 template $Window: Adw.ApplicationWindow {
@@ -23,155 +24,267 @@ template $Window: Adw.ApplicationWindow {
     }
   }
 
-  content: Adw.ToolbarView {
-    [top]
-    Adw.HeaderBar {
-      title-widget: Adw.Clamp clamp {
-        tightening-threshold: bind clamp.maximum-size;
+  Adw.Breakpoint {
+    condition ("max-width: 700px")
 
-        child: CenterBox {
-          hexpand: true;
-
-          center-widget: SearchEntry search_entry {
-            hexpand: true;
-            placeholder-text: _("Search games");
-            search-started => $_search_started();
-            search-changed => $_search_changed();
-            stop-search => $_stop_search();
-          };
-
-          end-widget: MenuButton {
-            icon-name: "filter-symbolic";
-            tooltip-text: _("Sort & Filter");
-            margin-start: 6;
-
-            menu-model: menu {
-              section {
-                label: _("Sort");
-
-                item {
-                  label: _("Last Played");
-                  action: "win.sort";
-                  target: "last_played";
-                }
-
-                item {
-                  label: _("A-Z");
-                  action: "win.sort";
-                  target: "a-z";
-                }
-
-                item {
-                  label: _("Z-A");
-                  action: "win.sort";
-                  target: "z-a";
-                }
-
-                item {
-                  label: _("Newest");
-                  action: "win.sort";
-                  target: "newest";
-                }
-
-                item {
-                  label: _("Oldest");
-                  action: "win.sort";
-                  target: "oldest";
-                }
-              }
-
-              section {
-                item (_("Show Hidden Games"), "win.show-hidden")
-              }
-            };
-          };
-        };
-      };
-
-      [end]
-      MenuButton {
-        icon-name: "open-menu-symbolic";
-        tooltip-text: _("Main Menu");
-        primary: true;
-
-        menu-model: menu {
-          item (_("About Cartridges"), "app.about")
-        };
-      }
+    setters {
+      details_box.orientation: vertical;
+      name_label.halign: center;
+      name_label.justify: center;
+      developer_label.halign: center;
+      developer_label.justify: center;
+      date_labels.orientation: vertical;
+      date_labels.halign: center;
+      last_played_label.halign: center;
+      last_played_label.justify: center;
+      added_label.halign: center;
+      added_label.justify: center;
     }
+  }
 
-    content: ScrolledWindow {
-      child: GridView grid {
-        name: "grid";
+  content: Adw.NavigationView navigation_view {
+    Adw.NavigationPage {
+      title: bind template.title;
 
-        model: NoSelection {
-          model: SortListModel {
-            sorter: CustomSorter sorter {};
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          title-widget: Adw.Clamp clamp {
+            tightening-threshold: bind clamp.maximum-size;
 
-            model: FilterListModel {
-              filter: EveryFilter {
-                AnyFilter {
-                  StringFilter {
-                    expression: expr item as <$Game>.name;
-                    search: bind template.search-text;
-                  }
+            child: CenterBox {
+              hexpand: true;
 
-                  StringFilter {
-                    expression: expr item as <$Game>.developer;
-                    search: bind template.search-text;
-                  }
-                }
-
-                BoolFilter {
-                  expression: expr item as <$Game>.hidden;
-                  invert: bind template.show-hidden inverted;
-                }
-
-                BoolFilter {
-                  expression: expr item as <$Game>.removed;
-                  invert: true;
-                }
-
-                BoolFilter {
-                  expression: expr item as <$Game>.blacklisted;
-                  invert: true;
-                }
+              center-widget: SearchEntry search_entry {
+                hexpand: true;
+                placeholder-text: _("Search games");
+                search-started => $_search_started();
+                search-changed => $_search_changed();
+                stop-search => $_stop_search();
               };
 
-              model: bind template.games;
+              end-widget: MenuButton {
+                icon-name: "filter-symbolic";
+                tooltip-text: _("Sort & Filter");
+                margin-start: 6;
+
+                menu-model: menu {
+                  section {
+                    label: _("Sort");
+
+                    item {
+                      label: _("Last Played");
+                      action: "win.sort";
+                      target: "last_played";
+                    }
+
+                    item {
+                      label: _("A-Z");
+                      action: "win.sort";
+                      target: "a-z";
+                    }
+
+                    item {
+                      label: _("Z-A");
+                      action: "win.sort";
+                      target: "z-a";
+                    }
+
+                    item {
+                      label: _("Newest");
+                      action: "win.sort";
+                      target: "newest";
+                    }
+
+                    item {
+                      label: _("Oldest");
+                      action: "win.sort";
+                      target: "oldest";
+                    }
+                  }
+
+                  section {
+                    item (_("Show Hidden Games"), "win.show-hidden")
+                  }
+                };
+              };
+            };
+          };
+
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            tooltip-text: _("Main Menu");
+            primary: true;
+
+            menu-model: menu {
+              item (_("About Cartridges"), "app.about")
+            };
+          }
+        }
+
+        content: ScrolledWindow {
+          hscrollbar-policy: never;
+
+          child: GridView grid {
+            name: "grid";
+            single-click-activate: true;
+            activate => $_activate_game();
+
+            model: NoSelection {
+              model: SortListModel {
+                sorter: CustomSorter sorter {};
+
+                model: FilterListModel {
+                  filter: EveryFilter {
+                    AnyFilter {
+                      StringFilter {
+                        expression: expr item as <$Game>.name;
+                        search: bind template.search-text;
+                      }
+
+                      StringFilter {
+                        expression: expr item as <$Game>.developer;
+                        search: bind template.search-text;
+                      }
+                    }
+
+                    BoolFilter {
+                      expression: expr item as <$Game>.hidden;
+                      invert: bind template.show-hidden inverted;
+                    }
+
+                    BoolFilter {
+                      expression: expr item as <$Game>.removed;
+                      invert: true;
+                    }
+
+                    BoolFilter {
+                      expression: expr item as <$Game>.blacklisted;
+                      invert: true;
+                    }
+                  };
+
+                  model: bind template.games;
+                };
+              };
+            };
+
+            factory: BuilderListItemFactory {
+              template ListItem {
+                child: Box {
+                  orientation: vertical;
+                  spacing: 12;
+
+                  $Cover {
+                    paintable: bind template.item as <$Game>.cover;
+                  }
+
+                  Label {
+                    label: bind template.item as <$Game>.name;
+                    ellipsize: middle;
+                  }
+                };
+              }
             };
           };
         };
 
-        factory: BuilderListItemFactory {
-          template ListItem {
-            child: Box {
-              orientation: vertical;
-              spacing: 12;
+        styles [
+          "view",
+        ]
+      };
+    }
 
-              Picture {
-                paintable: bind template.item as <$Game>.cover;
-                width-request: 200;
-                height-request: 300;
-                halign: center;
+    Adw.NavigationPage {
+      title: bind template.active-game as <$Game>.name;
+      tag: "details";
 
-                styles [
-                  "card",
-                ]
+      child: Overlay {
+        child: Picture {
+          name: "background";
+          paintable: bind $_downscale_image(template.active-game as <$Game>.cover) as <Gdk.Texture>;
+          content-fit: cover;
+        };
+
+        [overlay]
+        Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {
+            show-title: false;
+          }
+
+          content: ScrolledWindow {
+            hscrollbar-policy: never;
+
+            child: Box details_box {
+              halign: center;
+              valign: center;
+              margin-top: 12;
+              margin-bottom: 48;
+              margin-start: 24;
+              margin-end: 24;
+              spacing: 36;
+
+              $Cover {
+                paintable: bind template.active-game as <$Game>.cover;
               }
 
-              Label {
-                label: bind template.item as <$Game>.name;
-                ellipsize: middle;
+              Box {
+                orientation: vertical;
+                valign: center;
+                spacing: 3;
+
+                Label name_label {
+                  label: bind template.active-game as <$Game>.name;
+                  halign: start;
+                  max-width-chars: 24;
+                  wrap: true;
+                  wrap-mode: word_char;
+
+                  styles [
+                    "title-1",
+                  ]
+                }
+
+                Label developer_label {
+                  label: bind template.active-game as <$Game>.developer;
+                  visible: bind $_bool(template.active-game as <$Game>.developer) as <bool>;
+                  halign: start;
+                  max-width-chars: 36;
+                  wrap: true;
+                  wrap-mode: word_char;
+
+                  styles [
+                    "heading",
+                  ]
+                }
+
+                Box date_labels {
+                  halign: start;
+                  valign: start;
+                  margin-top: 9;
+                  spacing: 9;
+
+                  Label last_played_label {
+                    label: bind $_date_label(_("Last Played: {}"), template.active-game as <$Game>.last_played) as <string>;
+                    halign: start;
+                    wrap: true;
+                    wrap-mode: word_char;
+                  }
+
+                  Label added_label {
+                    label: bind $_date_label(_("Added: {}"), template.active-game as <$Game>.added) as <string>;
+                    halign: start;
+                    wrap: true;
+                    wrap-mode: word_char;
+                  }
+                }
               }
             };
-          }
-        };
+          };
+        }
       };
-    };
-
-    styles [
-      "view",
-    ]
+    }
   };
 }
