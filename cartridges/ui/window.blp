@@ -60,6 +60,7 @@ template $Window: Adw.ApplicationWindow {
                 placeholder-text: _("Search games");
                 search-started => $_search_started();
                 search-changed => $_search_changed();
+                activate => $_search_activate();
                 stop-search => $_stop_search();
               };
 

@@ -119,6 +119,10 @@ class Window(Adw.ApplicationWindow):
         entry.grab_focus()
 
     @Gtk.Template.Callback()
+    def _search_activate(self, _entry):
+        self.grid.activate_action("list.activate-item", GLib.Variant.new_uint32(0))
+
+    @Gtk.Template.Callback()
     def _stop_search(self, entry: Gtk.SearchEntry):
         entry.props.text = ""
         self.grid.grab_focus()
