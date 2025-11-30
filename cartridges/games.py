@@ -4,8 +4,12 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 import json
+import os
+import subprocess
 from collections.abc import Generator
 from json import JSONDecodeError
+from pathlib import Path
+from shlex import quote
 from types import UnionType
 from typing import Any
 
@@ -32,7 +36,7 @@ _PROPERTIES: dict[str, tuple[type | UnionType, bool]] = {
 }
 
 
-class Game(GObject.Object):
+class Game(Gio.SimpleActionGroup):
     """Game data class."""
 
     __gtype_name__ = __qualname__
@@ -72,6 +76,25 @@ class Game(GObject.Object):
                     continue
 
             setattr(self, name, value)
+
+        self.add_action_entries((("play", lambda *_: self.play()),))
+        self.add_action(Gio.PropertyAction.new("hide", self, "hidden"))
+        self.add_action(Gio.PropertyAction.new("remove", self, "removed"))
+
+    def play(self):
+        """Run the executable command in a shell."""
+        if Path("/.flatpak-info").exists():
+            executable = f"flatpak-spawn --host /bin/sh -c {quote(self.executable)}"
+        else:
+            executable = self.executable
+
+        subprocess.Popen(  # noqa: S602
+            executable,
+            cwd=Path.home(),
+            shell=True,
+            start_new_session=True,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
+        )
 
 
 def _load() -> Generator[Game]:
