@@ -3,7 +3,7 @@
 
 from gi.repository import Adw, Gdk, GObject, Gtk
 
-from cartridges.config import PREFIX
+from cartridges.config import APP_ID, PREFIX
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/cover.ui")
@@ -13,3 +13,8 @@ class Cover(Adw.Bin):
     __gtype_name__ = __qualname__
 
     paintable = GObject.Property(type=Gdk.Paintable)
+    app_icon_name = GObject.Property(type=str, default=f"{APP_ID}-symbolic")
+
+    @Gtk.Template.Callback()
+    def _get_stack_child(self, _obj, paintable: Gdk.Paintable | None) -> str:
+        return "cover" if paintable else "icon"

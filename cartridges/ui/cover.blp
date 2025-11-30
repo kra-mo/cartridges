@@ -8,21 +8,43 @@ template $Cover: Adw.Bin {
     maximum-size: bind picture.height-request;
     tightening-threshold: bind picture.height-request;
 
-    Adw.Clamp {
+    child: Adw.Clamp {
       unit: px;
       maximum-size: bind picture.width-request;
       tightening-threshold: bind picture.width-request;
 
-      Picture picture {
-        paintable: bind template.paintable;
-        width-request: 200;
-        height-request: 300;
-        content-fit: cover;
+      child: Stack {
+        visible-child-name: bind $_get_stack_child(template.paintable) as <string>;
+        overflow: hidden;
+
+        StackPage {
+          name: "cover";
+
+          child: Picture picture {
+            paintable: bind template.paintable;
+            width-request: 200;
+            height-request: 300;
+            content-fit: cover;
+          };
+        }
+
+        StackPage {
+          name: "icon";
+
+          child: Image {
+            icon-name: bind template.app-icon-name;
+            pixel-size: 80;
+
+            styles [
+              "dimmed",
+            ]
+          };
+        }
 
         styles [
           "card",
         ]
-      }
-    }
+      };
+    };
   };
 }
