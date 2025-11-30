@@ -10,7 +10,7 @@ from typing import Any
 
 from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
 
-from cartridges import games
+from cartridges import games, state_settings
 from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game
 
@@ -53,6 +53,13 @@ class Window(Adw.ApplicationWindow):
 
         if PROFILE == "development":
             self.add_css_class("devel")
+
+        for key, name in {
+            "width": "default-width",
+            "height": "default-height",
+            "is-maximized": "maximized",
+        }.items():
+            state_settings.bind(key, self, name, Gio.SettingsBindFlags.DEFAULT)
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7901
         self.search_entry.set_key_capture_widget(self)

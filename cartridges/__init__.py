@@ -17,9 +17,10 @@ gi.require_versions({
 
 from gi.repository import Gio, GLib
 
-from .config import LOCALEDIR, PKGDATADIR
+from .config import APP_ID, LOCALEDIR, PKGDATADIR
 
 DATA_DIR = Path(GLib.get_user_data_dir(), "cartridges")
+state_settings = Gio.Settings.new(f"{APP_ID}.State")
 
 _RESOURCES = ("data", "icons", "ui")
 
