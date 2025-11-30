@@ -96,6 +96,15 @@ class Game(Gio.SimpleActionGroup):
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
         )
 
+    def save(self):
+        """Save the game's properties to disk."""
+        properties = {name: getattr(self, name) for name in _PROPERTIES}
+
+        _GAMES_DIR.mkdir(parents=True, exist_ok=True)
+        path = (_GAMES_DIR / self.game_id).with_suffix(".json")
+        with path.open(encoding="utf-8") as f:
+            json.dump(properties, f, indent=4)
+
 
 def _load() -> Generator[Game]:
     for path in _GAMES_DIR.glob("*.json"):
