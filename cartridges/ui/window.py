@@ -42,7 +42,7 @@ class Window(Adw.ApplicationWindow):
         """Model of the user's games."""
         return games.model
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
         if PROFILE == "development":
@@ -59,20 +59,20 @@ class Window(Adw.ApplicationWindow):
         ))
 
     @Gtk.Template.Callback()
-    def _search_started(self, entry: Gtk.SearchEntry) -> None:
+    def _search_started(self, entry: Gtk.SearchEntry):
         entry.grab_focus()
 
     @Gtk.Template.Callback()
-    def _search_changed(self, entry: Gtk.SearchEntry) -> None:
+    def _search_changed(self, entry: Gtk.SearchEntry):
         self.search_text = entry.props.text
         entry.grab_focus()
 
     @Gtk.Template.Callback()
-    def _stop_search(self, entry: Gtk.SearchEntry) -> None:
+    def _stop_search(self, entry: Gtk.SearchEntry):
         entry.props.text = ""
         self.grid.grab_focus()
 
-    def _sort(self, action: Gio.SimpleAction, parameter: GLib.Variant, *_args) -> None:
+    def _sort(self, action: Gio.SimpleAction, parameter: GLib.Variant, *_args):
         action.change_state(parameter)
         prop, invert = SORT_MODES[parameter.get_string()]
         opposite = (self._sort_prop == prop) and (self._invert_sort != invert)

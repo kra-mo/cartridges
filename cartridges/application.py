@@ -13,7 +13,7 @@ from .ui.window import Window
 class Application(Adw.Application):
     """The main application."""
 
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__(application_id=APP_ID)
 
         self.add_action_entries((
@@ -23,11 +23,11 @@ class Application(Adw.Application):
         self.set_accels_for_action("app.quit", ("<Control>q",))
 
     @override
-    def do_activate(self) -> None:
+    def do_activate(self):
         window = self.props.active_window or Window(application=self)
         window.present()
 
-    def _present_about_dialog(self) -> None:
+    def _present_about_dialog(self):
         dialog = Adw.AboutDialog.new_from_appdata(f"{PREFIX}/{APP_ID}.metainfo.xml")
         # Translators: Replace "translator-credits" with your name/username,
         # and optionally a URL or an email in <user@example.org> format.
