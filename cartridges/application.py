@@ -30,6 +30,6 @@ class Application(Adw.Application):
     def _present_about_dialog(self) -> None:
         dialog = Adw.AboutDialog.new_from_appdata(f"{PREFIX}/{APP_ID}.metainfo.xml")
         # Translators: Replace "translator-credits" with your name/username,
-        # and optionally a URL or an email in <me@example.org> format.
+        # and optionally a URL or an email in <user@example.org> format.
         dialog.props.translator_credits = _("translator-credits")
         dialog.present(self.props.active_window)
