@@ -32,7 +32,7 @@
 }
 
 @media (prefers-contrast: more) {
-  .overlaid {
+  #game-item button {
     backdrop-filter: blur(9px) brightness(20%) saturate(600%);
   }
 
