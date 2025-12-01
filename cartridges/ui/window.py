@@ -4,7 +4,7 @@
 
 import locale
 from collections.abc import Generator
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
@@ -81,9 +81,8 @@ class Window(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _show_details(self, grid: Gtk.GridView, position: int):
-        if isinstance(model := grid.props.model, Gio.ListModel):
-            self.details.game = model.get_item(position)
-            self.navigation_view.push_by_tag("details")
+        self.details.game = cast(Gio.ListModel, grid.props.model).get_item(position)
+        self.navigation_view.push_by_tag("details")
 
     @Gtk.Template.Callback()
     def _search_started(self, entry: Gtk.SearchEntry):
@@ -137,11 +136,7 @@ class Window(Adw.ApplicationWindow):
         self.sorter.changed(Gtk.SorterChange.DIFFERENT)
 
     def _edit(self, pos: int):
-        if isinstance(self.grid.props.model, Gio.ListModel) and (
-            game := self.grid.props.model.get_item(pos)
-        ):
-            self.details.game = game
-
+        self.details.game = cast(Gio.ListModel, self.grid.props.model).get_item(pos)
         self.navigation_view.push_by_tag("details")
         self.details.edit()
 

@@ -5,7 +5,7 @@
 import sys
 from datetime import UTC, datetime
 from gettext import gettext as _
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GObject, Gtk
@@ -81,11 +81,7 @@ class GameDetails(Adw.NavigationPage):
 
     @Gtk.Template.Callback()
     def _downscale_image(self, _obj, cover: Gdk.Texture | None) -> Gdk.Texture | None:
-        if (
-            cover
-            and isinstance(root := self.props.root, Gtk.Native)
-            and (renderer := root.get_renderer())
-        ):
+        if cover and (renderer := cast(Gtk.Native, self.props.root).get_renderer()):
             cover.snapshot(snapshot := Gtk.Snapshot.new(), 3, 3)
             if node := snapshot.to_node():
                 return renderer.render_texture(node)
