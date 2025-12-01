@@ -13,11 +13,12 @@ template $Cover: Adw.Bin {
       maximum-size: bind _picture.width-request;
       tightening-threshold: bind _picture.width-request;
 
-      child: Stack {
+      child: Adw.ViewStack {
         visible-child-name: bind $_get_stack_child(template.paintable) as <string>;
         overflow: hidden;
+        enable-transitions: true;
 
-        StackPage {
+        Adw.ViewStackPage {
           name: "cover";
 
           child: Picture _picture {
@@ -28,7 +29,7 @@ template $Cover: Adw.Bin {
           };
         }
 
-        StackPage {
+        Adw.ViewStackPage {
           name: "icon";
 
           child: Image {
