@@ -14,6 +14,7 @@ template $Cover: Adw.Bin {
       tightening-threshold: bind _picture.width-request;
 
       child: Adw.ViewStack {
+        name: "cover";
         visible-child-name: bind $_get_stack_child(template.paintable) as <string>;
         overflow: hidden;
         enable-transitions: true;

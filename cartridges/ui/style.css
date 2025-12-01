@@ -7,8 +7,20 @@
 }
 
 #grid > child {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* https://gitlab.gnome.org/World/highscore/-/blob/cea3c7492d0b3c78a8b79ca60e9a86e8cdd4ceaf/src/library/library.css#L86 */
+#grid > child:focus-within:focus-visible #cover {
+  outline: 5px solid rgb(from var(--accent-color) r g b / 50%);
+}
+
+#game-item {
   padding: 12px;
-  border-radius: 24px;
 }
 
 #game-item button {
@@ -36,6 +48,10 @@
 }
 
 @media (prefers-contrast: more) {
+  #grid > child:focus-within:focus-visible #cover {
+    outline: 5px solid var(--accent-color);
+  }
+
   #game-item button {
     backdrop-filter: blur(9px) brightness(20%) saturate(600%);
   }
