@@ -37,6 +37,9 @@ template $Window: Adw.ApplicationWindow {
       last_played_label.justify: center;
       added_label.halign: center;
       added_label.justify: center;
+      actions.orientation: vertical;
+      actions.halign: center;
+      actions.spacing: 24;
     }
   }
 
@@ -135,6 +138,8 @@ template $Window: Adw.ApplicationWindow {
                 sorter: CustomSorter sorter {};
 
                 model: FilterListModel {
+                  watch-items: true;
+
                   filter: EveryFilter {
                     AnyFilter {
                       StringFilter {
@@ -171,18 +176,8 @@ template $Window: Adw.ApplicationWindow {
 
             factory: BuilderListItemFactory {
               template ListItem {
-                child: Box {
-                  orientation: vertical;
-                  spacing: 12;
-
-                  $Cover {
-                    paintable: bind template.item as <$Game>.cover;
-                  }
-
-                  Label {
-                    label: bind template.item as <$Game>.name;
-                    ellipsize: middle;
-                  }
+                child: $GameItem {
+                  game: bind template.item;
                 };
               }
             };
@@ -232,7 +227,7 @@ template $Window: Adw.ApplicationWindow {
               Box {
                 orientation: vertical;
                 valign: center;
-                spacing: 3;
+                spacing: 6;
 
                 Label name_label {
                   label: bind template.active-game as <$Game>.name;
@@ -266,7 +261,7 @@ template $Window: Adw.ApplicationWindow {
                   spacing: 9;
 
                   Label last_played_label {
-                    label: bind $_date_label(_("Last Played: {}"), template.active-game as <$Game>.last_played) as <string>;
+                    label: bind $_date_label(_("Last played: {}"), template.active-game as <$Game>.last_played) as <string>;
                     halign: start;
                     wrap: true;
                     wrap-mode: word_char;
@@ -277,6 +272,64 @@ template $Window: Adw.ApplicationWindow {
                     halign: start;
                     wrap: true;
                     wrap-mode: word_char;
+                  }
+                }
+
+                Box actions {
+                  spacing: 12;
+                  margin-top: 15;
+
+                  Button {
+                    name: "details-play-button";
+                    action-name: "game.play";
+                    label: _("Play");
+                    valign: center;
+
+                    styles [
+                      "pill",
+                      "suggested-action",
+                    ]
+                  }
+
+                  Box {
+                    spacing: 6;
+                    halign: center;
+
+                    Button hide_button {
+                      visible: bind hide_button.sensitive;
+                      action-name: "game.hide";
+                      icon-name: "view-conceal-symbolic";
+                      tooltip-text: _("Hide");
+                      valign: center;
+
+                      styles [
+                        "circular",
+                      ]
+                    }
+
+                    Button unhide_button {
+                      visible: bind unhide_button.sensitive;
+                      action-name: "game.unhide";
+                      icon-name: "view-reveal-symbolic";
+                      tooltip-text: _("Unhide");
+                      valign: center;
+
+                      styles [
+                        "circular",
+                      ]
+                    }
+
+                    Button {
+                      action-name: "game.remove";
+                      icon-name: "user-trash-symbolic";
+                      tooltip-text: _("Remove");
+                      valign: center;
+                      clicked => $_pop();
+
+                      styles [
+                        "circular",
+                      ]
+                    }
                   }
                 }
               }

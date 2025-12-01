@@ -15,6 +15,7 @@ from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game
 
 from .cover import Cover  # noqa: F401
+from .game_item import GameItem  # noqa: F401
 
 SORT_MODES = {
     "last_played": ("last-played", True),
@@ -36,7 +37,6 @@ class Window(Adw.ApplicationWindow):
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: Gtk.CustomSorter = Gtk.Template.Child()
 
-    active_game = GObject.Property(type=Game)
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
 
@@ -44,6 +44,16 @@ class Window(Adw.ApplicationWindow):
     def games(self) -> Gio.ListStore:
         """Model of the user's games."""
         return games.model
+
+    @GObject.Property(type=Game)
+    def active_game(self) -> Game | None:
+        """The game whose details to show."""
+        return self._active_game
+
+    @active_game.setter
+    def active_game(self, active_game: Game | None):
+        self._active_game = active_game
+        self.insert_action_group("game", active_game)
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -55,7 +65,6 @@ class Window(Adw.ApplicationWindow):
             "width": "default-width",
             "height": "default-height",
             "is-maximized": "maximized",
-            "show-hidden": "show-hidden",
         }.items():
             state_settings.bind(key, self, name, Gio.SettingsBindFlags.DEFAULT)
 
@@ -118,6 +127,10 @@ class Window(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def _bool(self, _obj, o: object) -> bool:
         return bool(o)
+
+    @Gtk.Template.Callback()
+    def _pop(self, _obj):
+        self.navigation_view.pop()
 
     @Gtk.Template.Callback()
     def _search_started(self, entry: Gtk.SearchEntry):

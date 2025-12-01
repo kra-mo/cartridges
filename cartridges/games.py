@@ -13,7 +13,7 @@ from shlex import quote
 from types import UnionType
 from typing import Any
 
-from gi.repository import Gdk, Gio, GLib, GObject
+from gi.repository import Gdk, Gio, GLib, GObject, Gtk
 
 from cartridges import DATA_DIR
 
@@ -77,9 +77,20 @@ class Game(Gio.SimpleActionGroup):
 
             setattr(self, name, value)
 
-        self.add_action_entries((("play", lambda *_: self.play()),))
-        self.add_action(Gio.PropertyAction.new("hide", self, "hidden"))
-        self.add_action(Gio.PropertyAction.new("remove", self, "removed"))
+        self.add_action_entries((
+            ("play", lambda *_: self.play()),
+            ("remove", lambda *_: setattr(self, "removed", True)),
+        ))
+
+        self.add_action(unhide_action := Gio.SimpleAction.new("unhide"))
+        unhide_action.connect("activate", lambda *_: setattr(self, "hidden", False))
+        hidden = Gtk.PropertyExpression.new(Game, None, "hidden")
+        hidden.bind(unhide_action, "enabled", self)
+
+        self.add_action(hide_action := Gio.SimpleAction.new("hide"))
+        hide_action.connect("activate", lambda *_: setattr(self, "hidden", True))
+        not_hidden = Gtk.ClosureExpression.new(bool, lambda _, h: not h, (hidden,))
+        not_hidden.bind(hide_action, "enabled", self)
 
     def play(self):
         """Run the executable command in a shell."""

@@ -1,0 +1,80 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $GameItem: Box {
+  name: "game-item";
+  orientation: vertical;
+  spacing: 12;
+
+  EventControllerMotion motion {}
+
+  Adw.Clamp {
+    unit: px;
+    maximum-size: bind cover.picture as <Picture>.width-request;
+    tightening-threshold: bind cover.picture as <Picture>.width-request;
+
+    child: Overlay {
+      child: $Cover cover {
+        paintable: bind template.game as <$Game>.cover;
+      };
+
+      [overlay]
+      Revealer {
+        reveal-child: bind $_any(motion.contains-pointer, options.active) as <bool>;
+        transition-type: slide_down; // https://gitlab.gnome.org/GNOME/gtk/-/issues/7903
+        halign: end;
+        valign: start;
+
+        child: MenuButton options {
+          icon-name: "view-more-symbolic";
+          tooltip-text: _("Options");
+          margin-top: 6;
+          margin-end: 6;
+
+          menu-model: menu {
+            item {
+              action: "game.hide";
+              label: _("Hide");
+              hidden-when: "action-disabled";
+            }
+
+            item {
+              action: "game.unhide";
+              label: _("Unhide");
+              hidden-when: "action-disabled";
+            }
+
+            item (_("Remove"), "game.remove")
+          };
+
+          styles [
+            "circular",
+          ]
+        };
+      }
+
+      [overlay]
+      Revealer {
+        reveal-child: bind motion.contains-pointer;
+        transition-type: slide_up; // https://gitlab.gnome.org/GNOME/gtk/-/issues/7903
+        halign: center;
+        valign: end;
+
+        child: Button {
+          action-name: "game.play";
+          label: _("Play");
+          margin-bottom: 12;
+
+          styles [
+            "pill",
+          ]
+        };
+      }
+    };
+  }
+
+  Label {
+    label: bind template.game as <$Game>.name;
+    ellipsize: middle;
+  }
+}

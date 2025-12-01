@@ -22,8 +22,5 @@
       </choices>
       <default>"last_played"</default>
     </key>
-    <key name="show-hidden" type="b">
-      <default>false</default>
-    </key>
   </schema>
 </schemalist>

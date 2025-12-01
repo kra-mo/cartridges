@@ -12,8 +12,11 @@ class Cover(Adw.Bin):
 
     __gtype_name__ = __qualname__
 
+    picture = GObject.Property(lambda self: self._picture, type=Gtk.Picture)
     paintable = GObject.Property(type=Gdk.Paintable)
     app_icon_name = GObject.Property(type=str, default=f"{APP_ID}-symbolic")
+
+    _picture = Gtk.Template.Child()
 
     @Gtk.Template.Callback()
     def _get_stack_child(self, _obj, paintable: Gdk.Paintable | None) -> str:

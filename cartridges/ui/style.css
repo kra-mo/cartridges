@@ -11,12 +11,29 @@
   border-radius: 24px;
 }
 
+#game-item button {
+  color: white;
+  backdrop-filter: blur(9px) brightness(30%) saturate(600%);
+  box-shadow:
+    0 0 0 1px rgb(from currentcolor r g b / 10%) inset,
+    0 1px rgb(from currentcolor r g b / 30%) inset;
+}
+
+#details-play-button {
+  --accent-fg-color: var(--view-bg-color);
+  --accent-bg-color: var(--view-fg-color);
+}
+
 #background {
-  filter: saturate(300%) opacity(0.5);
+  filter: saturate(300%) opacity(50%);
 }
 
 @media (prefers-contrast: more) {
+  .overlaid {
+    backdrop-filter: blur(9px) brightness(20%) saturate(600%);
+  }
+
   #background {
-    filter: saturate(300%) opacity(0.2);
+    filter: saturate(300%) opacity(20%);
   }
 }
