@@ -40,11 +40,21 @@
 }
 
 #details list {
-  background: rgb(from var(--card-bg-color) r g b / 20%);
+  background: rgb(from white r g b / 20%);
 }
 
 #background {
   filter: saturate(300%) opacity(50%);
+}
+
+@media (prefers-color-scheme: dark) {
+  #details list {
+    background: rgb(from white r g b / 10%);
+  }
+
+  #background {
+    filter: saturate(300%) brightness(50%);
+  }
 }
 
 @media (prefers-contrast: more) {
@@ -58,5 +68,11 @@
 
   #background {
     filter: saturate(300%) opacity(20%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    #background {
+      filter: saturate(300%) brightness(25%);
+    }
   }
 }
