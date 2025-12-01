@@ -76,7 +76,7 @@ class Window(Adw.ApplicationWindow):
         ))
 
     @Gtk.Template.Callback()
-    def _if_else(self, _obj, condition: bool, first: _T, second: _T) -> _T:
+    def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
         return first if condition else second
 
     @Gtk.Template.Callback()
