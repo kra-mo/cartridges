@@ -6,7 +6,7 @@ import locale
 from collections.abc import Generator
 from datetime import UTC, datetime
 from gettext import gettext as _
-from typing import Any
+from typing import Any, TypeVar
 
 from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
 
@@ -24,6 +24,8 @@ SORT_MODES = {
     "newest": ("added", False),
     "oldest": ("added", True),
 }
+
+_T = TypeVar("_T")
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/window.ui")
@@ -82,6 +84,10 @@ class Window(Adw.ApplicationWindow):
                 state_settings.get_value("sort-mode").print_(False),
             ),
         ))
+
+    @Gtk.Template.Callback()
+    def _if_else(self, _obj, condition: bool, first: _T, second: _T) -> _T:
+        return first if condition else second
 
     @Gtk.Template.Callback()
     def _activate_game(self, grid: Gtk.GridView, position: int):

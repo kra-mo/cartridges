@@ -47,6 +47,10 @@ template $Window: Adw.ApplicationWindow {
     Adw.NavigationPage {
       title: bind template.title;
 
+      styles [
+        "view",
+      ]
+
       child: Adw.ToolbarView {
         [top]
         Adw.HeaderBar {
@@ -125,68 +129,102 @@ template $Window: Adw.ApplicationWindow {
           }
         }
 
-        content: ScrolledWindow {
-          hscrollbar-policy: never;
+        content: Adw.ViewStack {
+          enable-transitions: true;
+          visible-child-name: bind $_if_else(grid.model as <NoSelection>.n-items, "grid", $_if_else(template.search-text, "empty-search", $_if_else(template.show-hidden, "empty-hidden", "empty") as <string>) as <string>) as <string>;
 
-          child: GridView grid {
+          Adw.ViewStackPage {
             name: "grid";
-            single-click-activate: true;
-            activate => $_activate_game();
 
-            model: NoSelection {
-              model: SortListModel {
-                sorter: CustomSorter sorter {};
+            child: ScrolledWindow {
+              hscrollbar-policy: never;
 
-                model: FilterListModel {
-                  watch-items: true;
+              child: GridView grid {
+                name: "grid";
+                single-click-activate: true;
+                activate => $_activate_game();
 
-                  filter: EveryFilter {
-                    AnyFilter {
-                      StringFilter {
-                        expression: expr item as <$Game>.name;
-                        search: bind template.search-text;
-                      }
+                model: NoSelection {
+                  model: SortListModel {
+                    sorter: CustomSorter sorter {};
 
-                      StringFilter {
-                        expression: expr item as <$Game>.developer;
-                        search: bind template.search-text;
-                      }
-                    }
+                    model: FilterListModel {
+                      watch-items: true;
 
-                    BoolFilter {
-                      expression: expr item as <$Game>.hidden;
-                      invert: bind template.show-hidden inverted;
-                    }
+                      filter: EveryFilter {
+                        AnyFilter {
+                          StringFilter {
+                            expression: expr item as <$Game>.name;
+                            search: bind template.search-text;
+                          }
 
-                    BoolFilter {
-                      expression: expr item as <$Game>.removed;
-                      invert: true;
-                    }
+                          StringFilter {
+                            expression: expr item as <$Game>.developer;
+                            search: bind template.search-text;
+                          }
+                        }
 
-                    BoolFilter {
-                      expression: expr item as <$Game>.blacklisted;
-                      invert: true;
-                    }
+                        BoolFilter {
+                          expression: expr item as <$Game>.hidden;
+                          invert: bind template.show-hidden inverted;
+                        }
+
+                        BoolFilter {
+                          expression: expr item as <$Game>.removed;
+                          invert: true;
+                        }
+
+                        BoolFilter {
+                          expression: expr item as <$Game>.blacklisted;
+                          invert: true;
+                        }
+                      };
+
+                      model: bind template.games;
+                    };
                   };
+                };
 
-                  model: bind template.games;
+                factory: BuilderListItemFactory {
+                  template ListItem {
+                    child: $GameItem {
+                      game: bind template.item;
+                    };
+                  }
                 };
               };
             };
+          }
 
-            factory: BuilderListItemFactory {
-              template ListItem {
-                child: $GameItem {
-                  game: bind template.item;
-                };
-              }
+          Adw.ViewStackPage {
+            name: "empty-search";
+
+            child: Adw.StatusPage {
+              icon-name: "edit-find-symbolic";
+              title: _("No Games Found");
+              description: _("Try a different search");
             };
-          };
-        };
+          }
 
-        styles [
-          "view",
-        ]
+          Adw.ViewStackPage {
+            name: "empty-hidden";
+
+            child: Adw.StatusPage {
+              icon-name: "view-conceal-symbolic";
+              title: _("No Hidden Games");
+              description: _("Games you hide will appear here");
+            };
+          }
+
+          Adw.ViewStackPage {
+            name: "empty";
+
+            child: Adw.StatusPage {
+              icon-name: bind template.application as <Application>.application-id;
+              title: _("No Games");
+            };
+          }
+        };
       };
     }
 
