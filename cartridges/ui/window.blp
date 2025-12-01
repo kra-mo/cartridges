@@ -191,8 +191,9 @@ template $Window: Adw.ApplicationWindow {
     }
 
     Adw.NavigationPage {
-      title: bind template.active-game as <$Game>.name;
+      name: "details";
       tag: "details";
+      title: bind template.active-game as <$Game>.name;
 
       child: Overlay {
         child: Picture {
@@ -280,7 +281,6 @@ template $Window: Adw.ApplicationWindow {
                   margin-top: 15;
 
                   Button {
-                    name: "details-play-button";
                     action-name: "game.play";
                     label: _("Play");
                     valign: center;

@@ -19,9 +19,12 @@
     0 1px rgb(from currentcolor r g b / 30%) inset;
 }
 
-#details-play-button {
+#details {
   --accent-fg-color: var(--view-bg-color);
   --accent-bg-color: var(--view-fg-color);
+  --accent-color: oklab(
+    from var(--accent-bg-color) var(--standalone-color-oklab)
+  );
 }
 
 #background {
