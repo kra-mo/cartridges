@@ -23,6 +23,11 @@ class Application(Adw.Application):
         self.set_accels_for_action("app.quit", ("<Control>q",))
 
     @override
+    def do_startup(self):
+        Adw.Application.do_startup(self)
+        Adw.StyleManager.get_default().props.color_scheme = Adw.ColorScheme.PREFER_DARK
+
+    @override
     def do_activate(self):
         window = self.props.active_window or Window(application=self)
         window.present()
