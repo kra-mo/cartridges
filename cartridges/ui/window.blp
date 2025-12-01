@@ -368,6 +368,58 @@ template $Window: Adw.ApplicationWindow {
                         "circular",
                       ]
                     }
+
+                    MenuButton {
+                      icon-name: "edit-find-symbolic";
+                      tooltip-text: _("Search On");
+                      valign: center;
+
+                      menu-model: menu {
+                        section {
+                          label: _("Search On");
+
+                          item {
+                            label: _("HowLongToBeat");
+                            action: "win.search-on";
+                            target: "https://howlongtobeat.com/?q={}";
+                          }
+
+                          item {
+                            label: _("IGDB");
+                            action: "win.search-on";
+                            target: "https://www.igdb.com/search?type=1&q={}";
+                          }
+
+                          item {
+                            label: _("Lutris");
+                            action: "win.search-on";
+                            target: "https://lutris.net/games?q={}";
+                          }
+
+                          item {
+                            label: _("PCGamingWiki");
+                            action: "win.search-on";
+                            target: "https://www.pcgamingwiki.com/w/index.php?search={}";
+                          }
+
+                          item {
+                            label: _("ProtonDB");
+                            action: "win.search-on";
+                            target: "https://www.protondb.com/search?q={}";
+                          }
+
+                          item {
+                            label: _("SteamGridDB");
+                            action: "win.search-on";
+                            target: "https://www.steamgriddb.com/search/grids?term={}";
+                          }
+                        }
+                      };
+
+                      styles [
+                        "circular",
+                      ]
+                    }
                   }
                 }
               }

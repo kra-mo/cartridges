@@ -7,6 +7,7 @@ from collections.abc import Generator
 from datetime import UTC, datetime
 from gettext import gettext as _
 from typing import Any, TypeVar
+from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
 
@@ -82,6 +83,13 @@ class Window(Adw.ApplicationWindow):
                 self._sort,
                 "s",
                 state_settings.get_value("sort-mode").print_(False),
+            ),
+            (
+                "search-on",
+                lambda _action, param, *_: Gio.AppInfo.launch_default_for_uri(
+                    param.get_string().format(quote(self.active_game.name))
+                ),
+                "s",
             ),
         ))
 
