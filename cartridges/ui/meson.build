@@ -1,10 +1,16 @@
 python.install_sources(
-    files('__init__.py', 'cover.py', 'game_item.py', 'window.py'),
+    files(
+        '__init__.py',
+        'cover.py',
+        'game_details.py',
+        'game_item.py',
+        'window.py',
+    ),
     subdir: 'cartridges' / 'ui',
 )
 
 blueprints = custom_target(
-    input: files('cover.blp', 'game-item.blp', 'window.blp'),
+    input: files('cover.blp', 'game-details.blp', 'game-item.blp', 'window.blp'),
     output: '.',
     command: [
         blueprint_compiler,

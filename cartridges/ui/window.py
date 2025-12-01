@@ -4,18 +4,15 @@
 
 import locale
 from collections.abc import Generator
-from datetime import UTC, datetime
-from gettext import gettext as _
 from typing import Any, TypeVar
-from urllib.parse import quote
 
-from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from cartridges import games, state_settings
 from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game
 
-from .cover import Cover  # noqa: F401
+from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
 
 SORT_MODES = {
@@ -39,6 +36,7 @@ class Window(Adw.ApplicationWindow):
     search_entry: Gtk.SearchEntry = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: Gtk.CustomSorter = Gtk.Template.Child()
+    details: GameDetails = Gtk.Template.Child()
 
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
@@ -47,16 +45,6 @@ class Window(Adw.ApplicationWindow):
     def games(self) -> Gio.ListStore:
         """Model of the user's games."""
         return games.model
-
-    @GObject.Property(type=Game)
-    def active_game(self) -> Game | None:
-        """The game whose details to show."""
-        return self._active_game
-
-    @active_game.setter
-    def active_game(self, active_game: Game | None):
-        self._active_game = active_game
-        self.insert_action_group("game", active_game)
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -84,13 +72,7 @@ class Window(Adw.ApplicationWindow):
                 "s",
                 state_settings.get_value("sort-mode").print_(False),
             ),
-            (
-                "search-on",
-                lambda _action, param, *_: Gio.AppInfo.launch_default_for_uri(
-                    param.get_string().format(quote(self.active_game.name))
-                ),
-                "s",
-            ),
+            ("edit", lambda _action, param, *_: self._edit(param.get_uint32()), "u"),
         ))
 
     @Gtk.Template.Callback()
@@ -98,53 +80,10 @@ class Window(Adw.ApplicationWindow):
         return first if condition else second
 
     @Gtk.Template.Callback()
-    def _activate_game(self, grid: Gtk.GridView, position: int):
+    def _show_details(self, grid: Gtk.GridView, position: int):
         if isinstance(model := grid.props.model, Gio.ListModel):
-            self.active_game = model.get_item(position)
+            self.details.game = model.get_item(position)
             self.navigation_view.push_by_tag("details")
-
-    @Gtk.Template.Callback()
-    def _downscale_image(self, _obj, cover: Gdk.Texture | None) -> Gdk.Texture | None:
-        if cover and (renderer := self.get_renderer()):
-            cover.snapshot(snapshot := Gtk.Snapshot.new(), 3, 3)
-            if node := snapshot.to_node():
-                return renderer.render_texture(node)
-
-        return None
-
-    @Gtk.Template.Callback()
-    def _date_label(self, _obj, label: str, timestamp: int) -> str:
-        date = datetime.fromtimestamp(timestamp, UTC)
-        now = datetime.now(UTC)
-        return label.format(
-            _("Never")
-            if not timestamp
-            else _("Today")
-            if (n_days := (now - date).days) == 0
-            else _("Yesterday")
-            if n_days == 1
-            else date.strftime("%A")
-            if n_days <= (day_of_week := now.weekday())
-            else _("Last Week")
-            if n_days <= day_of_week + 7
-            else _("This Month")
-            if n_days <= (day_of_month := now.day)
-            else _("Last Month")
-            if n_days <= day_of_month + 30
-            else date.strftime("%B")
-            if n_days < (day_of_year := now.timetuple().tm_yday)
-            else _("Last Year")
-            if n_days <= day_of_year + 365
-            else date.strftime("%Y")
-        )
-
-    @Gtk.Template.Callback()
-    def _bool(self, _obj, o: object) -> bool:
-        return bool(o)
-
-    @Gtk.Template.Callback()
-    def _pop(self, _obj):
-        self.navigation_view.pop()
 
     @Gtk.Template.Callback()
     def _search_started(self, entry: Gtk.SearchEntry):
@@ -192,3 +131,20 @@ class Window(Adw.ApplicationWindow):
     def _sortable(*strings: str) -> Generator[str]:
         for string in strings:
             yield string.lower().removeprefix("the ")
+
+    @Gtk.Template.Callback()
+    def _sort_changed(self, *_args):
+        self.sorter.changed(Gtk.SorterChange.DIFFERENT)
+
+    def _edit(self, pos: int):
+        if isinstance(self.grid.props.model, Gio.ListModel) and (
+            game := self.grid.props.model.get_item(pos)
+        ):
+            self.details.game = game
+
+        self.navigation_view.push_by_tag("details")
+        self.details.edit()
+
+    @Gtk.Template.Callback()
+    def _edit_done(self, *_args):
+        self.details.edit_done()

@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="@PREFIX@">
     <file>cover.ui</file>
+    <file>game-details.ui</file>
     <file>game-item.ui</file>
     <file>window.ui</file>
     <file>style.css</file>

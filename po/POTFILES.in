@@ -2,6 +2,8 @@ cartridges/application.py
 cartridges/games.py
 cartridges/ui/cover.blp
 cartridges/ui/cover.py
+cartridges/ui/game-details.blp
+cartridges/ui/game_details.py
 cartridges/ui/game-item.blp
 cartridges/ui/game_item.py
 cartridges/ui/window.blp

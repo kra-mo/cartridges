@@ -27,6 +27,10 @@
   );
 }
 
+#details list {
+  background: rgb(from var(--card-bg-color) r g b / 20%);
+}
+
 #background {
   filter: saturate(300%) opacity(50%);
 }

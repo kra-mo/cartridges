@@ -1,5 +1,4 @@
 using Gtk 4.0;
-using Gdk 4.0;
 using Adw 1;
 
 template $Window: Adw.ApplicationWindow {
@@ -22,28 +21,9 @@ template $Window: Adw.ApplicationWindow {
     }
   }
 
-  Adw.Breakpoint {
-    condition ("max-width: 700px")
-
-    setters {
-      details_box.orientation: vertical;
-      name_label.halign: center;
-      name_label.justify: center;
-      developer_label.halign: center;
-      developer_label.justify: center;
-      date_labels.orientation: vertical;
-      date_labels.halign: center;
-      last_played_label.halign: center;
-      last_played_label.justify: center;
-      added_label.halign: center;
-      added_label.justify: center;
-      actions.orientation: vertical;
-      actions.halign: center;
-      actions.spacing: 24;
-    }
-  }
-
   content: Adw.NavigationView navigation_view {
+    popped => $_edit_done();
+
     Adw.NavigationPage {
       title: bind template.title;
 
@@ -142,7 +122,7 @@ template $Window: Adw.ApplicationWindow {
               child: GridView grid {
                 name: "grid";
                 single-click-activate: true;
-                activate => $_activate_game();
+                activate => $_show_details();
 
                 model: NoSelection {
                   model: SortListModel {
@@ -189,6 +169,7 @@ template $Window: Adw.ApplicationWindow {
                   template ListItem {
                     child: $GameItem {
                       game: bind template.item;
+                      position: bind template.position;
                     };
                   }
                 };
@@ -228,205 +209,8 @@ template $Window: Adw.ApplicationWindow {
       };
     }
 
-    Adw.NavigationPage {
-      name: "details";
-      tag: "details";
-      title: bind template.active-game as <$Game>.name;
-
-      child: Overlay {
-        child: Picture {
-          name: "background";
-          paintable: bind $_downscale_image(template.active-game as <$Game>.cover) as <Gdk.Texture>;
-          content-fit: cover;
-        };
-
-        [overlay]
-        Adw.ToolbarView {
-          [top]
-          Adw.HeaderBar {
-            show-title: false;
-          }
-
-          content: ScrolledWindow {
-            hscrollbar-policy: never;
-
-            child: Box details_box {
-              halign: center;
-              valign: center;
-              margin-top: 12;
-              margin-bottom: 48;
-              margin-start: 24;
-              margin-end: 24;
-              spacing: 36;
-
-              $Cover {
-                paintable: bind template.active-game as <$Game>.cover;
-              }
-
-              Box {
-                orientation: vertical;
-                valign: center;
-                spacing: 6;
-
-                Label name_label {
-                  label: bind template.active-game as <$Game>.name;
-                  halign: start;
-                  max-width-chars: 24;
-                  wrap: true;
-                  wrap-mode: word_char;
-
-                  styles [
-                    "title-1",
-                  ]
-                }
-
-                Label developer_label {
-                  label: bind template.active-game as <$Game>.developer;
-                  visible: bind $_bool(template.active-game as <$Game>.developer) as <bool>;
-                  halign: start;
-                  max-width-chars: 36;
-                  wrap: true;
-                  wrap-mode: word_char;
-
-                  styles [
-                    "heading",
-                  ]
-                }
-
-                Box date_labels {
-                  halign: start;
-                  valign: start;
-                  margin-top: 9;
-                  spacing: 9;
-
-                  Label last_played_label {
-                    label: bind $_date_label(_("Last played: {}"), template.active-game as <$Game>.last_played) as <string>;
-                    halign: start;
-                    wrap: true;
-                    wrap-mode: word_char;
-                  }
-
-                  Label added_label {
-                    label: bind $_date_label(_("Added: {}"), template.active-game as <$Game>.added) as <string>;
-                    halign: start;
-                    wrap: true;
-                    wrap-mode: word_char;
-                  }
-                }
-
-                Box actions {
-                  spacing: 12;
-                  margin-top: 15;
-
-                  Button {
-                    action-name: "game.play";
-                    label: _("Play");
-                    valign: center;
-
-                    styles [
-                      "pill",
-                      "suggested-action",
-                    ]
-                  }
-
-                  Box {
-                    spacing: 6;
-                    halign: center;
-
-                    Button hide_button {
-                      visible: bind hide_button.sensitive;
-                      action-name: "game.hide";
-                      icon-name: "view-conceal-symbolic";
-                      tooltip-text: _("Hide");
-                      valign: center;
-
-                      styles [
-                        "circular",
-                      ]
-                    }
-
-                    Button unhide_button {
-                      visible: bind unhide_button.sensitive;
-                      action-name: "game.unhide";
-                      icon-name: "view-reveal-symbolic";
-                      tooltip-text: _("Unhide");
-                      valign: center;
-
-                      styles [
-                        "circular",
-                      ]
-                    }
-
-                    Button {
-                      action-name: "game.remove";
-                      icon-name: "user-trash-symbolic";
-                      tooltip-text: _("Remove");
-                      valign: center;
-                      clicked => $_pop();
-
-                      styles [
-                        "circular",
-                      ]
-                    }
-
-                    MenuButton {
-                      icon-name: "edit-find-symbolic";
-                      tooltip-text: _("Search On");
-                      valign: center;
-
-                      menu-model: menu {
-                        section {
-                          label: _("Search On");
-
-                          item {
-                            label: _("HowLongToBeat");
-                            action: "win.search-on";
-                            target: "https://howlongtobeat.com/?q={}";
-                          }
-
-                          item {
-                            label: _("IGDB");
-                            action: "win.search-on";
-                            target: "https://www.igdb.com/search?type=1&q={}";
-                          }
-
-                          item {
-                            label: _("Lutris");
-                            action: "win.search-on";
-                            target: "https://lutris.net/games?q={}";
-                          }
-
-                          item {
-                            label: _("PCGamingWiki");
-                            action: "win.search-on";
-                            target: "https://www.pcgamingwiki.com/w/index.php?search={}";
-                          }
-
-                          item {
-                            label: _("ProtonDB");
-                            action: "win.search-on";
-                            target: "https://www.protondb.com/search?q={}";
-                          }
-
-                          item {
-                            label: _("SteamGridDB");
-                            action: "win.search-on";
-                            target: "https://www.steamgriddb.com/search/grids?term={}";
-                          }
-                        }
-                      };
-
-                      styles [
-                        "circular",
-                      ]
-                    }
-                  }
-                }
-              }
-            };
-          };
-        }
-      };
+    $GameDetails details {
+      sort-changed => $_sort_changed();
     }
   };
 }

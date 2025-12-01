@@ -32,15 +32,17 @@ template $GameItem: Box {
           margin-end: 6;
 
           menu-model: menu {
+            item (_("Edit"), "item.edit")
+
             item {
-              action: "game.hide";
               label: _("Hide");
+              action: "game.hide";
               hidden-when: "action-disabled";
             }
 
             item {
-              action: "game.unhide";
               label: _("Unhide");
+              action: "game.unhide";
               hidden-when: "action-disabled";
             }
 
