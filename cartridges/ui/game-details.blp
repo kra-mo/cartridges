@@ -255,19 +255,19 @@ template $GameDetails: Adw.NavigationPage {
                   Adw.PreferencesGroup {
                     Adw.EntryRow name_entry {
                       title: _("Title");
-                      action-name: "details.edit-done";
+                      entry-activated => $_activate_edit_done();
                     }
 
                     Adw.EntryRow developer_entry {
                       title: _("Developer (optional)");
-                      action-name: "details.edit-done";
+                      entry-activated => $_activate_edit_done();
                     }
                   }
 
                   Adw.PreferencesGroup {
                     Adw.EntryRow executable_entry {
                       title: _("Executable");
-                      action-name: "details.edit-done";
+                      entry-activated => $_activate_edit_done();
 
                       [suffix]
                       MenuButton {

@@ -93,6 +93,10 @@ class GameDetails(Adw.NavigationPage):
         self.stack.props.visible_child_name = "details"
 
     @Gtk.Template.Callback()
+    def _activate_edit_done(self, _entry):
+        self.activate_action("details.edit-done")
+
+    @Gtk.Template.Callback()
     def _downscale_image(self, _obj, cover: Gdk.Texture | None) -> Gdk.Texture | None:
         if cover and (renderer := cast(Gtk.Native, self.props.root).get_renderer()):
             cover.snapshot(snapshot := Gtk.Snapshot.new(), 3, 3)
