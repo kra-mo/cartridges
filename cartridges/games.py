@@ -11,7 +11,7 @@ from json import JSONDecodeError
 from pathlib import Path
 from shlex import quote
 from types import UnionType
-from typing import Any, NamedTuple
+from typing import Any, NamedTuple, Self
 
 from gi.repository import Gdk, Gio, GLib, GObject, Gtk
 
@@ -64,8 +64,28 @@ class Game(Gio.SimpleActionGroup):
 
     cover = GObject.Property(type=Gdk.Texture)
 
-    def __init__(self, data: dict[str, Any]):
-        super().__init__()
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+
+        self.add_action_entries((
+            ("play", lambda *_: self.play()),
+            ("remove", lambda *_: setattr(self, "removed", True)),
+        ))
+
+        self.add_action(unhide_action := Gio.SimpleAction.new("unhide"))
+        unhide_action.connect("activate", lambda *_: setattr(self, "hidden", False))
+        hidden = Gtk.PropertyExpression.new(Game, None, "hidden")
+        hidden.bind(unhide_action, "enabled", self)
+
+        self.add_action(hide_action := Gio.SimpleAction.new("hide"))
+        hide_action.connect("activate", lambda *_: setattr(self, "hidden", True))
+        not_hidden = Gtk.ClosureExpression.new(bool, lambda _, h: not h, (hidden,))
+        not_hidden.bind(hide_action, "enabled", self)
+
+    @classmethod
+    def from_data(cls, data: dict[str, Any]) -> Self:
+        """Create a game from data. Useful for loading from JSON."""
+        game = cls()
 
         for prop in PROPERTIES:
             value = data.get(prop.name)
@@ -84,22 +104,9 @@ class Game(Gio.SimpleActionGroup):
                 case "version":
                     continue
 
-            setattr(self, prop.name, value)
+            setattr(game, prop.name, value)
 
-        self.add_action_entries((
-            ("play", lambda *_: self.play()),
-            ("remove", lambda *_: setattr(self, "removed", True)),
-        ))
-
-        self.add_action(unhide_action := Gio.SimpleAction.new("unhide"))
-        unhide_action.connect("activate", lambda *_: setattr(self, "hidden", False))
-        hidden = Gtk.PropertyExpression.new(Game, None, "hidden")
-        hidden.bind(unhide_action, "enabled", self)
-
-        self.add_action(hide_action := Gio.SimpleAction.new("hide"))
-        hide_action.connect("activate", lambda *_: setattr(self, "hidden", True))
-        not_hidden = Gtk.ClosureExpression.new(bool, lambda _, h: not h, (hidden,))
-        not_hidden.bind(hide_action, "enabled", self)
+        return game
 
     def play(self):
         """Run the executable command in a shell."""
@@ -135,7 +142,7 @@ def _load() -> Generator[Game]:
             continue
 
         try:
-            game = Game(data)
+            game = Game.from_data(data)
         except TypeError:
             continue
 
