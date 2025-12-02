@@ -51,7 +51,6 @@ class GameDetails(Adw.NavigationPage):
         self.insert_action_group("details", group := Gio.SimpleActionGroup())
         group.add_action_entries((
             ("edit", lambda *_: self.edit()),
-            ("edit-done", lambda *_: self.edit_done()),
             (
                 "search-on",
                 lambda _action, param, *_: Gio.AppInfo.launch_default_for_uri(
@@ -60,6 +59,20 @@ class GameDetails(Adw.NavigationPage):
                 "s",
             ),
         ))
+
+        group.add_action(edit_done := Gio.SimpleAction.new("edit-done"))
+        edit_done.connect("activate", lambda *_: self._edit_done())
+
+        entries = tuple(
+            Gtk.PropertyExpression.new(
+                Adw.EntryRow,
+                Gtk.ConstantExpression.new_for_value(getattr(self, f"{prop}_entry")),
+                "text",
+            )
+            for prop in _REQUIRED_PROPERTIES
+        )
+        valid = Gtk.ClosureExpression.new(bool, lambda _, *values: all(values), entries)
+        valid.bind(edit_done, "enabled")
 
     def edit(self):
         """Enter edit mode."""
