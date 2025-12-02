@@ -11,29 +11,38 @@ from json import JSONDecodeError
 from pathlib import Path
 from shlex import quote
 from types import UnionType
-from typing import Any
+from typing import Any, NamedTuple
 
 from gi.repository import Gdk, Gio, GLib, GObject, Gtk
 
 from cartridges import DATA_DIR
 
+
+class _GameProp(NamedTuple):
+    name: str
+    type_: type | UnionType
+    required: bool = False
+    editable: bool = False
+
+
+PROPERTIES: tuple[_GameProp, ...] = (
+    _GameProp("added", int),
+    _GameProp("executable", str | list[str], required=True, editable=True),
+    _GameProp("game_id", str, required=True),
+    _GameProp("source", str, required=True),
+    _GameProp("hidden", bool),
+    _GameProp("last_played", int),
+    _GameProp("name", str, required=True, editable=True),
+    _GameProp("developer", str, editable=True),
+    _GameProp("removed", bool),
+    _GameProp("blacklisted", bool),
+    _GameProp("version", float),
+)
+
 _GAMES_DIR = DATA_DIR / "games"
 _COVERS_DIR = DATA_DIR / "covers"
 
 _SPEC_VERSION = 2.0
-_PROPERTIES: dict[str, tuple[type | UnionType, bool]] = {
-    "added": (int, False),
-    "executable": (str | list[str], True),
-    "game_id": (str, True),
-    "source": (str, True),
-    "hidden": (bool, False),
-    "last_played": (int, False),
-    "name": (str, True),
-    "developer": (str, False),
-    "removed": (bool, False),
-    "blacklisted": (bool, False),
-    "version": (float, False),
-}
 
 
 class Game(Gio.SimpleActionGroup):
@@ -58,16 +67,16 @@ class Game(Gio.SimpleActionGroup):
     def __init__(self, data: dict[str, Any]):
         super().__init__()
 
-        for name, (type_, required) in _PROPERTIES.items():
-            value = data.get(name)
+        for prop in PROPERTIES:
+            value = data.get(prop.name)
 
-            if not required and value is None:
+            if not prop.required and value is None:
                 continue
 
-            if not isinstance(value, type_):
+            if not isinstance(value, prop.type_):
                 raise TypeError
 
-            match name:
+            match prop.name:
                 case "executable" if isinstance(value, list):
                     value = " ".join(value)
                 case "version" if value and value > _SPEC_VERSION:
@@ -75,7 +84,7 @@ class Game(Gio.SimpleActionGroup):
                 case "version":
                     continue
 
-            setattr(self, name, value)
+            setattr(self, prop.name, value)
 
         self.add_action_entries((
             ("play", lambda *_: self.play()),
@@ -109,7 +118,7 @@ class Game(Gio.SimpleActionGroup):
 
     def save(self):
         """Save the game's properties to disk."""
-        properties = {name: getattr(self, name) for name in _PROPERTIES}
+        properties = {prop.name: getattr(self, prop.name) for prop in PROPERTIES}
 
         _GAMES_DIR.mkdir(parents=True, exist_ok=True)
         path = (_GAMES_DIR / self.game_id).with_suffix(".json")
