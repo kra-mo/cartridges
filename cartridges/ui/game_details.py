@@ -10,12 +10,16 @@ from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
+from cartridges import games
 from cartridges.config import PREFIX
 from cartridges.games import Game
 
 from .cover import Cover  # noqa: F401
 
-_EDITABLE_PROPERTIES = "name", "developer", "executable"
+_EDITABLE_PROPERTIES = {prop.name for prop in games.PROPERTIES if prop.editable}
+_REQUIRED_PROPERTIES = {
+    prop.name for prop in games.PROPERTIES if prop.editable and prop.required
+}
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/game-details.ui")
@@ -60,7 +64,9 @@ class GameDetails(Adw.NavigationPage):
     def edit(self):
         """Enter edit mode."""
         for prop in _EDITABLE_PROPERTIES:
-            getattr(self, f"{prop}_entry").props.text = getattr(self.game, prop)
+            entry = getattr(self, f"{prop}_entry")
+            value = getattr(self.game, prop)
+            entry.props.text = value
 
         self.stack.props.visible_child_name = "edit"
         self.name_entry.grab_focus()
@@ -71,9 +77,16 @@ class GameDetails(Adw.NavigationPage):
             return
 
         for prop in _EDITABLE_PROPERTIES:
-            text = getattr(self, f"{prop}_entry").props.text
-            if text != getattr(self.game, prop) and (text or prop == "developer"):
-                setattr(self.game, prop, text)
+            entry = getattr(self, f"{prop}_entry")
+            value = entry.props.text
+            previous_value = getattr(self.game, prop)
+
+            if not value and prop in _REQUIRED_PROPERTIES:
+                entry.props.text = previous_value
+                continue
+
+            if value != previous_value:
+                setattr(self.game, prop, value)
                 if prop == "name":
                     self.emit("sort-changed")
 
