@@ -3,15 +3,16 @@
 # SPDX-FileCopyrightText: Copyright 2025 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+import itertools
 import json
 import os
 import subprocess
-from collections.abc import Generator
+from collections.abc import Generator, Iterable
 from json import JSONDecodeError
 from pathlib import Path
 from shlex import quote
 from types import UnionType
-from typing import Any, NamedTuple, Self
+from typing import Any, NamedTuple, Self, cast
 
 from gi.repository import Gdk, Gio, GLib, GObject, Gtk
 
@@ -43,6 +44,7 @@ _GAMES_DIR = DATA_DIR / "games"
 _COVERS_DIR = DATA_DIR / "covers"
 
 _SPEC_VERSION = 2.0
+_MANUALLY_ADDED_ID = "imported"
 
 
 class Game(Gio.SimpleActionGroup):
@@ -108,6 +110,14 @@ class Game(Gio.SimpleActionGroup):
 
         return game
 
+    @classmethod
+    def for_editing(cls) -> Self:
+        """Create a game for the user to manually set its properties."""
+        return cls(
+            game_id=f"{_MANUALLY_ADDED_ID}_{_increment_manually_added_id()}",
+            source=_MANUALLY_ADDED_ID,
+        )
+
     def play(self):
         """Run the executable command in a shell."""
         if Path("/.flatpak-info").exists():
@@ -131,6 +141,20 @@ class Game(Gio.SimpleActionGroup):
         path = (_GAMES_DIR / self.game_id).with_suffix(".json")
         with path.open(encoding="utf-8") as f:
             json.dump(properties, f, indent=4)
+
+
+def _increment_manually_added_id() -> int:
+    numbers = {
+        game.game_id.split("_")[1]
+        for game in cast(Iterable[Game], model)
+        if game.game_id.startswith(_MANUALLY_ADDED_ID)
+    }
+
+    for count in itertools.count():
+        if count not in numbers:
+            return count
+
+    raise ValueError
 
 
 def _load() -> Generator[Game]:

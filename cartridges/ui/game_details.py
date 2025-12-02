@@ -3,9 +3,10 @@
 
 
 import sys
+import time
 from datetime import UTC, datetime
 from gettext import gettext as _
-from typing import Any, cast
+from typing import Any, TypeVar, cast
 from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GObject, Gtk
@@ -20,6 +21,8 @@ _EDITABLE_PROPERTIES = {prop.name for prop in games.PROPERTIES if prop.editable}
 _REQUIRED_PROPERTIES = {
     prop.name for prop in games.PROPERTIES if prop.editable and prop.required
 }
+
+_T = TypeVar("_T")
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/game-details.ui")
@@ -84,30 +87,38 @@ class GameDetails(Adw.NavigationPage):
         self.stack.props.visible_child_name = "edit"
         self.name_entry.grab_focus()
 
-    def edit_done(self):
-        """Save edits and exit edit mode."""
-        if self.stack.props.visible_child_name != "edit":
-            return
-
+    def _edit_done(self):
         for prop in _EDITABLE_PROPERTIES:
             entry = getattr(self, f"{prop}_entry")
             value = entry.props.text
             previous_value = getattr(self.game, prop)
 
-            if not value and prop in _REQUIRED_PROPERTIES:
-                entry.props.text = previous_value
-                continue
-
             if value != previous_value:
                 setattr(self.game, prop, value)
-                if prop == "name":
+                if prop == "name" and not self.game.added:
                     self.emit("sort-changed")
 
+        if not self.game.added:
+            self.game.added = int(time.time())
+            games.model.append(self.game)
+
+        self._exit()
+
+    @Gtk.Template.Callback()
+    def _exit(self, *_args):
         self.stack.props.visible_child_name = "details"
 
     @Gtk.Template.Callback()
     def _activate_edit_done(self, _entry):
         self.activate_action("details.edit-done")
+
+    @Gtk.Template.Callback()
+    def _or(self, _obj, first: _T, second: _T) -> _T:
+        return first or second
+
+    @Gtk.Template.Callback()
+    def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
+        return first if condition else second
 
     @Gtk.Template.Callback()
     def _downscale_image(self, _obj, cover: Gdk.Texture | None) -> Gdk.Texture | None:

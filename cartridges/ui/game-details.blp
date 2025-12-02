@@ -5,7 +5,8 @@ using Adw 1;
 template $GameDetails: Adw.NavigationPage {
   name: "details";
   tag: "details";
-  title: bind template.game as <$Game>.name;
+  title: bind $_or(template.game as <$Game>.name, _("Add Game")) as <string>;
+  hidden => $_exit();
 
   child: Adw.BreakpointBin {
     width-request: bind template.root as <Widget>.width-request;
@@ -297,7 +298,7 @@ template $GameDetails: Adw.NavigationPage {
 
                   Button {
                     action-name: "details.edit-done";
-                    label: _("Apply");
+                    label: bind $_if_else(template.game as <$Game>.added, _("Apply"), _("Add")) as <string>;
                     halign: center;
 
                     styles [

@@ -71,6 +71,7 @@ class Window(Adw.ApplicationWindow):
                 state_settings.get_value("sort-mode").print_(False),
             ),
             ("edit", lambda _action, param, *_: self._edit(param.get_uint32()), "u"),
+            ("add", lambda *_: self._add()),
         ))
 
     @Gtk.Template.Callback()
@@ -138,6 +139,10 @@ class Window(Adw.ApplicationWindow):
         self.navigation_view.push_by_tag("details")
         self.details.edit()
 
-    @Gtk.Template.Callback()
-    def _edit_done(self, *_args):
-        self.details.edit_done()
+    def _add(self):
+        self.details.game = Game.for_editing()
+
+        if self.navigation_view.props.visible_page_tag != "details":
+            self.navigation_view.push_by_tag("details")
+
+        self.details.edit()

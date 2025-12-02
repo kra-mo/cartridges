@@ -16,14 +16,17 @@ template $Window: Adw.ApplicationWindow {
     }
 
     Shortcut {
+      trigger: "<Control>n";
+      action: "action(win.add)";
+    }
+
+    Shortcut {
       trigger: "<Control>w";
       action: "action(window.close)";
     }
   }
 
   content: Adw.NavigationView navigation_view {
-    popped => $_edit_done();
-
     Adw.NavigationPage {
       title: bind template.title;
 
@@ -96,6 +99,13 @@ template $Window: Adw.ApplicationWindow {
               };
             };
           };
+
+          [start]
+          Button {
+            icon-name: "list-add-symbolic";
+            tooltip-text: _("Add Game");
+            action-name: "win.add";
+          }
 
           [end]
           MenuButton {
@@ -203,6 +213,7 @@ template $Window: Adw.ApplicationWindow {
             child: Adw.StatusPage {
               icon-name: bind template.application as <Application>.application-id;
               title: _("No Games");
+              description: _("Use the + button to add games");
             };
           }
         };
