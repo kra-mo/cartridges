@@ -52,12 +52,10 @@ class Window(Adw.ApplicationWindow):
         if PROFILE == "development":
             self.add_css_class("devel")
 
-        for key, name in {
-            "width": "default-width",
-            "height": "default-height",
-            "is-maximized": "maximized",
-        }.items():
-            state_settings.bind(key, self, name, Gio.SettingsBindFlags.DEFAULT)
+        flags = Gio.SettingsBindFlags.DEFAULT
+        state_settings.bind("width", self, "default-width", flags)
+        state_settings.bind("height", self, "default-height", flags)
+        state_settings.bind("is-maximized", self, "maximized", flags)
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7901
         self.search_entry.set_key_capture_widget(self)
