@@ -157,7 +157,8 @@ def _increment_manually_added_id() -> int:
     raise ValueError
 
 
-def _load() -> Generator[Game]:
+def load() -> Generator[Game]:
+    """Load previously saved games from disk."""
     for path in _GAMES_DIR.glob("*.json"):
         try:
             with path.open(encoding="utf-8") as f:
@@ -184,4 +185,3 @@ def _load() -> Generator[Game]:
 
 
 model = Gio.ListStore.new(Game)
-model.splice(0, 0, tuple(_load()))

@@ -1,10 +1,16 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
+# SPDX-FileCopyrightText: Copyright 2025 kramo
 
+from collections.abc import Generator, Iterable
 from gettext import gettext as _
 from typing import override
 
 from gi.repository import Adw
+
+from cartridges import games
+from cartridges.games import Game
+from cartridges.sources import Source, SteamSource
 
 from .config import APP_ID, PREFIX
 from .ui.window import Window
@@ -21,6 +27,21 @@ class Application(Adw.Application):
             ("about", lambda *_: self._present_about_dialog()),
         ))
         self.set_accels_for_action("app.quit", ("<Control>q",))
+
+        saved = tuple(games.load())
+        new = self.import_games(SteamSource(), skip_ids={g.game_id for g in saved})
+        games.model.splice(0, 0, (*saved, *new))
+
+    @staticmethod
+    def import_games(*sources: Source, skip_ids: Iterable[str]) -> Generator[Game]:
+        """Import games from `sources`, skipping ones in `skip_ids`."""
+        for source in sources:
+            try:
+                new = source.get_games(skip_ids=skip_ids)
+            except FileNotFoundError:
+                continue
+
+            yield from new
 
     @override
     def do_startup(self):
