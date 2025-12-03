@@ -256,19 +256,19 @@ template $GameDetails: Adw.NavigationPage {
                   Adw.PreferencesGroup {
                     Adw.EntryRow name_entry {
                       title: _("Title");
-                      entry-activated => $_activate_edit_done();
+                      entry-activated => $_activate_apply();
                     }
 
                     Adw.EntryRow developer_entry {
                       title: _("Developer (optional)");
-                      entry-activated => $_activate_edit_done();
+                      entry-activated => $_activate_apply();
                     }
                   }
 
                   Adw.PreferencesGroup {
                     Adw.EntryRow executable_entry {
                       title: _("Executable");
-                      entry-activated => $_activate_edit_done();
+                      entry-activated => $_activate_apply();
 
                       [suffix]
                       MenuButton {
@@ -297,7 +297,7 @@ template $GameDetails: Adw.NavigationPage {
                   }
 
                   Button {
-                    action-name: "details.edit-done";
+                    action-name: "details.apply";
                     label: bind $_if_else(template.game as <$Game>.added, _("Apply"), _("Add")) as <string>;
                     halign: center;
 

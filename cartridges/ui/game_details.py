@@ -63,8 +63,8 @@ class GameDetails(Adw.NavigationPage):
             ),
         ))
 
-        group.add_action(edit_done := Gio.SimpleAction.new("edit-done"))
-        edit_done.connect("activate", lambda *_: self._edit_done())
+        group.add_action(apply := Gio.SimpleAction.new("apply"))
+        apply.connect("activate", lambda *_: self._apply())
 
         entries = tuple(
             Gtk.PropertyExpression.new(
@@ -75,7 +75,7 @@ class GameDetails(Adw.NavigationPage):
             for prop in _REQUIRED_PROPERTIES
         )
         valid = Gtk.ClosureExpression.new(bool, lambda _, *values: all(values), entries)
-        valid.bind(edit_done, "enabled")
+        valid.bind(apply, "enabled")
 
     def edit(self):
         """Enter edit mode."""
@@ -87,7 +87,7 @@ class GameDetails(Adw.NavigationPage):
         self.stack.props.visible_child_name = "edit"
         self.name_entry.grab_focus()
 
-    def _edit_done(self):
+    def _apply(self):
         for prop in _EDITABLE_PROPERTIES:
             entry = getattr(self, f"{prop}_entry")
             value = entry.props.text
@@ -109,8 +109,8 @@ class GameDetails(Adw.NavigationPage):
         self.stack.props.visible_child_name = "details"
 
     @Gtk.Template.Callback()
-    def _activate_edit_done(self, _entry):
-        self.activate_action("details.edit-done")
+    def _activate_apply(self, _entry):
+        self.activate_action("details.apply")
 
     @Gtk.Template.Callback()
     def _or(self, _obj, first: _T, second: _T) -> _T:
