@@ -96,7 +96,7 @@ class GameDetails(Adw.NavigationPage):
 
             if value != previous_value:
                 setattr(self.game, prop, value)
-                if prop == "name" and not self.game.added:
+                if prop == "name" and self.game.added:
                     self.emit("sort-changed")
 
         if not self.game.added:
