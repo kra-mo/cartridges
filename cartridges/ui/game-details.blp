@@ -8,6 +8,13 @@ template $GameDetails: Adw.NavigationPage {
   title: bind $_or(template.game as <$Game>.name, _("Add Game")) as <string>;
   hidden => $_exit();
 
+  ShortcutController {
+    Shortcut {
+      trigger: "Delete|KP_Delete";
+      action: "action(details.remove)";
+    }
+  }
+
   child: Adw.BreakpointBin {
     width-request: bind template.root as <Widget>.width-request;
     height-request: bind template.root as <Widget>.height-request;
@@ -177,11 +184,10 @@ template $GameDetails: Adw.NavigationPage {
                       }
 
                       Button {
-                        action-name: "game.remove";
+                        action-name: "details.remove";
                         icon-name: "user-trash-symbolic";
                         tooltip-text: _("Remove");
                         valign: center;
-                        clicked => $_pop();
 
                         styles [
                           "circular",

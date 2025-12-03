@@ -55,6 +55,7 @@ class GameDetails(Adw.NavigationPage):
         self.insert_action_group("details", group := Gio.SimpleActionGroup())
         group.add_action_entries((
             ("edit", lambda *_: self.edit()),
+            ("remove", lambda *_: self._remove()),
             (
                 "search-on",
                 lambda _action, param, *_: Gio.AppInfo.launch_default_for_uri(
@@ -113,6 +114,10 @@ class GameDetails(Adw.NavigationPage):
     def _activate_apply(self, _entry):
         self.activate_action("details.apply")
 
+    def _remove(self):
+        self.game.removed = True
+        self.activate_action("navigation.pop")
+
     @Gtk.Template.Callback()
     def _or(self, _obj, first: _T, second: _T) -> _T:
         return first or second
@@ -159,10 +164,6 @@ class GameDetails(Adw.NavigationPage):
     @Gtk.Template.Callback()
     def _bool(self, _obj, o: object) -> bool:
         return bool(o)
-
-    @Gtk.Template.Callback()
-    def _pop(self, _obj):
-        self.activate_action("navigation.pop")
 
     @Gtk.Template.Callback()
     def _format_more_info(self, _obj, label: str) -> str:
