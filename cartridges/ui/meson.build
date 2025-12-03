@@ -10,7 +10,13 @@ python.install_sources(
 )
 
 blueprints = custom_target(
-    input: files('cover.blp', 'game-details.blp', 'game-item.blp', 'window.blp'),
+    input: files(
+        'cover.blp',
+        'game-details.blp',
+        'game-item.blp',
+        'shortcuts-dialog.blp',
+        'window.blp',
+    ),
     output: '.',
     command: [
         blueprint_compiler,
