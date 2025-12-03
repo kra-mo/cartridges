@@ -37,11 +37,9 @@ class Application(Adw.Application):
         """Import games from `sources`, skipping ones in `skip_ids`."""
         for source in sources:
             try:
-                new = source.get_games(skip_ids=skip_ids)
+                yield from source.get_games(skip_ids=skip_ids)
             except FileNotFoundError:
                 continue
-
-            yield from new
 
     @override
     def do_startup(self):
