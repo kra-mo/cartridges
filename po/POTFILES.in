@@ -1,6 +1,7 @@
 cartridges/application.py
 cartridges/games.py
-cartridges/sources.py
+cartridges/sources/__init__.py
+cartridges/sources/steam.py
 cartridges/ui/cover.blp
 cartridges/ui/cover.py
 cartridges/ui/game-details.blp
