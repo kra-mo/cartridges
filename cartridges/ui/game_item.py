@@ -17,6 +17,10 @@ class GameItem(Gtk.Box):
 
     __gtype_name__ = __qualname__
 
+    motion: Gtk.EventControllerMotion = Gtk.Template.Child()
+    options: Gtk.MenuButton = Gtk.Template.Child()
+    play: Gtk.Button = Gtk.Template.Child()
+
     position = GObject.Property(type=int)
 
     @GObject.Property(type=Game)
@@ -42,6 +46,13 @@ class GameItem(Gtk.Box):
             ),
         ))
 
+        self._reveal_buttons()
+
     @Gtk.Template.Callback()
-    def _any(self, _obj, *values: bool) -> bool:
-        return any(values)
+    def _reveal_buttons(self, *_args):
+        for widget, reveal in (
+            (self.play, contains_pointer := self.motion.props.contains_pointer),
+            (self.options, contains_pointer or self.options.props.active),
+        ):
+            widget.props.can_focus = widget.props.can_target = reveal
+            (widget.remove_css_class if reveal else widget.add_css_class)("hidden")

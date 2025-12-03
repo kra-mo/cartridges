@@ -29,6 +29,21 @@
   box-shadow:
     0 0 0 1px rgb(from currentcolor r g b / 10%) inset,
     0 1px rgb(from currentcolor r g b / 30%) inset;
+
+  /* https://gitlab.gnome.org/GNOME/libadwaita/-/blob/c42b7c5bbff052a1af0eee131da28d1542254f47/src/stylesheet/_common.scss#L3 */
+  transition-property:
+    outline-color, outline-width, outline-offset, background, box-shadow,
+    opacity, transform;
+}
+
+#game-item button.hidden {
+  opacity: 0;
+  transform: translateY(3px);
+}
+
+#game-item menubutton.hidden button {
+  opacity: 0;
+  transform: translateY(-6px);
 }
 
 #details {

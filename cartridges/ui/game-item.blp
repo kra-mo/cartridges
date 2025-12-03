@@ -6,7 +6,9 @@ template $GameItem: Box {
   orientation: vertical;
   spacing: 12;
 
-  EventControllerMotion motion {}
+  EventControllerMotion motion {
+    notify::contains-pointer => $_reveal_buttons();
+  }
 
   Adw.Clamp {
     unit: px;
@@ -19,58 +21,49 @@ template $GameItem: Box {
       };
 
       [overlay]
-      Revealer {
-        reveal-child: bind $_any(motion.contains-pointer, options.active) as <bool>;
-        transition-type: slide_down; // https://gitlab.gnome.org/GNOME/gtk/-/issues/7903
+      MenuButton options {
+        icon-name: "view-more-symbolic";
+        tooltip-text: _("Options");
         halign: end;
         valign: start;
+        margin-top: 6;
+        margin-end: 6;
+        notify::active => $_reveal_buttons();
 
-        child: MenuButton options {
-          icon-name: "view-more-symbolic";
-          tooltip-text: _("Options");
-          margin-top: 6;
-          margin-end: 6;
+        menu-model: menu {
+          item (_("Edit"), "item.edit")
 
-          menu-model: menu {
-            item (_("Edit"), "item.edit")
+          item {
+            label: _("Hide");
+            action: "game.hide";
+            hidden-when: "action-disabled";
+          }
 
-            item {
-              label: _("Hide");
-              action: "game.hide";
-              hidden-when: "action-disabled";
-            }
+          item {
+            label: _("Unhide");
+            action: "game.unhide";
+            hidden-when: "action-disabled";
+          }
 
-            item {
-              label: _("Unhide");
-              action: "game.unhide";
-              hidden-when: "action-disabled";
-            }
-
-            item (_("Remove"), "game.remove")
-          };
-
-          styles [
-            "circular",
-          ]
+          item (_("Remove"), "game.remove")
         };
+
+        styles [
+          "circular",
+        ]
       }
 
       [overlay]
-      Revealer {
-        reveal-child: bind motion.contains-pointer;
-        transition-type: slide_up; // https://gitlab.gnome.org/GNOME/gtk/-/issues/7903
+      Button play {
+        action-name: "game.play";
+        label: _("Play");
         halign: center;
         valign: end;
+        margin-bottom: 12;
 
-        child: Button {
-          action-name: "game.play";
-          label: _("Play");
-          margin-bottom: 12;
-
-          styles [
-            "pill",
-          ]
-        };
+        styles [
+          "pill",
+        ]
       }
     };
   }
