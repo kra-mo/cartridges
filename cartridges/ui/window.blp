@@ -63,31 +63,31 @@ template $Window: Adw.ApplicationWindow {
 
                     item {
                       label: _("Last Played");
-                      action: "win.sort";
+                      action: "win.sort-mode";
                       target: "last_played";
                     }
 
                     item {
                       label: _("A-Z");
-                      action: "win.sort";
+                      action: "win.sort-mode";
                       target: "a-z";
                     }
 
                     item {
                       label: _("Z-A");
-                      action: "win.sort";
+                      action: "win.sort-mode";
                       target: "z-a";
                     }
 
                     item {
                       label: _("Newest");
-                      action: "win.sort";
+                      action: "win.sort-mode";
                       target: "newest";
                     }
 
                     item {
                       label: _("Oldest");
-                      action: "win.sort";
+                      action: "win.sort-mode";
                       target: "oldest";
                     }
                   }
@@ -137,7 +137,7 @@ template $Window: Adw.ApplicationWindow {
 
                 model: NoSelection {
                   model: SortListModel {
-                    sorter: CustomSorter sorter {};
+                    sorter: $GameSorter sorter {};
 
                     model: FilterListModel {
                       watch-items: true;
