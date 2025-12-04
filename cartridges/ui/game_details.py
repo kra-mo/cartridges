@@ -55,6 +55,7 @@ class GameDetails(Adw.NavigationPage):
         self.insert_action_group("details", group := Gio.SimpleActionGroup())
         group.add_action_entries((
             ("edit", lambda *_: self.edit()),
+            ("cancel", lambda *_: self._cancel()),
             ("remove", lambda *_: self._remove()),
             (
                 "search-on",
@@ -104,15 +105,18 @@ class GameDetails(Adw.NavigationPage):
             self.game.added = int(time.time())
             games.model.append(self.game)
 
-        self._exit()
-
-    @Gtk.Template.Callback()
-    def _exit(self, *_args):
         self.stack.props.visible_child_name = "details"
 
     @Gtk.Template.Callback()
     def _activate_apply(self, _entry):
         self.activate_action("details.apply")
+
+    @Gtk.Template.Callback()
+    def _cancel(self, *_args):
+        if self.stack.props.visible_child_name == "details" or not self.game.added:
+            self.activate_action("navigation.pop")
+
+        self.stack.props.visible_child_name = "details"
 
     def _remove(self):
         self.game.removed = True

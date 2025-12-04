@@ -6,9 +6,14 @@ template $GameDetails: Adw.NavigationPage {
   name: "details";
   tag: "details";
   title: bind $_or(template.game as <$Game>.name, _("Add Game")) as <string>;
-  hidden => $_exit();
+  hidden => $_cancel();
 
   ShortcutController {
+    Shortcut {
+      trigger: "Escape";
+      action: "action(details.cancel)";
+    }
+
     Shortcut {
       trigger: "Delete|KP_Delete";
       action: "action(details.remove)";
@@ -302,15 +307,32 @@ template $GameDetails: Adw.NavigationPage {
                     }
                   }
 
-                  Button {
-                    action-name: "details.apply";
-                    label: bind $_if_else(template.game as <$Game>.added, _("Apply"), _("Add")) as <string>;
+                  Adw.WrapBox {
                     halign: center;
+                    wrap-reverse: true;
+                    justify: fill;
+                    justify-last-line: true;
+                    child-spacing: 12;
+                    line-spacing: 12;
 
-                    styles [
-                      "pill",
-                      "suggested-action",
-                    ]
+                    Button cancel_button {
+                      action-name: "details.cancel";
+                      label: _("Cancel");
+
+                      styles [
+                        "pill",
+                      ]
+                    }
+
+                    Button apply_button {
+                      action-name: "details.apply";
+                      label: bind $_if_else(template.game as <$Game>.added, _("Apply"), _("Add")) as <string>;
+
+                      styles [
+                        "pill",
+                        "suggested-action",
+                      ]
+                    }
                   }
                 };
               }
@@ -320,4 +342,11 @@ template $GameDetails: Adw.NavigationPage {
       }
     };
   };
+}
+
+SizeGroup {
+  widgets [
+    cancel_button,
+    apply_button,
+  ]
 }
