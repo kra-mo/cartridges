@@ -3,6 +3,8 @@
 # SPDX-FileCopyrightText: Copyright 2022-2025 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+from collections.abc import Callable
+from gettext import gettext as _
 from typing import Any, TypeVar, cast
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
@@ -23,6 +25,7 @@ SORT_MODES = {
 }
 
 _T = TypeVar("_T")
+type _UndoFunc = Callable[[], Any]
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/window.ui")
@@ -32,6 +35,7 @@ class Window(Adw.ApplicationWindow):
     __gtype_name__ = __qualname__
 
     navigation_view: Adw.NavigationView = Gtk.Template.Child()
+    toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
     search_entry: Gtk.SearchEntry = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: GameSorter = Gtk.Template.Child()
@@ -65,7 +69,24 @@ class Window(Adw.ApplicationWindow):
             ("search", lambda *_: self.search_entry.grab_focus()),
             ("edit", lambda _action, param, *_: self._edit(param.get_uint32()), "u"),
             ("add", lambda *_: self._add()),
+            ("undo", lambda *_: self._undo()),
         ))
+
+        self._history: dict[Adw.Toast, _UndoFunc] = {}
+
+    def send_toast(self, title: str, *, undo: _UndoFunc | None = None):
+        """Notify the user with a toast.
+
+        Optionally display a button allowing the user to `undo` an operation.
+        """
+        toast = Adw.Toast.new(title)
+        if undo:
+            toast.props.action_name = "win.undo"
+            toast.props.button_label = _("Undo")
+            toast.props.priority = Adw.ToastPriority.HIGH
+            self._history[toast] = undo
+
+        self.toast_overlay.add_toast(toast)
 
     @Gtk.Template.Callback()
     def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
@@ -110,3 +131,12 @@ class Window(Adw.ApplicationWindow):
             self.navigation_view.push_by_tag("details")
 
         self.details.edit()
+
+    def _undo(self):
+        try:
+            toast, undo = self._history.popitem()
+        except KeyError:
+            return
+
+        toast.dismiss()
+        undo()

@@ -18,6 +18,7 @@ from cartridges.games import Game
 
 from .cover import Cover  # noqa: F401
 
+_POP_ON_ACTION = "hide", "unhide", "remove"
 _EDITABLE_PROPERTIES = {prop.name for prop in games.PROPERTIES if prop.editable}
 _REQUIRED_PROPERTIES = {
     prop.name for prop in games.PROPERTIES if prop.editable and prop.required
@@ -40,23 +41,34 @@ class GameDetails(Adw.NavigationPage):
     sort_changed = GObject.Signal()
 
     @GObject.Property(type=Game)
-    def game(self) -> Game | None:
+    def game(self) -> Game:
         """The game whose details to show."""
         return self._game
 
     @game.setter
-    def game(self, game: Game | None):
+    def game(self, game: Game):
         self._game = game
         self.insert_action_group("game", game)
 
+        for action, ident in self._signal_ids.copy().items():
+            action.disconnect(ident)
+            del self._signal_ids[action]
+
+        for name in _POP_ON_ACTION:
+            action = cast(Gio.SimpleAction, game.lookup_action(name))
+            self._signal_ids[action] = action.connect(
+                "activate", lambda *_: self.activate_action("navigation.pop")
+            )
+
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
+
+        self._signal_ids = dict[Gio.SimpleAction, int]()
 
         self.insert_action_group("details", group := Gio.SimpleActionGroup())
         group.add_action_entries((
             ("edit", lambda *_: self.edit()),
             ("cancel", lambda *_: self._cancel()),
-            ("remove", lambda *_: self._remove()),
             (
                 "search-on",
                 lambda _action, param, *_: Gio.AppInfo.launch_default_for_uri(
@@ -117,10 +129,6 @@ class GameDetails(Adw.NavigationPage):
             self.activate_action("navigation.pop")
 
         self.stack.props.visible_child_name = "details"
-
-    def _remove(self):
-        self.game.removed = True
-        self.activate_action("navigation.pop")
 
     @Gtk.Template.Callback()
     def _or(self, _obj, first: _T, second: _T) -> _T:

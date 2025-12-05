@@ -16,7 +16,7 @@ template $GameDetails: Adw.NavigationPage {
 
     Shortcut {
       trigger: "Delete|KP_Delete";
-      action: "action(details.remove)";
+      action: "action(game.remove)";
     }
   }
 
@@ -189,7 +189,7 @@ template $GameDetails: Adw.NavigationPage {
                       }
 
                       Button {
-                        action-name: "details.remove";
+                        action-name: "game.remove";
                         icon-name: "user-trash-symbolic";
                         tooltip-text: _("Remove");
                         valign: center;

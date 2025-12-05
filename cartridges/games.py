@@ -8,16 +8,21 @@ import json
 import locale
 import os
 import subprocess
-from collections.abc import Generator, Iterable
+from collections.abc import Callable, Generator, Iterable
+from gettext import gettext as _
 from json import JSONDecodeError
 from pathlib import Path
 from shlex import quote
 from types import UnionType
-from typing import Any, NamedTuple, Self, cast, override
+from typing import TYPE_CHECKING, Any, NamedTuple, Self, cast, override
 
 from gi.repository import Gdk, Gio, GLib, GObject, Gtk
 
 from cartridges import DATA_DIR, state_settings
+
+if TYPE_CHECKING:
+    from .application import Application
+    from .ui.window import Window
 
 
 class _GameProp(NamedTuple):
@@ -79,18 +84,26 @@ class Game(Gio.SimpleActionGroup):
 
         self.add_action_entries((
             ("play", lambda *_: self.play()),
-            ("remove", lambda *_: setattr(self, "removed", True)),
+            ("remove", lambda *_: self._remove()),
         ))
 
-        self.add_action(unhide_action := Gio.SimpleAction.new("unhide"))
-        unhide_action.connect("activate", lambda *_: setattr(self, "hidden", False))
-        hidden = Gtk.PropertyExpression.new(Game, None, "hidden")
-        hidden.bind(unhide_action, "enabled", self)
-
         self.add_action(hide_action := Gio.SimpleAction.new("hide"))
-        hide_action.connect("activate", lambda *_: setattr(self, "hidden", True))
-        not_hidden = Gtk.ClosureExpression.new(bool, lambda _, h: not h, (hidden,))
-        not_hidden.bind(hide_action, "enabled", self)
+        hide_action.connect("activate", lambda *_: self._hide())
+        self.bind_property(
+            "hidden",
+            hide_action,
+            "enabled",
+            GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.INVERT_BOOLEAN,
+        )
+
+        self.add_action(unhide_action := Gio.SimpleAction.new("unhide"))
+        unhide_action.connect("activate", lambda *_: self._unhide())
+        self.bind_property(
+            "hidden",
+            unhide_action,
+            "enabled",
+            GObject.BindingFlags.SYNC_CREATE,
+        )
 
     @classmethod
     def from_data(cls, data: dict[str, Any]) -> Self:
@@ -149,6 +162,32 @@ class Game(Gio.SimpleActionGroup):
         path = (_GAMES_DIR / self.game_id).with_suffix(".json")
         with path.open(encoding="utf-8") as f:
             json.dump(properties, f, indent=4)
+
+    def _remove(self):
+        self.removed = True
+        self._send(
+            _("{} removed").format(self.name),
+            undo=lambda: setattr(self, "removed", False),
+        )
+
+    def _hide(self):
+        self.hidden = True
+        self._send(
+            _("{} hidden").format(self.name),
+            undo=lambda: setattr(self, "hidden", False),
+        )
+
+    def _unhide(self):
+        self.hidden = False
+        self._send(
+            _("{} unhidden").format(self.name),
+            undo=lambda: setattr(self, "hidden", True),
+        )
+
+    def _send(self, title: str, *, undo: Callable[[], Any]):
+        app = cast("Application", Gio.Application.get_default())
+        window = cast("Window", app.props.active_window)
+        window.send_toast(title, undo=undo)
 
 
 class GameSorter(Gtk.Sorter):
