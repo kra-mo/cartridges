@@ -112,9 +112,13 @@ class Gamepad(GObject.Object):
                 else:
                     self._on_return_button_pressed()
             case 307:
-                print("Y / X / Triangle Pressed.")
+                print("Y / X / Triangle Pressed - Focus Search")
+                if not self._device_reverse_controls():
+                    self._on_search_button_pressed()
             case 308:
-                print("X / Y / Square Pressed.")
+                print("X / Y / Square Pressed - Focus Search")
+                if self._device_reverse_controls():
+                    self._on_search_button_pressed()
             case 310:
                 print("Left Shoulder Pressed")
             case 311:
@@ -160,6 +164,10 @@ class Gamepad(GObject.Object):
                     self._move_vertically(direction)
                 case _:
                     print("Other stick in use.")
+
+    def _on_search_button_pressed(self):
+        window.search_entry.grab_focus()
+        window.set_focus_visible(True)
 
     def _move_horizontally(self, direction: Direction):
         if self._is_focused_on_top_bar():
