@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gresources>
   <gresource prefix="@PREFIX@/icons/scalable/actions">
+    <file>collection-symbolic.svg</file>
     <file>filter-symbolic.svg</file>
   </gresource>
 </gresources>
