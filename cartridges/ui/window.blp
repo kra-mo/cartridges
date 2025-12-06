@@ -128,7 +128,15 @@ template $Window: Adw.ApplicationWindow {
         content: Adw.ToastOverlay toast_overlay {
           child: Adw.ViewStack {
             enable-transitions: true;
-            visible-child-name: bind $_if_else(grid.model as <NoSelection>.n-items, "grid", $_if_else(template.search-text, "empty-search", $_if_else(template.show-hidden, "empty-hidden", "empty") as <string>) as <string>) as <string>;
+            visible-child-name: bind $_if_else(
+              grid.model as <NoSelection>.n-items,
+              "grid",
+              $_if_else(
+                template.search-text,
+                "empty-search",
+                $_if_else(template.show-hidden, "empty-hidden", "empty") as <string>
+              ) as <string>
+            ) as <string>;
 
             Adw.ViewStackPage {
               name: "grid";

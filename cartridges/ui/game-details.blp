@@ -289,7 +289,11 @@ template $GameDetails: Adw.NavigationPage {
 
                         popover: Popover {
                           child: Label {
-                            label: bind $_format_more_info(_("To launch the executable \"{}\", use the command:\n\n<tt>\"{}\"</tt>\n\nTo open the file \"{}\" with the default application, use:\n\n<tt>{} \"{}\"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!")) as <string>;
+                            label: bind $_format_more_info(
+                              _(
+                                "To launch the executable \"{}\", use the command:\n\n<tt>\"{}\"</tt>\n\nTo open the file \"{}\" with the default application, use:\n\n<tt>{} \"{}\"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!"
+                              )
+                            ) as <string>;
                             use-markup: true;
                             wrap: true;
                             wrap-mode: word_char;
