@@ -8,8 +8,8 @@ from typing import override
 
 from gi.repository import Adw
 
-from cartridges import games
-from cartridges.games import Game
+from cartridges import games, settings
+from cartridges.games import Collection, Game
 from cartridges.sources import Source, steam
 
 from .config import APP_ID, PREFIX
@@ -32,6 +32,8 @@ class Application(Adw.Application):
         new = self.import_games(steam, skip_ids={g.game_id for g in saved})
         games.model.splice(0, 0, (*saved, *new))
 
+        games.collections.splice(0, 0, tuple(self.get_collections()))
+
     @staticmethod
     def import_games(*sources: Source, skip_ids: Iterable[str]) -> Generator[Game]:
         """Import games from `sources`, skipping ones in `skip_ids`."""
@@ -40,6 +42,20 @@ class Application(Adw.Application):
                 yield from source.get_games(skip_ids=skip_ids)
             except FileNotFoundError:
                 continue
+
+    @staticmethod
+    def get_collections() -> Generator[Collection]:
+        """Get collections from GSettings."""
+        for collection_ in settings.get_value("collections").unpack():
+            collection = Collection()
+
+            for prop, value in collection_.items():
+                try:
+                    collection.set_property(prop, value)
+                except TypeError:
+                    continue
+
+            yield collection
 
     @override
     def do_startup(self):

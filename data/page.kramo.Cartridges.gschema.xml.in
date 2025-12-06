@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schemalist gettext-domain="cartridges">
   <schema id="@APP_ID@" path="@PREFIX@/">
+    <key name="collections" type="aa{sv}">
+      <default>[]</default>
+    </key>
   </schema>
   <schema id="@APP_ID@.State" path="@PREFIX@/State/">
     <key name="width" type="i">
