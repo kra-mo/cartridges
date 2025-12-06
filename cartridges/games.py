@@ -16,7 +16,7 @@ from shlex import quote
 from types import UnionType
 from typing import TYPE_CHECKING, Any, NamedTuple, Self, cast, override
 
-from gi.repository import Gdk, Gio, GLib, GObject, Gtk
+from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
 
 from cartridges import DATA_DIR, state_settings
 
@@ -228,6 +228,45 @@ class Category(GObject.Object):
 
     name = GObject.Property(type=str)
     ids = GObject.Property(type=Gtk.StringList)
+
+
+class CategoryFilter(Gtk.Filter):
+    """A filter for game objects, based on categories."""
+
+    __gtype_name__ = __qualname__
+
+    category = GObject.Property(type=Category)
+
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+
+        self.connect(
+            "notify::category",
+            lambda *_: self.changed(
+                Gtk.FilterChange.DIFFERENT
+                if self.category
+                else Gtk.FilterChange.LESS_STRICT
+            ),
+        )
+
+    @override
+    def do_match(self, game: Game) -> bool:  # pyright: ignore[reportIncompatibleMethodOverride]
+        if not self.category:
+            return True
+
+        return self.category.ids.find(game.game_id) != GLib.MAXUINT
+
+
+class CategorySidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue, reportUntypedBaseClass]
+    """A sidebar item containing a category object."""
+
+    category = GObject.Property(type=Category)
+
+    def __init__(self, category: Category, **kwargs: Any):
+        super().__init__(**kwargs)
+
+        self.category = category
+        category.bind_property("name", self, "title", GObject.BindingFlags.SYNC_CREATE)
 
 
 def _increment_manually_added_id() -> int:

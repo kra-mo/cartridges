@@ -11,7 +11,7 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from cartridges import games, state_settings
 from cartridges.config import PREFIX, PROFILE
-from cartridges.games import Game, GameSorter
+from cartridges.games import CategoryFilter, CategorySidebarItem, Game, GameSorter
 
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
@@ -34,11 +34,14 @@ class Window(Adw.ApplicationWindow):
 
     __gtype_name__ = __qualname__
 
+    split_view: Adw.OverlaySplitView = Gtk.Template.Child()
+    categories: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     navigation_view: Adw.NavigationView = Gtk.Template.Child()
     toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
     search_entry: Gtk.SearchEntry = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: GameSorter = Gtk.Template.Child()
+    category_filter: CategoryFilter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
     search_text = GObject.Property(type=str)
@@ -59,10 +62,13 @@ class Window(Adw.ApplicationWindow):
         state_settings.bind("width", self, "default-width", flags)
         state_settings.bind("height", self, "default-height", flags)
         state_settings.bind("is-maximized", self, "maximized", flags)
+        state_settings.bind("show-sidebar", self.split_view, "show-sidebar", flags)
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7901
         self.search_entry.set_key_capture_widget(self)
+        self.categories.bind_model(games.categories, CategorySidebarItem)
 
+        self.add_action(state_settings.create_action("show-sidebar"))
         self.add_action(state_settings.create_action("sort-mode"))
         self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
         self.add_action_entries((
@@ -87,6 +93,13 @@ class Window(Adw.ApplicationWindow):
             self._history[toast] = undo
 
         self.toast_overlay.add_toast(toast)
+
+    @Gtk.Template.Callback()
+    def _change_content(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
+        item = sidebar.get_item(index)
+        self.category_filter.category = (
+            item.category if isinstance(item, CategorySidebarItem) else None
+        )
 
     @Gtk.Template.Callback()
     def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
