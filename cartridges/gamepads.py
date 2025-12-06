@@ -306,7 +306,7 @@ class Gamepad(GObject.Object):
 
     def _move_vertically(self, direction: Direction):
         if self._is_focused_on_top_bar():
-            if window.sort_button.get_active():
+            if window.sort_button.get_active() or window.main_menu.get_active():
                 popover_child = (
                     window.sort_button.get_popover()
                     .get_first_child()
@@ -439,8 +439,9 @@ class Gamepad(GObject.Object):
                 focused_widget = window.get_focus()
                 if isinstance(focused_widget, Gtk.ToggleButton):
                     focused_widget.set_active(True)
-                elif isinstance(focused_widget, Gtk.Button):
+                else:
                     focused_widget.activate()
+                    self._get_focused_game().grab_focus()
             else:
                 window.grid.activate_action(
                     "list.activate-item",
