@@ -39,94 +39,94 @@ template $Window: Adw.ApplicationWindow {
         "view",
       ]
 
-      child: Adw.ToastOverlay toast_overlay {
-        child: Adw.ToolbarView {
-          [top]
-          Adw.HeaderBar {
-            title-widget: Adw.Clamp clamp {
-              tightening-threshold: bind clamp.maximum-size;
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          title-widget: Adw.Clamp clamp {
+            tightening-threshold: bind clamp.maximum-size;
 
-              child: CenterBox {
+            child: CenterBox {
+              hexpand: true;
+
+              center-widget: SearchEntry search_entry {
                 hexpand: true;
+                placeholder-text: _("Search games");
+                search-started => $_search_started();
+                search-changed => $_search_changed();
+                activate => $_search_activate();
+                stop-search => $_stop_search();
+              };
 
-                center-widget: SearchEntry search_entry {
-                  hexpand: true;
-                  placeholder-text: _("Search games");
-                  search-started => $_search_started();
-                  search-changed => $_search_changed();
-                  activate => $_search_activate();
-                  stop-search => $_stop_search();
-                };
+              end-widget: MenuButton {
+                icon-name: "filter-symbolic";
+                tooltip-text: _("Sort & Filter");
+                margin-start: 6;
 
-                end-widget: MenuButton {
-                  icon-name: "filter-symbolic";
-                  tooltip-text: _("Sort & Filter");
-                  margin-start: 6;
+                menu-model: menu {
+                  section {
+                    label: _("Sort");
 
-                  menu-model: menu {
-                    section {
-                      label: _("Sort");
-
-                      item {
-                        label: _("Last Played");
-                        action: "win.sort-mode";
-                        target: "last_played";
-                      }
-
-                      item {
-                        label: _("A-Z");
-                        action: "win.sort-mode";
-                        target: "a-z";
-                      }
-
-                      item {
-                        label: _("Z-A");
-                        action: "win.sort-mode";
-                        target: "z-a";
-                      }
-
-                      item {
-                        label: _("Newest");
-                        action: "win.sort-mode";
-                        target: "newest";
-                      }
-
-                      item {
-                        label: _("Oldest");
-                        action: "win.sort-mode";
-                        target: "oldest";
-                      }
+                    item {
+                      label: _("Last Played");
+                      action: "win.sort-mode";
+                      target: "last_played";
                     }
 
-                    section {
-                      item (_("Show Hidden Games"), "win.show-hidden")
+                    item {
+                      label: _("A-Z");
+                      action: "win.sort-mode";
+                      target: "a-z";
                     }
-                  };
+
+                    item {
+                      label: _("Z-A");
+                      action: "win.sort-mode";
+                      target: "z-a";
+                    }
+
+                    item {
+                      label: _("Newest");
+                      action: "win.sort-mode";
+                      target: "newest";
+                    }
+
+                    item {
+                      label: _("Oldest");
+                      action: "win.sort-mode";
+                      target: "oldest";
+                    }
+                  }
+
+                  section {
+                    item (_("Show Hidden Games"), "win.show-hidden")
+                  }
                 };
               };
             };
+          };
 
-            [start]
-            Button {
-              icon-name: "list-add-symbolic";
-              tooltip-text: _("Add Game");
-              action-name: "win.add";
-            }
-
-            [end]
-            MenuButton {
-              icon-name: "open-menu-symbolic";
-              tooltip-text: _("Main Menu");
-              primary: true;
-
-              menu-model: menu {
-                item (_("Keyboard Shortcuts"), "app.shortcuts")
-                item (_("About Cartridges"), "app.about")
-              };
-            }
+          [start]
+          Button {
+            icon-name: "list-add-symbolic";
+            tooltip-text: _("Add Game");
+            action-name: "win.add";
           }
 
-          content: Adw.ViewStack {
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            tooltip-text: _("Main Menu");
+            primary: true;
+
+            menu-model: menu {
+              item (_("Keyboard Shortcuts"), "app.shortcuts")
+              item (_("About Cartridges"), "app.about")
+            };
+          }
+        }
+
+        content: Adw.ToastOverlay toast_overlay {
+          child: Adw.ViewStack {
             enable-transitions: true;
             visible-child-name: bind $_if_else(grid.model as <NoSelection>.n-items, "grid", $_if_else(template.search-text, "empty-search", $_if_else(template.show-hidden, "empty-hidden", "empty") as <string>) as <string>) as <string>;
 
