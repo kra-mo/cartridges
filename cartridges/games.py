@@ -223,6 +223,13 @@ class GameSorter(Gtk.Sorter):
         return max(-1, min(locale.strcoll(a, b), 1))
 
 
+class Category(GObject.Object):
+    """A category with a name and game ids."""
+
+    name = GObject.Property(type=str)
+    ids = GObject.Property(type=Gtk.StringList)
+
+
 def _increment_manually_added_id() -> int:
     numbers = {
         game.game_id.split("_")[1]
@@ -265,3 +272,4 @@ def load() -> Generator[Game]:
 
 
 model = Gio.ListStore.new(Game)
+categories = Gio.ListStore.new(Category)
