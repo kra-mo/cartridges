@@ -3,6 +3,7 @@ python.install_sources(
         '__init__.py',
         '__main__.py',
         'application.py',
+        'collections.py',
         'gamepads.py',
         'games.py',
     ),
