@@ -8,7 +8,7 @@ from typing import override
 
 from gi.repository import Adw
 
-from cartridges import games
+from cartridges import collections, games
 from cartridges.games import Game
 from cartridges.sources import Source, steam
 
@@ -31,6 +31,7 @@ class Application(Adw.Application):
         saved = tuple(games.load())
         new = self.import_games(steam, skip_ids={g.game_id for g in saved})
         games.model.splice(0, 0, (*saved, *new))
+        collections.load()
 
     @staticmethod
     def import_games(*sources: Source, skip_ids: Iterable[str]) -> Generator[Game]:

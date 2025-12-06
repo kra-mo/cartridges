@@ -1,9 +1,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+from collections.abc import Generator
 from typing import Any
 
 from gi.repository import Gio, GObject
+
+from cartridges import settings
 
 
 class Collection(GObject.Object):
@@ -29,6 +32,26 @@ class Collection(GObject.Object):
             GObject.BindingFlags.SYNC_CREATE,
             lambda _, name: f"{name}-symbolic",
         )
+
+
+def _get_collections() -> Generator[Collection]:
+    for data in settings.get_value("collections").unpack():
+        if data.get("removed"):
+            continue
+
+        collection = Collection()
+        for prop, value in data.items():
+            try:
+                collection.set_property(prop, value)
+            except TypeError:
+                continue
+
+        yield collection
+
+
+def load():
+    """Load collections from GSettings."""
+    model.splice(0, 0, tuple(_get_collections()))
 
 
 model = Gio.ListStore.new(Collection)
