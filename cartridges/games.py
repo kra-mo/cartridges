@@ -223,6 +223,21 @@ class GameSorter(Gtk.Sorter):
         return max(-1, min(locale.strcoll(a, b), 1))
 
 
+class Collection(GObject.Object):
+    """Collection data class."""
+
+    __gtype_name__ = __qualname__
+
+    name = GObject.Property(type=str)
+    icon_name = GObject.Property(type=str, default="collection-symbolic")
+    game_ids = GObject.Property(type=object)
+
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+
+        self.game_ids = []
+
+
 def _increment_manually_added_id() -> int:
     numbers = {
         game.game_id.split("_")[1]
@@ -265,3 +280,4 @@ def load() -> Generator[Game]:
 
 
 model = Gio.ListStore.new(Game)
+collections = Gio.ListStore.new(Collection)
