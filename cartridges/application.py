@@ -6,10 +6,10 @@ from collections.abc import Generator, Iterable
 from gettext import gettext as _
 from typing import override
 
-from gi.repository import Adw
+from gi.repository import Adw, Gtk
 
-from cartridges import games
-from cartridges.games import Game
+from cartridges import games, settings
+from cartridges.games import Category, Game
 from cartridges.sources import Source, SteamSource
 
 from .config import APP_ID, PREFIX
@@ -31,6 +31,12 @@ class Application(Adw.Application):
         saved = tuple(games.load())
         new = self.import_games(SteamSource(), skip_ids={g.game_id for g in saved})
         games.model.splice(0, 0, (*saved, *new))
+
+        categories = tuple(
+            Category(name=name, ids=Gtk.StringList.new(ids))
+            for name, ids in settings.get_value("categories").unpack().items()
+        )
+        games.categories.splice(0, 0, categories)
 
     @staticmethod
     def import_games(*sources: Source, skip_ids: Iterable[str]) -> Generator[Game]:
