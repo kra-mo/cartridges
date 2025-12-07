@@ -8,7 +8,7 @@ from typing import Any, override
 
 from gi.repository import Gtk
 
-from cartridges import state_settings
+from cartridges import STATE_SETTINGS
 from cartridges.games import Game
 
 _SORT_MODES = {
@@ -31,13 +31,13 @@ class GameSorter(Gtk.Sorter):
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
-        state_settings.connect(
+        STATE_SETTINGS.connect(
             "changed::sort-mode", lambda *_: self.changed(Gtk.SorterChange.DIFFERENT)
         )
 
     @override
     def do_compare(self, game1: Game, game2: Game) -> Gtk.Ordering:  # pyright: ignore[reportIncompatibleMethodOverride]
-        prop, invert = _SORT_MODES[state_settings.get_string("sort-mode")]
+        prop, invert = _SORT_MODES[STATE_SETTINGS.get_string("sort-mode")]
         a = (game2 if invert else game1).get_property(prop)
         b = (game1 if invert else game2).get_property(prop)
 

@@ -24,8 +24,8 @@ from gi.repository import Gio, GLib
 from .config import APP_ID, LOCALEDIR, PKGDATADIR
 
 DATA_DIR = Path(GLib.get_user_data_dir(), "cartridges")
-settings = Gio.Settings.new(APP_ID)
-state_settings = Gio.Settings.new(f"{APP_ID}.State")
+SETTINGS = Gio.Settings.new(APP_ID)
+STATE_SETTINGS = Gio.Settings.new(f"{APP_ID}.State")
 
 _RESOURCES = ("data", "icons", "ui")
 

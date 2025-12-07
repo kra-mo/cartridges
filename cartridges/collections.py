@@ -6,7 +6,7 @@ from typing import Any
 
 from gi.repository import Gio, GObject
 
-from cartridges import settings
+from cartridges import SETTINGS
 
 
 class Collection(GObject.Object):
@@ -35,7 +35,7 @@ class Collection(GObject.Object):
 
 
 def _get_collections() -> Generator[Collection]:
-    for data in settings.get_value("collections").unpack():
+    for data in SETTINGS.get_value("collections").unpack():
         if data.get("removed"):
             continue
 

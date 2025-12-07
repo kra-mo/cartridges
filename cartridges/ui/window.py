@@ -10,7 +10,7 @@ from typing import Any, TypeVar, cast
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-from cartridges import collections, games, state_settings
+from cartridges import STATE_SETTINGS, collections, games
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game
@@ -78,10 +78,10 @@ class Window(Adw.ApplicationWindow):
         self.settings = self.get_settings()
 
         flags = Gio.SettingsBindFlags.DEFAULT
-        state_settings.bind("width", self, "default-width", flags)
-        state_settings.bind("height", self, "default-height", flags)
-        state_settings.bind("is-maximized", self, "maximized", flags)
-        state_settings.bind("show-sidebar", self.split_view, "show-sidebar", flags)
+        STATE_SETTINGS.bind("width", self, "default-width", flags)
+        STATE_SETTINGS.bind("height", self, "default-height", flags)
+        STATE_SETTINGS.bind("is-maximized", self, "maximized", flags)
+        STATE_SETTINGS.bind("show-sidebar", self.split_view, "show-sidebar", flags)
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7901
         self.search_entry.set_key_capture_widget(self)
@@ -90,8 +90,8 @@ class Window(Adw.ApplicationWindow):
             lambda collection: CollectionSidebarItem(collection=collection),
         )
 
-        self.add_action(state_settings.create_action("show-sidebar"))
-        self.add_action(state_settings.create_action("sort-mode"))
+        self.add_action(STATE_SETTINGS.create_action("show-sidebar"))
+        self.add_action(STATE_SETTINGS.create_action("sort-mode"))
         self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
         self.add_action_entries((
             ("search", lambda *_: self.search_entry.grab_focus()),
