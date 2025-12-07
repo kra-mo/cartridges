@@ -7,6 +7,7 @@ import logging
 import re
 import struct
 import time
+from collections import defaultdict
 from collections.abc import Generator, Iterable, Sequence
 from contextlib import suppress
 from gettext import gettext as _
@@ -112,41 +113,39 @@ def get_games(*, skip_ids: Iterable[str]) -> Generator[Game]:
 
     librarycache = _data_dir() / "appcache" / "librarycache"
     with (_data_dir() / "appcache" / "appinfo.vdf").open("rb") as fp:
-        appinfo = dict(_parse_appinfo_vdf(fp))
+        appinfo = defaultdict(_AppInfo, _parse_appinfo_vdf(fp))
 
     appids = {i.rsplit("_", 1)[-1] for i in skip_ids if i.startswith(f"{ID}_")}
     for manifest in _manifests():
         try:
-            app = _App.from_manifest(manifest)
+            name, appid, stateflags, lastplayed = _App.from_manifest(manifest)
         except ValueError:
             continue
 
-        duplicate = app.appid in appids
+        duplicate = appid in appids
         installed = (
-            int(app.stateflags) & _MANIFEST_INSTALLED_MASK
-            if app.stateflags and app.stateflags.isdigit()
+            int(stateflags) & _MANIFEST_INSTALLED_MASK
+            if stateflags and stateflags.isdigit()
             else True
         )
 
         if duplicate or not installed:
             continue
 
-        info = appinfo.get(app.appid)
-        if info and info.type and (info.type.lower() not in _RELEVANT_TYPES):
+        type_, developer, capsule = appinfo[appid]
+        if type_ and (type_.lower() not in _RELEVANT_TYPES):
             continue
 
-        appids.add(app.appid)
+        appids.add(appid)
         yield Game(
             added=added,
-            executable=f"{OPEN} steam://rungameid/{app.appid}",
-            game_id=f"{ID}_{app.appid}",
+            executable=f"{OPEN} steam://rungameid/{appid}",
+            game_id=f"{ID}_{appid}",
             source=ID,
-            last_played=int(app.lastplayed)
-            if app.lastplayed and app.lastplayed.isdigit()
-            else 0,
-            name=app.name,
-            developer=info.developer if info else None,
-            cover=_find_cover(librarycache / app.appid, info.capsule if info else None),
+            last_played=int(lastplayed) if lastplayed and lastplayed.isdigit() else 0,
+            name=name,
+            developer=developer,
+            cover=_find_cover(librarycache / appid, capsule),
         )
 
 
