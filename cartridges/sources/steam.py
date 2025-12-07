@@ -9,6 +9,7 @@ import struct
 import time
 from collections.abc import Generator, Iterable, Sequence
 from contextlib import suppress
+from gettext import gettext as _
 from os import SEEK_CUR
 from pathlib import Path
 from typing import Any, BinaryIO, NamedTuple, Self, cast
@@ -19,7 +20,7 @@ from cartridges.games import Game
 
 from . import APPLICATION_SUPPORT, DATA, FLATPAK, OPEN, PROGRAM_FILES_X86
 
-ID: str = "steam"
+ID, NAME = "steam", _("Steam")
 
 _DATA_PATHS = (
     Path.home() / ".steam" / "steam",

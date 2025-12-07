@@ -5,7 +5,7 @@ import os
 import sys
 from collections.abc import Generator, Iterable
 from pathlib import Path
-from typing import Protocol
+from typing import Final, Protocol
 
 from gi.repository import GLib
 
@@ -28,7 +28,8 @@ OPEN = (
 class Source(Protocol):
     """A source of games to import."""
 
-    ID: str
+    ID: Final[str]
+    NAME: Final[str]
 
     @staticmethod
     def get_games(*, skip_ids: Iterable[str]) -> Generator[Game]:
