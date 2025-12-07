@@ -8,7 +8,7 @@ from typing import override
 
 from gi.repository import Adw
 
-from cartridges import games, settings
+from cartridges import SETTINGS, games
 from cartridges.games import Collection, Game
 from cartridges.sources import Source, steam
 
@@ -46,7 +46,7 @@ class Application(Adw.Application):
     @staticmethod
     def get_collections() -> Generator[Collection]:
         """Get collections from GSettings."""
-        for collection_ in settings.get_value("collections").unpack():
+        for collection_ in SETTINGS.get_value("collections").unpack():
             collection = Collection()
 
             for prop, value in collection_.items():
