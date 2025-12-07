@@ -63,6 +63,8 @@ template $Window: Adw.ApplicationWindow {
           child: Adw.ToolbarView {
             [top]
             Adw.HeaderBar {
+              show-title: bind $_show_sidebar_title(template.settings as <Settings>.gtk-decoration-layout) as <bool>;
+
               [start]
               Button {
                 visible: bind split_view.show-sidebar;
