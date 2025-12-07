@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright 2022-2025 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+import sys
 from collections.abc import Callable
 from gettext import gettext as _
 from typing import Any, TypeVar, cast
@@ -52,6 +53,8 @@ class Window(Adw.ApplicationWindow):
     show_hidden = GObject.Property(type=bool, default=False)
     collection = GObject.Property(type=Collection)
 
+    settings = GObject.Property(type=Gtk.Settings)
+
     @GObject.Property(type=Gio.ListStore)
     def games(self) -> Gio.ListStore:
         """Model of the user's games."""
@@ -62,6 +65,8 @@ class Window(Adw.ApplicationWindow):
 
         if PROFILE == "development":
             self.add_css_class("devel")
+
+        self.settings = self.get_settings()
 
         flags = Gio.SettingsBindFlags.DEFAULT
         STATE_SETTINGS.bind("width", self, "default-width", flags)
@@ -101,6 +106,11 @@ class Window(Adw.ApplicationWindow):
             self._history[toast] = undo
 
         self.toast_overlay.add_toast(toast)
+
+    @Gtk.Template.Callback()
+    def _show_sidebar_title(self, _obj, layout: str) -> bool:
+        right_window_controls = layout.replace("appmenu", "").startswith(":")
+        return not sys.platform.startswith("darwin") and right_window_controls
 
     @Gtk.Template.Callback()
     def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
