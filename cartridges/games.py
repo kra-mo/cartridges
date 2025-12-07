@@ -188,13 +188,22 @@ class Collection(GObject.Object):
     __gtype_name__ = __qualname__
 
     name = GObject.Property(type=str)
-    icon_name = GObject.Property(type=str, default="collection-symbolic")
+    icon = GObject.Property(type=str, default="collection")
     game_ids = GObject.Property(type=object)
+
+    icon_name = GObject.Property(type=str)
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
         self.game_ids = []
+        self.bind_property(
+            "icon",
+            self,
+            "icon-name",
+            GObject.BindingFlags.SYNC_CREATE,
+            lambda _, name: f"{name}-symbolic",
+        )
 
 
 def _increment_manually_added_id() -> int:
