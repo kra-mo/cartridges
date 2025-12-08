@@ -190,7 +190,9 @@ class Collection(GObject.Object):
     name = GObject.Property(type=str)
     icon = GObject.Property(type=str, default="collection")
     game_ids = GObject.Property(type=object)
+    removed = GObject.Property(type=bool, default=False)
 
+    added = GObject.Property(type=bool, default=True)
     icon_name = GObject.Property(type=str)
 
     def __init__(self, **kwargs: Any):

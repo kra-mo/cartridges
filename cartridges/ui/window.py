@@ -14,6 +14,7 @@ from cartridges import STATE_SETTINGS, games
 from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Collection, Game
 
+from .collection_details import CollectionDetails
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
 from .games import (
@@ -42,6 +43,7 @@ class Window(Adw.ApplicationWindow):
 
     split_view: Adw.OverlaySplitView = Gtk.Template.Child()
     collections: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
+    new_collection_item: Adw.SidebarItem = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     navigation_view: Adw.NavigationView = Gtk.Template.Child()
     toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
     search_entry: Gtk.SearchEntry = Gtk.Template.Child()
@@ -76,8 +78,24 @@ class Window(Adw.ApplicationWindow):
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7901
         self.search_entry.set_key_capture_widget(self)
+
+        self.collection_sorter = Gtk.StringSorter.new(
+            Gtk.PropertyExpression.new(Collection, None, "name")
+        )
         self.collections.bind_model(
-            games.collections,
+            Gtk.SortListModel.new(
+                Gtk.FilterListModel(
+                    model=games.collections,
+                    filter=Gtk.BoolFilter(
+                        expression=Gtk.PropertyExpression.new(
+                            Collection, None, "removed"
+                        ),
+                        invert=True,
+                    ),
+                    watch_items=True,  # pyright: ignore[reportCallIssue]
+                ),
+                self.collection_sorter,
+            ),
             lambda collection: CollectionSidebarItem(collection=collection),
         )
 
@@ -115,9 +133,13 @@ class Window(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
         item = sidebar.get_item(index)
-        self.collection = (
-            item.collection if isinstance(item, CollectionSidebarItem) else None
-        )
+
+        if item is self.new_collection_item:
+            self._add_collection()
+        elif isinstance(item, CollectionSidebarItem):
+            self.collection = item.collection
+        else:
+            self.collection = None
 
     @Gtk.Template.Callback()
     def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
@@ -166,6 +188,10 @@ class Window(Adw.ApplicationWindow):
             self.navigation_view.push_by_tag("details")
 
         self.details.edit()
+
+    def _add_collection(self):
+        details = CollectionDetails(collection=Collection(added=False))
+        details.present(self)
 
     def _undo(self, toast: Adw.Toast | None = None):
         if toast:

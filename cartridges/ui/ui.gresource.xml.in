@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gresources>
   <gresource prefix="@PREFIX@">
+    <file>collection-details.ui</file>
     <file>cover.ui</file>
     <file>game-details.ui</file>
     <file>game-item.ui</file>

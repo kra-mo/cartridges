@@ -87,6 +87,13 @@ template $Window: Adw.ApplicationWindow {
               Adw.SidebarSection collections {
                 title: _("Collections");
               }
+
+              Adw.SidebarSection {
+                Adw.SidebarItem new_collection_item {
+                  icon-name: "list-add-symbolic";
+                  title: _("New Collection");
+                }
+              }
             };
           };
         };

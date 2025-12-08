@@ -1,6 +1,7 @@
 python.install_sources(
     files(
         '__init__.py',
+        'collection_details.py',
         'cover.py',
         'game_details.py',
         'game_item.py',
@@ -12,6 +13,7 @@ python.install_sources(
 
 blueprints = custom_target(
     input: files(
+        'collection-details.blp',
         'cover.blp',
         'game-details.blp',
         'game-item.blp',
