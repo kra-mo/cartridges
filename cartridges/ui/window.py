@@ -81,9 +81,9 @@ class Window(Adw.ApplicationWindow):
         """
         toast = Adw.Toast.new(title)
         if undo:
-            toast.props.action_name = "win.undo"
             toast.props.button_label = _("Undo")
             toast.props.priority = Adw.ToastPriority.HIGH
+            toast.connect("button-clicked", lambda toast: self._undo(toast))
             self._history[toast] = undo
 
         self.toast_overlay.add_toast(toast)
@@ -132,7 +132,11 @@ class Window(Adw.ApplicationWindow):
 
         self.details.edit()
 
-    def _undo(self):
+    def _undo(self, toast: Adw.Toast | None = None):
+        if toast:
+            self._history.pop(toast)()
+            return
+
         try:
             toast, undo = self._history.popitem()
         except KeyError:
