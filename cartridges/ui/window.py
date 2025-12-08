@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright 2022-2025 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+import sys
 from collections.abc import Callable
 from gettext import gettext as _
 from typing import Any, TypeVar, cast
@@ -106,7 +107,8 @@ class Window(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _on_realize(self, *_args: Any):
-        Gamepad.window = self
+        if sys.platform.startswith("linux"):
+            Gamepad.window = self
 
     @Gtk.Template.Callback()
     def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:

@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
 
 import math
+import sys
 from collections.abc import Generator
 from typing import TYPE_CHECKING, Any, cast
 
@@ -336,12 +337,13 @@ def _on_device_disconnected(_monitor: Manette.Monitor, device: Manette.Device):
     model.remove(pos)
 
 
-monitor = Manette.Monitor()
-monitor.connect(
-    "device-connected",
-    lambda _, device: model.append(Gamepad(device)),
-)  # pyright: ignore[reportCallIssue]
-monitor.connect("device-disconnected", _on_device_disconnected)
+if sys.platform.startswith("linux"):
+    monitor = Manette.Monitor()
+    monitor.connect(
+        "device-connected",
+        lambda _, device: model.append(Gamepad(device)),
+    )  # pyright: ignore[reportCallIssue]
+    monitor.connect("device-disconnected", _on_device_disconnected)
 
-model = Gio.ListStore.new(Gamepad)
-model.splice(0, 0, tuple(_iterate_controllers()))
+    model = Gio.ListStore.new(Gamepad)
+    model.splice(0, 0, tuple(_iterate_controllers()))
