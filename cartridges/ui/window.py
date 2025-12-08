@@ -11,6 +11,7 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from cartridges import gamepads, games, state_settings
 from cartridges.config import PREFIX, PROFILE
+from cartridges.gamepads import Gamepad
 from cartridges.games import Game, GameSorter
 
 from .game_details import GameDetails
@@ -88,9 +89,6 @@ class Window(Adw.ApplicationWindow):
         )
 
         self._history: dict[Adw.Toast, _UndoFunc] = {}
-
-        gamepads.window = self
-        gamepads.monitor_gamepads()
 
     def send_toast(self, title: str, *, undo: _UndoFunc | None = None):
         """Notify the user with a toast.

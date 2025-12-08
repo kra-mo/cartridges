@@ -13,8 +13,6 @@ REPEAT_DELAY = 280
 if TYPE_CHECKING:
     from .ui.window import Window
 
-window: "Window"
-
 
 class Gamepad(GObject.Object):
     """Data class for gamepad and gamepad UI navigation."""
@@ -22,7 +20,7 @@ class Gamepad(GObject.Object):
     window: "Window"
     _device: Manette.Device
 
-    def __init__(self, **kwargs: Any):
+    def __init__(self, device: Manette.Device, **kwargs: Any):
         super().__init__(**kwargs)
 
         self._device = device
@@ -326,7 +324,7 @@ def _iterate_controllers() -> Generator[Gamepad]:
     while has_next:
         has_next, device = monitor_iter.next()
         if device:
-            yield Gamepad(device=device, window=window)
+            yield Gamepad(device)
 
 
 def _on_device_disconnected(_monitor: Manette.Monitor, device: Manette.Device):
@@ -341,7 +339,7 @@ def _on_device_disconnected(_monitor: Manette.Monitor, device: Manette.Device):
 monitor = Manette.Monitor()
 monitor.connect(
     "device-connected",
-    lambda _, device: model.append(Gamepad(device=device, window=window)),
+    lambda _, device: model.append(Gamepad(device)),
 )  # pyright: ignore[reportCallIssue]
 monitor.connect("device-disconnected", _on_device_disconnected)
 
