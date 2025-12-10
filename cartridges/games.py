@@ -182,7 +182,7 @@ class Game(Gio.SimpleActionGroup):
         window.send_toast(title, undo=undo)
 
 
-class Collection(GObject.Object):
+class Collection(Gio.SimpleActionGroup):
     """Collection data class."""
 
     __gtype_name__ = __qualname__
@@ -205,6 +205,20 @@ class Collection(GObject.Object):
             "icon-name",
             GObject.BindingFlags.SYNC_CREATE,
             lambda _, name: f"{name}-symbolic",
+        )
+
+        self.add_action(remove := Gio.SimpleAction.new("remove"))
+        remove.connect("activate", lambda *_: self._remove())
+        self.bind_property("added", remove, "enabled", GObject.BindingFlags.SYNC_CREATE)
+
+    def _remove(self):
+        self.removed = True
+
+        app = cast("Application", Gio.Application.get_default())
+        window = cast("Window", app.props.active_window)
+        window.send_toast(
+            _("{} removed").format(self.name),
+            undo=lambda: setattr(self, "removed", False),
         )
 
 

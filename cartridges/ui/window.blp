@@ -75,7 +75,10 @@ template $Window: Adw.ApplicationWindow {
             }
 
             content: Adw.Sidebar {
+              menu-model: menu {};
+
               activated => $_navigate();
+              setup-menu => $_setup_sidebar_menu();
 
               Adw.SidebarSection {
                 Adw.SidebarItem {

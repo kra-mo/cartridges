@@ -106,6 +106,16 @@ class Window(Adw.ApplicationWindow):
             ("search", lambda *_: self.search_entry.grab_focus()),
             ("edit", lambda _action, param, *_: self._edit(param.get_uint32()), "u"),
             ("add", lambda *_: self._add()),
+            (
+                "edit-collection",
+                lambda _action, param, *_: self._edit_collection(param.get_uint32()),
+                "u",
+            ),
+            (
+                "remove-collection",
+                lambda _action, param, *_: self._remove_collection(param.get_uint32()),
+                "u",
+            ),
             ("undo", lambda *_: self._undo()),
         ))
 
@@ -140,6 +150,20 @@ class Window(Adw.ApplicationWindow):
             self.collection = item.collection
         else:
             self.collection = None
+
+    @Gtk.Template.Callback()
+    def _setup_sidebar_menu(self, sidebar: Adw.Sidebar, item: Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
+        sidebar.props.menu_model.remove_all()
+
+        if isinstance(item, CollectionSidebarItem):
+            sidebar.props.menu_model.append(
+                _("Edit"),
+                f"win.edit-collection(uint32 {item.get_section_index()})",
+            )
+            sidebar.props.menu_model.append(
+                _("Remove"),
+                f"win.remove-collection(uint32 {item.get_section_index()})",
+            )
 
     @Gtk.Template.Callback()
     def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
@@ -188,6 +212,19 @@ class Window(Adw.ApplicationWindow):
             self.navigation_view.push_by_tag("details")
 
         self.details.edit()
+
+    def _edit_collection(self, pos: int):
+        collection = self.collections.get_item(pos).collection
+        details = CollectionDetails(collection=collection)
+        details.connect(
+            "sort-changed",
+            lambda *_: self.collection_sorter.changed(Gtk.SorterChange.DIFFERENT),
+        )
+        details.present(self)
+
+    def _remove_collection(self, pos: int):
+        collection = self.collections.get_item(pos).collection
+        collection.activate_action("remove")
 
     def _add_collection(self):
         details = CollectionDetails(collection=Collection(added=False))
