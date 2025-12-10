@@ -103,6 +103,6 @@ Thanks to [Weblate](https://weblate.org/) for hosting our translations!
 
 The project follows the [GNOME Code of Conduct](https://conduct.gnome.org/). 
 
-Cartridges' contributors stand with Palestine and Ukraine, and believe trans rights are human rights. If this bothers you, this is probably not the best project for you to contribute to.
+Cartridges' contributors stand with Palestine, Ukraine and all other victims of imperialism and war, and believe trans rights are human rights. If this bothers you, this is probably not the best project for you to contribute to.
 
 See [CODE_OF_CONDUCT.md](https://codeberg.org/kramo/cartridges/src/branch/main/CODE_OF_CONDUCT.md).
