@@ -33,6 +33,7 @@ class Application(Adw.Application):
         games.model.splice(0, 0, (*saved, *new))
 
         games.collections.splice(0, 0, tuple(self.get_collections()))
+        games.save_collections()
 
     @staticmethod
     def import_games(*sources: Source, skip_ids: Iterable[str]) -> Generator[Game]:
@@ -47,6 +48,9 @@ class Application(Adw.Application):
     def get_collections() -> Generator[Collection]:
         """Get collections from GSettings."""
         for collection_ in SETTINGS.get_value("collections").unpack():
+            if collection_.get("removed"):
+                continue
+
             collection = Collection()
 
             for prop, value in collection_.items():

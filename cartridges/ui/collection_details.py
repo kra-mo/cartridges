@@ -110,6 +110,7 @@ class CollectionDetails(Adw.Dialog):
             self.collection.added = True
             games.collections.append(self.collection)
 
+        games.save_collections()
         self.close()
 
     @Gtk.Template.Callback()

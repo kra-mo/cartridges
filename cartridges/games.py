@@ -17,7 +17,7 @@ from typing import TYPE_CHECKING, Any, NamedTuple, Self, cast
 
 from gi.repository import Gdk, Gio, GLib, GObject
 
-from cartridges import DATA_DIR
+from cartridges import DATA_DIR, SETTINGS
 
 if TYPE_CHECKING:
     from .application import Application
@@ -213,13 +213,15 @@ class Collection(Gio.SimpleActionGroup):
 
     def _remove(self):
         self.removed = True
+        save_collections()
 
         app = cast("Application", Gio.Application.get_default())
         window = cast("Window", app.props.active_window)
-        window.send_toast(
-            _("{} removed").format(self.name),
-            undo=lambda: setattr(self, "removed", False),
-        )
+        window.send_toast(_("{} removed").format(self.name), undo=self._undo_remove)
+
+    def _undo_remove(self):
+        self.removed = False
+        save_collections()
 
 
 def _increment_manually_added_id() -> int:
@@ -261,6 +263,25 @@ def load() -> Generator[Game]:
                 break
 
         yield game
+
+
+def save_collections():
+    """Save collections to GSettings."""
+    SETTINGS.set_value(
+        "collections",
+        GLib.Variant(
+            "aa{sv}",
+            [
+                {
+                    "name": GLib.Variant.new_string(collection.name),
+                    "icon": GLib.Variant.new_string(collection.icon),
+                    "game-ids": GLib.Variant.new_strv(collection.game_ids),
+                    "removed": GLib.Variant.new_boolean(collection.removed),
+                }
+                for collection in cast(Iterable[Collection], collections)
+            ],
+        ),
+    )
 
 
 model = Gio.ListStore.new(Game)
