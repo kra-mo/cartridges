@@ -117,6 +117,7 @@ class GameDetails(Adw.NavigationPage):
             self.game.added = int(time.time())
             games.model.append(self.game)
 
+        self.game.save()
         self.stack.props.visible_child_name = "details"
 
     @Gtk.Template.Callback()

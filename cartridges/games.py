@@ -160,29 +160,35 @@ class Game(Gio.SimpleActionGroup):
 
         _GAMES_DIR.mkdir(parents=True, exist_ok=True)
         path = (_GAMES_DIR / self.game_id).with_suffix(".json")
-        with path.open(encoding="utf-8") as f:
+        with path.open("w", encoding="utf-8") as f:
             json.dump(properties, f, indent=4)
 
     def _remove(self):
         self.removed = True
-        self._send(
-            _("{} removed").format(self.name),
-            undo=lambda: setattr(self, "removed", False),
-        )
+        self.save()
+        self._send(_("{} removed").format(self.name), undo=self._undo_remove)
+
+    def _undo_remove(self):
+        self.removed = False
+        self.save()
 
     def _hide(self):
         self.hidden = True
-        self._send(
-            _("{} hidden").format(self.name),
-            undo=lambda: setattr(self, "hidden", False),
-        )
+        self.save()
+        self._send(_("{} hidden").format(self.name), undo=self._undo_hide)
+
+    def _undo_hide(self):
+        self.hidden = False
+        self.save()
 
     def _unhide(self):
         self.hidden = False
-        self._send(
-            _("{} unhidden").format(self.name),
-            undo=lambda: setattr(self, "hidden", True),
-        )
+        self.save()
+        self._send(_("{} unhidden").format(self.name), undo=self._undo_unhide)
+
+    def _undo_unhide(self):
+        self.hidden = True
+        self.save()
 
     def _send(self, title: str, *, undo: Callable[[], Any]):
         app = cast("Application", Gio.Application.get_default())
@@ -244,6 +250,10 @@ def load() -> Generator[Game]:
             with path.open(encoding="utf-8") as f:
                 data = json.load(f)
         except (JSONDecodeError, UnicodeDecodeError):
+            continue
+
+        if data.get("removed"):
+            path.unlink()
             continue
 
         try:
