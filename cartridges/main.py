@@ -19,7 +19,6 @@
 
 import json
 import lzma
-import os
 import shlex
 import sys
 from time import time
@@ -94,11 +93,6 @@ class CartridgesApplication(Adw.Application):
 
     def do_activate(self) -> None:  # pylint: disable=arguments-differ
         """Called on app creation"""
-
-        if os.getenv("XDG_CURRENT_DESKOP") == "COSMIC":
-            Gio.AppInfo.launch_default_for_uri("https://stopthemingmy.app")
-            self.quit()
-
         try:
             setup_logging()
         except ValueError:
