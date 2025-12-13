@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 
 
 class Gamepad(GObject.Object):
-    """Data class for gamepad and gamepad UI navigation."""
+    """Data class for gamepad, including UI navigation."""
 
     window: "Window"
     _device: Manette.Device
@@ -121,7 +121,7 @@ class Gamepad(GObject.Object):
                 return
 
             focus_widget.activate()
-            self._get_focused_game().grab_focus()
+            self.window.grid.grab_focus()
             return
 
         self.window.grid.activate_action(
@@ -135,31 +135,25 @@ class Gamepad(GObject.Object):
                 self.window.details.stack.props.visible_child_name = "details"
                 return
 
-            if not self._is_focused_on_top_bar():
-                self.window.navigation_view.pop_to_tag("games")
-            else:
+            if self._is_focused_on_top_bar():
                 self.window.sort_button.props.active = False
+                return
+
+            self.window.navigation_view.pop_to_tag("games")
 
         open_menu = self._get_active_menu_button()
 
         if open_menu:
             open_menu.set_active(False)
             open_menu.grab_focus()
-        else:
-            self._get_focused_game().grab_focus()
+            self.window.props.focus_visible = True
+            return
 
+        self.window.grid.grab_focus()
         self.window.props.focus_visible = True
 
     def _focus_search_entry(self):
         self.window.search_entry.grab_focus()
-        self.window.props.focus_visible = True
-
-    def _attempt_widget_focus(self, widget: Gtk.Widget | None):
-        if not widget:
-            self.window.props.display.beep()
-            return
-
-        widget.grab_focus()
         self.window.props.focus_visible = True
 
     def _navigate_to_game_position(self, new_pos: int):
@@ -168,11 +162,15 @@ class Gamepad(GObject.Object):
         else:
             self.window.props.display.beep()
 
-        self.window.props.focus_visible = True
-
     def _move_horizontally(self, direction: Gtk.DirectionType):
         if self._is_focused_on_top_bar():
-            self._navigate_top_bar(direction)
+            if self.window.title_box.get_focus_child:
+                focus = self.window.header_bar.child_focus(direction)
+
+            if not focus:
+                self.window.header_bar.keynav_failed(direction)
+
+            self.window.props.focus_visible = True
             return
 
         if self._can_navigate_games_page():
@@ -187,16 +185,13 @@ class Gamepad(GObject.Object):
                 self._navigate_action_buttons(direction)
                 return
 
-            if not (focus_parent_widget := self.window.props.focus_widget.get_parent()):
-                return
-
+            focus_parent_widget = self.window.props.focus_widget.props.parent
             if not focus_parent_widget.child_focus(direction):
-                self.window.props.display.beep()
-            return
+                focus_parent_widget.keynav_failed(direction)
 
     def _move_vertically(self, direction: Gtk.DirectionType):
         if self._is_focused_on_top_bar() and direction == Gtk.DirectionType.DOWN:
-            self._get_focused_game()
+            self.window.grid.grab_focus()
             return
 
         if self._can_navigate_games_page():
@@ -238,14 +233,14 @@ class Gamepad(GObject.Object):
                     self.window.props.focus_visible = True
                     return
 
-                self.window.props.display.beep()
+                focus_widget.keynav_failed(direction)
                 return
 
             if not (current_box := current_row.get_ancestor(Gtk.Box)):
                 return
 
             if not current_box.child_focus(direction):
-                self.window.props.display.beep()
+                current_box.keynav_failed(direction)
 
             self.window.props.focus_visible = True
 
@@ -253,16 +248,12 @@ class Gamepad(GObject.Object):
         if not (focus_widget := self.window.props.focus_widget):
             return
 
-        if not (focus_parent_widget := focus_widget.props.parent):
-            return
-
+        focus_parent_widget = focus_widget.props.parent
         if focus_parent_widget.child_focus(direction):
             self.window.props.focus_visible = True
             return
 
-        if not (focus_parent_widget := focus_parent_widget.props.parent):
-            return
-
+        focus_parent_widget = focus_parent_widget.props.parent
         if focus_parent_widget.child_focus(direction):
             self.window.props.focus_visible = True
             return
@@ -276,16 +267,7 @@ class Gamepad(GObject.Object):
             self.window.props.focus_visible = True
             return
 
-        self.window.props.display.beep()
-
-    def _navigate_top_bar(self, direction: Gtk.DirectionType):
-        if self.window.title_box.get_focus_child:
-            focus = self.window.header_bar.child_focus(direction)
-
-        if not focus:
-            self.window.props.display.beep()
-
-        self.window.props.focus_visible = True
+        focus_widget.keynav_failed(direction)
 
     def _get_active_menu_button(self) -> Gtk.MenuButton | None:
         for button in self.window.main_menu, self.window.sort_button:
@@ -337,13 +319,24 @@ def _on_device_disconnected(_monitor: Manette.Monitor, device: Manette.Device):
     model.remove(pos)
 
 
-if sys.platform.startswith("linux"):
-    monitor = Manette.Monitor()
+def _on_gamepads_changed(model: Gio.ListStore, _pos: int, _removed: int, _added: int):
+    print(f"{model.get_n_items()} gamepads connected.")
+    if model.get_n_items() > 0:
+        Gamepad.window.add_css_class("controller-connected")
+    else:
+        Gamepad.window.remove_css_class("controller-connected")
+
+
+def _setup_gamepad_monitor():
     monitor.connect(
         "device-connected",
         lambda _, device: model.append(Gamepad(device)),
     )  # pyright: ignore[reportCallIssue]
     monitor.connect("device-disconnected", _on_device_disconnected)
-
-    model = Gio.ListStore.new(Gamepad)
     model.splice(0, 0, tuple(_iterate_controllers()))
+
+
+if sys.platform.startswith("linux"):
+    monitor = Manette.Monitor()
+    model = Gio.ListStore.new(Gamepad)
+    model.connect("items-changed", _on_gamepads_changed)

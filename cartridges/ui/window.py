@@ -107,8 +107,11 @@ class Window(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _on_realize(self, *_args: Any):
-        if sys.platform.startswith("linux"):
-            Gamepad.window = self
+        if not sys.platform.startswith("linux"):
+            return
+
+        Gamepad.window = self
+        gamepads._setup_gamepad_monitor()
 
     @Gtk.Template.Callback()
     def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
