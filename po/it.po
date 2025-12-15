@@ -6,13 +6,14 @@
 # kramo <contact@kramo.hu>, 2023.
 # Giasko <dibiame@hotmail.it>, 2023.
 # Andrea Costola <lamaildiandreac@gmail.com>, 2024.
+# Pierfrancesco Passerini <p.passerini@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-12-23 12:00+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"PO-Revision-Date: 2025-12-15 10:00+0000\n"
+"Last-Translator: Pierfrancesco Passerini <p.passerini@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/it/>\n"
 "Language: it\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -30,6 +31,7 @@ msgid "Cartridges"
 msgstr "Cartucce"
 
 #: data/page.kramo.Cartridges.desktop.in:4
+#, fuzzy
 msgid "Game Launcher"
 msgstr "Launcher di giochi"
 
@@ -51,10 +53,10 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Cartucce è un semplice launcher per tutti i tuoi giochi. Supporta l'import "
-"di giochi da Steam, Lutris, Heroic e altri senza bisogno di login. Puoi "
-"organizzare e nascondere i giochi oppure scaricare le copertine da "
-"StreamGridDB."
+"Cartucce è un semplice launcher per tutti i tuoi giochi. Supporta "
+"l'importazione di giochi da Steam, Lutris, Heroic e altri senza bisogno di "
+"login. Puoi organizzare e nascondere i giochi, oppure scaricare le copertine "
+"da StreamGridDB."
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
 #: cartridges/details_dialog.py:77
@@ -130,12 +132,12 @@ msgstr "Cerca"
 
 #: data/gtk/help-overlay.blp:24 data/gtk/window.blp:544
 msgid "Keyboard Shortcuts"
-msgstr "Scorciatoie da Tastiera"
+msgstr "Scorciatoie da tastiera"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
 #: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
-msgstr "Annulla"
+msgstr "Ripristina"
 
 #: data/gtk/help-overlay.blp:34
 msgid "Quit"
@@ -147,7 +149,7 @@ msgstr "Attiva/disattiva la barra laterale"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:200 data/gtk/window.blp:267
 msgid "Main Menu"
-msgstr "Menù Principale"
+msgstr "Menù principale"
 
 #: data/gtk/help-overlay.blp:50
 msgid "Games"
@@ -155,7 +157,7 @@ msgstr "Giochi"
 
 #: data/gtk/help-overlay.blp:53 data/gtk/window.blp:193 data/gtk/window.blp:551
 msgid "Add Game"
-msgstr "Aggiungi Gioco"
+msgstr "Aggiungi gioco"
 
 #: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:58
 #: data/gtk/window.blp:27 data/gtk/window.blp:555
@@ -164,11 +166,11 @@ msgstr "Importa"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Show Hidden Games"
-msgstr "Mostra Giochi nascosti"
+msgstr "Mostra giochi nascosti"
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
-msgstr "Rimuovi Gioco"
+msgstr "Rimuovi gioco"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
 #: data/gtk/preferences.blp:365
@@ -198,7 +200,7 @@ msgstr "Immagini di alta qualità"
 #: data/gtk/preferences.blp:30
 msgid "Save game covers losslessly at the cost of storage"
 msgstr ""
-"Salva copertine dei giochi in formato lossless, consuma più spazio su disco"
+"Salva copertine dei giochi in formato lossless, richiede più spazio su disco"
 
 #: data/gtk/preferences.blp:35
 msgid "Danger Zone"
@@ -258,11 +260,11 @@ msgstr "Importa giochi da GOG"
 
 #: data/gtk/preferences.blp:174
 msgid "Import Amazon Games"
-msgstr "Importa giochi Amazon"
+msgstr "Importa giochi da Amazon"
 
 #: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
-msgstr "Importa giochi da aggiunti manualmente"
+msgstr "Importa giochi da dispositivi esterni"
 
 #: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
@@ -320,7 +322,7 @@ msgstr "Usa SteamGridDB"
 
 #: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
-msgstr "Scarica immagini durante l'aggiunta o l'import di giochi"
+msgstr "Scarica immagini durante l'aggiunta o l'importazione di giochi"
 
 #: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
@@ -344,7 +346,7 @@ msgstr "Aggiorna"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
-msgstr "Nessun Gioco Trovato"
+msgstr "Nessun gioco trovato"
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
 msgid "Try a different search"
@@ -352,7 +354,7 @@ msgstr "Prova una ricerca diversa"
 
 #: data/gtk/window.blp:21
 msgid "No Games"
-msgstr "Nessun Gioco"
+msgstr "Nessun gioco"
 
 #: data/gtk/window.blp:22
 msgid "Use the + button to add games"
@@ -360,7 +362,7 @@ msgstr "Usa il pulsante + per aggiungere giochi"
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
-msgstr "Nessun Gioco Nascosto"
+msgstr "Nessun gioco nascosto"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
@@ -380,7 +382,7 @@ msgstr "Importato"
 
 #: data/gtk/window.blp:260
 msgid "Hidden Games"
-msgstr "Giochi Nascosti"
+msgstr "Giochi nascosti"
 
 #: data/gtk/window.blp:368
 msgid "Game Title"
@@ -412,7 +414,7 @@ msgstr "Più vecchio"
 
 #: data/gtk/window.blp:529
 msgid "Last Played"
-msgstr "Ultimo Avvio"
+msgstr "Ultimo avvio"
 
 #: data/gtk/window.blp:536
 msgid "Show Hidden"
@@ -432,7 +434,7 @@ msgstr "ProtonDB"
 
 #: data/gtk/window.blp:566
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
@@ -447,7 +449,7 @@ msgstr "Alessandro Iepure https://ale.iepure.me"
 #. The variable is the date when the game was added
 #: cartridges/window.py:382
 msgid "Added: {}"
-msgstr "Aggiunto il: {}"
+msgstr "Aggiunto: {}"
 
 #: cartridges/window.py:385
 msgid "Never"
@@ -456,7 +458,7 @@ msgstr "Mai"
 #. The variable is the date when the game was last played
 #: cartridges/window.py:389
 msgid "Last played: {}"
-msgstr "Ultima riproduzione: {}"
+msgstr "Ultimo avvio: {}"
 
 #: cartridges/details_dialog.py:82
 msgid "Apply"
@@ -464,7 +466,7 @@ msgstr "Applica"
 
 #: cartridges/details_dialog.py:88
 msgid "Add New Game"
-msgstr "Aggiungi un Nuovo Gioco"
+msgstr "Aggiungi un nuovo gioco"
 
 #: cartridges/details_dialog.py:89
 msgid "Add"
@@ -487,12 +489,12 @@ msgstr "programma"
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
-msgstr "C:\\path\\to{}"
+msgstr "C:\\percorso\\a{}"
 
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
-msgstr "/percorso/to/{}"
+msgstr "/percorso/a/{}"
 
 #: cartridges/details_dialog.py:137
 msgid ""
@@ -506,7 +508,7 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
-"Per lanciare l'eseguibile \"{}\", utilizzare il comando:\n"
+"Per avviare l'eseguibile \"{}\", utilizzare il comando:\n"
 "\n"
 "<tt>\"{}\"</tt>\n"
 "\n"
@@ -514,7 +516,7 @@ msgstr ""
 "\n"
 "<tt>{} \"{}\"</tt>\n"
 "\n"
-"Se il percorso contiene spazi, assicurarsi di avvolgerlo in doppi apici!"
+"Se il percorso contiene spazi, assicurarsi di racchiuderlo tra doppi apici!"
 
 #: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
@@ -615,7 +617,7 @@ msgstr "L'anno scorso"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
-msgstr "Import dei giochi in corso…"
+msgstr "Importazione dei giochi in corso…"
 
 #: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
@@ -636,8 +638,8 @@ msgstr[1] "{} giochi importati"
 #: cartridges/importer/importer.py:383
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} rimosso"
-msgstr[1] "{} rimossi"
+msgstr[0] ", {} rimosso"
+msgstr[1] ", {} rimossi"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
@@ -664,6 +666,7 @@ msgid "The following playlists have no default core:"
 msgstr "Le seguenti playlist non hanno un core di default:"
 
 #: cartridges/importer/retroarch_source.py:133
+#, fuzzy
 msgid "Games with no core selected were not imported"
 msgstr "I giochi senza core selezionato non sono stati importati"
 
