@@ -34,6 +34,7 @@ class GameDetails(Adw.NavigationPage):
     __gtype_name__ = __qualname__
 
     stack: Adw.ViewStack = Gtk.Template.Child()
+    actions: Gtk.Box = Gtk.Template.Child()
     name_entry: Adw.EntryRow = Gtk.Template.Child()
     developer_entry: Adw.EntryRow = Gtk.Template.Child()
     executable_entry: Adw.EntryRow = Gtk.Template.Child()

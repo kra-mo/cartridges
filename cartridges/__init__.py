@@ -15,6 +15,10 @@ gi.require_versions({
     "Adw": "1",
 })
 
+if sys.platform.startswith("linux"):
+    gi.require_version("Manette", "0.2")
+
+
 from gi.repository import Gio, GLib
 
 from .config import APP_ID, LOCALEDIR, PKGDATADIR

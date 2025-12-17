@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright 2022-2025 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+import sys
 from collections.abc import Callable
 from gettext import gettext as _
 from typing import Any, TypeVar, cast
@@ -15,6 +16,10 @@ from cartridges.games import Game, GameSorter
 
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
+
+if sys.platform.startswith("linux"):
+    from cartridges import gamepads
+    from cartridges.gamepads import Gamepad
 
 SORT_MODES = {
     "last_played": ("last-played", True),
@@ -35,8 +40,12 @@ class Window(Adw.ApplicationWindow):
     __gtype_name__ = __qualname__
 
     navigation_view: Adw.NavigationView = Gtk.Template.Child()
-    toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
+    header_bar: Adw.HeaderBar = Gtk.Template.Child()
+    title_box: Gtk.CenterBox = Gtk.Template.Child()
     search_entry: Gtk.SearchEntry = Gtk.Template.Child()
+    sort_button: Gtk.MenuButton = Gtk.Template.Child()
+    main_menu_button: Gtk.MenuButton = Gtk.Template.Child()
+    toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: GameSorter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
@@ -67,7 +76,11 @@ class Window(Adw.ApplicationWindow):
         self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
         self.add_action_entries((
             ("search", lambda *_: self.search_entry.grab_focus()),
-            ("edit", lambda _action, param, *_: self._edit(param.get_uint32()), "u"),
+            (
+                "edit",
+                lambda _action, param, *_: self._edit(param.get_uint32()),
+                "u",
+            ),
             ("add", lambda *_: self._add()),
             ("undo", lambda *_: self._undo()),
         ))
@@ -87,6 +100,12 @@ class Window(Adw.ApplicationWindow):
             self._history[toast] = undo
 
         self.toast_overlay.add_toast(toast)
+
+    @Gtk.Template.Callback()
+    def _setup_gamepad_monitor(self, *_args):
+        if sys.platform.startswith("linux"):
+            Gamepad.window = self  # pyright: ignore[reportPossiblyUnboundVariable]
+            gamepads.setup_monitor()  # pyright: ignore[reportPossiblyUnboundVariable]
 
     @Gtk.Template.Callback()
     def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:

@@ -2,6 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 template $Window: Adw.ApplicationWindow {
+  realize => $_setup_gamepad_monitor();
   title: _("Cartridges");
 
   ShortcutController {
@@ -34,6 +35,7 @@ template $Window: Adw.ApplicationWindow {
   content: Adw.NavigationView navigation_view {
     Adw.NavigationPage {
       title: bind template.title;
+      tag: "games";
 
       styles [
         "view",
@@ -41,11 +43,11 @@ template $Window: Adw.ApplicationWindow {
 
       child: Adw.ToolbarView {
         [top]
-        Adw.HeaderBar {
+        Adw.HeaderBar header_bar {
           title-widget: Adw.Clamp clamp {
             tightening-threshold: bind clamp.maximum-size;
 
-            child: CenterBox {
+            child: CenterBox title_box {
               hexpand: true;
 
               center-widget: SearchEntry search_entry {
@@ -57,7 +59,7 @@ template $Window: Adw.ApplicationWindow {
                 stop-search => $_stop_search();
               };
 
-              end-widget: MenuButton {
+              end-widget: MenuButton sort_button {
                 icon-name: "filter-symbolic";
                 tooltip-text: _("Sort & Filter");
                 margin-start: 6;
@@ -113,7 +115,7 @@ template $Window: Adw.ApplicationWindow {
           }
 
           [end]
-          MenuButton {
+          MenuButton main_menu_button {
             icon-name: "open-menu-symbolic";
             tooltip-text: _("Main Menu");
             primary: true;
@@ -128,15 +130,7 @@ template $Window: Adw.ApplicationWindow {
         content: Adw.ToastOverlay toast_overlay {
           child: Adw.ViewStack {
             enable-transitions: true;
-            visible-child-name: bind $_if_else(
-              grid.model as <NoSelection>.n-items,
-              "grid",
-              $_if_else(
-                template.search-text,
-                "empty-search",
-                $_if_else(template.show-hidden, "empty-hidden", "empty") as <string>
-              ) as <string>
-            ) as <string>;
+            visible-child-name: bind $_if_else(grid.model as <NoSelection>.n-items, "grid", $_if_else(template.search-text, "empty-search", $_if_else(template.show-hidden, "empty-hidden", "empty") as <string>) as <string>) as <string>;
 
             Adw.ViewStackPage {
               name: "grid";

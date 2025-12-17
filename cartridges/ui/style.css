@@ -15,6 +15,7 @@
 }
 
 /* https://gitlab.gnome.org/World/highscore/-/blob/cea3c7492d0b3c78a8b79ca60e9a86e8cdd4ceaf/src/library/library.css#L86 */
+.controller-connected #grid > child:focus-within #cover,
 #grid > child:focus-within:focus-visible #cover {
   outline: 5px solid rgb(from var(--accent-color) r g b / 50%);
 }
@@ -73,6 +74,7 @@
 }
 
 @media (prefers-contrast: more) {
+  .controller-connected #grid > child:focus-within #cover,
   #grid > child:focus-within:focus-visible #cover {
     outline: 5px solid var(--accent-color);
   }
