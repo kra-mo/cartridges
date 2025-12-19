@@ -10,10 +10,15 @@ from typing import Any, TypeVar, cast
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-from cartridges import games, state_settings
+from cartridges import collections, games, state_settings
+from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game
 
+from .collections import (
+    CollectionFilter,  # noqa: F401
+    CollectionSidebarItem,
+)
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
 from .games import GameSorter
@@ -40,6 +45,8 @@ class Window(Adw.ApplicationWindow):
 
     __gtype_name__ = __qualname__
 
+    split_view: Adw.OverlaySplitView = Gtk.Template.Child()
+    collections: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     navigation_view: Adw.NavigationView = Gtk.Template.Child()
     header_bar: Adw.HeaderBar = Gtk.Template.Child()
     title_box: Gtk.CenterBox = Gtk.Template.Child()
@@ -53,6 +60,9 @@ class Window(Adw.ApplicationWindow):
 
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
+    collection = GObject.Property(type=Collection)
+
+    settings = GObject.Property(type=Gtk.Settings)
 
     @GObject.Property(type=Gio.ListStore)
     def games(self) -> Gio.ListStore:
@@ -65,14 +75,22 @@ class Window(Adw.ApplicationWindow):
         if PROFILE == "development":
             self.add_css_class("devel")
 
+        self.settings = self.get_settings()
+
         flags = Gio.SettingsBindFlags.DEFAULT
         state_settings.bind("width", self, "default-width", flags)
         state_settings.bind("height", self, "default-height", flags)
         state_settings.bind("is-maximized", self, "maximized", flags)
+        state_settings.bind("show-sidebar", self.split_view, "show-sidebar", flags)
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7901
         self.search_entry.set_key_capture_widget(self)
+        self.collections.bind_model(
+            collections.model,
+            lambda collection: CollectionSidebarItem(collection=collection),
+        )
 
+        self.add_action(state_settings.create_action("show-sidebar"))
         self.add_action(state_settings.create_action("sort-mode"))
         self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
         self.add_action_entries((
@@ -103,6 +121,18 @@ class Window(Adw.ApplicationWindow):
         self.toast_overlay.add_toast(toast)
 
     @Gtk.Template.Callback()
+    def _show_sidebar_title(self, _obj, layout: str) -> bool:
+        right_window_controls = layout.replace("appmenu", "").startswith(":")
+        return right_window_controls and not sys.platform.startswith("darwin")
+
+    @Gtk.Template.Callback()
+    def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
+        item = sidebar.get_item(index)
+        self.collection = (
+            item.collection if isinstance(item, CollectionSidebarItem) else None
+        )
+
+    @Gtk.Template.Callback()
     def _setup_gamepad_monitor(self, *_args):
         if sys.platform.startswith("linux"):
             Gamepad.window = self  # pyright: ignore[reportPossiblyUnboundVariable]
@@ -111,6 +141,10 @@ class Window(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
         return first if condition else second
+
+    @Gtk.Template.Callback()
+    def _format(self, _obj, string: str, *args: Any) -> str:
+        return string.format(*args)
 
     @Gtk.Template.Callback()
     def _show_details(self, grid: Gtk.GridView, position: int):

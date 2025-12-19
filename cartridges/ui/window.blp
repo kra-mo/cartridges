@@ -27,8 +27,21 @@ template $Window: Adw.ApplicationWindow {
     }
 
     Shortcut {
+      trigger: "F9";
+      action: "action(win.show-sidebar)";
+    }
+
+    Shortcut {
       trigger: "<Control>w";
       action: "action(window.close)";
+    }
+  }
+
+  Adw.Breakpoint {
+    condition ("max-width: 730px") // 3 columns + 48px of inherent padding
+
+    setters {
+      split_view.collapsed: true;
     }
   }
 
@@ -41,198 +54,267 @@ template $Window: Adw.ApplicationWindow {
         "view",
       ]
 
-      child: Adw.ToolbarView {
-        [top]
-        Adw.HeaderBar header_bar {
-          title-widget: Adw.Clamp clamp {
-            tightening-threshold: bind clamp.maximum-size;
+      child: Adw.OverlaySplitView split_view {
+        sidebar-width-unit: px;
+        min-sidebar-width: 224; // Width of 1 column
+        max-sidebar-width: bind split_view.min-sidebar-width;
 
-            child: CenterBox title_box {
-              hexpand: true;
+        sidebar: Adw.NavigationPage {
+          title: bind template.title;
 
-              center-widget: SearchEntry search_entry {
-                hexpand: true;
-                placeholder-text: _("Search games");
-                search-started => $_search_started();
-                search-changed => $_search_changed();
-                activate => $_search_activate();
-                stop-search => $_stop_search();
-              };
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              show-title: bind $_show_sidebar_title(template.settings as <Settings>.gtk-decoration-layout) as <bool>;
 
-              end-widget: MenuButton sort_button {
-                icon-name: "filter-symbolic";
-                tooltip-text: _("Sort & Filter");
-                margin-start: 6;
+              [start]
+              Button {
+                visible: bind split_view.show-sidebar;
+                action-name: "win.show-sidebar";
+                icon-name: "sidebar-show-symbolic";
+                tooltip-text: _("Toggle Sidebar");
+              }
+            }
 
-                menu-model: menu {
-                  section {
-                    label: _("Sort");
+            content: Adw.Sidebar sidebar {
+              activated => $_navigate();
 
-                    item {
-                      label: _("Last Played");
-                      action: "win.sort-mode";
-                      target: "last_played";
-                    }
+              Adw.SidebarSection {
+                Adw.SidebarItem {
+                  icon-name: "view-grid-symbolic";
+                  title: _("All Games");
+                }
+              }
 
-                    item {
-                      label: _("A-Z");
-                      action: "win.sort-mode";
-                      target: "a-z";
-                    }
-
-                    item {
-                      label: _("Z-A");
-                      action: "win.sort-mode";
-                      target: "z-a";
-                    }
-
-                    item {
-                      label: _("Newest");
-                      action: "win.sort-mode";
-                      target: "newest";
-                    }
-
-                    item {
-                      label: _("Oldest");
-                      action: "win.sort-mode";
-                      target: "oldest";
-                    }
-                  }
-
-                  section {
-                    item (_("Show Hidden Games"), "win.show-hidden")
-                  }
-                };
-              };
+              Adw.SidebarSection collections {
+                title: _("Collections");
+              }
             };
           };
+        };
 
-          [start]
-          Button {
-            icon-name: "list-add-symbolic";
-            tooltip-text: _("Add Game");
-            action-name: "win.add";
-          }
+        content: Adw.NavigationPage {
+          title: _("Games");
 
-          [end]
-          MenuButton main_menu_button {
-            icon-name: "open-menu-symbolic";
-            tooltip-text: _("Main Menu");
-            primary: true;
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar header_bar {
+              title-widget: Adw.Clamp clamp {
+                tightening-threshold: bind clamp.maximum-size;
 
-            menu-model: menu {
-              item (_("Keyboard Shortcuts"), "app.shortcuts")
-              item (_("About Cartridges"), "app.about")
-            };
-          }
-        }
+                child: CenterBox title_box {
+                  hexpand: true;
 
-        content: Adw.ToastOverlay toast_overlay {
-          child: Adw.ViewStack {
-            enable-transitions: true;
-            visible-child-name: bind $_if_else(
-              grid.model as <NoSelection>.n-items,
-              "grid",
-              $_if_else(
-                template.search-text,
-                "empty-search",
-                $_if_else(template.show-hidden, "empty-hidden", "empty") as <string>
-              ) as <string>
-            ) as <string>;
+                  center-widget: SearchEntry search_entry {
+                    hexpand: true;
+                    placeholder-text: _("Search games");
+                    search-started => $_search_started();
+                    search-changed => $_search_changed();
+                    activate => $_search_activate();
+                    stop-search => $_stop_search();
+                  };
 
-            Adw.ViewStackPage {
-              name: "grid";
+                  end-widget: MenuButton sort_button {
+                    icon-name: "filter-symbolic";
+                    tooltip-text: _("Sort & Filter");
+                    margin-start: 6;
 
-              child: ScrolledWindow {
-                hscrollbar-policy: never;
+                    menu-model: menu {
+                      section {
+                        label: _("Sort");
 
-                child: GridView grid {
+                        item {
+                          label: _("Last Played");
+                          action: "win.sort-mode";
+                          target: "last_played";
+                        }
+
+                        item {
+                          label: _("A-Z");
+                          action: "win.sort-mode";
+                          target: "a-z";
+                        }
+
+                        item {
+                          label: _("Z-A");
+                          action: "win.sort-mode";
+                          target: "z-a";
+                        }
+
+                        item {
+                          label: _("Newest");
+                          action: "win.sort-mode";
+                          target: "newest";
+                        }
+
+                        item {
+                          label: _("Oldest");
+                          action: "win.sort-mode";
+                          target: "oldest";
+                        }
+                      }
+
+                      section {
+                        item (_("Show Hidden Games"), "win.show-hidden")
+                      }
+                    };
+                  };
+                };
+              };
+
+              [start]
+              Button {
+                visible: bind split_view.show-sidebar inverted;
+                action-name: "win.show-sidebar";
+                icon-name: "sidebar-show-symbolic";
+                tooltip-text: _("Toggle Sidebar");
+              }
+
+              [start]
+              Button {
+                icon-name: "list-add-symbolic";
+                tooltip-text: _("Add Game");
+                action-name: "win.add";
+              }
+
+              [end]
+              MenuButton main_menu_button {
+                icon-name: "open-menu-symbolic";
+                tooltip-text: _("Main Menu");
+                primary: true;
+
+                menu-model: menu {
+                  item (_("Keyboard Shortcuts"), "app.shortcuts")
+                  item (_("About Cartridges"), "app.about")
+                };
+              }
+            }
+
+            content: Adw.ToastOverlay toast_overlay {
+              child: Adw.ViewStack {
+                enable-transitions: true;
+                visible-child-name: bind $_if_else(
+                  grid.model as <NoSelection>.n-items,
+                  "grid",
+                  $_if_else(
+                    template.search-text,
+                    "empty-search",
+                    $_if_else(
+                      template.show-hidden,
+                      "empty-hidden",
+                      $_if_else(template.collection, "empty-collection", "empty") as <string>
+                    ) as <string>
+                  ) as <string>
+                ) as <string>;
+
+                Adw.ViewStackPage {
                   name: "grid";
-                  single-click-activate: true;
-                  activate => $_show_details();
 
-                  model: NoSelection {
-                    model: SortListModel {
-                      sorter: $GameSorter sorter {};
+                  child: ScrolledWindow {
+                    hscrollbar-policy: never;
 
-                      model: FilterListModel {
-                        watch-items: true;
+                    child: GridView grid {
+                      name: "grid";
+                      single-click-activate: true;
+                      activate => $_show_details();
 
-                        filter: EveryFilter {
-                          AnyFilter {
-                            StringFilter {
-                              expression: expr item as <$Game>.name;
-                              search: bind template.search-text;
-                            }
+                      model: NoSelection {
+                        model: SortListModel {
+                          sorter: $GameSorter sorter {};
 
-                            StringFilter {
-                              expression: expr item as <$Game>.developer;
-                              search: bind template.search-text;
-                            }
-                          }
+                          model: FilterListModel {
+                            watch-items: true;
 
-                          BoolFilter {
-                            expression: expr item as <$Game>.hidden;
-                            invert: bind template.show-hidden inverted;
-                          }
+                            filter: EveryFilter {
+                              $CollectionFilter {
+                                collection: bind template.collection;
+                              }
 
-                          BoolFilter {
-                            expression: expr item as <$Game>.removed;
-                            invert: true;
-                          }
+                              AnyFilter {
+                                StringFilter {
+                                  expression: expr item as <$Game>.name;
+                                  search: bind template.search-text;
+                                }
 
-                          BoolFilter {
-                            expression: expr item as <$Game>.blacklisted;
-                            invert: true;
-                          }
+                                StringFilter {
+                                  expression: expr item as <$Game>.developer;
+                                  search: bind template.search-text;
+                                }
+                              }
+
+                              BoolFilter {
+                                expression: expr item as <$Game>.hidden;
+                                invert: bind template.show-hidden inverted;
+                              }
+
+                              BoolFilter {
+                                expression: expr item as <$Game>.removed;
+                                invert: true;
+                              }
+
+                              BoolFilter {
+                                expression: expr item as <$Game>.blacklisted;
+                                invert: true;
+                              }
+                            };
+
+                            model: bind template.games;
+                          };
                         };
+                      };
 
-                        model: bind template.games;
+                      factory: BuilderListItemFactory {
+                        template ListItem {
+                          child: $GameItem {
+                            game: bind template.item;
+                            position: bind template.position;
+                          };
+                        }
                       };
                     };
                   };
+                }
 
-                  factory: BuilderListItemFactory {
-                    template ListItem {
-                      child: $GameItem {
-                        game: bind template.item;
-                        position: bind template.position;
-                      };
-                    }
+                Adw.ViewStackPage {
+                  name: "empty-search";
+
+                  child: Adw.StatusPage {
+                    icon-name: "edit-find-symbolic";
+                    title: _("No Games Found");
+                    description: _("Try a different search");
                   };
-                };
+                }
+
+                Adw.ViewStackPage {
+                  name: "empty-hidden";
+
+                  child: Adw.StatusPage {
+                    icon-name: "view-conceal-symbolic";
+                    title: _("No Hidden Games");
+                    description: _("Games you hide will appear here");
+                  };
+                }
+
+                Adw.ViewStackPage {
+                  name: "empty-collection";
+
+                  child: Adw.StatusPage {
+                    icon-name: bind template.collection as <$Collection>.icon-name;
+                    title: bind $_format(_("No Games in {}"), template.collection as <$Collection>.name) as <string>;
+                  };
+                }
+
+                Adw.ViewStackPage {
+                  name: "empty";
+
+                  child: Adw.StatusPage {
+                    icon-name: bind template.application as <Application>.application-id;
+                    title: _("No Games");
+                    description: _("Use the + button to add games");
+                  };
+                }
               };
-            }
-
-            Adw.ViewStackPage {
-              name: "empty-search";
-
-              child: Adw.StatusPage {
-                icon-name: "edit-find-symbolic";
-                title: _("No Games Found");
-                description: _("Try a different search");
-              };
-            }
-
-            Adw.ViewStackPage {
-              name: "empty-hidden";
-
-              child: Adw.StatusPage {
-                icon-name: "view-conceal-symbolic";
-                title: _("No Hidden Games");
-                description: _("Games you hide will appear here");
-              };
-            }
-
-            Adw.ViewStackPage {
-              name: "empty";
-
-              child: Adw.StatusPage {
-                icon-name: bind template.application as <Application>.application-id;
-                title: _("No Games");
-                description: _("Use the + button to add games");
-              };
-            }
+            };
           };
         };
       };

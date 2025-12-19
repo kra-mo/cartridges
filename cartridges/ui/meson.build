@@ -1,6 +1,7 @@
 python.install_sources(
     files(
         '__init__.py',
+        'collections.py',
         'cover.py',
         'game_details.py',
         'game_item.py',
