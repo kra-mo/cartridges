@@ -1,6 +1,13 @@
 [project]
 requires-python = ">= 3.13"
 
+[dependency-groups]
+dev = [
+  "pre-commit",
+  "pygobject-stubs",
+  "ruff",
+]
+
 [tool.pyright]
 exclude = ["**/__pycache__", "**/.*", "_build/**"]
 typeCheckingMode = "strict"
