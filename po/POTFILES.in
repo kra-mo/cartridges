@@ -10,6 +10,7 @@ cartridges/ui/game-details.blp
 cartridges/ui/game-item.blp
 cartridges/ui/game_details.py
 cartridges/ui/game_item.py
+cartridges/ui/games.py
 cartridges/ui/shortcuts-dialog.blp
 cartridges/ui/window.blp
 cartridges/ui/window.py

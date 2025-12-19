@@ -12,10 +12,11 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from cartridges import games, state_settings
 from cartridges.config import PREFIX, PROFILE
-from cartridges.games import Game, GameSorter
+from cartridges.games import Game
 
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
+from .games import GameSorter
 
 if sys.platform.startswith("linux"):
     from cartridges import gamepads

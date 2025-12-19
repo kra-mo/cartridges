@@ -5,7 +5,6 @@
 
 import itertools
 import json
-import locale
 import os
 import subprocess
 from collections.abc import Callable, Generator, Iterable
@@ -14,11 +13,11 @@ from json import JSONDecodeError
 from pathlib import Path
 from shlex import quote
 from types import UnionType
-from typing import TYPE_CHECKING, Any, NamedTuple, Self, cast, override
+from typing import TYPE_CHECKING, Any, NamedTuple, Self, cast
 
-from gi.repository import Gdk, Gio, GLib, GObject, Gtk
+from gi.repository import Gdk, Gio, GLib, GObject
 
-from cartridges import DATA_DIR, state_settings
+from cartridges import DATA_DIR
 
 if TYPE_CHECKING:
     from .application import Application
@@ -51,13 +50,6 @@ _COVERS_DIR = DATA_DIR / "covers"
 
 _SPEC_VERSION = 2.0
 _MANUALLY_ADDED_ID = "imported"
-_SORT_MODES = {
-    "last_played": ("last-played", True),
-    "a-z": ("name", False),
-    "z-a": ("name", True),
-    "newest": ("added", True),
-    "oldest": ("added", False),
-}
 
 
 class Game(Gio.SimpleActionGroup):
@@ -188,39 +180,6 @@ class Game(Gio.SimpleActionGroup):
         app = cast("Application", Gio.Application.get_default())
         window = cast("Window", app.props.active_window)
         window.send_toast(title, undo=undo)
-
-
-class GameSorter(Gtk.Sorter):
-    """A sorter for game objects.
-
-    Automatically updates if the "sort-mode" GSetting changes.
-    """
-
-    __gtype_name__ = __qualname__
-
-    def __init__(self, **kwargs: Any):
-        super().__init__(**kwargs)
-
-        state_settings.connect(
-            "changed::sort-mode", lambda *_: self.changed(Gtk.SorterChange.DIFFERENT)
-        )
-
-    @override
-    def do_compare(self, game1: Game, game2: Game) -> Gtk.Ordering:  # pyright: ignore[reportIncompatibleMethodOverride]
-        prop, invert = _SORT_MODES[state_settings.get_string("sort-mode")]
-        a = (game2 if invert else game1).get_property(prop)
-        b = (game1 if invert else game2).get_property(prop)
-
-        return Gtk.Ordering(
-            self._name_cmp(a, b)
-            if isinstance(a, str)
-            else ((a > b) - (a < b)) or self._name_cmp(game1.name, game2.name)
-        )
-
-    @staticmethod
-    def _name_cmp(a: str, b: str) -> int:
-        a, b = (name.lower().removeprefix("the ") for name in (a, b))
-        return max(-1, min(locale.strcoll(a, b), 1))
 
 
 def _increment_manually_added_id() -> int:
