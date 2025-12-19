@@ -3,7 +3,7 @@
 
 import sys
 
-from gi.events import GLibEventLoopPolicy
+from gi.events import GLibEventLoopPolicy  # pyright: ignore[reportMissingImports]
 
 from .application import Application
 

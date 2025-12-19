@@ -1,0 +1,53 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+        exclude_types: [svg]
+      - id: file-contents-sorter
+        files: po/LINGUAS|po/POTFILES\.in
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.10
+    hooks:
+      - id: ruff-check
+        args: [--select, I, --fix] # Only fix unsorted imports automatically
+      - id: ruff-check
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: pyright
+        name: pyright
+        language: node
+        additional_dependencies: [pyright]
+        types_or: [python, pyi]
+        entry: pyright
+
+      - id: blueprint-format # https://gitlab.gnome.org/GNOME/blueprint-compiler/-/merge_requests/258
+        name: blueprint
+        language: system
+        files: \.blp$
+        entry: blueprint-compiler format --fix --no-diff
+
+      - id: meson-format
+        name: meson
+        language: python
+        files: meson\.build|meson\.options
+        entry: meson format --inplace
+
+      - id: prettier
+        name: prettier
+        language: node
+        additional_dependencies: [prettier]
+        types_or: [css, json, yaml]
+        entry: prettier --write
+
+      - id: svgo
+        name: svgo
+        language: node
+        additional_dependencies: [svgo]
+        types: [svg]
+        entry: svgo
