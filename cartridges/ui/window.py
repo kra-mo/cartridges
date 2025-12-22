@@ -10,11 +10,13 @@ from typing import Any, TypeVar, cast
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-from cartridges import STATE_SETTINGS, collections, games
+from cartridges import STATE_SETTINGS, games
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game
+from cartridges.ui import collections
 
+from .collection_details import CollectionDetails
 from .collections import (
     CollectionFilter,  # noqa: F401
     CollectionSidebarItem,
@@ -47,6 +49,7 @@ class Window(Adw.ApplicationWindow):
 
     split_view: Adw.OverlaySplitView = Gtk.Template.Child()
     collections: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
+    new_collection_item: Adw.SidebarItem = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     navigation_view: Adw.NavigationView = Gtk.Template.Child()
     header_bar: Adw.HeaderBar = Gtk.Template.Child()
     title_box: Gtk.CenterBox = Gtk.Template.Child()
@@ -63,6 +66,8 @@ class Window(Adw.ApplicationWindow):
     collection = GObject.Property(type=Collection)
 
     settings = GObject.Property(type=Gtk.Settings)
+
+    _selected_sidebar_item = 0
 
     @GObject.Property(type=Gio.ListStore)
     def games(self) -> Gio.ListStore:
@@ -128,9 +133,24 @@ class Window(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
         item = sidebar.get_item(index)
-        self.collection = (
-            item.collection if isinstance(item, CollectionSidebarItem) else None
-        )
+
+        match item:
+            case self.new_collection_item:
+                self._add_collection()
+                sidebar.props.selected = self._selected_sidebar_item
+            case CollectionSidebarItem():
+                self.collection = item.collection
+            case _:
+                self.collection = None
+
+        if item is not self.new_collection_item:
+            self._selected_sidebar_item = index
+
+    @Gtk.Template.Callback()
+    def _update_selection(self, sidebar: Adw.Sidebar, *_args):  # pyright: ignore[reportAttributeAccessIssue]
+        if sidebar.props.selected_item is self.new_collection_item:
+            sidebar.props.selected = self._selected_sidebar_item
+        self._selected_sidebar_item = sidebar.props.selected
 
     @Gtk.Template.Callback()
     def _setup_gamepad_monitor(self, *_args):
@@ -185,6 +205,10 @@ class Window(Adw.ApplicationWindow):
             self.navigation_view.push_by_tag("details")
 
         self.details.edit()
+
+    def _add_collection(self):
+        details = CollectionDetails(collection=Collection())
+        details.present(self)
 
     def _undo(self, toast: Adw.Toast | None = None):
         if toast:

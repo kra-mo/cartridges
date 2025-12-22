@@ -78,6 +78,8 @@ template $Window: Adw.ApplicationWindow {
 
             content: Adw.Sidebar sidebar {
               activated => $_navigate();
+              setup-menu => $_setup_sidebar_menu();
+              notify::selected => $_update_selection();
 
               Adw.SidebarSection {
                 Adw.SidebarItem {
@@ -88,6 +90,13 @@ template $Window: Adw.ApplicationWindow {
 
               Adw.SidebarSection collections {
                 title: _("Collections");
+              }
+
+              Adw.SidebarSection {
+                Adw.SidebarItem new_collection_item {
+                  icon-name: "list-add-symbolic";
+                  title: _("New Collection");
+                }
               }
             };
           };

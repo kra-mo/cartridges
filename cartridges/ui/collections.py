@@ -5,6 +5,7 @@ from typing import Any, override
 
 from gi.repository import Adw, GObject, Gtk
 
+from cartridges import collections
 from cartridges.collections import Collection
 from cartridges.games import Game
 
@@ -51,3 +52,17 @@ class CollectionSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttribute
         super().__init__(**kwargs)
 
         self.bind_property("title", self, "tooltip", GObject.BindingFlags.SYNC_CREATE)
+
+
+sorter = Gtk.StringSorter.new(Gtk.PropertyExpression.new(Collection, None, "name"))
+model = Gtk.SortListModel.new(
+    Gtk.FilterListModel(
+        model=collections.model,
+        filter=Gtk.BoolFilter(
+            expression=Gtk.PropertyExpression.new(Collection, None, "removed"),
+            invert=True,
+        ),
+        watch_items=True,  # pyright: ignore[reportCallIssue]
+    ),
+    sorter,
+)

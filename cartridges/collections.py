@@ -21,6 +21,11 @@ class Collection(GObject.Object):
 
     icon_name = GObject.Property(type=str)
 
+    @GObject.Property(type=bool, default=True)
+    def in_model(self) -> bool:
+        """Whether `self` has been added to the model."""
+        return self in model
+
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
@@ -53,6 +58,9 @@ def load():
     """Load collections from GSettings."""
     model.splice(0, 0, tuple(_get_collections()))
     save()
+
+    for collection in model:
+        collection.notify("in-model")
 
 
 def save():

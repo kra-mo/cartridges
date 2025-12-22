@@ -1,0 +1,58 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CollectionDetails: Adw.Dialog {
+  title: _("New Collection");
+  content-width: 360;
+  default-widget: apply_button;
+  focus-widget: name_entry;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
+
+      [start]
+      Button {
+        action-name: "window.close";
+        icon-name: "cancel-symbolic";
+        tooltip-text: _("Cancel");
+      }
+
+      [end]
+      Button apply_button {
+        action-name: "details.apply";
+        icon-name: "apply-symbolic";
+        tooltip-text: _("Add");
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.EntryRow name_entry {
+          title: _("Name");
+          activates-default: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        FlowBox icons_box {
+          min-children-per-line: 7;
+
+          styles [
+            "navigation-sidebar",
+          ]
+        }
+
+        styles [
+          "card",
+        ]
+      }
+    };
+  };
+}

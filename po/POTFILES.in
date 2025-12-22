@@ -6,6 +6,8 @@ cartridges/sources/__init__.py
 cartridges/sources/heroic.py
 cartridges/sources/imported.py
 cartridges/sources/steam.py
+cartridges/ui/collection-details.blp
+cartridges/ui/collection_details.py
 cartridges/ui/collections.py
 cartridges/ui/cover.blp
 cartridges/ui/cover.py
