@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
-from typing import Any, cast
+from typing import Any, TypeVar, cast
 
 from gi.repository import Adw, Gio, GObject, Gtk
 
@@ -33,6 +33,8 @@ ICONS = (
     "fist",
 )
 
+_T = TypeVar("_T")
+
 
 @Gtk.Template.from_resource(f"{PREFIX}/collection-details.ui")
 class CollectionDetails(Adw.Dialog):
@@ -43,7 +45,19 @@ class CollectionDetails(Adw.Dialog):
     name_entry: Adw.EntryRow = Gtk.Template.Child()
     icons_box: Gtk.FlowBox = Gtk.Template.Child()
 
-    collection = GObject.Property(type=Collection)
+    sort_changed = GObject.Signal()
+
+    @GObject.Property(type=Collection)
+    def collection(self) -> Collection:
+        """The collection that `self` represents."""
+        return self._collection
+
+    @collection.setter
+    def collection(self, collection: Collection):
+        self._collection = collection
+        self.insert_action_group("collection", collection)
+        remove_action = cast(Gio.SimpleAction, collection.lookup_action("remove"))
+        remove_action.connect("activate", lambda *_: self.force_close())
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -77,7 +91,12 @@ class CollectionDetails(Adw.Dialog):
         )
 
     def _apply(self):
-        self.collection.name = self.name_entry.props.text
+        name = self.name_entry.props.text
+        if self.collection.name != name:
+            self.collection.name = name
+            if self.collection.in_model:
+                self.emit("sort-changed")
+
         self.collection.icon = ICONS[
             self.icons_box.get_selected_children()[0].get_index()
         ]
@@ -88,3 +107,11 @@ class CollectionDetails(Adw.Dialog):
 
         collections.save()
         self.close()
+
+    @Gtk.Template.Callback()
+    def _or(self, _obj, first: _T, second: _T) -> _T:
+        return first or second
+
+    @Gtk.Template.Callback()
+    def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
+        return first if condition else second

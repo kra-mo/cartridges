@@ -2,14 +2,19 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 from collections.abc import Generator, Iterable
-from typing import Any, cast
+from gettext import gettext as _
+from typing import TYPE_CHECKING, Any, cast
 
 from gi.repository import Gio, GLib, GObject
 
 from cartridges import SETTINGS
 
+if TYPE_CHECKING:
+    from .application import Application
+    from .ui.window import Window
 
-class Collection(GObject.Object):
+
+class Collection(Gio.SimpleActionGroup):
     """Collection data class."""
 
     __gtype_name__ = __qualname__
@@ -37,6 +42,27 @@ class Collection(GObject.Object):
             GObject.BindingFlags.SYNC_CREATE,
             lambda _, name: f"{name}-symbolic",
         )
+
+        self.add_action(remove := Gio.SimpleAction.new("remove"))
+        remove.connect("activate", lambda *_: self._remove())
+        self.bind_property(
+            "in-model",
+            remove,
+            "enabled",
+            GObject.BindingFlags.SYNC_CREATE,
+        )
+
+    def _remove(self):
+        self.removed = True
+        save()
+
+        app = cast("Application", Gio.Application.get_default())
+        window = cast("Window", app.props.active_window)
+        window.send_toast(_("{} removed").format(self.name), undo=self._undo_remove)
+
+    def _undo_remove(self):
+        self.removed = False
+        save()
 
 
 def _get_collections() -> Generator[Collection]:

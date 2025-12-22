@@ -48,8 +48,10 @@ class Window(Adw.ApplicationWindow):
     __gtype_name__ = __qualname__
 
     split_view: Adw.OverlaySplitView = Gtk.Template.Child()
+    sidebar: Adw.Sidebar = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     collections: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     new_collection_item: Adw.SidebarItem = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
+    collection_menu: Gio.Menu = Gtk.Template.Child()
     navigation_view: Adw.NavigationView = Gtk.Template.Child()
     header_bar: Adw.HeaderBar = Gtk.Template.Child()
     title_box: Gtk.CenterBox = Gtk.Template.Child()
@@ -63,16 +65,38 @@ class Window(Adw.ApplicationWindow):
 
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
-    collection = GObject.Property(type=Collection)
 
     settings = GObject.Property(type=Gtk.Settings)
 
+    _collection: Collection | None = None
+    _collection_removed_signal: int | None = None
     _selected_sidebar_item = 0
 
     @GObject.Property(type=Gio.ListStore)
     def games(self) -> Gio.ListStore:
         """Model of the user's games."""
         return games.model
+
+    @GObject.Property(type=Collection)
+    def collection(self) -> Collection | None:
+        """The currently selected collection."""
+        return self._collection
+
+    @collection.setter
+    def collection(self, collection: Collection | None):
+        if self._collection and self._collection_removed_signal:
+            self._collection.disconnect(self._collection_removed_signal)
+
+        self._collection = collection
+        self._collection_removed_signal = (
+            collection.connect("notify::removed", lambda *_: self._collection_removed())
+            if collection
+            else None
+        )
+
+    def _collection_removed(self):
+        self.collection = None
+        self.sidebar.props.selected = 0
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -106,6 +130,16 @@ class Window(Adw.ApplicationWindow):
                 "u",
             ),
             ("add", lambda *_: self._add()),
+            (
+                "edit-collection",
+                lambda _action, param, *_: self._edit_collection(param.get_uint32()),
+                "u",
+            ),
+            (
+                "remove-collection",
+                lambda _action, param, *_: self._remove_collection(param.get_uint32()),
+                "u",
+            ),
             ("undo", lambda *_: self._undo()),
         ))
 
@@ -151,6 +185,20 @@ class Window(Adw.ApplicationWindow):
         if sidebar.props.selected_item is self.new_collection_item:
             sidebar.props.selected = self._selected_sidebar_item
         self._selected_sidebar_item = sidebar.props.selected
+
+    @Gtk.Template.Callback()
+    def _setup_sidebar_menu(self, _sidebar, item: Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
+        if isinstance(item, CollectionSidebarItem):
+            menu = self.collection_menu
+            menu.remove_all()
+            menu.append(
+                _("Edit"),
+                f"win.edit-collection(uint32 {item.get_section_index()})",
+            )
+            menu.append(
+                _("Remove"),
+                f"win.remove-collection(uint32 {item.get_section_index()})",
+            )
 
     @Gtk.Template.Callback()
     def _setup_gamepad_monitor(self, *_args):
@@ -209,6 +257,19 @@ class Window(Adw.ApplicationWindow):
     def _add_collection(self):
         details = CollectionDetails(collection=Collection())
         details.present(self)
+
+    def _edit_collection(self, pos: int):
+        collection = self.collections.get_item(pos).collection
+        details = CollectionDetails(collection=collection)
+        details.connect(
+            "sort-changed",
+            lambda *_: collections.sorter.changed(Gtk.SorterChange.DIFFERENT),
+        )
+        details.present(self)
+
+    def _remove_collection(self, pos: int):
+        collection = self.collections.get_item(pos).collection
+        collection.activate_action("remove")
 
     def _undo(self, toast: Adw.Toast | None = None):
         if toast:

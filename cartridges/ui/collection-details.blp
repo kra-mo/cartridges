@@ -2,10 +2,17 @@ using Gtk 4.0;
 using Adw 1;
 
 template $CollectionDetails: Adw.Dialog {
-  title: _("New Collection");
+  title: bind $_or(template.collection as <$Collection>.name, _("New Collection")) as <string>;
   content-width: 360;
   default-widget: apply_button;
   focus-widget: name_entry;
+
+  ShortcutController {
+    Shortcut {
+      trigger: "Delete|KP_Delete";
+      action: "action(collection.remove)";
+    }
+  }
 
   child: Adw.ToolbarView {
     [top]
@@ -24,7 +31,7 @@ template $CollectionDetails: Adw.Dialog {
       Button apply_button {
         action-name: "details.apply";
         icon-name: "apply-symbolic";
-        tooltip-text: _("Add");
+        tooltip-text: bind $_if_else(template.collection as <$Collection>.in-model, _("Apply"), _("Add")) as <string>;
 
         styles [
           "suggested-action",
@@ -36,6 +43,7 @@ template $CollectionDetails: Adw.Dialog {
       Adw.PreferencesGroup {
         Adw.EntryRow name_entry {
           title: _("Name");
+          text: bind template.collection as <$Collection>.name;
           activates-default: true;
         }
       }
@@ -52,6 +60,19 @@ template $CollectionDetails: Adw.Dialog {
         styles [
           "card",
         ]
+      }
+
+      Adw.PreferencesGroup {
+        visible: bind remove_row.sensitive;
+
+        Adw.ButtonRow remove_row {
+          title: _("Remove");
+          action-name: "collection.remove";
+
+          styles [
+            "destructive-action",
+          ]
+        }
       }
     };
   };
