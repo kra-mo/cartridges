@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
-from collections.abc import Generator
-from typing import Any
+from collections.abc import Generator, Iterable
+from typing import Any, cast
 
-from gi.repository import Gio, GObject
+from gi.repository import Gio, GLib, GObject
 
 from cartridges import SETTINGS
 
@@ -52,6 +52,26 @@ def _get_collections() -> Generator[Collection]:
 def load():
     """Load collections from GSettings."""
     model.splice(0, 0, tuple(_get_collections()))
+    save()
+
+
+def save():
+    """Save collections to GSettings."""
+    SETTINGS.set_value(
+        "collections",
+        GLib.Variant(
+            "aa{sv}",
+            (
+                {
+                    "name": GLib.Variant.new_string(collection.name),
+                    "icon": GLib.Variant.new_string(collection.icon),
+                    "game-ids": GLib.Variant.new_strv(collection.game_ids),
+                    "removed": GLib.Variant.new_boolean(collection.removed),
+                }
+                for collection in cast(Iterable[Collection], model)
+            ),
+        ),
+    )
 
 
 model = Gio.ListStore.new(Collection)
