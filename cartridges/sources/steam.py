@@ -8,7 +8,7 @@ import re
 import struct
 import time
 from collections import defaultdict
-from collections.abc import Generator, Iterable, Sequence
+from collections.abc import Generator, Sequence
 from contextlib import suppress
 from gettext import gettext as _
 from os import SEEK_CUR
@@ -107,7 +107,7 @@ class _AppInfo(NamedTuple):
         return cls(common.get("type"), developer, capsule)
 
 
-def get_games(*, skip_ids: Iterable[str]) -> Generator[Game]:
+def get_games() -> Generator[Game]:
     """Installed Steam games."""
     added = int(time.time())
 
@@ -115,7 +115,7 @@ def get_games(*, skip_ids: Iterable[str]) -> Generator[Game]:
     with (_data_dir() / "appcache" / "appinfo.vdf").open("rb") as fp:
         appinfo = defaultdict(_AppInfo, _parse_appinfo_vdf(fp))
 
-    appids = {i.rsplit("_", 1)[-1] for i in skip_ids if i.startswith(f"{ID}_")}
+    appids = set()
     for manifest in _manifests():
         try:
             name, appid, stateflags, lastplayed = _App.from_manifest(manifest)

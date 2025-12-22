@@ -7,17 +7,16 @@ import itertools
 import json
 import os
 import subprocess
-from collections.abc import Callable, Generator, Iterable
+from collections.abc import Callable, Iterable
 from gettext import gettext as _
-from json import JSONDecodeError
 from pathlib import Path
 from shlex import quote
 from types import UnionType
 from typing import TYPE_CHECKING, Any, NamedTuple, Self, cast
 
-from gi.repository import Gdk, Gio, GLib, GObject
+from gi.repository import Gdk, Gio, GObject
 
-from cartridges import DATA_DIR
+from . import DATA_DIR
 
 if TYPE_CHECKING:
     from .application import Application
@@ -45,8 +44,8 @@ PROPERTIES: tuple[_GameProp, ...] = (
     _GameProp("version", float),
 )
 
-_GAMES_DIR = DATA_DIR / "games"
-_COVERS_DIR = DATA_DIR / "covers"
+GAMES_DIR = DATA_DIR / "games"
+COVERS_DIR = DATA_DIR / "covers"
 
 _SPEC_VERSION = 2.0
 _MANUALLY_ADDED_ID = "imported"
@@ -150,8 +149,8 @@ class Game(Gio.SimpleActionGroup):
         """Save the game's properties to disk."""
         properties = {prop.name: getattr(self, prop.name) for prop in PROPERTIES}
 
-        _GAMES_DIR.mkdir(parents=True, exist_ok=True)
-        path = (_GAMES_DIR / self.game_id).with_suffix(".json")
+        GAMES_DIR.mkdir(parents=True, exist_ok=True)
+        path = (GAMES_DIR / self.game_id).with_suffix(".json")
         with path.open(encoding="utf-8") as f:
             json.dump(properties, f, indent=4)
 
@@ -182,6 +181,13 @@ class Game(Gio.SimpleActionGroup):
         window.send_toast(title, undo=undo)
 
 
+def load():
+    """Populate `games.model` with all games from all sources."""
+    from . import sources
+
+    model.splice(0, 0, tuple(sources.get_games()))
+
+
 def _increment_manually_added_id() -> int:
     numbers = {
         game.game_id.split("_")[1]
@@ -194,33 +200,6 @@ def _increment_manually_added_id() -> int:
             return count
 
     raise ValueError
-
-
-def load() -> Generator[Game]:
-    """Load previously saved games from disk."""
-    for path in _GAMES_DIR.glob("*.json"):
-        try:
-            with path.open(encoding="utf-8") as f:
-                data = json.load(f)
-        except (JSONDecodeError, UnicodeDecodeError):
-            continue
-
-        try:
-            game = Game.from_data(data)
-        except TypeError:
-            continue
-
-        cover_path = _COVERS_DIR / game.game_id
-        for ext in ".gif", ".tiff":
-            filename = str(cover_path.with_suffix(ext))
-            try:
-                game.cover = Gdk.Texture.new_from_filename(filename)
-            except GLib.Error:
-                continue
-            else:
-                break
-
-        yield game
 
 
 model = Gio.ListStore.new(Game)

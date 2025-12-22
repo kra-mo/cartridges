@@ -111,11 +111,11 @@ class _NileSource(_StoreSource):
                     yield entry["id"]
 
 
-def get_games(*, skip_ids: Iterable[str]) -> Generator[Game]:
+def get_games() -> Generator[Game]:
     """Installed Heroic games."""
     added = int(time.time())
     for source in _LegendarySource, _GOGSource, _NileSource, _SideloadSource:
-        yield from _games_from(source, added, skip_ids)
+        yield from _games_from(source, added)
 
 
 def _config_dir() -> Path:
@@ -139,9 +139,7 @@ def _hidden_app_names() -> Generator[str]:
                 yield game["appName"]
 
 
-def _games_from(
-    source: type[_Source], added: int, skip_ids: Iterable[str]
-) -> Generator[Game]:
+def _games_from(source: type[_Source], added: int) -> Generator[Game]:
     try:
         with (_config_dir() / source.library_path()).open() as fp:
             library = json.load(fp)
@@ -164,10 +162,6 @@ def _games_from(
             if (installed is not None) and (app_name not in installed):
                 continue
 
-            game_id = f"{source_id}_{app_name}"
-            if game_id in skip_ids:
-                continue
-
             cover_uri = f"{entry.get('art_square', '')}{source.COVER_URI_PARAMS}"
             cover_path = images_cache / sha256(cover_uri.encode()).hexdigest()
 
@@ -179,7 +173,7 @@ def _games_from(
             yield Game(
                 added=added,
                 executable=f"{OPEN} heroic://launch/{entry['runner']}/{app_name}",
-                game_id=game_id,
+                game_id=f"{source_id}_{app_name}",
                 source=source_id,
                 hidden=app_name in hidden,
                 name=entry["title"],

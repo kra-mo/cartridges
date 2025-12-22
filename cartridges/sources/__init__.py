@@ -3,7 +3,7 @@
 
 import os
 import sys
-from collections.abc import Generator, Iterable
+from collections.abc import Generator
 from pathlib import Path
 from typing import Final, Protocol
 
@@ -44,6 +44,17 @@ class Source(Protocol):
     NAME: Final[str]
 
     @staticmethod
-    def get_games(*, skip_ids: Iterable[str]) -> Generator[Game]:
-        """Installed games, except those in `skip_ids`."""
+    def get_games() -> Generator[Game]:
+        """Installed games."""
         ...
+
+
+def get_games() -> Generator[Game]:
+    """Installed games from all sources."""
+    from . import heroic, imported, steam
+
+    for source in heroic, imported, steam:
+        try:
+            yield from source.get_games()
+        except OSError:
+            continue
