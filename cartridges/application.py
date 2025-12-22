@@ -39,7 +39,7 @@ class Application(Adw.Application):
         for source in sources:
             try:
                 yield from source.get_games(skip_ids=skip_ids)
-            except FileNotFoundError:
+            except OSError:
                 continue
 
     @override

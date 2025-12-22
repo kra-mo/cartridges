@@ -66,7 +66,7 @@ class _StoreSource(_Source):
         try:
             with (_config_dir() / cls._INSTALLED_PATH).open() as fp:
                 data = json.load(fp)
-        except (FileNotFoundError, JSONDecodeError):
+        except (OSError, JSONDecodeError):
             return set()
 
         return set(cls._installed(data))
@@ -130,7 +130,7 @@ def _hidden_app_names() -> Generator[str]:
     try:
         with (_config_dir() / "store" / "config.json").open() as fp:
             config = json.load(fp)
-    except (FileNotFoundError, JSONDecodeError):
+    except (OSError, JSONDecodeError):
         return
 
     with suppress(TypeError, KeyError):
@@ -145,7 +145,7 @@ def _games_from(
     try:
         with (_config_dir() / source.library_path()).open() as fp:
             library = json.load(fp)
-    except (FileNotFoundError, JSONDecodeError):
+    except (OSError, JSONDecodeError):
         return
 
     if not isinstance(library := library.get(source.LIBRARY_KEY), Iterable):
