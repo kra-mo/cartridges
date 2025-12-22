@@ -12,8 +12,20 @@ from gi.repository import GLib
 from cartridges.games import Game
 
 DATA = Path(GLib.get_user_data_dir())
+CONFIG = Path(GLib.get_user_config_dir())
+CACHE = Path(GLib.get_user_cache_dir())
+
 FLATPAK = Path.home() / ".var" / "app"
+HOST_DATA = Path(os.getenv("HOST_XDG_DATA_HOME", Path.home() / ".local" / "share"))
+HOST_CONFIG = Path(os.getenv("HOST_XDG_CONFIG_HOME", Path.home() / ".config"))
+HOST_CACHE = Path(os.getenv("HOST_XDG_CACHE_HOME", Path.home() / ".cache"))
+
 PROGRAM_FILES_X86 = Path(os.getenv("PROGRAMFILES(X86)", r"C:\Program Files (x86)"))
+APPDATA = Path(os.getenv("APPDATA", r"C:\Users\Default\AppData\Roaming"))
+LOCAL_APPDATA = Path(
+    os.getenv("CSIDL_LOCAL_APPDATA", r"C:\Users\Default\AppData\Local")
+)
+
 APPLICATION_SUPPORT = Path.home() / "Library" / "Application Support"
 
 OPEN = (

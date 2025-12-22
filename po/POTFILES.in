@@ -3,6 +3,7 @@ cartridges/collections.py
 cartridges/gamepads.py
 cartridges/games.py
 cartridges/sources/__init__.py
+cartridges/sources/heroic.py
 cartridges/sources/steam.py
 cartridges/ui/collections.py
 cartridges/ui/cover.blp

@@ -12,6 +12,7 @@
     "--socket=wayland",
     "--talk-name=org.freedesktop.Flatpak",
     "--filesystem=host:ro",
+    "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/heroic/:ro",
     "--filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam/:ro"
   ],
   "cleanup": [
