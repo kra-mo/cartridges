@@ -164,6 +164,52 @@ template $GameDetails: Adw.NavigationPage {
                         ]
                       }
 
+                      MenuButton {
+                        icon-name: "collection-symbolic";
+                        tooltip-text: _("Collections");
+                        valign: center;
+                        notify::active => $_setup_collections();
+
+                        popover: PopoverMenu {
+                          menu-model: menu {
+                            item (_("New Collection"), "win.add-collection")
+
+                            item {
+                              custom: "collections";
+                            }
+                          };
+
+                          [collections]
+                          Box {
+                            orientation: vertical;
+                            visible: bind collections_box.visible;
+
+                            Separator {}
+
+                            Label {
+                              label: _("Collections");
+                              halign: start;
+                              margin-top: 6;
+                              margin-bottom: 9;
+                              margin-start: 12;
+                              margin-end: 12;
+
+                              styles [
+                                "heading",
+                              ]
+                            }
+
+                            $CollectionsBox collections_box {
+                              game: bind template.game;
+                            }
+                          }
+                        };
+
+                        styles [
+                          "circular",
+                        ]
+                      }
+
                       Button hide_button {
                         visible: bind hide_button.sensitive;
                         action-name: "game.hide";

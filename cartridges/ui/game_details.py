@@ -16,6 +16,7 @@ from cartridges import games
 from cartridges.config import PREFIX
 from cartridges.games import Game
 
+from .collections import CollectionsBox
 from .cover import Cover  # noqa: F401
 
 _POP_ON_ACTION = "hide", "unhide", "remove"
@@ -35,6 +36,7 @@ class GameDetails(Adw.NavigationPage):
 
     stack: Adw.ViewStack = Gtk.Template.Child()
     actions: Gtk.Box = Gtk.Template.Child()
+    collections_box: CollectionsBox = Gtk.Template.Child()
     name_entry: Adw.EntryRow = Gtk.Template.Child()
     developer_entry: Adw.EntryRow = Gtk.Template.Child()
     executable_entry: Adw.EntryRow = Gtk.Template.Child()
@@ -130,6 +132,13 @@ class GameDetails(Adw.NavigationPage):
             self.activate_action("navigation.pop")
 
         self.stack.props.visible_child_name = "details"
+
+    @Gtk.Template.Callback()
+    def _setup_collections(self, button: Gtk.MenuButton, *_args):
+        if button.props.active:
+            self.collections_box.build()
+        else:
+            self.collections_box.finish()
 
     @Gtk.Template.Callback()
     def _or(self, _obj, first: _T, second: _T) -> _T:

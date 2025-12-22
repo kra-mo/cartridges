@@ -8,6 +8,7 @@ from gi.repository import Gio, GLib, GObject, Gtk
 from cartridges.config import PREFIX
 from cartridges.games import Game
 
+from .collections import CollectionsBox
 from .cover import Cover  # noqa: F401
 
 
@@ -19,6 +20,7 @@ class GameItem(Gtk.Box):
 
     motion: Gtk.EventControllerMotion = Gtk.Template.Child()
     options: Gtk.MenuButton = Gtk.Template.Child()
+    collections_box: CollectionsBox = Gtk.Template.Child()
     play: Gtk.Button = Gtk.Template.Child()
 
     position = GObject.Property(type=int)
@@ -56,3 +58,10 @@ class GameItem(Gtk.Box):
         ):
             widget.props.can_focus = widget.props.can_target = reveal
             (widget.remove_css_class if reveal else widget.add_css_class)("hidden")
+
+    @Gtk.Template.Callback()
+    def _setup_collections(self, button: Gtk.MenuButton, *_args):
+        if button.props.active:
+            self.collections_box.build()
+        else:
+            self.collections_box.finish()

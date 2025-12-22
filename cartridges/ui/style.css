@@ -24,7 +24,8 @@
   padding: 12px;
 }
 
-#game-item button {
+#game-item overlay > button,
+#game-item overlay > menubutton > button {
   color: white;
   backdrop-filter: blur(9px) brightness(30%) saturate(600%);
   box-shadow:
@@ -37,12 +38,12 @@
     opacity, transform;
 }
 
-#game-item button.hidden {
+#game-item overlay > button.hidden {
   opacity: 0;
   transform: translateY(3px);
 }
 
-#game-item menubutton.hidden button {
+#game-item overlay > menubutton.hidden > button {
   opacity: 0;
   transform: translateY(-6px);
 }
@@ -83,7 +84,8 @@
     outline: 5px solid var(--accent-color);
   }
 
-  #game-item button {
+  #game-item overlay > button,
+  #game-item overlay > menubutton > button {
     backdrop-filter: blur(9px) brightness(20%) saturate(600%);
   }
 

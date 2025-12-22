@@ -17,10 +17,7 @@ from cartridges.games import Game
 from cartridges.ui import collections
 
 from .collection_details import CollectionDetails
-from .collections import (
-    CollectionFilter,  # noqa: F401
-    CollectionSidebarItem,
-)
+from .collections import CollectionFilter, CollectionSidebarItem
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
 from .games import GameSorter
@@ -61,6 +58,7 @@ class Window(Adw.ApplicationWindow):
     toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: GameSorter = Gtk.Template.Child()
+    collection_filter: CollectionFilter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
     search_text = GObject.Property(type=str)
@@ -130,6 +128,7 @@ class Window(Adw.ApplicationWindow):
                 "u",
             ),
             ("add", lambda *_: self._add()),
+            ("add-collection", lambda *_: self._add_collection()),
             (
                 "edit-collection",
                 lambda _action, param, *_: self._edit_collection(param.get_uint32()),
@@ -139,6 +138,10 @@ class Window(Adw.ApplicationWindow):
                 "remove-collection",
                 lambda _action, param, *_: self._remove_collection(param.get_uint32()),
                 "u",
+            ),
+            (
+                "notify-collection-filter",
+                lambda *_: self.collection_filter.changed(Gtk.FilterChange.DIFFERENT),
             ),
             ("undo", lambda *_: self._undo()),
         ))
