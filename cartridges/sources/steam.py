@@ -6,7 +6,6 @@ import itertools
 import logging
 import re
 import struct
-import time
 from collections import defaultdict
 from collections.abc import Generator, Sequence
 from contextlib import suppress
@@ -109,8 +108,6 @@ class _AppInfo(NamedTuple):
 
 def get_games() -> Generator[Game]:
     """Installed Steam games."""
-    added = int(time.time())
-
     librarycache = _data_dir() / "appcache" / "librarycache"
     with (_data_dir() / "appcache" / "appinfo.vdf").open("rb") as fp:
         appinfo = defaultdict(_AppInfo, _parse_appinfo_vdf(fp))
@@ -138,7 +135,6 @@ def get_games() -> Generator[Game]:
 
         appids.add(appid)
         yield Game(
-            added=added,
             executable=f"{OPEN} steam://rungameid/{appid}",
             game_id=f"{ID}_{appid}",
             source=ID,

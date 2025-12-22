@@ -3,7 +3,9 @@
 
 import os
 import sys
+import time
 from collections.abc import Generator
+from contextlib import suppress
 from pathlib import Path
 from typing import Final, Protocol
 
@@ -53,8 +55,9 @@ def get_games() -> Generator[Game]:
     """Installed games from all sources."""
     from . import heroic, imported, steam
 
+    added = int(time.time())
     for source in heroic, imported, steam:
-        try:
-            yield from source.get_games()
-        except OSError:
-            continue
+        with suppress(OSError):
+            for game in source.get_games():
+                game.added = game.added or added
+                yield game

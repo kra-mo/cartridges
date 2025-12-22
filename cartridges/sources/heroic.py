@@ -3,7 +3,6 @@
 # SPDX-FileCopyrightText: Copyright 2022-2025 kramo
 
 import json
-import time
 from abc import ABC, abstractmethod
 from collections.abc import Generator, Iterable
 from contextlib import suppress
@@ -113,9 +112,8 @@ class _NileSource(_StoreSource):
 
 def get_games() -> Generator[Game]:
     """Installed Heroic games."""
-    added = int(time.time())
     for source in _LegendarySource, _GOGSource, _NileSource, _SideloadSource:
-        yield from _games_from(source, added)
+        yield from _games_from(source)
 
 
 def _config_dir() -> Path:
@@ -139,7 +137,7 @@ def _hidden_app_names() -> Generator[str]:
                 yield game["appName"]
 
 
-def _games_from(source: type[_Source], added: int) -> Generator[Game]:
+def _games_from(source: type[_Source]) -> Generator[Game]:
     try:
         with (_config_dir() / source.library_path()).open() as fp:
             library = json.load(fp)
@@ -171,7 +169,6 @@ def _games_from(source: type[_Source], added: int) -> Generator[Game]:
                 cover = None
 
             yield Game(
-                added=added,
                 executable=f"{OPEN} heroic://launch/{entry['runner']}/{app_name}",
                 game_id=f"{source_id}_{app_name}",
                 source=source_id,
