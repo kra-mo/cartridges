@@ -153,7 +153,7 @@ class Window(Adw.ApplicationWindow):
 
         Optionally display a button allowing the user to `undo` an operation.
         """
-        toast = Adw.Toast.new(title)
+        toast = Adw.Toast(title=title, use_markup=False)
         if undo:
             toast.props.button_label = _("Undo")
             toast.props.priority = Adw.ToastPriority.HIGH

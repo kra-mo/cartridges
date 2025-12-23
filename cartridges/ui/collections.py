@@ -4,7 +4,7 @@
 from collections.abc import Iterable
 from typing import Any, cast, override
 
-from gi.repository import Adw, GObject, Gtk
+from gi.repository import Adw, GLib, GObject, Gtk
 
 from cartridges import collections
 from cartridges.collections import Collection
@@ -52,7 +52,13 @@ class CollectionSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttribute
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self.bind_property("title", self, "tooltip", GObject.BindingFlags.SYNC_CREATE)
+        self.bind_property(
+            "title",
+            self,
+            "tooltip",
+            GObject.BindingFlags.SYNC_CREATE,
+            lambda _, name: GLib.markup_escape_text(name),
+        )
 
 
 class CollectionButton(Gtk.ToggleButton):
