@@ -46,6 +46,12 @@ class GameItem(Gtk.Box):
                     "win.edit", GLib.Variant.new_uint32(self.position)
                 ),
             ),
+            (
+                "add-collection",
+                lambda *_: self.activate_action(
+                    "win.add-collection", GLib.Variant.new_string(self.game.game_id)
+                ),
+            ),
         ))
 
         self._reveal_buttons()

@@ -128,7 +128,11 @@ class Window(Adw.ApplicationWindow):
                 "u",
             ),
             ("add", lambda *_: self._add()),
-            ("add-collection", lambda *_: self._add_collection()),
+            (
+                "add-collection",
+                lambda _action, param, *_: self._add_collection(param.get_string()),
+                "s",
+            ),
             (
                 "edit-collection",
                 lambda _action, param, *_: self._edit_collection(param.get_uint32()),
@@ -257,8 +261,12 @@ class Window(Adw.ApplicationWindow):
 
         self.details.edit()
 
-    def _add_collection(self):
-        details = CollectionDetails(collection=Collection())
+    def _add_collection(self, game_id: str | None = None):
+        collection = Collection()
+        if game_id:
+            collection.game_ids.append(game_id)
+
+        details = CollectionDetails(collection=collection)
         details.present(self)
 
     def _edit_collection(self, pos: int):

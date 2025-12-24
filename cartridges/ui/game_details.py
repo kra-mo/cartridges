@@ -10,7 +10,7 @@ from gettext import gettext as _
 from typing import Any, TypeVar, cast
 from urllib.parse import quote
 
-from gi.repository import Adw, Gdk, Gio, GObject, Gtk
+from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
 
 from cartridges import games
 from cartridges.config import PREFIX
@@ -78,6 +78,12 @@ class GameDetails(Adw.NavigationPage):
                     param.get_string().format(quote(self.game.name))
                 ),
                 "s",
+            ),
+            (
+                "add-collection",
+                lambda *_: self.activate_action(
+                    "win.add-collection", GLib.Variant.new_string(self.game.game_id)
+                ),
             ),
         ))
 
