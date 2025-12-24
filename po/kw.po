@@ -7,9 +7,10 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-12-24 18:00+0000\n"
+"Last-Translator: Flynn <cirilla@tuta.io>\n"
+"Language-Team: Cornish <https://hosted.weblate.org/projects/cartridges/"
+"cartridges/kw/>\n"
 "Language: kw\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,27 +22,29 @@ msgstr ""
 "1000000 == 100000) ? 2 : ((n % 100 == 3 || n % 100 == 23 || n % 100 == 43 || "
 "n % 100 == 63 || n % 100 == 83) ? 3 : ((n != 1 && (n % 100 == 1 || n % 100 "
 "== 21 || n % 100 == 41 || n % 100 == 61 || n % 100 == 81)) ? 4 : 5))));\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
 #: data/page.kramo.Cartridges.metainfo.xml.in:40 data/gtk/window.blp:47
 #: data/gtk/window.blp:83
 msgid "Cartridges"
-msgstr ""
+msgstr "Kartryjennow"
 
 #: data/page.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr ""
+msgstr "Lonchyer Gwariow"
 
 #: data/page.kramo.Cartridges.desktop.in:5
 #: data/page.kramo.Cartridges.metainfo.xml.in:10
 msgid "Launch all your games"
-msgstr ""
+msgstr "Lonchya oll agas gwariow"
 
 #: data/page.kramo.Cartridges.desktop.in:11
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
+"gwariow;lonchyer;steam;lutris;heroic;botellow;itch;flatpak;legendary;retroarch;"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:12
 msgid ""
@@ -50,443 +53,447 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
+"Kartryjennow yw unn lonchyer simpel rag oll agas gwariow. Y re skoodhyans "
+"rag ynperthyow gwariow a-dhia Steam, Lutris, Heroic, ha moy gans omgelm na "
+"res. Hwi gallos sortya ha kudha gwariow po iskarga artys boks a-dhia "
+"SteamGridDB."
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
 #: cartridges/details_dialog.py:77
 msgid "Game Details"
-msgstr ""
+msgstr "Manylyon Gwari"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:48
 msgid "Edit Game Details"
-msgstr ""
+msgstr "Dyllo Manylyon Gwari"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
-msgstr ""
+msgstr "Settyansow"
 
 #: data/gtk/details-dialog.blp:15
 msgid "Cancel"
-msgstr ""
+msgstr "Hedhi"
 
 #: data/gtk/details-dialog.blp:45
 msgid "New Cover"
-msgstr ""
+msgstr "Art Nowydh"
 
 #: data/gtk/details-dialog.blp:64
 msgid "Delete Cover"
-msgstr ""
+msgstr "Dilea Art"
 
 #: data/gtk/details-dialog.blp:92 data/gtk/game.blp:80
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: data/gtk/details-dialog.blp:96
 msgid "Developer (optional)"
-msgstr ""
+msgstr "Awtour (a-dhewis)"
 
 #: data/gtk/details-dialog.blp:102
 msgid "Executable"
-msgstr ""
+msgstr "Eksekutadow"
 
 #: data/gtk/details-dialog.blp:108
 msgid "Select File"
-msgstr ""
+msgstr "Dewis Restren"
 
 #: data/gtk/details-dialog.blp:119
 msgid "More Info"
-msgstr ""
+msgstr "Moy Kudhlow"
 
 #: data/gtk/game.blp:101 data/gtk/game.blp:109 data/gtk/window.blp:444
 msgid "Edit"
-msgstr ""
+msgstr "Dyllo"
 
 #: data/gtk/game.blp:102 cartridges/window.py:359
 msgid "Hide"
-msgstr ""
+msgstr "Kudha"
 
 #: data/gtk/game.blp:103 data/gtk/game.blp:111 data/gtk/window.blp:464
 msgid "Remove"
-msgstr ""
+msgstr "Dilea"
 
 #: data/gtk/game.blp:110 cartridges/window.py:361
 msgid "Unhide"
-msgstr ""
+msgstr "Diskudha"
 
 #: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
-msgstr ""
+msgstr "Ollgemmyn"
 
 #: data/gtk/help-overlay.blp:14 data/gtk/window.blp:207 data/gtk/window.blp:223
 #: data/gtk/window.blp:274 data/gtk/window.blp:290 data/gtk/window.blp:475
 msgid "Search"
-msgstr ""
+msgstr "Hwilas"
 
 #: data/gtk/help-overlay.blp:24 data/gtk/window.blp:544
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Kesunyansow Bysowek"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
 #: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
-msgstr ""
+msgstr "Digelmi"
 
 #: data/gtk/help-overlay.blp:34
 msgid "Quit"
-msgstr ""
+msgstr "Kwytya"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:187
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Dewis Bord Lestri"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:200 data/gtk/window.blp:267
 msgid "Main Menu"
-msgstr ""
+msgstr "Rol Chif"
 
 #: data/gtk/help-overlay.blp:50
 msgid "Games"
-msgstr ""
+msgstr "Gwariow"
 
 #: data/gtk/help-overlay.blp:53 data/gtk/window.blp:193 data/gtk/window.blp:551
 msgid "Add Game"
-msgstr ""
+msgstr "Addya Gwari"
 
 #: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:58
 #: data/gtk/window.blp:27 data/gtk/window.blp:555
 msgid "Import"
-msgstr ""
+msgstr "Ynperthi"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Show Hidden Games"
-msgstr ""
+msgstr "Diskwedhes Gwariow Kudh"
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
-msgstr ""
+msgstr "Dilea Gwari"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
 #: data/gtk/preferences.blp:365
 msgid "Behavior"
-msgstr ""
+msgstr "Fara"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
-msgstr ""
+msgstr "Kwytya Wosa Lonchyow Gwariow"
 
 #: data/gtk/preferences.blp:20
 msgid "Cover Image Launches Game"
-msgstr ""
+msgstr "Art Lonchys Gwari"
 
 #: data/gtk/preferences.blp:21
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr ""
+msgstr "Keschanjys an fara a an art ha an boton gwari"
 
 #: data/gtk/preferences.blp:26 cartridges/details_dialog.py:91
 msgid "Images"
-msgstr ""
+msgstr "Imajys"
 
 #: data/gtk/preferences.blp:29
 msgid "High Quality Images"
-msgstr ""
+msgstr "Imajys Kwalita Da"
 
 #: data/gtk/preferences.blp:30
 msgid "Save game covers losslessly at the cost of storage"
-msgstr ""
+msgstr "Sawya art yn perfyth dhe an kost a dalghuster"
 
 #: data/gtk/preferences.blp:35
 msgid "Danger Zone"
-msgstr ""
+msgstr "Kwartron Peryl"
 
 #: data/gtk/preferences.blp:39
 msgid "Remove All Games"
-msgstr ""
+msgstr "Dilea Oll Gwariow"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Ynperthi Awtomatek Gwariow"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
-msgstr ""
+msgstr "Dilea Gwariow Disleys"
 
 #: data/gtk/preferences.blp:74
 msgid "Sources"
-msgstr ""
+msgstr "Pennfentynnyow"
 
 #: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
-msgstr ""
+msgstr "Steam"
 
 #: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
 #: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
 #: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
 #: data/gtk/preferences.blp:273
 msgid "Install Location"
-msgstr ""
+msgstr "Tyller Lea"
 
 #: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
-msgstr ""
+msgstr "Lutris"
 
 #: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
-msgstr ""
+msgstr "Ynperthi Gwariow Steam"
 
 #: data/gtk/preferences.blp:135
 msgid "Import Flatpak Games"
-msgstr ""
+msgstr "Ynperthi Gwariow Flatpak"
 
 #: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
-msgstr ""
+msgstr "Heroic"
 
 #: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
-msgstr ""
+msgstr "Ynperthi Gwariow Epic"
 
 #: data/gtk/preferences.blp:170
 msgid "Import GOG Games"
-msgstr ""
+msgstr "Ynperthi Gwariow GOG"
 
 #: data/gtk/preferences.blp:174
 msgid "Import Amazon Games"
-msgstr ""
+msgstr "Ynperthi Gwariow Amazon"
 
 #: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
-msgstr ""
+msgstr "Ynperthy Gwariow Amalkargys"
 
 #: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
-msgstr ""
+msgstr "Botellow"
 
 #: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
-msgstr ""
+msgstr "itch"
 
 #: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
-msgstr ""
+msgstr "Legendary"
 
 #: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
-msgstr ""
+msgstr "RetroArch"
 
 #: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:301
 msgid "System Location"
-msgstr ""
+msgstr "Tyller System"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:319
 msgid "User Location"
-msgstr ""
+msgstr "Tyller Usyer"
 
 #: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
-msgstr ""
+msgstr "Ynperthi Lonchyerow Gwari"
 
 #: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
-msgstr ""
+msgstr "Enworrans Rol"
 
 #: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
-msgstr ""
+msgstr "SteamGridDB"
 
 #: data/gtk/preferences.blp:357
 msgid "Authentication"
-msgstr ""
+msgstr "Omgelmi"
 
 #: data/gtk/preferences.blp:360
 msgid "API Key"
-msgstr ""
+msgstr "Ger-Tremena API"
 
 #: data/gtk/preferences.blp:368
 msgid "Use SteamGridDB"
-msgstr ""
+msgstr "Gul Devnydh a SteamGridDB"
 
 #: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
-msgstr ""
+msgstr "Iskarga imajys p'eur addyow po ynperthyow gwariow"
 
 #: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
-msgstr ""
+msgstr "Preferya a-ugh dhe Imajys Sodhogel"
 
 #: data/gtk/preferences.blp:377
 msgid "Prefer Animated Images"
-msgstr ""
+msgstr "Preferya Imajys Bywhes"
 
 #: data/gtk/preferences.blp:383
 msgid "Update Covers"
-msgstr ""
+msgstr "Nowedhi Art"
 
 #: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
-msgstr ""
+msgstr "Iskarga art rag gwariow seulabrys yn agas lyverva"
 
 #: data/gtk/preferences.blp:389
 msgid "Update"
-msgstr ""
+msgstr "Nowedhi"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
-msgstr ""
+msgstr "Gwariow Kavos Vyth"
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
 msgid "Try a different search"
-msgstr ""
+msgstr "Assaya unn hwithrans dihaval"
 
 #: data/gtk/window.blp:21
 msgid "No Games"
-msgstr ""
+msgstr "Gwariow Vyth"
 
 #: data/gtk/window.blp:22
 msgid "Use the + button to add games"
-msgstr ""
+msgstr "Devnydhya an boton + dhe addya gwariow"
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
-msgstr ""
+msgstr "Gwariow Kudh Vyth"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
-msgstr ""
+msgstr "Gwariow hwi kudha vydh diskwedhes omma"
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
 msgid "All Games"
-msgstr ""
+msgstr "Oll Gwariow"
 
 #: data/gtk/window.blp:140 cartridges/main.py:251
 msgid "Added"
-msgstr ""
+msgstr "Addys"
 
 #: data/gtk/window.blp:162
 msgid "Imported"
-msgstr ""
+msgstr "Ynperthys"
 
 #: data/gtk/window.blp:260
 msgid "Hidden Games"
-msgstr ""
+msgstr "Gwariow Kudh"
 
 #: data/gtk/window.blp:368
 msgid "Game Title"
-msgstr ""
+msgstr "Titel Gwari"
 
 #: data/gtk/window.blp:425
 msgid "Play"
-msgstr ""
+msgstr "Gwari"
 
 #: data/gtk/window.blp:502
 msgid "Sort"
-msgstr ""
+msgstr "Sortya"
 
 #: data/gtk/window.blp:505
 msgid "A-Z"
-msgstr ""
+msgstr "A-Z"
 
 #: data/gtk/window.blp:511
 msgid "Z-A"
-msgstr ""
+msgstr "Z-A"
 
 #: data/gtk/window.blp:517
 msgid "Newest"
-msgstr ""
+msgstr "Nowydh Moggha"
 
 #: data/gtk/window.blp:523
 msgid "Oldest"
-msgstr ""
+msgstr "Koth Moggha"
 
 #: data/gtk/window.blp:529
 msgid "Last Played"
-msgstr ""
+msgstr "Gwarys a-Dhiwedhes"
 
 #: data/gtk/window.blp:536
 msgid "Show Hidden"
-msgstr ""
+msgstr "Diskwedhes Kudh"
 
 #: data/gtk/window.blp:545
 msgid "About Cartridges"
-msgstr ""
+msgstr "A-dro Kartryjennow"
 
 #: data/gtk/window.blp:562
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:564
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:566
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
 msgid "{} launched"
-msgstr ""
+msgstr "{} lonchys"
 
 #. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
 msgid "translator-credits"
-msgstr ""
+msgstr "Flynn"
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:382
 msgid "Added: {}"
-msgstr ""
+msgstr "Addys: {}"
 
 #: cartridges/window.py:385
 msgid "Never"
-msgstr ""
+msgstr "Jammes"
 
 #. The variable is the date when the game was last played
 #: cartridges/window.py:389
 msgid "Last played: {}"
-msgstr ""
+msgstr "Gwarys a-Dhiwedhes: {}"
 
 #: cartridges/details_dialog.py:82
 msgid "Apply"
-msgstr ""
+msgstr "Gweytha"
 
 #: cartridges/details_dialog.py:88
 msgid "Add New Game"
-msgstr ""
+msgstr "Addya Gwari Nowydh"
 
 #: cartridges/details_dialog.py:89
 msgid "Add"
-msgstr ""
+msgstr "Addya"
 
 #: cartridges/details_dialog.py:102
 msgid "Executables"
-msgstr ""
+msgstr "Eksekutadowys"
 
 #. Translate this string as you would translate "file"
 #: cartridges/details_dialog.py:117
 msgid "file.txt"
-msgstr ""
+msgstr "restren.txt"
 
 #. As in software
 #: cartridges/details_dialog.py:119
 msgid "program"
-msgstr ""
+msgstr "towlenna"
 
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
-msgstr ""
+msgstr "C:\\tyller\\dhe\\{}"
 
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
-msgstr ""
+msgstr "/tyller/dhe/{}"
 
 #: cartridges/details_dialog.py:137
 msgid ""
@@ -500,160 +507,179 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
+"Rag lonchya an eksekutadow \"{}\", devnydhya an arghadow:\n"
+"\n"
+"<tt>\"{}</tt>\n"
+"\n"
+"Rag ygeri an restren \"{}\" gans an app defowt, devnydhya:\n"
+"\n"
+"<tt>{}\"{}\"</tt>\n"
+"\n"
+"Mar an tyller kontaynya spassow, maylya y yn \"devynnow dewblek\"!"
 
 #: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
-msgstr ""
+msgstr "Fyllis dhe Addya Gwari"
 
 #: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
-msgstr ""
+msgstr "Titel gwari res bos na gwag."
 
 #: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
-msgstr ""
+msgstr "Eksekutadow res bos na gwag."
 
 #: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
-msgstr ""
+msgstr "Fyllis dhe Gweytha Settyansow"
 
 #. The variable is the title of the game
 #: cartridges/game.py:139
 msgid "{} hidden"
-msgstr ""
+msgstr "{} kudh"
 
 #: cartridges/game.py:139
 msgid "{} unhidden"
-msgstr ""
+msgstr "{} diskudh"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
 msgid "{} removed"
-msgstr ""
+msgstr "{} removys"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
-msgstr ""
+msgstr "Oll gwariow removys"
 
 #: cartridges/preferences.py:188
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
+"Unn ger-tremena API yw res dhe gul devnydh a SteamGridDB. Hwi gallos dinythi "
+"unn {}omma{}."
 
 #: cartridges/preferences.py:203
 msgid "Downloading covers…"
-msgstr ""
+msgstr "Iskargow art…"
 
 #: cartridges/preferences.py:222
 msgid "Covers updated"
-msgstr ""
+msgstr "Nowedhys artys"
 
 #: cartridges/preferences.py:370
 msgid "Installation Not Found"
-msgstr ""
+msgstr "Leyans Na Kavos"
 
 #: cartridges/preferences.py:371
 msgid "Select a valid directory"
-msgstr ""
+msgstr "Dewis unn restrenva ewn"
 
 #: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
-msgstr ""
+msgstr "Gwarnyans"
 
 #: cartridges/preferences.py:441
 msgid "Invalid Directory"
-msgstr ""
+msgstr "Restrenva Anewn"
 
 #: cartridges/preferences.py:447
 msgid "Set Location"
-msgstr ""
+msgstr "Dewis Tyller"
 
 #: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
-msgstr ""
+msgstr "Amyttya"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "Hedhyw"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "De"
 
 #: cartridges/utils/relative_date.py:36
 msgid "Last Week"
-msgstr ""
+msgstr "Seythen yw Passys"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "An Mis Ma"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Mis yw Passys"
 
 #: cartridges/utils/relative_date.py:44
 msgid "Last Year"
-msgstr ""
+msgstr "Warlena"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
-msgstr ""
+msgstr "Ynperthow Gwariow…"
 
 #: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
-msgstr ""
+msgstr "An errors a sew hwarvosys dres ynporth:"
 
 #: cartridges/importer/importer.py:366
 msgid "No new games found"
-msgstr ""
+msgstr "Gwariow nowydh kavos vyth"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} gwariow ynperthys"
+msgstr[1] "{} gwari ynperthys"
+msgstr[2] "{} gwariow ynperthys"
+msgstr[3] "{} gwariow ynperthys"
+msgstr[4] "{} gwariow ynperthys"
+msgstr[5] "{} gwariow ynperthys"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] ", {} removys"
+msgstr[1] ", {} removys"
+msgstr[2] ", {} removys"
+msgstr[3] ", {} removys"
+msgstr[4] ", {} removys"
+msgstr[5] ", {} removys"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
 msgid "Select the {} cache directory."
-msgstr ""
+msgstr "Dewis an restrenva sorn {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:36
 msgid "Select the {} configuration directory."
-msgstr ""
+msgstr "Dewis an restrenva settyansow {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:38
 msgid "Select the {} data directory."
-msgstr ""
+msgstr "Dewis an restrenva data {}."
 
 #: cartridges/importer/retroarch_source.py:129
 msgid "No RetroArch Core Selected"
-msgstr ""
+msgstr "RetroArch Core Dewisys Vyth"
 
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr ""
+msgstr "An rol a media a sew re core defowt vyth:"
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
-msgstr ""
+msgstr "Gwariow heb dewisys core na ynperthys"
 
 #: cartridges/store/managers/sgdb_manager.py:46
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr ""
+msgstr "Fyllis dhe omgelmi dhe SteamGridDB"
 
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
-msgstr ""
+msgstr "Gwirhe agas ger-tremena API yn Settyansow"
