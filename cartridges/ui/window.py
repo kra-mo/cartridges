@@ -187,6 +187,9 @@ class Window(Adw.ApplicationWindow):
         if item is not self.new_collection_item:
             self._selected_sidebar_item = index
 
+        if self.split_view.props.collapsed:
+            self.split_view.props.show_sidebar = False
+
     @Gtk.Template.Callback()
     def _update_selection(self, sidebar: Adw.Sidebar, *_args):  # pyright: ignore[reportAttributeAccessIssue]
         if sidebar.props.selected_item is self.new_collection_item:
