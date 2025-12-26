@@ -22,6 +22,12 @@ template $Window: Adw.ApplicationWindow {
     }
 
     Shortcut {
+      trigger: "<Control><Shift>n";
+      action: "action(win.add-collection)";
+      arguments: "''";
+    }
+
+    Shortcut {
       trigger: "<Control>z";
       action: "action(win.undo)";
     }
