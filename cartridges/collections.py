@@ -7,7 +7,9 @@ from typing import TYPE_CHECKING, Any, cast
 
 from gi.repository import Gio, GLib, GObject
 
-from cartridges import SETTINGS
+from cartridges import SETTINGS, games
+from cartridges.games import Game
+from cartridges.sources import imported
 
 if TYPE_CHECKING:
     from .application import Application
@@ -34,7 +36,7 @@ class Collection(Gio.SimpleActionGroup):
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self.game_ids = []
+        self.game_ids = self.game_ids or []
         self.bind_property(
             "icon",
             self,
@@ -66,18 +68,28 @@ class Collection(Gio.SimpleActionGroup):
 
 
 def _get_collections() -> Generator[Collection]:
+    manually_added_game_ids = {
+        game.game_id
+        for game in cast(Iterable[Game], games.model)
+        if game.source.startswith(imported.ID)
+    }
     for data in SETTINGS.get_value("collections").unpack():
         if data.get("removed"):
             continue
 
-        collection = Collection()
-        for prop, value in data.items():
-            try:
-                collection.set_property(prop, value)
-            except TypeError:
-                continue
-
-        yield collection
+        try:
+            yield Collection(
+                name=data["name"],
+                icon=data["icon"],
+                game_ids=[
+                    ident
+                    for ident in data["game-ids"]
+                    if not ident.startswith(imported.ID)
+                    or ident in manually_added_game_ids
+                ],
+            )
+        except (KeyError, TypeError):
+            continue
 
 
 def load():
