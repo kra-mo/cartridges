@@ -209,7 +209,6 @@ template $Window: Adw.ApplicationWindow {
 
             content: Adw.ToastOverlay toast_overlay {
               child: Adw.ViewStack {
-                enable-transitions: true;
                 visible-child-name: bind $_if_else(
                   grid.model as <NoSelection>.n-items,
                   "grid",
