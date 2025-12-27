@@ -217,9 +217,9 @@ template $Window: Adw.ApplicationWindow {
                     template.search-text,
                     "empty-search",
                     $_if_else(
-                      template.show-hidden,
-                      "empty-hidden",
-                      $_if_else(template.collection, "empty-collection", "empty") as <string>
+                      template.collection,
+                      "empty-collection",
+                      $_if_else(template.show-hidden, "empty-hidden", "empty") as <string>
                     ) as <string>
                   ) as <string>
                 ) as <string>;
