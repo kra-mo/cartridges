@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 from itertools import product
-from typing import Any, TypeVar, cast
+from typing import Any, NamedTuple, TypeVar, cast
 
 from gi.repository import Adw, Gio, GObject, Gtk
 
@@ -10,28 +10,34 @@ from cartridges import collections
 from cartridges.collections import Collection
 from cartridges.config import PREFIX
 
-ICONS = (
-    "collection",
-    "star",
-    "heart",
-    "music",
-    "people",
-    "skull",
-    "private",
-    "globe",
-    "map",
-    "city",
-    "car",
-    "horse",
-    "sprout",
-    "step-over",
-    "gamepad",
-    "ball",
-    "puzzle",
-    "flashlight",
-    "knife",
-    "gun",
-    "fist",
+
+class _Icon(NamedTuple):
+    name: str
+    a11y_label: str
+
+
+_ICONS = (
+    _Icon("collection", "📚"),
+    _Icon("star", "⭐"),
+    _Icon("heart", "❤️"),
+    _Icon("music", "🎵"),
+    _Icon("people", "🧑"),
+    _Icon("skull", "💀"),
+    _Icon("private", "🕵️"),
+    _Icon("globe", "🌐"),
+    _Icon("map", "🗺"),
+    _Icon("city", "🏙️"),
+    _Icon("car", "🚗"),
+    _Icon("horse", "🐎"),
+    _Icon("sprout", "🌱"),
+    _Icon("step-over", "🪜"),
+    _Icon("gamepad", "🎮"),
+    _Icon("ball", "⚽"),
+    _Icon("puzzle", "🧩"),
+    _Icon("flashlight", "🔦"),
+    _Icon("knife", "🔪"),
+    _Icon("gun", "🔫"),
+    _Icon("fist", "✊"),
 )
 
 _T = TypeVar("_T")
@@ -79,13 +85,17 @@ class CollectionDetails(Adw.Dialog):
 
         group_button = None
         for index, (row, col) in enumerate(product(range(3), range(7))):
-            icon = ICONS[index]
+            icon = _ICONS[index].name
 
             button = Gtk.ToggleButton(
                 icon_name=f"{icon}-symbolic",
                 hexpand=True,
                 halign=Gtk.Align.CENTER,
             )
+            button.update_property(
+                (Gtk.AccessibleProperty.LABEL,), (_ICONS[index].a11y_label,)
+            )
+
             button.add_css_class("circular")
             button.add_css_class("flat")
 
