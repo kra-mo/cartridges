@@ -267,7 +267,7 @@ class Window(Adw.ApplicationWindow):
     def _add_collection(self, game_id: str | None = None):
         collection = Collection()
         if game_id:
-            collection.game_ids.append(game_id)
+            collection.game_ids.add(game_id)
 
         details = CollectionDetails(collection=collection)
         details.present(self)

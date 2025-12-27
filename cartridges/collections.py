@@ -36,7 +36,7 @@ class Collection(Gio.SimpleActionGroup):
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self.game_ids = self.game_ids or []
+        self.game_ids = self.game_ids or set()
         self.bind_property(
             "icon",
             self,
@@ -81,12 +81,12 @@ def _get_collections() -> Generator[Collection]:
             yield Collection(
                 name=data["name"],
                 icon=data["icon"],
-                game_ids=[
+                game_ids={
                     ident
                     for ident in data["game-ids"]
                     if not ident.startswith(imported.ID)
                     or ident in manually_added_game_ids
-                ],
+                },
             )
         except (KeyError, TypeError):
             continue
@@ -111,7 +111,7 @@ def save():
                 {
                     "name": GLib.Variant.new_string(collection.name),
                     "icon": GLib.Variant.new_string(collection.icon),
-                    "game-ids": GLib.Variant.new_strv(collection.game_ids),
+                    "game-ids": GLib.Variant.new_strv(tuple(collection.game_ids)),
                     "removed": GLib.Variant.new_boolean(collection.removed),
                 }
                 for collection in cast(Iterable[Collection], model)

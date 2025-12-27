@@ -114,12 +114,11 @@ class CollectionsBox(Adw.Bin):
         for button in cast(Iterable[CollectionButton], self.box):
             game_ids = button.collection.game_ids
             old_game_ids = game_ids.copy()
-            in_collection = self.game.game_id in game_ids
 
-            if button.props.active and not in_collection:
-                game_ids.append(self.game.game_id)
-            elif not button.props.active and in_collection:
-                game_ids.remove(self.game.game_id)
+            if button.props.active:
+                game_ids.add(self.game.game_id)
+            else:
+                game_ids.discard(self.game.game_id)
 
             if game_ids != old_game_ids:
                 filter_changed = True
