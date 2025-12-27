@@ -64,10 +64,6 @@
   filter: saturate(300%) opacity(50%);
 }
 
-#collection-icon-child {
-  border-radius: 9999px;
-}
-
 @media (prefers-color-scheme: dark) {
   #details list {
     background: rgb(from white r g b / 10%);

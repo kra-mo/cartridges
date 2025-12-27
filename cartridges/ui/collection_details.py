@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+from itertools import product
 from typing import Any, TypeVar, cast
 
 from gi.repository import Adw, Gio, GObject, Gtk
@@ -43,9 +44,11 @@ class CollectionDetails(Adw.Dialog):
     __gtype_name__ = __qualname__
 
     name_entry: Adw.EntryRow = Gtk.Template.Child()
-    icons_box: Gtk.FlowBox = Gtk.Template.Child()
+    icons_grid: Gtk.Grid = Gtk.Template.Child()
 
     sort_changed = GObject.Signal()
+
+    _selected_icon: str
 
     @GObject.Property(type=Collection)
     def collection(self) -> Collection:
@@ -74,21 +77,33 @@ class CollectionDetails(Adw.Dialog):
             transform_to=lambda _, text: bool(text),
         )
 
-        icons = Gtk.StringList.new(tuple(f"{icon}-symbolic" for icon in ICONS))
-        self.icons_box.bind_model(
-            icons,
-            lambda string: Gtk.FlowBoxChild(
-                name="collection-icon-child",
-                child=Gtk.Image.new_from_icon_name(string.props.string),
+        group_button = None
+        for index, (row, col) in enumerate(product(range(3), range(7))):
+            icon = ICONS[index]
+
+            button = Gtk.ToggleButton(
+                icon_name=f"{icon}-symbolic",
+                hexpand=True,
                 halign=Gtk.Align.CENTER,
-            ),
-        )
-        self.icons_box.select_child(
-            cast(
-                Gtk.FlowBoxChild,
-                self.icons_box.get_child_at_index(ICONS.index(self.collection.icon)),
             )
-        )
+            button.add_css_class("circular")
+            button.add_css_class("flat")
+
+            if group_button:
+                button.props.group = group_button
+            else:
+                group_button = button
+
+            button.connect(
+                "toggled",
+                lambda _, icon: setattr(self, "_selected_icon", icon),
+                icon,
+            )
+
+            if icon == self.collection.icon:
+                button.props.active = True
+
+            self.icons_grid.attach(button, col, row, 1, 1)
 
     def _apply(self):
         name = self.name_entry.props.text
@@ -97,9 +112,7 @@ class CollectionDetails(Adw.Dialog):
             if self.collection.in_model:
                 self.emit("sort-changed")
 
-        self.collection.icon = ICONS[
-            self.icons_box.get_selected_children()[0].get_index()
-        ]
+        self.collection.icon = self._selected_icon
 
         if not self.collection.in_model:
             collections.model.append(self.collection)

@@ -49,12 +49,13 @@ template $CollectionDetails: Adw.Dialog {
       }
 
       Adw.PreferencesGroup {
-        FlowBox icons_box {
-          min-children-per-line: 7;
-
-          styles [
-            "navigation-sidebar",
-          ]
+        Grid icons_grid {
+          column-spacing: 6;
+          row-spacing: 6;
+          margin-top: 6;
+          margin-bottom: 6;
+          margin-start: 6;
+          margin-end: 6;
         }
 
         styles [
