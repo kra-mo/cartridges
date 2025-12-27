@@ -14,13 +14,18 @@ from cartridges import STATE_SETTINGS, games
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
 from cartridges.games import Game
-from cartridges.ui import collections
+from cartridges.ui import collections, sources
 
 from .collection_details import CollectionDetails
 from .collections import CollectionFilter, CollectionSidebarItem
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
 from .games import GameSorter
+from .sources import (
+    Source,
+    SourceFilter,  # noqa: F401
+    SourceSidebarItem,
+)
 
 if sys.platform.startswith("linux"):
     from cartridges import gamepads
@@ -46,6 +51,7 @@ class Window(Adw.ApplicationWindow):
 
     split_view: Adw.OverlaySplitView = Gtk.Template.Child()
     sidebar: Adw.Sidebar = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
+    sources: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     collections: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     new_collection_item: Adw.SidebarItem = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     collection_menu: Gio.Menu = Gtk.Template.Child()
@@ -63,6 +69,7 @@ class Window(Adw.ApplicationWindow):
 
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
+    source = GObject.Property(type=Source)
 
     settings = GObject.Property(type=Gtk.Settings)
 
@@ -115,6 +122,10 @@ class Window(Adw.ApplicationWindow):
         self.collections.bind_model(
             collections.model,
             lambda collection: CollectionSidebarItem(collection=collection),
+        )
+        self.sources.bind_model(
+            sources.model,
+            lambda source: SourceSidebarItem(source=source),
         )
 
         self.add_action(STATE_SETTINGS.create_action("show-sidebar"))
@@ -180,9 +191,13 @@ class Window(Adw.ApplicationWindow):
                 self._add_collection()
                 sidebar.props.selected = self._selected_sidebar_item
             case CollectionSidebarItem():
+                self.source = None
                 self.collection = item.collection
-            case _:
+            case SourceSidebarItem():
+                self.source = item.source
                 self.collection = None
+            case _:
+                self.source = self.collection = None
 
         if item is not self.new_collection_item:
             self._selected_sidebar_item = index

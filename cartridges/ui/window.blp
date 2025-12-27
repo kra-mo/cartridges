@@ -94,6 +94,10 @@ template $Window: Adw.ApplicationWindow {
                 }
               }
 
+              Adw.SidebarSection sources {
+                title: _("Sources");
+              }
+
               Adw.SidebarSection collections {
                 title: _("Collections");
 
@@ -216,9 +220,13 @@ template $Window: Adw.ApplicationWindow {
                     template.search-text,
                     "empty-search",
                     $_if_else(
-                      template.collection,
-                      "empty-collection",
-                      $_if_else(template.show-hidden, "empty-hidden", "empty") as <string>
+                      template.source,
+                      "empty-source",
+                      $_if_else(
+                        template.collection,
+                        "empty-collection",
+                        $_if_else(template.show-hidden, "empty-hidden", "empty",) as <string>
+                      ) as <string>
                     ) as <string>
                   ) as <string>
                 ) as <string>;
@@ -242,6 +250,10 @@ template $Window: Adw.ApplicationWindow {
                             watch-items: true;
 
                             filter: EveryFilter {
+                              $SourceFilter {
+                                source: bind template.source;
+                              }
+
                               $CollectionFilter collection_filter {
                                 collection: bind template.collection;
                               }
@@ -308,6 +320,15 @@ template $Window: Adw.ApplicationWindow {
                     icon-name: "view-conceal-symbolic";
                     title: _("No Hidden Games");
                     description: _("Games you hide will appear here");
+                  };
+                }
+
+                Adw.ViewStackPage {
+                  name: "empty-source";
+
+                  child: Adw.StatusPage {
+                    icon-name: bind template.source as <$Source>.icon-name;
+                    title: bind $_format(_("No Games From {}"), template.source as <$Source>.name) as <string>;
                   };
                 }
 
