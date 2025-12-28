@@ -3,11 +3,10 @@
 # SPDX-FileCopyrightText: Copyright 2025 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
-import itertools
 import json
 import os
 import subprocess
-from collections.abc import Callable, Iterable
+from collections.abc import Callable
 from gettext import gettext as _
 from pathlib import Path
 from shlex import quote
@@ -48,7 +47,6 @@ GAMES_DIR = DATA_DIR / "games"
 COVERS_DIR = DATA_DIR / "covers"
 
 _SPEC_VERSION = 2.0
-_MANUALLY_ADDED_ID = "imported"
 
 
 class Game(Gio.SimpleActionGroup):
@@ -122,14 +120,6 @@ class Game(Gio.SimpleActionGroup):
 
         return game
 
-    @classmethod
-    def for_editing(cls) -> Self:
-        """Create a game for the user to manually set its properties."""
-        return cls(
-            game_id=f"{_MANUALLY_ADDED_ID}_{_increment_manually_added_id()}",
-            source=_MANUALLY_ADDED_ID,
-        )
-
     def play(self):
         """Run the executable command in a shell."""
         if Path("/.flatpak-info").exists():
@@ -179,27 +169,3 @@ class Game(Gio.SimpleActionGroup):
         app = cast("Application", Gio.Application.get_default())
         window = cast("Window", app.props.active_window)
         window.send_toast(title, undo=undo)
-
-
-def load():
-    """Populate `games.model` with all games from all sources."""
-    from . import sources
-
-    model.splice(0, 0, tuple(sources.get_games()))
-
-
-def _increment_manually_added_id() -> int:
-    numbers = {
-        game.game_id.split("_")[1]
-        for game in cast(Iterable[Game], model)
-        if game.game_id.startswith(_MANUALLY_ADDED_ID)
-    }
-
-    for count in itertools.count():
-        if count not in numbers:
-            return count
-
-    raise ValueError
-
-
-model = Gio.ListStore.new(Game)

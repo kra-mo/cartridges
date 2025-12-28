@@ -7,7 +7,7 @@ from typing import override
 
 from gi.repository import Adw
 
-from cartridges import collections, games
+from cartridges import collections, sources
 
 from .config import APP_ID, PREFIX
 from .ui.window import Window
@@ -25,7 +25,7 @@ class Application(Adw.Application):
         ))
         self.set_accels_for_action("app.quit", ("<Control>q",))
 
-        games.load()
+        sources.load()
         collections.load()
 
     @override

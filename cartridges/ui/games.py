@@ -8,7 +8,7 @@ from typing import Any, override
 
 from gi.repository import Gtk
 
-from cartridges import STATE_SETTINGS
+from cartridges import STATE_SETTINGS, sources
 from cartridges.games import Game
 
 _SORT_MODES = {
@@ -18,6 +18,8 @@ _SORT_MODES = {
     "newest": ("added", True),
     "oldest": ("added", False),
 }
+
+model = Gtk.FlattenListModel.new(sources.model)
 
 
 class GameSorter(Gtk.Sorter):
