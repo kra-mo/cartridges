@@ -1,13 +1,15 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 kramo
 
+import importlib
 import os
+import pkgutil
 import sys
 import time
 from collections.abc import Generator
 from contextlib import suppress
 from pathlib import Path
-from typing import Final, Protocol
+from typing import Final, Protocol, cast
 
 from gi.repository import GLib
 
@@ -53,11 +55,15 @@ class Source(Protocol):
 
 def get_games() -> Generator[Game]:
     """Installed games from all sources."""
-    from . import heroic, imported, steam
-
     added = int(time.time())
-    for source in heroic, imported, steam:
+    for source in all_sources():
         with suppress(OSError):
             for game in source.get_games():
                 game.added = game.added or added
                 yield game
+
+
+def all_sources() -> Generator[Source]:
+    """All sources of games."""
+    for module in pkgutil.iter_modules(__path__, prefix="."):
+        yield cast(Source, importlib.import_module(module.name, __package__))
