@@ -10,11 +10,11 @@ from typing import Any, TypeVar, cast
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-from cartridges import STATE_SETTINGS, games
+from cartridges import STATE_SETTINGS
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
-from cartridges.games import Game
-from cartridges.ui import collections
+from cartridges.sources import imported
+from cartridges.ui import collections, games
 
 from .collection_details import CollectionDetails
 from .collections import CollectionFilter, CollectionSidebarItem
@@ -62,6 +62,8 @@ class Window(Adw.ApplicationWindow):
     collection_filter: CollectionFilter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
+    model = GObject.Property(type=Gio.ListModel, default=games.model)
+
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
 
@@ -70,11 +72,6 @@ class Window(Adw.ApplicationWindow):
     _collection: Collection | None = None
     _collection_removed_signal: int | None = None
     _selected_sidebar_item = 0
-
-    @GObject.Property(type=Gio.ListStore)
-    def games(self) -> Gio.ListStore:
-        """Model of the user's games."""
-        return games.model
 
     @GObject.Property(type=Collection)
     def collection(self) -> Collection | None:
@@ -264,7 +261,7 @@ class Window(Adw.ApplicationWindow):
         self.details.edit()
 
     def _add(self):
-        self.details.game = Game.for_editing()
+        self.details.game = imported.new()
 
         if self.navigation_view.props.visible_page_tag != "details":
             self.navigation_view.push_by_tag("details")

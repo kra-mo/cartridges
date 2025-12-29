@@ -12,9 +12,10 @@ from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
 
-from cartridges import games
+from cartridges import games, sources
 from cartridges.config import PREFIX
 from cartridges.games import Game
+from cartridges.sources import imported
 
 from .collections import CollectionsBox
 from .cover import Cover  # noqa: F401
@@ -124,7 +125,7 @@ class GameDetails(Adw.NavigationPage):
 
         if not self.game.added:
             self.game.added = int(time.time())
-            games.model.append(self.game)
+            sources.get(imported.ID).append(self.game)
 
         self.stack.props.visible_child_name = "details"
 

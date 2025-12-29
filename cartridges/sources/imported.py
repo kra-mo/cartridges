@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 kramo
 
+import itertools
 import json
 from collections.abc import Generator
 from gettext import gettext as _
 from json import JSONDecodeError
+from pathlib import Path
 
 from gi.repository import Gdk, GLib
 
@@ -15,7 +17,7 @@ ID, NAME = "imported", _("Added")
 
 def get_games() -> Generator[Game]:
     """Manually added games."""
-    for path in GAMES_DIR.glob("imported_*.json"):
+    for path in get_paths():
         try:
             with path.open(encoding="utf-8") as f:
                 data = json.load(f)
@@ -38,3 +40,15 @@ def get_games() -> Generator[Game]:
                 break
 
         yield game
+
+
+def new() -> Game:
+    """Create a new game for the user to manually set its properties."""
+    numbers = {int(p.stem.rsplit("_", 1)[1]) for p in get_paths()}
+    number = next(i for i in itertools.count() if i not in numbers)
+    return Game(game_id=f"{ID}_{number}", source=ID)
+
+
+def get_paths() -> Generator[Path]:
+    """Get the paths of all imported games on disk."""
+    yield from GAMES_DIR.glob("imported_*.json")

@@ -7,8 +7,7 @@ from typing import TYPE_CHECKING, Any, cast
 
 from gi.repository import Gio, GLib, GObject
 
-from cartridges import SETTINGS, games
-from cartridges.games import Game
+from cartridges import SETTINGS
 from cartridges.sources import imported
 
 if TYPE_CHECKING:
@@ -67,31 +66,6 @@ class Collection(Gio.SimpleActionGroup):
         save()
 
 
-def _get_collections() -> Generator[Collection]:
-    manually_added_game_ids = {
-        game.game_id
-        for game in cast(Iterable[Game], games.model)
-        if game.source.startswith(imported.ID)
-    }
-    for data in SETTINGS.get_value("collections").unpack():
-        if data.get("removed"):
-            continue
-
-        try:
-            yield Collection(
-                name=data["name"],
-                icon=data["icon"],
-                game_ids={
-                    ident
-                    for ident in data["game-ids"]
-                    if not ident.startswith(imported.ID)
-                    or ident in manually_added_game_ids
-                },
-            )
-        except (KeyError, TypeError):
-            continue
-
-
 def load():
     """Load collections from GSettings."""
     model.splice(0, 0, tuple(_get_collections()))
@@ -118,6 +92,26 @@ def save():
             ),
         ),
     )
+
+
+def _get_collections() -> Generator[Collection]:
+    imported_ids = {p.stem for p in imported.get_paths()}
+    for data in SETTINGS.get_value("collections").unpack():
+        if data.get("removed"):
+            continue
+
+        try:
+            yield Collection(
+                name=data["name"],
+                icon=data["icon"],
+                game_ids={
+                    ident
+                    for ident in data["game-ids"]
+                    if not ident.startswith(imported.ID) or ident in imported_ids
+                },
+            )
+        except (KeyError, TypeError):
+            continue
 
 
 model = Gio.ListStore.new(Collection)
