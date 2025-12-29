@@ -56,6 +56,7 @@ class Window(Adw.ApplicationWindow):
     sort_button: Gtk.MenuButton = Gtk.Template.Child()
     main_menu_button: Gtk.MenuButton = Gtk.Template.Child()
     toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
+    view_stack: Adw.ViewStack = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: GameSorter = Gtk.Template.Child()
     collection_filter: CollectionFilter = Gtk.Template.Child()
