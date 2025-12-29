@@ -262,16 +262,6 @@ template $Window: Adw.ApplicationWindow {
                                 expression: expr item as <$Game>.hidden;
                                 invert: bind template.show-hidden inverted;
                               }
-
-                              BoolFilter {
-                                expression: expr item as <$Game>.removed;
-                                invert: true;
-                              }
-
-                              BoolFilter {
-                                expression: expr item as <$Game>.blacklisted;
-                                invert: true;
-                              }
                             };
 
                             model: bind template.model;
