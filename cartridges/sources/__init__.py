@@ -54,6 +54,8 @@ class _SourceModule(Protocol):
 class Source(GObject.Object, Gio.ListModel):  # pyright: ignore[reportIncompatibleMethodOverride]
     """A source of games to import."""
 
+    __gtype_name__ = __qualname__
+
     id = GObject.Property(type=str)
     name = GObject.Property(type=str)
     icon_name = GObject.Property(type=str)
