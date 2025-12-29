@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2025-10-07 21:02+0000\n"
+"PO-Revision-Date: 2025-12-29 14:00+0000\n"
 "Last-Translator: AsciiWolf <mail@asciiwolf.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/cs/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -436,9 +436,8 @@ msgstr "{} spuštěno"
 
 #. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
-#, fuzzy
 msgid "translator-credits"
-msgstr "ooo.i.love.foo"
+msgstr "Daniel Rusek <mail@asciiwolf.com>"
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:382
