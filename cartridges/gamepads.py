@@ -153,18 +153,46 @@ class Gamepad(GObject.Object):
             self.window.props.focus_visible = True
             return
 
-        if self._can_navigate_games_page():
-            self._navigate_to_game_position(
-                self._get_current_position()
-                + (
-                    -1
-                    if direction
-                    == self._get_rtl_direction(
-                        Gtk.DirectionType.RIGHT, Gtk.DirectionType.LEFT
-                    )
-                    else 1
-                )
+        if self._is_focused_on_sidebar():
+            # The usual behaviour of child_focus() on the sidebar
+            # would result in the + button being focused, instead of the grid
+            # so we need to grab the focus of the grid if the user inputs the
+            # corresponding direction to the grid.
+
+            grid_direction = self._get_rtl_direction(
+                Gtk.DirectionType.LEFT, Gtk.DirectionType.RIGHT
             )
+
+            if direction is grid_direction:
+                self.window.grid.grab_focus()
+                return
+
+            self.window.sidebar.keynav_failed(direction)
+            return
+
+        if self._can_navigate_games_page():
+            if not self._get_focused_game():
+                return
+
+            new_pos = self._get_current_position() + (
+                -1
+                if direction
+                == self._get_rtl_direction(
+                    Gtk.DirectionType.RIGHT, Gtk.DirectionType.LEFT
+                )
+                else 1
+            )
+
+            # If the user is focused on the first game and tries to go
+            # back another game, instead of failing, the focus should
+            # change to the sidebar.
+
+            if new_pos < 0:
+                self.window.sidebar.grab_focus()
+                self.window.props.focus_visible = True
+                return
+
+            self._navigate_to_game_position(new_pos)
             return
 
         if self.window.navigation_view.props.visible_page_tag == "details":
@@ -182,6 +210,14 @@ class Gamepad(GObject.Object):
     def _move_vertically(self, direction: Gtk.DirectionType):
         if self._is_focused_on_top_bar() and direction == Gtk.DirectionType.DOWN:
             self.window.grid.grab_focus()
+            return
+
+        if self._is_focused_on_sidebar():
+            if self.window.sidebar.child_focus(direction):
+                self.window.props.focus_visible = True
+                return
+
+            self.window.sidebar.keynav_failed(direction)
             return
 
         if self._can_navigate_games_page():
@@ -296,6 +332,9 @@ class Gamepad(GObject.Object):
             self.window.header_bar.get_focus_child()
             and not self._get_active_menu_button()
         )
+
+    def _is_focused_on_sidebar(self) -> bool:
+        return bool(self.window.sidebar.get_focus_child())
 
     def _n_grid_games(self) -> int:
         return cast(Gtk.SingleSelection, self.window.grid.props.model).props.n_items
