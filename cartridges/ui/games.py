@@ -19,7 +19,24 @@ _SORT_MODES = {
     "oldest": ("added", False),
 }
 
-model = Gtk.FlattenListModel.new(sources.model)
+filter_ = Gtk.EveryFilter()
+filter_.append(
+    Gtk.BoolFilter(
+        expression=Gtk.PropertyExpression.new(Game, None, "removed"),
+        invert=True,
+    )
+)
+filter_.append(
+    Gtk.BoolFilter(
+        expression=Gtk.PropertyExpression.new(Game, None, "blacklisted"),
+        invert=True,
+    )
+)
+model = Gtk.FilterListModel(
+    model=Gtk.FlattenListModel.new(sources.model),
+    filter=filter_,
+    watch_items=True,  # pyright: ignore[reportCallIssue]
+)
 
 
 class GameSorter(Gtk.Sorter):
