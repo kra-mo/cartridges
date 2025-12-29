@@ -65,11 +65,11 @@ class Source(GObject.Object, Gio.ListModel):  # pyright: ignore[reportIncompatib
 
         self.id, self.name, self._module = module.ID, module.NAME, module
         self.bind_property(
-            "name",
+            "id",
             self,
             "icon-name",
             GObject.BindingFlags.SYNC_CREATE,
-            lambda _, name: f"{name}-symbolic",
+            lambda _, ident: f"{ident}-symbolic",
         )
 
         try:
