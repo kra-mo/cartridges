@@ -141,8 +141,8 @@ class Game(Gio.SimpleActionGroup):
 
         GAMES_DIR.mkdir(parents=True, exist_ok=True)
         path = (GAMES_DIR / self.game_id).with_suffix(".json")
-        with path.open(encoding="utf-8") as f:
-            json.dump(properties, f, indent=4)
+        with path.open("w", encoding="utf-8") as f:
+            json.dump(properties, f, indent=4, sort_keys=True)
 
     def _remove(self):
         self.removed = True
