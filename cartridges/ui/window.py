@@ -164,15 +164,12 @@ class Window(Adw.ApplicationWindow):
 
         self.toast_overlay.add_toast(toast)
 
-    @Gtk.Template.Callback()
-    def _show_sidebar_title(self, _obj, layout: str) -> bool:
-        right_window_controls = layout.replace("appmenu", "").startswith(":")
-        return right_window_controls and not sys.platform.startswith("darwin")
+    def navigate_sidebar(self, sidebar: Adw.Sidebar, item: Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
+        """Select given item in the sidebar.
 
-    @Gtk.Template.Callback()
-    def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
-        item = sidebar.get_item(index)
-
+        Item should correspond to a collection, or the all game category/
+        new collection buttons.
+        """
         match item:
             case self.new_collection_item:
                 self._add_collection()
@@ -183,10 +180,19 @@ class Window(Adw.ApplicationWindow):
                 self.collection = None
 
         if item is not self.new_collection_item:
-            self._selected_sidebar_item = index
+            self._selected_sidebar_item = sidebar.props.selected
 
         if self.split_view.props.collapsed:
             self.split_view.props.show_sidebar = False
+
+    @Gtk.Template.Callback()
+    def _show_sidebar_title(self, _obj, layout: str) -> bool:
+        right_window_controls = layout.replace("appmenu", "").startswith(":")
+        return right_window_controls and not sys.platform.startswith("darwin")
+
+    @Gtk.Template.Callback()
+    def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
+        self.navigate_sidebar(sidebar, sidebar.get_item(index))
 
     @Gtk.Template.Callback()
     def _update_selection(self, sidebar: Adw.Sidebar, *_args):  # pyright: ignore[reportAttributeAccessIssue]
