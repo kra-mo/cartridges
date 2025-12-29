@@ -112,6 +112,12 @@ class Gamepad(GObject.Object):
             focus_widget.activate()
             return
 
+        if self._is_focused_on_sidebar():
+            self.window.navigate_sidebar(
+                self.window.sidebar, item=self.window.sidebar.get_selected_item()
+            )
+            return
+
         self.window.grid.activate_action(
             "list.activate-item",
             GLib.Variant.new_uint32(self._get_current_position()),

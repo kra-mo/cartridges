@@ -135,23 +135,12 @@ class Window(Adw.ApplicationWindow):
 
         self.toast_overlay.add_toast(toast)
 
-    def _collection_removed(self):
-        self.collection = None
-        self.sidebar.props.selected = 0
+    def navigate_sidebar(self, sidebar: Adw.Sidebar, item: Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
+        """Select given item in the sidebar.
 
-    def _model_emptied(self):
-        self.model = games.model
-        self.sidebar.props.selected = 0
-
-    @Gtk.Template.Callback()
-    def _show_sidebar_title(self, _obj, layout: str) -> bool:
-        right_window_controls = layout.replace("appmenu", "").startswith(":")
-        return right_window_controls and not sys.platform.startswith("darwin")
-
-    @Gtk.Template.Callback()
-    def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
-        item = sidebar.get_item(index)
-
+        Item should correspond to a collection, or the all game category/
+        new collection buttons.
+        """
         match item:
             case self.new_collection_item:
                 collections.add()
@@ -167,10 +156,27 @@ class Window(Adw.ApplicationWindow):
                 self.model = games.model
 
         if item is not self.new_collection_item:
-            self._selected_sidebar_item = index
+            self._selected_sidebar_item = sidebar.props.selected
 
         if self.split_view.props.collapsed:
             self.split_view.props.show_sidebar = False
+
+    def _collection_removed(self):
+        self.collection = None
+        self.sidebar.props.selected = 0
+
+    def _model_emptied(self):
+        self.model = games.model
+        self.sidebar.props.selected = 0
+
+    @Gtk.Template.Callback()
+    def _show_sidebar_title(self, _obj, layout: str) -> bool:
+        right_window_controls = layout.replace("appmenu", "").startswith(":")
+        return right_window_controls and not sys.platform.startswith("darwin")
+
+    @Gtk.Template.Callback()
+    def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
+        self.navigate_sidebar(sidebar, sidebar.get_item(index))
 
     @Gtk.Template.Callback()
     def _update_selection(self, sidebar: Adw.Sidebar, *_args):  # pyright: ignore[reportAttributeAccessIssue]
