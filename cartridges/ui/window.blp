@@ -232,7 +232,7 @@ template $Window: Adw.ApplicationWindow {
             }
 
             content: Adw.ToastOverlay toast_overlay {
-              child: Adw.ViewStack {
+              child: Adw.ViewStack view_stack {
                 visible-child-name: bind $if_else(
                   grid.model as <NoSelection>.n-items,
                   "grid",

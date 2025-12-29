@@ -136,7 +136,22 @@ class Gamepad(GObject.Object):
             open_menu.grab_focus()
             return
 
-        self.window.grid.grab_focus()
+        grid_visible = self.window.view_stack.props.visible_child_name == "grid"
+        if self._is_focused_on_top_bar():
+            focus_widget = self.window.grid if grid_visible else self.window.sidebar
+
+        # If the grid is not visible (i.e no search results or imports)
+        # the searchbar is focused as a fallback.
+        elif self._is_focused_on_sidebar():
+            focus_widget = (
+                self.window.grid if grid_visible else self.window.search_entry
+            )
+        else:
+            focus_widget = (
+                self.window.sidebar if grid_visible else self.window.search_entry
+            )
+
+        focus_widget.grab_focus()
         self.window.props.focus_visible = True
 
     def _navigate_to_game_position(self, new_pos: int):
