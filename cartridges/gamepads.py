@@ -112,10 +112,9 @@ class Gamepad(GObject.Object):
             focus_widget.activate()
             return
 
-        if self._is_focused_on_sidebar():
-            self.window.navigate_sidebar(
-                self.window.sidebar, item=self.window.sidebar.get_selected_item()
-            )
+        if self.window.sidebar.get_focus_child():
+            selected_item = self.window.sidebar.get_selected_item()
+            self.window.navigate_sidebar(self.window.sidebar, item=selected_item)
             return
 
         self.window.grid.activate_action(
@@ -148,14 +147,12 @@ class Gamepad(GObject.Object):
 
         # If the grid is not visible (i.e no search results or imports)
         # the searchbar is focused as a fallback.
-        elif self._is_focused_on_sidebar():
-            focus_widget = (
-                self.window.grid if grid_visible else self.window.search_entry
-            )
-        else:
-            focus_widget = (
-                self.window.sidebar if grid_visible else self.window.search_entry
-            )
+        fallback_child = (
+            self.window.grid
+            if self.window.sidebar.get_focus_child()
+            else self.window.sidebar
+        )
+        focus_widget = fallback_child if grid_visible else self.window.search_entry
 
         focus_widget.grab_focus()
         self.window.props.focus_visible = True
@@ -174,7 +171,7 @@ class Gamepad(GObject.Object):
             self.window.props.focus_visible = True
             return
 
-        if self._is_focused_on_sidebar():
+        if self.window.sidebar.get_focus_child():
             # The usual behaviour of child_focus() on the sidebar
             # would result in the + button being focused, instead of the grid
             # so we need to grab the focus of the grid if the user inputs the
@@ -184,7 +181,9 @@ class Gamepad(GObject.Object):
                 Gtk.DirectionType.LEFT, Gtk.DirectionType.RIGHT
             )
 
+            # Focus the first game when re-entering from sidebar
             if direction is grid_direction:
+                self.window.grid.scroll_to(0, Gtk.ListScrollFlags.FOCUS, None)
                 self.window.grid.grab_focus()
                 return
 
@@ -233,7 +232,7 @@ class Gamepad(GObject.Object):
             self.window.grid.grab_focus()
             return
 
-        if self._is_focused_on_sidebar():
+        if self.window.sidebar.get_focus_child():
             if self.window.sidebar.child_focus(direction):
                 self.window.props.focus_visible = True
                 return
@@ -353,9 +352,6 @@ class Gamepad(GObject.Object):
             self.window.header_bar.get_focus_child()
             and not self._get_active_menu_button()
         )
-
-    def _is_focused_on_sidebar(self) -> bool:
-        return bool(self.window.sidebar.get_focus_child())
 
     def _n_grid_games(self) -> int:
         return cast(Gtk.SingleSelection, self.window.grid.props.model).props.n_items
