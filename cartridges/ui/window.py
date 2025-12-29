@@ -13,14 +13,15 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 from cartridges import STATE_SETTINGS
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
-from cartridges.sources import imported
-from cartridges.ui import collections, games
+from cartridges.sources import Source, imported
+from cartridges.ui import collections, games, sources
 
 from .collection_details import CollectionDetails
 from .collections import CollectionFilter, CollectionSidebarItem
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
 from .games import GameSorter
+from .sources import SourceSidebarItem
 
 if sys.platform.startswith("linux"):
     from cartridges import gamepads
@@ -45,6 +46,7 @@ class Window(Adw.ApplicationWindow):
 
     split_view: Adw.OverlaySplitView = Gtk.Template.Child()
     sidebar: Adw.Sidebar = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
+    sources: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     collections: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     new_collection_item: Adw.SidebarItem = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     collection_menu: Gio.Menu = Gtk.Template.Child()
@@ -108,6 +110,7 @@ class Window(Adw.ApplicationWindow):
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7901
         self.search_entry.set_key_capture_widget(self)
+        self.sources.bind_model(sources.model, self._create_source_item)
         self.collections.bind_model(
             collections.model,
             lambda collection: CollectionSidebarItem(collection=collection),
@@ -162,6 +165,18 @@ class Window(Adw.ApplicationWindow):
 
         self.toast_overlay.add_toast(toast)
 
+    def _create_source_item(self, source: Source) -> SourceSidebarItem:
+        item = SourceSidebarItem(source=source)
+        item.connect(
+            "notify::visible",
+            lambda item, _: self._source_empty() if not item.props.visible else None,
+        )
+        return item
+
+    def _source_empty(self):
+        self.model = games.model
+        self.sidebar.props.selected = 0
+
     @Gtk.Template.Callback()
     def _show_sidebar_title(self, _obj, layout: str) -> bool:
         right_window_controls = layout.replace("appmenu", "").startswith(":")
@@ -175,10 +190,15 @@ class Window(Adw.ApplicationWindow):
             case self.new_collection_item:
                 self._add_collection()
                 sidebar.props.selected = self._selected_sidebar_item
+            case SourceSidebarItem():
+                self.collection = None
+                self.model = item.model
             case CollectionSidebarItem():
                 self.collection = item.collection
+                self.model = games.model
             case _:
                 self.collection = None
+                self.model = games.model
 
         if item is not self.new_collection_item:
             self._selected_sidebar_item = index

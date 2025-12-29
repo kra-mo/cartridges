@@ -17,6 +17,7 @@ cartridges/ui/game_details.py
 cartridges/ui/game_item.py
 cartridges/ui/games.py
 cartridges/ui/shortcuts-dialog.blp
+cartridges/ui/sources.py
 cartridges/ui/window.blp
 cartridges/ui/window.py
 data/page.kramo.Cartridges.desktop.in

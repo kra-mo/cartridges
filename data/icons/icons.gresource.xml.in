@@ -4,6 +4,10 @@
     <file>apply-symbolic.svg</file>
     <file>cancel-symbolic.svg</file>
     <file>filter-symbolic.svg</file>
+    <!-- Sources -->
+    <file>heroic-symbolic.svg</file>
+    <file>imported-symbolic.svg</file>
+    <file>steam-symbolic.svg</file>
     <!-- Categories -->
     <file>collection-symbolic.svg</file>
     <file>ball-symbolic.svg</file>

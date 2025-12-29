@@ -7,6 +7,7 @@ python.install_sources(
         'game_details.py',
         'game_item.py',
         'games.py',
+        'sources.py',
         'window.py',
     ),
     subdir: 'cartridges' / 'ui',
