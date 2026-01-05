@@ -5,27 +5,27 @@ template $Cover: Adw.Bin {
   child: Adw.Clamp {
     orientation: vertical;
     unit: px;
-    maximum-size: bind _picture.height-request;
-    tightening-threshold: bind _picture.height-request;
+    maximum-size: bind template.height;
+    tightening-threshold: bind template.height;
 
     child: Adw.Clamp {
       unit: px;
-      maximum-size: bind _picture.width-request;
-      tightening-threshold: bind _picture.width-request;
+      maximum-size: bind template.width;
+      tightening-threshold: bind template.width;
 
       child: Adw.ViewStack {
         name: "cover";
-        visible-child-name: bind $_get_stack_child(template.paintable) as <string>;
+        visible-child-name: bind $_if_else(template.paintable, "cover", "icon") as <string>;
         overflow: hidden;
         enable-transitions: true;
 
         Adw.ViewStackPage {
           name: "cover";
 
-          child: Picture _picture {
+          child: Picture {
             paintable: bind template.paintable;
-            width-request: 200;
-            height-request: 300;
+            width-request: bind template.width;
+            height-request: bind template.height;
             content-fit: cover;
           };
         }
@@ -34,7 +34,10 @@ template $Cover: Adw.Bin {
           name: "icon";
 
           child: Image {
-            icon-name: bind template.app-icon-name;
+            icon-name: bind $_concat(
+              template.root as <Window>.application as <Application>.application-id,
+              "-symbolic"
+            ) as <string>;
             pixel-size: 80;
 
             styles [

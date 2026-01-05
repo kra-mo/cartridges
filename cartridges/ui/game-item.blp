@@ -12,8 +12,8 @@ template $GameItem: Box {
 
   Adw.Clamp {
     unit: px;
-    maximum-size: bind cover.picture as <Picture>.width-request;
-    tightening-threshold: bind cover.picture as <Picture>.width-request;
+    maximum-size: bind cover.width;
+    tightening-threshold: bind cover.width;
 
     child: Overlay {
       child: $Cover cover {
