@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
-# Flynn <cirilla@tuta.io>, 2025.
+# Flynn <cirilla@tuta.io>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2025-12-24 18:00+0000\n"
+"PO-Revision-Date: 2026-01-05 20:01+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/kw/>\n"
@@ -55,7 +55,7 @@ msgid ""
 msgstr ""
 "Kartryjennow yw unn lonchyer simpel rag oll agas gwariow. Y re skoodhyans "
 "rag ynperthyow gwariow a-dhia Steam, Lutris, Heroic, ha moy gans omgelm na "
-"res. Hwi gallos sortya ha kudha gwariow po iskarga artys boks a-dhia "
+"res. Ty gallos sortya ha kudha gwariow po iskarga artys boks a-dhia "
 "SteamGridDB."
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
@@ -365,7 +365,7 @@ msgstr "Gwariow Kudh Vyth"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
-msgstr "Gwariow hwi kudha vydh diskwedhes omma"
+msgstr "Gwariow ty kudha vydh diskwedhes omma"
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
 msgid "All Games"
@@ -555,7 +555,7 @@ msgstr "Oll gwariow removys"
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
-"Unn ger-tremena API yw res dhe gul devnydh a SteamGridDB. Hwi gallos dinythi "
+"Unn ger-tremena API yw res dhe gul devnydh a SteamGridDB. Ty gallos dinythi "
 "unn {}omma{}."
 
 #: cartridges/preferences.py:203
