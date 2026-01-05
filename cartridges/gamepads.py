@@ -165,9 +165,22 @@ class Gamepad(GObject.Object):
 
     def _move_horizontally(self, direction: Gtk.DirectionType):
         if self._is_focused_on_top_bar():
-            if not self.window.header_bar.child_focus(direction):
-                self.window.header_bar.keynav_failed(direction)
+            if self.window.header_bar.child_focus(direction):
+                self.window.props.focus_visible = True
+                return
 
+            # The usual behaviour of child_focus() on the header bar on the
+            # left will result in the above child focus to fail, so
+            # we need to manually check the user is going left to then focus the
+            # sidebar.
+
+            if direction is not self._get_rtl_direction(
+                Gtk.DirectionType.RIGHT, Gtk.DirectionType.LEFT
+            ):
+                self.window.header_bar.keynav_failed(direction)
+                return
+
+            self.window.sidebar.grab_focus()
             self.window.props.focus_visible = True
             return
 
