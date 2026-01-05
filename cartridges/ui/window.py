@@ -6,7 +6,7 @@
 import sys
 from collections.abc import Callable
 from gettext import gettext as _
-from typing import Any, TypeVar, cast
+from typing import Any, cast
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
@@ -34,7 +34,6 @@ SORT_MODES = {
     "oldest": ("added", True),
 }
 
-_T = TypeVar("_T")
 type _UndoFunc = Callable[[], Any]
 
 
@@ -214,7 +213,7 @@ class Window(Adw.ApplicationWindow):
             gamepads.setup_monitor()  # pyright: ignore[reportPossiblyUnboundVariable]
 
     @Gtk.Template.Callback()
-    def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
+    def _if_else[T](self, _obj, condition: object, first: T, second: T) -> T:
         return first if condition else second
 
     @Gtk.Template.Callback()

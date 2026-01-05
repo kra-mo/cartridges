@@ -7,7 +7,7 @@ import sys
 import time
 from datetime import UTC, datetime
 from gettext import gettext as _
-from typing import Any, TypeVar, cast
+from typing import Any, cast
 from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
@@ -25,8 +25,6 @@ _EDITABLE_PROPERTIES = {prop.name for prop in games.PROPERTIES if prop.editable}
 _REQUIRED_PROPERTIES = {
     prop.name for prop in games.PROPERTIES if prop.editable and prop.required
 }
-
-_T = TypeVar("_T")
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/game-details.ui")
@@ -148,11 +146,11 @@ class GameDetails(Adw.NavigationPage):
             self.collections_box.finish()
 
     @Gtk.Template.Callback()
-    def _or(self, _obj, first: _T, second: _T) -> _T:
+    def _or[T](self, _obj, first: T, second: T) -> T:
         return first or second
 
     @Gtk.Template.Callback()
-    def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
+    def _if_else[T](self, _obj, condition: object, first: T, second: T) -> T:
         return first if condition else second
 
     @Gtk.Template.Callback()

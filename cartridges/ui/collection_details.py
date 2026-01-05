@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 from itertools import product
-from typing import Any, NamedTuple, TypeVar, cast
+from typing import Any, NamedTuple, cast
 
 from gi.repository import Adw, Gio, GObject, Gtk
 
@@ -39,8 +39,6 @@ _ICONS = (
     _Icon("gun", "🔫"),
     _Icon("fist", "✊"),
 )
-
-_T = TypeVar("_T")
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/collection-details.ui")
@@ -132,9 +130,9 @@ class CollectionDetails(Adw.Dialog):
         self.close()
 
     @Gtk.Template.Callback()
-    def _or(self, _obj, first: _T, second: _T) -> _T:
+    def _or[T](self, _obj, first: T, second: T) -> T:
         return first or second
 
     @Gtk.Template.Callback()
-    def _if_else(self, _obj, condition: object, first: _T, second: _T) -> _T:
+    def _if_else[T](self, _obj, condition: object, first: T, second: T) -> T:
         return first if condition else second
