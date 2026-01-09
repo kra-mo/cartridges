@@ -21,7 +21,7 @@ from cartridges.ui import closures
 from .collections import CollectionsBox
 from .cover import Cover  # noqa: F401
 
-_POP_ON_ACTION = "hide", "unhide", "remove"
+_POP_ON_PROPERTY_NOTIFY = "hidden", "removed"
 _EDITABLE_PROPERTIES = {prop.name for prop in games.PROPERTIES if prop.editable}
 _REQUIRED_PROPERTIES = {
     prop.name for prop in games.PROPERTIES if prop.editable and prop.required
@@ -41,6 +41,7 @@ class GameDetails(Adw.NavigationPage):
     developer_entry: Adw.EntryRow = Gtk.Template.Child()
     executable_entry: Adw.EntryRow = Gtk.Template.Child()
 
+    game_signals: GObject.SignalGroup = Gtk.Template.Child()
     sort_changed = GObject.Signal()
 
     boolean = closures.boolean
@@ -58,20 +59,8 @@ class GameDetails(Adw.NavigationPage):
         self._game = game
         self.insert_action_group("game", game)
 
-        for action, ident in self._signal_ids.copy().items():
-            action.disconnect(ident)
-            del self._signal_ids[action]
-
-        for name in _POP_ON_ACTION:
-            action = cast(Gio.SimpleAction, game.lookup_action(name))
-            self._signal_ids[action] = action.connect(
-                "activate", lambda *_: self.activate_action("navigation.pop")
-            )
-
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-
-        self._signal_ids = dict[Gio.SimpleAction, int]()
 
         self.insert_action_group("details", group := Gio.SimpleActionGroup())
         group.add_action_entries((
@@ -105,6 +94,13 @@ class GameDetails(Adw.NavigationPage):
         )
         valid = Gtk.ClosureExpression.new(bool, lambda _, *values: all(values), entries)
         valid.bind(apply, "enabled")
+
+        for name in _POP_ON_PROPERTY_NOTIFY:
+            self.game_signals.connect_closure(
+                f"notify::{name}",
+                lambda *_: self.activate_action("navigation.pop"),
+                after=True,
+            )
 
     def edit(self):
         """Enter edit mode."""

@@ -1,5 +1,11 @@
 using Gtk 4.0;
 using Adw 1;
+using GObject 2.0;
+
+GObject.SignalGroup collection_signals {
+  target: bind template.collection;
+  target-type: typeof<$Collection>;
+}
 
 template $CollectionDetails: Adw.Dialog {
   title: bind $either(template.collection as <$Collection>.name, _("New Collection")) as <string>;

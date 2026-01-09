@@ -13,7 +13,7 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 from cartridges import STATE_SETTINGS
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
-from cartridges.sources import Source, imported
+from cartridges.sources import imported
 from cartridges.ui import closures, collections, games, sources
 
 from .collection_details import CollectionDetails
@@ -27,6 +27,7 @@ if sys.platform.startswith("linux"):
     from cartridges import gamepads
     from cartridges.gamepads import Gamepad
 
+GObject.type_ensure(GObject.SignalGroup)
 
 type _UndoFunc = Callable[[], Any]
 
@@ -55,40 +56,20 @@ class Window(Adw.ApplicationWindow):
     collection_filter: CollectionFilter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
-    model = GObject.Property(type=Gio.ListModel, default=games.model)
+    collection = GObject.Property(type=Collection)
+    collection_signals: GObject.SignalGroup = Gtk.Template.Child()
+    model = GObject.Property(type=Gio.ListModel)
+    model_signals: GObject.SignalGroup = Gtk.Template.Child()
 
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
 
     settings = GObject.Property(type=Gtk.Settings)
 
-    _collection: Collection | None = None
-    _collection_removed_signal: int | None = None
     _selected_sidebar_item = 0
 
     format_string = closures.format_string
     if_else = closures.if_else
-
-    @GObject.Property(type=Collection)
-    def collection(self) -> Collection | None:
-        """The currently selected collection."""
-        return self._collection
-
-    @collection.setter
-    def collection(self, collection: Collection | None):
-        if self._collection and self._collection_removed_signal:
-            self._collection.disconnect(self._collection_removed_signal)
-
-        self._collection = collection
-        self._collection_removed_signal = (
-            collection.connect("notify::removed", lambda *_: self._collection_removed())
-            if collection
-            else None
-        )
-
-    def _collection_removed(self):
-        self.collection = None
-        self.sidebar.props.selected = 0
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -106,7 +87,10 @@ class Window(Adw.ApplicationWindow):
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7901
         self.search_entry.set_key_capture_widget(self)
-        self.sources.bind_model(sources.model, self._create_source_item)
+        self.sources.bind_model(
+            sources.model,
+            lambda source: SourceSidebarItem(source),
+        )
         self.collections.bind_model(
             collections.model,
             lambda collection: CollectionSidebarItem(collection=collection),
@@ -145,6 +129,18 @@ class Window(Adw.ApplicationWindow):
             ("undo", lambda *_: self._undo()),
         ))
 
+        self.collection_signals.connect_closure(
+            "notify::removed",
+            lambda *_: self._collection_removed(),
+            after=True,
+        )
+        self.model_signals.connect_closure(
+            "items-changed",
+            lambda model, *_: None if model else self._model_emptied(),
+            after=True,
+        )
+        self.model = games.model
+
         self._history: dict[Adw.Toast, _UndoFunc] = {}
 
     def send_toast(self, title: str, *, undo: _UndoFunc | None = None):
@@ -161,15 +157,11 @@ class Window(Adw.ApplicationWindow):
 
         self.toast_overlay.add_toast(toast)
 
-    def _create_source_item(self, source: Source) -> SourceSidebarItem:
-        item = SourceSidebarItem(source=source)
-        item.connect(
-            "notify::visible",
-            lambda item, _: self._source_empty() if not item.props.visible else None,
-        )
-        return item
+    def _collection_removed(self):
+        self.collection = None
+        self.sidebar.props.selected = 0
 
-    def _source_empty(self):
+    def _model_emptied(self):
         self.model = games.model
         self.sidebar.props.selected = 0
 
@@ -273,12 +265,12 @@ class Window(Adw.ApplicationWindow):
         if game_id:
             collection.game_ids.add(game_id)
 
-        details = CollectionDetails(collection=collection)
+        details = CollectionDetails(collection)
         details.present(self)
 
     def _edit_collection(self, pos: int):
         collection = self.collections.get_item(pos).collection
-        details = CollectionDetails(collection=collection)
+        details = CollectionDetails(collection)
         details.connect(
             "sort-changed",
             lambda *_: collections.sorter.changed(Gtk.SorterChange.DIFFERENT),

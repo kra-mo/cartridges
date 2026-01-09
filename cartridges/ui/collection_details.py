@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 from itertools import product
-from typing import Any, NamedTuple, cast
+from typing import Any, NamedTuple
 
 from gi.repository import Adw, Gio, GObject, Gtk
 
@@ -51,6 +51,7 @@ class CollectionDetails(Adw.Dialog):
     name_entry: Adw.EntryRow = Gtk.Template.Child()
     icons_grid: Gtk.Grid = Gtk.Template.Child()
 
+    collection_signals: GObject.SignalGroup = Gtk.Template.Child()
     sort_changed = GObject.Signal()
 
     _selected_icon: str
@@ -67,10 +68,8 @@ class CollectionDetails(Adw.Dialog):
     def collection(self, collection: Collection):
         self._collection = collection
         self.insert_action_group("collection", collection)
-        remove_action = cast(Gio.SimpleAction, collection.lookup_action("remove"))
-        remove_action.connect("activate", lambda *_: self.force_close())
 
-    def __init__(self, **kwargs: Any):
+    def __init__(self, collection: Collection, **kwargs: Any):
         super().__init__(**kwargs)
 
         self.insert_action_group("details", group := Gio.SimpleActionGroup())
@@ -84,6 +83,13 @@ class CollectionDetails(Adw.Dialog):
             GObject.BindingFlags.SYNC_CREATE,
             transform_to=lambda _, text: bool(text),
         )
+
+        self.collection_signals.connect_closure(
+            "notify::removed",
+            lambda *_: self.force_close(),
+            after=True,
+        )
+        self.collection = collection
 
         group_button = None
         for index, (row, col) in enumerate(product(range(3), range(7))):
