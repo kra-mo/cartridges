@@ -1,6 +1,7 @@
 python.install_sources(
     files(
         '__init__.py',
+        'closures.py',
         'collection_details.py',
         'collections.py',
         'cover.py',

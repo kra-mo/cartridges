@@ -15,7 +15,7 @@ template $Cover: Adw.Bin {
 
       child: Adw.ViewStack {
         name: "cover";
-        visible-child-name: bind $_if_else(template.paintable, "cover", "icon") as <string>;
+        visible-child-name: bind $if_else(template.paintable, "cover", "icon") as <string>;
         overflow: hidden;
         enable-transitions: true;
 
@@ -34,7 +34,7 @@ template $Cover: Adw.Bin {
           name: "icon";
 
           child: Image {
-            icon-name: bind $_concat(
+            icon-name: bind $concat(
               template.root as <Window>.application as <Application>.application-id,
               "-symbolic"
             ) as <string>;

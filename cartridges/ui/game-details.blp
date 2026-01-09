@@ -5,7 +5,7 @@ using Adw 1;
 template $GameDetails: Adw.NavigationPage {
   name: "details";
   tag: "details";
-  title: bind $_or(template.game as <$Game>.name, _("Add Game")) as <string>;
+  title: bind $either(template.game as <$Game>.name, _("Add Game")) as <string>;
   hidden => $_cancel();
 
   ShortcutController {
@@ -101,7 +101,7 @@ template $GameDetails: Adw.NavigationPage {
 
                   Label developer_label {
                     label: bind template.game as <$Game>.developer;
-                    visible: bind $_bool(template.game as <$Game>.developer) as <bool>;
+                    visible: bind $boolean(template.game as <$Game>.developer) as <bool>;
                     halign: start;
                     max-width-chars: 36;
                     wrap: true;
@@ -119,14 +119,20 @@ template $GameDetails: Adw.NavigationPage {
                     spacing: 9;
 
                     Label last_played_label {
-                      label: bind $_date_label(_("Last played: {}"), template.game as <$Game>.last_played) as <string>;
+                      label: bind $format_string(
+                        _("Last played: {}"),
+                        $_relative_date(template.game as <$Game>.last-played) as <string>
+                      ) as <string>;
                       halign: start;
                       wrap: true;
                       wrap-mode: word_char;
                     }
 
                     Label added_label {
-                      label: bind $_date_label(_("Added: {}"), template.game as <$Game>.added) as <string>;
+                      label: bind $format_string(
+                        _("Added: {}"),
+                        $_relative_date(template.game as <$Game>.added) as <string>
+                      ) as <string>;
                       halign: start;
                       wrap: true;
                       wrap-mode: word_char;
@@ -376,7 +382,7 @@ template $GameDetails: Adw.NavigationPage {
 
                     Button apply_button {
                       action-name: "details.apply";
-                      label: bind $_if_else(template.game as <$Game>.added, _("Apply"), _("Add")) as <string>;
+                      label: bind $if_else(template.game as <$Game>.added, _("Apply"), _("Add")) as <string>;
 
                       styles [
                         "pill",

@@ -2,7 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 template $CollectionDetails: Adw.Dialog {
-  title: bind $_or(template.collection as <$Collection>.name, _("New Collection")) as <string>;
+  title: bind $either(template.collection as <$Collection>.name, _("New Collection")) as <string>;
   content-width: 360;
   default-widget: apply_button;
   focus-widget: name_entry;
@@ -31,7 +31,7 @@ template $CollectionDetails: Adw.Dialog {
       Button apply_button {
         action-name: "details.apply";
         icon-name: "apply-symbolic";
-        tooltip-text: bind $_if_else(template.collection as <$Collection>.in-model, _("Apply"), _("Add")) as <string>;
+        tooltip-text: bind $if_else(template.collection as <$Collection>.in-model, _("Apply"), _("Add")) as <string>;
 
         styles [
           "suggested-action",

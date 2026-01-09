@@ -14,7 +14,7 @@ from cartridges import STATE_SETTINGS
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
 from cartridges.sources import Source, imported
-from cartridges.ui import collections, games, sources
+from cartridges.ui import closures, collections, games, sources
 
 from .collection_details import CollectionDetails
 from .collections import CollectionFilter, CollectionSidebarItem
@@ -72,6 +72,9 @@ class Window(Adw.ApplicationWindow):
     _collection: Collection | None = None
     _collection_removed_signal: int | None = None
     _selected_sidebar_item = 0
+
+    format_string = closures.format_string
+    if_else = closures.if_else
 
     @GObject.Property(type=Collection)
     def collection(self) -> Collection | None:
@@ -231,14 +234,6 @@ class Window(Adw.ApplicationWindow):
         if sys.platform.startswith("linux"):
             Gamepad.window = self  # pyright: ignore[reportPossiblyUnboundVariable]
             gamepads.setup_monitor()  # pyright: ignore[reportPossiblyUnboundVariable]
-
-    @Gtk.Template.Callback()
-    def _if_else[T](self, _obj, condition: object, first: T, second: T) -> T:
-        return first if condition else second
-
-    @Gtk.Template.Callback()
-    def _format(self, _obj, string: str, *args: Any) -> str:
-        return string.format(*args)
 
     @Gtk.Template.Callback()
     def _show_details(self, grid: Gtk.GridView, position: int):

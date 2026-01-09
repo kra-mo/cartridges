@@ -9,6 +9,7 @@ from gi.repository import Adw, Gio, GObject, Gtk
 from cartridges import collections
 from cartridges.collections import Collection
 from cartridges.config import PREFIX
+from cartridges.ui import closures
 
 
 class _Icon(NamedTuple):
@@ -53,6 +54,9 @@ class CollectionDetails(Adw.Dialog):
     sort_changed = GObject.Signal()
 
     _selected_icon: str
+
+    either = closures.either
+    if_else = closures.if_else
 
     @GObject.Property(type=Collection)
     def collection(self) -> Collection:
@@ -128,11 +132,3 @@ class CollectionDetails(Adw.Dialog):
 
         collections.save()
         self.close()
-
-    @Gtk.Template.Callback()
-    def _or[T](self, _obj, first: T, second: T) -> T:
-        return first or second
-
-    @Gtk.Template.Callback()
-    def _if_else[T](self, _obj, condition: object, first: T, second: T) -> T:
-        return first if condition else second

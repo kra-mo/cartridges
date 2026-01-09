@@ -16,6 +16,7 @@ from cartridges import games, sources
 from cartridges.config import PREFIX
 from cartridges.games import Game
 from cartridges.sources import imported
+from cartridges.ui import closures
 
 from .collections import CollectionsBox
 from .cover import Cover  # noqa: F401
@@ -41,6 +42,11 @@ class GameDetails(Adw.NavigationPage):
     executable_entry: Adw.EntryRow = Gtk.Template.Child()
 
     sort_changed = GObject.Signal()
+
+    boolean = closures.boolean
+    either = closures.either
+    format_string = closures.format_string
+    if_else = closures.if_else
 
     @GObject.Property(type=Game)
     def game(self) -> Game:
@@ -146,14 +152,6 @@ class GameDetails(Adw.NavigationPage):
             self.collections_box.finish()
 
     @Gtk.Template.Callback()
-    def _or[T](self, _obj, first: T, second: T) -> T:
-        return first or second
-
-    @Gtk.Template.Callback()
-    def _if_else[T](self, _obj, condition: object, first: T, second: T) -> T:
-        return first if condition else second
-
-    @Gtk.Template.Callback()
     def _downscale_image(self, _obj, cover: Gdk.Texture | None) -> Gdk.Texture | None:
         if cover and (renderer := cast(Gtk.Native, self.props.root).get_renderer()):
             cover.snapshot(snapshot := Gtk.Snapshot.new(), 3, 3)
@@ -163,10 +161,10 @@ class GameDetails(Adw.NavigationPage):
         return None
 
     @Gtk.Template.Callback()
-    def _date_label(self, _obj, label: str, timestamp: int) -> str:
+    def _relative_date(self, _obj, timestamp: int) -> str:
         date = datetime.fromtimestamp(timestamp, UTC)
         now = datetime.now(UTC)
-        return label.format(
+        return (
             _("Never")
             if not timestamp
             else _("Today")
@@ -187,10 +185,6 @@ class GameDetails(Adw.NavigationPage):
             if n_days <= day_of_year + 365
             else date.strftime("%Y")
         )
-
-    @Gtk.Template.Callback()
-    def _bool(self, _obj, o: object) -> bool:
-        return bool(o)
 
     @Gtk.Template.Callback()
     def _format_more_info(self, _obj, label: str) -> str:

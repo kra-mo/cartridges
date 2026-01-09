@@ -4,6 +4,7 @@
 from gi.repository import Adw, Gdk, GObject, Gtk
 
 from cartridges.config import PREFIX
+from cartridges.ui import closures
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/cover.ui")
@@ -16,10 +17,5 @@ class Cover(Adw.Bin):
     width = GObject.Property(type=int, default=200)
     height = GObject.Property(type=int, default=300)
 
-    @Gtk.Template.Callback()
-    def _if_else[T](self, _obj, condition: object, first: T, second: T) -> T:
-        return first if condition else second
-
-    @Gtk.Template.Callback()
-    def _concat(self, _obj, *strings: str) -> str:
-        return "".join(strings)
+    concat = closures.concat
+    if_else = closures.if_else
