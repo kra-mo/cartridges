@@ -1,5 +1,17 @@
 using Gtk 4.0;
 using Adw 1;
+using GObject 2.0;
+using Gio 2.0;
+
+GObject.SignalGroup collection_signals {
+  target: bind template.collection;
+  target-type: typeof<$Collection>;
+}
+
+GObject.SignalGroup model_signals {
+  target: bind template.model;
+  target-type: typeof<Gio.ListModel>;
+}
 
 template $Window: Adw.ApplicationWindow {
   realize => $_setup_gamepad_monitor();

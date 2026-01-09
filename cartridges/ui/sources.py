@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+from typing import Any
+
 from gi.repository import Adw, Gio, GObject, Gtk
 
 from cartridges import sources
@@ -30,12 +32,20 @@ class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAcce
             filter=games.filter_,
             watch_items=True,  # pyright: ignore[reportCallIssue]
         )
-        # https://gitlab.gnome.org/GNOME/gtk/-/issues/7959
-        self.model.connect(
-            "items-changed",
-            lambda *_: self.set_property("visible", self.model.props.n_items),
-        )
         self.props.visible = self.model.props.n_items
+
+    def __init__(self, source: Source, **kwargs: Any):
+        super().__init__(**kwargs)
+
+        # https://gitlab.gnome.org/GNOME/gtk/-/issues/7959
+        self._model_signals = GObject.SignalGroup.new(Gio.ListModel)
+        self._model_signals.connect_closure(
+            "items-changed",
+            lambda model, *_: self.set_property("visible", model.props.n_items),
+            after=True,
+        )
+        self.bind_property("model", self._model_signals, "target")
+        self.source = source
 
 
 model = Gtk.SortListModel.new(
