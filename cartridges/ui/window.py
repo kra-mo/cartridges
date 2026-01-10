@@ -96,7 +96,7 @@ class Window(Adw.ApplicationWindow):
         )
         self.collections.bind_model(
             collections.model,
-            lambda collection: CollectionSidebarItem(collection=collection),
+            lambda collection: CollectionSidebarItem(collection),
         )
 
         self.add_action(STATE_SETTINGS.create_action("show-sidebar"))
