@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2026-01-05 20:01+0000\n"
+"PO-Revision-Date: 2026-01-10 13:01+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/kw/>\n"
@@ -54,7 +54,7 @@ msgid ""
 "SteamGridDB."
 msgstr ""
 "Kartryjennow yw unn lonchyer simpel rag oll agas gwariow. Y re skoodhyans "
-"rag ynperthyow gwariow a-dhia Steam, Lutris, Heroic, ha moy gans omgelm na "
+"rag ynporthyans gwariow a-dhia Steam, Lutris, Heroic, ha moy gans omgelm na "
 "res. Ty gallos sortya ha kudha gwariow po iskarga artys boks a-dhia "
 "SteamGridDB."
 
@@ -179,7 +179,7 @@ msgstr "Fara"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
-msgstr "Kwytya Wosa Lonchyow Gwariow"
+msgstr "Kwytya Wosa Ow Lonchya Gwariow"
 
 #: data/gtk/preferences.blp:20
 msgid "Cover Image Launches Game"
@@ -321,7 +321,7 @@ msgstr "Gul Devnydh a SteamGridDB"
 
 #: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
-msgstr "Iskarga imajys p'eur addyow po ynperthyow gwariow"
+msgstr "Iskarga imajys p'eur owth addya po owth ynperthya gwariow"
 
 #: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
@@ -560,7 +560,7 @@ msgstr ""
 
 #: cartridges/preferences.py:203
 msgid "Downloading covers…"
-msgstr "Iskargow art…"
+msgstr "Owth iskarga art…"
 
 #: cartridges/preferences.py:222
 msgid "Covers updated"
@@ -616,7 +616,7 @@ msgstr "Warlena"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
-msgstr "Ynperthow Gwariow…"
+msgstr "Owth Ynperthi Gwariow…"
 
 #: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
