@@ -37,19 +37,9 @@ class CollectionFilter(Gtk.Filter):
 class CollectionSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
     """A sidebar item representing a collection."""
 
-    @GObject.Property(type=Collection)
-    def collection(self) -> Collection:
-        """The collection that `self` represents."""
-        return self._collection
+    collection = GObject.Property(type=Collection)
 
-    @collection.setter
-    def collection(self, collection: Collection):
-        self._collection = collection
-        flags = GObject.BindingFlags.SYNC_CREATE
-        collection.bind_property("name", self, "title", flags)
-        collection.bind_property("icon-name", self, "icon-name", flags)
-
-    def __init__(self, **kwargs: Any):
+    def __init__(self, collection: Collection, **kwargs: Any):
         super().__init__(**kwargs)
 
         self.bind_property(
@@ -59,6 +49,13 @@ class CollectionSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttribute
             GObject.BindingFlags.SYNC_CREATE,
             lambda _, name: GLib.markup_escape_text(name),
         )
+
+        flags = GObject.BindingFlags.DEFAULT
+        self._collection_bindings = GObject.BindingGroup()
+        self._collection_bindings.bind("name", self, "title", flags)
+        self._collection_bindings.bind("icon-name", self, "icon-name", flags)
+        self.bind_property("collection", self._collection_bindings, "source")
+        self.collection = collection
 
 
 class CollectionButton(Gtk.ToggleButton):

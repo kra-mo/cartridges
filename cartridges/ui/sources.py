@@ -13,26 +13,8 @@ from cartridges.ui import games
 class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
     """A sidebar item representing a source."""
 
+    source = GObject.Property(type=Source)
     model = GObject.Property(type=Gio.ListModel)
-
-    @GObject.Property(type=Source)
-    def source(self) -> Source:
-        """The source that `self` represents."""
-        return self._source
-
-    @source.setter
-    def source(self, source: Source):
-        self._source = source
-        flags = GObject.BindingFlags.SYNC_CREATE
-        source.bind_property("name", self, "title", flags)
-        source.bind_property("icon-name", self, "icon-name", flags)
-
-        self.model = Gtk.FilterListModel(
-            model=source,
-            filter=games.filter_,
-            watch_items=True,  # pyright: ignore[reportCallIssue]
-        )
-        self.props.visible = self.model.props.n_items
 
     def __init__(self, source: Source, **kwargs: Any):
         super().__init__(**kwargs)
@@ -41,10 +23,24 @@ class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAcce
         self._model_signals = GObject.SignalGroup.new(Gio.ListModel)
         self._model_signals.connect_closure(
             "items-changed",
-            lambda model, *_: self.set_property("visible", model.props.n_items),
+            lambda model, *_: model.notify("n-items"),
             after=True,
         )
-        self.bind_property("model", self._model_signals, "target")
+
+        flags = GObject.BindingFlags.DEFAULT
+        self._source_bindings = GObject.BindingGroup()
+        self._source_bindings.bind("name", self, "title", flags)
+        self._source_bindings.bind("icon-name", self, "icon-name", flags)
+        self.bind_property("source", self._source_bindings, "source")
+
+        self.model = Gtk.FilterListModel(filter=games.filter_, watch_items=True)  # pyright: ignore[reportCallIssue]
+        self.model.bind_property(
+            "n-items",
+            self,
+            "visible",
+            GObject.BindingFlags.SYNC_CREATE,
+        )
+        self.bind_property("source", self.model, "model")
         self.source = source
 
 
