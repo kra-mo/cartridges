@@ -27,13 +27,6 @@ if sys.platform.startswith("linux"):
     from cartridges import gamepads
     from cartridges.gamepads import Gamepad
 
-SORT_MODES = {
-    "last_played": ("last-played", True),
-    "a-z": ("name", False),
-    "z-a": ("name", True),
-    "newest": ("added", False),
-    "oldest": ("added", True),
-}
 
 type _UndoFunc = Callable[[], Any]
 
