@@ -54,10 +54,10 @@ class CollectionDetails(Adw.Dialog):
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
     sort_changed = GObject.Signal()
 
-    _selected_icon: str
-
     either = closures.either
     if_else = closures.if_else
+
+    _selected_icon: str
 
     @GObject.Property(type=Collection)
     def collection(self) -> Collection:

@@ -42,6 +42,7 @@ class GameDetails(Adw.NavigationPage):
     executable_entry: Adw.EntryRow = Gtk.Template.Child()
 
     game_signals: GObject.SignalGroup = Gtk.Template.Child()
+
     sort_changed = GObject.Signal()
 
     boolean = closures.boolean

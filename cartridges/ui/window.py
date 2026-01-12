@@ -56,20 +56,21 @@ class Window(Adw.ApplicationWindow):
     collection_filter: CollectionFilter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
-    collection = GObject.Property(type=Collection)
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
-    model = GObject.Property(type=Gio.ListModel)
     model_signals: GObject.SignalGroup = Gtk.Template.Child()
+
+    collection = GObject.Property(type=Collection)
+    model = GObject.Property(type=Gio.ListModel)
 
     search_text = GObject.Property(type=str)
     show_hidden = GObject.Property(type=bool, default=False)
 
     settings = GObject.Property(type=Gtk.Settings)
 
-    _selected_sidebar_item = 0
-
     format_string = closures.format_string
     if_else = closures.if_else
+
+    _selected_sidebar_item = 0
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
