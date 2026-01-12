@@ -9,13 +9,14 @@
 # Geoffrey Coulaud <geoffrey.coulaud+github@gmail.com>, 2023.
 # TacoCake <kiwifruit@seibmoz.anonaddy.me>, 2024.
 # p-sage <p-sage@users.noreply.hosted.weblate.org>, 2025.
+# Ciel <outlook75012@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2025-09-25 19:01+0000\n"
-"Last-Translator: p-sage <p-sage@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-01-12 14:01+0000\n"
+"Last-Translator: Ciel <outlook75012@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/fr/>\n"
 "Language: fr\n"
@@ -23,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -44,7 +45,8 @@ msgstr "Lancez tous vos jeux"
 #: data/page.kramo.Cartridges.desktop.in:11
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
-msgstr "jeu;lanceur;steam;lutris;heroic;bouteilles;itch;flatpak;legendary;"
+msgstr ""
+"jeu ;lanceur ;steam ;lutris ;heroic ;bottles ;itch ;flatpak ;legendary ;retroarch ;"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:12
 msgid ""
@@ -137,7 +139,7 @@ msgstr "Raccourcis clavier"
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
 #: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
-msgstr "Annuler"
+msgstr "Défaire"
 
 #: data/gtk/help-overlay.blp:34
 msgid "Quit"
