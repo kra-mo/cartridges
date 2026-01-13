@@ -16,8 +16,7 @@ from cartridges.config import PREFIX, PROFILE
 from cartridges.sources import imported
 from cartridges.ui import closures, collections, games, sources
 
-from .collection_details import CollectionDetails
-from .collections import CollectionFilter, CollectionSidebarItem
+from .collections import CollectionActions, CollectionFilter, CollectionSidebarItem
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
 from .games import GameSorter
@@ -43,7 +42,6 @@ class Window(Adw.ApplicationWindow):
     sources: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     collections: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
     new_collection_item: Adw.SidebarItem = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
-    collection_menu: Gio.Menu = Gtk.Template.Child()
     navigation_view: Adw.NavigationView = Gtk.Template.Child()
     header_bar: Adw.HeaderBar = Gtk.Template.Child()
     title_box: Gtk.CenterBox = Gtk.Template.Child()
@@ -56,9 +54,11 @@ class Window(Adw.ApplicationWindow):
     collection_filter: CollectionFilter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
+    menu_collection_actions: CollectionActions = Gtk.Template.Child()
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
     model_signals: GObject.SignalGroup = Gtk.Template.Child()
 
+    menu_collection = GObject.Property(type=Collection)
     collection = GObject.Property(type=Collection)
     model = GObject.Property(type=Gio.ListModel)
 
@@ -109,27 +109,13 @@ class Window(Adw.ApplicationWindow):
             ),
             ("add", lambda *_: self._add()),
             (
-                "add-collection",
-                lambda _action, param, *_: self._add_collection(param.get_string()),
-                "s",
-            ),
-            (
-                "edit-collection",
-                lambda _action, param, *_: self._edit_collection(param.get_uint32()),
-                "u",
-            ),
-            (
-                "remove-collection",
-                lambda _action, param, *_: self._remove_collection(param.get_uint32()),
-                "u",
-            ),
-            (
                 "notify-collection-filter",
                 lambda *_: self.collection_filter.changed(Gtk.FilterChange.DIFFERENT),
             ),
             ("undo", lambda *_: self._undo()),
         ))
 
+        self.insert_action_group("collection", self.menu_collection_actions)
         self.collection_signals.connect_closure(
             "notify::removed",
             lambda *_: self._collection_removed(),
@@ -177,7 +163,7 @@ class Window(Adw.ApplicationWindow):
 
         match item:
             case self.new_collection_item:
-                self._add_collection()
+                collections.add()
                 sidebar.props.selected = self._selected_sidebar_item
             case SourceSidebarItem():
                 self.collection = None
@@ -204,16 +190,7 @@ class Window(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def _setup_sidebar_menu(self, _sidebar, item: Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
         if isinstance(item, CollectionSidebarItem):
-            menu = self.collection_menu
-            menu.remove_all()
-            menu.append(
-                _("Edit"),
-                f"win.edit-collection(uint32 {item.get_section_index()})",
-            )
-            menu.append(
-                _("Remove"),
-                f"win.remove-collection(uint32 {item.get_section_index()})",
-            )
+            self.menu_collection = item.collection
 
     @Gtk.Template.Callback()
     def _setup_gamepad_monitor(self, *_args):
@@ -260,27 +237,6 @@ class Window(Adw.ApplicationWindow):
             self.navigation_view.push_by_tag("details")
 
         self.details.edit()
-
-    def _add_collection(self, game_id: str | None = None):
-        collection = Collection()
-        if game_id:
-            collection.game_ids.add(game_id)
-
-        details = CollectionDetails(collection)
-        details.present(self)
-
-    def _edit_collection(self, pos: int):
-        collection = self.collections.get_item(pos).collection
-        details = CollectionDetails(collection)
-        details.connect(
-            "sort-changed",
-            lambda *_: collections.sorter.changed(Gtk.SorterChange.DIFFERENT),
-        )
-        details.present(self)
-
-    def _remove_collection(self, pos: int):
-        collection = self.collections.get_item(pos).collection
-        collection.activate_action("remove")
 
     def _undo(self, toast: Adw.Toast | None = None):
         if toast:

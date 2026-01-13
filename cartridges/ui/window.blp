@@ -3,6 +3,10 @@ using Adw 1;
 using GObject 2.0;
 using Gio 2.0;
 
+$CollectionActions menu_collection_actions {
+  collection: bind template.menu-collection;
+}
+
 GObject.SignalGroup collection_signals {
   target: bind template.collection;
   target-type: typeof<$Collection>;
@@ -34,12 +38,6 @@ template $Window: Adw.ApplicationWindow {
     }
 
     Shortcut {
-      trigger: "<Control><Shift>n";
-      action: "action(win.add-collection)";
-      arguments: "''";
-    }
-
-    Shortcut {
       trigger: "<Control>z";
       action: "action(win.undo)";
     }
@@ -52,6 +50,11 @@ template $Window: Adw.ApplicationWindow {
     Shortcut {
       trigger: "<Control>w";
       action: "action(window.close)";
+    }
+
+    Shortcut {
+      trigger: "<Control><Shift>n";
+      action: "action(collection.add)";
     }
   }
 
@@ -113,7 +116,10 @@ template $Window: Adw.ApplicationWindow {
               Adw.SidebarSection collections {
                 title: _("Collections");
 
-                menu-model: menu collection_menu {};
+                menu-model: menu {
+                  item (_("Edit"), "collection.edit")
+                  item (_("Remove"), "collection.remove")
+                };
               }
 
               Adw.SidebarSection {

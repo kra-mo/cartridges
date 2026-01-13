@@ -11,6 +11,8 @@ from cartridges.collections import Collection
 from cartridges.config import PREFIX
 from cartridges.ui import closures
 
+from .collections import CollectionActions
+
 
 class _Icon(NamedTuple):
     name: str
@@ -51,23 +53,17 @@ class CollectionDetails(Adw.Dialog):
     name_entry: Adw.EntryRow = Gtk.Template.Child()
     icons_grid: Gtk.Grid = Gtk.Template.Child()
 
+    collection_actions: CollectionActions = Gtk.Template.Child()
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
+
+    collection = GObject.Property(type=Collection)
+
     sort_changed = GObject.Signal()
 
     either = closures.either
     if_else = closures.if_else
 
     _selected_icon: str
-
-    @GObject.Property(type=Collection)
-    def collection(self) -> Collection:
-        """The collection that `self` represents."""
-        return self._collection
-
-    @collection.setter
-    def collection(self, collection: Collection):
-        self._collection = collection
-        self.insert_action_group("collection", collection)
 
     def __init__(self, collection: Collection, **kwargs: Any):
         super().__init__(**kwargs)
@@ -84,6 +80,7 @@ class CollectionDetails(Adw.Dialog):
             transform_to=lambda _, text: bool(text),
         )
 
+        self.insert_action_group("collection", self.collection_actions)
         self.collection_signals.connect_closure(
             "notify::removed",
             lambda *_: self.force_close(),
@@ -134,7 +131,6 @@ class CollectionDetails(Adw.Dialog):
 
         if not self.collection.in_model:
             collections.model.append(self.collection)
-            self.collection.notify("in-model")
 
         collections.save()
         self.close()

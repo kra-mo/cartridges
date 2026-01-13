@@ -2,6 +2,10 @@ using Gtk 4.0;
 using Adw 1;
 using GObject 2.0;
 
+$CollectionActions collection_actions {
+  collection: bind template.collection;
+}
+
 GObject.SignalGroup collection_signals {
   target: bind template.collection;
   target-type: typeof<$Collection>;

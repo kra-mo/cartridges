@@ -2,20 +2,15 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 from collections.abc import Generator, Iterable
-from gettext import gettext as _
-from typing import TYPE_CHECKING, Any, cast
+from typing import Any, cast
 
 from gi.repository import Gio, GLib, GObject
 
 from cartridges import SETTINGS
 from cartridges.sources import imported
 
-if TYPE_CHECKING:
-    from .application import Application
-    from .ui.window import Window
 
-
-class Collection(Gio.SimpleActionGroup):
+class Collection(GObject.Object):
     """Collection data class."""
 
     __gtype_name__ = __qualname__
@@ -27,7 +22,7 @@ class Collection(Gio.SimpleActionGroup):
 
     icon_name = GObject.Property(type=str)
 
-    @GObject.Property(type=bool, default=True)
+    @GObject.Property(type=bool, default=False)
     def in_model(self) -> bool:
         """Whether `self` has been added to the model."""
         return self in model
@@ -44,35 +39,19 @@ class Collection(Gio.SimpleActionGroup):
             lambda _, name: f"{name}-symbolic",
         )
 
-        self.add_action(remove := Gio.SimpleAction.new("remove"))
-        remove.connect("activate", lambda *_: self._remove())
-        self.bind_property(
-            "in-model",
-            remove,
-            "enabled",
-            GObject.BindingFlags.SYNC_CREATE,
+        self._model_signals = GObject.SignalGroup.new(Gio.ListModel)
+        self._model_signals.connect_closure(
+            "items-changed",
+            lambda *_: self.notify("in-model"),
+            after=True,
         )
-
-    def _remove(self):
-        self.removed = True
-        save()
-
-        app = cast("Application", Gio.Application.get_default())
-        window = cast("Window", app.props.active_window)
-        window.send_toast(_("{} removed").format(self.name), undo=self._undo_remove)
-
-    def _undo_remove(self):
-        self.removed = False
-        save()
+        self._model_signals.props.target = model
 
 
 def load():
     """Load collections from GSettings."""
     model.splice(0, 0, tuple(_get_collections()))
     save()
-
-    for collection in model:
-        collection.notify("in-model")
 
 
 def save():

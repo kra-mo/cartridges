@@ -8,7 +8,7 @@ from gi.repository import Gio, GLib, GObject, Gtk
 from cartridges.config import PREFIX
 from cartridges.games import Game
 
-from .collections import CollectionsBox
+from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
 
 
@@ -22,6 +22,8 @@ class GameItem(Gtk.Box):
     options: Gtk.MenuButton = Gtk.Template.Child()
     collections_box: CollectionsBox = Gtk.Template.Child()
     play: Gtk.Button = Gtk.Template.Child()
+
+    collection_actions: CollectionActions = Gtk.Template.Child()
 
     position = GObject.Property(type=int)
 
@@ -46,13 +48,9 @@ class GameItem(Gtk.Box):
                     "win.edit", GLib.Variant.new_uint32(self.position)
                 ),
             ),
-            (
-                "add-collection",
-                lambda *_: self.activate_action(
-                    "win.add-collection", GLib.Variant.new_string(self.game.game_id)
-                ),
-            ),
         ))
+
+        self.insert_action_group("collection", self.collection_actions)
 
         self._reveal_buttons()
 

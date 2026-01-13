@@ -3,6 +3,10 @@ using Gdk 4.0;
 using Adw 1;
 using GObject 2.0;
 
+$CollectionActions collection_actions {
+  game: bind template.game;
+}
+
 GObject.SignalGroup game_signals {
   target: bind template.game;
   target-type: typeof<$Game>;
@@ -184,7 +188,7 @@ template $GameDetails: Adw.NavigationPage {
 
                         popover: PopoverMenu {
                           menu-model: menu {
-                            item (_("New Collection"), "details.add-collection")
+                            item (_("New Collection"), "collection.add")
 
                             item {
                               custom: "collections";

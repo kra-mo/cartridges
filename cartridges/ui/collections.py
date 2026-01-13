@@ -2,13 +2,75 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 from collections.abc import Iterable
-from typing import Any, cast, override
+from gettext import gettext as _
+from typing import TYPE_CHECKING, Any, cast, override
 
-from gi.repository import Adw, GLib, GObject, Gtk
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from cartridges import collections
 from cartridges.collections import Collection
 from cartridges.games import Game
+
+if TYPE_CHECKING:
+    from .window import Window
+
+
+class CollectionActions(Gio.SimpleActionGroup):
+    """Action group for collection actions."""
+
+    __gtype_name__ = __qualname__
+
+    game = GObject.Property(type=Game)
+
+    _collection: Collection | None = None
+
+    @GObject.Property(type=Collection)
+    def collection(self) -> Collection | None:
+        """The collection `self` provides actions for."""
+        return self._collection
+
+    @collection.setter
+    def collection(self, collection: Collection | None):
+        self._collection = collection
+        self._update_remove()
+
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+
+        self.add_action_entries((
+            ("add", lambda *_: add(self.game.game_id if self.game else None)),
+            ("edit", lambda *_: edit(self.collection)),
+            ("remove", lambda *_: remove(self.collection)),
+        ))
+
+        self.bind_property(
+            "collection",
+            cast(Gio.SimpleAction, self.lookup_action("edit")),
+            "enabled",
+            GObject.BindingFlags.SYNC_CREATE,
+            transform_to=lambda _, collection: bool(collection),
+        )
+
+        self._collection_signals = GObject.SignalGroup.new(Collection)
+        self._collection_signals.connect_closure(
+            "notify::removed",
+            lambda *_: self._update_remove(),
+            after=True,
+        )
+        self._collection_signals.connect_closure(
+            "notify::in-model",
+            lambda *_: self._update_remove(),
+            after=True,
+        )
+        self.bind_property("collection", self._collection_signals, "target")
+
+        self._update_remove()
+
+    def _update_remove(self):
+        action = cast(Gio.SimpleAction, self.lookup_action("remove"))
+        action.props.enabled = (
+            self.collection and self.collection.in_model and not self.collection.removed
+        )
 
 
 class CollectionFilter(Gtk.Filter):
@@ -125,6 +187,47 @@ class CollectionsBox(Adw.Bin):
 
         if filter_changed:
             self.activate_action("win.notify-collection-filter")
+
+
+def add(game_id: str | None = None):
+    """Add a new collection, optionally with `game_id`."""
+    from .collection_details import CollectionDetails
+
+    collection = Collection()
+    if game_id:
+        collection.game_ids.add(game_id)
+
+    details = CollectionDetails(collection)
+    details.present(_window())
+
+
+def edit(collection: Collection):
+    """Edit `collection`."""
+    from .collection_details import CollectionDetails
+
+    details = CollectionDetails(collection)
+    details.present(_window())
+
+
+def remove(collection: Collection):
+    """Remove `collection` and notify the user with a toast."""
+    collection.removed = True
+    collections.save()
+
+    _window().send_toast(
+        _("{} removed").format(collection.name),
+        undo=lambda: _undo_remove(collection),
+    )
+
+
+def _undo_remove(collection: Collection):
+    collection.removed = False
+    collections.save()
+
+
+def _window() -> "Window":
+    app = cast(Gtk.Application, Gio.Application.get_default())
+    return cast("Window", app.props.active_window)
 
 
 sorter = Gtk.StringSorter.new(Gtk.PropertyExpression.new(Collection, None, "name"))

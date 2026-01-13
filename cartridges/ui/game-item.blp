@@ -1,6 +1,10 @@
 using Gtk 4.0;
 using Adw 1;
 
+$CollectionActions collection_actions {
+  game: bind template.game;
+}
+
 template $GameItem: Box {
   name: "game-item";
   orientation: vertical;
@@ -52,7 +56,7 @@ template $GameItem: Box {
             }
 
             section {
-              item (_("New Collection"), "item.add-collection")
+              item (_("New Collection"), "collection.add")
 
               item {
                 custom: "collections";

@@ -10,7 +10,7 @@ from gettext import gettext as _
 from typing import Any, cast
 from urllib.parse import quote
 
-from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
+from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
 from cartridges import games, sources
 from cartridges.config import PREFIX
@@ -18,7 +18,7 @@ from cartridges.games import Game
 from cartridges.sources import imported
 from cartridges.ui import closures
 
-from .collections import CollectionsBox
+from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
 
 _POP_ON_PROPERTY_NOTIFY = "hidden", "removed"
@@ -41,6 +41,7 @@ class GameDetails(Adw.NavigationPage):
     developer_entry: Adw.EntryRow = Gtk.Template.Child()
     executable_entry: Adw.EntryRow = Gtk.Template.Child()
 
+    collection_actions: CollectionActions = Gtk.Template.Child()
     game_signals: GObject.SignalGroup = Gtk.Template.Child()
 
     sort_changed = GObject.Signal()
@@ -74,16 +75,12 @@ class GameDetails(Adw.NavigationPage):
                 ),
                 "s",
             ),
-            (
-                "add-collection",
-                lambda *_: self.activate_action(
-                    "win.add-collection", GLib.Variant.new_string(self.game.game_id)
-                ),
-            ),
         ))
 
         group.add_action(apply := Gio.SimpleAction.new("apply"))
         apply.connect("activate", lambda *_: self._apply())
+
+        self.insert_action_group("collection", self.collection_actions)
 
         entries = tuple(
             Gtk.PropertyExpression.new(
