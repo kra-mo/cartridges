@@ -35,6 +35,12 @@ def either[T](first: T, second: T) -> T:
 
 
 @_closure
+def every(*values: object) -> bool:
+    """Get whether all values are truthy."""
+    return all(values)
+
+
+@_closure
 def format_string(string: str, *args: Any) -> str:
     """Format `string` with `args`."""
     return string.format(*args)

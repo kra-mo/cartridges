@@ -35,11 +35,8 @@ class GameDetails(Adw.NavigationPage):
     __gtype_name__ = __qualname__
 
     stack: Adw.ViewStack = Gtk.Template.Child()
-    actions: Gtk.Box = Gtk.Template.Child()
     collections_box: CollectionsBox = Gtk.Template.Child()
     name_entry: Adw.EntryRow = Gtk.Template.Child()
-    developer_entry: Adw.EntryRow = Gtk.Template.Child()
-    executable_entry: Adw.EntryRow = Gtk.Template.Child()
 
     game_actions: GameActions = Gtk.Template.Child()
     collection_actions: CollectionActions = Gtk.Template.Child()
@@ -47,20 +44,27 @@ class GameDetails(Adw.NavigationPage):
 
     game = GObject.Property(type=Game)
 
+    valid = GObject.Property(type=bool, default=False)
+    game_name = GObject.Property(type=str)
+    game_developer = GObject.Property(type=str)
+    game_executable = GObject.Property(type=str)
+
     sort_changed = GObject.Signal()
 
     boolean = closures.boolean
     either = closures.either
+    every = closures.every
     format_string = closures.format_string
     if_else = closures.if_else
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self.insert_action_group("details", group := Gio.SimpleActionGroup())
+        group = Gio.SimpleActionGroup()
         group.add_action_entries((
             ("edit", lambda *_: self.edit()),
             ("cancel", lambda *_: self._cancel()),
+            ("apply", lambda *_: self._apply()),
             (
                 "search-on",
                 lambda _action, param, *_: Gio.AppInfo.launch_default_for_uri(
@@ -69,23 +73,17 @@ class GameDetails(Adw.NavigationPage):
                 "s",
             ),
         ))
+        self.insert_action_group("details", group)
 
-        group.add_action(apply := Gio.SimpleAction.new("apply"))
-        apply.connect("activate", lambda *_: self._apply())
+        self.bind_property(
+            "valid",
+            cast(Gio.SimpleAction, group.lookup_action("apply")),
+            "enabled",
+            GObject.BindingFlags.SYNC_CREATE,
+        )
 
         self.insert_action_group("game", self.game_actions)
         self.insert_action_group("collection", self.collection_actions)
-
-        entries = tuple(
-            Gtk.PropertyExpression.new(
-                Adw.EntryRow,
-                Gtk.ConstantExpression.new_for_value(getattr(self, f"{prop}_entry")),
-                "text",
-            )
-            for prop in _REQUIRED_PROPERTIES
-        )
-        valid = Gtk.ClosureExpression.new(bool, lambda _, *values: all(values), entries)
-        valid.bind(apply, "enabled")
 
         for name in "hidden", "removed":
             self.game_signals.connect_closure(
@@ -97,17 +95,15 @@ class GameDetails(Adw.NavigationPage):
     def edit(self):
         """Enter edit mode."""
         for prop in _EDITABLE_PROPERTIES:
-            entry = getattr(self, f"{prop}_entry")
             value = getattr(self.game, prop)
-            entry.props.text = value
+            setattr(self, f"game_{prop}", value)
 
         self.stack.props.visible_child_name = "edit"
         self.name_entry.grab_focus()
 
     def _apply(self):
         for prop in _EDITABLE_PROPERTIES:
-            entry = getattr(self, f"{prop}_entry")
-            value = entry.props.text
+            value = getattr(self, f"game_{prop}")
             previous_value = getattr(self.game, prop)
 
             if value != previous_value:

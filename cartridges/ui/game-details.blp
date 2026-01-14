@@ -20,6 +20,7 @@ template $GameDetails: Adw.NavigationPage {
   name: "details";
   tag: "details";
   title: bind $either(template.game as <$Game>.name, _("Add Game")) as <string>;
+  valid: bind $every(template.game-name, template.game-executable) as <bool>;
   hidden => $_cancel();
 
   ShortcutController {
@@ -333,18 +334,21 @@ template $GameDetails: Adw.NavigationPage {
                   Adw.PreferencesGroup {
                     Adw.EntryRow name_entry {
                       title: _("Title");
+                      text: bind template.game-name bidirectional;
                       entry-activated => $_activate_apply();
                     }
 
-                    Adw.EntryRow developer_entry {
+                    Adw.EntryRow {
                       title: _("Developer (optional)");
+                      text: bind template.game-developer bidirectional;
                       entry-activated => $_activate_apply();
                     }
                   }
 
                   Adw.PreferencesGroup {
-                    Adw.EntryRow executable_entry {
+                    Adw.EntryRow {
                       title: _("Executable");
+                      text: bind template.game-executable bidirectional;
                       entry-activated => $_activate_apply();
 
                       [suffix]
