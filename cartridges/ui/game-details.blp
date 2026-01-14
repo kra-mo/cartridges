@@ -3,6 +3,10 @@ using Gdk 4.0;
 using Adw 1;
 using GObject 2.0;
 
+$GameActions game_actions {
+  game: bind template.game;
+}
+
 $CollectionActions collection_actions {
   game: bind template.game;
 }

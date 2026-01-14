@@ -20,8 +20,8 @@ from cartridges.ui import closures
 
 from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
+from .games import GameActions
 
-_POP_ON_PROPERTY_NOTIFY = "hidden", "removed"
 _EDITABLE_PROPERTIES = {prop.name for prop in games.PROPERTIES if prop.editable}
 _REQUIRED_PROPERTIES = {
     prop.name for prop in games.PROPERTIES if prop.editable and prop.required
@@ -41,8 +41,11 @@ class GameDetails(Adw.NavigationPage):
     developer_entry: Adw.EntryRow = Gtk.Template.Child()
     executable_entry: Adw.EntryRow = Gtk.Template.Child()
 
+    game_actions: GameActions = Gtk.Template.Child()
     collection_actions: CollectionActions = Gtk.Template.Child()
     game_signals: GObject.SignalGroup = Gtk.Template.Child()
+
+    game = GObject.Property(type=Game)
 
     sort_changed = GObject.Signal()
 
@@ -50,16 +53,6 @@ class GameDetails(Adw.NavigationPage):
     either = closures.either
     format_string = closures.format_string
     if_else = closures.if_else
-
-    @GObject.Property(type=Game)
-    def game(self) -> Game:
-        """The game whose details to show."""
-        return self._game
-
-    @game.setter
-    def game(self, game: Game):
-        self._game = game
-        self.insert_action_group("game", game)
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -80,6 +73,7 @@ class GameDetails(Adw.NavigationPage):
         group.add_action(apply := Gio.SimpleAction.new("apply"))
         apply.connect("activate", lambda *_: self._apply())
 
+        self.insert_action_group("game", self.game_actions)
         self.insert_action_group("collection", self.collection_actions)
 
         entries = tuple(
@@ -93,7 +87,7 @@ class GameDetails(Adw.NavigationPage):
         valid = Gtk.ClosureExpression.new(bool, lambda _, *values: all(values), entries)
         valid.bind(apply, "enabled")
 
-        for name in _POP_ON_PROPERTY_NOTIFY:
+        for name in "hidden", "removed":
             self.game_signals.connect_closure(
                 f"notify::{name}",
                 lambda *_: self.activate_action("navigation.pop"),

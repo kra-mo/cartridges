@@ -1,6 +1,10 @@
 using Gtk 4.0;
 using Adw 1;
 
+$GameActions game_actions {
+  game: bind template.game;
+}
+
 $CollectionActions collection_actions {
   game: bind template.game;
 }
@@ -38,7 +42,7 @@ template $GameItem: Box {
         popover: PopoverMenu {
           menu-model: menu {
             section {
-              item (_("Edit"), "item.edit")
+              item (_("Edit"), "game.edit")
 
               item {
                 label: _("Hide");

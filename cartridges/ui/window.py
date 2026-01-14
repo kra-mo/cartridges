@@ -13,13 +13,12 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 from cartridges import STATE_SETTINGS
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
-from cartridges.sources import imported
 from cartridges.ui import closures, collections, games, sources
 
 from .collections import CollectionActions, CollectionFilter, CollectionSidebarItem
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
-from .games import GameSorter
+from .games import GameActions, GameSorter
 from .sources import SourceSidebarItem
 
 if sys.platform.startswith("linux"):
@@ -54,6 +53,7 @@ class Window(Adw.ApplicationWindow):
     collection_filter: CollectionFilter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
+    game_actions: GameActions = Gtk.Template.Child()
     menu_collection_actions: CollectionActions = Gtk.Template.Child()
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
     model_signals: GObject.SignalGroup = Gtk.Template.Child()
@@ -102,19 +102,14 @@ class Window(Adw.ApplicationWindow):
         self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
         self.add_action_entries((
             ("search", lambda *_: self.search_entry.grab_focus()),
-            (
-                "edit",
-                lambda _action, param, *_: self._edit(param.get_uint32()),
-                "u",
-            ),
-            ("add", lambda *_: self._add()),
+            ("undo", lambda *_: self._undo()),
             (
                 "notify-collection-filter",
                 lambda *_: self.collection_filter.changed(Gtk.FilterChange.DIFFERENT),
             ),
-            ("undo", lambda *_: self._undo()),
         ))
 
+        self.insert_action_group("game", self.game_actions)
         self.insert_action_group("collection", self.menu_collection_actions)
         self.collection_signals.connect_closure(
             "notify::removed",
@@ -224,19 +219,6 @@ class Window(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def _sort_changed(self, *_args):
         self.sorter.changed(Gtk.SorterChange.DIFFERENT)
-
-    def _edit(self, pos: int):
-        self.details.game = cast(Gio.ListModel, self.grid.props.model).get_item(pos)
-        self.navigation_view.push_by_tag("details")
-        self.details.edit()
-
-    def _add(self):
-        self.details.game = imported.new()
-
-        if self.navigation_view.props.visible_page_tag != "details":
-            self.navigation_view.push_by_tag("details")
-
-        self.details.edit()
 
     def _undo(self, toast: Adw.Toast | None = None):
         if toast:

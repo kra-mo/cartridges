@@ -6,20 +6,14 @@
 import json
 import os
 import subprocess
-from collections.abc import Callable
-from gettext import gettext as _
 from pathlib import Path
 from shlex import quote
 from types import UnionType
-from typing import TYPE_CHECKING, Any, NamedTuple, Self, cast
+from typing import Any, NamedTuple, Self
 
 from gi.repository import Gdk, Gio, GObject
 
 from . import DATA_DIR
-
-if TYPE_CHECKING:
-    from .application import Application
-    from .ui.window import Window
 
 
 class _GameProp(NamedTuple):
@@ -67,32 +61,6 @@ class Game(Gio.SimpleActionGroup):
     version = GObject.Property(type=float, default=_SPEC_VERSION)
 
     cover = GObject.Property(type=Gdk.Texture)
-
-    def __init__(self, **kwargs: Any):
-        super().__init__(**kwargs)
-
-        self.add_action_entries((
-            ("play", lambda *_: self.play()),
-            ("remove", lambda *_: self._remove()),
-        ))
-
-        self.add_action(hide_action := Gio.SimpleAction.new("hide"))
-        hide_action.connect("activate", lambda *_: self._hide())
-        self.bind_property(
-            "hidden",
-            hide_action,
-            "enabled",
-            GObject.BindingFlags.SYNC_CREATE | GObject.BindingFlags.INVERT_BOOLEAN,
-        )
-
-        self.add_action(unhide_action := Gio.SimpleAction.new("unhide"))
-        unhide_action.connect("activate", lambda *_: self._unhide())
-        self.bind_property(
-            "hidden",
-            unhide_action,
-            "enabled",
-            GObject.BindingFlags.SYNC_CREATE,
-        )
 
     @classmethod
     def from_data(cls, data: dict[str, Any]) -> Self:
@@ -143,29 +111,3 @@ class Game(Gio.SimpleActionGroup):
         path = (GAMES_DIR / self.game_id).with_suffix(".json")
         with path.open("w", encoding="utf-8") as f:
             json.dump(properties, f, indent=4, sort_keys=True)
-
-    def _remove(self):
-        self.removed = True
-        self._send(
-            _("{} removed").format(self.name),
-            undo=lambda: setattr(self, "removed", False),
-        )
-
-    def _hide(self):
-        self.hidden = True
-        self._send(
-            _("{} hidden").format(self.name),
-            undo=lambda: setattr(self, "hidden", False),
-        )
-
-    def _unhide(self):
-        self.hidden = False
-        self._send(
-            _("{} unhidden").format(self.name),
-            undo=lambda: setattr(self, "hidden", True),
-        )
-
-    def _send(self, title: str, *, undo: Callable[[], Any]):
-        app = cast("Application", Gio.Application.get_default())
-        window = cast("Window", app.props.active_window)
-        window.send_toast(title, undo=undo)

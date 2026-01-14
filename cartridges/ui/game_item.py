@@ -3,13 +3,14 @@
 
 from typing import Any
 
-from gi.repository import Gio, GLib, GObject, Gtk
+from gi.repository import GObject, Gtk
 
 from cartridges.config import PREFIX
 from cartridges.games import Game
 
 from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
+from .games import GameActions
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/game-item.ui")
@@ -23,35 +24,16 @@ class GameItem(Gtk.Box):
     collections_box: CollectionsBox = Gtk.Template.Child()
     play: Gtk.Button = Gtk.Template.Child()
 
+    game_actions: GameActions = Gtk.Template.Child()
     collection_actions: CollectionActions = Gtk.Template.Child()
 
-    position = GObject.Property(type=int)
-
-    @GObject.Property(type=Game)
-    def game(self) -> Game | None:
-        """The game that `self` represents."""
-        return self._game
-
-    @game.setter
-    def game(self, game: Game | None):
-        self._game = game
-        self.insert_action_group("game", game)
+    game = GObject.Property(type=Game)
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self.insert_action_group("item", group := Gio.SimpleActionGroup())
-        group.add_action_entries((
-            (
-                "edit",
-                lambda *_: self.activate_action(
-                    "win.edit", GLib.Variant.new_uint32(self.position)
-                ),
-            ),
-        ))
-
+        self.insert_action_group("game", self.game_actions)
         self.insert_action_group("collection", self.collection_actions)
-
         self._reveal_buttons()
 
     @Gtk.Template.Callback()

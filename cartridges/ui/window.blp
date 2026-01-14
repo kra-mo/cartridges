@@ -3,6 +3,8 @@ using Adw 1;
 using GObject 2.0;
 using Gio 2.0;
 
+$GameActions game_actions {}
+
 $CollectionActions menu_collection_actions {
   collection: bind template.menu-collection;
 }
@@ -33,11 +35,6 @@ template $Window: Adw.ApplicationWindow {
     }
 
     Shortcut {
-      trigger: "<Control>n";
-      action: "action(win.add)";
-    }
-
-    Shortcut {
       trigger: "<Control>z";
       action: "action(win.undo)";
     }
@@ -50,6 +47,11 @@ template $Window: Adw.ApplicationWindow {
     Shortcut {
       trigger: "<Control>w";
       action: "action(window.close)";
+    }
+
+    Shortcut {
+      trigger: "<Control>n";
+      action: "action(game.add)";
     }
 
     Shortcut {
@@ -213,7 +215,7 @@ template $Window: Adw.ApplicationWindow {
               Button {
                 icon-name: "list-add-symbolic";
                 tooltip-text: _("Add Game");
-                action-name: "win.add";
+                action-name: "game.add";
               }
 
               [end]
@@ -295,7 +297,6 @@ template $Window: Adw.ApplicationWindow {
                         template ListItem {
                           child: $GameItem {
                             game: bind template.item;
-                            position: bind template.position;
                           };
                         }
                       };
