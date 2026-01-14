@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 from itertools import product
-from typing import Any, NamedTuple
+from typing import Any, NamedTuple, cast
 
 from gi.repository import Adw, Gio, GObject, Gtk
 
@@ -50,34 +50,35 @@ class CollectionDetails(Adw.Dialog):
 
     __gtype_name__ = __qualname__
 
-    name_entry: Adw.EntryRow = Gtk.Template.Child()
     icons_grid: Gtk.Grid = Gtk.Template.Child()
 
     collection_actions: CollectionActions = Gtk.Template.Child()
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
+    collection_bindings: GObject.BindingGroup = Gtk.Template.Child()
 
     collection = GObject.Property(type=Collection)
+
+    collection_name = GObject.Property(type=str)
+    collection_icon = GObject.Property(type=str)
 
     sort_changed = GObject.Signal()
 
     either = closures.either
     if_else = closures.if_else
 
-    _selected_icon: str
-
     def __init__(self, collection: Collection, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self.insert_action_group("details", group := Gio.SimpleActionGroup())
+        group = Gio.SimpleActionGroup()
+        group.add_action_entries((("apply", lambda *_: self._apply()),))
+        self.insert_action_group("details", group)
 
-        group.add_action(apply := Gio.SimpleAction.new("apply"))
-        apply.connect("activate", lambda *_: self._apply())
-        self.name_entry.bind_property(
-            "text",
-            apply,
+        self.bind_property(
+            "collection-name",
+            cast(Gio.SimpleAction, group.lookup_action("apply")),
             "enabled",
             GObject.BindingFlags.SYNC_CREATE,
-            transform_to=lambda _, text: bool(text),
+            transform_to=lambda _, name: bool(name),
         )
 
         self.insert_action_group("collection", self.collection_actions)
@@ -85,6 +86,12 @@ class CollectionDetails(Adw.Dialog):
             "notify::removed",
             lambda *_: self.force_close(),
             after=True,
+        )
+        self.collection_bindings.bind(
+            "name",
+            self,
+            "collection-name",
+            GObject.BindingFlags.DEFAULT,
         )
         self.collection = collection
 
@@ -111,7 +118,7 @@ class CollectionDetails(Adw.Dialog):
 
             button.connect(
                 "toggled",
-                lambda _, icon: setattr(self, "_selected_icon", icon),
+                lambda _, icon: setattr(self, "collection_icon", icon),
                 icon,
             )
 
@@ -121,13 +128,12 @@ class CollectionDetails(Adw.Dialog):
             self.icons_grid.attach(button, col, row, 1, 1)
 
     def _apply(self):
-        name = self.name_entry.props.text
-        if self.collection.name != name:
-            self.collection.name = name
+        if self.collection.name != self.collection_name:
+            self.collection.name = self.collection_name
             if self.collection.in_model:
                 self.emit("sort-changed")
 
-        self.collection.icon = self._selected_icon
+        self.collection.icon = self.collection_icon
 
         if not self.collection.in_model:
             collections.model.append(self.collection)

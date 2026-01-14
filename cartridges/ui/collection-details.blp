@@ -11,6 +11,10 @@ GObject.SignalGroup collection_signals {
   target-type: typeof<$Collection>;
 }
 
+GObject.BindingGroup collection_bindings {
+  source: bind template.collection;
+}
+
 template $CollectionDetails: Adw.Dialog {
   title: bind $either(template.collection as <$Collection>.name, _("New Collection")) as <string>;
   content-width: 360;
@@ -53,7 +57,7 @@ template $CollectionDetails: Adw.Dialog {
       Adw.PreferencesGroup {
         Adw.EntryRow name_entry {
           title: _("Name");
-          text: bind template.collection as <$Collection>.name;
+          text: bind template.collection-name bidirectional;
           activates-default: true;
         }
       }
