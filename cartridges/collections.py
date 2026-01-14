@@ -43,7 +43,7 @@ class Collection(GObject.Object):
         self._model_signals.connect_closure(
             "items-changed",
             lambda *_: self.notify("in-model"),
-            after=True,
+            after=False,
         )
         self._model_signals.props.target = model
 

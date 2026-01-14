@@ -24,7 +24,7 @@ class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAcce
         self._model_signals.connect_closure(
             "items-changed",
             lambda model, *_: model.notify("n-items"),
-            after=True,
+            after=False,
         )
 
         flags = GObject.BindingFlags.DEFAULT

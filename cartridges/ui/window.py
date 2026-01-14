@@ -114,12 +114,12 @@ class Window(Adw.ApplicationWindow):
         self.collection_signals.connect_closure(
             "notify::removed",
             lambda *_: self._collection_removed(),
-            after=True,
+            after=False,
         )
         self.model_signals.connect_closure(
             "items-changed",
             lambda model, *_: None if model else self._model_emptied(),
-            after=True,
+            after=False,
         )
         self.model = games.model
 

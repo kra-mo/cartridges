@@ -85,7 +85,7 @@ class CollectionDetails(Adw.Dialog):
         self.collection_signals.connect_closure(
             "notify::removed",
             lambda *_: self.force_close(),
-            after=True,
+            after=False,
         )
         self.collection_bindings.bind(
             "name",

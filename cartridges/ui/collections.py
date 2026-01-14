@@ -55,12 +55,12 @@ class CollectionActions(Gio.SimpleActionGroup):
         self._collection_signals.connect_closure(
             "notify::removed",
             lambda *_: self._update_remove(),
-            after=True,
+            after=False,
         )
         self._collection_signals.connect_closure(
             "notify::in-model",
             lambda *_: self._update_remove(),
-            after=True,
+            after=False,
         )
         self.bind_property("collection", self._collection_signals, "target")
 

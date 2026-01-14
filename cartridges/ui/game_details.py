@@ -89,7 +89,7 @@ class GameDetails(Adw.NavigationPage):
             self.game_signals.connect_closure(
                 f"notify::{name}",
                 lambda *_: self.activate_action("navigation.pop"),
-                after=True,
+                after=False,
             )
 
     def edit(self):
