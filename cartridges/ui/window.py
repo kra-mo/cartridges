@@ -15,7 +15,7 @@ from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
 from cartridges.ui import closures, collections, games, sources
 
-from .collections import CollectionActions, CollectionFilter, CollectionSidebarItem
+from .collections import CollectionActions, CollectionSidebarItem
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
 from .games import GameActions, GameSorter
@@ -50,7 +50,6 @@ class Window(Adw.ApplicationWindow):
     toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
     sorter: GameSorter = Gtk.Template.Child()
-    collection_filter: CollectionFilter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
     game_actions: GameActions = Gtk.Template.Child()
@@ -104,10 +103,6 @@ class Window(Adw.ApplicationWindow):
         self.add_action_entries((
             ("search", lambda *_: self.search_entry.grab_focus()),
             ("undo", lambda *_: self._undo()),
-            (
-                "notify-collection-filter",
-                lambda *_: self.collection_filter.changed(Gtk.FilterChange.DIFFERENT),
-            ),
         ))
 
         self.insert_action_group("game", self.game_actions)

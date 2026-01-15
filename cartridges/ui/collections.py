@@ -93,7 +93,18 @@ class CollectionFilter(Gtk.Filter):
         if not self.collection:
             return True
 
-        return game.game_id in self.collection.game_ids
+        return game.game_id in self.collection
+
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+
+        self._collection_signals = GObject.SignalGroup.new(Collection)
+        self._collection_signals.connect_closure(
+            "items-changed",
+            lambda *_: self.changed(Gtk.FilterChange.DIFFERENT),
+            after=False,
+        )
+        self.bind_property("collection", self._collection_signals, "target")
 
 
 class CollectionSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
@@ -164,29 +175,18 @@ class CollectionsBox(Adw.Bin):
         """Populate the box with collections."""
         for collection in cast(Iterable[Collection], model):
             button = CollectionButton(collection)
-            button.props.active = self.game.game_id in collection.game_ids
+            button.props.active = self.game.game_id in collection
             self.box.append(button)
 
     def finish(self):
-        """Clear the box and save changes."""
-        filter_changed = False
+        """Clear the box."""
         for button in cast(Iterable[CollectionButton], self.box):
-            game_ids = button.collection.game_ids
-            old_game_ids = game_ids.copy()
-
             if button.props.active:
-                game_ids.add(self.game.game_id)
+                button.collection.add(self.game.game_id)
             else:
-                game_ids.discard(self.game.game_id)
-
-            if game_ids != old_game_ids:
-                filter_changed = True
+                button.collection.discard(self.game.game_id)
 
         self.box.remove_all()  # pyright: ignore[reportAttributeAccessIssue]
-        collections.save()
-
-        if filter_changed:
-            self.activate_action("win.notify-collection-filter")
 
 
 def add(game_id: str | None = None):
@@ -195,7 +195,7 @@ def add(game_id: str | None = None):
 
     collection = Collection()
     if game_id:
-        collection.game_ids.add(game_id)
+        collection.add(game_id)
 
     details = CollectionDetails(collection)
     details.present(_window())
@@ -212,17 +212,10 @@ def edit(collection: Collection):
 def remove(collection: Collection):
     """Remove `collection` and notify the user with a toast."""
     collection.removed = True
-    collections.save()
-
     _window().send_toast(
         _("{} removed").format(collection.name),
-        undo=lambda: _undo_remove(collection),
+        undo=lambda: setattr(collection, "removed", False),
     )
-
-
-def _undo_remove(collection: Collection):
-    collection.removed = False
-    collections.save()
 
 
 def _window() -> "Window":

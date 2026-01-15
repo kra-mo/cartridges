@@ -135,8 +135,9 @@ class CollectionDetails(Adw.Dialog):
 
         self.collection.icon = self.collection_icon
 
-        if not self.collection.in_model:
+        if self.collection.in_model:
+            collections.save()
+        else:
             collections.model.append(self.collection)
 
-        collections.save()
         self.close()
