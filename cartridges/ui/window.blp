@@ -259,37 +259,33 @@ template $Window: Adw.ApplicationWindow {
                       activate => $_show_details();
 
                       model: NoSelection {
-                        model: SortListModel {
-                          sorter: $GameSorter sorter {};
+                        model: FilterListModel {
+                          watch-items: true;
 
-                          model: FilterListModel {
-                            watch-items: true;
+                          filter: EveryFilter {
+                            $CollectionFilter {
+                              collection: bind template.collection;
+                            }
 
-                            filter: EveryFilter {
-                              $CollectionFilter {
-                                collection: bind template.collection;
+                            AnyFilter {
+                              StringFilter {
+                                expression: expr item as <$Game>.name;
+                                search: bind template.search-text;
                               }
 
-                              AnyFilter {
-                                StringFilter {
-                                  expression: expr item as <$Game>.name;
-                                  search: bind template.search-text;
-                                }
-
-                                StringFilter {
-                                  expression: expr item as <$Game>.developer;
-                                  search: bind template.search-text;
-                                }
+                              StringFilter {
+                                expression: expr item as <$Game>.developer;
+                                search: bind template.search-text;
                               }
+                            }
 
-                              BoolFilter {
-                                expression: expr item as <$Game>.hidden;
-                                invert: bind template.show-hidden inverted;
-                              }
-                            };
-
-                            model: bind template.model;
+                            BoolFilter {
+                              expression: expr item as <$Game>.hidden;
+                              invert: bind template.show-hidden inverted;
+                            }
                           };
+
+                          model: bind template.model;
                         };
                       };
 
@@ -352,8 +348,6 @@ template $Window: Adw.ApplicationWindow {
       };
     }
 
-    $GameDetails details {
-      sort-changed => $_sort_changed();
-    }
+    $GameDetails details {}
   };
 }

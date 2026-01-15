@@ -12,19 +12,22 @@ from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
-from cartridges import games, sources
+import cartridges.games
+from cartridges import sources
 from cartridges.config import PREFIX
 from cartridges.games import Game
 from cartridges.sources import imported
-from cartridges.ui import closures
+from cartridges.ui import closures, games
 
 from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
 from .games import GameActions
 
-_EDITABLE_PROPERTIES = {prop.name for prop in games.PROPERTIES if prop.editable}
+_EDITABLE_PROPERTIES = {
+    prop.name for prop in cartridges.games.PROPERTIES if prop.editable
+}
 _REQUIRED_PROPERTIES = {
-    prop.name for prop in games.PROPERTIES if prop.editable and prop.required
+    prop.name for prop in cartridges.games.PROPERTIES if prop.editable and prop.required
 }
 
 
@@ -48,8 +51,6 @@ class GameDetails(Adw.NavigationPage):
     game_name = GObject.Property(type=str)
     game_developer = GObject.Property(type=str)
     game_executable = GObject.Property(type=str)
-
-    sort_changed = GObject.Signal()
 
     boolean = closures.boolean
     either = closures.either
@@ -109,7 +110,7 @@ class GameDetails(Adw.NavigationPage):
             if value != previous_value:
                 setattr(self.game, prop, value)
                 if prop == "name" and self.game.added:
-                    self.emit("sort-changed")
+                    games.sorter.changed(Gtk.SorterChange.DIFFERENT)
 
         if not self.game.added:
             self.game.added = int(time.time())

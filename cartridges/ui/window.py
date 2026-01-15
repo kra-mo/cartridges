@@ -18,7 +18,7 @@ from cartridges.ui import closures, collections, games, sources
 from .collections import CollectionActions, CollectionSidebarItem
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
-from .games import GameActions, GameSorter
+from .games import GameActions
 from .sources import SourceSidebarItem
 
 if sys.platform.startswith("linux"):
@@ -49,7 +49,6 @@ class Window(Adw.ApplicationWindow):
     main_menu_button: Gtk.MenuButton = Gtk.Template.Child()
     toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
     grid: Gtk.GridView = Gtk.Template.Child()
-    sorter: GameSorter = Gtk.Template.Child()
     details: GameDetails = Gtk.Template.Child()
 
     game_actions: GameActions = Gtk.Template.Child()
@@ -211,10 +210,6 @@ class Window(Adw.ApplicationWindow):
     def _stop_search(self, entry: Gtk.SearchEntry):
         entry.props.text = ""
         self.grid.grab_focus()
-
-    @Gtk.Template.Callback()
-    def _sort_changed(self, *_args):
-        self.sorter.changed(Gtk.SorterChange.DIFFERENT)
 
     def _undo(self, toast: Adw.Toast | None = None):
         if toast:

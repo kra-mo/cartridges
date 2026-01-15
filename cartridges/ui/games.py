@@ -5,7 +5,7 @@
 
 import locale
 from gettext import gettext as _
-from typing import TYPE_CHECKING, Any, cast, override
+from typing import TYPE_CHECKING, Any, cast
 
 from gi.repository import Gio, GObject, Gtk
 
@@ -23,25 +23,6 @@ _SORT_MODES = {
     "newest": ("added", True),
     "oldest": ("added", False),
 }
-
-filter_ = Gtk.EveryFilter()
-filter_.append(
-    Gtk.BoolFilter(
-        expression=Gtk.PropertyExpression.new(Game, None, "removed"),
-        invert=True,
-    )
-)
-filter_.append(
-    Gtk.BoolFilter(
-        expression=Gtk.PropertyExpression.new(Game, None, "blacklisted"),
-        invert=True,
-    )
-)
-model = Gtk.FilterListModel(
-    model=Gtk.FlattenListModel.new(sources.model),
-    filter=filter_,
-    watch_items=True,  # pyright: ignore[reportCallIssue]
-)
 
 
 class GameActions(Gio.SimpleActionGroup):
@@ -112,39 +93,6 @@ class GameActions(Gio.SimpleActionGroup):
                 action.props.enabled = False
 
 
-class GameSorter(Gtk.Sorter):
-    """A sorter for game objects.
-
-    Automatically updates if the "sort-mode" GSetting changes.
-    """
-
-    __gtype_name__ = __qualname__
-
-    def __init__(self, **kwargs: Any):
-        super().__init__(**kwargs)
-
-        STATE_SETTINGS.connect(
-            "changed::sort-mode", lambda *_: self.changed(Gtk.SorterChange.DIFFERENT)
-        )
-
-    @override
-    def do_compare(self, game1: Game, game2: Game) -> Gtk.Ordering:  # pyright: ignore[reportIncompatibleMethodOverride]
-        prop, invert = _SORT_MODES[STATE_SETTINGS.get_string("sort-mode")]
-        a = (game2 if invert else game1).get_property(prop)
-        b = (game1 if invert else game2).get_property(prop)
-
-        return Gtk.Ordering(
-            self._name_cmp(a, b)
-            if isinstance(a, str)
-            else ((a > b) - (a < b)) or self._name_cmp(game1.name, game2.name)
-        )
-
-    @staticmethod
-    def _name_cmp(a: str, b: str) -> int:
-        a, b = (name.lower().removeprefix("the ") for name in (a, b))
-        return max(-1, min(locale.strcoll(a, b), 1))
-
-
 def add():
     """Add a new game."""
     window = _window()
@@ -194,3 +142,49 @@ def remove(game: Game):
 def _window() -> "Window":
     app = cast(Gtk.Application, Gio.Application.get_default())
     return cast("Window", app.props.active_window)
+
+
+def _sort(game1: Game, game2: Game) -> int:
+    prop, invert = _SORT_MODES[STATE_SETTINGS.get_string("sort-mode")]
+    a = (game2 if invert else game1).get_property(prop)
+    b = (game1 if invert else game2).get_property(prop)
+
+    return (
+        _name_cmp(a, b)
+        if isinstance(a, str)
+        else ((a > b) - (a < b)) or _name_cmp(game1.name, game2.name)
+    )
+
+
+def _name_cmp(a: str, b: str) -> int:
+    a, b = (name.lower().removeprefix("the ") for name in (a, b))
+    return locale.strcoll(a, b)
+
+
+filter_ = Gtk.EveryFilter()
+filter_.append(
+    Gtk.BoolFilter(
+        expression=Gtk.PropertyExpression.new(Game, None, "removed"),
+        invert=True,
+    )
+)
+filter_.append(
+    Gtk.BoolFilter(
+        expression=Gtk.PropertyExpression.new(Game, None, "blacklisted"),
+        invert=True,
+    )
+)
+
+sorter = Gtk.CustomSorter.new(lambda game1, game2, _: _sort(game1, game2))
+STATE_SETTINGS.connect(
+    "changed::sort-mode", lambda *_: sorter.changed(Gtk.SorterChange.DIFFERENT)
+)
+
+model = Gtk.SortListModel.new(
+    Gtk.FilterListModel(
+        model=Gtk.FlattenListModel.new(sources.model),
+        filter=filter_,
+        watch_items=True,  # pyright: ignore[reportCallIssue]
+    ),
+    sorter,
+)
