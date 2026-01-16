@@ -25,17 +25,17 @@ template $Window: Adw.ApplicationWindow {
 
   ShortcutController {
     Shortcut {
-      trigger: "<Control>f";
+      trigger: bind $shortcut("<Control>f") as <ShortcutTrigger>;
       action: "action(win.search)";
     }
 
     Shortcut {
-      trigger: "<Control>h";
+      trigger: bind $shortcut("<Control>h", "<Meta><Shift>h") as <ShortcutTrigger>;
       action: "action(win.show-hidden)";
     }
 
     Shortcut {
-      trigger: "<Control>z";
+      trigger: bind $shortcut("<Control>z") as <ShortcutTrigger>;
       action: "action(win.undo)";
     }
 
@@ -45,17 +45,17 @@ template $Window: Adw.ApplicationWindow {
     }
 
     Shortcut {
-      trigger: "<Control>w";
+      trigger: bind $shortcut("<Control>w") as <ShortcutTrigger>;
       action: "action(window.close)";
     }
 
     Shortcut {
-      trigger: "<Control>n";
+      trigger: bind $shortcut("<Control>n") as <ShortcutTrigger>;
       action: "action(game.add)";
     }
 
     Shortcut {
-      trigger: "<Control><Shift>n";
+      trigger: bind $shortcut("<Control><Shift>n") as <ShortcutTrigger>;
       action: "action(collection.add)";
     }
   }

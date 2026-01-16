@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+import sys
 from collections.abc import Callable
 from typing import Any
 
@@ -50,3 +51,13 @@ def format_string(string: str, *args: Any) -> str:
 def if_else[T](condition: object, first: T, second: T) -> T:
     """Return `first` or `second` depending on `condition`."""
     return first if condition else second
+
+
+@_closure
+def shortcut(default: str, macos: str | None = None) -> Gtk.ShortcutTrigger | None:
+    """Get the correct shortcut for the user's platform."""
+    return Gtk.ShortcutTrigger.parse_string(
+        (macos or default.replace("<Control>", "<Meta>"))
+        if sys.platform.startswith("darwin")
+        else default
+    )

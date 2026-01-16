@@ -10,6 +10,7 @@ from gi.repository import Adw
 from cartridges import collections, sources
 
 from .config import APP_ID, PREFIX
+from .ui import PRIMARY_KEY
 from .ui.window import Window
 
 
@@ -28,7 +29,7 @@ class Application(Adw.Application):
             ("quit", lambda *_: self.quit()),
             ("about", lambda *_: self._present_about_dialog()),
         ))
-        self.set_accels_for_action("app.quit", ("<Control>q",))
+        self.set_accels_for_action("app.quit", (f"{PRIMARY_KEY}q",))
 
         sources.load()
         collections.load()

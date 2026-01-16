@@ -69,6 +69,7 @@ class Window(Adw.ApplicationWindow):
 
     format_string = closures.format_string
     if_else = closures.if_else
+    shortcut = closures.shortcut
 
     _selected_sidebar_item = 0
 
