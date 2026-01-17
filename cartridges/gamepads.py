@@ -112,15 +112,8 @@ class Gamepad(GObject.Object):
             focus_widget.activate()
             return
 
-        if self.window.sidebar.get_focus_child():
-            selected_item = self.window.sidebar.get_selected_item()
-            self.window.navigate_sidebar(self.window.sidebar, item=selected_item)
-            return
-
-        self.window.grid.activate_action(
-            "list.activate-item",
-            GLib.Variant.new_uint32(self._get_current_position()),
-        )
+        if focus_widget := self.window.props.focus_widget:
+            focus_widget.activate()
 
     def _on_return_button_pressed(self):
         if self.window.navigation_view.props.visible_page_tag == "details":
