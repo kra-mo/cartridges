@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Any, cast
 
 from gi.repository import Adw, Gio, GLib, GObject, Gtk, Manette
 
+from .ui.collection_details import CollectionDetails
 from .ui.game_item import GameItem
 
 if TYPE_CHECKING:
@@ -126,6 +127,11 @@ class Gamepad(GObject.Object):
                 return
 
             self.window.navigation_view.pop_to_tag("games")
+
+        if (dialog := self.window.props.visible_dialog) and isinstance(
+            dialog, CollectionDetails
+        ):
+            dialog.close()
 
         open_menu = self._get_active_menu_button()
 
