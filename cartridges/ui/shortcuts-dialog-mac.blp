@@ -1,0 +1,61 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.ShortcutsDialog shortcuts_dialog {
+  Adw.ShortcutsSection {
+    title: _("General");
+
+    Adw.ShortcutsItem {
+      title: _("Search");
+      accelerator: "<Meta>f";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Toggle Sidebar");
+      accelerator: "F9";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Main Menu");
+      accelerator: "F10";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Keyboard Shortcuts");
+      action-name: "app.shortcuts";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Quit");
+      action-name: "app.quit";
+    }
+  }
+
+  Adw.ShortcutsSection {
+    title: _("Games");
+
+    Adw.ShortcutsItem {
+      title: _("Add Game");
+      accelerator: "<Meta>n";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Show Hidden Games");
+      accelerator: "<Meta><Shift>h";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Remove Game");
+      accelerator: "Delete";
+    }
+  }
+
+  Adw.ShortcutsSection {
+    title: _("Collections");
+
+    Adw.ShortcutsItem {
+      title: _("Add Collection");
+      accelerator: "<Meta><Shift>n";
+    }
+  }
+}

@@ -20,7 +20,6 @@ blueprints = custom_target(
         'cover.blp',
         'game-details.blp',
         'game-item.blp',
-        'shortcuts-dialog.blp',
         'window.blp',
     ),
     output: '.',
@@ -30,6 +29,19 @@ blueprints = custom_target(
         '--minify',
         '@OUTPUT@',
         '@CURRENT_SOURCE_DIR@',
+        '@INPUT@',
+    ],
+)
+
+shortcuts_dialog_blueprint = custom_target(
+    input: host_machine.system() == 'darwin' ? 'shortcuts-dialog-mac.blp' : 'shortcuts-dialog.blp',
+    output: 'shortcuts-dialog.ui',
+    command: [
+        blueprint_compiler,
+        'compile',
+        '--minify',
+        '--output',
+        '@OUTPUT@',
         '@INPUT@',
     ],
 )
@@ -46,5 +58,5 @@ gnome.compile_resources(
     gresource_bundle: true,
     install: true,
     install_dir: pkgdatadir,
-    dependencies: blueprints,
+    dependencies: [blueprints, shortcuts_dialog_blueprint],
 )
