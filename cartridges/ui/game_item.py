@@ -28,6 +28,7 @@ class GameItem(Gtk.Box):
     collection_actions: CollectionActions = Gtk.Template.Child()
 
     game = GObject.Property(type=Game)
+    position = GObject.Property(type=int)
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
