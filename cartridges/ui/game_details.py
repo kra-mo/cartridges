@@ -139,7 +139,7 @@ class GameDetails(Adw.NavigationPage):
     @Gtk.Template.Callback()
     def _downscale_image(self, _obj, cover: Gdk.Texture | None) -> Gdk.Texture | None:
         if cover and (renderer := cast(Gtk.Native, self.props.root).get_renderer()):
-            cover.snapshot(snapshot := Gtk.Snapshot.new(), 3, 3)
+            cover.snapshot(snapshot := Gtk.Snapshot(), 3, 3)
             if node := snapshot.to_node():
                 return renderer.render_texture(node)
 
