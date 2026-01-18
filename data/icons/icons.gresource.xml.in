@@ -8,8 +8,9 @@
     <file>flatpak-symbolic.svg</file>
     <file>heroic-symbolic.svg</file>
     <file>imported-symbolic.svg</file>
+    <file>itch-symbolic.svg</file>
     <file>steam-symbolic.svg</file>
-    <!-- Categories -->
+    <!-- Collections -->
     <file>collection-symbolic.svg</file>
     <file>ball-symbolic.svg</file>
     <file>car-symbolic.svg</file>
