@@ -78,11 +78,6 @@ class Collection(GObject.Object):
             self.emit("items-changed")
 
 
-def load():
-    """Load collections from GSettings."""
-    model.splice(0, 0, tuple(_get_collections()))
-
-
 def save():
     """Save collections to GSettings."""
     SETTINGS.set_value(
@@ -124,3 +119,4 @@ def _get_collections() -> Generator[Collection]:
 
 model = Gio.ListStore.new(Collection)
 model.connect("items-changed", lambda *_: save())
+model.splice(0, 0, tuple(_get_collections()))

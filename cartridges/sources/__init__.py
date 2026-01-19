@@ -106,11 +106,6 @@ class Source(GObject.Object, Gio.ListModel):  # pyright: ignore[reportIncompatib
             yield game
 
 
-def load():
-    """Populate `sources.model` with all sources."""
-    model.splice(0, 0, tuple(_get_sources()))
-
-
 @cache
 def get(ident: str) -> Source:
     """Get the source with `ident`."""
@@ -125,3 +120,4 @@ def _get_sources() -> Generator[Source]:
 
 
 model = Gio.ListStore.new(Source)
+model.splice(0, 0, tuple(_get_sources()))
