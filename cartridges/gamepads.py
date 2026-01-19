@@ -128,10 +128,9 @@ class Gamepad(GObject.Object):
 
             self.window.navigation_view.pop_to_tag("games")
 
-        if (dialog := self.window.props.visible_dialog) and isinstance(
-            dialog, CollectionDetails
-        ):
+        if isinstance(dialog := self.window.props.visible_dialog, CollectionDetails):
             dialog.close()
+            return
 
         open_menu = self._get_active_menu_button()
 
@@ -144,14 +143,15 @@ class Gamepad(GObject.Object):
         if self._is_focused_on_top_bar():
             focus_widget = self.window.grid if grid_visible else self.window.sidebar
 
-        # If the grid is not visible (i.e no search results or imports)
-        # the searchbar is focused as a fallback.
-        fallback_child = (
-            self.window.grid
+        # If the grid is not visible (i.e.  no search results or imports)
+        # the search bar is focused as a fallback.
+        focus_widget = (
+            self.window.search_entry
+            if not grid_visible
+            else self.window.grid
             if self.window.sidebar.get_focus_child()
             else self.window.sidebar
         )
-        focus_widget = fallback_child if grid_visible else self.window.search_entry
 
         focus_widget.grab_focus()
         self.window.props.focus_visible = True
@@ -168,9 +168,9 @@ class Gamepad(GObject.Object):
                 self.window.props.focus_visible = True
                 return
 
-            # The usual behaviour of child_focus() on the header bar on the
+            # The usual behaviour of child_focus() on the header bar navigating to the
             # left will result in the above child focus to fail, so
-            # we need to manually check the user is going left to then focus the
+            # we need to manually check if the user is going left to then focus the
             # sidebar.
 
             if direction is not self._get_rtl_direction(

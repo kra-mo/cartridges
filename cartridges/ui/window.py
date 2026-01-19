@@ -135,32 +135,6 @@ class Window(Adw.ApplicationWindow):
 
         self.toast_overlay.add_toast(toast)
 
-    def navigate_sidebar(self, sidebar: Adw.Sidebar, item: Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
-        """Select given item in the sidebar.
-
-        Item should correspond to a collection, or the all game category/
-        new collection buttons.
-        """
-        match item:
-            case self.new_collection_item:
-                collections.add()
-                sidebar.props.selected = self._selected_sidebar_item
-            case SourceSidebarItem():
-                self.collection = None
-                self.model = item.model
-            case CollectionSidebarItem():
-                self.collection = item.collection
-                self.model = games.model
-            case _:
-                self.collection = None
-                self.model = games.model
-
-        if item is not self.new_collection_item:
-            self._selected_sidebar_item = sidebar.props.selected
-
-        if self.split_view.props.collapsed:
-            self.split_view.props.show_sidebar = False
-
     def _collection_removed(self):
         self.collection = None
         self.sidebar.props.selected = 0
@@ -176,7 +150,27 @@ class Window(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
-        self.navigate_sidebar(sidebar, sidebar.get_item(index))
+        item = sidebar.get_item(index)
+
+        match item:
+            case self.new_collection_item:
+                collections.add()
+                sidebar.props.selected = self._selected_sidebar_item
+            case SourceSidebarItem():
+                self.collection = None
+                self.model = item.model
+            case CollectionSidebarItem():
+                self.collection = item.collection
+                self.model = games.model
+            case _:
+                self.collection = None
+                self.model = games.model
+
+        if item is not self.new_collection_item:
+            self._selected_sidebar_item = index
+
+        if self.split_view.props.collapsed:
+            self.split_view.props.show_sidebar = False
 
     @Gtk.Template.Callback()
     def _update_selection(self, sidebar: Adw.Sidebar, *_args):  # pyright: ignore[reportAttributeAccessIssue]
