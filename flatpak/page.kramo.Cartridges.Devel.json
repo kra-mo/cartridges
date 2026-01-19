@@ -12,12 +12,13 @@
     "--socket=wayland",
     "--talk-name=org.freedesktop.Flatpak",
     "--filesystem=host:ro",
-    "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/heroic/:ro",
-    "--filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam/:ro",
     "--filesystem=/var/lib/flatpak/app:ro",
     "--filesystem=/var/lib/flatpak/exports:ro",
     "--filesystem=xdg-data/flatpak/app:ro",
-    "--filesystem=xdg-data/flatpak/exports:ro"
+    "--filesystem=xdg-data/flatpak/exports:ro",
+    "--filesystem=~/.var/app/com.heroicgameslauncher.hgl/config/heroic/:ro",
+    "--filesystem=~/.var/app/io.itch.itch/config/itch/:ro",
+    "--filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam/:ro"
   ],
   "cleanup": [
     "/include",
