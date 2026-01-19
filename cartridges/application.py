@@ -17,17 +17,14 @@ from .ui.window import Window
 class Application(Adw.Application):
     """The main application."""
 
-    def __init__(self):
-        super().__init__(application_id=APP_ID)
-
     @override
     def do_startup(self):
         Adw.Application.do_startup(self)
         self.props.style_manager.props.color_scheme = Adw.ColorScheme.PREFER_DARK
 
         self.add_action_entries((
-            ("quit", lambda *_: self.quit()),
             ("about", lambda *_: self._present_about_dialog()),
+            ("quit", lambda *_: self.quit()),
         ))
         self.set_accels_for_action("app.quit", (f"{PRIMARY_KEY}q",))
 
