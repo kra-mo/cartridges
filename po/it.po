@@ -6,13 +6,13 @@
 # kramo <contact@kramo.hu>, 2023.
 # Giasko <dibiame@hotmail.it>, 2023.
 # Andrea Costola <lamaildiandreac@gmail.com>, 2024.
-# Pierfrancesco Passerini <p.passerini@gmail.com>, 2025.
+# Pierfrancesco Passerini <p.passerini@gmail.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2025-12-15 10:00+0000\n"
+"PO-Revision-Date: 2026-01-20 08:01+0000\n"
 "Last-Translator: Pierfrancesco Passerini <p.passerini@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/it/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -31,9 +31,8 @@ msgid "Cartridges"
 msgstr "Cartucce"
 
 #: data/page.kramo.Cartridges.desktop.in:4
-#, fuzzy
 msgid "Game Launcher"
-msgstr "Launcher di giochi"
+msgstr "Launcher dei giochi"
 
 #: data/page.kramo.Cartridges.desktop.in:5
 #: data/page.kramo.Cartridges.metainfo.xml.in:10
@@ -666,9 +665,8 @@ msgid "The following playlists have no default core:"
 msgstr "Le seguenti playlist non hanno un core di default:"
 
 #: cartridges/importer/retroarch_source.py:133
-#, fuzzy
 msgid "Games with no core selected were not imported"
-msgstr "I giochi senza core selezionato non sono stati importati"
+msgstr "I giochi senza alcun core selezionato non sono stati importati"
 
 #: cartridges/store/managers/sgdb_manager.py:46
 msgid "Couldn't Authenticate SteamGridDB"
