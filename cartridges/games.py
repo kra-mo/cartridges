@@ -63,7 +63,7 @@ class Game(Gio.SimpleActionGroup):
     blacklisted = GObject.Property(type=bool, default=False)
     version = GObject.Property(type=float, default=_SPEC_VERSION)
 
-    cover = GObject.Property(type=Gdk.Texture)
+    cover = GObject.Property(type=Gdk.Paintable)
 
     @classmethod
     def from_data(cls, data: dict[str, Any]) -> Self:
