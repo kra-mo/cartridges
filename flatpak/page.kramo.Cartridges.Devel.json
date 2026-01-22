@@ -6,10 +6,11 @@
   "command": "cartridges",
   "finish-args": [
     "--share=ipc",
-    "--socket=fallback-x11",
+    "--share=network",
     "--device=dri",
     "--device=input",
     "--socket=wayland",
+    "--socket=fallback-x11",
     "--talk-name=org.freedesktop.Flatpak",
     "--filesystem=host:ro",
     "--filesystem=/var/lib/flatpak/app:ro",
