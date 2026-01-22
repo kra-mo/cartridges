@@ -42,9 +42,7 @@ _tasks = set()
 
 def get_games() -> Generator[Game]:
     """Installed itch games."""
-    butler = _config_dir() / "db" / "butler.db"
-
-    with sqlite3.connect(butler) as conn:
+    with sqlite3.connect(_config_dir() / "db" / "butler.db") as conn:
         for row in conn.execute(_QUERY):
             game = Game(
                 executable=f"{OPEN} itch://caves/{row[4]}/launch",
