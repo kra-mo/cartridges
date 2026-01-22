@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2026-01-22 13:46+0000\n"
+"PO-Revision-Date: 2026-01-22 19:47+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/kw/>\n"
@@ -670,7 +670,7 @@ msgstr "RetroArch Core Dewisys Vyth"
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr "An rol a media a sew re core defowt vyth:"
+msgstr "An rol media a sew re core defowt vyth:"
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
