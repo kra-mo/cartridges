@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2023 Geoffrey Coulaud
-# SPDX-FileCopyrightText: Copyright 2022-2025 kramo
+# SPDX-FileCopyrightText: Copyright 2022-2026 kramo
 
 import asyncio
 import sqlite3
-from collections.abc import Coroutine, Generator
+from collections.abc import Generator
 from gettext import gettext as _
 from pathlib import Path
-from typing import Any
+from typing import cast
 from urllib.request import urlopen
 
-from gi.repository import Gdk, GLib, Graphene, Gtk
+from gi.repository import Gdk, Gio, GLib, Graphene, Gtk
 
 from cartridges.games import COVER_HEIGHT, COVER_WIDTH, Game
 
@@ -37,11 +37,10 @@ _QUERY = """
     INNER JOIN games
     ON caves.game_id = games.id;"""
 
-_tasks = set()
-
 
 def get_games() -> Generator[Game]:
     """Installed itch games."""
+    app = cast(Gio.Application, Gio.Application.get_default())
     with sqlite3.connect(_config_dir() / "db" / "butler.db") as conn:
         for row in conn.execute(_QUERY):
             game = Game(
@@ -50,7 +49,7 @@ def get_games() -> Generator[Game]:
                 source=ID,
                 name=row[1],
             )
-            _create_task(_update_cover(game, row[3] or row[2]))
+            app.create_asyncio_task(_update_cover(game, row[3] or row[2]))  # pyright: ignore[reportAttributeAccessIssue]
             yield game
 
 
@@ -81,9 +80,3 @@ def _pad_cover(cover: Gdk.Paintable) -> Gdk.Paintable | None:
     snapshot.translate(Graphene.Point().init(x, y))
     cover.snapshot(snapshot, w, h)
     return snapshot.to_paintable(Graphene.Size().init(COVER_WIDTH, COVER_HEIGHT))
-
-
-def _create_task(coro: Coroutine[Any, Any, Any]):
-    task = asyncio.get_event_loop().create_task(coro)
-    _tasks.add(task)
-    task.add_done_callback(lambda t: _tasks.discard(t))

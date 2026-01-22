@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: Copyright 2025 kramo
+# SPDX-FileCopyrightText: Copyright 2025-2026 kramo
 
 import importlib
 import os
@@ -106,6 +106,14 @@ class Source(GObject.Object, Gio.ListModel):  # pyright: ignore[reportIncompatib
             yield game
 
 
+model = Gio.ListStore(item_type=Source)
+
+
+def load():
+    """Populate `sources.model`."""
+    model.splice(0, 0, tuple(_get_sources()))
+
+
 @cache
 def get(ident: str) -> Source:
     """Get the source with `ident`."""
@@ -117,7 +125,3 @@ def _get_sources() -> Generator[Source]:
     for info in pkgutil.iter_modules(__path__, prefix="."):
         module = cast(_SourceModule, importlib.import_module(info.name, __package__))
         yield Source(module, added)
-
-
-model = Gio.ListStore.new(Source)
-model.splice(0, 0, tuple(_get_sources()))
