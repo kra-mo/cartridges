@@ -40,6 +40,9 @@ PROPERTIES: tuple[_GameProp, ...] = (
 GAMES_DIR = DATA_DIR / "games"
 COVERS_DIR = DATA_DIR / "covers"
 
+COVER_WIDTH = 200
+COVER_HEIGHT = 300
+
 _SPEC_VERSION = 2.0
 
 
