@@ -1,11 +1,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: Copyright 2025 kramo
+# SPDX-FileCopyrightText: Copyright 2025, 2026 kramo
 
 from gi.repository import Adw, Gdk, GObject, Gtk
 
 from cartridges.config import PREFIX
 from cartridges.games import COVER_HEIGHT, COVER_WIDTH
-from cartridges.ui import closures
+
+from . import closures
 
 
 @Gtk.Template.from_resource(f"{PREFIX}/cover.ui")

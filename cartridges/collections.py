@@ -6,8 +6,8 @@ from typing import Any, cast
 
 from gi.repository import Gio, GLib, GObject
 
-from cartridges import SETTINGS
-from cartridges.sources import imported
+from . import SETTINGS
+from .sources import imported
 
 type _GameID = str
 

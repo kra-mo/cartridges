@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: Copyright 2022-2025 kramo
+# SPDX-FileCopyrightText: Copyright 2022-2026 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 
@@ -17,8 +17,8 @@ from cartridges import sources
 from cartridges.config import PREFIX
 from cartridges.games import Game
 from cartridges.sources import imported
-from cartridges.ui import closures, games
 
+from . import closures, games
 from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
 from .games import GameActions

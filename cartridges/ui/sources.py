@@ -7,7 +7,8 @@ from gi.repository import Adw, Gio, GObject, Gtk
 
 from cartridges import sources
 from cartridges.sources import Source
-from cartridges.ui import games
+
+from . import games
 
 
 class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
-# SPDX-FileCopyrightText: Copyright 2022-2025 kramo
+# SPDX-FileCopyrightText: Copyright 2022-2026 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 import sys
@@ -13,8 +13,8 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 from cartridges import STATE_SETTINGS
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
-from cartridges.ui import closures, collections, games, sources
 
+from . import closures, collections, games, sources
 from .collections import CollectionActions, CollectionSidebarItem
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401

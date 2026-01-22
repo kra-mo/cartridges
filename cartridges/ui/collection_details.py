@@ -9,8 +9,8 @@ from gi.repository import Adw, Gio, GObject, Gtk
 from cartridges import collections
 from cartridges.collections import Collection
 from cartridges.config import PREFIX
-from cartridges.ui import closures
 
+from . import closures
 from .collections import CollectionActions
 
 
