@@ -197,7 +197,7 @@ def add(game_id: str | None = None):
     """Add a new collection, optionally with `game_id`."""
     from .collection_details import CollectionDetails
 
-    collection = Collection(game_ids=filter(None, (game_id,)))
+    collection = Collection(game_ids=(game_id,)) if game_id else None
     details = CollectionDetails(collection)
     details.present(_window())
 

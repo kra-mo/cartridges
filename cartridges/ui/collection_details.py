@@ -43,6 +43,9 @@ _ICONS = (
     _Icon("fist", "✊"),
 )
 
+_COLUMNS = 7
+_ROWS = 3
+
 
 @Gtk.Template(resource_path=f"{PREFIX}/collection-details.ui")
 class CollectionDetails(Adw.Dialog):
@@ -56,8 +59,6 @@ class CollectionDetails(Adw.Dialog):
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
     collection_bindings: GObject.BindingGroup = Gtk.Template.Child()
 
-    collection = GObject.Property(type=Collection)
-
     collection_name = GObject.Property(type=str)
     collection_icon = GObject.Property(type=str)
 
@@ -66,7 +67,25 @@ class CollectionDetails(Adw.Dialog):
     either = closures.either
     if_else = closures.if_else
 
-    def __init__(self, collection: Collection, **kwargs: Any):
+    @GObject.Property(type=Collection)
+    def collection(self) -> Collection:
+        """The collection that `self` represents."""
+        return self._collection
+
+    @collection.setter
+    def collection(self, collection: Collection):
+        self._collection = collection
+
+        for index, icon in enumerate(icon.name for icon in _ICONS):
+            if icon == collection.icon:
+                button = cast(
+                    Gtk.ToggleButton,
+                    self.icons_grid.get_child_at(*reversed(divmod(index, _COLUMNS))),
+                )
+                button.props.active = True
+                break
+
+    def __init__(self, collection: Collection | None = None, **kwargs: Any):
         super().__init__(**kwargs)
 
         group = Gio.SimpleActionGroup()
@@ -77,7 +96,6 @@ class CollectionDetails(Adw.Dialog):
             "collection-name",
             cast(Gio.SimpleAction, group.lookup_action("apply")),
             "enabled",
-            GObject.BindingFlags.SYNC_CREATE,
             transform_to=lambda _, name: bool(name),
         )
 
@@ -93,10 +111,9 @@ class CollectionDetails(Adw.Dialog):
             "collection-name",
             GObject.BindingFlags.DEFAULT,
         )
-        self.collection = collection
 
         group_button = None
-        for index, (row, col) in enumerate(product(range(3), range(7))):
+        for index, (row, col) in enumerate(product(range(_ROWS), range(_COLUMNS))):
             icon = _ICONS[index].name
 
             button = Gtk.ToggleButton(
@@ -122,10 +139,9 @@ class CollectionDetails(Adw.Dialog):
                 icon,
             )
 
-            if icon == self.collection.icon:
-                button.props.active = True
-
             self.icons_grid.attach(button, col, row, 1, 1)
+
+        self.collection = collection or Collection()
 
     def _apply(self):
         if self.collection.name != self.collection_name:
