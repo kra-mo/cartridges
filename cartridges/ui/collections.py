@@ -114,7 +114,7 @@ class CollectionSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttribute
 
     collection = GObject.Property(type=Collection)
 
-    def __init__(self, collection: Collection, **kwargs: Any):
+    def __init__(self, collection: Collection | None = None, **kwargs: Any):
         super().__init__(**kwargs)
 
         self.bind_property(
@@ -140,15 +140,20 @@ class CollectionButton(Gtk.ToggleButton):
 
     collection = GObject.Property(type=Collection)
 
-    def __init__(self, collection: Collection, **kwargs: Any):
+    def __init__(self, collection: Collection | None = None, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self.collection = collection
-        self.props.child = Adw.ButtonContent(
-            icon_name=collection.icon_name,
-            label=collection.name,
-            can_shrink=True,
+        self.props.child = Adw.ButtonContent(can_shrink=True)
+
+        flags = GObject.BindingFlags.DEFAULT
+        self._collection_bindings = GObject.BindingGroup()
+        self._collection_bindings.bind("name", self.props.child, "label", flags)
+        self._collection_bindings.bind(
+            "icon-name", self.props.child, "icon-name", flags
         )
+        self.bind_property("collection", self._collection_bindings, "source")
+
+        self.collection = collection
 
 
 class CollectionsBox(Adw.Bin):
@@ -185,10 +190,11 @@ class CollectionsBox(Adw.Bin):
     def finish(self):
         """Clear the box."""
         for button in cast(Iterable[CollectionButton], self.box):
+            collection = cast(Collection, button.collection)
             if button.props.active:
-                button.collection.add(self.game.game_id)
+                collection.add(self.game.game_id)
             else:
-                button.collection.discard(self.game.game_id)
+                collection.discard(self.game.game_id)
 
         self.box.remove_all()  # pyright: ignore[reportAttributeAccessIssue]
 

@@ -19,7 +19,7 @@ class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAcce
     source = GObject.Property(type=Source)
     model = GObject.Property(type=Gio.ListModel)
 
-    def __init__(self, source: Source, **kwargs: Any):
+    def __init__(self, source: Source | None = None, **kwargs: Any):
         super().__init__(**kwargs)
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7959

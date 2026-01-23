@@ -23,12 +23,11 @@ class Gamepad(GObject.Object):
     __gtype_name__ = __qualname__
 
     window: "Window"
-    device: Manette.Device
+    device = GObject.Property(type=Manette.Device)
 
-    def __init__(self, device: Manette.Device, **kwargs: Any):
+    def __init__(self, device: Manette.Device | None = None, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self.device = device
         self._allowed_inputs = {
             Gtk.DirectionType.UP,
             Gtk.DirectionType.DOWN,
@@ -36,8 +35,16 @@ class Gamepad(GObject.Object):
             Gtk.DirectionType.RIGHT,
         }
 
-        self.device.connect("button-press-event", self._on_button_press_event)
-        self.device.connect("absolute-axis-event", self._on_analog_axis_event)
+        self._device_signals = GObject.SignalGroup(target_type=Manette.Device)
+        self._device_signals.connect_closure(
+            "button-press-event", self._on_button_press_event, after=False
+        )
+        self._device_signals.connect_closure(
+            "absolute-axis-event", self._on_analog_axis_event, after=False
+        )
+        self.bind_property("device", self._device_signals, "device")
+
+        self.device = device
 
     @staticmethod
     def _get_rtl_direction(
