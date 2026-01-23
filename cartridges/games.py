@@ -93,13 +93,8 @@ class Game(Gio.SimpleActionGroup):
 
     def play(self):
         """Run the executable command in a shell."""
-        if Path("/.flatpak-info").exists():
-            executable = f"flatpak-spawn --host /bin/sh -c {quote(self.executable)}"
-        else:
-            executable = self.executable
-
         subprocess.Popen(  # noqa: S602
-            executable,
+            get_executable(self.executable),
             cwd=Path.home(),
             shell=True,
             start_new_session=True,
@@ -114,3 +109,12 @@ class Game(Gio.SimpleActionGroup):
         path = (GAMES_DIR / self.game_id).with_suffix(".json")
         with path.open("w", encoding="utf-8") as f:
             json.dump(properties, f, indent=4, sort_keys=True)
+
+
+def get_executable(executable: str) -> str:
+    """Get the correct executable for the user's environment."""
+    return (
+        f"flatpak-spawn --host /bin/sh -c {quote(executable)}"
+        if Path("/.flatpak-info").exists()
+        else executable
+    )

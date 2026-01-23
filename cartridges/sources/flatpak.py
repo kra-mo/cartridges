@@ -9,11 +9,11 @@ from contextlib import suppress
 from gettext import gettext as _
 from pathlib import Path
 
-from gi.repository import Gdk, GLib, Graphene, Gtk
+from gi.repository import GLib, Gtk
 
-from cartridges.games import COVER_HEIGHT, COVER_WIDTH, Game
+from cartridges.games import Game
 
-from . import DATA
+from . import DATA, cover_from_icon
 
 ID, NAME = "flatpak", _("Flatpak")
 
@@ -34,8 +34,6 @@ _BLACKLIST = frozenset((
     "net.lutris.Lutris",
     "org.libretro.RetroArch",
 ))
-
-_ICON_SIZE = 128
 
 
 def get_games() -> Generator[Game]:
@@ -60,32 +58,8 @@ def get_games() -> Generator[Game]:
                 game_id=f"{ID}_{flatpak_id}",
                 source=ID,
                 name=file.get_string("Desktop Entry", "Name"),
-                cover=_get_cover(flatpak_id),
+                cover=cover_from_icon(_icon_theme(), flatpak_id),
             )
-
-
-def _get_cover(icon_name: str) -> Gdk.Paintable | None:
-    icon = _icon_theme().lookup_icon(
-        icon_name,
-        fallbacks=None,
-        size=_ICON_SIZE,
-        # Sources shouldn't know about the user's display,
-        # so we assume 2x scaling and render the icon at the correct size later.
-        scale=2,
-        direction=Gtk.TextDirection.NONE,
-        flags=Gtk.IconLookupFlags.NONE,
-    )
-
-    snapshot = Gtk.Snapshot()
-    snapshot.translate(
-        Graphene.Point().init(
-            (COVER_WIDTH - _ICON_SIZE) / 2,
-            (COVER_HEIGHT - _ICON_SIZE) / 2,
-        )
-    )
-    icon.snapshot(snapshot, _ICON_SIZE, _ICON_SIZE)
-
-    return snapshot.to_paintable(Graphene.Size().init(COVER_WIDTH, COVER_HEIGHT))
 
 
 @functools.cache
