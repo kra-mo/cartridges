@@ -51,7 +51,7 @@ class CollectionActions(Gio.SimpleActionGroup):
             transform_to=lambda _, collection: bool(collection),
         )
 
-        self._collection_signals = GObject.SignalGroup.new(Collection)
+        self._collection_signals = GObject.SignalGroup(target_type=Collection)
         self._collection_signals.connect_closure(
             "notify::removed",
             lambda *_: self._update_remove(),
@@ -98,7 +98,7 @@ class CollectionFilter(Gtk.Filter):
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
-        self._collection_signals = GObject.SignalGroup.new(Collection)
+        self._collection_signals = GObject.SignalGroup(target_type=Collection)
         self._collection_signals.connect_closure(
             "items-changed",
             lambda *_: self.changed(Gtk.FilterChange.DIFFERENT),
@@ -220,9 +220,11 @@ def _window() -> "Window":
     return cast("Window", app.props.active_window)
 
 
-sorter = Gtk.StringSorter.new(Gtk.PropertyExpression.new(Collection, None, "name"))
-model = Gtk.SortListModel.new(
-    Gtk.FilterListModel(
+sorter = Gtk.StringSorter(
+    expression=Gtk.PropertyExpression.new(Collection, None, "name")
+)
+model = Gtk.SortListModel(
+    model=Gtk.FilterListModel(
         model=collections.model,
         filter=Gtk.BoolFilter(
             expression=Gtk.PropertyExpression.new(Collection, None, "removed"),
@@ -230,5 +232,5 @@ model = Gtk.SortListModel.new(
         ),
         watch_items=True,  # pyright: ignore[reportCallIssue]
     ),
-    sorter,
+    sorter=sorter,
 )

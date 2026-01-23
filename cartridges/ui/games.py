@@ -180,11 +180,11 @@ STATE_SETTINGS.connect(
     "changed::sort-mode", lambda *_: sorter.changed(Gtk.SorterChange.DIFFERENT)
 )
 
-model = Gtk.SortListModel.new(
-    Gtk.FilterListModel(
-        model=Gtk.FlattenListModel.new(sources.model),
+model = Gtk.SortListModel(
+    model=Gtk.FilterListModel(
+        model=Gtk.FlattenListModel(model=sources.model),
         filter=filter_,
         watch_items=True,  # pyright: ignore[reportCallIssue]
     ),
-    sorter,
+    sorter=sorter,
 )

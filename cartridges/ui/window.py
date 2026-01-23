@@ -30,7 +30,7 @@ GObject.type_ensure(GObject.SignalGroup)
 type _UndoFunc = Callable[[], Any]
 
 
-@Gtk.Template.from_resource(f"{PREFIX}/window.ui")
+@Gtk.Template(resource_path=f"{PREFIX}/window.ui")
 class Window(Adw.ApplicationWindow):
     """The main window."""
 
@@ -99,7 +99,13 @@ class Window(Adw.ApplicationWindow):
 
         self.add_action(STATE_SETTINGS.create_action("show-sidebar"))
         self.add_action(STATE_SETTINGS.create_action("sort-mode"))
-        self.add_action(Gio.PropertyAction.new("show-hidden", self, "show-hidden"))
+        self.add_action(
+            Gio.PropertyAction(
+                name="show-hidden",
+                object=self,
+                property_name="show-hidden",
+            )
+        )
         self.add_action_entries((
             ("search", lambda *_: self.search_entry.grab_focus()),
             ("undo", lambda *_: self._undo()),
@@ -205,7 +211,7 @@ class Window(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _search_activate(self, _entry):
-        self.grid.activate_action("list.activate-item", GLib.Variant.new_uint32(0))
+        self.grid.activate_action("list.activate-item", GLib.Variant("u", 0))
 
     @Gtk.Template.Callback()
     def _stop_search(self, entry: Gtk.SearchEntry):

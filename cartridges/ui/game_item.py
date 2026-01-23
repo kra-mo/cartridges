@@ -13,7 +13,7 @@ from .cover import Cover  # noqa: F401
 from .games import GameActions
 
 
-@Gtk.Template.from_resource(f"{PREFIX}/game-item.ui")
+@Gtk.Template(resource_path=f"{PREFIX}/game-item.ui")
 class GameItem(Gtk.Box):
     """A game in the grid."""
 

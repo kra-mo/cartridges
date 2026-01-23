@@ -406,5 +406,5 @@ def setup_monitor():
 
 
 monitor = Manette.Monitor()
-model = Gio.ListStore.new(Gamepad)
+model = Gio.ListStore(item_type=Gamepad)
 model.connect("items-changed", lambda model, *_: _update_window_style(model))

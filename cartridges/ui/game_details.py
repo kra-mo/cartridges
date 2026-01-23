@@ -31,7 +31,7 @@ _REQUIRED_PROPERTIES = {
 }
 
 
-@Gtk.Template.from_resource(f"{PREFIX}/game-details.ui")
+@Gtk.Template(resource_path=f"{PREFIX}/game-details.ui")
 class GameDetails(Adw.NavigationPage):
     """The details of a game."""
 

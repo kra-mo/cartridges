@@ -21,7 +21,7 @@ class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAcce
         super().__init__(**kwargs)
 
         # https://gitlab.gnome.org/GNOME/gtk/-/issues/7959
-        self._model_signals = GObject.SignalGroup.new(Gio.ListModel)
+        self._model_signals = GObject.SignalGroup(target_type=Gio.ListModel)
         self._model_signals.connect_closure(
             "items-changed",
             lambda model, *_: model.notify("n-items"),
@@ -45,7 +45,9 @@ class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAcce
         self.source = source
 
 
-model = Gtk.SortListModel.new(
-    sources.model,
-    Gtk.StringSorter.new(Gtk.PropertyExpression.new(Source, None, "name")),
+model = Gtk.SortListModel(
+    model=sources.model,
+    sorter=Gtk.StringSorter(
+        expression=Gtk.PropertyExpression.new(Source, None, "name")
+    ),
 )

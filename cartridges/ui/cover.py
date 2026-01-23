@@ -9,7 +9,7 @@ from cartridges.games import COVER_HEIGHT, COVER_WIDTH
 from . import closures
 
 
-@Gtk.Template.from_resource(f"{PREFIX}/cover.ui")
+@Gtk.Template(resource_path=f"{PREFIX}/cover.ui")
 class Cover(Adw.Bin):
     """Displays a game's cover art."""
 

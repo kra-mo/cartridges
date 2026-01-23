@@ -44,7 +44,7 @@ _ICONS = (
 )
 
 
-@Gtk.Template.from_resource(f"{PREFIX}/collection-details.ui")
+@Gtk.Template(resource_path=f"{PREFIX}/collection-details.ui")
 class CollectionDetails(Adw.Dialog):
     """The details of a category."""
 

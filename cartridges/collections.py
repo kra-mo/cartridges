@@ -48,7 +48,7 @@ class Collection(GObject.Object):
             lambda _, name: f"{name}-symbolic",
         )
 
-        self._model_signals = GObject.SignalGroup.new(Gio.ListModel)
+        self._model_signals = GObject.SignalGroup(target_type=Gio.ListModel)
         self._model_signals.connect_closure(
             "items-changed",
             lambda *_: self.notify("in-model"),
@@ -86,10 +86,10 @@ def save():
             "aa{sv}",
             (
                 {
-                    "name": GLib.Variant.new_string(collection.name),
-                    "icon": GLib.Variant.new_string(collection.icon),
-                    "game-ids": GLib.Variant.new_strv(tuple(collection)),
-                    "removed": GLib.Variant.new_boolean(collection.removed),
+                    "name": GLib.Variant("s", collection.name),
+                    "icon": GLib.Variant("s", collection.icon),
+                    "game-ids": GLib.Variant("as", tuple(collection)),
+                    "removed": GLib.Variant("b", collection.removed),
                 }
                 for collection in cast(Iterable[Collection], model)
             ),
@@ -117,6 +117,6 @@ def _get_collections() -> Generator[Collection]:
             continue
 
 
-model = Gio.ListStore.new(Collection)
+model = Gio.ListStore(item_type=Collection)
 model.connect("items-changed", lambda *_: save())
 model.splice(0, 0, tuple(_get_collections()))
