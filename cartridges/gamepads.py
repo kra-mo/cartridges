@@ -20,6 +20,8 @@ REPEAT_DELAY = 280
 class Gamepad(GObject.Object):
     """Data class for gamepad, including UI navigation."""
 
+    __gtype_name__ = __qualname__
+
     window: "Window"
     device: Manette.Device
 

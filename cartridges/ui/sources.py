@@ -14,6 +14,8 @@ from . import games
 class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
     """A sidebar item representing a source."""
 
+    __gtype_name__ = __qualname__
+
     source = GObject.Property(type=Source)
     model = GObject.Property(type=Gio.ListModel)
 

@@ -110,6 +110,8 @@ class CollectionFilter(Gtk.Filter):
 class CollectionSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
     """A sidebar item representing a collection."""
 
+    __gtype_name__ = __qualname__
+
     collection = GObject.Property(type=Collection)
 
     def __init__(self, collection: Collection, **kwargs: Any):
@@ -133,6 +135,8 @@ class CollectionSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttribute
 
 class CollectionButton(Gtk.ToggleButton):
     """A toggle button representing a collection."""
+
+    __gtype_name__ = __qualname__
 
     collection = GObject.Property(type=Collection)
 

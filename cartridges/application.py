@@ -16,6 +16,8 @@ from .ui.window import Window
 class Application(Adw.Application):
     """The main application."""
 
+    __gtype_name__ = __qualname__
+
     @override
     def do_startup(self):
         Adw.Application.do_startup(self)
