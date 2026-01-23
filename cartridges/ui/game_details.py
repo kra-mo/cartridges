@@ -137,7 +137,7 @@ class GameDetails(Adw.NavigationPage):
             self.collections_box.finish()
 
     @Gtk.Template.Callback()
-    def _downscale_image(self, _obj, cover: Gdk.Texture | None) -> Gdk.Texture | None:
+    def _downscale_image(self, _obj, cover: Gdk.Paintable | None) -> Gdk.Texture | None:
         if cover and (renderer := cast(Gtk.Native, self.props.root).get_renderer()):
             cover.snapshot(snapshot := Gtk.Snapshot(), 3, 3)
             if node := snapshot.to_node():

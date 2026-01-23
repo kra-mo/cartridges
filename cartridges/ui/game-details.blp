@@ -63,7 +63,7 @@ template $GameDetails: Adw.NavigationPage {
     child: Overlay {
       child: Picture {
         name: "background";
-        paintable: bind $_downscale_image(template.game as <$Game>.cover) as <Gdk.Texture>;
+        paintable: bind $_downscale_image(template.game as <$Game>.cover) as <Gdk.Paintable>;
         content-fit: cover;
       };
 
