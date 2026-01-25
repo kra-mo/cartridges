@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025-2026 kramo
 
+# pyright: reportConstantRedefinition=false
+
 import importlib
 import os
 import pkgutil
@@ -15,14 +17,16 @@ from gi.repository import Gio, GLib, GObject
 
 from cartridges.games import Game
 
-DATA = Path(GLib.get_user_data_dir())
-CONFIG = Path(GLib.get_user_config_dir())
-CACHE = Path(GLib.get_user_cache_dir())
+if Path("/.flatpak-info").exists():
+    DATA = Path(os.getenv("HOST_XDG_DATA_HOME", Path.home() / ".local" / "share"))
+    CONFIG = Path(os.getenv("HOST_XDG_CONFIG_HOME", Path.home() / ".config"))
+    CACHE = Path(os.getenv("HOST_XDG_CACHE_HOME", Path.home() / ".cache"))
+else:
+    DATA = Path(GLib.get_user_data_dir())
+    CONFIG = Path(GLib.get_user_config_dir())
+    CACHE = Path(GLib.get_user_cache_dir())
 
 FLATPAK = Path.home() / ".var" / "app"
-HOST_DATA = Path(os.getenv("HOST_XDG_DATA_HOME", Path.home() / ".local" / "share"))
-HOST_CONFIG = Path(os.getenv("HOST_XDG_CONFIG_HOME", Path.home() / ".config"))
-HOST_CACHE = Path(os.getenv("HOST_XDG_CACHE_HOME", Path.home() / ".cache"))
 
 PROGRAM_FILES_X86 = Path(os.getenv("PROGRAMFILES(X86)", r"C:\Program Files (x86)"))
 APPDATA = Path(os.getenv("APPDATA", r"C:\Users\Default\AppData\Roaming"))

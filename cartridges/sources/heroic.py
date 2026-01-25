@@ -16,13 +16,12 @@ from gi.repository import Gdk, GLib
 
 from cartridges.games import Game
 
-from . import APPDATA, APPLICATION_SUPPORT, CONFIG, FLATPAK, HOST_CONFIG, OPEN
+from . import APPDATA, APPLICATION_SUPPORT, CONFIG, FLATPAK, OPEN
 
 ID, NAME = "heroic", _("Heroic")
 
 _CONFIG_PATHS = (
     CONFIG / "heroic",
-    HOST_CONFIG / "heroic",
     FLATPAK / "com.heroicgameslauncher.hgl" / "config" / "heroic",
     APPDATA / "heroic",
     APPLICATION_SUPPORT / "heroic",

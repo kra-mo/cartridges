@@ -14,13 +14,12 @@ from gi.repository import Gdk, Gio, GLib, Graphene, Gtk
 
 from cartridges.games import COVER_HEIGHT, COVER_WIDTH, Game
 
-from . import APPDATA, APPLICATION_SUPPORT, CONFIG, FLATPAK, HOST_CONFIG, OPEN
+from . import APPDATA, APPLICATION_SUPPORT, CONFIG, FLATPAK, OPEN
 
 ID, NAME = "itch", _("itch")
 
 _CONFIG_PATHS = (
     CONFIG / "itch",
-    HOST_CONFIG / "itch",
     FLATPAK / "io.itch.itch" / "config" / "itch",
     APPDATA / "itch",
     APPLICATION_SUPPORT / "itch",

@@ -13,14 +13,13 @@ from gi.repository import Gdk, GLib, Graphene, Gtk
 
 from cartridges.games import COVER_HEIGHT, COVER_WIDTH, Game
 
-from . import DATA, HOST_DATA
+from . import DATA
 
 ID, NAME = "flatpak", _("Flatpak")
 
 _PATHS = (
     Path("/var", "lib", "flatpak"),
     DATA / "flatpak",
-    HOST_DATA / "flatpak",
 )
 
 _BLACKLIST = frozenset((
