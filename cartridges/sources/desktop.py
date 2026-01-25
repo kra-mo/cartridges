@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2023-2026 kramo
 # SPDX-FileCopyrightText: Copyright 2026 Jamie Gravendeel
 
+import functools
 import itertools
 import shlex
 import subprocess
@@ -16,11 +17,12 @@ from gi.repository import GLib, Gtk
 from cartridges import games
 from cartridges.games import Game
 
-from . import DATA, SYSTEM_DATA, cover_from_icon
+from . import DATA, ICON_SIZE, SYSTEM_DATA, cover_from_icon
 
 ID, NAME = "desktop", _("Desktop")
 
 _DATA_PATHS = (DATA, *SYSTEM_DATA)
+_ICON_PATHS = tuple(path / "icons" for path in _DATA_PATHS)
 _DESKTOP_PATHS = (
     Path(cast(str, GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))),
     *(path / "applications" for path in _DATA_PATHS),
@@ -35,18 +37,32 @@ _EXECUTABLE_BLACKLIST = (
     "heroic://launch/",
     "bottles-cli ",
 )
+_FLATPAK_ID_BLACKLIST = frozenset((
+    "hu.kramo.Cartridges",
+    "hu.kramo.Cartridges.Devel",
+    "page.kramo.Cartridges",
+    "page.kramo.Cartridges.Devel",
+    "com.heroicgameslauncher.hgl",
+    "com.usebottles.bottles",
+    "com.valvesoftware.Steam",
+    "io.itch.itch",
+    "net.lutris.Lutris",
+    "org.libretro.RetroArch",
+))
 
 _HIDDEN_KEYS = "NoDisplay", "Hidden"
 
-_ICON_THEME = Gtk.IconTheme()
+_ICON_FALLBACK = "application-x-executable"
 
 
 def get_games() -> Generator[Game]:
     """Installed desktop entries."""
+    appids = set()
     for path in itertools.chain.from_iterable(
         path.glob("*.desktop") for path in _DESKTOP_PATHS
     ):
-        if any(path.match(pattern) for pattern in _FILE_BLACKLIST):
+        appid = path.stem
+        if appid in appids or any(path.match(pattern) for pattern in _FILE_BLACKLIST):
             continue
 
         with suppress(GLib.Error):
@@ -54,6 +70,10 @@ def get_games() -> Generator[Game]:
             file.load_from_file(str(path), GLib.KeyFileFlags.NONE)
 
             if "Game" not in file.get_string_list("Desktop Entry", "Categories"):
+                continue
+
+            flatpak_id = file.get_string("Desktop Entry", "X-Flatpak")
+            if flatpak_id in _FLATPAK_ID_BLACKLIST:
                 continue
 
             for key in _HIDDEN_KEYS:
@@ -64,6 +84,22 @@ def get_games() -> Generator[Game]:
             with suppress(GLib.Error):
                 if not _try_exec(file.get_string("Desktop Entry", "TryExec")):
                     continue
+
+            try:
+                icon_name = file.get_string("Desktop Entry", "Icon")
+            except GLib.Error:
+                icon_name = _ICON_FALLBACK
+
+            icon = _icon_theme().lookup_icon(
+                icon_name,
+                fallbacks=(_ICON_FALLBACK,),
+                size=ICON_SIZE,
+                # Sources shouldn't know about the user's display,
+                # so we assume 2x scaling and render the icon at the correct size later.
+                scale=2,
+                direction=Gtk.TextDirection.NONE,
+                flags=Gtk.IconLookupFlags.NONE,
+            )
 
             real_path = (
                 Path("/", path.relative_to("/run/host"))
@@ -76,16 +112,15 @@ def get_games() -> Generator[Game]:
                 game_id=f"{ID}_{path.stem}",
                 source=ID,
                 name=file.get_string("Desktop Entry", "Name"),
-                cover=cover_from_icon(
-                    _ICON_THEME, file.get_string("Desktop Entry", "Icon")
-                ),
+                cover=cover_from_icon(icon),
             )
+            appids.add(appid)
 
 
 def _try_exec(executable: str) -> bool:
     try:
         subprocess.run(  # noqa: S603
-            shlex.split(games.get_executable(f"which {executable}")),
+            shlex.split(games.format_executable(f"which {executable}")),
             check=True,
             capture_output=True,
         )
@@ -93,3 +128,12 @@ def _try_exec(executable: str) -> bool:
         return False
     else:
         return True
+
+
+@functools.cache
+def _icon_theme() -> Gtk.IconTheme:
+    icon_theme = Gtk.IconTheme()
+    search_path = icon_theme.props.search_path or []
+    search_path += [str(path) for path in _ICON_PATHS if path not in search_path]
+    icon_theme.props.search_path = search_path
+    return icon_theme

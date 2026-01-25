@@ -18,16 +18,18 @@ from gi.repository import Gdk, Gio, GLib, GObject, Graphene, Gtk
 from cartridges.games import COVER_HEIGHT, COVER_WIDTH, Game
 
 if Path("/.flatpak-info").exists():
+    DATA = Path(os.getenv("HOST_XDG_DATA_HOME", Path.home() / ".local" / "share"))
     SYSTEM_DATA = (
         Path("/run", "host", "usr", "share"),
         Path("/run", "host", "usr", "local", "share"),
+        Path("/var", "lib", "flatpak", "exports", "share"),
+        DATA / "flatpak" / "exports" / "share",
     )
-    DATA = Path(os.getenv("HOST_XDG_DATA_HOME", Path.home() / ".local" / "share"))
     CONFIG = Path(os.getenv("HOST_XDG_CONFIG_HOME", Path.home() / ".config"))
     CACHE = Path(os.getenv("HOST_XDG_CACHE_HOME", Path.home() / ".cache"))
 else:
-    SYSTEM_DATA = tuple(Path(path) for path in GLib.get_system_data_dirs())
     DATA = Path(GLib.get_user_data_dir())
+    SYSTEM_DATA = tuple(Path(path) for path in GLib.get_system_data_dirs())
     CONFIG = Path(GLib.get_user_config_dir())
     CACHE = Path(GLib.get_user_cache_dir())
 
@@ -49,7 +51,7 @@ OPEN = (
     else "xdg-open"
 )
 
-_ICON_SIZE = 128
+ICON_SIZE = 128
 
 
 class _SourceModule(Protocol):
@@ -128,26 +130,16 @@ def get(ident: str) -> Source:
     return next(s for s in cast(Iterable[Source], model) if s.id == ident)
 
 
-def cover_from_icon(theme: Gtk.IconTheme, name: str) -> Gdk.Paintable | None:
-    """Get a cover from looking up `name` in `theme`."""
-    icon = theme.lookup_icon(
-        name,
-        fallbacks=("application-x-executable",),
-        size=_ICON_SIZE,
-        # Sources shouldn't know about the user's display,
-        # so we assume 2x scaling and render the icon at the correct size later.
-        scale=2,
-        direction=Gtk.TextDirection.NONE,
-        flags=Gtk.IconLookupFlags.NONE,
-    )
+def cover_from_icon(icon: Gdk.Paintable) -> Gdk.Paintable | None:
+    """Get a cover from `icon`."""
     snapshot = Gtk.Snapshot()
     snapshot.translate(
         Graphene.Point().init(
-            (COVER_WIDTH - _ICON_SIZE) / 2,
-            (COVER_HEIGHT - _ICON_SIZE) / 2,
+            (COVER_WIDTH - ICON_SIZE) / 2,
+            (COVER_HEIGHT - ICON_SIZE) / 2,
         )
     )
-    icon.snapshot(snapshot, _ICON_SIZE, _ICON_SIZE)
+    icon.snapshot(snapshot, ICON_SIZE, ICON_SIZE)
     return snapshot.to_paintable(Graphene.Size().init(COVER_WIDTH, COVER_HEIGHT))
 
 
