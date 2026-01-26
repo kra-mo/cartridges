@@ -2,12 +2,42 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 from collections.abc import Generator, Iterable, Iterator
-from typing import Any, cast
+from typing import Any, NamedTuple, cast
 
 from gi.repository import Gio, GLib, GObject
 
 from . import SETTINGS
 from .sources import imported
+
+
+class _Icon(NamedTuple):
+    name: str
+    a11y_label: str
+
+
+ICONS = (
+    _Icon("collection", "📚"),
+    _Icon("star", "⭐"),
+    _Icon("heart", "❤️"),
+    _Icon("music", "🎵"),
+    _Icon("people", "🧑"),
+    _Icon("skull", "💀"),
+    _Icon("private", "🕵️"),
+    _Icon("globe", "🌐"),
+    _Icon("map", "🗺"),
+    _Icon("city", "🏙️"),
+    _Icon("car", "🚗"),
+    _Icon("horse", "🐎"),
+    _Icon("sprout", "🌱"),
+    _Icon("step-over", "🪜"),
+    _Icon("gamepad", "🎮"),
+    _Icon("ball", "⚽"),
+    _Icon("puzzle", "🧩"),
+    _Icon("flashlight", "🔦"),
+    _Icon("knife", "🔪"),
+    _Icon("gun", "🔫"),
+    _Icon("fist", "✊"),
+)
 
 type _GameID = str
 
