@@ -6,12 +6,11 @@ from typing import Any, NamedTuple, cast
 
 from gi.repository import Adw, Gio, GObject, Gtk
 
-from cartridges import collections
 from cartridges.collections import Collection
 from cartridges.config import PREFIX
 
 from . import closures
-from .collections import CollectionActions
+from .collections import CollectionActions, CollectionEditable
 
 
 class _Icon(NamedTuple):
@@ -56,13 +55,8 @@ class CollectionDetails(Adw.Dialog):
     icons_grid: Gtk.Grid = Gtk.Template.Child()
 
     collection_actions: CollectionActions = Gtk.Template.Child()
+    collection_editable: CollectionEditable = Gtk.Template.Child()
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
-    collection_bindings: GObject.BindingGroup = Gtk.Template.Child()
-
-    collection_name = GObject.Property(type=str)
-    collection_icon = GObject.Property(type=str)
-
-    sort_changed = GObject.Signal()
 
     either = closures.either
     if_else = closures.if_else
@@ -92,11 +86,11 @@ class CollectionDetails(Adw.Dialog):
         group.add_action_entries((("apply", lambda *_: self._apply()),))
         self.insert_action_group("details", group)
 
-        self.bind_property(
-            "collection-name",
+        self.collection_editable.bind_property(
+            "valid",
             cast(Gio.SimpleAction, group.lookup_action("apply")),
             "enabled",
-            transform_to=lambda _, name: bool(name),
+            GObject.BindingFlags.SYNC_CREATE,
         )
 
         self.insert_action_group("collection", self.collection_actions)
@@ -104,12 +98,6 @@ class CollectionDetails(Adw.Dialog):
             "notify::removed",
             lambda *_: self.force_close(),
             after=False,
-        )
-        self.collection_bindings.bind(
-            "name",
-            self,
-            "collection-name",
-            GObject.BindingFlags.DEFAULT,
         )
 
         group_button = None
@@ -135,7 +123,7 @@ class CollectionDetails(Adw.Dialog):
 
             button.connect(
                 "toggled",
-                lambda _, icon: setattr(self, "collection_icon", icon),
+                lambda _, icon: self.collection_editable.set_property("icon", icon),
                 icon,
             )
 
@@ -144,16 +132,5 @@ class CollectionDetails(Adw.Dialog):
         self.collection = collection or Collection()
 
     def _apply(self):
-        if self.collection.name != self.collection_name:
-            self.collection.name = self.collection_name
-            if self.collection.in_model:
-                self.emit("sort-changed")
-
-        self.collection.icon = self.collection_icon
-
-        if self.collection.in_model:
-            collections.save()
-        else:
-            collections.model.append(self.collection)
-
+        self.collection_editable.apply()
         self.close()
