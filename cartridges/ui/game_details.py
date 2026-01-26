@@ -4,7 +4,6 @@
 
 
 import sys
-import time
 from datetime import UTC, datetime
 from gettext import gettext as _
 from typing import Any, cast
@@ -12,23 +11,13 @@ from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
-import cartridges.games
-from cartridges import sources
 from cartridges.config import PREFIX
 from cartridges.games import Game
-from cartridges.sources import imported
 
-from . import closures, games
+from . import closures
 from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
-from .games import GameActions
-
-_EDITABLE_PROPERTIES = {
-    prop.name for prop in cartridges.games.PROPERTIES if prop.editable
-}
-_REQUIRED_PROPERTIES = {
-    prop.name for prop in cartridges.games.PROPERTIES if prop.editable and prop.required
-}
+from .games import GameActions, GameEditable
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/game-details.ui")
@@ -43,18 +32,13 @@ class GameDetails(Adw.NavigationPage):
 
     game_actions: GameActions = Gtk.Template.Child()
     collection_actions: CollectionActions = Gtk.Template.Child()
+    game_editable: GameEditable = Gtk.Template.Child()
     game_signals: GObject.SignalGroup = Gtk.Template.Child()
 
     game = GObject.Property(type=Game)
 
-    valid = GObject.Property(type=bool, default=False)
-    game_name = GObject.Property(type=str)
-    game_developer = GObject.Property(type=str)
-    game_executable = GObject.Property(type=str)
-
     boolean = closures.boolean
     either = closures.either
-    every = closures.every
     format_string = closures.format_string
     if_else = closures.if_else
 
@@ -76,7 +60,7 @@ class GameDetails(Adw.NavigationPage):
         ))
         self.insert_action_group("details", group)
 
-        self.bind_property(
+        self.game_editable.bind_property(
             "valid",
             cast(Gio.SimpleAction, group.lookup_action("apply")),
             "enabled",
@@ -95,27 +79,11 @@ class GameDetails(Adw.NavigationPage):
 
     def edit(self):
         """Enter edit mode."""
-        for prop in _EDITABLE_PROPERTIES:
-            value = getattr(self.game, prop)
-            setattr(self, f"game_{prop}", value)
-
         self.stack.props.visible_child_name = "edit"
         self.name_entry.grab_focus()
 
     def _apply(self):
-        for prop in _EDITABLE_PROPERTIES:
-            value = getattr(self, f"game_{prop}")
-            previous_value = getattr(self.game, prop)
-
-            if value != previous_value:
-                setattr(self.game, prop, value)
-                if prop == "name" and self.game.added:
-                    games.sorter.changed(Gtk.SorterChange.DIFFERENT)
-
-        if not self.game.added:
-            self.game.added = int(time.time())
-            sources.get(imported.ID).append(self.game)
-
+        self.game_editable.apply()
         self.stack.props.visible_child_name = "details"
 
     @Gtk.Template.Callback()

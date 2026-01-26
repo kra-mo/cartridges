@@ -11,6 +11,13 @@ $CollectionActions collection_actions {
   game: bind template.game;
 }
 
+$GameEditable game_editable {
+  game: bind template.game;
+  executable: bind executable_entry.text;
+  name: bind name_entry.text;
+  developer: bind developer_entry.text;
+}
+
 GObject.SignalGroup game_signals {
   target: bind template.game;
   target-type: typeof<$Game>;
@@ -20,7 +27,6 @@ template $GameDetails: Adw.NavigationPage {
   name: "details";
   tag: "details";
   title: bind $either(template.game as <$Game>.name, _("Add Game")) as <string>;
-  valid: bind $every(template.game-name, template.game-executable) as <bool>;
   hidden => $_cancel();
 
   ShortcutController {
@@ -334,21 +340,21 @@ template $GameDetails: Adw.NavigationPage {
                   Adw.PreferencesGroup {
                     Adw.EntryRow name_entry {
                       title: _("Title");
-                      text: bind template.game-name bidirectional;
+                      text: bind template.game as <$Game>.name;
                       entry-activated => $_activate_apply();
                     }
 
-                    Adw.EntryRow {
+                    Adw.EntryRow developer_entry {
                       title: _("Developer (optional)");
-                      text: bind template.game-developer bidirectional;
+                      text: bind template.game as <$Game>.developer;
                       entry-activated => $_activate_apply();
                     }
                   }
 
                   Adw.PreferencesGroup {
-                    Adw.EntryRow {
+                    Adw.EntryRow executable_entry {
                       title: _("Executable");
-                      text: bind template.game-executable bidirectional;
+                      text: bind template.game as <$Game>.executable;
                       entry-activated => $_activate_apply();
 
                       [suffix]

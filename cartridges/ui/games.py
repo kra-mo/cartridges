@@ -4,6 +4,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 import locale
+import time
 from gettext import gettext as _
 from typing import TYPE_CHECKING, Any, cast
 
@@ -91,6 +92,49 @@ class GameActions(Gio.SimpleActionGroup):
             for name in "hide", "unhide", "remove":
                 action = cast(Gio.SimpleAction, self.lookup_action(name))
                 action.props.enabled = False
+
+
+class GameEditable(GObject.Object):
+    """A helper object for editing a game."""
+
+    __gtype_name__ = __qualname__
+
+    game = GObject.Property(type=Game)
+
+    valid = GObject.Property(type=bool, default=False)
+
+    executable = GObject.Property(type=str)
+    name = GObject.Property(type=str)
+    developer = GObject.Property(type=str)
+
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+
+        Gtk.ClosureExpression.new(
+            bool,
+            lambda _, *values: all(values),
+            (
+                Gtk.PropertyExpression.new(GameEditable, None, "game"),
+                Gtk.PropertyExpression.new(GameEditable, None, "executable"),
+                Gtk.PropertyExpression.new(GameEditable, None, "name"),
+            ),
+        ).bind(self, "valid", self)
+
+    def apply(self):
+        """Apply the changes."""
+        if not self.valid:
+            return
+
+        self.game.executable = self.executable
+        if self.game.name != self.name:
+            self.game.name = self.name
+            if self.game.added:
+                sorter.changed(Gtk.SorterChange.DIFFERENT)
+        self.game.developer = self.developer
+
+        if not self.game.added:
+            self.game.added = int(time.time())
+            sources.get(imported.ID).append(self.game)
 
 
 def add():
