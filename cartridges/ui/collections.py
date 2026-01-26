@@ -73,6 +73,48 @@ class CollectionActions(Gio.SimpleActionGroup):
         )
 
 
+class CollectionEditable(GObject.Object):
+    """A helper object for editing a collection."""
+
+    __gtype_name__ = __qualname__
+
+    collection = GObject.Property(type=Collection)
+
+    valid = GObject.Property(type=bool, default=False)
+
+    name = GObject.Property(type=str)
+    icon = GObject.Property(type=str)
+
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+
+        Gtk.ClosureExpression.new(
+            bool,
+            lambda _, *values: all(values),
+            (
+                Gtk.PropertyExpression.new(CollectionEditable, None, "collection"),
+                Gtk.PropertyExpression.new(CollectionEditable, None, "name"),
+                Gtk.PropertyExpression.new(CollectionEditable, None, "icon"),
+            ),
+        ).bind(self, "valid", self)
+
+    def apply(self):
+        """Apply the changes."""
+        if not self.valid:
+            return
+
+        if self.collection.name != self.name:
+            self.collection.name = self.name
+            if self.collection.in_model:
+                sorter.changed(Gtk.SorterChange.DIFFERENT)
+        self.collection.icon = self.icon
+
+        if self.collection.in_model:
+            collections.save()
+        else:
+            collections.model.append(self.collection)
+
+
 class CollectionFilter(Gtk.Filter):
     """Filter games based on a selected collection."""
 

@@ -6,13 +6,14 @@ $CollectionActions collection_actions {
   collection: bind template.collection;
 }
 
+$CollectionEditable collection_editable {
+  collection: bind template.collection;
+  name: bind name_entry.text;
+}
+
 GObject.SignalGroup collection_signals {
   target: bind template.collection;
   target-type: typeof<$Collection>;
-}
-
-GObject.BindingGroup collection_bindings {
-  source: bind template.collection;
 }
 
 template $CollectionDetails: Adw.Dialog {
@@ -57,7 +58,7 @@ template $CollectionDetails: Adw.Dialog {
       Adw.PreferencesGroup {
         Adw.EntryRow name_entry {
           title: _("Name");
-          text: bind template.collection-name bidirectional;
+          text: bind template.collection as <$Collection>.name;
           activates-default: true;
         }
       }
