@@ -6,6 +6,7 @@ from typing import Any, cast
 
 from gi.repository import Adw, Gio, GObject, Gtk
 
+from cartridges import collections
 from cartridges.collections import ICONS, Collection
 from cartridges.config import PREFIX
 
@@ -30,6 +31,8 @@ class CollectionDetails(Adw.Dialog):
 
     either = closures.either
     if_else = closures.if_else
+    on_change = closures.on_change
+    within = closures.within
 
     @GObject.Property(type=Collection)
     def collection(self) -> Collection:
@@ -104,3 +107,7 @@ class CollectionDetails(Adw.Dialog):
     def _apply(self):
         self.collection_editable.apply()
         self.close()
+
+    @Gtk.Template.Callback()
+    def _collections(self, _obj) -> Gio.ListStore:
+        return collections.model

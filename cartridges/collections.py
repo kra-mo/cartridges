@@ -60,11 +60,6 @@ class Collection(GObject.Object):
 
     items_changed = GObject.Signal()
 
-    @GObject.Property(type=bool, default=False)
-    def in_model(self) -> bool:
-        """Whether `self` has been added to the model."""
-        return self in model
-
     def __init__(self, *, game_ids: Iterable[_GameID] = (), **kwargs: Any):
         super().__init__(**kwargs)
 
@@ -77,14 +72,6 @@ class Collection(GObject.Object):
             GObject.BindingFlags.SYNC_CREATE,
             lambda _, name: f"{name}-symbolic",
         )
-
-        self._model_signals = GObject.SignalGroup(target_type=Gio.ListModel)
-        self._model_signals.connect_closure(
-            "items-changed",
-            lambda *_: self.notify("in-model"),
-            after=False,
-        )
-        self._model_signals.props.target = model
 
         for signal in "items-changed", "notify::removed":
             self.connect(signal, lambda *_: save())

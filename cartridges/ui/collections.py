@@ -57,19 +57,17 @@ class CollectionActions(Gio.SimpleActionGroup):
             lambda *_: self._update_remove(),
             after=False,
         )
-        self._collection_signals.connect_closure(
-            "notify::in-model",
-            lambda *_: self._update_remove(),
-            after=False,
-        )
         self.bind_property("collection", self._collection_signals, "target")
 
+        collections.model.connect("items-changed", lambda *_: self._update_remove())
         self._update_remove()
 
     def _update_remove(self):
         action = cast(Gio.SimpleAction, self.lookup_action("remove"))
         action.props.enabled = (
-            self.collection and self.collection.in_model and not self.collection.removed
+            self.collection
+            and self.collection in collections.model
+            and not self.collection.removed
         )
 
 
@@ -105,11 +103,11 @@ class CollectionEditable(GObject.Object):
 
         if self.collection.name != self.name:
             self.collection.name = self.name
-            if self.collection.in_model:
+            if self.collection in collections.model:
                 sorter.changed(Gtk.SorterChange.DIFFERENT)
         self.collection.icon = self.icon
 
-        if self.collection.in_model:
+        if self.collection in collections.model:
             collections.save()
         else:
             collections.model.append(self.collection)
