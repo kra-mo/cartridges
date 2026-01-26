@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 import sys
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 from typing import Any
 
 from gi.repository import Gtk
@@ -61,3 +61,15 @@ def shortcut(default: str, macos: str | None = None) -> Gtk.ShortcutTrigger | No
         if sys.platform.startswith("darwin")
         else default
     )
+
+
+@_closure
+def when[T](_trigger, value: T) -> T:
+    """Evaluate the nested expression when `_trigger` notifies and propagate `value`."""
+    return value
+
+
+@_closure
+def within[T](item: T | None, items: Iterable[T]) -> bool:
+    """Get whether `item` is in `items`."""
+    return item in items if item is not None else False
