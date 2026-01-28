@@ -19,5 +19,5 @@ class Cover(Adw.Bin):
     width = GObject.Property(type=int, default=COVER_WIDTH)
     height = GObject.Property(type=int, default=COVER_HEIGHT)
 
-    concat = closures.concat
+    format_string = closures.format_string
     if_else = closures.if_else

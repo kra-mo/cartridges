@@ -34,9 +34,9 @@ template $Cover: Adw.Bin {
           name: "icon";
 
           child: Image {
-            icon-name: bind $concat(
+            icon-name: bind $format_string(
+              "{}-symbolic",
               template.root as <Window>.application as <Application>.application-id,
-              "-symbolic"
             ) as <string>;
             pixel-size: 96;
 

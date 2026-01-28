@@ -24,12 +24,6 @@ def boolean(value: object) -> bool:
 
 
 @_closure
-def concat(*strings: str) -> str:
-    """Join `strings`."""
-    return "".join(strings)
-
-
-@_closure
 def either[T](first: T, second: T) -> T:
     """Return `first` or `second`."""
     return first or second
