@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2026-01-22 19:47+0000\n"
+"PO-Revision-Date: 2026-01-28 10:48+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/kw/>\n"
@@ -38,7 +38,7 @@ msgstr "Lonchyer Gwariow"
 #: data/page.kramo.Cartridges.desktop.in:5
 #: data/page.kramo.Cartridges.metainfo.xml.in:10
 msgid "Launch all your games"
-msgstr "Lonchya oll agas gwariow"
+msgstr "Lonchya oll dha gwariow"
 
 #: data/page.kramo.Cartridges.desktop.in:11
 msgid ""
@@ -53,10 +53,9 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
-"Kartryjennow yw unn lonchyer simpel rag oll agas gwariow. Y re skoodhyans "
-"rag ynporthyans gwariow a-dhia Steam, Lutris, Heroic, ha moy gans omgelm na "
-"res. Ty gallos sortya ha kudha gwariow po iskarga artys boks a-dhia "
-"SteamGridDB."
+"Kartryjennow yw unn lonchyer simpel rag oll dha gwariow. Y re skoodhyans rag "
+"ynporthyans gwariow a-dhia Steam, Lutris, Heroic, ha moy gans omgelm na res. "
+"Ty gallos sortya ha kudha gwariow po iskarga artys boks a-dhia SteamGridDB."
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
 #: cartridges/details_dialog.py:77
@@ -187,7 +186,7 @@ msgstr "Art Lonchys Gwari"
 
 #: data/gtk/preferences.blp:21
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr "Keschanjys an fara a an art ha an boton gwari"
+msgstr "Keschanjys an fara a 'n art ha an boton gwari"
 
 #: data/gtk/preferences.blp:26 cartridges/details_dialog.py:91
 msgid "Images"
@@ -199,7 +198,7 @@ msgstr "Imajys Kwalita Da"
 
 #: data/gtk/preferences.blp:30
 msgid "Save game covers losslessly at the cost of storage"
-msgstr "Sawya art yn perfyth dhe an kost a dalghuster"
+msgstr "Sawya art yn perfyth dhe'n kost dalghuster"
 
 #: data/gtk/preferences.blp:35
 msgid "Danger Zone"
@@ -337,7 +336,7 @@ msgstr "Nowedhi Art"
 
 #: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
-msgstr "Iskarga art rag gwariow seulabrys yn agas lyverva"
+msgstr "Iskarga art rag gwariow seulabrys yn dha lyverva"
 
 #: data/gtk/preferences.blp:389
 msgid "Update"
@@ -682,4 +681,4 @@ msgstr "Fyllis dhe omgelmi dhe SteamGridDB"
 
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
-msgstr "Gwirhe agas ger-tremena API yn Settyansow"
+msgstr "Gwirhe dha ger-tremena API yn Settyansow"
