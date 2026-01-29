@@ -17,19 +17,6 @@ blueprints = custom_target(
   ],
 )
 
-gnome.compile_resources(
-  'cartridges',
-  configure_file(
-    input: 'cartridges.gresource.xml.in',
-    output: 'cartridges.gresource.xml',
-    configuration: conf,
-  ),
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-  dependencies: blueprints,
-)
-
 if host_machine.system() == 'windows'
   desktop_file = configure_file(
     input: 'page.kramo.Cartridges.desktop.in',
@@ -81,6 +68,19 @@ else
     install_dir: join_paths(get_option('datadir'), 'metainfo'),
   )
 endif
+
+gnome.compile_resources(
+  'cartridges',
+  configure_file(
+    input: 'cartridges.gresource.xml.in',
+    output: 'cartridges.gresource.xml',
+    configuration: conf,
+  ),
+  gresource_bundle: true,
+  install: true,
+  install_dir: pkgdatadir,
+  dependencies: [blueprints, appstream_file],
+)
 
 if host_machine.system() != 'windows'
   appstreamcli = find_program('appstreamcli', required: false)
