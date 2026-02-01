@@ -1,0 +1,653 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR kramo
+# This file is distributed under the same license as the Cartridges package.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: Cartridges\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-05 14:01+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: data/page.kramo.Cartridges.desktop.in:3
+#: data/page.kramo.Cartridges.metainfo.xml.in:9
+#: data/page.kramo.Cartridges.metainfo.xml.in:40 data/gtk/window.blp:47
+#: data/gtk/window.blp:83
+msgid "Cartridges"
+msgstr ""
+
+#: data/page.kramo.Cartridges.desktop.in:4
+msgid "Game Launcher"
+msgstr ""
+
+#: data/page.kramo.Cartridges.desktop.in:5
+#: data/page.kramo.Cartridges.metainfo.xml.in:10
+msgid "Launch all your games"
+msgstr ""
+
+#: data/page.kramo.Cartridges.desktop.in:11
+msgid ""
+"gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
+msgstr ""
+
+#: data/page.kramo.Cartridges.metainfo.xml.in:12
+msgid ""
+"Cartridges is a simple game launcher for all of your games. It has support "
+"for importing games from Steam, Lutris, Heroic and more with no login "
+"necessary. You can sort and hide games or download cover art from "
+"SteamGridDB."
+msgstr ""
+
+#: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
+#: cartridges/details_dialog.py:77
+msgid "Game Details"
+msgstr ""
+
+#: data/page.kramo.Cartridges.metainfo.xml.in:48
+msgid "Edit Game Details"
+msgstr ""
+
+#: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
+#: data/gtk/window.blp:543 cartridges/details_dialog.py:279
+#: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
+msgid "Preferences"
+msgstr ""
+
+#: data/gtk/details-dialog.blp:15
+msgid "Cancel"
+msgstr ""
+
+#: data/gtk/details-dialog.blp:45
+msgid "New Cover"
+msgstr ""
+
+#: data/gtk/details-dialog.blp:64
+msgid "Delete Cover"
+msgstr ""
+
+#: data/gtk/details-dialog.blp:92 data/gtk/game.blp:80
+msgid "Title"
+msgstr ""
+
+#: data/gtk/details-dialog.blp:96
+msgid "Developer (optional)"
+msgstr ""
+
+#: data/gtk/details-dialog.blp:102
+msgid "Executable"
+msgstr ""
+
+#: data/gtk/details-dialog.blp:108
+msgid "Select File"
+msgstr ""
+
+#: data/gtk/details-dialog.blp:119
+msgid "More Info"
+msgstr ""
+
+#: data/gtk/game.blp:101 data/gtk/game.blp:109 data/gtk/window.blp:444
+msgid "Edit"
+msgstr ""
+
+#: data/gtk/game.blp:102 cartridges/window.py:359
+msgid "Hide"
+msgstr ""
+
+#: data/gtk/game.blp:103 data/gtk/game.blp:111 data/gtk/window.blp:464
+msgid "Remove"
+msgstr ""
+
+#: data/gtk/game.blp:110 cartridges/window.py:361
+msgid "Unhide"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
+msgid "General"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:14 data/gtk/window.blp:207 data/gtk/window.blp:223
+#: data/gtk/window.blp:274 data/gtk/window.blp:290 data/gtk/window.blp:475
+msgid "Search"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:24 data/gtk/window.blp:544
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:29 cartridges/game.py:103
+#: cartridges/preferences.py:137 cartridges/importer/importer.py:386
+msgid "Undo"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:34
+msgid "Quit"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:187
+msgid "Toggle Sidebar"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:44 data/gtk/window.blp:200 data/gtk/window.blp:267
+msgid "Main Menu"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:50
+msgid "Games"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:53 data/gtk/window.blp:193 data/gtk/window.blp:551
+msgid "Add Game"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:58
+#: data/gtk/window.blp:27 data/gtk/window.blp:555
+msgid "Import"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:63
+msgid "Show Hidden Games"
+msgstr ""
+
+#: data/gtk/help-overlay.blp:68
+msgid "Remove Game"
+msgstr ""
+
+#: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
+#: data/gtk/preferences.blp:365
+msgid "Behavior"
+msgstr ""
+
+#: data/gtk/preferences.blp:16
+msgid "Exit After Launching Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:20
+msgid "Cover Image Launches Game"
+msgstr ""
+
+#: data/gtk/preferences.blp:21
+msgid "Swaps the behavior of the cover image and the play button"
+msgstr ""
+
+#: data/gtk/preferences.blp:26 cartridges/details_dialog.py:91
+msgid "Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:29
+msgid "High Quality Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:30
+msgid "Save game covers losslessly at the cost of storage"
+msgstr ""
+
+#: data/gtk/preferences.blp:35
+msgid "Danger Zone"
+msgstr ""
+
+#: data/gtk/preferences.blp:39
+msgid "Remove All Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:65
+msgid "Import Games Automatically"
+msgstr ""
+
+#: data/gtk/preferences.blp:69
+msgid "Remove Uninstalled Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:74
+msgid "Sources"
+msgstr ""
+
+#: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
+msgid "Steam"
+msgstr ""
+
+#: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
+#: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
+#: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
+#: data/gtk/preferences.blp:273
+msgid "Install Location"
+msgstr ""
+
+#: data/gtk/preferences.blp:105 data/gtk/window.blp:565
+#: cartridges/importer/lutris_source.py:107
+msgid "Lutris"
+msgstr ""
+
+#: data/gtk/preferences.blp:131
+msgid "Import Steam Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:135
+msgid "Import Flatpak Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
+msgid "Heroic"
+msgstr ""
+
+#: data/gtk/preferences.blp:166
+msgid "Import Epic Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:170
+msgid "Import GOG Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:174
+msgid "Import Amazon Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:178
+msgid "Import Sideloaded Games"
+msgstr ""
+
+#: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
+msgid "Bottles"
+msgstr ""
+
+#: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
+msgid "itch"
+msgstr ""
+
+#: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
+msgid "Legendary"
+msgstr ""
+
+#: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
+msgid "RetroArch"
+msgstr ""
+
+#: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
+msgid "Flatpak"
+msgstr ""
+
+#. The location of the system-wide data directory
+#: data/gtk/preferences.blp:301
+msgid "System Location"
+msgstr ""
+
+#. The location of the user-specific data directory
+#: data/gtk/preferences.blp:319
+msgid "User Location"
+msgstr ""
+
+#: data/gtk/preferences.blp:336
+msgid "Import Game Launchers"
+msgstr ""
+
+#: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
+msgid "Desktop Entries"
+msgstr ""
+
+#: data/gtk/preferences.blp:353 data/gtk/window.blp:563
+msgid "SteamGridDB"
+msgstr ""
+
+#: data/gtk/preferences.blp:357
+msgid "Authentication"
+msgstr ""
+
+#: data/gtk/preferences.blp:360
+msgid "API Key"
+msgstr ""
+
+#: data/gtk/preferences.blp:368
+msgid "Use SteamGridDB"
+msgstr ""
+
+#: data/gtk/preferences.blp:369
+msgid "Download images when adding or importing games"
+msgstr ""
+
+#: data/gtk/preferences.blp:373
+msgid "Prefer Over Official Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:377
+msgid "Prefer Animated Images"
+msgstr ""
+
+#: data/gtk/preferences.blp:383
+msgid "Update Covers"
+msgstr ""
+
+#: data/gtk/preferences.blp:384
+msgid "Fetch covers for games already in your library"
+msgstr ""
+
+#: data/gtk/preferences.blp:389
+msgid "Update"
+msgstr ""
+
+#: data/gtk/window.blp:6 data/gtk/window.blp:14
+msgid "No Games Found"
+msgstr ""
+
+#: data/gtk/window.blp:7 data/gtk/window.blp:15
+msgid "Try a different search"
+msgstr ""
+
+#: data/gtk/window.blp:21
+msgid "No Games"
+msgstr ""
+
+#: data/gtk/window.blp:22
+msgid "Use the + button to add games"
+msgstr ""
+
+#: data/gtk/window.blp:40
+msgid "No Hidden Games"
+msgstr ""
+
+#: data/gtk/window.blp:41
+msgid "Games you hide will appear here"
+msgstr ""
+
+#: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
+msgid "All Games"
+msgstr ""
+
+#: data/gtk/window.blp:140 cartridges/main.py:251
+msgid "Added"
+msgstr ""
+
+#: data/gtk/window.blp:162
+msgid "Imported"
+msgstr ""
+
+#: data/gtk/window.blp:260
+msgid "Hidden Games"
+msgstr ""
+
+#: data/gtk/window.blp:368
+msgid "Game Title"
+msgstr ""
+
+#: data/gtk/window.blp:425
+msgid "Play"
+msgstr ""
+
+#: data/gtk/window.blp:502
+msgid "Sort"
+msgstr ""
+
+#: data/gtk/window.blp:505
+msgid "A-Z"
+msgstr ""
+
+#: data/gtk/window.blp:511
+msgid "Z-A"
+msgstr ""
+
+#: data/gtk/window.blp:517
+msgid "Newest"
+msgstr ""
+
+#: data/gtk/window.blp:523
+msgid "Oldest"
+msgstr ""
+
+#: data/gtk/window.blp:529
+msgid "Last Played"
+msgstr ""
+
+#: data/gtk/window.blp:536
+msgid "Show Hidden"
+msgstr ""
+
+#: data/gtk/window.blp:545
+msgid "About Cartridges"
+msgstr ""
+
+#: data/gtk/window.blp:562
+msgid "IGDB"
+msgstr ""
+
+#: data/gtk/window.blp:564
+msgid "ProtonDB"
+msgstr ""
+
+#: data/gtk/window.blp:566
+msgid "HowLongToBeat"
+msgstr ""
+
+#. The variable is the title of the game
+#: cartridges/main.py:226 cartridges/game.py:125
+msgid "{} launched"
+msgstr ""
+
+#. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
+#: cartridges/main.py:291
+msgid "translator-credits"
+msgstr ""
+
+#. The variable is the date when the game was added
+#: cartridges/window.py:382
+msgid "Added: {}"
+msgstr ""
+
+#: cartridges/window.py:385
+msgid "Never"
+msgstr ""
+
+#. The variable is the date when the game was last played
+#: cartridges/window.py:389
+msgid "Last played: {}"
+msgstr ""
+
+#: cartridges/details_dialog.py:82
+msgid "Apply"
+msgstr ""
+
+#: cartridges/details_dialog.py:88
+msgid "Add New Game"
+msgstr ""
+
+#: cartridges/details_dialog.py:89
+msgid "Add"
+msgstr ""
+
+#: cartridges/details_dialog.py:102
+msgid "Executables"
+msgstr ""
+
+#. Translate this string as you would translate "file"
+#: cartridges/details_dialog.py:117
+msgid "file.txt"
+msgstr ""
+
+#. As in software
+#: cartridges/details_dialog.py:119
+msgid "program"
+msgstr ""
+
+#. Translate this string as you would translate "path to {}"
+#: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
+msgid "C:\\path\\to\\{}"
+msgstr ""
+
+#. Translate this string as you would translate "path to {}"
+#: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
+msgid "/path/to/{}"
+msgstr ""
+
+#: cartridges/details_dialog.py:137
+msgid ""
+"To launch the executable \"{}\", use the command:\n"
+"\n"
+"<tt>\"{}\"</tt>\n"
+"\n"
+"To open the file \"{}\" with the default application, use:\n"
+"\n"
+"<tt>{} \"{}\"</tt>\n"
+"\n"
+"If the path contains spaces, make sure to wrap it in double quotes!"
+msgstr ""
+
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
+msgid "Couldn't Add Game"
+msgstr ""
+
+#: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
+msgid "Game title cannot be empty."
+msgstr ""
+
+#: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
+msgid "Executable cannot be empty."
+msgstr ""
+
+#: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
+msgid "Couldn't Apply Preferences"
+msgstr ""
+
+#. The variable is the title of the game
+#: cartridges/game.py:139
+msgid "{} hidden"
+msgstr ""
+
+#: cartridges/game.py:139
+msgid "{} unhidden"
+msgstr ""
+
+#. The variable is the title of the game
+#: cartridges/game.py:153
+msgid "{} removed"
+msgstr ""
+
+#: cartridges/preferences.py:136
+msgid "All games removed"
+msgstr ""
+
+#: cartridges/preferences.py:188
+msgid ""
+"An API key is required to use SteamGridDB. You can generate one {}here{}."
+msgstr ""
+
+#: cartridges/preferences.py:203
+msgid "Downloading covers…"
+msgstr ""
+
+#: cartridges/preferences.py:222
+msgid "Covers updated"
+msgstr ""
+
+#: cartridges/preferences.py:370
+msgid "Installation Not Found"
+msgstr ""
+
+#: cartridges/preferences.py:371
+msgid "Select a valid directory"
+msgstr ""
+
+#: cartridges/preferences.py:407 cartridges/importer/importer.py:317
+msgid "Warning"
+msgstr ""
+
+#: cartridges/preferences.py:441
+msgid "Invalid Directory"
+msgstr ""
+
+#: cartridges/preferences.py:447
+msgid "Set Location"
+msgstr ""
+
+#: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
+msgid "Dismiss"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:30
+msgid "Today"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:32
+msgid "Yesterday"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:36
+msgid "Last Week"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:38
+msgid "This Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:40
+msgid "Last Month"
+msgstr ""
+
+#: cartridges/utils/relative_date.py:44
+msgid "Last Year"
+msgstr ""
+
+#: cartridges/importer/importer.py:144
+msgid "Importing Games…"
+msgstr ""
+
+#: cartridges/importer/importer.py:337
+msgid "The following errors occured during import:"
+msgstr ""
+
+#: cartridges/importer/importer.py:366
+msgid "No new games found"
+msgstr ""
+
+#. The variable is the number of games.
+#: cartridges/importer/importer.py:379
+msgid "{} game imported"
+msgid_plural "{} games imported"
+msgstr[0] ""
+msgstr[1] ""
+
+#. The variable is the number of games. This text comes after "{0} games imported".
+#: cartridges/importer/importer.py:383
+msgid ", {} removed"
+msgid_plural ", {} removed"
+msgstr[0] ""
+msgstr[1] ""
+
+#. The variable is the name of the source
+#: cartridges/importer/location.py:34
+msgid "Select the {} cache directory."
+msgstr ""
+
+#. The variable is the name of the source
+#: cartridges/importer/location.py:36
+msgid "Select the {} configuration directory."
+msgstr ""
+
+#. The variable is the name of the source
+#: cartridges/importer/location.py:38
+msgid "Select the {} data directory."
+msgstr ""
+
+#: cartridges/importer/retroarch_source.py:129
+msgid "No RetroArch Core Selected"
+msgstr ""
+
+#. The variable is a newline separated list of playlists
+#: cartridges/importer/retroarch_source.py:131
+msgid "The following playlists have no default core:"
+msgstr ""
+
+#: cartridges/importer/retroarch_source.py:133
+msgid "Games with no core selected were not imported"
+msgstr ""
+
+#: cartridges/store/managers/sgdb_manager.py:46
+msgid "Couldn't Authenticate SteamGridDB"
+msgstr ""
+
+#: cartridges/store/managers/sgdb_manager.py:47
+msgid "Verify your API key in preferences"
+msgstr ""
