@@ -7,21 +7,23 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-02-02 08:01+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <https://hosted.weblate.org/projects/cartridges/"
+"cartridges/ka/>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
 #: data/page.kramo.Cartridges.metainfo.xml.in:40 data/gtk/window.blp:47
 #: data/gtk/window.blp:83
 msgid "Cartridges"
-msgstr ""
+msgstr "Cartridges"
 
 #: data/page.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
@@ -58,11 +60,11 @@ msgstr ""
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
-msgstr ""
+msgstr "მორგება"
 
 #: data/gtk/details-dialog.blp:15
 msgid "Cancel"
-msgstr ""
+msgstr "გაუქმება"
 
 #: data/gtk/details-dialog.blp:45
 msgid "New Cover"
@@ -74,7 +76,7 @@ msgstr ""
 
 #: data/gtk/details-dialog.blp:92 data/gtk/game.blp:80
 msgid "Title"
-msgstr ""
+msgstr "სათაური"
 
 #: data/gtk/details-dialog.blp:96
 msgid "Developer (optional)"
@@ -82,74 +84,74 @@ msgstr ""
 
 #: data/gtk/details-dialog.blp:102
 msgid "Executable"
-msgstr ""
+msgstr "შესრულებადი"
 
 #: data/gtk/details-dialog.blp:108
 msgid "Select File"
-msgstr ""
+msgstr "აირჩიეთ ფაილი"
 
 #: data/gtk/details-dialog.blp:119
 msgid "More Info"
-msgstr ""
+msgstr "მეტი ინფორმაცია"
 
 #: data/gtk/game.blp:101 data/gtk/game.blp:109 data/gtk/window.blp:444
 msgid "Edit"
-msgstr ""
+msgstr "ჩასწორება"
 
 #: data/gtk/game.blp:102 cartridges/window.py:359
 msgid "Hide"
-msgstr ""
+msgstr "დამალვა"
 
 #: data/gtk/game.blp:103 data/gtk/game.blp:111 data/gtk/window.blp:464
 msgid "Remove"
-msgstr ""
+msgstr "წაშლა"
 
 #: data/gtk/game.blp:110 cartridges/window.py:361
 msgid "Unhide"
-msgstr ""
+msgstr "გამოჩენა"
 
 #: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
-msgstr ""
+msgstr "ზოგადი"
 
 #: data/gtk/help-overlay.blp:14 data/gtk/window.blp:207 data/gtk/window.blp:223
 #: data/gtk/window.blp:274 data/gtk/window.blp:290 data/gtk/window.blp:475
 msgid "Search"
-msgstr ""
+msgstr "ძებნა"
 
 #: data/gtk/help-overlay.blp:24 data/gtk/window.blp:544
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "კლავიატურის მალსახმობები"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
 #: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
-msgstr ""
+msgstr "გაუქმება"
 
 #: data/gtk/help-overlay.blp:34
 msgid "Quit"
-msgstr ""
+msgstr "გასვლა"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:187
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "გვერდითი პანელის ჩვენების გადართვა"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:200 data/gtk/window.blp:267
 msgid "Main Menu"
-msgstr ""
+msgstr "მთავარი მენიუ"
 
 #: data/gtk/help-overlay.blp:50
 msgid "Games"
-msgstr ""
+msgstr "თამაშები"
 
 #: data/gtk/help-overlay.blp:53 data/gtk/window.blp:193 data/gtk/window.blp:551
 msgid "Add Game"
-msgstr ""
+msgstr "თამაშის დამატება"
 
 #: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:58
 #: data/gtk/window.blp:27 data/gtk/window.blp:555
 msgid "Import"
-msgstr ""
+msgstr "შემოტანა"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Show Hidden Games"
@@ -162,7 +164,7 @@ msgstr ""
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
 #: data/gtk/preferences.blp:365
 msgid "Behavior"
-msgstr ""
+msgstr "ქცევა"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
@@ -178,7 +180,7 @@ msgstr ""
 
 #: data/gtk/preferences.blp:26 cartridges/details_dialog.py:91
 msgid "Images"
-msgstr ""
+msgstr "გამოსახულებები"
 
 #: data/gtk/preferences.blp:29
 msgid "High Quality Images"
@@ -206,11 +208,11 @@ msgstr ""
 
 #: data/gtk/preferences.blp:74
 msgid "Sources"
-msgstr ""
+msgstr "წყაროები"
 
 #: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
-msgstr ""
+msgstr "ნაკადი"
 
 #: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
 #: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
@@ -222,7 +224,7 @@ msgstr ""
 #: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
-msgstr ""
+msgstr "Lutris"
 
 #: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
@@ -270,7 +272,7 @@ msgstr ""
 
 #: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
-msgstr ""
+msgstr "Flat pak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:301
@@ -292,19 +294,19 @@ msgstr ""
 
 #: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
-msgstr ""
+msgstr "SteamGridDB"
 
 #: data/gtk/preferences.blp:357
 msgid "Authentication"
-msgstr ""
+msgstr "ავთენტიკაცია"
 
 #: data/gtk/preferences.blp:360
 msgid "API Key"
-msgstr ""
+msgstr "API-ის გასაღები"
 
 #: data/gtk/preferences.blp:368
 msgid "Use SteamGridDB"
-msgstr ""
+msgstr "SteamGridDB-ის გამოყენება"
 
 #: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
@@ -328,7 +330,7 @@ msgstr ""
 
 #: data/gtk/preferences.blp:389
 msgid "Update"
-msgstr ""
+msgstr "განახლება"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
@@ -336,11 +338,11 @@ msgstr ""
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
 msgid "Try a different search"
-msgstr ""
+msgstr "სცადეთ სხვა ძებნა"
 
 #: data/gtk/window.blp:21
 msgid "No Games"
-msgstr ""
+msgstr "თამაშების გარეშე"
 
 #: data/gtk/window.blp:22
 msgid "Use the + button to add games"
@@ -348,7 +350,7 @@ msgstr ""
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
-msgstr ""
+msgstr "დამალული თამაშების გარეშე"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
@@ -356,19 +358,19 @@ msgstr ""
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
 msgid "All Games"
-msgstr ""
+msgstr "ყველა თამაში"
 
 #: data/gtk/window.blp:140 cartridges/main.py:251
 msgid "Added"
-msgstr ""
+msgstr "დამატებულია"
 
 #: data/gtk/window.blp:162
 msgid "Imported"
-msgstr ""
+msgstr "შემოტანილია"
 
 #: data/gtk/window.blp:260
 msgid "Hidden Games"
-msgstr ""
+msgstr "დამალული თამაშები"
 
 #: data/gtk/window.blp:368
 msgid "Game Title"
@@ -376,47 +378,47 @@ msgstr ""
 
 #: data/gtk/window.blp:425
 msgid "Play"
-msgstr ""
+msgstr "თამაში"
 
 #: data/gtk/window.blp:502
 msgid "Sort"
-msgstr ""
+msgstr "დალაგება"
 
 #: data/gtk/window.blp:505
 msgid "A-Z"
-msgstr ""
+msgstr "A-Z"
 
 #: data/gtk/window.blp:511
 msgid "Z-A"
-msgstr ""
+msgstr "Z-A"
 
 #: data/gtk/window.blp:517
 msgid "Newest"
-msgstr ""
+msgstr "უახლესი"
 
 #: data/gtk/window.blp:523
 msgid "Oldest"
-msgstr ""
+msgstr "ყველაზე ძველი"
 
 #: data/gtk/window.blp:529
 msgid "Last Played"
-msgstr ""
+msgstr "ბოლოს დაკვრის დრო"
 
 #: data/gtk/window.blp:536
 msgid "Show Hidden"
-msgstr ""
+msgstr "დამალულების ჩვენება"
 
 #: data/gtk/window.blp:545
 msgid "About Cartridges"
-msgstr ""
+msgstr "Cartridges-ის შესახებ"
 
 #: data/gtk/window.blp:562
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:564
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:566
 msgid "HowLongToBeat"
@@ -425,21 +427,21 @@ msgstr ""
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
 msgid "{} launched"
-msgstr ""
+msgstr "{} გაშვებულია"
 
 #. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
 msgid "translator-credits"
-msgstr ""
+msgstr "თემური დოღონაძე"
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:382
 msgid "Added: {}"
-msgstr ""
+msgstr "დაემატა: {}"
 
 #: cartridges/window.py:385
 msgid "Never"
-msgstr ""
+msgstr "არასდროს"
 
 #. The variable is the date when the game was last played
 #: cartridges/window.py:389
@@ -448,7 +450,7 @@ msgstr ""
 
 #: cartridges/details_dialog.py:82
 msgid "Apply"
-msgstr ""
+msgstr "გადატარება"
 
 #: cartridges/details_dialog.py:88
 msgid "Add New Game"
@@ -456,31 +458,31 @@ msgstr ""
 
 #: cartridges/details_dialog.py:89
 msgid "Add"
-msgstr ""
+msgstr "დამატება"
 
 #: cartridges/details_dialog.py:102
 msgid "Executables"
-msgstr ""
+msgstr "გამშვებები"
 
 #. Translate this string as you would translate "file"
 #: cartridges/details_dialog.py:117
 msgid "file.txt"
-msgstr ""
+msgstr "file.txt"
 
 #. As in software
 #: cartridges/details_dialog.py:119
 msgid "program"
-msgstr ""
+msgstr "პროგრამა"
 
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
-msgstr ""
+msgstr "C:\\ბილიკი\\\\{}-მდე"
 
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
-msgstr ""
+msgstr "/ბილიკი/{}-მდე"
 
 #: cartridges/details_dialog.py:137
 msgid ""
@@ -514,16 +516,16 @@ msgstr ""
 #. The variable is the title of the game
 #: cartridges/game.py:139
 msgid "{} hidden"
-msgstr ""
+msgstr "{} დამალულია"
 
 #: cartridges/game.py:139
 msgid "{} unhidden"
-msgstr ""
+msgstr "{} გამოჩენილია"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
 msgid "{} removed"
-msgstr ""
+msgstr "{} წაშლილია"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
@@ -552,43 +554,43 @@ msgstr ""
 
 #: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
-msgstr ""
+msgstr "გაფრთხილება"
 
 #: cartridges/preferences.py:441
 msgid "Invalid Directory"
-msgstr ""
+msgstr "არასწორი დირექტორია"
 
 #: cartridges/preferences.py:447
 msgid "Set Location"
-msgstr ""
+msgstr "მდებარეობის დაყენება"
 
 #: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
-msgstr ""
+msgstr "მოცილება"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "დღეს"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "გუშინ"
 
 #: cartridges/utils/relative_date.py:36
 msgid "Last Week"
-msgstr ""
+msgstr "ბოლო კვირა"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "ამ თვეში"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "ბოლო თვე"
 
 #: cartridges/utils/relative_date.py:44
 msgid "Last Year"
-msgstr ""
+msgstr "წინა წელს"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
