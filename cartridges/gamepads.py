@@ -42,7 +42,8 @@ class Gamepad(GObject.Object):
         self._device_signals.connect_closure(
             "absolute-axis-event", self._on_analog_axis_event, after=False
         )
-        self.bind_property("device", self._device_signals, "device")
+
+        self.bind_property("device", self._device_signals, "target")
 
         self.device = device
 
