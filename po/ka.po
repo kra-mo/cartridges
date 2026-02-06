@@ -2,13 +2,15 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2026-02-02 08:01+0000\n"
-"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"PO-Revision-Date: 2026-02-06 12:01+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ka/>\n"
 "Language: ka\n"
@@ -155,7 +157,7 @@ msgstr "შემოტანა"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Show Hidden Games"
-msgstr ""
+msgstr "დამალული თამაშების ჩვენება"
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
@@ -454,7 +456,7 @@ msgstr "გადატარება"
 
 #: cartridges/details_dialog.py:88
 msgid "Add New Game"
-msgstr ""
+msgstr "ახალი თამაშის დამატება"
 
 #: cartridges/details_dialog.py:89
 msgid "Add"
@@ -615,8 +617,8 @@ msgstr[1] ""
 #: cartridges/importer/importer.py:383
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} წაშლილია"
+msgstr[1] "{} წაშლილია"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
