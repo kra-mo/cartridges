@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 import sys
-from collections.abc import Callable, Iterable
+from collections.abc import Callable
 from typing import Any
 
 from gi.repository import Gtk
@@ -30,12 +30,6 @@ def either[T](first: T, second: T) -> T:
 
 
 @_closure
-def every(*values: object) -> bool:
-    """Get whether all values are truthy."""
-    return all(values)
-
-
-@_closure
 def format_string(string: str, *args: Any) -> str:
     """Format `string` with `args`."""
     return string.format(*args)
@@ -48,12 +42,6 @@ def if_else[T](condition: object, first: T, second: T) -> T:
 
 
 @_closure
-def on_change[T](_trigger, value: T) -> T:
-    """Evaluate the expression when `_trigger` notifies and propagate `value`."""
-    return value
-
-
-@_closure
 def shortcut(default: str, macos: str | None = None) -> Gtk.ShortcutTrigger | None:
     """Get the correct shortcut for the user's platform."""
     return Gtk.ShortcutTrigger.parse_string(
@@ -61,9 +49,3 @@ def shortcut(default: str, macos: str | None = None) -> Gtk.ShortcutTrigger | No
         if sys.platform.startswith("darwin")
         else default
     )
-
-
-@_closure
-def within[T](item: T | None, items: Iterable[T]) -> bool:
-    """Get whether `item` is in `items`."""
-    return item in items if item is not None else False

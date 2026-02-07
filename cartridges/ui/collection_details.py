@@ -31,8 +31,6 @@ class CollectionDetails(Adw.Dialog):
 
     either = closures.either
     if_else = closures.if_else
-    on_change = closures.on_change
-    within = closures.within
 
     @GObject.Property(type=Collection)
     def collection(self) -> Collection:
@@ -51,6 +49,13 @@ class CollectionDetails(Adw.Dialog):
                 )
                 button.props.active = True
                 break
+
+        self.notify("collection-in-model")
+
+    @GObject.Property(type=bool, default=False)
+    def collection_in_model(self) -> bool:
+        """Whether the collection is in the collections model."""
+        return self.collection in collections.model
 
     def __init__(self, collection: Collection | None = None, **kwargs: Any):
         super().__init__(**kwargs)
@@ -104,10 +109,11 @@ class CollectionDetails(Adw.Dialog):
 
         self.collection = collection or Collection()
 
+        collections.model.connect(
+            "items-changed",
+            lambda *_: self.notify("collection-in-model"),
+        )
+
     def _apply(self):
         self.collection_editable.apply()
         self.close()
-
-    @Gtk.Template.Callback()
-    def _collections(self, _obj) -> Gio.ListStore:
-        return collections.model

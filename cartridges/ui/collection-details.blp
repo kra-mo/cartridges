@@ -1,7 +1,6 @@
 using Gtk 4.0;
 using Adw 1;
 using GObject 2.0;
-using Gio 2.0;
 
 $CollectionActions collection_actions {
   collection: bind template.collection;
@@ -47,14 +46,7 @@ template $CollectionDetails: Adw.Dialog {
       Button apply_button {
         action-name: "details.apply";
         icon-name: "apply-symbolic";
-        tooltip-text: bind $on_change(
-          $_collections() as <Gio.ListStore>.n-items,
-          $if_else(
-            $within(template.collection, $_collections() as <Gio.ListStore>) as <bool>,
-            _("Apply"),
-            _("Add")
-          ) as <string>
-        ) as <string>;
+        tooltip-text: bind $if_else(template.collection-in-model, _("Apply"), _("Add")) as <string>;
 
         styles [
           "suggested-action",
