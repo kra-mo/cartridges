@@ -37,8 +37,8 @@ class Application(Adw.Application):
         window.present()
 
     def _present_about_dialog(self):
-        dialog = Adw.AboutDialog.new_from_appdata(f"{PREFIX}/{APP_ID}.metainfo.xml")
+        about = Adw.AboutDialog(appdata_resource_path=f"{PREFIX}/{APP_ID}.metainfo.xml")  # pyright: ignore[reportCallIssue]
         # Translators: Replace "translator-credits" with your name/username,
         # and optionally a URL or an email in <user@example.org> format.
-        dialog.props.translator_credits = _("translator-credits")
-        dialog.present(self.props.active_window)
+        about.props.translator_credits = _("translator-credits")
+        about.present(self.props.active_window)
