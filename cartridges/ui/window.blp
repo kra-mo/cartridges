@@ -147,6 +147,7 @@ template $Window: Adw.ApplicationWindow {
                   hexpand: true;
 
                   center-widget: SearchEntry search_entry {
+                    key-capture-widget: template;
                     hexpand: true;
                     placeholder-text: _("Search games");
                     search-started => $_search_started();

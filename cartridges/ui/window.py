@@ -86,8 +86,6 @@ class Window(Adw.ApplicationWindow):
         STATE_SETTINGS.bind("is-maximized", self, "maximized", flags)
         STATE_SETTINGS.bind("show-sidebar", self.split_view, "show-sidebar", flags)
 
-        # https://gitlab.gnome.org/GNOME/gtk/-/issues/7901
-        self.search_entry.set_key_capture_widget(self)
         self.sources.bind_model(
             sources.model,
             lambda source: SourceSidebarItem(source),
