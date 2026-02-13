@@ -129,11 +129,11 @@ class CollectionFilter(Gtk.Filter):
         self.changed(Gtk.FilterChange.DIFFERENT)
 
     @override
-    def do_match(self, game: Game) -> bool:  # pyright: ignore[reportIncompatibleMethodOverride]
-        if not self.collection:
+    def do_match(self, item: GObject.Object | None = None) -> bool:
+        if not (self.collection and isinstance(item, Game)):
             return True
 
-        return game.game_id in self.collection
+        return item.game_id in self.collection
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
