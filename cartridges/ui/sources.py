@@ -11,7 +11,7 @@ from cartridges.sources import Source
 from . import games
 
 
-class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
+class SourceSidebarItem(Adw.SidebarItem):
     """A sidebar item representing a source."""
 
     __gtype_name__ = __qualname__
@@ -28,7 +28,7 @@ class SourceSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAcce
         self._source_bindings.bind("icon-name", self, "icon-name", flags)
         self.bind_property("source", self._source_bindings, "source")
 
-        self.model = Gtk.FilterListModel(filter=games.filter_, watch_items=True)  # pyright: ignore[reportCallIssue]
+        self.model = Gtk.FilterListModel(filter=games.filter_, watch_items=True)
         self.model.bind_property(
             "n-items", self, "visible", GObject.BindingFlags.SYNC_CREATE
         )

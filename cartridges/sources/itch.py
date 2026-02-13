@@ -48,7 +48,7 @@ def get_games() -> Generator[Game]:
                 source=ID,
                 name=row[1],
             )
-            app.create_asyncio_task(_update_cover(game, row[3] or row[2]))  # pyright: ignore[reportAttributeAccessIssue]
+            app.create_asyncio_task(_update_cover(game, row[3] or row[2]))
             yield game
 
 

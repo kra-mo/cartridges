@@ -147,7 +147,7 @@ class CollectionFilter(Gtk.Filter):
         self.bind_property("collection", self._collection_signals, "target")
 
 
-class CollectionSidebarItem(Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
+class CollectionSidebarItem(Adw.SidebarItem):
     """A sidebar item representing a collection."""
 
     __gtype_name__ = __qualname__
@@ -236,7 +236,7 @@ class CollectionsBox(Adw.Bin):
             else:
                 collection.discard(self.game.game_id)
 
-        self.box.remove_all()  # pyright: ignore[reportAttributeAccessIssue]
+        self.box.remove_all()
 
 
 def add(game_id: str | None = None):
@@ -280,7 +280,7 @@ model = Gtk.SortListModel(
             expression=Gtk.PropertyExpression.new(Collection, None, "removed"),
             invert=True,
         ),
-        watch_items=True,  # pyright: ignore[reportCallIssue]
+        watch_items=True,
     ),
     sorter=sorter,
 )

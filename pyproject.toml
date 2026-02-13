@@ -4,7 +4,7 @@ requires-python = ">= 3.13"
 [dependency-groups]
 dev = [
   "pre-commit",
-  "pygobject-stubs",
+  "pygobject-stubs @ git+https://github.com/jamiethecat/pygobject-stubs.git",
   "ruff",
 ]
 

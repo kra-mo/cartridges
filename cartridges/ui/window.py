@@ -37,10 +37,10 @@ class Window(Adw.ApplicationWindow):
     __gtype_name__ = __qualname__
 
     split_view: Adw.OverlaySplitView = Gtk.Template.Child()
-    sidebar: Adw.Sidebar = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
-    sources: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
-    collections: Adw.SidebarSection = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
-    new_collection_item: Adw.SidebarItem = Gtk.Template.Child()  # pyright: ignore[reportAttributeAccessIssue]
+    sidebar: Adw.Sidebar = Gtk.Template.Child()
+    sources: Adw.SidebarSection = Gtk.Template.Child()
+    collections: Adw.SidebarSection = Gtk.Template.Child()
+    new_collection_item: Adw.SidebarItem = Gtk.Template.Child()
     navigation_view: Adw.NavigationView = Gtk.Template.Child()
     header_bar: Adw.HeaderBar = Gtk.Template.Child()
     title_box: Gtk.CenterBox = Gtk.Template.Child()
@@ -153,7 +153,7 @@ class Window(Adw.ApplicationWindow):
         return right_window_controls and not sys.platform.startswith("darwin")
 
     @Gtk.Template.Callback()
-    def _navigate(self, sidebar: Adw.Sidebar, index: int):  # pyright: ignore[reportAttributeAccessIssue]
+    def _navigate(self, sidebar: Adw.Sidebar, index: int):
         item = sidebar.get_item(index)
 
         match item:
@@ -177,13 +177,13 @@ class Window(Adw.ApplicationWindow):
             self.split_view.props.show_sidebar = False
 
     @Gtk.Template.Callback()
-    def _update_selection(self, sidebar: Adw.Sidebar, *_args):  # pyright: ignore[reportAttributeAccessIssue]
+    def _update_selection(self, sidebar: Adw.Sidebar, *_args):
         if sidebar.props.selected_item is self.new_collection_item:
             sidebar.props.selected = self._selected_sidebar_item
         self._selected_sidebar_item = sidebar.props.selected
 
     @Gtk.Template.Callback()
-    def _setup_sidebar_menu(self, _sidebar, item: Adw.SidebarItem):  # pyright: ignore[reportAttributeAccessIssue]
+    def _setup_sidebar_menu(self, _sidebar, item: Adw.SidebarItem):
         if isinstance(item, CollectionSidebarItem):
             self.menu_collection = item.collection
 

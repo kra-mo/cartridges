@@ -228,7 +228,7 @@ model = Gtk.SortListModel(
     model=Gtk.FilterListModel(
         model=Gtk.FlattenListModel(model=sources.model),
         filter=filter_,
-        watch_items=True,  # pyright: ignore[reportCallIssue]
+        watch_items=True,
     ),
     sorter=sorter,
 )
