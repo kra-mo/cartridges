@@ -7,35 +7,38 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-02-14 02:09+0000\n"
+"Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
+"Language-Team: Vietnamese <https://hosted.weblate.org/projects/cartridges/"
+"cartridges/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
 #: data/page.kramo.Cartridges.metainfo.xml.in:40 data/gtk/window.blp:47
 #: data/gtk/window.blp:83
 msgid "Cartridges"
-msgstr ""
+msgstr "Cartridges"
 
 #: data/page.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr ""
+msgstr "Game Launcher"
 
 #: data/page.kramo.Cartridges.desktop.in:5
 #: data/page.kramo.Cartridges.metainfo.xml.in:10
 msgid "Launch all your games"
-msgstr ""
+msgstr "Khởi chạy tất cả các game của bạn"
 
 #: data/page.kramo.Cartridges.desktop.in:11
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
+"gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:12
 msgid ""
@@ -44,443 +47,449 @@ msgid ""
 "necessary. You can sort and hide games or download cover art from "
 "SteamGridDB."
 msgstr ""
+"Cartridges là một game đơn giản launcher dành cho tất cả các game của bạn. "
+"Nó có hỗ trợ nhập game từ Steam, Lutris, Heroic và hơn thế nữa mà không cần "
+"đăng nhập. Bạn có thể sắp xếp và ẩn game hoặc tải xuống ảnh bìa từ "
+"SteamGridDB."
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
 #: cartridges/details_dialog.py:77
 msgid "Game Details"
-msgstr ""
+msgstr "Chi tiết game"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:48
 msgid "Edit Game Details"
-msgstr ""
+msgstr "Chỉnh sửa chi tiết game"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:279
 #: cartridges/importer/importer.py:319 cartridges/importer/importer.py:369
 msgid "Preferences"
-msgstr ""
+msgstr "Tuỳ chọn"
 
 #: data/gtk/details-dialog.blp:15
 msgid "Cancel"
-msgstr ""
+msgstr "Hủy"
 
 #: data/gtk/details-dialog.blp:45
 msgid "New Cover"
-msgstr ""
+msgstr "Bìa mới"
 
 #: data/gtk/details-dialog.blp:64
 msgid "Delete Cover"
-msgstr ""
+msgstr "Xóa bìa"
 
 #: data/gtk/details-dialog.blp:92 data/gtk/game.blp:80
 msgid "Title"
-msgstr ""
+msgstr "Tiêu đề"
 
 #: data/gtk/details-dialog.blp:96
 msgid "Developer (optional)"
-msgstr ""
+msgstr "Nhà phát triển (tùy chọn)"
 
 #: data/gtk/details-dialog.blp:102
 msgid "Executable"
-msgstr ""
+msgstr "Có thể thực thi được"
 
 #: data/gtk/details-dialog.blp:108
 msgid "Select File"
-msgstr ""
+msgstr "Chọn tệp"
 
 #: data/gtk/details-dialog.blp:119
 msgid "More Info"
-msgstr ""
+msgstr "Thông tin thêm"
 
 #: data/gtk/game.blp:101 data/gtk/game.blp:109 data/gtk/window.blp:444
 msgid "Edit"
-msgstr ""
+msgstr "Chỉnh sửa"
 
 #: data/gtk/game.blp:102 cartridges/window.py:359
 msgid "Hide"
-msgstr ""
+msgstr "Ẩn"
 
 #: data/gtk/game.blp:103 data/gtk/game.blp:111 data/gtk/window.blp:464
 msgid "Remove"
-msgstr ""
+msgstr "Xóa"
 
 #: data/gtk/game.blp:110 cartridges/window.py:361
 msgid "Unhide"
-msgstr ""
+msgstr "Hiện"
 
 #: data/gtk/help-overlay.blp:11 data/gtk/preferences.blp:9
 msgid "General"
-msgstr ""
+msgstr "Tổng quát"
 
 #: data/gtk/help-overlay.blp:14 data/gtk/window.blp:207 data/gtk/window.blp:223
 #: data/gtk/window.blp:274 data/gtk/window.blp:290 data/gtk/window.blp:475
 msgid "Search"
-msgstr ""
+msgstr "Tìm kiếm"
 
 #: data/gtk/help-overlay.blp:24 data/gtk/window.blp:544
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Phím tắt"
 
 #: data/gtk/help-overlay.blp:29 cartridges/game.py:103
 #: cartridges/preferences.py:137 cartridges/importer/importer.py:386
 msgid "Undo"
-msgstr ""
+msgstr "Hoàn tác"
 
 #: data/gtk/help-overlay.blp:34
 msgid "Quit"
-msgstr ""
+msgstr "Thoát"
 
 #: data/gtk/help-overlay.blp:39 data/gtk/window.blp:92 data/gtk/window.blp:187
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Bật/tắt thanh bên"
 
 #: data/gtk/help-overlay.blp:44 data/gtk/window.blp:200 data/gtk/window.blp:267
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu chính"
 
 #: data/gtk/help-overlay.blp:50
 msgid "Games"
-msgstr ""
+msgstr "Games"
 
 #: data/gtk/help-overlay.blp:53 data/gtk/window.blp:193 data/gtk/window.blp:551
 msgid "Add Game"
-msgstr ""
+msgstr "Thêm game"
 
 #: data/gtk/help-overlay.blp:58 data/gtk/preferences.blp:58
 #: data/gtk/window.blp:27 data/gtk/window.blp:555
 msgid "Import"
-msgstr ""
+msgstr "Nhập"
 
 #: data/gtk/help-overlay.blp:63
 msgid "Show Hidden Games"
-msgstr ""
+msgstr "Hiển thị các game ẩn"
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
-msgstr ""
+msgstr "Xóa game"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
 #: data/gtk/preferences.blp:365
 msgid "Behavior"
-msgstr ""
+msgstr "Hành vi"
 
 #: data/gtk/preferences.blp:16
 msgid "Exit After Launching Games"
-msgstr ""
+msgstr "Thoát sau khi khởi chạy game"
 
 #: data/gtk/preferences.blp:20
 msgid "Cover Image Launches Game"
-msgstr ""
+msgstr "Ảnh bìa ra mắt game"
 
 #: data/gtk/preferences.blp:21
 msgid "Swaps the behavior of the cover image and the play button"
-msgstr ""
+msgstr "Hoán đổi hoạt động của ảnh bìa và nút phát"
 
 #: data/gtk/preferences.blp:26 cartridges/details_dialog.py:91
 msgid "Images"
-msgstr ""
+msgstr "Hình ảnh"
 
 #: data/gtk/preferences.blp:29
 msgid "High Quality Images"
-msgstr ""
+msgstr "Hình ảnh chất lượng cao"
 
 #: data/gtk/preferences.blp:30
 msgid "Save game covers losslessly at the cost of storage"
-msgstr ""
+msgstr "Lưu bìa game toàn vẹn đánh đổi bằng chi phí lưu trữ"
 
 #: data/gtk/preferences.blp:35
 msgid "Danger Zone"
-msgstr ""
+msgstr "Vùng nguy hiểm"
 
 #: data/gtk/preferences.blp:39
 msgid "Remove All Games"
-msgstr ""
+msgstr "Xóa tất cả game"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "Tự động nhập game"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
-msgstr ""
+msgstr "Xóa game đã gỡ cài đặt"
 
 #: data/gtk/preferences.blp:74
 msgid "Sources"
-msgstr ""
+msgstr "Nguồn"
 
 #: data/gtk/preferences.blp:78 cartridges/importer/steam_source.py:114
 msgid "Steam"
-msgstr ""
+msgstr "Steam"
 
 #: data/gtk/preferences.blp:87 data/gtk/preferences.blp:114
 #: data/gtk/preferences.blp:149 data/gtk/preferences.blp:192
 #: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
 #: data/gtk/preferences.blp:273
 msgid "Install Location"
-msgstr ""
+msgstr "Vị trí cài đặt"
 
 #: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
 msgid "Lutris"
-msgstr ""
+msgstr "Lutris"
 
 #: data/gtk/preferences.blp:131
 msgid "Import Steam Games"
-msgstr ""
+msgstr "Nhập Steam Games"
 
 #: data/gtk/preferences.blp:135
 msgid "Import Flatpak Games"
-msgstr ""
+msgstr "Nhập Flatpak Games"
 
 #: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
-msgstr ""
+msgstr "Heroic"
 
 #: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
-msgstr ""
+msgstr "Nhập Epic Games"
 
 #: data/gtk/preferences.blp:170
 msgid "Import GOG Games"
-msgstr ""
+msgstr "Nhập GOG Games"
 
 #: data/gtk/preferences.blp:174
 msgid "Import Amazon Games"
-msgstr ""
+msgstr "Nhập Amazon Games"
 
 #: data/gtk/preferences.blp:178
 msgid "Import Sideloaded Games"
-msgstr ""
+msgstr "Nhập Sideloaded Games"
 
 #: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
-msgstr ""
+msgstr "Bottles"
 
 #: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
-msgstr ""
+msgstr "itch"
 
 #: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
-msgstr ""
+msgstr "Legendary"
 
 #: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
-msgstr ""
+msgstr "RetroArch"
 
 #: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #. The location of the system-wide data directory
 #: data/gtk/preferences.blp:301
 msgid "System Location"
-msgstr ""
+msgstr "Vị trí hệ thống"
 
 #. The location of the user-specific data directory
 #: data/gtk/preferences.blp:319
 msgid "User Location"
-msgstr ""
+msgstr "Vị trí người dùng"
 
 #: data/gtk/preferences.blp:336
 msgid "Import Game Launchers"
-msgstr ""
+msgstr "Nhập Game Launchers"
 
 #: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
-msgstr ""
+msgstr "Các mục trên máy tính để bàn"
 
 #: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
-msgstr ""
+msgstr "SteamGridDB"
 
 #: data/gtk/preferences.blp:357
 msgid "Authentication"
-msgstr ""
+msgstr "Xác thực"
 
 #: data/gtk/preferences.blp:360
 msgid "API Key"
-msgstr ""
+msgstr "Khóa API"
 
 #: data/gtk/preferences.blp:368
 msgid "Use SteamGridDB"
-msgstr ""
+msgstr "Sử dụng SteamGridDB"
 
 #: data/gtk/preferences.blp:369
 msgid "Download images when adding or importing games"
-msgstr ""
+msgstr "Tải xuống hình ảnh khi thêm hoặc nhập game"
 
 #: data/gtk/preferences.blp:373
 msgid "Prefer Over Official Images"
-msgstr ""
+msgstr "Thích hơn hình ảnh chính thức"
 
 #: data/gtk/preferences.blp:377
 msgid "Prefer Animated Images"
-msgstr ""
+msgstr "Ưu tiên hình ảnh hoạt hình"
 
 #: data/gtk/preferences.blp:383
 msgid "Update Covers"
-msgstr ""
+msgstr "Bìa cập nhật"
 
 #: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
-msgstr ""
+msgstr "Tìm bìa cho các game đã có trong thư viện của bạn"
 
 #: data/gtk/preferences.blp:389
 msgid "Update"
-msgstr ""
+msgstr "Cập nhật"
 
 #: data/gtk/window.blp:6 data/gtk/window.blp:14
 msgid "No Games Found"
-msgstr ""
+msgstr "Không tìm thấy game nào"
 
 #: data/gtk/window.blp:7 data/gtk/window.blp:15
 msgid "Try a different search"
-msgstr ""
+msgstr "Hãy thử tìm kiếm khác"
 
 #: data/gtk/window.blp:21
 msgid "No Games"
-msgstr ""
+msgstr "Không có game"
 
 #: data/gtk/window.blp:22
 msgid "Use the + button to add games"
-msgstr ""
+msgstr "Sử dụng nút + để thêm game"
 
 #: data/gtk/window.blp:40
 msgid "No Hidden Games"
-msgstr ""
+msgstr "Không có game ẩn"
 
 #: data/gtk/window.blp:41
 msgid "Games you hide will appear here"
-msgstr ""
+msgstr "Trò chơi bạn ẩn sẽ xuất hiện ở đây"
 
 #: data/gtk/window.blp:76 data/gtk/window.blp:113 cartridges/main.py:249
 msgid "All Games"
-msgstr ""
+msgstr "Tất cả game"
 
 #: data/gtk/window.blp:140 cartridges/main.py:251
 msgid "Added"
-msgstr ""
+msgstr "Đã thêm"
 
 #: data/gtk/window.blp:162
 msgid "Imported"
-msgstr ""
+msgstr "Đã nhập"
 
 #: data/gtk/window.blp:260
 msgid "Hidden Games"
-msgstr ""
+msgstr "Trò chơi ẩn"
 
 #: data/gtk/window.blp:368
 msgid "Game Title"
-msgstr ""
+msgstr "Tiêu đề game"
 
 #: data/gtk/window.blp:425
 msgid "Play"
-msgstr ""
+msgstr "Chơi"
 
 #: data/gtk/window.blp:502
 msgid "Sort"
-msgstr ""
+msgstr "Sắp xếp"
 
 #: data/gtk/window.blp:505
 msgid "A-Z"
-msgstr ""
+msgstr "A-Z"
 
 #: data/gtk/window.blp:511
 msgid "Z-A"
-msgstr ""
+msgstr "Z-A"
 
 #: data/gtk/window.blp:517
 msgid "Newest"
-msgstr ""
+msgstr "Mới nhất"
 
 #: data/gtk/window.blp:523
 msgid "Oldest"
-msgstr ""
+msgstr "Cũ nhất"
 
 #: data/gtk/window.blp:529
 msgid "Last Played"
-msgstr ""
+msgstr "Đã phát lần cuối"
 
 #: data/gtk/window.blp:536
 msgid "Show Hidden"
-msgstr ""
+msgstr "Hiển thị ẩn"
 
 #: data/gtk/window.blp:545
 msgid "About Cartridges"
-msgstr ""
+msgstr "Giới thiệu Cartridges"
 
 #: data/gtk/window.blp:562
 msgid "IGDB"
-msgstr ""
+msgstr "IGDB"
 
 #: data/gtk/window.blp:564
 msgid "ProtonDB"
-msgstr ""
+msgstr "ProtonDB"
 
 #: data/gtk/window.blp:566
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
 msgid "{} launched"
-msgstr ""
+msgstr "{} đã ra mắt"
 
 #. Translators: Replace this with Your Name, Your Name <your.email@example.com>, or Your Name https://your-site.com for it to show up in the About dialog.
 #: cartridges/main.py:291
 msgid "translator-credits"
 msgstr ""
+"Vietnam Linux L10n <https://github.com/linux-l10n-vi>\n"
+"Loc Huynh <https://github.com/hthienloc>"
 
 #. The variable is the date when the game was added
 #: cartridges/window.py:382
 msgid "Added: {}"
-msgstr ""
+msgstr "Đã thêm: {}"
 
 #: cartridges/window.py:385
 msgid "Never"
-msgstr ""
+msgstr "Không bao giờ"
 
 #. The variable is the date when the game was last played
 #: cartridges/window.py:389
 msgid "Last played: {}"
-msgstr ""
+msgstr "Chơi lần cuối: {}"
 
 #: cartridges/details_dialog.py:82
 msgid "Apply"
-msgstr ""
+msgstr "Áp dụng"
 
 #: cartridges/details_dialog.py:88
 msgid "Add New Game"
-msgstr ""
+msgstr "Thêm game mới"
 
 #: cartridges/details_dialog.py:89
 msgid "Add"
-msgstr ""
+msgstr "Thêm"
 
 #: cartridges/details_dialog.py:102
 msgid "Executables"
-msgstr ""
+msgstr "Các tệp thực thi"
 
 #. Translate this string as you would translate "file"
 #: cartridges/details_dialog.py:117
 msgid "file.txt"
-msgstr ""
+msgstr "file.txt"
 
 #. As in software
 #: cartridges/details_dialog.py:119
 msgid "program"
-msgstr ""
+msgstr "program"
 
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:124 cartridges/details_dialog.py:126
 msgid "C:\\path\\to\\{}"
-msgstr ""
+msgstr "C:\\\\path\\ o\\\\{}"
 
 #. Translate this string as you would translate "path to {}"
 #: cartridges/details_dialog.py:130 cartridges/details_dialog.py:132
 msgid "/path/to/{}"
-msgstr ""
+msgstr "/path/to/{}"
 
 #: cartridges/details_dialog.py:137
 msgid ""
@@ -494,160 +503,169 @@ msgid ""
 "\n"
 "If the path contains spaces, make sure to wrap it in double quotes!"
 msgstr ""
+"Để khởi chạy \"{}\" thực thi, hãy sử dụng lệnh:\n"
+"\n"
+"<tt>\"{}\"</tt>\n"
+"\n"
+"Để mở tệp \"{}\" bằng ứng dụng mặc định, hãy sử dụng:\n"
+"\n"
+"<tt>{} \"{}\"</tt>\n"
+"\n"
+"Nếu đường dẫn chứa khoảng trắng, hãy đảm bảo bọc nó trong dấu ngoặc kép!"
 
 #: cartridges/details_dialog.py:179 cartridges/details_dialog.py:185
 msgid "Couldn't Add Game"
-msgstr ""
+msgstr "Không thể thêm game"
 
 #: cartridges/details_dialog.py:179 cartridges/details_dialog.py:221
 msgid "Game title cannot be empty."
-msgstr ""
+msgstr "Tiêu đề game không được để trống."
 
 #: cartridges/details_dialog.py:185 cartridges/details_dialog.py:229
 msgid "Executable cannot be empty."
-msgstr ""
+msgstr "Không thể để trống tệp thực thi."
 
 #: cartridges/details_dialog.py:220 cartridges/details_dialog.py:228
 msgid "Couldn't Apply Preferences"
-msgstr ""
+msgstr "Không thể áp dụng tùy chọn"
 
 #. The variable is the title of the game
 #: cartridges/game.py:139
 msgid "{} hidden"
-msgstr ""
+msgstr "{} bị ẩn"
 
 #: cartridges/game.py:139
 msgid "{} unhidden"
-msgstr ""
+msgstr "{} được hiển thị"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
 msgid "{} removed"
-msgstr ""
+msgstr "{} đã bị xóa"
 
 #: cartridges/preferences.py:136
 msgid "All games removed"
-msgstr ""
+msgstr "Đã xóa tất cả game"
 
 #: cartridges/preferences.py:188
 msgid ""
 "An API key is required to use SteamGridDB. You can generate one {}here{}."
 msgstr ""
+"Cần có khóa API để sử dụng SteamGridDB. Bạn có thể tạo một tài khoản {}tại "
+"đây{}."
 
 #: cartridges/preferences.py:203
 msgid "Downloading covers…"
-msgstr ""
+msgstr "Đang tải xuống bìa…"
 
 #: cartridges/preferences.py:222
 msgid "Covers updated"
-msgstr ""
+msgstr "Đã cập nhật bìa"
 
 #: cartridges/preferences.py:370
 msgid "Installation Not Found"
-msgstr ""
+msgstr "Không tìm thấy cài đặt"
 
 #: cartridges/preferences.py:371
 msgid "Select a valid directory"
-msgstr ""
+msgstr "Chọn một thư mục hợp lệ"
 
 #: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
-msgstr ""
+msgstr "Cảnh báo"
 
 #: cartridges/preferences.py:441
 msgid "Invalid Directory"
-msgstr ""
+msgstr "Thư mục không hợp lệ"
 
 #: cartridges/preferences.py:447
 msgid "Set Location"
-msgstr ""
+msgstr "Đặt vị trí"
 
 #: cartridges/utils/create_dialog.py:33 cartridges/importer/importer.py:318
 msgid "Dismiss"
-msgstr ""
+msgstr "Loại bỏ"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "Hôm nay"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "Hôm qua"
 
 #: cartridges/utils/relative_date.py:36
 msgid "Last Week"
-msgstr ""
+msgstr "Tuần trước"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "Tháng này"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "Tháng trước"
 
 #: cartridges/utils/relative_date.py:44
 msgid "Last Year"
-msgstr ""
+msgstr "Năm ngoái"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
-msgstr ""
+msgstr "Đang nhập game…"
 
 #: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
-msgstr ""
+msgstr "Đã xảy ra các lỗi sau trong quá trình nhập:"
 
 #: cartridges/importer/importer.py:366
 msgid "No new games found"
-msgstr ""
+msgstr "Không tìm thấy game mới nào"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
 msgid "{} game imported"
 msgid_plural "{} games imported"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} game được nhập"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] ", {} bị xoá"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
 msgid "Select the {} cache directory."
-msgstr ""
+msgstr "Chọn thư mục bộ đệm {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:36
 msgid "Select the {} configuration directory."
-msgstr ""
+msgstr "Chọn thư mục cấu hình {}."
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:38
 msgid "Select the {} data directory."
-msgstr ""
+msgstr "Chọn thư mục dữ liệu {}."
 
 #: cartridges/importer/retroarch_source.py:129
 msgid "No RetroArch Core Selected"
-msgstr ""
+msgstr "Không có RetroArch Core nào được chọn"
 
 #. The variable is a newline separated list of playlists
 #: cartridges/importer/retroarch_source.py:131
 msgid "The following playlists have no default core:"
-msgstr ""
+msgstr "Các danh sách phát sau không có lõi mặc định:"
 
 #: cartridges/importer/retroarch_source.py:133
 msgid "Games with no core selected were not imported"
-msgstr ""
+msgstr "Các game không có lõi được chọn sẽ không được nhập"
 
 #: cartridges/store/managers/sgdb_manager.py:46
 msgid "Couldn't Authenticate SteamGridDB"
-msgstr ""
+msgstr "Không thể xác thực SteamGridDB"
 
 #: cartridges/store/managers/sgdb_manager.py:47
 msgid "Verify your API key in preferences"
-msgstr ""
+msgstr "Xác minh khóa API của bạn trong tùy chọn"
