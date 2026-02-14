@@ -86,14 +86,8 @@ class Window(Adw.ApplicationWindow):
         STATE_SETTINGS.bind("is-maximized", self, "maximized", flags)
         STATE_SETTINGS.bind("show-sidebar", self.split_view, "show-sidebar", flags)
 
-        self.sources.bind_model(
-            sources.model,
-            lambda source: SourceSidebarItem(source),
-        )
-        self.collections.bind_model(
-            collections.model,
-            lambda collection: CollectionSidebarItem(collection),
-        )
+        self.sources.bind_model(sources.model, SourceSidebarItem)
+        self.collections.bind_model(collections.model, CollectionSidebarItem)
 
         self.add_action(STATE_SETTINGS.create_action("show-sidebar"))
         self.add_action(STATE_SETTINGS.create_action("sort-mode"))
@@ -134,7 +128,7 @@ class Window(Adw.ApplicationWindow):
         if undo:
             toast.props.button_label = _("Undo")
             toast.props.priority = Adw.ToastPriority.HIGH
-            toast.connect("button-clicked", lambda toast: self._undo(toast))
+            toast.connect("button-clicked", self._undo)
             self._history[toast] = undo
 
         self.toast_overlay.add_toast(toast)
