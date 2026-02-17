@@ -17,7 +17,7 @@ GObject.SignalGroup collection_signals {
 }
 
 template $CollectionDetails: Adw.Dialog {
-  title: bind $either(template.collection as <$Collection>.name, _("New Collection")) as <string>;
+  title: bind $either(template.collection as <$Collection>.name, _("New Collection"));
   content-width: 360;
   default-widget: apply_button;
   focus-widget: name_entry;
@@ -46,7 +46,7 @@ template $CollectionDetails: Adw.Dialog {
       Button apply_button {
         action-name: "details.apply";
         icon-name: "apply-symbolic";
-        tooltip-text: bind $if_else(template.collection-in-model, _("Apply"), _("Add")) as <string>;
+        tooltip-text: bind $if_else(template.collection-in-model, _("Apply"), _("Add"));
 
         styles [
           "suggested-action",

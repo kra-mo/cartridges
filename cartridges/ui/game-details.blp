@@ -1,5 +1,4 @@
 using Gtk 4.0;
-using Gdk 4.0;
 using Adw 1;
 using GObject 2.0;
 
@@ -26,7 +25,7 @@ GObject.SignalGroup game_signals {
 template $GameDetails: Adw.NavigationPage {
   name: "details";
   tag: "details";
-  title: bind $either(template.game as <$Game>.name, _("Add Game")) as <string>;
+  title: bind $either(template.game as <$Game>.name, _("Add Game"));
   hidden => $_cancel();
 
   ShortcutController {
@@ -69,7 +68,7 @@ template $GameDetails: Adw.NavigationPage {
     child: Overlay {
       child: Picture {
         name: "background";
-        paintable: bind $_downscale_image(template.game as <$Game>.cover) as <Gdk.Paintable>;
+        paintable: bind $_downscale_image(template.game as <$Game>.cover);
         content-fit: cover;
       };
 
@@ -122,7 +121,7 @@ template $GameDetails: Adw.NavigationPage {
 
                   Label developer_label {
                     label: bind template.game as <$Game>.developer;
-                    visible: bind $boolean(template.game as <$Game>.developer) as <bool>;
+                    visible: bind $boolean(template.game as <$Game>.developer);
                     halign: start;
                     max-width-chars: 36;
                     wrap: true;
@@ -143,7 +142,7 @@ template $GameDetails: Adw.NavigationPage {
                       label: bind $format_string(
                         _("Last played: {}"),
                         $_relative_date(template.game as <$Game>.last-played) as <string>
-                      ) as <string>;
+                      );
                       halign: start;
                       wrap: true;
                       wrap-mode: word_char;
@@ -153,7 +152,7 @@ template $GameDetails: Adw.NavigationPage {
                       label: bind $format_string(
                         _("Added: {}"),
                         $_relative_date(template.game as <$Game>.added) as <string>
-                      ) as <string>;
+                      );
                       halign: start;
                       wrap: true;
                       wrap-mode: word_char;
@@ -369,7 +368,7 @@ template $GameDetails: Adw.NavigationPage {
                               _(
                                 "To launch the executable \"{}\", use the command:\n\n<tt>\"{}\"</tt>\n\nTo open the file \"{}\" with the default application, use:\n\n<tt>{} \"{}\"</tt>\n\nIf the path contains spaces, make sure to wrap it in double quotes!"
                               )
-                            ) as <string>;
+                            );
                             use-markup: true;
                             wrap: true;
                             wrap-mode: word_char;
@@ -406,7 +405,7 @@ template $GameDetails: Adw.NavigationPage {
 
                     Button apply_button {
                       action-name: "details.apply";
-                      label: bind $if_else(template.game as <$Game>.added, _("Apply"), _("Add")) as <string>;
+                      label: bind $if_else(template.game as <$Game>.added, _("Apply"), _("Add"));
 
                       styles [
                         "pill",

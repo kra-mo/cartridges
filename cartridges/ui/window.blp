@@ -25,17 +25,17 @@ template $Window: Adw.ApplicationWindow {
 
   ShortcutController {
     Shortcut {
-      trigger: bind $shortcut("<Control>f") as <ShortcutTrigger>;
+      trigger: bind $shortcut("<Control>f");
       action: "action(win.search)";
     }
 
     Shortcut {
-      trigger: bind $shortcut("<Control>h", "<Meta><Shift>h") as <ShortcutTrigger>;
+      trigger: bind $shortcut("<Control>h", "<Meta><Shift>h");
       action: "action(win.show-hidden)";
     }
 
     Shortcut {
-      trigger: bind $shortcut("<Control>z") as <ShortcutTrigger>;
+      trigger: bind $shortcut("<Control>z");
       action: "action(win.undo)";
     }
 
@@ -45,17 +45,17 @@ template $Window: Adw.ApplicationWindow {
     }
 
     Shortcut {
-      trigger: bind $shortcut("<Control>w") as <ShortcutTrigger>;
+      trigger: bind $shortcut("<Control>w");
       action: "action(window.close)";
     }
 
     Shortcut {
-      trigger: bind $shortcut("<Control>n") as <ShortcutTrigger>;
+      trigger: bind $shortcut("<Control>n");
       action: "action(game.add)";
     }
 
     Shortcut {
-      trigger: bind $shortcut("<Control><Shift>n") as <ShortcutTrigger>;
+      trigger: bind $shortcut("<Control><Shift>n");
       action: "action(collection.add)";
     }
   }
@@ -88,7 +88,7 @@ template $Window: Adw.ApplicationWindow {
           child: Adw.ToolbarView {
             [top]
             Adw.HeaderBar {
-              show-title: bind $_show_sidebar_title(template.settings as <Settings>.gtk-decoration-layout) as <bool>;
+              show-title: bind $_show_sidebar_title(template.settings as <Settings>.gtk-decoration-layout);
 
               [start]
               Button {
@@ -246,7 +246,7 @@ template $Window: Adw.ApplicationWindow {
                       $if_else(template.show-hidden, "empty-hidden", "empty") as <string>
                     ) as <string>
                   ) as <string>
-                ) as <string>;
+                );
 
                 Adw.ViewStackPage {
                   name: "grid";
@@ -327,10 +327,7 @@ template $Window: Adw.ApplicationWindow {
 
                   child: Adw.StatusPage {
                     icon-name: bind template.collection as <$Collection>.icon-name;
-                    title: bind $format_string(
-                      _("No Games in {}"),
-                      template.collection as <$Collection>.name,
-                    ) as <string>;
+                    title: bind $format_string(_("No Games in {}"), template.collection as <$Collection>.name);
                   };
                 }
 
