@@ -38,7 +38,6 @@ class GameDetails(Adw.NavigationPage):
     game = GObject.Property(type=Game)
 
     boolean = closures.boolean
-    either = closures.either
     format_string = closures.format_string
     if_else = closures.if_else
 
@@ -53,7 +52,7 @@ class GameDetails(Adw.NavigationPage):
             (
                 "search-on",
                 lambda _action, param, *_: Gio.AppInfo.launch_default_for_uri(
-                    param.get_string().format(quote(self.game.name))
+                    param.get_string().format(quote(cast(Game, self.game).name))
                 ),
                 "s",
             ),
@@ -77,6 +76,11 @@ class GameDetails(Adw.NavigationPage):
                 after=False,
             )
 
+    def add(self):
+        """Add a new game."""
+        self.game = None
+        self.edit()
+
     def edit(self):
         """Enter edit mode."""
         self.stack.props.visible_child_name = "edit"
@@ -84,6 +88,7 @@ class GameDetails(Adw.NavigationPage):
 
     def _apply(self):
         self.game_editable.apply()
+        self.game = self.game_editable.game
         self.stack.props.visible_child_name = "details"
 
     @Gtk.Template.Callback()
@@ -92,7 +97,7 @@ class GameDetails(Adw.NavigationPage):
 
     @Gtk.Template.Callback()
     def _cancel(self, *_args):
-        if self.stack.props.visible_child_name == "details" or not self.game.added:
+        if self.stack.props.visible_child_name == "details" or not self.game:
             self.activate_action("navigation.pop")
 
         self.stack.props.visible_child_name = "details"

@@ -3,6 +3,7 @@
 
 import itertools
 import json
+import time
 from collections.abc import Generator
 from gettext import gettext as _
 from json import JSONDecodeError
@@ -46,7 +47,7 @@ def new() -> Game:
     """Create a new game for the user to manually set its properties."""
     numbers = {int(p.stem.rsplit("_", 1)[1]) for p in get_paths()}
     number = next(i for i in itertools.count() if i not in numbers)
-    return Game(game_id=f"{ID}_{number}", source=ID)
+    return Game(game_id=f"{ID}_{number}", source=ID, added=int(time.time()))
 
 
 def get_paths() -> Generator[Path]:

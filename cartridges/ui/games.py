@@ -4,7 +4,6 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 import locale
-import time
 from gettext import gettext as _
 from typing import TYPE_CHECKING, Any, cast
 
@@ -31,17 +30,7 @@ class GameActions(Gio.SimpleActionGroup):
 
     __gtype_name__ = __qualname__
 
-    _game: Game | None = None
-
-    @GObject.Property(type=Game)
-    def game(self) -> Game | None:
-        """The game `self` provides actions for."""
-        return self._game
-
-    @game.setter
-    def game(self, game: Game | None):
-        self._game = game
-        self._update_action_states()
+    game = GObject.Property(type=Game)
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -55,43 +44,33 @@ class GameActions(Gio.SimpleActionGroup):
             ("remove", lambda *_: remove(self.game)),
         ))
 
-        for name in "edit", "play":
-            self.bind_property(
-                "game",
-                cast(Gio.SimpleAction, self.lookup_action(name)),
-                "enabled",
-                GObject.BindingFlags.SYNC_CREATE,
-                transform_to=lambda _, game: bool(game),
-            )
+        game = Gtk.PropertyExpression.new(GameActions, None, "game")
+        has_game = Gtk.ClosureExpression.new(bool, self._bool, (game,))
+        hidden = Gtk.PropertyExpression.new(Game, game, "hidden")
+        not_hidden = Gtk.ClosureExpression.new(bool, self._invert, (hidden,))
+        removed = Gtk.PropertyExpression.new(Game, game, "removed")
+        not_removed = Gtk.ClosureExpression.new(bool, self._invert, (removed,))
+        false = Gtk.ConstantExpression.new_for_value(False)
 
-        self._game_bindings = GObject.BindingGroup()
-        self._game_bindings.bind(
-            "hidden",
-            cast(Gio.SimpleAction, self.lookup_action("hide")),
-            "enabled",
-            GObject.BindingFlags.INVERT_BOOLEAN,
-        )
-        self._game_bindings.bind(
-            "hidden",
-            cast(Gio.SimpleAction, self.lookup_action("unhide")),
-            "enabled",
-            GObject.BindingFlags.DEFAULT,
-        )
-        self._game_bindings.bind(
-            "removed",
-            cast(Gio.SimpleAction, self.lookup_action("remove")),
-            "enabled",
-            GObject.BindingFlags.INVERT_BOOLEAN,
-        )
-        self.bind_property("game", self._game_bindings, "source")
+        edit_action = cast(Gio.SimpleAction, self.lookup_action("edit"))
+        play_action = cast(Gio.SimpleAction, self.lookup_action("play"))
+        hide_action = cast(Gio.SimpleAction, self.lookup_action("hide"))
+        unhide_action = cast(Gio.SimpleAction, self.lookup_action("unhide"))
+        remove_action = cast(Gio.SimpleAction, self.lookup_action("remove"))
 
-        self._update_action_states()
+        has_game.bind(edit_action, "enabled", self)
+        has_game.bind(play_action, "enabled", self)
+        Gtk.TryExpression.new((hidden, false)).bind(unhide_action, "enabled", self)
+        Gtk.TryExpression.new((not_hidden, false)).bind(hide_action, "enabled", self)
+        Gtk.TryExpression.new((not_removed, false)).bind(remove_action, "enabled", self)
 
-    def _update_action_states(self):
-        if not self.game:
-            for name in "hide", "unhide", "remove":
-                action = cast(Gio.SimpleAction, self.lookup_action(name))
-                action.props.enabled = False
+    @staticmethod
+    def _bool(_obj, value: object) -> bool:
+        return bool(value)
+
+    @staticmethod
+    def _invert(_obj, value: bool) -> bool:
+        return not value
 
 
 class GameEditable(GObject.Object):
@@ -110,42 +89,37 @@ class GameEditable(GObject.Object):
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
-        Gtk.ClosureExpression.new(
-            bool,
-            lambda _, *values: all(values),
-            (
-                Gtk.PropertyExpression.new(GameEditable, None, "game"),
-                Gtk.PropertyExpression.new(GameEditable, None, "executable"),
-                Gtk.PropertyExpression.new(GameEditable, None, "name"),
-            ),
-        ).bind(self, "valid", self)
+        executable = Gtk.PropertyExpression.new(GameEditable, None, "executable")
+        name = Gtk.PropertyExpression.new(GameEditable, None, "name")
+        valid = Gtk.ClosureExpression.new(bool, self._all, (executable, name))
+        valid.bind(self, "valid", self)
 
     def apply(self):
         """Apply the changes."""
         if not self.valid:
             return
 
+        if not self.game:
+            self.game = imported.new()
+            sources.get(imported.ID).append(self.game)
+
         self.game.executable = self.executable
         if self.game.name != self.name:
             self.game.name = self.name
-            if self.game.added:
-                sorter.changed(Gtk.SorterChange.DIFFERENT)
+            sorter.changed(Gtk.SorterChange.DIFFERENT)
         self.game.developer = self.developer
 
-        if not self.game.added:
-            self.game.added = int(time.time())
-            sources.get(imported.ID).append(self.game)
+    @staticmethod
+    def _all(_, *values: object) -> bool:
+        return all(values)
 
 
 def add():
     """Add a new game."""
     window = _window()
-    window.details.game = imported.new()
-
     if window.navigation_view.props.visible_page_tag != "details":
         window.navigation_view.push_by_tag("details")
-
-    window.details.edit()
+    window.details.add()
 
 
 def edit(game: Game):

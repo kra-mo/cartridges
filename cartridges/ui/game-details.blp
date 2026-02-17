@@ -1,4 +1,5 @@
 using Gtk 4.0;
+using Gdk 4.0;
 using Adw 1;
 using GObject 2.0;
 
@@ -25,7 +26,7 @@ GObject.SignalGroup game_signals {
 template $GameDetails: Adw.NavigationPage {
   name: "details";
   tag: "details";
-  title: bind $either(template.game as <$Game>.name, _("Add Game"));
+  title: bind try { template.game as <$Game>.name, _("Add Game") };
   hidden => $_cancel();
 
   ShortcutController {
@@ -68,7 +69,7 @@ template $GameDetails: Adw.NavigationPage {
     child: Overlay {
       child: Picture {
         name: "background";
-        paintable: bind $_downscale_image(template.game as <$Game>.cover);
+        paintable: bind try { $_downscale_image(template.game as <$Game>.cover), null };
         content-fit: cover;
       };
 
@@ -92,7 +93,7 @@ template $GameDetails: Adw.NavigationPage {
             spacing: 36;
 
             $Cover {
-              paintable: bind template.game as <$Game>.cover;
+              paintable: bind try { template.game as <$Game>.cover, null } as <Gdk.Paintable>;
             }
 
             Adw.ViewStack stack {
@@ -339,13 +340,13 @@ template $GameDetails: Adw.NavigationPage {
                   Adw.PreferencesGroup {
                     Adw.EntryRow name_entry {
                       title: _("Title");
-                      text: bind template.game as <$Game>.name;
+                      text: bind try { template.game as <$Game>.name, "" };
                       entry-activated => $_activate_apply();
                     }
 
                     Adw.EntryRow developer_entry {
                       title: _("Developer (optional)");
-                      text: bind template.game as <$Game>.developer;
+                      text: bind try { template.game as <$Game>.developer, "" };
                       entry-activated => $_activate_apply();
                     }
                   }
@@ -353,7 +354,7 @@ template $GameDetails: Adw.NavigationPage {
                   Adw.PreferencesGroup {
                     Adw.EntryRow executable_entry {
                       title: _("Executable");
-                      text: bind template.game as <$Game>.executable;
+                      text: bind try { template.game as <$Game>.executable, "" };
                       entry-activated => $_activate_apply();
 
                       [suffix]
@@ -405,7 +406,7 @@ template $GameDetails: Adw.NavigationPage {
 
                     Button apply_button {
                       action-name: "details.apply";
-                      label: bind $if_else(template.game as <$Game>.added, _("Apply"), _("Add"));
+                      label: bind $if_else(template.game, _("Apply"), _("Add"));
 
                       styles [
                         "pill",
