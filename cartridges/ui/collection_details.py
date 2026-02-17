@@ -6,9 +6,9 @@ from typing import Any, cast
 
 from gi.repository import Adw, Gio, GObject, Gtk
 
-from cartridges import collections
 from cartridges.collections import ICONS, Collection
 from cartridges.config import PREFIX
+from cartridges.games import Game
 
 from . import closures
 from .collections import CollectionActions, CollectionEditable
@@ -29,33 +29,28 @@ class CollectionDetails(Adw.Dialog):
     collection_editable: CollectionEditable = Gtk.Template.Child()
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
 
-    either = closures.either
+    game = GObject.Property(type=Game)
+
     if_else = closures.if_else
 
     @GObject.Property(type=Collection)
-    def collection(self) -> Collection:
+    def collection(self) -> Collection | None:
         """The collection that `self` represents."""
         return self._collection
 
     @collection.setter
-    def collection(self, collection: Collection):
+    def collection(self, collection: Collection | None):
         self._collection = collection
 
-        for index, icon in enumerate(icon.name for icon in ICONS):
-            if icon == collection.icon:
-                button = cast(
-                    Gtk.ToggleButton,
-                    self.icons_grid.get_child_at(*reversed(divmod(index, _COLUMNS))),
-                )
-                button.props.active = True
-                break
+        row, column = 0, 0
+        if collection:
+            for index, icon in enumerate(icon.name for icon in ICONS):
+                if icon == collection.icon:
+                    row, column = divmod(index, _COLUMNS)
+                    break
 
-        self.notify("collection-in-model")
-
-    @GObject.Property(type=bool, default=False)
-    def collection_in_model(self) -> bool:
-        """Whether the collection is in the collections model."""
-        return self.collection in collections.model
+        button = cast(Gtk.ToggleButton, self.icons_grid.get_child_at(column, row))
+        button.props.active = True
 
     def __init__(self, collection: Collection | None = None, **kwargs: Any):
         super().__init__(**kwargs)
@@ -107,12 +102,7 @@ class CollectionDetails(Adw.Dialog):
 
             self.icons_grid.attach(button, col, row, 1, 1)
 
-        self.collection = collection or Collection()
-
-        collections.model.connect(
-            "items-changed",
-            lambda *_: self.notify("collection-in-model"),
-        )
+        self.collection = collection
 
     def _apply(self):
         self.collection_editable.apply()

@@ -20,55 +20,37 @@ class CollectionActions(Gio.SimpleActionGroup):
 
     __gtype_name__ = __qualname__
 
+    collection = GObject.Property(type=Collection)
     game = GObject.Property(type=Game)
-
-    _collection: Collection | None = None
-
-    @GObject.Property(type=Collection)
-    def collection(self) -> Collection | None:
-        """The collection `self` provides actions for."""
-        return self._collection
-
-    @collection.setter
-    def collection(self, collection: Collection | None):
-        self._collection = collection
-        self._update_remove()
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
         self.add_action_entries((
-            ("add", lambda *_: add(self.game.game_id if self.game else None)),
+            ("add", lambda *_: add(self.game)),
             ("edit", lambda *_: edit(self.collection)),
             ("remove", lambda *_: remove(self.collection)),
         ))
 
-        self.bind_property(
-            "collection",
-            cast(Gio.SimpleAction, self.lookup_action("edit")),
-            "enabled",
-            GObject.BindingFlags.SYNC_CREATE,
-            transform_to=lambda _, collection: bool(collection),
-        )
+        collection = Gtk.PropertyExpression.new(CollectionActions, None, "collection")
+        has_collection = Gtk.ClosureExpression.new(bool, self._bool, (collection,))
+        removed = Gtk.PropertyExpression.new(Collection, collection, "removed")
+        not_removed = Gtk.ClosureExpression.new(bool, self._invert, (removed,))
+        false = Gtk.ConstantExpression.new_for_value(False)
 
-        self._collection_signals = GObject.SignalGroup(target_type=Collection)
-        self._collection_signals.connect_closure(
-            "notify::removed",
-            lambda *_: self._update_remove(),
-            after=False,
-        )
-        self.bind_property("collection", self._collection_signals, "target")
+        edit_action = cast(Gio.SimpleAction, self.lookup_action("edit"))
+        remove_action = cast(Gio.SimpleAction, self.lookup_action("remove"))
 
-        collections.model.connect("items-changed", lambda *_: self._update_remove())
-        self._update_remove()
+        has_collection.bind(edit_action, "enabled", self)
+        Gtk.TryExpression.new((not_removed, false)).bind(remove_action, "enabled", self)
 
-    def _update_remove(self):
-        action = cast(Gio.SimpleAction, self.lookup_action("remove"))
-        action.props.enabled = (
-            self.collection
-            and self.collection in collections.model
-            and not self.collection.removed
-        )
+    @staticmethod
+    def _bool(_, value: object) -> bool:
+        return bool(value)
+
+    @staticmethod
+    def _invert(_, value: object) -> bool:
+        return not value
 
 
 class CollectionEditable(GObject.Object):
@@ -77,6 +59,7 @@ class CollectionEditable(GObject.Object):
     __gtype_name__ = __qualname__
 
     collection = GObject.Property(type=Collection)
+    game = GObject.Property(type=Game)
 
     valid = GObject.Property(type=bool, default=False)
 
@@ -86,31 +69,31 @@ class CollectionEditable(GObject.Object):
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
 
-        Gtk.ClosureExpression.new(
-            bool,
-            lambda _, *values: all(values),
-            (
-                Gtk.PropertyExpression.new(CollectionEditable, None, "collection"),
-                Gtk.PropertyExpression.new(CollectionEditable, None, "name"),
-                Gtk.PropertyExpression.new(CollectionEditable, None, "icon"),
-            ),
-        ).bind(self, "valid", self)
+        name = Gtk.PropertyExpression.new(CollectionEditable, None, "name")
+        icon = Gtk.PropertyExpression.new(CollectionEditable, None, "icon")
+        valid = Gtk.ClosureExpression.new(bool, self._all, (name, icon))
+        valid.bind(self, "valid", self)
 
     def apply(self):
         """Apply the changes."""
         if not self.valid:
             return
 
+        if not self.collection:
+            game_ids = (self.game.game_id,) if self.game else ()
+            self.collection = Collection(game_ids=game_ids)
+            collections.model.append(self.collection)
+
         if self.collection.name != self.name:
             self.collection.name = self.name
-            if self.collection in collections.model:
-                sorter.changed(Gtk.SorterChange.DIFFERENT)
+            sorter.changed(Gtk.SorterChange.DIFFERENT)
         self.collection.icon = self.icon
 
-        if self.collection in collections.model:
-            collections.save()
-        else:
-            collections.model.append(self.collection)
+        collections.save()
+
+    @staticmethod
+    def _all(_, *values: object) -> bool:
+        return all(values)
 
 
 class CollectionFilter(Gtk.Filter):
@@ -239,12 +222,11 @@ class CollectionsBox(Adw.Bin):
         self.box.remove_all()
 
 
-def add(game_id: str | None = None):
+def add(game: Game | None = None):
     """Add a new collection, optionally with `game_id`."""
     from .collection_details import CollectionDetails
 
-    collection = Collection(game_ids=(game_id,)) if game_id else None
-    details = CollectionDetails(collection)
+    details = CollectionDetails(game=game)
     details.present(_window())
 
 

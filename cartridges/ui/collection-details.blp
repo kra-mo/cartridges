@@ -8,6 +8,7 @@ $CollectionActions collection_actions {
 
 $CollectionEditable collection_editable {
   collection: bind template.collection;
+  game: bind template.game;
   name: bind name_entry.text;
 }
 
@@ -17,7 +18,7 @@ GObject.SignalGroup collection_signals {
 }
 
 template $CollectionDetails: Adw.Dialog {
-  title: bind $either(template.collection as <$Collection>.name, _("New Collection"));
+  title: bind try { template.collection as <$Collection>.name, _("New Collection") };
   content-width: 360;
   default-widget: apply_button;
   focus-widget: name_entry;
@@ -46,7 +47,7 @@ template $CollectionDetails: Adw.Dialog {
       Button apply_button {
         action-name: "details.apply";
         icon-name: "apply-symbolic";
-        tooltip-text: bind $if_else(template.collection-in-model, _("Apply"), _("Add"));
+        tooltip-text: bind $if_else(template.collection, _("Apply"), _("Add"));
 
         styles [
           "suggested-action",
@@ -58,7 +59,7 @@ template $CollectionDetails: Adw.Dialog {
       Adw.PreferencesGroup {
         Adw.EntryRow name_entry {
           title: _("Name");
-          text: bind template.collection as <$Collection>.name;
+          text: bind try { template.collection as <$Collection>.name, "" };
           activates-default: true;
         }
       }

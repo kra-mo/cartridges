@@ -24,12 +24,6 @@ def boolean(value: object) -> bool:
 
 
 @_closure
-def either[T](first: T, second: T) -> T:
-    """Return `first` or `second`."""
-    return first or second
-
-
-@_closure
 def format_string(string: str, *args: Any) -> str:
     """Format `string` with `args`."""
     return string.format(*args)
