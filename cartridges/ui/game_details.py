@@ -26,7 +26,6 @@ class GameDetails(Adw.NavigationPage):
 
     __gtype_name__ = __qualname__
 
-    stack: Adw.ViewStack = Gtk.Template.Child()
     collections_box: CollectionsBox = Gtk.Template.Child()
     name_entry: Adw.EntryRow = Gtk.Template.Child()
 
@@ -36,6 +35,7 @@ class GameDetails(Adw.NavigationPage):
     game_signals: GObject.SignalGroup = Gtk.Template.Child()
 
     game = GObject.Property(type=Game)
+    editing = GObject.Property(type=bool, default=False)
 
     boolean = closures.boolean
     format_string = closures.format_string
@@ -83,13 +83,13 @@ class GameDetails(Adw.NavigationPage):
 
     def edit(self):
         """Enter edit mode."""
-        self.stack.props.visible_child_name = "edit"
+        self.editing = True
         self.name_entry.grab_focus()
 
     def _apply(self):
         self.game_editable.apply()
         self.game = self.game_editable.game
-        self.stack.props.visible_child_name = "details"
+        self.editing = False
 
     @Gtk.Template.Callback()
     def _activate_apply(self, _entry):
@@ -97,10 +97,9 @@ class GameDetails(Adw.NavigationPage):
 
     @Gtk.Template.Callback()
     def _cancel(self, *_args):
-        if self.stack.props.visible_child_name == "details" or not self.game:
+        if not (self.editing and self.game):
             self.activate_action("navigation.pop")
-
-        self.stack.props.visible_child_name = "details"
+        self.editing = False
 
     @Gtk.Template.Callback()
     def _setup_collections(self, button: Gtk.MenuButton, *_args):

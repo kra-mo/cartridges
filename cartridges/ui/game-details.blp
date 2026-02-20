@@ -99,6 +99,7 @@ template $GameDetails: Adw.NavigationPage {
             Adw.ViewStack stack {
               vhomogeneous: false;
               enable-transitions: true;
+              visible-child-name: bind $if_else(template.editing, "edit", "details");
 
               Adw.ViewStackPage {
                 name: "details";

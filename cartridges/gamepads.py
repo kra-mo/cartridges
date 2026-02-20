@@ -128,7 +128,7 @@ class Gamepad(GObject.Object):
 
     def _on_return_button_pressed(self):
         if self.window.navigation_view.props.visible_page_tag == "details":
-            if self.window.details.stack.props.visible_child_name == "edit":
+            if self.window.details.editing:
                 self.window.details.activate_action("details.cancel")
                 return
 
@@ -238,7 +238,7 @@ class Gamepad(GObject.Object):
             return
 
         if self.window.navigation_view.props.visible_page_tag == "details":
-            if self.window.details.stack.props.visible_child_name == "details":
+            if not self.window.details.editing:
                 self._navigate_action_buttons(direction)
                 return
 
@@ -285,7 +285,7 @@ class Gamepad(GObject.Object):
         if self.window.navigation_view.props.visible_page_tag != "details":
             return
 
-        if self.window.details.stack.props.visible_child_name == "details":
+        if not self.window.details.editing:
             self._navigate_action_buttons(direction)
             return
 
