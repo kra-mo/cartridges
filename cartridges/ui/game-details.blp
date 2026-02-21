@@ -69,7 +69,7 @@ template $GameDetails: Adw.NavigationPage {
     child: Overlay {
       child: Picture {
         name: "background";
-        paintable: bind try { $_downscale_image(template.game as <$Game>.cover), null };
+        paintable: bind try { $_downscale(template.game as <$Game>.cover), null };
         content-fit: cover;
       };
 
