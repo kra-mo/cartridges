@@ -19,6 +19,9 @@ class GameItem(Gtk.Box):
 
     __gtype_name__ = __qualname__
 
+    game = GObject.Property(type=Game)
+    position = GObject.Property(type=int)
+
     motion: template.Child[Gtk.EventControllerMotion]
     options: template.Child[Gtk.MenuButton]
     collections_box: template.Child[CollectionsBox]
@@ -26,9 +29,6 @@ class GameItem(Gtk.Box):
 
     game_actions: template.Child[GameActions]
     collection_actions: template.Child[CollectionActions]
-
-    game = GObject.Property(type=Game)
-    position = GObject.Property(type=int)
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)

@@ -22,13 +22,13 @@ class CollectionDetails(Adw.Dialog):
 
     __gtype_name__ = __qualname__
 
+    game = GObject.Property(type=Game)
+
     icons_grid: template.Child[Gtk.Grid]
 
     collection_actions: template.Child[CollectionActions]
     collection_editable: template.Child[CollectionEditable]
     collection_signals: template.Child[GObject.SignalGroup]
-
-    game = GObject.Property(type=Game)
 
     @GObject.Property(type=Collection)
     def collection(self) -> Collection | None:

@@ -36,6 +36,15 @@ class Window(Adw.ApplicationWindow):
 
     __gtype_name__ = __qualname__
 
+    menu_collection = GObject.Property(type=Collection)
+    collection = GObject.Property(type=Collection)
+    model = GObject.Property(type=Gio.ListModel)
+
+    search_text = GObject.Property(type=str)
+    show_hidden = GObject.Property(type=bool, default=False)
+
+    settings = GObject.Property(type=Gtk.Settings)
+
     split_view: template.Child[Adw.OverlaySplitView]
     sidebar: template.Child[Adw.Sidebar]
     sources: template.Child[Adw.SidebarSection]
@@ -56,15 +65,6 @@ class Window(Adw.ApplicationWindow):
     menu_collection_actions: template.Child[CollectionActions]
     collection_signals: template.Child[GObject.SignalGroup]
     model_signals: template.Child[GObject.SignalGroup]
-
-    menu_collection = GObject.Property(type=Collection)
-    collection = GObject.Property(type=Collection)
-    model = GObject.Property(type=Gio.ListModel)
-
-    search_text = GObject.Property(type=str)
-    show_hidden = GObject.Property(type=bool, default=False)
-
-    settings = GObject.Property(type=Gtk.Settings)
 
     _selected_sidebar_item = 0
 
