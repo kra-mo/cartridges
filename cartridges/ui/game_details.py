@@ -25,6 +25,9 @@ class GameDetails(Adw.NavigationPage):
 
     __gtype_name__ = __qualname__
 
+    game = GObject.Property(type=Game)
+    editing = GObject.Property(type=bool, default=False)
+
     collections_box: Child[CollectionsBox]
     name_entry: Child[Adw.EntryRow]
 
@@ -32,9 +35,6 @@ class GameDetails(Adw.NavigationPage):
     collection_actions: Child[CollectionActions]
     game_editable: Child[GameEditable]
     game_signals: Child[GObject.SignalGroup]
-
-    game = GObject.Property(type=Game)
-    editing = GObject.Property(type=bool, default=False)
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
