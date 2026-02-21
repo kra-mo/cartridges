@@ -7,31 +7,28 @@ from typing import Any, cast
 from gi.repository import Adw, Gio, GObject, Gtk
 
 from cartridges.collections import ICONS, Collection
-from cartridges.config import PREFIX
 from cartridges.games import Game
 
-from . import closures
 from .collections import CollectionActions, CollectionEditable
+from .template import Child, template
 
 _COLUMNS = len(ICONS) // 3
 _ROWS = len(ICONS) // _COLUMNS
 
 
-@Gtk.Template(resource_path=f"{PREFIX}/collection-details.ui")
+@template
 class CollectionDetails(Adw.Dialog):
     """The details of a category."""
 
     __gtype_name__ = __qualname__
 
-    icons_grid: Gtk.Grid = Gtk.Template.Child()
+    icons_grid: Child[Gtk.Grid]
 
-    collection_actions: CollectionActions = Gtk.Template.Child()
-    collection_editable: CollectionEditable = Gtk.Template.Child()
-    collection_signals: GObject.SignalGroup = Gtk.Template.Child()
+    collection_actions: Child[CollectionActions]
+    collection_editable: Child[CollectionEditable]
+    collection_signals: Child[GObject.SignalGroup]
 
     game = GObject.Property(type=Game)
-
-    if_else = closures.if_else
 
     @GObject.Property(type=Collection)
     def collection(self) -> Collection | None:

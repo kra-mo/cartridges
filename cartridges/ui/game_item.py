@@ -5,27 +5,27 @@ from typing import Any
 
 from gi.repository import GObject, Gtk
 
-from cartridges.config import PREFIX
 from cartridges.games import Game
 
 from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
 from .games import GameActions
+from .template import Child, template
 
 
-@Gtk.Template(resource_path=f"{PREFIX}/game-item.ui")
+@template
 class GameItem(Gtk.Box):
     """A game in the grid."""
 
     __gtype_name__ = __qualname__
 
-    motion: Gtk.EventControllerMotion = Gtk.Template.Child()
-    options: Gtk.MenuButton = Gtk.Template.Child()
-    collections_box: CollectionsBox = Gtk.Template.Child()
-    play: Gtk.Button = Gtk.Template.Child()
+    motion: Child[Gtk.EventControllerMotion]
+    options: Child[Gtk.MenuButton]
+    collections_box: Child[CollectionsBox]
+    play: Child[Gtk.Button]
 
-    game_actions: GameActions = Gtk.Template.Child()
-    collection_actions: CollectionActions = Gtk.Template.Child()
+    game_actions: Child[GameActions]
+    collection_actions: Child[CollectionActions]
 
     game = GObject.Property(type=Game)
     position = GObject.Property(type=int)
@@ -37,7 +37,6 @@ class GameItem(Gtk.Box):
         self.insert_action_group("collection", self.collection_actions)
         self._reveal_buttons()
 
-    @Gtk.Template.Callback()
     def _reveal_buttons(self, *_args):
         for widget, reveal in (
             (self.play, contains_pointer := self.motion.props.contains_pointer),
@@ -46,7 +45,6 @@ class GameItem(Gtk.Box):
             widget.props.can_focus = widget.props.can_target = reveal
             (widget.remove_css_class if reveal else widget.add_css_class)("hidden")
 
-    @Gtk.Template.Callback()
     def _setup_collections(self, button: Gtk.MenuButton, *_args):
         if button.props.active:
             self.collections_box.build()

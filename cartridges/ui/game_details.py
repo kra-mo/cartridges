@@ -11,35 +11,30 @@ from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
-from cartridges.config import PREFIX
 from cartridges.games import Game
 
-from . import closures
 from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
 from .games import GameActions, GameEditable
+from .template import Child, template
 
 
-@Gtk.Template(resource_path=f"{PREFIX}/game-details.ui")
+@template
 class GameDetails(Adw.NavigationPage):
     """The details of a game."""
 
     __gtype_name__ = __qualname__
 
-    collections_box: CollectionsBox = Gtk.Template.Child()
-    name_entry: Adw.EntryRow = Gtk.Template.Child()
+    collections_box: Child[CollectionsBox]
+    name_entry: Child[Adw.EntryRow]
 
-    game_actions: GameActions = Gtk.Template.Child()
-    collection_actions: CollectionActions = Gtk.Template.Child()
-    game_editable: GameEditable = Gtk.Template.Child()
-    game_signals: GObject.SignalGroup = Gtk.Template.Child()
+    game_actions: Child[GameActions]
+    collection_actions: Child[CollectionActions]
+    game_editable: Child[GameEditable]
+    game_signals: Child[GObject.SignalGroup]
 
     game = GObject.Property(type=Game)
     editing = GObject.Property(type=bool, default=False)
-
-    boolean = closures.boolean
-    format_string = closures.format_string
-    if_else = closures.if_else
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -91,24 +86,20 @@ class GameDetails(Adw.NavigationPage):
         self.game = self.game_editable.game
         self.editing = False
 
-    @Gtk.Template.Callback()
     def _activate_apply(self, _entry):
         self.activate_action("details.apply")
 
-    @Gtk.Template.Callback()
     def _cancel(self, *_args):
         if not (self.editing and self.game):
             self.activate_action("navigation.pop")
         self.editing = False
 
-    @Gtk.Template.Callback()
     def _setup_collections(self, button: Gtk.MenuButton, *_args):
         if button.props.active:
             self.collections_box.build()
         else:
             self.collections_box.finish()
 
-    @Gtk.Template.Callback()
     def _downscale_image(self, _obj, cover: Gdk.Paintable | None) -> Gdk.Texture | None:
         if cover and (renderer := cast(Gtk.Native, self.props.root).get_renderer()):
             cover.snapshot(snapshot := Gtk.Snapshot(), 3, 3)
@@ -117,7 +108,6 @@ class GameDetails(Adw.NavigationPage):
 
         return None
 
-    @Gtk.Template.Callback()
     def _relative_date(self, _obj, timestamp: int) -> str:
         date = datetime.fromtimestamp(timestamp, UTC)
         now = datetime.now(UTC)
@@ -143,7 +133,6 @@ class GameDetails(Adw.NavigationPage):
             else date.strftime("%Y")
         )
 
-    @Gtk.Template.Callback()
     def _format_more_info(self, _obj, label: str) -> str:
         executable = _("program")
         filename = _("file.txt")

@@ -1,15 +1,14 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025, 2026 kramo
 
-from gi.repository import Adw, Gdk, GObject, Gtk
+from gi.repository import Adw, Gdk, GObject
 
-from cartridges.config import PREFIX
 from cartridges.games import COVER_HEIGHT, COVER_WIDTH
 
-from . import closures
+from .template import template
 
 
-@Gtk.Template(resource_path=f"{PREFIX}/cover.ui")
+@template
 class Cover(Adw.Bin):
     """Displays a game's cover art."""
 
@@ -18,6 +17,3 @@ class Cover(Adw.Bin):
     paintable = GObject.Property(type=Gdk.Paintable)
     width = GObject.Property(type=int, default=COVER_WIDTH)
     height = GObject.Property(type=int, default=COVER_HEIGHT)
-
-    format_string = closures.format_string
-    if_else = closures.if_else
