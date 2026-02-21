@@ -100,7 +100,7 @@ class GameDetails(Adw.NavigationPage):
         else:
             self.collections_box.finish()
 
-    def _downscale_image(self, _obj, cover: Gdk.Paintable | None) -> Gdk.Texture | None:
+    def _downscale(self, _this, cover: Gdk.Paintable | None) -> Gdk.Texture | None:
         if cover and (renderer := cast(Gtk.Native, self.props.root).get_renderer()):
             cover.snapshot(snapshot := Gtk.Snapshot(), 3, 3)
             if node := snapshot.to_node():
@@ -108,7 +108,7 @@ class GameDetails(Adw.NavigationPage):
 
         return None
 
-    def _relative_date(self, _obj, timestamp: int) -> str:
+    def _relative_date(self, _this, timestamp: int) -> str:
         date = datetime.fromtimestamp(timestamp, UTC)
         now = datetime.now(UTC)
         return (
@@ -133,7 +133,7 @@ class GameDetails(Adw.NavigationPage):
             else date.strftime("%Y")
         )
 
-    def _format_more_info(self, _obj, label: str) -> str:
+    def _format_more_info(self, _this, label: str) -> str:
         executable = _("program")
         filename = _("file.txt")
         path = _("/path/to/{}")
