@@ -9,10 +9,10 @@ from gettext import gettext as _
 from json import JSONDecodeError
 from pathlib import Path
 from typing import cast
-from urllib.request import urlopen
 
-from gi.repository import Gdk, Gio, GLib
+from gi.repository import Gio
 
+from cartridges import cover
 from cartridges.games import Game
 
 from . import CONFIG
@@ -76,7 +76,4 @@ def _config_dir() -> Path:
 
 
 async def _update_cover(game: Game, url: str):
-    with await asyncio.to_thread(urlopen, url) as response:  # TODO: Rate limit?
-        contents = response.read()
-
-    game.cover = Gdk.Texture.new_from_bytes(GLib.Bytes.new(contents))
+    game.cover = await asyncio.to_thread(cover.at_url, url)

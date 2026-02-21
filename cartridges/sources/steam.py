@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2023 Geoffrey Coulaud
-# SPDX-FileCopyrightText: Copyright 2022-2025 kramo
+# SPDX-FileCopyrightText: Copyright 2022-2026 kramo
 
 import itertools
 import logging
@@ -14,8 +14,9 @@ from os import SEEK_CUR
 from pathlib import Path
 from typing import Any, BinaryIO, NamedTuple, Self, cast
 
-from gi.repository import Gdk, GLib
+from gi.repository import Gdk
 
+from cartridges import cover
 from cartridges.games import Game
 
 from . import APPLICATION_SUPPORT, DATA, FLATPAK, OPEN, PROGRAM_FILES_X86
@@ -215,15 +216,13 @@ def _read_string(fp: BinaryIO, *, wide: bool = False) -> str:
     return string.decode(encoding, "replace")
 
 
-def _find_cover(path: Path, capsule: str | None = None) -> Gdk.Texture | None:
+def _find_cover(path: Path, capsule: str | None = None) -> Gdk.Paintable | None:
     paths = [*itertools.chain.from_iterable(path.rglob(p) for p in _CAPSULE_NAMES)]
     if capsule:
         paths.insert(0, path / capsule)
 
-    for filename in map(str, paths):
-        try:
-            return Gdk.Texture.new_from_filename(filename)
-        except GLib.Error:
-            continue
+    for p in paths:
+        if c := cover.at_path(p):
+            return c
 
     return None

@@ -8,11 +8,11 @@ from collections.abc import Generator
 from gettext import gettext as _
 from pathlib import Path
 from typing import cast
-from urllib.request import urlopen
 
-from gi.repository import Gdk, Gio, GLib, Graphene, Gtk
+from gi.repository import Gio
 
-from cartridges.games import COVER_HEIGHT, COVER_WIDTH, Game
+from cartridges import cover
+from cartridges.games import Game
 
 from . import APPDATA, APPLICATION_SUPPORT, CONFIG, FLATPAK, OPEN
 
@@ -61,21 +61,4 @@ def _config_dir() -> Path:
 
 
 async def _update_cover(game: Game, url: str):
-    with await asyncio.to_thread(urlopen, url) as response:  # TODO: Rate limit?
-        contents = response.read()
-
-    game.cover = _pad_cover(Gdk.Texture.new_from_bytes(GLib.Bytes.new(contents)))
-
-
-def _pad_cover(cover: Gdk.Paintable) -> Gdk.Paintable | None:
-    if cover.props.height > cover.props.width:
-        w, h = cover.props.width * (COVER_HEIGHT / cover.props.height), COVER_HEIGHT
-        x, y = (COVER_WIDTH - w) / 2, 0
-    else:
-        h, w = cover.props.height * (COVER_WIDTH / cover.props.width), COVER_WIDTH
-        y, x = (COVER_HEIGHT - h) / 2, 0
-
-    snapshot = Gtk.Snapshot()
-    snapshot.translate(Graphene.Point().init(x, y))
-    cover.snapshot(snapshot, w, h)
-    return snapshot.to_paintable(Graphene.Size().init(COVER_WIDTH, COVER_HEIGHT))
+    game.cover = await asyncio.to_thread(cover.at_url, url)

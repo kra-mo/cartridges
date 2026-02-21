@@ -1,5 +1,6 @@
 cartridges/application.py
 cartridges/collections.py
+cartridges/cover.py
 cartridges/gamepads.py
 cartridges/games.py
 cartridges/sources/__init__.py

@@ -4,6 +4,7 @@ python.install_sources(
         '__main__.py',
         'application.py',
         'collections.py',
+        'cover.py',
         'gamepads.py',
         'games.py',
     ),

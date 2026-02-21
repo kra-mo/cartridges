@@ -26,7 +26,7 @@ template $Cover: Adw.Bin {
             paintable: bind template.paintable;
             width-request: bind template.width;
             height-request: bind template.height;
-            content-fit: cover;
+            content-fit: bind $_content_fit(template.paintable);
           };
         }
 

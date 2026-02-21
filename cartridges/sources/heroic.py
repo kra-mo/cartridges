@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2023 Geoffrey Coulaud
-# SPDX-FileCopyrightText: Copyright 2022-2025 kramo
+# SPDX-FileCopyrightText: Copyright 2022-2026 kramo
 
 import json
 from abc import ABC, abstractmethod
@@ -12,8 +12,7 @@ from json import JSONDecodeError
 from pathlib import Path
 from typing import Any, override
 
-from gi.repository import Gdk, GLib
-
+from cartridges import cover
 from cartridges.games import Game
 
 from . import APPDATA, APPLICATION_SUPPORT, CONFIG, FLATPAK, OPEN
@@ -162,11 +161,6 @@ def _games_from(source: type[_Source]) -> Generator[Game]:
             cover_uri = f"{entry.get('art_square', '')}{source.COVER_URI_PARAMS}"
             cover_path = images_cache / sha256(cover_uri.encode()).hexdigest()
 
-            try:
-                cover = Gdk.Texture.new_from_filename(str(cover_path))
-            except GLib.Error:
-                cover = None
-
             yield Game(
                 executable=f"{OPEN} heroic://launch/{entry['runner']}/{app_name}",
                 game_id=f"{source_id}_{app_name}",
@@ -174,5 +168,5 @@ def _games_from(source: type[_Source]) -> Generator[Game]:
                 hidden=app_name in hidden,
                 name=entry["title"],
                 developer=entry.get("developer"),
-                cover=cover,
+                cover=cover.at_path(cover_path),
             )

@@ -9,8 +9,7 @@ from gettext import gettext as _
 from json import JSONDecodeError
 from pathlib import Path
 
-from gi.repository import Gdk, GLib
-
+from cartridges import cover
 from cartridges.games import COVERS_DIR, GAMES_DIR, Game
 
 ID, NAME = "imported", _("Added")
@@ -30,16 +29,8 @@ def get_games() -> Generator[Game]:
         except TypeError:
             continue
 
-        cover_path = COVERS_DIR / game.game_id
-        for ext in "gif", "tiff":
-            filename = f"{cover_path}.{ext}"
-            try:
-                game.cover = Gdk.Texture.new_from_filename(filename)
-            except GLib.Error:
-                continue
-            else:
-                break
-
+        base = COVERS_DIR / game.game_id
+        game.cover = cover.at_path(f"{base}.gif") or cover.at_path(f"{base}.tiff")
         yield game
 
 
