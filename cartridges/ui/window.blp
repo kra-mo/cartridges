@@ -327,7 +327,7 @@ template $Window: Adw.ApplicationWindow {
 
                   child: Adw.StatusPage {
                     icon-name: bind template.collection as <$Collection>.icon-name;
-                    title: bind $format_string(_("No Games in {}"), template.collection as <$Collection>.name);
+                    title: bind $format(_("No Games in {}"), template.collection as <$Collection>.name);
                   };
                 }
 
