@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: Copyright 2025 kramo
+# SPDX-FileCopyrightText: Copyright 2025-2026 kramo
 
 import itertools
 import json
@@ -31,8 +31,8 @@ def get_games() -> Generator[Game]:
             continue
 
         cover_path = COVERS_DIR / game.game_id
-        for ext in ".gif", ".tiff":
-            filename = str(cover_path.with_suffix(ext))
+        for ext in "gif", "tiff":
+            filename = f"{cover_path}.{ext}"
             try:
                 game.cover = Gdk.Texture.new_from_filename(filename)
             except GLib.Error:

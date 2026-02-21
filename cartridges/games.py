@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Zoey Ahmed
-# SPDX-FileCopyrightText: Copyright 2025 kramo
+# SPDX-FileCopyrightText: Copyright 2025-2026 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 import json
@@ -106,7 +106,7 @@ class Game(Gio.SimpleActionGroup):
         properties = {prop.name: getattr(self, prop.name) for prop in PROPERTIES}
 
         GAMES_DIR.mkdir(parents=True, exist_ok=True)
-        path = (GAMES_DIR / self.game_id).with_suffix(".json")
+        path = Path(f"{GAMES_DIR / self.game_id}.json")
         with path.open("w", encoding="utf-8") as f:
             json.dump(properties, f, indent=4, sort_keys=True)
 
