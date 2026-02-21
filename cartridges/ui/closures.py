@@ -26,18 +26,15 @@ def _add[**P, R](func: Callable[P, R]) -> Callable[P, R]:
     return func
 
 
-@_add
-@closure
-def boolean(value: object) -> bool:
-    """Get a boolean for `value`."""
-    return bool(value)
+_add(closure(bool))
+_add(closure(str.format))
 
 
 @_add
 @closure
-def format_string(string: str, *args: Any) -> str:
-    """Format `string` with `args`."""
-    return string.format(*args)
+def every(*values: object) -> bool:
+    """Like `all`, but takes in `*values` instead of an iterable."""
+    return all(values)
 
 
 @_add

@@ -123,7 +123,7 @@ template $GameDetails: Adw.NavigationPage {
 
                   Label developer_label {
                     label: bind template.game as <$Game>.developer;
-                    visible: bind $boolean(template.game as <$Game>.developer);
+                    visible: bind $bool(template.game as <$Game>.developer);
                     halign: start;
                     max-width-chars: 36;
                     wrap: true;
@@ -141,7 +141,7 @@ template $GameDetails: Adw.NavigationPage {
                     spacing: 9;
 
                     Label last_played_label {
-                      label: bind $format_string(
+                      label: bind $format(
                         _("Last played: {}"),
                         $_relative_date(template.game as <$Game>.last-played) as <string>
                       );
@@ -151,10 +151,7 @@ template $GameDetails: Adw.NavigationPage {
                     }
 
                     Label added_label {
-                      label: bind $format_string(
-                        _("Added: {}"),
-                        $_relative_date(template.game as <$Game>.added) as <string>
-                      );
+                      label: bind $format(_("Added: {}"), $_relative_date(template.game as <$Game>.added) as <string>);
                       halign: start;
                       wrap: true;
                       wrap-mode: word_char;
