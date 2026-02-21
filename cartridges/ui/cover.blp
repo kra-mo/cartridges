@@ -1,55 +1,40 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $Cover: Adw.Bin {
-  child: Adw.Clamp {
-    orientation: vertical;
-    unit: px;
-    maximum-size: bind template.height;
-    tightening-threshold: bind template.height;
+template $Cover: Widget {
+  Adw.ViewStack {
+    name: "cover";
+    visible-child-name: bind $if_else(template.paintable, "cover", "icon");
+    overflow: hidden;
+    enable-transitions: true;
 
-    child: Adw.Clamp {
-      unit: px;
-      maximum-size: bind template.width;
-      tightening-threshold: bind template.width;
+    Adw.ViewStackPage {
+      name: "cover";
 
-      child: Adw.ViewStack {
-        name: "cover";
-        visible-child-name: bind $if_else(template.paintable, "cover", "icon");
-        overflow: hidden;
-        enable-transitions: true;
+      child: Picture {
+        paintable: bind template.paintable;
+        content-fit: bind $_content_fit(template.paintable);
+      };
+    }
 
-        Adw.ViewStackPage {
-          name: "cover";
+    Adw.ViewStackPage {
+      name: "icon";
 
-          child: Picture {
-            paintable: bind template.paintable;
-            width-request: bind template.width;
-            height-request: bind template.height;
-            content-fit: bind $_content_fit(template.paintable);
-          };
-        }
-
-        Adw.ViewStackPage {
-          name: "icon";
-
-          child: Image {
-            icon-name: bind $format_string(
-              "{}-symbolic",
-              template.root as <Window>.application as <Application>.application-id,
-            );
-            pixel-size: 96;
-
-            styles [
-              "dimmed",
-            ]
-          };
-        }
+      child: Image {
+        icon-name: bind $format_string(
+          "{}-symbolic",
+          template.root as <Window>.application as <Application>.application-id,
+        );
+        pixel-size: 96;
 
         styles [
-          "card",
+          "dimmed",
         ]
       };
-    };
-  };
+    }
+
+    styles [
+      "card",
+    ]
+  }
 }
