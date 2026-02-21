@@ -2,54 +2,44 @@ using Gtk 4.0;
 using Adw 1;
 
 template $Cover: Adw.Bin {
-  child: Adw.Clamp {
-    orientation: vertical;
-    unit: px;
-    maximum-size: bind template.height;
-    tightening-threshold: bind template.height;
+  layout-manager: $CoverLayoutManager {
+    width: bind template.width;
+    height: bind template.height;
+  };
 
-    child: Adw.Clamp {
-      unit: px;
-      maximum-size: bind template.width;
-      tightening-threshold: bind template.width;
+  child: Adw.ViewStack {
+    name: "cover";
+    visible-child-name: bind $if_else(template.paintable, "cover", "icon");
+    overflow: hidden;
+    enable-transitions: true;
 
-      child: Adw.ViewStack {
-        name: "cover";
-        visible-child-name: bind $if_else(template.paintable, "cover", "icon");
-        overflow: hidden;
-        enable-transitions: true;
+    Adw.ViewStackPage {
+      name: "cover";
 
-        Adw.ViewStackPage {
-          name: "cover";
+      child: Picture {
+        paintable: bind template.paintable;
+        content-fit: bind $_content_fit(template.paintable);
+      };
+    }
 
-          child: Picture {
-            paintable: bind template.paintable;
-            width-request: bind template.width;
-            height-request: bind template.height;
-            content-fit: bind $_content_fit(template.paintable);
-          };
-        }
+    Adw.ViewStackPage {
+      name: "icon";
 
-        Adw.ViewStackPage {
-          name: "icon";
-
-          child: Image {
-            icon-name: bind $format_string(
-              "{}-symbolic",
-              template.root as <Window>.application as <Application>.application-id,
-            );
-            pixel-size: 96;
-
-            styles [
-              "dimmed",
-            ]
-          };
-        }
+      child: Image {
+        icon-name: bind $format_string(
+          "{}-symbolic",
+          template.root as <Window>.application as <Application>.application-id,
+        );
+        pixel-size: 96;
 
         styles [
-          "card",
+          "dimmed",
         ]
       };
-    };
+    }
+
+    styles [
+      "card",
+    ]
   };
 }
