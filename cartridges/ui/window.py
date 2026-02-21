@@ -12,9 +12,9 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from cartridges import STATE_SETTINGS
 from cartridges.collections import Collection
-from cartridges.config import PREFIX, PROFILE
+from cartridges.config import PROFILE
 
-from . import closures, collections, games, sources
+from . import collections, games, sources, template
 from .collections import CollectionActions, CollectionSidebarItem
 from .game_details import GameDetails
 from .game_item import GameItem  # noqa: F401
@@ -30,32 +30,32 @@ GObject.type_ensure(GObject.SignalGroup)
 type _UndoFunc = Callable[[], Any]
 
 
-@Gtk.Template(resource_path=f"{PREFIX}/window.ui")
+@template.set_template
 class Window(Adw.ApplicationWindow):
     """The main window."""
 
     __gtype_name__ = __qualname__
 
-    split_view: Adw.OverlaySplitView = Gtk.Template.Child()
-    sidebar: Adw.Sidebar = Gtk.Template.Child()
-    sources: Adw.SidebarSection = Gtk.Template.Child()
-    collections: Adw.SidebarSection = Gtk.Template.Child()
-    new_collection_item: Adw.SidebarItem = Gtk.Template.Child()
-    navigation_view: Adw.NavigationView = Gtk.Template.Child()
-    header_bar: Adw.HeaderBar = Gtk.Template.Child()
-    title_box: Gtk.CenterBox = Gtk.Template.Child()
-    search_entry: Gtk.SearchEntry = Gtk.Template.Child()
-    sort_button: Gtk.MenuButton = Gtk.Template.Child()
-    main_menu_button: Gtk.MenuButton = Gtk.Template.Child()
-    toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
-    view_stack: Adw.ViewStack = Gtk.Template.Child()
-    grid: Gtk.GridView = Gtk.Template.Child()
-    details: GameDetails = Gtk.Template.Child()
+    split_view: template.Child[Adw.OverlaySplitView]
+    sidebar: template.Child[Adw.Sidebar]
+    sources: template.Child[Adw.SidebarSection]
+    collections: template.Child[Adw.SidebarSection]
+    new_collection_item: template.Child[Adw.SidebarItem]
+    navigation_view: template.Child[Adw.NavigationView]
+    header_bar: template.Child[Adw.HeaderBar]
+    title_box: template.Child[Gtk.CenterBox]
+    search_entry: template.Child[Gtk.SearchEntry]
+    sort_button: template.Child[Gtk.MenuButton]
+    main_menu_button: template.Child[Gtk.MenuButton]
+    toast_overlay: template.Child[Adw.ToastOverlay]
+    view_stack: template.Child[Adw.ViewStack]
+    grid: template.Child[Gtk.GridView]
+    details: template.Child[GameDetails]
 
-    game_actions: GameActions = Gtk.Template.Child()
-    menu_collection_actions: CollectionActions = Gtk.Template.Child()
-    collection_signals: GObject.SignalGroup = Gtk.Template.Child()
-    model_signals: GObject.SignalGroup = Gtk.Template.Child()
+    game_actions: template.Child[GameActions]
+    menu_collection_actions: template.Child[CollectionActions]
+    collection_signals: template.Child[GObject.SignalGroup]
+    model_signals: template.Child[GObject.SignalGroup]
 
     menu_collection = GObject.Property(type=Collection)
     collection = GObject.Property(type=Collection)
@@ -65,10 +65,6 @@ class Window(Adw.ApplicationWindow):
     show_hidden = GObject.Property(type=bool, default=False)
 
     settings = GObject.Property(type=Gtk.Settings)
-
-    format_string = closures.format_string
-    if_else = closures.if_else
-    shortcut = closures.shortcut
 
     _selected_sidebar_item = 0
 
@@ -141,12 +137,10 @@ class Window(Adw.ApplicationWindow):
         self.model = games.model
         self.sidebar.props.selected = 0
 
-    @Gtk.Template.Callback()
     def _show_sidebar_title(self, _obj, layout: str) -> bool:
         right_window_controls = layout.replace("appmenu", "").startswith(":")
         return right_window_controls and not sys.platform.startswith("darwin")
 
-    @Gtk.Template.Callback()
     def _navigate(self, sidebar: Adw.Sidebar, index: int):
         item = sidebar.get_item(index)
 
@@ -170,42 +164,34 @@ class Window(Adw.ApplicationWindow):
         if self.split_view.props.collapsed:
             self.split_view.props.show_sidebar = False
 
-    @Gtk.Template.Callback()
     def _update_selection(self, sidebar: Adw.Sidebar, *_args):
         if sidebar.props.selected_item is self.new_collection_item:
             sidebar.props.selected = self._selected_sidebar_item
         self._selected_sidebar_item = sidebar.props.selected
 
-    @Gtk.Template.Callback()
     def _setup_sidebar_menu(self, _sidebar, item: Adw.SidebarItem):
         if isinstance(item, CollectionSidebarItem):
             self.menu_collection = item.collection
 
-    @Gtk.Template.Callback()
     def _setup_gamepad_monitor(self, *_args):
         if sys.platform.startswith("linux"):
             Gamepad.window = self  # pyright: ignore[reportPossiblyUnboundVariable]
             gamepads.setup_monitor()  # pyright: ignore[reportPossiblyUnboundVariable]
 
-    @Gtk.Template.Callback()
     def _show_details(self, grid: Gtk.GridView, position: int):
         self.details.game = cast(Gio.ListModel, grid.props.model).get_item(position)
         self.navigation_view.push_by_tag("details")
 
-    @Gtk.Template.Callback()
     def _search_started(self, entry: Gtk.SearchEntry):
         entry.grab_focus()
 
-    @Gtk.Template.Callback()
     def _search_changed(self, entry: Gtk.SearchEntry):
         self.search_text = entry.props.text
         entry.grab_focus()
 
-    @Gtk.Template.Callback()
     def _search_activate(self, _entry):
         self.grid.activate_action("list.activate-item", GLib.Variant("u", 0))
 
-    @Gtk.Template.Callback()
     def _stop_search(self, entry: Gtk.SearchEntry):
         entry.props.text = ""
         self.grid.grab_focus()

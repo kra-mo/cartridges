@@ -7,23 +7,19 @@ from typing import cast, override
 from gi.repository import Gdk, GObject, Gtk
 
 from cartridges import cover
-from cartridges.config import PREFIX
 
-from . import closures
+from . import template
 
 COVER_ASPECT_RATIO = cover.WIDTH / cover.HEIGHT
 
 
-@Gtk.Template(resource_path=f"{PREFIX}/cover.ui")
+@template.set_template
 class Cover(Gtk.Widget):
     """Displays a game's cover art."""
 
     __gtype_name__ = __qualname__
 
     paintable = GObject.Property(type=Gdk.Paintable)
-
-    format_string = closures.format_string
-    if_else = closures.if_else
 
     def __init__(self):
         super().__init__()
@@ -39,7 +35,6 @@ class Cover(Gtk.Widget):
         child = cast(Gtk.Widget, self.get_first_child())
         child.size_allocate(allocation, baseline)
 
-    @Gtk.Template.Callback()
     def _content_fit(self, _obj, paintable: Gdk.Paintable | None) -> Gtk.ContentFit:
         return (
             Gtk.ContentFit.COVER
