@@ -3,12 +3,12 @@
 
 from gi.repository import Adw, Gdk, GObject, Gtk
 
+from cartridges import cover
 from cartridges.config import PREFIX
-from cartridges.games import COVER_HEIGHT, COVER_WIDTH
 
 from . import closures
 
-COVER_ASPECT_RATIO = COVER_WIDTH / COVER_HEIGHT
+COVER_ASPECT_RATIO = cover.WIDTH / cover.HEIGHT
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/cover.ui")
@@ -18,8 +18,8 @@ class Cover(Adw.Bin):
     __gtype_name__ = __qualname__
 
     paintable = GObject.Property(type=Gdk.Paintable)
-    width = GObject.Property(type=int, default=COVER_WIDTH)
-    height = GObject.Property(type=int, default=COVER_HEIGHT)
+    width = GObject.Property(type=int, default=cover.WIDTH)
+    height = GObject.Property(type=int, default=cover.HEIGHT)
 
     format_string = closures.format_string
     if_else = closures.if_else

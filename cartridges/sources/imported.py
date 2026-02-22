@@ -10,7 +10,8 @@ from json import JSONDecodeError
 from pathlib import Path
 
 from cartridges import cover
-from cartridges.games import COVERS_DIR, GAMES_DIR, Game
+from cartridges.cover import COVERS_DIR
+from cartridges.games import GAMES_DIR, Game
 
 ID, NAME = "imported", _("Added")
 

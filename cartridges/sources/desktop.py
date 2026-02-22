@@ -14,10 +14,10 @@ from typing import cast
 
 from gi.repository import GLib, Gtk
 
-from cartridges import games
+from cartridges import cover, games
 from cartridges.games import Game
 
-from . import DATA, ICON_SIZE, SYSTEM_DATA, cover_from_icon
+from . import DATA, SYSTEM_DATA
 
 ID, NAME = "desktop", _("Desktop")
 
@@ -93,7 +93,7 @@ def get_games() -> Generator[Game]:
             icon = _icon_theme().lookup_icon(
                 icon_name,
                 fallbacks=(_ICON_FALLBACK,),
-                size=ICON_SIZE,
+                size=cover.ICON_SIZE,
                 # Sources shouldn't know about the user's display,
                 # so we assume 2x scaling and render the icon at the correct size later.
                 scale=2,
@@ -112,7 +112,7 @@ def get_games() -> Generator[Game]:
                 game_id=f"{ID}_{path.stem}",
                 source=ID,
                 name=file.get_string("Desktop Entry", "Name"),
-                cover=cover_from_icon(icon),
+                cover=cover.from_icon(icon),
             )
             appids.add(appid)
 

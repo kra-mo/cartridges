@@ -13,9 +13,9 @@ from functools import cache
 from pathlib import Path
 from typing import Final, Protocol, cast
 
-from gi.repository import Gdk, Gio, GLib, GObject, Graphene, Gtk
+from gi.repository import Gio, GLib, GObject
 
-from cartridges.games import COVER_HEIGHT, COVER_WIDTH, Game
+from cartridges.games import Game
 
 if Path("/.flatpak-info").exists():
     DATA = Path(os.getenv("HOST_XDG_DATA_HOME", Path.home() / ".local" / "share"))
@@ -50,8 +50,6 @@ OPEN = (
     if sys.platform.startswith("win32")
     else "xdg-open"
 )
-
-ICON_SIZE = 128
 
 
 class _SourceModule(Protocol):
@@ -128,19 +126,6 @@ def load():
 def get(ident: str) -> Source:
     """Get the source with `ident`."""
     return next(s for s in cast(Iterable[Source], model) if s.id == ident)
-
-
-def cover_from_icon(icon: Gdk.Paintable) -> Gdk.Paintable | None:
-    """Get a cover from `icon`."""
-    snapshot = Gtk.Snapshot()
-    snapshot.translate(
-        Graphene.Point().init(
-            (COVER_WIDTH - ICON_SIZE) / 2,
-            (COVER_HEIGHT - ICON_SIZE) / 2,
-        )
-    )
-    icon.snapshot(snapshot, ICON_SIZE, ICON_SIZE)
-    return snapshot.to_paintable(Graphene.Size().init(COVER_WIDTH, COVER_HEIGHT))
 
 
 def _get_sources() -> Generator[Source]:

@@ -7,8 +7,16 @@ from os import PathLike
 from urllib.request import urlopen
 
 import PIL
-from gi.repository import Gdk, GLib, GObject
+from gi.repository import Gdk, GLib, GObject, Graphene, Gtk
 from PIL import Image
+
+from . import DATA_DIR
+
+COVERS_DIR = DATA_DIR / "covers"
+
+WIDTH = 200
+HEIGHT = 300
+ICON_SIZE = 128
 
 
 class _PILPaintable(GObject.Object, Gdk.Paintable):
@@ -77,3 +85,16 @@ def at_url(url: str) -> Gdk.Paintable | None:
         return _PILPaintable(Image.open(BytesIO(contents)))
     except PIL.UnidentifiedImageError:
         return None
+
+
+def from_icon(icon: Gdk.Paintable) -> Gdk.Paintable | None:
+    """Pad `icon` to be appropriate for a cover."""
+    snapshot = Gtk.Snapshot()
+    snapshot.translate(
+        Graphene.Point().init(
+            (WIDTH - ICON_SIZE) / 2,
+            (HEIGHT - ICON_SIZE) / 2,
+        )
+    )
+    icon.snapshot(snapshot, ICON_SIZE, ICON_SIZE)
+    return snapshot.to_paintable(Graphene.Size().init(WIDTH, HEIGHT))
