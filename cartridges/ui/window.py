@@ -137,7 +137,8 @@ class Window(Adw.ApplicationWindow):
         self.model = games.model
         self.sidebar.props.selected = 0
 
-    def _show_sidebar_title(self, _this, layout: str) -> bool:
+    @staticmethod
+    def _show_sidebar_title(_this, layout: str) -> bool:
         right_window_controls = layout.replace("appmenu", "").startswith(":")
         return right_window_controls and not sys.platform.startswith("darwin")
 
