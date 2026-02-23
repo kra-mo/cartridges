@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2026 Jamie Gravendeel
 
 import functools
+import inspect
 import re
 import typing
 from collections.abc import Callable
@@ -35,7 +36,11 @@ def set_template[T: type[Gtk.Widget]](cls: T) -> T:
 
 class _BuilderScope(GObject.Object, Gtk.BuilderScope):
     def do_create_closure(
-        self, builder: Gtk.Builder, func_name: str, _flags, _obj
+        self,
+        builder: Gtk.Builder,
+        func_name: str,
+        flags: Gtk.BuilderClosureFlags,
+        _obj,
     ) -> Callable[..., Any]:
         """Create a closure with the given arguments.
 
@@ -43,8 +48,19 @@ class _BuilderScope(GObject.Object, Gtk.BuilderScope):
         and falls back to looking it up in a list of closures.
         """
         template = builder.props.current_object
-        if callback := getattr(template, func_name, closures.get(func_name)):
-            return callback
+        if callback := getattr(template, func_name, None):
+            n_args = len(inspect.signature(callback).parameters)
+            swapped = flags is Gtk.BuilderClosureFlags.SWAPPED
+
+            def cb(*args: Any) -> object:
+                if swapped:
+                    args = args[1:] + args[:1]
+                return callback(*args[:n_args])
+
+            return cb
+
+        if closure := closures.get(func_name):
+            return closure
 
         msg = f"'{func_name}' is not an available callback"
         raise RuntimeError(msg)

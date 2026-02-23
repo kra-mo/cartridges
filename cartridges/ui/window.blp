@@ -101,7 +101,7 @@ template $Window: Adw.ApplicationWindow {
 
             content: Adw.Sidebar sidebar {
               activated => $_navigate();
-              setup-menu => $_setup_sidebar_menu();
+              setup-menu => $_setup_sidebar_menu() swapped;
               notify::selected => $_update_selection();
 
               Adw.SidebarSection {

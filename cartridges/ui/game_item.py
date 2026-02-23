@@ -37,7 +37,7 @@ class GameItem(Gtk.Box):
         self.insert_action_group("collection", self.collection_actions)
         self._reveal_buttons()
 
-    def _reveal_buttons(self, *_args):
+    def _reveal_buttons(self):
         for widget, reveal in (
             (self.play, contains_pointer := self.motion.props.contains_pointer),
             (self.options, contains_pointer or self.options.props.active),
@@ -45,7 +45,7 @@ class GameItem(Gtk.Box):
             widget.props.can_focus = widget.props.can_target = reveal
             (widget.remove_css_class if reveal else widget.add_css_class)("hidden")
 
-    def _setup_collections(self, button: Gtk.MenuButton, *_args):
+    def _setup_collections(self, button: Gtk.MenuButton):
         if button.props.active:
             self.collections_box.build()
         else:

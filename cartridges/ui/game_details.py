@@ -86,15 +86,15 @@ class GameDetails(Adw.NavigationPage):
         self.game = self.game_editable.game
         self.editing = False
 
-    def _activate_apply(self, _entry):
+    def _activate_apply(self):
         self.activate_action("details.apply")
 
-    def _cancel(self, *_args):
+    def _cancel(self):
         if not (self.editing and self.game):
             self.activate_action("navigation.pop")
         self.editing = False
 
-    def _setup_collections(self, button: Gtk.MenuButton, *_args):
+    def _setup_collections(self, button: Gtk.MenuButton):
         if button.props.active:
             self.collections_box.build()
         else:

@@ -164,16 +164,16 @@ class Window(Adw.ApplicationWindow):
         if self.split_view.props.collapsed:
             self.split_view.props.show_sidebar = False
 
-    def _update_selection(self, sidebar: Adw.Sidebar, *_args):
+    def _update_selection(self, sidebar: Adw.Sidebar):
         if sidebar.props.selected_item is self.new_collection_item:
             sidebar.props.selected = self._selected_sidebar_item
         self._selected_sidebar_item = sidebar.props.selected
 
-    def _setup_sidebar_menu(self, _sidebar, item: Adw.SidebarItem):
+    def _setup_sidebar_menu(self, item: Adw.SidebarItem):
         if isinstance(item, CollectionSidebarItem):
             self.menu_collection = item.collection
 
-    def _setup_gamepad_monitor(self, *_args):
+    def _setup_gamepad_monitor(self):
         if sys.platform.startswith("linux"):
             Gamepad.window = self  # pyright: ignore[reportPossiblyUnboundVariable]
             gamepads.setup_monitor()  # pyright: ignore[reportPossiblyUnboundVariable]
@@ -189,7 +189,7 @@ class Window(Adw.ApplicationWindow):
         self.search_text = entry.props.text
         entry.grab_focus()
 
-    def _search_activate(self, _entry):
+    def _search_activate(self):
         self.grid.activate_action("list.activate-item", GLib.Variant("u", 0))
 
     def _stop_search(self, entry: Gtk.SearchEntry):
