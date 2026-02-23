@@ -17,6 +17,37 @@ STICK_DEADZONE = 0.5
 REPEAT_DELAY = 280
 
 
+def get_gamepad_navigable_ancestor(target_widget: Gtk.Widget) -> Gtk.Widget | None:
+    """Return first ancestor widget with the GamepadNavigable mixin.
+
+    Relative to target_widget. Return value can be None.
+    """
+    if not (widget := target_widget):
+        return None
+
+    while not isinstance(widget, GamepadNavigable):
+        if not (widget := widget.props.parent):
+            return None
+
+    return widget
+
+
+class GamepadNavigable:
+    """Abstract class for focused widgets to handle forwarded controller input."""
+
+    def move_focus(self, direction: Gtk.DirectionType):
+        """Change the focused widget for the given direction."""
+
+    def activate_button_pressed(self):
+        """Trigger action when lowest button is pressed (A on XBox Controllers)."""
+
+    def return_button_pressed(self):
+        """Trigger action when right-most button is pressed (B on XBox Controllers)."""
+
+    def search_button_pressed(self):
+        """Trigger action when top button is pressed (Y on XBox Controllers)."""
+
+
 class Gamepad(GObject.Object):
     """Data class for gamepad, including UI navigation."""
 
@@ -61,11 +92,11 @@ class Gamepad(GObject.Object):
         _success, button = event.get_button()
         match button:  # Xbox / Nintendo / PlayStation
             case 304:  # A / B / Circle
-                self._on_activate_button_pressed()
+                self._activate()
             case 305:  # B / A / Cross
-                self._on_return_button_pressed()
+                self._return()
             case 307:  # Y / X / Triangle
-                self.window.search_entry.grab_focus()
+                self._search()
             case 308:  # X / Y / Square
                 pass
             case 310:  # Left Shoulder Button
@@ -77,13 +108,45 @@ class Gamepad(GObject.Object):
             case 315:  # Start / + / Share
                 pass
             case 544:
-                self._move_vertically(Gtk.DirectionType.UP)
+                self._move(Gtk.DirectionType.UP)
             case 545:
-                self._move_vertically(Gtk.DirectionType.DOWN)
+                self._move(Gtk.DirectionType.DOWN)
             case 546:
-                self._move_horizontally(Gtk.DirectionType.LEFT)
+                self._move(Gtk.DirectionType.LEFT)
             case 547:
-                self._move_horizontally(Gtk.DirectionType.RIGHT)
+                self._move(Gtk.DirectionType.RIGHT)
+
+    def _move(self, direction: Gtk.DirectionType):
+        if not (focus_widget := self.window.props.focus_widget) or not (
+            widget := get_gamepad_navigable_ancestor(focus_widget)
+        ):
+            return
+
+        cast(GamepadNavigable, widget).move_focus(direction)
+
+    def _activate(self):
+        if not (focus_widget := self.window.props.focus_widget) or not (
+            widget := get_gamepad_navigable_ancestor(focus_widget)
+        ):
+            return
+
+        cast(GamepadNavigable, widget).activate_button_pressed()
+
+    def _return(self):
+        if not (focus_widget := self.window.props.focus_widget) or not (
+            widget := get_gamepad_navigable_ancestor(focus_widget)
+        ):
+            return
+
+        cast(GamepadNavigable, widget).return_button_pressed()
+
+    def _search(self):
+        if not (focus_widget := self.window.props.focus_widget) or not (
+            widget := get_gamepad_navigable_ancestor(focus_widget)
+        ):
+            return
+
+        cast(GamepadNavigable, widget).search_button_pressed()
 
     def _on_analog_axis_event(self, _device: Manette.Device, event: Manette.Event):
         _, axis, value = event.get_absolute()
@@ -98,14 +161,14 @@ class Gamepad(GObject.Object):
 
                 if direction in self._allowed_inputs:
                     self._lock_input(direction)
-                    self._move_horizontally(direction)
+                    self._move(direction)
             case 1:
                 direction = (
                     Gtk.DirectionType.UP if value < 0 else Gtk.DirectionType.DOWN
                 )
                 if direction in self._allowed_inputs:
                     self._lock_input(direction)
-                    self._move_vertically(direction)
+                    self._move(direction)
 
     def _on_activate_button_pressed(self):
         if self.window.navigation_view.props.visible_page_tag == "details":
@@ -158,9 +221,11 @@ class Gamepad(GObject.Object):
         focus_widget = (
             self.window.search_entry
             if not grid_visible
-            else self.window.grid
-            if self.window.sidebar.get_focus_child()
-            else self.window.sidebar
+            else (
+                self.window.grid
+                if self.window.sidebar.get_focus_child()
+                else self.window.sidebar
+            )
         )
 
         focus_widget.grab_focus()
