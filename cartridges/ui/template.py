@@ -49,13 +49,18 @@ class _BuilderScope(GObject.Object, Gtk.BuilderScope):
         """
         template = builder.props.current_object
         if callback := getattr(template, func_name, None):
-            n_args = len(inspect.signature(callback).parameters)
+            params = inspect.signature(callback).parameters
+            kinds = (param.kind for param in params.values())
+            variadic = inspect.Parameter.VAR_POSITIONAL in kinds
+            n_args = len(params)
             swapped = flags is Gtk.BuilderClosureFlags.SWAPPED
 
             def cb(*args: Any) -> object:
                 if swapped:
                     args = args[1:] + args[:1]
-                return callback(*args[:n_args])
+                if not variadic:
+                    args = args[:n_args]
+                return callback(*args)
 
             return cb
 
