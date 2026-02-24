@@ -21,31 +21,29 @@ def closure[**P, R](func: Callable[P, R]) -> Callable[Concatenate[Any, P], R]:
     return wrapper
 
 
-def _add[**P, R](func: Callable[P, R]) -> Callable[P, R]:
-    closures[func.__name__] = func
-    return func
+def _register[**P, R](func: Callable[P, R]) -> Callable[Concatenate[Any, P], R]:
+    wrapper = closure(func)
+    closures[func.__name__] = wrapper
+    return wrapper
 
 
-_add(closure(bool))
-_add(closure(str.format))
+_register(bool)
+_register(str.format)
 
 
-@_add
-@closure
+@_register
 def every(*values: object) -> bool:
     """Like `all`, but takes in `*values` instead of an iterable."""
     return all(values)
 
 
-@_add
-@closure
+@_register
 def if_else[T](condition: object, first: T, second: T) -> T:
     """Return `first` or `second` depending on `condition`."""
     return first if condition else second
 
 
-@_add
-@closure
+@_register
 def shortcut(default: str, macos: str | None = None) -> Gtk.ShortcutTrigger | None:
     """Get the correct shortcut for the user's platform."""
     return Gtk.ShortcutTrigger.parse_string(
