@@ -21,7 +21,7 @@ template $Cover: Widget {
       name: "icon";
 
       child: Image {
-        icon-name: bind $format("{}-symbolic", template.root as <Window>.application as <Application>.application-id);
+        icon-name: bind $format("{}-symbolic", template.root as <Window>.application.application-id);
         pixel-size: 96;
 
         styles [
