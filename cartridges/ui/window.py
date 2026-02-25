@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright 2022-2026 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+import math
 import sys
 from collections.abc import Callable
 from gettext import gettext as _
@@ -13,11 +14,12 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 from cartridges import STATE_SETTINGS
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
+from cartridges.gamepads import GamepadNavigable
 
 from . import closures, collections, games, sources
 from .collections import CollectionActions, CollectionSidebarItem
 from .game_details import GameDetails
-from .game_item import GameItem  # noqa: F401
+from .game_item import GameItem
 from .games import GameActions
 from .sources import SourceSidebarItem
 
@@ -31,7 +33,7 @@ type _UndoFunc = Callable[[], Any]
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/window.ui")
-class Window(Adw.ApplicationWindow):
+class Window(Adw.ApplicationWindow, GamepadNavigable):
     """The main window."""
 
     __gtype_name__ = __qualname__
@@ -119,6 +121,77 @@ class Window(Adw.ApplicationWindow):
 
         self._history: dict[Adw.Toast, _UndoFunc] = {}
 
+    def move_focus(self, direction: Gtk.DirectionType):
+        """Move focus in main page."""
+        # Override GTK's child focus by going up to the search bar,
+        # instead of doing nothing when going up on the first row of games.
+        if direction == Gtk.DirectionType.UP and (game := self._get_focused_game()):
+            current_grid_columns = math.floor(self.grid.get_width() / game.get_width())
+
+            if (self._get_current_game_position() - current_grid_columns) < 0:
+                self.search_entry.grab_focus()
+                return
+
+        # Override GTK's child focus going to the + button, by going to
+        # the grid when leaving sidebar instead
+        sidebar_direction = (
+            Gtk.DirectionType.LEFT
+            if Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL
+            else Gtk.DirectionType.RIGHT
+        )
+        if direction == sidebar_direction and self.sidebar.get_focus_child():
+            self.grid.grab_focus()
+            return
+
+        if self.child_focus(direction):
+            self.props.focus_visible = True
+            return
+
+        self.keynav_failed(direction)
+
+    def activate_button_pressed(self):
+        """Activate currently focused widget in the main page."""
+        if not (focus_widget := self.props.focus_widget):
+            return
+
+        focus_widget.activate()
+
+    def return_button_pressed(self):
+        """Return to last used widget in main page."""
+        if self.can_close_popover():
+            return
+
+        grid_visible = self.view_stack.props.visible_child_name == "grid"
+        if self.header_bar.get_focus_child():
+            focus_widget = self.grid if grid_visible else self.sidebar
+
+        # If the grid is not visible (i.e.  no search results or imports)
+        # the search bar is focused as a fallback.
+        focus_widget = (
+            self.search_entry
+            if not grid_visible
+            else (self.grid if self.sidebar.get_focus_child() else self.sidebar)
+        )
+
+        focus_widget.grab_focus()
+        self.props.focus_visible = True
+
+    def search_button_pressed(self):
+        """Focus search entry."""
+        self.search_entry.grab_focus()
+
+    def can_close_popover(self) -> bool:
+        """If a pop-over menu is open, attempt to close it.
+
+        Used by controller navigation to exit popovers.
+        """
+        if (focus_widget := self.props.focus_widget) and (
+            popover_menu := focus_widget.get_ancestor(Gtk.PopoverMenu)
+        ):
+            popover_menu.popdown()
+            return True
+        return False
+
     def send_toast(self, title: str, *, undo: _UndoFunc | None = None):
         """Notify the user with a toast.
 
@@ -132,6 +205,20 @@ class Window(Adw.ApplicationWindow):
             self._history[toast] = undo
 
         self.toast_overlay.add_toast(toast)
+
+    def _get_focused_game(self) -> Gtk.Widget | None:
+        if (focused_game := self.props.focus_widget) and focused_game.get_ancestor(
+            Gtk.GridView
+        ):
+            return focused_game
+        return None
+
+    def _get_current_game_position(self) -> int:
+        if (game_widget := self._get_focused_game()) and isinstance(
+            item := game_widget.get_first_child(), GameItem
+        ):
+            return item.position
+        return 0
 
     def _collection_removed(self):
         self.collection = None
