@@ -134,8 +134,8 @@ template $Window: Adw.ApplicationWindow {
           };
         };
 
-        content: Adw.NavigationPage {
-          title: _("Games");
+        content: Adw.NavigationPage navigation_page {
+          title: bind sidebar.selected-item.title;
 
           child: Adw.ToolbarView {
             [top]
@@ -149,7 +149,7 @@ template $Window: Adw.ApplicationWindow {
                   center-widget: SearchEntry search_entry {
                     key-capture-widget: template;
                     hexpand: true;
-                    placeholder-text: _("Search games");
+                    placeholder-text: bind navigation_page.title;
                     search-started => $_search_started();
                     search-changed => $_search_changed();
                     activate => $_search_activate();
