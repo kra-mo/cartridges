@@ -256,6 +256,7 @@ template $Window: Adw.ApplicationWindow {
 
                     child: GridView grid {
                       name: "grid";
+                      max-columns: 12;
                       single-click-activate: true;
                       activate => $_show_details();
 
