@@ -10,6 +10,7 @@ $CollectionEditable collection_editable {
   collection: bind template.collection;
   game: bind template.game;
   name: bind name_entry.text;
+  icon: bind try { template.collection as <$Collection>.icon, "collection" };
 }
 
 GObject.SignalGroup collection_signals {

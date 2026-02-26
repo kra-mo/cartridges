@@ -4,7 +4,7 @@
 from itertools import product
 from typing import Any, cast
 
-from gi.repository import Adw, Gio, GObject, Gtk
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from cartridges.collections import ICONS, Collection
 from cartridges.config import PREFIX
@@ -29,33 +29,22 @@ class CollectionDetails(Adw.Dialog):
     collection_editable: CollectionEditable = Gtk.Template.Child()
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
 
+    collection = GObject.Property(type=Collection)
     game = GObject.Property(type=Game)
 
     if_else = closures.if_else
-
-    @GObject.Property(type=Collection)
-    def collection(self) -> Collection | None:
-        """The collection that `self` represents."""
-        return self._collection
-
-    @collection.setter
-    def collection(self, collection: Collection | None):
-        self._collection = collection
-
-        row, column = 0, 0
-        if collection:
-            for index, icon in enumerate(icon.name for icon in ICONS):
-                if icon == collection.icon:
-                    row, column = divmod(index, _COLUMNS)
-                    break
-
-        button = cast(Gtk.ToggleButton, self.icons_grid.get_child_at(column, row))
-        button.props.active = True
 
     def __init__(self, collection: Collection | None = None, **kwargs: Any):
         super().__init__(**kwargs)
 
         group = Gio.SimpleActionGroup()
+        group.add_action(
+            Gio.PropertyAction(
+                name="icon",
+                object=self.collection_editable,
+                property_name="icon",
+            )
+        )
         group.add_action_entries((("apply", lambda *_: self._apply()),))
         self.insert_action_group("details", group)
 
@@ -73,32 +62,21 @@ class CollectionDetails(Adw.Dialog):
             after=False,
         )
 
-        group_button = None
         for index, (row, col) in enumerate(product(range(_ROWS), range(_COLUMNS))):
             icon = ICONS[index].name
 
             button = Gtk.ToggleButton(
                 icon_name=f"{icon}-symbolic",
+                action_name="details.icon",
+                action_target=GLib.Variant("s", icon),
                 hexpand=True,
                 halign=Gtk.Align.CENTER,
             )
             button.update_property(
                 (Gtk.AccessibleProperty.LABEL,), (ICONS[index].a11y_label,)
             )
-
             button.add_css_class("circular")
             button.add_css_class("flat")
-
-            if group_button:
-                button.props.group = group_button
-            else:
-                group_button = button
-
-            button.connect(
-                "toggled",
-                lambda _, icon: self.collection_editable.set_property("icon", icon),
-                icon,
-            )
 
             self.icons_grid.attach(button, col, row, 1, 1)
 
