@@ -43,12 +43,7 @@ type _GameID = str
 
 
 class Collection(GObject.Object):
-    """Collection data class.
-
-    Changes to `removed` and the game IDs are autosaved.
-
-    Changes to `name` and `icon` require explicit saving with `collections.save()`.
-    """
+    """Collection data class."""
 
     __gtype_name__ = __qualname__
 
@@ -73,9 +68,6 @@ class Collection(GObject.Object):
             lambda _, name: f"{name}-symbolic",
         )
 
-        for signal in "items-changed", "notify::removed":
-            self.connect(signal, lambda *_: save())
-
     def __iter__(self) -> Iterator[_GameID]:
         return iter(self._game_ids)
 
@@ -93,6 +85,12 @@ class Collection(GObject.Object):
         if game_id in self:
             self._game_ids.discard(game_id)
             self.emit("items-changed")
+
+
+def load():
+    """Load collections from GSettings."""
+    model.splice(0, 0, tuple(_get_collections()))
+    save()
 
 
 def save():
@@ -135,5 +133,3 @@ def _get_collections() -> Generator[Collection]:
 
 
 model = Gio.ListStore(item_type=Collection)
-model.connect("items-changed", lambda *_: save())
-model.splice(0, 0, tuple(_get_collections()))

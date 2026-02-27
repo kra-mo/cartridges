@@ -80,8 +80,9 @@ class CollectionEditable(GObject.Object):
             return
 
         if not self.collection:
-            game_ids = (self.game.game_id,) if self.game else ()
-            self.collection = Collection(game_ids=game_ids)
+            self.collection = Collection()
+            if self.game:
+                self.collection.add(self.game.game_id)
             collections.model.append(self.collection)
 
         if self.collection.name != self.name:
@@ -219,6 +220,7 @@ class CollectionsBox(Adw.Bin):
             else:
                 collection.discard(self.game.game_id)
 
+        collections.save()
         self.box.remove_all()
 
 
@@ -241,10 +243,16 @@ def edit(collection: Collection):
 def remove(collection: Collection):
     """Remove `collection` and notify the user with a toast."""
     collection.removed = True
+    collections.save()
     _window().send_toast(
         _("{} removed").format(collection.name),
-        undo=lambda: setattr(collection, "removed", False),
+        undo=lambda: _undo_remove(collection),
     )
+
+
+def _undo_remove(collection: Collection):
+    collection.removed = False
+    collections.save()
 
 
 def _window() -> "Window":
