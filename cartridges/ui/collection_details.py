@@ -18,6 +18,7 @@ _ROWS = len(ICONS) // _COLUMNS
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/collection-details.ui")
+@closures.add(closures.if_)
 class CollectionDetails(Adw.Dialog):
     """The details of a category."""
 
@@ -31,8 +32,6 @@ class CollectionDetails(Adw.Dialog):
 
     collection = GObject.Property(type=Collection)
     game = GObject.Property(type=Game)
-
-    if_else = closures.if_else
 
     def __init__(self, collection: Collection | None = None, **kwargs: Any):
         super().__init__(**kwargs)

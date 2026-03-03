@@ -1,16 +1,31 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
+# ruff: noqa: D103
+
+import functools
 import sys
 from collections.abc import Callable
-from typing import Any
+from typing import Concatenate
 
 from gi.repository import Gtk
 
 
-def _closure[**P, R](func: Callable[P, R]) -> object:  # gi._gtktemplate.CallThing
-    @Gtk.Template.Callback()
-    @staticmethod
+def add[T: type[Gtk.Widget]](*closures: Callable[..., object]) -> Callable[[T], T]:
+    """Add `closures` to a widget."""
+
+    def decorator(cls: T) -> T:
+        for closure in closures:
+            name = closure.__name__.rstrip("_")
+            cb = Gtk.Template.Callback(name)(staticmethod(closure))
+            setattr(cls, f"_closure_{name}", cb)
+        return cls
+
+    return decorator
+
+
+def _closure[**P, R](func: Callable[P, R]) -> Callable[Concatenate[object, P], R]:
+    @functools.wraps(func)
     def wrapper(_this, *args: P.args, **kwargs: P.kwargs) -> R:
         return func(*args, **kwargs)
 
@@ -18,26 +33,32 @@ def _closure[**P, R](func: Callable[P, R]) -> object:  # gi._gtktemplate.CallThi
 
 
 @_closure
-def boolean(value: object) -> bool:
-    """Get a boolean for `value`."""
+def all_(*values: object) -> bool:
+    return all(values)
+
+
+@_closure
+def bool_(value: object) -> bool:
     return bool(value)
 
 
 @_closure
-def format_string(string: str, *args: Any) -> str:
-    """Format `string` with `args`."""
+def format_(string: str, *args: object) -> str:
     return string.format(*args)
 
 
 @_closure
-def if_else[T](condition: object, first: T, second: T) -> T:
-    """Return `first` or `second` depending on `condition`."""
+def if_[T](condition: object, first: T, second: T) -> T:
     return first if condition else second
 
 
 @_closure
+def not_(value: object) -> bool:
+    return not value
+
+
+@_closure
 def shortcut(default: str, macos: str | None = None) -> Gtk.ShortcutTrigger | None:
-    """Get the correct shortcut for the user's platform."""
     return Gtk.ShortcutTrigger.parse_string(
         (macos or default.replace("<Control>", "<Meta>"))
         if sys.platform.startswith("darwin")

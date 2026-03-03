@@ -31,6 +31,7 @@ type _UndoFunc = Callable[[], Any]
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/window.ui")
+@closures.add(closures.format_, closures.if_, closures.shortcut)
 class Window(Adw.ApplicationWindow):
     """The main window."""
 
@@ -65,10 +66,6 @@ class Window(Adw.ApplicationWindow):
     show_hidden = GObject.Property(type=bool, default=False)
 
     settings = GObject.Property(type=Gtk.Settings)
-
-    format_string = closures.format_string
-    if_else = closures.if_else
-    shortcut = closures.shortcut
 
     _selected_sidebar_item = 0
 

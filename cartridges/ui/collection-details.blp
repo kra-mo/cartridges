@@ -48,7 +48,7 @@ template $CollectionDetails: Adw.Dialog {
       Button apply_button {
         action-name: "details.apply";
         icon-name: "apply-symbolic";
-        tooltip-text: bind $if_else(template.collection, _("Apply"), _("Add"));
+        tooltip-text: bind $if(template.collection, _("Apply"), _("Add"));
 
         styles [
           "suggested-action",

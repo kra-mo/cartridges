@@ -234,16 +234,16 @@ template $Window: Adw.ApplicationWindow {
 
             content: Adw.ToastOverlay toast_overlay {
               child: Adw.ViewStack view_stack {
-                visible-child-name: bind $if_else(
+                visible-child-name: bind $if(
                   grid.model as <NoSelection>.n-items,
                   "grid",
-                  $if_else(
+                  $if(
                     template.search-text,
                     "empty-search",
-                    $if_else(
+                    $if(
                       template.collection,
                       "empty-collection",
-                      $if_else(template.show-hidden, "empty-hidden", "empty") as <string>
+                      $if(template.show-hidden, "empty-hidden", "empty") as <string>
                     ) as <string>
                   ) as <string>
                 );
@@ -328,7 +328,7 @@ template $Window: Adw.ApplicationWindow {
 
                   child: Adw.StatusPage {
                     icon-name: bind template.collection as <$Collection>.icon-name;
-                    title: bind $format_string(_("No Games in {}"), template.collection as <$Collection>.name);
+                    title: bind $format(_("No Games in {}"), template.collection as <$Collection>.name);
                   };
                 }
 

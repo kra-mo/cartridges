@@ -4,7 +4,7 @@ using Adw 1;
 template $Cover: Widget {
   Adw.ViewStack {
     name: "cover";
-    visible-child-name: bind $if_else(template.paintable, "cover", "icon");
+    visible-child-name: bind $if(template.paintable, "cover", "icon");
     overflow: hidden;
     enable-transitions: true;
 
@@ -21,10 +21,7 @@ template $Cover: Widget {
       name: "icon";
 
       child: Image {
-        icon-name: bind $format_string(
-          "{}-symbolic",
-          template.root as <Window>.application as <Application>.application-id,
-        );
+        icon-name: bind $format("{}-symbolic", template.root as <Window>.application.application-id);
         pixel-size: 96;
 
         styles [

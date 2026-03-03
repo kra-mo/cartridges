@@ -11,6 +11,8 @@ from cartridges import collections
 from cartridges.collections import Collection
 from cartridges.games import Game
 
+from . import closures
+
 if TYPE_CHECKING:
     from .window import Window
 
@@ -33,9 +35,9 @@ class CollectionActions(Gio.SimpleActionGroup):
         ))
 
         collection = Gtk.PropertyExpression.new(CollectionActions, None, "collection")
-        has_collection = Gtk.ClosureExpression.new(bool, self._bool, (collection,))
+        has_collection = Gtk.ClosureExpression.new(bool, closures.bool_, (collection,))
         removed = Gtk.PropertyExpression.new(Collection, collection, "removed")
-        not_removed = Gtk.ClosureExpression.new(bool, self._invert, (removed,))
+        not_removed = Gtk.ClosureExpression.new(bool, closures.not_, (removed,))
         false = Gtk.ConstantExpression.new_for_value(False)
 
         edit_action = cast(Gio.SimpleAction, self.lookup_action("edit"))
@@ -43,14 +45,6 @@ class CollectionActions(Gio.SimpleActionGroup):
 
         has_collection.bind(edit_action, "enabled", self)
         Gtk.TryExpression.new((not_removed, false)).bind(remove_action, "enabled", self)
-
-    @staticmethod
-    def _bool(_, value: object) -> bool:
-        return bool(value)
-
-    @staticmethod
-    def _invert(_, value: object) -> bool:
-        return not value
 
 
 class CollectionEditable(GObject.Object):
@@ -71,7 +65,7 @@ class CollectionEditable(GObject.Object):
 
         name = Gtk.PropertyExpression.new(CollectionEditable, None, "name")
         icon = Gtk.PropertyExpression.new(CollectionEditable, None, "icon")
-        valid = Gtk.ClosureExpression.new(bool, self._all, (name, icon))
+        valid = Gtk.ClosureExpression.new(bool, closures.all_, (name, icon))
         valid.bind(self, "valid", self)
 
     def apply(self):
@@ -91,10 +85,6 @@ class CollectionEditable(GObject.Object):
         self.collection.icon = self.icon
 
         collections.save()
-
-    @staticmethod
-    def _all(_, *values: object) -> bool:
-        return all(values)
 
 
 class CollectionFilter(Gtk.Filter):

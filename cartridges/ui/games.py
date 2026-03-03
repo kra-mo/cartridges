@@ -13,6 +13,8 @@ from cartridges import STATE_SETTINGS, sources
 from cartridges.games import Game
 from cartridges.sources import imported
 
+from . import closures
+
 if TYPE_CHECKING:
     from .window import Window
 
@@ -45,11 +47,11 @@ class GameActions(Gio.SimpleActionGroup):
         ))
 
         game = Gtk.PropertyExpression.new(GameActions, None, "game")
-        has_game = Gtk.ClosureExpression.new(bool, self._bool, (game,))
+        has_game = Gtk.ClosureExpression.new(bool, closures.bool_, (game,))
         hidden = Gtk.PropertyExpression.new(Game, game, "hidden")
-        not_hidden = Gtk.ClosureExpression.new(bool, self._invert, (hidden,))
+        not_hidden = Gtk.ClosureExpression.new(bool, closures.not_, (hidden,))
         removed = Gtk.PropertyExpression.new(Game, game, "removed")
-        not_removed = Gtk.ClosureExpression.new(bool, self._invert, (removed,))
+        not_removed = Gtk.ClosureExpression.new(bool, closures.not_, (removed,))
         false = Gtk.ConstantExpression.new_for_value(False)
 
         edit_action = cast(Gio.SimpleAction, self.lookup_action("edit"))
@@ -63,14 +65,6 @@ class GameActions(Gio.SimpleActionGroup):
         Gtk.TryExpression.new((hidden, false)).bind(unhide_action, "enabled", self)
         Gtk.TryExpression.new((not_hidden, false)).bind(hide_action, "enabled", self)
         Gtk.TryExpression.new((not_removed, false)).bind(remove_action, "enabled", self)
-
-    @staticmethod
-    def _bool(_obj, value: object) -> bool:
-        return bool(value)
-
-    @staticmethod
-    def _invert(_obj, value: bool) -> bool:
-        return not value
 
 
 class GameEditable(GObject.Object):
@@ -91,7 +85,7 @@ class GameEditable(GObject.Object):
 
         executable = Gtk.PropertyExpression.new(GameEditable, None, "executable")
         name = Gtk.PropertyExpression.new(GameEditable, None, "name")
-        valid = Gtk.ClosureExpression.new(bool, self._all, (executable, name))
+        valid = Gtk.ClosureExpression.new(bool, closures.all_, (executable, name))
         valid.bind(self, "valid", self)
 
     def apply(self):
@@ -108,10 +102,6 @@ class GameEditable(GObject.Object):
             self.game.name = self.name
             sorter.changed(Gtk.SorterChange.DIFFERENT)
         self.game.developer = self.developer
-
-    @staticmethod
-    def _all(_, *values: object) -> bool:
-        return all(values)
 
 
 def add():

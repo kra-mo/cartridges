@@ -15,15 +15,13 @@ COVER_ASPECT_RATIO = cover.WIDTH / cover.HEIGHT
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/cover.ui")
+@closures.add(closures.format_, closures.if_)
 class Cover(Gtk.Widget):
     """Displays a game's cover art."""
 
     __gtype_name__ = __qualname__
 
     paintable = GObject.Property(type=Gdk.Paintable)
-
-    format_string = closures.format_string
-    if_else = closures.if_else
 
     def __init__(self):
         super().__init__()

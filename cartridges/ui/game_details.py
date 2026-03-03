@@ -21,6 +21,7 @@ from .games import GameActions, GameEditable
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/game-details.ui")
+@closures.add(closures.bool_, closures.format_, closures.if_)
 class GameDetails(Adw.NavigationPage):
     """The details of a game."""
 
@@ -36,10 +37,6 @@ class GameDetails(Adw.NavigationPage):
 
     game = GObject.Property(type=Game)
     editing = GObject.Property(type=bool, default=False)
-
-    boolean = closures.boolean
-    format_string = closures.format_string
-    if_else = closures.if_else
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
