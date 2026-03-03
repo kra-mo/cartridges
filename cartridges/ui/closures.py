@@ -11,7 +11,7 @@ from gi.repository import Gtk
 def _closure[**P, R](func: Callable[P, R]) -> object:  # gi._gtktemplate.CallThing
     @Gtk.Template.Callback()
     @staticmethod
-    def wrapper(_obj, *args: P.args, **kwargs: P.kwargs) -> R:
+    def wrapper(_this, *args: P.args, **kwargs: P.kwargs) -> R:
         return func(*args, **kwargs)
 
     return wrapper

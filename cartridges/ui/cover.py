@@ -40,7 +40,8 @@ class Cover(Gtk.Widget):
         child.size_allocate(allocation, baseline)
 
     @Gtk.Template.Callback()
-    def _content_fit(self, _obj, paintable: Gdk.Paintable | None) -> Gtk.ContentFit:
+    @staticmethod
+    def _content_fit(_this, paintable: Gdk.Paintable | None) -> Gtk.ContentFit:
         return (
             Gtk.ContentFit.COVER
             if paintable
