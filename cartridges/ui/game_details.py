@@ -1,17 +1,19 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright 2022-2026 kramo
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
+# SPDX-FileCopyrightText: Copyright 2026 Zoey Ahmed
 
 
 import sys
 from datetime import UTC, datetime
 from gettext import gettext as _
-from typing import Any, cast
+from typing import TYPE_CHECKING, Any, cast
 from urllib.parse import quote
 
 from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
 from cartridges.config import PREFIX
+from cartridges.gamepads import GamepadNavigable
 from cartridges.games import Game
 
 from . import closures
@@ -19,9 +21,12 @@ from .collections import CollectionActions, CollectionsBox
 from .cover import Cover  # noqa: F401
 from .games import GameActions, GameEditable
 
+if TYPE_CHECKING:
+    from .window import Window
+
 
 @Gtk.Template(resource_path=f"{PREFIX}/game-details.ui")
-class GameDetails(Adw.NavigationPage):
+class GameDetails(Adw.NavigationPage, GamepadNavigable):
     """The details of a game."""
 
     __gtype_name__ = __qualname__
@@ -75,6 +80,28 @@ class GameDetails(Adw.NavigationPage):
                 lambda *_: self.activate_action("navigation.pop"),
                 after=False,
             )
+
+    def move_focus(self, direction: Gtk.DirectionType):
+        """Move focus in game details page."""
+        if self.child_focus(direction):
+            _window().props.focus_visible = True
+            return
+
+        self.keynav_failed(direction)
+
+    def activate_button_pressed(self):
+        """Activate currently focused widget in the game details page."""
+        if not (focus_widget := _window().props.focus_widget):
+            return
+
+        focus_widget.activate()
+
+    def return_button_pressed(self):
+        """Cancel the current action in page."""
+        if _window().can_close_popover():
+            return
+
+        self._cancel()
 
     def add(self):
         """Add a new game."""
@@ -164,3 +191,8 @@ class GameDetails(Adw.NavigationPage):
             command,
             path.format(filename),
         )
+
+
+def _window() -> "Window":
+    app = cast(Gtk.Application, Gio.Application.get_default())
+    return cast("Window", app.props.active_window)
