@@ -57,64 +57,72 @@ _ICON_FALLBACK = "application-x-executable"
 
 def get_games() -> Generator[Game]:
     """Installed desktop entries."""
-    appids = set()
-    for path in itertools.chain.from_iterable(
-        path.glob("*.desktop") for path in _DESKTOP_PATHS
-    ):
-        appid = path.stem
-        if appid in appids or any(path.match(pattern) for pattern in _FILE_BLACKLIST):
+    seen = set()
+    paths = itertools.chain.from_iterable(p.glob("*.desktop") for p in _DESKTOP_PATHS)
+    for path in paths:
+        if path.name in seen or any(path.match(pattern) for pattern in _FILE_BLACKLIST):
             continue
 
+        try:
+            game = _game_from(path)
+        except (GLib.Error, ValueError):
+            continue
+
+        yield game
+        seen.add(path.name)
+
+
+def _game_from(path: Path) -> Game:
+    file = GLib.KeyFile()
+    file.load_from_file(str(path), GLib.KeyFileFlags.NONE)
+
+    if "Game" not in file.get_string_list("Desktop Entry", "Categories"):
+        raise ValueError
+
+    for key in _HIDDEN_KEYS:
         with suppress(GLib.Error):
-            file = GLib.KeyFile()
-            file.load_from_file(str(path), GLib.KeyFileFlags.NONE)
+            if file.get_boolean("Desktop Entry", key):
+                raise ValueError
 
-            if "Game" not in file.get_string_list("Desktop Entry", "Categories"):
-                continue
+    exe = file.get_string("Desktop Entry", "Exec")
+    if any(exe.startswith(cmd) for cmd in _EXECUTABLE_BLACKLIST):
+        raise ValueError
 
-            flatpak_id = file.get_string("Desktop Entry", "X-Flatpak")
-            if flatpak_id in _FLATPAK_ID_BLACKLIST:
-                continue
+    with suppress(GLib.Error):
+        if file.get_string("Desktop Entry", "X-Flatpak") in _FLATPAK_ID_BLACKLIST:
+            raise ValueError
 
-            for key in _HIDDEN_KEYS:
-                with suppress(GLib.Error):
-                    if file.get_boolean("Desktop Entry", key):
-                        continue
+        if not _try_exec(file.get_string("Desktop Entry", "TryExec")):
+            raise ValueError
 
-            with suppress(GLib.Error):
-                if not _try_exec(file.get_string("Desktop Entry", "TryExec")):
-                    continue
+    try:
+        icon_name = file.get_string("Desktop Entry", "Icon")
+    except GLib.Error:
+        icon_name = _ICON_FALLBACK
 
-            try:
-                icon_name = file.get_string("Desktop Entry", "Icon")
-            except GLib.Error:
-                icon_name = _ICON_FALLBACK
+    icon = _icon_theme().lookup_icon(
+        icon_name,
+        fallbacks=(_ICON_FALLBACK,),
+        size=cover.ICON_SIZE,
+        # Sources shouldn't know about the user's display,
+        # so we assume 2x scaling and render the icon at the correct size later.
+        scale=2,
+        direction=Gtk.TextDirection.NONE,
+        flags=Gtk.IconLookupFlags.NONE,
+    )
 
-            icon = _icon_theme().lookup_icon(
-                icon_name,
-                fallbacks=(_ICON_FALLBACK,),
-                size=cover.ICON_SIZE,
-                # Sources shouldn't know about the user's display,
-                # so we assume 2x scaling and render the icon at the correct size later.
-                scale=2,
-                direction=Gtk.TextDirection.NONE,
-                flags=Gtk.IconLookupFlags.NONE,
-            )
+    try:
+        real_path = Path("/", path.relative_to("/run/host"))
+    except ValueError:
+        real_path = path
 
-            real_path = (
-                Path("/", path.relative_to("/run/host"))
-                if path.is_relative_to("/run/host")
-                else path
-            )
-
-            yield Game(
-                executable=f"gio launch {shlex.quote(str(real_path))}",
-                game_id=f"{ID}_{path.stem}",
-                source=ID,
-                name=file.get_string("Desktop Entry", "Name"),
-                cover=cover.from_icon(icon),
-            )
-            appids.add(appid)
+    return Game(
+        executable=f"gio launch {shlex.quote(str(real_path))}",
+        game_id=f"{ID}_{path.stem}",
+        source=ID,
+        name=file.get_string("Desktop Entry", "Name"),
+        cover=cover.from_icon(icon),
+    )
 
 
 def _try_exec(executable: str) -> bool:
