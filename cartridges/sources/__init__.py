@@ -8,7 +8,7 @@ import os
 import pkgutil
 import sys
 import time
-from collections.abc import Generator, Iterable
+from collections.abc import Generator
 from functools import cache
 from pathlib import Path
 from typing import Final, Protocol, cast
@@ -62,7 +62,7 @@ class _SourceModule(Protocol):
         ...
 
 
-class Source(GObject.Object, Gio.ListModel):
+class Source(GObject.Object, Gio.ListModel[Game]):
     """A source of games to import."""
 
     __gtype_name__ = __qualname__
@@ -125,7 +125,7 @@ def load():
 @cache
 def get(ident: str) -> Source:
     """Get the source with `ident`."""
-    return next(s for s in cast(Iterable[Source], model) if s.id == ident)
+    return next(source for source in model if source.id == ident)
 
 
 def _get_sources() -> Generator[Source]:

@@ -389,16 +389,11 @@ def _iterate_devices() -> Generator[Gamepad]:
 
 
 def _remove_device(device: Manette.Device):
-    model.remove(
-        next(
-            pos
-            for pos, gamepad in enumerate(model)
-            if cast(Gamepad, gamepad).device == device
-        )
-    )
+    pos = next(pos for pos, gamepad in enumerate(model) if gamepad.device == device)
+    model.remove(pos)
 
 
-def _update_window_style(model: Gio.ListStore):
+def _update_window_style(model: Gio.ListStore[Gamepad]):
     if model.props.n_items > 0:
         Gamepad.window.add_css_class("controller-connected")
     else:

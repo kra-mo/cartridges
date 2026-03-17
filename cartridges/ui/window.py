@@ -13,6 +13,7 @@ from gi.repository import Adw, Gio, GLib, GObject, Gtk
 from cartridges import STATE_SETTINGS
 from cartridges.collections import Collection
 from cartridges.config import PREFIX, PROFILE
+from cartridges.games import Game
 
 from . import closures, collections, games, sources
 from .collections import CollectionActions, CollectionSidebarItem
@@ -187,7 +188,8 @@ class Window(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _show_details(self, grid: Gtk.GridView, position: int):
-        self.details.game = cast(Gio.ListModel, grid.props.model).get_item(position)
+        model = cast(Gio.ListModel[Game], grid.props.model)
+        self.details.game = model.get_item(position)
         self.navigation_view.push_by_tag("details")
 
     @Gtk.Template.Callback()

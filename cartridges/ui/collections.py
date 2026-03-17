@@ -196,7 +196,7 @@ class CollectionsBox(Adw.Bin):
 
     def build(self):
         """Populate the box with collections."""
-        for collection in cast(Iterable[Collection], model):
+        for collection in model:
             button = CollectionButton(collection)
             button.props.active = self.game.game_id in collection
             self.box.append(button)

@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 from collections.abc import Generator, Iterable, Iterator
-from typing import Any, NamedTuple, cast
+from typing import Any, NamedTuple
 
 from gi.repository import Gio, GLib, GObject
 
@@ -106,7 +106,7 @@ def save():
                     "game-ids": GLib.Variant("as", tuple(collection)),
                     "removed": GLib.Variant("b", collection.removed),
                 }
-                for collection in cast(Iterable[Collection], model)
+                for collection in model
             ),
         ),
     )
