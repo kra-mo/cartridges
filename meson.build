@@ -23,8 +23,8 @@ compile_schemas = find_program(
 appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 
 localedir = get_option('prefix') / get_option('localedir')
-pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 bindir = get_option('prefix') / get_option('bindir')
+resourcedir = python.get_install_dir() / 'cartridges' / 'resources'
 
 profile = get_option('profile')
 if profile == 'development'
@@ -42,7 +42,6 @@ conf = configuration_data(
         'PREFIX': prefix,
         'PROFILE': profile,
         'LOCALEDIR': localedir,
-        'PKGDATADIR': pkgdatadir,
         'BINDIR': bindir,
     },
 )

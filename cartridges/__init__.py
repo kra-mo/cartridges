@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright 2025 Jamie Gravendeel
 
 import gettext
+import importlib.resources
 import locale
 import signal
 import sys
@@ -21,13 +22,11 @@ if sys.platform.startswith("linux"):
 
 from gi.repository import Gio, GLib
 
-from .config import APP_ID, LOCALEDIR, PKGDATADIR
+from .config import APP_ID, LOCALEDIR
 
 DATA_DIR = Path(GLib.get_user_data_dir(), "cartridges")
 SETTINGS = Gio.Settings(schema_id=APP_ID)
 STATE_SETTINGS = Gio.Settings(schema_id=f"{APP_ID}.State")
-
-_RESOURCES = ("data", "icons", "ui")
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
@@ -38,7 +37,7 @@ if sys.platform.startswith("linux"):
 gettext.bindtextdomain("cartridges", LOCALEDIR)
 gettext.textdomain("cartridges")
 
-for name in _RESOURCES:
-    path = Path(PKGDATADIR, name).with_suffix(".gresource")
-    resource = Gio.Resource.load(str(path))
-    Gio.resources_register(resource)
+for file in importlib.resources.files("cartridges.resources").iterdir():
+    with importlib.resources.as_file(file) as path:
+        resource = Gio.Resource.load(str(path))
+        Gio.resources_register(resource)

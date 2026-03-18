@@ -13,5 +13,5 @@ gnome.compile_resources(
     resource,
     gresource_bundle: true,
     install: true,
-    install_dir: pkgdatadir,
+    install_dir: resourcedir,
 )
