@@ -4,7 +4,7 @@
 
 from typing import cast, override
 
-from gi.repository import Gdk, GObject, Gtk
+from gi.repository import Adw, Gdk, GObject, Gtk
 
 from cartridges import cover
 from cartridges.config import PREFIX
@@ -16,7 +16,7 @@ COVER_ASPECT_RATIO = cover.WIDTH / cover.HEIGHT
 
 @Gtk.Template(resource_path=f"{PREFIX}/cover.ui")
 @closures.add(closures.format_, closures.if_)
-class Cover(Gtk.Widget):
+class Cover(Adw.Bin):
     """Displays a game's cover art."""
 
     __gtype_name__ = __qualname__
@@ -27,15 +27,6 @@ class Cover(Gtk.Widget):
         super().__init__()
 
         self.set_size_request(cover.WIDTH, cover.HEIGHT)
-
-    @override
-    def do_size_allocate(self, width: int, height: int, baseline: int):
-        allocation = Gdk.Rectangle()
-        allocation.width = self.props.width_request
-        allocation.height = self.props.height_request
-        allocation.x = (width - self.props.width_request) // 2
-        child = cast(Gtk.Widget, self.get_first_child())
-        child.size_allocate(allocation, baseline)
 
     @Gtk.Template.Callback()
     @staticmethod
@@ -48,3 +39,27 @@ class Cover(Gtk.Widget):
             < COVER_ASPECT_RATIO + 0.1
             else Gtk.ContentFit.CONTAIN
         )
+
+
+class CoverLayoutManager(Gtk.LayoutManager):
+    """A layout manager for `Cover` with an exact size."""
+
+    __gtype_name__ = __qualname__
+
+    @override
+    def do_measure(
+        self,
+        widget: Gtk.Widget,
+        orientation: Gtk.Orientation,
+        for_size: int,
+    ) -> tuple[int, int, int, int]:
+        size = widget.get_size_request()[orientation]
+        return size, size, -1, -1
+
+    @override
+    def do_allocate(self, widget: Gtk.Widget, width: int, height: int, baseline: int):
+        allocation = Gdk.Rectangle()
+        allocation.width = widget.props.width_request
+        allocation.height = widget.props.height_request
+        allocation.x = (width - widget.props.width_request) // 2
+        cast(Gtk.Widget, widget.get_first_child()).size_allocate(allocation, baseline)
