@@ -2,13 +2,14 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # Scott Anecito <scott.anecito@linux.com>, 2024.
+# Neville Pethani <nevillepeth@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-01-16 06:06+0000\n"
-"Last-Translator: Scott Anecito <scott.anecito@linux.com>\n"
+"PO-Revision-Date: 2026-03-29 20:09+0000\n"
+"Last-Translator: Neville Pethani <nevillepeth@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ja/>\n"
 "Language: ja\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -50,7 +51,7 @@ msgstr ""
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
 #: cartridges/details_dialog.py:77
 msgid "Game Details"
-msgstr ""
+msgstr "ゲーム内容"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:48
 msgid "Edit Game Details"
