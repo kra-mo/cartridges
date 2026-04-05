@@ -3,6 +3,7 @@ requires-python = ">= 3.13"
 
 [dependency-groups]
 dev = [
+  "blueprint-compiler @ git+https://gitlab.gnome.org/GNOME/blueprint-compiler.git",
   "pillow",
   "pre-commit",
   "pygobject-stubs @ git+https://github.com/jamiethecat/pygobject-stubs.git",
