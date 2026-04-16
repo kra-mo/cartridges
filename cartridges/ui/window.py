@@ -58,6 +58,8 @@ class Window(Adw.ApplicationWindow):
     menu_collection_actions: CollectionActions = Gtk.Template.Child()
     collection_signals: GObject.SignalGroup = Gtk.Template.Child()
     model_signals: GObject.SignalGroup = Gtk.Template.Child()
+    collections_model: Gtk.FlattenListModel = Gtk.Template.Child()
+    collection_models: Gio.ListStore = Gtk.Template.Child()
 
     menu_collection = GObject.Property(type=Collection)
     collection = GObject.Property(type=Collection)
@@ -85,7 +87,13 @@ class Window(Adw.ApplicationWindow):
         STATE_SETTINGS.bind("show-sidebar", self.split_view, "show-sidebar", flags)
 
         self.sources.bind_model(sources.model, SourceSidebarItem)
-        self.collections.bind_model(collections.model, CollectionSidebarItem)
+        self.collection_models.insert(0, collections.model)
+        self.collections.bind_model(
+            self.collections_model,
+            lambda item: (
+                CollectionSidebarItem(item) if isinstance(item, Collection) else item
+            ),
+        )
 
         self.add_action(STATE_SETTINGS.create_action("show-sidebar"))
         self.add_action(STATE_SETTINGS.create_action("sort-mode"))

@@ -19,6 +19,17 @@ GObject.SignalGroup model_signals {
   target-type: typeof<Gio.ListModel>;
 }
 
+FlattenListModel collections_model {
+  model: Gio.ListStore collection_models {
+    Gio.ListStore {
+      Adw.SidebarItem new_collection_item {
+        icon-name: "list-add-symbolic";
+        title: _("New Collection");
+      }
+    }
+  };
+}
+
 template $Window: Adw.ApplicationWindow {
   realize => $_setup_gamepad_monitor();
   title: _("Cartridges");
@@ -122,13 +133,6 @@ template $Window: Adw.ApplicationWindow {
                   item (_("Edit"), "collection.edit")
                   item (_("Remove"), "collection.remove")
                 };
-              }
-
-              Adw.SidebarSection {
-                Adw.SidebarItem new_collection_item {
-                  icon-name: "list-add-symbolic";
-                  title: _("New Collection");
-                }
               }
             };
           };
