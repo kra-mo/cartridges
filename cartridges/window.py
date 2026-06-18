@@ -162,7 +162,7 @@ class CartridgesWindow(Adw.ApplicationWindow):
 
             row.append(
                 games_no_label := Gtk.Label(
-                    label=games_no,
+                    label=str(games_no),
                     hexpand=True,
                     halign=Gtk.Align.END,
                 )
