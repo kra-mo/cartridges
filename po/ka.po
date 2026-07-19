@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2026-04-26 06:10+0000\n"
+"PO-Revision-Date: 2026-07-19 13:01+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/cartridges/"
 "cartridges/ka/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -28,7 +28,7 @@ msgstr "Cartridges"
 
 #: data/page.kramo.Cartridges.desktop.in:4
 msgid "Game Launcher"
-msgstr ""
+msgstr "თამაშის გამშვები"
 
 #: data/page.kramo.Cartridges.desktop.in:5
 #: data/page.kramo.Cartridges.metainfo.xml.in:10
@@ -39,6 +39,7 @@ msgstr ""
 msgid ""
 "gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;"
 msgstr ""
+"gaming;launcher;steam;lutris;heroic;bottles;itch;flatpak;legendary;retroarch;თამაშები;გამშვები;"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:12
 msgid ""
@@ -51,11 +52,11 @@ msgstr ""
 #: data/page.kramo.Cartridges.metainfo.xml.in:44 data/gtk/window.blp:320
 #: cartridges/details_dialog.py:77
 msgid "Game Details"
-msgstr ""
+msgstr "თამაშის დეტალები"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:48
 msgid "Edit Game Details"
-msgstr ""
+msgstr "თამაშის დეტალების ჩასწორება"
 
 #: data/page.kramo.Cartridges.metainfo.xml.in:52 data/gtk/help-overlay.blp:19
 #: data/gtk/window.blp:543 cartridges/details_dialog.py:279
@@ -69,11 +70,11 @@ msgstr "გაუქმება"
 
 #: data/gtk/details-dialog.blp:45
 msgid "New Cover"
-msgstr ""
+msgstr "ახალი ყდა"
 
 #: data/gtk/details-dialog.blp:64
 msgid "Delete Cover"
-msgstr ""
+msgstr "ყრის წაშლა"
 
 #: data/gtk/details-dialog.blp:92 data/gtk/game.blp:80
 msgid "Title"
@@ -81,7 +82,7 @@ msgstr "სათაური"
 
 #: data/gtk/details-dialog.blp:96
 msgid "Developer (optional)"
-msgstr ""
+msgstr "პროგრამისტი (არასავალდებულო)"
 
 #: data/gtk/details-dialog.blp:102
 msgid "Executable"
@@ -160,7 +161,7 @@ msgstr "დამალული თამაშების ჩვენებ�
 
 #: data/gtk/help-overlay.blp:68
 msgid "Remove Game"
-msgstr ""
+msgstr "თამაშის წაშლა"
 
 #: data/gtk/preferences.blp:13 data/gtk/preferences.blp:62
 #: data/gtk/preferences.blp:365
@@ -185,7 +186,7 @@ msgstr "გამოსახულებები"
 
 #: data/gtk/preferences.blp:29
 msgid "High Quality Images"
-msgstr ""
+msgstr "მაღალი ხარისხის გამოსახულებები"
 
 #: data/gtk/preferences.blp:30
 msgid "Save game covers losslessly at the cost of storage"
@@ -193,15 +194,15 @@ msgstr ""
 
 #: data/gtk/preferences.blp:35
 msgid "Danger Zone"
-msgstr ""
+msgstr "სახიფათო ადგილი"
 
 #: data/gtk/preferences.blp:39
 msgid "Remove All Games"
-msgstr ""
+msgstr "ყველა თამაშის წაშლა"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "თამაშების ავტომატური შემოტანა"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -220,7 +221,7 @@ msgstr "ნაკადი"
 #: data/gtk/preferences.blp:219 data/gtk/preferences.blp:246
 #: data/gtk/preferences.blp:273
 msgid "Install Location"
-msgstr ""
+msgstr "დაყენების ადგილი"
 
 #: data/gtk/preferences.blp:105 data/gtk/window.blp:565
 #: cartridges/importer/lutris_source.py:107
@@ -237,7 +238,7 @@ msgstr ""
 
 #: data/gtk/preferences.blp:140 cartridges/importer/heroic_source.py:355
 msgid "Heroic"
-msgstr ""
+msgstr "Heroic"
 
 #: data/gtk/preferences.blp:166
 msgid "Import Epic Games"
@@ -257,19 +258,19 @@ msgstr ""
 
 #: data/gtk/preferences.blp:183 cartridges/importer/bottles_source.py:86
 msgid "Bottles"
-msgstr ""
+msgstr "Bottles"
 
 #: data/gtk/preferences.blp:210 cartridges/importer/itch_source.py:81
 msgid "itch"
-msgstr ""
+msgstr "itch"
 
 #: data/gtk/preferences.blp:237 cartridges/importer/legendary_source.py:97
 msgid "Legendary"
-msgstr ""
+msgstr "Legendary"
 
 #: data/gtk/preferences.blp:264 cartridges/importer/retroarch_source.py:142
 msgid "RetroArch"
-msgstr ""
+msgstr "RetroArch"
 
 #: data/gtk/preferences.blp:291 cartridges/importer/flatpak_source.py:143
 msgid "Flatpak"
@@ -291,7 +292,7 @@ msgstr ""
 
 #: data/gtk/preferences.blp:341 cartridges/importer/desktop_source.py:215
 msgid "Desktop Entries"
-msgstr ""
+msgstr "სამუშაო მაგიდის ჩანაწერები"
 
 #: data/gtk/preferences.blp:353 data/gtk/window.blp:563
 msgid "SteamGridDB"
@@ -319,11 +320,11 @@ msgstr ""
 
 #: data/gtk/preferences.blp:377
 msgid "Prefer Animated Images"
-msgstr ""
+msgstr "უპირატესობა ანიმირებულ გამოსახულებებზე"
 
 #: data/gtk/preferences.blp:383
 msgid "Update Covers"
-msgstr ""
+msgstr "ყდების განახლება"
 
 #: data/gtk/preferences.blp:384
 msgid "Fetch covers for games already in your library"
@@ -375,7 +376,7 @@ msgstr "დამალული თამაშები"
 
 #: data/gtk/window.blp:368
 msgid "Game Title"
-msgstr ""
+msgstr "თამაშის სახელი"
 
 #: data/gtk/window.blp:425
 msgid "Play"
@@ -423,7 +424,7 @@ msgstr "ProtonDB"
 
 #: data/gtk/window.blp:566
 msgid "HowLongToBeat"
-msgstr ""
+msgstr "HowLongToBeat"
 
 #. The variable is the title of the game
 #: cartridges/main.py:226 cartridges/game.py:125
@@ -539,11 +540,11 @@ msgstr ""
 
 #: cartridges/preferences.py:203
 msgid "Downloading covers…"
-msgstr ""
+msgstr "ყდების გადმოწერა…"
 
 #: cartridges/preferences.py:222
 msgid "Covers updated"
-msgstr ""
+msgstr "ყდები განახლდა"
 
 #: cartridges/preferences.py:370
 msgid "Installation Not Found"
@@ -595,7 +596,7 @@ msgstr "წინა წელს"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
-msgstr ""
+msgstr "თამაშების შემოტანა…"
 
 #: cartridges/importer/importer.py:337
 msgid "The following errors occured during import:"
