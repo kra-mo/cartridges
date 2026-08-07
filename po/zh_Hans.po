@@ -2,23 +2,25 @@
 # Copyright (C) YEAR kramo
 # This file is distributed under the same license as the Cartridges package.
 # 刘韬 <lyuutau@outlook.com>, 2023.
-# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2023.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2023, 2026.
 # Float <float.hu+@gmail.com>, 2023, 2024.
+# raki <abefcb2@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Cartridges\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-05 14:01+0100\n"
-"PO-Revision-Date: 2024-01-28 19:06+0000\n"
-"Last-Translator: Float <float.hu+@gmail.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"cartridges/cartridges/zh_Hans/>\n"
+"PO-Revision-Date: 2026-08-07 12:51+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/cartridges/cartridges/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 2026.8.1.dev0\n"
 
 #: data/page.kramo.Cartridges.desktop.in:3
 #: data/page.kramo.Cartridges.metainfo.xml.in:9
@@ -206,7 +208,7 @@ msgstr "移除所有游戏"
 
 #: data/gtk/preferences.blp:65
 msgid "Import Games Automatically"
-msgstr ""
+msgstr "自动导入游戏"
 
 #: data/gtk/preferences.blp:69
 msgid "Remove Uninstalled Games"
@@ -539,7 +541,6 @@ msgstr "{} 已取消隐藏"
 
 #. The variable is the title of the game
 #: cartridges/game.py:153
-#, fuzzy
 msgid "{} removed"
 msgstr "{} 已删除"
 
@@ -566,7 +567,7 @@ msgstr "未找到安装程序"
 
 #: cartridges/preferences.py:371
 msgid "Select a valid directory"
-msgstr "选择一个有效的目录。"
+msgstr "选择一个有效的目录"
 
 #: cartridges/preferences.py:407 cartridges/importer/importer.py:317
 msgid "Warning"
@@ -586,29 +587,27 @@ msgstr "不考虑"
 
 #: cartridges/utils/relative_date.py:30
 msgid "Today"
-msgstr ""
+msgstr "今天"
 
 #: cartridges/utils/relative_date.py:32
 msgid "Yesterday"
-msgstr ""
+msgstr "昨天"
 
 #: cartridges/utils/relative_date.py:36
-#, fuzzy
 msgid "Last Week"
-msgstr "最后玩过的"
+msgstr "上周"
 
 #: cartridges/utils/relative_date.py:38
 msgid "This Month"
-msgstr ""
+msgstr "本月"
 
 #: cartridges/utils/relative_date.py:40
 msgid "Last Month"
-msgstr ""
+msgstr "上个月"
 
 #: cartridges/utils/relative_date.py:44
-#, fuzzy
 msgid "Last Year"
-msgstr "最后玩过的"
+msgstr "去年"
 
 #: cartridges/importer/importer.py:144
 msgid "Importing Games…"
@@ -624,17 +623,15 @@ msgstr "没有发现新游戏"
 
 #. The variable is the number of games.
 #: cartridges/importer/importer.py:379
-#, fuzzy
 msgid "{} game imported"
 msgid_plural "{} games imported"
 msgstr[0] "导入了 {} 个游戏"
 
 #. The variable is the number of games. This text comes after "{0} games imported".
 #: cartridges/importer/importer.py:383
-#, fuzzy
 msgid ", {} removed"
 msgid_plural ", {} removed"
-msgstr[0] "{} 已删除"
+msgstr[0] "删除了 {} 个游戏"
 
 #. The variable is the name of the source
 #: cartridges/importer/location.py:34
