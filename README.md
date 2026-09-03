@@ -9,8 +9,8 @@
 [installs-image]: https://img.shields.io/flathub/downloads/page.kramo.Cartridges?style=for-the-badge
 
 > [!IMPORTANT]
-> Please use [Codeberg](https://codeberg.org/kramo/cartridges) for issues and pull requests.
-> The GitHub repository is a [mirror](https://en.wikipedia.org/wiki/Mirror_site).
+> This project is no longer actively maintained.
+> The `rewrite` branch has the most up-to-date code in case someone wants to keep it alive through a fork, but be aware that not everything there is functional. Still, please don't use code from the `main` branch as it's of poor quality.
 
 <div align="center">
   <img src="data/icons/hicolor/scalable/apps/page.kramo.Cartridges.svg" width="128" height="128">
